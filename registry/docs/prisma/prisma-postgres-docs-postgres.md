@@ -1,77 +1,98 @@
 # Prisma Postgres (/docs/postgres)
 
-[Prisma Postgres](https://www.prisma.io/postgres?utm_source=docs) supports the following workflows:
+[Prisma Postgres](https://www.prisma.io/postgres?utm_source=docs) is a managed PostgreSQL service built for modern app development.
+Use this page to choose a connection path and get started quickly.
 
-- Schema migrations and queries (via [Prisma ORM](https://www.prisma.io/orm) or any other ORM/database library)
-- Connection pooling and caching
-- Local database workflows via [`prisma dev`](/postgres/database/local-development)
+Getting started \[#getting-started]
 
-Usage metrics \[#usage-metrics]
+Create a database \[#create-a-database]
 
-You can view the following usage metrics in your Console Dashboard:
-
-- Key metrics
-  - Estimated upcoming invoice
-  - Total storage used
-  - Total DBs
-- Overall usage
-  - Cumulative operations
-  - Operations per day
-
-For details into individual databases in your workspace, each database has it's own metrics report
-as well. You can view the following:
-
-- Average response size
-- Average query duration
-- Total egress
-- Total operations
-- Cache utilization
-
-Billing \[#billing]
-
-Usage-based pricing \[#usage-based-pricing]
-
-Prisma Postgres charges for:
-
-- number of operations
-- storage (in GiB)
-
-An *operation* is counted each time you perform a create, read, update, or delete, regardless of how simple or complex the underlying SQL is. Whether it's a single-row lookup or complex JOIN query, it still counts as one operation and costs the same. Read our blog post on [operations-based billing](https://www.prisma.io/blog/operations-based-billing?utm_source=docs) for more details.
-
-By treating every operation equally, you don't have to worry about write-heavy workloads driving up your bill or high-bandwidth requests ballooning costs unexpectedly. You can [directly correlate your database costs to real product usage and user behavior](/postgres/faq#is-there-a-sample-workload-to-estimate-my-expected-charges), making forecasting and budgeting simple and predictable.
-
-You can view your usage and billing details in the dashboard for your current workspace.
-
-Learn more on our [pricing page](https://www.prisma.io/pricing).
-
-Spend limits \[#spend-limits]
-
-Prisma Postgres allows you to set limits to ensure you never get a surprise bill. You'll receive alerts when you reach 75% of your set limit, and if you reach 100%, your database will be paused. This ensures you'll never have an unexpected bill, and you can always be in complete control of your spending. Spend limits are available on all paid plans.
-
-Restarting your database when changing your subscription \[#restarting-your-database-when-changing-your-subscription]
-
-When changing your subscription from Free to Starter/Pro/Business or from Starter/Pro/Business to Free, your database instance is being restarted. This may cause a downtime of ~1second.
+New to Prisma Postgres? Start here.
 
 ```
-This is temporary. In the future, there won't be any downtime when up- or downgrading a plan.
+Create a temporary Prisma Postgres database in one command.
+
+
+
+Set up Prisma ORM and connect it to Prisma Postgres.
 ```
+
+Get your connection string \[#get-your-connection-string]
+
+In [Prisma Console](https://console.prisma.io), open your database and click **Connect to your database** to copy connection URLs.
+
+Choose a connection type \[#choose-a-connection-type]
+
+Prisma ORM (recommended default) \[#prisma-orm-recommended-default]
+
+Use Prisma ORM for migrations and type-safe queries.
+
+```
+Get started with the recommended Prisma ORM workflow.
+```
+
+Any PostgreSQL client or ORM \[#any-postgresql-client-or-orm]
+
+Use Prisma Postgres with `psql`, GUI tools, `node-postgres`, or other ORMs.
+
+```
+Connect Prisma Postgres from Kysely.
+
+
+
+Connect Prisma Postgres from Drizzle ORM.
+
+
+
+Connect Prisma Postgres from TypeORM.
+
+
+
+Choose the right connection string for Prisma ORM, PostgreSQL tools, and serverless runtimes.
+```
+
+Serverless and edge runtimes \[#serverless-and-edge-runtimes]
+
+Use the serverless driver for HTTP/WebSocket connectivity in edge or constrained runtimes.
+
+- [Serverless driver (`@prisma/ppg`)](/postgres/database/serverless-driver)
+
+Local development \[#local-development]
+
+Run Prisma Postgres locally with `prisma dev`, then switch to cloud when ready.
+
+- [Local development](/postgres/database/local-development)
+
+Optimize and manage \[#optimize-and-manage]
+
+- [Connecting to your database](/postgres/database/connecting-to-your-database)
+- [Connection pooling](/postgres/database/connection-pooling)
+- [Caching](/accelerate/caching)
+- [Backups](/postgres/database/backups)
+- [PostgreSQL extensions](/postgres/database/postgres-extensions)
+- [Troubleshooting](/postgres/troubleshooting)
+- [FAQ](/postgres/faq)
+
+Billing and limits \[#billing-and-limits]
+
+Prisma Postgres uses usage-based pricing and includes spend controls.
+
+- [Pricing](https://www.prisma.io/pricing)
+- [Operations-based billing explained](https://www.prisma.io/blog/operations-based-billing?utm_source=docs)
+- [FAQ: estimating costs](/postgres/faq#is-there-a-sample-workload-to-estimate-my-expected-charges)
+
+In Prisma Console, you can track usage, set spend limits, and view billing details.
 
 Technical details \[#technical-details]
 
-PostgreSQL version \[#postgresql-version]
+Prisma Postgres is based on **PostgreSQL v17** and uses a unikernel-based architecture.
 
-Prisma Postgres is based **PostgreSQL v17**.
-
-Architecture \[#architecture]
-
-Prisma Postgres uses a unique architecture to deliver unmatched efficiency, safety and ease of use. It is deployed on bare metal servers using unikernels (think: "hyper-specialized operating systems").
-
-Learn more about the architecture in this article: [Prisma Postgres®: Building a Modern PostgreSQL Service Using Unikernels & MicroVMs](https://pris.ly/ppg-early-access?utm_source=docs).
+Learn more: [Prisma Postgres: Building a modern PostgreSQL service](https://pris.ly/ppg-early-access?utm_source=docs).
 
 ```
 Note
 
 
 
-Postgres, PostgreSQL and the Slonik Logo are trademarks or registered trademarks of the PostgreSQL Community Association of Canada, and used with their permission
+Postgres, PostgreSQL, and the Slonik Logo are trademarks or registered trademarks of the PostgreSQL Community Association of Canada and are used with permission.
 ```

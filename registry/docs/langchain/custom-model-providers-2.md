@@ -4,11 +4,11 @@ Source: https://docs.langchain.com/oss/python/deepagents/cli/providers
 
 Configure any LangChain-compatible model provider for the Deep Agents CLI
 
-The Deep Agents CLI supports any [chat model provider compatible with LangChain](/oss/python/langchain/models), unlocking use for virtually any LLM that supports tool calling. Any service that exposes an OpenAI-compatible or Anthropic-compatible API also works out of the box — see [Compatible APIs](#compatible-apis).
+The Deep Agents CLI supports any [chat model provider compatible with LangChain](/oss/python/langchain/models), unlocking use for virtually any LLM that supports tool calling. Any service that exposes an OpenAI-compatible or Anthropic-compatible API also works out of the box—see [Compatible APIs](/oss/python/deepagents/cli/configuration#compatible-apis).
 
 ## Quick start
 
-The CLI integrates automatically with the [following model providers](#provider-reference) — no extra configuration needed beyond installing the relevant provider package.
+The CLI integrates automatically with the [following model providers](#provider-reference): no extra configuration needed beyond installing the relevant provider package.
 
 1. **Install provider packages**
 
@@ -25,7 +25,7 @@ The CLI integrates automatically with the [following model providers](#provider-
    uv tool upgrade deepagents-cli --with langchain-ollama
 
    # All providers
-   uv tool install 'deepagents-cli[anthropic,bedrock,cohere,deepseek,fireworks,google-genai,groq,huggingface,ibm,mistralai,nvidia,ollama,openai,openrouter,perplexity,vertexai,xai]'
+   uv tool install 'deepagents-cli[anthropic,baseten,bedrock,cohere,deepseek,fireworks,google-genai,groq,huggingface,ibm,litellm,mistralai,nvidia,ollama,openai,openrouter,perplexity,vertexai,xai]'
    ```
 
 2. **Set credentials**
@@ -34,30 +34,32 @@ The CLI integrates automatically with the [following model providers](#provider-
 
 ### Provider reference
 
-Using a provider not listed here? See [Arbitrary providers](#arbitrary-providers) — any LangChain-compatible provider can be used in the CLI with some additional setup.
+Using a provider not listed here? See [Arbitrary providers](/oss/python/deepagents/cli/configuration#arbitrary-providers): any LangChain-compatible provider can be used in the CLI with some additional setup.
 
-| Provider             | Package                                                                                       | Credential env var                           | Model profiles |
-| -------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------- | -------------- |
-| OpenAI               | [`langchain-openai`](/oss/python/integrations/chat/openai)                                    | `OPENAI_API_KEY`                             | ✅              |
-| Azure OpenAI         | [`langchain-openai`](/oss/python/integrations/chat/azure_chat_openai)                         | `AZURE_OPENAI_API_KEY`                       | ✅              |
-| Anthropic            | [`langchain-anthropic`](/oss/python/integrations/chat/anthropic)                              | `ANTHROPIC_API_KEY`                          | ✅              |
-| Google Gemini API    | [`langchain-google-genai`](/oss/python/integrations/chat/google_generative_ai)                | `GOOGLE_API_KEY`                             | ✅              |
-| Google Vertex AI     | [`langchain-google-vertexai`](/oss/python/integrations/chat/google_generative_ai#credentials) | `GOOGLE_CLOUD_PROJECT`                       | ✅              |
-| AWS Bedrock          | [`langchain-aws`](/oss/python/integrations/chat/bedrock)                                      | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | ✅              |
-| AWS Bedrock Converse | [`langchain-aws`](/oss/python/integrations/chat/bedrock)                                      | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | ✅              |
-| Hugging Face         | [`langchain-huggingface`](/oss/python/integrations/chat/huggingface)                          | `HUGGINGFACEHUB_API_TOKEN`                   | ✅              |
-| Ollama               | [`langchain-ollama`](/oss/python/integrations/chat/ollama)                                    | Optional                                     | ❌              |
-| Groq                 | [`langchain-groq`](/oss/python/integrations/chat/groq)                                        | `GROQ_API_KEY`                               | ✅              |
-| Cohere               | [`langchain-cohere`](/oss/python/integrations/chat/cohere)                                    | `COHERE_API_KEY`                             | ❌              |
-| Fireworks            | [`langchain-fireworks`](/oss/python/integrations/chat/fireworks)                              | `FIREWORKS_API_KEY`                          | ✅              |
-| Together             | [`langchain-together`](/oss/python/integrations/chat/together)                                | `TOGETHER_API_KEY`                           | ❌              |
-| Mistral AI           | [`langchain-mistralai`](/oss/python/integrations/chat/mistralai)                              | `MISTRAL_API_KEY`                            | ✅              |
-| DeepSeek             | [`langchain-deepseek`](/oss/python/integrations/chat/deepseek)                                | `DEEPSEEK_API_KEY`                           | ✅              |
-| IBM (watsonx.ai)     | [`langchain-ibm`](/oss/python/integrations/chat/ibm_watsonx)                                  | `WATSONX_APIKEY`                             | ❌              |
-| Nvidia               | [`langchain-nvidia-ai-endpoints`](/oss/python/integrations/chat/nvidia_ai_endpoints)          | `NVIDIA_API_KEY`                             | ❌              |
-| xAI                  | [`langchain-xai`](/oss/python/integrations/chat/xai)                                          | `XAI_API_KEY`                                | ✅              |
-| Perplexity           | [`langchain-perplexity`](/oss/python/integrations/chat/perplexity)                            | `PPLX_API_KEY`                               | ✅              |
-| OpenRouter           | [`langchain-openrouter`](/oss/python/integrations/chat/openrouter)                            | `OPENROUTER_API_KEY`                         | ✅              |
+| Provider             | Package                                                                                       | Credential env var                                  | Model profiles |
+| -------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------- | -------------- |
+| OpenAI               | [`langchain-openai`](/oss/python/integrations/chat/openai)                                    | `OPENAI_API_KEY`                                    | ✅              |
+| Azure OpenAI         | [`langchain-openai`](/oss/python/integrations/chat/azure_chat_openai)                         | `AZURE_OPENAI_API_KEY`                              | ✅              |
+| Anthropic            | [`langchain-anthropic`](/oss/python/integrations/chat/anthropic)                              | `ANTHROPIC_API_KEY`                                 | ✅              |
+| Google Gemini API    | [`langchain-google-genai`](/oss/python/integrations/chat/google_generative_ai)                | `GOOGLE_API_KEY`                                    | ✅              |
+| Google Vertex AI     | [`langchain-google-vertexai`](/oss/python/integrations/chat/google_generative_ai#credentials) | `GOOGLE_CLOUD_PROJECT`                              | ✅              |
+| Baseten              | [`langchain-baseten`](https://github.com/basetenlabs/langchain-baseten)                       | `BASETEN_API_KEY`                                   | ✅              |
+| AWS Bedrock          | [`langchain-aws`](/oss/python/integrations/chat/bedrock)                                      | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`        | ✅              |
+| AWS Bedrock Converse | [`langchain-aws`](/oss/python/integrations/chat/bedrock)                                      | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`        | ✅              |
+| Hugging Face         | [`langchain-huggingface`](/oss/python/integrations/chat/huggingface)                          | `HUGGINGFACEHUB_API_TOKEN`                          | ✅              |
+| Ollama               | [`langchain-ollama`](/oss/python/integrations/chat/ollama)                                    | Optional                                            | ❌              |
+| Groq                 | [`langchain-groq`](/oss/python/integrations/chat/groq)                                        | `GROQ_API_KEY`                                      | ✅              |
+| Cohere               | [`langchain-cohere`](/oss/python/integrations/chat/cohere)                                    | `COHERE_API_KEY`                                    | ❌              |
+| Fireworks            | [`langchain-fireworks`](/oss/python/integrations/chat/fireworks)                              | `FIREWORKS_API_KEY`                                 | ✅              |
+| Together             | [`langchain-together`](/oss/python/integrations/chat/together)                                | `TOGETHER_API_KEY`                                  | ❌              |
+| Mistral AI           | [`langchain-mistralai`](/oss/python/integrations/chat/mistralai)                              | `MISTRAL_API_KEY`                                   | ✅              |
+| DeepSeek             | [`langchain-deepseek`](/oss/python/integrations/chat/deepseek)                                | `DEEPSEEK_API_KEY`                                  | ✅              |
+| IBM (watsonx.ai)     | [`langchain-ibm`](/oss/python/integrations/chat/ibm_watsonx)                                  | `WATSONX_APIKEY`                                    | ❌              |
+| Nvidia               | [`langchain-nvidia-ai-endpoints`](/oss/python/integrations/chat/nvidia_ai_endpoints)          | `NVIDIA_API_KEY`                                    | ✅              |
+| xAI                  | [`langchain-xai`](/oss/python/integrations/chat/xai)                                          | `XAI_API_KEY`                                       | ✅              |
+| Perplexity           | [`langchain-perplexity`](/oss/python/integrations/chat/perplexity)                            | `PPLX_API_KEY`                                      | ✅              |
+| OpenRouter           | [`langchain-openrouter`](/oss/python/integrations/chat/openrouter)                            | `OPENROUTER_API_KEY`                                | ✅              |
+| LiteLLM              | [`langchain-litellm`](/oss/python/integrations/chat/litellm)                                  | Per-provider (see [docs](https://docs.litellm.ai/)) | ❌              |
 
 A **[model profile](/oss/python/langchain/models#model-profiles)** is a bundle of metadata (model name, default parameters, capabilities, etc.) that ships with a provider package, largely powered by the [models.dev](https://models.dev/) project. Providers that include model profiles have their models listed automatically in the interactive `/model` switcher, subject to the [filtering criteria](#which-models-appear-in-the-switcher) (notably, `tool_calling` must be enabled). Providers without model profiles require you to specify the model name directly or add models via `config.toml`.
 
@@ -79,15 +81,24 @@ To switch models in the CLI, either:
 
 ### Which models appear in the switcher
 
-The interactive `/model` selector builds its list dynamically — it is not a hardcoded list baked into the CLI. A model appears in the switcher when **all** of the following are true:
+The interactive `/model` selector builds its list dynamically—it is not a hardcoded list baked into the CLI. A model appears in the switcher when **all** of the following are true:
 
-1. **The provider package is installed.** Each provider (e.g. `langchain-anthropic`, `langchain-openai`) must be installed alongside `deepagents-cli` — either as an [install extra](/oss/python/deepagents/cli/providers#quick-start) (e.g. `uv tool install 'deepagents-cli[anthropic]'`) or added later with `uv tool upgrade deepagents-cli --with <package>`. If a package is missing, its entire provider section is absent from the switcher.
-2. **The model has a profile with `tool_calling` enabled.** The CLI is a tool-calling agent, so it filters out models that don't support tool calling, as indicated in their profile data. This is the most common reason a model is missing from the list.
+1. **The provider package is installed.** Each provider (e.g. `langchain-anthropic`, `langchain-openai`) must be installed alongside `deepagents-cli`—either as an [install extra](/oss/python/deepagents/cli/providers#quick-start) (e.g. `uv tool install 'deepagents-cli[anthropic]'`) or added later with `uv tool upgrade deepagents-cli --with <package>`. If a package is missing, its entire provider section is absent from the switcher.
+2. **The model has a profile with `tool_calling` enabled.** The CLI is a tool-calling agent, so it filters out models that don't support tool calling, as indicated in their profile data. This is the most common reason a model is missing from the list. For providers that don't bundle profiles (see the [Provider reference](#provider-reference) table), you can define one in `config.toml`:
+
+   ```toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   [models.providers.ollama.profile."qwen3:4b"]
+   tool_calling = true
+   max_input_tokens = 32768
+   max_output_tokens = 8192
+   ```
+
+   This is not strictly required for the model to appear in the switcher — adding it to the [`models` list](/oss/python/deepagents/cli/configuration#adding-models-to-the-interactive-switcher) also works and is simpler. A profile is useful when you want the CLI to know the model's context window and capabilities for features like auto-summarization. See [Profile overrides](/oss/python/deepagents/cli/configuration#profile-overrides) for all overridable fields.
 3. **The model accepts and produces text.** Models whose profile explicitly sets `text_inputs` or `text_outputs` to `false` (e.g. embedding or image-generation models) are excluded.
 
-Models defined in `config.toml` under [`[models.providers.<name>].models`](/oss/python/deepagents/cli/configuration#adding-models-to-the-interactive-switcher) bypass the profile filter — they always appear in the switcher regardless of profile metadata. This is the recommended way to add models that are missing from the list.
+Models defined in `config.toml` under [`[models.providers.<name>].models`](/oss/python/deepagents/cli/configuration#adding-models-to-the-interactive-switcher) bypass the profile filter—they always appear in the switcher regardless of profile metadata. This is the recommended way to add models that are missing from the list.
 
-Credential status does **not** affect whether a model is listed. The switcher shows all qualifying models and displays a credential indicator next to each provider header: a checkmark for confirmed credentials, a warning for missing credentials, or a question mark when credential status is unknown. You can still select a model with missing credentials — the provider will report an authentication error at request time.
+Credential status does **not** affect whether a model is listed. The switcher shows all qualifying models and displays a credential indicator next to each provider header: a checkmark for confirmed credentials, a warning for missing credentials, or a question mark when credential status is unknown. You can still select a model with missing credentials—the provider will report an authentication error at request time.
 
 #### Troubleshooting missing models
 
@@ -96,7 +107,7 @@ Credential status does **not** affect whether a model is listed. The switcher sh
 | Entire provider missing from switcher     | Provider package not installed                               | Install the package (e.g. `uv tool upgrade deepagents-cli --with langchain-groq`)                                 |
 | Provider shown but specific model missing | Model profile has `tool_calling: false` or no profile exists | Add the model to `[models.providers.<name>].models` in `config.toml`, or use `/model <provider>:<model>` directly |
 | Provider shows ⚠ "missing credentials"    | API key env var not set                                      | Set the credential env var from the [Provider reference](#provider-reference) table                               |
-| Provider shows ? "credentials unknown"    | Provider uses non-standard auth that the CLI can't verify    | Credentials may still work — try switching to the model. If auth fails, check the provider's docs                 |
+| Provider shows ? "credentials unknown"    | Provider uses non-standard auth that the CLI can't verify    | Credentials may still work—try switching to the model. If auth fails, check the provider's docs                   |
 
 ### Setting a default model
 
@@ -136,9 +147,9 @@ Without a default, the CLI will default to the most recently used model.
 When the CLI launches, it resolves which model to use in the following order:
 
 1. **`--model` flag** always wins when provided.
-2. **`[models].default`** in `~/.deepagents/config.toml` — The user's intentional long-term preference.
-3. **`[models].recent`** in `~/.deepagents/config.toml` — The last model switched to via `/model`. Written automatically; never overwrites `[models].default`.
-4. **Environment auto-detection** — Falls back to the first available startup credential, checked in order: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `GOOGLE_CLOUD_PROJECT` (Vertex AI).
+2. **`[models].default`** in `~/.deepagents/config.toml`—The user's intentional long-term preference.
+3. **`[models].recent`** in `~/.deepagents/config.toml`—The last model switched to via `/model`. Written automatically; never overwrites `[models].default`.
+4. **Environment auto-detection**: Falls back to the first available startup credential, checked in order: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `GOOGLE_CLOUD_PROJECT` (Vertex AI).
 
 This startup fallback intentionally checks only those four credentials. Other supported providers (for example, Groq) are still available via `--model`, `/model`, and saved defaults (`[models].default` / `[models].recent`).
 
@@ -151,11 +162,18 @@ Use the dedicated integration packages for these services:
 | Router     | Package                                                            | Config                                                                         |
 | ---------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | OpenRouter | [`langchain-openrouter`](/oss/python/integrations/chat/openrouter) | `openrouter:<model>` (built-in, see [Provider reference](#provider-reference)) |
+| LiteLLM    | [`langchain-litellm`](/oss/python/integrations/chat/litellm)       | `litellm:<model>` (built-in, see [Provider reference](#provider-reference))    |
 
-**OpenRouter** is a built-in provider — install the package and use it directly:
+**OpenRouter** is a built-in provider—install the package and use it directly:
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 uv tool install 'deepagents-cli[openrouter]'
+```
+
+**LiteLLM** is also a built-in provider:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+uv tool install 'deepagents-cli[litellm]'
 ```
 
 ***

@@ -1,0 +1,155 @@
+---
+title: Quickstart - Back up a VM with the Azure portal by using Azure Backup
+description: In this Quickstart, learn how to create a Recovery Services vault, enable protection on an Azure VM, and back up the VM,  with the Azure portal.
+ms.date: 01/27/2026
+ms.topic: quickstart
+ms.devlang: azurecli
+ms.custom: mvc, mode-ui, engagement-fy24
+ms.service: azure-backup
+author: AbhishekMallick-MS
+ms.author: v-mallicka
+# Customer intent: As an IT administrator, I want to back up an Azure virtual machine using the portal so that I can ensure data protection and quickly restore it in case of data loss or system failure.
+---
+
+# Quickstart: Back up a virtual machine in Azure
+
+This quickstart describes how to enable backup on an existing Azure VM by using the Azure portal. If you need to create a VM, you can [create a VM with the Azure portal](/azure/virtual-machines/windows/quick-create-portal).
+
+Azure backups can be created through the Azure portal. This method provides a browser-based user interface to create and configure Azure backups and all related resources. You can protect your data by taking backups at regular intervals. Azure Backup creates recovery points that can be stored in geo-redundant recovery vaults. This article details how to back up a virtual machine (VM) with the Azure portal.
+
+## Sign in to Azure
+
+Sign in to the [Azure portal](https://portal.azure.com).
+
+[!INCLUDE [How to create a Recovery Services vault](../../includes/backup-create-rs-vault.md)]
+
+>[!Important]
+>If you have [Azure Files for protection](azure-file-share-backup-overview.md), after vault creation, [configure backup for Azure Files, and then initiate an on-demand backup](backup-azure-files.md). Learn more [about the best practices for Azure Files backup](tutorial-backup-azure-files-vault-tier-portal.md#best-practices).
+
+## Apply a backup policy
+
+To apply a backup policy to your Azure VMs, follow these steps:
+
+1. Go to **Resiliency** and select **+ Configure protection**.
+
+   :::image type="content" source="./media/backup-azure-arm-vms-prepare/configure-protection.png" alt-text="Screenshot shows how to start configuring system backup." lightbox="./media/backup-azure-arm-vms-prepare/configure-protection.png":::
+
+1. On the **Configure protection** pane, select **Resource managed by** as **Azure**, **Datasource type** as **Azure Virtual machines**, **Solution** as **Azure Backup**, and then select **Continue**.
+
+   :::image type="content" source="./media/backup-azure-arm-vms-prepare/configure-system-protection.png" alt-text="Screenshot shows how to set the system backup." lightbox="./media/backup-azure-arm-vms-prepare/configure-system-protection.png":::  
+
+
+1. On the **Start: Configure Backup** pane, select **Azure Virtual machines** as the **Datasource type** and select the vault you have created. Then select **Continue**.
+
+   :::image type="content" source="./media/backup-azure-arm-vms-prepare/select-backup-goal-1.png" alt-text="Screenshot showing Backup and Backup Goal panes." lightbox="./media/backup-azure-arm-vms-prepare/select-backup-goal-1.png":::
+
+1. On the **Configure backup** pane, select the **Policy sub type** as **Enhanced**, **Standard**.
+
+   - **Enhanced Backup policy**: [This policy](backup-azure-vms-enhanced-policy.md) allows multiple daily backups, enabling hourly backups. To enable Azure Backup on Azure VMs in Azure Extended Zones, you can only use the Enhanced policy.
+   - **Standard Backup policy**: [This policy](backup-instant-restore-capability.md) allows VM backup once a day. The daily backups are retained for 30 days. Instant recovery snapshots are retained for two days.
+
+   :::image type="content" source="./media/backup-azure-arm-vms-prepare/default-policy.png" alt-text="Screenshot showing the default backup policy." lightbox="./media/backup-azure-arm-vms-prepare/default-policy.png":::
+
+   If you don't want to use the default policy, select **Create New**, and create a custom policy as described in the next procedure.
+
+## Select a VM to back up
+
+Create a scheduled daily backup to a Recovery Services vault.
+
+1. Under **Virtual Machines**, select **Add**.
+
+      ![Screenshot showing to add virtual machines.](./media/backup-azure-arm-vms-prepare/add-virtual-machines.png)
+
+1. The **Select virtual machines** blade will open. Select the VMs you want to back up using the policy. Then select **OK**.
+
+   * The selected VMs are validated.
+   * You can only select VMs in the same region as the vault.
+   * VMs can only be backed up in a single vault.
+
+     ![Screenshot showing the Select virtual machines blade.](./media/backup-azure-arm-vms-prepare/select-vms-to-backup.png)
+
+    >[!NOTE]
+   > All the VMs in the same region and subscription as that of the vault are available to configure backup. When configuring backup, you can browse to the virtual machine name and its resource group, even though you don’t have the required permission on those VMs. If your VM is in soft deleted state, then it won't be visible in this list. If you need to re-protect the VM, then you need to wait for the soft delete period to expire or undelete the VM from the soft deleted list. For more information, see [the soft delete for VMs article](soft-delete-virtual-machines.md#soft-delete-azure-vm-backups).
+
+## Enable backup on a VM
+
+A Recovery Services vault is a logical container that stores the backup data for each protected resource, such as Azure VMs. When the backup job for a protected resource runs, it creates a recovery point inside the Recovery Services vault. You can then use one of these recovery points to restore data to a given point in time.
+
+To enable VM backup, in **Backup**, select **Enable backup**. This deploys the policy to the vault and to the VMs, and installs the backup extension on the VM agent running on the Azure VM.
+
+After enabling backup:
+
+- The Backup service installs the backup extension whether or not the VM is running.
+- An initial backup will run in accordance with your backup schedule.
+- When backups run, note that:
+  - A VM that's running has the greatest chance for capturing an application-consistent recovery point.
+  - However, even if the VM is turned off, it's backed up. Such a VM is known as an offline VM. In this case, the recovery point will be crash-consistent.
+- Explicit outbound connectivity isn't required to allow backup of Azure VMs.
+
+### Create a custom policy
+
+If you selected to create a new backup policy, fill in the policy settings.
+
+1. In **Policy name**, specify a meaningful name.
+2. In **Backup schedule**, specify when backups should be taken. You can take daily or weekly backups for Azure VMs.
+3. In **Instant Restore**, specify how long you want to retain snapshots locally for instant restore.
+    * When you restore, backed up VM disks are copied from storage, across the network to the recovery storage location. With instant restore, you can leverage locally stored snapshots taken during a backup job, without waiting for backup data to be transferred to the vault.
+    * You can retain snapshots for instant restore for between one to five days. The default value is two days.
+4. In **Retention range**, specify how long you want to keep your daily or weekly backup points.
+5. In **Retention of monthly backup point** and **Retention of yearly backup point**, specify whether you want to keep a monthly or yearly backup of your daily or weekly backups.
+6. Select **OK** to save the policy.
+    > [!NOTE]
+    > To store the restore point collection (RPC), the Backup service creates a separate resource group (RG). This RG is different than RG of the VM. [Learn more](backup-during-vm-creation.md#azure-backup-resource-group-for-virtual-machines).
+
+    ![Screenshot showing the new backup policy.](./media/backup-azure-arm-vms-prepare/new-policy.png)
+
+> [!NOTE]
+   > Azure Backup doesn't support automatic clock adjustment for daylight-saving changes for Azure VM backups. As time changes occur, modify backup policies manually as required.
+
+## Start a backup job
+
+The initial backup will run in accordance with the schedule, but you can run it immediately as follows:
+
+1. Go to **Resiliency** and then select **Protection Inventory** > **Protected items**.
+1. On the **Protected items** pane, filter **Datasource type** by Virtual machines, and then select the **more icon** > **Details** corresponding to the VM instance you want to back up.
+1. On the selected VM instance pane, right-click the relevant row or select the more icon (…), and then select **Backup Now**.
+1. On the **Backup now** pane, use the calendar control to select the last day that the recovery point should be retained. Then select **OK**.
+
+## Monitor the backup job
+
+Backup job details show **Snapshot** and **Transfer data to vault** subtasks. **Snapshot** ensures availability of a recovery point for Instant Restore. **Transfer data to vault** creates a recovery point in the vault for long-term retention and starts after **Snapshot** completes.
+
+  ![Screenshot showing the backup job status.](./media/backup-azure-arm-vms-prepare/backup-job-status.png)
+
+There are **Sub Tasks** running at the backend, one for front-end backup job that can be checked from the **Backup Job** details blade as given below:
+
+  ![Screenshot showing backup job status sub-tasks.](./media/backup-azure-arm-vms-prepare/backup-job-phase.png)
+
+For information on VM backup job phases and how to interpret the progress bar, see [Verify the backup job status](backup-azure-arm-vms-prepare.md#verify-the-backup-job-status).
+
+Depending on disk size and churn, **Transfer data to vault** can take time to complete. See the related article for job-status combinations, parallel backup behavior, and recovery-point guidance.
+
+## Optional steps
+
+### Install the VM agent
+
+Azure Backup backs up Azure VMs by installing an extension to the Azure VM agent running on the machine. If your VM was created from an Azure Marketplace image, the agent is installed and running. If you create a custom VM, or you migrate an on-premises machine, you might need to install the agent manually, as summarized in the table.
+
+**VM** | **Details**
+--- | ---
+**Windows** | 1. [Download and install](https://go.microsoft.com/fwlink/?LinkID=394789&clcid=0x409) the agent MSI file. <br><br> 2. Install with admin permissions on the machine. <br><br> 3. Verify the installation. In *C:\WindowsAzure\Packages* on the VM, right-click **WaAppAgent.exe** > **Properties**. On the **Details** tab, **Product Version** should be 2.6.1198.718 or higher. <br><br>  If you're updating the agent, make sure that no backup operations are running, and [reinstall the agent](https://go.microsoft.com/fwlink/?LinkID=394789&clcid=0x409).
+**Linux** | Install by using an RPM or a DEB package from your distribution's package repository. This is the preferred method for installing and upgrading the Azure Linux agent. All the [endorsed distribution providers](/azure/virtual-machines/linux/endorsed-distros) integrate the Azure Linux agent package into their images and repositories. The agent is available on [GitHub](https://github.com/Azure/WALinuxAgent), but we don't recommend installing from there. <br><br>  If you're updating the agent, make sure no backup operations are running, and update the binaries.</li><ul>
+
+## Clean up deployment
+
+When no longer needed, you can disable protection on the VM, remove the restore points and Recovery Services vault, then delete the resource group and associated VM resources
+
+Learn how to [stop protection and delete VM backups](backup-azure-manage-vms.md#stop-protection-and-delete-backup-data).
+
+## Next steps
+
+In this quickstart, you created a Recovery Services vault, enabled protection on a VM, and created the initial recovery point. To learn more about Azure Backup and Recovery Services, continue to the tutorials.
+
+> [!div class="nextstepaction"]
+>- [Back up multiple Azure VMs](./tutorial-backup-vm-at-scale.md)
+>- [Restore an Azure VM using REST API](backup-azure-arm-userestapi-restoreazurevms.md)

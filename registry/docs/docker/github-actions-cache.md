@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -184,7 +182,7 @@ For example:
 
 ```yaml
 - name: Build and push
-  uses: docker/build-push-action@v6
+  uses: docker/build-push-action@v7
   with:
     context: .
     push: true
@@ -220,7 +218,7 @@ The `ghtoken` parameter is automatically set to the value of `secrets.GITHUB_TOK
 
 ```yaml
 - name: Build and push
-  uses: docker/build-push-action@v6
+  uses: docker/build-push-action@v7
   with:
     context: .
     push: true

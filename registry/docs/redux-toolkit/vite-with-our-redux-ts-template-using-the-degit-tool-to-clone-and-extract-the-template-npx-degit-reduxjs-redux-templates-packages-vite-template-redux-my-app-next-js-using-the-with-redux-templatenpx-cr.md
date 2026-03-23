@@ -136,6 +136,8 @@ Redux maintainer Mark Erikson appeared on the "Learn with Jason" show to explain
 
 See [the "Learn Modern Redux" show notes page](https://www.learnwithjason.dev/let-s-learn-modern-redux) for a transcript and links to the example app source.
 
+Watch
+
 ## Help and Discussion[​](#help-and-discussion "Direct link to Help and Discussion")
 
 The **[#redux channel](https://discord.gg/0ZcbPKXt5bZ6au5t)** of the **[Reactiflux Discord community](https://www.reactiflux.com)** is our official resource for all questions related to learning and using Redux. Reactiflux is a great place to hang out, ask questions, and learn - come join us!

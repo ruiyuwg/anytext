@@ -2,11 +2,11 @@
 
 Validates that [components/hooks are pure](/reference/rules/components-and-hooks-must-be-pure) by checking that they do not call known-impure functions.
 
-## Rule Details {/_rule-details_/}
+## Rule Details {/*rule-details*/}
 
 React components must be pure functions - given the same props, they should always return the same JSX. When components use functions like `Math.random()` or `Date.now()` during render, they produce different output each time, breaking React's assumptions and causing bugs like hydration mismatches, incorrect memoization, and unpredictable behavior.
 
-## Common Violations {/_common-violations_/}
+## Common Violations {/*common-violations*/}
 
 In general, any API that returns a different value for the same inputs violates this rule. Usual examples include:
 
@@ -15,7 +15,7 @@ In general, any API that returns a different value for the same inputs violates 
 - `crypto.randomUUID()`
 - `performance.now()`
 
-### Invalid {/_invalid_/}
+### Invalid {/*invalid*/}
 
 Examples of incorrect code for this rule:
 
@@ -33,7 +33,7 @@ function Component() {
 }
 ```
 
-### Valid {/_valid_/}
+### Valid {/*valid*/}
 
 Examples of correct code for this rule:
 
@@ -45,9 +45,9 @@ function Component() {
 }
 ```
 
-## Troubleshooting {/_troubleshooting_/}
+## Troubleshooting {/*troubleshooting*/}
 
-### I need to show the current time {/_current-time_/}
+### I need to show the current time {/*current-time*/}
 
 Calling `Date.now()` during render makes your component impure:
 
@@ -76,7 +76,7 @@ function Clock() {
 }
 ```
 
----
+***
 
 ## Sitemap
 

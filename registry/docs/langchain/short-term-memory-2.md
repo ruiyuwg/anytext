@@ -16,6 +16,8 @@ Even if your model supports the full context length, most LLMs still perform poo
 
 Chat models accept context using [messages](/oss/python/langchain/messages), which include instructions (a system message) and inputs (human messages). In chat applications, messages alternate between human inputs and model responses, resulting in a list of messages that grows longer over time. Because context windows are limited, many applications can benefit from using techniques to remove or "forget" stale information.
 
+Need to remember information **across** conversations? Use [long-term memory](/oss/python/langchain/long-term-memory) to store and recall user-specific or application-level data across different threads and sessions.
+
 ## Usage
 
 To add short-term memory (thread-level persistence) to an agent, you need to specify a `checkpointer` when creating an agent.
@@ -61,7 +63,7 @@ from langgraph.checkpoint.postgres import PostgresSaver  # [!code highlight]
 
 DB_URI = "postgresql://postgres:postgres@localhost:5442/postgres?sslmode=disable"
 with PostgresSaver.from_conn_string(DB_URI) as checkpointer:
-    checkpointer.setup() # auto create tables in PostgresSql
+    checkpointer.setup() # auto create tables in PostgreSQL
     agent = create_agent(
         "gpt-5",
         tools=[get_user_info],
@@ -105,7 +107,7 @@ result = agent.invoke(
 
 ## Common patterns
 
-With [short-term memory](#add-short-term-memory) enabled, long conversations can exceed the LLM's context window. Common solutions are:
+With [short-term memory](#usage) enabled, long conversations can exceed the LLM's context window. Common solutions are:
 
 ```
 Remove first or last N messages (before calling LLM)
@@ -503,8 +505,7 @@ Access short term memory (state) in [`@before_model`](https://reference.langchai
         "fontFamily": "monospace",
         "flowchart": {
         "curve": "basis"
-        },
-        "themeVariables": {"edgeLabelBackground": "transparent"}
+        }
     }
 }%%
 graph TD
@@ -589,8 +590,7 @@ Access short term memory (state) in [`@after_model`](https://reference.langchain
         "fontFamily": "monospace",
         "flowchart": {
         "curve": "basis"
-        },
-        "themeVariables": {"edgeLabelBackground": "transparent"}
+        }
     }
 }%%
 graph TD

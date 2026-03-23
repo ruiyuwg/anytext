@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -157,18 +155,6 @@ RUN --mount=type=bind,source=src,target=src \
 ################################################################################
 
 FROM dhi.io/static:20250419 AS final
-
-# Create a non-privileged user that the app will run under.
-ARG UID=10001
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home "/nonexistent" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
-    --uid "${UID}" \
-    appuser
-USER appuser
 
 # Copy the executable from the "build" stage.
 COPY --from=build /bin/server /bin/

@@ -80,5 +80,5 @@ with Pydantic AI to access various AI models and providers.
 
 title: "Ecosystem"
 description: "Explore community framework integrations and ecosystem features for the AI Gateway."
-last\_updated: "2026-03-08T05:03:10.437Z"
+last\_updated: "2026-03-23T09:40:04.351Z"
 source: "https://vercel.com/docs/ai-gateway/ecosystem"

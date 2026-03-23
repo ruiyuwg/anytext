@@ -107,8 +107,9 @@ When you deliver these emails, you must also meet Stripe’s compliance requirem
 
 ### First offer email
 
+|  |
+|  |
 | **Audience:**     | All users receiving their very first financing offer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Subject line:** | Access up to \[offer amount] in financing to grow your business                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | **Preheader:**    | \[Business name] is prequalified—apply in a few clicks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **Body Copy:**    | Access flexible financing with one flat fee for whatever your business needs. Businesses use Stripe Capital to manage cash flow, buy inventory, invest in marketing, and more.
@@ -135,8 +136,9 @@ This email was sent to \[customer email address]. If you’d rather not receive 
 
 ### Reminder email #1
 
+|  |
+|  |
 | **Audience:**  | All users who have not yet accepted their very first financing offer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Subject:**   | Get the financing you need with \[Platform name] and Stripe                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | **Preheader:** | Have questions? Let’s talk.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **Body Copy:** | Hello \[name],
@@ -160,8 +162,9 @@ This offer is available until \[expiration date].
 
 ### Reminder email #2
 
+|  |
+|  |
 | **Audience:**  | All users who have not yet accepted their very first financing offer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Subject:**   | Your financing offer expires in a few days                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | **Preheader:** | Have any questions?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **Body copy:** | Hello \[name],
@@ -186,8 +189,9 @@ This offer is available until \[expiration date].
 
 ### Re-engagement email campaign
 
-| **Audience:**     | Eligible users who did not accept their last offer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|  |
+|  |
+| **Audience:**     | Eligible users who didn’t accept their last offer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | **Subject:**      | You’re eligible for a new financing offer through \[Platform name]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | **Preview text:** | Get funding in as little as 2 days                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | **Email body:**   | Hello,
@@ -214,8 +218,9 @@ This offer is available until \[expiration date].
 
 ### Refill offer email campaign
 
+|  |
+|  |
 | **Audience:**     | All users with in-progress financing that has been 75% paid off                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Subject:**      | Great job on your payment progress                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | **Preview text:** | You’re now eligible for additional funds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | **Email body:**   | The finish line is close—you’ve paid 75% of your financing through \[platform name] Capital. Amazing work. Your remaining balance is \[add amount], which will continue to be paid automatically. You’re now eligible for \[add amount] of additional funds.
@@ -235,8 +240,9 @@ This offer is available until \[expiration date].
 
 ### Repeat offer email campaign
 
+|  |
+|  |
 | **Audience:**     | Eligible users who fully paid their last offer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Subject:**      | You’re eligible for a new offer through \[Platform name]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | **Preview text:** | Get funding in as little as 2 days                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **Email body:**   | Hello \[name],
@@ -269,8 +275,9 @@ In-product upsells help deliver targeted marketing messages directly to your cus
 
 ### Option 1: Promotional Banner
 
+|  |
+|  |
 | **Audience:**  | All users with a live offer who have not accepted yet                                                                                     |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | **Placement:** | Homepage or payments/payouts page                                                                                                         |
 | **Timing:**    | Trigger upon login                                                                                                                        |
 | **Copy:**      | \[Platform name] | Stripe Congratulations!
@@ -279,27 +286,30 @@ You’re prequalified for up to \[local currency, for example USD or GBP]\[XX,XX
 
 ### Alternative promotional banners
 
+|  |
+|  |
 | **Copy:** | - You’re prequalified for a financing offer! Get the funding you need—now.
 
 - Financing fuels growth. And good news—you’re prequalified for a financing offer.
 - You’re prequalified for a financing offer. It’s time to dream up your next big move. |
-  | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ### Option 2: Pop-up chat message
 
+|  |
+|  |
 | **Audience:**  | All users with a live offer who have not accepted yet                                                                                        |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Placement:** | Homepage or payments/payouts page                                                                                                            |
 | **Timing:**    | Trigger upon login                                                                                                                           |
 | **Copy:**      | Hey \[first name], Congratulations! You’ve been prequalified for a financing offer of up to \[local currency, for example USD or GBP]\[XX,XXX]. |
 
 ### Alternative pop-up chat messages
 
+|  |
+|  |
 | **Copy:** | - Hey \[first name], Financing can help accelerate your business growth. And we have some good news: You’ve been prequalified for a financing offer of up to \[XX,XXX] \[local currency, for example USD or GBP].
 
 - Hey \[first name], We want to help you grow. That’s why we’re excited to share that you’ve been prequalified for a financing offer of up to \[XX,XXX]\[local currency, for example USD or GBP].
 - Hey \[first name], Good news! You’ve been prequalified for a financing offer of up to \[XX,XXX] \[local currency, for example USD or GBP]. Get the financing your business needs. |
-  | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Required disclaimers
 
@@ -356,9 +366,9 @@ Here’s how you could describe the benefits and features of the program:
 
 Here is a template for explaining how the program works. Modify it as needed for your situation. For example, if your customers may see their eligibility offer in places other than email, like in-app notifications or banner ads, mention them in the description of step one.
 
-1. Check your eligibility: If you’re eligible, based on factors that include your payment volume and history on , you will receive a capital offer via email.
+1. Check your eligibility: If you’re eligible, based on factors that include your payment volume and history on , you’ll receive a capital offer via email.
 2. Select your offer: Select the amount that’s right for your business needs. The financing fee and payment rate are set based on the funding amount.
-3. Receive your funds: After your application is reviewed, if you are approved the funds are deposited into your bank account, typically in as little as one to two business days after approval.
+3. Receive your funds: After your application is reviewed, if you’re approved the funds are deposited into your bank account, typically in as little as one to two business days after approval.
 4. Pay as you earn\*: You’ll automatically pay the financing with a fixed percentage of your sales, until the total amount is paid. Stripe Capital loans have a minimum amount due each payment period. If the amount that you pay through sales doesn’t meet the minimum required, your bank account will be automatically debited the remaining amount at the end of the period.
 
 ### Marketing to ineligible users
@@ -373,17 +383,17 @@ If you’d like to receive a financing offer, but aren’t eligible at this time
 
 The list of approved and prohibited language isn’t exhaustive. For any questions, contact the Capital team at <capital-review@stripe.com>.
 
-| Approved messaging                                                                                                                                                                                                             | Prohibited messaging                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Approved messaging                                                                                                                                                                                                             | Prohibited messaging                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | - Payment rate
 
 - Pay as a fixed percentage of sales/invoices                                                                                                                                                                 | - Interest rates
 - High interest rates/high-rate
 - APR
-- Repayment                                                                                                                                                          |
+- Repayment                                                                                                                                                       |
   | - Payment
 - Paid                                                                                                                                                                                                             | - Only pay when you get paid
-- Use the paycheck to cover your financing                                                                                                                                                         |
+- Use the paycheck to cover your financing                                                                                                                                                      |
   | - Automatic and flexible payment
 - Pay when you get paid
 
@@ -391,31 +401,31 @@ You must pair these two phrases in close proximity with the phrase, “pay your 
 
 - Payment on your schedule
 - Pay it off in pieces
-- Pay it back whenever                                                                                                               |
+- Pay it back whenever                                                                                                            |
   | - Flat fee
 - Financing fee                                                                                                                                                                                                   | - Interest rates
-- High interest rates                                                                                                                                                                                          |
+- High interest rates                                                                                                                                                                                       |
   | - Financing
 - Business financing                                                                                                                                                                                             | - Low risk financial solution
-- Loans                                                                                                                                                                                           |
+- Loans                                                                                                                                                                                        |
   | - Offer through Stripe Capital
 - Financing through our partner, Stripe Capital
 - Offer from Stripe Capital
 - Stripe Capital offer
 - Powered by Stripe Capital                                                          | - Offer from Stripe
-- Offer from \[Platform]                                                                                                                                                                                     |
+- Offer from \[Platform]                                                                                                                                                                                  |
   | - Typically in 2 business days
 - As soon as 2 business day
 - Get funds fast                                                                                                                                                | - In 2 business days
 - Get funds the next business day
-- Get funds instantly                                                                                                                                                  |
+- Get funds instantly                                                                                                                                               |
   | - Simple and fast for you to get the financing for your business                                                                                                                                                               | - Get instant financing
-- ACcess to loans/financing right away                                                                                                                                                                  |
+- ACcess to loans/financing right away                                                                                                                                                               |
   | - Financing for business needs                                                                                                                                                                                                 | - Financing for any of your needs
-- Consumer financing                                                                                                                                                                          |
+- Consumer financing                                                                                                                                                                       |
   | - Applying for financing through Stripe Capital might require a personal credit check, but this credit check doesn’t affect your personal credit score
-- Will not affect your personal credit score                          | - No credit check
-- Will not affect your credit                                                                                                                                                                                 |
+- Won’t affect your personal credit score                             | - No credit check
+- Won’t affect your credit                                                                                                                                                                                 |
   | Use business financing for:
 - Creating/publishing/purchasing advertisements
 - Costs of hiring new team members/recruitment costs
@@ -425,16 +435,16 @@ You must pair these two phrases in close proximity with the phrase, “pay your 
 - Offsetting personal expenses such as groceries and home expenses
 - Using funds for personal, family, or household purposes
 - Paying personal bills
-- No downsides                           |
+- No downsides                        |
   | - \[when processing payments through Stripe you] “…can begin the eligibility process”
 - \[the eligibility process] “…takes into account transaction amounts that you’ve demonstrated you can pay”                              | - \[when processing payments through Stripe you] “…are automatically eligible to qualify”
-- \[when processing payments through Stripe you] “…will not offer you more than you can afford/show you can pay”
+- \[when processing payments through Stripe you] “…won’t offer you more than you can afford/show you can pay”
 - Consumer financing |
-  | - \[when discussing eligibility] “…additional steps you can take to streamline your evaluation”                                                                                                                                 | - \[when discussing eligibility] “…increase the amount of money you’ll be eligible to borrow”                                                                                                                                      |
+  | - \[when discussing eligibility] “…additional steps you can take to streamline your evaluation”                                                                                                                                 | - \[when discussing eligibility] “…increase the amount of money you’ll be eligible to borrow”                                                                                                                                   |
   | - Stripe’s/their easy/straightforward/integrated process                                                                                                                                                                       | - Stripe’s/their responsible lending practices
 - “ensures responsible financing practices”
-- \[any language implying that underwriting practices ensure no chance of default]                                                  |
-  | - prequalified                                                                                                                                                                                                                 | - Pre-approved                                                                                                                                                                                                                    |
+- \[any language implying that underwriting practices ensure no chance of default]                                               |
+  | - prequalified                                                                                                                                                                                                                 | - Pre-approved                                                                                                                                                                                                                 |
 
 ## Promote your Capital program
 
@@ -477,7 +487,7 @@ Here are a few examples for landing page URL options and site navigation categor
 
 ### Blog-post content
 
-We understand that blog posts are a common tool to increase your own company’s organic growth, so you might decide to promote Stripe Capital through such content. Because blog posts are not space constrained, you have some additional things to consider when creating this type of marketing content:
+We understand that blog posts are a common tool to increase your own company’s organic growth, so you might decide to promote Stripe Capital through such content. Because blog posts aren’t space constrained, you have some additional things to consider when creating this type of marketing content:
 
 - Comparisons: Due to the additional regulatory complexity of comparing Stripe Capital against other competitors or different loan products, you may not directly compare Stripe Capital against any competitors’ offerings.
 - Testimonials: Writing about your customer’s experiences in a blog post related to Stripe Capital falls under “testimonials” rules and must adhere to specific [requirements](https://docs.stripe.com/capital/regulatory-compliance.md#testimonials).

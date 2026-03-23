@@ -50,6 +50,12 @@ We use standard HTTP response codes for success and failure notifications, and o
 - **Message:** The `domain.com` domain is not verified. Please, add and verify your domain.
 - **Suggested action:** Make sure the domain in your API request's `from` field matches a domain you've verified in Resend. Update your API request to use your verified domain, or add and verify the domain you're trying to use. [Learn more about resolving this error](/knowledge-base/403-error-domain-mismatch).
 
+### `validation_error`
+
+- **Status:** 403
+- **Message:** The `example.com` domain has been registered already.
+- **Suggested action:** Verify you are signed in to the correct Resend account and check whether a teammate already added the domain. If you still cannot access it, [contact support](https://resend.com/help). [Learn more about resolving this error](/knowledge-base/domain-already-registered).
+
 ### `not_found`
 
 - **Status:** 404

@@ -122,5 +122,5 @@ This section guides you through setting up Conformance for your repository.
 
 title: "Introduction to Conformance"
 description: "Learn how Conformance improves collaboration, productivity, and software quality at scale."
-last\_updated: "2026-03-08T05:03:12.621Z"
+last\_updated: "2026-03-23T09:40:07.483Z"
 source: "https://vercel.com/docs/conformance"

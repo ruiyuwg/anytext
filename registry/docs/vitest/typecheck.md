@@ -86,7 +86,9 @@ Minimum time in milliseconds it takes to spawn the typechecker.
 
 Enable [Vitest UI](/guide/ui).
 
-This features requires a [`@vitest/ui`](https://www.npmjs.com/package/@vitest/ui) package to be installed. If you do not have it already, Vitest will install it when you run the test command for the first time.
+This features requires a [`@vitest/ui`](https://npmx.dev/package/@vitest/ui) package to be installed. If you do not have it already, Vitest will install it when you run the test command for the first time.
+
+Make sure that your UI server is not exposed to the network. Since Vitest 4.1 setting [`api.host`](/config/api) to anything other than `localhost` will disable the buttons to save the code or run any tests for security reasons, effectively making UI a readonly reporter.
 
 ***
 
@@ -107,6 +109,8 @@ export default defineConfig({
 })
 ```
 
+Be aware that this option may cause problems with async [concurrent tests](/api/test#test-concurrent). If enabled, the completion of one test will restore all the values changed with [`vi.stubEnv`](/api/vi#vi-stubenv), including those currently being used by other tests in progress.
+
 ***
 
 # unstubGlobals
@@ -126,6 +130,8 @@ export default defineConfig({
 })
 ```
 
+Be aware that this option may cause problems with async [concurrent tests](/api/test#test-concurrent). If enabled, the completion of one test will restore all global values that were changed with [`vi.stubGlobal`](/api/vi#vi-stubglobal), including those currently being used by other tests in progress.
+
 ***
 
 ```ts
@@ -136,11 +142,20 @@ function import<T>(moduleId: string): Promise<T>
 
 # update
 
-- **Type:** `boolean`
+- **Type:** `boolean | 'new' | 'all' | 'none'`
 - **Default:** `false`
-- **CLI:** `-u`, `--update`, `--update=false`
+- **CLI:** `-u`, `--update`, `--update=false`, `--update=new`, `--update=none`
 
-Update snapshot files. This will update all changed snapshots and delete obsolete ones.
+Define snapshot update behavior.
+
+- `true` or `'all'`: updates all changed snapshots and deletes obsolete ones
+- `new`: generates new snapshots without changing or deleting obsolete ones
+- `none`: does not write snapshots and fails on snapshot mismatches, missing snapshots, and obsolete snapshots
+
+When `update` is `false` (the default), Vitest resolves snapshot update mode by environment:
+
+- Local runs (non-CI): works same as `new`
+- CI runs (`process.env.CI` is truthy): works same as `none`
 
 ***
 
@@ -151,3 +166,11 @@ Vitest can be extended using plugins, similar to how Vite plugins work. This all
 For detailed guidance on how to write plugins, you can refer to the [Vite plugin documentation](https://vitejs.dev/guide/api-plugin).
 
 ***
+
+# Vi
+
+Vitest provides utility functions to help you out through its `vi` helper. You can access it globally (when [globals configuration](/config/globals) is enabled), or import it from `vitest` directly:
+
+```js
+import { vi } from 'vitest'
+```

@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -56,13 +54,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           platforms: linux/amd64,linux/arm64
           tags: user/app:latest
@@ -70,14 +68,116 @@ jobs:
             "github_token=${{ secrets.GITHUB_TOKEN }}"
 ```
 
-> Note
->
-> You can also expose a secret file to the build with the `secret-files` input:
->
-> ```yaml
-> secret-files: |
->   "MY_SECRET=./secret.txt"
-> ```
+### [Using secret files](#using-secret-files)
+
+The `secret-files` input lets you mount existing files as secrets in your build. This is useful when you need to use credential files that are generated during your workflow, or when you need to mount configuration files like `.npmrc` or `.pypirc` that are already in the expected format.
+
+The key difference between `secrets` and `secret-files`:
+
+- `secrets`: Pass secret values as strings (from environment variables or GitHub secrets)
+- `secret-files`: Mount existing files from the runner's filesystem
+
+#### [Example: Using .npmrc for private npm packages](#example-using-npmrc-for-private-npm-packages)
+
+If your build needs to install packages from a private npm registry, you can create an `.npmrc` file and mount it as a secret:
+
+```yaml
+name: ci
+
+on:
+  push:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Create .npmrc file
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
+      - name: Build
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          secret-files: |
+            npmrc=./.npmrc
+          tags: user/app:latest
+```
+
+In your Dockerfile, mount the secret file to the expected location:
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \
+    npm ci
+
+COPY . .
+
+RUN npm run build
+```
+
+#### [Example: Using dynamically generated credentials](#example-using-dynamically-generated-credentials)
+
+You can generate credential files from multiple secrets and mount them:
+
+```yaml
+name: ci
+
+on:
+  push:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Create credentials file
+        run: |
+          cat <<EOF > aws-credentials
+          [default]
+          aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          EOF
+
+      - name: Build
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          secret-files: |
+            aws=./aws-credentials
+          tags: user/app:latest
+```
+
+In your Dockerfile:
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine
+
+RUN apk add --no-cache aws-cli
+
+RUN --mount=type=secret,id=aws,target=/root/.aws/credentials \
+    aws s3 cp s3://my-private-bucket/data.tar.gz /tmp/
+```
+
+### [Multi-line secrets](#multi-line-secrets)
 
 If you're using [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and need to handle multi-line value, you will need to place the key-value pair between quotes:
 
@@ -202,7 +302,7 @@ jobs:
           private-key-name: github-ppk
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           ssh: default
           push: true
@@ -227,7 +327,7 @@ jobs:
           private-key-name: github-ppk
 
       - name: Build
-        uses: docker/bake-action@v6
+        uses: docker/bake-action@v7
         with:
           set: |
             *.ssh=default

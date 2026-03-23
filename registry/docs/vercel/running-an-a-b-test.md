@@ -1,12 +1,13 @@
 # Running an A/B test
 
-This workflow sets up an A/B test for a layout experiment, tracks results through Web Analytics, and cleans up afterward.
+This workflow sets up a multi-variant layout experiment, tracks results through Web Analytics, and cleans up afterward.
 
 ## 1. Create the flag
 
 ```bash filename="terminal"
-vercel flags add new-pricing-layout --kind boolean \
-  --description "A/B test: new pricing page layout"
+vercel flags create new-pricing-layout --kind string \
+  --description "A/B test: new pricing page layout" \
+  --variant control="Current layout" --variant treatment="New layout"
 ```
 
 ## 2. Define the flag in code
@@ -15,13 +16,13 @@ vercel flags add new-pricing-layout --kind boolean \
 import { flag } from 'flags/next';
 import { vercelAdapter } from '@flags-sdk/vercel';
 
-export const newPricingLayout = flag({
+export const newPricingLayout = flag<'control' | 'treatment'>({
   key: 'new-pricing-layout',
   adapter: vercelAdapter(),
 });
 ```
 
-The flag returns `false` until you configure targeting in the dashboard.
+The flag returns one of the variants you created in the CLI, in this case `control` or `treatment`. If you want to rename a variant later, use `vercel flags update`.
 
 ## 3. Use the flag in a component
 
@@ -29,9 +30,9 @@ The flag returns `false` until you configure targeting in the dashboard.
 import { newPricingLayout } from '../../flags';
 
 export default async function PricingPage() {
-  const useNewLayout = await newPricingLayout();
+  const layoutVariant = await newPricingLayout();
 
-  return useNewLayout ? <NewPricing /> : <CurrentPricing />;
+  return layoutVariant === 'treatment' ? <NewPricing /> : <CurrentPricing />;
 }
 ```
 
@@ -64,23 +65,49 @@ export default async function RootLayout({
 
 See [Web Analytics integration](/docs/flags/observability/web-analytics) for more on tracking flag values.
 
-## 5. Deploy to preview and test both variants
+## 5. Deploy to preview
 
 ```bash filename="terminal"
 vercel deploy
 ```
 
-Visit the preview URL to confirm both layouts render correctly. If you've set up the [Flags Explorer](/docs/flags/flags-explorer), you can toggle the flag in the toolbar.
+## 6. Test both variants in preview
 
-## 6. Deploy to production
+Use `vercel flags set` to switch the preview environment between variants while you test:
+
+```bash filename="terminal"
+vercel flags set new-pricing-layout --environment preview --variant control \
+  --message "Verify the control layout in preview"
+```
+
+```bash filename="terminal"
+vercel flags set new-pricing-layout --environment preview --variant treatment \
+  --message "Verify the treatment layout in preview"
+```
+
+Visit the preview URL after each change to confirm both layouts render correctly. If you've set up the [Flags Explorer](/docs/flags/flags-explorer), you can still use it for local overrides.
+
+## 7. Open the flag and configure the experiment
+
+Use `vercel flags open` to jump to the flag in the dashboard:
+
+```bash filename="terminal"
+vercel flags open new-pricing-layout
+```
+
+In the dashboard, configure the targeting rule that splits production traffic between the `control` and `treatment` variants.
+
+## 8. Deploy to production
 
 ```bash filename="terminal"
 vercel deploy --prod
 ```
 
-Enable the flag in the **Production** environment in the dashboard to start serving the new layout to users. Monitor results in Web Analytics by comparing metrics per variant.
+## 9. Monitor the experiment
 
-## 7. Conclude the experiment
+Monitor results in Web Analytics by comparing metrics for the `control` and `treatment` variants.
+
+## 10. Conclude the experiment
 
 When you've picked a winner, clean up:
 
@@ -93,7 +120,7 @@ vercel flags archive new-pricing-layout --yes
 
 title: "Setting up Flags Explorer"
 description: "Add the Flags Explorer to the Vercel Toolbar so you can override flag values on preview deployments without affecting other users."
-last\_updated: "2026-03-08T05:03:14.521Z"
+last\_updated: "2026-03-23T09:40:10.094Z"
 source: "https://vercel.com/docs/flags/vercel-flags/cli/set-up-flags-explorer"
 
 # Setting up Flags Explorer
@@ -129,5 +156,5 @@ See [Flags Explorer](/docs/flags/flags-explorer/getting-started) for the full se
 
 title: "Archive"
 description: "Archive unused feature flags and restore them when needed."
-last\_updated: "2026-03-08T05:03:14.529Z"
+last\_updated: "2026-03-23T09:40:10.108Z"
 source: "https://vercel.com/docs/flags/vercel-flags/dashboard/archive"

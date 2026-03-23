@@ -68,5 +68,5 @@ Learn more about using [tools with the AI SDK](https://sdk.vercel.ai/docs/founda
 
 title: "Build with AI on Vercel"
 description: "Integrate powerful AI services and models seamlessly into your Vercel projects."
-last\_updated: "2026-03-08T05:03:09.857Z"
+last\_updated: "2026-03-23T09:40:03.357Z"
 source: "https://vercel.com/docs/agent-resources/integrations-for-models"

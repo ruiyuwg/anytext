@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/api/runtime-request
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 The [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request)
 interface is part of the Fetch API and represents the request of fetch().

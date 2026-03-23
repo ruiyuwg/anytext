@@ -1,0 +1,107 @@
+---
+title: About Azure Bastion configuration settings
+description: Learn about the available configuration settings for Azure Bastion.
+author: abell
+ms.author: abell
+ms.service: azure-bastion
+ms.topic: concept-article
+ms.date: 11/24/2025
+ms.custom: references_regions, ignite-2024
+# Customer intent: "As a cloud administrator, I want to configure Azure Bastion settings, including SKU selection and network requirements, so that I can ensure secure and efficient access to virtual machines within my infrastructure."
+---
+
+# About Azure Bastion configuration settings
+
+The sections in this article discuss the resources and settings for Azure Bastion.
+
+## <a name="subnet"></a>Azure Bastion subnet
+
+> [!IMPORTANT]
+> For Azure Bastion resources deployed on or after November 2, 2021, the minimum AzureBastionSubnet size is /26 or larger (/25, /24, etc.). All Azure Bastion resources deployed in subnets of size /27 prior to this date are unaffected by this change and will continue to work, but we highly recommend increasing the size of any existing AzureBastionSubnet to /26 in case you choose to take advantage of [host scaling](./configure-host-scaling.md) in the future.
+>
+
+When you deploy Azure Bastion using any SKU except the Bastion Developer offering, Bastion requires a dedicated subnet named **AzureBastionSubnet**. You must create this subnet in the same virtual network that you want to deploy Azure Bastion to. The subnet must have the following configuration:
+
+* Subnet name must be *AzureBastionSubnet*.
+* Subnet size must be /26 or larger (/25, /24 etc.).
+* For host scaling, a /26 or larger subnet is recommended. Using a smaller subnet space limits the number of scale units. For more information, see the [Host scaling](#instance) section of this article.
+* The subnet must be in the same virtual network and resource group as the bastion host.
+* The subnet can't contain other resources.
+
+You can configure this setting using the following methods:
+
+| Method | Value | Links |
+| --- | --- |--- |
+| Azure portal | Subnet  |[Quickstart](quickstart-host-portal.md)|
+| Azure PowerShell | -subnetName|[cmdlet](/powershell/module/az.network/new-azbastion#parameters) |
+| Azure CLI |  --subnet-name | [command](/cli/azure/network/vnet#az-network-vnet-create) |
+
+## <a name="public-ip"></a>Public IP address
+
+Azure Bastion deployments, except Bastion Developer and [Private-only](#private-only), require a Public IP address. The Public IP must have the following configuration:
+
+* The Public IP address SKU must be **Standard**.
+* The Public IP address assignment/allocation method must be **Static**.
+* The Public IP address name is the resource name by which you want to refer to this public IP address.
+* You can choose to use a public IP address that you already created, as long as it meets the criteria required by Azure Bastion and isn't already in use.
+
+You can configure this setting using the following methods:
+
+| Method | Value | Links |
+| --- | --- |--- |
+| Azure portal | Public IP address |[Azure portal](https://portal.azure.com)|
+| Azure PowerShell | -PublicIpAddress| [cmdlet](/powershell/module/az.network/new-azbastion#parameters)  |
+| Azure CLI | --public-ip create |[command](/cli/azure/network/public-ip) |
+
+### Configure Public IP addresses with availability zones configured
+Refer to the table below for creating/using public IP addresses for zonal Bastion deployments:
+
+| Scenario| Bastion availability zones  | Public IP availability zones  |
+|:-------|:------|:-------|
+| Creating a new public IP | 1, 2, 3 | 1, 2, 3 |
+| | 1 | 1, 2, 3|
+|Using an existing public IP | 1, 2, 3 | 1, 2, 3|
+| | 1 | 1, 2, 3|
+| | 0 | all public IPs, zonal or not|
+
+
+## <a name="instance"></a>Instances and host scaling
+
+An instance is an optimized Azure VM that is created when you configure Azure Bastion. Azure fully manages each instance for you. An instance is also referred to as a scale unit. You connect to client VMs via an Azure Bastion instance. When you configure Azure Bastion using the Basic SKU, two instances are created. If you use the Standard SKU or higher, you can specify the number of instances. This is called **host scaling**.
+
+To configure host scaling, see [Configure host scaling](configure-host-scaling.md).
+
+## <a name="ports"></a>Custom ports
+
+You can specify the port that you want to use to connect to your VMs. By default, the inbound ports used to connect are 3389 for RDP and 22 for SSH. If you configure a custom port value, specify that value when you connect to the VM.
+
+Custom port values are supported for the Standard SKU or higher only.
+
+## Shareable link
+
+The Bastion **Shareable Link** feature lets users connect to a target resource using Azure Bastion without accessing the Azure portal.
+
+When a user without Azure credentials clicks a shareable link, a webpage opens that prompts the user to sign in to the target resource via RDP or SSH. Users authenticate using username and password or private key, depending on what you configured in the Azure portal for that target resource. Users can connect to the same resources that you can currently connect to with Azure Bastion: VMs or virtual machine scale set.
+
+| Method | Value | Links | Requires Standard SKU or higher |
+| --- | --- | --- | --- |
+| Azure portal |Shareable Link  | [Configure](shareable-link.md)| Yes |
+
+## <a name="private-only"></a>Private-only deployment
+
+[!INCLUDE [Private-only deployments](../../includes/bastion-private-only-description.md)] For more information, see [Deploy Bastion as private-only](private-only-deployment.md).
+
+## <a name="session"></a>Session recording
+
+[!INCLUDE [Session recording](../../includes/bastion-session-recording-description.md)] For more information, see [Bastion session recording](session-recording.md).
+
+## <a name="az"></a>Availability zones
+
+[!INCLUDE [Availability Zones description and supported regions](../../includes/bastion-availability-zones-description.md)]
+
+## Next steps
+
+* Learn about [frequently asked questions for Azure Bastion](bastion-faq.md).
+* Learn about the different [Azure Bastion SKU tiers](bastion-sku-comparison.md) and choose the right one for your requirements.
+* Learn how to [optimize Azure Bastion costs](cost-optimization.md) while maintaining secure remote access.
+* Learn how to [add more instances (scale units) to Azure Bastion](configure-host-scaling.md).

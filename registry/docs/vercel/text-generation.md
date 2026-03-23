@@ -83,5 +83,5 @@ The response includes the generated text in the `output` array, along with token
 
 title: "Tool Calling"
 description: "Define tools the model can call using the OpenResponses API."
-last\_updated: "2026-03-08T05:03:10.824Z"
+last\_updated: "2026-03-23T09:40:04.922Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openresponses/tool-calling"

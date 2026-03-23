@@ -10,12 +10,12 @@ With the `t.createCallerFactory`-function you can create a server-side caller of
 
 ### Basic example
 
-We create the router with a query to list posts and a mutation to add posts, and then we a call each method.
+We create the router with a query to list posts and a mutation to add posts, and then we call each method.
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC } from "@trpc/server";
-import { z } from "zod";
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
 
 type Context = {
   foo: string;
@@ -32,8 +32,8 @@ interface Post {
 }
 const posts: Post[] = [
   {
-    id: "1",
-    title: "Hello world",
+    id: '1',
+    title: 'Hello world',
   },
 ];
 const appRouter = router({
@@ -61,12 +61,12 @@ const createCaller = createCallerFactory(appRouter);
 
 // 2. create a caller using your `Context`
 const caller = createCaller({
-  foo: "bar",
+  foo: 'bar',
 });
 
 // 3. use the caller to add and list posts
 const addedPost = await caller.post.add({
-  title: "How to make server-side call in tRPC",
+  title: 'How to make server-side call in tRPC',
 });
 
 const postList = await caller.post.list();
@@ -77,25 +77,60 @@ const postList = await caller.post.list();
 
 > Taken from <https://github.com/trpc/examples-next-prisma-starter/blob/main/src/server/routers/post.test.ts>
 
-```ts
-import { inferProcedureInput } from "@trpc/server";
-import { createContextInner } from "../context";
-import { AppRouter, createCaller } from "./_app";
+```ts twoslash
+// @target: esnext
+// @filename: context.ts
+export async function createContextInner(opts: {}) {
+  return { user: undefined };
+}
 
-test("add and get post", async () => {
+// @filename: _app.ts
+import { initTRPC, type inferProcedureInput } from '@trpc/server';
+import { z } from 'zod';
+import { createContextInner } from './context';
+
+type Context = Awaited<ReturnType<typeof createContextInner>>;
+
+const t = initTRPC.context<Context>().create();
+
+const posts: { id: string; title: string; text: string }[] = [];
+
+export const appRouter = t.router({
+  post: t.router({
+    add: t.procedure
+      .input(z.object({ title: z.string(), text: z.string() }))
+      .mutation((opts) => {
+        const post = { id: `${Math.random()}`, ...opts.input };
+        posts.push(post);
+        return post;
+      }),
+    byId: t.procedure
+      .input(z.object({ id: z.string() }))
+      .query((opts) => posts.find((p) => p.id === opts.input.id)!),
+  }),
+});
+
+export type AppRouter = typeof appRouter;
+export const createCaller = t.createCallerFactory(appRouter);
+
+// @filename: test.ts
+import { type inferProcedureInput } from '@trpc/server';
+import { createContextInner } from './context';
+import { type AppRouter, createCaller } from './_app';
+
+// ---cut---
+async function testAddAndGetPost() {
   const ctx = await createContextInner({});
   const caller = createCaller(ctx);
 
-  const input: inferProcedureInput<AppRouter["post"]["add"]> = {
-    text: "hello test",
-    title: "hello test",
+  const input: inferProcedureInput<AppRouter['post']['add']> = {
+    text: 'hello test',
+    title: 'hello test',
   };
 
   const post = await caller.post.add(input);
   const byId = await caller.post.byId({ id: post.id });
-
-  expect(byId).toMatchObject(input);
-});
+}
 ```
 
 ## `router.createCaller()`
@@ -108,8 +143,8 @@ We create the router with an input query, and then we call the asynchronous `gre
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC } from "@trpc/server";
-import { z } from "zod";
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
 
 const t = initTRPC.create();
 
@@ -121,7 +156,7 @@ const router = t.router({
 });
 
 const caller = router.createCaller({});
-const result = await caller.greeting({ name: "tRPC" });
+const result = await caller.greeting({ name: 'tRPC' });
 //     ^?
 ```
 
@@ -131,10 +166,10 @@ We create the router with a mutation, and then we call the asynchronous `post` p
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC } from "@trpc/server";
-import { z } from "zod";
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
 
-const posts = ["One", "Two", "Three"];
+const posts = ['One', 'Two', 'Three'];
 
 const t = initTRPC.create();
 const router = t.router({
@@ -147,7 +182,7 @@ const router = t.router({
 });
 
 const caller = router.createCaller({});
-const result = await caller.post.add("Four");
+const result = await caller.post.add('Four');
 //     ^?
 ```
 
@@ -159,7 +194,7 @@ Middlewares are performed before any procedure(s) are called.
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC, TRPCError } from "@trpc/server";
+import { initTRPC, TRPCError } from '@trpc/server';
 
 type Context = {
   user?: {
@@ -172,8 +207,8 @@ const protectedProcedure = t.procedure.use((opts) => {
   const { ctx } = opts;
   if (!ctx.user) {
     throw new TRPCError({
-      code: "UNAUTHORIZED",
-      message: "You are not authorized",
+      code: 'UNAUTHORIZED',
+      message: 'You are not authorized',
     });
   }
 
@@ -200,7 +235,7 @@ const router = t.router({
   // ✅ this will work because user property is present inside context param
   const authorizedCaller = router.createCaller({
     user: {
-      id: "KATT",
+      id: 'KATT',
     },
   });
   const result = await authorizedCaller.secret();
@@ -214,13 +249,30 @@ This example shows how to use the caller in a Next.js API endpoint. tRPC creates
 how to call a procedure from another, custom endpoint.
 
 ```ts twoslash
-// @noErrors
-// ---cut---
-import { TRPCError } from "@trpc/server";
-import { getHTTPStatusCodeFromError } from "@trpc/server/http";
-import { appRouter } from "~/server/routers/_app";
-import type { NextApiRequest, NextApiResponse } from "next";
+// @target: esnext
+// @filename: server/routers/_app.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
 
+const t = initTRPC.create();
+
+export const appRouter = t.router({
+  post: t.router({
+    byId: t.procedure
+      .input(z.object({ id: z.string() }))
+      .query((opts) => {
+        return { id: opts.input.id, title: 'Example Post' };
+      }),
+  }),
+});
+
+// @filename: pages/api/post.ts
+import { TRPCError } from '@trpc/server';
+import { getHTTPStatusCodeFromError } from '@trpc/server/http';
+import { appRouter } from '../../server/routers/_app';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+// ---cut---
 type ResponseData = {
   data?: {
     postTitle: string;
@@ -264,34 +316,36 @@ export default async (
 
 ### Error handling
 
-The `createFactoryCaller` and the `createCaller` function can take an error handler through the `onError` option. This can be used to throw errors that are not wrapped in a TRPCError, or respond to errors in some other way. Any handler passed to createCallerFactory will be called before the handler passed to createCaller.
+The `createCallerFactory` and the `createCaller` function can take an error handler through the `onError` option. This can be used to throw errors that are not wrapped in a TRPCError, or respond to errors in some other way. Any handler passed to createCallerFactory will be called before the handler passed to createCaller.
 The handler is called with the same arguments as an error formatter would be, except for the shape field:
 
-```ts
-{
-  ctx: unknown; // The request context
-  error: TRPCError; // The TRPCError that was thrown
-  path: string | undefined; // The path of the procedure that threw the error
-  input: unknown; // The input that was passed to the procedure
-  type: "query" | "mutation" | "subscription" | "unknown"; // The type of the procedure that threw the error
+```ts twoslash
+import { TRPCError } from '@trpc/server';
+// ---cut---
+interface OnErrorShape {
+  ctx: unknown;
+  error: TRPCError;
+  path: string | undefined;
+  input: unknown;
+  type: 'query' | 'mutation' | 'subscription' | 'unknown';
 }
 ```
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC } from "@trpc/server";
-import { z } from "zod";
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
 
 const t = initTRPC
   .context<{
-    foo?: "bar";
+    foo?: 'bar';
   }>()
   .create();
 
 const router = t.router({
   greeting: t.procedure.input(z.object({ name: z.string() })).query((opts) => {
-    if (opts.input.name === "invalid") {
-      throw new Error("Invalid name");
+    if (opts.input.name === 'invalid') {
+      throw new Error('Invalid name');
     }
 
     return `Hello ${opts.input.name}`;
@@ -304,12 +358,11 @@ const caller = router.createCaller(
   },
   {
     onError: (opts) => {
-      console.error("An error occurred:", opts.error);
+      console.error('An error occurred:', opts.error);
     },
   },
 );
 
-// The following will log "An error occurred: Error: Invalid name", and then throw a plain error
-//  with the message "This is a custom error"
-await caller.greeting({ name: "invalid" });
+// The following will log "An error occurred: Error: Invalid name", and then throw the error
+await caller.greeting({ name: 'invalid' });
 ```

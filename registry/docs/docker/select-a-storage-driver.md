@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -62,7 +60,7 @@ Allow for advanced options, such as creating snapshots, but require more mainten
 
 Intended for testing purposes, and for situations where no copy-on-write filesystem can be used. Performance is poor, and not generally recommended for production use.
 
-The Docker Engine has a prioritized list of which storage driver to use if no storage driver is explicitly configured, assuming that the storage driver meets the prerequisites, and automatically selects a compatible storage driver. You can see the order in the [source code for Docker Engine 29.2.1](https://github.com/moby/moby/blob/v29.2.1/daemon/graphdriver/driver_linux.go#L52-L53).
+The Docker Engine has a prioritized list of which storage driver to use if no storage driver is explicitly configured, assuming that the storage driver meets the prerequisites, and automatically selects a compatible storage driver. You can see the order in the [source code for Docker Engine 29.2.1](https://github.com/moby/moby/blob/docker-v29.2.1/daemon/graphdriver/driver_linux.go).
 
 Some storage drivers require you to use a specific format for the backing filesystem. If you have external requirements to use a specific backing filesystem, this may limit your choices. See [Supported backing filesystems](#supported-backing-filesystems).
 

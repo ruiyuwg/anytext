@@ -8,6 +8,10 @@ If you’re using Astro as a static site builder, you don’t need an adapter.
 
 Learn how to deploy your Astro site in our [Cloudflare deployment guide](/en/guides/deploy/cloudflare/).
 
+Upgrading to Astro 6?
+
+Astro 6 requires an upgrade to v13 of this adapter. See the [Cloudflare adapter upgrade instructions for Astro 6](#upgrading-to-v13-and-astro-6) for breaking changes and migration guidance.
+
 ## Why Astro Cloudflare
 
 [Section titled “Why Astro Cloudflare”](#why-astro-cloudflare)
@@ -80,197 +84,60 @@ Now, you can enable [on-demand rendering per page](/en/guides/on-demand-renderin
    });
    ```
 
-3. Create a [Wrangler configuration file](https://developers.cloudflare.com/workers/wrangler/configuration/):
+3. Astro will automatically generate a default configuration, using the package.json name field or the folder name as the Worker name. You can optionally create a [Wrangler configuration file](https://developers.cloudflare.com/workers/wrangler/configuration/) if you need custom settings. This example declares Cloudflare KV bindings:
 
    wrangler.jsonc
 
    ```jsonc
    {
-     "main": "dist/_worker.js/index.js",
      "name": "my-astro-app",
-     // Update to today's date
-     "compatibility_date": "2025-03-25",
-     "compatibility_flags": [
-       "nodejs_compat",
-       "global_fetch_strictly_public"
-     ],
-     "assets": {
-       "binding": "ASSETS",
-       "directory": "./dist"
-     },
-     "observability": {
-       "enabled": true
-     }
+     // Add your bindings here, e.g.:
+     // "kv_namespaces": [{ "binding": "MY_KV", "id": "<namespace_id>" }]
    }
-   ```
-
-4. Create a `.assetsignore` file in your `public/` folder, and add the following lines to it:
-
-   public/.assetsignore
-
-   ```txt
-   _worker.js
-   _routes.json
    ```
 
 ## Options
 
 [Section titled “Options”](#options)
 
-The Cloudflare adapter accepts the following options:
+The Cloudflare adapter accepts the following options from [`@cloudflare/vite-plugin`](https://developers.cloudflare.com/workers/vite-plugin/):
 
-### `cloudflareModules`
+- `auxiliaryWorkers`
+- `configPath`
+- `inspectorPort`
+- `persistState`
+- `remoteBindings`
+- `experimental.headersAndRedirectsDevModeSupport`
 
-[Section titled “cloudflareModules”](#cloudflaremodules)
-
-**Type:** `boolean`\
-**Default:** `true`
-
-Enables [imports of `.wasm`, `.bin`, and `.txt` modules](#cloudflare-module-imports).
-
-This functionality is enabled by default. If you’d like to disable, set `cloudflareModules` to `false`.
+It also accepts the following:
 
 ### `imageService`
 
 [Section titled “imageService”](#imageservice)
 
-**Type:** `'passthrough' | 'cloudflare' | 'compile' | 'custom'`\
-**Default:** `'compile'`
+**Type:** `'passthrough' | 'cloudflare' | 'cloudflare-binding' | 'compile' | 'custom' | { build: 'compile', runtime?: 'cloudflare-binding' | 'passthrough' }`\
+**Default:** `'cloudflare-binding'`
 
-Determines which image service is used by the adapter. The adapter will default to `compile` mode when an incompatible image service is configured. Otherwise, it will use the globally configured image service:
+Determines which image service is used by the adapter. The adapter will default to `cloudflare-binding` mode when an incompatible image service is configured. Otherwise, it will use the globally configured image service:
 
 - **`cloudflare`:** Uses the [Cloudflare Image Resizing](https://developers.cloudflare.com/images/image-resizing/) service.
+- **`cloudflare-binding`:** Uses the [Cloudflare Images binding](https://developers.cloudflare.com/images/transform-images/bindings/) for image transformation. The binding is automatically provisioned when you deploy.
 - **`passthrough`:** Uses the existing [`noop`](/en/guides/images/#configure-no-op-passthrough-service) service.
-- **`compile`:** Uses Astro’s default service (sharp), but only on pre-rendered routes at build time. For pages rendered on-demand, all `astro:assets` features are disabled.
+- **`compile`:** Uses a combination of internal dependencies to transform images locally at build time for prerendered routes. The noop `passthrough` option is configured for on-demand rendered pages.
 - **`custom`:** Always uses the image service configured in [Image Options](/en/reference/configuration-reference/#image-options). **This option will not check to see whether the configured image service works in Cloudflare’s `workerd` runtime.**
+
+It is also possible to configure your image service as an object, setting both a build time and runtime service independently. Currently, `'compile'` is the only available build-time option. The supported runtime options are `'passthrough'` (default) and `'cloudflare-binding'`:
 
 astro.config.mjs
 
 ```diff
-import { defineConfig } from "astro/config";
-import cloudflare from '@astrojs/cloudflare';
-
-
-export default defineConfig({
-  adapter: cloudflare({
-+     imageService: 'cloudflare'
-  }),
-})
-```
-
-### `platformProxy`
-
-[Section titled “platformProxy”](#platformproxy)
-
-Determines whether and how the Cloudflare runtime is added to `astro dev`. It contains proxies to local `workerd` bindings and emulations of Cloudflare specific values, allowing the emulation of the runtime in the Node.js dev process. Read more about the [Cloudflare Runtime](#cloudflare-runtime).
-
-Note
-
-Proxies provided by this are a best effort emulation of the real production. Although they are designed to be as close as possible to the real thing, there might be a slight differences and inconsistencies between the two.
-
-#### `platformProxy.enabled`
-
-[Section titled “platformProxy.enabled”](#platformproxyenabled)
-
-**Type:** `boolean`\
-**Default:** `true`
-
-Determines whether to enable the Cloudflare runtime in development mode.
-
-#### `platformProxy.configPath`
-
-[Section titled “platformProxy.configPath”](#platformproxyconfigpath)
-
-**Type:** `string`\
-**Default:** `undefined`
-
-Defines the path to the Wrangler configuration file. If no value is set, it tracks `wrangler.toml`, `wrangler.json`, and `wrangler.jsonc` in the project root.
-
-#### `platformProxy.environment`
-
-[Section titled “platformProxy.environment”](#platformproxyenvironment)
-
-**Type:** `string`\
-**Default:** `undefined`
-
-Sets the [Cloudflare environment](https://developers.cloudflare.com/workers/wrangler/environments/) to use. You must select an environment defined in the Wrangler configuration file, otherwise an error occurs.
-
-#### `platformProxy.persist`
-
-[Section titled “platformProxy.persist”](#platformproxypersist)
-
-**Type:** `boolean | { path: string }`\
-**Default:** `true`
-
-Sets whether and where to save binding data locally to the file system.
-
-- If set to `true`, binding data is stored in `.wrangler/state/v3/`. It is the same as the default setting for wrangler.
-- If set to `false`, binding data is not stored in file system.
-- If set to `{ path: string }`, binding data is stored in the specified path.
-
-Note
-
-`wrangler`’s `--persist-to` option adds a sub directory called `v3` under the hood while the `@astrojs/cloudflare` `persist` property does not. For example, to reuse the same location as running `wrangler dev --persist-to ./my-directory`, you must specify: `persist: { path: "./my-directory/v3" }`.
-
-The following configuration shows an example of enabling the Cloudflare runtime when running the development server, as well as using a `wrangler.json` config file. It also specifies a custom location for persisting data to the filesystem:
-
-```js
-import cloudflare from '@astrojs/cloudflare';
 import { defineConfig } from 'astro/config';
+import cloudflare from '@astrojs/cloudflare';
 
 
 export default defineConfig({
   adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-      configPath: 'wrangler.json',
-      persist: {
-        path: './.cache/wrangler/v3'
-      },
-    },
-  }),
-});
-```
-
-### `routes.extend`
-
-[Section titled “routes.extend”](#routesextend)
-
-On Cloudflare Workers, this option is not applicable. Refer to [Routing on Cloudflare Workers](#routing-on-cloudflare-workers) for more information.
-
-On Cloudflare Pages, this option allows you to add or exclude custom patterns (e.g. `/fonts/*`) to the generated `_routes.json` file that determines which routes are generated on-demand. This can be useful if you need to add route patterns which cannot be automatically generated, or exclude prerendered routes.
-
-More information about the custom route patterns can be found in [Cloudflare’s routing docs](https://developers.cloudflare.com/pages/functions/routing/#functions-invocation-routes). Any routes specified are not automatically deduplicated and will be appended to the existing routes as is.
-
-#### `routes.extend.include`
-
-[Section titled “routes.extend.include”](#routesextendinclude)
-
-**Type:** `{ pattern: string }[]`\
-**Default:** `undefined`
-
-Configures additional routes to be generated on demand by the Cloudflare adapter in the `routes.extend.include` array.
-
-#### `routes.extend.exclude`
-
-[Section titled “routes.extend.exclude”](#routesextendexclude)
-
-**Type:** `{ pattern: string }[]`\
-**Default:** `undefined`
-
-Configures routes to be excluded from on-demand rendering in the `routes.extend.exclude` array. These routes will be prerendered and served statically instead, and will not invoke the server function. Additionally you can use this option to serve any static asset (e.g. images, fonts, css, js, html, txt, json, etc.) files directly without routing the request through the server function.
-
-astro.config.mjs
-
-```js
-export default defineConfig({
-  adapter: cloudflare({
-    routes: {
-      extend: {
-        include: [{ pattern: '/static' }], // Route a prerended page to the server function for on-demand rendering
-        exclude: [{ pattern: '/pagefind/*' }], // Use Starlight's pagefind search, which is generated statically at build time
-      }
-    },
++    imageService: { build: 'compile', runtime: 'cloudflare-binding' }
   }),
 });
 ```
@@ -282,9 +149,9 @@ export default defineConfig({
 **Type:** `string`\
 **Default:** `SESSION`
 
-**Added in:** `astro@5.6.0`
+**Added in:** `@astrojs/cloudflare@12.4.0`
 
-The `sessionKVBindingName` option allows you to specify the name of the KV binding used for session storage. By default, this is set to `SESSION`, but you can change it to match your own KV binding name. See [Sessions](#sessions) for more information.
+Sets the name of the KV binding used for session storage. By default, the KV namespace is automatically provisioned when you deploy, and is named `SESSION`. You can change this name by setting the binding manually in your wrangler config. See [Sessions](#sessions) for more information.
 
 astro.config.mjs
 
@@ -296,168 +163,110 @@ export default defineConfig({
 });
 ```
 
-### `workerEntryPoint`
+wrangler.jsonc
 
-[Section titled “workerEntryPoint”](#workerentrypoint)
+```jsonc
+{
+  "kv_namespaces": [
+    {
+      "binding": "MY_SESSION_BINDING",
+    }
+  ]
+}
+```
 
-**Type:** `{ path: string | URL, namedExports: string[] }`\
-**Default:** `{ path: '@astrojs/cloudflare/entrypoints/server.js', namedExports: [] }`
+### `imagesBindingName`
 
-**Added in:** `@astrojs/cloudflare@12.6.0` New
+[Section titled “imagesBindingName”](#imagesbindingname)
 
-A configuration object to specify the [workerEntryPoint](https://developers.cloudflare.com/workers/runtime-apis/bindings/service-bindings/rpc/) for your Cloudflare Worker when you use the `astro build` command.
+**Type:** `string`\
+**Default:** `IMAGES`
 
-It allows you to optionally specify both a custom file `path` and `namedExports`:
+Sets the name of the Images binding used when [`imageService`](#imageservice) is set to `cloudflare-binding`. By default, the binding is automatically provisioned with the name `IMAGES` when you deploy. You can change it by setting the binding manually in your wrangler config:
 
 astro.config.mjs
 
 ```js
-import cloudflare from '@astrojs/cloudflare';
-import { defineConfig } from 'astro/config';
-
-
 export default defineConfig({
   adapter: cloudflare({
-    workerEntryPoint: {
-      path: 'src/worker.ts',
-      namedExports: ['MyDurableObject']
-    }
+    imageService: 'cloudflare-binding',
+    imagesBindingName: 'MY_IMAGES',
   }),
 });
 ```
-
-#### `workerEntryPoint.path`
-
-[Section titled “workerEntryPoint.path”](#workerentrypointpath)
-
-**Type:** `string`\
-**Default:** `@astrojs/cloudflare/entrypoints/server.js`
-
-**Added in:** `@astrojs/cloudflare@12.6.0` New
-
-The path to the entry file. This should be a relative path from the root of your Astro project.
-
-By default, the adapter uses a generic entry file, which only supports the `fetch` handler.
-
-To support other [Cloudflare invocation handlers](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs), you can create a custom file to use as the entry point. This is useful if you want to use features that require other handlers (e.g. Durable Objects, Cloudflare Queues, Scheduled Invocations).
-
-#### `workerEntryPoint.namedExports`
-
-[Section titled “workerEntryPoint.namedExports”](#workerentrypointnamedexports)
-
-**Type:** `[]`\
-**Default:** `[]`
-
-**Added in:** `@astrojs/cloudflare@12.6.0` New
-
-An array of named exports to use for the entry file.
-
-Provide any additional defined named exports of your [custom entry file](#creating-a-custom-cloudflare-worker-entry-file) (e.g. `DurableObject`). If not provided, only default exports will be included.
-
-#### Creating a custom Cloudflare Worker entry file
-
-[Section titled “Creating a custom Cloudflare Worker entry file”](#creating-a-custom-cloudflare-worker-entry-file)
-
-The custom entry file must export the `createExports()` function with a `default` export including all the handlers you need.
-
-The following example entry file registers a Durable Object and a queue handler:
-
-src/worker.ts
-
-```ts
-import type { SSRManifest } from 'astro';
-import { App } from 'astro/app';
-import { handle } from '@astrojs/cloudflare/handler'
-import { DurableObject } from 'cloudflare:workers';
-
-
-class MyDurableObject extends DurableObject<Env> {
-  constructor(ctx: DurableObjectState, env: Env) {
-    super(ctx, env)
-  }
-}
-
-
-export function createExports(manifest: SSRManifest) {
-  const app = new App(manifest);
-  return {
-    default: {
-      async fetch(request, env, ctx) {
-        await env.MY_QUEUE.send("log");
-        return handle(manifest, app, request, env, ctx);
-      },
-      async queue(batch, _env) {
-        let messages = JSON.stringify(batch.messages);
-        console.log(`consumed from our queue: ${messages}`);
-      }
-    } satisfies ExportedHandler<Env>,
-    MyDurableObject: MyDurableObject,
-  }
-}
-```
-
-## Cloudflare runtime
-
-[Section titled “Cloudflare runtime”](#cloudflare-runtime)
-
-### Usage
-
-[Section titled “Usage”](#usage)
-
-The Cloudflare runtime gives you access to environment variables and bindings to Cloudflare resources defined in your `wrangler.toml`/`wrangler.jsonc` configuration file.
-
-You can access the bindings from `Astro.locals.runtime`:
-
-src/pages/index.astro
-
-```astro
----
-const { env } = Astro.locals.runtime;
----
-```
-
-You can access the runtime from API endpoints through `context.locals`:
-
-src/pages/api/someFile.js
-
-```js
-export function GET(context) {
-  const runtime = context.locals.runtime;
-
-
-  return new Response('Some body');
-}
-```
-
-See the [list of all supported bindings](https://developers.cloudflare.com/workers/wrangler/api/#supported-bindings) in the Cloudflare documentation.
-
-### Environment variables and secrets
-
-[Section titled “Environment variables and secrets”](#environment-variables-and-secrets)
-
-The Cloudflare runtime treats environment variables as a type of binding.
-
-For example, you can define an [environment variable](https://developers.cloudflare.com/workers/configuration/environment-variables/#add-environment-variables-via-wrangler) in `wrangler.jsonc` as follows:
 
 wrangler.jsonc
 
 ```jsonc
 {
-  "vars" : {
-    "MY_VARIABLE": "test"
+  "images": {
+    "binding": "MY_IMAGES"
   }
 }
 ```
 
-Secrets are a special type of environment variable that allow you to attach encrypted text values to your Worker. They need to be defined differently to ensure they are not visible after you set them.
+### `prerenderEnvironment`
 
-To define `secrets`, add them through the [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/) rather than in your Wrangler config file.
+[Section titled “prerenderEnvironment”](#prerenderenvironment)
+
+**Type:** `'workerd' | 'node'`\
+**Default:** `'workerd'`
+
+**Added in:** `@astrojs/cloudflare@13.1.0` New
+
+Controls which runtime is used for [prerendering](/en/guides/on-demand-rendering/) static pages at build time and during development.
+
+By default, prerendered pages are built using Cloudflare’s `workerd` runtime to match the production environment as closely as possible. Set this option to `'node'` when your prerendered pages depend on Node.js APIs or NPM packages that are not compatible with `workerd`:
+
+astro.config.mjs
+
+```js
+import { defineConfig } from 'astro/config';
+import cloudflare from '@astrojs/cloudflare';
+
+
+export default defineConfig({
+  adapter: cloudflare({
+    prerenderEnvironment: 'node',
+  }),
+});
+```
+
+For example, if a prerendered page reads from the file system using `node:fs`, set `prerenderEnvironment` to `'node'`. On-demand rendered pages are unaffected by this option and always run in `workerd`.
+
+## Cloudflare runtime
+
+[Section titled “Cloudflare runtime”](#cloudflare-runtime)
+
+The Cloudflare runtime gives you access to environment variables, bindings to Cloudflare resources, and other Cloudflare-specific APIs.
+
+### Environment variables and bindings
+
+[Section titled “Environment variables and bindings”](#environment-variables-and-bindings)
+
+Environment variables and bindings are defined in your `wrangler.jsonc` configuration file.
+
+Define [environment variables](https://developers.cloudflare.com/workers/configuration/environment-variables/#add-environment-variables-via-wrangler) that do not store sensitive information in `wrangler.jsonc`:
+
+wrangler.jsonc
+
+```jsonc
+{
+  "vars": {
+    "MY_VARIABLE": "test",
+  },
+}
+```
+
+[Secrets](https://developers.cloudflare.com/workers/configuration/secrets/) are a special type of environment variable that allow you to attach encrypted text values to your Worker. They need to be defined differently to ensure they are not visible within Wrangler or Cloudflare dashboard after you set them.
+
+To define `secrets`, add them through the [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/) rather than in your Wrangler config file:
 
 ```bash
 npx wrangler secret put <KEY>
 ```
 
-To set secrets for local development, you also need to add a `.dev.vars` file to the root of the Astro project:
+To set secrets for local development, add a `.dev.vars` file to the root of the Astro project:
 
 .dev.vars
 
@@ -465,31 +274,70 @@ To set secrets for local development, you also need to add a `.dev.vars` file to
 DB_PASSWORD=myPassword
 ```
 
-You can then access environment variables, including secrets, from the `env` object available from `Astro.locals.runtime`:
+Cloudflare environment variables and secrets can be imported from `"cloudflare:workers"`:
 
 src/pages/index.astro
 
 ```astro
 ---
-const { env } = Astro.locals.runtime;
+import { env } from 'cloudflare:workers';
+
+
 const myVariable = env.MY_VARIABLE;
-const secret = env.DB_PASSWORD;
+const myKVNamespace = env.MY_KV;
 ---
 ```
 
-Cloudflare environment variables and secrets are compatible with the [`astro:env` API](/en/guides/environment-variables/#type-safe-environment-variables).
+They are also compatible with the [`astro:env` API](/en/guides/environment-variables/#type-safe-environment-variables):
+
+```js
+import { MY_VARIABLE } from 'astro:env/server';
+```
+
+See the [list of all supported bindings](https://developers.cloudflare.com/workers/wrangler/api/#supported-bindings) in the Cloudflare documentation.
+
+### The `cf` object
+
+[Section titled “The cf object”](#the-cf-object)
+
+The Cloudflare [`cf` object](https://developers.cloudflare.com/workers/runtime-apis/request/#incomingrequestcfproperties) contains request metadata such as geolocation information. Access it directly from the request:
+
+src/pages/index.astro
+
+```astro
+---
+const cf = Astro.request.cf;
+const country = cf?.country;
+---
+```
+
+### Execution context
+
+[Section titled “Execution context”](#execution-context)
+
+Access the Cloudflare [`ExecutionContext`](https://developers.cloudflare.com/workers/runtime-apis/context/) through `Astro.locals.cfContext`. This is useful for operations like [`waitUntil()`](https://developers.cloudflare.com/workers/runtime-apis/context/#waituntil), or accessing [Durable Object exports](https://developers.cloudflare.com/workers/runtime-apis/context/#exports) within your page.
+
+src/pages/index.astro
+
+```astro
+---
+const cfContext = Astro.locals.cfContext;
+cfContext.exports.Greeter.greet('Astro');
+cfContext.waitUntil(someAsyncOperation());
+---
+```
 
 ### Typing
 
 [Section titled “Typing”](#typing)
 
-`wrangler` provides a `types` command to generate TypeScript types for the bindings. This allows you to type locals without the need to manually type them. Refer to the [Cloudflare documentation](https://developers.cloudflare.com/workers/wrangler/commands/#types) for more information.
+`wrangler` provides a [`types`](https://developers.cloudflare.com/workers/wrangler/commands/#types) command to generate TypeScript types for your bindings. This allows you to type your environment without the need for manual type definitions.
 
-Every time you change your configuration files (e.g. `wrangler.toml`, `.dev.vars`) you need to run `wrangler types`.
+Run `wrangler types` every time you change your configuration files (e.g. `wrangler.jsonc`, `.dev.vars`).
 
 Note
 
-You can create a pnpm script to run `wrangler types` automatically before other commands.
+The following example shows a script configuration to run `wrangler types` automatically before other commands:
 
 package.json
 
@@ -505,23 +353,6 @@ package.json
 }
 ```
 
-You can type the `runtime` object by [extending global types](/en/guides/typescript/#extending-global-types) using `Runtime`:
-
-src/env.d.ts
-
-```ts
-type Runtime = import('@astrojs/cloudflare').Runtime<Env>;
-
-
-declare namespace App {
-  interface Locals extends Runtime {
-    otherLocals: {
-      test: string;
-    };
-  }
-}
-```
-
 ## Cloudflare Platform
 
 [Section titled “Cloudflare Platform”](#cloudflare-platform)
@@ -530,54 +361,25 @@ declare namespace App {
 
 [Section titled “Headers”](#headers)
 
-You can attach [custom headers](https://developers.cloudflare.com/pages/platform/headers/) to your responses by adding a `_headers` file in your Astro project’s `public/` folder. This file will be copied to your build output directory.
-
-This is available on Cloudflare Workers and Pages.
+Add [custom headers](https://developers.cloudflare.com/workers/static-assets/headers/) for static assets by creating a `_headers` file in your Astro project’s `public/` folder. This file will be copied to the build output directory. Headers in `_headers` are not applied to responses generated by your Worker code.
 
 ### Assets
 
 [Section titled “Assets”](#assets)
 
-Assets built by Astro are all named with a hash and therefore can be given long cache headers. By default, Astro on Cloudflare will add such a header for these files.
+Assets built by Astro are all named with a hash and, therefore, can be given long cache headers. By default, Astro on Cloudflare will add such a header for these files.
 
 ### Redirects
 
 [Section titled “Redirects”](#redirects)
 
-You can declare [custom redirects](https://developers.cloudflare.com/pages/platform/redirects/) to redirect requests to a different URL. To do so, add a `_redirects` file in your Astro project’s `public/` folder. This file will be copied to your build output directory.
-
-This is available on Cloudflare Workers and Pages.
+Declare [custom redirects for static assets](https://developers.cloudflare.com/workers/static-assets/redirects/) by adding a `_redirects` file in your Astro project’s `public/` folder. This file will be copied to your build output directory. For dynamic routes, [configure redirects in Astro directly](/en/guides/routing/#configured-redirects) instead.
 
 ### Routes
 
 [Section titled “Routes”](#routes)
 
-#### Routing on Cloudflare Workers
-
-[Section titled “Routing on Cloudflare Workers”](#routing-on-cloudflare-workers)
-
 Routing for static assets is based on the file structure in the build directory (e.g. `./dist`). If no match is found, this will fall back to the Worker for on-demand rendering. Read more about [static asset routing with Cloudflare Workers](https://developers.cloudflare.com/workers/static-assets/routing/).
-
-Unlike [Cloudflare Pages](#routing-on-cloudflare-pages), with Workers, you do not need a `_routes.json` file.
-
-Currently, the Cloudflare adapter always generates this file. To work around this, create a `.assetsignore` file in your `public/` folder, and add the following lines to it:
-
-public/.assetsignore
-
-```txt
-_worker.js
-_routes.json
-```
-
-#### Routing on Cloudflare Pages
-
-[Section titled “Routing on Cloudflare Pages”](#routing-on-cloudflare-pages)
-
-For Cloudflare Pages, [routing](https://developers.cloudflare.com/pages/platform/functions/routing/#functions-invocation-routes) uses a `_routes.json` file to determine which requests are routed to the server function and which are served as static assets. By default, a `_routes.json` file will be automatically generated for your project based on its files and configuration.
-
-You can [specify additional routing patterns to follow](#routesextend) in your adapter config, or create your own custom `_routes.json` file to fully override the automatic generation.
-
-Creating a custom `public/_routes.json` will override the automatic generation. See [Cloudflare’s documentation on creating a custom `_routes.json`](https://developers.cloudflare.com/pages/platform/functions/routing/#create-a-_routesjson-file) for more details.
 
 ## Sessions
 
@@ -585,54 +387,21 @@ Creating a custom `public/_routes.json` will override the automatic generation. 
 
 The Astro [Sessions API](/en/guides/sessions/) allows you to easily store user data between requests. This can be used for things like user data and preferences, shopping carts, and authentication credentials. Unlike cookie storage, there are no size limits on the data, and it can be restored on different devices.
 
-Astro automatically configures [Workers KV](https://developers.cloudflare.com/kv/) for session storage when using the Cloudflare adapter. Before using sessions, you need to create a KV namespace to store the data and configure a KV binding in your Wrangler config file. By default, Astro expects the KV binding to be named `SESSION`, but you can choose a different name if you prefer by setting the [`sessionKVBindingName`](#sessionkvbindingname) option in the adapter config.
+Astro automatically configures [Workers KV](https://developers.cloudflare.com/kv/) for session storage when using the Cloudflare adapter. Wrangler can [automatically provision](https://developers.cloudflare.com/workers/wrangler/configuration/#automatic-provisioning) the KV namespace when you deploy, so no manual setup is required. Alternatively, you can define the KV binding manually in your `wrangler.jsonc` file and set a custom binding name using the [`sessionKVBindingName`](#sessionkvbindingname) adapter option.
 
-1. Create a KV namespace using the Wrangler CLI and make note of the ID of the new namespace:
+src/components/CartButton.astro
 
-   ```sh
-   npx wrangler kv namespace create "SESSION"
-   ```
-
-2. Declare the KV namespace in your Wrangler config, setting the namespace ID to the one returned by the previous command:
-
-   - wrangler.jsonc
-
-     wrangler.jsonc
-
-     ```json
-     {
-       "kv_namespaces": [
-         {
-           "binding": "SESSION",
-           "id": "<KV_NAMESPACE_ID>"
-         }
-       ]
-     }
-     ```
-
-   - wrangler.toml
-
-     wrangler.toml
-
-     ```toml
-     kv_namespaces = [
-       { binding = "SESSION", id = "<KV_NAMESPACE_ID>" }
-     ]
-     ```
-
-3. You can then use sessions in your server code:
-
-   src/components/CartButton.astro
-
-   ```astro
-   ---
-   export const prerender = false;
-   const cart = await Astro.session?.get('cart');
-   ---
+```astro
+---
+export const prerender = false; // Not needed in 'server' mode
+const cart = await Astro.session?.get('cart');
+---
 
 
-   🛒 {cart?.length ?? 0} items
-   ```
+<a href="/checkout">🛒 {cart?.length ?? 0} items</a>
+```
+
+By default, the KV binding is named `SESSION`. To use a different name, set the [`sessionKVBindingName`](#sessionkvbindingname) option in the adapter config.
 
 Note
 
@@ -676,71 +445,42 @@ While this example is trivial, Wasm can be used to accelerate computationally in
 
 [Section titled “Node.js compatibility”](#nodejs-compatibility)
 
-Out of the box, Cloudflare does not support the Node.js runtime APIs. With some configuration, Cloudflare does support a subset of the Node.js runtime APIs. You can find supported Node.js runtime APIs in Cloudflare’s [documentation](https://developers.cloudflare.com/workers/runtime-apis/nodejs).
+Cloudflare Workers support most Node.js runtime APIs through the `nodejs_compat` compatibility flag. This includes commonly used modules like `node:buffer`, `node:crypto`, `node:path`, and many others. See the [full list of supported Node.js APIs](https://developers.cloudflare.com/workers/runtime-apis/nodejs) in Cloudflare’s documentation.
 
-To use these APIs, your page or endpoint must be server-side rendered (not pre-rendered) and must use the `import {} from 'node:*'` import syntax.
+To enable Node.js compatibility, add the `nodejs_compat` flag to your Wrangler configuration:
 
-pages/api/endpoint.js
+wrangler.jsonc
+
+```jsonc
+{
+  "compatibility_flags": ["nodejs_compat"],
+}
+```
+
+Then use the `node:*` import syntax in your server-side code:
+
+src/pages/api/endpoint.js
 
 ```js
-export const prerender = false;
+export const prerender = false; // Not needed in 'server' mode
 import { Buffer } from 'node:buffer';
 ```
 
-You’ll also need to modify the `vite` configuration in your Astro config to allow for the `node:*` import syntax:
+For Node.js APIs not yet supported in the Workers runtime, Wrangler can inject polyfills (requires `nodejs_compat` and a compatibility date of 2024-09-23 or later).
 
-astro.config.mjs
+See the [Cloudflare documentation on Node.js compatibility](https://developers.cloudflare.com/workers/runtime-apis/nodejs/) for the complete list of supported APIs and configuration details.
 
-```diff
-import {defineConfig} from "astro/config";
-import cloudflare from '@astrojs/cloudflare';
+## Local preview
 
+[Section titled “Local preview”](#local-preview)
 
-export default defineConfig({
-  adapter: cloudflare({}),
-+  vite: {
-+    ssr: {
-+      external: ['node:buffer'],
-+    },
-+  },
-})
-```
-
-Additionally, you’ll need to follow Cloudflare’s documentation on how to enable support. For detailed guidance, please refer to the [Cloudflare documentation on enabling Node.js compatibility](https://developers.cloudflare.com/workers/runtime-apis/nodejs/).
-
-Package Compatibility Implications
-
-If a project imports a package into the server that uses the Node.js runtime APIs, this can cause issues when deploying to Cloudflare. This issue arises with package that do not use the `node:*` import syntax. It is recommended that you contact the authors of the package to determine if the package supports the above import syntax. If the package does not support this, you may need to use a different package.
-
-## Preview with Wrangler
-
-[Section titled “Preview with Wrangler”](#preview-with-wrangler)
-
-To use [`wrangler`](https://developers.cloudflare.com/workers/wrangler/) to run your application locally, update the preview script.
-
-For Workers:
-
-package.json
-
-```json
-"preview": "wrangler dev"
-```
-
-For Pages:
-
-package.json
-
-```json
-"preview": "wrangler pages dev ./dist"
-```
-
-Developing with [`wrangler`](https://developers.cloudflare.com/workers/wrangler/) gives you access to [Cloudflare bindings](https://developers.cloudflare.com/pages/platform/functions/bindings), [environment variables](https://developers.cloudflare.com/pages/platform/functions/bindings/#environment-variables), and the [cf object](https://developers.cloudflare.com/workers/runtime-apis/request/#incomingrequestcfproperties). Getting hot reloading of the Astro dev server to work with Wrangler might require custom setup. See [community examples](https://github.com/withastro/roadmap/discussions/590).
+After building your project with `astro build`, use `astro preview` to test your Cloudflare Workers application locally. The preview runs using Cloudflare’s `workerd` runtime, closely mirroring production behavior.
 
 ### Meaningful error messages
 
 [Section titled “Meaningful error messages”](#meaningful-error-messages)
 
-Currently, errors during running your application in Wrangler are not very useful, due to the minification of your code. For better debugging, you can add `vite.build.minify = false` setting to your `astro.config.mjs`.
+By default, errors occurring while running your application in Wrangler are minified. For better debugging, add `vite.build.minify = false` to your `astro.config.mjs`:
 
 astro.config.mjs
 
@@ -754,3 +494,267 @@ export default defineConfig({
 +  },
 });
 ```
+
+## Upgrading to v13 and Astro 6
+
+[Section titled “Upgrading to v13 and Astro 6”](#upgrading-to-v13-and-astro-6)
+
+Astro 6 brings significant improvements to the Cloudflare development experience and requires `@astrojs/cloudflare` v13 or later. Now, `astro dev` uses Cloudflare’s Vite plugin and `workerd` runtime to closely mirror production behavior.
+
+See [the Astro 6 upgrade guide](/en/guides/upgrade-to/v6/) for full instructions on upgrading Astro itself.
+
+### Development server now uses workerd
+
+[Section titled “Development server now uses workerd”](#development-server-now-uses-workerd)
+
+The biggest change for Cloudflare users in Astro 6 is that `astro dev` and `astro preview` now use the Cloudflare Vite plugin to run your site using the real Workers runtime (`workerd`) instead of Node.js. This means your development environment is now a much closer replica of your production environment, with the same runtime, APIs, and behavior.
+
+This change helps you catch issues during development that would have previously only appeared in production, and features like Durable Objects, R2 bindings, and Workers AI now work exactly as they do when deployed to Cloudflare’s platform.
+
+This change is transparent for most projects. If your project had special configuration for `astro dev` or was relying on Node.js-specific behavior in development, adjust your code or configuration accordingly.
+
+### New: `prerenderEnvironment` option
+
+[Section titled “New: prerenderEnvironment option”](#new-prerenderenvironment-option)
+
+In Astro 6, prerendered pages now run in Cloudflare’s `workerd` runtime by default during development and build. Previously, these pages always ran in Node.js.
+
+If your prerendered pages depend on Node.js APIs (for example `node:fs`) or NPM packages that are not compatible with `workerd`, set `prerenderEnvironment: 'node'` in your Cloudflare adapter config to restore the previous behavior for prerendering.
+
+On-demand rendered pages are not affected by this option and continue to run in `workerd`.
+
+See [`prerenderEnvironment`](#prerenderenvironment) for configuration details.
+
+### Some dependencies might need to be pre-compiled
+
+[Section titled “Some dependencies might need to be pre-compiled”](#some-dependencies-might-need-to-be-pre-compiled)
+
+The new workerd environment does not support CommonJS syntax, including Node.js specific syntax such as `require` and `module.exports`. This means that some of your project dependencies may throw errors in the development server or during the build.
+
+If you have control over the dependency, you can create a Vite plugin and pre-compile the dependency using the `optimizeDeps.include` option.
+
+For example, you can create a Vite plugin to pre-compile the dependency `postcss` in order to use the Expressive Code syntax highlighter:
+
+```diff
+function noExternalPlugin() {
+  return {
+    name: "optimize-dependencies",
+    configEnvironment(environment) {
+      // We're only interested in server environments
+      if (environment !== 'client') {
+        return {
++          optimizeDeps: {
++            include: [
+              +"postcss"
+              +// Or you can use this syntax if you don't depend directly on a dependency
+              +// "expressive-code > postcss"
++            ]
++          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Changed: Wrangler entrypoint configuration
+
+[Section titled “Changed: Wrangler entrypoint configuration”](#changed-wrangler-entrypoint-configuration)
+
+Previously, the `main` field in your Wrangler configuration pointed to the built worker file (e.g. `dist/_worker.js/index.js`). With Astro 6, this has changed to point to a new unified entrypoint provided by the Cloudflare adapter: `@astrojs/cloudflare/entrypoints/server`.
+
+Update your `wrangler.jsonc` to use the new entrypoint:
+
+wrangler.jsonc
+
+```diff
+{
+  -"main": "dist/_worker.js/index.js",
+  +"main": "@astrojs/cloudflare/entrypoints/server",
+  "name": "my-astro-app",
+  // ... rest of config
+}
+```
+
+This single entrypoint handles both `astro dev` and production deployments.
+
+### Removed: `Astro.locals.runtime` API
+
+[Section titled “Removed: Astro.locals.runtime API”](#removed-astrolocalsruntime-api)
+
+The `Astro.locals.runtime` object has been removed in favor of direct access to Cloudflare Workers APIs. Access environment variables, the `cf` object, caches, and execution context directly through the provided interfaces.
+
+**Accessing environment variables:**
+
+Previously, environment variables were accessed through `Astro.locals.runtime.env`. Now import `env` directly instead:
+
+```diff
+-const { env } = Astro.locals.runtime;
++import { env } from 'cloudflare:workers';
+```
+
+**Accessing the `cf` object:**
+
+Previously, the `cf` object was accessed through `Astro.locals.runtime.cf`. Now access it directly from the request:
+
+```diff
+-const { cf } = Astro.locals.runtime;
++const cf = Astro.request.cf;
+```
+
+**Accessing the caches API:**
+
+Previously, the caches API was accessed through `Astro.locals.runtime.caches`. Now use the global `caches` object directly:
+
+```diff
+-const { caches } = Astro.locals.runtime;
+
+
+caches.default.put(request, response);
+```
+
+**Accessing the execution context:**
+
+The `Astro.locals.runtime.ctx` object is replaced with `Astro.locals.cfContext`, which contains the Cloudflare `ExecutionContext`:
+
+```diff
+-const ctx = Astro.locals.runtime.ctx;
++const ctx = Astro.locals.cfContext;
+```
+
+### Changed: Wrangler configuration file is now optional
+
+[Section titled “Changed: Wrangler configuration file is now optional”](#changed-wrangler-configuration-file-is-now-optional)
+
+The Wrangler configuration file is now optional for simple projects. If you don’t have custom configuration, such as Cloudflare bindings (KV, D1, Durable Objects, etc.), Astro will automatically generate a default configuration for you.
+
+If your `wrangler.jsonc` only contains basic configuration like this:
+
+```jsonc
+{
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2025-05-21",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+  },
+}
+```
+
+You can safely delete this file. Astro handles this configuration automatically. Alternatively, create a minimal `wrangler.jsonc` with just your project name and other custom settings:
+
+wrangler.jsonc
+
+```jsonc
+{
+  "name": "my-astro-app",
+}
+```
+
+### Changed: Custom entrypoint API
+
+[Section titled “Changed: Custom entrypoint API”](#changed-custom-entrypoint-api)
+
+If you were using a custom `workerEntryPoint` configuration in the adapter options, this has been removed. Instead, specify your custom entrypoint in your Wrangler configuration and create a standard Cloudflare Worker export object directly, rather than using the `createExports()` function.
+
+1. Remove the `workerEntryPoint` option from your adapter config:
+
+   astro.config.mjs
+
+   ```diff
+   import { defineConfig } from 'astro/config';
+   import cloudflare from '@astrojs/cloudflare';
+
+
+   export default defineConfig({
+     adapter: cloudflare({
+   -    workerEntryPoint: {
+   -      path: 'src/worker.ts',
+   -      namedExports: ['MyDurableObject'],
+   -    },
+     }),
+   });
+   ```
+
+2. Specify the entrypoint in `wrangler.jsonc` instead:
+
+   wrangler.jsonc
+
+   ```jsonc
+   {
+     "main": "./src/worker.ts"
+   }
+   ```
+
+3. Update your custom worker entry file to use standard Worker syntax. Import the handler from `@astrojs/cloudflare/handler` and export a standard Cloudflare Worker object, alongside any custom exports like Durable Objects:
+
+   src/worker.ts
+
+   ```ts
+   import { handle } from '@astrojs/cloudflare/handler';
+   import { DurableObject } from 'cloudflare:workers';
+
+
+   export class MyDurableObject extends DurableObject {
+     // ...
+   }
+
+
+   export default {
+     async fetch(request, env, ctx) {
+       await env.MY_QUEUE.send('log');
+       return handle(request, env, ctx);
+     },
+     async queue(batch, _env) {
+       let messages = JSON.stringify(batch.messages);
+       console.log(`consumed from our queue: ${messages}`);
+     },
+   } satisfies ExportedHandler;
+   ```
+
+The manifest is now created internally by the adapter, so it does not need to be passed to your handler.
+
+### Removed: `cloudflareModules` option
+
+[Section titled “Removed: cloudflareModules option”](#removed-cloudflaremodules-option)
+
+The `cloudflareModules` adapter option has been removed because it is no longer necessary. Cloudflare natively supports importing `.sql`, `.wasm`, and other module types.
+
+Remove the `cloudflareModules` option from your Cloudflare adapter configuration if you were using it:
+
+astro.config.mjs
+
+```diff
+import cloudflare from '@astrojs/cloudflare';
+
+
+export default defineConfig({
+  adapter: cloudflare({
+-    cloudflareModules: true
+  })
+});
+```
+
+### New: `astro preview` support
+
+[Section titled “New: astro preview support”](#new-astro-preview-support)
+
+Use `astro preview` to test your Cloudflare Workers application locally before deploying. The preview runs using Cloudflare’s `workerd` runtime, closely mirroring production behavior. Run `astro build` followed by `astro preview` to start the preview server.
+
+### Removed: Cloudflare Pages support
+
+[Section titled “Removed: Cloudflare Pages support”](#removed-cloudflare-pages-support)
+
+The Astro Cloudflare adapter no longer supports deployment on Cloudflare Pages. For the best experience and feature support, you should migrate to Cloudflare Workers.
+
+See Cloudflare’s [migration guide from Pages to Workers](https://developers.cloudflare.com/workers/static-assets/migration-guides/migrate-from-pages/) for detailed migration instructions.
+
+### Changed: `imageService` default
+
+[Section titled “Changed: imageService default”](#changed-imageservice-default)
+
+The default value of `imageService` has changed from `'compile'` to `'cloudflare-binding'` for an improved experience when working with images.
+
+The `cloudflare-binding` service uses the [Cloudflare Images binding](https://developers.cloudflare.com/images/transform-images/bindings/) to transform images at runtime, and the binding is automatically provisioned when you deploy.
+
+To revert to the previous behavior, where image transformation was only available on prerendered routes at build time, set `imageService: 'compile'` explicitly in your adapter config.

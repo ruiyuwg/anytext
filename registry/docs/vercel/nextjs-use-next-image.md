@@ -74,7 +74,7 @@ costs.
 
 title: "NEXTJS\_USE\_NEXT\_SCRIPT"
 description: "Requires that next/script is used for all scripts."
-last\_updated: "2026-03-08T05:03:12.766Z"
+last\_updated: "2026-03-23T09:40:07.695Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_USE\_NEXT\_SCRIPT"
 
 # NEXTJS\_USE\_NEXT\_SCRIPT
@@ -126,7 +126,7 @@ elements that are caught by this rule with [`next/script`](https://nextjs.org/do
 
 title: "NO\_ASSIGN\_WINDOW\_LOCATION"
 description: "Prevent unsafe assignment to window.location.href in your application."
-last\_updated: "2026-03-08T05:03:12.769Z"
+last\_updated: "2026-03-23T09:40:07.699Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_ASSIGN\_WINDOW\_LOCATION"
 
 # NO\_ASSIGN\_WINDOW\_LOCATION
@@ -156,5 +156,5 @@ router.push('/login');
 
 title: "NO\_CORS\_HEADERS"
 description: "Warns when CORS header (or header-like) configuration is detected, requiring that configuration to be allowlisted."
-last\_updated: "2026-03-08T05:03:12.774Z"
+last\_updated: "2026-03-23T09:40:07.705Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_CORS\_HEADERS"

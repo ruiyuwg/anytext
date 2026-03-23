@@ -9,7 +9,7 @@ When defined, Vitest will run all matched files that have `import.meta.vitest` i
 
 Vitest performs a simple text-based inclusion check on source files. If a file contains `import.meta.vitest`, even in a comment, it will be matched as an in-source test file.
 
-Vitest uses the [`tinyglobby`](https://www.npmjs.com/package/tinyglobby) package to resolve the globs.
+Vitest uses the [`tinyglobby`](https://npmx.dev/package/tinyglobby) package to resolve the globs.
 
 ## Example
 
@@ -119,7 +119,7 @@ To get TypeScript support for `import.meta.vitest`, add `vitest/importMeta` to y
 - **Type:** `boolean`
 - **Default:** `false`
 
-Should `location` property be included when Vitest API receives tasks in [reporters](#reporters). If you have a lot of tests, this might cause a small performance regression.
+Should `location` property be included when Vitest API receives tasks in [reporters](/config/reporters). If you have a lot of tests, this might cause a small performance regression.
 
 The `location` property has `column` and `line` values that correspond to the `test` or `describe` position in the original file.
 

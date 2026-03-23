@@ -58,9 +58,9 @@ You can [purchase credits and enable auto-reload](/docs/agent/pricing#adding-cre
 
 ## Privacy
 
-Vercel Agent doesn't store or train on your data. It only uses LLMs from providers on our [subprocessor list](https://security.vercel.com/?itemUid=e3fae2ca-94a9-416b-b577-5c90e382df57\&source=click), and we have agreements in place that don't allow them to train on your data.
+Vercel Agent never trains on customer code if your Vercel team's [data preferences setting](https://vercel.fyi/team-data-preferences) is "off" or you are on an [Enterprise plan](/docs/plans/enterprise).
 
 title: "Code Review"
 description: "Get automatic AI-powered code reviews on your pull requests"
-last\_updated: "2026-03-08T05:03:09.658Z"
+last\_updated: "2026-03-23T09:40:03.047Z"
 source: "https://vercel.com/docs/agent/pr-review"

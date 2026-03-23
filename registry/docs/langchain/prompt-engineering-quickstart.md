@@ -21,7 +21,7 @@ Select the tab for UI or SDK workflows:
 ````
 ## 1. Set workspace secret
 
-In the [LangSmith UI](https://smith.langchain.com), ensure that your API key is set as a [workspace secret](/langsmith/administration-overview#workspace-secrets).
+In the [LangSmith UI](https://smith.langchain.com), ensure that your API key is set as a [workspace secret](/langsmith/set-up-hierarchy#configure-workspace-settings).
 
 1. Navigate to  **Settings** and then move to the **Secrets** tab.
 2. Select **Add secret** and enter the key environment variable (e.g.,`OPENAI_API_KEY` or `ANTHROPIC_API_KEY`) and your API key as the **Value**.
@@ -67,7 +67,7 @@ In the [LangSmith UI](https://smith.langchain.com), ensure that your API key is 
 
 ## 4. Iterate on a prompt
 
-LangSmith allows for team-based prompt iteration. [Workspace](/langsmith/administration-overview#workspaces) members can experiment with prompts in the playground and save their changes as a new [*commit*](/langsmith/prompt-engineering-concepts#commits) when ready.
+LangSmith allows for team-based prompt iteration. [Workspace](/langsmith/administration-overview#workspaces) members can experiment with prompts in the Playground and save their changes as a new [*commit*](/langsmith/prompt-engineering-concepts#commits) when ready.
 
 To improve your prompts:
 
@@ -298,7 +298,7 @@ To improve your prompts:
 
 - Learn more about how to store and manage prompts using the Prompt Hub in the [Create a prompt guide](/langsmith/create-a-prompt).
 - Learn how to set up the Playground to [Test multi-turn conversations](/langsmith/multiple-messages) in this tutorial.
-- Learn how to test your prompt's performance over a dataset instead of individual examples, refer to [Run an evaluation from the Prompt Playground](/langsmith/run-evaluation-from-prompt-playground).
+- Learn how to test your prompt's performance over a dataset instead of individual examples, refer to [Run an evaluation from the Playground](/langsmith/run-evaluation-from-playground).
 
   Use **[Polly](/langsmith/polly)** in the Playground to help optimize your prompts, generate tools, and create output schemas.
 

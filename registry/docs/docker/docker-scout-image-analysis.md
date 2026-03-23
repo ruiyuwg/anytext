@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -34,7 +32,7 @@ Docker Scout image analysis is available by default for Docker Hub repositories.
 
 ## [Activate Docker Scout on a repository](#activate-docker-scout-on-a-repository)
 
-Docker Personal comes with 1 Scout-enabled repository. You can upgrade your Docker subscription if you need additional repositories. See [Subscriptions and features](https://www.docker.com/pricing/) to learn how many Scout-enabled repositories come with each subscription tier.
+Docker Personal comes with 1 Scout-enabled repository. You can upgrade your Docker subscription if you need additional repositories. See [Subscriptions and features](https://www.docker.com/pricing?ref=Docs\&refAction=DocsScoutAnalysis) to learn how many Scout-enabled repositories come with each subscription tier.
 
 Before you can activate image analysis on a repository in a third-party registry, the registry must be integrated with Docker Scout for your Docker organization. Docker Hub is integrated by default. For more information, see See [Container registry integrations](https://docs.docker.com/scout/integrations/#container-registries)
 

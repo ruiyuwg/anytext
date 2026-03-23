@@ -82,7 +82,7 @@ export default defineNuxtModule({
     extendRouteRules('/preview', {
       redirect: {
         to: '/preview-new',
-        statusCode: 302,
+        status: 302,
       },
     })
 

@@ -1,77 +1,322 @@
 # Introduction
 
-Block content in Sanity uses Portable Text, a structured format for rich text that stores content as blocks. It allows you to create content with formatting, custom blocks, and annotations while keeping the content separate from its presentation.
+Typically, you find the studio configuration inside a `sanity.config.ts (or js)` file located at the root of your project. The development server for Sanity Studio automatically picks up what's returned from the exported [defineConfig](https://reference.sanity.io/sanity/index/defineConfig/) function. This function takes either a single workspace configuration object or [an array of configuration objects](https://www.sanity.io/docs/studio/workspaces) as its only argument. By implementing the pre-defined properties of this object you are able to customize a range of options and behaviors in the studio, as well as control how plugins and other studio extensions are configured.
 
-In Sanity Studio, block content lets you build flexible editing experiences where you can include custom content types, add structured data to text, and control how your content appears across different platforms.
+> \[!TIP]
+> Protip
+> All these are valid file suffixes for the studio configuration file: `.js` , `.jsx` , `.ts` , `.tsx`
 
-Here's what you can do with block content:
+## Minimal studio configuration example
 
-- **Create rich text content** with customizable styles, decorators, and annotations.
-- **Embed custom content blocks** like images, videos, or code snippets directly within your text.
-- **Add structured data to text** through annotations, enabling features like internal linking to references.
-- **Customize the editing experience** with your own toolbar icons, block styles, and plugins.
-- **Serialize Portable Text** for a common targets like HTML, React, Vue, Markdown, or even write your own custom serializer.
+### Single Studio configuration
 
-#### Get started
+For a single Studio configuration, the `defineConfig` function takes a single configuration object. The only *required* properties are `projectId` and `dataset` but, since this won't make for a very useful studio, we've included the [structureTool()](https://reference.sanity.io/sanity/structure/structureTool/)-plugin and some schemas in our example to reflect a more typical setup.
 
-[Configure the Portable Text Editor](https://www.sanity.io/docs/studio/portable-text-editor-configuration)
+[More about Schemas and Forms ->](https://www.sanity.io/docs/studio/schemas-and-forms)
 
-[Customize the Portable Text Editor](https://www.sanity.io/docs/studio/customizing-the-portable-text-editor)
+```javascript
+// Single workspace configuration
 
-## Core concepts
+import {defineConfig} from 'sanity'
+import {structureTool} from 'sanity/structure'
+import {schemaTypes} from './schemas'
 
-### Portable Text
+export default defineConfig({
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset-name>',
+  plugins: [structureTool()],
+  schema: {
+    types: schemaTypes,
+  },
+})
+```
 
-When you define your schema, you define rich text as an array of blocks. This is the fundamental shape of Portable Text.
+### Multiple workspace configurations
 
-Portable Text is built on the idea of rich text as an array of blocks, where each block is an array of child spans.
+When configuring multiple workspaces you supply an array of configuration objects. Each of these must, in addition to `projectId` and `dataset`, also include a unique `basePath` and `name` for each workspace.
 
-#### Blocks
+[More about Workspaces ->](https://www.sanity.io/docs/studio/workspaces)
 
-Blocks are units representing paragraphs, headings, or other block-level elements. Each block can have a style (like normal, h1, h2, etc.) and contains an array of spans or inline objects.
+```javascript
+// Multiple workspace configuration
+import {defineConfig} from 'sanity'
+import {structureTool} from 'sanity/structure'
+import {schemaTypes} from './schemas'
 
-#### Spans
+export default defineConfig([
+  {
+    projectId: '<projectId>',
+    dataset: '<your-dataset>',
+    name: 'production-workspace',
+    basePath: '/production',
+    title: 'Default Workspace',
+    subtitle: 'production',
+    plugins: [structureTool()],
+    schema: {
+      types: schemaTypes,
+    },
+  },
+  {
+    projectId: '<projectId>',
+    dataset: 'staging',
+    name: 'staging-workspace',
+    basePath: '/staging',
+    title: 'Another workspace',
+    subtitle: 'staging',
+    plugins: [structureTool()],
+    schema: {
+      types: schemaTypes,
+    },
+  },
+])
+```
 
-Spans are the text content within blocks. They can have marks applied to them, which are either simple decorators (like bold or italic) or more complex annotations (like links with structured data).
+### Property callback functions
 
-#### Marks
+Many of the properties of the config object have the option of accepting a callback function instead of a static value. These callbacks are usually invoked with the previous value and a context object.
 
-Marks let you label sections of inline text, either for stylistic reasons for to add additional information to the text. There are two types of marks.
+```javascript
+import {defineConfig} from 'sanity'
+import {structureTool} from 'sanity/structure'
+import {schemaTypes} from './schemas'
 
-Decorators are simple marks applied to spans, like bold, italic, or inline code formatting. They're stored as string values in the marks array of a span.
+export default defineConfig({
+  projectId: '<your-project-id>',
+	dataset: '<your-dataset-name>',
+  plugins: [structureTool()],
+	schema: {
+    types: (prev, context) => {
+      console.log(context);// logs { projectId, dataset }
+      return [...schemaTypes, ...prev]
+    },
+  },
+})
+```
 
-Annotations are more complex marks that can contain structured data. For example, a link annotation might include a URL or a reference to another document.
+> \[!WARNING]
+> Gotcha
+> If you choose to use the callback function you need to make sure you return the previous value along with whatever new value you want to add. When using static values this is handled automatically by the studio.
 
-#### Custom blocks
+The information included in the context object varies depending on the property in question.
 
-Beyond text blocks, Portable Text allows you to insert custom content blocks like images, videos, or any other content type you define. These appear as separate items in the Portable Text array.
+```javascript
+import {defineConfig} from 'sanity'
+import {structureTool} from 'sanity/structure'
+import {RocketIcon} from '@sanity/icons'
+import {schemaTypes} from './schemas'
 
-[Common Portable Text Editor patterns](https://www.sanity.io/docs/studio/customizing-block-content)
+export default defineConfig({
+  projectId: '<your-project-id>',
+	dataset: '<your-dataset-name>',
+  plugins: [structureTool()],
+	schema: {
+    types: schemaTypes,
+  },
+	tools: (prev, context) => {
+    console.log(context) // logs { getClient, currentUser, schema, projectId, dataset}
+    return [
+      {
+        name: 'my-tool',
+        title: 'My super-cool tool',
+        icon: RocketIcon,
+        component: (props) => <Card>I am a tool, albeit not a useful one</Card>,
+      },
+      ...prev, // remember to include previous values
+    ]
+  },
+})
+```
 
-### The Portable Text Editor
+> \[!WARNING]
+> Gotcha
+> The example above includes some JSX in the inline component declaration. Vite, the default studio bundler, requires files that contain JSX to have a file extension or either `.jsx` or `.tsx`.
 
-When you use an array of blocks in your schema, Studio inserts a pre-configured version of the Portable Text Editor(PTE). The editor itself is open source and allows you to build on top of the same foundation that Studio uses for its rich text experience. Learn more about the [standalone editor](https://portabletext.org).
+## Commonly used configuration properties
 
-### Extending the editor in Studio
+### Workspace properties
 
-You can customize the built-in editor experience by customizing blocks individually, and by creating behavior plugins. You can even replace the entire editor with your own implementation of the standalone PTE.
+Every workspace configuration needs to at least include appropriate string values for `dataset` and `projectId`. If you are working with multiple workspaces in your studio, each workspace should also include a `name` and `basePath`.
 
-[Create a Portable Text behavior plugin](https://www.sanity.io/docs/studio/pte-plugins)
+```javascript
+//⬇ Required
+dataset: '<your-dataset-name>',
+projectId: '<your-project-id>',
+//⬇ Optional if only using a single workspace
+name: 'cool-studio',  
+basePath: '/my-default-workspace',
+//⬇ Optional 
+title: 'My Cool Studio',
+subtitle: 'production'
+icon: RocketIcon, 
+```
 
-[Add Portable Text Editor plugins to Studio](https://www.sanity.io/docs/studio/add-portable-text-plugins)
+[More about Workspaces ->](https://www.sanity.io/docs/studio/workspaces)
 
-### Rendering Portable Text in your apps
+### Schema
 
-Because block content uses the Portable Text specification, you can use any portable text serializer to render the content in your front end code.
+The `schema` property is where you declare your schema types. You can specify a static array of schema objects or a callback function that returns such an array.
 
-#### Portable Text Serializers
+```javascript
+schema: {
+	types: mySchemas,
+}
+```
 
-[Presenting Portable Text](https://www.sanity.io/docs/developer-guides/presenting-block-text)
+```javascript
+schema: {
+  types: (prev, context) => {
+    console.log(context) // logs { projectId, dataset' }
+    return [...mySchemas, ...prev]
+  },
+},
+```
 
-[Libraries and tools](https://www.sanity.io/docs/libraries)
+You may also set [initial value templates](https://www.sanity.io/docs/studio/initial-value-templates) using the aptly named `templates` property. You can specify a static array of template objects or a callback function that returns such an array.
 
-## Limitations
+```javascript
+schema: {
+    templates: (prev) => [
+		  {
+		    id: 'category-child',
+		    title: 'Category: Child',
+		    schemaType: 'category',
+		    parameters: [{name: `parentId`, title: `Parent ID`, type: `string`}],
+		    value: ({parentId}) => ({
+		      parent: {_type: 'reference', _ref: parentId},
+		    }),
+		  },
+		  {
+		    id: 'article-with-author',
+		    title: 'Article: Author',
+		    schemaType: 'article',
+		    parameters: [{name: `authorId`, title: `Author ID`, type: `string`}],
+		    value: ({authorId}) => ({
+		      author: authorId,
+		    }),
+		  },
+		  ...prev,
+		]
+  },
+```
 
-### Attribute limits
+[More about Schemas ->](https://www.sanity.io/docs/studio/schemas-and-forms)
 
-Block content is powerful, but can sometimes lead to complex documents made up of many attributes. Refer to the [advice in this guide on attribute limits](https://www.sanity.io/docs/content-lake/attribute-limit) to use block content responsibly.
+### Plugins
+
+This is where you declare plugins for your studio. It accepts a static array of plugin config objects or a callback function that returns such an array. The default studio templates come with the `structureTool` plugin included already.
+
+```javascript
+plugins: [structureTool()],
+```
+
+You’ll notice that the plugin function usually needs to be invoked, not just referred to. This is because plugins, by convention, are functions that can accept configuration options as arguments.
+
+```javascript
+plugins: [
+    structureTool(),
+    visionTool({
+      defaultApiVersion: 'v2021-10-21',
+      defaultDataset: 'production',
+    }),
+  ],
+```
+
+[More about Plugins ->](https://www.sanity.io/docs/studio/installing-and-configuring-plugins)
+
+### Tools
+
+Tools are full page-components, in that they “take over” most of the studio interface when activated, just like the structure-tool or vision plugin. Because of this behavior they also show up in your studio’s nav bar, and they can be navigated to by appending their `name` to your studio’s URL. E.g. `https://my-cool-site.com/studio/my-tool`.
+
+Tools are declared much in the same way as plugins. The property accepts either a static array of tool configuration objects or a callback function that returns such an array.
+
+```javascript
+  tools: [
+    {name: 'my-tool', title: 'My Tool', component: MyTool},
+    {name: 'tool-2', title: '2nd Tool', component: MyOtherTool},
+  ],
+
+ // Example using the callback function with some conditional logic
+  tools: (prev, {currentUser}) => {
+    if (currentUser.roles.find((r) => r.name === 'admin')) {
+      return [
+				...prev,
+				{name: 'admin', title: 'Admin', component: MyAdminTool},
+			]
+    }
+		return prev
+  },
+```
+
+[More about Tools ->](https://www.sanity.io/docs/studio/studio-tools)
+
+### Form
+
+The form config property lets you configure asset sources for files and images, as well as override the default rendering of form components.
+
+```javascript
+form: {
+  file: {
+  assetSources: myFileAssetSourceResolver,
+  directUploads: true,
+  }
+  image: {
+    assetSources: myImageAssetSourceResolver,
+    directUploads: true,
+  },
+  components: {
+    input: (props) => isStringInputProps(props) ? <MyCustomStringInput {...props} /> : props.renderDefault(props),
+    field: MyCustomField,
+	}
+},
+```
+
+> \[!WARNING]
+> Gotcha
+> Overriding the rendering of inputs and fields in the top level studio configuration will affect all fields in your studio. If you wish to customize the rendering of only certain fields, you probably want to do so by setting the components property of the appropriate fields. More info: [Introduction to Component API](https://www.sanity.io/docs/studio/intro-to-custom-studio-components).
+
+[More about Asset Sources ->](https://www.sanity.io/docs/studio/custom-asset-sources)
+
+[More about Form Components ->](https://www.sanity.io/docs/studio/form-components)
+
+### Document
+
+This property lets you configure [document actions](https://www.sanity.io/docs/studio/document-actions) and [badges](https://www.sanity.io/docs/studio/custom-document-badges), as well as set a `productionUrl` for previews and specify [options for new documents](https://www.sanity.io/docs/studio/new-document-options).
+
+```javascript
+document: {
+  actions: (prev) =>
+    prev.map((previousAction) =>
+      previousAction.action === 'publish' ? MyPublishAction : previousAction
+    ),
+  productionUrl: (prev, context) => {
+    return `http://example.com/${context.document?.slug?.current || '404.html'}`
+  },
+},
+```
+
+[More about Actions & Badges ->](https://www.sanity.io/docs/studio/document-actions-api)
+
+### Auth
+
+This property lets you implement custom authentication by providing a configuration object that conforms to the [AuthConfig](https://reference.sanity.io/sanity/index/AuthConfig/) signature.
+
+```javascript
+import {defineConfig} from 'sanity'
+/* ... */
+
+auth: {
+  redirectOnSingle: false,
+  mode: 'append',
+  providers: [
+    {
+      name: 'vandelay',
+      title: 'Vandelay Industries',
+      url: 'https://api.vandelay.industries/login',
+      logo: '/static/img/vandelay.svg'
+    }
+  ],
+  loginMethod: 'dual',
+}
+```
+
+[More about Authentication ->](https://www.sanity.io/docs/studio/custom-auth)

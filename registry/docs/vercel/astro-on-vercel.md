@@ -680,5 +680,5 @@ Learn more about deploying Astro projects on Vercel with the following resources
 
 title: "Create React App on Vercel"
 description: "Learn how to use Vercel"
-last\_updated: "2026-03-08T05:03:14.868Z"
+last\_updated: "2026-03-23T09:40:10.531Z"
 source: "https://vercel.com/docs/frameworks/frontend/create-react-app"

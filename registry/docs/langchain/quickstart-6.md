@@ -20,7 +20,7 @@ Although these examples use Claude, you can use [any supported model](/oss/pytho
 
 ## Build a basic agent
 
-Start by creating a simple agent that can answer questions and call tools. The agent will use Claude Sonnet 4.5 as its language model, a basic weather function as a tool, and a simple prompt to guide its behavior.
+Start by creating a simple agent that can answer questions and call tools. The agent will use Claude Sonnet 4.6 as its language model, a basic weather function as a tool, and a simple prompt to guide its behavior.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain.agents import create_agent
@@ -50,7 +50,7 @@ Next, build a practical weather forecasting agent that demonstrates key producti
 1. **Detailed system prompts** for better agent behavior
 2. **Create tools** that integrate with external data
 3. **Model configuration** for consistent responses
-4. **Structured output** for predictable results
+4. **[Structured output](/oss/python/langchain/structured-output)** for predictable results
 5. **Conversational memory** for chat-like interactions
 6. **Create and run the agent** to test the fully functional agent
 
@@ -101,6 +101,7 @@ def get_user_location(runtime: ToolRuntime[Context]) -> str:
 
   Tools should be well-documented: their name, description, and argument names become part of the model's prompt.
   LangChain's [`@tool` decorator](https://reference.langchain.com/python/langchain-core/tools/convert/tool) adds metadata and enables runtime injection with the `ToolRuntime` parameter.
+  Learn more in the [tools guide](/oss/python/langchain/tools).
 
 
 
@@ -122,7 +123,7 @@ Depending on the model and provider chosen, initialization parameters may vary; 
 
 
 
-Optionally, define a structured response format if you need the agent responses to match
+Optionally, define a [structured response format](/oss/python/langchain/structured-output) if you need the agent responses to match
 a specific schema.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}

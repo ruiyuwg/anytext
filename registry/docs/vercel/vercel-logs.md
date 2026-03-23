@@ -187,7 +187,7 @@ vercel logs --expand --limit 20
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -202,5 +202,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel mcp"
 description: "Set up Model Context Protocol (MCP) usage with a Vercel project using the vercel mcp CLI command."
-last\_updated: "2026-03-08T05:03:12.280Z"
+last\_updated: "2026-03-23T09:40:06.920Z"
 source: "https://vercel.com/docs/cli/mcp"

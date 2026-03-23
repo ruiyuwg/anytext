@@ -1,6 +1,6 @@
 # Identity verification (redirect)
 
-# Identity verification
+## Identity verification
 
 The redirect integration decreases the amount of private information you handle on your site, allows you to support users in a variety of platforms and languages, and allows you to customize the style to match your branding.
 

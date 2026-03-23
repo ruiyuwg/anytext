@@ -23,7 +23,7 @@ my-app/
 └── pyproject.toml # dependencies for your project
 ```
 
-LangSmith Deployment supports deploying a [LangGraph](/oss/python/langgraph/overview) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](/langsmith/deployments), scaling, and [observability](/langsmith/observability). For more details, refer to [Use any framework with LangSmith Deployment](/langsmith/application-structure#use-any-framework-with-langsmith-deployment).
+LangSmith Deployment supports deploying a [LangGraph](/oss/python/langgraph/overview) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](/langsmith/deployment), scaling, and [observability](/langsmith/observability). For more details, refer to [Use any framework with LangSmith Deployment](/langsmith/application-structure#use-any-framework-with-langsmith-deployment).
 
 You can also set up with:
 
@@ -48,7 +48,7 @@ orjson>=3.9.7
 httpx>=0.25.0
 tenacity>=8.0.0
 uvicorn>=0.26.0
-sse-starlette>=2.1.0,<2.2.0
+sse-starlette>=2.1.0,<3.4.0
 uvloop>=0.18.0
 httptools>=0.5.0
 jsonschema-rs>=0.20.0
@@ -217,36 +217,6 @@ After you setup your project and place it in a GitHub repository, it's time to [
 
 ```
 [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/setup-pyproject.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-
-
-
-[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-```
-
-# Share or unshare a trace publicly
-
-Source: https://docs.langchain.com/langsmith/share-trace
-
-**Sharing a trace publicly will make it accessible to anyone with the link. Make sure you're not sharing sensitive information.**
-
-If your self-hosted or hybrid LangSmith deployment is within a VPC, then the public link is accessible only to members authenticated within your VPC. For enhanced security, we recommend configuring your instance with a private URL accessible only to users with access to your network.
-
-To share a trace publicly, simply click on the **Share** button in the upper right hand side of any trace view.
-
-This will open a dialog where you can copy the link to the trace.
-
-Shared traces will be accessible to anyone with the link, even if they don't have a LangSmith account. They will be able to view the trace, but not edit it.
-
-To "unshare" a trace, either:
-
-1. Click on **Unshare** by clicking on **Public** in the upper right hand corner of any publicly shared trace, then **Unshare** in the dialog.
-
-2. Navigate to your organization's list of publicly shared traces, by clicking on **Settings** -> **Shared URLs**, then click on **Unshare** next to the trace you want to unshare.
-
-***
-
-```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/share-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

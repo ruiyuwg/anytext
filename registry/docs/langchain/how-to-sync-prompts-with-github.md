@@ -427,7 +427,7 @@ Test and experiment with prompts using custom endpoints and model configurations
 Learn step-by-step techniques, like optimizing classifiers and advanced prompt engineering.
 ```
 
-Use **[Polly](/langsmith/polly)** in the Prompt Playground to optimize prompts, generate tools, and create output schemas with AI-powered assistance.
+Use **[Polly](/langsmith/polly)** in the Playground to optimize prompts, generate tools, and create output schemas with AI-powered assistance.
 
 To set up a LangSmith instance, visit the [Platform setup section](/langsmith/platform-setup) to choose between cloud, hybrid, or self-hosted. All options include observability, evaluation, prompt engineering, and deployment.
 

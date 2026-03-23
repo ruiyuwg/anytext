@@ -78,7 +78,7 @@ Choosing not to link a financial account, or unlinking one, might make you ineli
 
 ## Trusted entity identification
 
-When you link a financial account with Stripe, we become the primary recipient of your account data. Depending on the purpose for linking your account, we may also share this data with certain financial institutions or service providers involved in offering Stripe Capital and other financial services. For example, if you obtain a loan through Stripe Capital, we might share your account data with service providers that help manage your loan. Stripe only shares your data as set out in the [Stripe Privacy Policy](https://stripe.com/privacy).
+When you link a financial account with Stripe, we become the primary recipient of your account data. Depending on the purpose for linking your account, we might also share this data with certain financial institutions or service providers involved in offering Stripe Capital and other financial services. For example, if you obtain a loan through Stripe Capital, we might share your account data with service providers that help manage your loan. Stripe only shares your data as set out in the [Stripe Privacy Policy](https://stripe.com/privacy).
 
 ## Stripe’s technology partners
 

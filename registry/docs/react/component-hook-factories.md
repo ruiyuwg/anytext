@@ -2,11 +2,11 @@
 
 Validates against higher order functions defining nested components or hooks. Components and hooks should be defined at the module level.
 
-## Rule Details {/_rule-details_/}
+## Rule Details {/*rule-details*/}
 
 Defining components or hooks inside other functions creates new instances on every call. React treats each as a completely different component, destroying and recreating the entire component tree, losing all state, and causing performance problems.
 
-### Invalid {/_invalid_/}
+### Invalid {/*invalid*/}
 
 Examples of incorrect code for this rule:
 
@@ -35,7 +35,7 @@ function createCustomHook(endpoint) {
 }
 ```
 
-### Valid {/_valid_/}
+### Valid {/*valid*/}
 
 Examples of correct code for this rule:
 
@@ -51,30 +51,38 @@ function useData(endpoint) {
 }
 ```
 
-## Troubleshooting {/_troubleshooting_/}
+## Troubleshooting {/*troubleshooting*/}
 
-### I need dynamic component behavior {/_dynamic-behavior_/}
+### I need dynamic component behavior {/*dynamic-behavior*/}
 
 You might think you need a factory to create customized components:
 
 ```js
 // ❌ Wrong: Factory pattern
 function makeButton(color) {
-  return function Button({ children }) {
-    return <button style={{ backgroundColor: color }}>{children}</button>;
+  return function Button({children}) {
+    return (
+      <button style={{backgroundColor: color}}>
+        {children}
+      </button>
+    );
   };
 }
 
-const RedButton = makeButton("red");
-const BlueButton = makeButton("blue");
+const RedButton = makeButton('red');
+const BlueButton = makeButton('blue');
 ```
 
 Pass [JSX as children](/learn/passing-props-to-a-component#passing-jsx-as-children) instead:
 
 ```js
 // ✅ Better: Pass JSX as children
-function Button({ color, children }) {
-  return <button style={{ backgroundColor: color }}>{children}</button>;
+function Button({color, children}) {
+  return (
+    <button style={{backgroundColor: color}}>
+      {children}
+    </button>
+  );
 }
 
 function App() {
@@ -87,7 +95,7 @@ function App() {
 }
 ```
 
----
+***
 
 ## Sitemap
 

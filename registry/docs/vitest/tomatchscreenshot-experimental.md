@@ -76,10 +76,9 @@ await expect.element(getByTestId('button')).toMatchScreenshot('fancy-button', {
 
 - `comparatorName: "pixelmatch" = "pixelmatch"`
 
-  The name of the algorithm/library used for comparing images.
+  The algorithm/library used for comparing images.
 
-  Currently, [`"pixelmatch"`](https://github.com/mapbox/pixelmatch) is the only
-  supported comparator.
+  `"pixelmatch"` is the only built-in comparator, but you can use custom ones by [registering them in the config file](/config/browser/expect#browser-expect-tomatchscreenshot-comparators).
 
 - `comparatorOptions: object`
 
@@ -135,7 +134,7 @@ await expect.element(getByTestId('button')).toMatchScreenshot('fancy-button', {
 
 #### `"pixelmatch"` comparator options
 
-The following options are available when using the `"pixelmatch"` comparator:
+The `"pixelmatch"` comparator uses [`@blazediff/core`](https://blazediff.dev/docs/core) under the hood. The following options are available when using it:
 
 - `allowedMismatchedPixelRatio: number | undefined = undefined`
 
@@ -275,7 +274,7 @@ Exclude globs for benchmark test files
 - **Type:** `string[]`
 - **Default:** `[]`
 
-Include globs for in-source benchmark test files. This option is similar to [`includeSource`](#includesource).
+Include globs for in-source benchmark test files. This option is similar to [`includeSource`](/config/include-source).
 
 When defined, Vitest will run all matched files with `import.meta.vitest` inside.
 

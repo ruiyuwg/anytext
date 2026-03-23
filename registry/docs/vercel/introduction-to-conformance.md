@@ -41,5 +41,5 @@ information.
 
 title: "BFCACHE\_INTEGRITY\_NO\_UNLOAD\_LISTENERS"
 description: "Disallows the use of the unload and beforeunload events to eliminate a source of eviction from the browser"
-last\_updated: "2026-03-08T05:03:12.627Z"
+last\_updated: "2026-03-23T09:40:07.490Z"
 source: "https://vercel.com/docs/conformance/rules/BFCACHE\_INTEGRITY\_NO\_UNLOAD\_LISTENERS"

@@ -15,11 +15,11 @@ You can install it with
 To use LM Studio, you can create a custom provider instance with the `createOpenAICompatible` function from `@ai-sdk/openai-compatible`:
 
 ```ts
-import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
 
 const lmstudio = createOpenAICompatible({
-  name: "lmstudio",
-  baseURL: "http://localhost:1234/v1",
+  name: 'lmstudio',
+  baseURL: 'http://localhost:1234/v1',
 });
 ```
 
@@ -32,7 +32,7 @@ You can interact with local LLMs in [LM Studio](https://lmstudio.ai/docs/basics/
 The first argument is the model id, e.g. `llama-3.2-1b`.
 
 ```ts
-const model = lmstudio("llama-3.2-1b");
+const model = lmstudio('llama-3.2-1b');
 ```
 
 ###### To be able to use a model, you need to [download it first](https://lmstudio.ai/docs/basics/download-model).
@@ -42,17 +42,17 @@ const model = lmstudio("llama-3.2-1b");
 You can use LM Studio language models to generate text with the `generateText` function:
 
 ```ts
-import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-import { generateText } from "ai";
+import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
+import { generateText } from 'ai';
 
 const lmstudio = createOpenAICompatible({
-  name: "lmstudio",
-  baseURL: "https://localhost:1234/v1",
+  name: 'lmstudio',
+  baseURL: 'https://localhost:1234/v1',
 });
 
 const { text } = await generateText({
-  model: lmstudio("llama-3.2-1b"),
-  prompt: "Write a vegetarian lasagna recipe for 4 people.",
+  model: lmstudio('llama-3.2-1b'),
+  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
   maxRetries: 1, // immediately error if the server is not running
 });
 ```
@@ -62,27 +62,27 @@ LM Studio language models can also be used with `streamText`.
 ## Embedding Models
 
 You can create models that call the [LM Studio embeddings API](https://lmstudio.ai/docs/basics/server#endpoints-overview)
-using the `.embeddingModel()` factory method.
+using the `.embedding()` factory method.
 
 ```ts
-const model = lmstudio.embeddingModel("text-embedding-nomic-embed-text-v1.5");
+const model = lmstudio.embedding('text-embedding-nomic-embed-text-v1.5');
 ```
 
 ### Example - Embedding a Single Value
 
 ```tsx
-import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-import { embed } from "ai";
+import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
+import { embed } from 'ai';
 
 const lmstudio = createOpenAICompatible({
-  name: "lmstudio",
-  baseURL: "https://localhost:1234/v1",
+  name: 'lmstudio',
+  baseURL: 'https://localhost:1234/v1',
 });
 
 // 'embedding' is a single embedding object (number[])
 const { embedding } = await embed({
-  model: lmstudio.embeddingModel("text-embedding-nomic-embed-text-v1.5"),
-  value: "sunny day at the beach",
+  model: lmstudio.textEmbeddingModel('text-embedding-nomic-embed-text-v1.5'),
+  value: 'sunny day at the beach',
 });
 ```
 
@@ -93,25 +93,25 @@ it is often useful to embed many values at once (batch embedding).
 
 The AI SDK provides the [`embedMany`](/docs/reference/ai-sdk-core/embed-many) function for this purpose.
 Similar to `embed`, you can use it with embeddings models,
-e.g. `lmstudio.embeddingModel('text-embedding-nomic-embed-text-v1.5')` or `lmstudio.embeddingModel('text-embedding-bge-small-en-v1.5')`.
+e.g. `lmstudio.textEmbeddingModel('text-embedding-nomic-embed-text-v1.5')` or `lmstudio.textEmbeddingModel('text-embedding-bge-small-en-v1.5')`.
 
 ```tsx
-import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-import { embedMany } from "ai";
+import { createOpenAICompatible } from '@ai-sdk/openai';
+import { embedMany } from 'ai';
 
 const lmstudio = createOpenAICompatible({
-  name: "lmstudio",
-  baseURL: "https://localhost:1234/v1",
+  name: 'lmstudio',
+  baseURL: 'https://localhost:1234/v1',
 });
 
 // 'embeddings' is an array of embedding objects (number[][]).
 // It is sorted in the same order as the input values.
 const { embeddings } = await embedMany({
-  model: lmstudio.embeddingModel("text-embedding-nomic-embed-text-v1.5"),
+  model: lmstudio.textEmbeddingModel('text-embedding-nomic-embed-text-v1.5'),
   values: [
-    "sunny day at the beach",
-    "rainy afternoon in the city",
-    "snowy night in the mountains",
+    'sunny day at the beach',
+    'rainy afternoon in the city',
+    'snowy night in the mountains',
   ],
 });
 ```

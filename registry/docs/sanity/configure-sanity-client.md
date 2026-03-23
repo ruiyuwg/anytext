@@ -7,7 +7,7 @@ In this guide, you'll learn to install and configure `@sanity/client` in a Sanit
 Prerequisites:
 
 - Complete the [Functions quick start](https://www.sanity.io/docs/functions/function-quickstart), or be comfortable writing and deploying a Sanity Function.
-- `sanity` CLI v3.92.0 or higher is recommended to interact with Blueprints and Functions. You can always run the latest CLI commands with `npx sanity@latest`.
+- The latest version of `sanity` CLI (`sanity@latest`) is recommended to interact with Blueprints and Functions as shown in this guide. You can always run the latest CLI commands with `npx sanity@latest`.
 
 ## Create a function
 

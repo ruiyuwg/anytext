@@ -66,5 +66,5 @@ npx skills find <query>
 
 title: "Use Vercel"
 description: "Vercel MCP has tools available for searching docs along with managing teams, projects, and deployments."
-last\_updated: "2026-03-08T05:03:10.045Z"
+last\_updated: "2026-03-23T09:40:03.693Z"
 source: "https://vercel.com/docs/agent-resources/vercel-mcp"

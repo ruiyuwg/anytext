@@ -20,7 +20,7 @@ To troubleshoot this error, follow these steps:
 
 title: "DNS\_HOSTNAME\_EMPTY"
 description: "An empty DNS record was received as part of the DNS response. This is a DNS error."
-last\_updated: "2026-03-08T05:03:14.084Z"
+last\_updated: "2026-03-23T09:40:09.587Z"
 source: "https://vercel.com/docs/errors/DNS\_HOSTNAME\_EMPTY"
 
 # DNS\_HOSTNAME\_EMPTY
@@ -41,7 +41,7 @@ To troubleshoot this error, follow these steps:
 
 title: "DNS\_HOSTNAME\_NOT\_FOUND"
 description: "The domain does not exist, resulting in an NXDOMAIN error during DNS resolution. This is a DNS error."
-last\_updated: "2026-03-08T05:03:14.088Z"
+last\_updated: "2026-03-23T09:40:09.591Z"
 source: "https://vercel.com/docs/errors/DNS\_HOSTNAME\_NOT\_FOUND"
 
 # DNS\_HOSTNAME\_NOT\_FOUND
@@ -63,7 +63,7 @@ To troubleshoot this error, follow these steps:
 
 title: "DNS\_HOSTNAME\_RESOLVED\_PRIVATE"
 description: "The DNS hostname resolved to a private IP address or an IPv6 address during an external rewrite. This is a DNS error."
-last\_updated: "2026-03-08T05:03:14.091Z"
+last\_updated: "2026-03-23T09:40:09.597Z"
 source: "https://vercel.com/docs/errors/DNS\_HOSTNAME\_RESOLVED\_PRIVATE"
 
 # DNS\_HOSTNAME\_RESOLVED\_PRIVATE
@@ -89,7 +89,7 @@ To troubleshoot this error, follow these steps:
 
 title: "DNS\_HOSTNAME\_RESOLVE\_FAILED"
 description: "No error with the DNS resolution but no IP was returned. This is a DNS error."
-last\_updated: "2026-03-08T05:03:14.095Z"
+last\_updated: "2026-03-23T09:40:09.601Z"
 source: "https://vercel.com/docs/errors/DNS\_HOSTNAME\_RESOLVE\_FAILED"
 
 # DNS\_HOSTNAME\_RESOLVE\_FAILED
@@ -111,7 +111,7 @@ To troubleshoot this error, follow these steps:
 
 title: "DNS\_HOSTNAME\_SERVER\_ERROR"
 description: "The DNS server was unable to fulfill the DNS request due to an internal issue or misconfiguration. This is a DNS error."
-last\_updated: "2026-03-08T05:03:14.100Z"
+last\_updated: "2026-03-23T09:40:09.604Z"
 source: "https://vercel.com/docs/errors/DNS\_HOSTNAME\_SERVER\_ERROR"
 
 # DNS\_HOSTNAME\_SERVER\_ERROR
@@ -133,7 +133,7 @@ To troubleshoot this error, follow these steps:
 
 title: "EDGE\_FUNCTION\_INVOCATION\_FAILED"
 description: "The request for a Edge Function was not completed successfully. This is an application error."
-last\_updated: "2026-03-08T05:03:14.108Z"
+last\_updated: "2026-03-23T09:40:09.608Z"
 source: "https://vercel.com/docs/errors/EDGE\_FUNCTION\_INVOCATION\_FAILED"
 
 # EDGE\_FUNCTION\_INVOCATION\_FAILED
@@ -156,7 +156,7 @@ To troubleshoot this error, follow these steps:
 
 title: "EDGE\_FUNCTION\_INVOCATION\_TIMEOUT"
 description: "The Edge Function invocation timed out. This is an application error."
-last\_updated: "2026-03-08T05:03:14.104Z"
+last\_updated: "2026-03-23T09:40:09.613Z"
 source: "https://vercel.com/docs/errors/EDGE\_FUNCTION\_INVOCATION\_TIMEOUT"
 
 # EDGE\_FUNCTION\_INVOCATION\_TIMEOUT
@@ -182,7 +182,7 @@ To troubleshoot this error, follow these steps:
 
 title: "FALLBACK\_BODY\_TOO\_LARGE"
 description: "The fallback body is too large for the cache. This is a cache error."
-last\_updated: "2026-03-08T05:03:14.116Z"
+last\_updated: "2026-03-23T09:40:09.618Z"
 source: "https://vercel.com/docs/errors/FALLBACK\_BODY\_TOO\_LARGE"
 
 # FALLBACK\_BODY\_TOO\_LARGE
@@ -206,7 +206,7 @@ To prevent this error, ensure that the size of the fallback page is less than 10
 
 title: "FUNCTION\_INVOCATION\_FAILED"
 description: "The invocation of a function failed. This is a function error."
-last\_updated: "2026-03-08T05:03:14.120Z"
+last\_updated: "2026-03-23T09:40:09.627Z"
 source: "https://vercel.com/docs/errors/FUNCTION\_INVOCATION\_FAILED"
 
 # FUNCTION\_INVOCATION\_FAILED
@@ -233,5 +233,5 @@ To troubleshoot this error, follow these steps:
 
 title: "FUNCTION\_INVOCATION\_TIMEOUT"
 description: "The request for a Vercel Function reached the timeout threshold. This is an application error."
-last\_updated: "2026-03-08T05:03:14.113Z"
+last\_updated: "2026-03-23T09:40:09.623Z"
 source: "https://vercel.com/docs/errors/FUNCTION\_INVOCATION\_TIMEOUT"

@@ -171,7 +171,7 @@ Use either --silent or --verbose. Don't specify both options. |
 
 [embeddings-index-cli package on the npm registry](https://www.npmjs.com/package/@sanity/embeddings-index-cli)
 
-# HTTP API reference
+# Embeddings index API reference
 
 The Embeddings Index API allows you to create, manage, and query embeddings indexes for semantic search in your Sanity project.
 

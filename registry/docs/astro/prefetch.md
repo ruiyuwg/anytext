@@ -275,7 +275,7 @@ For dynamic and server-side rendered pages, set the appropriate cache headers yo
 
 [Section titled “Migrating from @astrojs/prefetch”](#migrating-from-astrojsprefetch)
 
-The `@astrojs/prefetch` integration was deprecated in v3.5.0 and will eventually be removed entirely. Use the following instructions to migrate to Astro’s built-in prefetching which replaces this integration.
+The `@astrojs/prefetch` integration was deprecated in v3.5.0 and is no longer maintained. Use the following instructions to migrate to Astro’s built-in prefetching which replaces this integration.
 
 1. Remove the `@astrojs/prefetch` integration and enable the `prefetch` config in `astro.config.mjs`:
 

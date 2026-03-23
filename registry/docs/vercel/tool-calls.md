@@ -130,5 +130,5 @@ When the model makes tool calls, the response includes tool use blocks:
 
 title: "Advanced Configuration"
 description: "Configure reasoning, provider options, model fallbacks, BYOK credentials, and prompt caching."
-last\_updated: "2026-03-08T05:03:10.693Z"
+last\_updated: "2026-03-23T09:40:04.773Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-chat-completions/advanced"

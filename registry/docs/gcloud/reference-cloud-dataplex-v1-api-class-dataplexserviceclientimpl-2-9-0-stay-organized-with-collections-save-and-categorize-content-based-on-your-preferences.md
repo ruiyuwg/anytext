@@ -1,0 +1,3521 @@
+-   [Home](https://docs.cloud.google.com/)
+-   [Documentation](https://docs.cloud.google.com/docs)
+-   [Developer tools](https://docs.cloud.google.com/docs/costs-usage)
+-   [.NET](https://docs.cloud.google.com/dotnet/docs)
+-   [Client libraries](https://docs.cloud.google.com/dotnet/docs/reference)
+
+Send feedback
+
+# Cloud Dataplex v1 API - Class DataplexServiceClientImpl (2.9.0) Stay organized with collections Save and categorize content based on your preferences.
+
+3.13.0 (latest) 3.12.0 3.11.0 3.10.0 3.9.0 3.8.0 3.7.0 3.6.0 3.5.0 3.4.0 3.3.0 3.2.0 3.1.0 3.0.0 2.15.0 2.14.0 2.13.0 2.12.0 2.11.0 2.10.0 2.9.0 2.8.0 2.7.0 2.6.0 2.5.0 2.4.0 2.3.0 2.2.0 2.1.0 2.0.0 1.0.0
+
+```
+public sealed class DataplexServiceClientImpl : DataplexServiceClient
+```
+
+Reference documentation and code samples for the Cloud Dataplex v1 API class DataplexServiceClientImpl.
+
+DataplexService client wrapper implementation, for convenient use.
+
+## Inheritance
+
+[object](https://learn.microsoft.com/dotnet/api/system.object) \> [DataplexServiceClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient) \> DataplexServiceClientImpl
+
+## Inherited Members
+
+[DataplexServiceClient.DefaultEndpoint](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DefaultEndpoint)
+
+[DataplexServiceClient.DefaultScopes](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DefaultScopes)
+
+[DataplexServiceClient.ServiceMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ServiceMetadata)
+
+[DataplexServiceClient.CreateAsync(CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateAsync_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.Create()](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_Create)
+
+[DataplexServiceClient.ShutdownDefaultChannelsAsync()](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ShutdownDefaultChannelsAsync)
+
+[DataplexServiceClient.CreateLakeAsync(CreateLakeRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateLakeAsync_Google_Cloud_Dataplex_V1_CreateLakeRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceCreateLake(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceCreateLake_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceCreateLakeAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceCreateLakeAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateLake(string, Lake, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateLake_System_String_Google_Cloud_Dataplex_V1_Lake_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateLakeAsync(string, Lake, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateLakeAsync_System_String_Google_Cloud_Dataplex_V1_Lake_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateLakeAsync(string, Lake, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateLakeAsync_System_String_Google_Cloud_Dataplex_V1_Lake_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.CreateLake(LocationName, Lake, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateLake_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Dataplex_V1_Lake_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateLakeAsync(LocationName, Lake, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateLakeAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Dataplex_V1_Lake_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateLakeAsync(LocationName, Lake, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateLakeAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Dataplex_V1_Lake_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.UpdateLakeAsync(UpdateLakeRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateLakeAsync_Google_Cloud_Dataplex_V1_UpdateLakeRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceUpdateLake(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceUpdateLake_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceUpdateLakeAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceUpdateLakeAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateLake(Lake, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateLake_Google_Cloud_Dataplex_V1_Lake_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateLakeAsync(Lake, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateLakeAsync_Google_Cloud_Dataplex_V1_Lake_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateLakeAsync(Lake, FieldMask, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateLakeAsync_Google_Cloud_Dataplex_V1_Lake_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.DeleteLakeAsync(DeleteLakeRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteLakeAsync_Google_Cloud_Dataplex_V1_DeleteLakeRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceDeleteLake(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceDeleteLake_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceDeleteLakeAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceDeleteLakeAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteLake(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteLake_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteLakeAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteLakeAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteLakeAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteLakeAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.DeleteLake(LakeName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteLake_Google_Cloud_Dataplex_V1_LakeName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteLakeAsync(LakeName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteLakeAsync_Google_Cloud_Dataplex_V1_LakeName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteLakeAsync(LakeName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteLakeAsync_Google_Cloud_Dataplex_V1_LakeName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.ListLakes(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakes_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListLakesAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakesAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListLakes(LocationName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakes_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListLakesAsync(LocationName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakesAsync_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetLakeAsync(GetLakeRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetLakeAsync_Google_Cloud_Dataplex_V1_GetLakeRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetLake(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetLake_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetLakeAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetLakeAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetLakeAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetLakeAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetLake(LakeName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetLake_Google_Cloud_Dataplex_V1_LakeName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetLakeAsync(LakeName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetLakeAsync_Google_Cloud_Dataplex_V1_LakeName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetLakeAsync(LakeName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetLakeAsync_Google_Cloud_Dataplex_V1_LakeName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.ListLakeActions(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakeActions_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListLakeActionsAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakeActionsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListLakeActions(LakeName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakeActions_Google_Cloud_Dataplex_V1_LakeName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListLakeActionsAsync(LakeName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakeActionsAsync_Google_Cloud_Dataplex_V1_LakeName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateZoneAsync(CreateZoneRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateZoneAsync_Google_Cloud_Dataplex_V1_CreateZoneRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceCreateZone(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceCreateZone_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceCreateZoneAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceCreateZoneAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateZone(string, Zone, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateZone_System_String_Google_Cloud_Dataplex_V1_Zone_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateZoneAsync(string, Zone, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateZoneAsync_System_String_Google_Cloud_Dataplex_V1_Zone_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateZoneAsync(string, Zone, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateZoneAsync_System_String_Google_Cloud_Dataplex_V1_Zone_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.CreateZone(LakeName, Zone, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateZone_Google_Cloud_Dataplex_V1_LakeName_Google_Cloud_Dataplex_V1_Zone_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateZoneAsync(LakeName, Zone, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateZoneAsync_Google_Cloud_Dataplex_V1_LakeName_Google_Cloud_Dataplex_V1_Zone_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateZoneAsync(LakeName, Zone, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateZoneAsync_Google_Cloud_Dataplex_V1_LakeName_Google_Cloud_Dataplex_V1_Zone_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.UpdateZoneAsync(UpdateZoneRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateZoneAsync_Google_Cloud_Dataplex_V1_UpdateZoneRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceUpdateZone(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceUpdateZone_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceUpdateZoneAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceUpdateZoneAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateZone(Zone, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateZone_Google_Cloud_Dataplex_V1_Zone_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateZoneAsync(Zone, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateZoneAsync_Google_Cloud_Dataplex_V1_Zone_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateZoneAsync(Zone, FieldMask, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateZoneAsync_Google_Cloud_Dataplex_V1_Zone_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.DeleteZoneAsync(DeleteZoneRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteZoneAsync_Google_Cloud_Dataplex_V1_DeleteZoneRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceDeleteZone(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceDeleteZone_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceDeleteZoneAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceDeleteZoneAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteZone(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteZone_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteZoneAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteZoneAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteZoneAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteZoneAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.DeleteZone(ZoneName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteZone_Google_Cloud_Dataplex_V1_ZoneName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteZoneAsync(ZoneName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteZoneAsync_Google_Cloud_Dataplex_V1_ZoneName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteZoneAsync(ZoneName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteZoneAsync_Google_Cloud_Dataplex_V1_ZoneName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.ListZones(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZones_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListZonesAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZonesAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListZones(LakeName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZones_Google_Cloud_Dataplex_V1_LakeName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListZonesAsync(LakeName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZonesAsync_Google_Cloud_Dataplex_V1_LakeName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetZoneAsync(GetZoneRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetZoneAsync_Google_Cloud_Dataplex_V1_GetZoneRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetZone(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetZone_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetZoneAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetZoneAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetZoneAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetZoneAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetZone(ZoneName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetZone_Google_Cloud_Dataplex_V1_ZoneName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetZoneAsync(ZoneName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetZoneAsync_Google_Cloud_Dataplex_V1_ZoneName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetZoneAsync(ZoneName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetZoneAsync_Google_Cloud_Dataplex_V1_ZoneName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.ListZoneActions(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZoneActions_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListZoneActionsAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZoneActionsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListZoneActions(ZoneName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZoneActions_Google_Cloud_Dataplex_V1_ZoneName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListZoneActionsAsync(ZoneName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZoneActionsAsync_Google_Cloud_Dataplex_V1_ZoneName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateAssetAsync(CreateAssetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateAssetAsync_Google_Cloud_Dataplex_V1_CreateAssetRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceCreateAsset(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceCreateAsset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceCreateAssetAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceCreateAssetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateAsset(string, Asset, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateAsset_System_String_Google_Cloud_Dataplex_V1_Asset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateAssetAsync(string, Asset, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateAssetAsync_System_String_Google_Cloud_Dataplex_V1_Asset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateAssetAsync(string, Asset, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateAssetAsync_System_String_Google_Cloud_Dataplex_V1_Asset_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.CreateAsset(ZoneName, Asset, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateAsset_Google_Cloud_Dataplex_V1_ZoneName_Google_Cloud_Dataplex_V1_Asset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateAssetAsync(ZoneName, Asset, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateAssetAsync_Google_Cloud_Dataplex_V1_ZoneName_Google_Cloud_Dataplex_V1_Asset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateAssetAsync(ZoneName, Asset, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateAssetAsync_Google_Cloud_Dataplex_V1_ZoneName_Google_Cloud_Dataplex_V1_Asset_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.UpdateAssetAsync(UpdateAssetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateAssetAsync_Google_Cloud_Dataplex_V1_UpdateAssetRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceUpdateAsset(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceUpdateAsset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceUpdateAssetAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceUpdateAssetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateAsset(Asset, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateAsset_Google_Cloud_Dataplex_V1_Asset_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateAssetAsync(Asset, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateAssetAsync_Google_Cloud_Dataplex_V1_Asset_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateAssetAsync(Asset, FieldMask, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateAssetAsync_Google_Cloud_Dataplex_V1_Asset_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.DeleteAssetAsync(DeleteAssetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteAssetAsync_Google_Cloud_Dataplex_V1_DeleteAssetRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceDeleteAsset(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceDeleteAsset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceDeleteAssetAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceDeleteAssetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteAsset(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteAsset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteAssetAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteAssetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteAssetAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteAssetAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.DeleteAsset(AssetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteAsset_Google_Cloud_Dataplex_V1_AssetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteAssetAsync(AssetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteAssetAsync_Google_Cloud_Dataplex_V1_AssetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteAssetAsync(AssetName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteAssetAsync_Google_Cloud_Dataplex_V1_AssetName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.ListAssets(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssets_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListAssetsAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssetsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListAssets(ZoneName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssets_Google_Cloud_Dataplex_V1_ZoneName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListAssetsAsync(ZoneName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssetsAsync_Google_Cloud_Dataplex_V1_ZoneName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetAssetAsync(GetAssetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetAssetAsync_Google_Cloud_Dataplex_V1_GetAssetRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetAsset(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetAsset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetAssetAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetAssetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetAssetAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetAssetAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetAsset(AssetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetAsset_Google_Cloud_Dataplex_V1_AssetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetAssetAsync(AssetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetAssetAsync_Google_Cloud_Dataplex_V1_AssetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetAssetAsync(AssetName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetAssetAsync_Google_Cloud_Dataplex_V1_AssetName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.ListAssetActions(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssetActions_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListAssetActionsAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssetActionsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListAssetActions(AssetName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssetActions_Google_Cloud_Dataplex_V1_AssetName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListAssetActionsAsync(AssetName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssetActionsAsync_Google_Cloud_Dataplex_V1_AssetName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateTaskAsync(CreateTaskRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateTaskAsync_Google_Cloud_Dataplex_V1_CreateTaskRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceCreateTask(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceCreateTask_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceCreateTaskAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceCreateTaskAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateTask(string, Task, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateTask_System_String_Google_Cloud_Dataplex_V1_Task_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateTaskAsync(string, Task, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateTaskAsync_System_String_Google_Cloud_Dataplex_V1_Task_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateTaskAsync(string, Task, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateTaskAsync_System_String_Google_Cloud_Dataplex_V1_Task_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.CreateTask(LakeName, Task, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateTask_Google_Cloud_Dataplex_V1_LakeName_Google_Cloud_Dataplex_V1_Task_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateTaskAsync(LakeName, Task, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateTaskAsync_Google_Cloud_Dataplex_V1_LakeName_Google_Cloud_Dataplex_V1_Task_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateTaskAsync(LakeName, Task, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateTaskAsync_Google_Cloud_Dataplex_V1_LakeName_Google_Cloud_Dataplex_V1_Task_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.UpdateTaskAsync(UpdateTaskRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateTaskAsync_Google_Cloud_Dataplex_V1_UpdateTaskRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceUpdateTask(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceUpdateTask_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceUpdateTaskAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceUpdateTaskAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateTask(Task, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateTask_Google_Cloud_Dataplex_V1_Task_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateTaskAsync(Task, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateTaskAsync_Google_Cloud_Dataplex_V1_Task_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateTaskAsync(Task, FieldMask, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateTaskAsync_Google_Cloud_Dataplex_V1_Task_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.DeleteTaskAsync(DeleteTaskRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteTaskAsync_Google_Cloud_Dataplex_V1_DeleteTaskRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceDeleteTask(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceDeleteTask_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceDeleteTaskAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceDeleteTaskAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteTask(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteTask_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteTaskAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteTaskAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteTaskAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteTaskAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.DeleteTask(TaskName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteTask_Google_Cloud_Dataplex_V1_TaskName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteTaskAsync(TaskName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteTaskAsync_Google_Cloud_Dataplex_V1_TaskName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteTaskAsync(TaskName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteTaskAsync_Google_Cloud_Dataplex_V1_TaskName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.ListTasks(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListTasks_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListTasksAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListTasksAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListTasks(LakeName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListTasks_Google_Cloud_Dataplex_V1_LakeName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListTasksAsync(LakeName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListTasksAsync_Google_Cloud_Dataplex_V1_LakeName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetTaskAsync(GetTaskRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetTaskAsync_Google_Cloud_Dataplex_V1_GetTaskRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetTask(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetTask_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetTaskAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetTaskAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetTaskAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetTaskAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetTask(TaskName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetTask_Google_Cloud_Dataplex_V1_TaskName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetTaskAsync(TaskName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetTaskAsync_Google_Cloud_Dataplex_V1_TaskName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetTaskAsync(TaskName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetTaskAsync_Google_Cloud_Dataplex_V1_TaskName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.ListJobs(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListJobs_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListJobsAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListJobsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListJobs(TaskName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListJobs_Google_Cloud_Dataplex_V1_TaskName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListJobsAsync(TaskName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListJobsAsync_Google_Cloud_Dataplex_V1_TaskName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.RunTaskAsync(RunTaskRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_RunTaskAsync_Google_Cloud_Dataplex_V1_RunTaskRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.RunTask(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_RunTask_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.RunTaskAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_RunTaskAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.RunTaskAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_RunTaskAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.RunTask(TaskName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_RunTask_Google_Cloud_Dataplex_V1_TaskName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.RunTaskAsync(TaskName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_RunTaskAsync_Google_Cloud_Dataplex_V1_TaskName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.RunTaskAsync(TaskName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_RunTaskAsync_Google_Cloud_Dataplex_V1_TaskName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetJobAsync(GetJobRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetJobAsync_Google_Cloud_Dataplex_V1_GetJobRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetJob(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetJob_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetJobAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetJobAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetJobAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetJobAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetJob(JobName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetJob_Google_Cloud_Dataplex_V1_JobName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetJobAsync(JobName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetJobAsync_Google_Cloud_Dataplex_V1_JobName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetJobAsync(JobName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetJobAsync_Google_Cloud_Dataplex_V1_JobName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.CancelJobAsync(CancelJobRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CancelJobAsync_Google_Cloud_Dataplex_V1_CancelJobRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.CancelJob(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CancelJob_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CancelJobAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CancelJobAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CancelJobAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CancelJobAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.CancelJob(JobName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CancelJob_Google_Cloud_Dataplex_V1_JobName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CancelJobAsync(JobName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CancelJobAsync_Google_Cloud_Dataplex_V1_JobName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CancelJobAsync(JobName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CancelJobAsync_Google_Cloud_Dataplex_V1_JobName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.CreateEnvironmentAsync(CreateEnvironmentRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateEnvironmentAsync_Google_Cloud_Dataplex_V1_CreateEnvironmentRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceCreateEnvironment(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceCreateEnvironment_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceCreateEnvironmentAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceCreateEnvironmentAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateEnvironment(string, Environment, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateEnvironment_System_String_Google_Cloud_Dataplex_V1_Environment_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateEnvironmentAsync(string, Environment, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateEnvironmentAsync_System_String_Google_Cloud_Dataplex_V1_Environment_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateEnvironmentAsync(string, Environment, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateEnvironmentAsync_System_String_Google_Cloud_Dataplex_V1_Environment_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.CreateEnvironment(LakeName, Environment, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateEnvironment_Google_Cloud_Dataplex_V1_LakeName_Google_Cloud_Dataplex_V1_Environment_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateEnvironmentAsync(LakeName, Environment, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateEnvironmentAsync_Google_Cloud_Dataplex_V1_LakeName_Google_Cloud_Dataplex_V1_Environment_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.CreateEnvironmentAsync(LakeName, Environment, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateEnvironmentAsync_Google_Cloud_Dataplex_V1_LakeName_Google_Cloud_Dataplex_V1_Environment_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.UpdateEnvironmentAsync(UpdateEnvironmentRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateEnvironmentAsync_Google_Cloud_Dataplex_V1_UpdateEnvironmentRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceUpdateEnvironment(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceUpdateEnvironment_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceUpdateEnvironmentAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceUpdateEnvironmentAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateEnvironment(Environment, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateEnvironment_Google_Cloud_Dataplex_V1_Environment_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateEnvironmentAsync(Environment, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateEnvironmentAsync_Google_Cloud_Dataplex_V1_Environment_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.UpdateEnvironmentAsync(Environment, FieldMask, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateEnvironmentAsync_Google_Cloud_Dataplex_V1_Environment_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.DeleteEnvironmentAsync(DeleteEnvironmentRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteEnvironmentAsync_Google_Cloud_Dataplex_V1_DeleteEnvironmentRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.PollOnceDeleteEnvironment(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceDeleteEnvironment_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.PollOnceDeleteEnvironmentAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_PollOnceDeleteEnvironmentAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteEnvironment(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteEnvironment_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteEnvironmentAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteEnvironmentAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteEnvironmentAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteEnvironmentAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.DeleteEnvironment(EnvironmentName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteEnvironment_Google_Cloud_Dataplex_V1_EnvironmentName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteEnvironmentAsync(EnvironmentName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteEnvironmentAsync_Google_Cloud_Dataplex_V1_EnvironmentName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.DeleteEnvironmentAsync(EnvironmentName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteEnvironmentAsync_Google_Cloud_Dataplex_V1_EnvironmentName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.ListEnvironments(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListEnvironments_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListEnvironmentsAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListEnvironmentsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListEnvironments(LakeName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListEnvironments_Google_Cloud_Dataplex_V1_LakeName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListEnvironmentsAsync(LakeName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListEnvironmentsAsync_Google_Cloud_Dataplex_V1_LakeName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetEnvironmentAsync(GetEnvironmentRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetEnvironmentAsync_Google_Cloud_Dataplex_V1_GetEnvironmentRequest_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetEnvironment(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetEnvironment_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetEnvironmentAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetEnvironmentAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetEnvironmentAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetEnvironmentAsync_System_String_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.GetEnvironment(EnvironmentName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetEnvironment_Google_Cloud_Dataplex_V1_EnvironmentName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetEnvironmentAsync(EnvironmentName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetEnvironmentAsync_Google_Cloud_Dataplex_V1_EnvironmentName_Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.GetEnvironmentAsync(EnvironmentName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetEnvironmentAsync_Google_Cloud_Dataplex_V1_EnvironmentName_System_Threading_CancellationToken_)
+
+[DataplexServiceClient.ListSessions(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListSessions_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListSessionsAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListSessionsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListSessions(EnvironmentName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListSessions_Google_Cloud_Dataplex_V1_EnvironmentName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[DataplexServiceClient.ListSessionsAsync(EnvironmentName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListSessionsAsync_Google_Cloud_Dataplex_V1_EnvironmentName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[object.GetHashCode()](https://learn.microsoft.com/dotnet/api/system.object.gethashcode)
+
+[object.GetType()](https://learn.microsoft.com/dotnet/api/system.object.gettype)
+
+[object.ToString()](https://learn.microsoft.com/dotnet/api/system.object.tostring)
+
+## Namespace
+
+[Google.Cloud.Dataplex.V1](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1)
+
+## Assembly
+
+Google.Cloud.Dataplex.V1.dll
+
+## Remarks
+
+Dataplex service provides data lakes as a service. The primary resources offered by this service are Lakes, Zones and Assets which collectively allow a data administrator to organize, manage, secure and catalog data across their organization located across cloud projects in a variety of storage systems including Cloud Storage and BigQuery.
+
+## Constructors
+
+### DataplexServiceClientImpl(DataplexServiceClient, DataplexServiceSettings, ILogger)
+
+```
+public DataplexServiceClientImpl(DataplexService.DataplexServiceClient grpcClient, DataplexServiceSettings settings, ILogger logger)
+```
+
+Constructs a client wrapper for the DataplexService service, with the specified gRPC client and settings.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`grpcClient`
+
+`[DataplexService](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexService)[DataplexServiceClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexService.DataplexServiceClient)`  
+
+The underlying gRPC client.
+
+`settings`
+
+`[DataplexServiceSettings](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceSettings)`  
+
+The base [DataplexServiceSettings](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceSettings) used within this client.
+
+`logger`
+
+`[ILogger](https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger)`  
+
+Optional [ILogger](https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger) to use within this client.
+
+## Properties
+
+### CreateAssetOperationsClient
+
+```
+public override OperationsClient CreateAssetOperationsClient { get; }
+```
+
+The long-running operations client for `CreateAsset`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.CreateAssetOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateAssetOperationsClient)
+
+### CreateEnvironmentOperationsClient
+
+```
+public override OperationsClient CreateEnvironmentOperationsClient { get; }
+```
+
+The long-running operations client for `CreateEnvironment`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.CreateEnvironmentOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateEnvironmentOperationsClient)
+
+### CreateLakeOperationsClient
+
+```
+public override OperationsClient CreateLakeOperationsClient { get; }
+```
+
+The long-running operations client for `CreateLake`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.CreateLakeOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateLakeOperationsClient)
+
+### CreateTaskOperationsClient
+
+```
+public override OperationsClient CreateTaskOperationsClient { get; }
+```
+
+The long-running operations client for `CreateTask`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.CreateTaskOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateTaskOperationsClient)
+
+### CreateZoneOperationsClient
+
+```
+public override OperationsClient CreateZoneOperationsClient { get; }
+```
+
+The long-running operations client for `CreateZone`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.CreateZoneOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateZoneOperationsClient)
+
+### DeleteAssetOperationsClient
+
+```
+public override OperationsClient DeleteAssetOperationsClient { get; }
+```
+
+The long-running operations client for `DeleteAsset`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.DeleteAssetOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteAssetOperationsClient)
+
+### DeleteEnvironmentOperationsClient
+
+```
+public override OperationsClient DeleteEnvironmentOperationsClient { get; }
+```
+
+The long-running operations client for `DeleteEnvironment`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.DeleteEnvironmentOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteEnvironmentOperationsClient)
+
+### DeleteLakeOperationsClient
+
+```
+public override OperationsClient DeleteLakeOperationsClient { get; }
+```
+
+The long-running operations client for `DeleteLake`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.DeleteLakeOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteLakeOperationsClient)
+
+### DeleteTaskOperationsClient
+
+```
+public override OperationsClient DeleteTaskOperationsClient { get; }
+```
+
+The long-running operations client for `DeleteTask`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.DeleteTaskOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteTaskOperationsClient)
+
+### DeleteZoneOperationsClient
+
+```
+public override OperationsClient DeleteZoneOperationsClient { get; }
+```
+
+The long-running operations client for `DeleteZone`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.DeleteZoneOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteZoneOperationsClient)
+
+### GrpcClient
+
+```
+public override DataplexService.DataplexServiceClient GrpcClient { get; }
+```
+
+The underlying gRPC DataplexService client
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[DataplexService](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexService)[DataplexServiceClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexService.DataplexServiceClient)`
+
+**Overrides**
+
+[DataplexServiceClient.GrpcClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GrpcClient)
+
+### IAMPolicyClient
+
+```
+public override IAMPolicyClient IAMPolicyClient { get; }
+```
+
+The [IAMPolicyClient](https://github.com/googleapis/google-cloud-dotnet/blob/ff2c06edc86420d5c55db210dfd1c5b6eb7d9bf1/apis/Google.Cloud.Iam.V1/Google.Cloud.Iam.V1/IAMPolicyClient.g.cs) associated with this client.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[IAMPolicyClient](https://github.com/googleapis/google-cloud-dotnet/blob/ff2c06edc86420d5c55db210dfd1c5b6eb7d9bf1/apis/Google.Cloud.Iam.V1/Google.Cloud.Iam.V1/IAMPolicyClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.IAMPolicyClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_IAMPolicyClient)
+
+### LocationsClient
+
+```
+public override LocationsClient LocationsClient { get; }
+```
+
+The [LocationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/94ef638cba52b4508a352c841dd68e3cc9817fce/apis/Google.Cloud.Location/Google.Cloud.Location/LocationsClient.g.cs) associated with this client.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[LocationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/94ef638cba52b4508a352c841dd68e3cc9817fce/apis/Google.Cloud.Location/Google.Cloud.Location/LocationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.LocationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_LocationsClient)
+
+### UpdateAssetOperationsClient
+
+```
+public override OperationsClient UpdateAssetOperationsClient { get; }
+```
+
+The long-running operations client for `UpdateAsset`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.UpdateAssetOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateAssetOperationsClient)
+
+### UpdateEnvironmentOperationsClient
+
+```
+public override OperationsClient UpdateEnvironmentOperationsClient { get; }
+```
+
+The long-running operations client for `UpdateEnvironment`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.UpdateEnvironmentOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateEnvironmentOperationsClient)
+
+### UpdateLakeOperationsClient
+
+```
+public override OperationsClient UpdateLakeOperationsClient { get; }
+```
+
+The long-running operations client for `UpdateLake`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.UpdateLakeOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateLakeOperationsClient)
+
+### UpdateTaskOperationsClient
+
+```
+public override OperationsClient UpdateTaskOperationsClient { get; }
+```
+
+The long-running operations client for `UpdateTask`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.UpdateTaskOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateTaskOperationsClient)
+
+### UpdateZoneOperationsClient
+
+```
+public override OperationsClient UpdateZoneOperationsClient { get; }
+```
+
+The long-running operations client for `UpdateZone`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[DataplexServiceClient.UpdateZoneOperationsClient](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateZoneOperationsClient)
+
+## Methods
+
+### CancelJob(CancelJobRequest, CallSettings)
+
+```
+public override void CancelJob(CancelJobRequest request, CallSettings callSettings = null)
+```
+
+Cancel jobs running for the task resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CancelJobRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CancelJobRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Overrides**
+
+[DataplexServiceClient.CancelJob(CancelJobRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CancelJob_Google_Cloud_Dataplex_V1_CancelJobRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CancelJobAsync(CancelJobRequest, CallSettings)
+
+```
+public override Task CancelJobAsync(CancelJobRequest request, CallSettings callSettings = null)
+```
+
+Cancel jobs running for the task resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CancelJobRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CancelJobRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.CancelJobAsync(CancelJobRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CancelJobAsync_Google_Cloud_Dataplex_V1_CancelJobRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateAsset(CreateAssetRequest, CallSettings)
+
+```
+public override Operation<Asset, OperationMetadata> CreateAsset(CreateAssetRequest request, CallSettings callSettings = null)
+```
+
+Creates an asset resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateAssetRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CreateAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Asset](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Asset)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.CreateAsset(CreateAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateAsset_Google_Cloud_Dataplex_V1_CreateAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateAssetAsync(CreateAssetRequest, CallSettings)
+
+```
+public override Task<Operation<Asset, OperationMetadata>> CreateAssetAsync(CreateAssetRequest request, CallSettings callSettings = null)
+```
+
+Creates an asset resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateAssetRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CreateAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Asset](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Asset)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.CreateAssetAsync(CreateAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateAssetAsync_Google_Cloud_Dataplex_V1_CreateAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateEnvironment(CreateEnvironmentRequest, CallSettings)
+
+```
+public override Operation<Environment, OperationMetadata> CreateEnvironment(CreateEnvironmentRequest request, CallSettings callSettings = null)
+```
+
+Create an environment resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateEnvironmentRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CreateEnvironmentRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Environment](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Environment)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.CreateEnvironment(CreateEnvironmentRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateEnvironment_Google_Cloud_Dataplex_V1_CreateEnvironmentRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateEnvironmentAsync(CreateEnvironmentRequest, CallSettings)
+
+```
+public override Task<Operation<Environment, OperationMetadata>> CreateEnvironmentAsync(CreateEnvironmentRequest request, CallSettings callSettings = null)
+```
+
+Create an environment resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateEnvironmentRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CreateEnvironmentRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Environment](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Environment)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.CreateEnvironmentAsync(CreateEnvironmentRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateEnvironmentAsync_Google_Cloud_Dataplex_V1_CreateEnvironmentRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateLake(CreateLakeRequest, CallSettings)
+
+```
+public override Operation<Lake, OperationMetadata> CreateLake(CreateLakeRequest request, CallSettings callSettings = null)
+```
+
+Creates a lake resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateLakeRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CreateLakeRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Lake](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Lake)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.CreateLake(CreateLakeRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateLake_Google_Cloud_Dataplex_V1_CreateLakeRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateLakeAsync(CreateLakeRequest, CallSettings)
+
+```
+public override Task<Operation<Lake, OperationMetadata>> CreateLakeAsync(CreateLakeRequest request, CallSettings callSettings = null)
+```
+
+Creates a lake resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateLakeRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CreateLakeRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Lake](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Lake)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.CreateLakeAsync(CreateLakeRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateLakeAsync_Google_Cloud_Dataplex_V1_CreateLakeRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateTask(CreateTaskRequest, CallSettings)
+
+```
+public override Operation<Task, OperationMetadata> CreateTask(CreateTaskRequest request, CallSettings callSettings = null)
+```
+
+Creates a task resource within a lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateTaskRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CreateTaskRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Task](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Task)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.CreateTask(CreateTaskRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateTask_Google_Cloud_Dataplex_V1_CreateTaskRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateTaskAsync(CreateTaskRequest, CallSettings)
+
+```
+public override Task<Operation<Task, OperationMetadata>> CreateTaskAsync(CreateTaskRequest request, CallSettings callSettings = null)
+```
+
+Creates a task resource within a lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateTaskRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CreateTaskRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Task](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Task)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.CreateTaskAsync(CreateTaskRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateTaskAsync_Google_Cloud_Dataplex_V1_CreateTaskRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateZone(CreateZoneRequest, CallSettings)
+
+```
+public override Operation<Zone, OperationMetadata> CreateZone(CreateZoneRequest request, CallSettings callSettings = null)
+```
+
+Creates a zone resource within a lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateZoneRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CreateZoneRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Zone](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Zone)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.CreateZone(CreateZoneRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateZone_Google_Cloud_Dataplex_V1_CreateZoneRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateZoneAsync(CreateZoneRequest, CallSettings)
+
+```
+public override Task<Operation<Zone, OperationMetadata>> CreateZoneAsync(CreateZoneRequest request, CallSettings callSettings = null)
+```
+
+Creates a zone resource within a lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateZoneRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.CreateZoneRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Zone](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Zone)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.CreateZoneAsync(CreateZoneRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_CreateZoneAsync_Google_Cloud_Dataplex_V1_CreateZoneRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteAsset(DeleteAssetRequest, CallSettings)
+
+```
+public override Operation<Empty, OperationMetadata> DeleteAsset(DeleteAssetRequest request, CallSettings callSettings = null)
+```
+
+Deletes an asset resource. The referenced storage resource is detached (default) or deleted based on the associated Lifecycle policy.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteAssetRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DeleteAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.DeleteAsset(DeleteAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteAsset_Google_Cloud_Dataplex_V1_DeleteAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteAssetAsync(DeleteAssetRequest, CallSettings)
+
+```
+public override Task<Operation<Empty, OperationMetadata>> DeleteAssetAsync(DeleteAssetRequest request, CallSettings callSettings = null)
+```
+
+Deletes an asset resource. The referenced storage resource is detached (default) or deleted based on the associated Lifecycle policy.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteAssetRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DeleteAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.DeleteAssetAsync(DeleteAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteAssetAsync_Google_Cloud_Dataplex_V1_DeleteAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteEnvironment(DeleteEnvironmentRequest, CallSettings)
+
+```
+public override Operation<Empty, OperationMetadata> DeleteEnvironment(DeleteEnvironmentRequest request, CallSettings callSettings = null)
+```
+
+Delete the environment resource. All the child resources must have been deleted before environment deletion can be initiated.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteEnvironmentRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DeleteEnvironmentRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.DeleteEnvironment(DeleteEnvironmentRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteEnvironment_Google_Cloud_Dataplex_V1_DeleteEnvironmentRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteEnvironmentAsync(DeleteEnvironmentRequest, CallSettings)
+
+```
+public override Task<Operation<Empty, OperationMetadata>> DeleteEnvironmentAsync(DeleteEnvironmentRequest request, CallSettings callSettings = null)
+```
+
+Delete the environment resource. All the child resources must have been deleted before environment deletion can be initiated.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteEnvironmentRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DeleteEnvironmentRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.DeleteEnvironmentAsync(DeleteEnvironmentRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteEnvironmentAsync_Google_Cloud_Dataplex_V1_DeleteEnvironmentRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteLake(DeleteLakeRequest, CallSettings)
+
+```
+public override Operation<Empty, OperationMetadata> DeleteLake(DeleteLakeRequest request, CallSettings callSettings = null)
+```
+
+Deletes a lake resource. All zones within the lake must be deleted before the lake can be deleted.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteLakeRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DeleteLakeRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.DeleteLake(DeleteLakeRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteLake_Google_Cloud_Dataplex_V1_DeleteLakeRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteLakeAsync(DeleteLakeRequest, CallSettings)
+
+```
+public override Task<Operation<Empty, OperationMetadata>> DeleteLakeAsync(DeleteLakeRequest request, CallSettings callSettings = null)
+```
+
+Deletes a lake resource. All zones within the lake must be deleted before the lake can be deleted.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteLakeRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DeleteLakeRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.DeleteLakeAsync(DeleteLakeRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteLakeAsync_Google_Cloud_Dataplex_V1_DeleteLakeRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteTask(DeleteTaskRequest, CallSettings)
+
+```
+public override Operation<Empty, OperationMetadata> DeleteTask(DeleteTaskRequest request, CallSettings callSettings = null)
+```
+
+Delete the task resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteTaskRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DeleteTaskRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.DeleteTask(DeleteTaskRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteTask_Google_Cloud_Dataplex_V1_DeleteTaskRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteTaskAsync(DeleteTaskRequest, CallSettings)
+
+```
+public override Task<Operation<Empty, OperationMetadata>> DeleteTaskAsync(DeleteTaskRequest request, CallSettings callSettings = null)
+```
+
+Delete the task resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteTaskRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DeleteTaskRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.DeleteTaskAsync(DeleteTaskRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteTaskAsync_Google_Cloud_Dataplex_V1_DeleteTaskRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteZone(DeleteZoneRequest, CallSettings)
+
+```
+public override Operation<Empty, OperationMetadata> DeleteZone(DeleteZoneRequest request, CallSettings callSettings = null)
+```
+
+Deletes a zone resource. All assets within a zone must be deleted before the zone can be deleted.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteZoneRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DeleteZoneRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.DeleteZone(DeleteZoneRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteZone_Google_Cloud_Dataplex_V1_DeleteZoneRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteZoneAsync(DeleteZoneRequest, CallSettings)
+
+```
+public override Task<Operation<Empty, OperationMetadata>> DeleteZoneAsync(DeleteZoneRequest request, CallSettings callSettings = null)
+```
+
+Deletes a zone resource. All assets within a zone must be deleted before the zone can be deleted.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteZoneRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DeleteZoneRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.DeleteZoneAsync(DeleteZoneRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_DeleteZoneAsync_Google_Cloud_Dataplex_V1_DeleteZoneRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetAsset(GetAssetRequest, CallSettings)
+
+```
+public override Asset GetAsset(GetAssetRequest request, CallSettings callSettings = null)
+```
+
+Retrieves an asset resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetAssetRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Asset](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Asset)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetAsset(GetAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetAsset_Google_Cloud_Dataplex_V1_GetAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetAssetAsync(GetAssetRequest, CallSettings)
+
+```
+public override Task<Asset> GetAssetAsync(GetAssetRequest request, CallSettings callSettings = null)
+```
+
+Retrieves an asset resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetAssetRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Asset](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Asset)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetAssetAsync(GetAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetAssetAsync_Google_Cloud_Dataplex_V1_GetAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetEnvironment(GetEnvironmentRequest, CallSettings)
+
+```
+public override Environment GetEnvironment(GetEnvironmentRequest request, CallSettings callSettings = null)
+```
+
+Get environment resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetEnvironmentRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetEnvironmentRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Environment](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Environment)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetEnvironment(GetEnvironmentRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetEnvironment_Google_Cloud_Dataplex_V1_GetEnvironmentRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetEnvironmentAsync(GetEnvironmentRequest, CallSettings)
+
+```
+public override Task<Environment> GetEnvironmentAsync(GetEnvironmentRequest request, CallSettings callSettings = null)
+```
+
+Get environment resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetEnvironmentRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetEnvironmentRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Environment](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Environment)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetEnvironmentAsync(GetEnvironmentRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetEnvironmentAsync_Google_Cloud_Dataplex_V1_GetEnvironmentRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetJob(GetJobRequest, CallSettings)
+
+```
+public override Job GetJob(GetJobRequest request, CallSettings callSettings = null)
+```
+
+Get job resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetJobRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetJobRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Job](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Job)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetJob(GetJobRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetJob_Google_Cloud_Dataplex_V1_GetJobRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetJobAsync(GetJobRequest, CallSettings)
+
+```
+public override Task<Job> GetJobAsync(GetJobRequest request, CallSettings callSettings = null)
+```
+
+Get job resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetJobRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetJobRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Job](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Job)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetJobAsync(GetJobRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetJobAsync_Google_Cloud_Dataplex_V1_GetJobRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetLake(GetLakeRequest, CallSettings)
+
+```
+public override Lake GetLake(GetLakeRequest request, CallSettings callSettings = null)
+```
+
+Retrieves a lake resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetLakeRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetLakeRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Lake](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Lake)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetLake(GetLakeRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetLake_Google_Cloud_Dataplex_V1_GetLakeRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetLakeAsync(GetLakeRequest, CallSettings)
+
+```
+public override Task<Lake> GetLakeAsync(GetLakeRequest request, CallSettings callSettings = null)
+```
+
+Retrieves a lake resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetLakeRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetLakeRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Lake](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Lake)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetLakeAsync(GetLakeRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetLakeAsync_Google_Cloud_Dataplex_V1_GetLakeRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetTask(GetTaskRequest, CallSettings)
+
+```
+public override Task GetTask(GetTaskRequest request, CallSettings callSettings = null)
+```
+
+Get task resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetTaskRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetTaskRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Task)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetTask(GetTaskRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetTask_Google_Cloud_Dataplex_V1_GetTaskRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetTaskAsync(GetTaskRequest, CallSettings)
+
+```
+public override Task<Task> GetTaskAsync(GetTaskRequest request, CallSettings callSettings = null)
+```
+
+Get task resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetTaskRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetTaskRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Task](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Task)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetTaskAsync(GetTaskRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetTaskAsync_Google_Cloud_Dataplex_V1_GetTaskRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetZone(GetZoneRequest, CallSettings)
+
+```
+public override Zone GetZone(GetZoneRequest request, CallSettings callSettings = null)
+```
+
+Retrieves a zone resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetZoneRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetZoneRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Zone](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Zone)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetZone(GetZoneRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetZone_Google_Cloud_Dataplex_V1_GetZoneRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetZoneAsync(GetZoneRequest, CallSettings)
+
+```
+public override Task<Zone> GetZoneAsync(GetZoneRequest request, CallSettings callSettings = null)
+```
+
+Retrieves a zone resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetZoneRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.GetZoneRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Zone](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Zone)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.GetZoneAsync(GetZoneRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_GetZoneAsync_Google_Cloud_Dataplex_V1_GetZoneRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListAssetActions(ListAssetActionsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListActionsResponse, Action> ListAssetActions(ListAssetActionsRequest request, CallSettings callSettings = null)
+```
+
+Lists action resources in an asset.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListAssetActionsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListAssetActionsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedEnumerable.cs)[ListActionsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListActionsResponse)[Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action)`
+
+A pageable sequence of [Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListAssetActions(ListAssetActionsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssetActions_Google_Cloud_Dataplex_V1_ListAssetActionsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListAssetActionsAsync(ListAssetActionsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListActionsResponse, Action> ListAssetActionsAsync(ListAssetActionsRequest request, CallSettings callSettings = null)
+```
+
+Lists action resources in an asset.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListAssetActionsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListAssetActionsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListActionsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListActionsResponse)[Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action)`
+
+A pageable asynchronous sequence of [Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListAssetActionsAsync(ListAssetActionsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssetActionsAsync_Google_Cloud_Dataplex_V1_ListAssetActionsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListAssets(ListAssetsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListAssetsResponse, Asset> ListAssets(ListAssetsRequest request, CallSettings callSettings = null)
+```
+
+Lists asset resources in a zone.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListAssetsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListAssetsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedEnumerable.cs)[ListAssetsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListAssetsResponse)[Asset](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Asset)`
+
+A pageable sequence of [Asset](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Asset) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListAssets(ListAssetsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssets_Google_Cloud_Dataplex_V1_ListAssetsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListAssetsAsync(ListAssetsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListAssetsResponse, Asset> ListAssetsAsync(ListAssetsRequest request, CallSettings callSettings = null)
+```
+
+Lists asset resources in a zone.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListAssetsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListAssetsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListAssetsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListAssetsResponse)[Asset](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Asset)`
+
+A pageable asynchronous sequence of [Asset](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Asset) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListAssetsAsync(ListAssetsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListAssetsAsync_Google_Cloud_Dataplex_V1_ListAssetsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListEnvironments(ListEnvironmentsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListEnvironmentsResponse, Environment> ListEnvironments(ListEnvironmentsRequest request, CallSettings callSettings = null)
+```
+
+Lists environments under the given lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListEnvironmentsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListEnvironmentsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedEnumerable.cs)[ListEnvironmentsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListEnvironmentsResponse)[Environment](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Environment)`
+
+A pageable sequence of [Environment](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Environment) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListEnvironments(ListEnvironmentsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListEnvironments_Google_Cloud_Dataplex_V1_ListEnvironmentsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListEnvironmentsAsync(ListEnvironmentsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListEnvironmentsResponse, Environment> ListEnvironmentsAsync(ListEnvironmentsRequest request, CallSettings callSettings = null)
+```
+
+Lists environments under the given lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListEnvironmentsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListEnvironmentsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListEnvironmentsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListEnvironmentsResponse)[Environment](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Environment)`
+
+A pageable asynchronous sequence of [Environment](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Environment) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListEnvironmentsAsync(ListEnvironmentsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListEnvironmentsAsync_Google_Cloud_Dataplex_V1_ListEnvironmentsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListJobs(ListJobsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListJobsResponse, Job> ListJobs(ListJobsRequest request, CallSettings callSettings = null)
+```
+
+Lists Jobs under the given task.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListJobsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListJobsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedEnumerable.cs)[ListJobsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListJobsResponse)[Job](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Job)`
+
+A pageable sequence of [Job](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Job) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListJobs(ListJobsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListJobs_Google_Cloud_Dataplex_V1_ListJobsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListJobsAsync(ListJobsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListJobsResponse, Job> ListJobsAsync(ListJobsRequest request, CallSettings callSettings = null)
+```
+
+Lists Jobs under the given task.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListJobsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListJobsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListJobsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListJobsResponse)[Job](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Job)`
+
+A pageable asynchronous sequence of [Job](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Job) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListJobsAsync(ListJobsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListJobsAsync_Google_Cloud_Dataplex_V1_ListJobsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListLakeActions(ListLakeActionsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListActionsResponse, Action> ListLakeActions(ListLakeActionsRequest request, CallSettings callSettings = null)
+```
+
+Lists action resources in a lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListLakeActionsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListLakeActionsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedEnumerable.cs)[ListActionsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListActionsResponse)[Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action)`
+
+A pageable sequence of [Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListLakeActions(ListLakeActionsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakeActions_Google_Cloud_Dataplex_V1_ListLakeActionsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListLakeActionsAsync(ListLakeActionsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListActionsResponse, Action> ListLakeActionsAsync(ListLakeActionsRequest request, CallSettings callSettings = null)
+```
+
+Lists action resources in a lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListLakeActionsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListLakeActionsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListActionsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListActionsResponse)[Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action)`
+
+A pageable asynchronous sequence of [Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListLakeActionsAsync(ListLakeActionsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakeActionsAsync_Google_Cloud_Dataplex_V1_ListLakeActionsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListLakes(ListLakesRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListLakesResponse, Lake> ListLakes(ListLakesRequest request, CallSettings callSettings = null)
+```
+
+Lists lake resources in a project and location.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListLakesRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListLakesRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedEnumerable.cs)[ListLakesResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListLakesResponse)[Lake](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Lake)`
+
+A pageable sequence of [Lake](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Lake) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListLakes(ListLakesRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakes_Google_Cloud_Dataplex_V1_ListLakesRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListLakesAsync(ListLakesRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListLakesResponse, Lake> ListLakesAsync(ListLakesRequest request, CallSettings callSettings = null)
+```
+
+Lists lake resources in a project and location.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListLakesRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListLakesRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListLakesResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListLakesResponse)[Lake](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Lake)`
+
+A pageable asynchronous sequence of [Lake](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Lake) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListLakesAsync(ListLakesRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListLakesAsync_Google_Cloud_Dataplex_V1_ListLakesRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListSessions(ListSessionsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListSessionsResponse, Session> ListSessions(ListSessionsRequest request, CallSettings callSettings = null)
+```
+
+Lists session resources in an environment.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListSessionsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListSessionsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedEnumerable.cs)[ListSessionsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListSessionsResponse)[Session](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Session)`
+
+A pageable sequence of [Session](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Session) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListSessions(ListSessionsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListSessions_Google_Cloud_Dataplex_V1_ListSessionsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListSessionsAsync(ListSessionsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListSessionsResponse, Session> ListSessionsAsync(ListSessionsRequest request, CallSettings callSettings = null)
+```
+
+Lists session resources in an environment.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListSessionsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListSessionsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListSessionsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListSessionsResponse)[Session](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Session)`
+
+A pageable asynchronous sequence of [Session](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Session) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListSessionsAsync(ListSessionsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListSessionsAsync_Google_Cloud_Dataplex_V1_ListSessionsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListTasks(ListTasksRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListTasksResponse, Task> ListTasks(ListTasksRequest request, CallSettings callSettings = null)
+```
+
+Lists tasks under the given lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListTasksRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListTasksRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedEnumerable.cs)[ListTasksResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListTasksResponse)[Task](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Task)`
+
+A pageable sequence of [Task](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Task) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListTasks(ListTasksRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListTasks_Google_Cloud_Dataplex_V1_ListTasksRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListTasksAsync(ListTasksRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListTasksResponse, Task> ListTasksAsync(ListTasksRequest request, CallSettings callSettings = null)
+```
+
+Lists tasks under the given lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListTasksRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListTasksRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListTasksResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListTasksResponse)[Task](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Task)`
+
+A pageable asynchronous sequence of [Task](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Task) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListTasksAsync(ListTasksRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListTasksAsync_Google_Cloud_Dataplex_V1_ListTasksRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListZoneActions(ListZoneActionsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListActionsResponse, Action> ListZoneActions(ListZoneActionsRequest request, CallSettings callSettings = null)
+```
+
+Lists action resources in a zone.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListZoneActionsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListZoneActionsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedEnumerable.cs)[ListActionsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListActionsResponse)[Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action)`
+
+A pageable sequence of [Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListZoneActions(ListZoneActionsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZoneActions_Google_Cloud_Dataplex_V1_ListZoneActionsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListZoneActionsAsync(ListZoneActionsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListActionsResponse, Action> ListZoneActionsAsync(ListZoneActionsRequest request, CallSettings callSettings = null)
+```
+
+Lists action resources in a zone.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListZoneActionsRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListZoneActionsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListActionsResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListActionsResponse)[Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action)`
+
+A pageable asynchronous sequence of [Action](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Action) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListZoneActionsAsync(ListZoneActionsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZoneActionsAsync_Google_Cloud_Dataplex_V1_ListZoneActionsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListZones(ListZonesRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListZonesResponse, Zone> ListZones(ListZonesRequest request, CallSettings callSettings = null)
+```
+
+Lists zone resources in a lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListZonesRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListZonesRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedEnumerable.cs)[ListZonesResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListZonesResponse)[Zone](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Zone)`
+
+A pageable sequence of [Zone](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Zone) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListZones(ListZonesRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZones_Google_Cloud_Dataplex_V1_ListZonesRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListZonesAsync(ListZonesRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListZonesResponse, Zone> ListZonesAsync(ListZonesRequest request, CallSettings callSettings = null)
+```
+
+Lists zone resources in a lake.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListZonesRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListZonesRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListZonesResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.ListZonesResponse)[Zone](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Zone)`
+
+A pageable asynchronous sequence of [Zone](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Zone) resources.
+
+**Overrides**
+
+[DataplexServiceClient.ListZonesAsync(ListZonesRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_ListZonesAsync_Google_Cloud_Dataplex_V1_ListZonesRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### RunTask(RunTaskRequest, CallSettings)
+
+```
+public override RunTaskResponse RunTask(RunTaskRequest request, CallSettings callSettings = null)
+```
+
+Run an on demand execution of a Task.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[RunTaskRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.RunTaskRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[RunTaskResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.RunTaskResponse)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.RunTask(RunTaskRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_RunTask_Google_Cloud_Dataplex_V1_RunTaskRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### RunTaskAsync(RunTaskRequest, CallSettings)
+
+```
+public override Task<RunTaskResponse> RunTaskAsync(RunTaskRequest request, CallSettings callSettings = null)
+```
+
+Run an on demand execution of a Task.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[RunTaskRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.RunTaskRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[RunTaskResponse](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.RunTaskResponse)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.RunTaskAsync(RunTaskRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_RunTaskAsync_Google_Cloud_Dataplex_V1_RunTaskRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateAsset(UpdateAssetRequest, CallSettings)
+
+```
+public override Operation<Asset, OperationMetadata> UpdateAsset(UpdateAssetRequest request, CallSettings callSettings = null)
+```
+
+Updates an asset resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateAssetRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.UpdateAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Asset](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Asset)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.UpdateAsset(UpdateAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateAsset_Google_Cloud_Dataplex_V1_UpdateAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateAssetAsync(UpdateAssetRequest, CallSettings)
+
+```
+public override Task<Operation<Asset, OperationMetadata>> UpdateAssetAsync(UpdateAssetRequest request, CallSettings callSettings = null)
+```
+
+Updates an asset resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateAssetRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.UpdateAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Asset](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Asset)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.UpdateAssetAsync(UpdateAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateAssetAsync_Google_Cloud_Dataplex_V1_UpdateAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateEnvironment(UpdateEnvironmentRequest, CallSettings)
+
+```
+public override Operation<Environment, OperationMetadata> UpdateEnvironment(UpdateEnvironmentRequest request, CallSettings callSettings = null)
+```
+
+Update the environment resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateEnvironmentRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.UpdateEnvironmentRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Environment](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Environment)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.UpdateEnvironment(UpdateEnvironmentRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateEnvironment_Google_Cloud_Dataplex_V1_UpdateEnvironmentRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateEnvironmentAsync(UpdateEnvironmentRequest, CallSettings)
+
+```
+public override Task<Operation<Environment, OperationMetadata>> UpdateEnvironmentAsync(UpdateEnvironmentRequest request, CallSettings callSettings = null)
+```
+
+Update the environment resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateEnvironmentRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.UpdateEnvironmentRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Environment](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Environment)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.UpdateEnvironmentAsync(UpdateEnvironmentRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateEnvironmentAsync_Google_Cloud_Dataplex_V1_UpdateEnvironmentRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateLake(UpdateLakeRequest, CallSettings)
+
+```
+public override Operation<Lake, OperationMetadata> UpdateLake(UpdateLakeRequest request, CallSettings callSettings = null)
+```
+
+Updates a lake resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateLakeRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.UpdateLakeRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Lake](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Lake)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.UpdateLake(UpdateLakeRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateLake_Google_Cloud_Dataplex_V1_UpdateLakeRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateLakeAsync(UpdateLakeRequest, CallSettings)
+
+```
+public override Task<Operation<Lake, OperationMetadata>> UpdateLakeAsync(UpdateLakeRequest request, CallSettings callSettings = null)
+```
+
+Updates a lake resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateLakeRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.UpdateLakeRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Lake](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Lake)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.UpdateLakeAsync(UpdateLakeRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateLakeAsync_Google_Cloud_Dataplex_V1_UpdateLakeRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateTask(UpdateTaskRequest, CallSettings)
+
+```
+public override Operation<Task, OperationMetadata> UpdateTask(UpdateTaskRequest request, CallSettings callSettings = null)
+```
+
+Update the task resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateTaskRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.UpdateTaskRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Task](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Task)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.UpdateTask(UpdateTaskRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateTask_Google_Cloud_Dataplex_V1_UpdateTaskRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateTaskAsync(UpdateTaskRequest, CallSettings)
+
+```
+public override Task<Operation<Task, OperationMetadata>> UpdateTaskAsync(UpdateTaskRequest request, CallSettings callSettings = null)
+```
+
+Update the task resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateTaskRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.UpdateTaskRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Task](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Task)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.UpdateTaskAsync(UpdateTaskRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateTaskAsync_Google_Cloud_Dataplex_V1_UpdateTaskRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateZone(UpdateZoneRequest, CallSettings)
+
+```
+public override Operation<Zone, OperationMetadata> UpdateZone(UpdateZoneRequest request, CallSettings callSettings = null)
+```
+
+Updates a zone resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateZoneRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.UpdateZoneRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Zone](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Zone)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.UpdateZone(UpdateZoneRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateZone_Google_Cloud_Dataplex_V1_UpdateZoneRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateZoneAsync(UpdateZoneRequest, CallSettings)
+
+```
+public override Task<Operation<Zone, OperationMetadata>> UpdateZoneAsync(UpdateZoneRequest request, CallSettings callSettings = null)
+```
+
+Updates a zone resource.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateZoneRequest](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.UpdateZoneRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/6f2d3e64dd92f0f7a4f02a7db56cf6ed409615f2/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/abf311d7d0649ce9e47aac5c9bae36cb75a5a218/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Zone](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.Zone)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[DataplexServiceClient.UpdateZoneAsync(UpdateZoneRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/2.9.0/Google.Cloud.Dataplex.V1.DataplexServiceClient#Google_Cloud_Dataplex_V1_DataplexServiceClient_UpdateZoneAsync_Google_Cloud_Dataplex_V1_UpdateZoneRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-03-16 UTC.

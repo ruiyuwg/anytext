@@ -30,7 +30,7 @@ There are some limitations you should be aware of when using third-party authent
 
 ## Pricing
 
-per Third-Party MAU. You are only charged for usage exceeding your subscription
-plan's quota.
+per Third-Party MAU. You are only charged for usage exceeding your
+subscription plan's quota.
 
 For a detailed breakdown of how charges are calculated, refer to [Manage Monthly Active Third-Party Users usage](/docs/guides/platform/manage-your-usage/monthly-active-users-third-party).

@@ -1,186 +1,257 @@
 # Documents
 
-```markdown
-usage: sanity documents [-v|--version] [-d|--debug] [-h|--help] <command> [<args>]
+**CLI output**
 
-Commands:
-   create   Create one or more documents
-   delete   Delete a document by ID
-   get      Get and print a document
-   query    Query for documents
-   validate Download and validate documents
-
-See 'sanity help documents <command>' for specific information on a subcommand.
+```sh
+npx sanity documents --help
 ```
 
 ## Commands
 
-### Create
+### `create`
 
-```markdown
-usage: sanity documents create [FILE]
+**CLI output**
 
-   Create one or more documents
+```sh
+USAGE
+  $ sanity documents create [FILE] [-d <name>] [-p <id>] [--id <value>] [--json5] [--missing] [--replace] [--watch]
 
-Options
-  --replace On duplicate document IDs, replace existing document with specified document(s)
-  --missing On duplicate document IDs, don't modify the target document(s)
-  --watch   Write the documents whenever the target file or buffer changes
-  --json5   Use JSON5 file type to allow a "simplified" version of JSON
-  --id <id> Specify a document ID to use. Will fetch remote document ID and populate editor.
-  --dataset NAME to override dataset
+ARGUMENTS
+  [FILE]  JSON file to create document(s) from
 
-Examples
-  # Create the document specified in "myDocument.json".
-  sanity documents create myDocument.json
+FLAGS
+      --id=<value>  Specify a document ID to use. Will fetch remote document ID and populate editor.
+      --json5       Use JSON5 file type to allow a "simplified" version of JSON
+      --missing     On duplicate document IDs, don't modify the target document(s)
+      --replace     On duplicate document IDs, replace existing document with specified document(s)
+      --watch       Write the documents whenever the target file or buffer changes
 
-  # Open configured $EDITOR and create the specified document(s)
-  sanity documents create
+OVERRIDE FLAGS
+  -d, --dataset=<name>   Dataset to create document(s) in (overrides CLI configuration)
+  -p, --project-id=<id>  Project ID to create document(s) in (overrides CLI configuration)
 
-  # Fetch document with the ID "myDocId" and open configured $EDITOR with the
-  # current document content (if any). Replace document with the edited version
-  # when the editor closes
-  sanity documents create --id myDocId --replace
+DESCRIPTION
+  Create one or more documents
 
-  # Open configured $EDITOR and replace the document with the given content
-  # on each save. Use JSON5 file extension and parser for simplified syntax.
-  sanity documents create --id myDocId --watch --replace --json5
+EXAMPLES
+  Create the document specified in "myDocument.json"
+
+    $ sanity documents create myDocument.json
+
+  Open configured $EDITOR and create the specified document(s)
+
+    $ sanity documents create
+
+  Fetch document with the ID "myDocId" and open configured $EDITOR with the current document content (if any). Replace document with the edited version when the editor closes
+
+    $ sanity documents create --id myDocId --replace
+
+  Open configured $EDITOR and replace the document with the given content on each save. Use JSON5 file extension and parser for simplified syntax.
+
+    $ sanity documents create --id myDocId --watch --replace --json5
+
+  Create documents in a specific project
+
+    $ sanity documents create myDocument.json --project-id abc123
 ```
 
-### Delete
+### `delete`
 
-```markdown
-usage: sanity documents delete [ID] [...IDS]
+**CLI output**
 
-   Delete a document by ID
+```sh
+USAGE
+  $ sanity documents delete ID [IDS] [-d <name>] [-p <id>]
 
-Delete a document from the projects configured dataset
+ARGUMENTS
+  ID     Document ID to delete
+  [IDS]  Additional document IDs to delete
 
-Options
-  --dataset NAME to override dataset
+OVERRIDE FLAGS
+  -d, --dataset=<name>   Dataset to delete from (overrides CLI configuration)
+  -p, --project-id=<id>  Project ID to delete from (overrides CLI configuration)
 
-Example
-  # Delete the document with the ID "myDocId"
-  sanity documents delete myDocId
+DESCRIPTION
+  Delete one or more documents from the projects configured dataset
 
-  # ID wrapped in double or single quote works equally well
-  sanity documents delete 'myDocId'
+EXAMPLES
+  Delete the document with the ID "myDocId"
 
-  # Delete document with ID "someDocId" from dataset "blog"
-  sanity documents delete --dataset=blog someDocId
+    $ sanity documents delete myDocId
 
-  # Delete the document with ID "doc1" and "doc2"
-  sanity documents delete doc1 doc2
+  ID wrapped in double or single quote works equally well
+
+    $ sanity documents delete 'myDocId'
+
+  Delete document with ID "someDocId" from dataset "blog"
+
+    $ sanity documents delete --dataset=blog someDocId
+
+  Delete the document with ID "doc1" and "doc2"
+
+    $ sanity documents delete doc1 doc2
+
+  Delete a document from a specific project
+
+    $ sanity documents delete myDocId --project-id abc123
 ```
 
-### Get
+### `get`
 
-```markdown
-usage: sanity documents get [DOCUMENT_ID]
+**CLI output**
 
-   Get and print a document by ID
+```sh
+USAGE
+  $ sanity documents get DOCUMENTID [-d <name>] [-p <id>] [--pretty]
 
-Get and print a document from the projects configured dataset
+ARGUMENTS
+  DOCUMENTID  Document ID to retrieve
 
-Options
-  --pretty colorized JSON output
-  --dataset NAME to override dataset
+FLAGS
+      --pretty  Colorize JSON output
 
-Examples
-  # Get the document with the ID "myDocId"
-  sanity documents get myDocId
+OVERRIDE FLAGS
+  -d, --dataset=<name>   Dataset to get document from (overrides CLI configuration)
+  -p, --project-id=<id>  Project ID to get document from (overrides CLI configuration)
 
-  # ID wrapped in double or single quote works equally well
-  sanity documents get 'myDocId'
+DESCRIPTION
+  Get and print a document by ID
+
+EXAMPLES
+  Get the document with ID "myDocId"
+
+    $ sanity documents get myDocId
+
+  Get document with colorized JSON output
+
+    $ sanity documents get myDocId --pretty
+
+  Get document from a specific dataset
+
+    $ sanity documents get myDocId --dataset production
+
+  Get a document from a specific project
+
+    $ sanity documents get myDocId --project-id abc123
 ```
 
-### Query
+### `query`
 
-```markdown
-usage: sanity documents query [QUERY]
+**CLI output**
 
-   Query for documents
+```sh
+USAGE
+  $ sanity documents query QUERY [-d <name>] [-p <id>] [--anonymous] [--api-version <value>] [--pretty]
 
-Run a query against the projects configured dataset
+ARGUMENTS
+  QUERY  GROQ query to run against the dataset
 
-Options
-  --pretty colorized JSON output
-  --dataset NAME to override dataset
-  --project PROJECT to override project ID
-  --anonymous Send the query without any authorization token
-  --api-version API version to use (defaults to `v2022-06-01`)
+FLAGS
+      --anonymous            Send the query without any authorization token
+      --api-version=<value>  API version to use (defaults to 2025-08-15)
+      --pretty               Colorize JSON output
 
-Environment variables
-  `SANITY_CLI_QUERY_API_VERSION` - will use the defined API version,
-  unless `--api-version` is specified.
+OVERRIDE FLAGS
+  -d, --dataset=<name>   Dataset to query (overrides CLI configuration)
+  -p, --project-id=<id>  Project ID to query (overrides CLI configuration)
 
-Examples
-  # Fetch 5 documents of type "movie"
-  sanity documents query '*[_type == "movie"][0..4]'
+DESCRIPTION
+  Query for documents
 
-  # Fetch title of the oldest movie in the dataset named "staging"
-  sanity documents query '*[_type == "movie"]|order(releaseDate asc)[0]{title}' --dataset staging
+EXAMPLES
+  Fetch 5 documents of type "movie"
 
-  # Use API version v2021-06-07 and do a query
-  sanity documents query --api-version v2021-06-07 '*[_id == "header"] { "headerText": pt::text(body) }'
+    $ sanity documents query '*[_type == "movie"][0..4]'
+
+  Fetch title of the oldest movie in the dataset named "staging"
+
+    $ sanity documents query '*[_type == "movie"]|order(releaseDate asc)[0]{title}' --dataset staging
+
+  Use API version v2021-06-07 and do a query
+
+    $ sanity documents query '*[_id == "header"] { "headerText": pt::text(body) }' --api-version v2021-06-07
+
+  Query documents in a specific project and dataset
+
+    $ sanity documents query '*[_type == "post"]' --project-id abc123 --dataset production
 ```
 
-### Validate
+### `validate`
 
-```markdown
-usage: sanity documents validate
+**CLI output**
 
-   Downloads and validates all documents specified in a workspace
+```sh
+USAGE
+  $ sanity documents validate [-d <name>] [-p <id>] [--yes] [--file <value>] [--format <value>] [--level <value>] [--max-custom-validation-concurrency <value>] [--max-fetch-concurrency <value>] [--workspace <value>]
 
-Options
-  -y, --yes Skips the first confirmation prompt.
-  --workspace <name> The name of the workspace to use when downloading and validating all documents.
-  --dataset <name> Override the dataset used. By default, this is derived from the given workspace.
-  --file <filepath> Provide a path to either an .ndjson file or a tarball containing an .ndjson file.
-  --format <pretty|ndjson|json> The output format used to print the found validation markers and report progress.
-  --level <error|warning|info> The minimum level reported out. Defaults to warning.
-  --max-custom-validation-concurrency <number> Specify how many custom validators can run concurrently. Defaults to 5.
-  --max-fetch-concurrency <number> Specify how many `client.fetch` requests are allowed concurrently. Defaults to 25.
+FLAGS
+  -d, --dataset=<name>                             Override the dataset used. By default, this is derived from the given workspace
+  -p, --project-id=<id>                            Override the project ID used. By default, this is derived from the given workspace
+  -y, --yes                                        Skips the first confirmation prompt
+      --file=<value>                               Provide a path to either an .ndjson file or a tarball containing an .ndjson file
+      --format=<value>                             The output format used to print the found validation markers and report progress
+      --level=<value>                              The minimum level reported. Defaults to warning
+      --max-custom-validation-concurrency=<value>  Specify how many custom validators can run concurrently
+      --max-fetch-concurrency=<value>              Specify how many `client.fetch` requests are allowed to run concurrently
+      --workspace=<value>                          The name of the workspace to use when downloading and validating all documents
 
-Examples
-  # Validates all documents in a Sanity project with more than one workspace
-  sanity documents validate --workspace default
+DESCRIPTION
+  Validate documents in a dataset against the studio schema
 
-  # Override the dataset specified in the workspace
-  sanity documents validate --workspace default --dataset staging
+EXAMPLES
+  Validates all documents in a Sanity project with more than one workspace
 
-  # Save the results of the report into a file
-  sanity documents validate > report.txt
+    $ sanity documents validate --workspace default
 
-  # Report out info level validation markers too
-  sanity documents validate --level info
+  Override the dataset specified in the workspace
+
+    $ sanity documents validate --workspace default --dataset staging
+
+  Save the results of the report into a file
+
+    $ sanity documents validate --yes > report.txt
+
+  Report out info level validation markers too
+
+    $ sanity documents validate --level info
+
+  Validate documents in a specific project and dataset
+
+    $ sanity documents validate --project-id abc123 --dataset production
 ```
 
 # Exec
 
-```markdown
-usage: sanity exec SCRIPT
+**CLI output**
 
-   Runs a script in Sanity context
+```sh
+USAGE
+  $ sanity exec SCRIPT [--mock-browser-env] [--with-user-token]
 
-Options
-  --with-user-token Prime access token from CLI config into getCliClient()
-  --mock-browser-env Mocks a browser-like environment using jsdom
+ARGUMENTS
+  SCRIPT  Path to the script to execute
 
-Examples
-  # Run the script at some/script.js in Sanity context
-  sanity exec some/script.js
+FLAGS
+      --mock-browser-env  Mocks a browser-like environment using jsdom
+      --with-user-token   Prime access token from CLI config into getCliClient()
 
-  # Run the script at migrations/fullname.ts and configure `getCliClient()`
-  # from `sanity/cli`to include the current user's token
-  sanity exec migrations/fullname.ts --with-user-token
+DESCRIPTION
+  Executes a script within the Sanity Studio context
 
-  # Run the script at scripts/browserScript.js in a mock browser environment
-  sanity exec scripts/browserScript.js --mock-browser-env
+EXAMPLES
+  Run the script at some/script.js in Sanity context
 
-  # Pass arbitrary arguments to scripts by separating them with a `--`.
-  # Arguments are available in `process.argv` as they would in regular node scripts
-  # eg the following command would yield a `process.argv` of:
-  # ['/path/to/node', '/path/to/myscript.js', '--dry-run', 'positional-argument']
-  sanity exec --mock-browser-env myscript.js -- --dry-run positional-argument
+    $ sanity exec some/script.js
+
+  Run the script at migrations/fullname.ts and configure `getCliClient()` from `sanity/cli` to include the current user's token
+
+    $ sanity exec migrations/fullname.ts --with-user-token
+
+  Run the script at scripts/browserScript.js in a mock browser environment
+
+    $ sanity exec scripts/browserScript.js --mock-browser-env
+
+  Pass arbitrary arguments to scripts by separating them with a `--`. Arguments are available in `process.argv` as they would in regular node scripts (eg the following command would yield a `process.argv` of: `['/path/to/node', '/path/to/myscript.js', '--dry-run', 'positional-argument']`)
+
+    $ sanity exec --mock-browser-env myscript.js -- --dry-run positional-argument
 ```

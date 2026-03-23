@@ -50,7 +50,7 @@ The following are examples of when you might want to use a denylist:
 
 #### Add records to an allowlist
 
-You can add metadata to stop the connector from syncing a record to NetSuite until it is granted permission. This is helpful if you have an e-commerce system that uses Stripe to process payments before the invoice is created in NetSuite.
+You can add metadata to stop the connector from syncing a record to NetSuite until it’s granted permission. This is helpful if you have an e-commerce system that uses Stripe to process payments before the invoice is created in NetSuite.
 
 Use an allowlist to control the syncing of a record to NetSuite:
 

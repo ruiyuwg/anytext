@@ -52,5 +52,5 @@ To learn how to share deployments with comments enabled, see the [Sharing Deploy
 
 title: "Integrations for Comments"
 description: "Learn how Comments integrates with Git providers like GitHub, GitLab, and BitBucket, as well as Vercel"
-last\_updated: "2026-03-08T05:03:12.508Z"
+last\_updated: "2026-03-23T09:40:07.295Z"
 source: "https://vercel.com/docs/comments/integrations"

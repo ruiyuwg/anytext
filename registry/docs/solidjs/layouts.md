@@ -15,8 +15,8 @@ A root-level layout acts as a container surrounding all routes within your appli
 ```
 import { render } from "solid-js/web";import { Router, Route } from "@solidjs/router";
 import Home from "./pages/Home";
-const Layout = (props) => {    return (        <>            <header>Header</header>            {props.children}            <footer>Footer</footer>        </>    );};
-render(    () => (        <Router root={Layout}>            <Route path="/" component={Home} />            <Route path="/hello-world" component={() => <div>Hello world!</div>} />        </Router>    ),    document.getElementById("app"));
+const Layout = (props) => {  return (    <>      <header>Header</header>      {props.children}      <footer>Footer</footer>    </>  );};
+render(  () => (    <Router root={Layout}>      <Route path="/" component={Home} />      <Route path="/hello-world" component={() => <div>Hello world!</div>} />    </Router>  ),  document.getElementById("app"));
 ```
 
 With the root-level layout, `props.children` will be replaced with the content of the current route. This means that while the words "Header" and "Footer" will be displayed on every page, the content between them will change depending on the current route. For example, when the route is `/hello-world`, you will see the text "Hello world!" between the header and footer.
@@ -34,7 +34,7 @@ function PageWrapper(props) {  return (    <div>      <h1> We love our users! </
 While the routes are still configured the same, the route's elements will appear inside the parent element where the `props.children` was declared. For `PageWrapper` to be used as a layout, in this case, you can pass it as a component to the parent route:
 
 ```
-<Router>    <Route path="/users" component={PageWrapper}>        <Route path="/" component={Users} />        <Route path="/:id" component={User} />    </Route></Router>
+<Router>  <Route path="/users" component={PageWrapper}>    <Route path="/" component={Users} />    <Route path="/:id" component={User} />  </Route></Router>
 ```
 
 Now, when the route is `/users`, the content of the `Users` component will be displayed inside the `PageWrapper` component. Similarly, when navigating to `/users/1`, the content of the `User` component will be displayed inside the `PageWrapper` component as well.

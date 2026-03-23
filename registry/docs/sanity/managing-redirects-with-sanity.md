@@ -105,8 +105,8 @@ const { createClient } = require("@sanity/client");
 
 // Initialize Sanity client
 const client = createClient({
-  projectId: "your-project-id",
-  dataset: "production",
+  projectId: "<your-project-id>",
+  dataset: "<your-dataset>",
   useCdn: false, // Ensure no accidental 'stale' data
   apiVersion: "2023-05-03" // use current date (YYYY-MM-DD) to target the latest API version
 });
@@ -274,8 +274,8 @@ import { createClient } from "@sanity/client";
 
 // Initialize Sanity client
 const client = createClient({
-  projectId: "your-project-id",
-  dataset: "production",
+  projectId: "<your-project-id>",
+  dataset: "<your-dataset>",
   apiVersion: "2023-05-03", // use current date (YYYY-MM-DD) to target the latest API version
 });
 
@@ -369,8 +369,8 @@ Then in your Nuxt app’s `server` directory add a `middleware` directory with a
 import { createClient } from "@sanity/client";
 
 const client = createClient({
-  projectId: "your-project-id",
-  dataset: "production",
+  projectId: "<your-project-id>",
+  dataset: "<your-dataset>",
   apiVersion: "2023-05-03", // use current date (YYYY-MM-DD) to target the latest API version
 });
 

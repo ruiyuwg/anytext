@@ -50,8 +50,9 @@ This example includes only one *invoice* (Invoices are statements of amounts owe
 
 The monthly summary for July 2025 would look like this:
 
+|  |
+|  |
 | **Recognized revenue**                       |         |
-| -------------------------------------------- | ------- |
 | Revenue from billings this month             | 12 USD  |
 | **Net revenue**                              | 12 USD  |
 | **Deferred revenue**                         |         |
@@ -65,8 +66,9 @@ The monthly summary for July 2025 would look like this:
 
 Continuing on this example, if the invoice is refunded on August 15, 2025, the monthly summary for August 2025 would look like this:
 
+|  |
+|  |
 | **Recognized revenue**        |         |
-| ----------------------------- | ------- |
 | Less refunds                  | -12 USD |
 | **Net revenue**               | -12 USD |
 | **Deferred revenue**          |         |
@@ -86,8 +88,9 @@ The revenue of a standalone payment is recognized when the payment occurs. This 
 
 The monthly summary for July 2025 would look like this:
 
+|  |
+|  |
 | **Recognized revenue**                       |        |
-| -------------------------------------------- | ------ |
 | Revenue from billings this month             | 17 USD |
 | **Net revenue**                              | 17 USD |
 | **Deferred revenue**                         |        |

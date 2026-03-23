@@ -1,0 +1,135 @@
+--- 
+title: Microsoft Dev Box for Cloud-Based Development
+description: Learn about Microsoft Dev Box, a self-service cloud-based development environment. Boost productivity with ready-to-code workstations.
+services: dev-box
+ms.service: dev-box
+ms.topic: overview
+ms.author: rosemalcolm
+author: RoseHJM
+ms.date: 10/31/2025
+adobe-target: true
+
+#Customer intent: As a platform engineer, I want to understand what Microsoft Dev Box is and how it helps developer teams, so that I can efficiently set up and use cloud development environments for my teams.
+---
+
+# What is Microsoft Dev Box?
+
+[!INCLUDE [note-windows-365-announcement](includes/note-windows-365-announcement.md)]
+
+Microsoft Dev Box gives developers self-service access to ready-to-code cloud workstations called *dev boxes*. You can configure dev boxes with tools, source code, and prebuilt binaries that are specific to a project, so developers can immediately start work. You can create cloud development environments for your developer teams by using image definitions with YAML-based customizations, custom images from Azure Compute Gallery, or preconfigured images from Azure Marketplace, complete with Visual Studio already installed. 
+
+If you're a developer, you can use multiple dev boxes in your day-to-day workflows. Access and manage your dev boxes through the developer portal.
+
+Microsoft Dev Box bridges the gap between development teams and IT, by bringing control of project resources closer to the development team.
+
+The Dev Box service was designed with three organizational roles in mind: platform engineers, development team leads, and developers.
+
+:::image type="content" source="media/overview-what-is-microsoft-dev-box/dev-box-roles.png" alt-text="Diagram that shows roles and responsibilities for Dev Box platform engineers, team leads, and developers." lightbox="media/overview-what-is-microsoft-dev-box/dev-box-roles.png" border="false":::
+
+Platform engineers and IT admins work together to provide developer infrastructure and tools to the developer teams. Platform engineers set and manage security settings, network configurations, and organizational policies to ensure that dev boxes can access resources securely.
+
+Developer team leads are experienced developers who have in-depth knowledge of their projects. They can be assigned the DevCenter Project Admin role and assist with creating and managing the developer experience. Project admins create and manage pools of dev boxes.
+
+Members of a development team are assigned the DevCenter Dev Box User role. They can then self-serve one or more dev boxes on demand from the dev box pools that are enabled for a project. Dev box users can work on multiple projects or tasks by creating multiple dev boxes. 
+
+Microsoft Dev Box bridges the gap between development teams and IT, by bringing control of project resources closer to the development team.
+
+## Scenarios for Microsoft Dev Box
+
+Organizations can use Microsoft Dev Box in a range of scenarios.
+
+### Platform engineering scenarios
+
+Dev Box helps platform engineering teams provide the appropriate dev boxes for each user's workload. Platform engineers can:
+
+- Configure team-specific customizations using YAML-based image definitions for standardized development environments.
+- Create dev box pools with image definitions, custom images, or marketplace images.
+- Enforce governance by using project policies to select resources to allow, like networks, images, and SKUs. 
+- Define the network configuration, which determines the region where the dev box is created.
+- Control costs by using autostop schedules and hibernation features.
+- Assign the built-in Dev Box User role to grant access to development teams and enable them to self-serve dev boxes.
+
+### IT admin scenarios
+
+Dev Box has the following benefits for IT admins:
+
+- Manage dev boxes like any other device on your network:
+
+  - Dev boxes automatically enroll in Microsoft Intune. Use the Microsoft Intune to manage dev boxes.
+  - Keep all Windows devices up to date by using expedited quality updates in Intune to deploy zero-day patches across your organization.
+  - If a dev box is compromised, isolate it while helping users get backup and running on a new dev box.
+
+- Dev Box provides secure access in a secure environment. Access controls in Microsoft Entra ID organize access by project or user type:
+
+  - Join dev boxes natively to a Microsoft Entra ID or Active Directory domain.
+  - Set conditional access policies that require users to connect via a compliant device.
+  - Require multifactor authentication at sign-in.
+  - Configure risk-based sign-in policies for dev boxes that access sensitive source code and customer data.
+
+### Developer team lead scenarios
+
+After a developer team lead is assigned the DevCenter Project Admin role, they can help manage the project. Project Admins can:
+
+- Create dev box pools with available image options (image definitions, custom images, or marketplace images) and independently select compute and storage configurations.
+- Control costs by using autostop schedules and hibernation settings.
+- Use YAML-based image definitions to create team-specific customizations that can be built into reusable images for faster dev box creation.
+- Configure setup tasks from catalogs attached to the dev center that execute during dev box creation to install and customize software specific to the project.
+
+## Image configuration options
+
+Microsoft Dev Box offers flexible approaches to configuring development environments:
+
+- **Image definitions**: YAML-based customization files that define team-specific environments with automated software installation and configuration. Image definitions can be built into reusable images for faster dev box creation.
+- **Custom images**: Organization-specific images stored in Azure Compute Gallery for tailored configurations.
+- **Marketplace images**: Preconfigured images from Azure Marketplace with common development tools like Visual Studio.
+
+These approaches provide greater flexibility than legacy dev box definitions by allowing independent selection of compute size and storage when creating dev box pools.
+
+> [!TIP]
+> Read about General Motors's use of Microsoft Dev Box: [General Motors reimagines the dev tool chain and onboarding experience with cloud-based developer services from Microsoft](https://www.microsoft.com/en/customers/story/1650265213028177234-gm-cloud-based-developer-services-from-microsoft).
+
+### Developer scenarios
+
+An organization with globally distributed development teams configures Dev Box to allow developers to create their own dev boxes in their closest region. Developers create dev boxes as needed, without waiting for the IT admin team. Users access dev boxes from any device and operating system.
+
+Dev Box supports developers who are working on multiple projects. Developers can create and use separate dev boxes for separate workloads, projects, or tasks. Developers can create multiple dev boxes from a predefined pool whenever they need them, and then delete those dev boxes when they're done.
+
+Organizations can even define dev boxes for various roles on a team. You might configure standard dev boxes with admin rights to give full-time developers greater control, while applying more restricted permissions for contractors.
+
+Dev boxes use Azure virtual machines, which have sufficient vCPUs and memory to meet the requirements associated with most general-purpose workloads. For storage, dev boxes use Azure Premium SSDs, which deliver high-performance and low-latency disk support.
+
+## Get started with Microsoft Dev Box
+
+To get started with Microsoft Dev Box, you need to set up a dev center. A dev center is a container for your projects and resources. You can create a dev center in the Azure portal, and then create projects within that dev center. Each project can have dev box pools configured with image definitions, custom images, or marketplace images.
+
+The basic setup workflow includes:
+1. Create a dev center
+2. Configure network connections (optional for Microsoft-hosted networks)
+3. Attach catalogs for customizations (optional)
+4. Create projects
+5. Create dev box pools with your preferred image approach and compute/storage settings
+6. Assign access to development teams
+
+Start your Dev Box journey with a basic template: [Microsoft Dev Box](https://portal.azure.com/#view/Microsoft_Azure_DevCenter/DevCenterMenuBlade/~/overview).
+
+## What's new in Microsoft Dev Box
+
+To learn about the latest features and updates in Microsoft Dev Box, see [What's new in Microsoft Dev Box](https://aka.ms/devbox/WhatsNew).
+
+## Components shared with Azure Deployment Environments
+
+Microsoft Dev Box and [Azure Deployment Environments](../deployment-environments/overview-what-is-azure-deployment-environments.md) are complementary services that share certain architectural components. Deployment Environments provides developers with preconfigured cloud-based environments for developing applications. Dev centers and projects are common to both services, and they help organize resources in an enterprise.  
+
+When you configure Dev Box, you might see Deployment Environments resources and components. You might even see informational messages regarding Deployment Environments features. If you're not configuring any Deployment Environments features, you can safely ignore these messages.
+
+## Related content
+
+Start using Microsoft Dev Box:
+
+- [Quickstart: Configure Microsoft Dev Box](./quickstart-configure-dev-box-service.md)
+- [Quickstart: Create a dev box](./quickstart-create-dev-box.md)
+
+Learn more about Microsoft Dev Box:
+
+- [Microsoft Dev Box architecture and key concepts](./concept-dev-box-architecture.md)
+

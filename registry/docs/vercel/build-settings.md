@@ -94,5 +94,5 @@ https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2F
 
 title: "Using Callbacks with the Deploy Button"
 description: "Learn how to use the Deploy Button"
-last\_updated: "2026-03-08T05:03:13.055Z"
+last\_updated: "2026-03-23T09:40:08.070Z"
 source: "https://vercel.com/docs/deploy-button/callback"

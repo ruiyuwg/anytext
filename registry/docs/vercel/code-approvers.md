@@ -251,5 +251,5 @@ pnpm-lock.yaml *
 
 title: "Getting Started with Code Owners"
 description: "Learn how to set up Code Owners for your codebase."
-last\_updated: "2026-03-08T05:03:12.466Z"
+last\_updated: "2026-03-23T09:40:07.234Z"
 source: "https://vercel.com/docs/code-owners/getting-started"

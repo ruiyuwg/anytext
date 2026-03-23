@@ -12,6 +12,7 @@ Each AI credit costs **$0.05**. Credit consumption depends on the type and scope
 
 - **Query** (your message to Content Agent): **4 credits** ($0.20)
 - **Action** (tool use by Content Agent): **2 credits** ($0.10)
+- **Agent Action** (a request with any [Agent Action](https://www.sanity.io/docs/agent-actions)): **1 credit** ($0.05)
 
 **Queries** are messages you send to the Content Agent. Each request includes a 4-credit query cost.
 

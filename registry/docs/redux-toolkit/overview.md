@@ -38,6 +38,8 @@ Redux maintainer Mark Erikson appeared on the "Learn with Jason" show to explain
 
 See [the "Learn Modern Redux" show notes page](https://www.learnwithjason.dev/let-s-learn-modern-redux) for a transcript and links to the example app source.
 
+Watch
+
 ## Using Redux Toolkit[​](#using-redux-toolkit "Direct link to Using Redux Toolkit")
 
 The RTK [**Usage Guide** docs page](/usage/usage-guide) explains the standard usage patterns for each of RTK's APIs. The [API Reference](/api/configureStore) section describes each API function and has additional usage examples.

@@ -117,9 +117,22 @@ interface ImportDuration {
 }
 ```
 
-## viteEnvironment 4.0.15
+## viteEnvironment 4.1.0
 
 This is a Vite's [`DevEnvironment`](https://vite.dev/guide/api-environment) that transforms all files inside of the test module.
+
+- `v4.0.15`: added as experimental
+  :::
+
+## toTestSpecification 4.1.0
+
+```ts
+function toTestSpecification(testCases?: TestCase[]): TestSpecification
+```
+
+Returns a new [test specification](/api/advanced/test-specification) that can be used to filter or run this specific test module.
+
+It accepts an optional array of test cases that should be filtered.
 
 ***
 

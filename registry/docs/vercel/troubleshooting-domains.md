@@ -162,5 +162,5 @@ The [/.well-known](# "The /.well-known directory") path is reserved and cannot b
 
 title: "Working with DNS"
 description: "Learn how DNS works in order to properly configure your domain."
-last\_updated: "2026-03-08T05:03:13.497Z"
+last\_updated: "2026-03-23T09:40:08.768Z"
 source: "https://vercel.com/docs/domains/working-with-dns"

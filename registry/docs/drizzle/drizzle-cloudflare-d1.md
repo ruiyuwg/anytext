@@ -1,4 +1,4 @@
-# Drizzle + Cloudflare D1
+# Drizzle  +  Cloudflare D1
 
 - Database [connection basics](/docs/connect-overview) with Drizzle
 - D1 Database - [website](https://developers.cloudflare.com/d1/)
@@ -24,18 +24,20 @@ You would need to have either a `wrangler.json` or a `wrangler.toml` file for D1
 
 ```json
 {
-  "name": "YOUR_PROJECT_NAME",
-  "main": "src/index.ts",
-  "compatibility_date": "2024-09-26",
-  "compatibility_flags": ["nodejs_compat"],
-  "d1_databases": [
-    {
-      "binding": "BINDING_NAME",
-      "database_name": "YOUR_DB_NAME",
-      "database_id": "YOUR_DB_ID",
-      "migrations_dir": "drizzle/migrations"
-    }
-  ]
+    "name": "YOUR_PROJECT_NAME",
+    "main": "src/index.ts",
+    "compatibility_date": "2024-09-26",
+    "compatibility_flags": [
+        "nodejs_compat"
+    ],
+    "d1_databases": [
+        {
+            "binding": "BINDING_NAME",
+            "database_name": "YOUR_DB_NAME",
+            "database_id": "YOUR_DB_ID",
+            "migrations_dir": "drizzle/migrations"
+        }
+    ]
 }
 ```
 

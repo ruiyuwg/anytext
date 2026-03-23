@@ -69,5 +69,5 @@ To restore a deleted deployment, open **Settings** in the sidebar of your projec
 
 title: "Claim Deployments"
 description: "Learn how to take ownership of deployments on Vercel with the Claim Deployments feature."
-last\_updated: "2026-03-08T05:03:13.267Z"
+last\_updated: "2026-03-23T09:40:08.339Z"
 source: "https://vercel.com/docs/deployments/claim-deployments"

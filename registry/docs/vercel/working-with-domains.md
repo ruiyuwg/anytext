@@ -69,5 +69,5 @@ Because many domain providers do not offer a mail service, several third-party s
 
 title: "Removing a Domain from a Project"
 description: "Learn how to remove a domain from a Project and from your account completely with this guide."
-last\_updated: "2026-03-08T05:03:13.579Z"
+last\_updated: "2026-03-23T09:40:08.843Z"
 source: "https://vercel.com/docs/domains/working-with-domains/remove-a-domain"

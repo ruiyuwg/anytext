@@ -25,9 +25,10 @@ You only need to use one of these forms of authentication. If an API key is spec
 
 ## Supported endpoints
 
-The AI Gateway supports the following Anthropic Messages API endpoint:
+The AI Gateway supports the following Anthropic Messages API endpoints:
 
 - [`POST /v1/messages`](/docs/ai-gateway/sdks-and-apis/anthropic-messages-api/messages) - Create messages with support for streaming, [tool calls](/docs/ai-gateway/sdks-and-apis/anthropic-messages-api/tool-calls), [extended thinking](/docs/ai-gateway/sdks-and-apis/anthropic-messages-api/advanced), [structured outputs](/docs/ai-gateway/sdks-and-apis/anthropic-messages-api/structured-outputs), and [file attachments](/docs/ai-gateway/sdks-and-apis/anthropic-messages-api/file-attachments)
+- `POST /v1/messages/count_tokens` - [Count tokens](https://docs.anthropic.com/en/docs/build-with-claude/token-counting) in a message before sending it to Claude, for managing context windows and costs
 
 For advanced features, see:
 
@@ -176,7 +177,7 @@ The messages endpoint supports the following parameters:
 
 The gateway passes through the `cache_control` parameter to Anthropic's [prompt caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching) feature. This is explicit caching: you specify cache breakpoints, and Anthropic handles storing and reusing cached content automatically.
 
-> **💡 Note:** The `cache_control` parameter is passed through to **Anthropic** and **Vertex AI Anthropic** models for explicit caching. Other providers or models with implicit caching work automatically without any configuration.
+> **💡 Note:** The `cache_control` parameter is passed through to **Anthropic**, **Vertex AI Anthropic**, and **Amazon Bedrock Anthropic** models for explicit caching. Other providers or models with implicit caching work automatically without any configuration.
 
 Example request
 
@@ -306,5 +307,5 @@ The API returns standard HTTP status codes and error responses:
 
 title: "Structured Outputs"
 description: "Get JSON responses conforming to a JSON Schema from Anthropic models through AI Gateway."
-last\_updated: "2026-03-08T05:03:10.667Z"
+last\_updated: "2026-03-23T09:40:04.705Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/anthropic-messages-api/structured-outputs"

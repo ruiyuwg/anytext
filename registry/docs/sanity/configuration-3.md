@@ -12,7 +12,7 @@ import { defineConfig } from 'sanity'
 
 export default defineConfig({
   projectId: '<project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
 })
 ```
 
@@ -62,7 +62,7 @@ import { schemaTypes } from './schemas'
 export default defineConfig({
   title: 'My cool project',
   projectId: '<project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   plugins: [structureTool()],
   schema: {
     types: schemaTypes,
@@ -86,7 +86,7 @@ export default defineConfig([
     basePath: '/production',
     icon: LaunchIcon,
     projectId: '<project-id>',
-    dataset: 'production',
+    dataset: '<your-dataset>',
     plugins: [structureTool()],
     schema: {
       types: schemaTypes,

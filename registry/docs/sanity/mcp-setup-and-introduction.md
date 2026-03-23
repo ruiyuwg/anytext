@@ -8,6 +8,10 @@ With the MCP server, agents can go beyond code generation and perform advanced c
 
 The Sanity MCP server is hosted on Sanity's own infrastructure on `https://mcp.sanity.io`. It follows Anthropic's official MCP specification and works with any MCP-compatible client. It supports authentication through both OAuth (default) and token-based authentication.
 
+> \[!NOTE]
+> Migrating from the local MCP server?
+> The `@sanity/mcp-server` npm package has been deprecated. The Sanity MCP server is now hosted at `mcp.sanity.io` with OAuth authentication, automatic updates, and no local setup required. Follow the installation instructions below to switch to the hosted server.
+
 **Prerequisites:**
 
 - An MCP-compatible client, such as [Claude Code](https://docs.anthropic.com/en/docs/claude-code/mcp), [Cursor](https://docs.cursor.com/context/mcp#installing-mcp-servers), [VS Code](https://code.visualstudio.com/docs/copilot/customization/mcp-servers), [Lovable](https://docs.lovable.dev/integrations/mcp-servers), or [v0](https://v0.app/docs/MCP).
@@ -279,3 +283,11 @@ You can do this manually in your AI tool of choice, or by instructing the agent 
 ## Support
 
 [Join us in the Sanity community](https://snty.link/community) to ask questions and discuss our MCP server with other developers in the [#mcp-server](https://discord.com/channels/1304483263171264613/1446564219423035533) channel.
+
+## Related resources
+
+- [Agent Context](https://www.sanity.io/docs/ai/agent-context): Give AI agents read-only access to your content through MCP.
+- [Get started with AI-powered Sanity development](https://www.sanity.io/docs/ai/ai-quickstart): Best practices for using AI tools with Sanity.
+- [Get started with Sanity Content Agent](https://www.sanity.io/docs/content-agent/introduction): Use natural language to query and manage content.
+
+*Want to build the MCP server with us? See open roles for Engineering Manager and Software Engineer in SF / Bay Area.*

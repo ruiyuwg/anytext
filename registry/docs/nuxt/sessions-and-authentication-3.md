@@ -208,7 +208,7 @@ We've successfully set up a very basic user authentication and session managemen
 As next steps, you can:
 
 - Add authentication using the [20+ supported OAuth providers](https://github.com/atinux/nuxt-auth-utils?tab=readme-ov-file#supported-oauth-providers){rel=""nofollow""}
-- Add a database to store users, see [Nitro SQL Database](https://nitro.build/guide/database){rel=""nofollow""} or [NuxtHub SQL Database](https://hub.nuxt.com/docs/features/database){rel=""nofollow""}
+- Add a database to store users, see [Nitro SQL Database](https://nitro.build/guide/database){rel=""nofollow""} or [NuxtHub SQL Database](https://hub.nuxt.com/docs/database){rel=""nofollow""}
 - Let user signup with email & password using [password hashing](https://github.com/atinux/nuxt-auth-utils?tab=readme-ov-file#password-hashing){rel=""nofollow""}
 - Add support for [WebAuthn / Passkeys](https://github.com/atinux/nuxt-auth-utils?tab=readme-ov-file#webauthn-passkey){rel=""nofollow""}
 

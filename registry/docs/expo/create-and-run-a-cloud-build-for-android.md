@@ -6,7 +6,7 @@ In this chapter, we'll create a development build that can run on Android with E
 
 The process for creating and running a build on Android devices or emulators is identical, with differences only in the installation of the development build.
 
-[Watch: How to create and run a cloud build for Android](https://www.youtube.com/watch?v=D612BUtvvl8)
+[Watch: How to create and run a cloud build for Android](https://www.youtube.com/watch?v=D612BUtvvl8) — Learn how to create an Android development build with EAS Build and install it on a device or emulator.
 
 ## Create a build for the development profile
 

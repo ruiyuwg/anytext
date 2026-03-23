@@ -12,7 +12,7 @@ Financial Connections helps you:
 - Reduce payout failure rates by eliminating errors that result from manual entry of account and routing numbers.
 - Stay secure by not storing sensitive data such as account and routing numbers on your server.
 - Save development time by eliminating your need to build bank account manual entry forms.
-- Enable your users to connect their accounts in fewer steps with Link, allowing them to save and quickly reuse their bank account details across Stripe merchants.
+- Enable your users to connect their accounts in fewer steps with Link, allowing them to save and quickly reuse their bank account details across Stripe businesses.
 
 Optionally, Stripe platforms in the US can request permission from your accounts to retrieve additional data on their [Financial Connections account](https://docs.stripe.com/api/financial_connections/accounts/object.md). Consider optimizing your onboarding process by accessing [balances](https://docs.stripe.com/financial-connections/balances.md), [transactions](https://docs.stripe.com/financial-connections/transactions.md), and [ownership](https://docs.stripe.com/financial-connections/ownership.md) information.
 

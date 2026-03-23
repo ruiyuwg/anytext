@@ -79,7 +79,7 @@ When processing a request with model fallbacks:
 
 title: "Model Variants"
 description: "Enable provider-specific capabilities via headers when calling models through AI Gateway."
-last\_updated: "2026-03-08T05:03:10.525Z"
+last\_updated: "2026-03-23T09:40:04.487Z"
 source: "https://vercel.com/docs/ai-gateway/models-and-providers/model-variants"
 
 # Model Variants
@@ -110,5 +110,5 @@ Sonnet 4.6, Sonnet 4.5, and Sonnet 4 models. No configuration is required.
 
 title: "Models & Providers"
 description: "Learn about models and providers for the AI Gateway."
-last\_updated: "2026-03-08T05:03:10.600Z"
+last\_updated: "2026-03-23T09:40:04.536Z"
 source: "https://vercel.com/docs/ai-gateway/models-and-providers"

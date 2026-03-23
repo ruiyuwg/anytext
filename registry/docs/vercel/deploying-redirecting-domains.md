@@ -52,5 +52,5 @@ You can also add redirects programmatically using frameworks and Vercel Function
 
 title: "Working with domains"
 description: "Learn how domains work and the options Vercel provides for managing them."
-last\_updated: "2026-03-08T05:03:13.635Z"
+last\_updated: "2026-03-23T09:40:08.863Z"
 source: "https://vercel.com/docs/domains/working-with-domains"

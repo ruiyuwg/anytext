@@ -99,5 +99,5 @@ Once disabled, Code Review won't run on any new pull requests. You can re-enable
 
 title: "Vercel Agent Pricing"
 description: "Understand how Vercel Agent pricing works and how to manage your credits"
-last\_updated: "2026-03-08T05:03:09.684Z"
+last\_updated: "2026-03-23T09:40:03.083Z"
 source: "https://vercel.com/docs/agent/pricing"

@@ -5,8 +5,8 @@ Reactive utilities
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/reactive-utilities/get-owner.mdx)
 
 ```
-import { getOwner } from "solid-js"import type { Owner } from "solid-js"
-function getOwner(): Owner
+import { getOwner } from "solid-js";import type { Owner } from "solid-js";
+function getOwner(): Owner;
 ```
 
 Gets the tracking scope that owns the currently running code, e.g., for passing into a later call to `runWithOwner` outside of the current scope.

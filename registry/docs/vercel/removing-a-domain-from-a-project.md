@@ -29,5 +29,5 @@ curl --request DELETE \
 
 title: "Managing Domain Renewals and Redemptions"
 description: "Learn how to manage automatic and manual renewals for custom domains purchased through or registered with Vercel, and how to redeem expired domains with this guide."
-last\_updated: "2026-03-08T05:03:13.556Z"
+last\_updated: "2026-03-23T09:40:08.854Z"
 source: "https://vercel.com/docs/domains/working-with-domains/renew-a-domain"

@@ -1,503 +1,98 @@
 # Overview
 
-Source: https://docs.langchain.com/oss/javascript/deepagents/streaming/overview
+Source: https://docs.langchain.com/oss/javascript/deepagents/frontend/overview
 
-Stream real-time updates from deep agent runs and subagent execution
+Build UIs that display real-time subagent streams from Deep Agents
 
-Deep agents build on LangGraph's streaming infrastructure with first-class support for subagent streams. When a deep agent delegates work to subagents, you can stream updates from each subagent independently — tracking progress, LLM tokens, and tool calls in real time.
+Build frontends that visualize deep agent workflows in real time. These patterns show how to render subagent progress, task planning, and streaming content from agents created with `createDeepAgent`.
 
-What's possible with deep agent streaming:
+## Architecture
 
-- [**Stream subagent progress**](#subagent-progress) — track each subagent's execution as it runs in parallel.
-- [**Stream LLM tokens**](#llm-tokens) — stream tokens from the main agent and each subagent.
-- [**Stream tool calls**](#tool-calls) — see tool calls and results from within subagent execution.
-- [**Stream custom updates**](#custom-updates) — emit user-defined signals from inside subagent nodes.
+Deep Agents use a coordinator-worker architecture. The main agent plans tasks and delegates to specialized subagents, each running in isolation. On the frontend, `useStream` surfaces both the coordinator's messages and each subagent's streaming state.
 
-## Enable subgraph streaming
+```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+%%{
+  init: {
+    "fontFamily": "monospace",
+    "flowchart": {
+      "curve": "curve"
+    }
+  }
+}%%
+graph LR
+  FRONTEND["useStream()"]
+  BACKEND["createDeepAgent()"]
+  SUB1["Subagent A"]
+  SUB2["Subagent B"]
 
-Deep agents use LangGraph's subgraph streaming to surface events from subagent execution. To receive subagent events, enable `stream_subgraphs` when streaming.
+  BACKEND --"stream"--> FRONTEND
+  FRONTEND --"submit"--> BACKEND
+  BACKEND --"delegate"--> SUB1
+  BACKEND --"delegate"--> SUB2
+  SUB1 --"result"--> BACKEND
+  SUB2 --"result"--> BACKEND
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+  classDef blueHighlight fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A;
+  classDef greenHighlight fill:#DCFCE7,stroke:#16A34A,color:#14532D;
+  classDef purpleHighlight fill:#EDE9FE,stroke:#7C3AED,color:#4C1D95;
+  class FRONTEND blueHighlight;
+  class BACKEND greenHighlight;
+  class SUB1,SUB2 purpleHighlight;
+```
+
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { createDeepAgent } from "deepagents";
 
 const agent = createDeepAgent({
-  systemPrompt: "You are a helpful research assistant",
+  tools: [getWeather],
+  system: "You are a helpful assistant",
   subagents: [
     {
       name: "researcher",
-      description: "Researches a topic in depth",
-      systemPrompt: "You are a thorough researcher.",
+      description: "Research assistant",
     },
   ],
 });
+```
 
-for await (const [namespace, chunk] of await agent.stream(
-  { messages: [{ role: "user", content: "Research quantum computing advances" }] },
-  {
-    streamMode: "updates",
-    subgraphs: true,  // [!code highlight]
-  }
-)) {
-  if (namespace.length > 0) {
-    // Subagent event — namespace identifies the source
-    console.log(`[subagent: ${namespace.join("|")}]`);
-  } else {
-    // Main agent event
-    console.log("[main agent]");
-  }
-  console.log(chunk);
+On the frontend, connect with `useStream` the same way as with `createAgent`. Deep agent patterns use additional `useStream` features like `stream.subagents`, `stream.values.todos`, and `filterSubagentMessages` to render subagent-specific UIs.
+
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { useStream } from "@langchain/react";
+
+function App() {
+  const stream = useStream<typeof agent>({
+    apiUrl: "http://localhost:2024",
+    assistantId: "agent",
+  });
+
+  // Deep agent state beyond messages
+  const todos = stream.values?.todos;
+  const subagents = stream.subagents;
 }
 ```
 
-## Namespaces
+## Patterns
 
-When `subgraphs` is enabled, each streaming event includes a **namespace** that identifies which agent produced it. The namespace is a path of node names and task IDs that represents the agent hierarchy.
+```
+Display specialist subagents with streaming content, progress tracking, and collapsible cards.
 
-| Namespace                                  | Source                                                           |
-| ------------------------------------------ | ---------------------------------------------------------------- |
-| `()` (empty)                               | Main agent                                                       |
-| `("tools:abc123",)`                        | A subagent spawned by the main agent's `task` tool call `abc123` |
-| `("tools:abc123", "model_request:def456")` | The model request node inside a subagent                         |
 
-Use namespaces to route events to the correct UI component:
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-for await (const [namespace, chunk] of await agent.stream(
-  { messages: [{ role: "user", content: "Plan my vacation" }] },
-  { streamMode: "updates", subgraphs: true }
-)) {
-  // Check if this event came from a subagent
-  const isSubagent = namespace.some(
-    (segment: string) => segment.startsWith("tools:")
-  );
-
-  if (isSubagent) {
-    // Extract the tool call ID from the namespace
-    const toolCallId = namespace
-      .find((s: string) => s.startsWith("tools:"))
-      ?.split(":")[1];
-    console.log(`Subagent ${toolCallId}:`, chunk);
-  } else {
-    console.log("Main agent:", chunk);
-  }
-}
+Track agent progress with a real-time todo list synced from agent state.
 ```
 
-## Subagent progress
+## Related patterns
 
-Use `stream_mode="updates"` to track subagent progress as each step completes. This is useful for showing which subagents are active and what work they've completed.
-
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { createDeepAgent } from "deepagents";
-
-const agent = createDeepAgent({
-  systemPrompt:
-    "You are a project coordinator. Always delegate research tasks " +
-    "to your researcher subagent using the task tool. Keep your final response to one sentence.",
-  subagents: [
-    {
-      name: "researcher",
-      description: "Researches topics thoroughly",
-      systemPrompt:
-        "You are a thorough researcher. Research the given topic " +
-        "and provide a concise summary in 2-3 sentences.",
-    },
-  ],
-});
-
-for await (const [namespace, chunk] of await agent.stream(
-  {
-    messages: [
-      { role: "user", content: "Write a short summary about AI safety" },
-    ],
-  },
-  { streamMode: "updates", subgraphs: true },
-)) {
-  // Main agent updates (empty namespace)
-  if (namespace.length === 0) {
-    for (const [nodeName, data] of Object.entries(chunk)) {
-      if (nodeName === "tools") {
-        // Subagent results returned to main agent
-        for (const msg of (data as any).messages ?? []) {
-          if (msg.type === "tool") {
-            console.log(`\nSubagent complete: ${msg.name}`);
-            console.log(`  Result: ${String(msg.content).slice(0, 200)}...`);
-          }
-        }
-      } else {
-        console.log(`[main agent] step: ${nodeName}`);
-      }
-    }
-  }
-  // Subagent updates (non-empty namespace)
-  else {
-    for (const [nodeName] of Object.entries(chunk)) {
-      console.log(`  [${namespace[0]}] step: ${nodeName}`);
-    }
-  }
-}
-```
-
-```shell title="Output" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-Main agent step: model_request
-  [tools:call_abc123] step: model_request
-  [tools:call_abc123] step: tools
-  [tools:call_abc123] step: model_request
-Subagent complete: task
-Result: ## AI Safety Report...
-Main agent step: model_request
-  [tools:call_def456] step: model_request
-  [tools:call_def456] step: model_request
-Subagent complete: task
-Result: # Comprehensive Report on AI Safety...
-Main agent step: model_request
-```
-
-## LLM tokens
-
-Use `stream_mode="messages"` to stream individual tokens from both the main agent and subagents. Each message event includes metadata that identifies the source agent.
-
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-let currentSource = "";
-
-for await (const [namespace, chunk] of await agent.stream(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Research quantum computing advances",
-      },
-    ],
-  },
-  { streamMode: "messages", subgraphs: true },
-)) {
-  const [message] = chunk;
-
-  // Check if this event came from a subagent (namespace contains "tools:")
-  const isSubagent = namespace.some((s: string) => s.startsWith("tools:"));
-
-  if (isSubagent) {
-    // Token from a subagent
-    const subagentNs = namespace.find((s: string) => s.startsWith("tools:"))!;
-    if (subagentNs !== currentSource) {
-      process.stdout.write(`\n\n--- [subagent: ${subagentNs}] ---\n`);
-      currentSource = subagentNs;
-    }
-    if (message.text) {
-      process.stdout.write(message.text);
-    }
-  } else {
-    // Token from the main agent
-    if ("main" !== currentSource) {
-      process.stdout.write(`\n\n--- [main agent] ---\n`);
-      currentSource = "main";
-    }
-    if (message.text) {
-      process.stdout.write(message.text);
-    }
-  }
-}
-
-process.stdout.write("\n");
-```
-
-## Tool calls
-
-When subagents use tools, you can stream tool call events to display what each subagent is doing. Tool call chunks appear in the `messages` stream mode.
-
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { AIMessageChunk, ToolMessage } from "langchain";
-
-for await (const [namespace, chunk] of await agent.stream(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Research recent quantum computing advances",
-      },
-    ],
-  },
-  { streamMode: "messages", subgraphs: true },
-)) {
-  const [message] = chunk;
-
-  // Identify source: "main" or the subagent namespace segment
-  const isSubagent = namespace.some((s: string) => s.startsWith("tools:"));
-  const source = isSubagent
-    ? namespace.find((s: string) => s.startsWith("tools:"))!
-    : "main";
-
-  // Tool call chunks (streaming tool invocations)
-  if (AIMessageChunk.isInstance(message) && message.tool_call_chunks?.length) {
-    for (const tc of message.tool_call_chunks) {
-      if (tc.name) {
-        console.log(`\n[${source}] Tool call: ${tc.name}`);
-      }
-      // Args stream in chunks — write them incrementally
-      if (tc.args) {
-        process.stdout.write(tc.args);
-      }
-    }
-  }
-
-  // Tool results
-  if (ToolMessage.isInstance(message)) {
-    console.log(
-      `\n[${source}] Tool result [${message.name}]: ${message.text?.slice(0, 150)}`,
-    );
-  }
-
-  // Regular AI content (skip tool call messages)
-  if (
-    AIMessageChunk.isInstance(message) &&
-    message.text &&
-    !message.tool_call_chunks?.length
-  ) {
-    process.stdout.write(message.text);
-  }
-}
-
-process.stdout.write("\n");
-```
-
-## Custom updates
-
-Use `config.writer` inside your subagent tools to emit custom progress events:
-
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { createDeepAgent } from "deepagents";
-import { tool, type ToolRuntime } from "langchain";
-import { z } from "zod";
-
-/**
- * A tool that emits custom progress events via config.writer.
- * The writer sends data to the "custom" stream mode.
- */
-const analyzeData = tool(
-  async ({ topic }: { topic: string }, config: ToolRuntime) => {
-    const writer = config.writer;
-
-    writer?.({ status: "starting", topic, progress: 0 });
-    await new Promise((r) => setTimeout(r, 500));
-
-    writer?.({ status: "analyzing", progress: 50 });
-    await new Promise((r) => setTimeout(r, 500));
-
-    writer?.({ status: "complete", progress: 100 });
-    return `Analysis of "${topic}": Customer sentiment is 85% positive, driven by product quality and support response times.`;
-  },
-  {
-    name: "analyze_data",
-    description:
-      "Run a data analysis on a given topic. " +
-      "This tool performs the actual analysis and emits progress updates. " +
-      "You MUST call this tool for any analysis request.",
-    schema: z.object({
-      topic: z.string().describe("The topic or subject to analyze"),
-    }),
-  },
-);
-
-const agent = createDeepAgent({
-  systemPrompt:
-    "You are a coordinator. For any analysis request, you MUST delegate " +
-    "to the analyst subagent using the task tool. Never try to answer directly. " +
-    "After receiving the result, summarize it in one sentence.",
-  subagents: [
-    {
-      name: "analyst",
-      description: "Performs data analysis with real-time progress tracking",
-      systemPrompt:
-        "You are a data analyst. You MUST call the analyze_data tool " +
-        "for every analysis request. Do not use any other tools. " +
-        "After the analysis completes, report the result.",
-      tools: [analyzeData],
-    },
-  ],
-});
-
-for await (const [namespace, chunk] of await agent.stream(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Analyze customer satisfaction trends",
-      },
-    ],
-  },
-  { streamMode: "custom", subgraphs: true },
-)) {
-  const isSubagent = namespace.some((s: string) => s.startsWith("tools:"));
-  if (isSubagent) {
-    const subagentNs = namespace.find((s: string) => s.startsWith("tools:"))!;
-    console.log(`[${subagentNs}]`, chunk);
-  } else {
-    console.log("[main]", chunk);
-  }
-}
-```
-
-```shell title="Output" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-[tools:call_abc123] { status: 'fetching', progress: 0 }
-[tools:call_abc123] { status: 'analyzing', progress: 50 }
-[tools:call_abc123] { status: 'complete', progress: 100 }
-```
-
-## Stream multiple modes
-
-Combine multiple stream modes to get a complete picture of agent execution:
-
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-// Skip internal middleware steps — only show meaningful node names
-const INTERESTING_NODES = new Set(["model_request", "tools"]);
-
-let lastSource = "";
-let midLine = false; // true when we've written tokens without a trailing newline
-
-for await (const [namespace, mode, data] of await agent.stream(
-  {
-    messages: [
-      {
-        role: "user",
-        content: "Analyze the impact of remote work on team productivity",
-      },
-    ],
-  },
-  { streamMode: ["updates", "messages", "custom"], subgraphs: true },
-)) {
-  const isSubagent = namespace.some((s: string) => s.startsWith("tools:"));
-  const source = isSubagent ? "subagent" : "main";
-
-  if (mode === "updates") {
-    for (const nodeName of Object.keys(data)) {
-      if (!INTERESTING_NODES.has(nodeName)) continue;
-      if (midLine) {
-        process.stdout.write("\n");
-        midLine = false;
-      }
-      console.log(`[${source}] step: ${nodeName}`);
-    }
-  } else if (mode === "messages") {
-    const [message] = data;
-    if (message.text) {
-      // Print a header when the source changes
-      if (source !== lastSource) {
-        if (midLine) {
-          process.stdout.write("\n");
-          midLine = false;
-        }
-        process.stdout.write(`\n[${source}] `);
-        lastSource = source;
-      }
-      process.stdout.write(message.text);
-      midLine = true;
-    }
-  } else if (mode === "custom") {
-    if (midLine) {
-      process.stdout.write("\n");
-      midLine = false;
-    }
-    console.log(`[${source}] custom event:`, data);
-  }
-}
-
-process.stdout.write("\n");
-```
-
-## Common patterns
-
-### Track subagent lifecycle
-
-Monitor when subagents start, run, and complete:
-
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-for await (const [namespace, chunk] of await agent.stream(
-  {
-    messages: [
-      { role: "user", content: "Research the latest AI safety developments" },
-    ],
-  },
-  { streamMode: "updates", subgraphs: true },
-)) {
-  for (const [nodeName, data] of Object.entries(chunk)) {
-    // ─── Phase 1: Detect subagent starting ────────────────────────
-    // When the main agent's model_request contains task tool calls,
-    // a subagent has been spawned.
-    if (namespace.length === 0 && nodeName === "model_request") {
-      for (const msg of (data as any).messages ?? []) {
-        for (const tc of msg.tool_calls ?? []) {
-          if (tc.name === "task") {
-            activeSubagents.set(tc.id, {
-              type: tc.args?.subagent_type,
-              description: tc.args?.description?.slice(0, 80),
-              status: "pending",
-            });
-            console.log(
-              `[lifecycle] PENDING  → subagent "${tc.args?.subagent_type}" (${tc.id})`,
-            );
-          }
-        }
-      }
-    }
-
-    // ─── Phase 2: Detect subagent running ─────────────────────────
-    // When we receive events from a tools:UUID namespace, that
-    // subagent is actively executing.
-    if (namespace.length > 0 && namespace[0].startsWith("tools:")) {
-      const pregelId = namespace[0].split(":")[1];
-      // Check if any pending subagent needs to be marked running.
-      // Note: the pregel task ID differs from the tool_call_id,
-      // so we mark any pending subagent as running on first subagent event.
-      for (const [id, sub] of activeSubagents) {
-        if (sub.status === "pending") {
-          sub.status = "running";
-          console.log(
-            `[lifecycle] RUNNING  → subagent "${sub.type}" (pregel: ${pregelId})`,
-          );
-          break;
-        }
-      }
-    }
-
-    // ─── Phase 3: Detect subagent completing ──────────────────────
-    // When the main agent's tools node returns a tool message,
-    // the subagent has completed and returned its result.
-    if (namespace.length === 0 && nodeName === "tools") {
-      for (const msg of (data as any).messages ?? []) {
-        if (msg.type === "tool") {
-          const subagent = activeSubagents.get(msg.tool_call_id);
-          if (subagent) {
-            subagent.status = "complete";
-            console.log(
-              `[lifecycle] COMPLETE → subagent "${subagent.type}" (${msg.tool_call_id})`,
-            );
-            console.log(
-              `  Result preview: ${String(msg.content).slice(0, 120)}...`,
-            );
-          }
-        }
-      }
-    }
-  }
-}
-
-// Print final state
-console.log("\n--- Final subagent states ---");
-for (const [id, sub] of activeSubagents) {
-  console.log(`  ${sub.type}: ${sub.status}`);
-}
-```
-
-## Related
-
-- [Subagents](/oss/javascript/deepagents/subagents) — Configure and use subagents with deep agents
-- [Frontend streaming](/oss/javascript/deepagents/streaming/frontend) — Build React UIs with `useStream` for deep agents
-- [LangChain streaming overview](/oss/javascript/langchain/streaming/overview) — General streaming concepts with LangChain agents
+The [LangChain frontend patterns](/oss/javascript/langchain/frontend/overview), including
+markdown messages, tool calling, and human-in-the-loop, all work with deep
+agents too. Deep Agents are built on the same LangGraph runtime, so
+`useStream` provides the same core API.
 
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/streaming/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

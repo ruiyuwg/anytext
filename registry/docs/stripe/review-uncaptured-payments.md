@@ -29,8 +29,8 @@ Set the `capture_method` in your API request to create an uncaptured payment. Af
 
 ```ruby
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 # Get the credit card details submitted by the form
@@ -73,8 +73,8 @@ If `reason` is `approved`, capture the charge.
 
 ```ruby
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 post "/my/webhook/url" do

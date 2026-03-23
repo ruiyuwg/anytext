@@ -33,7 +33,7 @@ When there is a change in the source signal, an internal fetch process is trigge
 
 ```
 import { createSignal, createResource, Switch, Match, Show } from "solid-js";
-const fetchUser = async (id) => {  const response = await fetch(`https://swapi.dev/api/people/${id}/`);  return response.json();}
+const fetchUser = async (id) => {  const response = await fetch(`https://swapi.dev/api/people/${id}/`);  return response.json();};
 function App() {  const [userId, setUserId] = createSignal();  const [user] = createResource(userId, fetchUser);
   return (    <div>      <input        type="number"        min="1"        placeholder="Enter Numeric Id"        onInput={(e) => setUserId(e.currentTarget.value)}      />      <Show when={user.loading}>        <p>Loading...</p>      </Show>      <Switch>        <Match when={user.error}>          <span>Error: {user.error}</span>        </Match>        <Match when={user()}>          <div>{JSON.stringify(user())}</div>        </Match>      </Switch>    </div>  );}
 ```
@@ -55,10 +55,10 @@ In addition to the `error` property, the `loading` property offers a way to disp
 Although you can use `createResource` independently, Solid provides an alternative method for synchronizing the display of multiple asynchronous events. `Suspense` is a component in Solid designed to act as a boundary. It allows you to display a fallback placeholder while waiting for all asynchronous events to resolve, preventing the display of partially loaded content:
 
 ```
-import { createSignal, createResource, Switch, Match, Suspense } from "solid-js";
-const fetchUser = async (id) => {  const response = await fetch(`https://swapi.dev/api/people/${id}/`);  return response.json();}
+import {  createSignal,  createResource,  Switch,  Match,  Suspense,} from "solid-js";
+const fetchUser = async (id) => {  const response = await fetch(`https://swapi.dev/api/people/${id}/`);  return response.json();};
 function App() {  const [userId, setUserId] = createSignal();  const [user] = createResource(userId, fetchUser);
-  return (    <div>    <input      type="number"      min="1"      placeholder="Enter Numeric Id"      onInput={(e) => setUserId(e.currentTarget.value)}    />      <Suspense fallback={<div>Loading...</div>}>        <Switch>          <Match when={user.error}>            <span>Error: {user.error.message}</span>          </Match>          <Match when={user()}>            <div>{JSON.stringify(user())}</div>          </Match>        </Switch>      </Suspense>    </div>  );}
+  return (    <div>      <input        type="number"        min="1"        placeholder="Enter Numeric Id"        onInput={(e) => setUserId(e.currentTarget.value)}      />      <Suspense fallback={<div>Loading...</div>}>        <Switch>          <Match when={user.error}>            <span>Error: {user.error.message}</span>          </Match>          <Match when={user()}>            <div>{JSON.stringify(user())}</div>          </Match>        </Switch>      </Suspense>    </div>  );}
 ```
 
 `Suspense` has the ability to identify asynchronous reads within its descendants and act accordingly. This feature helps to remove any intermediate components that may otherwise be displayed during partial loading states. Additionally, you can nest as many components as needed within `Suspense` but only the closest ancestor will switch to the `fallback` state when a loading state is detected.
@@ -78,9 +78,9 @@ In situations where immediate feedback or responsiveness is important, the `muta
 This functionality is particularly valuable in applications like task lists. For example, when users input a new task and click the `Add` button, the list will refresh immediately, regardless of the ongoing data communication with the server.
 
 ```
-import { For, createResource } from "solid-js"
+import { For, createResource } from "solid-js";
 function TodoList() {  const [tasks, { mutate }] = createResource(fetchTasksFromServer);
-  return (    <>      <ul>        <For each={tasks()}>          {(task) => (            <li>{task.name}</li>          )}        </For>      </ul>      <button        onClick={() => {          mutate((todos) => [...todos, "do new task"]); // add todo for user          // make a call to send to database        }}      >        Add Task      </button>    </>  );}
+  return (    <>      <ul>        <For each={tasks()}>{(task) => <li>{task.name}</li>}</For>      </ul>      <button        onClick={() => {          mutate((todos) => [...todos, "do new task"]); // add todo for user          // make a call to send to database        }}      >        Add Task      </button>    </>  );}
 ```
 
 ### [`refetch`](/guides/fetching-data#refetch)
@@ -88,9 +88,9 @@ function TodoList() {  const [tasks, { mutate }] = createResource(fetchTasksFrom
 When real-time feedback is necessary, the `refetch` method can be used to reload the current query regardless of any changes. This method can be particularly useful when data is constantly evolving, such as with real-time financial applications.
 
 ```
-import { createResource, onCleanup } from "solid-js"
+import { createResource, onCleanup } from "solid-js";
 function StockPriceTicker() {  const [prices, { refetch }] = createResource(fetchStockPrices);
-  const timer = setInterval(() => {    refetch()  }, 1000);  onCleanup(() => clearInterval(timer))}
+  const timer = setInterval(() => {    refetch();  }, 1000);  onCleanup(() => clearInterval(timer));}
 ```
 
 [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/guides/fetching-data.mdx\&page=https://docs.solidjs.com/guides/fetching-data)

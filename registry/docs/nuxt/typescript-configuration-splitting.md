@@ -101,7 +101,7 @@ Four experimental features are no longer configurable in Nuxt 4:
 - `experimental.configSchema` will be `true` (default since v3.3)
 - `experimental.polyfillVueUseHead` will be `false` (default since v3.4)
 - `experimental.respectNoSSRHeader` will be `false` (default since v3.4)
-- `experimental.viteEnvironmentApi` is now always enabled and cannot be disabled
+- `vite.devBundler` is no longer configurable - it will use `vite-node` by default
 
 #### Reasons for Change
 

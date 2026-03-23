@@ -8,7 +8,7 @@ This how-to guide will demonstrate how to set up and run one type of evaluator (
 
 ## Setup
 
-You'll need to install the `openevals` package to use the pre-built LLM-as-a-judge evaluator.
+You'll need to install the `openevals` package to use the prebuilt LLM-as-a-judge evaluator.
 
 ```bash Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 pip install -U openevals

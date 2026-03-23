@@ -21,7 +21,7 @@ export const previewUrlPlugin = definePlugin({
 })
 ```
 
-### Properties
+## Properties
 
 #### Properties
 

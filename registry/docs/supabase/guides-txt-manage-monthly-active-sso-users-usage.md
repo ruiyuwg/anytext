@@ -75,8 +75,8 @@ Usage is shown as "Monthly Active SSO Users" on your invoice.
 
 ## Pricing
 
-per SSO MAU. You are only charged for usage exceeding your subscription plan's
-quota.
+per SSO MAU. You are only charged for usage exceeding your subscription
+plan's quota.
 
 For a detailed breakdown of how charges are calculated, refer to [Manage Monthly Active SSO Users usage](/docs/guides/platform/manage-your-usage/monthly-active-users-sso).
 

@@ -111,16 +111,19 @@ import { addImportsSources, defineNuxtModule } from '@nuxt/kit'
 
 export default defineNuxtModule({
   setup () {
-    addImportsSources({
-      from: 'h3',
-      imports: [
-        'defineEventHandler',
-        'getQuery',
-        'getRouterParams',
-        'readBody',
-        'sendRedirect',
-      ],
-    })
+    addImportsSources([
+      { package: '@vueuse/core' },
+      {
+        from: 'h3',
+        imports: [
+          'defineEventHandler',
+          'getQuery',
+          'getRouterParams',
+          'readBody',
+          'sendRedirect',
+        ],
+      },
+    ])
   },
 })
 ```
@@ -128,14 +131,22 @@ export default defineNuxtModule({
 ### Type
 
 ```ts
-function addImportsSources (importSources: ImportSource | ImportSource[]): void
+function addImportsSources (importSources: Preset | Preset[]): void
 ```
 
 ### Parameters
 
 **importSources**: An object or an array of objects with the following properties:
 
+- InlinePreset
+
 | Property  | Type                                                                                                                                              | Required | Description                                                                                    |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------- |
 | `from`    | `string`                                                                                                                                          | `true`   | Module specifier to import from.                                                               |
 | `imports` | `PresetImport | ImportSource[]`{.language-ts.shiki.shiki-themes.material-theme-lighter.material-theme-lighter.material-theme-palenight lang="ts"} | `true`   | An object or an array of objects, which can be import names, import objects or import sources. |
+
+- PackagePreset
+
+| Property  | Type     | Required | Description          |
+| --------- | -------- | -------- | -------------------- |
+| `package` | `string` | `true`   | Name of the package. |

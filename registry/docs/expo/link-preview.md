@@ -6,7 +6,7 @@ Learn how to add a preview to your link on iOS when using Expo Router.
 
 Link preview (also known as "Peek and Pop") is a feature commonly used on iOS to show users a preview popup of the screen for a link. This guide will show you how to add and customize a link preview for your app on iOS.
 
-If you have a link in your app, you can add a link preview to it by replacing the link's content with a [`Link.Trigger`](/versions/latest/sdk/router#linktrigger) and adding the [`Link.Preview`](/versions/latest/sdk/router#linkpreview) component to it. This will create a preview of the page that the link points to.
+If you have a link in your app, you can add a link preview to it by replacing the link's content with a [`Link.Trigger`](/versions/latest/sdk/router/link#linktrigger) and adding the [`Link.Preview`](/versions/latest/sdk/router/link#linkpreview) component to it. This will create a preview of the page that the link points to.
 
 ```tsx
 import { Link } from 'expo-router';
@@ -68,7 +68,7 @@ The following example shows a custom link preview on iOS:
 
 ## Menu
 
-To render a context menu next to the preview, add a [`Link.Menu`](/versions/latest/sdk/router#linkmenu) with [`Link.MenuAction`](/versions/latest/sdk/router#linkmenuaction) children.
+To render a context menu next to the preview, add a [`Link.Menu`](/versions/latest/sdk/router/link#linkmenu) with [`Link.MenuAction`](/versions/latest/sdk/router/link#linkmenuaction) children.
 
 ```tsx
 <Link href="/about">
@@ -106,7 +106,7 @@ The following example shows a context menu with four elements, each using a diff
 
 ### Nested menus
 
-You can nest menus by placing a [`Link.Menu`](/versions/latest/sdk/router#linkmenu) inside another menu:
+You can nest menus by placing a [`Link.Menu`](/versions/latest/sdk/router/link#linkmenu) inside another menu:
 
 ```jsx
 <Link href="...">
@@ -125,11 +125,11 @@ The following example shows a nested context menu on iOS:
 
 ### More customization options
 
-To explore all available customization options, see the API documentation for [`Link.MenuAction`](/versions/latest/sdk/router#linkmenuaction).
+To explore all available customization options, see the API documentation for [`Link.MenuAction`](/versions/latest/sdk/router/link#linkmenuaction).
 
 ## Detecting if component is in preview
 
-If you're building a component that might be rendered inside a preview, you can use the [`useIsPreview()`](/versions/latest/sdk/router#useispreview) hook to adjust its behavior accordingly:
+If you're building a component that might be rendered inside a preview, you can use the [`useIsPreview()`](/versions/latest/sdk/router/link#useispreview) hook to adjust its behavior accordingly:
 
 ```jsx
 function MyComponent() {
@@ -144,7 +144,7 @@ function MyComponent() {
 
 ### `replace` not supported
 
-Using link previews with [`replace`](/versions/latest/sdk/router#replace) mode is currently **not supported**. Previews can only be used with the default [`push`](/versions/latest/sdk/router#push) navigation mode.
+Using link previews with [`replace`](/versions/latest/sdk/router/link#replace) mode is currently **not supported**. Previews can only be used with the default [`push`](/versions/latest/sdk/router/link#push) navigation mode.
 
 ### JavaScript tabs and slots
 

@@ -1334,7 +1334,7 @@ const Action = v.domain<TInput, TMessage>(message);
 With `domain` you can validate the formatting of a domain string.
 If the input is not a valid domain, you can use `message` to customize the error message.
 
-> Validates ASCII domains. Limits: 63 chars per label, 253 chars total. Internationalized domain names (IDN) in Unicode form are not supported.
+> Validates ASCII domains. Limits: 63 chars per label, 253 chars total. Internationalized domain names (IDNs) are not supported, including Punycode-encoded labels.
 > If you need to validate a full URL (including protocol, path, query, etc.), use the `url` action.
 
 #### Returns

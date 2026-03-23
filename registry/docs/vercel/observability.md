@@ -71,5 +71,5 @@ Once in project scope, you'll see the same metrics filtered to show only the act
 
 title: "Capabilities"
 description: "Explore AI Gateway capabilities including reasoning, image generation, video generation, web search, observability, usage tracking, and data retention policies."
-last\_updated: "2026-03-08T05:03:10.177Z"
+last\_updated: "2026-03-23T09:40:03.898Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities"

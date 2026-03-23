@@ -17,7 +17,7 @@ To deploy using LangSmith, provide the following information:
 
 **Framework agnostic**
 
-LangSmith Deployment supports deploying a [LangGraph](/oss/python/langgraph/overview) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](/langsmith/deployments), scaling, and [observability](/langsmith/observability). For more details, refer to [Use any framework with LangSmith Deployment](/langsmith/application-structure#use-any-framework-with-langsmith-deployment).
+LangSmith Deployment supports deploying a [LangGraph](/oss/python/langgraph/overview) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](/langsmith/deployment), scaling, and [observability](/langsmith/observability). For more details, refer to [Use any framework with LangSmith Deployment](/langsmith/application-structure#use-any-framework-with-langsmith-deployment).
 
 ## File structure
 
@@ -226,7 +226,7 @@ In this example, the node functions (`my_app_node` for Python and `myAppNode` fo
 
 ## Environment variables
 
-If you're working with a deployed LangGraph application [locally](/langsmith/local-server), you can configure environment variables in the `env` key of the [configuration file](#configuration-file-concepts).
+If you're working with a deployed LangGraph application [locally](/langsmith/local-dev-testing), you can configure environment variables in the `env` key of the [configuration file](#configuration-file-concepts).
 
 For a production deployment, you will typically want to configure the environment variables in the deployment environment.
 

@@ -8,14 +8,13 @@ The following table describes the possible fields that are sent via Web Analytic
 
 | Name                   | Type   | Description                                | Example                                          |
 | ---------------------- | ------ | ------------------------------------------ | ------------------------------------------------ |
-| `schema`               | string | Schema version identifier                  | `vercel.analytics.v1`                            |
+| `schema`               | string | Schema version identifier                  | `vercel.analytics.v2`                            |
 | `eventType`            | string | Type of analytics event                    | `pageview` or `event`                            |
 | `eventName`            | string | Name of the custom event                   | `button_click`                                   |
 | `eventData`            | string | Additional data associated with the event  | `{"button": "signup"}`                           |
 | `timestamp`            | number | Unix timestamp when the event was recorded | 1694723400000                                    |
 | `projectId`            | string | Identifier for the Vercel project          | `Qmc52npNy86S8VV4Mt8a8dP1LEkRNbgosW3pBCQytkcgf2` |
 | `ownerId`              | string | Identifier for the project owner           | `team_nLlpyC6REAqxydlFKbrMDlud`                  |
-| `dataSourceName`       | string | Name of the data source                    | `web-analytics`                                  |
 | `sessionId`            | number | Unique session identifier                  | 12345                                            |
 | `deviceId`             | number | Unique device identifier                   | 67890                                            |
 | `origin`               | string | Origin URL where the event was recorded    | `https://example.com`                            |
@@ -54,8 +53,8 @@ Vercel sends Web Analytics data as JSON arrays containing event objects:
 
 ```json
 [
-  { "schema": "vercel.analytics.v1", "eventType": "pageview", "timestamp": 1694723400000, "projectId": "Qmc52npNy86S8VV4Mt8a8dP1LEkRNbgosW3pBCQytkcgf2", "ownerId": "team_nLlpyC6REAqxydlFKbrMDlud", "dataSourceName": "web-analytics", "sessionId": 12345, "deviceId": 67890, "origin": "https://example.com", "path": "/dashboard" },
-  { "schema": "vercel.analytics.v1", "eventType": "event", "eventName": "button_click", "eventData": "{\"button\": \"signup\"}", "timestamp": 1694723405000, "projectId": "Qmc52npNy86S8VV4Mt8a8dP1LEkRNbgosW3pBCQytkcgf2", "ownerId": "team_nLlpyC6REAqxydlFKbrMDlud", "dataSourceName": "web-analytics", "sessionId": 12345, "deviceId": 67890, "origin": "https://example.com", "path": "/signup" }
+  { "schema": "vercel.analytics.v2", "eventType": "pageview", "timestamp": 1694723400000, "projectId": "Qmc52npNy86S8VV4Mt8a8dP1LEkRNbgosW3pBCQytkcgf2", "ownerId": "team_nLlpyC6REAqxydlFKbrMDlud", "sessionId": 12345, "deviceId": 67890, "origin": "https://example.com", "path": "/dashboard" },
+  { "schema": "vercel.analytics.v2", "eventType": "event", "eventName": "button_click", "eventData": "{\"button\": \"signup\"}", "timestamp": 1694723405000, "projectId": "Qmc52npNy86S8VV4Mt8a8dP1LEkRNbgosW3pBCQytkcgf2", "ownerId": "team_nLlpyC6REAqxydlFKbrMDlud", "sessionId": 12345, "deviceId": 67890, "origin": "https://example.com", "path": "/signup" }
 ]
 ```
 
@@ -64,8 +63,8 @@ Vercel sends Web Analytics data as JSON arrays containing event objects:
 Vercel sends Web Analytics data as newline-delimited JSON objects:
 
 ```json
-{"schema": "vercel.analytics.v1","eventType": "pageview","timestamp": 1694723400000,"projectId": "Qmc52npNy86S8VV4Mt8a8dP1LEkRNbgosW3pBCQytkcgf2","ownerId": "team_nLlpyC6REAqxydlFKbrMDlud","dataSourceName": "web-analytics","sessionId": 12345,"deviceId": 67890,"origin": "https://example.com","path": "/dashboard"}
-{"schema": "vercel.analytics.v1","eventType": "event","eventName": "button_click","eventData": "{\"button\": \"signup\"}","timestamp": 1694723405000,"projectId": "Qmc52npNy86S8VV4Mt8a8dP1LEkRNbgosW3pBCQytkcgf2","ownerId": "team_nLlpyC6REAqxydlFKbrMDlud","dataSourceName": "web-analytics","sessionId": 12345,"deviceId": 67890,"origin": "https://example.com","path": "/signup"}
+{"schema": "vercel.analytics.v2","eventType": "pageview","timestamp": 1694723400000,"projectId": "Qmc52npNy86S8VV4Mt8a8dP1LEkRNbgosW3pBCQytkcgf2","ownerId": "team_nLlpyC6REAqxydlFKbrMDlud","sessionId": 12345,"deviceId": 67890,"origin": "https://example.com","path": "/dashboard"}
+{"schema": "vercel.analytics.v2","eventType": "event","eventName": "button_click","eventData": "{\"button\": \"signup\"}","timestamp": 1694723405000,"projectId": "Qmc52npNy86S8VV4Mt8a8dP1LEkRNbgosW3pBCQytkcgf2","ownerId": "team_nLlpyC6REAqxydlFKbrMDlud","sessionId": 12345,"deviceId": 67890,"origin": "https://example.com","path": "/signup"}
 ```
 
 ## Sampling Rate
@@ -81,5 +80,5 @@ For more information on Web Analytics Drains and how to use them, refer to the f
 
 title: "Log Drains Reference"
 description: "Learn about Log Drains - data formats, sources, environments, and security configuration."
-last\_updated: "2026-03-08T05:03:13.738Z"
+last\_updated: "2026-03-23T09:40:09.001Z"
 source: "https://vercel.com/docs/drains/reference/logs"

@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -1080,7 +1078,7 @@ rag:
 
 - Read the [Toolsets reference](https://docs.docker.com/ai/docker-agent/reference/toolsets/) for detailed toolset documentation
 - Review the [CLI reference](https://docs.docker.com/ai/docker-agent/reference/cli/) for command-line options
-- Browse [example configurations](https://github.com/docker/cagent/tree/main/examples)
+- Browse [example configurations](https://github.com/docker/docker-agent/tree/main/examples)
 - Learn about [sharing agents](https://docs.docker.com/ai/docker-agent/sharing-agents/)
 
 [Edit this page](https://github.com/docker/docs/edit/main/content/manuals/ai/docker-agent/reference/config.md)

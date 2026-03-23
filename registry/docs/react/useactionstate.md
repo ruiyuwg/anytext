@@ -6,33 +6,30 @@
 const [state, dispatchAction, isPending] = useActionState(reducerAction, initialState, permalink?);
 ```
 
----
+***
 
-## Reference {/_reference_/}
+## Reference {/*reference*/}
 
-### `useActionState(reducerAction, initialState, permalink?)` {/_useactionstate_/}
+### `useActionState(reducerAction, initialState, permalink?)` {/*useactionstate*/}
 
 Call `useActionState` at the top level of your component to create state for the result of an Action.
 
 ```js
-import { useActionState } from "react";
+import { useActionState } from 'react';
 
 function reducerAction(previousState, actionPayload) {
   // ...
 }
 
-function MyCart({ initialState }) {
-  const [state, dispatchAction, isPending] = useActionState(
-    reducerAction,
-    initialState,
-  );
+function MyCart({initialState}) {
+  const [state, dispatchAction, isPending] = useActionState(reducerAction, initialState);
   // ...
 }
 ```
 
 [See more examples below.](#usage)
 
-#### Parameters {/_parameters_/}
+#### Parameters {/*parameters*/}
 
 - `reducerAction`: The function to be called when the Action is triggered. When called, it receives the previous state (initially the `initialState` you provided, then its previous return value) as its first argument, followed by the `actionPayload` passed to `dispatchAction`.
 - `initialState`: The value you want the state to be initially. React ignores this argument after `dispatchAction` is invoked for the first time.
@@ -40,7 +37,7 @@ function MyCart({ initialState }) {
   - For use on pages with [React Server Components](/reference/rsc/server-components) with progressive enhancement.
   - If `reducerAction` is a [Server Function](/reference/rsc/server-functions) and the form is submitted before the JavaScript bundle loads, the browser will navigate to the specified permalink URL rather than the current page's URL.
 
-#### Returns {/_returns_/}
+#### Returns {/*returns*/}
 
 `useActionState` returns an array with exactly three values:
 
@@ -48,7 +45,7 @@ function MyCart({ initialState }) {
 2. A `dispatchAction` function that you call inside [Actions](/reference/react/useTransition#functions-called-in-starttransition-are-called-actions).
 3. The `isPending` flag that tells you if any dispatched Actions for this Hook are pending.
 
-#### Caveats {/_caveats_/}
+#### Caveats {/*caveats*/}
 
 - `useActionState` is a Hook, so you can only call it **at the top level of your component** or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
 - React queues and executes multiple calls to `dispatchAction` sequentially. Each call to `reducerAction` receives the result of the previous call.
@@ -62,9 +59,9 @@ function MyCart({ initialState }) {
 
 You can wrap it in [`startTransition`](/reference/react/startTransition), or pass it to an [Action prop](/reference/react/useTransition#exposing-action-props-from-components). Calls outside that scope won’t be treated as part of the Transition and [log an error](#async-function-outside-transition) on development mode.
 
----
+***
 
-### `reducerAction` function {/_reduceraction_/}
+### `reducerAction` function {/*reduceraction*/}
 
 The `reducerAction` function passed to `useActionState` receives the previous state and returns a new state.
 
@@ -79,17 +76,17 @@ async function reducerAction(previousState, actionPayload) {
 
 Each time you call `dispatchAction`, React calls the `reducerAction` with the `actionPayload`. The reducer will perform side effects such as posting data, and return the new state. If `dispatchAction` is called multiple times, React queues and executes them in order so the result of the previous call is passed as `previousState` for the current call.
 
-#### Parameters {/_reduceraction-parameters_/}
+#### Parameters {/*reduceraction-parameters*/}
 
 - `previousState`: The last state. Initially this is equal to the `initialState`. After the first call to `dispatchAction`, it's equal to the last state returned.
 
 - **optional** `actionPayload`: The argument passed to `dispatchAction`. It can be a value of any type. Similar to `useReducer` conventions, it is usually an object with a `type` property identifying it and, optionally, other properties with additional information.
 
-#### Returns {/_reduceraction-returns_/}
+#### Returns {/*reduceraction-returns*/}
 
 `reducerAction` returns the new state, and triggers a Transition to re-render with that state.
 
-#### Caveats {/_reduceraction-caveats_/}
+#### Caveats {/*reduceraction-caveats*/}
 
 - `reducerAction` can be sync or async. It can perform sync actions like showing a notification, or async actions like posting updates to a server.
 - `reducerAction` is not invoked twice in `<StrictMode>` since `reducerAction` is designed to allow side effects.
@@ -97,25 +94,25 @@ Each time you call `dispatchAction`, React calls the `reducerAction` with the `a
 - If you set state after `await` in the `reducerAction` you currently need to wrap the state update in an additional `startTransition`. See the [startTransition](/reference/react/useTransition#react-doesnt-treat-my-state-update-after-await-as-a-transition) docs for more info.
 - When using Server Functions, `actionPayload` needs to be [serializable](/reference/rsc/use-server#serializable-parameters-and-return-values) (values like plain objects, arrays, strings, and numbers).
 
-#### Why is it called `reducerAction`? {/_why-is-it-called-reduceraction_/}
+#### Why is it called `reducerAction`? {/*why-is-it-called-reduceraction*/}
 
-The function passed to `useActionState` is called a _reducer action_ because:
+The function passed to `useActionState` is called a *reducer action* because:
 
-- It _reduces_ the previous state into a new state, like `useReducer`.
-- It's an _Action_ because it's called inside a Transition and can perform side effects.
+- It *reduces* the previous state into a new state, like `useReducer`.
+- It's an *Action* because it's called inside a Transition and can perform side effects.
 
 Conceptually, `useActionState` is like `useReducer`, but you can do side effects in the reducer.
 
----
+***
 
-## Usage {/_usage_/}
+## Usage {/*usage*/}
 
-### Adding state to an Action {/_adding-state-to-an-action_/}
+### Adding state to an Action {/*adding-state-to-an-action*/}
 
 Call `useActionState` at the top level of your component to create state for the result of an Action.
 
 ```js [[1, 7, "count"], [2, 7, "dispatchAction"], [3, 7, "isPending"]]
-import { useActionState } from "react";
+import { useActionState } from 'react';
 
 async function addToCartAction(prevCount) {
   // ...
@@ -136,17 +133,14 @@ function Counter() {
 To call `addToCartAction`, call the action dispatcher. React will queue calls to `addToCartAction` with the previous count.
 
 ```js src/App.js
-import { useActionState, startTransition } from "react";
-import { addToCart } from "./api";
-import Total from "./Total";
+import { useActionState, startTransition } from 'react';
+import { addToCart } from './api';
+import Total from './Total';
 
 export default function Checkout() {
-  const [count, dispatchAction, isPending] = useActionState(
-    async (prevCount) => {
-      return await addToCart(prevCount);
-    },
-    0,
-  );
+  const [count, dispatchAction, isPending] = useActionState(async (prevCount) => {
+    return await addToCart(prevCount)
+  }, 0);
 
   function handleClick() {
     startTransition(() => {
@@ -162,9 +156,7 @@ export default function Checkout() {
         <span>Qty: {count}</span>
       </div>
       <div className="row">
-        <button onClick={handleClick}>
-          Add Ticket{isPending ? " 🌀" : "  "}
-        </button>
+        <button onClick={handleClick}>Add Ticket{isPending ? ' 🌀' : '  '}</button>
       </div>
       <hr />
       <Total quantity={count} />
@@ -174,13 +166,13 @@ export default function Checkout() {
 ```
 
 ```js src/Total.js
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
   minimumFractionDigits: 0,
 });
 
-export default function Total({ quantity }) {
+export default function Total({quantity}) {
   return (
     <div className="row total">
       <span>Total</span>
@@ -192,12 +184,12 @@ export default function Total({ quantity }) {
 
 ```js src/api.js
 export async function addToCart(count) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return count + 1;
 }
 
 export async function removeFromCart(count) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return Math.max(0, count - 1);
 }
 ```
@@ -247,7 +239,7 @@ button {
 
 Every time you click "Add Ticket," React queues a call to `addToCartAction`. React shows the pending state until all the tickets are added, and then re-renders with the final state.
 
-#### How `useActionState` queuing works {/_how-useactionstate-queuing-works_/}
+#### How `useActionState` queuing works {/*how-useactionstate-queuing-works*/}
 
 Try clicking "Add Ticket" multiple times. Every time you click, a new `addToCartAction` is queued. Since there's an artificial 1 second delay, that means 4 clicks will take ~4 seconds to complete.
 
@@ -257,34 +249,31 @@ We have to wait for the previous result of `addToCartAction` in order to pass th
 
 You can typically solve this by [using with useOptimistic](/reference/react/useActionState#using-with-useoptimistic) but for more complex cases you may want to consider [cancelling queued actions](#cancelling-queued-actions) or not using `useActionState`.
 
----
+***
 
-### Using multiple Action types {/_using-multiple-action-types_/}
+### Using multiple Action types {/*using-multiple-action-types*/}
 
 To handle multiple types, you can pass an argument to `dispatchAction`.
 
 By convention, it is common to write it as a switch statement. For each case in the switch, calculate and return some next state. The argument can have any shape, but it is common to pass objects with a `type` property identifying the action.
 
 ```js src/App.js
-import { useActionState, startTransition } from "react";
-import { addToCart, removeFromCart } from "./api";
-import Total from "./Total";
+import { useActionState, startTransition } from 'react';
+import { addToCart, removeFromCart } from './api';
+import Total from './Total';
 
 export default function Checkout() {
-  const [count, dispatchAction, isPending] = useActionState(
-    updateCartAction,
-    0,
-  );
+  const [count, dispatchAction, isPending] = useActionState(updateCartAction, 0);
 
   function handleAdd() {
     startTransition(() => {
-      dispatchAction({ type: "ADD" });
+      dispatchAction({ type: 'ADD' });
     });
   }
 
   function handleRemove() {
     startTransition(() => {
-      dispatchAction({ type: "REMOVE" });
+      dispatchAction({ type: 'REMOVE' });
     });
   }
 
@@ -294,7 +283,7 @@ export default function Checkout() {
       <div className="row">
         <span>Eras Tour Tickets</span>
         <span className="stepper">
-          <span className="qty">{isPending ? "🌀" : count}</span>
+          <span className="qty">{isPending ? '🌀' : count}</span>
           <span className="buttons">
             <button onClick={handleAdd}>▲</button>
             <button onClick={handleRemove}>▼</button>
@@ -302,17 +291,17 @@ export default function Checkout() {
         </span>
       </div>
       <hr />
-      <Total quantity={count} isPending={isPending} />
+      <Total quantity={count} isPending={isPending}/>
     </div>
   );
 }
 
 async function updateCartAction(prevCount, actionPayload) {
   switch (actionPayload.type) {
-    case "ADD": {
+    case 'ADD': {
       return await addToCart(prevCount);
     }
-    case "REMOVE": {
+    case 'REMOVE': {
       return await removeFromCart(prevCount);
     }
   }
@@ -321,17 +310,17 @@ async function updateCartAction(prevCount, actionPayload) {
 ```
 
 ```js src/Total.js
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
   minimumFractionDigits: 0,
 });
 
-export default function Total({ quantity, isPending }) {
+export default function Total({quantity, isPending}) {
   return (
     <div className="row total">
       <span>Total</span>
-      {isPending ? "🌀 Updating..." : formatter.format(quantity * 9999)}
+      {isPending ? '🌀 Updating...' : formatter.format(quantity * 9999)}
     </div>
   );
 }
@@ -339,12 +328,12 @@ export default function Total({ quantity, isPending }) {
 
 ```js src/api.js hidden
 export async function addToCart(count) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return count + 1;
 }
 
 export async function removeFromCart(count) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return Math.max(0, count - 1);
 }
 ```
@@ -415,7 +404,7 @@ When you click to increase or decrease the quantity, an `"ADD"` or `"REMOVE"` is
 
 In this example, we use the pending state of the Actions to replace both the quantity and the total. If you want to provide immediate feedback, such as immediately updating the quantity, you can use `useOptimistic`.
 
-#### How is `useActionState` different from `useReducer`? {/_useactionstate-vs-usereducer_/}
+#### How is `useActionState` different from `useReducer`? {/*useactionstate-vs-usereducer*/}
 
 You might notice this example looks a lot like `useReducer`, but they serve different purposes:
 
@@ -425,35 +414,32 @@ You might notice this example looks a lot like `useReducer`, but they serve diff
 
 You can think of `useActionState` as `useReducer` for side effects from user Actions. Since it computes the next Action to take based on the previous Action, it has to [order the calls sequentially](/reference/react/useActionState#how-useactionstate-queuing-works). If you want to perform Actions in parallel, use `useState` and `useTransition` directly.
 
----
+***
 
-### Using with `useOptimistic` {/_using-with-useoptimistic_/}
+### Using with `useOptimistic` {/*using-with-useoptimistic*/}
 
 You can combine `useActionState` with [`useOptimistic`](/reference/react/useOptimistic) to show immediate UI feedback:
 
 ```js src/App.js
-import { useActionState, startTransition, useOptimistic } from "react";
-import { addToCart, removeFromCart } from "./api";
-import Total from "./Total";
+import { useActionState, startTransition, useOptimistic } from 'react';
+import { addToCart, removeFromCart } from './api';
+import Total from './Total';
 
 export default function Checkout() {
-  const [count, dispatchAction, isPending] = useActionState(
-    updateCartAction,
-    0,
-  );
+  const [count, dispatchAction, isPending] = useActionState(updateCartAction, 0);
   const [optimisticCount, setOptimisticCount] = useOptimistic(count);
 
   function handleAdd() {
     startTransition(() => {
-      setOptimisticCount((c) => c + 1);
-      dispatchAction({ type: "ADD" });
+      setOptimisticCount(c => c + 1);
+      dispatchAction({ type: 'ADD' });
     });
   }
 
   function handleRemove() {
     startTransition(() => {
-      setOptimisticCount((c) => c - 1);
-      dispatchAction({ type: "REMOVE" });
+      setOptimisticCount(c => c - 1);
+      dispatchAction({ type: 'REMOVE' });
     });
   }
 
@@ -463,7 +449,7 @@ export default function Checkout() {
       <div className="row">
         <span>Eras Tour Tickets</span>
         <span className="stepper">
-          <span className="pending">{isPending && "🌀"}</span>
+          <span className="pending">{isPending && '🌀'}</span>
           <span className="qty">{optimisticCount}</span>
           <span className="buttons">
             <button onClick={handleAdd}>▲</button>
@@ -472,17 +458,17 @@ export default function Checkout() {
         </span>
       </div>
       <hr />
-      <Total quantity={optimisticCount} isPending={isPending} />
+      <Total quantity={optimisticCount} isPending={isPending}/>
     </div>
   );
 }
 
 async function updateCartAction(prevCount, actionPayload) {
   switch (actionPayload.type) {
-    case "ADD": {
+    case 'ADD': {
       return await addToCart(prevCount);
     }
-    case "REMOVE": {
+    case 'REMOVE': {
       return await removeFromCart(prevCount);
     }
   }
@@ -491,19 +477,17 @@ async function updateCartAction(prevCount, actionPayload) {
 ```
 
 ```js src/Total.js
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
   minimumFractionDigits: 0,
 });
 
-export default function Total({ quantity, isPending }) {
+export default function Total({quantity, isPending}) {
   return (
     <div className="row total">
       <span>Total</span>
-      <span>
-        {isPending ? "🌀 Updating..." : formatter.format(quantity * 9999)}
-      </span>
+      <span>{isPending ? '🌀 Updating...' : formatter.format(quantity * 9999)}</span>
     </div>
   );
 }
@@ -511,12 +495,12 @@ export default function Total({ quantity, isPending }) {
 
 ```js src/api.js hidden
 export async function addToCart(count) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return count + 1;
 }
 
 export async function removeFromCart(count) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return Math.max(0, count - 1);
 }
 ```
@@ -585,32 +569,29 @@ hr {
 
 `setOptimisticCount` immediately updates the quantity, and `dispatchAction()` queues the `updateCartAction`. A pending indicator appears on both the quantity and total to give the user feedback that their update is still being applied.
 
----
+***
 
-### Using with Action props {/_using-with-action-props_/}
+### Using with Action props {/*using-with-action-props*/}
 
 When you pass the `dispatchAction` function to a component that exposes an [Action prop](/reference/react/useTransition#exposing-action-props-from-components), you don't need to call `startTransition` or `useOptimistic` yourself.
 
 This example shows using the `increaseAction` and `decreaseAction` props of a QuantityStepper component:
 
 ```js src/App.js
-import { useActionState } from "react";
-import { addToCart, removeFromCart } from "./api";
-import QuantityStepper from "./QuantityStepper";
-import Total from "./Total";
+import { useActionState } from 'react';
+import { addToCart, removeFromCart } from './api';
+import QuantityStepper from './QuantityStepper';
+import Total from './Total';
 
 export default function Checkout() {
-  const [count, dispatchAction, isPending] = useActionState(
-    updateCartAction,
-    0,
-  );
+  const [count, dispatchAction, isPending] = useActionState(updateCartAction, 0);
 
   function addAction() {
-    dispatchAction({ type: "ADD" });
+    dispatchAction({type: 'ADD'});
   }
 
   function removeAction() {
-    dispatchAction({ type: "REMOVE" });
+    dispatchAction({type: 'REMOVE'});
   }
 
   return (
@@ -632,10 +613,10 @@ export default function Checkout() {
 
 async function updateCartAction(prevCount, actionPayload) {
   switch (actionPayload.type) {
-    case "ADD": {
+    case 'ADD': {
       return await addToCart(prevCount);
     }
-    case "REMOVE": {
+    case 'REMOVE': {
       return await removeFromCart(prevCount);
     }
   }
@@ -644,32 +625,28 @@ async function updateCartAction(prevCount, actionPayload) {
 ```
 
 ```js src/QuantityStepper.js
-import { startTransition, useOptimistic } from "react";
+import { startTransition, useOptimistic } from 'react';
 
-export default function QuantityStepper({
-  value,
-  increaseAction,
-  decreaseAction,
-}) {
+export default function QuantityStepper({value, increaseAction, decreaseAction}) {
   const [optimisticValue, setOptimisticValue] = useOptimistic(value);
   const isPending = value !== optimisticValue;
   function handleIncrease() {
     startTransition(async () => {
-      setOptimisticValue((c) => c + 1);
+      setOptimisticValue(c => c + 1);
       await increaseAction();
     });
   }
 
   function handleDecrease() {
     startTransition(async () => {
-      setOptimisticValue((c) => Math.max(0, c - 1));
+      setOptimisticValue(c => Math.max(0, c - 1));
       await decreaseAction();
     });
   }
 
   return (
     <span className="stepper">
-      <span className="pending">{isPending && "🌀"}</span>
+      <span className="pending">{isPending && '🌀'}</span>
       <span className="qty">{optimisticValue}</span>
       <span className="buttons">
         <button onClick={handleIncrease}>▲</button>
@@ -681,17 +658,17 @@ export default function QuantityStepper({
 ```
 
 ```js src/Total.js
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
   minimumFractionDigits: 0,
 });
 
-export default function Total({ quantity, isPending }) {
+export default function Total({quantity, isPending}) {
   return (
     <div className="row total">
       <span>Total</span>
-      {isPending ? "🌀 Updating..." : formatter.format(quantity * 9999)}
+      {isPending ? '🌀 Updating...' : formatter.format(quantity * 9999)}
     </div>
   );
 }
@@ -699,12 +676,12 @@ export default function Total({ quantity, isPending }) {
 
 ```js src/api.js hidden
 export async function addToCart(count) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return count + 1;
 }
 
 export async function removeFromCart(count) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return Math.max(0, count - 1);
 }
 ```
@@ -771,33 +748,30 @@ hr {
 }
 ```
 
-Since `<QuantityStepper>` has built-in support for transitions, pending state, and optimistically updating the count, you just need to tell the Action _what_ to change, and _how_ to change it is handled for you.
+Since `<QuantityStepper>` has built-in support for transitions, pending state, and optimistically updating the count, you just need to tell the Action *what* to change, and *how* to change it is handled for you.
 
----
+***
 
-### Cancelling queued Actions {/_cancelling-queued-actions_/}
+### Cancelling queued Actions {/*cancelling-queued-actions*/}
 
 You can use an `AbortController` to cancel pending Actions:
 
 ```js src/App.js
-import { useActionState, useRef } from "react";
-import { addToCart, removeFromCart } from "./api";
-import QuantityStepper from "./QuantityStepper";
-import Total from "./Total";
+import { useActionState, useRef } from 'react';
+import { addToCart, removeFromCart } from './api';
+import QuantityStepper from './QuantityStepper';
+import Total from './Total';
 
 export default function Checkout() {
   const abortRef = useRef(null);
-  const [count, dispatchAction, isPending] = useActionState(
-    updateCartAction,
-    0,
-  );
-
+  const [count, dispatchAction, isPending] = useActionState(updateCartAction, 0);
+  
   async function addAction() {
     if (abortRef.current) {
       abortRef.current.abort();
     }
     abortRef.current = new AbortController();
-    await dispatchAction({ type: "ADD", signal: abortRef.current.signal });
+    await dispatchAction({ type: 'ADD', signal: abortRef.current.signal });
   }
 
   async function removeAction() {
@@ -805,7 +779,7 @@ export default function Checkout() {
       abortRef.current.abort();
     }
     abortRef.current = new AbortController();
-    await dispatchAction({ type: "REMOVE", signal: abortRef.current.signal });
+    await dispatchAction({ type: 'REMOVE', signal: abortRef.current.signal });
   }
 
   return (
@@ -827,18 +801,16 @@ export default function Checkout() {
 
 async function updateCartAction(prevCount, actionPayload) {
   switch (actionPayload.type) {
-    case "ADD": {
+    case 'ADD': {
       try {
         return await addToCart(prevCount, { signal: actionPayload.signal });
       } catch (e) {
         return prevCount + 1;
       }
     }
-    case "REMOVE": {
+    case 'REMOVE': {
       try {
-        return await removeFromCart(prevCount, {
-          signal: actionPayload.signal,
-        });
+        return await removeFromCart(prevCount, { signal: actionPayload.signal });
       } catch (e) {
         return Math.max(0, prevCount - 1);
       }
@@ -849,32 +821,28 @@ async function updateCartAction(prevCount, actionPayload) {
 ```
 
 ```js src/QuantityStepper.js
-import { startTransition, useOptimistic } from "react";
+import { startTransition, useOptimistic } from 'react';
 
-export default function QuantityStepper({
-  value,
-  increaseAction,
-  decreaseAction,
-}) {
+export default function QuantityStepper({value, increaseAction, decreaseAction}) {
   const [optimisticValue, setOptimisticValue] = useOptimistic(value);
   const isPending = value !== optimisticValue;
   function handleIncrease() {
     startTransition(async () => {
-      setOptimisticValue((c) => c + 1);
+      setOptimisticValue(c => c + 1);
       await increaseAction();
     });
   }
 
   function handleDecrease() {
     startTransition(async () => {
-      setOptimisticValue((c) => Math.max(0, c - 1));
+      setOptimisticValue(c => Math.max(0, c - 1));
       await decreaseAction();
     });
   }
 
   return (
-    <span className="stepper">
-      <span className="pending">{isPending && "🌀"}</span>
+          <span className="stepper">
+      <span className="pending">{isPending && '🌀'}</span>
       <span className="qty">{optimisticValue}</span>
       <span className="buttons">
         <button onClick={handleIncrease}>▲</button>
@@ -886,17 +854,17 @@ export default function QuantityStepper({
 ```
 
 ```js src/Total.js
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
   minimumFractionDigits: 0,
 });
 
-export default function Total({ quantity, isPending }) {
+export default function Total({quantity, isPending}) {
   return (
     <div className="row total">
       <span>Total</span>
-      {isPending ? "🌀 Updating..." : formatter.format(quantity * 9999)}
+      {isPending ? '🌀 Updating...' : formatter.format(quantity * 9999)}
     </div>
   );
 }
@@ -904,8 +872,8 @@ export default function Total({ quantity, isPending }) {
 
 ```js src/api.js hidden
 class AbortError extends Error {
-  name = "AbortError";
-  constructor(message = "The operation was aborted") {
+  name = 'AbortError';
+  constructor(message = 'The operation was aborted') {
     super(message);
   }
 }
@@ -916,7 +884,7 @@ function sleep(ms, signal) {
 
   return new Promise((resolve, reject) => {
     const id = setTimeout(() => {
-      signal.removeEventListener("abort", onAbort);
+      signal.removeEventListener('abort', onAbort);
       resolve();
     }, ms);
 
@@ -925,7 +893,7 @@ function sleep(ms, signal) {
       reject(new AbortError());
     };
 
-    signal.addEventListener("abort", onAbort, { once: true });
+    signal.addEventListener('abort', onAbort, { once: true });
   });
 }
 export async function addToCart(count, opts) {
@@ -1007,32 +975,29 @@ Aborting an Action isn't always safe.
 
 For example, if the Action performs a mutation (like writing to a database), aborting the network request doesn't undo the server-side change. This is why `useActionState` doesn't abort by default. It's only safe when you know the side effect can be safely ignored or retried.
 
----
+***
 
-### Using with `<form>` Action props {/_use-with-a-form_/}
+### Using with `<form>` Action props {/*use-with-a-form*/}
 
 You can pass the `dispatchAction` function as the `action` prop to a `<form>`.
 
 When used this way, React automatically wraps the submission in a Transition, so you don't need to call `startTransition` yourself. The `reducerAction` receives the previous state and the submitted `FormData`:
 
 ```js src/App.js
-import { useActionState, useOptimistic } from "react";
-import { addToCart, removeFromCart } from "./api";
-import Total from "./Total";
+import { useActionState, useOptimistic } from 'react';
+import { addToCart, removeFromCart } from './api';
+import Total from './Total';
 
 export default function Checkout() {
-  const [count, dispatchAction, isPending] = useActionState(
-    updateCartAction,
-    0,
-  );
+  const [count, dispatchAction, isPending] = useActionState(updateCartAction, 0);
   const [optimisticCount, setOptimisticCount] = useOptimistic(count);
 
   async function formAction(formData) {
-    const type = formData.get("type");
-    if (type === "ADD") {
-      setOptimisticCount((c) => c + 1);
+    const type = formData.get('type');
+    if (type === 'ADD') {
+      setOptimisticCount(c => c + 1);
     } else {
-      setOptimisticCount((c) => Math.max(0, c - 1));
+      setOptimisticCount(c => Math.max(0, c - 1));
     }
     return dispatchAction(formData);
   }
@@ -1043,15 +1008,11 @@ export default function Checkout() {
       <div className="row">
         <span>Eras Tour Tickets</span>
         <span className="stepper">
-          <span className="pending">{isPending && "🌀"}</span>
+          <span className="pending">{isPending && '🌀'}</span>
           <span className="qty">{optimisticCount}</span>
           <span className="buttons">
-            <button type="submit" name="type" value="ADD">
-              ▲
-            </button>
-            <button type="submit" name="type" value="REMOVE">
-              ▼
-            </button>
+            <button type="submit" name="type" value="ADD">▲</button>
+            <button type="submit" name="type" value="REMOVE">▼</button>
           </span>
         </span>
       </div>
@@ -1062,12 +1023,12 @@ export default function Checkout() {
 }
 
 async function updateCartAction(prevCount, formData) {
-  const type = formData.get("type");
+  const type = formData.get('type');
   switch (type) {
-    case "ADD": {
+    case 'ADD': {
       return await addToCart(prevCount);
     }
-    case "REMOVE": {
+    case 'REMOVE': {
       return await removeFromCart(prevCount);
     }
   }
@@ -1076,17 +1037,17 @@ async function updateCartAction(prevCount, formData) {
 ```
 
 ```js src/Total.js
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
   minimumFractionDigits: 0,
 });
 
-export default function Total({ quantity, isPending }) {
+export default function Total({quantity, isPending}) {
   return (
     <div className="row total">
       <span>Total</span>
-      {isPending ? "🌀 Updating..." : formatter.format(quantity * 9999)}
+      {isPending ? '🌀 Updating...' : formatter.format(quantity * 9999)}
     </div>
   );
 }
@@ -1094,12 +1055,12 @@ export default function Total({ quantity, isPending }) {
 
 ```js src/api.js hidden
 export async function addToCart(count) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return count + 1;
 }
 
 export async function removeFromCart(count) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return Math.max(0, count - 1);
 }
 ```
@@ -1172,9 +1133,9 @@ When used with a [Server Function](/reference/rsc/server-functions), `useActionS
 
 See the [`<form>`](/reference/react-dom/components/form#handle-form-submission-with-a-server-function) docs for more information on using Actions with forms.
 
----
+***
 
-### Handling errors {/_handling-errors_/}
+### Handling errors {/*handling-errors*/}
 
 There are two ways to handle errors with `useActionState`.
 
@@ -1183,10 +1144,10 @@ For known errors, such as "quantity not available" validation errors from your b
 For unknown errors, such as `undefined is not a function`, you can throw an error. React will cancel all queued Actions and shows the nearest [Error Boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) by rethrowing the error from the `useActionState` hook.
 
 ```js src/App.js
-import { useActionState, startTransition } from "react";
-import { ErrorBoundary } from "react-error-boundary";
-import { addToCart } from "./api";
-import Total from "./Total";
+import {useActionState, startTransition} from 'react';
+import {ErrorBoundary} from 'react-error-boundary';
+import {addToCart} from './api';
+import Total from './Total';
 
 function Checkout() {
   const [state, dispatchAction, isPending] = useActionState(
@@ -1194,24 +1155,23 @@ function Checkout() {
       const result = await addToCart(prevState.count, quantity);
       if (result.error) {
         // Return the error from the API as state
-        return {
-          ...prevState,
-          error: `Could not add quanitiy ${quantity}: ${result.error}`,
-        };
+        return {...prevState, error: `Could not add quanitiy ${quantity}: ${result.error}`};
       }
-
+      
       if (!isPending) {
         // Clear the error state for the first dispatch.
-        return { count: result.count, error: null };
+        return {count: result.count, error: null};    
       }
-
+      
       // Return the new count, and any errors that happened.
-      return { count: result.count, error: prevState.error };
+      return {count: result.count, error: prevState.error};
+      
+      
     },
     {
       count: 0,
       error: null,
-    },
+    }
   );
 
   function handleAdd(quantity) {
@@ -1226,7 +1186,7 @@ function Checkout() {
       <div className="row">
         <span>Eras Tour Tickets</span>
         <span>
-          {isPending && "🌀 "}Qty: {state.count}
+          {isPending && '🌀 '}Qty: {state.count}
         </span>
       </div>
       <div className="buttons">
@@ -1241,17 +1201,18 @@ function Checkout() {
   );
 }
 
+
+
 export default function App() {
   return (
     <ErrorBoundary
-      fallbackRender={({ resetErrorBoundary }) => (
+      fallbackRender={({resetErrorBoundary}) => (
         <div className="checkout">
           <h2>Something went wrong</h2>
           <p>The action could not be completed.</p>
           <button onClick={resetErrorBoundary}>Try again</button>
         </div>
-      )}
-    >
+      )}>
       <Checkout />
     </ErrorBoundary>
   );
@@ -1259,18 +1220,18 @@ export default function App() {
 ```
 
 ```js src/Total.js
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
   minimumFractionDigits: 0,
 });
 
-export default function Total({ quantity, isPending }) {
+export default function Total({quantity, isPending}) {
   return (
     <div className="row total">
       <span>Total</span>
       <span>
-        {isPending ? "🌀 Updating..." : formatter.format(quantity * 9999)}
+        {isPending ? '🌀 Updating...' : formatter.format(quantity * 9999)}
       </span>
     </div>
   );
@@ -1281,11 +1242,11 @@ export default function Total({ quantity, isPending }) {
 export async function addToCart(count, quantity) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
   if (quantity > 5) {
-    return { error: "Quantity not available" };
+    return {error: 'Quantity not available'};
   } else if (isNaN(quantity)) {
-    throw new Error("Quantity must be a number");
+    throw new Error('Quantity must be a number');
   }
-  return { count: count + quantity };
+  return {count: count + quantity};
 }
 ```
 
@@ -1351,16 +1312,16 @@ button {
 
 In this example, "Add 10" simulates an API that returns a validation error, which `updateCartAction` stores in state and displays inline. "Add NaN" results in an invalid count, so `updateCartAction` throws, which propagates through `useActionState` to the `ErrorBoundary` and shows a reset UI.
 
----
+***
 
-## Troubleshooting {/_troubleshooting_/}
+## Troubleshooting {/*troubleshooting*/}
 
-### My `isPending` flag is not updating {/_ispending-not-updating_/}
+### My `isPending` flag is not updating {/*ispending-not-updating*/}
 
 If you're calling `dispatchAction` manually (not through an Action prop), make sure you wrap the call in [`startTransition`](/reference/react/startTransition):
 
 ```js
-import { useActionState, startTransition } from "react";
+import { useActionState, startTransition } from 'react';
 
 function MyComponent() {
   const [state, dispatchAction, isPending] = useActionState(myAction, null);
@@ -1378,27 +1339,27 @@ function MyComponent() {
 
 When `dispatchAction` is passed to an Action prop, React automatically wraps it in a Transition.
 
----
+***
 
-### My Action cannot read form data {/_action-cannot-read-form-data_/}
+### My Action cannot read form data {/*action-cannot-read-form-data*/}
 
 When you use `useActionState`, the `reducerAction` receives an extra argument as its first argument: the previous or initial state. The submitted form data is therefore its second argument instead of its first.
 
 ```js {2,7}
 // Without useActionState
 function action(formData) {
-  const name = formData.get("name");
+  const name = formData.get('name');
 }
 
 // With useActionState
 function action(prevState, formData) {
-  const name = formData.get("name");
+  const name = formData.get('name');
 }
 ```
 
----
+***
 
-### My actions are being skipped {/_actions-skipped_/}
+### My actions are being skipped {/*actions-skipped*/}
 
 If you call `dispatchAction` multiple times and some of them don't run, it may be because an earlier `dispatchAction` call threw an error.
 
@@ -1418,14 +1379,14 @@ async function myReducerAction(prevState, data) {
 }
 ```
 
----
+***
 
-### My state doesn't reset {/_reset-state_/}
+### My state doesn't reset {/*reset-state*/}
 
 `useActionState` doesn't provide a built-in reset function. To reset the state, you can design your `reducerAction` to handle a reset signal:
 
 ```js
-const initialState = { name: "", error: null };
+const initialState = { name: '', error: null };
 
 async function formAction(prevState, payload) {
   // Handle reset
@@ -1438,10 +1399,7 @@ async function formAction(prevState, payload) {
 }
 
 function MyComponent() {
-  const [state, dispatchAction, isPending] = useActionState(
-    formAction,
-    initialState,
-  );
+  const [state, dispatchAction, isPending] = useActionState(formAction, initialState);
 
   function handleReset() {
     startTransition(() => {
@@ -1455,9 +1413,9 @@ function MyComponent() {
 
 Alternatively, you can add a `key` prop to the component using `useActionState` to force it to remount with fresh state, or a `<form>` `action` prop, which resets automatically after submission.
 
----
+***
 
-### I'm getting an error: "An async function with useActionState was called outside of a transition." {/_async-function-outside-transition_/}
+### I'm getting an error: "An async function with useActionState was called outside of a transition." {/*async-function-outside-transition*/}
 
 A common mistake is to forget to call `dispatchAction` from inside a Transition:
 
@@ -1467,10 +1425,7 @@ This error happens because `dispatchAction` must run inside a Transition:
 
 ```js
 function MyComponent() {
-  const [state, dispatchAction, isPending] = useActionState(
-    myAsyncAction,
-    null,
-  );
+  const [state, dispatchAction, isPending] = useActionState(myAsyncAction, null);
 
   function handleClick() {
     // ❌ Wrong: calling dispatchAction outside a Transition
@@ -1484,13 +1439,10 @@ function MyComponent() {
 To fix, either wrap the call in [`startTransition`](/reference/react/startTransition):
 
 ```js
-import { useActionState, startTransition } from "react";
+import { useActionState, startTransition } from 'react';
 
 function MyComponent() {
-  const [state, dispatchAction, isPending] = useActionState(
-    myAsyncAction,
-    null,
-  );
+  const [state, dispatchAction, isPending] = useActionState(myAsyncAction, null);
 
   function handleClick() {
     // ✅ Correct: wrap in startTransition
@@ -1507,19 +1459,16 @@ Or pass `dispatchAction` to an Action prop, is call in a Transition:
 
 ```js
 function MyComponent() {
-  const [state, dispatchAction, isPending] = useActionState(
-    myAsyncAction,
-    null,
-  );
+  const [state, dispatchAction, isPending] = useActionState(myAsyncAction, null);
 
   // ✅ Correct: action prop wraps in a Transition for you
   return <Button action={dispatchAction}>...</Button>;
 }
 ```
 
----
+***
 
-### I'm getting an error: "Cannot update action state while rendering" {/_cannot-update-during-render_/}
+### I'm getting an error: "Cannot update action state while rendering" {/*cannot-update-during-render*/}
 
 You cannot call `dispatchAction` during render:
 
@@ -1540,7 +1489,7 @@ function MyComponent() {
 
 To fix, only call `dispatchAction` in response to user events (like form submissions or button clicks).
 
----
+***
 
 ## Sitemap
 

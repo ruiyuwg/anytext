@@ -161,5 +161,5 @@ Custom environments are available at no additional cost on the Pro and Enterpris
 
 title: "Accessing Deployments through Generated URLs"
 description: "When you create a new deployment, Vercel will automatically generate a unique URL which you can use to access that particular deployment."
-last\_updated: "2026-03-08T05:03:13.291Z"
+last\_updated: "2026-03-23T09:40:08.362Z"
 source: "https://vercel.com/docs/deployments/generated-urls"

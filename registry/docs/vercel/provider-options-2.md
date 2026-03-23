@@ -95,5 +95,5 @@ Use `caching: 'auto'` in the request body to let AI Gateway automatically add ca
 
 title: "Streaming"
 description: "Stream responses token by token using the OpenResponses API."
-last\_updated: "2026-03-08T05:03:10.814Z"
+last\_updated: "2026-03-23T09:40:04.902Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openresponses/streaming"

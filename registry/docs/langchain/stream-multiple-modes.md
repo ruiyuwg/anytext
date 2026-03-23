@@ -2,7 +2,7 @@
 
 You can specify multiple streaming modes by passing stream mode as a list: `stream_mode=["updates", "custom"]`.
 
-The streamed outputs will be tuples of `(mode, chunk)` where `mode` is the name of the stream mode and `chunk` is the data streamed by that mode.
+Each streamed chunk is a `StreamPart` dict with `type`, `ns`, and `data` keys. Use `chunk["type"]` to determine the stream mode and `chunk["data"]` to access the payload.
 
 ```python title="Streaming multiple modes" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain.agents import create_agent
@@ -21,12 +21,13 @@ agent = create_agent(
     tools=[get_weather],
 )
 
-for stream_mode, chunk in agent.stream(  # [!code highlight]
+for chunk in agent.stream(  # [!code highlight]
     {"messages": [{"role": "user", "content": "What is the weather in SF?"}]},
-    stream_mode=["updates", "custom"]
+    stream_mode=["updates", "custom"],
+    version="v2",  # [!code highlight]
 ):
-    print(f"stream_mode: {stream_mode}")
-    print(f"content: {chunk}")
+    print(f"stream_mode: {chunk['type']}")  # [!code highlight]
+    print(f"content: {chunk['data']}")  # [!code highlight]
     print("\n")
 ```
 

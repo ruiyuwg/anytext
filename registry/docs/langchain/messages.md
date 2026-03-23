@@ -143,7 +143,7 @@ const humanMsg = new HumanMessage({
 });
 ```
 
-The `name` field behavior varies by provider – some use it for user identification, others ignore it. To check, refer to the model provider's [reference](https://reference.langchain.com/python/integrations/).
+The `name` field behavior varies by provider—some use it for user identification, others ignore it. To check, refer to the model provider's [reference](https://reference.langchain.com/python/integrations/).
 
 ***
 
@@ -928,7 +928,7 @@ Content blocks are represented (either when creating a message or accessing the 
 Additional provider-specific content types may be found within the [reference documentation](/oss/javascript/integrations/providers/overview) of each model provider.
 ````
 
-Each of these content blocks mentioned above are indvidually addressable as types when importing the [`ContentBlock`](https://reference.langchain.com/javascript/langchain-core/messages/ContentBlock) type.
+Each of these content blocks mentioned above are individually addressable as types when importing the [`ContentBlock`](https://reference.langchain.com/javascript/langchain-core/messages/ContentBlock) type.
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { ContentBlock } from "langchain";

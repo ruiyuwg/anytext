@@ -134,5 +134,5 @@ export default async function handler(
 
 title: "Form Submissions"
 description: "How to properly handle form submissions with BotID protection"
-last\_updated: "2026-03-08T05:03:11.131Z"
+last\_updated: "2026-03-23T09:40:05.410Z"
 source: "https://vercel.com/docs/botid/form-submissions"

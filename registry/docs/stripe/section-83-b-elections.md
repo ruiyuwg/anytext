@@ -20,9 +20,9 @@ Startup lawyers recommend filing a Section 83(b) election if founders purchase t
 
 If you live outside the US but file US tax returns, startup lawyers recommend making a Section 83(b) election because it might save you on future US taxes.
 
-If you do not currently file US tax returns but think you might become a US taxpayer in the future, making a Section 83(b) election is important. Not doing so could result in additional US tax liability when your stock vests.
+If you don’t currently file US tax returns but think you might become a US taxpayer in the future, making a Section 83(b) election is important. Not doing so could result in additional US tax liability when your stock vests.
 
-If you are not currently a US taxpayer and do not anticipate becoming one in the future, making a Section 83(b) election doesn’t matter because it affects only US tax liability.
+If you aren’t currently a US taxpayer and don’t anticipate becoming one in the future, making a Section 83(b) election doesn’t matter because it affects only US tax liability.
 
 The IRS requires a US Taxpayer Identification Number (TIN) at the time of filing. This can be either a Social Security Number (SSN) or an Individual Taxpayer Identification Number (ITIN). If you don’t have either of these when you incorporate with Stripe Atlas, Stripe informs the IRS that you’re a non-US taxpayer, and you intend to apply for an ITIN upon becoming a US taxpayer. Consult a tax advisor about if and when to get an ITIN.
 

@@ -4,7 +4,7 @@ Source: https://docs.langchain.com/oss/python/langchain/knowledge-base
 
 ## Overview
 
-This tutorial will familiarize you with LangChain's [document loader](/oss/python/langchain/retrieval#document-loaders), [embedding](/oss/python/langchain/retrieval#embedding-models), and [vector store](/oss/python/langchain/retrieval#vector-store) abstractions. These abstractions are designed to support retrieval of data--  from (vector) databases and other sources -- for integration with LLM workflows. They are important for applications that fetch data to be reasoned over as part of model inference, as in the case of retrieval-augmented generation, or [RAG](/oss/python/langchain/retrieval).
+This tutorial will familiarize you with LangChain's [document loader](/oss/python/integrations/document_loaders), [embedding](/oss/python/integrations/embeddings), and [vector store](/oss/python/integrations/vectorstores) abstractions. These abstractions are designed to support retrieval of data--  from (vector) databases and other sources -- for integration with LLM workflows. They are important for applications that fetch data to be reasoned over as part of model inference, as in the case of retrieval-augmented generation, or [RAG](/oss/python/langchain/retrieval).
 
 Here we will build a search engine over a PDF document. This will allow us to retrieve passages in the PDF that are similar to an input query. The guide also includes a minimal RAG implementation on top of the search engine.
 
@@ -14,7 +14,7 @@ This guide focuses on retrieval of text data. We will cover the following concep
 
 - [Documents and document loaders](/oss/python/integrations/document_loaders);
 - [Text splitters](/oss/python/integrations/splitters);
-- [Embeddings](/oss/python/integrations/text_embedding);
+- [Embeddings](/oss/python/integrations/embeddings);
 - [Vector stores](/oss/python/integrations/vectorstores) and [retrievers](/oss/python/integrations/retrievers).
 
 ## Setup
@@ -87,7 +87,7 @@ documents = [
 ]
 ```
 
-However, the LangChain ecosystem implements [document loaders](/oss/python/langchain/retrieval#document-loaders) that [integrate with hundreds of common sources](/oss/python/integrations/document_loaders/). This makes it easy to incorporate data from these sources into your AI application.
+However, the LangChain ecosystem implements [document loaders](/oss/python/integrations/document_loaders) that integrate with hundreds of common sources. This makes it easy to incorporate data from these sources into your AI application.
 
 ### Loading documents
 
@@ -135,7 +135,7 @@ FO
 
 For both information retrieval and downstream question-answering purposes, a page may be too coarse a representation. Our goal in the end will be to retrieve [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects that answer an input query, and further splitting our PDF will help ensure that the meanings of relevant portions of the document are not "washed out" by surrounding text.
 
-We can use [text splitters](/oss/python/langchain/retrieval#text_splitters) for this purpose. Here we will use a simple text splitter that partitions based on characters. We will split our documents into chunks of 1000 characters
+We can use [text splitters](/oss/python/integrations/splitters) for this purpose. Here we will use a simple text splitter that partitions based on characters. We will split our documents into chunks of 1000 characters
 with 200 characters of overlap between chunks. The overlap helps
 mitigate the possibility of separating a statement from important
 context related to it. We use the
@@ -165,9 +165,9 @@ print(len(all_splits))
 
 ## 2. Embeddings
 
-Vector search is a common way to store and search over unstructured data (such as unstructured text). The idea is to store numeric vectors that are associated with the text. Given a query, we can [embed](/oss/python/langchain/retrieval#embedding_models) it as a vector of the same dimension and use vector similarity metrics (such as cosine similarity) to identify related text.
+Vector search is a common way to store and search over unstructured data (such as unstructured text). The idea is to store numeric vectors that are associated with the text. Given a query, we can [embed](/oss/python/integrations/embeddings) it as a vector of the same dimension and use vector similarity metrics (such as cosine similarity) to identify related text.
 
-LangChain supports embeddings from [dozens of providers](/oss/python/integrations/text_embedding/). These models specify how text should be converted into a numeric vector. Let's select a model:
+LangChain supports embeddings from [dozens of providers](/oss/python/integrations/embeddings/). These models specify how text should be converted into a numeric vector. Let's select a model:
 
 ````
 ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
@@ -436,7 +436,7 @@ Armed with a model for generating text embeddings, we can next store them in a s
 
 ## 3. Vector stores
 
-LangChain [VectorStore](https://reference.langchain.com/python/langchain-core/vectorstores/base/VectorStore) objects contain methods for adding text and [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects to the store, and querying them using various similarity metrics. They are often initialized with [embedding](/oss/python/langchain/retrieval#embedding_models) models, which determine how text data is translated to numeric vectors.
+LangChain [VectorStore](https://reference.langchain.com/python/langchain-core/vectorstores/base/VectorStore) objects contain methods for adding text and [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects to the store, and querying them using various similarity metrics. They are often initialized with [embedding](/oss/python/integrations/embeddings) models, which determine how text data is translated to numeric vectors.
 
 LangChain includes a suite of [integrations](/oss/python/integrations/vectorstores) with different vector store technologies. Some vector stores are hosted by a provider (e.g., various cloud providers) and require specific credentials to use; some (such as [Postgres](/oss/python/integrations/vectorstores/pgvector)) run in separate infrastructure that can be run locally or via a third-party; others can run in-memory for lightweight workloads. Let's select a vector store:
 
@@ -833,17 +833,17 @@ You've now seen how to build a semantic search engine over a PDF document.
 
 For more on document loaders:
 
-- [Overview](/oss/python/langchain/retrieval#document_loaders)
+- [Overview](/oss/python/langchain/retrieval)
 - [Available integrations](/oss/python/integrations/document_loaders/)
 
 For more on embeddings:
 
-- [Overview](/oss/python/langchain/retrieval#embedding_models/)
-- [Available integrations](/oss/python/integrations/text_embedding/)
+- [Overview](/oss/python/langchain/retrieval)
+- [Available integrations](/oss/python/integrations/embeddings/)
 
 For more on vector stores:
 
-- [Overview](/oss/python/langchain/retrieval#vectorstores/)
+- [Overview](/oss/python/langchain/retrieval)
 - [Available integrations](/oss/python/integrations/vectorstores/)
 
 For more on RAG, see:

@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -20,26 +18,228 @@ Copy as Markdown
 
 Open Markdown Ask Docs AI Claude Open in Claude
 
+Table of contents
+
 ***
 
-- Always use the latest version of WSL. At a minimum you must use WSL version 2.1.5, otherwise Docker Desktop may not work as expected. Testing, development, and documentation is based on the newest kernel versions. Older versions of WSL can cause:
+Patterns you learn from building and running agents with Docker Agent. These aren't features or configuration options - they're approaches that work well in practice.
 
-  - Docker Desktop to hang periodically or when upgrading
-  - Deployment via SCCM to fail
-  - The `vmmem.exe` to consume all memory
-  - Network filter policies to be applied globally, not to specific objects
-  - GPU failures with containers
-- To get the best out of the file system performance when bind-mounting files, it's recommended that you store source code and other data that is bind-mounted into Linux containers. For instance, use `docker run -v <host-path>:<container-path>` in the Linux file system, rather than the Windows file system. You can also refer to the [recommendation](https://learn.microsoft.com/en-us/windows/wsl/compare-versions) from Microsoft.
+## [Handling large command outputs](#handling-large-command-outputs)
 
-  - Linux containers only receive file change events, “inotify events”, if the original files are stored in the Linux filesystem. For example, some web development workflows rely on inotify events for automatic reloading when files have changed.
-  - Performance is much higher when files are bind-mounted from the Linux filesystem, rather than remoted from the Windows host. Therefore avoid `docker run -v /mnt/c/users:/users,` where `/mnt/c` is mounted from Windows.
-  - Instead, from a Linux shell use a command like `docker run -v ~/my-project:/sources <my-image>` where `~` is expanded by the Linux shell to `$HOME`.
-- If you have concerns about the size of the `docker-desktop-data` distribution, take a look at the [WSL tooling built into Windows](https://learn.microsoft.com/en-us/windows/wsl/disk-space).
+Shell commands that produce large output can overflow your agent's context window. Validation tools, test suites, and build logs often generate thousands of lines. If you capture this output directly, it consumes all available context and the agent fails.
 
-  - Installations of Docker Desktop version 4.30 and later no longer rely on the `docker-desktop-data` distribution; instead Docker Desktop creates and manages its own virtual hard disk (VHDX) for storage. (note, however, that Docker Desktop keeps using the `docker-desktop-data` distribution if it was already created by an earlier version of the software).
-  - Starting from version 4.34 and later, Docker Desktop automatically manages the size of the managed VHDX and returns unused space to the operating system.
-- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, and swap size allocated to the [WSL 2 utility VM](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#global-configuration-options-with-wslconfig).
+The solution: redirect output to a file, then read the file. The Read tool automatically truncates large files to 2000 lines, and your agent can navigate through it if needed.
 
-[Edit this page](https://github.com/docker/docs/edit/main/content/manuals/desktop/features/wsl/best-practices.md)
+**Don't do this:**
 
-[Request changes](https://github.com/docker/docs/issues/new?template=doc_issue.yml\&location=https%3a%2f%2fdocs.docker.com%2fdesktop%2ffeatures%2fwsl%2fbest-practices%2f\&labels=status%2Ftriage)
+```yaml
+reviewer:
+  instruction: |
+    Run validation: `docker buildx bake validate`
+    Check the output for errors.
+  toolsets:
+    - type: shell
+```
+
+The validation output goes directly into context. If it's large, the agent fails with a context overflow error.
+
+**Do this:**
+
+```yaml
+reviewer:
+  instruction: |
+    Run validation and save output:
+    `docker buildx bake validate > validation.log 2>&1`
+
+    Read validation.log to check for errors.
+    The file can be large - read the first 2000 lines.
+    Errors usually appear at the beginning.
+  toolsets:
+    - type: filesystem
+    - type: shell
+```
+
+The output goes to a file, not context. The agent reads what it needs using the filesystem toolset.
+
+## [Structuring agent teams](#structuring-agent-teams)
+
+A single agent handling multiple responsibilities makes instructions complex and behavior unpredictable. Breaking work across specialized agents produces better results.
+
+The coordinator pattern works well: a root agent understands the overall task and delegates to specialists. Each specialist focuses on one thing.
+
+**Example: Documentation writing team**
+
+```yaml
+agents:
+  root:
+    description: Technical writing coordinator
+    instruction: |
+      Coordinate documentation work:
+      1. Delegate to writer for content creation
+      2. Delegate to editor for formatting polish
+      3. Delegate to reviewer for validation
+      4. Loop back through editor if reviewer finds issues
+    sub_agents: [writer, editor, reviewer]
+    toolsets: [filesystem, todo]
+
+  writer:
+    description: Creates and edits documentation content
+    instruction: |
+      Write clear, practical documentation.
+      Focus on content quality - the editor handles formatting.
+    toolsets: [filesystem, think]
+
+  editor:
+    description: Polishes formatting and style
+    instruction: |
+      Fix formatting issues, wrap lines, run prettier.
+      Remove AI-isms and polish style.
+      Don't change meaning or add content.
+    toolsets: [filesystem, shell]
+
+  reviewer:
+    description: Runs validation tools
+    instruction: |
+      Run validation suite, report failures.
+    toolsets: [filesystem, shell]
+```
+
+Each agent has clear responsibilities. The writer doesn't worry about line wrapping. The editor doesn't generate content. The reviewer just runs tools.
+
+This example uses `sub_agents` where root delegates discrete tasks and gets results back. The root agent maintains control and coordinates all work. For different coordination patterns where agents should transfer control to each other, see the `handoffs` mechanism in the [configuration reference](https://docs.docker.com/ai/docker-agent/reference/config/#task-delegation-versus-conversation-handoff).
+
+**When to use teams:**
+
+- Multiple distinct steps in your workflow
+- Different skills required (writing ↔ editing ↔ testing)
+- One step might need to retry based on later feedback
+
+**When to use a single agent:**
+
+- Simple, focused tasks
+- All work happens in one step
+- Adding coordination overhead doesn't help
+
+## [Optimizing RAG performance](#optimizing-rag-performance)
+
+RAG indexing takes time when you have many files. A configuration that indexes your entire codebase might take minutes to start. Optimize for what your agent actually needs.
+
+**Narrow the scope:**
+
+Don't index everything. Index what's relevant for the agent's work.
+
+```yaml
+# Too broad - indexes entire codebase
+rag:
+  codebase:
+    docs: [./]
+
+# Better - indexes only relevant directories
+rag:
+  codebase:
+    docs: [./src/api, ./docs, ./examples]
+```
+
+If your agent only works with API code, don't index tests, vendor directories, or generated files.
+
+**Increase batching and concurrency:**
+
+Process more chunks per API call and make parallel requests.
+
+```yaml
+strategies:
+  - type: chunked-embeddings
+    embedding_model: openai/text-embedding-3-small
+    batch_size: 50 # More chunks per API call
+    max_embedding_concurrency: 10 # Parallel requests
+    chunking:
+      size: 2000 # Larger chunks = fewer total chunks
+      overlap: 150
+```
+
+This reduces both API calls and indexing time.
+
+**Consider BM25 for fast local search:**
+
+If you need exact term matching (function names, error messages, identifiers), BM25 is fast and runs locally without API calls.
+
+```yaml
+strategies:
+  - type: bm25
+    database: ./bm25.db
+    chunking:
+      size: 1500
+```
+
+Combine with embeddings using hybrid retrieval when you need both semantic understanding and exact matching.
+
+## [Preserving document scope](#preserving-document-scope)
+
+When building agents that update documentation, a common problem: the agent transforms minimal guides into tutorials. It adds prerequisites, troubleshooting, best practices, examples, and detailed explanations to everything.
+
+These additions might individually be good, but they change the document's character. A focused 90-line how-to becomes a 200-line reference.
+
+**Build this into instructions:**
+
+```yaml
+writer:
+  instruction: |
+    When updating documentation:
+
+    1. Understand the current document's scope and length
+    2. Match that character - don't transform minimal guides into tutorials
+    3. Add only what's genuinely missing
+    4. Value brevity - not every topic needs comprehensive coverage
+
+    Good additions fill gaps. Bad additions change the document's character.
+    When in doubt, add less rather than more.
+```
+
+Tell your agents explicitly to preserve the existing document's scope. Without this guidance, they default to being comprehensive.
+
+## [Model selection](#model-selection)
+
+Choose models based on the agent's role and complexity.
+
+**Use larger models (Sonnet, GPT-5) for:**
+
+- Complex reasoning and planning
+- Writing and editing content
+- Coordinating multiple agents
+- Tasks requiring judgment and creativity
+
+**Use smaller models (Haiku, GPT-5 Mini) for:**
+
+- Running validation tools
+- Simple structured tasks
+- Reading logs and reporting errors
+- High-volume, low-complexity work
+
+Example from the documentation writing team:
+
+```yaml
+agents:
+  root:
+    model: anthropic/claude-sonnet-4-5 # Complex coordination
+  writer:
+    model: anthropic/claude-sonnet-4-5 # Creative content work
+  editor:
+    model: anthropic/claude-sonnet-4-5 # Judgment about style
+  reviewer:
+    model: anthropic/claude-haiku-4-5 # Just runs validation
+```
+
+The reviewer uses Haiku because it runs commands and checks for errors. No complex reasoning needed, and Haiku is faster and cheaper.
+
+## [What's next](#whats-next)
+
+- Review [configuration reference](https://docs.docker.com/ai/docker-agent/reference/config/) for all available options
+- Check [toolsets reference](https://docs.docker.com/ai/docker-agent/reference/toolsets/) to understand what tools agents can use
+- See [example configurations](https://github.com/docker/docker-agent/tree/main/examples) for complete working agents
+- Read the [RAG guide](https://docs.docker.com/ai/docker-agent/rag/) for detailed retrieval optimization
+
+[Edit this page](https://github.com/docker/docs/edit/main/content/manuals/ai/docker-agent/best-practices.md)
+
+[Request changes](https://github.com/docker/docs/issues/new?template=doc_issue.yml\&location=https%3a%2f%2fdocs.docker.com%2fai%2fdocker-agent%2fbest-practices%2f\&labels=status%2Ftriage)
+
+Table of contents

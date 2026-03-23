@@ -248,3 +248,13 @@ You can add a `component` property to a block, decorator, or annotation that con
 > \[!TIP]
 > Protip
 > Looking to [query](https://www.sanity.io/docs/content-lake/how-queries-work) for the occurence of a string in an array of blocks? Try `*[pt::text(body) match "aliens"]` (where `body` is the name of your array).
+
+#### Related articles
+
+[Block Content](https://www.sanity.io/docs/studio/block-content)
+
+[Configure the Portable Text Editor](https://www.sanity.io/docs/studio/portable-text-editor-configuration)
+
+[Array](https://www.sanity.io/docs/studio/array-type)
+
+[Schema](https://www.sanity.io/docs/studio/schema-types)

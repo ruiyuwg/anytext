@@ -422,8 +422,8 @@ You are charged for the number of Realtime messages and the number of Realtime p
 
 ## Messages
 
-per 1 million messages. You are only charged for usage exceeding your subscription
-plan's quota.
+per 1 million messages. You are only charged for usage exceeding your
+subscription plan's quota.
 
 | Plan       | Quota     | Over-Usage                                    |
 | ---------- | --------- | --------------------------------------------- |
@@ -436,8 +436,8 @@ For a detailed explanation of how charges are calculated, refer to [Manage Realt
 
 ## Peak connections
 
-per 1,000 peak connections. You are only charged for usage exceeding your subscription
-plan's quota.
+per 1,000 peak connections. You are only charged for usage exceeding your
+subscription plan's quota.
 
 | Plan       | Quota  | Over-Usage                                      |
 | ---------- | ------ | ----------------------------------------------- |

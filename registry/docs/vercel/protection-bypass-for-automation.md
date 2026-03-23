@@ -123,5 +123,5 @@ https://your-app.vercel.app/api/github-webhook?x-vercel-protection-bypass=your-g
 
 title: "Sharable Links"
 description: "Learn how to share your deployments with external users."
-last\_updated: "2026-03-08T05:03:13.188Z"
+last\_updated: "2026-03-23T09:40:08.237Z"
 source: "https://vercel.com/docs/deployment-protection/methods-to-bypass-deployment-protection/sharable-links"

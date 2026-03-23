@@ -27,27 +27,27 @@ Now, create a helper file to initialize the Supabase client for both web and Rea
 
 ````
     ```typescript name=lib/supabase.web.ts
-    import AsyncStorage from '@react-native-async-storage/async-storage';
-    import { createClient } from '@supabase/supabase-js';
-    import 'react-native-url-polyfill/auto';
+    import AsyncStorage from '@react-native-async-storage/async-storage'
+    import { createClient } from '@supabase/supabase-js'
+    import 'react-native-url-polyfill/auto'
 
-    const isSSR = typeof window === 'undefined';
+    const isSSR = typeof window === 'undefined'
 
     const ExpoWebSecureStoreAdapter = {
       getItem: (key: string) => {
-        if (isSSR) return null;
-        console.debug("getItem", { key })
+        if (isSSR) return null
+        console.debug('getItem', { key })
         return AsyncStorage.getItem(key)
       },
       setItem: (key: string, value: string) => {
-        if (isSSR) return;
+        if (isSSR) return
         return AsyncStorage.setItem(key, value)
       },
       removeItem: (key: string) => {
-        if (isSSR) return;
+        if (isSSR) return
         return AsyncStorage.removeItem(key)
       },
-    };
+    }
 
     export const supabase = createClient(
       process.env.EXPO_PUBLIC_SUPABASE_URL ?? '',
@@ -59,8 +59,8 @@ Now, create a helper file to initialize the Supabase client for both web and Rea
           persistSession: true,
           detectSessionInUrl: false,
         },
-      },
-    );
+      }
+    )
     ```
   
 
@@ -80,24 +80,26 @@ Implement a `ExpoSecureStoreAdapter` to pass in as Auth storage adapter for the 
 
   
     ```typescript name=lib/supabase.ts
-    import { createClient } from '@supabase/supabase-js';
-    import { deleteItemAsync, getItemAsync, setItemAsync } from 'expo-secure-store';
+    import { createClient } from '@supabase/supabase-js'
+    import { deleteItemAsync, getItemAsync, setItemAsync } from 'expo-secure-store'
 
     const ExpoSecureStoreAdapter = {
       getItem: (key: string) => {
-        console.debug("getItem", { key, getItemAsync })
+        console.debug('getItem', { key, getItemAsync })
         return getItemAsync(key)
       },
       setItem: (key: string, value: string) => {
         if (value.length > 2048) {
-          console.warn('Value being stored in SecureStore is larger than 2048 bytes and it may not be stored successfully. In a future SDK version, this call may throw an error.')
+          console.warn(
+            'Value being stored in SecureStore is larger than 2048 bytes and it may not be stored successfully. In a future SDK version, this call may throw an error.'
+          )
         }
         return setItemAsync(key, value)
       },
       removeItem: (key: string) => {
         return deleteItemAsync(key)
       },
-    };
+    }
 
     export const supabase = createClient(
       process.env.EXPO_PUBLIC_SUPABASE_URL ?? '',
@@ -109,8 +111,8 @@ Implement a `ExpoSecureStoreAdapter` to pass in as Auth storage adapter for the 
           persistSession: true,
           detectSessionInUrl: false,
         },
-      },
-    );
+      }
+    )
     ```
   
 ````
@@ -214,11 +216,7 @@ export default function AuthProvider({ children }: PropsWithChildren) {
       setIsLoading(true)
 
       if (claims) {
-        const { data } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', claims.sub)
-          .single()
+        const { data } = await supabase.from('profiles').select('*').eq('id', claims.sub).single()
 
         setProfile(data)
       } else {

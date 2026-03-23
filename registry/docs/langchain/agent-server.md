@@ -2,9 +2,9 @@
 
 Source: https://docs.langchain.com/langsmith/agent-server
 
-LangSmith Deployment's **Agent Server** offers an API for creating and managing agent-based applications. It is built on the concept of [assistants](/langsmith/assistants), which are agents configured for specific tasks, and includes built-in [persistence](/oss/python/langgraph/persistence#memory-store) and a **task queue**. This versatile API supports a wide range of agentic application use cases, from background processing to real-time interactions.
+LangSmith Deployment's **Agent Server** offers an API for creating and managing agent-based applications. It is built on the concept of [assistants](/langsmith/assistants), which are agents configured for specific tasks, and includes built-in [persistence](/oss/python/langgraph/persistence#memory-store) and a [**task queue**](#task-queue). This versatile API supports a wide range of agentic application use cases, from background processing to real-time interactions.
 
-Use Agent Server to create and manage [assistants](/langsmith/assistants), [threads](/oss/python/langgraph/persistence#threads), [runs](/langsmith/assistants#execution), [cron jobs](/langsmith/cron-jobs), [webhooks](/langsmith/use-webhooks), and more.
+Use Agent Server to create and manage:
 
 **API reference**
 For detailed information on the API endpoints and data models, refer to the [Agent Server API reference](/langsmith/server-api-ref).
@@ -15,45 +15,58 @@ To deploy an Agent Server application, you need to specify the graph(s) you want
 
 Read the [application structure](/langsmith/application-structure) guide to learn how to structure your LangGraph application for deployment.
 
+[LangSmith cloud](/langsmith/cloud) manages the database for you. If you're deploying on your [own infrastructure](/langsmith/self-hosted), you'll need to set it up yourself.
+
 ## Parts of a deployment
 
-When you deploy Agent Server, you are deploying one or more [graphs](#graphs), a database for [persistence](/oss/python/langgraph/persistence), and a task queue.
+When you deploy Agent Server, you are deploying one or more [graphs](#graphs), a database for [persistence](/oss/python/langgraph/persistence), and a [task queue](#task-queue).
 
 ### Graphs
 
 When you deploy a graph with Agent Server, you are deploying a "blueprint" for an [Assistant](/langsmith/assistants).
 
-An [Assistant](/langsmith/assistants) is a graph paired with specific configuration settings. You can create multiple assistants per graph, each with unique settings to accommodate different use cases
-that can be served by the same graph.
+A graph most commonly implements an [agent](/oss/python/langgraph/workflows-agents), but it does not have to. For example, a graph could implement a simple chatbot that only supports back-and-forth conversation, without the ability to influence any application control flow. In reality, as applications get more complex, a graph will often implement a more complex flow that may use [multiple agents](/oss/python/langchain/multi-agent) working in tandem.
 
-Upon deployment, Agent Server will automatically create a default assistant for each graph using the graph's default configuration settings.
+Graphs don't have to be written with LangGraph. You can also deploy agents built with other frameworks—such as Strands or Google ADK—using the LangGraph Functional API. For details, refer to [Deploy other frameworks](/langsmith/deploy-other-frameworks).
 
-We often think of a graph as implementing an [agent](/oss/python/langgraph/workflows-agents), but a graph does not necessarily need to implement an agent. For example, a graph could implement a simple
-chatbot that only supports back-and-forth conversation, without the ability to influence any application control flow. In reality, as applications get more complex, a graph will often implement a more complex flow that may use [multiple agents](/oss/python/langchain/multi-agent) working in tandem.
+#### Graph loading and compilation
 
-### Persistence and task queue
+How and when your graph is compiled depends on how you register it in your [application structure](/langsmith/application-structure):
 
-Agent Server leverages a database for [persistence](/oss/python/langgraph/persistence) and a task queue.
+1. **Compiled graph** (recommended): Export an already-compiled `CompiledGraph` instance. The server loads it once at container startup and reuses it for every run—no compilation overhead per request.
+2. **Factory function**: Export an agent factory function that the server invokes each time it needs the graph. Use this only when you need per-run graph customization (for example, choosing different models or tools based on the assistant config). Keep factory functions lightweight, since they run on every invocation.
 
-[PostgreSQL](https://www.postgresql.org/) is supported as a database for Agent Server and [Redis](https://redis.io/) as the task queue.
+Use a compiled graph unless you specifically need per-run customization. Factory functions add overhead on every invocation; compiled graphs do not.
 
-If you're deploying using [LangSmith cloud](/langsmith/cloud), these components are managed for you. If you're deploying Agent Server on your [own infrastructure](/langsmith/self-hosted), you'll need to set up and manage these components yourself.
+In both cases, the server automatically injects the checkpointer and memory store configured for that deployment at runtime. **Do not configure these in your graph code** because the server needs to manage them for other operations.
 
-For more information on how these components are set up and managed, review the [hosting options](/langsmith/platform-setup) guide.
+### Persistence
 
-### How to deploy
+Agent Server persists three types of data, all backed by [PostgreSQL](https://www.postgresql.org/) by default:
 
-Agent Server can be deployed using different methods depending on your infrastructure:
+- **Core resource data**: assistants, threads, runs, and cron jobs. Always stored in PostgreSQL.
+- **Checkpoints (short-term memory)**: snapshots of graph execution state written at each step. They make runs durable: if a worker is interrupted, the run can resume from the last checkpoint rather than from the beginning. Durability mode controls checkpoint frequency—`async` (default) writes after each step; `exit` stores only the final state. LangSmith stores this in PostgreSQL by default; but you can switch to [MongoDB](https://www.mongodb.com/) or a custom implementation. For details, refer to [Configure checkpointer backend](/langsmith/configure-checkpointer).
+- **Store (long-term memory)**: memory that persists across threads, enabling agents to retain information between separate conversations. Stored in PostgreSQL by default but can be replaced with a custom implementation. For details, refer to [Add custom store](/langsmith/custom-store).
 
-- [Cloud](/langsmith/deploy-to-cloud): Deploy from GitHub repositories with fully managed infrastructure.
-- [Hybrid or self-hosted with control plane](/langsmith/deploy-with-control-plane): Build Docker images and deploy via the UI.
-- [Standalone servers](/langsmith/deploy-standalone-server): Deploy Agent Servers directly without the control plane.
+### Task queue
 
-  Cloud deployments are available on all LangSmith plans. Hybrid and self-hosted options require an Enterprise plan and license key. To acquire a license key, [contact our sales team](https://www.langchain.com/contact-sales).
+When a client creates a run, the API server enqueues it and a queue worker picks it up for execution. Workers can also be signaled to cancel a run in progress, and publish output events that open `/stream` connections forward to the client in real time.
+
+[Redis](https://redis.io/) handles the signaling, cancellation, and streaming pub/sub between API servers and queue workers. It stores only ephemeral data—no user or run data persists in Redis. Run data itself is always read from and written to PostgreSQL.
+
+For more information on how to set up and manage these components, review the [hosting options](/langsmith/platform-setup) guide.
 
 ## Runtime architecture
 
-The following description applies to the non-distributed runtime variant of LangSmith Deployment.
+### Deployment modes
+
+Agent Server supports three runtime configurations:
+
+- **Single host**: The API server manages the task queue directly with no separate queue workers. This is the default for self-hosted deployments and is suitable for development and low-traffic use cases.
+- **Split API and queue**: Dedicated queue workers handle run execution on separate hosts from the API server. For self-hosted deployments, enable this by setting `queue.enabled: true` in your configuration. Each tier scales independently—API servers scale on request volume, queue workers scale on pending run count.
+- **Distributed runtime**: The API and queue processes are again run separately, but instead of a single queue process handling both the orchestration and execution of your graph, the distributed runtime uses one process for orchestration and one process for execution. Use this for large-scale deployments with high concurrency requirements.
+
+The container architecture and run lifecycle described below apply to single host and split API and queue configurations.
 
 ### Container architecture
 
@@ -62,7 +75,7 @@ A typical deployment consists of two kinds of long-running containers, both buil
 - **API servers** handle client requests (creating runs, reading thread state, streaming results) but do not execute agent code themselves.
 - **Queue workers** are the execution engine. They listen to the durable task queue, execute your graph code, and write checkpoints.
 
-Containers are \**stateless* but persistent. At least 1 queue worker must listen to the task queue at any time to ensure no runs are orphaned. The containers can serve many runs over their lifetime.
+Containers are **stateless** but persistent. At least 1 queue worker must listen to the task queue at any time to ensure no runs are orphaned. The containers can serve many runs over their lifetime.
 
 API servers and queue workers are separate container pools and [scale independently](/langsmith/data-plane#autoscaling).
 
@@ -72,7 +85,7 @@ flowchart TB
 
     API["API Servers"]
 
-    subgraph WorkerContainer["Worker Container"]
+    subgraph WorkerContainer["Worker Containers"]
         QueueLoop["Queue Loop"]
         W1["Worker"]
         W2["Worker"]
@@ -118,16 +131,7 @@ When you invoke a run, the request flows through several components:
 4. If the client opened a `/stream` connection, the API server subscribes to the pubsub channel and forwards events to the client via server-sent events in real time.
 5. When execution completes, the worker updates the run status and releases its slot for the next run.
 
-Each worker handles up to [`N_JOBS_PER_WORKER`](/langsmith/env-var#n-jobs-per-worker) runs concurrently (default: 10), so a single worker container serves many runs in parallel. See [Configure Agent Server for scale](/langsmith/agent-server-scale) for tuning guidance.
-
-### Graph loading and compilation
-
-How and when your graph is compiled depends on how you register it in your [application structure](/langsmith/application-structure):
-
-1. **Compiled graph**: If you export an already-compiled graph (a `CompiledGraph` instance), it is loaded once at container startup and reused for every run. This is the most efficient path.
-2. **Factory function**: If you export an agent factory function, the server invokes it each time it needs the graph. Factories receive the run's configuration, enabling per-run graph customization (for example, choosing different models or tools based on the assistant config). Keep factory functions lightweight for best performance.
-
-In both cases, the server automatically injects the checkpointer and memory store configured for that deployment at runtime. **You should not configure these in your graph code**, since the server needs to manage these for other operations.
+Each worker handles up to [`N_JOBS_PER_WORKER`](/langsmith/env-var#n_jobs_per_worker) runs concurrently (default: 10), so a single worker container serves many runs in parallel. See [Configure Agent Server for scale](/langsmith/agent-server-scale) for tuning guidance.
 
 ## Learn more
 
@@ -148,7 +152,7 @@ In both cases, the server automatically injects the checkpointer and memory stor
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/a2a/a2a-json-rpc
 
-langsmith/agent-server-openapi.json post /a2a/{assistant\_id}
+/langsmith/agent-server-openapi.json post /a2a/{assistant\_id}
 Communicate with an assistant using the Agent-to-Agent (A2A) Protocol over JSON-RPC 2.0.
 This endpoint accepts a JSON-RPC envelope and dispatches based on `method`.
 
@@ -173,14 +177,14 @@ This endpoint accepts a JSON-RPC envelope and dispatches based on `method`.
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/count-assistants
 
-langsmith/agent-server-openapi.json post /assistants/count
+/langsmith/agent-server-openapi.json post /assistants/count
 Get the count of assistants matching the specified criteria.
 
 # Create Assistant
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/create-assistant
 
-langsmith/agent-server-openapi.json post /assistants
+/langsmith/agent-server-openapi.json post /assistants
 Create an assistant.
 
 An initial version of the assistant will be created and the assistant is set to that version. To change versions, use the `POST /assistants/{assistant_id}/latest` endpoint.
@@ -189,7 +193,7 @@ An initial version of the assistant will be created and the assistant is set to 
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/delete-assistant
 
-langsmith/agent-server-openapi.json delete /assistants/{assistant\_id}
+/langsmith/agent-server-openapi.json delete /assistants/{assistant\_id}
 Delete an assistant by ID.
 
 All versions of the assistant will be deleted as well.
@@ -198,56 +202,56 @@ All versions of the assistant will be deleted as well.
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant
 
-langsmith/agent-server-openapi.json get /assistants/{assistant\_id}
+/langsmith/agent-server-openapi.json get /assistants/{assistant\_id}
 Get an assistant by ID.
 
 # Get Assistant Graph
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant-graph
 
-langsmith/agent-server-openapi.json get /assistants/{assistant\_id}/graph
+/langsmith/agent-server-openapi.json get /assistants/{assistant\_id}/graph
 Get an assistant by ID.
 
 # Get Assistant Schemas
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant-schemas
 
-langsmith/agent-server-openapi.json get /assistants/{assistant\_id}/schemas
+/langsmith/agent-server-openapi.json get /assistants/{assistant\_id}/schemas
 Get an assistant by ID.
 
 # Get Assistant Subgraphs
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant-subgraphs
 
-langsmith/agent-server-openapi.json get /assistants/{assistant\_id}/subgraphs
+/langsmith/agent-server-openapi.json get /assistants/{assistant\_id}/subgraphs
 Get an assistant's subgraphs.
 
 # Get Assistant Subgraphs by Namespace
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant-subgraphs-by-namespace
 
-langsmith/agent-server-openapi.json get /assistants/{assistant\_id}/subgraphs/{namespace}
+/langsmith/agent-server-openapi.json get /assistants/{assistant\_id}/subgraphs/{namespace}
 Get an assistant's subgraphs filtered by namespace.
 
 # Get Assistant Versions
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant-versions
 
-langsmith/agent-server-openapi.json post /assistants/{assistant\_id}/versions
+/langsmith/agent-server-openapi.json post /assistants/{assistant\_id}/versions
 Get all versions of an assistant.
 
 # Patch Assistant
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/patch-assistant
 
-langsmith/agent-server-openapi.json patch /assistants/{assistant\_id}
+/langsmith/agent-server-openapi.json patch /assistants/{assistant\_id}
 Update an assistant.
 
 # Search Assistants
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/search-assistants
 
-langsmith/agent-server-openapi.json post /assistants/search
+/langsmith/agent-server-openapi.json post /assistants/search
 Search for assistants.
 
 This endpoint also functions as the endpoint to list all assistants.
@@ -256,63 +260,63 @@ This endpoint also functions as the endpoint to list all assistants.
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/assistants/set-latest-assistant-version
 
-langsmith/agent-server-openapi.json post /assistants/{assistant\_id}/latest
+/langsmith/agent-server-openapi.json post /assistants/{assistant\_id}/latest
 Set the latest version for an assistant.
 
 # Count Crons
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/crons/count-crons
 
-langsmith/agent-server-openapi.json post /runs/crons/count
+/langsmith/agent-server-openapi.json post /runs/crons/count
 Get the count of crons matching the specified criteria.
 
 # Create Cron
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/crons/create-cron
 
-langsmith/agent-server-openapi.json post /runs/crons
+/langsmith/agent-server-openapi.json post /runs/crons
 Create a cron to schedule runs on new threads.
 
 # Create Thread Cron
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/crons/create-thread-cron
 
-langsmith/agent-server-openapi.json post /threads/{thread\_id}/runs/crons
+/langsmith/agent-server-openapi.json post /threads/{thread\_id}/runs/crons
 Create a cron to schedule runs on a thread.
 
 # Delete Cron
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/crons/delete-cron
 
-langsmith/agent-server-openapi.json delete /runs/crons/{cron\_id}
+/langsmith/agent-server-openapi.json delete /runs/crons/{cron\_id}
 Delete a cron by ID.
 
 # Search Crons
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/crons/search-crons
 
-langsmith/agent-server-openapi.json post /runs/crons/search
+/langsmith/agent-server-openapi.json post /runs/crons/search
 Search all active crons
 
 # Update Cron
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/crons/update-cron
 
-langsmith/agent-server-openapi.json patch /runs/crons/{cron\_id}
+/langsmith/agent-server-openapi.json patch /runs/crons/{cron\_id}
 Update a cron job by ID.
 
 # MCP Get
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/mcp/mcp-get
 
-langsmith/agent-server-openapi.json get /mcp/
+/langsmith/agent-server-openapi.json get /mcp/
 Implemented according to the Streamable HTTP Transport specification.
 
 # MCP Post
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/mcp/mcp-post
 
-langsmith/agent-server-openapi.json post /mcp/
+/langsmith/agent-server-openapi.json post /mcp/
 Implemented according to the Streamable HTTP Transport specification.
 Sends a JSON-RPC 2.0 message to the server.
 
@@ -327,7 +331,7 @@ Sends a JSON-RPC 2.0 message to the server.
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/mcp/terminate-session
 
-langsmith/agent-server-openapi.json delete /mcp/
+/langsmith/agent-server-openapi.json delete /mcp/
 Implemented according to the Streamable HTTP Transport specification.
 Terminate an MCP session. The server implementation is stateless, so this is a no-op.
 
@@ -335,212 +339,212 @@ Terminate an MCP session. The server implementation is stateless, so this is a n
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/stateless-runs/create-background-run
 
-langsmith/agent-server-openapi.json post /runs
+/langsmith/agent-server-openapi.json post /runs
 Create a run and return the run ID immediately. Don't wait for the final run output.
 
 # Create Run Batch
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/stateless-runs/create-run-batch
 
-langsmith/agent-server-openapi.json post /runs/batch
+/langsmith/agent-server-openapi.json post /runs/batch
 Create a batch of runs and return immediately.
 
 # Create Run, Stream Output
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/stateless-runs/create-run-stream-output
 
-langsmith/agent-server-openapi.json post /runs/stream
+/langsmith/agent-server-openapi.json post /runs/stream
 Create a run and stream the output.
 
 # Create Run, Wait for Output
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/stateless-runs/create-run-wait-for-output
 
-langsmith/agent-server-openapi.json post /runs/wait
+/langsmith/agent-server-openapi.json post /runs/wait
 Create a run, wait for the final output and then return it.
 
 # Delete an item.
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/store/delete-an-item
 
-langsmith/agent-server-openapi.json delete /store/items
+/langsmith/agent-server-openapi.json delete /store/items
 
 # List namespaces with optional match conditions.
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/store/list-namespaces-with-optional-match-conditions
 
-langsmith/agent-server-openapi.json post /store/namespaces
+/langsmith/agent-server-openapi.json post /store/namespaces
 
 # Retrieve a single item.
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/store/retrieve-a-single-item
 
-langsmith/agent-server-openapi.json get /store/items
+/langsmith/agent-server-openapi.json get /store/items
 
 # Search or list items within a namespace prefix.
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/store/search-or-list-items-within-a-namespace-prefix
 
-langsmith/agent-server-openapi.json post /store/items/search
+/langsmith/agent-server-openapi.json post /store/items/search
 Lists items ordered by last updated time. If a `query` is provided, performs a natural language search instead. Supports pagination via `limit` and `offset`, and filtering via `filter`.
 
 # Store or update an item.
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/store/store-or-update-an-item
 
-langsmith/agent-server-openapi.json put /store/items
+/langsmith/agent-server-openapi.json put /store/items
 
 # API Documentation
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/system/api-documentation
 
-langsmith/agent-server-openapi.json get /docs
+/langsmith/agent-server-openapi.json get /docs
 A local reference to the Agent Server API documentation.
 
 # Health Check
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/system/health-check
 
-langsmith/agent-server-openapi.json get /ok
+/langsmith/agent-server-openapi.json get /ok
 Check the health status of the server. Optionally check database connectivity.
 
 # Server Information
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/system/server-information
 
-langsmith/agent-server-openapi.json get /info
+/langsmith/agent-server-openapi.json get /info
 Get server version information, feature flags, and metadata.
 
 # System Metrics
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/system/system-metrics
 
-langsmith/agent-server-openapi.json get /metrics
+/langsmith/agent-server-openapi.json get /metrics
 Get system metrics in Prometheus or JSON format for monitoring and observability.
 
 # Cancel Run
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/thread-runs/cancel-run
 
-langsmith/agent-server-openapi.json post /threads/{thread\_id}/runs/{run\_id}/cancel
+/langsmith/agent-server-openapi.json post /threads/{thread\_id}/runs/{run\_id}/cancel
 
 # Cancel Runs
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/thread-runs/cancel-runs
 
-langsmith/agent-server-openapi.json post /runs/cancel
+/langsmith/agent-server-openapi.json post /runs/cancel
 Cancel one or more runs. Can cancel runs by thread ID and run IDs, or by status filter.
 
 # Create Background Run
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/thread-runs/create-background-run
 
-langsmith/agent-server-openapi.json post /threads/{thread\_id}/runs
+/langsmith/agent-server-openapi.json post /threads/{thread\_id}/runs
 Create a run in existing thread, return the run ID immediately. Don't wait for the final run output.
 
 # Create Run, Stream Output
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/thread-runs/create-run-stream-output
 
-langsmith/agent-server-openapi.json post /threads/{thread\_id}/runs/stream
+/langsmith/agent-server-openapi.json post /threads/{thread\_id}/runs/stream
 Create a run in existing thread. Stream the output.
 
 # Create Run, Wait for Output
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/thread-runs/create-run-wait-for-output
 
-langsmith/agent-server-openapi.json post /threads/{thread\_id}/runs/wait
+/langsmith/agent-server-openapi.json post /threads/{thread\_id}/runs/wait
 Create a run in existing thread. Wait for the final output and then return it.
 
 # Delete Run
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/thread-runs/delete-run
 
-langsmith/agent-server-openapi.json delete /threads/{thread\_id}/runs/{run\_id}
+/langsmith/agent-server-openapi.json delete /threads/{thread\_id}/runs/{run\_id}
 Delete a run by ID.
 
 # Get Run
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/thread-runs/get-run
 
-langsmith/agent-server-openapi.json get /threads/{thread\_id}/runs/{run\_id}
+/langsmith/agent-server-openapi.json get /threads/{thread\_id}/runs/{run\_id}
 Get a run by ID.
 
 # Join Run
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/thread-runs/join-run
 
-langsmith/agent-server-openapi.json get /threads/{thread\_id}/runs/{run\_id}/join
+/langsmith/agent-server-openapi.json get /threads/{thread\_id}/runs/{run\_id}/join
 Wait for a run to finish.
 
 # Join Run Stream
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/thread-runs/join-run-stream
 
-langsmith/agent-server-openapi.json get /threads/{thread\_id}/runs/{run\_id}/stream
+/langsmith/agent-server-openapi.json get /threads/{thread\_id}/runs/{run\_id}/stream
 Join a run stream. This endpoint streams output in real-time from a run similar to the /threads/**THREAD\_ID**/runs/stream endpoint. If the run has been created with `stream_resumable=true`, the stream can be resumed from the last seen event ID.
 
 # List Runs
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/thread-runs/list-runs
 
-langsmith/agent-server-openapi.json get /threads/{thread\_id}/runs
+/langsmith/agent-server-openapi.json get /threads/{thread\_id}/runs
 List runs for a thread.
 
 # Copy Thread
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/copy-thread
 
-langsmith/agent-server-openapi.json post /threads/{thread\_id}/copy
+/langsmith/agent-server-openapi.json post /threads/{thread\_id}/copy
 Create a new thread with a copy of the state and checkpoints from an existing thread.
 
 # Count Threads
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/count-threads
 
-langsmith/agent-server-openapi.json post /threads/count
+/langsmith/agent-server-openapi.json post /threads/count
 Get the count of threads matching the specified criteria.
 
 # Create Thread
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/create-thread
 
-langsmith/agent-server-openapi.json post /threads
+/langsmith/agent-server-openapi.json post /threads
 Create a thread.
 
 # Delete Thread
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/delete-thread
 
-langsmith/agent-server-openapi.json delete /threads/{thread\_id}
+/langsmith/agent-server-openapi.json delete /threads/{thread\_id}
 Delete a thread by ID.
 
 # Get Thread
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread
 
-langsmith/agent-server-openapi.json get /threads/{thread\_id}
+/langsmith/agent-server-openapi.json get /threads/{thread\_id}
 Get a thread by ID.
 
 # Get Thread History
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread-history
 
-langsmith/agent-server-openapi.json get /threads/{thread\_id}/history
+/langsmith/agent-server-openapi.json get /threads/{thread\_id}/history
 Get all past states for a thread.
 
 # Get Thread History Post
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread-history-post
 
-langsmith/agent-server-openapi.json post /threads/{thread\_id}/history
+/langsmith/agent-server-openapi.json post /threads/{thread\_id}/history
 Get all past states for a thread.
 
 # Get Thread State
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread-state
 
-langsmith/agent-server-openapi.json get /threads/{thread\_id}/state
+/langsmith/agent-server-openapi.json get /threads/{thread\_id}/state
 Get state for a thread.
 
 The latest state of the thread (i.e. latest checkpoint) is returned.
@@ -549,42 +553,42 @@ The latest state of the thread (i.e. latest checkpoint) is returned.
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread-state-at-checkpoint
 
-langsmith/agent-server-openapi.json get /threads/{thread\_id}/state/{checkpoint\_id}
+/langsmith/agent-server-openapi.json get /threads/{thread\_id}/state/{checkpoint\_id}
 Get state for a thread at a specific checkpoint.
 
 # Get Thread State At Checkpoint
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread-state-at-checkpoint-1
 
-langsmith/agent-server-openapi.json post /threads/{thread\_id}/state/checkpoint
+/langsmith/agent-server-openapi.json post /threads/{thread\_id}/state/checkpoint
 Get state for a thread at a specific checkpoint.
 
 # Join Thread Stream
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/join-thread-stream
 
-langsmith/agent-server-openapi.json get /threads/{thread\_id}/stream
+/langsmith/agent-server-openapi.json get /threads/{thread\_id}/stream
 This endpoint streams output in real-time from a thread. The stream will include the output of each run executed sequentially on the thread and will remain open indefinitely. It is the responsibility of the calling client to close the connection.
 
 # Patch Thread
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/patch-thread
 
-langsmith/agent-server-openapi.json patch /threads/{thread\_id}
+/langsmith/agent-server-openapi.json patch /threads/{thread\_id}
 Update a thread.
 
 # Prune Threads
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/prune-threads
 
-langsmith/agent-server-openapi.json post /threads/prune
+/langsmith/agent-server-openapi.json post /threads/prune
 Prune threads by ID. The 'delete' strategy removes threads entirely. The 'keep\_latest' strategy prunes old checkpoints but keeps threads and their latest state.
 
 # Search Threads
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/search-threads
 
-langsmith/agent-server-openapi.json post /threads/search
+/langsmith/agent-server-openapi.json post /threads/search
 Search for threads.
 
 This endpoint also functions as the endpoint to list all threads.
@@ -593,7 +597,7 @@ This endpoint also functions as the endpoint to list all threads.
 
 Source: https://docs.langchain.com/langsmith/agent-server-api/threads/update-thread-state
 
-langsmith/agent-server-openapi.json post /threads/{thread\_id}/state
+/langsmith/agent-server-openapi.json post /threads/{thread\_id}/state
 Add state to a thread.
 
 # Agent Server changelog
@@ -603,6 +607,62 @@ Source: https://docs.langchain.com/langsmith/agent-server-changelog
 **Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/langsmith/agent-server-changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
 [Agent Server](/langsmith/agent-server) is an API platform for creating and managing agent-based applications. It provides built-in persistence, a task queue, and supports deploying, configuring, and running assistants (agentic workflows) at scale. This changelog documents all notable updates, features, and fixes to Agent Server releases.
+
+## v0.7.82
+
+- Ensured A2A protocol compliance by preserving `kind` discriminators and using lowercase states/roles in responses for all client method name formats.
+
+## v0.7.79
+
+- Introduced beta release of the `swr` function for improved data fetching capabilities.
+- Upgraded the Go runtime to version 1.25.8 across all Dockerfiles and `go.mod` to address multiple CVEs.
+
+## v0.7.77
+
+- Introduced `HTTP_MAX_REQUEST_BODY_BYTES` config to limit HTTP request body size to 300MB, returning a 413 error for oversized requests to prevent memory exhaustion.
+- Added support for accessing store and checkpointer via config in JS graph factories to facilitate deep agent initialization.
+- Updated `pyasn1` dependency from version 0.6.2 to 0.6.3 to enhance security and fix parsing issues.
+- Added instrumentation to log time to first byte (TTFB) and response size for streaming endpoints, improving access log details.
+
+## v0.7.76
+
+- Relaxed `starlette-sse` version bounds to improve dependency compatibility.
+
+## v0.7.75
+
+- Correctly closed streams in `Runs.Enter` to prevent buffer issues and added a configurable environment variable for window size.
+
+## v0.7.74
+
+- Cleaned up some false error logs during queue shutdown operations.
+
+## v0.7.73
+
+- Improved thread search performance with `extract` by avoiding unnecessary detoasting of large JSONB values.
+
+## v0.7.72
+
+- Updated undici package from version 7.22.0 to 7.24.0 to address multiple security vulnerabilities.
+
+## v0.7.71
+
+- Cleaned up the API by removing unused parameters from Threads State Checkpoint and Runs create methods.
+- Fixed the `POST /threads/prune` with `strategy=delete` to ensure thread records are fully removed, not just checkpoint data.
+- Added A2A 1.0 `kind` discriminators to response objects, removed `{"task": ...}` wrapper, and fixed Anthropic streaming metadata issues.
+- Added support for custom encryption in the Redis queue to enhance data security.
+
+## v0.7.69
+
+- Added optional `timezone` field to crons, allowing `next_run_date` computation in user's specified timezone, defaulting to UTC.
+- Corrected the handling of 401 status codes in authentication exceptions to prevent incorrect defaulting to 403.
+
+## v0.7.68
+
+- Fixed issues with non-DR checkpoint AES JSON to improve functionality and extend test coverage.
+- Fixed A2A streaming to correctly emit interrupt artifacts as separate `artifact-update` events according to the specification.
+- Ensured secure tarfile extraction by only extracting validated and safe members to prevent arbitrary file write vulnerabilities.
+- Enhanced security by requiring an exact match for the `noauth` path in authentication middleware.
+- Fixed stale checkpoint values being written to thread state during rollback in multitasking strategy.
 
 ## v0.7.66
 
@@ -1795,7 +1855,7 @@ Introduced a new connection for each operation while preserving transaction char
 ## v0.2.44
 
 - Enhanced the worker logic to exit the pipeline before continuing when the Redis message limit is reached.
-- Introduced a ceiling for Redis message size with an option to skip messages larger than 128 MB for improved performance.
+- Introduced a ceiling for Redis message size with an option to skip messages larger than 128 MB for improved performance.
 - Ensured the pipeline always closes properly to prevent resource leaks.
 
 ## v0.2.43

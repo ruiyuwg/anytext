@@ -1,0 +1,2073 @@
+-   [Home](https://docs.cloud.google.com/)
+-   [Documentation](https://docs.cloud.google.com/docs)
+-   [Developer tools](https://docs.cloud.google.com/docs/costs-usage)
+-   [.NET](https://docs.cloud.google.com/dotnet/docs)
+-   [Client libraries](https://docs.cloud.google.com/dotnet/docs/reference)
+
+Send feedback
+
+# Class ProductSearchClientImpl (3.1.0) Stay organized with collections Save and categorize content based on your preferences.
+
+Version 3.1.0keyboard\_arrow\_down
+
+-   [3.8.0 (latest)](/dotnet/docs/reference/Google.Cloud.Vision.V1/latest/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+-   [3.7.0](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.7.0/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+-   [3.6.0](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.6.0/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+-   [3.5.0](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.5.0/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+-   [3.4.0](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.4.0/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+-   [3.3.0](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.3.0/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+-   [3.2.0](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.2.0/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+-   [3.1.0](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+-   [3.0.0](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.0.0/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+-   [2.5.0](/dotnet/docs/reference/Google.Cloud.Vision.V1/2.5.0/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+-   [2.4.0](/dotnet/docs/reference/Google.Cloud.Vision.V1/2.4.0/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+-   [2.3.0](/dotnet/docs/reference/Google.Cloud.Vision.V1/2.3.0/Google.Cloud.Vision.V1.ProductSearchClientImpl)
+
+```
+public sealed class ProductSearchClientImpl : ProductSearchClient
+```
+
+ProductSearch client wrapper implementation, for convenient use.
+
+## Inheritance
+
+[Object](https://learn.microsoft.com/dotnet/api/system.object) \> [ProductSearchClient](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient) \> ProductSearchClientImpl
+
+## Inherited Members
+
+[ProductSearchClient.DefaultEndpoint](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DefaultEndpoint)
+
+[ProductSearchClient.DefaultScopes](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DefaultScopes)
+
+[ProductSearchClient.ServiceMetadata](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ServiceMetadata)
+
+[ProductSearchClient.CreateAsync(CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateAsync_System_Threading_CancellationToken_)
+
+[ProductSearchClient.Create()](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_Create)
+
+[ProductSearchClient.ShutdownDefaultChannelsAsync()](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ShutdownDefaultChannelsAsync)
+
+[ProductSearchClient.CreateProductSetAsync(CreateProductSetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductSetAsync_Google_Cloud_Vision_V1_CreateProductSetRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.CreateProductSet(String, ProductSet, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductSet_System_String_Google_Cloud_Vision_V1_ProductSet_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateProductSetAsync(String, ProductSet, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductSetAsync_System_String_Google_Cloud_Vision_V1_ProductSet_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateProductSetAsync(String, ProductSet, String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductSetAsync_System_String_Google_Cloud_Vision_V1_ProductSet_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.CreateProductSet(LocationName, ProductSet, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductSet_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Vision_V1_ProductSet_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateProductSetAsync(LocationName, ProductSet, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductSetAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Vision_V1_ProductSet_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateProductSetAsync(LocationName, ProductSet, String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductSetAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Vision_V1_ProductSet_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.ListProductSets(String, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductSets_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListProductSetsAsync(String, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductSetsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListProductSets(LocationName, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductSets_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListProductSetsAsync(LocationName, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductSetsAsync_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetProductSetAsync(GetProductSetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductSetAsync_Google_Cloud_Vision_V1_GetProductSetRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.GetProductSet(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductSet_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetProductSetAsync(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductSetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetProductSetAsync(String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductSetAsync_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.GetProductSet(ProductSetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductSet_Google_Cloud_Vision_V1_ProductSetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetProductSetAsync(ProductSetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductSetAsync_Google_Cloud_Vision_V1_ProductSetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetProductSetAsync(ProductSetName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductSetAsync_Google_Cloud_Vision_V1_ProductSetName_System_Threading_CancellationToken_)
+
+[ProductSearchClient.UpdateProductSetAsync(UpdateProductSetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProductSetAsync_Google_Cloud_Vision_V1_UpdateProductSetRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.UpdateProductSet(ProductSet, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProductSet_Google_Cloud_Vision_V1_ProductSet_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.UpdateProductSetAsync(ProductSet, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProductSetAsync_Google_Cloud_Vision_V1_ProductSet_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.UpdateProductSetAsync(ProductSet, FieldMask, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProductSetAsync_Google_Cloud_Vision_V1_ProductSet_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_)
+
+[ProductSearchClient.DeleteProductSetAsync(DeleteProductSetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductSetAsync_Google_Cloud_Vision_V1_DeleteProductSetRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.DeleteProductSet(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductSet_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteProductSetAsync(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductSetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteProductSetAsync(String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductSetAsync_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.DeleteProductSet(ProductSetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductSet_Google_Cloud_Vision_V1_ProductSetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteProductSetAsync(ProductSetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductSetAsync_Google_Cloud_Vision_V1_ProductSetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteProductSetAsync(ProductSetName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductSetAsync_Google_Cloud_Vision_V1_ProductSetName_System_Threading_CancellationToken_)
+
+[ProductSearchClient.CreateProductAsync(CreateProductRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductAsync_Google_Cloud_Vision_V1_CreateProductRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.CreateProduct(String, Product, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProduct_System_String_Google_Cloud_Vision_V1_Product_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateProductAsync(String, Product, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductAsync_System_String_Google_Cloud_Vision_V1_Product_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateProductAsync(String, Product, String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductAsync_System_String_Google_Cloud_Vision_V1_Product_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.CreateProduct(LocationName, Product, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProduct_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Vision_V1_Product_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateProductAsync(LocationName, Product, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Vision_V1_Product_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateProductAsync(LocationName, Product, String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Vision_V1_Product_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.ListProducts(String, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProducts_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListProductsAsync(String, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListProducts(LocationName, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProducts_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListProductsAsync(LocationName, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductsAsync_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetProductAsync(GetProductRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductAsync_Google_Cloud_Vision_V1_GetProductRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.GetProduct(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProduct_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetProductAsync(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetProductAsync(String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductAsync_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.GetProduct(ProductName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProduct_Google_Cloud_Vision_V1_ProductName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetProductAsync(ProductName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductAsync_Google_Cloud_Vision_V1_ProductName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetProductAsync(ProductName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductAsync_Google_Cloud_Vision_V1_ProductName_System_Threading_CancellationToken_)
+
+[ProductSearchClient.UpdateProductAsync(UpdateProductRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProductAsync_Google_Cloud_Vision_V1_UpdateProductRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.UpdateProduct(Product, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProduct_Google_Cloud_Vision_V1_Product_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.UpdateProductAsync(Product, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProductAsync_Google_Cloud_Vision_V1_Product_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.UpdateProductAsync(Product, FieldMask, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProductAsync_Google_Cloud_Vision_V1_Product_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_)
+
+[ProductSearchClient.DeleteProductAsync(DeleteProductRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductAsync_Google_Cloud_Vision_V1_DeleteProductRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.DeleteProduct(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProduct_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteProductAsync(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteProductAsync(String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductAsync_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.DeleteProduct(ProductName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProduct_Google_Cloud_Vision_V1_ProductName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteProductAsync(ProductName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductAsync_Google_Cloud_Vision_V1_ProductName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteProductAsync(ProductName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductAsync_Google_Cloud_Vision_V1_ProductName_System_Threading_CancellationToken_)
+
+[ProductSearchClient.CreateReferenceImageAsync(CreateReferenceImageRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateReferenceImageAsync_Google_Cloud_Vision_V1_CreateReferenceImageRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.CreateReferenceImage(String, ReferenceImage, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateReferenceImage_System_String_Google_Cloud_Vision_V1_ReferenceImage_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateReferenceImageAsync(String, ReferenceImage, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateReferenceImageAsync_System_String_Google_Cloud_Vision_V1_ReferenceImage_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateReferenceImageAsync(String, ReferenceImage, String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateReferenceImageAsync_System_String_Google_Cloud_Vision_V1_ReferenceImage_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.CreateReferenceImage(ProductName, ReferenceImage, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateReferenceImage_Google_Cloud_Vision_V1_ProductName_Google_Cloud_Vision_V1_ReferenceImage_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateReferenceImageAsync(ProductName, ReferenceImage, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateReferenceImageAsync_Google_Cloud_Vision_V1_ProductName_Google_Cloud_Vision_V1_ReferenceImage_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.CreateReferenceImageAsync(ProductName, ReferenceImage, String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateReferenceImageAsync_Google_Cloud_Vision_V1_ProductName_Google_Cloud_Vision_V1_ReferenceImage_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.DeleteReferenceImageAsync(DeleteReferenceImageRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteReferenceImageAsync_Google_Cloud_Vision_V1_DeleteReferenceImageRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.DeleteReferenceImage(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteReferenceImage_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteReferenceImageAsync(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteReferenceImageAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteReferenceImageAsync(String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteReferenceImageAsync_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.DeleteReferenceImage(ReferenceImageName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteReferenceImage_Google_Cloud_Vision_V1_ReferenceImageName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteReferenceImageAsync(ReferenceImageName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteReferenceImageAsync_Google_Cloud_Vision_V1_ReferenceImageName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.DeleteReferenceImageAsync(ReferenceImageName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteReferenceImageAsync_Google_Cloud_Vision_V1_ReferenceImageName_System_Threading_CancellationToken_)
+
+[ProductSearchClient.ListReferenceImages(String, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListReferenceImages_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListReferenceImagesAsync(String, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListReferenceImagesAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListReferenceImages(ProductName, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListReferenceImages_Google_Cloud_Vision_V1_ProductName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListReferenceImagesAsync(ProductName, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListReferenceImagesAsync_Google_Cloud_Vision_V1_ProductName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetReferenceImageAsync(GetReferenceImageRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetReferenceImageAsync_Google_Cloud_Vision_V1_GetReferenceImageRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.GetReferenceImage(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetReferenceImage_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetReferenceImageAsync(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetReferenceImageAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetReferenceImageAsync(String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetReferenceImageAsync_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.GetReferenceImage(ReferenceImageName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetReferenceImage_Google_Cloud_Vision_V1_ReferenceImageName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetReferenceImageAsync(ReferenceImageName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetReferenceImageAsync_Google_Cloud_Vision_V1_ReferenceImageName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.GetReferenceImageAsync(ReferenceImageName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetReferenceImageAsync_Google_Cloud_Vision_V1_ReferenceImageName_System_Threading_CancellationToken_)
+
+[ProductSearchClient.AddProductToProductSetAsync(AddProductToProductSetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_AddProductToProductSetAsync_Google_Cloud_Vision_V1_AddProductToProductSetRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.AddProductToProductSet(String, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_AddProductToProductSet_System_String_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.AddProductToProductSetAsync(String, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_AddProductToProductSetAsync_System_String_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.AddProductToProductSetAsync(String, String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_AddProductToProductSetAsync_System_String_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.AddProductToProductSet(ProductSetName, ProductName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_AddProductToProductSet_Google_Cloud_Vision_V1_ProductSetName_Google_Cloud_Vision_V1_ProductName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.AddProductToProductSetAsync(ProductSetName, ProductName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_AddProductToProductSetAsync_Google_Cloud_Vision_V1_ProductSetName_Google_Cloud_Vision_V1_ProductName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.AddProductToProductSetAsync(ProductSetName, ProductName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_AddProductToProductSetAsync_Google_Cloud_Vision_V1_ProductSetName_Google_Cloud_Vision_V1_ProductName_System_Threading_CancellationToken_)
+
+[ProductSearchClient.RemoveProductFromProductSetAsync(RemoveProductFromProductSetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_RemoveProductFromProductSetAsync_Google_Cloud_Vision_V1_RemoveProductFromProductSetRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.RemoveProductFromProductSet(String, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_RemoveProductFromProductSet_System_String_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.RemoveProductFromProductSetAsync(String, String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_RemoveProductFromProductSetAsync_System_String_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.RemoveProductFromProductSetAsync(String, String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_RemoveProductFromProductSetAsync_System_String_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.RemoveProductFromProductSet(ProductSetName, ProductName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_RemoveProductFromProductSet_Google_Cloud_Vision_V1_ProductSetName_Google_Cloud_Vision_V1_ProductName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.RemoveProductFromProductSetAsync(ProductSetName, ProductName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_RemoveProductFromProductSetAsync_Google_Cloud_Vision_V1_ProductSetName_Google_Cloud_Vision_V1_ProductName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.RemoveProductFromProductSetAsync(ProductSetName, ProductName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_RemoveProductFromProductSetAsync_Google_Cloud_Vision_V1_ProductSetName_Google_Cloud_Vision_V1_ProductName_System_Threading_CancellationToken_)
+
+[ProductSearchClient.ListProductsInProductSet(String, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductsInProductSet_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListProductsInProductSetAsync(String, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductsInProductSetAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListProductsInProductSet(ProductSetName, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductsInProductSet_Google_Cloud_Vision_V1_ProductSetName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ListProductsInProductSetAsync(ProductSetName, String, Nullable<Int32>, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductsInProductSetAsync_Google_Cloud_Vision_V1_ProductSetName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ImportProductSetsAsync(ImportProductSetsRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ImportProductSetsAsync_Google_Cloud_Vision_V1_ImportProductSetsRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.PollOnceImportProductSets(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PollOnceImportProductSets_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.PollOnceImportProductSetsAsync(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PollOnceImportProductSetsAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ImportProductSets(String, ImportProductSetsInputConfig, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ImportProductSets_System_String_Google_Cloud_Vision_V1_ImportProductSetsInputConfig_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ImportProductSetsAsync(String, ImportProductSetsInputConfig, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ImportProductSetsAsync_System_String_Google_Cloud_Vision_V1_ImportProductSetsInputConfig_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ImportProductSetsAsync(String, ImportProductSetsInputConfig, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ImportProductSetsAsync_System_String_Google_Cloud_Vision_V1_ImportProductSetsInputConfig_System_Threading_CancellationToken_)
+
+[ProductSearchClient.ImportProductSets(LocationName, ImportProductSetsInputConfig, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ImportProductSets_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Vision_V1_ImportProductSetsInputConfig_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ImportProductSetsAsync(LocationName, ImportProductSetsInputConfig, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ImportProductSetsAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Vision_V1_ImportProductSetsInputConfig_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.ImportProductSetsAsync(LocationName, ImportProductSetsInputConfig, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ImportProductSetsAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Vision_V1_ImportProductSetsInputConfig_System_Threading_CancellationToken_)
+
+[ProductSearchClient.PurgeProductsAsync(PurgeProductsRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PurgeProductsAsync_Google_Cloud_Vision_V1_PurgeProductsRequest_System_Threading_CancellationToken_)
+
+[ProductSearchClient.PollOncePurgeProducts(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PollOncePurgeProducts_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.PollOncePurgeProductsAsync(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PollOncePurgeProductsAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.PurgeProducts(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PurgeProducts_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.PurgeProductsAsync(String, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PurgeProductsAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.PurgeProductsAsync(String, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PurgeProductsAsync_System_String_System_Threading_CancellationToken_)
+
+[ProductSearchClient.PurgeProducts(LocationName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PurgeProducts_Google_Api_Gax_ResourceNames_LocationName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.PurgeProductsAsync(LocationName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PurgeProductsAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Api_Gax_Grpc_CallSettings_)
+
+[ProductSearchClient.PurgeProductsAsync(LocationName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PurgeProductsAsync_Google_Api_Gax_ResourceNames_LocationName_System_Threading_CancellationToken_)
+
+[Object.GetHashCode()](https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode)
+
+[Object.GetType()](https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype)
+
+[Object.MemberwiseClone()](https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone)
+
+[Object.ToString()](https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring)
+
+## Namespace
+
+[Google.Cloud.Vision.V1](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1)
+
+## Assembly
+
+Google.Cloud.Vision.V1.dll
+
+## Remarks
+
+Manages Products and ProductSets of reference images for use in product search. It uses the following resource model:
+
+-   The API has a collection of \[ProductSet\]\[google.cloud.vision.v1.ProductSet\] resources, named `projects/*/locations/*/productSets/*`, which acts as a way to put different products into groups to limit identification.
+
+In parallel,
+
+-   The API has a collection of \[Product\]\[google.cloud.vision.v1.Product\] resources, named `projects/*/locations/*/products/*`
+    
+-   Each \[Product\]\[google.cloud.vision.v1.Product\] has a collection of \[ReferenceImage\]\[google.cloud.vision.v1.ReferenceImage\] resources, named `projects/*/locations/*/products/*/referenceImages/*`
+    
+
+## Constructors
+
+### ProductSearchClientImpl(ProductSearch.ProductSearchClient, ProductSearchSettings, ILogger)
+
+```
+public ProductSearchClientImpl(ProductSearch.ProductSearchClient grpcClient, ProductSearchSettings settings, ILogger logger)
+```
+
+Constructs a client wrapper for the ProductSearch service, with the specified gRPC client and settings.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`grpcClient`
+
+`[ProductSearch.ProductSearchClient](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearch.ProductSearchClient)`  
+
+The underlying gRPC client.
+
+`settings`
+
+`[ProductSearchSettings](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchSettings)`  
+
+The base [ProductSearchSettings](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchSettings) used within this client.
+
+`logger`
+
+`[ILogger](https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger)`  
+
+Optional [ILogger](https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger) to use within this client.
+
+## Properties
+
+### GrpcClient
+
+```
+public override ProductSearch.ProductSearchClient GrpcClient { get; }
+```
+
+The underlying gRPC ProductSearch client
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[ProductSearch.ProductSearchClient](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearch.ProductSearchClient)`
+
+**Overrides**
+
+[ProductSearchClient.GrpcClient](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GrpcClient)
+
+### ImportProductSetsOperationsClient
+
+```
+public override OperationsClient ImportProductSetsOperationsClient { get; }
+```
+
+The long-running operations client for `ImportProductSets`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://cloud.google.com/dotnet/docs/reference/Google.LongRunning/latest/Google.LongRunning.OperationsClient.html)`
+
+**Overrides**
+
+[ProductSearchClient.ImportProductSetsOperationsClient](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ImportProductSetsOperationsClient)
+
+### PurgeProductsOperationsClient
+
+```
+public override OperationsClient PurgeProductsOperationsClient { get; }
+```
+
+The long-running operations client for `PurgeProducts`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://cloud.google.com/dotnet/docs/reference/Google.LongRunning/latest/Google.LongRunning.OperationsClient.html)`
+
+**Overrides**
+
+[ProductSearchClient.PurgeProductsOperationsClient](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PurgeProductsOperationsClient)
+
+## Methods
+
+### AddProductToProductSet(AddProductToProductSetRequest, CallSettings)
+
+```
+public override void AddProductToProductSet(AddProductToProductSetRequest request, CallSettings callSettings = null)
+```
+
+Adds a Product to the specified ProductSet. If the Product is already present, no change is made.
+
+One Product can be added to at most 100 ProductSets.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the Product or the ProductSet doesn't exist.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[AddProductToProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.AddProductToProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Overrides**
+
+[ProductSearchClient.AddProductToProductSet(AddProductToProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_AddProductToProductSet_Google_Cloud_Vision_V1_AddProductToProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### AddProductToProductSetAsync(AddProductToProductSetRequest, CallSettings)
+
+```
+public override Task AddProductToProductSetAsync(AddProductToProductSetRequest request, CallSettings callSettings = null)
+```
+
+Adds a Product to the specified ProductSet. If the Product is already present, no change is made.
+
+One Product can be added to at most 100 ProductSets.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the Product or the ProductSet doesn't exist.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[AddProductToProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.AddProductToProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.AddProductToProductSetAsync(AddProductToProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_AddProductToProductSetAsync_Google_Cloud_Vision_V1_AddProductToProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateProduct(CreateProductRequest, CallSettings)
+
+```
+public override Product CreateProduct(CreateProductRequest request, CallSettings callSettings = null)
+```
+
+Creates and returns a new product resource.
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if display\_name is missing or longer than 4096 characters.
+-   Returns INVALID\_ARGUMENT if description is longer than 4096 characters.
+-   Returns INVALID\_ARGUMENT if product\_category is missing or invalid.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateProductRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.CreateProductRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product)`
+
+The RPC response.
+
+**Overrides**
+
+[ProductSearchClient.CreateProduct(CreateProductRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProduct_Google_Cloud_Vision_V1_CreateProductRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateProductAsync(CreateProductRequest, CallSettings)
+
+```
+public override Task<Product> CreateProductAsync(CreateProductRequest request, CallSettings callSettings = null)
+```
+
+Creates and returns a new product resource.
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if display\_name is missing or longer than 4096 characters.
+-   Returns INVALID\_ARGUMENT if description is longer than 4096 characters.
+-   Returns INVALID\_ARGUMENT if product\_category is missing or invalid.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateProductRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.CreateProductRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)<[Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product)>`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.CreateProductAsync(CreateProductRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductAsync_Google_Cloud_Vision_V1_CreateProductRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateProductSet(CreateProductSetRequest, CallSettings)
+
+```
+public override ProductSet CreateProductSet(CreateProductSetRequest request, CallSettings callSettings = null)
+```
+
+Creates and returns a new ProductSet resource.
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if display\_name is missing, or is longer than 4096 characters.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.CreateProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[ProductSet](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSet)`
+
+The RPC response.
+
+**Overrides**
+
+[ProductSearchClient.CreateProductSet(CreateProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductSet_Google_Cloud_Vision_V1_CreateProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateProductSetAsync(CreateProductSetRequest, CallSettings)
+
+```
+public override Task<ProductSet> CreateProductSetAsync(CreateProductSetRequest request, CallSettings callSettings = null)
+```
+
+Creates and returns a new ProductSet resource.
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if display\_name is missing, or is longer than 4096 characters.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.CreateProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)<[ProductSet](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSet)>`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.CreateProductSetAsync(CreateProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateProductSetAsync_Google_Cloud_Vision_V1_CreateProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateReferenceImage(CreateReferenceImageRequest, CallSettings)
+
+```
+public override ReferenceImage CreateReferenceImage(CreateReferenceImageRequest request, CallSettings callSettings = null)
+```
+
+Creates and returns a new ReferenceImage resource.
+
+The `bounding_poly` field is optional. If `bounding_poly` is not specified, the system will try to detect regions of interest in the image that are compatible with the product\_category on the parent product. If it is specified, detection is ALWAYS skipped. The system converts polygons into non-rotated rectangles.
+
+Note that the pipeline will resize the image if the image resolution is too large to process (above 50MP).
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if the image\_uri is missing or longer than 4096 characters.
+-   Returns INVALID\_ARGUMENT if the product does not exist.
+-   Returns INVALID\_ARGUMENT if bounding\_poly is not provided, and nothing compatible with the parent product's product\_category is detected.
+-   Returns INVALID\_ARGUMENT if bounding\_poly contains more than 10 polygons.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateReferenceImageRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.CreateReferenceImageRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[ReferenceImage](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ReferenceImage)`
+
+The RPC response.
+
+**Overrides**
+
+[ProductSearchClient.CreateReferenceImage(CreateReferenceImageRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateReferenceImage_Google_Cloud_Vision_V1_CreateReferenceImageRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateReferenceImageAsync(CreateReferenceImageRequest, CallSettings)
+
+```
+public override Task<ReferenceImage> CreateReferenceImageAsync(CreateReferenceImageRequest request, CallSettings callSettings = null)
+```
+
+Creates and returns a new ReferenceImage resource.
+
+The `bounding_poly` field is optional. If `bounding_poly` is not specified, the system will try to detect regions of interest in the image that are compatible with the product\_category on the parent product. If it is specified, detection is ALWAYS skipped. The system converts polygons into non-rotated rectangles.
+
+Note that the pipeline will resize the image if the image resolution is too large to process (above 50MP).
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if the image\_uri is missing or longer than 4096 characters.
+-   Returns INVALID\_ARGUMENT if the product does not exist.
+-   Returns INVALID\_ARGUMENT if bounding\_poly is not provided, and nothing compatible with the parent product's product\_category is detected.
+-   Returns INVALID\_ARGUMENT if bounding\_poly contains more than 10 polygons.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateReferenceImageRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.CreateReferenceImageRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)<[ReferenceImage](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ReferenceImage)>`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.CreateReferenceImageAsync(CreateReferenceImageRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_CreateReferenceImageAsync_Google_Cloud_Vision_V1_CreateReferenceImageRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteProduct(DeleteProductRequest, CallSettings)
+
+```
+public override void DeleteProduct(DeleteProductRequest request, CallSettings callSettings = null)
+```
+
+Permanently deletes a product and its reference images.
+
+Metadata of the product and all its images will be deleted right away, but search queries against ProductSets containing the product may still work until all related caches are refreshed.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteProductRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.DeleteProductRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Overrides**
+
+[ProductSearchClient.DeleteProduct(DeleteProductRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProduct_Google_Cloud_Vision_V1_DeleteProductRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteProductAsync(DeleteProductRequest, CallSettings)
+
+```
+public override Task DeleteProductAsync(DeleteProductRequest request, CallSettings callSettings = null)
+```
+
+Permanently deletes a product and its reference images.
+
+Metadata of the product and all its images will be deleted right away, but search queries against ProductSets containing the product may still work until all related caches are refreshed.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteProductRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.DeleteProductRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.DeleteProductAsync(DeleteProductRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductAsync_Google_Cloud_Vision_V1_DeleteProductRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteProductSet(DeleteProductSetRequest, CallSettings)
+
+```
+public override void DeleteProductSet(DeleteProductSetRequest request, CallSettings callSettings = null)
+```
+
+Permanently deletes a ProductSet. Products and ReferenceImages in the ProductSet are not deleted.
+
+The actual image files are not deleted from Google Cloud Storage.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.DeleteProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Overrides**
+
+[ProductSearchClient.DeleteProductSet(DeleteProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductSet_Google_Cloud_Vision_V1_DeleteProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteProductSetAsync(DeleteProductSetRequest, CallSettings)
+
+```
+public override Task DeleteProductSetAsync(DeleteProductSetRequest request, CallSettings callSettings = null)
+```
+
+Permanently deletes a ProductSet. Products and ReferenceImages in the ProductSet are not deleted.
+
+The actual image files are not deleted from Google Cloud Storage.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.DeleteProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.DeleteProductSetAsync(DeleteProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteProductSetAsync_Google_Cloud_Vision_V1_DeleteProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteReferenceImage(DeleteReferenceImageRequest, CallSettings)
+
+```
+public override void DeleteReferenceImage(DeleteReferenceImageRequest request, CallSettings callSettings = null)
+```
+
+Permanently deletes a reference image.
+
+The image metadata will be deleted right away, but search queries against ProductSets containing the image may still work until all related caches are refreshed.
+
+The actual image files are not deleted from Google Cloud Storage.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteReferenceImageRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.DeleteReferenceImageRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Overrides**
+
+[ProductSearchClient.DeleteReferenceImage(DeleteReferenceImageRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteReferenceImage_Google_Cloud_Vision_V1_DeleteReferenceImageRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteReferenceImageAsync(DeleteReferenceImageRequest, CallSettings)
+
+```
+public override Task DeleteReferenceImageAsync(DeleteReferenceImageRequest request, CallSettings callSettings = null)
+```
+
+Permanently deletes a reference image.
+
+The image metadata will be deleted right away, but search queries against ProductSets containing the image may still work until all related caches are refreshed.
+
+The actual image files are not deleted from Google Cloud Storage.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteReferenceImageRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.DeleteReferenceImageRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.DeleteReferenceImageAsync(DeleteReferenceImageRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_DeleteReferenceImageAsync_Google_Cloud_Vision_V1_DeleteReferenceImageRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetProduct(GetProductRequest, CallSettings)
+
+```
+public override Product GetProduct(GetProductRequest request, CallSettings callSettings = null)
+```
+
+Gets information associated with a Product.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the Product does not exist.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetProductRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.GetProductRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product)`
+
+The RPC response.
+
+**Overrides**
+
+[ProductSearchClient.GetProduct(GetProductRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProduct_Google_Cloud_Vision_V1_GetProductRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetProductAsync(GetProductRequest, CallSettings)
+
+```
+public override Task<Product> GetProductAsync(GetProductRequest request, CallSettings callSettings = null)
+```
+
+Gets information associated with a Product.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the Product does not exist.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetProductRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.GetProductRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)<[Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product)>`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.GetProductAsync(GetProductRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductAsync_Google_Cloud_Vision_V1_GetProductRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetProductSet(GetProductSetRequest, CallSettings)
+
+```
+public override ProductSet GetProductSet(GetProductSetRequest request, CallSettings callSettings = null)
+```
+
+Gets information associated with a ProductSet.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the ProductSet does not exist.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.GetProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[ProductSet](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSet)`
+
+The RPC response.
+
+**Overrides**
+
+[ProductSearchClient.GetProductSet(GetProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductSet_Google_Cloud_Vision_V1_GetProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetProductSetAsync(GetProductSetRequest, CallSettings)
+
+```
+public override Task<ProductSet> GetProductSetAsync(GetProductSetRequest request, CallSettings callSettings = null)
+```
+
+Gets information associated with a ProductSet.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the ProductSet does not exist.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.GetProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)<[ProductSet](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSet)>`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.GetProductSetAsync(GetProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetProductSetAsync_Google_Cloud_Vision_V1_GetProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetReferenceImage(GetReferenceImageRequest, CallSettings)
+
+```
+public override ReferenceImage GetReferenceImage(GetReferenceImageRequest request, CallSettings callSettings = null)
+```
+
+Gets information associated with a ReferenceImage.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the specified image does not exist.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetReferenceImageRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.GetReferenceImageRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[ReferenceImage](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ReferenceImage)`
+
+The RPC response.
+
+**Overrides**
+
+[ProductSearchClient.GetReferenceImage(GetReferenceImageRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetReferenceImage_Google_Cloud_Vision_V1_GetReferenceImageRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetReferenceImageAsync(GetReferenceImageRequest, CallSettings)
+
+```
+public override Task<ReferenceImage> GetReferenceImageAsync(GetReferenceImageRequest request, CallSettings callSettings = null)
+```
+
+Gets information associated with a ReferenceImage.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the specified image does not exist.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetReferenceImageRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.GetReferenceImageRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)<[ReferenceImage](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ReferenceImage)>`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.GetReferenceImageAsync(GetReferenceImageRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_GetReferenceImageAsync_Google_Cloud_Vision_V1_GetReferenceImageRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ImportProductSets(ImportProductSetsRequest, CallSettings)
+
+```
+public override Operation<ImportProductSetsResponse, BatchOperationMetadata> ImportProductSets(ImportProductSetsRequest request, CallSettings callSettings = null)
+```
+
+Asynchronous API that imports a list of reference images to specified product sets based on a list of image information.
+
+The \[google.longrunning.Operation\]\[google.longrunning.Operation\] API can be used to keep track of the progress and results of the request. `Operation.metadata` contains `BatchOperationMetadata`. (progress) `Operation.response` contains `ImportProductSetsResponse`. (results)
+
+The input source of this method is a csv file on Google Cloud Storage. For the format of the csv file please see \[ImportProductSetsGcsSource.csv\_file\_uri\]\[google.cloud.vision.v1.ImportProductSetsGcsSource.csv\_file\_uri\].
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ImportProductSetsRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ImportProductSetsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://cloud.google.com/dotnet/docs/reference/Google.LongRunning/latest/Google.LongRunning.Operation-2.html)<[ImportProductSetsResponse](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ImportProductSetsResponse), [BatchOperationMetadata](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.BatchOperationMetadata)>`
+
+The RPC response.
+
+**Overrides**
+
+[ProductSearchClient.ImportProductSets(ImportProductSetsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ImportProductSets_Google_Cloud_Vision_V1_ImportProductSetsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ImportProductSetsAsync(ImportProductSetsRequest, CallSettings)
+
+```
+public override async Task<Operation<ImportProductSetsResponse, BatchOperationMetadata>> ImportProductSetsAsync(ImportProductSetsRequest request, CallSettings callSettings = null)
+```
+
+Asynchronous API that imports a list of reference images to specified product sets based on a list of image information.
+
+The \[google.longrunning.Operation\]\[google.longrunning.Operation\] API can be used to keep track of the progress and results of the request. `Operation.metadata` contains `BatchOperationMetadata`. (progress) `Operation.response` contains `ImportProductSetsResponse`. (results)
+
+The input source of this method is a csv file on Google Cloud Storage. For the format of the csv file please see \[ImportProductSetsGcsSource.csv\_file\_uri\]\[google.cloud.vision.v1.ImportProductSetsGcsSource.csv\_file\_uri\].
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ImportProductSetsRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ImportProductSetsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)<[Operation](https://cloud.google.com/dotnet/docs/reference/Google.LongRunning/latest/Google.LongRunning.Operation-2.html)<[ImportProductSetsResponse](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ImportProductSetsResponse), [BatchOperationMetadata](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.BatchOperationMetadata)>>`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.ImportProductSetsAsync(ImportProductSetsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ImportProductSetsAsync_Google_Cloud_Vision_V1_ImportProductSetsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListProducts(ListProductsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListProductsResponse, Product> ListProducts(ListProductsRequest request, CallSettings callSettings = null)
+```
+
+Lists products in an unspecified order.
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if page\_size is greater than 100 or less than 1.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListProductsRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.PagedEnumerable-2.html)<[ListProductsResponse](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductsResponse), [Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product)>`
+
+A pageable sequence of [Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product) resources.
+
+**Overrides**
+
+[ProductSearchClient.ListProducts(ListProductsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProducts_Google_Cloud_Vision_V1_ListProductsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListProductsAsync(ListProductsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListProductsResponse, Product> ListProductsAsync(ListProductsRequest request, CallSettings callSettings = null)
+```
+
+Lists products in an unspecified order.
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if page\_size is greater than 100 or less than 1.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListProductsRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.PagedAsyncEnumerable-2.html)<[ListProductsResponse](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductsResponse), [Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product)>`
+
+A pageable asynchronous sequence of [Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product) resources.
+
+**Overrides**
+
+[ProductSearchClient.ListProductsAsync(ListProductsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductsAsync_Google_Cloud_Vision_V1_ListProductsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListProductSets(ListProductSetsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListProductSetsResponse, ProductSet> ListProductSets(ListProductSetsRequest request, CallSettings callSettings = null)
+```
+
+Lists ProductSets in an unspecified order.
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if page\_size is greater than 100, or less than 1.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListProductSetsRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductSetsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.PagedEnumerable-2.html)<[ListProductSetsResponse](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductSetsResponse), [ProductSet](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSet)>`
+
+A pageable sequence of [ProductSet](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSet) resources.
+
+**Overrides**
+
+[ProductSearchClient.ListProductSets(ListProductSetsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductSets_Google_Cloud_Vision_V1_ListProductSetsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListProductSetsAsync(ListProductSetsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListProductSetsResponse, ProductSet> ListProductSetsAsync(ListProductSetsRequest request, CallSettings callSettings = null)
+```
+
+Lists ProductSets in an unspecified order.
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if page\_size is greater than 100, or less than 1.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListProductSetsRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductSetsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.PagedAsyncEnumerable-2.html)<[ListProductSetsResponse](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductSetsResponse), [ProductSet](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSet)>`
+
+A pageable asynchronous sequence of [ProductSet](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSet) resources.
+
+**Overrides**
+
+[ProductSearchClient.ListProductSetsAsync(ListProductSetsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductSetsAsync_Google_Cloud_Vision_V1_ListProductSetsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListProductsInProductSet(ListProductsInProductSetRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListProductsInProductSetResponse, Product> ListProductsInProductSet(ListProductsInProductSetRequest request, CallSettings callSettings = null)
+```
+
+Lists the Products in a ProductSet, in an unspecified order. If the ProductSet does not exist, the products field of the response will be empty.
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if page\_size is greater than 100 or less than 1.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListProductsInProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductsInProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.PagedEnumerable-2.html)<[ListProductsInProductSetResponse](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductsInProductSetResponse), [Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product)>`
+
+A pageable sequence of [Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product) resources.
+
+**Overrides**
+
+[ProductSearchClient.ListProductsInProductSet(ListProductsInProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductsInProductSet_Google_Cloud_Vision_V1_ListProductsInProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListProductsInProductSetAsync(ListProductsInProductSetRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListProductsInProductSetResponse, Product> ListProductsInProductSetAsync(ListProductsInProductSetRequest request, CallSettings callSettings = null)
+```
+
+Lists the Products in a ProductSet, in an unspecified order. If the ProductSet does not exist, the products field of the response will be empty.
+
+Possible errors:
+
+-   Returns INVALID\_ARGUMENT if page\_size is greater than 100 or less than 1.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListProductsInProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductsInProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.PagedAsyncEnumerable-2.html)<[ListProductsInProductSetResponse](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListProductsInProductSetResponse), [Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product)>`
+
+A pageable asynchronous sequence of [Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product) resources.
+
+**Overrides**
+
+[ProductSearchClient.ListProductsInProductSetAsync(ListProductsInProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListProductsInProductSetAsync_Google_Cloud_Vision_V1_ListProductsInProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListReferenceImages(ListReferenceImagesRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListReferenceImagesResponse, ReferenceImage> ListReferenceImages(ListReferenceImagesRequest request, CallSettings callSettings = null)
+```
+
+Lists reference images.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the parent product does not exist.
+-   Returns INVALID\_ARGUMENT if the page\_size is greater than 100, or less than 1.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListReferenceImagesRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListReferenceImagesRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.PagedEnumerable-2.html)<[ListReferenceImagesResponse](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListReferenceImagesResponse), [ReferenceImage](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ReferenceImage)>`
+
+A pageable sequence of [ReferenceImage](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ReferenceImage) resources.
+
+**Overrides**
+
+[ProductSearchClient.ListReferenceImages(ListReferenceImagesRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListReferenceImages_Google_Cloud_Vision_V1_ListReferenceImagesRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListReferenceImagesAsync(ListReferenceImagesRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListReferenceImagesResponse, ReferenceImage> ListReferenceImagesAsync(ListReferenceImagesRequest request, CallSettings callSettings = null)
+```
+
+Lists reference images.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the parent product does not exist.
+-   Returns INVALID\_ARGUMENT if the page\_size is greater than 100, or less than 1.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListReferenceImagesRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListReferenceImagesRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.PagedAsyncEnumerable-2.html)<[ListReferenceImagesResponse](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ListReferenceImagesResponse), [ReferenceImage](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ReferenceImage)>`
+
+A pageable asynchronous sequence of [ReferenceImage](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ReferenceImage) resources.
+
+**Overrides**
+
+[ProductSearchClient.ListReferenceImagesAsync(ListReferenceImagesRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_ListReferenceImagesAsync_Google_Cloud_Vision_V1_ListReferenceImagesRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### PurgeProducts(PurgeProductsRequest, CallSettings)
+
+```
+public override Operation<Empty, BatchOperationMetadata> PurgeProducts(PurgeProductsRequest request, CallSettings callSettings = null)
+```
+
+Asynchronous API to delete all Products in a ProductSet or all Products that are in no ProductSet.
+
+If a Product is a member of the specified ProductSet in addition to other ProductSets, the Product will still be deleted.
+
+It is recommended to not delete the specified ProductSet until after this operation has completed. It is also recommended to not add any of the Products involved in the batch delete to a new ProductSet while this operation is running because those Products may still end up deleted.
+
+It's not possible to undo the PurgeProducts operation. Therefore, it is recommended to keep the csv files used in ImportProductSets (if that was how you originally built the Product Set) before starting PurgeProducts, in case you need to re-import the data after deletion.
+
+If the plan is to purge all of the Products from a ProductSet and then re-use the empty ProductSet to re-import new Products into the empty ProductSet, you must wait until the PurgeProducts operation has finished for that ProductSet.
+
+The \[google.longrunning.Operation\]\[google.longrunning.Operation\] API can be used to keep track of the progress and results of the request. `Operation.metadata` contains `BatchOperationMetadata`. (progress)
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[PurgeProductsRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.PurgeProductsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://cloud.google.com/dotnet/docs/reference/Google.LongRunning/latest/Google.LongRunning.Operation-2.html)<[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html), [BatchOperationMetadata](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.BatchOperationMetadata)>`
+
+The RPC response.
+
+**Overrides**
+
+[ProductSearchClient.PurgeProducts(PurgeProductsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PurgeProducts_Google_Cloud_Vision_V1_PurgeProductsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### PurgeProductsAsync(PurgeProductsRequest, CallSettings)
+
+```
+public override async Task<Operation<Empty, BatchOperationMetadata>> PurgeProductsAsync(PurgeProductsRequest request, CallSettings callSettings = null)
+```
+
+Asynchronous API to delete all Products in a ProductSet or all Products that are in no ProductSet.
+
+If a Product is a member of the specified ProductSet in addition to other ProductSets, the Product will still be deleted.
+
+It is recommended to not delete the specified ProductSet until after this operation has completed. It is also recommended to not add any of the Products involved in the batch delete to a new ProductSet while this operation is running because those Products may still end up deleted.
+
+It's not possible to undo the PurgeProducts operation. Therefore, it is recommended to keep the csv files used in ImportProductSets (if that was how you originally built the Product Set) before starting PurgeProducts, in case you need to re-import the data after deletion.
+
+If the plan is to purge all of the Products from a ProductSet and then re-use the empty ProductSet to re-import new Products into the empty ProductSet, you must wait until the PurgeProducts operation has finished for that ProductSet.
+
+The \[google.longrunning.Operation\]\[google.longrunning.Operation\] API can be used to keep track of the progress and results of the request. `Operation.metadata` contains `BatchOperationMetadata`. (progress)
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[PurgeProductsRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.PurgeProductsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)<[Operation](https://cloud.google.com/dotnet/docs/reference/Google.LongRunning/latest/Google.LongRunning.Operation-2.html)<[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html), [BatchOperationMetadata](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.BatchOperationMetadata)>>`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.PurgeProductsAsync(PurgeProductsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_PurgeProductsAsync_Google_Cloud_Vision_V1_PurgeProductsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### RemoveProductFromProductSet(RemoveProductFromProductSetRequest, CallSettings)
+
+```
+public override void RemoveProductFromProductSet(RemoveProductFromProductSetRequest request, CallSettings callSettings = null)
+```
+
+Removes a Product from the specified ProductSet.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[RemoveProductFromProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.RemoveProductFromProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Overrides**
+
+[ProductSearchClient.RemoveProductFromProductSet(RemoveProductFromProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_RemoveProductFromProductSet_Google_Cloud_Vision_V1_RemoveProductFromProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### RemoveProductFromProductSetAsync(RemoveProductFromProductSetRequest, CallSettings)
+
+```
+public override Task RemoveProductFromProductSetAsync(RemoveProductFromProductSetRequest request, CallSettings callSettings = null)
+```
+
+Removes a Product from the specified ProductSet.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[RemoveProductFromProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.RemoveProductFromProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.RemoveProductFromProductSetAsync(RemoveProductFromProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_RemoveProductFromProductSetAsync_Google_Cloud_Vision_V1_RemoveProductFromProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateProduct(UpdateProductRequest, CallSettings)
+
+```
+public override Product UpdateProduct(UpdateProductRequest request, CallSettings callSettings = null)
+```
+
+Makes changes to a Product resource. Only the `display_name`, `description`, and `labels` fields can be updated right now.
+
+If labels are updated, the change will not be reflected in queries until the next index time.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the Product does not exist.
+-   Returns INVALID\_ARGUMENT if display\_name is present in update\_mask but is missing from the request or longer than 4096 characters.
+-   Returns INVALID\_ARGUMENT if description is present in update\_mask but is longer than 4096 characters.
+-   Returns INVALID\_ARGUMENT if product\_category is present in update\_mask.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateProductRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.UpdateProductRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product)`
+
+The RPC response.
+
+**Overrides**
+
+[ProductSearchClient.UpdateProduct(UpdateProductRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProduct_Google_Cloud_Vision_V1_UpdateProductRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateProductAsync(UpdateProductRequest, CallSettings)
+
+```
+public override Task<Product> UpdateProductAsync(UpdateProductRequest request, CallSettings callSettings = null)
+```
+
+Makes changes to a Product resource. Only the `display_name`, `description`, and `labels` fields can be updated right now.
+
+If labels are updated, the change will not be reflected in queries until the next index time.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the Product does not exist.
+-   Returns INVALID\_ARGUMENT if display\_name is present in update\_mask but is missing from the request or longer than 4096 characters.
+-   Returns INVALID\_ARGUMENT if description is present in update\_mask but is longer than 4096 characters.
+-   Returns INVALID\_ARGUMENT if product\_category is present in update\_mask.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateProductRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.UpdateProductRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)<[Product](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.Product)>`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.UpdateProductAsync(UpdateProductRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProductAsync_Google_Cloud_Vision_V1_UpdateProductRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateProductSet(UpdateProductSetRequest, CallSettings)
+
+```
+public override ProductSet UpdateProductSet(UpdateProductSetRequest request, CallSettings callSettings = null)
+```
+
+Makes changes to a ProductSet resource. Only display\_name can be updated currently.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the ProductSet does not exist.
+-   Returns INVALID\_ARGUMENT if display\_name is present in update\_mask but missing from the request or longer than 4096 characters.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.UpdateProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[ProductSet](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSet)`
+
+The RPC response.
+
+**Overrides**
+
+[ProductSearchClient.UpdateProductSet(UpdateProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProductSet_Google_Cloud_Vision_V1_UpdateProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateProductSetAsync(UpdateProductSetRequest, CallSettings)
+
+```
+public override Task<ProductSet> UpdateProductSetAsync(UpdateProductSetRequest request, CallSettings callSettings = null)
+```
+
+Makes changes to a ProductSet resource. Only display\_name can be updated currently.
+
+Possible errors:
+
+-   Returns NOT\_FOUND if the ProductSet does not exist.
+-   Returns INVALID\_ARGUMENT if display\_name is present in update\_mask but missing from the request or longer than 4096 characters.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateProductSetRequest](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.UpdateProductSetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://cloud.google.com/dotnet/docs/reference/Google.Api.Gax/latest/Google.Api.Gax.Grpc.CallSettings.html)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)<[ProductSet](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSet)>`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[ProductSearchClient.UpdateProductSetAsync(UpdateProductSetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Vision.V1/3.1.0/Google.Cloud.Vision.V1.ProductSearchClient#Google_Cloud_Vision_V1_ProductSearchClient_UpdateProductSetAsync_Google_Cloud_Vision_V1_UpdateProductSetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-03-09 UTC.

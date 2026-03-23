@@ -163,6 +163,20 @@ Source: https://docs.langchain.com/oss/javascript/reference/deepagents-javascrip
 [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 ```
 
+# Integrations
+
+Source: https://docs.langchain.com/oss/javascript/reference/integrations-javascript
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/reference/integrations-javascript.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
 # LangChain SDK
 
 Source: https://docs.langchain.com/oss/javascript/reference/langchain-javascript
@@ -209,6 +223,18 @@ Complete API reference for LangGraph JavaScript/TypeScript, including graph APIs
 
 
 Build agents that can plan, use subagents, and leverage file systems for complex tasks
+
+
+
+LangChain packages to connect with popular LLM providers, vector stores, tools, and other services.
+
+
+
+Use Model Context Protocol (MCP) tools within LangChain and LangGraph applications.
+
+
+
+Build agents that can plan, use subagents, and leverage file systems for complex tasks.
 ```
 
 ***

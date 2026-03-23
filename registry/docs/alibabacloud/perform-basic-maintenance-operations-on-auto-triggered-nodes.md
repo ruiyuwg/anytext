@@ -1,0 +1,268 @@
+Auto triggered nodes are nodes that are periodically scheduled based on their scheduling configurations after they are committed to the scheduling system. You can view auto triggered nodes in a workspace and perform O&M operations on the desired auto triggered node in the list of auto triggered nodes on the **Auto Triggered Nodes** page in **Operation Center**. For example, you can manually run or enable the scheduling system to automatically run the auto triggered node, view the details of the auto triggered node, or suspend or undeploy the auto triggered node. This topic describes the O&M operations that you can perform on an auto triggered node.
+
+## Usage notes
+
+-   Auto triggered nodes can be automatically scheduled to generate instances only in Operation Center in the production environment. Auto triggered nodes cannot be automatically scheduled to generate instances in Operation Center in the development environment.
+    
+-   After you perform operations such as addition, modification, and undeployment on node code, scheduling configurations, resources, or functions in the production environment, you must commit and deploy the objects to make the configurations take effect.
+    
+-   After you modify an auto triggered node, you must deploy the node. After the node is deployed, the modification takes effect in the production environment. The following issues may occur when you deploy the node: The node fails to be deployed, the deployment process is blocked, or the version of the deployed node does not meet your requirements. In these cases, we recommend that you go to the **Cycle Task** page in **Operation Center** to troubleshoot issues. For more information, see [Manage auto triggered tasks](/help/en/dataworks/user-guide/view-and-manage-auto-triggered-nodes#task-2056582).
+    
+
+## Overview
+
+The following table describes the O&M operations that you can perform on auto triggered nodes.
+
+**O&M operation**
+
+**Description**
+
+[View auto triggered nodes](#section-b72-wak-x5a)
+
+You can view the details of an auto triggered node and perform operations on the node in the list of auto triggered nodes or in the directed acyclic graph (DAG) of the node on the Cycle Task page.
+
+[Run auto triggered nodes](#section-6vs-bws-541)
+
+-   Running modes: Nodes that are deployed to the production environment are scheduled to run at the points in time that you specify. You can view the node scheduling results on the **Cycle Instance** page in **Operation Center**. You can also test the nodes and backfill historical data or future data for the nodes in the production environment and view the node running results on the [Patch Data](/help/en/dataworks/user-guide/backfill-data-for-an-auto-triggered-node-and-view-data-backfill-instances-of-the-node#section-zjx-4c8-kcv) and [Test Instance](/help/en/dataworks/user-guide/test-an-auto-triggered-node-and-view-test-instances-of-the-node#concept-azp-qxh-r2b) pages in Operation Center.
+    
+-   Conditions for running an auto triggered node and issue troubleshooting: You must understand the conditions that must be met to run an auto triggered node and identify the related causes if the auto triggered node is not run.
+    
+-   Emergency O&M operations: If an ancestor node of an auto triggered node is not run and blocks the running of the auto triggered node, you can remove the dependency between the auto triggered node and the ancestor node. If data quality issues occur on multiple descendant nodes of an auto triggered node, you can forcefully rerun the auto triggered node and its descendant nodes.
+    
+
+[Manage auto triggered nodes](#section-0mi-pkj-6pq)
+
+-   Node deployment and node undeployment
+    
+    -   Deploy an auto triggered node: Before you can view an auto triggered node on the Cycle Task page in Operation Center, you must deploy the node to the scheduling system in the production environment.
+        
+    -   Undeploy an auto triggered node: If an auto triggered node does not need to be run, you can undeploy the auto triggered node. If auto triggered nodes in a specified workflow do not need to be run, you can undeploy the auto triggered nodes in the workflow at a time.
+        
+        **Note**
+        
+        After you undeploy an auto triggered node, the auto triggered node is moved to the recycle bin. You can restore the auto triggered node from the recycle bin.
+        
+-   Node management
+    
+    -   Freeze an auto triggered node: If an auto triggered node and its descendant nodes do not need to be run for a specific period of time, you can freeze the auto triggered node.
+        
+    -   Configure monitoring and alerting for an auto triggered node: You can find the auto triggered node that you want to monitor in the list of auto triggered nodes and configure a custom alert rule to monitor the status of the node or monitor the resource group used to run the node. You can also configure a data quality monitoring rule to monitor the table data generated by the auto triggered node.
+        
+    -   Manage priorities of auto triggered nodes: You can use the baseline management feature to adjust the priority of an auto triggered node. Scheduling resources are preferentially allocated to nodes with higher priorities.
+        
+    -   Change the resource group used to run an auto triggered node: You can modify the attributes that are related to the running of an auto triggered node. For example, you can change the resource group for scheduling or resource group for Data Integration that is used to run an auto triggered node.
+        
+    -   Change the node owner: You can change the owners of multiple nodes at a time.
+        
+
+[View operation records of auto triggered nodes](#section-ua3-y7y-ci5)
+
+You can view the operation logs, versions, and operation history of an auto triggered node.
+
+## View auto triggered nodes
+
+In the list of auto triggered nodes, you can view the auto triggered nodes that are committed and deployed to the scheduling system in the production environment. You can check whether the code, scheduling parameter configurations, scheduling dependencies, and lineage of the auto triggered nodes meet your business requirements. You can view the details of an auto triggered node and perform the related operations on the node in the list of auto triggered nodes or in the DAG of the node. For more information, see [Manage auto triggered tasks](/help/en/dataworks/user-guide/view-and-manage-auto-triggered-nodes#task-2056582).
+
+**Note**
+
+-   Only the auto triggered nodes that are deployed to the production environment are displayed in the list of auto triggered nodes on the Cycle Task page in Operation Center.
+    
+-   The following types of nodes are not automatically scheduled: nodes that do not depend on other nodes and nodes that are used as the ancestor nodes of other nodes and depend on their descendant nodes.
+    
+
+## Run auto triggered nodes
+
+You can understand the modes in which nodes in DataWorks are run and perform O&M diagnostics based on the running situations of nodes in an efficient manner.
+
+### Running modes
+
+DataWorks generates auto triggered node instances that are scheduled to run on the next day for an auto triggered node every night. You can click Backfill Data or Test in the Actions column of the auto triggered node to generate a data backfill instance or a test instance for the auto triggered node.
+
+**Instance type**
+
+**Scenario**
+
+**Relationship with an auto triggered node**
+
+**(How an instance is generated)**
+
+**Instance trigger method**
+
+**(How an instance is triggered to run)**
+
+[Auto triggered node instance](/help/en/dataworks/user-guide/view-auto-triggered-node-instances#concept-nlb-nxh-r2b)
+
+Periodic extract, transform, and load (ETL) operations are required.
+
+Every night, DataWorks generates auto triggered node instances that are scheduled to run on the next day based on the snapshot information of an auto triggered node at a specific point in time.
+
+**Note**
+
+Auto triggered nodes cannot be automatically scheduled to generate instances in Operation Center in the development environment.
+
+DataWorks triggers an auto triggered node instance for running.
+
+[Data backfill instance](/help/en/dataworks/user-guide/backfill-data-for-an-auto-triggered-node-and-view-data-backfill-instances-of-the-node#task-2105702)
+
+You want to backfill data of a historical period of time or a period of time in the future for the current auto triggered node and its descendant nodes. This indicates that you must perform ETL operations on the data of that period of time.
+
+You must backfill data for the current auto triggered node to generate data backfill instances for the node.
+
+After you backfill data, the data backfill instances are generated and triggered to run.
+
+[Test an auto triggered task and view test instances generated for the task](/help/en/dataworks/user-guide/test-an-auto-triggered-node-and-view-test-instances-of-the-node#concept-azp-qxh-r2b)
+
+You want to test the current auto triggered node to check whether the node can be run as expected.
+
+**Note**
+
+The code of the auto triggered node is run during the test.
+
+You must test the current auto triggered node to generate test instances for the node.
+
+After you perform the test, the test instances are generated and triggered to run.
+
+### Conditions for running an auto triggered node
+
+An auto triggered node can be scheduled to run only when the following conditions are met: Ancestor nodes of the auto triggered node are successfully run, the scheduling time of the auto triggered node has arrived, scheduling resources are sufficient, and the auto triggered node is not frozen. For more information, see [Prerequisites for an auto triggered node to successfully run](/help/en/dataworks/user-guide/overview-43#section-se2-k7o-z9o). ![Flowchart](https://help-static-aliyun-doc.aliyuncs.com/assets/img/en-US/9439227461/p337451.png)
+
+### Troubleshooting for issues related to node running
+
+Problem description and causes: The scheduling time of an auto triggered node arrives, but the node is not run. The possible causes of this issue may be that the ancestor nodes of the auto triggered node are still running until the scheduling time of the auto triggered node arrives, no sufficient resources can be used to run the auto triggered node, and the auto triggered node is frozen.
+
+Solution: If an auto triggered node fails to run, you can use the [upstream analysis](/help/en/dataworks/user-guide/use-the-features-provided-in-a-dag#task-2105702) feature provided in the DAG of the auto triggered node to quickly identify ancestor nodes that block the running of the auto triggered node. Then, you can use the [intelligent diagnosis](/help/en/dataworks/user-guide/intelligent-diagnosis#task-2489375) feature to diagnose failure causes or related issues of the ancestor nodes. The intelligent diagnosis feature can also be used to quickly troubleshoot issues when dependencies between the auto triggered node and its ancestor nodes are complex. This helps improve O&M efficiency. For more information, see [Why is an auto triggered instance not run after its scheduling time arrives?](/help/en/dataworks/nodes-that-are-not-run#section-yfh-5pw-5mu), [Waiting for resources](/help/en/dataworks/nodes-that-are-waiting-for-resources#concept-2098557), and [Node freezing and unfreezing](/help/en/dataworks/node-freezing-and-unfreezing#concept-2098652).
+
+### Emergency O&M operations
+
+-   If an auto triggered node depends on multiple ancestor nodes and one of the ancestor nodes is not run, you can find the instance generated for the auto triggered node on the Cycle Instance page, open the DAG of the instance, right-click the instance in the DAG, and then choose **Emergency Operations** > **Delete Dependencies**. In the Delete Dependencies with Parent Nodes dialog box, you can specify the name of the ancestor node that is not run to remove the dependency between the auto triggered node and the ancestor node.
+    
+    **Note**
+    
+    You must check whether this operation affects data output based on the code of the node for which the instance is generated and the lineage of the instance.
+    
+-   If data quality issues occur on multiple descendant nodes of an auto triggered node, you can find the instance generated for the auto triggered node on the Cycle Instance page, open the DAG of the instance, right-click the instance in the DAG, and then choose **Emergency Operations** > **Force Rerun** or choose Emergency Operations > Force Rerun Descendant Nodes to forcefully rerun the auto triggered node and its descendant nodes. For more information, see [Appendix: Forcefully rerun the descendant instances of an auto triggered instance](/help/en/dataworks/user-guide/forcefully-rerun-the-descendant-instances-of-an-auto-triggered-node-instance#task-2169914).
+    
+-   In some extreme cases, such as abnormal server power outage and primary/secondary switchover, DataWorks may not be able to completely terminate relevant task processes of MaxCompute. In this case, go to the MaxCompute project that corresponds to a desired MaxCompute computing resource to [terminate tasks](/help/en/maxcompute/user-guide/manage-jobs-in-the-new-maxcompute-console#c7c1f98082m6a).
+    
+
+## Manage auto triggered nodes
+
+### Deploy auto triggered nodes
+
+Before you can view an auto triggered node in the list of auto triggered nodes on the Cycle Task page in Operation Center, you must deploy the node to the scheduling system in the production environment. For more information, see [Deploy nodes (in old-version DataStudio)](/help/en/dataworks/user-guide/deploy-nodes) or [Node or workflow deployment (in new-version Data Studio)](/help/en/dataworks/user-guide/task-release/).
+
+### Undeploy auto triggered nodes
+
+If you no longer require an auto triggered node or a workflow, you can undeploy the node or all nodes in the workflow. After you undeploy an auto triggered node, you cannot find the node on the Cycle Task page. For more information, see [Undeploy nodes (in old-version DataStudio)](/help/en/dataworks/user-guide/undeploy-nodes#task-2299216) or [Undeploy nodes (in new-version Data Studio)](/help/en/dataworks/user-guide/task-release/#6be7d76bc5vbi).
+
+### Freeze auto triggered nodes
+
+**Important**
+
+Do not perform operations on the projectname\_root node, which is the root node of your workspace. All instances of auto triggered nodes in the workspace depend on this node. If this node is frozen, the instances of auto triggered nodes cannot be run.
+
+**Operation**
+
+**Scenario**
+
+**Description**
+
+Freeze an auto triggered node
+
+If an auto triggered node and its descendant nodes do not need to be run for a specific period of time, you can freeze the auto triggered node.
+
+-   Freeze operation: In automatic scheduling scenarios, an auto triggered node can start to run only after all ancestor nodes of the node are successfully run. If one of the ancestor nodes is frozen, the running of the auto triggered node is blocked. If an auto triggered node and its descendant nodes do not need to be run for a specific period of time, you can freeze the root node in the workflow to which the auto triggered node belongs.
+    
+-   Impacts: After you freeze an auto triggered node, auto triggered node instances generated for the auto triggered node are also frozen, and the descendant instances of the auto triggered node instances cannot be run.
+    
+
+Freeze an instance
+
+If an instance generated for an auto triggered node does not need to be run, you can freeze the instance.
+
+The freeze operation takes effect only on the current instance. Other instances that are generated on the same day as the current instance and the instances that are generated later than the current day are not affected.
+
+Set Recurrence to Dry Run for an auto triggered node
+
+If an auto triggered node does not need to be run for a specific period of time, but you do not want the running of the descendant nodes of the node to be blocked, you can set the Recurrence parameter to **Dry Run** for the auto triggered node.
+
+The auto triggered node in the dry-run state generates dry-run instances. The system does not run the dry-run instances to generate data, does not generate run logs for the dry-run instances, and does not display running duration for the dry-run instances.
+
+**Note**
+
+The operation of setting the Recurrence parameter to Skip Execution for an auto triggered node on the DataStudio page achieves the same effect as the operation of freezing the auto triggered node in Operation Center. The modifications to an auto triggered node on the DataStudio page take effect only in the development environment. If you want the modifications to take effect in the production environment, you must deploy the auto triggered node to the production environment. For more information, see [Deploy nodes (in old-version DataStudio)](/help/en/dataworks/user-guide/deploy-nodes) or [Node or workflow deployment (in new-version Data Studio)](/help/en/dataworks/user-guide/task-release/).
+
+**Note**
+
+For more information about the impacts of freezing or unfreezing an auto triggered node or auto triggered node instance, see [Node freezing and unfreezing](/help/en/dataworks/node-freezing-and-unfreezing#concept-2098652).
+
+### Manage node priorities
+
+You can use the baseline management feature to adjust the priority of an auto triggered node in a baseline. Scheduling resources are preferentially allocated to the auto triggered nodes with higher priorities. For more information, see [Manage baselines](/help/en/dataworks/user-guide/manage-baselines#section-gko-b5r-eha).
+
+### Configure monitoring and alerting for an auto triggered node
+
+You can find the auto triggered node that you want to monitor and configure a custom alert rule and a data quality monitoring rule for the node.
+
+-   You can configure a custom alert rule to monitor the status of an auto triggered node. For more information, see [Manage custom alert rules](/help/en/dataworks/user-guide/create-a-custom-alert-rule#task-2364475).
+    
+-   You can configure a data quality monitoring rule for an auto triggered node to monitor the table data that is generated when auto triggered node instances, data backfill instances, or test instances generated for the node are run. For more information, see [Overview](/help/en/dataworks/data-quality-overview#concept-zsz-44h-r2b).
+    
+-   You can configure a custom alert rule to monitor a resource group used to run an auto triggered node based on the number of instances that are generated for the node and waiting for resources in the resource group or based on the resource usage of the resource group. For more information, see [Manage custom alert rules](/help/en/dataworks/user-guide/create-a-custom-alert-rule#task-2364475).
+    
+
+### Change the resource group used to run an auto triggered node
+
+DataWorks allows you to change the resource group for scheduling or resource group for Data Integration used to run an auto triggered node. For more information, see [General reference: Change the resource groups used by tasks](/help/en/dataworks/user-guide/change-the-resource-group-used-by-nodes#task-2042405).
+
+**Note**
+
+If you want to redefine scheduling properties of an auto triggered node, you can go to the DataStudio page, find the desired auto triggered node, and modify the configurations of the scheduling properties on the configuration tab of the auto triggered node. For more information, see [Configure basic properties](/help/en/dataworks/user-guide/configure-basic-properties#concept-dlk-2lq-p2b). You can also go to the batch operation tab to perform an operation on multiple auto triggered nodes at a time. For more information, see [Batch operations](/help/en/dataworks/user-guide/perform-operations-on-multiple-dataworks-objects-at-a-time#task-2136650).
+
+### Change the node owner
+
+Before you can change the owner of a node, you must turn on [Change Node Owner by RAM User](/help/en/dataworks/user-guide/create-and-manage-workspaces/#3f78585b7d1e1).
+
+After Change Node Owner by RAM User is turned on, the workspace administrator can perform the following operations:
+
+-   Change the owner of a node or the owners of multiple nodes at a time on the DataStudio page.
+    
+    -   Change the owner of a node: The workspace administrator can change the owner of a node in the **General** section of the **Properties** tab on the DataStudio page.
+        
+    -   Change the owners of multiple nodes at a time: The workspace administrator can change the owners of multiple nodes at a time on the DataStudio page. For more information, see [Batch operations](/help/en/dataworks/user-guide/perform-operations-on-multiple-dataworks-objects-at-a-time#task-2136650).
+        
+    
+    After you change the owner of a node in the development environment, you must deploy the node to the production environment. This way, the change can take effect.
+    
+-   Change the owner of a node or the owners of multiple nodes at a time in the production environment.
+    
+    -   Change the owner of a node: Find the node and choose **More** > **Change Owner** in the Actions column.
+        
+    -   Change the owners of multiple nodes at a time: Select the nodes whose owners you want to change and click **Change Owner** at the bottom.
+        
+
+**Note**
+
+After you change the owner of a node in the production environment, the owner of the node in the development environment is also changed.
+
+## View operation records of auto triggered nodes
+
+**Entry point**
+
+**Description**
+
+**Operation Log** tab of the DAG page of an auto triggered node or auto triggered node instance
+
+You can view the operation records of an auto triggered node or auto triggered node instance on the **Operation Log** tab.
+
+**Versions** tab on the DataStudio page
+
+If no details about an operation that is performed on and deployed for an auto triggered node are recorded, you can go to the configuration tab of the auto triggered node and compare an existing version of the node with the version of the node in the production environment to obtain details about version changes. For more information, see [Deploy nodes (in old-version DataStudio)](/help/en/dataworks/user-guide/deploy-nodes) or [Node or workflow deployment (in new-version Data Studio)](/help/en/dataworks/user-guide/task-release/).
+
+**Operation History** page in Operation Center
+
+You can go to the Operation History page in Operation Center to view the operation records of an auto triggered node, an auto triggered node instance, or a baseline. For more information, see [View Operation Center operation records](/help/en/dataworks/user-guide/view-operation-records-in-operation-center#task-2170579).
+
+## FAQ
+
+For more information about the FAQ for the O&M operations that can be performed on an auto triggered node, see [FAQ about auto triggered nodes](/help/en/dataworks/overview-16#concept-1962958).

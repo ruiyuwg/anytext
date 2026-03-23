@@ -255,7 +255,7 @@ To resume the subscription, call the [subscribe API](https://docs.stripe.com/api
 
 ## Optional: Refresh transactions on demand
 
-There are two alternatives to [subscribing](https://docs.stripe.com/financial-connections/transactions.md#subscribe-to-transactions) to daily updates: prefetching transaction data and on-demand refreshes. You might use these methods if you only want a one-time transaction data pull for a use case like underwriting. These methods are not mutually exclusive with maintaining a subscription, but most financial institutions don’t update transactions multiple times per day.
+There are two alternatives to [subscribing](https://docs.stripe.com/financial-connections/transactions.md#subscribe-to-transactions) to daily updates: prefetching transaction data and on-demand refreshes. You might use these methods if you only want a one-time transaction data pull for a use case like underwriting. These methods aren’t mutually exclusive with maintaining a subscription, but most financial institutions don’t update transactions multiple times per day.
 
 ### Prefetch transaction data
 

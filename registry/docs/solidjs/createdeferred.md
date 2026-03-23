@@ -5,8 +5,8 @@ Secondary primitives
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/secondary-primitives/create-deferred.mdx)
 
 ```
-import { createDeferred } from "solid-js"
-function createDeferred<T>(  source: () => T,  options?: {    timeoutMs?: number    equals?: false | ((prev: T, next: T) => boolean)    name?: string  }): () => T
+import { createDeferred } from "solid-js";
+function createDeferred<T>(  source: () => T,  options?: {    timeoutMs?: number;    equals?: false | ((prev: T, next: T) => boolean);    name?: string;  }): () => T;
 ```
 
 Creates a readonly that only notifies downstream changes when the browser is idle. `timeoutMs` is the maximum time to wait before forcing the update.

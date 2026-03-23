@@ -1258,11 +1258,11 @@ jsx
 function ViewWithTooltip() {
 // ...
 
-// We get the layout information and pass to ToolTip to position itself
+// We get the layout information and pass to Tooltip to position itself
 const onLayout = React.useCallback(event => {
 targetRef.current?.measureInWindow((x, y, width, height) => {
 // This state update is not guaranteed to run in the same commit
-// This results in a visual "jump" as the ToolTip repositions itself
+// This results in a visual "jump" as the Tooltip repositions itself
 setTargetRect({x, y, width, height});
 });
 }, \[]);
@@ -1286,7 +1286,7 @@ function ViewWithTooltip() {
 
 useLayoutEffect(() => {
 // The measurement and state update for `targetRect` happens in a single commit
-// allowing ToolTip to position itself without intermediate paints
+// allowing Tooltip to position itself without intermediate paints
 targetRef.current?.measureInWindow((x, y, width, height) => {
 setTargetRect({x, y, width, height});
 });
@@ -1302,11 +1302,11 @@ return (
 
 ![A view that is moving to the corners of the viewport and center with a tooltip rendered either above or below it. The tooltip is rendered after a short delay after the view moves](/img/new-architecture/async-on-layout.gif)
 
-Asynchronous measurement and render of the ToolTip. [See code](https://gist.github.com/lunaleaps/eabd653d9864082ac1d3772dac217ab9).
+Asynchronous measurement and render of the Tooltip. [See code](https://gist.github.com/lunaleaps/eabd653d9864082ac1d3772dac217ab9).
 
 ![A view that is moving to the corners of the viewport and center with a tooltip rendered either above or below it. The view and tooltip move in unison.](/img/new-architecture/sync-use-layout-effect.gif)
 
-Synchronous measurement and render of the ToolTip. [See code](https://gist.github.com/lunaleaps/148756563999c83220887757f2e549a3).
+Synchronous measurement and render of the Tooltip. [See code](https://gist.github.com/lunaleaps/148756563999c83220887757f2e549a3).
 
 ### Support for Concurrent Renderer and Features[​](#support-for-concurrent-renderer-and-features "Direct link to Support for Concurrent Renderer and Features")
 

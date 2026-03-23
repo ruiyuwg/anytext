@@ -199,7 +199,7 @@ Ensure LangSmith services emit logs to stdout/stderr and forward them via [Fluen
 
 ## Continuous integration
 
-- The preferred method to manage [LangSmith deployments](/langsmith/deployments) is to create a CI process that builds [Agent Server](/langsmith/agent-server) images and pushes them to [Azure Container Registry](https://azure.microsoft.com/en-us/products/container-registry). Create a test deployment for pull requests before deploying a new revision to staging or production upon PR merge.
+- The preferred method to manage [LangSmith deployments](/langsmith/deployment) is to create a CI process that builds [Agent Server](/langsmith/agent-server) images and pushes them to [Azure Container Registry](https://azure.microsoft.com/en-us/products/container-registry). Create a test deployment for pull requests before deploying a new revision to staging or production upon PR merge.
 
 ***
 

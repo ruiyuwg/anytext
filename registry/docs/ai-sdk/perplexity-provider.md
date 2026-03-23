@@ -13,36 +13,36 @@ The Perplexity provider is available via the `@ai-sdk/perplexity` module. You ca
 You can import the default provider instance `perplexity` from `@ai-sdk/perplexity`:
 
 ```ts
-import { perplexity } from "@ai-sdk/perplexity";
+import { perplexity } from '@ai-sdk/perplexity';
 ```
 
 For custom configuration, you can import `createPerplexity` and create a provider instance with your settings:
 
 ```ts
-import { createPerplexity } from "@ai-sdk/perplexity";
+import { createPerplexity } from '@ai-sdk/perplexity';
 
 const perplexity = createPerplexity({
-  apiKey: process.env.PERPLEXITY_API_KEY ?? "",
+  apiKey: process.env.PERPLEXITY_API_KEY ?? '',
 });
 ```
 
 You can use the following optional settings to customize the Perplexity provider instance:
 
-- **baseURL** _string_
+- **baseURL** *string*
 
   Use a different URL prefix for API calls.
   The default prefix is `https://api.perplexity.ai`.
 
-- **apiKey** _string_
+- **apiKey** *string*
 
   API key that is being sent using the `Authorization` header. It defaults to
   the `PERPLEXITY_API_KEY` environment variable.
 
-- **headers** _Record\<string,string>_
+- **headers** *Record\<string,string>*
 
   Custom headers to include in the requests.
 
-- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
+- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
 
@@ -51,12 +51,12 @@ You can use the following optional settings to customize the Perplexity provider
 You can create Perplexity models using a provider instance:
 
 ```ts
-import { perplexity } from "@ai-sdk/perplexity";
-import { generateText } from "ai";
+import { perplexity } from '@ai-sdk/perplexity';
+import { generateText } from 'ai';
 
 const { text } = await generateText({
-  model: perplexity("sonar-pro"),
-  prompt: "What are the latest developments in quantum computing?",
+  model: perplexity('sonar-pro'),
+  prompt: 'What are the latest developments in quantum computing?',
 });
 ```
 
@@ -65,12 +65,12 @@ const { text } = await generateText({
 Websites that have been used to generate the response are included in the `sources` property of the result:
 
 ```ts
-import { perplexity } from "@ai-sdk/perplexity";
-import { generateText } from "ai";
+import { perplexity } from '@ai-sdk/perplexity';
+import { generateText } from 'ai';
 
 const { text, sources } = await generateText({
-  model: perplexity("sonar-pro"),
-  prompt: "What are the latest developments in quantum computing?",
+  model: perplexity('sonar-pro'),
+  prompt: 'What are the latest developments in quantum computing?',
 });
 
 console.log(sources);
@@ -83,12 +83,11 @@ Additional configuration options are available through `providerOptions`.
 
 ```ts
 const result = await generateText({
-  model: perplexity("sonar-pro"),
-  prompt: "What are the latest developments in quantum computing?",
+  model: perplexity('sonar-pro'),
+  prompt: 'What are the latest developments in quantum computing?',
   providerOptions: {
     perplexity: {
       return_images: true, // Enable image responses (Tier-2 Perplexity users only)
-      search_recency_filter: "week", // Filter search results by recency
     },
   },
 });
@@ -106,83 +105,23 @@ console.log(result.providerMetadata);
 // }
 ```
 
-#### Provider Options
-
-The following provider-specific options are available:
-
-- **return_images** _boolean_
-
-  Enable image responses. When set to `true`, the response may include relevant images. This feature is only available to Perplexity Tier-2 users and above.
-
-- **search_recency_filter** _string_
-
-  Filter search results by recency. Possible values: `'hour'`, `'day'`, `'week'`, `'month'`. If not specified, defaults to all time.
-
-  Any other [Perplexity API
-  parameters](https://docs.perplexity.ai/api-reference/chat-completions) can
-  also be passed through `providerOptions.perplexity`.
-
-#### Provider Metadata
-
-The response metadata includes:
+The metadata includes:
 
 - `usage`: Object containing `citationTokens` and `numSearchQueries` metrics
-- `images`: Array of image objects when `return_images` is enabled (Tier-2 users only). Each image contains `imageUrl`, `originUrl`, `height`, and `width`.
+- `images`: Array of image URLs when `return_images` is enabled (Tier-2 users only)
 
-### PDF Support
-
-The Perplexity provider supports reading PDF files.
-You can pass PDF files as part of the message content using the `file` type:
-
-```ts
-const result = await generateText({
-  model: perplexity("sonar-pro"),
-  messages: [
-    {
-      role: "user",
-      content: [
-        {
-          type: "text",
-          text: "What is this document about?",
-        },
-        {
-          type: "file",
-          data: fs.readFileSync("./data/ai.pdf"),
-          mediaType: "application/pdf",
-          filename: "ai.pdf", // optional
-        },
-      ],
-    },
-  ],
-});
-```
-
-You can also pass the URL of a PDF:
-
-```ts
-{
-  type: 'file',
-  data: new URL('https://example.com/document.pdf'),
-  mediaType: 'application/pdf',
-  filename: 'document.pdf', // optional
-}
-```
-
-The model will have access to the contents of the PDF file and
-respond to questions about it.
+You can enable image responses by setting `return_images: true` in the provider options. This feature is only available to Perplexity Tier-2 users and above.
 
 For more details about Perplexity's capabilities, see the [Perplexity chat
 completion docs](https://docs.perplexity.ai/api-reference/chat-completions).
 
 ## Model Capabilities
 
-| Model                 | Image Input | Object Generation | Tool Usage | Tool Streaming |
-| --------------------- | ----------- | ----------------- | ---------- | -------------- |
-| `sonar-deep-research` |             |                   |            |                |
-| `sonar-reasoning-pro` |             |                   |            |                |
-| `sonar-reasoning`     |             |                   |            |                |
-| `sonar-pro`           |             |                   |            |                |
-| `sonar`               |             |                   |            |                |
+| Model                 | Image Input         | Object Generation   | Tool Usage          | Tool Streaming      |
+| --------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| `sonar-pro`           |  |  |  |  |
+| `sonar`               |  |  |  |  |
+| `sonar-deep-research` |  |  |  |  |
 
 Please see the [Perplexity docs](https://docs.perplexity.ai) for detailed API
 documentation and the latest updates.

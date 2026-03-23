@@ -362,7 +362,7 @@ When creating a rule, Radar provides feedback if you attempt to use an invalid c
 - `:risk_level: < 'highest'` (string values can only make use of = or != operators)
 - `:ip_country: = 'Canada'` (country values must be expressed in two-letter short code)
 - `:amount_in_usd: >= 'one thousand dollars'` (numeric values must be expressed in numbers)
-- `:is_anonymous_ip: = 'true'` (Boolean attributes are not used with operators or values)
+- `:is_anonymous_ip: = 'true'` (Boolean attributes aren’t used with operators or values)
 
 ### Velocity rules
 

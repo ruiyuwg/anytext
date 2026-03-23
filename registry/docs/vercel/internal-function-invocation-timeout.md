@@ -24,7 +24,7 @@ For more information on Vercel Functions timeouts, see [What can I do about Verc
 
 title: "INTERNAL\_FUNCTION\_NOT\_FOUND"
 description: "The internal function could not be found. This is a Vercel"
-last\_updated: "2026-03-08T05:03:14.169Z"
+last\_updated: "2026-03-23T09:40:09.689Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_FUNCTION\_NOT\_FOUND"
 
 # INTERNAL\_FUNCTION\_NOT\_FOUND
@@ -46,7 +46,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_FUNCTION\_NOT\_READY"
 description: "The internal function is not ready to be invoked. This is a Vercel error."
-last\_updated: "2026-03-08T05:03:14.176Z"
+last\_updated: "2026-03-23T09:40:09.694Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_FUNCTION\_NOT\_READY"
 
 # INTERNAL\_FUNCTION\_NOT\_READY
@@ -68,7 +68,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_MICROFRONTENDS\_BUILD\_ERROR"
 description: "The microfrontend build did not include the required data as expected."
-last\_updated: "2026-03-08T05:03:14.179Z"
+last\_updated: "2026-03-23T09:40:09.697Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_MICROFRONTENDS\_BUILD\_ERROR"
 
 # INTERNAL\_MICROFRONTENDS\_BUILD\_ERROR
@@ -85,7 +85,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_MICROFRONTENDS\_INVALID\_CONFIGURATION\_ERROR"
 description: "The microfrontend configuration file is invalid."
-last\_updated: "2026-03-08T05:03:14.182Z"
+last\_updated: "2026-03-23T09:40:09.700Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_MICROFRONTENDS\_INVALID\_CONFIGURATION\_ERROR"
 
 # INTERNAL\_MICROFRONTENDS\_INVALID\_CONFIGURATION\_ERROR
@@ -104,7 +104,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_MICROFRONTENDS\_UNEXPECTED\_ERROR"
 description: "An unexpected internal error occurred in the microfrontend."
-last\_updated: "2026-03-08T05:03:14.185Z"
+last\_updated: "2026-03-23T09:40:09.704Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_MICROFRONTENDS\_UNEXPECTED\_ERROR"
 
 # INTERNAL\_MICROFRONTENDS\_UNEXPECTED\_ERROR
@@ -119,7 +119,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_MISSING\_RESPONSE\_FROM\_CACHE"
 description: "This error indicates a missing response from the cache during a deployment or build process."
-last\_updated: "2026-03-08T05:03:14.187Z"
+last\_updated: "2026-03-23T09:40:09.707Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_MISSING\_RESPONSE\_FROM\_CACHE"
 
 # INTERNAL\_MISSING\_RESPONSE\_FROM\_CACHE
@@ -138,7 +138,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_OPTIMIZED\_IMAGE\_REQUEST\_FAILED"
 description: "The request for an internally optimized image failed. This is a server error."
-last\_updated: "2026-03-08T05:03:14.191Z"
+last\_updated: "2026-03-23T09:40:09.710Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_OPTIMIZED\_IMAGE\_REQUEST\_FAILED"
 
 # INTERNAL\_OPTIMIZED\_IMAGE\_REQUEST\_FAILED
@@ -159,7 +159,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_ROUTER\_CANNOT\_PARSE\_PATH"
 description: "The CDN has failed to parse application-specified URL, such as rewrite/redirection URLs."
-last\_updated: "2026-03-08T05:03:14.193Z"
+last\_updated: "2026-03-23T09:40:09.713Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_ROUTER\_CANNOT\_PARSE\_PATH"
 
 # INTERNAL\_ROUTER\_CANNOT\_PARSE\_PATH
@@ -178,7 +178,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_STATIC\_REQUEST\_FAILED"
 description: "This error occurs when a request for a static file in a project fails."
-last\_updated: "2026-03-08T05:03:14.196Z"
+last\_updated: "2026-03-23T09:40:09.716Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_STATIC\_REQUEST\_FAILED"
 
 # INTERNAL\_STATIC\_REQUEST\_FAILED
@@ -199,7 +199,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_UNARCHIVE\_FAILED"
 description: "Unarchiving of the deployment or resource failed. This is an internal error."
-last\_updated: "2026-03-08T05:03:14.200Z"
+last\_updated: "2026-03-23T09:40:09.720Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_UNARCHIVE\_FAILED"
 
 # INTERNAL\_UNARCHIVE\_FAILED
@@ -222,7 +222,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_UNEXPECTED\_ERROR"
 description: "An unexpected internal error occurred. This is a general internal error."
-last\_updated: "2026-03-08T05:03:14.203Z"
+last\_updated: "2026-03-23T09:40:09.723Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_UNEXPECTED\_ERROR"
 
 # INTERNAL\_UNEXPECTED\_ERROR
@@ -241,5 +241,5 @@ To troubleshoot this error, follow these steps:
 
 title: "INVALID\_IMAGE\_OPTIMIZE\_REQUEST"
 description: "The query string is using an invalid value for q, w, or url parameters. This is a request error."
-last\_updated: "2026-03-08T05:03:14.210Z"
+last\_updated: "2026-03-23T09:40:09.736Z"
 source: "https://vercel.com/docs/errors/INVALID\_IMAGE\_OPTIMIZE\_REQUEST"

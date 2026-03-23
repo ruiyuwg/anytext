@@ -17,8 +17,8 @@ You can then use the `experimental_telemetry` option to enable telemetry on spec
 
 ```ts highlight="4"
 const result = await generateText({
-  model: __MODEL__,
-  prompt: "Write a short story about a cat.",
+  model: openai('gpt-4-turbo'),
+  prompt: 'Write a short story about a cat.',
   experimental_telemetry: { isEnabled: true },
 });
 ```
@@ -36,14 +36,14 @@ and `metadata` to include additional information in the telemetry data.
 
 ```ts highlight="6-10"
 const result = await generateText({
-  model: __MODEL__,
-  prompt: "Write a short story about a cat.",
+  model: openai('gpt-4-turbo'),
+  prompt: 'Write a short story about a cat.',
   experimental_telemetry: {
     isEnabled: true,
-    functionId: "my-awesome-function",
+    functionId: 'my-awesome-function',
     metadata: {
-      something: "custom",
-      someOtherThing: "other-value",
+      something: 'custom',
+      someOtherThing: 'other-value',
     },
   },
 });
@@ -57,132 +57,14 @@ you want your traces to use a `TracerProvider` other than the one provided by th
 ```ts highlight="7"
 const tracerProvider = new NodeTracerProvider();
 const result = await generateText({
-  model: __MODEL__,
-  prompt: "Write a short story about a cat.",
+  model: openai('gpt-4-turbo'),
+  prompt: 'Write a short story about a cat.',
   experimental_telemetry: {
     isEnabled: true,
-    tracer: tracerProvider.getTracer("ai"),
+    tracer: tracerProvider.getTracer('ai'),
   },
 });
 ```
-
-## Telemetry Integrations
-
-Telemetry integrations let you hook into the generation lifecycle to build custom observability — logging, analytics, DevTools, or any other monitoring system. Instead of wiring up individual callbacks on every call, you implement a `TelemetryIntegration` once and pass it via `experimental_telemetry.integrations`.
-
-### Using an integration
-
-Pass one or more integrations to any `generateText` or `streamText` call:
-
-```ts highlight="6-8"
-import { streamText } from "ai";
-import { devToolsIntegration } from "@ai-sdk/devtools";
-
-const result = streamText({
-  model: openai("gpt-4o"),
-  prompt: "Hello!",
-  experimental_telemetry: {
-    isEnabled: true,
-    integrations: [devToolsIntegration()],
-  },
-});
-```
-
-You can combine multiple integrations — they all receive the same lifecycle events:
-
-```ts
-experimental_telemetry: {
-  isEnabled: true,
-  integrations: [devToolsIntegration(), otelIntegration(), customLogger()],
-},
-```
-
-Errors inside integrations are caught and do not break the generation flow.
-
-### Building a custom integration
-
-Implement the `TelemetryIntegration` interface from the `ai` package. All methods are optional — implement only the lifecycle events you care about:
-
-```ts
-import type { TelemetryIntegration } from "ai";
-import { bindTelemetryIntegration } from "ai";
-
-class MyIntegration implements TelemetryIntegration {
-  async onStart(event) {
-    console.log("Generation started:", event.model.modelId);
-  }
-
-  async onStepFinish(event) {
-    console.log(
-      `Step ${event.stepNumber} done:`,
-      event.usage.totalTokens,
-      "tokens",
-    );
-  }
-
-  async onToolCallFinish(event) {
-    if (event.success) {
-      console.log(
-        `Tool "${event.toolCall.toolName}" took ${event.durationMs}ms`,
-      );
-    } else {
-      console.error(`Tool "${event.toolCall.toolName}" failed:`, event.error);
-    }
-  }
-
-  async onFinish(event) {
-    console.log("Done. Total tokens:", event.totalUsage.totalTokens);
-  }
-}
-
-export function myIntegration(): TelemetryIntegration {
-  return bindTelemetryIntegration(new MyIntegration());
-}
-```
-
-Use `bindTelemetryIntegration` for class-based integrations to ensure `this` is correctly bound when methods are extracted and called as callbacks.
-
-### Available lifecycle methods
-
-\<PropertiesTable
-content={\[
-{
-name: 'onStart',
-type: '(event: OnStartEvent) => void | PromiseLike',
-description:
-'Called when the generation operation begins, before any LLM calls.',
-},
-{
-name: 'onStepStart',
-type: '(event: OnStepStartEvent) => void | PromiseLike',
-description:
-'Called when a step (LLM call) begins, before the provider is called.',
-},
-{
-name: 'onToolCallStart',
-type: '(event: OnToolCallStartEvent) => void | PromiseLike',
-description: "Called when a tool's execute function is about to run.",
-},
-{
-name: 'onToolCallFinish',
-type: '(event: OnToolCallFinishEvent) => void | PromiseLike',
-description: "Called when a tool's execute function completes or errors.",
-},
-{
-name: 'onStepFinish',
-type: '(event: OnStepFinishEvent) => void | PromiseLike',
-description: 'Called when a step (LLM call) completes.',
-},
-{
-name: 'onFinish',
-type: '(event: OnFinishEvent) => void | PromiseLike',
-description:
-'Called when the entire generation completes (all steps finished).',
-},
-]}
-/>
-
-The event types for each method are the same as the corresponding [event callbacks](/docs/ai-sdk-core/event-listeners). See the event callbacks documentation for the full property reference of each event.
 
 ## Collected Data
 
@@ -192,22 +74,25 @@ The event types for each method are the same as the corresponding [event callbac
 
 - `ai.generateText` (span): the full length of the generateText call. It contains 1 or more `ai.generateText.doGenerate` spans.
   It contains the [basic LLM span information](#basic-llm-span-information) and the following attributes:
+
   - `operation.name`: `ai.generateText` and the functionId that was set through `telemetry.functionId`
   - `ai.operationId`: `"ai.generateText"`
   - `ai.prompt`: the prompt that was used when calling `generateText`
   - `ai.response.text`: the text that was generated
   - `ai.response.toolCalls`: the tool calls that were made as part of the generation (stringified JSON)
   - `ai.response.finishReason`: the reason why the generation finished
-  - `ai.settings.maxOutputTokens`: the maximum number of output tokens that were set
+  - `ai.settings.maxSteps`: the maximum number of steps that were set
 
 - `ai.generateText.doGenerate` (span): a provider doGenerate call. It can contain `ai.toolCall` spans.
   It contains the [call LLM span information](#call-llm-span-information) and the following attributes:
+
   - `operation.name`: `ai.generateText.doGenerate` and the functionId that was set through `telemetry.functionId`
   - `ai.operationId`: `"ai.generateText.doGenerate"`
+  - `ai.prompt.format`: the format of the prompt
   - `ai.prompt.messages`: the messages that were passed into the provider
-  - `ai.prompt.tools`: array of stringified tool definitions. The tools can be of type `function` or `provider-defined-client`.
-    Function tools have a `name`, `description` (optional), and `inputSchema` (JSON schema).
-    Provider-defined-client tools have a `name`, `id`, and `input` (Record).
+  - `ai.prompt.tools`: array of stringified tool definitions. The tools can be of type `function` or `provider-defined`.
+    Function tools have a `name`, `description` (optional), and `parameters` (JSON schema).
+    Provider-defined tools have a `name`, `id`, and `args` (Record).
   - `ai.prompt.toolChoice`: the stringified tool choice setting (JSON). It has a `type` property
     (`auto`, `none`, `required`, `tool`), and if the type is `tool`, a `toolName` property with the specific tool.
   - `ai.response.text`: the text that was generated
@@ -222,23 +107,26 @@ The event types for each method are the same as the corresponding [event callbac
 
 - `ai.streamText` (span): the full length of the streamText call. It contains a `ai.streamText.doStream` span.
   It contains the [basic LLM span information](#basic-llm-span-information) and the following attributes:
+
   - `operation.name`: `ai.streamText` and the functionId that was set through `telemetry.functionId`
   - `ai.operationId`: `"ai.streamText"`
   - `ai.prompt`: the prompt that was used when calling `streamText`
   - `ai.response.text`: the text that was generated
   - `ai.response.toolCalls`: the tool calls that were made as part of the generation (stringified JSON)
   - `ai.response.finishReason`: the reason why the generation finished
-  - `ai.settings.maxOutputTokens`: the maximum number of output tokens that were set
+  - `ai.settings.maxSteps`: the maximum number of steps that were set
 
 - `ai.streamText.doStream` (span): a provider doStream call.
   This span contains an `ai.stream.firstChunk` event and `ai.toolCall` spans.
   It contains the [call LLM span information](#call-llm-span-information) and the following attributes:
+
   - `operation.name`: `ai.streamText.doStream` and the functionId that was set through `telemetry.functionId`
   - `ai.operationId`: `"ai.streamText.doStream"`
+  - `ai.prompt.format`: the format of the prompt
   - `ai.prompt.messages`: the messages that were passed into the provider
-  - `ai.prompt.tools`: array of stringified tool definitions. The tools can be of type `function` or `provider-defined-client`.
-    Function tools have a `name`, `description` (optional), and `inputSchema` (JSON schema).
-    Provider-defined-client tools have a `name`, `id`, and `input` (Record).
+  - `ai.prompt.tools`: array of stringified tool definitions. The tools can be of type `function` or `provider-defined`.
+    Function tools have a `name`, `description` (optional), and `parameters` (JSON schema).
+    Provider-defined tools have a `name`, `id`, and `args` (Record).
   - `ai.prompt.toolChoice`: the stringified tool choice setting (JSON). It has a `type` property
     (`auto`, `none`, `required`, `tool`), and if the type is `tool`, a `toolName` property with the specific tool.
   - `ai.response.text`: the text that was generated
@@ -251,25 +139,73 @@ The event types for each method are the same as the corresponding [event callbac
 - `ai.toolCall` (span): a tool call that is made as part of the generateText call. See [Tool call spans](#tool-call-spans) for more details.
 
 - `ai.stream.firstChunk` (event): an event that is emitted when the first chunk of the stream is received.
+
   - `ai.response.msToFirstChunk`: the time it took to receive the first chunk
 
 - `ai.stream.finish` (event): an event that is emitted when the finish part of the LLM stream is received.
 
 It also records a `ai.stream.firstChunk` event when the first chunk of the stream is received.
 
-### Deprecated object APIs
+### generateObject function
 
-`generateObject` and `streamObject` are deprecated. Use `generateText` and
-`streamText` with the `output` property instead.
+`generateObject` records 2 types of spans:
 
-If you still run deprecated object APIs, you will see legacy span names:
+- `ai.generateObject` (span): the full length of the generateObject call. It contains 1 or more `ai.generateObject.doGenerate` spans.
+  It contains the [basic LLM span information](#basic-llm-span-information) and the following attributes:
 
-- `generateObject`: `ai.generateObject`, `ai.generateObject.doGenerate`
-- `streamObject`: `ai.streamObject`, `ai.streamObject.doStream`, `ai.stream.firstChunk`
+  - `operation.name`: `ai.generateObject` and the functionId that was set through `telemetry.functionId`
+  - `ai.operationId`: `"ai.generateObject"`
+  - `ai.prompt`: the prompt that was used when calling `generateObject`
+  - `ai.schema`: Stringified JSON schema version of the schema that was passed into the `generateObject` function
+  - `ai.schema.name`: the name of the schema that was passed into the `generateObject` function
+  - `ai.schema.description`: the description of the schema that was passed into the `generateObject` function
+  - `ai.response.object`: the object that was generated (stringified JSON)
+  - `ai.settings.mode`: the object generation mode, e.g. `json`
+  - `ai.settings.output`: the output type that was used, e.g. `object` or `no-schema`
 
-Legacy object spans include the same core metadata as other LLM spans, plus
-object-specific attributes such as `ai.schema.*`, `ai.response.object`, and
-`ai.settings.output`.
+- `ai.generateObject.doGenerate` (span): a provider doGenerate call.
+  It contains the [call LLM span information](#call-llm-span-information) and the following attributes:
+
+  - `operation.name`: `ai.generateObject.doGenerate` and the functionId that was set through `telemetry.functionId`
+  - `ai.operationId`: `"ai.generateObject.doGenerate"`
+  - `ai.prompt.format`: the format of the prompt
+  - `ai.prompt.messages`: the messages that were passed into the provider
+  - `ai.response.object`: the object that was generated (stringified JSON)
+  - `ai.settings.mode`: the object generation mode
+  - `ai.response.finishReason`: the reason why the generation finished
+
+### streamObject function
+
+`streamObject` records 2 types of spans and 1 type of event:
+
+- `ai.streamObject` (span): the full length of the streamObject call. It contains 1 or more `ai.streamObject.doStream` spans.
+  It contains the [basic LLM span information](#basic-llm-span-information) and the following attributes:
+
+  - `operation.name`: `ai.streamObject` and the functionId that was set through `telemetry.functionId`
+  - `ai.operationId`: `"ai.streamObject"`
+  - `ai.prompt`: the prompt that was used when calling `streamObject`
+  - `ai.schema`: Stringified JSON schema version of the schema that was passed into the `streamObject` function
+  - `ai.schema.name`: the name of the schema that was passed into the `streamObject` function
+  - `ai.schema.description`: the description of the schema that was passed into the `streamObject` function
+  - `ai.response.object`: the object that was generated (stringified JSON)
+  - `ai.settings.mode`: the object generation mode, e.g. `json`
+  - `ai.settings.output`: the output type that was used, e.g. `object` or `no-schema`
+
+- `ai.streamObject.doStream` (span): a provider doStream call.
+  This span contains an `ai.stream.firstChunk` event.
+  It contains the [call LLM span information](#call-llm-span-information) and the following attributes:
+
+  - `operation.name`: `ai.streamObject.doStream` and the functionId that was set through `telemetry.functionId`
+  - `ai.operationId`: `"ai.streamObject.doStream"`
+  - `ai.prompt.format`: the format of the prompt
+  - `ai.prompt.messages`: the messages that were passed into the provider
+  - `ai.settings.mode`: the object generation mode
+  - `ai.response.object`: the object that was generated (stringified JSON)
+  - `ai.response.msToFirstChunk`: the time it took to receive the first chunk
+  - `ai.response.finishReason`: the reason why the generation finished
+
+- `ai.stream.firstChunk` (event): an event that is emitted when the first chunk of the stream is received.
+  - `ai.response.msToFirstChunk`: the time it took to receive the first chunk
 
 ### embed function
 
@@ -277,6 +213,7 @@ object-specific attributes such as `ai.schema.*`, `ai.response.object`, and
 
 - `ai.embed` (span): the full length of the embed call. It contains 1 `ai.embed.doEmbed` spans.
   It contains the [basic embedding span information](#basic-embedding-span-information) and the following attributes:
+
   - `operation.name`: `ai.embed` and the functionId that was set through `telemetry.functionId`
   - `ai.operationId`: `"ai.embed"`
   - `ai.value`: the value that was passed into the `embed` function
@@ -284,6 +221,7 @@ object-specific attributes such as `ai.schema.*`, `ai.response.object`, and
 
 - `ai.embed.doEmbed` (span): a provider doEmbed call.
   It contains the [basic embedding span information](#basic-embedding-span-information) and the following attributes:
+
   - `operation.name`: `ai.embed.doEmbed` and the functionId that was set through `telemetry.functionId`
   - `ai.operationId`: `"ai.embed.doEmbed"`
   - `ai.values`: the values that were passed into the provider (array)
@@ -295,6 +233,7 @@ object-specific attributes such as `ai.schema.*`, `ai.response.object`, and
 
 - `ai.embedMany` (span): the full length of the embedMany call. It contains 1 or more `ai.embedMany.doEmbed` spans.
   It contains the [basic embedding span information](#basic-embedding-span-information) and the following attributes:
+
   - `operation.name`: `ai.embedMany` and the functionId that was set through `telemetry.functionId`
   - `ai.operationId`: `"ai.embedMany"`
   - `ai.values`: the values that were passed into the `embedMany` function
@@ -302,6 +241,7 @@ object-specific attributes such as `ai.schema.*`, `ai.response.object`, and
 
 - `ai.embedMany.doEmbed` (span): a provider doEmbed call.
   It contains the [basic embedding span information](#basic-embedding-span-information) and the following attributes:
+
   - `operation.name`: `ai.embedMany.doEmbed` and the functionId that was set through `telemetry.functionId`
   - `ai.operationId`: `"ai.embedMany.doEmbed"`
   - `ai.values`: the values that were sent to the provider
@@ -311,7 +251,8 @@ object-specific attributes such as `ai.schema.*`, `ai.response.object`, and
 
 ### Basic LLM span information
 
-Many spans that use LLMs (`ai.generateText`, `ai.generateText.doGenerate`, `ai.streamText`, `ai.streamText.doStream`) contain the following attributes:
+Many spans that use LLMs (`ai.generateText`, `ai.generateText.doGenerate`, `ai.streamText`, `ai.streamText.doStream`,
+`ai.generateObject`, `ai.generateObject.doGenerate`, `ai.streamObject`, `ai.streamObject.doStream`) contain the following attributes:
 
 - `resource.name`: the functionId that was set through `telemetry.functionId`
 - `ai.model.id`: the id of the model
@@ -326,7 +267,7 @@ Many spans that use LLMs (`ai.generateText`, `ai.generateText.doGenerate`, `ai.s
 
 ### Call LLM span information
 
-Spans that correspond to individual LLM calls (`ai.generateText.doGenerate`, `ai.streamText.doStream`) contain
+Spans that correspond to individual LLM calls (`ai.generateText.doGenerate`, `ai.streamText.doStream`, `ai.generateObject.doGenerate`, `ai.streamObject.doStream`) contain
 [basic LLM span information](#basic-llm-span-information) and the following attributes:
 
 - `ai.response.model`: the model that was used to generate the response. This can be different from the model that was requested if the provider supports aliases.
@@ -355,6 +296,7 @@ Many spans that use embedding models (`ai.embed`, `ai.embed.doEmbed`, `ai.embedM
 - `ai.model.id`: the id of the model
 - `ai.model.provider`: the provider of the model
 - `ai.request.headers.*`: the request headers that were passed in through `headers`
+- `ai.response.providerMetadata`: provider specific metadata returned with the generation response
 - `ai.settings.maxRetries`: the maximum number of retries that were set
 - `ai.telemetry.functionId`: the functionId that was set through `telemetry.functionId`
 - `ai.telemetry.metadata.*`: the metadata that was passed in through `telemetry.metadata`
@@ -369,7 +311,7 @@ Tool call spans (`ai.toolCall`) contain the following attributes:
 - `ai.operationId`: `"ai.toolCall"`
 - `ai.toolCall.name`: the name of the tool
 - `ai.toolCall.id`: the id of the tool call
-- `ai.toolCall.args`: the input parameters of the tool call
-- `ai.toolCall.result`: the output result of the tool call. Only available if the tool call is successful and the result is serializable.
+- `ai.toolCall.args`: the parameters of the tool call
+- `ai.toolCall.result`: the result of the tool call. Only available if the tool call is successful and the result is serializable.
 
-# DevTools
+# Overview

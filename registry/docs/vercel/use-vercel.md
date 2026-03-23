@@ -339,5 +339,5 @@ This automatically provides the context for team `my-team` and project `my-aweso
 
 title: "Tools"
 description: "Available tools in Vercel MCP for searching docs, managing teams, projects, deployments, and viewing runtime logs."
-last\_updated: "2026-03-08T05:03:10.074Z"
+last\_updated: "2026-03-23T09:40:03.742Z"
 source: "https://vercel.com/docs/agent-resources/vercel-mcp/tools"

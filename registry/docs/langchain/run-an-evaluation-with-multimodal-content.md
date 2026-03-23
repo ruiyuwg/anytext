@@ -22,7 +22,7 @@ You can add examples with attachments to a dataset in a few different ways.
 
 #### From existing runs
 
-When adding runs to a LangSmith dataset, attachments can be selectively propagated from the source run to the destination example. To learn more, please see [this guide](/langsmith/manage-datasets-in-application#add-runs-from-the-tracing-project-ui).
+When adding runs to a LangSmith dataset, attachments can be selectively propagated from the source run to the destination example. To learn more, please see [Manage datasets in application](/langsmith/manage-datasets-in-application#manually-from-a-tracing-project).
 
 
 
@@ -417,7 +417,7 @@ You can also define a multimodal evaluator in the UI that references these attac
 
 The exact same rules apply as above to determine whether the evaluator should receive attachments.
 
-The evaluator below uses an LLM to judge if the reasoning and the answer are consistent. To learn more about how to define llm-based evaluators, please see [this guide](/langsmith/llm-as-judge).
+The evaluator below uses an LLM to judge if the reasoning and the answer are consistent. To learn more about how to define llm-based evaluators, please see [How to define an LLM-as-a-judge evaluator](/langsmith/llm-as-judge).
 
 
   ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
@@ -517,7 +517,7 @@ The evaluator below uses an LLM to judge if the reasoning and the answer are con
 
 In the code above, we showed how to add examples with attachments to a dataset. It is also possible to update these same examples using the SDK.
 
-As with existing examples, datasets are versioned when you update them with attachments. Therefore, you can navigate to the dataset version history to see the changes made to each example. To learn more, please see [this guide](/langsmith/manage-datasets-in-application).
+As with existing examples, datasets are versioned when you update them with attachments. Therefore, you can navigate to the dataset version history to see the changes made to each example. To learn more, please see [Create and manage datasets in the UI](/langsmith/manage-datasets-in-application).
 
 When updating an example with attachments, you can update attachments in a few different ways:
 

@@ -470,6 +470,7 @@ Patch and resizing behavior
 
 
 
+  gpt-5.4-mini, gpt-5.4-nano,
   gpt-5-mini, gpt-5-nano, gpt-5.2,
   gpt-5.3-codex, gpt-5-codex-mini,
   gpt-5.1-codex-mini, gpt-5.2-codex,
@@ -537,6 +538,8 @@ D. Apply a multiplier based on the model to get the total tokens:
 
 | Model           | Multiplier |
 | --------------- | ---------- |
+| `gpt-5.4-mini`  | 1.62       |
+| `gpt-5.4-nano`  | 2.46       |
 | `gpt-5-mini`    | 1.62       |
 | `gpt-5-nano`    | 2.46       |
 | `gpt-4.1-mini*` | 1.62       |

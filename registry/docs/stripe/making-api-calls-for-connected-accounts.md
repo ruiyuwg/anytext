@@ -141,7 +141,7 @@ function App() {
       publishableKey="<<YOUR_PUBLISHABLE_KEY>>"
       stripeAccountId="{{CONNECTED_ACCOUNT_ID}}"
     >
-      // Your app code here
+      {/* Your app code here */}
     </StripeProvider>
   );
 }

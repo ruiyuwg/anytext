@@ -2,17 +2,22 @@
 
 ## Methods <-> Type mapping
 
-| HTTP Method | Mapping           | Notes                                                                                                     |
-| ----------- | ----------------- | --------------------------------------------------------------------------------------------------------- |
-| `GET`       | `.query()`        | Input JSON-stringified in query param._e.g._ `myQuery?input=${encodeURIComponent(JSON.stringify(input))}` |
-| `POST`      | `.mutation()`     | Input as POST body.                                                                                       |
-| n/a         | `.subscription()` | Subscriptions are not supported in HTTP transport                                                         |
+| HTTP Method | Mapping           | Notes                                                                                                                                                                                    |
+| ----------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET`       | `.query()`        | Input JSON-stringified in query param.*e.g.* `myQuery?input=${encodeURIComponent(JSON.stringify(input))}`                                                                           |
+| `POST`      | `.mutation()`     | Input as POST body.                                                                                                                                                                      |
+| `GET`       | `.subscription()` | Subscriptions are supported via [Server-sent Events](/docs/client/links/httpSubscriptionLink) using `httpSubscriptionLink`, or via [WebSockets](/docs/server/websockets) using `wsLink`. |
 
 ## Accessing nested procedures
 
-Nested procedures are separated by dots, so for a request to `byId` below would end up being a request to `/api/trpc/post.byId`.
+Nested procedures are separated by dots, so a request to `byId` below would end up being a request to `/api/trpc/post.byId`.
 
-```ts
+```ts twoslash
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+const router = t.router;
+const publicProcedure = t.procedure;
+// ---cut---
 export const appRouter = router({
   post: router({
     byId: publicProcedure.input(String).query(async (opts) => {
@@ -29,13 +34,23 @@ When batching, we combine all parallel procedure calls of the same HTTP method i
 - The called procedures' names are combined by a comma (`,`) in the `pathname`
 - Input parameters are sent as a query parameter called `input` which has the shape `Record<number, unknown>`.
 - We also need to pass `batch=1` as a query parameter.
-- If the response has different statuses, we send back `207 Multi-Status` \_(e.g., if one call errored and one succeeded) \_
+- If the response has different statuses, we send back `207 Multi-Status` *(e.g., if one call errored and one succeeded)*
 
 ### Batching Example Request
 
 #### Given a router like this exposed at `/api/trpc`:
 
-```tsx title='server/router.ts'
+```tsx twoslash title='server/router.ts'
+import { initTRPC } from '@trpc/server';
+
+type Post = { id: string; title: string; body: string };
+type Context = {
+  post: { findUnique: (opts: { where: { id: string } }) => Promise<Post | null> };
+  findRelatedPostsById: (id: string) => Promise<Post[]>;
+};
+
+const t = initTRPC.context<Context>().create();
+// ---cut---
 export const appRouter = t.router({
   postById: t.procedure.input(String).query(async (opts) => {
     const post = await opts.ctx.post.findUnique({
@@ -52,10 +67,17 @@ export const appRouter = t.router({
 
 #### ... And two queries defined like this in a React component:
 
-```tsx title='MyComponent.tsx'
+```tsx twoslash title='MyComponent.tsx'
+
+// @jsx: react-jsx
+import React from 'react';
+
+const trpc = null as any;
+
+// ---cut---
 export function MyComponent() {
-  const post1 = trpc.postById.useQuery("1");
-  const relatedPosts = trpc.relatedPosts.useQuery("1");
+  const post1 = trpc.postById.useQuery('1');
+  const relatedPosts = trpc.relatedPosts.useQuery('1');
 
   return (
     <pre>
@@ -81,11 +103,11 @@ export function MyComponent() {
 
 **\*) `input` in the above is the result of:**
 
-```ts
+```ts twoslash
 encodeURIComponent(
   JSON.stringify({
-    0: "1", // <-- input for `postById`
-    1: "1", // <-- input for `relatedPosts`
+    0: '1', // <-- input for `postById`
+    1: '1', // <-- input for `relatedPosts`
   }),
 );
 ```
@@ -138,8 +160,10 @@ Example JSON Response
 }
 ```
 
-```ts
-{
+```ts twoslash
+type TOutput = any;
+// ---cut---
+interface SuccessResponse {
   result: {
     data: TOutput; // output from procedure
   }
@@ -171,39 +195,42 @@ Example JSON Response
 ```
 
 - When possible, we propagate HTTP status codes from the error thrown.
-- If the response has different statuses, we send back `207 Multi-Status` \_(e.g., if one call errored and one succeeded) \_
+- If the response has different statuses, we send back `207 Multi-Status` *(e.g., if one call errored and one succeeded)*
 - For more on errors and how to customize them see [Error Formatting](../server/error-formatting.md).
 
 ## Error Codes <-> HTTP Status
 
-```ts
-PARSE_ERROR: 400,
-BAD_REQUEST: 400,
-UNAUTHORIZED: 401,
-FORBIDDEN: 403,
-NOT_FOUND: 404,
-METHOD_NOT_SUPPORTED: 405,
-TIMEOUT: 408,
-CONFLICT: 409,
-PRECONDITION_FAILED: 412,
-PAYLOAD_TOO_LARGE: 413,
-UNSUPPORTED_MEDIA_TYPE: 415,
-UNPROCESSABLE_CONTENT: 422,
-PRECONDITION_REQUIRED: 428,
-TOO_MANY_REQUESTS: 429,
-CLIENT_CLOSED_REQUEST: 499,
-INTERNAL_SERVER_ERROR: 500,
-NOT_IMPLEMENTED: 501,
-BAD_GATEWAY: 502,
-SERVICE_UNAVAILABLE: 503,
-GATEWAY_TIMEOUT: 504,
+```ts twoslash
+const HTTP_STATUS_CODES = {
+  PARSE_ERROR: 400,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  PAYMENT_REQUIRED: 402,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  METHOD_NOT_SUPPORTED: 405,
+  TIMEOUT: 408,
+  CONFLICT: 409,
+  PRECONDITION_FAILED: 412,
+  PAYLOAD_TOO_LARGE: 413,
+  UNSUPPORTED_MEDIA_TYPE: 415,
+  UNPROCESSABLE_CONTENT: 422,
+  PRECONDITION_REQUIRED: 428,
+  TOO_MANY_REQUESTS: 429,
+  CLIENT_CLOSED_REQUEST: 499,
+  INTERNAL_SERVER_ERROR: 500,
+  NOT_IMPLEMENTED: 501,
+  BAD_GATEWAY: 502,
+  SERVICE_UNAVAILABLE: 503,
+  GATEWAY_TIMEOUT: 504,
+} as const;
 ```
 
 ## Error Codes <-> JSON-RPC 2.0 Error Codes
 
 Available codes & JSON-RPC code
 
-```ts
+```ts twoslash
 /**
  * JSON-RPC 2.0 Error codes
  *
@@ -230,6 +257,7 @@ export const TRPC_ERROR_CODES_BY_KEY = {
 
   // Implementation specific errors
   UNAUTHORIZED: -32001, // 401
+  PAYMENT_REQUIRED: -32002, // 402
   FORBIDDEN: -32003, // 403
   NOT_FOUND: -32004, // 404
   METHOD_NOT_SUPPORTED: -32005, // 405
@@ -249,7 +277,12 @@ export const TRPC_ERROR_CODES_BY_KEY = {
 
 To override the HTTP method used for queries/mutations, you can use the `methodOverride` option:
 
-```tsx title = 'server/httpHandler.ts'
+```tsx twoslash title = 'server/httpHandler.ts'
+import { initTRPC } from '@trpc/server';
+import { createHTTPHandler } from '@trpc/server/adapters/standalone';
+const t = initTRPC.create();
+const router = t.router({});
+// ---cut---
 // Your server must separately allow the client to override the HTTP method
 const handler = createHTTPHandler({
   router: router,
@@ -257,13 +290,24 @@ const handler = createHTTPHandler({
 });
 ```
 
-```tsx title = 'client/trpc.ts'
+```tsx twoslash title = 'client/trpc.ts'
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+// ---cut---
+import { createTRPCClient, httpLink } from '@trpc/client';
+import type { AppRouter } from './server';
+
 // The client can then specify which HTTP method to use for all queries/mutations
 const client = createTRPCClient<AppRouter>({
   links: [
     httpLink({
       url: `http://localhost:3000`,
-      methodOverride: "POST", // all queries and mutations will be sent to the tRPC Server as POST requests.
+      methodOverride: 'POST', // all queries and mutations will be sent to the tRPC Server as POST requests.
     }),
   ],
 });
@@ -277,8 +321,8 @@ You can read more details by drilling into the TypeScript definitions in
 - [/packages/server/src/unstable-core-do-not-import/rpc/codes.ts](https://github.com/trpc/trpc/tree/main/packages/server/src/unstable-core-do-not-import/rpc/codes.ts)
 
 ```ts twoslash
-import { initTRPC } from "@trpc/server";
-import z from "zod";
+import { initTRPC } from '@trpc/server';
+import z from 'zod';
 
 // ---cut---
 const t = initTRPC.create();
@@ -294,13 +338,18 @@ const appRouter = router({
       //      ^?
 
       return `Hello ${input.name}` as const;
-    }),
+  }),
 });
 
 export type AppRouter = typeof appRouter;
 ```
 
-```ts
+```ts twoslash
+import { initTRPC } from '@trpc/server';
+import { createHTTPServer } from '@trpc/server/adapters/standalone';
+const t = initTRPC.create();
+const appRouter = t.router({});
+// ---cut---
 const { listen } = createHTTPServer({
   router: appRouter,
 });
@@ -312,6 +361,7 @@ listen(3000);
 ```twoslash include server
 // @target: esnext
 // @filename: server.ts
+// ---cut---
 import { initTRPC } from '@trpc/server';
 import z from 'zod';
 
@@ -333,19 +383,19 @@ export type AppRouter = typeof appRouter;
 // @target: esnext
 // @include: server
 // @filename: client.ts
-import { createTRPCClient, httpBatchLink } from "@trpc/client";
-import type { AppRouter } from "./server";
+import { createTRPCClient, httpBatchLink } from '@trpc/client';
+import type { AppRouter } from './server';
 
 // ---cut---
 const trpc = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: "http://localhost:3000",
+      url: 'http://localhost:3000',
     }),
   ],
 });
 
-const res = await trpc.greeting.query({ name: "John" });
+const res = await trpc.greeting.query({ name: 'John' });
 //    ^?
 ```
 
@@ -361,7 +411,7 @@ RPC is short for "Remote Procedure Call". It is a way of calling functions on on
 
 ```ts
 // HTTP/REST
-const res = await fetch("/api/users/1");
+const res = await fetch('/api/users/1');
 const user = await res.json();
 
 // RPC
@@ -372,7 +422,7 @@ tRPC (TypeScript Remote Procedure Call) is one implementation of RPC, designed f
 
 ### Don't think about HTTP/REST implementation details
 
-If you inspect the network traffic of a tRPC app, you'll see that it's fairly standard HTTP requests and responses, but you don't need to think about the implementation details while writing your application code. You call functions, and tRPC takes care of everything else. You should ignore details like HTTP Verbs, since they carry meaning in REST APIs, but in RPC form part of your function names instead, for instance: `getUser(id)` instead of `GET /users/:id`.
+If you inspect the network traffic of a tRPC app, you'll see that it's fairly standard HTTP requests and responses, but you don't need to think about the implementation details while writing your application code. You call functions, and tRPC takes care of everything else. You should ignore details like HTTP Verbs, since they carry meaning in REST APIs but, in RPC, form part of your function names instead, for instance: `getUser(id)` instead of `GET /users/:id`.
 
 ## Vocabulary
 

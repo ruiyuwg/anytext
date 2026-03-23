@@ -9,6 +9,7 @@ import type {
   AstroIntegrationLogger,
   AstroIntegrationMiddleware,
   AstroMiddlewareInstance,
+  AstroPrerenderer,
   AstroRenderer,
   ClientDirectiveConfig,
   HookParameters,
@@ -22,8 +23,6 @@ import type {
   SSRLoadedRendererValue,
   SSRManifest,
   ValidRedirectStatus,
-  // The following are deprecated:
-  IntegrationRouteData,
 } from "astro";
 ```
 
@@ -128,6 +127,56 @@ Defines the import path of the middleware.
 
 An object containing an [`onRequest()`](/en/reference/modules/astro-middleware/#onrequest) property defined with the project’s middleware function when it exists.
 
+### `AstroPrerenderer`
+
+[Section titled “AstroPrerenderer”](#astroprerenderer)
+
+**Type:** `string`
+
+**Added in:** `astro@6.0.0` New
+
+Describes a [custom prerender](/en/reference/adapter-reference/#custom-prerenderer) that adapters can provide to control page prerendering.
+
+#### `AstroPrerenderer.name`
+
+[Section titled “AstroPrerenderer.name”](#astroprerenderername)
+
+**Type:** `string`
+
+Specifies a unique name for the prerender.
+
+#### `AstroPrerenderer.setup()`
+
+[Section titled “AstroPrerenderer.setup()”](#astroprerenderersetup)
+
+**Type:** `() => Promise<void>`
+
+Defines an optional method that will be called once before the prerendering starts. This is useful for starting a preview server.
+
+#### `AstroPrerenderer.getStaticPaths()`
+
+[Section titled “AstroPrerenderer.getStaticPaths()”](#astroprerenderergetstaticpaths)
+
+**Type:** `() => Promise<Array<{ pathname: string; route: RouteData; }>>`
+
+Returns a list of objects describing the prerendered route path and its associated data.
+
+#### `AstroPrerenderer.render()`
+
+[Section titled “AstroPrerenderer.render()”](#astroprerendererrender)
+
+**Type:** `(request: Request, options: { routeData: RouteData }) => Promise<Response>`
+
+Defines an optional method describing how to render a page. This will be called by Astro for each path returned by [`getStaticPaths()`](/en/reference/routing-reference/#getstaticpaths).
+
+#### `AstroPrerenderer.teardown()`
+
+[Section titled “AstroPrerenderer.teardown()”](#astroprerendererteardown)
+
+**Type:** `() => Promise<void>`
+
+Defines an optional method called once all pages are pre-rendered. This is useful for performing cleanup tasks such as stopping a preview server.
+
 ### `AstroRenderer`
 
 [Section titled “AstroRenderer”](#astrorenderer)
@@ -210,13 +259,14 @@ A subset of [`RouteData`](#routedata) with remapped properties.
 ```ts
 interface IntegrationResolvedRoute extends Pick<
     RouteData,
-    'generate' | 'params' | 'pathname' | 'segments' | 'type' | 'redirect' | 'origin'
+    'params' | 'pathname' | 'segments' | 'type' | 'redirect' | 'origin'
   > & {
   pattern: RouteData['route'];
   patternRegex: RouteData['pattern'];
   entrypoint: RouteData['component'];
   isPrerendered: RouteData['prerender'];
   redirectRoute?: IntegrationResolvedRoute;
+  generate: (data?: any) => string;
 }
 ```
 
@@ -269,6 +319,22 @@ Determines whether the route use [on demand rendering](/en/guides/on-demand-rend
 
 When the value of `IntegrationResolvedRoute.type` is `redirect`, the value will be the `IntegrationResolvedRoute` to redirect to. Otherwise, the value will be undefined.
 
+#### `IntegrationResolvedRoute.generate()`
+
+[Section titled “IntegrationResolvedRoute.generate()”](#integrationresolvedroutegenerate)
+
+**Type:** `(data?: any) => string`
+
+**Added in:** `astro@6.0.0` New
+
+A function that provides the optional parameters of the route, interpolates them with the route pattern, and returns the path name of the route.
+
+For example, with a route such as `/blog/[...id].astro`, the `generate()` function could return:
+
+```js
+generate({ id: 'presentation' }) // will output `/blog/presentation`
+```
+
 ### `RedirectConfig`
 
 [Section titled “RedirectConfig”](#redirectconfig)
@@ -303,20 +369,6 @@ Defines the current route pattern. Here are some examples of paths associated wi
 
 Specifies the source component URL.
 
-#### `RouteData.generate()`
-
-[Section titled “RouteData.generate()”](#routedatagenerate)
-
-**Type:** `(data?: any) => string`
-
-A function that provides the optional parameters of the route, interpolates them with the route pattern, and returns the path name of the route.
-
-For example, with a route such as `/blog/[...id].astro`, the `generate()` function could return:
-
-```js
-generate({ id: 'presentation' }) // will output `/blog/presentation`
-```
-
 #### `RouteData.params`
 
 [Section titled “RouteData.params”](#routedataparams)
@@ -337,11 +389,11 @@ For regular routes, the value will be the URL pathname where this route will be 
 
 [Section titled “RouteData.distURL”](#routedatadisturl)
 
-**Type:** `URL[] | undefined`
+**Type:** `URL[]`
 
 **Added in:** `astro@5.0.0`
 
-Defines the paths of the physical files emitted by this route. When a route isn’t prerendered, the value is either `undefined` or an empty array.
+Defines the paths of the physical files emitted by this route. When a route isn’t prerendered, the value is an empty array.
 
 #### `RouteData.pattern`
 
@@ -586,16 +638,6 @@ Returns a framework-specific hydration script that must be injected into the HTM
 
 An object containing build configuration and project metadata that the server adapters use at runtime to serve on-demand rendered pages.
 
-#### `SSRManifest.hrefRoot`
-
-[Section titled “SSRManifest.hrefRoot”](#ssrmanifesthrefroot)
-
-**Type:** `string`
-
-**Added in:** `astro@4.12.0`
-
-Specifies the root path used to generate URLs.
-
 #### `SSRManifest.adapterName`
 
 [Section titled “SSRManifest.adapterName”](#ssrmanifestadaptername)
@@ -728,6 +770,16 @@ Specifies the [configured prefix for Astro-generated asset links](/en/reference/
 
 A list of renderers (e.g. React, Vue, Svelte, MDX) available for the server to use.
 
+#### `SSRManifest.serverLike`
+
+[Section titled “SSRManifest.serverLike”](#ssrmanifestserverlike)
+
+**Type:** `boolean`
+
+**Added in:** `astro@6.0.0` New
+
+Determines whether this application uses any on-demand rendered routes.
+
 #### `SSRManifest.clientDirectives`
 
 [Section titled “SSRManifest.clientDirectives”](#ssrmanifestclientdirectives)
@@ -802,14 +854,6 @@ A function to retrieve an instance of the page component.
 
 An [Astro middleware function](/en/reference/modules/astro-middleware/#onrequest) when defined in the user project.
 
-##### `SSRManifest.pageModule.renderers`
-
-[Section titled “SSRManifest.pageModule.renderers”](#ssrmanifestpagemodulerenderers)
-
-**Type:** `SSRLoadedRenderer[]`
-
-A list of renderers that a server can use for this page.
-
 #### `SSRManifest.pageMap`
 
 [Section titled “SSRManifest.pageMap”](#ssrmanifestpagemap)
@@ -818,9 +862,19 @@ A list of renderers that a server can use for this page.
 
 Defines a mapping of component paths to their importable instances.
 
-#### `SSRManifest.serverIslandMap`
+#### `SSRManifest.serverIslandMappings`
 
-[Section titled “SSRManifest.serverIslandMap”](#ssrmanifestserverislandmap)
+[Section titled “SSRManifest.serverIslandMappings”](#ssrmanifestserverislandmappings)
+
+**Type:** `() => Promise<ServerIslandMappings> | ServerIslandMappings`
+
+**Added in:** `astro@6.0.0` New
+
+An object, or a function that returns an object, describing available server islands mapping.
+
+##### `SSRManifest.serverIslandMappings.serverIslandMap`
+
+[Section titled “SSRManifest.serverIslandMappings.serverIslandMap”](#ssrmanifestserverislandmappingsserverislandmap)
 
 **Type:** `Map<string, () => Promise<ComponentInstance>>`
 
@@ -828,9 +882,9 @@ Defines a mapping of component paths to their importable instances.
 
 Defines a mapping of server island IDs to their component instances.
 
-#### `SSRManifest.serverIslandNameMap`
+##### `SSRManifest.serverIslandMappings.serverIslandNameMap`
 
-[Section titled “SSRManifest.serverIslandNameMap”](#ssrmanifestserverislandnamemap)
+[Section titled “SSRManifest.serverIslandMappings.serverIslandNameMap”](#ssrmanifestserverislandmappingsserverislandnamemap)
 
 **Type:** `Map<string, string>`
 
@@ -926,6 +980,16 @@ Defines an instance to load the middleware.
 
 An object, or a function that returns an object, with a `server` property that maps action names to their callable functions.
 
+#### `SSRManifest.sessionDriver()`
+
+[Section titled “SSRManifest.sessionDriver()”](#ssrmanifestsessiondriver)
+
+**Type:** `() => Promise<{ default: SessionDriverFactory | null }>`
+
+**Added in:** `astro@6.0.0` New
+
+Retrieves the [configured session driver](/en/reference/configuration-reference/#sessiondriver) when enabled.
+
 #### `SSRManifest.checkOrigin`
 
 [Section titled “SSRManifest.checkOrigin”](#ssrmanifestcheckorigin)
@@ -958,7 +1022,7 @@ An object containing the [resolved session configuration](/en/reference/configur
 
 [Section titled “SSRManifest.cacheDir”](#ssrmanifestcachedir)
 
-**Type:** `string | URL`
+**Type:** `URL`
 
 **Added in:** `astro@5.2.0`
 
@@ -968,7 +1032,7 @@ Specifies the [configured directory for caching build artifacts](/en/reference/c
 
 [Section titled “SSRManifest.srcDir”](#ssrmanifestsrcdir)
 
-**Type:** `string | URL`
+**Type:** `URL`
 
 **Added in:** `astro@5.2.0`
 
@@ -978,27 +1042,47 @@ Specifies the [configured directory that Astro will read the site from](/en/refe
 
 [Section titled “SSRManifest.outDir”](#ssrmanifestoutdir)
 
-**Type:** `string | URL`
+**Type:** `URL`
 
 **Added in:** `astro@5.2.0`
 
 Specifies the [configured directory in which to write the final build](/en/reference/configuration-reference/#outdir).
 
+#### `SSRManifest.rootDir`
+
+[Section titled “SSRManifest.rootDir”](#ssrmanifestrootdir)
+
+**Type:** `URL`
+
+**Added in:** `astro@6.0.0` New
+
+Specifies the resolved URL for the [directory configured as the project root](/en/reference/configuration-reference/#root).
+
 #### `SSRManifest.publicDir`
 
 [Section titled “SSRManifest.publicDir”](#ssrmanifestpublicdir)
 
-**Type:** `string | URL`
+**Type:** `URL`
 
 **Added in:** `astro@5.2.0`
 
 Specifies the [configured directory for the static assets](/en/reference/configuration-reference/#publicdir).
 
+#### `SSRManifest.assetsDir`
+
+[Section titled “SSRManifest.assetsDir”](#ssrmanifestassetsdir)
+
+**Type:** `string`
+
+**Added in:** `astro@6.0.0` New
+
+Specifies the [configured directory for generated assets](/en/reference/configuration-reference/#buildassets) in the build output.
+
 #### `SSRManifest.buildClientDir`
 
 [Section titled “SSRManifest.buildClientDir”](#ssrmanifestbuildclientdir)
 
-**Type:** `string | URL`
+**Type:** `URL`
 
 **Added in:** `astro@5.2.0`
 
@@ -1008,7 +1092,7 @@ Determines the path where client-side build artifacts (e.g. JavaScript, CSS) are
 
 [Section titled “SSRManifest.buildServerDir”](#ssrmanifestbuildserverdir)
 
-**Type:** `string | URL`
+**Type:** `URL`
 
 **Added in:** `astro@5.2.0`
 
@@ -1022,7 +1106,7 @@ Determines the path where server-side build artifacts are output within the buil
 
 **Added in:** `astro@5.9.0`
 
-Describes the [Content Security Policy configuration](/en/reference/experimental-flags/csp/).
+Describes the [Content Security Policy configuration](/en/reference/configuration-reference/#securitycsp).
 
 ##### `SSRManifest.csp.cspDestination`
 
@@ -1030,7 +1114,7 @@ Describes the [Content Security Policy configuration](/en/reference/experimental
 
 **Type:** `'adapter' | 'meta' | 'header' | undefined`
 
-Specifies whether CSP directives should be injected as a `meta` element, as a response `header`, or by the [`adapter` when it supports setting response headers](/en/reference/adapter-reference/#experimentalstaticheaders).
+Specifies whether CSP directives should be injected as a `meta` element, as a response `header`, or by the [`adapter` when it supports setting response headers](/en/reference/adapter-reference/#staticheaders).
 
 ##### `SSRManifest.csp.algorithm`
 
@@ -1038,7 +1122,7 @@ Specifies whether CSP directives should be injected as a `meta` element, as a re
 
 **Type:** `'SHA-256' | 'SHA-384' | 'SHA-512'`
 
-Specifies the [configured hash function](/en/reference/experimental-flags/csp/#algorithm).
+Specifies the [configured hash function](/en/reference/configuration-reference/#securitycspalgorithm).
 
 ##### `SSRManifest.csp.scriptHashes`
 
@@ -1046,7 +1130,7 @@ Specifies the [configured hash function](/en/reference/experimental-flags/csp/#a
 
 **Type:** `string[]`
 
-Specifies a list of generated hashes for project scripts and [user-supplied hashes](/en/reference/experimental-flags/csp/#hashes) for external scripts.
+Specifies a list of generated hashes for project scripts and [user-supplied hashes](/en/reference/configuration-reference/#securitycspscriptdirectivehashes) for external scripts.
 
 ##### `SSRManifest.csp.scriptResources`
 
@@ -1054,7 +1138,7 @@ Specifies a list of generated hashes for project scripts and [user-supplied hash
 
 **Type:** `string[]`
 
-Specifies a list of valid sources combining the [configured script resources](/en/reference/experimental-flags/csp/#resources) and the [injected script resources](/en/reference/experimental-flags/csp/#cspinsertscriptresource).
+Specifies a list of valid sources combining the [configured script resources](/en/reference/configuration-reference/#securitycspscriptdirectiveresources) and the [injected script resources](/en/reference/api-reference/#cspinsertscriptresource).
 
 ##### `SSRManifest.csp.isStrictDynamic`
 
@@ -1062,7 +1146,7 @@ Specifies a list of valid sources combining the [configured script resources](/e
 
 **Type:** `boolean`
 
-Determines whether support for [dynamic script injection is enabled in the configuration](/en/reference/experimental-flags/csp/#strictdynamic).
+Determines whether support for [dynamic script injection is enabled in the configuration](/en/reference/configuration-reference/#securitycspscriptdirectivestrictdynamic).
 
 ##### `SSRManifest.csp.styleHashes`
 
@@ -1070,7 +1154,7 @@ Determines whether support for [dynamic script injection is enabled in the confi
 
 **Type:** `string[]`
 
-Specifies a list of generated hashes for project styles and [user-supplied hashes](/en/reference/experimental-flags/csp/#hashes) for external styles.
+Specifies a list of generated hashes for project styles and [user-supplied hashes](/en/reference/configuration-reference/#securitycspstyledirectivehashes) for external styles.
 
 ##### `SSRManifest.csp.styleResources`
 
@@ -1078,7 +1162,7 @@ Specifies a list of generated hashes for project styles and [user-supplied hashe
 
 **Type:** `string[]`
 
-Specifies a list of valid sources combining the [configured style resources](/en/reference/experimental-flags/csp/#resources) and the [injected style resources](/en/reference/experimental-flags/csp/#cspinsertstyleresource).
+Specifies a list of valid sources combining the [configured style resources](/en/reference/configuration-reference/#securitycspstyledirectiveresources) and the [injected style resources](/en/reference/api-reference/#cspinsertstyleresource).
 
 ##### `SSRManifest.csp.directives`
 
@@ -1086,7 +1170,51 @@ Specifies a list of valid sources combining the [configured style resources](/en
 
 **Type:** `CspDirective[]`
 
-Specifies the [configured list of valid sources](/en/reference/experimental-flags/csp/#directives) for specific content types.
+Specifies the [configured list of valid sources](/en/reference/configuration-reference/#securitycspdirectives) for specific content types.
+
+#### `SSRManifest.devToolbar`
+
+[Section titled “SSRManifest.devToolbar”](#ssrmanifestdevtoolbar)
+
+**Type:** `{ enabled: boolean; latestAstroVersion: string | undefined; debugInfoOutput: string | undefined; }`
+
+**Added in:** `astro@6.0.0` New
+
+Describes the resolved dev toolbar settings.
+
+##### `SSRManifest.devToolbar.enabled`
+
+[Section titled “SSRManifest.devToolbar.enabled”](#ssrmanifestdevtoolbarenabled)
+
+**Type:** `boolean`
+
+**Added in:** `astro@6.0.0` New
+
+Determines [whether the dev toolbar is enabled](/en/reference/configuration-reference/#devtoolbarenabled).
+
+##### `SSRManifest.devToolbar.latestAstroVersion`
+
+[Section titled “SSRManifest.devToolbar.latestAstroVersion”](#ssrmanifestdevtoolbarlatestastroversion)
+
+**Type:** `string | undefined`
+
+**Added in:** `astro@6.0.0` New
+
+Specifies the latest available version of Astro. This is used to notify the user in the dev toolbar of when an update is available. This will be `undefined` when one of the following conditions applies:
+
+- the check fails or has not been completed yet
+- the user has disabled the check
+- the user is already using the latest version
+
+##### `SSRManifest.devToolbar.debugInfoOutput`
+
+[Section titled “SSRManifest.devToolbar.debugInfoOutput”](#ssrmanifestdevtoolbardebuginfooutput)
+
+**Type:** `string | undefined`
+
+**Added in:** `astro@6.0.0` New
+
+Defines the serialized [debug information](/en/reference/cli-reference/#astro-info) passed to the dev toolbar for display.
 
 #### `SSRManifest.internalFetchHeaders`
 
@@ -1098,6 +1226,16 @@ Specifies the [configured list of valid sources](/en/reference/experimental-flag
 
 Specifies the headers that are automatically added to internal fetch requests made during rendering.
 
+#### `SSRManifest.logLevel`
+
+[Section titled “SSRManifest.logLevel”](#ssrmanifestloglevel)
+
+**Type:** `"error" | "warn" | "debug" | "info" | "silent"`
+
+**Added in:** `astro@6.0.0` New
+
+Specifies the [Vite logging level](https://vite.dev/config/shared-options#loglevel).
+
 ### `ValidRedirectStatus`
 
 [Section titled “ValidRedirectStatus”](#validredirectstatus)
@@ -1105,39 +1243,6 @@ Specifies the headers that are automatically added to internal fetch requests ma
 **Type:** `301 | 302 | 303 | 307 | 308 | 300 | 304`
 
 A union of supported redirect status code.
-
-### Deprecated type imports
-
-[Section titled “Deprecated type imports”](#deprecated-type-imports)
-
-The following types are deprecated and will be removed in a future major version:
-
-#### `IntegrationRouteData`
-
-[Section titled “IntegrationRouteData”](#integrationroutedata)
-
-Caution
-
-This type is deprecated since v5.0. Use [`IntegrationResolvedRoute`](#integrationresolvedroute) instead.
-
-A smaller version of the [`RouteData`](#routedata) that is used in the integrations.
-
-```ts
-type IntegrationRouteData = Omit<
-  RouteData,
-  'isIndex' | 'fallbackRoutes' | 'redirectRoute' | 'origin'
-> & {
-  redirectRoute?: IntegrationRouteData;
-};
-```
-
-##### `redirectRoute`
-
-[Section titled “redirectRoute”](#redirectroute)
-
-**Type:** `IntegrationRouteData | undefined`
-
-When the value of [`RouteData.type`](#routedatatype) is `redirect`, the value will contains the `IntegrationRouteData` of the route to redirect to. Otherwise, the value will be undefined.
 
 ## Allow installation with `astro add`
 
@@ -1197,3 +1302,38 @@ integrations: [
 
 - [Build your own Astro Integrations](https://www.freecodecamp.org/news/how-to-use-the-astro-ui-framework/#chapter-8-build-your-own-astro-integrations-1) - by Emmanuel Ohans on FreeCodeCamp
 - [Astro Integration Template](https://github.com/florian-lefebvre/astro-integration-template) - by Florian Lefebvre on GitHub
+
+# Legacy flags
+
+To help some users migrate between versions of Astro, we occasionally introduce `legacy` flags.
+
+These flags allow you to opt in to some deprecated or otherwise outdated behavior of Astro in the latest version, so that you can continue to upgrade and take advantage of new Astro releases until you are able to fully update your project code.
+
+## `collectionsBackwardsCompat`
+
+[Section titled “collectionsBackwardsCompat”](#collectionsbackwardscompat)
+
+**Type:** `boolean`\
+**Default:** `false`
+
+**Added in:** `astro@6.0.0` New
+
+The `legacy.collectionsBackwardsCompat` flag provides temporary backwards compatibility for projects unable to migrate to the Content Layer API introduced in v5.0.
+
+astro.config.mjs
+
+```js
+export default defineConfig({
+  legacy: {
+    collectionsBackwardsCompat: true,
+  },
+});
+```
+
+This flag preserves some legacy v4 content collections features:
+
+- Supports `type: 'content'` and `type: 'data'` without loaders
+- Preserves legacy entry API: `entry.slug` and `entry.render()`
+- Uses path-based entry IDs instead of slug-based IDs
+
+This is a temporary migration helper. Migrate collections to the Content Layer API, then disable this flag.

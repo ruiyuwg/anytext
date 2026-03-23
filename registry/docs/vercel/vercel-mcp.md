@@ -8,7 +8,7 @@ The `vercel mcp` command helps you set up an MCP client to talk to MCP servers y
 vercel mcp [options]
 ```
 
-*Using the vercel mcp command to initialize local MCP
+*Using the \`vercel mcp\` command to initialize local MCP
 configuration for the currently linked Project.*
 
 ## Examples
@@ -41,11 +41,11 @@ The `--project` option sets up project-specific MCP access for the currently lin
 vercel mcp --project
 ```
 
-*Use the --project flag to configure MCP access scoped to your linked project.*
+*Use the \`--project\` flag to configure MCP access scoped to your linked project.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -60,5 +60,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel microfrontends"
 description: "Manage microfrontends configuration from the CLI. Learn how to pull configuration for local development."
-last\_updated: "2026-03-08T05:03:12.274Z"
+last\_updated: "2026-03-23T09:40:06.926Z"
 source: "https://vercel.com/docs/cli/microfrontends"

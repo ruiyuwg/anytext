@@ -54,16 +54,71 @@ Remember to replace `YOUR_ACCESS_KEY_ID`, `YOUR_SECRET_ACCESS_KEY`, and `YOUR_RE
 
 When using AWS SDK, the SDK will automatically use the credentials chain to determine the credentials to use. This includes instance profiles, instance roles, ECS roles, EKS Service Accounts, etc. A similar behavior is possible using the AI SDK by not specifying the `accessKeyId` and `secretAccessKey`, `sessionToken` properties in the provider settings and instead passing a `credentialProvider` property.
 
-_Usage:_
+*Usage:*
 
 `@aws-sdk/credential-providers` package provides a set of credential providers that can be used to create a credential provider chain.
 
 ```ts
-import { createAmazonBedrock } from "@ai-sdk/amazon-bedrock";
-import { fromNodeProviderChain } from "@aws-sdk/credential-providers";
+import { createAmazonBedrock } from '@ai-sdk/amazon-bedrock';
+import { fromNodeProviderChain } from '@aws-sdk/credential-providers';
 
 const bedrock = createAmazonBedrock({
-  region: "us-east-1",
+  region: 'us-east-1',
   credentialProvider: fromNodeProviderChain(),
 });
 ```
+
+## Provider Instance
+
+You can import the default provider instance `bedrock` from `@ai-sdk/amazon-bedrock`:
+
+```ts
+import { bedrock } from '@ai-sdk/amazon-bedrock';
+```
+
+If you need a customized setup, you can import `createAmazonBedrock` from `@ai-sdk/amazon-bedrock` and create a provider instance with your settings:
+
+```ts
+import { createAmazonBedrock } from '@ai-sdk/amazon-bedrock';
+
+const bedrock = createAmazonBedrock({
+  region: 'us-east-1',
+  accessKeyId: 'xxxxxxxxx',
+  secretAccessKey: 'xxxxxxxxx',
+  sessionToken: 'xxxxxxxxx',
+});
+```
+
+The credentials settings fall back to environment variable defaults described
+below. These may be set by your serverless environment without your awareness,
+which can lead to merged/conflicting credential values and provider errors
+around failed authentication. If you're experiencing issues be sure you are
+explicitly specifying all settings (even if `undefined`) to avoid any
+defaults.
+
+You can use the following optional settings to customize the Amazon Bedrock provider instance:
+
+- **region** *string*
+
+  The AWS region that you want to use for the API calls.
+  It uses the `AWS_REGION` environment variable by default.
+
+- **accessKeyId** *string*
+
+  The AWS access key ID that you want to use for the API calls.
+  It uses the `AWS_ACCESS_KEY_ID` environment variable by default.
+
+- **secretAccessKey** *string*
+
+  The AWS secret access key that you want to use for the API calls.
+  It uses the `AWS_SECRET_ACCESS_KEY` environment variable by default.
+
+- **sessionToken** *string*
+
+  Optional. The AWS session token that you want to use for the API calls.
+  It uses the `AWS_SESSION_TOKEN` environment variable by default.
+
+- **credentialProvider** *() => Promise<{ accessKeyId: string; secretAccessKey: string; sessionToken?: string; }>*
+
+  Optional. The AWS credential provider chain that you want to use for the API calls.
+  It uses the specified credentials by default.

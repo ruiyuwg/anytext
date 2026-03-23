@@ -12,19 +12,19 @@ For example configurations, refer to [Example LangSmith configurations for scale
 
 The table below provides an overview comparing different LangSmith configurations for various load patterns (reads / writes):
 
-|                                                             | **[Low / low](#low-reads-low-writes)**              | **[Low / high](#low-reads-high-writes)**            | **[High / low](#high-reads-low-writes)**            | [Medium / medium](#medium-reads-medium-writes)      | [High / high](#high-reads-high-writes)              |
-| :---------------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------- |
-| Concurrent frontend users                | 5                                                   | 5                                                   | 50                                                  | 20                                                  | 50                                                  |
-| Traces submitted per second              | 10                                                  | 1000                                                | 10                                                  | 100                                                 | 1000                                                |
-| **Frontend replicas**(500m CPU, 1Gi per replica)      | 1 (default)                                         | 4                                                   | 2                                                   | 2                                                   | 4                                                   |
-| **Platform backend replicas**(1 CPU, 2Gi per replica) | 3 (default)                                         | 20                                                  | 3 (default)                                         | 3 (default)                                         | 20                                                  |
-| **Ingest queue replicas**(1 CPU, 2Gi per replica)     | 3 (default)                                         | 24                                                  | 3 (default)                                         | 6                                                   | 24                                                  |
-| **Backend replicas**(1 CPU, 2Gi per replica)          | 2 (default)                                         | 5                                                   | 40                                                  | 16                                                  | 50                                                  |
-| **Redis resources**                                         | 8 Gi (default)                                      | 26 Gi external                                      | 8 Gi (default)                                      | 13Gi external                                       | 26 Gi external                                      |
-| **ClickHouse resources**                                    | 4 CPU16 Gi (default)                          | 10 CPU32Gi memory                             | 8 CPU16 Gi per replica                        | 16 CPU24Gi memory                             | 14 CPU24 Gi per replica                       |
-| **ClickHouse setup**                                        | Single instance                                     | Single instance                                     | 3-node replicated cluster        | Single instance                                     | 3-node replicated cluster        |
-| Postgres resources                       | 2 CPU8 GB memory10GB storage (external) | 2 CPU8 GB memory10GB storage (external) | 2 CPU8 GB memory10GB storage (external) | 2 CPU8 GB memory10GB storage (external) | 2 CPU8 GB memory10GB storage (external) |
-| **Blob storage**                                            | Disabled                                            | Enabled                                             | Enabled                                             | Enabled                                             | Enabled                                             |
+|                                                             | **[Low / low](#low-reads-low-writes)**               | **[Low / high](#low-reads-high-writes)**             | **[High / low](#high-reads-low-writes)**             | [Medium / medium](#medium-reads-medium-writes)       | [High / high](#high-reads-high-writes)               |
+| :---------------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- |
+| Concurrent frontend users                | 5                                                    | 5                                                    | 50                                                   | 20                                                   | 50                                                   |
+| Traces submitted per second              | 10                                                   | 1000                                                 | 10                                                   | 100                                                  | 1000                                                 |
+| **Frontend replicas**(500m CPU, 1Gi per replica)      | 1 (default)                                          | 4                                                    | 2                                                    | 2                                                    | 4                                                    |
+| **Platform backend replicas**(1 CPU, 2Gi per replica) | 3 (default)                                          | 20                                                   | 3 (default)                                          | 3 (default)                                          | 20                                                   |
+| **Ingest queue replicas**(1 CPU, 2Gi per replica)     | 3 (default)                                          | 24                                                   | 3 (default)                                          | 6                                                    | 24                                                   |
+| **Backend replicas**(1 CPU, 2Gi per replica)          | 2 (default)                                          | 5                                                    | 40                                                   | 16                                                   | 50                                                   |
+| **Redis resources**                                         | 8 Gi (default)                                       | 26 Gi external                                       | 8 Gi (default)                                       | 13Gi external                                        | 26 Gi external                                       |
+| **ClickHouse resources**                                    | 4 CPU16 Gi (default)                           | 10 CPU32Gi memory                              | 8 CPU16 Gi per replica                         | 16 CPU24Gi memory                              | 14 CPU24 Gi per replica                        |
+| **ClickHouse setup**                                        | Single instance                                      | Single instance                                      | 3-node replicated cluster         | Single instance                                      | 3-node replicated cluster         |
+| Postgres resources                       | 2 CPU8 GB memory10 GB storage (external) | 2 CPU8 GB memory10 GB storage (external) | 2 CPU8 GB memory10 GB storage (external) | 2 CPU8 GB memory10 GB storage (external) | 2 CPU8 GB memory10 GB storage (external) |
+| **Blob storage**                                            | Disabled                                             | Enabled                                              | Enabled                                              | Enabled                                              | Enabled                                              |
 
 Below we go into more details about the read and write paths as well as provide a `values.yaml` snippet for you to start with for your self-hosted LangSmith instance.
 
@@ -210,7 +210,7 @@ commonEnv:
 
 You have a relatively low scale of trace ingestions, but many frontend users querying traces and/or have scripts that hit the `/runs/query` or `/runs/<run-id>` endpoints frequently.
 
-**For this, we strongly recommend setting up a replicated ClickHouse cluster to enable high read scale at low latency.** See our [external ClickHouse doc](/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster) for more guidance on how to setup a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 8+ cores and 16+ GB memory, and resource limit of 12 cores and 32 GB memory.
+**For this, we strongly recommend setting up a replicated ClickHouse cluster to enable high read scale at low latency.** See our [external ClickHouse doc](/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster) for more guidance on how to setup a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 8+ cores and 16+ GB memory, and resource limit of 12 cores and 32 GB memory.
 
 For this, we recommend a configuration like this:
 
@@ -246,7 +246,7 @@ backend:
 # Update these values as needed to connect to your replicated clickhouse cluster.
 clickhouse:
   external:
-    # If using a 3 node replicated setup, each replica in the cluster should have resource requests of 8+ cores and 16+ GB memory, and resource limit of 12 cores and 32 GB memory.
+    # If using a 3 node replicated setup, each replica in the cluster should have resource requests of 8+ cores and 16+ GB memory, and resource limit of 12 cores and 32 GB memory.
     enabled: true
     host: langsmith-ch-clickhouse-replicated.default.svc.cluster.local
     port: "8123"
@@ -331,7 +331,7 @@ If you still notice slow reads with the above configuration, we recommend moving
 
 You have a very high rate of trace ingestion (approaching 1000 traces submitted per second) and also have many users querying traces on the frontend (over 50 users) and/or scripts that are consistently making requests to `/runs/query` or `/runs/<run-id>` endpoints.
 
-**For this, we very strongly recommend setting up a replicated ClickHouse cluster to prevent degraded read performance at high write scale.** See our [external ClickHouse doc](/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster) for more guidance on how to set up a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 14+ cores and 24+ GB memory, and resource limit of 20 cores and 48 GB memory. We also recommend that each node/instance of ClickHouse has 600 Gi of volume storage for each day of TTL that you enable (as per the configuration below).
+**For this, we very strongly recommend setting up a replicated ClickHouse cluster to prevent degraded read performance at high write scale.** See our [external ClickHouse doc](/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster) for more guidance on how to set up a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 14+ cores and 24+ GB memory, and resource limit of 20 cores and 48 GB memory. We also recommend that each node/instance of ClickHouse has 600 Gi of volume storage for each day of TTL that you enable (as per the configuration below).
 
 Overall, we recommend a configuration like this:
 
@@ -394,7 +394,7 @@ redis:
 # Update these values as needed to connect to your replicated clickhouse cluster.
 clickhouse:
   external:
-    # If using a 3 node replicated setup, each replica in the cluster should have resource requests of 14+ cores and 24+ GB memory, and resource limit of 20 cores and 48 GB memory.
+    # If using a 3 node replicated setup, each replica in the cluster should have resource requests of 14+ cores and 24+ GB memory, and resource limit of 20 cores and 48 GB memory.
     enabled: true
     host: langsmith-ch-clickhouse-replicated.default.svc.cluster.local
     port: "8123"

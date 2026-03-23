@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -84,7 +82,7 @@ With this environment up and running, you’re ready to make a few changes to th
 
 The greeting at the top of the page is populated by an API call at `/api/greeting`. Currently, it always returns "Hello world!". You’ll now modify it to return one of three randomized messages (that you'll get to choose).
 
-1. Open the `backend/src/routes/getGreeting.js` file in a text editor. This file provides the handler for the API endpoint.
+1. Open the `backend/src/routes/getGreeting.js` file in a text editor on your local machine (in the cloned project directory). This file provides the handler for the API endpoint. Your changes will automatically sync to the running container.
 
 2. Modify the variable at the top to an array of greetings. Feel free to use the following modifications or customize it to your own liking. Also, update the endpoint to send a random greeting from this list.
 
@@ -104,15 +102,15 @@ The greeting at the top of the page is populated by an API call at `/api/greetin
 
    ```js
    const GREETINGS = [
-       "Whalecome!",
-       "All hands on deck!",
-       "Charting the course ahead!",
+     "Whalecome!",
+     "All hands on deck!",
+     "Charting the course ahead!",
    ];
 
    module.exports = async (req, res) => {
-       res.send({
-           greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length )],
-       });
+     res.send({
+       greeting: GREETINGS[Math.floor(Math.random() * GREETINGS.length)],
+     });
    };
    ```
 
@@ -124,7 +122,7 @@ The greeting at the top of the page is populated by an API call at `/api/greetin
 
 When you look at the app, you'll see the placeholder text is simply "New Item". You’ll now make that a little more descriptive and fun. You’ll also make a few changes to the styling of the app too.
 
-1. Open the `client/src/components/AddNewItemForm.jsx` file. This provides the component to add a new item to the to-do list.
+1. Open the `client/src/components/AddNewItemForm.jsx` file in your local project directory. This provides the component to add a new item to the to-do list.
 
 2. Modify the `placeholder` attribute of the `Form.Control` element to whatever you'd like to display.
 
@@ -140,11 +138,11 @@ When you look at the app, you'll see the placeholder text is simply "New Item". 
 
    ```js
    <Form.Control
-       value={newItem}
-       onChange={(e) => setNewItem(e.target.value)}
-       type="text"
-       placeholder="What do you need to do?"
-       aria-label="New item"
+     value={newItem}
+     onChange={(e) => setNewItem(e.target.value)}
+     type="text"
+     placeholder="What do you need to do?"
+     aria-label="New item"
    />
    ```
 
@@ -156,7 +154,7 @@ When you look at the app, you'll see the placeholder text is simply "New Item". 
 
 Before you consider the application finalized, you need to make the colors better.
 
-1. Open the `client/src/index.scss` file.
+1. Open the `client/src/index.scss` file in your local project directory.
 
 2. Adjust the `background-color` attribute to any color you'd like. The provided snippet is a soft blue to go along with Docker's nautical theme.
 
@@ -172,9 +170,9 @@ Before you consider the application finalized, you need to make the colors bette
 
    ```css
    body {
-       background-color: #99bbff;
-       margin-top: 50px;
-       font-family: 'Lato';
+     background-color: #99bbff;
+     margin-top: 50px;
+     font-family: "Lato";
    }
    ```
 
@@ -190,7 +188,9 @@ Before you move on, take a moment and reflect on what happened here. Within a fe
 
 - Start a complete development project with zero installation effort. The containerized environment provided the development environment, ensuring you have everything you need. You didn't have to install Node, MySQL, or any of the other dependencies directly on your machine. All you needed was Docker Desktop and a code editor.
 
-- Make changes and see them immediately. This was made possible because 1) the processes running in each container are watching and responding to file changes and 2) the files are shared with the containerized environment.
+- Make changes and see them immediately. This was made possible because
+
+  1. the processes running in each container are watching and responding to file changes and 2) the files in your local project directory are shared with the containerized environment, so edits you make locally are automatically synced to the containers.
 
 Docker Desktop enables all of this and so much more. Once you start thinking with containers, you can create almost any environment and easily share it with your team.
 

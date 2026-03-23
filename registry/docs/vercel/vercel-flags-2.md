@@ -65,5 +65,5 @@ Learn more about [embedded definitions](/docs/flags/vercel-flags/sdks/core#embed
 
 title: "Getting Started with Vercel Flags"
 description: "Create your first feature flag and evaluate it in your application using the Flags SDK, OpenFeature, or the core library."
-last\_updated: "2026-03-08T05:03:14.628Z"
+last\_updated: "2026-03-23T09:40:10.232Z"
 source: "https://vercel.com/docs/flags/vercel-flags/quickstart"

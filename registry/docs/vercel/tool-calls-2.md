@@ -157,7 +157,7 @@ When the model makes tool calls, the response includes tool call information:
 
 title: "Image Input"
 description: "Send images for analysis using the OpenResponses API."
-last\_updated: "2026-03-08T05:03:10.809Z"
+last\_updated: "2026-03-23T09:40:04.874Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openresponses/image-input"
 
 # Image Input
@@ -216,5 +216,5 @@ The `detail` parameter controls image resolution:
 
 title: "OpenResponses API"
 description: "Use the OpenResponses API specification with AI Gateway for a unified, provider-agnostic interface."
-last\_updated: "2026-03-08T05:03:10.801Z"
+last\_updated: "2026-03-23T09:40:04.888Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openresponses"

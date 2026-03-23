@@ -1,6 +1,6 @@
 # Next.js Documentation
 
-@doc-version: >=v16.1.6
+@doc-version: >=v16.2.1
 @doc-version-notes: Some features may have extended or refined behavior in minor or patch releases
 @router: App Router
 @router-note: Unless otherwise noted in each section, these documents apply to the App Router
@@ -31,10 +31,10 @@ If you're new to React or need a refresher, we recommend starting with our [Reac
 - [Layouts and Pages](/docs/app/getting-started/layouts-and-pages)
 - [Linking and Navigating](/docs/app/getting-started/linking-and-navigating)
 - [Server and Client Components](/docs/app/getting-started/server-and-client-components)
-- [Cache Components](/docs/app/getting-started/cache-components)
 - [Fetching Data](/docs/app/getting-started/fetching-data)
-- [Updating Data](/docs/app/getting-started/updating-data)
-- [Caching and Revalidating](/docs/app/getting-started/caching-and-revalidating)
+- [Mutating Data](/docs/app/getting-started/mutating-data)
+- [Caching](/docs/app/getting-started/caching)
+- [Revalidating](/docs/app/getting-started/revalidating)
 - [Error Handling](/docs/app/getting-started/error-handling)
 - [CSS](/docs/app/getting-started/css)
 - [Image Optimization](/docs/app/getting-started/images)

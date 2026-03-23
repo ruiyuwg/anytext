@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -129,7 +127,7 @@ Only organization owners can stop mirroring a repository. After you stop mirrori
 
 > Note
 >
-> If you only want to stop mirroring ELS versions, you can uncheck the ELS option in the mirrored repository's **Settings** tab. For more details, see [Disable ELS for a repository](https://docs.docker.com/dhi/how-to/els/#disable-els-for-a-repository).
+> If you only want to stop mirroring ELS versions, you can clear the ELS option in the mirrored repository's **Settings** tab. For more details, see [Disable ELS for a repository](https://docs.docker.com/dhi/how-to/els/#disable-els-for-a-repository).
 
 To stop mirroring a repository:
 
@@ -151,15 +149,61 @@ However, to preserve the full security context, including attestations, you must
 
 To copy both, you can use [`regctl`](https://regclient.org/cli/regctl/), an OCI-aware CLI that supports mirroring images along with attached artifacts such as SBOMs, vulnerability reports, and SLSA provenance. For ongoing synchronization, you can use [`regsync`](https://regclient.org/cli/regsync/).
 
+### [Authenticate to `dhi.io` with an organization access token](#authenticate-to-dhiio-with-an-organization-access-token)
+
+You can authenticate to `dhi.io` using an [organization access token (OAT)](https://docs.docker.com/enterprise/security/access-tokens/) instead of a personal access token (PAT). OATs are owned by the organization rather than an individual user, which makes them better suited for CI/CD pipelines and automated workflows.
+
+> Note
+>
+> When using an OAT, use your organization name as the username, not your personal Docker ID. OATs are org-scoped and will return a `401 Unauthorized` error if presented under an individual user's username.
+
+To authenticate using an OAT:
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
+
+2. Select **Admin Console**, then **Access tokens**.
+
+3. Select **Generate access token**.
+
+4. Give the token a descriptive name, for example `dhi-pull-automation`.
+
+5. Expand the **Repository** drop-down and select **Read public repositories**.
+
+6. Select **Generate token**, then copy and save the token. You won't be able to retrieve it after closing the screen.
+
+7. Sign in to `dhi.io` using your organization name as the username and the OAT as the password:
+
+   ```console
+   $ oras login dhi.io -u <YOUR_ORGANIZATION_NAME>
+   ```
+
+   Or non-interactively in a CI/CD pipeline:
+
+   ```console
+   $ echo $OAT | oras login dhi.io -u "$DOCKER_ORG" --password-stdin
+   ```
+
+8. Verify access by discovering attestations on a DHI image:
+
+   ```console
+   $ oras discover dhi.io/node:24-dev --platform linux/amd64
+   ```
+
+   > Note
+   >
+   > The `--platform` flag is required. Without it, `oras discover` resolves to the multi-arch image index, which returns only an index-level signature rather than the full set of per-platform attestations.
+
+   A successful response lists the attestations attached to the image, including SBOMs, provenance, vulnerability reports, and changelog metadata.
+
 ### [Example mirroring with `regctl`](#example-mirroring-with-regctl)
 
 The following example shows how to mirror a specific tag of a Docker Hardened Image from Docker Hub to another registry, along with its associated attestations using `regctl`. You must [install `regctl`](https://github.com/regclient/regclient) first.
 
-The example assumes you have mirrored the DHI repository to your organization's namespace on Docker Hub as described in the previous section. You can apply the same steps to a non-mirrored image by updating the the `SRC_ATT_REPO` and `SRC_REPO` variables accordingly.
+The example assumes you have mirrored the DHI repository to your organization's namespace on Docker Hub as described in the previous section. You can apply the same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and `SRC_REPO` variables accordingly.
 
 1. Set environment variables for your specific environment. Replace the placeholders with your actual values.
 
-   In this example, you use a Docker username to represent a member of the Docker Hub organization that the DHI repositories are mirrored in. Prepare a [personal access token (PAT)](https://docs.docker.com/security/access-tokens/) for the user with `read only` access. Alternatively, you can use an organization namespace and an [organization access token (OAT)](https://docs.docker.com/enterprise/security/access-tokens/) to sign in to Docker Hub, but OATs are not yet supported for `registry.scout.docker.com`.
+   In this example, you use a Docker username to represent a member of the Docker Hub organization that the DHI repositories are mirrored in. Prepare a [personal access token (PAT)](https://docs.docker.com/security/access-tokens/) for the user with `read only` access. Alternatively, you can use your organization name and an [organization access token (OAT)](https://docs.docker.com/enterprise/security/access-tokens/) to authenticate with `docker.io`. Note that OATs are not supported for `registry.scout.docker.com`. If your workflow requires authenticating to the Scout registry, use a personal access token (PAT) for that step.
 
    ```console
    $ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"

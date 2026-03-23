@@ -48,7 +48,7 @@ function MyComponent() {  return (    <div>      <h2>        Component with envi
 These variables should only be accessed in your backend code, so it's best not to use the `VITE_` prefix for them. Instead, use `process.env` to access them. Depending on the [Nitro preset](https://nitro.build/deploy) chosen, they'll be made available automatically or they will require an external dependency such as [dotenv](https://www.npmjs.com/package/dotenv).
 
 ```
-DB_HOST="somedb://192.110.0"DB_PASSWORD = super_secret_password_hash
+DB_HOST = "somedb://192.110.0";DB_PASSWORD = super_secret_password_hash;
 ```
 
 To access them, within your backend code, use `process.env`. For an example, check the pseudo-code below.
@@ -61,7 +61,7 @@ To access them, within your backend code, use `process.env`. For an example, che
 It is also possible to make `process.env` type-safe via the same `env.d.ts` file.
 
 ```
-declare namespace NodeJS {  interface ProcessEnv {    readonly DB_URL: string    readonly DB_PASSWORD: string  }}
+declare namespace NodeJS {  interface ProcessEnv {    readonly DB_URL: string;    readonly DB_PASSWORD: string;  }}
 ```
 
 [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/configuration/environment-variables.mdx\&page=https://docs.solidjs.com/configuration/environment-variables)

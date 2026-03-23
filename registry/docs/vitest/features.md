@@ -25,7 +25,7 @@ Out-of-the-box ES Module / TypeScript / JSX support / PostCSS
 ## Threads
 
 By default Vitest runs test files in [multiple processes](/guide/parallelism) using [`node:child_process`](https://nodejs.org/api/child_process.html), allowing tests to run simultaneously. If you want to speed up your test suite even further, consider enabling `--pool=threads` to run tests using [`node:worker_threads`](https://nodejs.org/api/worker_threads.html) (beware that some packages might not work with this setup).
-To run tests in a single thread or process, see [`fileParallelism`](/config/#fileParallelism).
+To run tests in a single thread or process, see [`fileParallelism`](/config/fileparallelism).
 
 Vitest also isolates each file's environment so env mutations in one file don't affect others. Isolation can be disabled by passing `--no-isolate` to the CLI (trading correctness for run performance).
 
@@ -63,7 +63,7 @@ describe.concurrent('suite', () => {
 })
 ```
 
-You can also use `.skip`, `.only`, and `.todo` with concurrent suites and tests. Read more in the [API Reference](/api/#test-concurrent).
+You can also use `.skip`, `.only`, and `.todo` with concurrent suites and tests. Read more in the [API Reference](/api/test#test-concurrent).
 
 When running concurrent tests, Snapshots and Assertions must use `expect` from the local [Test Context](/guide/test-context) to ensure the right test is detected.
 
@@ -86,7 +86,7 @@ Learn more at [Snapshot](/guide/snapshot).
 
 [Chai](https://www.chaijs.com/) is built-in for assertions with [Jest `expect`](https://jestjs.io/docs/expect)-compatible APIs.
 
-Notice that if you are using third-party libraries that add matchers, setting [`test.globals`](/config/#globals) to `true` will provide better compatibility.
+Notice that if you are using third-party libraries that add matchers, setting [`test.globals`](/config/globals) to `true` will provide better compatibility.
 
 ## Mocking
 
@@ -175,7 +175,7 @@ Learn more at [In-source testing](/guide/in-source).
 
 ## Benchmarking Experimental
 
-You can run benchmark tests with [`bench`](/api/#bench) function via [Tinybench](https://github.com/tinylibs/tinybench) to compare performance results.
+You can run benchmark tests with [`bench`](/api/test#bench) function via [Tinybench](https://github.com/tinylibs/tinybench) to compare performance results.
 
 ```ts [sort.bench.ts]
 import { bench, describe } from 'vitest'
@@ -271,7 +271,7 @@ window.addEventListener('unhandledrejection', () => {
 })
 ```
 
-Alternatively, you can also ignore reported errors with a [`dangerouslyIgnoreUnhandledErrors`](/config/#dangerouslyignoreunhandlederrors) option. Vitest will still report them, but they won't affect the test result (exit code won't be changed).
+Alternatively, you can also ignore reported errors with a [`dangerouslyIgnoreUnhandledErrors`](/config/dangerouslyignoreunhandlederrors) option. Vitest will still report them, but they won't affect the test result (exit code won't be changed).
 
 If you need to test that error was not caught, you can create a test that looks like this:
 
@@ -299,7 +299,7 @@ test('my function throws uncaught error', async ({ onTestFinished }) => {
 
 Should all test files run in parallel. Setting this to `false` will override `maxWorkers` option to `1`.
 
-This option doesn't affect tests running in the same file. If you want to run those in parallel, use `concurrent` option on [describe](/api/#describe-concurrent) or via [a config](#sequence-concurrent).
+This option doesn't affect tests running in the same file. If you want to run those in parallel, use `concurrent` option on [describe](/api/describe#describe-concurrent) or via [a config](/config/sequence#sequence-concurrent).
 
 ***
 

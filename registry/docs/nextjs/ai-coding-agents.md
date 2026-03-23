@@ -71,6 +71,16 @@ Before any Next.js work, find and read the relevant doc in `node_modules/next/di
 @AGENTS.md
 ```
 
+For earlier versions
+
+On version 16.1 and earlier, use the codemod to generate these files automatically:
+
+```bash
+npx @next/codemod@latest agents-md
+```
+
+The codemod outputs the bundled docs to `.next-docs/` in the project root instead of `node_modules/next/dist/docs/`, and the generated agent files will point to that directory.
+
 ## Understanding AGENTS.md
 
 The default `AGENTS.md` contains a single, focused instruction: **read the bundled docs before writing code**. This is intentionally minimal — the goal is to redirect agents from stale training data to the accurate, version-matched documentation in `node_modules/next/dist/docs/`.

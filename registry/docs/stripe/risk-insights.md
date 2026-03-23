@@ -13,7 +13,7 @@ If you’re not seeing the customer information or locations that you expect, ch
 
 If your integration doesn’t provide important details like the cardholder’s email address, IP address, or shipping address, Radar can’t compute all of the data it needs to accurately evaluate each payment.
 
-Risk insights also includes information about the customer, such as matching the cardholder’s name with the provided email, and the success rate of transactions on the Stripe network associated with the email address. A low authorization rate may indicate suspicious behavior, because previous declines sometimes suggest past attempts at fraudulent transactions.
+Risk insights also includes information about the customer, such as matching the cardholder’s name with the provided email, and the success rate of transactions on the Stripe network associated with the email address. A low authorization rate might indicate suspicious behavior, because previous declines sometimes suggest past attempts at fraudulent transactions.
 
 We also highlight geography-based information, including the billing, shipping, and, IP address locations associated with this payment.
 

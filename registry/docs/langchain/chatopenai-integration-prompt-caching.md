@@ -240,7 +240,7 @@ For specifics on how to use example selectors, see the [relevant how-to guides h
 
 More and more models are supporting function (or tool) calling, which handles this automatically.
 It is recommended to use function/tool calling rather than output parsing.
-See documentation for that [here](/oss/javascript/langchain/tools).
+See the [LangChain tools documentation](/oss/javascript/langchain/tools).
 
 </Note>
 

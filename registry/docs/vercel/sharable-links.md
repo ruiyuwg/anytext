@@ -54,6 +54,6 @@ You can view and manage all the existing Shareable Links for your team in the fo
 ![Image](`/docs-assets/static/docs/concepts/deployments/preview-deployments/shareable-links-list.png`)
 
 title: "Methods to Protect Deployments"
-description: "Learn about the different methods to protect your deployments on Vercel, including Vercel Authentication, Password Protection, and Trusted IPs."
-last\_updated: "2026-03-08T05:03:13.179Z"
+description: "Vercel offers three methods to protect your deployments: Vercel Authentication, Password Protection, and Trusted IPs."
+last\_updated: "2026-03-23T09:40:08.253Z"
 source: "https://vercel.com/docs/deployment-protection/methods-to-protect-deployments"

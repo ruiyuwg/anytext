@@ -937,7 +937,7 @@ Configuration for Nitro.
 {
   "public": {},
   "app": {
-    "buildId": "f90f6a12-4673-4481-a5f5-514e21c7a35b",
+    "buildId": "da7d1e19-1748-484d-b9b2-d164ac3eb489",
     "baseURL": "/",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""

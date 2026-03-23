@@ -69,5 +69,5 @@ To follow this guide, you'll need the following:
 
 title: "Vercel & OpenAI Integration"
 description: "Integrate your Vercel project with OpenAI"
-last\_updated: "2026-03-08T05:03:09.849Z"
+last\_updated: "2026-03-23T09:40:03.348Z"
 source: "https://vercel.com/docs/agent-resources/integrations-for-models/openai"

@@ -2,6 +2,8 @@
 
 Source: https://docs.langchain.com/langsmith/configure-input-output-preview
 
+Customize what appears in the Input and Output columns of the Runs table by configuring custom preview paths for specific trace types.
+
 By default, LangSmith uses a heuristic to determine what to display in the **Input** and **Output** columns of your **Runs** table. However, you can customize exactly what appears in these columns by configuring custom preview paths for specific trace types.
 
 This is particularly useful when:

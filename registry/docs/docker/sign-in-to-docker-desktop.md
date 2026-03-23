@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -30,7 +28,7 @@ In large enterprises where admin access is restricted, administrators can [enfor
 
 > Tip
 >
-> Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you.
+> Explore [Docker's core subscriptions](https://www.docker.com/pricing?ref=Docs\&refAction=DocsDesktopSignIn) to see what else Docker can offer you.
 
 ## [Benefits of signing in](#benefits-of-signing-in)
 

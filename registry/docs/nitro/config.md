@@ -6,11 +6,29 @@
 
 ### `preset`
 
-Use `preset` option `NITRO_PRESET` environment variable for custom **production** preset.
+Use `preset` option or `NITRO_PRESET` environment variable for custom **production** preset.
 
 Preset for development mode is always `nitro_dev` and default `node_server` for production building a standalone Node.js server.
 
 The preset will automatically be detected when the `preset` option is not set and running in known environments.
+
+```ts
+export default defineNitroConfig({
+  preset: "cloudflare_pages", // deploy to Cloudflare Pages
+});
+```
+
+### `debug`
+
+- Default: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} (`true`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} when `DEBUG` environment variable is set)
+
+Enable debug mode for verbose logging and additional development information.
+
+```ts
+export default defineNitroConfig({
+  debug: true,
+});
+```
 
 ### `logLevel`
 
@@ -18,13 +36,27 @@ The preset will automatically be detected when the `preset` option is not set an
 
 Log verbosity level. See [consola](https://github.com/unjs/consola?tab=readme-ov-file#log-level){rel=""nofollow""} for more information.
 
+```ts
+export default defineNitroConfig({
+  logLevel: 4, // verbose logging
+});
+```
+
 ### `runtimeConfig`
 
 - Default: `{ nitro: { ... }, ...yourOptions }`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
 
 Server runtime configuration.
 
-**Note:**: `nitro` namespace is reserved.
+**Note:** `nitro` namespace is reserved.
+
+```ts
+export default defineNitroConfig({
+  runtimeConfig: {
+    apiSecret: "default-secret", // override with NITRO_API_SECRET
+  },
+});
+```
 
 ### `compatibilityDate`
 
@@ -32,9 +64,54 @@ Deployment providers introduce new features that Nitro presets can leverage, but
 
 Set it to latest tested date in `YYYY-MM-DD` format to leverage latest preset features.
 
-If this configuration is not provided, Nitro will continue using the current (v2.9) behavior for presets and show a warning.
+If this configuration is not provided, Nitro will use `"latest"` behavior by default.
+
+```ts
+export default defineNitroConfig({
+  compatibilityDate: "2025-01-01",
+});
+```
+
+### `static`
+
+- Default: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Enable static site generation mode.
+
+```ts
+export default defineNitroConfig({
+  static: true, // prerender all routes
+});
+```
 
 ## Features
+
+### `features`
+
+- Default: `{}`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Enable built-in features.
+
+#### `runtimeHooks`
+
+- Default: auto-detected (enabled if there is at least one nitro plugin)
+
+Enable runtime hooks for request and response.
+
+#### `websocket`
+
+- Default: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Enable WebSocket support.
+
+```ts
+export default defineNitroConfig({
+  features: {
+    runtimeHooks: true,
+    websocket: true, // enable WebSocket support
+  },
+});
+```
 
 ### `experimental`
 
@@ -44,13 +121,55 @@ Enable experimental features.
 
 #### `openAPI`
 
+- Default: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
 Enable `/_scalar`, `/_swagger` and `/_openapi.json` endpoints.
 
-- Default: `false`
+::note
+Prefer using the top-level [`openAPI`](https://nitro.build/#openapi) option for configuration.
+::
 
-To define the OpenAPI specification on your routes, take a look at [defineRouteMeta](https://nitro.build/guide/routing#route-meta)
+#### `typescriptBundlerResolution`
 
-You can pass an object on the root level to modify your OpenAPI specification:
+Enable TypeScript bundler module resolution. See [TypeScript#51669](https://github.com/microsoft/TypeScript/pull/51669){rel=""nofollow""}.
+
+#### `asyncContext`
+
+Enable native async context support for `useRequest()`.
+
+#### `sourcemapMinify`
+
+Set to `false` to disable experimental sourcemap minification.
+
+#### `envExpansion`
+
+Allow env expansion in runtime config. See [#2043](https://github.com/nitrojs/nitro/pull/2043){rel=""nofollow""}.
+
+#### `database`
+
+Enable experimental database support. See [Database](https://nitro.build/docs/database).
+
+#### `tasks`
+
+Enable experimental tasks support. See [Tasks](https://nitro.build/docs/tasks).
+
+```ts
+export default defineNitroConfig({
+  experimental: {
+    typescriptBundlerResolution: true,
+    asyncContext: true,
+    envExpansion: true,
+    database: true,
+    tasks: true,
+  },
+});
+```
+
+### `openAPI`
+
+Top-level OpenAPI configuration.
+
+You can pass an object to modify your OpenAPI specification:
 
 ```js
 openAPI: {
@@ -100,14 +219,6 @@ openAPI: {
 }
 ```
 
-#### `wasm`
-
-Enable WASM support
-
-#### `legacyExternals`
-
-When enabled, legacy (unstable) experimental rollup externals algorithm will be used.
-
 ### `future`
 
 - Default: `{}`
@@ -118,39 +229,116 @@ New features pending for a major version to avoid breaking changes.
 
 Uses built-in SWR functionality (using caching layer and storage) for Netlify and Vercel presets instead of falling back to ISR behavior.
 
+```ts
+export default defineNitroConfig({
+  future: {
+    nativeSWR: true,
+  },
+});
+```
+
 ### `storage`
 
 - Default: `{}`
 
-Storage configuration, read more in the [Storage Layer](https://nitro.build/guide/storage) section.
+Storage configuration, read more in the [Storage Layer](https://nitro.build/docs/storage) section.
 
-### `timing`
+```ts
+export default defineNitroConfig({
+  storage: {
+    redis: {
+      driver: "redis",
+      url: "redis://localhost:6379",
+    },
+  },
+});
+```
 
-- Default: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+### `devStorage`
 
-Enable timing information:
+- Default: `{}`
 
-- Nitro startup time log
-- `Server-Timing` header on HTTP responses
+Storage configuration overrides for development mode.
+
+```ts
+export default defineNitroConfig({
+  devStorage: {
+    redis: {
+      driver: "fs",
+      base: "./data/redis", // use filesystem in development
+    },
+  },
+});
+```
+
+### `database`
+
+Database connection configurations. Requires `experimental.database: true`.
+
+```ts
+database: {
+  default: {
+    connector: "sqlite",
+    options: { name: "db" }
+  }
+}
+```
+
+### `devDatabase`
+
+Database connection configuration overrides for development mode.
+
+```ts
+export default defineNitroConfig({
+  devDatabase: {
+    default: {
+      connector: "sqlite",
+      options: { name: "db-dev" }, // separate dev database
+    },
+  },
+});
+```
 
 ### `renderer`
 
-Path to main render (file should export an event handler as default)
+- Type: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} | `{ handler?: string, static?: boolean, template?: string }`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Points to main render entry (file should export an event handler as default).
+
+```ts
+export default defineNitroConfig({
+  renderer: {
+    handler: "~/renderer", // path to the render handler
+  },
+});
+```
 
 ### `serveStatic`
 
-- Type: `boolean` | `'node'`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} | `'deno'`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
-- Default: depends of the deployment preset used.
+- Type: `boolean`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} | `'node'`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} | `'deno'`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} | `'inline'`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+- Default: depends on the deployment preset used.
 
 Serve `public/` assets in production.
 
-**Note:** It is highly recommended that your edge CDN (Nginx, Apache, Cloud) serves the `.output/public/` directory instead of enabling compression and higher lever caching.
+**Note:** It is highly recommended that your edge CDN (Nginx, Apache, Cloud) serves the `.output/public/` directory instead to enable compression and higher level caching.
+
+```ts
+export default defineNitroConfig({
+  serveStatic: "node", // serve static assets using Node.js
+});
+```
 
 ### `noPublicDir`
 
 - Default: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
 
-If enabled, disabled `.output/public` directory creation. Skipping to copy `public/` dir and also disables pre-rendering.
+If enabled, disables `.output/public` directory creation. Skips copying `public/` dir and also disables pre-rendering.
+
+```ts
+export default defineNitroConfig({
+  noPublicDir: true, // skip public directory output
+});
+```
 
 ### `publicAssets`
 
@@ -178,79 +366,51 @@ The `dir` option is where your files live on your file system; the `baseURL` opt
 
 ### `compressPublicAssets`
 
-- Default: `{ gzip: false, brotli: false }`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+- Default: `{ gzip: false, brotli: false, zstd: false }`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
 
-If enabled, Nitro will generate a pre-compressed (gzip and/or brotli) version of supported types of public assets and prerendered routes
-larger than 1024 bytes into the public directory. The best compression level is used. Using this option you can support zero overhead asset compression without using a CDN.
+If enabled, Nitro will generate a pre-compressed (gzip, brotli, and/or zstd) version of supported types of public assets and prerendered routes
+larger than 1024 bytes into the public directory. Default compression levels are used. Using this option you can support zero overhead asset compression without using a CDN.
 
-List of compressible MIME types:
-
-- `application/dash+xml`
-- `application/eot`
-- `application/font`
-- `application/font-sfnt`
-- `application/javascript`
-- `application/json`
-- `application/opentype`
-- `application/otf`
-- `application/pdf`
-- `application/pkcs7-mime`
-- `application/protobuf`
-- `application/rss+xml`
-- `application/truetype`
-- `application/ttf`
-- `application/vnd.apple.mpegurl`
-- `application/vnd.mapbox-vector-tile`
-- `application/vnd.ms-fontobject`
-- `application/wasm`
-- `application/xhtml+xml`
-- `application/xml`
-- `application/x-font-opentype`
-- `application/x-font-truetype`
-- `application/x-font-ttf`
-- `application/x-httpd-cgi`
-- `application/x-javascript`
-- `application/x-mpegurl`
-- `application/x-opentype`
-- `application/x-otf`
-- `application/x-perl`
-- `application/x-ttf`
-- `font/eot`
-- `font/opentype`
-- `font/otf`
-- `font/ttf`
-- `image/svg+xml`
-- `text/css`
-- `text/csv`
-- `text/html`
-- `text/javascript`
-- `text/js`
-- `text/plain`
-- `text/richtext`
-- `text/tab-separated-values`
-- `text/xml`
-- `text/x-component`
-- `text/x-java-source`
-- `text/x-script`
-- `vnd.apple.mpegurl`
+```ts
+export default defineNitroConfig({
+  compressPublicAssets: {
+    gzip: true,
+    brotli: true, // enable gzip and brotli pre-compression
+  },
+});
+```
 
 ### `serverAssets`
 
-Assets can be accessed in server logic and bundled in production. [Read more](https://nitro.build/guide/assets#server-assets).
+Assets can be accessed in server logic and bundled in production. [Read more](https://nitro.build/docs/assets#server-assets).
 
-### `devServer`
+```ts
+export default defineNitroConfig({
+  serverAssets: [
+    {
+      baseName: "templates",
+      dir: "./templates", // bundle templates/ as server assets
+    },
+  ],
+});
+```
 
-- Default: `{ watch: [] }`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+### `modules`
 
-Dev server options. You can use `watch` to make the dev server reload if any file changes in specified paths.
+- Default: `[]`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
 
-### `watchOptions`
+An array of Nitro modules. Modules can be a string (path), a module object with a `setup` function, or a function.
 
-Watch options for development mode. See [chokidar](https://github.com/paulmillr/chokidar){rel=""nofollow""} for more information.
-
-### `imports`
-
-Auto import options. See [unimport](https://github.com/unjs/unimport){rel=""nofollow""} for more information.
+```ts
+export default defineNitroConfig({
+  modules: [
+    "./modules/my-module.ts",
+    (nitro) => {
+      nitro.hooks.hook("compiled", () => { /* ... */ });
+    },
+  ],
+});
+```
 
 ### `plugins`
 
@@ -258,7 +418,57 @@ Auto import options. See [unimport](https://github.com/unjs/unimport){rel=""nofo
 
 An array of paths to nitro plugins. They will be executed by order on the first initialization.
 
-Note that Nitro auto-register the plugins in the `plugins/` directory, [learn more](https://nitro.build/guide/plugins).
+Note that Nitro auto-registers the plugins in the `plugins/` directory, [learn more](https://nitro.build/docs/plugins).
+
+```ts
+export default defineNitroConfig({
+  plugins: [
+    "~/plugins/my-plugin.ts",
+  ],
+});
+```
+
+### `tasks`
+
+- Default: `{}`
+
+Task definitions. Each key is a task name with a `handler` path and optional `description`.
+
+```ts
+tasks: {
+  'db:migrate': {
+    handler: './tasks/db-migrate',
+    description: 'Run database migrations'
+  }
+}
+```
+
+### `scheduledTasks`
+
+- Default: `{}`
+
+Map of cron expressions to task name(s).
+
+```ts
+scheduledTasks: {
+  '0 * * * *': 'cleanup:temp',
+  '*/5 * * * *': ['health:check', 'metrics:collect']
+}
+```
+
+### `imports`
+
+- Default: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Auto import options. Set to an object to enable. See [unimport](https://github.com/unjs/unimport){rel=""nofollow""} for more information.
+
+```ts
+export default defineNitroConfig({
+  imports: {
+    dirs: ["./utils"], // auto-import from utils/ directory
+  },
+});
+```
 
 ### `virtual`
 
@@ -266,54 +476,71 @@ Note that Nitro auto-register the plugins in the `plugins/` directory, [learn mo
 
 A map from dynamic virtual import names to their contents or an (async) function that returns it.
 
-## Routing
-
-### `baseURL`
-
-Default: `/`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} (or `NITRO_APP_BASE_URL` environment variable if provided)
-
-Server's main base URL.
-
-### `apiBaseURL`
-
-- Default : `/api`
-
-Changes the default api base URL prefix.
-
-### `handlers`
-
-Server handlers and routes.
-
-If `server/routes/`, `server/api/` or `server/middleware/` directories exist, they will be automatically added to the handlers array.
-
-### `devHandlers`
-
-Regular handlers refer to the path of handlers to be imported and transformed by rollup.
-
-There are situations in that we directly want to provide a handler instance with programmatic usage.
-
-We can use `devHandlers` but note that they are **only available in development mode** and **not in production build**.
-
-For example:
-
 ```ts
-import { defineEventHandler } from 'h3'
-
 export default defineNitroConfig({
-  devHandlers: [
-    {
-      route: '/',
-      handler: defineEventHandler((event) => {
-       console.log(event)
-      })
-    }
-  ]
-})
+  virtual: {
+    "#config": `export default { version: "1.0.0" }`,
+  },
+});
 ```
 
-::note{type="info"}
-Note that `defineEventHandler` is a helper function from [`h3`](https://v1.h3.dev){rel=""nofollow""} library.
-::
+### `ignore`
+
+- Default: `[]`
+
+Array of glob patterns to ignore when scanning directories.
+
+```ts
+export default defineNitroConfig({
+  ignore: [
+    "routes/_legacy/**", // skip legacy route handlers
+  ],
+});
+```
+
+### `wasm`
+
+- Default: `{}`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+- Type: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} | `UnwasmPluginOptions`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+WASM support configuration. See [unwasm](https://github.com/unjs/unwasm){rel=""nofollow""} for options.
+
+```ts
+export default defineNitroConfig({
+  wasm: {}, // enable WASM import support
+});
+```
+
+## Dev
+
+### `devServer`
+
+- Default: `{ watch: [] }`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Dev server options. You can use `watch` to make the dev server reload if any file changes in specified paths.
+
+Supports `port`, `hostname`, `watch`, and `runner` options.
+
+```ts
+export default defineNitroConfig({
+  devServer: {
+    port: 3001,
+    watch: ["./server/plugins"],
+  },
+});
+```
+
+### `watchOptions`
+
+Watch options for development mode. See [chokidar](https://github.com/paulmillr/chokidar){rel=""nofollow""} for more information.
+
+```ts
+export default defineNitroConfig({
+  watchOptions: {
+    ignored: ["**/node_modules/**", "**/dist/**"],
+  },
+});
+```
 
 ### `devProxy`
 
@@ -332,18 +559,108 @@ You can use this option to override development server routes and proxy-pass req
 
 See [httpxy](https://github.com/unjs/httpxy){rel=""nofollow""} for all available target options.
 
+## Logging
+
+### `logging`
+
+- Default: `{ compressedSizes: true, buildSuccess: true }`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Control build logging behavior. Set `compressedSizes` to `false` to skip reporting compressed bundle sizes. Set `buildSuccess` to `false` to suppress the build success message.
+
+```ts
+export default defineNitroConfig({
+  logging: {
+    compressedSizes: false, // skip compressed size reporting
+    buildSuccess: false,
+  },
+});
+```
+
+## Routing
+
+### `baseURL`
+
+Default: `/`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} (or `NITRO_APP_BASE_URL` environment variable if provided)
+
+Server's main base URL.
+
+```ts
+export default defineNitroConfig({
+  baseURL: "/app/", // serve app under /app/ prefix
+});
+```
+
+### `apiBaseURL`
+
+- Default: `/api`
+
+Changes the default API base URL prefix.
+
+```ts
+export default defineNitroConfig({
+  apiBaseURL: "/server/api", // api routes under /server/api/
+});
+```
+
+### `handlers`
+
+Server handlers and routes.
+
+If `routes/`, `api/` or `middleware/` directories exist inside the server directory, they will be automatically added to the handlers array.
+
+```ts
+export default defineNitroConfig({
+  handlers: [
+    { route: "/health", handler: "./handlers/health.ts" },
+    { route: "/admin/**", handler: "./handlers/admin.ts", method: "get" },
+  ],
+});
+```
+
+### `devHandlers`
+
+Regular handlers refer to the path of handlers to be imported and transformed by the bundler.
+
+There are situations in that we directly want to provide a handler instance with programmatic usage.
+
+We can use `devHandlers` but note that they are **only available in development mode** and **not in production build**.
+
+```ts
+export default defineNitroConfig({
+  devHandlers: [
+    { route: "/__dev", handler: eventHandler(() => "dev-only route") },
+  ],
+});
+```
+
+### `routes`
+
+- Default: `{}`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Inline route definitions. A map from route pattern to handler path or handler options.
+
+```ts
+export default defineNitroConfig({
+  routes: {
+    "/hello": "./routes/hello.ts",
+    "/greet": { handler: "./routes/greet.ts", method: "post" },
+  },
+});
+```
+
 ### `errorHandler`
 
-Path to a custom runtime error handler. Replacing nitro's built-in error page.
-The error handler is given an `H3Error` and `H3Event`. If the handler returns a promise it is awaited.
-The handler is expected to send a response of its own.
-Below is an example where a plain-text response is returned using h3's functions.
+- Type: `string`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} | `string[]`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Path(s) to custom runtime error handler(s). Replaces nitro's built-in error page.
 
 **Example:**
 
 ::CodeGroup
 
 ```js [nitro.config]
+import { defineNitroConfig } from "nitro/config";
+
 export default defineNitroConfig({
   errorHandler: "~/error",
 });
@@ -351,8 +668,9 @@ export default defineNitroConfig({
 
 ```js [error.ts]
 export default defineNitroErrorHandler((error, event) => {
-  setResponseHeader(event, 'Content-Type', 'text/plain')
-  return send(event, '[custom error handler] ' + error.stack)
+  return new Response('[custom error handler] ' + error.stack, {
+    headers: { 'Content-Type': 'text/plain' }
+  });
 });
 ```
 
@@ -362,11 +680,11 @@ export default defineNitroErrorHandler((error, event) => {
 
 **🧪 Experimental!**
 
-Route options. It is a map from route pattern (following [radix3](https://github.com/unjs/rou3/tree/radix3#route-matcher){rel=""nofollow""}) to route options.
+Route options. It is a map from route pattern (following [rou3](https://github.com/h3js/rou3){rel=""nofollow""}) to route options.
 
 When `cache` option is set, handlers matching pattern will be automatically wrapped with `defineCachedEventHandler`.
 
-See the [Cache API](https://nitro.build/guide/cache) for all available cache options.
+See the [Cache API](https://nitro.build/docs/cache) for all available cache options.
 
 ::note
 `swr: true|number` is shortcut for `cache: { swr: true, maxAge: number }`
@@ -387,6 +705,7 @@ routeRules: {
   '/old-page/**': { redirect: '/new-page/**' },
   '/proxy/example': { proxy: 'https://example.com' },
   '/proxy/**': { proxy: '/api/**' },
+  '/admin/**': { basicAuth: { username: 'admin', password: 'secret' } },
 }
 ```
 
@@ -414,7 +733,7 @@ Any route (string) that starts with a prefix listed in `ignore` or matches a reg
 
 If `crawlLinks` option is set to `true`, nitro starts with `/` by default (or all routes in `routes` array) and for HTML pages extracts `<a>` tags and prerender them as well.
 
-You can set `failOnError` option to `true` to stop the CI when an error if Nitro could not prerender a route.
+You can set `failOnError` option to `true` to stop the CI when Nitro could not prerender a route.
 
 The `interval` and `concurrency` options lets you control the speed of pre-rendering, can be useful to avoid hitting some rate-limit if you call external APIs.
 
@@ -439,16 +758,36 @@ Project workspace root directory.
 
 The workspace (e.g. pnpm workspace) directory is automatically detected when the `workspaceDir` option is not set.
 
+```ts
+export default defineNitroConfig({
+  workspaceDir: "../", // monorepo root
+});
+```
+
 ### `rootDir`
 
 Project main directory.
 
-### `srcDir`
+```ts
+export default defineNitroConfig({
+  rootDir: "./src/server",
+});
+```
 
-- Default: (same as `rootDir`)
+### `serverDir`
 
-Project source directory. Same as `rootDir` unless specified.
-Root directory for `api`, `routes`, `plugins`, `utils`, `public`, `middleware`, `assets`, and `tasks` folders.
+- Default: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+- Type: `boolean`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} | `"./"` | `"./server"` | `string`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Server directory for scanning `api/`, `routes/`, `plugins/`, `utils/`, `middleware/`, `assets/`, and `tasks/` folders.
+
+When set to `false`, automatic directory scanning is disabled. Set to `"./"` to use the root directory, or `"./server"` to use a `server/` subdirectory.
+
+```ts
+export default defineNitroConfig({
+  serverDir: "./server", // scan server/ subdirectory
+});
+```
 
 ### `scanDirs`
 
@@ -456,29 +795,269 @@ Root directory for `api`, `routes`, `plugins`, `utils`, `public`, `middleware`, 
 
 List of directories to scan and auto-register files, such as API routes.
 
+```ts
+export default defineNitroConfig({
+  scanDirs: ["./modules/auth/api", "./modules/billing/api"],
+});
+```
+
 ### `apiDir`
 
-- Default : `api`
+- Default: `api`
 
 Defines a different directory to scan for api route handlers.
 
+```ts
+export default defineNitroConfig({
+  apiDir: "endpoints", // scan endpoints/ instead of api/
+});
+```
+
 ### `routesDir`
 
-- Default : `routes`
+- Default: `routes`
 
 Defines a different directory to scan for route handlers.
 
+```ts
+export default defineNitroConfig({
+  routesDir: "pages", // scan pages/ instead of routes/
+});
+```
+
 ### `buildDir`
 
-- Default: `.nitro`
+- Default: `node_modules/.nitro`
 
-nitro's temporary working directory for generating build-related files.
+Nitro's temporary working directory for generating build-related files.
+
+```ts
+export default defineNitroConfig({
+  buildDir: ".nitro", // use .nitro/ in project root
+});
+```
 
 ### `output`
 
 - Default: `{ dir: '.output', serverDir: '.output/server', publicDir: '.output/public' }`
 
 Output directories for production bundle.
+
+```ts
+export default defineNitroConfig({
+  output: {
+    dir: "dist",
+    serverDir: "dist/server",
+    publicDir: "dist/public",
+  },
+});
+```
+
+## Build
+
+### `builder`
+
+- Type: `"rollup"`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} | `"rolldown"`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} | `"vite"`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+- Default: `undefined`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"} (auto-detected)
+
+Specify the bundler to use for building.
+
+```ts
+export default defineNitroConfig({
+  builder: "vite",
+});
+```
+
+### `rollupConfig`
+
+Additional rollup configuration.
+
+```ts
+export default defineNitroConfig({
+  rollupConfig: {
+    output: { manualChunks: { vendor: ["lodash-es"] } },
+  },
+});
+```
+
+### `rolldownConfig`
+
+Additional rolldown configuration.
+
+```ts
+export default defineNitroConfig({
+  rolldownConfig: {
+    output: { banner: "/* built with nitro */" },
+  },
+});
+```
+
+### `entry`
+
+Bundler entry point.
+
+```ts
+export default defineNitroConfig({
+  entry: "./server/entry.ts", // custom entry file
+});
+```
+
+### `unenv`
+
+[unenv](https://github.com/unjs/unenv/){rel=""nofollow""} preset(s) for environment compatibility.
+
+```ts
+export default defineNitroConfig({
+  unenv: {
+    alias: { "my-module": "my-module/web" },
+  },
+});
+```
+
+### `alias`
+
+Path aliases for module resolution.
+
+```ts
+export default defineNitroConfig({
+  alias: {
+    "~utils": "./src/utils",
+    "#shared": "./shared",
+  },
+});
+```
+
+### `minify`
+
+- Default: `false`
+
+Minify bundle.
+
+```ts
+export default defineNitroConfig({
+  minify: true, // minify production bundle
+});
+```
+
+### `inlineDynamicImports`
+
+- Default: `false`
+
+Bundle all code into a single file instead of creating separate chunks per route.
+
+When `false`, each route handler becomes a separate chunk loaded on-demand. When `true`, everything is bundled together. Some presets enable this by default.
+
+```ts
+export default defineNitroConfig({
+  inlineDynamicImports: true, // single output file
+});
+```
+
+### `sourcemap`
+
+- Default: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Enable source map generation. See [options](https://rollupjs.org/configuration-options/#output-sourcemap){rel=""nofollow""}.
+
+```ts
+export default defineNitroConfig({
+  sourcemap: true, // generate .map files
+});
+```
+
+### `node`
+
+- Default: `true`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Specify whether the build is used for Node.js or not. If set to `false`, nitro tries to mock Node.js dependencies using [unenv](https://github.com/unjs/unenv){rel=""nofollow""} and adjust its behavior.
+
+```ts
+export default defineNitroConfig({
+  node: false, // target non-Node.js runtimes
+});
+```
+
+### `moduleSideEffects`
+
+Default: `['unenv/polyfill/']`
+
+Specifies module imports that have side-effects.
+
+```ts
+export default defineNitroConfig({
+  moduleSideEffects: ["unenv/polyfill/", "reflect-metadata"],
+});
+```
+
+### `replace`
+
+Build-time string replacements.
+
+```ts
+export default defineNitroConfig({
+  replace: {
+    "process.env.APP_VERSION": JSON.stringify("1.0.0"),
+  },
+});
+```
+
+### `commonJS`
+
+Specifies additional configuration for the rollup CommonJS plugin.
+
+```ts
+export default defineNitroConfig({
+  commonJS: {
+    requireReturnsDefault: "auto",
+  },
+});
+```
+
+### `exportConditions`
+
+Custom export conditions for module resolution.
+
+```ts
+export default defineNitroConfig({
+  exportConditions: ["worker", "production"],
+});
+```
+
+### `noExternals`
+
+- Default: `false`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Prevent specific packages from being externalized. Set to `true` to bundle all dependencies, or pass an array of package names/patterns.
+
+```ts
+export default defineNitroConfig({
+  noExternals: true, // bundle all dependencies
+});
+```
+
+### `traceDeps`
+
+- Default: `[]`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
+
+Additional dependencies to trace and include in the build output.
+
+```ts
+export default defineNitroConfig({
+  traceDeps: ["sharp", "better-sqlite3"],
+});
+```
+
+### `oxc`
+
+OXC options for rolldown builds. Includes `minify` and `transform` sub-options.
+
+```ts
+export default defineNitroConfig({
+  oxc: {
+    minify: { compress: true, mangle: true },
+  },
+});
+```
 
 ## Advanced
 
@@ -488,15 +1067,26 @@ Output directories for production bundle.
 
 **⚠️ Caution! This is an advanced configuration. Things can go wrong if misconfigured.**
 
+```ts
+export default defineNitroConfig({
+  dev: true, // force development mode behavior
+});
+```
+
 ### `typescript`
 
-Default: `{ generateTsConfig: true }`
+Default: `{ strict: true, generateRuntimeConfigTypes: false, generateTsConfig: false }`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
 
-### `nodeModulesDirs`
+TypeScript configuration options including `strict`, `generateRuntimeConfigTypes`, `generateTsConfig`, `tsConfig`, `generatedTypesDir`, and `tsconfigPath`.
 
-**⚠️ Caution! This is an advanced configuration. Things can go wrong if misconfigured.**
-
-Additional `node_modules` to search when resolving a module. By default user directory is added.
+```ts
+export default defineNitroConfig({
+  typescript: {
+    strict: true,
+    generateTsConfig: true,
+  },
+});
+```
 
 ### `hooks`
 
@@ -504,11 +1094,29 @@ Additional `node_modules` to search when resolving a module. By default user dir
 
 nitro hooks. See [hookable](https://github.com/unjs/hookable){rel=""nofollow""} for more information.
 
+```ts
+export default defineNitroConfig({
+  hooks: {
+    compiled(nitro) {
+      console.log("Build compiled successfully!");
+    },
+  },
+});
+```
+
 ### `commands`
 
 **⚠️ Caution! This is an advanced configuration. Things can go wrong if misconfigured.**
 
 Preview and deploy command hints are usually filled by deployment presets.
+
+```ts
+export default defineNitroConfig({
+  commands: {
+    preview: "node ./server/index.mjs",
+  },
+});
+```
 
 ### `devErrorHandler`
 
@@ -516,61 +1124,25 @@ Preview and deploy command hints are usually filled by deployment presets.
 
 A custom error handler function for development errors.
 
-## Rollup
+```ts
+export default defineNitroConfig({
+  devErrorHandler: (error, event) => {
+    return new Response(`Dev error: ${error.message}`, { status: 500 });
+  },
+});
+```
 
-### `rollupConfig`
+### `framework`
 
-Additional rollup configuration.
+- Default: `{ name: "nitro", version: "<current>" }`{.shiki,shiki-themes,github-light,github-dark,github-dark lang="ts"}
 
-### `entry`
+Framework information. Used by presets and build info. Typically set by higher-level frameworks (e.g. Nuxt).
 
-Rollup entry.
-
-### `unenv`
-
-Options for [unenv](https://github.com/unjs/unenv/){rel=""nofollow""} preset.
-
-### `alias`
-
-Rollup aliases options.
-
-### `minify`
-
-- Default: `false`
-
-Minify bundle.
-
-### `inlineDynamicImports`
-
-Avoid creating chunks.
-
-### `sourceMap`
-
-Enable source map generation. See [options](https://rollupjs.org/configuration-options/#output-sourcemap){rel=""nofollow""}
-
-- Default: `true`
-
-### `node`
-
-Specify whether the build is used for Node.js or not. If set to `false`, nitro tries to mock Node.js dependencies using [unenv](https://github.com/unjs/unenv){rel=""nofollow""} and adjust its behavior.
-
-### `analyze`
-
-If enabled, will analyze server bundle after build using [rollup-plugin-visualizer](https://github.com/btd/rollup-plugin-visualizer){rel=""nofollow""}. You can also pass your custom options.
-
-### `moduleSideEffects`
-
-Default: `['unenv/polyfill/', 'node-fetch-native/polyfill']`
-
-Rollup specific option. Specifies module imports that have side-effects
-
-### `replace`
-
-Rollup specific option.
-
-### `commonJS`
-
-Rollup specific option. Specifies additional configuration for the rollup CommonJS plugin.
+```ts
+export default defineNitroConfig({
+  framework: { name: "my-framework", version: "2.0.0" },
+});
+```
 
 ## Preset options
 
@@ -578,10 +1150,41 @@ Rollup specific option. Specifies additional configuration for the rollup Common
 
 The options for the firebase functions preset. See [Preset Docs](https://nitro.build/deploy/providers/firebase#options)
 
+```ts
+export default defineNitroConfig({
+  firebase: {
+    gen: 2, // use Cloud Functions 2nd gen
+    region: "us-central1",
+  },
+});
+```
+
 ### `vercel`
 
 The options for the vercel preset. See [Preset Docs](https://nitro.build/deploy/providers/vercel)
 
+```ts
+export default defineNitroConfig({
+  vercel: {
+    config: { runtime: "nodejs20.x" },
+  },
+});
+```
+
 ### `cloudflare`
 
 The options for the cloudflare preset. See [Preset Docs](https://nitro.build/deploy/providers/cloudflare)
+
+```ts
+export default defineNitroConfig({
+  cloudflare: {
+    wrangler: { compatibility_date: "2025-01-01" },
+  },
+});
+```
+
+### `zephyr`
+
+The options for the zephyr preset. See [Preset Docs](https://nitro.build/deploy/providers/zephyr#options)
+
+# Examples

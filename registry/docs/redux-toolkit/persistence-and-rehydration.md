@@ -6,7 +6,7 @@ See also [Server Side Rendering](/rtk-query/usage/server-side-rendering).
 
 info
 
-Generally, persisting API slices is not recommended and instead, mechanisms like [`Cache-Control` Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) should be used in browsers to define cache behavior. Persisting and rehydrating an api slice might always leave the user with very stale data if the user has not visited the page for some time. Nonetheless, in environments like Native Apps, where there is no browser cache to take care of this, persistance might still be a viable option.
+Generally, persisting API slices is not recommended and instead, mechanisms like [`Cache-Control` Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) should be used in browsers to define cache behavior. Persisting and rehydrating an api slice might always leave the user with very stale data if the user has not visited the page for some time. Nonetheless, in environments like Native Apps, where there is no browser cache to take care of this, persistence might still be a viable option.
 
 ## Redux Persist[​](#redux-persist "Direct link to Redux Persist")
 

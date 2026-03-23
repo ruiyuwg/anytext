@@ -1,82 +1,99 @@
 # Introduction
 
-By combining the tool with the builder API, Studio provides a way to organize your content and create intuitive workflows for your content editors. With the Structure Builder API, you can customize how lists, documents, views, and menus are organized within Studio.
+While the Studio provides an excellent out-of-the-box experience, its true power lies in its extensive customization capabilities. The React-based framework lets you tailor the editorial experience to your specific workflows.
 
-Here are some ways you can use the Structure tool with the Structure Builder API:
+With Sanity Studio customization, you can:
 
-- **Customize document browsing** by organizing content into logical groups, making it easier for editors to find what they need.
-- **Create specialized document views** that provide contextual information or alternative ways to interact with your content.
-- **Build custom editing workflows** that guide editors through complex content creation processes.
-- **Design intuitive navigation** that reflects the structure of your content model.
+- **Create custom input components** to provide specialized editing interfaces for your content.
+- **Design custom document views** and structure to organize content in ways that make sense for your team.
+- **Add visual enhancements** with custom icons, theming, and UI components.
+- **Extend functionality** with plugins and custom tools that integrate with your existing systems.
+- **Localize** the Studio interface to support your global team's preferred languages.
 
 > \[!TIP]
-> Where's the desk?
-> In earlier versions of Sanity, Structure was called the "Desk" tool. You may still see reference to this in filenames or tutorials around the web.
-
-## Requirements
-
-- New projects come pre-configured with the Structure tool. For existing projects, you'll need to [install it by updating your project's configuration file](https://www.sanity.io/docs/studio/structure-tool).
+> Studio or App SDK?
+> Sanity Studio is a fully featured Content Management System (CMS) based on your schemas. While highly customizable and extendable, it does come with the assumptions and all the bells and whistles of a CMS.
+> If you rather need a highly specialized workflow or tool to interact with your content without front-loading the entire editorial toolkit, you might consider building a custom application using the [App SDK](https://www.sanity.io/docs/app-sdk).
 
 ## Core concepts
 
-### Structure Builder API
+Sanity Studio is built from the ground up with customization in mind. Understanding these core customization areas will help you create the perfect editing environment for your team.
 
-Customizing the structure tool centers around using the Structure Builder API. It uses a structure builder object (often displayed as `S`) to chain builder methods. For example:
+### Custom components
 
-```typescript
- export default defineConfig({
-  // ...
-  plugins: [
-    structureTool({
-      structure: (S) =>
-        S.list()
-          .title('Document Types')
-          .items([...S.documentTypeListItems()]),
-    }),
-  ],
-})
-```
+The Studio's form builder automatically creates editing interfaces based on your schema definitions, but you can replace any input component with your own custom React component. This allows you to create specialized editing experiences for specific content types or fields.
 
-The most common builder methods are:
+Custom components can range from simple UI enhancements to complex interfaces that integrate with external services or provide specialized editing capabilities.
 
-- `S.list()`: creates a list (a container of items).
-- `S.listItem()`: creates an item in a list.
-- `S.documentTypeList()`: list of documents of a given schema type.
-- `S.document()`: a single document editor node.
-- `S.divider()`: adds a visual divider.
+#### Develop custom components
 
-### Collapsable panes
+[Custom component for Sanity Studio](https://www.sanity.io/docs/studio/intro-to-custom-studio-components)
 
-Collapsable panes are the building blocks of the Structure tool's interface. These panes have a title and contain a list of document types, a list of documents, a form, or a custom component. They can be collapsed to make more space within the window, providing a flexible way to navigate complex content structures.
+[Form Components](https://www.sanity.io/docs/studio/form-components)
 
-Panes can be nested, with child panes opening to the right of their parent. This creates a visual hierarchy that helps editors understand where they are in the content structure.
+#### Example components and tutorials
 
-### Pane types
+[Create a time duration object field](https://www.sanity.io/docs/developer-guides/create-a-time-duration-object-field)
 
-There are four main types of panes you can work with:
+[Create a “coupon generator” string field input](https://www.sanity.io/docs/developer-guides/create-a-coupon-generator-string-field-input)
 
-#### List
+[Create an array input field with selectable templates](https://www.sanity.io/docs/developer-guides/create-an-array-input-field-with-selectable-templates)
 
-A list contains one or more list items and is generally considered to be static. It's useful for displaying a fixed set of options, such as document types within your schema.
+[Create a document form progress component](https://www.sanity.io/docs/developer-guides/create-a-document-progress-root-level-component)
 
-#### Document list
+[Create a visual string selector field input](https://www.sanity.io/docs/developer-guides/create-a-rich-string-selector-field-input)
 
-Optimized for displaying a collection of documents, a document list keeps itself updated in real-time as documents are created, modified, or deleted. It uses GROQ filters to determine which documents to display and supports infinite scrolling for large collections.
+[Create a survey rating number field input](https://www.sanity.io/docs/developer-guides/create-a-survey-rating-number-field-input)
 
-#### Document (and views)
+[Create a time duration object field](https://www.sanity.io/docs/developer-guides/create-a-time-duration-object-field)
 
-A document pane displays a single document and can include multiple views, such as the default form view and custom views you create. Each view can show different aspects of the document or provide specialized interfaces for working with the content.
+### Structure builder
 
-### Child resolvers
+The Structure Builder gives you complete control over how documents are organized and presented in the Studio. You can customize document lists, create custom views, build specialized navigation, and design intuitive workflows for your content editors.
 
-Child resolvers are functions that determine what should be displayed when a user navigates to a specific item. They allow you to create dynamic, nested structures that respond to user actions and content changes.
+With Structure Builder, you can move beyond the default document type lists to create an information architecture that matches your team's mental model of the content.
 
 #### Get started with structure builder
 
-[Structure Builder tutorial](https://www.sanity.io/docs/studio/structure-builder-introduction)
+[Structure tool and Structure builder](https://www.sanity.io/docs/studio/structure-introduction)
+
+### Visual customization
+
+Sanity Studio can be visually customized to match your brand or to improve the editing experience. This includes:
+
+- **Theming**: Customize colors, typography, and spacing.
+- **Icons**: Replace default icons with custom ones for document types and fields.
+- **Sanity UI**: Use the built-in UI component library to create consistent interfaces.
+- **Favicons**: Add your own favicon to make the Studio recognizable in browser tabs.
+
+#### Bring your brand to Studio
+
+[Icons](https://www.sanity.io/docs/studio/icons-for-data-types)
+
+[Favicons](https://www.sanity.io/docs/studio/favicons)
+
+[Theming](https://www.sanity.io/docs/studio/theming)
+
+[Sanity UI](https://www.sanity.io/docs/studio/sanity-ui)
+
+### Tools and plugins
+
+The Studio can be extended with custom tools and plugins that add new functionality to the editing environment:
+
+- **Custom tools**: Create entirely new sections in the Studio for specialized workflows.
+- **Plugins**: Install or create plugins that add features like the Dashboard, Comments, or AI Assist.
+- **Integrations**: Connect the Studio to external services and systems.
+
+#### Popular tools and plugins
+
+[The Vision Plugin](https://www.sanity.io/docs/content-lake/the-vision-plugin)
+
+[AI Assist for Studio](https://www.sanity.io/docs/studio/install-and-configure-sanity-ai-assist)
+
+[Explore the Sanity Exchange](https://www.sanity.io/exchange)
 
 ## Limitations
 
-- The Structure tool's document list has a limited view of 2000 documents. If you find yourself running into this limitation, consider customizing your Structure configuration to organize documents into narrower categories.
-- Custom views cannot directly modify document content outside of the standard form fields without additional configuration. For highly complex custom views, consider using the App SDK instead.
-- Complex custom structures may impact performance, especially in projects with large numbers of documents.
+- Custom components should be compatible with Sanity's real-time collaboration system.
+- Some advanced customizations may require deeper knowledge of React and Sanity's internal APIs.
+- Custom tools and plugins may need to be updated when new versions of the Studio are released.

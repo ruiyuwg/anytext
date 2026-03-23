@@ -4,9 +4,6 @@ Source: https://payloadcms.com/docs/plugins/mcp
 
 ![https://www.npmjs.com/package/@payloadcms/plugin-mcp](https://img.shields.io/npm/v/@payloadcms/plugin-mcp)
 
-This plugin is currently in Beta and may have breaking changes in future
-releases.
-
 This plugin adds [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) capabilities.
 
 This plugin is completely open-source and the [source code can be found

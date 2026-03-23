@@ -264,7 +264,7 @@ VERCEL_GIT_PULL_REQUEST_ID=23
 
 title: "BODY\_NOT\_A\_STRING\_FROM\_FUNCTION"
 description: "The function returned a non-string body. This is a function error."
-last\_updated: "2026-03-08T05:03:14.041Z"
+last\_updated: "2026-03-23T09:40:09.532Z"
 source: "https://vercel.com/docs/errors/BODY\_NOT\_A\_STRING\_FROM\_FUNCTION"
 
 # BODY\_NOT\_A\_STRING\_FROM\_FUNCTION
@@ -286,7 +286,7 @@ To troubleshoot this error, follow these steps:
 
 title: "DEPLOYMENT\_BLOCKED"
 description: "The deployment was blocked due to certain conditions. This is a deployment error."
-last\_updated: "2026-03-08T05:03:14.060Z"
+last\_updated: "2026-03-23T09:40:09.538Z"
 source: "https://vercel.com/docs/errors/DEPLOYMENT\_BLOCKED"
 
 # DEPLOYMENT\_BLOCKED
@@ -311,7 +311,7 @@ To troubleshoot this error, follow these steps:
 
 title: "DEPLOYMENT\_DELETED"
 description: "The deployment has been removed"
-last\_updated: "2026-03-08T05:03:14.067Z"
+last\_updated: "2026-03-23T09:40:09.542Z"
 source: "https://vercel.com/docs/errors/DEPLOYMENT\_DELETED"
 
 # DEPLOYMENT\_DELETED
@@ -335,7 +335,7 @@ To restore a deleted deployment, open **Settings** in the sidebar of your projec
 
 title: "DEPLOYMENT\_DISABLED"
 description: "The deployment is disabled. This is a deployment error."
-last\_updated: "2026-03-08T05:03:14.064Z"
+last\_updated: "2026-03-23T09:40:09.546Z"
 source: "https://vercel.com/docs/errors/DEPLOYMENT\_DISABLED"
 
 # DEPLOYMENT\_DISABLED
@@ -358,7 +358,7 @@ To troubleshoot this error, follow these steps:
 
 title: "DEPLOYMENT\_NOT\_FOUND"
 description: "The deployment was not found. This is a deployment error."
-last\_updated: "2026-03-08T05:03:14.072Z"
+last\_updated: "2026-03-23T09:40:09.574Z"
 source: "https://vercel.com/docs/errors/DEPLOYMENT\_NOT\_FOUND"
 
 # DEPLOYMENT\_NOT\_FOUND
@@ -382,7 +382,7 @@ To troubleshoot this error, follow these steps:
 
 title: "DEPLOYMENT\_NOT\_READY\_REDIRECTING"
 description: "The deployment is not ready and is redirecting to another location. This is a deployment error."
-last\_updated: "2026-03-08T05:03:14.081Z"
+last\_updated: "2026-03-23T09:40:09.578Z"
 source: "https://vercel.com/docs/errors/DEPLOYMENT\_NOT\_READY\_REDIRECTING"
 
 # DEPLOYMENT\_NOT\_READY\_REDIRECTING
@@ -404,5 +404,5 @@ To troubleshoot this error, follow these steps:
 
 title: "DEPLOYMENT\_PAUSED"
 description: "The deployment was paused. This is a deployment error."
-last\_updated: "2026-03-08T05:03:14.076Z"
+last\_updated: "2026-03-23T09:40:09.583Z"
 source: "https://vercel.com/docs/errors/DEPLOYMENT\_PAUSED"

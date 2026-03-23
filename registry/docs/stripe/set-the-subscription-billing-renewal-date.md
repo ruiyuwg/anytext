@@ -21,7 +21,7 @@ Full billing periods start on the first full *invoice* (Invoices are statements 
 
 ## Specify the billing cycle anchor for new subscriptions
 
-> The subscription creation time matches the time of the request. It is not the same as the subscription start date. Learn more about [backdating and billing cycle anchors](https://docs.stripe.com/billing/subscriptions/backdating.md#backdating-billing-cycle).
+> The subscription creation time matches the time of the request. It isn’t the same as the subscription start date. Learn more about [backdating and billing cycle anchors](https://docs.stripe.com/billing/subscriptions/backdating.md#backdating-billing-cycle).
 
 There are two ways to set the billing cycle anchor on new subscriptions:
 

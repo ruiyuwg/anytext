@@ -1,0 +1,161 @@
+Change the availability check method of an instance.
+
+## Operation description
+
+### [](#supported-database-engines)[](#)Supported database engines
+
+-   MySQL
+-   PostgreSQL
+-   SQL Server
+-   MariaDB
+
+### [](#references)[](#)References
+
+**Note** Before you call this operation, read the following documentation and make sure that you fully understand the prerequisites and impacts of this operation.
+
+[What is availability check?](/help/en/rds/support/what-is-availability-detection)
+
+## Debugging
+
+[You can run this interface directly in OpenAPI Explorer, saving you the trouble of calculating signatures. After running successfully, OpenAPI Explorer can automatically generate SDK code samples.](https://api.alibabacloud.com/api/Rds/2014-08-15/ModifyHADiagnoseConfig)
+
+[![](https://img.alicdn.com/tfs/TB16JcyXHr1gK0jSZR0XXbP8XXa-24-26.png)Debug](https://api.alibabacloud.com/api/Rds/2014-08-15/ModifyHADiagnoseConfig)
+
+## Authorization information
+
+The following table shows the authorization information corresponding to the API. The authorization information can be used in the `Action` policy element to grant a RAM user or RAM role the permissions to call this API operation. Description:
+
+-   Operation: the value that you can use in the Action element to specify the operation on a resource.
+-   Access level: the access level of each operation. The levels are read, write, and list.
+-   Resource type: the type of the resource on which you can authorize the RAM user or the RAM role to perform the operation. Take note of the following items:
+    -   For mandatory resource types, indicate with a prefix of \* .
+    -   If the permissions cannot be granted at the resource level, `All Resources` is used in the Resource type column of the operation.
+-   Condition Key: the condition key that is defined by the cloud service.
+-   Associated operation: other operations that the RAM user or the RAM role must have permissions to perform to complete the operation. To complete the operation, the RAM user or the RAM role must have the permissions to perform the associated operations.
+
+Operation
+
+Access level
+
+Resource type
+
+Condition key
+
+Associated operation
+
+rds:ModifyHADiagnoseConfig
+
+update
+
+\*DBInstance
+
+`acs:rds:{#regionId}:{#accountId}:dbinstance/{#dbinstanceId}`
+
+-   rds:ResourceTag
+
+none
+
+## Request parameters
+
+Parameter
+
+Type
+
+Required
+
+Description
+
+Example
+
+DBInstanceId
+
+string
+
+Yes
+
+The instance ID. You can call the DescribeDBInstances operation to query the instance ID.
+
+rm-uf6wjk5xxxxxxxxxx
+
+TcpConnectionType
+
+string
+
+Yes
+
+The availability check method of the instance. Valid values:
+
+-   **SHORT**: Alibaba Cloud uses short-lived connections to check the availability of the instance.
+-   **LONG**: Alibaba Cloud uses persistent connections to check the availability of the instance.
+
+SHORT
+
+RegionId
+
+string
+
+Yes
+
+The region ID. You can call the DescribeRegions operation to query the most recent region list.
+
+cn-hangzhou
+
+## Response parameters
+
+Parameter
+
+Type
+
+Description
+
+Example
+
+object
+
+The response parameters.
+
+RequestId
+
+string
+
+The ID of the request.
+
+9EFA6DF3-5247-4D9D-80AA-68765BE6D5EA
+
+## Examples
+
+Sample success responses
+
+`JSON`format
+
+```
+{
+  "RequestId": "9EFA6DF3-5247-4D9D-80AA-68765BE6D5EA"
+}
+```
+
+## Error codes
+
+HTTP status code
+
+Error code
+
+Error message
+
+400
+
+HaDiagnoseConfig.Format
+
+The value of tcpConnectionType must be LONG or SHORT
+
+For a list of error codes, visit the [Service error codes]( https://api.alibabacloud.com/document/Rds/2014-08-15/errorCode).
+
+## Change history
+
+Change time
+
+Summary of changes
+
+Operation
+
+No change history

@@ -561,5 +561,5 @@ Now that you have set up the Split Edge Config integration, you can explore the 
 
 title: "Using Edge Config with Statsig"
 description: "Learn how to use Edge Config with Vercel"
-last\_updated: "2026-03-08T05:03:13.800Z"
+last\_updated: "2026-03-23T09:40:09.174Z"
 source: "https://vercel.com/docs/edge-config/edge-config-integrations/statsig-edge-config"

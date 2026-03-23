@@ -17,9 +17,9 @@ Setting `devIndicators` to `false` will hide the indicator, however Next.js will
 
 ### Indicator not marking a route as static
 
-If you expect a route to be static and the indicator has marked it as dynamic, it's likely the route has opted out of static rendering.
+If you expect a route to be static and the indicator has marked it as dynamic, it's likely the route has opted out of prerendering.
 
-You can confirm if a route is [static](/docs/app/guides/caching#static-rendering) or [dynamic](/docs/app/guides/caching#dynamic-rendering) by building your application using `next build --debug`, and checking the output in your terminal. Static (or prerendered) routes will display a `○` symbol, whereas dynamic routes will display a `ƒ` symbol. For example:
+You can confirm if a route is [prerendered](/docs/app/glossary#prerendering) or [dynamically rendered](/docs/app/glossary#dynamic-rendering) by building your application using `next build --debug`, and checking the output in your terminal. Static (or prerendered) routes will display a `○` symbol, whereas dynamic routes will display a `ƒ` symbol. For example:
 
 ```bash filename="Build Output"
 Route (app)
@@ -30,9 +30,9 @@ Route (app)
 ƒ  (Dynamic)  server-rendered on demand
 ```
 
-There are two reasons a route might opt out of static rendering:
+There are two reasons a route might opt out of prerendering:
 
-- The presence of [Dynamic APIs](/docs/app/guides/caching#dynamic-rendering) which rely on runtime information.
+- The presence of [Request-time APIs](/docs/app/glossary#request-time-apis) which rely on request information.
 - An [uncached data request](/docs/app/getting-started/fetching-data), like a call to an ORM or database driver.
 
 Check your route for any of these conditions, and if you are not able to statically render the route, then consider using [`loading.js`](/docs/app/api-reference/file-conventions/loading) or [`<Suspense />`](https://react.dev/reference/react/Suspense) to leverage [streaming](/docs/app/getting-started/linking-and-navigating#streaming).
@@ -55,8 +55,8 @@ Open `next.config.js` and add the `distDir` config:
 
 ```js filename="next.config.js"
 module.exports = {
-  distDir: "build",
-};
+  distDir: 'build',
+}
 ```
 
 Now if you run `next build` Next.js will use `build` instead of the default `.next` folder.
@@ -78,19 +78,19 @@ To add environment variables to the JavaScript bundle, open `next.config.js` and
 ```js filename="next.config.js"
 module.exports = {
   env: {
-    customKey: "my-value",
+    customKey: 'my-value',
   },
-};
+}
 ```
 
 Now you can access `process.env.customKey` in your code. For example:
 
 ```jsx
 function Page() {
-  return <h1>The value of customKey is: {process.env.customKey}</h1>;
+  return <h1>The value of customKey is: {process.env.customKey}</h1>
 }
 
-export default Page;
+export default Page
 ```
 
 Next.js will replace `process.env.customKey` with `'my-value'` at build time. Trying to destructure `process.env` variables won't work due to the nature of webpack [DefinePlugin](https://webpack.js.org/plugins/define-plugin/).
@@ -98,13 +98,13 @@ Next.js will replace `process.env.customKey` with `'my-value'` at build time. Tr
 For example, the following line:
 
 ```jsx
-return <h1>The value of customKey is: {process.env.customKey}</h1>;
+return <h1>The value of customKey is: {process.env.customKey}</h1>
 ```
 
 Will end up being:
 
 ```jsx
-return <h1>The value of customKey is: {"my-value"}</h1>;
+return <h1>The value of customKey is: {'my-value'}</h1>
 ```
 
 # expireTime
@@ -119,7 +119,7 @@ Open `next.config.js` and add the `expireTime` config:
 module.exports = {
   // one hour in seconds
   expireTime: 3600,
-};
+}
 ```
 
 Now when sending the `Cache-Control` header the expire time will be calculated depending on the specific revalidate period.

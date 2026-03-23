@@ -55,5 +55,5 @@ You can also use [crontab guru](https://crontab.guru/) to validate your cron exp
 
 title: "Getting started with cron jobs"
 description: "Learn how to schedule cron jobs to run at specific times or intervals."
-last\_updated: "2026-03-08T05:03:13.065Z"
+last\_updated: "2026-03-23T09:40:08.108Z"
 source: "https://vercel.com/docs/cron-jobs/quickstart"

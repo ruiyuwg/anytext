@@ -79,7 +79,7 @@ export function handleUserNavigatingAway() {
 
 title: "BFCACHE\_INTEGRITY\_REQUIRE\_NOOPENER\_ATTRIBUTE"
 description: "Requires that links opened with window.open use the noopener attribute to eliminate a source of eviction from the browser"
-last\_updated: "2026-03-08T05:03:12.623Z"
+last\_updated: "2026-03-23T09:40:07.495Z"
 source: "https://vercel.com/docs/conformance/rules/BFCACHE\_INTEGRITY\_REQUIRE\_NOOPENER\_ATTRIBUTE"
 
 # BFCACHE\_INTEGRITY\_REQUIRE\_NOOPENER\_ATTRIBUTE
@@ -124,5 +124,5 @@ window.open('https://example.com', '_top', 'noreferrer');
 
 title: "ESLINT\_CONFIGURATION"
 description: "Requires that a workspace package has ESLint installed and configured correctly"
-last\_updated: "2026-03-08T05:03:12.635Z"
+last\_updated: "2026-03-23T09:40:07.500Z"
 source: "https://vercel.com/docs/conformance/rules/ESLINT\_CONFIGURATION"

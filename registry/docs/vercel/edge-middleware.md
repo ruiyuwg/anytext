@@ -32,5 +32,5 @@ If your Edge Middleware depends on a database far away from one of [our regions]
 
 title: "Edit Mode"
 description: "Discover how Vercel"
-last\_updated: "2026-03-08T05:03:13.900Z"
+last\_updated: "2026-03-23T09:40:09.398Z"
 source: "https://vercel.com/docs/edit-mode"

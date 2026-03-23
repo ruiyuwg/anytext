@@ -84,7 +84,7 @@ You should also add `"eslint-config-custom": "workspace:*"` to your
 
 title: "NEXTJS\_MISSING\_MODULARIZE\_IMPORTS"
 description: "modularizeImports can improve dev compilation speed for packages that use barrel files."
-last\_updated: "2026-03-08T05:03:12.648Z"
+last\_updated: "2026-03-23T09:40:07.520Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_MISSING\_MODULARIZE\_IMPORTS"
 
 # NEXTJS\_MISSING\_MODULARIZE\_IMPORTS
@@ -144,7 +144,7 @@ See [Customizing Conformance](/docs/conformance/customize) for more information.
 
 title: "NEXTJS\_MISSING\_NEXT13\_TYPESCRIPT\_PLUGIN"
 description: "Applications using Next 13 should use the "
-last\_updated: "2026-03-08T05:03:12.650Z"
+last\_updated: "2026-03-23T09:40:07.523Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_MISSING\_NEXT13\_TYPESCRIPT\_PLUGIN"
 
 # NEXTJS\_MISSING\_NEXT13\_TYPESCRIPT\_PLUGIN
@@ -167,7 +167,7 @@ file.
 
 title: "NEXTJS\_MISSING\_OPTIMIZE\_PACKAGE\_IMPORTS"
 description: "optimizePackageImports improves compilation speed for packages that use barrel files or export many modules."
-last\_updated: "2026-03-08T05:03:12.654Z"
+last\_updated: "2026-03-23T09:40:07.531Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_MISSING\_OPTIMIZE\_PACKAGE\_IMPORTS"
 
 # NEXTJS\_MISSING\_OPTIMIZE\_PACKAGE\_IMPORTS
@@ -203,7 +203,7 @@ experimental: {
 
 title: "NEXTJS\_MISSING\_REACT\_STRICT\_MODE"
 description: "Applications using Next.js should enable React Strict Mode"
-last\_updated: "2026-03-08T05:03:12.674Z"
+last\_updated: "2026-03-23T09:40:07.535Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_MISSING\_REACT\_STRICT\_MODE"
 
 # NEXTJS\_MISSING\_REACT\_STRICT\_MODE
@@ -226,7 +226,7 @@ module.exports = {
 
 title: "NEXTJS\_MISSING\_SECURITY\_HEADERS"
 description: "Requires that security headers are set correctly for Next.js apps and contain valid directives."
-last\_updated: "2026-03-08T05:03:12.678Z"
+last\_updated: "2026-03-23T09:40:07.538Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_MISSING\_SECURITY\_HEADERS"
 
 # NEXTJS\_MISSING\_SECURITY\_HEADERS
@@ -284,5 +284,5 @@ do and how to set the best values for your application.
 
 title: "NEXTJS\_NO\_ASYNC\_LAYOUT"
 description: "Ensures that the exported Next.js "
-last\_updated: "2026-03-08T05:03:12.690Z"
+last\_updated: "2026-03-23T09:40:07.545Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_NO\_ASYNC\_LAYOUT"

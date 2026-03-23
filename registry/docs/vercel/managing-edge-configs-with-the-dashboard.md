@@ -147,5 +147,5 @@ You can generate a new token by clicking the **Generate Token** button, typing a
 
 title: "Using Edge Config with DevCycle"
 description: "Learn how to use Edge Config with Vercel"
-last\_updated: "2026-03-08T05:03:13.704Z"
+last\_updated: "2026-03-23T09:40:09.100Z"
 source: "https://vercel.com/docs/edge-config/edge-config-integrations/devcycle-edge-config"

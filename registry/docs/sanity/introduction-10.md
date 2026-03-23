@@ -12,7 +12,7 @@ Agent Actions let you programmatically run schema-aware AI instructions to creat
 - Translate documents automatically or on demand.
 - See live AI presence so your editors know when the Instruct API works on a document.
 
-You can create powerful AI-driven workflows, by combining Agent Actions with Functions, Content Releases, the Actions API, and the rest of Content Lake's APIs.
+You can create powerful AI-driven workflows, by combining Agent Actions with Functions, Content Releases, the Actions API, and the rest of Content Lake's APIs. Each request with an Agent Action uses AI credits. [Learn more about our AI pricing](https://www.sanity.io/docs/platform-management/how-ai-credits-work).
 
 #### Get started with the actions
 

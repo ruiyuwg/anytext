@@ -19,7 +19,7 @@ import { useSubmissions } from "@solidjs/router";
 ## [Type](/solid-router/reference/data-apis/use-submissions#type)
 
 ```
-function useSubmissions<T extends Array<any>, U, V>(  fn: Action<T, U, V>,  filter?: (input: V) => boolean): Submission<T, NarrowResponse<U>>[] & {    pending: boolean;};
+function useSubmissions<T extends Array<any>, U, V>(  fn: Action<T, U, V>,  filter?: (input: V) => boolean): Submission<T, NarrowResponse<U>>[] & {  pending: boolean;};
 ```
 
 ***

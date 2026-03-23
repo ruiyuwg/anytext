@@ -17,7 +17,7 @@ In the above example, the `double` function relies on the `count` signal to prod
 Similarly you can create a derived signal that relies on a store value because stores use signals under the hood. To learn more about how stores work, [you can visit the stores section](/concepts/stores).
 
 ```
-const fullName = () => store.firstName + ' ' + store.lastName;
+const fullName = () => store.firstName + " " + store.lastName;
 ```
 
 These dependent functions gain reactivity from the signal they access, ensuring that changes in the underlying data propagate throughout your application. It is important to note that these functions do not store a value themselves; instead, they can update any effects or components that depend on them. If included within a component's body, these derived signals will trigger an update when necessary.

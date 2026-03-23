@@ -11,7 +11,7 @@ With vouchers, customers complete online purchases in-person at authorized locat
 
 Vouchers might not be a good fit for your business if:
 
-- You deliver goods immediately after checkout. Some customers may not complete payment and it can take 1 business day to receive a payment confirmation.
+- You deliver goods immediately after checkout. Some customers might not complete payment and it can take 1 business day to receive a payment confirmation.
 - You need to send refunds. Not all vouchers support refunds. Some businesses create separate processes to credit customers who ask for a refund directly.
 
 ## Payment flow

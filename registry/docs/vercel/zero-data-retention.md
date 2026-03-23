@@ -181,7 +181,7 @@ In special cases where certain models or functionalities are excluded from a pro
 
 title: "Chatbox"
 description: "Use Chatbox with the AI Gateway."
-last\_updated: "2026-03-08T05:03:10.368Z"
+last\_updated: "2026-03-23T09:40:04.206Z"
 source: "https://vercel.com/docs/ai-gateway/chat-platforms/chatbox"
 
 # Chatbox
@@ -213,5 +213,5 @@ source: "https://vercel.com/docs/ai-gateway/chat-platforms/chatbox"
 
 title: "LibreChat"
 description: "Use LibreChat with the AI Gateway."
-last\_updated: "2026-03-08T05:03:10.327Z"
+last\_updated: "2026-03-23T09:40:04.224Z"
 source: "https://vercel.com/docs/ai-gateway/chat-platforms/librechat"

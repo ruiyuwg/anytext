@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -60,7 +58,7 @@ $ docker compose down
 
 ### [Single host deployments](#single-host-deployments)
 
-Compose has traditionally been focused on development and testing workflows, but with each release we're making progress on more production-oriented features.
+Compose supports production deployments on single hosts. You can use Compose to deploy applications to remote Docker hosts and manage production-specific configurations.
 
 For details on using production-oriented features, see [Compose in production](https://docs.docker.com/compose/how-tos/production/).
 

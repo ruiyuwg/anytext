@@ -92,7 +92,8 @@ curl -X GET 'https://api.resend.com/api-keys' \
     {
       "id": "91f3200a-df72-4654-b0cd-f202395f5354",
       "name": "Production",
-      "created_at": "2023-04-08T00:11:13.110779+00:00"
+      "created_at": "2023-04-08T00:11:13.110779+00:00",
+      "last_used_at": "2024-11-01T17:09:51.813959+00:00"
     }
   ]
 }

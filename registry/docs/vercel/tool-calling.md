@@ -114,5 +114,5 @@ When the model decides to call a tool, the response includes a `function_call` o
 
 title: "SDKs & APIs"
 description: "Use the AI Gateway with various SDKs and API specifications including OpenAI, Anthropic, and OpenResponses."
-last\_updated: "2026-03-08T05:03:10.836Z"
+last\_updated: "2026-03-23T09:40:04.934Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis"

@@ -5,7 +5,7 @@ Plugin configurations are stored in `/config/plugins.js|ts` (see [project struct
 | Parameter                  | Description                                                                                                                                                            | Type    |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | `enabled`                  | Enable (`true`) or disable (`false`) an installed plugin                                                                                                               | Boolean |
-| `config`*Optional* | Used to override default plugin configuration ([defined in strapi-server.js](/cms/plugins-development/server-api#configuration)) | Object  |
+| `config`*Optional* | Used to override default plugin configuration ([defined in strapi-server.js](/cms/plugins-development/server-configuration)) | Object  |
 | `resolve` *Optional, only required for local plugins*             | Path to the plugin's folder                                                                                                                                            | String  |
 
 - Some core features of Strapi have historically been implemented as core plugins. This explains that their configuration is still defined in the `/config/plugins` file despite not technically being plugins in Strapi 5 anymore. This includes:

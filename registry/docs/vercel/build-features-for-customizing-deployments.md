@@ -94,5 +94,5 @@ On Vercel, you can deploy [Git submodules](https://git-scm.com/book/en/v2/Git-To
 
 title: "Build image overview"
 description: "Learn about the container image used for Vercel builds."
-last\_updated: "2026-03-08T05:03:11.307Z"
+last\_updated: "2026-03-23T09:40:05.666Z"
 source: "https://vercel.com/docs/builds/build-image"

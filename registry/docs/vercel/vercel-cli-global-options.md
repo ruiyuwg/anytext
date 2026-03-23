@@ -12,8 +12,8 @@ This option can be a relative or absolute path.
 vercel --cwd ~/path-to/project
 ```
 
-*Using the vercel command with the
-\--cwd option.*
+*Using the \`vercel\` command with the
+\`--cwd\` option.*
 
 ## Debug
 
@@ -23,8 +23,8 @@ The `--debug` option, shorthand `-d`, can be used to provide a more verbose outp
 vercel --debug
 ```
 
-*Using the vercel command with the
-\--debug option.*
+*Using the \`vercel\` command with the
+\`--debug\` option.*
 
 ## Global config
 
@@ -34,8 +34,8 @@ The `--global-config` option, shorthand `-Q`, can be used to set the path to the
 vercel --global-config /path-to/global-config-directory
 ```
 
-*Using the vercel command with the
-\--global-config option.*
+*Using the \`vercel\` command with the
+\`--global-config\` option.*
 
 ## Help
 
@@ -45,15 +45,15 @@ The `--help` option, shorthand `-h`, can be used to display more information abo
 vercel --help
 ```
 
-*Using the vercel command with the
-\--help option.*
+*Using the \`vercel\` command with the
+\`--help\` option.*
 
 ```bash filename="terminal"
 vercel alias --help
 ```
 
-*Using the vercel alias command with the
-\--help option.*
+*Using the \`vercel alias\` command with the
+\`--help\` option.*
 
 ## Local config
 
@@ -63,8 +63,8 @@ The `--local-config` option, shorthand `-A`, can be used to set the path to a lo
 vercel --local-config /path-to/vercel.json
 ```
 
-*Using the vercel command with the
-\--local-config option.*
+*Using the \`vercel\` command with the
+\`--local-config\` option.*
 
 ## Scope
 
@@ -74,8 +74,8 @@ The `--scope` option, shorthand `-S`, can be used to execute Vercel CLI commands
 vercel --scope my-team-slug
 ```
 
-*Using the vercel command with the
-\--scope option.*
+*Using the \`vercel\` command with the
+\`--scope\` option.*
 
 ## Project
 
@@ -114,8 +114,8 @@ The `--token` option, shorthand `-t`, can be used to execute Vercel CLI commands
 vercel --token iZJb2oftmY4ab12HBzyBXMkp
 ```
 
-*Using the vercel command with the
-\--token option.*
+*Using the \`vercel\` command with the
+\`--token\` option.*
 
 ## No Color
 
@@ -125,8 +125,8 @@ The `--no-color` option, or `NO_COLOR=1` environment variable, can be used to ex
 vercel login --no-color
 ```
 
-*Using the vercel command with the
-\--no-color option.*
+*Using the \`vercel\` command with the
+\`--no-color\` option.*
 
 ## Team
 
@@ -136,15 +136,15 @@ The `--team` option, shorthand `-T`, can be used to specify a team slug or ID fo
 vercel list --team my-team-slug
 ```
 
-*Using the vercel command with the
-\--team option.*
+*Using the \`vercel\` command with the
+\`--team\` option.*
 
 ```bash filename="terminal"
 vercel deploy -T team_abc123def
 ```
 
-*Using the vercel command with the
--T shorthand to specify a team by ID.*
+*Using the \`vercel\` command with the
+\`-T\` shorthand to specify a team by ID.*
 
 ## Version
 
@@ -154,10 +154,10 @@ The `--version` option, shorthand `-v`, outputs the current version number of Ve
 vercel --version
 ```
 
-*Using the vercel command with the
-\--version option to display the CLI version.*
+*Using the \`vercel\` command with the
+\`--version\` option to display the CLI version.*
 
 title: "vercel guidance"
 description: "Enable or disable guidance messages in the Vercel CLI using the vercel guidance command."
-last\_updated: "2026-03-08T05:03:12.177Z"
+last\_updated: "2026-03-23T09:40:06.779Z"
 source: "https://vercel.com/docs/cli/guidance"

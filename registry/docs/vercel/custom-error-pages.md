@@ -74,5 +74,5 @@ For example, if you add only two custom error pages (`500.html` and `504.html`),
 
 title: "Build Settings"
 description: "Learn how to configure the Build & Development settings for your Vercel Deploy Button."
-last\_updated: "2026-03-08T05:03:13.049Z"
+last\_updated: "2026-03-23T09:40:08.061Z"
 source: "https://vercel.com/docs/deploy-button/build-settings"

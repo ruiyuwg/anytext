@@ -13,17 +13,17 @@ LangChain and NVIDIA have partnered to accelerate agents through four mechanisms
 
 ## Components
 
-The `langchain-nvidia-ai-endpoints` package provides LangChain integrations for chat, embeddings, reranking, and retrieval powered by NVIDIA AI — including [Nemotron](https://www.nvidia.com/en-us/ai-data-science/foundation-models/nemotron/), NVIDIA's open model family built for agentic AI, and hundreds of community models on the [NVIDIA API Catalog](https://build.nvidia.com/).
+The `langchain-nvidia-ai-endpoints` package provides LangChain integrations for chat, embeddings, reranking, and retrieval powered by NVIDIA AI—including [Nemotron](https://www.nvidia.com/en-us/ai-data-science/foundation-models/nemotron/), NVIDIA's open model family built for agentic AI, and hundreds of community models on the [NVIDIA API Catalog](https://build.nvidia.com/).
 
 Models run on NVIDIA NIM microservices: container images that expose a standard OpenAI-compatible API, optimized with TensorRT-LLM for peak throughput on NVIDIA hardware. They can be accessed via the hosted API Catalog or self-hosted on-premises.
 
-| Component     | Class                                              | Description                                                     |
-| :------------ | :------------------------------------------------- | :-------------------------------------------------------------- |
-| Chat          | [`ChatNVIDIA`](#chat-chatnvidia)                   | Chat completions with any NVIDIA-hosted model or local NIM      |
-| Chat (Dynamo) | [`ChatNVIDIADynamo`](#chat-chatnvidiadynamo)       | `ChatNVIDIA` with KV cache routing hints for Dynamo deployments |
-| Embeddings    | [`NVIDIAEmbeddings`](#embeddings-nvidiaembeddings) | Dense vector embeddings for semantic search and RAG             |
-| Reranking     | [`NVIDIARerank`](#reranking-nvidiarerank)          | Document reranking by query relevance                           |
-| Retrieval     | [`NVIDIARetriever`](#retrieval-nvidiaretriever)    | Retrieval from an NVIDIA RAG Blueprint server                   |
+| Component     | Class                                                 | Description                                                     |
+| :------------ | :---------------------------------------------------- | :-------------------------------------------------------------- |
+| Chat          | [`ChatNVIDIA`](#chat-chatnvidia)                      | Chat completions with any NVIDIA-hosted model or local NIM      |
+| Chat (Dynamo) | [`ChatNVIDIADynamo`](#chat-chatnvidiadynamo)          | `ChatNVIDIA` with KV cache routing hints for Dynamo deployments |
+| Embeddings    | [`NVIDIAEmbeddings`](#embeddings-nvidiaembeddings)    | Dense vector embeddings for semantic search and RAG             |
+| Reranking     | [`NVIDIARerank`](#reranking-nvidiarerank)             | Document reranking by query relevance                           |
+| Retrieval     | [`NVIDIARAGRetriever`](#retrieval-nvidiaragretriever) | Retrieval from an NVIDIA RAG Blueprint server                   |
 
 ### Chat: ChatNVIDIA
 
@@ -62,8 +62,8 @@ else:
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
 
-# Nemotron 3 Nano — efficient reasoning and agentic tasks
-llm = ChatNVIDIA(model="nvidia/nemotron-3-nano-30b-a3b")
+# Nemotron 3 Super — efficient reasoning and agentic tasks
+llm = ChatNVIDIA(model="nvidia/nemotron-3-super-120b-a12b")
 result = llm.invoke("Plan a three-step research workflow for competitive analysis.")
 print(result.content)
 ```
@@ -79,7 +79,7 @@ from langchain_nvidia_ai_endpoints import ChatNVIDIADynamo
 
 llm = ChatNVIDIADynamo(
     base_url="http://localhost:8099/v1",
-    model="nvidia/nemotron-3-nano-30b-a3b",
+    model="nvidia/nemotron-3-super-120b-a12b",
     osl=512,             # expected output sequence length (tokens)
     iat=250,             # expected inter-arrival time (ms)
     latency_sensitivity=1.0,
@@ -102,7 +102,7 @@ embedder = NVIDIAEmbeddings(model="NV-Embed-QA")
 embedder.embed_query("What's the temperature today?")
 ```
 
-See the [`NVIDIAEmbeddings` integration page](/oss/python/integrations/text_embedding/nvidia_ai_endpoints) for full documentation.
+See the [`NVIDIAEmbeddings` integration page](/oss/python/integrations/embeddings/nvidia_ai_endpoints) for full documentation.
 
 ### Reranking: NVIDIARerank
 
@@ -119,18 +119,18 @@ docs = ranker.compress_documents(
 )
 ```
 
-### Retrieval: NVIDIARetriever
+### Retrieval: NVIDIARAGRetriever
 
-`NVIDIARetriever` connects LangChain to a running [NVIDIA RAG Blueprint](https://docs.nvidia.com/ai-enterprise/rag-llm-operator/latest/overview.html) server and retrieves relevant documents via the `/v1/search` endpoint. It supports reranking, query rewriting, and metadata filtering.
+`NVIDIARAGRetriever` connects LangChain to a running [NVIDIA RAG Blueprint](https://docs.nvidia.com/rag/latest/index.html) server and retrieves relevant documents via the `/v1/search` endpoint. It supports reranking, query rewriting, and metadata filtering.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-from langchain_nvidia_ai_endpoints import NVIDIARetriever
+from langchain_nvidia_ai_endpoints import NVIDIARAGRetriever
 
-retriever = NVIDIARetriever(base_url="http://localhost:8081", k=4)
+retriever = NVIDIARAGRetriever(base_url="http://localhost:8081", k=4)
 docs = retriever.invoke("What is NVIDIA NIM?")
 ```
 
-See the [`NVIDIARetriever` integration page](/oss/python/integrations/retrievers/nvidia) for full documentation.
+See the [`NVIDIARAGRetriever` integration page](/oss/python/integrations/retrievers/nvidia) for full documentation.
 
 ### Self-host with NVIDIA NIM Microservices
 
@@ -140,7 +140,7 @@ When you are ready to deploy your AI application, you can self-host models with 
 from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings, NVIDIARerank
 
 # connect to a chat NIM running at localhost:8000, specifying a model
-llm = ChatNVIDIA(base_url="http://localhost:8000/v1", model="nvidia/nemotron-3-nano-30b-a3b")
+llm = ChatNVIDIA(base_url="http://localhost:8000/v1", model="nvidia/nemotron-3-super-120b-a12b")
 
 # connect to an embedding NIM running at localhost:8080
 embedder = NVIDIAEmbeddings(base_url="http://localhost:8080/v1")
@@ -199,14 +199,14 @@ def write_to_db(state):
     ...
 
 # Declare a dependency not expressed in graph edges
-@depends_on("wrte_to_db")
+@depends_on("write_to_db")
 def next_action(state):
     ...
 ```
 
 ### Speculative execution
 
-Enable speculation via `OptimizationConfig` at compile time. The executor runs both sides of conditional branches in parallel and keeps the result that matches the routing decision.
+Enable speculation via `OptimizationConfig` at compile time. The executor runs conditional branches in parallel and keeps the result that matches the routing decision.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 app = graph.compile(optimization=OptimizationConfig(enable_speculation=True))
@@ -222,10 +222,10 @@ The NVIDIA NeMo Agent Toolkit is an open-source AI toolkit for building, profili
 
 ## Full Stack Blueprints
 
-NVIDIA and LangChain have collaborated on [full stack deep agent examples](https://github.com/langchain-ai/deepagents/tree/main/examples) showing how all these components are combined for two enterprise use cases, with focus on production readiness:
+NVIDIA and LangChain have collaborated on [full stack examples](https://github.com/langchain-ai/deepagents/tree/main/examples) showing how all these components are combined for two enterprise use cases, with focus on production readiness:
 
-- [NVIDIA AI-Q](https://github.com/NVIDIA-AI-Blueprints/aiq/tree/develop) is a blueprint for deep research across enterprise data sources
-- [NVIDIA VSS](https://github.com/NVIDIA-AI-Blueprints/video-search-and-summarization) is a blueprint for video search and summarization
+- [NVIDIA AI-Q](https://github.com/NVIDIA-AI-Blueprints/aiq/tree/develop) is a blueprint for deep research across enterprise data sources using LangChain Deep Agents
+- [NVIDIA VSS](https://github.com/NVIDIA-AI-Blueprints/video-search-and-summarization) is a blueprint for video search and summarization using LangChain and LangGraph
 
 ## Additional Resources
 
@@ -236,8 +236,8 @@ NVIDIA and LangChain have collaborated on [full stack deep agent examples](https
 - [Overview of NeMo Retriever Embedding NIM](https://docs.nvidia.com/nim/nemo-retriever/text-embedding/latest/overview.html)
 - [Overview of NeMo Retriever Reranking NIM](https://docs.nvidia.com/nim/nemo-retriever/text-reranking/latest/overview.html)
 - [`ChatNVIDIA` Model](/oss/python/integrations/chat/nvidia_ai_endpoints)
-- [`NVIDIAEmbeddings` Model for RAG Workflows](/oss/python/integrations/text_embedding/nvidia_ai_endpoints)
-- [`NVIDIARetriever`](/oss/python/integrations/retrievers/nvidia)
+- [`NVIDIAEmbeddings` Model for RAG Workflows](/oss/python/integrations/embeddings/nvidia_ai_endpoints)
+- [`NVIDIARAGRetriever`](/oss/python/integrations/retrievers/nvidia)
 - [NVIDIA Dynamo](https://developer.nvidia.com/dynamo)
 
 ***

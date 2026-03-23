@@ -93,5 +93,5 @@ When you deploy an xmcp app to Vercel, your server endpoints automatically run a
 
 title: "Astro on Vercel"
 description: "Learn how to use Vercel"
-last\_updated: "2026-03-08T05:03:14.955Z"
+last\_updated: "2026-03-23T09:40:10.700Z"
 source: "https://vercel.com/docs/frameworks/frontend/astro"

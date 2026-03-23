@@ -121,6 +121,7 @@ The table references the following terms:
 | [ZA](https://docs.stripe.com/tax/supported-countries/africa/collect-tax.md?tax-jurisdiction-africa=south-africa)                  | VAT                            | All PTCs         | Remote sales |
 | [KR](https://docs.stripe.com/tax/supported-countries/asia-pacific.md?tax-jurisdiction-asia-pacific=south-korea)                   | VAT                            | Digital products | Remote sales |
 | [ES](https://docs.stripe.com/tax/supported-countries/european-union/collect-tax.md?tax-jurisdiction-european-union=spain)         | VAT                            | All PTCs         | All sales    |
+| [LK](https://docs.stripe.com/tax/supported-countries/asia-pacific/collect-tax.md?tax-jurisdiction-asia-pacific=sri-lanka)         | VAT                            | Digital products | Remote sales |
 | [SR](https://docs.stripe.com/tax/supported-countries/latin-america-and-caribbean.md?tax-jurisdiction-latin-america=suriname)      | VAT                            | Digital products | Remote sales |
 | [SE](https://docs.stripe.com/tax/supported-countries/european-union/collect-tax.md?tax-jurisdiction-european-union=sweden)        | VAT                            | All PTCs         | All sales    |
 | [CH](https://docs.stripe.com/tax/supported-countries/europe/collect-tax.md?tax-jurisdiction-europe=switzerland-and-liechtenstein) | VAT                            | All PTCs         | All sales    |

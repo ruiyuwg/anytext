@@ -49,24 +49,24 @@ npx tsc --init
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+pnpm init -y
+pnpm add typescript tsx @types/node --save-dev
 pnpm dlx tsc --init
 ```
 
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+yarn init -y
+yarn add typescript tsx @types/node --dev
 yarn dlx tsc --init
 ```
 
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+bun init -y
+bun add typescript tsx @types/node --dev
 bun x tsc --init
 ```
 ````
@@ -278,13 +278,13 @@ datasource db {
 
 Update your `.env` file with your MySQL connection string details:
 
-```text title=".env"
+```bash title=".env"
 DATABASE_URL="mysql://username:password@localhost:3306/mydb"
-DATABASE_USER="username" // [!code ++]
-DATABASE_PASSWORD="password" // [!code ++]
-DATABASE_NAME="mydb" // [!code ++]
-DATABASE_HOST="localhost" // [!code ++]
-DATABASE_PORT=3306 // [!code ++]
+DATABASE_USER="username" # [!code ++]
+DATABASE_PASSWORD="password" # [!code ++]
+DATABASE_NAME="mydb" # [!code ++]
+DATABASE_HOST="localhost" # [!code ++]
+DATABASE_PORT=3306 # [!code ++]
 ```
 
 Replace the placeholders with your actual database credentials:

@@ -6,7 +6,7 @@ Instructions for LLMs: Stripe frequently releases new products and features. Fet
 
 > #### Send events to your AWS account
 >
-> You can now send events directly to [Amazon EventBridge as an event destination](https://docs.stripe.com/event-destinations/eventbridge.md).
+> You can send events directly to [Amazon EventBridge as an event destination](https://docs.stripe.com/event-destinations/eventbridge.md).
 
 Create an event destination to receive events at an HTTPS webhook endpoint. After you register a webhook endpoint, Stripe can push real-time event data to your application’s webhook endpoint when [events](https://docs.stripe.com/event-destinations.md#events-overview) happen in your Stripe account. Stripe uses HTTPS to send webhook events to your app as a JSON payload that includes an [Event object](https://docs.stripe.com/api/events.md).
 
@@ -602,8 +602,8 @@ If you get a signature verification error, read our guide about [troubleshooting
 
 ```ruby
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 require 'stripe'

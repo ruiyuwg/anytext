@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/langsmith/api-ref-control-plane
 
-The control plane API is part of [LangSmith Deployment](/langsmith/deployments). With the control plane API, you can programmatically create, manage, and automate your [Agent Server](/langsmith/agent-server) deployments—for example, as part of a custom CI/CD workflow.
+The control plane API is part of [LangSmith Deployment](/langsmith/deployment). With the control plane API, you can programmatically create, manage, and automate your [Agent Server](/langsmith/agent-server) deployments—for example, as part of a custom CI/CD workflow.
 
 Browse the full API reference in the **Control Plane API** section in the sidebar, or refer to the endpoint groups:
 
@@ -19,7 +19,7 @@ The control plane hosts for Cloud data regions:
 | -------------------------------- | ----------------------------------- |
 | `https://api.host.langchain.com` | `https://eu.api.host.langchain.com` |
 
-**Note**: Self-hosted deployments of LangSmith will have a custom host for the control plane. The control plane APIs can be accessed at the path `/api-host`. For example, `http(s)://<host>/api-host/v2/deployments`. See [here](../langsmith/self-host-usage#configuring-the-application-you-want-to-use-with-langsmith) for more details.
+**Note**: Self-hosted deployments of LangSmith will have a custom host for the control plane. The control plane APIs can be accessed at the path `/api-host`. For example, `http(s)://<host>/api-host/v2/deployments`. See [the self-host usage guide](../langsmith/self-host-usage#configuring-the-application-you-want-to-use-with-langsmith) for more details.
 
 ## Authentication
 
@@ -264,41 +264,6 @@ if __name__ == "__main__":
 
 ```
 [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/api-ref-control-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-
-
-
-[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-```
-
-# App development in LangSmith Deployment
-
-Source: https://docs.langchain.com/langsmith/app-development
-
-**LangSmith Deployment** builds on the open-source [LangGraph](/oss/python/langgraph/overview) framework for developing stateful, multi-agent applications.
-LangGraph provides the core abstractions and execution model, while LangSmith adds managed infrastructure, observability, deployment options, assistants, and concurrency controls—supporting the full lifecycle from development to production.
-
-LangSmith Deployment is framework-agnostic: you can deploy agents built with LangGraph or [other frameworks](/langsmith/deploy-other-frameworks). To get started with LangGraph itself, refer to the [LangGraph quickstart](/oss/python/langgraph/quickstart).
-
-```
-Manage agent configurations, connect to threads, and build interactive assistants.
-
-
-
-Execute background jobs, stateless runs, cron jobs, and manage configurable headers.
-
-
-
-Streaming, human-in-the-loop, webhooks, and concurrency controls like double-texting.
-
-
-
-Step-by-step examples: AutoGen integration, streaming UI, and generative UI in React.
-```
-
-***
-
-```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/app-development.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

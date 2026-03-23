@@ -1,0 +1,149 @@
+# Replicate Provider
+
+[Replicate](https://replicate.com/) is a platform for running open-source AI models.
+It is a popular choice for running image generation models.
+
+## Setup
+
+The Replicate provider is available via the `@ai-sdk/replicate` module. You can install it with
+
+## Provider Instance
+
+You can import the default provider instance `replicate` from `@ai-sdk/replicate`:
+
+```ts
+import { replicate } from '@ai-sdk/replicate';
+```
+
+If you need a customized setup, you can import `createReplicate` from `@ai-sdk/replicate`
+and create a provider instance with your settings:
+
+```ts
+import { createReplicate } from '@ai-sdk/replicate';
+
+const replicate = createReplicate({
+  apiToken: process.env.REPLICATE_API_TOKEN ?? '',
+});
+```
+
+You can use the following optional settings to customize the Replicate provider instance:
+
+- **baseURL** *string*
+
+  Use a different URL prefix for API calls, e.g. to use proxy servers.
+  The default prefix is `https://api.replicate.com/v1`.
+
+- **apiToken** *string*
+
+  API token that is being sent using the `Authorization` header. It defaults to
+  the `REPLICATE_API_TOKEN` environment variable.
+
+- **headers** *Record\<string,string>*
+
+  Custom headers to include in the requests.
+
+- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+
+  Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
+
+## Image Models
+
+You can create Replicate image models using the `.image()` factory method.
+For more on image generation with the AI SDK see [generateImage()](/docs/reference/ai-sdk-core/generate-image).
+
+Model support for `size` and other parameters varies by model. Check the
+model's documentation on [Replicate](https://replicate.com/explore) for
+supported options and additional parameters that can be passed via
+`providerOptions.replicate`.
+
+### Supported Image Models
+
+The following image models are currently supported by the Replicate provider:
+
+- [black-forest-labs/flux-1.1-pro-ultra](https://replicate.com/black-forest-labs/flux-1.1-pro-ultra)
+- [black-forest-labs/flux-1.1-pro](https://replicate.com/black-forest-labs/flux-1.1-pro)
+- [black-forest-labs/flux-dev](https://replicate.com/black-forest-labs/flux-dev)
+- [black-forest-labs/flux-pro](https://replicate.com/black-forest-labs/flux-pro)
+- [black-forest-labs/flux-schnell](https://replicate.com/black-forest-labs/flux-schnell)
+- [bytedance/sdxl-lightning-4step](https://replicate.com/bytedance/sdxl-lightning-4step)
+- [fofr/aura-flow](https://replicate.com/fofr/aura-flow)
+- [fofr/latent-consistency-model](https://replicate.com/fofr/latent-consistency-model)
+- [fofr/realvisxl-v3-multi-controlnet-lora](https://replicate.com/fofr/realvisxl-v3-multi-controlnet-lora)
+- [fofr/sdxl-emoji](https://replicate.com/fofr/sdxl-emoji)
+- [fofr/sdxl-multi-controlnet-lora](https://replicate.com/fofr/sdxl-multi-controlnet-lora)
+- [ideogram-ai/ideogram-v2-turbo](https://replicate.com/ideogram-ai/ideogram-v2-turbo)
+- [ideogram-ai/ideogram-v2](https://replicate.com/ideogram-ai/ideogram-v2)
+- [lucataco/dreamshaper-xl-turbo](https://replicate.com/lucataco/dreamshaper-xl-turbo)
+- [lucataco/open-dalle-v1.1](https://replicate.com/lucataco/open-dalle-v1.1)
+- [lucataco/realvisxl-v2.0](https://replicate.com/lucataco/realvisxl-v2.0)
+- [lucataco/realvisxl2-lcm](https://replicate.com/lucataco/realvisxl2-lcm)
+- [luma/photon-flash](https://replicate.com/luma/photon-flash)
+- [luma/photon](https://replicate.com/luma/photon)
+- [nvidia/sana](https://replicate.com/nvidia/sana)
+- [playgroundai/playground-v2.5-1024px-aesthetic](https://replicate.com/playgroundai/playground-v2.5-1024px-aesthetic)
+- [recraft-ai/recraft-v3-svg](https://replicate.com/recraft-ai/recraft-v3-svg)
+- [recraft-ai/recraft-v3](https://replicate.com/recraft-ai/recraft-v3)
+- [stability-ai/stable-diffusion-3.5-large-turbo](https://replicate.com/stability-ai/stable-diffusion-3.5-large-turbo)
+- [stability-ai/stable-diffusion-3.5-large](https://replicate.com/stability-ai/stable-diffusion-3.5-large)
+- [stability-ai/stable-diffusion-3.5-medium](https://replicate.com/stability-ai/stable-diffusion-3.5-medium)
+- [tstramer/material-diffusion](https://replicate.com/tstramer/material-diffusion)
+
+You can also use [versioned models](https://replicate.com/docs/topics/models/versions).
+The id for versioned models is the Replicate model id followed by a colon and the version ID (`$modelId:$versionId`), e.g.
+`bytedance/sdxl-lightning-4step:5599ed30703defd1d160a25a63321b4dec97101d98b4674bcc56e41f62f35637`.
+
+You can also pass any available Replicate model ID as a string if needed.
+
+### Basic Usage
+
+```ts
+import { replicate } from '@ai-sdk/replicate';
+import { experimental_generateImage as generateImage } from 'ai';
+import { writeFile } from 'node:fs/promises';
+
+const { image } = await generateImage({
+  model: replicate.image('black-forest-labs/flux-schnell'),
+  prompt: 'The Loch Ness Monster getting a manicure',
+  aspectRatio: '16:9',
+});
+
+await writeFile('image.webp', image.uint8Array);
+
+console.log('Image saved as image.webp');
+```
+
+### Model-specific options
+
+```ts highlight="9-11"
+import { replicate } from '@ai-sdk/replicate';
+import { experimental_generateImage as generateImage } from 'ai';
+
+const { image } = await generateImage({
+  model: replicate.image('recraft-ai/recraft-v3'),
+  prompt: 'The Loch Ness Monster getting a manicure',
+  size: '1365x1024',
+  providerOptions: {
+    replicate: {
+      style: 'realistic_image',
+    },
+  },
+});
+```
+
+### Versioned Models
+
+```ts
+import { replicate } from '@ai-sdk/replicate';
+import { experimental_generateImage as generateImage } from 'ai';
+
+const { image } = await generateImage({
+  model: replicate.image(
+    'bytedance/sdxl-lightning-4step:5599ed30703defd1d160a25a63321b4dec97101d98b4674bcc56e41f62f35637',
+  ),
+  prompt: 'The Loch Ness Monster getting a manicure',
+});
+```
+
+For more details, see the [Replicate models page](https://replicate.com/explore).
+
+# Perplexity

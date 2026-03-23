@@ -1,6 +1,6 @@
 # platform (/docs/cli/console)
 
-The `prisma platform` command group provides tools to manage Prisma Console workspaces, projects, environments, and API keys.
+The `prisma platform` command group provides tools to manage Prisma Console workspaces, projects, environments, and connection strings.
 
 ```
 Legacy GraphQL API
@@ -31,7 +31,7 @@ Subcommands \[#subcommands]
 | [`prisma platform workspace`](/cli/console/workspace)     | Manage workspaces             |
 | [`prisma platform project`](/cli/console/project)         | Manage projects               |
 | [`prisma platform environment`](/cli/console/environment) | Manage environments           |
-| [`prisma platform apikey`](/cli/console/apikey)           | Manage API keys               |
+| [`prisma platform apikey`](/cli/console/apikey)           | Manage connection strings     |
 
 Examples \[#examples]
 
@@ -48,7 +48,7 @@ prisma platform project create --workspace $WORKSPACE_ID --name "My Project" --e
 # Create an environment
 prisma platform environment create --project $PROJECT_ID --name "production" --early-access
 
-# Create an API key
+# Create a connection string
 prisma platform apikey create --environment $ENVIRONMENT_ID --name "production-key" --early-access
 ```
 

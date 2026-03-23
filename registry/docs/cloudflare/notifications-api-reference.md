@@ -1,0 +1,17 @@
+# API reference
+
+[Skip to content](#%5Ftop)
+
+Was this helpful?
+
+YesNo
+
+[ Edit page ](https://github.com/cloudflare/cloudflare-docs/edit/production/src/content/docs/notifications/api-reference.mdx) [ Report issue ](https://github.com/cloudflare/cloudflare-docs/issues/new/choose)
+
+Copy page
+
+# API reference
+
+```json
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"/directory/","name":"Directory"}},{"@type":"ListItem","position":2,"item":{"@id":"/notifications/","name":"Notifications"}},{"@type":"ListItem","position":3,"item":{"@id":"/notifications/api-reference/","name":"API reference"}}]}
+```

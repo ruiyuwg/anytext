@@ -12,6 +12,7 @@ Each AI credit costs **$0.05**. Credit consumption depends on the type and scope
 
 - **Query** (your message to Content Agent): **4 credits** ($0.20)
 - **Action** (tool use by Content Agent): **2 credits** ($0.10)
+- **Agent Action** (a request with any [Agent Action](https://www.sanity.io/docs/agent-actions)): **1 credit** ($0.05)
 
 **Queries** are messages you send to the Content Agent. Each request includes a 4-credit query cost.
 
@@ -59,31 +60,3 @@ You can set a monthly spending limit to prevent unexpected charges. When your or
 ### Tips for efficient usage
 
 When working with large document sets, select a few documents first to refine your prompt before applying it to the entire set. This helps you optimize your queries and reduce unnecessary credit consumption.
-
-# Build custom applications on Sanity
-
-#### Get started
-
-[App SDK Quickstart Guide](https://www.sanity.io/docs/app-sdk/sdk-quickstart)
-
-[Conceptual Walkthrough](https://www.sanity.io/docs/app-sdk/sdk-introduction)
-
-#### Concepts
-
-[Document Handles](https://www.sanity.io/docs/app-sdk/document-handles)
-
-[React Hooks](https://www.sanity.io/docs/app-sdk/sdk-react-hooks)
-
-[React Suspense](https://www.sanity.io/docs/app-sdk/react-suspense-sdk)
-
-#### Headless UI
-
-[Sanity UI](https://www.sanity.io/docs/app-sdk/sanity-ui-sdk)
-
-[Tailwind CSS](https://www.sanity.io/docs/app-sdk/tailwind-sdk)
-
-#### Reference and examples
-
-[App SDK – Reference](https://reference.sanity.io/_sanity/sdk-react/)
-
-[App SDK Explorer](https://sdk-explorer.sanity.io)

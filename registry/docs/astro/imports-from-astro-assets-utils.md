@@ -17,12 +17,11 @@ import {
   resolveSrc,
   imageMetadata,
   emitImageMetadata,
+  emitClientAsset,
   getOrigQueryParams,
   inferRemoteSize,
   propsToFilename,
   hashTransform,
-  /* The following are deprecated: */
-  emitESMImage,
 } from "astro/assets/utils";
 ```
 
@@ -303,6 +302,37 @@ const metadata = await emitImageMetadata(imageId);
 // }
 ```
 
+### `emitClientAsset()`
+
+[Section titled “emitClientAsset()”](#emitclientasset)
+
+**Type:** `(pluginContext: Rollup.PluginContext, options: Rollup.EmitFile) => string`
+
+**Added in:** `astro@6.0.0` New
+
+Emits a client asset that will be moved to the client directory for assets (e.g. `dist/client/_astro/`) during SSR builds. This function is intended for integration authors who need to emit assets (such as images) from server-rendered content that should be available on the client.
+
+Use this instead of [Rollup `pluginContext.emitFile()`](https://rollupjs.org/plugin-development/#this-emitfile) directly when working in a Vite plugin context and you need the emitted asset to be moved to the client output directory.
+
+```ts
+import { emitClientAsset } from 'astro/assets/utils';
+
+
+function myVitePlugin() {
+  return {
+    name: 'my-plugin',
+    transform(code, id) {
+      const handle = emitClientAsset(this, {
+        type: 'asset',
+        name: 'my-image.png',
+        source: imageBuffer,
+      });
+      // Returns the asset handle similar to `emitFile()`
+    }
+  }
+}
+```
+
 ### `getOrigQueryParams()`
 
 [Section titled “getOrigQueryParams()”](#getorigqueryparams)
@@ -409,36 +439,4 @@ const propertiesToHash = ['width', 'height', 'format'];
 
 const hash = hashTransform(transform, imageService, propertiesToHash);
 // Example value: 'd41d8cd98f00b204e9800998ecf8427e'
-```
-
-### `emitESMImage()`
-
-[Section titled “emitESMImage()”](#emitesmimage)
-
-Deprecated
-
-Use the [`emitImageMetadata`](#emitimagemetadata) function instead.
-
-**Type:** `(id: string | undefined, _watchMode: boolean, experimentalSvgEnabled: boolean, fileEmitter?: Rollup.EmitFile) => Promise<(ImageMetadata & { contents?: Buffer }) | undefined>`
-
-**Added in:** `astro@4.0.0`
-
-Processes an image file and emits its metadata and optionally its contents. In build mode, the function uses `fileEmitter` to generate an asset reference. In development mode, it resolves to a local file URL with query parameters for metadata.
-
-```ts
-import { emitESMImage } from 'astro/assets/utils';
-
-
-const imageId = '/images/photo.jpg';
-const unusedWatchMode = false; // Deprecated, unused
-const unusedExperimentalSvgEnabled = false; // Set to `true` only if you are using SVG and want the file data to be embedded
-const image = await emitESMImage(imageId, unusedWatchMode, unusedExperimentalSvgEnabled);
-// Example value:
-// {
-//    src: '/@fs/home/username/dev/astro-project/src/images/photo.jpg?origWidth=800&origHeight=600&origFormat=jpg',
-//    width: 800,
-//    height: 600,
-//    format: 'jpg',
-//    contents: Uint8Array([...])
-// }
 ```

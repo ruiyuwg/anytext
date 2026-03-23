@@ -33,21 +33,21 @@ MY_ENV_VAR="temporary value" next dev
 vercel env ls
 ```
 
-*Using the vercel env command to list all Environment
+*Using the \`vercel env\` command to list all Environment
 Variables in a Vercel Project.*
 
 ```bash filename="terminal"
 vercel env add
 ```
 
-*Using the vercel env command to add an Environment
+*Using the \`vercel env\` command to add an Environment
 Variable to a Vercel Project.*
 
 ```bash filename="terminal"
 vercel env rm
 ```
 
-*Using the vercel env command to remove an Environment
+*Using the \`vercel env\` command to remove an Environment
 Variable from a Vercel Project.*
 
 ## Extended Usage
@@ -56,58 +56,58 @@ Variable from a Vercel Project.*
 vercel env ls [environment]
 ```
 
-*Using the vercel env command to list Environment
+*Using the \`vercel env\` command to list Environment
 Variables for a specific Environment in a Vercel Project.*
 
 ```bash filename="terminal"
 vercel env ls [environment] [gitbranch]
 ```
 
-*Using the vercel env command to list Environment
+*Using the \`vercel env\` command to list Environment
 Variables for a specific Environment and Git branch.*
 
 ```bash filename="terminal"
 vercel env add [name]
 ```
 
-*Using the vercel env command to add an Environment
+*Using the \`vercel env\` command to add an Environment
 Variable to all Environments to a Vercel Project.*
 
 ```bash filename="terminal"
 vercel env add [name] [environment]
 ```
 
-*Using the vercel env command to add an Environment
+*Using the \`vercel env\` command to add an Environment
 Variable for a specific Environment to a Vercel Project.*
 
 ```bash filename="terminal"
 vercel env add [name] [environment] [gitbranch]
 ```
 
-*Using the vercel env command to add an Environment
+*Using the \`vercel env\` command to add an Environment
 Variable to a specific Git branch.*
 
 ```bash filename="terminal"
 vercel env add [name] [environment] < [file]
 ```
 
-*Using the vercel env command to add an Environment
+*Using the \`vercel env\` command to add an Environment
 Variable to a Vercel Project using a local file's content as the value.*
 
 ```bash filename="terminal"
 echo [value] | vercel env add [name] [environment]
 ```
 
-*Using the echo command to generate the value of the
+*Using the \`echo\` command to generate the value of the
 Environment Variable and piping that value into the
-vercel dev command. Warning: this will save the value
+\`vercel dev\` command. Warning: this will save the value
 in bash history, so this is not recommend for secrets.*
 
 ```bash filename="terminal"
 vercel env add [name] [environment] [gitbranch] < [file]
 ```
 
-*Using the vercel env command to add an Environment
+*Using the \`vercel env\` command to add an Environment
 Variable with Git branch to a Vercel Project using a local file's content as
 the value.*
 
@@ -115,7 +115,7 @@ the value.*
 vercel env rm [name] [environment]
 ```
 
-*Using the vercel env command to remove an Environment
+*Using the \`vercel env\` command to remove an Environment
 Variable from a Vercel Project.*
 
 ### Updating Environment Variables
@@ -126,21 +126,21 @@ The `vercel env update` sub-command updates the value of an existing environment
 vercel env update [name]
 ```
 
-*Using vercel env update to update an Environment
+*Using \`vercel env update\` to update an Environment
 Variable across all Environments.*
 
 ```bash filename="terminal"
 vercel env update [name] [environment]
 ```
 
-*Using vercel env update to update an Environment
+*Using \`vercel env update\` to update an Environment
 Variable for a specific Environment.*
 
 ```bash filename="terminal"
 vercel env update [name] [environment] [gitbranch]
 ```
 
-*Using vercel env update to update an Environment
+*Using \`vercel env update\` to update an Environment
 Variable for a specific Environment and Git branch.*
 
 ```bash filename="terminal"
@@ -153,24 +153,24 @@ cat ~/.npmrc | vercel env update NPM_RC preview
 vercel env pull [file]
 ```
 
-*Using the vercel env command to download Development
+*Using the \`vercel env\` command to download Development
 Environment Variables from the cloud and write to a specific file.*
 
 ```bash filename="terminal"
 vercel env pull --environment=preview
 ```
 
-*Using the vercel env command to download Preview
+*Using the \`vercel env\` command to download Preview
 Environment Variables from the cloud and write to the
-.env.local file.*
+\`.env.local\` file.*
 
 ```bash filename="terminal"
 vercel env pull --environment=preview --git-branch=feature-branch
 ```
 
-*Using the vercel env command to download
+*Using the \`vercel env\` command to download
 "feature-branch" Environment Variables from the cloud and write to the
-.env.local file.*
+\`.env.local\` file.*
 
 ### Running Commands with Environment Variables
 
@@ -180,7 +180,7 @@ The `vercel env run` sub-command runs any command with environment variables fro
 vercel env run -- <command>
 ```
 
-*Using vercel env run to run a command with
+*Using \`vercel env run\` to run a command with
 development Environment Variables from your Vercel Project.*
 
 ```bash filename="terminal"
@@ -231,16 +231,16 @@ The `--sensitive` option marks an environment variable as sensitive. Sensitive v
 vercel env add API_TOKEN --sensitive
 ```
 
-*Using vercel env add with the
-\--sensitive option to add a sensitive Environment
+*Using \`vercel env add\` with the
+\`--sensitive\` option to add a sensitive Environment
 Variable.*
 
 ```bash filename="terminal"
 vercel env update API_TOKEN --sensitive
 ```
 
-*Using vercel env update with the
-\--sensitive option to update a variable and mark it
+*Using \`vercel env update\` with the
+\`--sensitive\` option to update a variable and mark it
 as sensitive.*
 
 ### Force
@@ -251,8 +251,8 @@ The `--force` option overwrites an existing environment variable of the same tar
 vercel env add API_TOKEN production --force
 ```
 
-*Using vercel env add with the
-\--force option to overwrite an existing Environment
+*Using \`vercel env add\` with the
+\`--force\` option to overwrite an existing Environment
 Variable.*
 
 ### Yes
@@ -263,27 +263,27 @@ The `--yes` option can be used to bypass the confirmation prompt when overwritin
 vercel env pull --yes
 ```
 
-*Using the vercel env pull command with the
-\--yes option to overwrite an existing environment
+*Using the \`vercel env pull\` command with the
+\`--yes\` option to overwrite an existing environment
 file.*
 
 ```bash filename="terminal"
 vercel env rm [name] --yes
 ```
 
-*Using the vercel env rm command with the
-\--yes option to skip the remove confirmation.*
+*Using the \`vercel env rm\` command with the
+\`--yes\` option to skip the remove confirmation.*
 
 ```bash filename="terminal"
 vercel env update API_TOKEN production --yes
 ```
 
-*Using the vercel env update command with the
-\--yes option to skip the update confirmation.*
+*Using the \`vercel env update\` command with the
+\`--yes\` option to skip the update confirmation.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -298,5 +298,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel flags"
 description: "Learn how to manage feature flags for your Vercel project using the vercel flags CLI command."
-last\_updated: "2026-03-08T05:03:12.162Z"
+last\_updated: "2026-03-23T09:40:06.752Z"
 source: "https://vercel.com/docs/cli/flags"

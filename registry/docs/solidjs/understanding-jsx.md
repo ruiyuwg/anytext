@@ -13,14 +13,14 @@ JSX is an extension for JavaScript. It allows you to write HTML-like code inside
 Solid was designed to align closely with HTML standards.
 
 ```
-const element = <h1>I'm JSX!!</h1>
+const element = <h1>I'm JSX!!</h1>;
 ```
 
 It offers a distinct advantage, however: to copy/paste solutions from resources like Stack Overflow; and to allow direct usage of templates from design tools. Solid sets itself apart by using JSX immediately as it returns [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction) elements. This lets you use dynamic expressions within your HTML by allowing variables and functions to be references with the use of curly braces (`{ }`):
 
 ```
-const Component = () => {  const animal = { breed: "cat", name: "Midnight" }
-  return (    <p>      I have a {animal.breed} named {animal.name}!    </p>  )}
+const Component = () => {  const animal = { breed: "cat", name: "Midnight" };
+  return (    <p>      I have a {animal.breed} named {animal.name}!    </p>  );};
 ```
 
 This means JavaScript content can be rendered on web pages based on an application's state or logic.

@@ -182,7 +182,7 @@ Deploy the current project to Vercel.
 
 **Sample prompt:** "Deploy this project to Vercel"
 
-title: "CLI Workflows"
-description: "End-to-end workflows that show how to compose Vercel CLI commands into complete debugging, deployment, and recovery sessions."
-last\_updated: "2026-03-08T05:03:10.084Z"
-source: "https://vercel.com/docs/agent-resources/workflows"
+title: "Vercel Plugin for AI Coding Agents"
+description: "Install the Vercel plugin to give AI coding agents expert-level knowledge of the Vercel ecosystem, including skills, specialist agents, and automatic context injection."
+last\_updated: "2026-03-23T09:40:03.718Z"
+source: "https://vercel.com/docs/agent-resources/vercel-plugin"

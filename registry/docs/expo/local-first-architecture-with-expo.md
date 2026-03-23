@@ -60,7 +60,7 @@ npx create-expo-app --example with-tinybase
 
 TinyBase works seamlessly with Expo Go, allowing you to develop quickly. On Android and iOS, it uses the [`expo-sqlite`](/versions/latest/sdk/sqlite) library to persist data. On the web, it relies on the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) API. [Beto Moedano](https://github.com/betomoedano) demonstrates how to build a [Universal Local-first Shopping List App](https://github.com/betomoedano/groceries-shopping-list-app) in the following video:
 
-[Watch: Build a Local-First Real-Time Shopping List App with Expo and TinyBase](https://www.youtube.com/watch?v=HqOiB2tDM8Q)
+[Watch: Build a Local-First Real-Time Shopping List App with Expo and TinyBase](https://www.youtube.com/watch?v=HqOiB2tDM8Q) — Build a real-time shopping list app using TinyBase with expo-sqlite for persistence and automatic syncing.
 
 ### SQLite
 
@@ -74,7 +74,7 @@ TinyBase works seamlessly with Expo Go, allowing you to develop quickly. On Andr
 
 [Prisma](https://prisma.io) is well known as the most popular ORM for Node.js and TypeScript backends, and it's now available for [Expo and React Native in early access](https://www.prisma.io/blog/bringing-prisma-orm-to-react-native-and-expo). Prisma aims to provide a complete local-first solution, with state management, syncing, and persistence all covered for you. While it's still early, [Beto Moedano](https://github.com/betomoedano) has put together a full walkthrough of using Prisma with Expo to build a local-first Notion clone, [check out the code on GitHub](https://github.com/betomoedano/React-Native-Notion-Clone).
 
-[Watch: Building a Local-first Notion Clone with React Native Expo and Prisma](https://www.youtube.com/watch?v=uTrPte0sCiw)
+[Watch: Building a Local-first Notion Clone with React Native Expo and Prisma](https://www.youtube.com/watch?v=uTrPte0sCiw) — Build a local-first Notion clone with Prisma ORM for Expo, covering state management, syncing, and persistence.
 
 ### Jazz
 
@@ -84,19 +84,19 @@ TinyBase works seamlessly with Expo Go, allowing you to develop quickly. On Andr
 
 [LiveStore](https://docs.livestore.dev/getting-started/expo/) is a client-centric local-first data layer for high-performance applications. It provides first-class support for Expo, and it's a great choice for building local-first apps. See the blog post on [LiveStore: SQLite-based data layer for local-first apps](https://expo.dev/blog/local-first-application-development-with-livestore).
 
-[Watch: How to build local-first native apps with LiveStore and Expo](https://www.youtube.com/watch?v=zQIhJqYU1Qw)
+[Watch: How to build local-first native apps with LiveStore and Expo](https://www.youtube.com/watch?v=zQIhJqYU1Qw) — Use LiveStore's SQLite-based data layer to build a high-performance local-first app with Expo.
 
 ### Turso
 
 [Turso](https://turso.tech) is a modern database service built on SQLite. It now supports [Offline Sync](https://turso.tech/blog/turso-offline-sync-public-beta), which enables true local-first experiences. You can sync databases between local and remote sources with bidirectional sync and built-in conflict detection. While automatic conflict resolution isn't available yet, this feature is still a major step forward. You can use Turso today with [expo-sqlite](/versions/latest/sdk/sqlite). To learn more, read the [Turso: Offline Sync Public Beta](https://turso.tech/blog/turso-offline-sync-public-beta) blog post. For an example integration, check out the [Notes App](https://github.com/betomoedano/notes-app).
 
-[Watch: How to build a local-first Notes App with Turso and Expo](https://www.youtube.com/watch?v=SBv32tmyb3k)
+[Watch: How to build a local-first Notes App with Turso and Expo](https://www.youtube.com/watch?v=SBv32tmyb3k) — Build a local-first notes app with Turso's offline sync and expo-sqlite for bidirectional data syncing.
 
 ### Instant
 
 [Instant](https://www.instantdb.com/) is a modern alternative to Firebase. It gives you a real-time database so you can focus on building your app's frontend. To get started, check out the [Getting Started Guide](https://www.instantdb.com/docs/start-rn). You can also explore the [Sketch App](https://github.com/betomoedano/sketch-app) featured in the video below.
 
-[Watch: Build a Local-First Sketch App with Expo, Instant & Reanimated](https://www.youtube.com/watch?v=DEJIcaGN3vY)
+[Watch: Build a Local-First Sketch App with Expo, Instant & Reanimated](https://www.youtube.com/watch?v=DEJIcaGN3vY) — Build a collaborative sketch app with Instant's real-time database and Reanimated for smooth drawing interactions.
 
 ### RxDB
 

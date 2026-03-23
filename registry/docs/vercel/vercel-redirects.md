@@ -12,7 +12,7 @@ The `vercel redirects` command lets you manage redirects for a project. Redirect
 vercel redirects list
 ```
 
-*Using the vercel redirects command to list all
+*Using the \`vercel redirects\` command to list all
 redirects for the current project.*
 
 ## Commands
@@ -219,7 +219,7 @@ vercel redirects restore <version-id>
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -234,5 +234,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel remove"
 description: "Learn how to remove a deployment using the vercel remove CLI command."
-last\_updated: "2026-03-08T05:03:12.380Z"
+last\_updated: "2026-03-23T09:40:07.029Z"
 source: "https://vercel.com/docs/cli/remove"

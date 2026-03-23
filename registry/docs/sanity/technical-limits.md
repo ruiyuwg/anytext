@@ -150,6 +150,9 @@ This limit applies to on-demand transforms for supported animated image formats.
 ## Users
 
 - Maximum number of users per project: 1,000
+- Maximum attributes per user: 50
+- Maximum user attribute name: 32 characters
+- Maximum user attribute value: 1024 characters
 
 [Please get in touch](https://sanity.io/contact) if you need more than 1,000 users on a single project.
 

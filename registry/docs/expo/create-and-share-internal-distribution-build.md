@@ -4,7 +4,7 @@ Learn about internal distribution builds, why we need them, and how to create th
 
 In this chapter, we'll learn how to set up [internal distribution builds](/build/internal-distribution#internal-distribution).
 
-[Watch: How to create and share an internal distribution build](https://www.youtube.com/watch?v=1fQuGLHxWks)
+[Watch: How to create and share an internal distribution build](https://www.youtube.com/watch?v=1fQuGLHxWks) — Create an internal distribution build with EAS and share it directly with your team for testing.
 
 ## Internal distribution build
 

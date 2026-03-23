@@ -444,7 +444,7 @@ npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --remote --title="./prisma/mig
 pnpm dlx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --local --title="./prisma/migrations/0001_init.sql"
 
 # Apply to remote database
-npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --remote --title="./prisma/migrations/0001_init.sql"
+pnpm dlx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --remote --title="./prisma/migrations/0001_init.sql"
 ```
 
 
@@ -454,7 +454,7 @@ npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --remote --title="./prisma/mig
 yarn dlx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --local --title="./prisma/migrations/0001_init.sql"
 
 # Apply to remote database
-npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --remote --title="./prisma/migrations/0001_init.sql"
+yarn dlx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --remote --title="./prisma/migrations/0001_init.sql"
 ```
 
 
@@ -464,7 +464,7 @@ npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --remote --title="./prisma/mig
 bun x wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --local --title="./prisma/migrations/0001_init.sql"
 
 # Apply to remote database
-npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --remote --title="./prisma/migrations/0001_init.sql"
+bun x wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --remote --title="./prisma/migrations/0001_init.sql"
 ```
 
 
@@ -511,7 +511,7 @@ npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\
 pnpm dlx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\" (\"email\", \"name\") VALUES ('jane@prisma.io', 'Jane Doe (Local)');" --local
 
 # For the remote database
-npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\" (\"email\", \"name\") VALUES ('jane@prisma.io', 'Jane Doe (Remote)');" --remote
+pnpm dlx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\" (\"email\", \"name\") VALUES ('jane@prisma.io', 'Jane Doe (Remote)');" --remote
 ```
 
 
@@ -521,7 +521,7 @@ npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\
 yarn dlx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\" (\"email\", \"name\") VALUES ('jane@prisma.io', 'Jane Doe (Local)');" --local
 
 # For the remote database
-npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\" (\"email\", \"name\") VALUES ('jane@prisma.io', 'Jane Doe (Remote)');" --remote
+yarn dlx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\" (\"email\", \"name\") VALUES ('jane@prisma.io', 'Jane Doe (Remote)');" --remote
 ```
 
 
@@ -531,7 +531,7 @@ npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\
 bun x wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\" (\"email\", \"name\") VALUES ('jane@prisma.io', 'Jane Doe (Local)');" --local
 
 # For the remote database
-npx wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\" (\"email\", \"name\") VALUES ('jane@prisma.io', 'Jane Doe (Remote)');" --remote
+bun x wrangler d1 execute __YOUR_D1_DATABASE_NAME__ --command "INSERT INTO \"User\" (\"email\", \"name\") VALUES ('jane@prisma.io', 'Jane Doe (Remote)');" --remote
 ```
 
 

@@ -67,4 +67,4 @@ The journal entry list supports filtering on the ID of the journal entries on ex
 
 ### Deletion
 
-To reverse the journal entries, select the journal entry checkbox and click **Delete**. Note that only journal entries in open accounting periods can be deleted. To delete a journal entry in a closed accounting period, you will have to reopen the accounting period first. It can take up to 24 hours for Revenue Recognition reports to reflect deletions.
+To reverse the journal entries, select the journal entry checkbox and click **Delete**. Note that only journal entries in open accounting periods can be deleted. To delete a journal entry in a closed accounting period, you’ll have to reopen the accounting period first. It can take up to 24 hours for Revenue Recognition reports to reflect deletions.

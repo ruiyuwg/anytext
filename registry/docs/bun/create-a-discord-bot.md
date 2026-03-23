@@ -29,7 +29,7 @@ Once complete, you'll be presented with your bot's *private key*. Let's add this
 This is an example token that has already been invalidated.
 
 ```ini .env.local icon="settings" theme={"theme":{"light":"github-light","dark":"dracula"}}
-DISCORD_TOKEN=your_discord_bot_token_here
+DISCORD_TOKEN=NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I
 ```
 
 ***
@@ -45,7 +45,7 @@ node_modules
 
 Now let's actually write our bot in a new file called `bot.ts`.
 
-```ts bot.ts icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts bot.ts icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 // import discord.js
 import { Client, Events, GatewayIntentBits } from "discord.js";
 

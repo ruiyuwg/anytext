@@ -244,7 +244,7 @@ import { Platform } from 'react-native';
 
 > **Note:** Loading a Google Font using `useFonts` hook has same benefits and limitations as embedding a custom font on your own. See [using a local font file with `useFonts` hook](/develop/user-interface/fonts#with-usefonts-hook) for more information.
 
-Each google Fonts package provides the `useFonts` hook to load the fonts asynchronously. This hook keeps track of the loading state and loads the font when an app is initialized. The font package also imports the font file so you don't have to explicitly import it.
+Each Google Fonts package provides the `useFonts` hook to load the fonts asynchronously. This hook keeps track of the loading state and loads the font when an app is initialized. The font package also imports the font file so you don't have to explicitly import it.
 
 Install the Google Fonts package, `expo-font` and `expo-splash-screen` libraries.
 

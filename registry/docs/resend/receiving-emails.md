@@ -115,6 +115,22 @@ if ($event['type'] === 'email.received') {
 echo json_encode([]);
 ```
 
+```rust Rust theme={"theme":{"light":"github-light","dark":"vesper"}}
+#[derive(Serialize)]
+struct Empty {}
+
+async fn example(Json(event): Json<resend_rs::events::EmailEvent>) -> Response {
+    if matches!(
+        event.r#type,
+        resend_rs::events::EmailEventType::EmailReceived
+    ) {
+        Json(event).into_response()
+    } else {
+        Json(Empty {}).into_response()
+    }
+}
+```
+
 Once you receive the email event, you can process the email body and attachments. We also recommend implementing [webhook request verification](/webhooks/verify-webhooks-requests) to secure your webhook endpoint.
 
 ```json theme={"theme":{"light":"github-light","dark":"vesper"}}

@@ -57,5 +57,5 @@ Once you have decided on the model you want to add to your project:
 
 title: "Adding a Provider"
 description: "Learn how to add a new AI provider to your Vercel projects."
-last\_updated: "2026-03-08T05:03:09.815Z"
+last\_updated: "2026-03-23T09:40:03.272Z"
 source: "https://vercel.com/docs/agent-resources/integrations-for-models/adding-a-provider"

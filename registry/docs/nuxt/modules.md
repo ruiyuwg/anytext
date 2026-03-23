@@ -39,6 +39,8 @@ export default defineNuxtModule({
 ```
 
 ```ts [modules/hello/runtime/api-route.ts] twoslash
+import { defineEventHandler } from 'nitro/h3'
+
 export default defineEventHandler(() => {
   return { hello: 'world' }
 })

@@ -2,6 +2,13 @@
 
 URL: https://docs.deno.com/subhosting/manual/planning\_your\_implementation
 
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the <a href="https://api.deno.com/v2/docs">v2 API</a>. See the <a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for
+details.
+
+:::
+
 Let's say, for example, that you are building a SaaS CRM platform like
 Salesforce. You want to empower your customers to write JavaScript code that
 would be executed every time a new lead was captured.
@@ -121,6 +128,13 @@ deployments as well.
 > Overview of Deno Subhosting pricing plans, resource limits, deployment restrictions, and performance constraints for your applications.
 
 URL: https://docs.deno.com/subhosting/manual/pricing\_and\_limits
+
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the <a href="https://api.deno.com/v2/docs">v2 API</a>. See the <a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for
+details.
+
+:::
 
 You can see an
 [overview of available pricing plans and features](https://deno.com/deploy/pricing?subhosting)

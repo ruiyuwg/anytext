@@ -160,7 +160,7 @@ If your domain's nameservers point to an external DNS provider (like Cloudflare 
 
 title: "Supported domains"
 
-last\_updated: "2026-03-08T05:03:13.479Z"
+last\_updated: "2026-03-23T09:40:08.697Z"
 source: "https://vercel.com/docs/domains/supported-domains"
 
 # Supported domains
@@ -169,5 +169,5 @@ Vercel supports the following top-level domains (TLDs) for [purchase](/docs/doma
 
 title: "Troubleshooting domains"
 description: "Learn about common reasons for domain misconfigurations and how to troubleshoot your domain on Vercel."
-last\_updated: "2026-03-08T05:03:13.492Z"
+last\_updated: "2026-03-23T09:40:08.737Z"
 source: "https://vercel.com/docs/domains/troubleshooting"

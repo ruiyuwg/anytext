@@ -5,8 +5,8 @@ Rendering
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/render-to-string.mdx)
 
 ```
-import { renderToString } from "solid-js/web"
-function renderToString<T>(  fn: () => T,  options?: {    nonce?: string    renderId?: string  }): string
+import { renderToString } from "solid-js/web";
+function renderToString<T>(  fn: () => T,  options?: {    nonce?: string;    renderId?: string;  }): string;
 ```
 
 Renders to a string synchronously. The function also generates a script tag for progressive hydration. Options include eventNames to listen to before the page loads and play back on hydration, and nonce to put on the script tag.
@@ -14,7 +14,7 @@ Renders to a string synchronously. The function also generates a script tag for 
 `renderId` is used to namespace renders when having multiple top level roots.
 
 ```
-const html = renderToString(App)
+const html = renderToString(App);
 ```
 
 ***

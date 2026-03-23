@@ -154,5 +154,5 @@ for await (const part of result.textStream) {
 
 title: "LangChain"
 description: "Learn how to integrate Vercel AI Gateway with LangChain to access multiple AI models through a unified interface"
-last\_updated: "2026-03-08T05:03:10.384Z"
+last\_updated: "2026-03-23T09:40:04.292Z"
 source: "https://vercel.com/docs/ai-gateway/ecosystem/framework-integrations/langchain"

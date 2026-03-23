@@ -38,7 +38,7 @@ issues: [
 }
 ```
 
-Vitest uses special handling for `Error` subclasses that ignores enumerable properties. \*/}
+Vitest uses special handling for `Error` subclasses that ignores enumerable properties.  \*/}
 
 ### updates issue formats
 
@@ -47,7 +47,7 @@ The issue formats have been dramatically streamlined.
 ```ts
 import * as z from "zod"; // v4
 
-type IssueFormats =
+type IssueFormats = 
   | z.core.$ZodIssueInvalidType
   | z.core.$ZodIssueTooBig
   | z.core.$ZodIssueTooSmall
@@ -56,7 +56,7 @@ type IssueFormats =
   | z.core.$ZodIssueUnrecognizedKeys
   | z.core.$ZodIssueInvalidValue
   | z.core.$ZodIssueInvalidUnion
-  | z.core.$ZodIssueInvalidKey // new: used for z.record/z.map
+  | z.core.$ZodIssueInvalidKey // new: used for z.record/z.map 
   | z.core.$ZodIssueInvalidElement // new: used for z.map/z.set
   | z.core.$ZodIssueCustom;
 ```
@@ -68,7 +68,7 @@ import * as z from "zod"; // v3
 
 export type IssueFormats =
   | z.ZodInvalidTypeIssue // ♻️ renamed to z.core.$ZodIssueInvalidType
-  | z.ZodTooBigIssue // ♻️ renamed to z.core.$ZodIssueTooBig
+  | z.ZodTooBigIssue  // ♻️ renamed to z.core.$ZodIssueTooBig
   | z.ZodTooSmallIssue // ♻️ renamed to z.core.$ZodIssueTooSmall
   | z.ZodInvalidStringIssue // ♻️ z.core.$ZodIssueInvalidStringFormat
   | z.ZodNotMultipleOfIssue // ♻️ renamed to z.core.$ZodIssueNotMultipleOf
@@ -82,7 +82,7 @@ export type IssueFormats =
   | z.ZodInvalidReturnTypeIssue // ❌ z.function throws ZodError directly
   | z.ZodInvalidDateIssue // ❌ merged into invalid_type
   | z.ZodInvalidIntersectionTypesIssue // ❌ removed (throws regular Error)
-  | z.ZodNotFiniteIssue; // ❌ infinite values no longer accepted (invalid_type)
+  | z.ZodNotFiniteIssue // ❌ infinite values no longer accepted (invalid_type)
 ```
 
 While certain Zod 4 issue types have been merged, dropped, and modified, each issue remains structurally similar to Zod 3 counterpart (identical, in most cases). All issues still conform to the same base interface as Zod 3, so most common error handling logic will work without modification.
@@ -98,7 +98,7 @@ export interface $ZodIssueBase {
 
 ### changes error map precedence
 
-The error map precedence has been changed to be more consistent. Specifically, an error map passed into `.parse()` _no longer_ takes precedence over a schema-level error map.
+The error map precedence has been changed to be more consistent. Specifically, an error map passed into `.parse()` *no longer* takes precedence over a schema-level error map.
 
 ```ts
 const mySchema = z.string({ error: () => "Schema-level error" });
@@ -127,7 +127,7 @@ This API was identical to `.flatten()`. It exists for historical reasons and isn
 Directly push to `err.issues` array instead, if necessary.
 
 ```ts
-myError.issues.push({
+myError.issues.push({ 
   // new issue
 });
 ```
@@ -190,7 +190,7 @@ The method forms (`z.string().email()`) still exist and work as before, but are 
 
 ```ts
 z.string().email(); // ❌ deprecated
-z.email(); // ✅
+z.email(); // ✅ 
 ```
 
 ### stricter `.uuid()`
@@ -211,9 +211,9 @@ Padding is no longer allowed in `z.base64url()` (formerly `z.string().base64url(
 This has been replaced with separate `.ipv4()` and `.ipv6()` methods. Use `z.union()` to combine them if you need to accept both.
 
 ```ts
-z.string().ip(); // ❌
-z.ipv4(); // ✅
-z.ipv6(); // ✅
+z.string().ip() // ❌
+z.ipv4() // ✅
+z.ipv6() // ✅
 ```
 
 ### updates `z.string().ipv6()`
@@ -225,9 +225,9 @@ Validation now happens using the `new URL()` constructor, which is far more robu
 Similarly, this has been replaced with separate `.cidrv4()` and `.cidrv6()` methods. Use `z.union()` to combine them if you need to accept both.
 
 ```ts
-z.string().cidr(); // ❌
-z.cidrv4(); // ✅
-z.cidrv6(); // ✅
+z.string().cidr() // ❌
+z.cidrv4() // ✅
+z.cidrv6() // ✅
 ```
 
 ## `z.coerce` updates
@@ -244,23 +244,21 @@ type schemaInput = z.input<typeof schema>;
 
 ## `.default()` updates
 
-The application of `.default()` has changed in a subtle way. If the input is `undefined`, `ZodDefault` short-circuits the parsing process and returns the default value. The default value must be assignable to the _output type_.
+The application of `.default()` has changed in a subtle way. If the input is `undefined`, `ZodDefault` short-circuits the parsing process and returns the default value. The default value must be assignable to the *output type*.
 
 ```ts
-const schema = z
-  .string()
-  .transform((val) => val.length)
+const schema = z.string()
+  .transform(val => val.length)
   .default(0); // should be a number
 schema.parse(undefined); // => 0
 ```
 
-In Zod 3, `.default()` expected a value that matched the _input type_. `ZodDefault` would parse the default value, instead of short-circuiting. As such, the default value must be assignable to the _input type_ of the schema.
+In Zod 3, `.default()` expected a value that matched the *input type*. `ZodDefault` would parse the default value, instead of short-circuiting. As such, the default value must be assignable to the *input type* of the schema.
 
 ```ts
 // Zod 3
-const schema = z
-  .string()
-  .transform((val) => val.length)
+const schema = z.string()
+  .transform(val => val.length)
   .default("tuna");
 schema.parse(undefined); // => 4
 ```
@@ -269,9 +267,8 @@ To replicate the old behavior, Zod implements a new `.prefault()` API. This is s
 
 ```ts
 // Zod 3
-const schema = z
-  .string()
-  .transform((val) => val.length)
+const schema = z.string()
+  .transform(val => val.length)
   .prefault("tuna");
 schema.parse(undefined); // => 4
 ```

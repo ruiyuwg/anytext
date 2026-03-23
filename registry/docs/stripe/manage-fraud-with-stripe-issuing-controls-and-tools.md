@@ -60,7 +60,7 @@ Stripe offers the following proactive fraud protection controls:
 
 Know Your Customer (KYC) or Know Your Business (KYB) is the mandatory process of collecting and verifying information about the company or individual who uses the cards. Information includes the legal entity and personal information about the representative of the business, and those who own or control the business. To manage KYC/KYB, you can integrate [Connect Onboarding](https://docs.stripe.com/connect/custom/hosted-onboarding.md), which lets Stripe take care of the complexity around the basic obligations.
 
-To learn more about using Connect to manage KYC/KYB, see [Risk management with Connect](https://docs.stripe.com/connect/risk-management.md#know-your-customer-\(kyc\)-and-compliance).
+To learn more about using Connect to manage KYC/KYB, see [Risk management with Connect](https://docs.stripe.com/connect/risk-management.md#know-your-customer-kyc-and-compliance).
 
 ### Spending controls
 

@@ -18,7 +18,7 @@ By the end of the tutorial we will have done the following:
 
 We will cover the following concepts:
 
-- [Retrieval](/oss/python/langchain/retrieval) using [document loaders](/oss/python/integrations/document_loaders), [text splitters](/oss/python/integrations/splitters), [embeddings](/oss/python/integrations/text_embedding), and [vector stores](/oss/python/integrations/vectorstores)
+- [Retrieval](/oss/python/langchain/retrieval) using [document loaders](/oss/python/integrations/document_loaders), [text splitters](/oss/python/integrations/splitters), [embeddings](/oss/python/integrations/embeddings), and [vector stores](/oss/python/integrations/vectorstores)
 - The LangGraph [Graph API](/oss/python/langgraph/graph-api), including state, nodes, edges, and conditional edges.
 
 ## Setup
@@ -121,7 +121,7 @@ retriever_tool.invoke({"query": "types of reward hacking"})
 
 Now we will start building components ([nodes](/oss/python/langgraph/graph-api#nodes) and [edges](/oss/python/langgraph/graph-api#edges)) for our agentic RAG graph.
 
-Note that the components will operate on the [`MessagesState`](/oss/python/langgraph/graph-api#messagesstate) — graph state that contains a `messages` key with a list of [chat messages](https://python.langchain.com/docs/concepts/messages/).
+Note that the components will operate on the [`MessagesState`](/oss/python/langgraph/graph-api#messagesstate)—graph state that contains a `messages` key with a list of [chat messages](https://python.langchain.com/docs/concepts/messages/).
 
 1. Build a `generate_query_or_respond` node. It will call an LLM to generate a response based on the current graph state (list of messages). Given the input messages, it will decide to retrieve using the retriever tool, or respond directly to the user. Note that we're giving the chat model access to the `retriever_tool` we created earlier via `.bind_tools`:
 
@@ -185,7 +185,7 @@ Args:
 
 ## 4. Grade documents
 
-1. Add a [conditional edge](/oss/python/langgraph/graph-api#conditional-edges) — `grade_documents` — to determine whether the retrieved documents are relevant to the question. We will use a model with a structured output schema `GradeDocuments` for document grading. The `grade_documents` function will return the name of the node to go to based on the grading decision (`generate_answer` or `rewrite_question`):
+1. Add a [conditional edge](/oss/python/langgraph/graph-api#conditional-edges)—`grade_documents`—to determine whether the retrieved documents are relevant to the question. We will use a model with a structured output schema `GradeDocuments` for document grading. The `grade_documents` function will return the name of the node to go to based on the grading decision (`generate_answer` or `rewrite_question`):
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from pydantic import BaseModel, Field

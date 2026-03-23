@@ -1,4 +1,4 @@
-# Drizzle + Nile
+# Drizzle  +  Nile
 
 - Database [connection basics](/docs/connect-overview) with Drizzle
 - Nile Database - [website](https://thenile.dev)
@@ -49,17 +49,14 @@ In order to set the tenant context, we wrap each query in a transaction that set
 The tenant ID can simply be passed into the wrapper as an argument:
 
 ```typescript copy filename="index.ts"
-import { drizzle } from "drizzle-orm/node-postgres";
+import { drizzle } from 'drizzle-orm/node-postgres';
 import { todosTable, tenants } from "./db/schema";
-import { sql } from "drizzle-orm";
-import "dotenv/config";
+import { sql } from 'drizzle-orm';
+import 'dotenv/config';
 
 const db = drizzle(process.env.NILEDB_URL);
 
-function tenantDB<T>(
-  tenantId: string,
-  cb: (tx: any) => T | Promise<T>,
-): Promise<T> {
+function tenantDB<T>(tenantId: string, cb: (tx: any) => T | Promise<T>): Promise<T> {
   return db.transaction(async (tx) => {
     if (tenantId) {
       await tx.execute(sql`set local nile.tenant_id = '${sql.raw(tenantId)}'`);
@@ -70,11 +67,11 @@ function tenantDB<T>(
 }
 
 // In a webapp, you'll likely get it from the request path parameters or headers
-const tenantId = "01943e56-16df-754f-a7b6-6234c368b400";
+const tenantId = '01943e56-16df-754f-a7b6-6234c368b400'
 
 const response = await tenantDB(tenantId, async (tx) => {
-  // No need for a "where" clause here
-  return await tx.select().from(todosTable);
+    // No need for a "where" clause here
+    return await tx.select().from(todosTable);
 });
 
 console.log(response);
@@ -83,7 +80,7 @@ console.log(response);
 If you are using a web framwork that supports it, you can set up [AsyncLocalStorage](https://nodejs.org/api/async_context.html) and use middleware to populate it with the tenant ID. In this case, your Drizzle client setup will be:
 
 ```typescript copy filename="db/index.ts
-import { drizzle } from "drizzle-orm/node-postgres";
+import { drizzle } from 'drizzle-orm/node-postgres';
 import dotenv from "dotenv/config";
 import { sql } from "drizzle-orm";
 import { AsyncLocalStorage } from "async_hooks";
@@ -117,18 +114,84 @@ app.use("/api/tenants/:tenantId/*", async (c, next) => {
 
 // Route handler
 app.get("/api/tenants/:tenantId/todos", async (c) => {
-  const todos = await tenantDB(c, async (tx) => {
-    return await tx
-      .select({
-        id: todoSchema.id,
-        tenant_id: todoSchema.tenantId,
-        title: todoSchema.title,
-        estimate: todoSchema.estimate,
-      })
-      .from(todoSchema);
-  });
-  return c.json(todos);
+    const todos = await tenantDB(c, async (tx) => {
+      return await tx
+        .select({
+          id: todoSchema.id,
+          tenant_id: todoSchema.tenantId,
+          title: todoSchema.title,
+          estimate: todoSchema.estimate,
+        })
+        .from(todoSchema);
+    });
+    return c.json(todos);
 });
+```
+
+#### What's next?
+
+Source: https://orm.drizzle.team/docs/connect-node-sqlite
+
+import Npm from "@mdx/Npm.astro";
+import Callout from '@mdx/Callout.astro';
+import AnchorCards from '@mdx/AnchorCards.astro';
+import Steps from '@mdx/Steps.astro';
+import WhatsNextPostgres from "@mdx/WhatsNextPostgres.astro";
+import Prerequisites from "@mdx/Prerequisites.astro";
+import CodeTabs from "@mdx/CodeTabs.astro";
+
+# Drizzle  +  Node SQLite
+
+- Database [connection basics](/docs/connect-overview) with Drizzle
+- Node - [website](https://nodejs.org/)
+- Node SQLite driver - [docs](https://nodejs.org/api/sqlite.html)
+
+Drizzle ORM natively supports **[`node:sqlite`](https://nodejs.org/api/sqlite.html)** module
+
+We embrace SQL dialects and dialect specific drivers and syntax and unlike any other ORM,
+for synchronous drivers like `node:sqlite` we have both **async** and **sync** APIs and we mirror most popular
+SQLite-like `all`, `get`, `values` and `run` query methods syntax.
+
+#### Step 1 - Install packages
+
+drizzle-orm
+-D drizzle-kit
+
+#### Step 2 - Initialize the driver and make a query
+
+```typescript copy
+import { drizzle } from 'drizzle-orm/node-sqlite';
+
+const db = drizzle("sqlite.db");
+
+const result = await db.select().from(...);
+```
+
+If you need to provide your existing driver:
+
+```typescript copy
+import { drizzle } from 'drizzle-orm/node-sqlite';
+import { DatabaseSync } from 'node:sqlite';
+
+const sqlite = new DatabaseSync('sqlite.db');
+const db = drizzle({ client: sqlite });
+
+const result = await db.select().from(...);
+```
+
+If you want to use **sync** APIs:
+
+```typescript copy
+import { drizzle } from 'drizzle-orm/node-sqlite';
+import { DatabaseSync } from 'node:sqlite';
+
+const sqlite = new Database('sqlite.db');
+const db = drizzle({ client: sqlite });
+
+const result = db.select().from(users).all();
+const result = db.select().from(users).get();
+const result = db.select().from(users).values();
+const result = db.select().from(users).run();
 ```
 
 #### What's next?

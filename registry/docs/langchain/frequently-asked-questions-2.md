@@ -98,25 +98,25 @@ You can request more information about our security policies and posture at [tru
 
 We will not train on your data, and you own all rights to your data. See [LangSmith Terms of Service](https://langchain.dev/terms-of-service) for more information.
 
-## What is an Agent Builder run?
+## What is a Fleet run?
 
-An Agent Builder Run is a complete invocation of an Agent Builder agent, initiated by the receipt of a message or event, whether triggered automatically or sent manually. An Agent Builder Run includes any message delivered to the agent through configured triggers (including third-party integrations or other connected services) as well as messages sent directly through the Agent Builder user interface (for example, via the chat interface). An Agent Builder Run is counted if the invocation succeeds or is interrupted. Resuming execution after a human-in-the-loop interruption constitutes a separate Agent Builder Run. An execution failure does not count as an Agent Builder Run.
+A LangSmith Fleet run is a complete invocation of a Fleet agent, initiated by the receipt of a message or event, whether triggered automatically or sent manually. A Fleet run includes any message delivered to the agent through configured triggers (including third-party integrations or other connected services) as well as messages sent directly through the Fleet user interface (for example, via the chat interface). A Fleet run is counted if the invocation succeeds or is interrupted. Resuming execution after a human-in-the-loop interruption constitutes a separate Fleet run. An execution failure does not count as a Fleet run.
 
-## Are model costs included with Agent Builder pricing?
+## Are model costs included with Fleet pricing?
 
-No. Model usage is billed separately by your model provider. Agent Builder lets you choose the model you want (for example, Anthropic, OpenAI, Gemini, or another provider) and connect it using your provider API key. For more information on configuring models, see the [Agent Builder setup](/langsmith/agent-builder-setup#required-model-key) page.
+No. Model usage is billed separately by your model provider. Fleet lets you choose the model you want (for example, Anthropic, OpenAI, Gemini, or another provider) and connect it using your provider API key. For more information on configuring models, see the [Workplace setup](/langsmith/fleet/setup#required-model-key) page.
 
-## Are agent tools included with Agent Builder pricing?
+## Are agent tools included with Fleet pricing?
 
-Agent Builder includes built-in tools and supports connecting third-party tools via a remote MCP server. Third-party tools typically require you to authenticate with your account, and any fees or usage charges are billed by the third-party provider. For more information on setting up tool keys, see the [Agent Builder setup](/langsmith/agent-builder-setup#optional-tool-keys) page.
+Fleet includes built-in tools and supports connecting third-party tools via a remote MCP server. Third-party tools typically require you to authenticate with your account, and any fees or usage charges are billed by the third-party provider. For more information on setting up tool keys, see the [Fleet setup](/langsmith/fleet/setup#optional-tool-keys) page.
 
-## Are Agent Builder runs automatically traced in LangSmith, and do they count toward billing?
+## Are Fleet runs automatically traced in LangSmith, and do they count toward billing?
 
-Yes. Every Agent Builder run is automatically traced in LangSmith. These traces are attributed to the user's account and count toward usage-based billing under the customer's LangSmith plan.
+Yes. Every Fleet run is automatically traced in LangSmith. These traces are attributed to the user's account and count toward usage-based billing under the customer's LangSmith plan.
 
-## How do I disable Agent Builder?
+## How do I disable Fleet?
 
-If you are on a Self-Hosted LangSmith instance, you can disable Agent Builder by setting the following to `false` in your `values.yaml`:
+If you are on a self-hosted LangSmith instance, you can disable Fleet by setting the following to `false` in your `values.yaml`:
 
 ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 backend:
@@ -134,7 +134,7 @@ agentBuilderTriggerServer:
   enabled: false
 ```
 
-If you are on cloud LangSmith, [reach out to our Support team](https://support.langchain.com/) to disable Agent Builder.
+If you are on cloud LangSmith, [reach out to our Support team](https://support.langchain.com/) to disable Fleet.
 
 ***
 

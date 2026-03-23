@@ -24,15 +24,15 @@ The AI SDK is the TypeScript toolkit designed to help developers build AI-powere
 
 The AI SDK abstracts away the differences between model providers, eliminates boilerplate code for building chatbots, and allows you to go beyond text output to generate rich, interactive components.
 
-At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call Claude 4 Sonnet with the AI SDK:
+At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call Claude 3.7 Sonnet with the AI SDK:
 
 ```ts
-import { anthropic } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
+import { anthropic } from '@ai-sdk/anthropic';
+import { generateText } from 'ai';
 
-const { text, reasoningText, reasoning } = await generateText({
-  model: anthropic("claude-sonnet-4-20250514"),
-  prompt: "How will quantum computing impact cryptography by 2050?",
+const { text, reasoning, reasoningDetails } = await generateText({
+  model: anthropic('claude-4-sonnet-20250514'),
+  prompt: 'How will quantum computing impact cryptography by 2050?',
 });
 console.log(text);
 ```
@@ -42,25 +42,25 @@ console.log(text);
 Claude 4 enhances the extended thinking capabilities first introduced in Claude 3.7 Sonnet—the ability to solve complex problems with careful, step-by-step reasoning. Additionally, both Opus 4 and Sonnet 4 can now use tools during extended thinking, allowing Claude to alternate between reasoning and tool use to improve responses. You can enable extended thinking using the `thinking` provider option and specifying a thinking budget in tokens. For interleaved thinking (where Claude can think in between tool calls) you'll need to enable a beta feature using the `anthropic-beta` header:
 
 ```ts
-import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
+import { anthropic, AnthropicProviderOptions } from '@ai-sdk/anthropic';
+import { generateText } from 'ai';
 
-const { text, reasoningText, reasoning } = await generateText({
-  model: anthropic("claude-sonnet-4-20250514"),
-  prompt: "How will quantum computing impact cryptography by 2050?",
+const { text, reasoning, reasoningDetails } = await generateText({
+  model: anthropic('claude-4-sonnet-20250514'),
+  prompt: 'How will quantum computing impact cryptography by 2050?',
   providerOptions: {
     anthropic: {
-      thinking: { type: "enabled", budgetTokens: 15000 },
-    } satisfies AnthropicLanguageModelOptions,
+      thinking: { type: 'enabled', budgetTokens: 15000 },
+    } satisfies AnthropicProviderOptions,
   },
   headers: {
-    "anthropic-beta": "interleaved-thinking-2025-05-14",
+    'anthropic-beta': 'interleaved-thinking-2025-05-14',
   },
 });
 
 console.log(text); // text response
-console.log(reasoningText); // reasoning text
-console.log(reasoning); // reasoning details including redacted reasoning
+console.log(reasoning); // reasoning text
+console.log(reasoningDetails); // reasoning details including redacted reasoning
 ```
 
 ### Building Interactive Interfaces
@@ -69,7 +69,7 @@ AI SDK Core can be paired with [AI SDK UI](/docs/ai-sdk-ui/overview), another po
 
 AI SDK UI provides robust abstractions that simplify the complex tasks of managing chat streams and UI updates on the frontend, enabling you to develop dynamic AI-driven interfaces more efficiently.
 
-With three main hooks — [`useChat`](/docs/reference/ai-sdk-ui/use-chat), [`useCompletion`](/docs/reference/ai-sdk-ui/use-completion), and [`useObject`](/docs/reference/ai-sdk-ui/use-object) — you can incorporate real-time chat capabilities, text completions, and streamed JSON into your app.
+With four main hooks — [`useChat`](/docs/reference/ai-sdk-ui/use-chat), [`useCompletion`](/docs/reference/ai-sdk-ui/use-completion), [`useObject`](/docs/reference/ai-sdk-ui/use-object), and [`useAssistant`](/docs/reference/ai-sdk-ui/use-assistant) — you can incorporate real-time chat capabilities, text completions, streamed JSON, and interactive assistant features into your app.
 
 Let's explore building a chatbot with [Next.js](https://nextjs.org), the AI SDK, and Claude Sonnet 4:
 
@@ -78,79 +78,66 @@ In a new Next.js application, first install the AI SDK and the Anthropic provide
 Then, create a route handler for the chat endpoint:
 
 ```tsx filename="app/api/chat/route.ts"
-import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
-import { streamText, convertToModelMessages, type UIMessage } from "ai";
+import { anthropic, AnthropicProviderOptions } from '@ai-sdk/anthropic';
+import { streamText } from 'ai';
 
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
+  const { messages } = await req.json();
 
   const result = streamText({
-    model: anthropic("claude-sonnet-4-20250514"),
-    messages: await convertToModelMessages(messages),
+    model: anthropic('claude-4-sonnet-20250514'),
+    messages,
     headers: {
-      "anthropic-beta": "interleaved-thinking-2025-05-14",
+      'anthropic-beta': 'interleaved-thinking-2025-05-14',
     },
     providerOptions: {
       anthropic: {
-        thinking: { type: "enabled", budgetTokens: 15000 },
-      } satisfies AnthropicLanguageModelOptions,
+        thinking: { type: 'enabled', budgetTokens: 15000 },
+      } satisfies AnthropicProviderOptions,
     },
   });
 
-  return result.toUIMessageStreamResponse({
+  return result.toDataStreamResponse({
     sendReasoning: true,
   });
 }
 ```
 
 You can forward the model's reasoning tokens to the client with
-`sendReasoning: true` in the `toUIMessageStreamResponse` method.
+`sendReasoning: true` in the `toDataStreamResponse` method.
 
 Finally, update the root page (`app/page.tsx`) to use the `useChat` hook:
 
 ```tsx filename="app/page.tsx"
-"use client";
+'use client';
 
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
-import { useState } from "react";
+import { useChat } from '@ai-sdk/react';
 
 export default function Page() {
-  const [input, setInput] = useState("");
-  const { messages, sendMessage } = useChat({
-    transport: new DefaultChatTransport({ api: "/api/chat" }),
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (input.trim()) {
-      sendMessage({ text: input });
-      setInput("");
-    }
-  };
+  const { messages, input, handleInputChange, handleSubmit, error } = useChat();
 
   return (
     <div className="flex flex-col h-screen max-w-2xl mx-auto p-4">
       <div className="flex-1 overflow-y-auto space-y-4 mb-4">
-        {messages.map((message) => (
+        {messages.map(message => (
           <div
             key={message.id}
             className={`p-3 rounded-lg ${
-              message.role === "user" ? "bg-blue-50 ml-auto" : "bg-gray-50"
+              message.role === 'user' ? 'bg-blue-50 ml-auto' : 'bg-gray-50'
             }`}
           >
             <p className="font-semibold">
-              {message.role === "user" ? "You" : "Claude 4"}
+              {message.role === 'user' ? 'You' : 'Claude 4'}
             </p>
             {message.parts.map((part, index) => {
-              if (part.type === "text") {
+              if (part.type === 'text') {
                 return (
                   <div key={index} className="mt-1">
                     {part.text}
                   </div>
                 );
               }
-              if (part.type === "reasoning") {
+              if (part.type === 'reasoning') {
                 return (
                   <pre
                     key={index}
@@ -160,7 +147,9 @@ export default function Page() {
                       <summary className="cursor-pointer">
                         View reasoning
                       </summary>
-                      {part.text}
+                      {part.details.map(detail =>
+                        detail.type === 'text' ? detail.text : '<redacted>',
+                      )}
                     </details>
                   </pre>
                 );
@@ -173,7 +162,7 @@ export default function Page() {
         <input
           name="prompt"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           className="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Ask Claude 4 something..."
         />
@@ -190,10 +179,9 @@ export default function Page() {
 ```
 
 You can access the model's reasoning tokens with the `reasoning` part on the
-message `parts`. The reasoning text is available in the `text` property of the
-reasoning part.
+message `parts`.
 
-The useChat hook on your root page (`app/page.tsx`) will make a request to your LLM provider endpoint (`app/api/chat/route.ts`) whenever the user submits a message. The messages are then displayed in the chat UI.
+The useChat hook on your root page (`app/page.tsx`) will make a request to your AI provider endpoint (`app/api/chat/route.ts`) whenever the user submits a message. The messages are then displayed in the chat UI.
 
 ### Claude 4 Model Variants
 
@@ -208,7 +196,7 @@ Ready to dive in? Here's how you can begin:
 
 1. Explore the documentation at [ai-sdk.dev/docs](/docs) to understand the capabilities of the AI SDK.
 2. Check out practical examples at [ai-sdk.dev/examples](/examples) to see the SDK in action.
-3. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) at [ai-sdk.dev/docs/guides](/cookbook/guides).
+3. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) at [ai-sdk.dev/docs/guides](/docs/guides).
 4. Use ready-to-deploy AI templates at [vercel.com/templates?type=ai](https://vercel.com/templates?type=ai).
 
 # OpenAI Responses API

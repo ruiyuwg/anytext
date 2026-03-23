@@ -224,7 +224,7 @@ The following sites use Astro + WordPress in production:
 
 [Section titled “Themes”](#themes)
 
-- [![](/_astro/astro-wordpress-starter.DWg2-sU7_ZlvAh5.webp) Astro WordPress Starter](https://astro.build/themes/details/astro-wordpress-starter/)
+- [![](/_astro/astro-wordpress-starter.DWg2-sU7_1Oghc9.webp) Astro WordPress Starter](https://astro.build/themes/details/astro-wordpress-starter/)
 
 ## Community Resources
 
@@ -261,3 +261,13 @@ The following sites use Astro + WordPress in production:
 Have a resource to share?
 
 If you found (or made!) a helpful video or blog post about using headless WordPress with Astro, [add it to this list](https://github.com/withastro/docs/edit/main/src/content/docs/en/guides/cms/wordpress.mdx)!
+
+# Content collections
+
+> Manage your content with type safety.
+
+**Added in:** `astro@2.0.0`
+
+**Content collections** are the best way to manage sets of content in any Astro project: blog posts, product descriptions, character profiles, recipes, or any structured content. Collections help to organize and query your documents, enable Intellisense and type checking in your editor, and provide automatic TypeScript type-safety for all of your content.
+
+Astro provides performant, scalable APIs to load, query, and render content from anywhere: stored locally in your project, hosted remotely, or fetched live from frequently-updating sources.

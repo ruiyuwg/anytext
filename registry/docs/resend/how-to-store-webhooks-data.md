@@ -31,7 +31,7 @@ Storing your own webhook data gives you full control over retention periods and 
 
 ### 2. Enable Long-term Retention
 
-Resend retains email data for a limited period. If you need access to historical email data beyond that window, storing events in your own database ensures you never lose important information.
+Resend retains email data for 30 days across all plans (with flexible retention for Enterprise). If you need access to historical email data beyond that window, storing events in your own database ensures you never lose important information.
 
 ### 3. Power Automated Workflows
 

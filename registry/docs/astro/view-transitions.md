@@ -536,7 +536,7 @@ src/pages/index.astro
 
 The exact kind of sanitization you need will depend on your site and what you want to allow.
 
-Consider enabling Astro’s [experimental Content Security Policy feature](/en/reference/experimental-flags/csp/) to help protect against cross-site scripting (XSS) risks if using user input with the `navigate()` API.
+Consider enabling Astro’s [Content Security Policy feature](/en/reference/configuration-reference/#securitycsp) to help protect against cross-site scripting (XSS) risks if using user input with the `navigate()` API.
 
 ## Fallback control
 

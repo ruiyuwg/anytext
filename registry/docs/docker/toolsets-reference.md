@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -187,6 +185,45 @@ toolsets:
 
 Useful for tools that return large JSON responses (API results, file listings, search results). The compression is transparent to the agent but can significantly reduce context consumption for verbose tool outputs.
 
+### [Auto-installation of tool binaries](#auto-installation-of-tool-binaries)
+
+MCP and LSP toolsets that require a binary command can be auto-installed if the command isn't on your system. Docker Agent uses the [aqua registry](https://github.com/aquaproj/aqua-registry), a curated index of CLI tool packages, to resolve and download binaries.
+
+When a toolset with a `command` property is loaded, Docker Agent:
+
+1. Checks if the command exists in your `PATH`.
+2. Checks the Docker Agent tools directory (`~/.cagent/tools/bin/`).
+3. If still not found, looks up the command in the aqua registry and installs it.
+
+Installed binaries are stored under `~/.cagent/tools/`. You can override this location with the `DOCKER_AGENT_TOOLS_DIR` environment variable.
+
+Use the `version` property to pin a specific package and version:
+
+```yaml
+toolsets:
+  - type: lsp
+    command: gopls
+    version: "golang/tools@v0.21.0"
+    file_types: [".go"]
+
+  - type: mcp
+    command: some-mcp-server
+    version: "owner/repo@v1.2.3"
+```
+
+The format is `owner/repo` or `owner/repo@version`. Without a version tag, Docker Agent uses the latest release. Without the `version` property entirely, Docker Agent tries to auto-detect the package from the command name.
+
+To disable auto-installation for a single toolset, set `version` to `"false"`:
+
+```yaml
+toolsets:
+  - type: mcp
+    command: my-custom-server
+    version: "false"
+```
+
+To disable auto-installation globally, set the `DOCKER_AGENT_AUTO_INSTALL` environment variable to `false`.
+
 ### [Per-agent tool configuration](#per-agent-tool-configuration)
 
 Different agents can have different toolsets:
@@ -234,13 +271,231 @@ toolsets:
     tools: [read_file, write_file, edit_file]
 ```
 
+### [LSP](#lsp)
+
+The `lsp` toolset connects your agent to [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) servers, providing code intelligence like go-to-definition, find references, diagnostics, rename, formatting, and more.
+
+You can configure multiple LSP servers for different programming languages, giving your agent code intelligence across your project.
+
+#### [Configuration](#configuration-2)
+
+```yaml
+toolsets:
+  - type: lsp
+    command: gopls
+    file_types: [".go"]
+
+  - type: lsp
+    command: typescript-language-server
+    args: ["--stdio"]
+    file_types: [".ts", ".tsx", ".js", ".jsx"]
+
+  - type: lsp
+    command: pylsp
+    file_types: [".py"]
+```
+
+If an LSP server binary isn't in your PATH, Docker Agent can [auto-install it](#auto-installation-of-tool-binaries) using the `version` property.
+
+#### [Properties](#properties)
+
+Property
+
+Type
+
+Required
+
+Description
+
+`command`
+
+string
+
+Yes
+
+LSP server executable command
+
+`args`
+
+array of strings
+
+No
+
+Command-line arguments for the LSP server
+
+`env`
+
+object
+
+No
+
+Environment variables for the LSP server process
+
+`file_types`
+
+array of strings
+
+No
+
+File extensions this server handles (e.g., `[".go", ".mod"]`)
+
+`version`
+
+string
+
+No
+
+Package reference for auto-installing the server binary (e.g., `"golang/tools@v0.21.0"`). Set `"false"` to disable.
+
+#### [Available tools](#available-tools)
+
+Tool
+
+Description
+
+Read-only
+
+`lsp_workspace`
+
+Get workspace info and available capabilities
+
+Yes
+
+`lsp_hover`
+
+Get type info and documentation for a symbol
+
+Yes
+
+`lsp_definition`
+
+Find where a symbol is defined
+
+Yes
+
+`lsp_references`
+
+Find all references to a symbol
+
+Yes
+
+`lsp_document_symbols`
+
+List all symbols in a file
+
+Yes
+
+`lsp_workspace_symbols`
+
+Search symbols across the workspace
+
+Yes
+
+`lsp_diagnostics`
+
+Get errors and warnings for a file
+
+Yes
+
+`lsp_code_actions`
+
+Get available quick fixes and refactorings
+
+Yes
+
+`lsp_rename`
+
+Rename a symbol across the workspace
+
+No
+
+`lsp_format`
+
+Format a file
+
+No
+
+`lsp_call_hierarchy`
+
+Find incoming and outgoing calls
+
+Yes
+
+`lsp_type_hierarchy`
+
+Find supertypes and subtypes
+
+Yes
+
+`lsp_implementations`
+
+Find interface implementations
+
+Yes
+
+`lsp_signature_help`
+
+Get function signature at call site
+
+Yes
+
+`lsp_inlay_hints`
+
+Get type annotations and parameter names
+
+Yes
+
+Not all LSP servers support all features. The agent uses `lsp_workspace` to discover the capabilities of each configured server.
+
+#### [Language server examples](#language-server-examples)
+
+The following examples show configurations for common languages:
+
+Language
+
+Command
+
+`file_types`
+
+Go
+
+`gopls`
+
+`[".go"]`
+
+TypeScript/JavaScript
+
+`typescript-language-server`
+
+`[".ts", ".tsx", ".js", ".jsx"]`
+
+Python
+
+`pylsp`
+
+`[".py"]`
+
+Rust
+
+`rust-analyzer`
+
+`[".rs"]`
+
+C/C++
+
+`clangd`
+
+`[".c", ".cpp", ".h", ".hpp"]`
+
+For TypeScript/JavaScript, pass `args: ["--stdio"]` to the language server.
+
 ### [Shell](#shell)
 
 The `shell` toolset lets your agent execute commands in your system's shell environment. Use this for agents that need to run builds, execute tests, manage processes, interact with CLI tools, or perform system operations. The agent can run commands in the foreground or background.
 
 Commands execute in the current working directory and inherit environment variables from the Docker Agent process. This toolset is powerful but should be used with appropriate security considerations.
 
-#### [Configuration](#configuration-2)
+#### [Configuration](#configuration-3)
 
 ```yaml
 toolsets:
@@ -253,7 +508,7 @@ The `think` toolset provides your agent with a reasoning scratchpad. The agent c
 
 Agents use this to break down problems, list applicable rules, verify they have all needed information, and document their reasoning process before acting.
 
-#### [Configuration](#configuration-3)
+#### [Configuration](#configuration-4)
 
 ```yaml
 toolsets:
@@ -266,7 +521,7 @@ The `todo` toolset gives your agent task-tracking capabilities for managing mult
 
 The `shared` option allows todos to persist across different agents in a multi-agent system, enabling coordination.
 
-#### [Configuration](#configuration-4)
+#### [Configuration](#configuration-5)
 
 ```yaml
 toolsets:
@@ -283,7 +538,7 @@ The `tasks` toolset is an advanced version of the `todo` toolset, and provides t
 
 Tasks are stored in a JSON file and persist across Docker Agent sessions.
 
-#### [Configuration](#configuration-5)
+#### [Configuration](#configuration-6)
 
 ```yaml
 toolsets:
@@ -294,7 +549,7 @@ toolsets:
     path: ./project-tasks.json
 ```
 
-#### [Available tools](#available-tools)
+#### [Available tools](#available-tools-1)
 
 The tasks toolset provides these tools:
 
@@ -319,7 +574,7 @@ The `memory` toolset allows your agent to store and retrieve information across 
 
 Memories are stored in a local database file and persist across Docker Agent sessions.
 
-#### [Configuration](#configuration-6)
+#### [Configuration](#configuration-7)
 
 ```yaml
 toolsets:
@@ -336,7 +591,7 @@ The `fetch` toolset enables your agent to retrieve content from HTTP/HTTPS URLs.
 
 The agent can specify custom HTTP headers when needed for authentication or other purposes.
 
-#### [Configuration](#configuration-7)
+#### [Configuration](#configuration-8)
 
 ```yaml
 toolsets:
@@ -349,7 +604,7 @@ The `user_prompt` toolset lets your agent ask you questions during task executio
 
 You'll see a prompt with the agent's question. Depending on what the agent needs, you might provide free-form text, select from options, or fill out a form with multiple fields. You can accept and provide the information, decline to answer, or cancel the operation entirely.
 
-#### [Configuration](#configuration-8)
+#### [Configuration](#configuration-9)
 
 ```yaml
 toolsets:
@@ -368,7 +623,7 @@ The `api` toolset lets you define custom tools that call HTTP APIs. Similar to `
 
 Use this to integrate with external services, call internal APIs, trigger webhooks, or interact with any HTTP-based system.
 
-#### [Configuration](#configuration-9)
+#### [Configuration](#configuration-10)
 
 Each API tool is defined with an `api_config` containing the endpoint, HTTP method, and optional typed parameters:
 
@@ -417,7 +672,7 @@ The `script` toolset lets you define custom tools by wrapping shell commands wit
 
 Use this to create tools for deployment scripts, build commands, test runners, or any operation specific to your project or workflow.
 
-#### [Configuration](#configuration-10)
+#### [Configuration](#configuration-11)
 
 Each custom tool is defined with a command, description, and optional typed parameters:
 
@@ -469,7 +724,7 @@ Automatically available when your agent has `handoffs` configured. Allows the ag
 - Read the [Configuration file reference](https://docs.docker.com/ai/docker-agent/reference/config/) for YAML file structure
 - Review the [CLI reference](https://docs.docker.com/ai/docker-agent/reference/cli/) for running agents
 - Explore [MCP servers](https://docs.docker.com/ai/mcp-catalog-and-toolkit/mcp-gateway/) for extended capabilities
-- Browse [example configurations](https://github.com/docker/cagent/tree/main/examples)
+- Browse [example configurations](https://github.com/docker/docker-agent/tree/main/examples)
 
 [Edit this page](https://github.com/docker/docs/edit/main/content/manuals/ai/docker-agent/reference/toolsets.md)
 

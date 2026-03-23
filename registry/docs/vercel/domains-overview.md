@@ -46,5 +46,5 @@ This is where, as a developer, you may have to configure the DNS settings to tel
 
 title: "Pre-Generate SSL Certificates"
 description: "test"
-last\_updated: "2026-03-08T05:03:13.470Z"
+last\_updated: "2026-03-23T09:40:08.665Z"
 source: "https://vercel.com/docs/domains/pre-generating-ssl-certs"

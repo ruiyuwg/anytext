@@ -11,7 +11,7 @@ An agent harness is a combination of several different capabilities that make bu
 - [Code execution](#code-execution)
 - [Human-in-the-loop](#human-in-the-loop)
 
-Alongside these capabilities, deep agents use [Skills](#skills) and [Memory](#memory) for additional context and instructions.
+Alongside these capabilities, Deep Agents use [Skills](#skills) and [Memory](#memory) for additional context and instructions.
 
 ## Planning capabilities
 
@@ -40,7 +40,7 @@ The backends support the following file system operations:
 | `execute`    | Run shell commands in the environment (available with [sandbox backends](/oss/python/deepagents/sandboxes) only)                                                                                   |
 
 The virtual filesystem is used by several other harness capabilities such as skills, memory, code execution, and context management.
-You can also use the file system when building custom tools and middleware for deep agents.
+You can also use the file system when building custom tools and middleware for Deep Agents.
 
 For more information, see [backends](/oss/python/deepagents/backends).
 
@@ -77,7 +77,7 @@ The harness allows the main agent to create ephemeral "subagents" for isolated m
 
 ## Context management
 
-Deep agents can handle long-running tasks by making use of effective context management.
+To handle long-running tasks, deep agents make use of effective context management.
 
 Agents have access to several kinds of context.
 Some sources are provided to the agent at startup; others become available during runtime, such as user input.
@@ -90,7 +90,7 @@ Input context consists of sources of information provided to your deep agent at 
 
 #### Prompts
 
-Deep agents use system prompts to define the agent's role, behavior, capabilities, and knowledge base.
+System prompts define the agent's role, behavior, capabilities, and knowledge base.
 If you provide a custom system prompt, this gets prepended to the built-in system prompt which includes detailed guidance for using built-in tools like the planning tool, filesystem tools, and subagents.
 
 Middleware that adds tools (such as the filesystem middleware) automatically appends tool-specific instructions to the system prompt, creating tool prompts that explain how to use those tools effectively.
@@ -110,7 +110,7 @@ The final deep agent prompt consists of the following parts:
 
 ### Runtime context
 
-Deep agents use a pattern called context compression which works by reducing the size of the information in an agent's working memory while preserving the details that are relevant to the task.
+Context compression reduces the size of information in an agent's working memory while preserving details relevant to the task.
 The following techniques are the built-in features to ensure the context passed to LLMs stays within its context window limit:
 
 - [Offloading large tool inputs and results](#offloading-large-tool-inputs-and-results)
@@ -120,12 +120,12 @@ You can also configure deep agents to use [long-term memory](#long-term-memory) 
 
 #### Offloading large tool inputs and results
 
-Deep agents use the [built-in filesystem tools](#virtual-filesystem-access) to automatically offload content and to search and retrieve that offloaded content as needed.
+Deep Agents use the [built-in filesystem tools](#virtual-filesystem-access) to automatically offload content and to search and retrieve that offloaded content as needed.
 Content offloading happens in two cases:
 
 1. **Tool call inputs exceed 20,000 tokens** (configurable via `tool_token_limit_before_evict`): File write and edit operations leave behind tool calls containing the complete file content in the agent's conversation history.
    Since this content is already persisted to the filesystem, it's often redundant.
-   As the session context crosses 85% of the model’s available window, Deep agents will truncate older tool calls, replacing them with a pointer to the file on disk and reducing the size of the active context.
+   As the session context crosses 85% of the model's available window, Deep Agents will truncate older tool calls, replacing them with a pointer to the file on disk and reducing the size of the active context.
 
 2. **Tool call results exceed 20,000 tokens** (configurable via `tool_token_limit_before_evict`): When this occurs, the deep agent offloads the response to the configured backend and substitutes it with a file path reference and a preview of the first 10 lines. Agents can then re-read or search the content as needed.
 
@@ -153,6 +153,34 @@ This dual approach ensures the agent maintains awareness of its goals and progre
 - Enables very long conversations without hitting context limits
 - Preserves recent context while compressing ancient history
 - Transparent to the agent (appears as a special system message)
+
+##### Summariation Tool
+
+Deep Agents includes an optional [tool](/oss/python/langchain/tools) for summarization, enabling agents to trigger summarization at opportune times—such as between tasks—instead of at fixed token intervals.
+
+You can enable this tool by appending it to the middleware list:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from deepagents import create_deep_agent
+from deepagents.backends import StateBackend
+from deepagents.middleware.summarization import (
+    create_summarization_tool_middleware,
+)
+
+backend = StateBackend  # if using default backend
+
+model = "openai:gpt-5.4"
+agent = create_deep_agent(
+    model=model,
+    middleware=[  # [!code highlight]
+        create_summarization_tool_middleware(model, backend),  # [!code highlight]
+    ],  # [!code highlight]
+)
+```
+
+Enabling this feature does not disable the default summarization action at 85% of the model's context limit.
+
+See [API reference](https://reference.langchain.com/python/deepagents/middleware/summarization/SummarizationToolMiddleware) for details.
 
 #### Long-term memory
 

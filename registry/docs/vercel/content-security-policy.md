@@ -46,7 +46,7 @@ Additionally, while CSP is supported by modern browsers, nuances exist in their 
 
 title: "Checks API Reference"
 description: "The Vercel Checks API let you create tests and assertions that run after each deployment has been built, and are powered by Vercel Integrations."
-last\_updated: "2026-03-08T05:03:11.913Z"
+last\_updated: "2026-03-23T09:40:06.351Z"
 source: "https://vercel.com/docs/checks/checks-api"
 
 # Checks API Reference
@@ -59,5 +59,5 @@ API endpoints allow integrations to interact with the Vercel platform. Integrati
 
 title: "Anatomy of the Checks API"
 description: "Learn how to create your own Checks with Vercel Integrations. You can build your own Integration in order to register any arbitrary Check for your deployments."
-last\_updated: "2026-03-08T05:03:11.932Z"
+last\_updated: "2026-03-23T09:40:06.370Z"
 source: "https://vercel.com/docs/checks/creating-checks"

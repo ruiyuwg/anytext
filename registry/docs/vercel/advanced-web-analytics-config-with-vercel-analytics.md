@@ -4,6 +4,12 @@
 
 To get started with analytics, follow our [Quickstart](/docs/analytics/quickstart) guide which will walk you through the process of setting up analytics for your project.
 
+## What's new in version 2.x
+
+- `@vercel/analytics` is now distributed under the MIT license.
+- It can use Vercel's [Resilient Intake](/docs/analytics/privacy-policy#resilient-intake) for script loading and data collection.
+- For Nuxt applications: install with the new module system.
+
 ## `mode`
 
 Override the automatic environment detection.
@@ -40,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Component {...pageProps} />
-      <Analytics mode="production" />;
+      <Analytics mode="production" />
     </>
   );
 }
@@ -55,7 +61,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Component {...pageProps} />
-      <Analytics mode="production" />;
+      <Analytics mode="production" />
     </>
   );
 }
@@ -78,7 +84,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
-        <Analytics mode="production" />;
+        <Analytics mode="production" />
       </body>
     </html>
   );
@@ -96,7 +102,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         {children}
-        <Analytics mode="production" />;
+        <Analytics mode="production" />
       </body>
     </html>
   );
@@ -1063,22 +1069,30 @@ inject({
 </script>
 ```
 
-## `endpoint`
+## `eventEndpoint`
 
-The `endpoint` option allows you to report the collected analytics to a different url than the default: `https://yourdomain.com/_vercel/insights`.
+Use the `eventEndpoint` option to report the collected custom events to a different URL than the default.
 
 This is useful when deploying several projects under the same domain, as it allows you to keep each application isolated.
 
 For example, when `yourdomain.com` is managed outside of Vercel:
 
-1. "alice-app" is deployed under `yourdomain.com/alice/*`, vercel alias is `alice-app.vercel.sh`
-2. "bob-app" is deployed under `yourdomain.com/bob/*`, vercel alias is `bob-app.vercel.sh`
-3. `yourdomain.com/_vercel/*` is routed to `alice-app.vercel.sh`
+1. "alice-app" is deployed under `yourdomain.com/alice/*` and the vercel alias is `alice-app.vercel.sh`
+2. "bob-app" is deployed under `yourdomain.com/bob/*` and the vercel alias is `bob-app.vercel.sh`
+3. You route `yourdomain.com/<unique-path>/*` to `alice-app.vercel.sh`
 
-Both applications are sending their analytics to `alice-app.vercel.sh`. To restore the isolation, "bob-app" should use:
+Both applications send their analytics to `alice-app.vercel.sh`. To restore the isolation, "bob-app" should use:
 
 ```tsx
-<Analytics endpoint="https://bob-app.vercel.sh/_vercel/insights" />
+<Analytics eventEndpoint="https://bob-app.vercel.sh/<unique-path>/event" />
+```
+
+## `viewEndpoint`
+
+Use the `viewEndpoint` option to report the collected page views to a different URL than the default.
+
+```tsx
+<Analytics viewEndpoint="https://bob-app.vercel.sh/<unique-path>/view" />
 ```
 
 ## `scriptSrc`
@@ -1086,10 +1100,36 @@ Both applications are sending their analytics to `alice-app.vercel.sh`. To resto
 The `scriptSrc` option allows you to load the Web Analytics script from a different URL than the default one.
 
 ```tsx
-<Analytics scriptSrc="https://bob-app.vercel.sh/_vercel/insights/script.js" />
+<Analytics scriptSrc="https://bob-app.vercel.sh/<unique-path>/script.js" />
 ```
+
+## `endpoint` (deprecated in 2.x)
+
+The `endpoint` option still works for backward compatibility. In version 2, use `eventEndpoint` and `viewEndpoint` instead.
+
+## Dynamic configuration
+
+In version 2, Vercel passes default client options at build time with a JSON string under an `analytics` key:
+
+```json
+{
+  "analytics": {
+    "scriptSrc": "/<unique-path>/script.js",
+    "eventEndpoint": "/<unique-path>/event",
+    "viewEndpoint": "/<unique-path>/view"
+  }
+}
+```
+
+Vercel configures this for you so you don't need to pass this dynamic configuration.
+
+To change configured values, you can:
+
+- Pass individual properties (for example, `scriptSrc`, `eventEndpoint` or `viewEndpoint`) to your React or Vue `<Analytics />` component.
+- Pass individual properties to the `injectAnalytics()` function.
+- Provide your own value for the `VERCEL_OBSERVABILITY_CLIENT_CONFIG` build configuration variable.
 
 title: "Vercel Web Analytics"
 description: "With Web Analytics, you can get detailed insights into your website"
-last\_updated: "2026-03-08T05:03:10.932Z"
+last\_updated: "2026-03-23T09:40:05.162Z"
 source: "https://vercel.com/docs/analytics"

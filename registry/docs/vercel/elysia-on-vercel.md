@@ -153,5 +153,5 @@ When you deploy an Elysia app to Vercel, your server endpoints automatically run
 
 title: "Express on Vercel"
 description: "Deploy Express applications to Vercel with zero configuration. Learn about middleware and Vercel Functions."
-last\_updated: "2026-03-08T05:03:14.745Z"
+last\_updated: "2026-03-23T09:40:10.412Z"
 source: "https://vercel.com/docs/frameworks/backend/express"

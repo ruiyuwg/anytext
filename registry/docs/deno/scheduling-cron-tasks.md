@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/cron
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 The [`Deno.cron`](https://docs.deno.com/api/deno/~/Deno.cron) interface enables
 you to configure JavaScript or TypeScript code that executes on a configurable

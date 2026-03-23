@@ -1187,6 +1187,8 @@ Formats: `yyyy-mm-ddThh:mm:ss.sssZ`, `yyyy-mm-ddThh:mm:ss.sss±hh:mm`, `yyyy-mm-
 
 > The regex also allows a space as a separator between the date and time parts instead of the "T" character.
 
+> The regex also allows a space before the UTC offset (e.g., " +00:00") to support PostgreSQL's `timestamptz` output format.
+
 ```ts
 const Action = v.isoTimestamp<TInput, TMessage>(message);
 ```
@@ -1280,6 +1282,59 @@ const IsoWeekSchema = v.pipe(
 #### Related
 
 The following APIs can be combined with `isoWeek`.
+
+##### Schemas
+
+##### Methods
+
+##### Utils
+
+### jwsCompact
+
+Creates a [JWS compact serialization](https://datatracker.ietf.org/doc/html/rfc7515#section-3.1) validation action.
+
+```ts
+const Action = v.jwsCompact<TInput, TMessage>(message);
+```
+
+#### Generics
+
+- `TInput`
+- `TMessage`
+
+#### Parameters
+
+- `message`
+
+##### Explanation
+
+With `jwsCompact` you can validate that a string matches the three-part compact string shape used by JWS compact serialization with unpadded Base64URL-like segments. If the input does not match this JWS compact string shape, you can use `message` to customize the error message.
+
+> Hint: This validation action only checks the three-part compact string shape. It does not decode the segments, verify the signature, or validate claims. Empty payload and signature segments are accepted when they appear as valid compact-serialization segments. If you need full JWT validation, signature verification, or claim checks, use a dedicated library such as one from [jwt.io/libraries](https://www.jwt.io/libraries).
+
+#### Returns
+
+- `Action`
+
+#### Examples
+
+The following examples show how `jwsCompact` can be used.
+
+##### Access token schema
+
+Schema to validate that an access token string matches the JWS compact string shape.
+
+```ts
+const AccessTokenSchema = v.pipe(
+  v.string(),
+  v.nonEmpty('Provide an access token.'),
+  v.jwsCompact('The token must be a valid JWS compact string.')
+);
+```
+
+#### Related
+
+The following APIs can be combined with `jwsCompact`.
 
 ##### Schemas
 

@@ -41,7 +41,7 @@ Follow this guide to help you prepare for tax season.
   - Make sure that your [Connect branding settings](https://dashboard.stripe.com/settings/connect/stripe-dashboard/branding) and your [support email address](https://dashboard.stripe.com/settings/public) are up to date.
   - Prepare your support teams for tax season 2025. View the [example FAQs](https://docs.stripe.com/connect/platform-express-dashboard-taxes-faqs.md) your support team might receive from your connected accounts.
 - Recommended for e-delivery:
-  - Notify your connected accounts when Stripe outreach occurs. View the [example email copy](https://docs.stripe.com/connect/platform-express-dashboard-taxes-communication.md#email-template:-post-stripe-email).
+  - Notify your connected accounts when Stripe outreach occurs. View the [example email copy](https://docs.stripe.com/connect/platform-express-dashboard-taxes-communication.md#email-template-post-stripe-email).
 
 ## Review tax form totals and identity information \[December 31]
 
@@ -145,14 +145,14 @@ Stripe automatically calculates the overall status for each tax form, and allows
 
 ## Understand tax form TIN status
 
-Platforms need valid TINs on the tax forms to ensure that the IRS and/or state accepts the forms, and Stripe displays the status of the TIN in the Tax Form Editor as follows:
+Platforms need valid TINs on the tax forms to make sure that the IRS or state accepts the forms, and Stripe displays the status of the TIN in the Tax Form Editor as follows:
 
 | Status      | Description                                                                      | Next steps                                                                                                                                                                                                                                                                     |
 | ----------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Verified    | Name & TIN are verified                                                          | No further action required.                                                                                                                                                                                                                                                    |
 | Mismatch    | Name + TIN didn’t match the records in IRS and need to be resolved before filing | Follow up with the account to get a name + TIN that matches IRS records. If you still want to file the form in this state, change the [Filing requirement](https://docs.stripe.com/connect/modify-tax-forms.md?method=csv#tax-form-status) to **Required even if incomplete**. |
-| Overwritten | Platform has overwritten the Name and/or TIN                                     | Verify the name + TIN directly with the IRS and/or use a third party TIN verification tool. You can still file this form in this status.                                                                                                                                       |
-| Provided    | Name and TIN were inherited from Connect Settings, but Stripe didn’t verify.     | Verify the name + TIN directly with the IRS and/or use a third party TIN verification tool. You can still file this form in this status.                                                                                                                                       |
+| Overwritten | The platform has overwritten the Name or TIN                                     | Verify the name + TIN directly with the IRS or use a third party TIN verification tool. You can still file this form in this status.                                                                                                                                           |
+| Provided    | Name and TIN were inherited from Connect Settings, but Stripe didn’t verify.     | Verify the name + TIN directly with the IRS or use a third party TIN verification tool. You can still file this form in this status.                                                                                                                                           |
 | Missing     | Name or TIN not provided and needs to be resolved before filing                  | Follow up with the account to get a name + TIN that matches IRS records. If you still want to file the form in this state, change the Filing requirement to **Required even if incomplete**.                                                                                   |
 
 ## Understand tax form delivery status

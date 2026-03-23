@@ -236,8 +236,8 @@ To update subscriptions with [tax rates](https://docs.stripe.com/billing/taxes/t
 
 ```ruby
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 subscription = Stripe::Subscription.retrieve('{{SUBSCRIPTION_ID}}')
@@ -290,8 +290,8 @@ You can currently only schedule subscription updates with the API:
 
 ```ruby
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 subscription = Stripe::Subscription.retrieve(
@@ -325,13 +325,13 @@ Stripe::SubscriptionSchedule.update(
       # automatic tax calculation
       {
         items: [
-          # Prices for each item with tax_rates: ''
+          # Prices for each item with tax_rates: []
           {
             price: '{{PRICE_ID}}',
-            tax_rates: ''
+            tax_rates: []
           }
         ],
-        default_tax_rates: '',
+        default_tax_rates: [],
         automatic_tax: {enabled: true},
         iterations: 1
       }

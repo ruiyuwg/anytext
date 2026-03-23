@@ -3,20 +3,20 @@
 `headers` is an **async** function that allows you to **read** the HTTP incoming request headers from a [Server Component](/docs/app/getting-started/server-and-client-components).
 
 ```tsx filename="app/page.tsx" switcher
-import { headers } from "next/headers";
+import { headers } from 'next/headers'
 
 export default async function Page() {
-  const headersList = await headers();
-  const userAgent = headersList.get("user-agent");
+  const headersList = await headers()
+  const userAgent = headersList.get('user-agent')
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { headers } from "next/headers";
+import { headers } from 'next/headers'
 
 export default async function Page() {
-  const headersList = await headers();
-  const userAgent = headersList.get("user-agent");
+  const headersList = await headers()
+  const userAgent = headersList.get('user-agent')
 }
 ```
 
@@ -42,23 +42,23 @@ export default async function Page() {
 - `headers` is an **asynchronous** function that returns a promise. You must use `async/await` or React's [`use`](https://react.dev/reference/react/use) function.
   - In version 14 and earlier, `headers` was a synchronous function. To help with backwards compatibility, you can still access it synchronously in Next.js 15, but this behavior will be deprecated in the future.
 - Since `headers` is read-only, you cannot `set` or `delete` the outgoing request headers.
-- `headers` is a [Dynamic API](/docs/app/guides/caching#dynamic-rendering) whose returned values cannot be known ahead of time. Using it in will opt a route into **[dynamic rendering](/docs/app/guides/caching#dynamic-rendering)**.
+- `headers` is a [Request-time API](/docs/app/glossary#request-time-apis) whose returned values cannot be known ahead of time. Using it in will opt a route into **[dynamic rendering](/docs/app/glossary#dynamic-rendering)**.
 
 ## Examples
 
 ### Using the Authorization header
 
 ```jsx filename="app/page.js"
-import { headers } from "next/headers";
+import { headers } from 'next/headers'
 
 export default async function Page() {
-  const authorization = (await headers()).get("authorization");
-  const res = await fetch("...", {
+  const authorization = (await headers()).get('authorization')
+  const res = await fetch('...', {
     headers: { authorization }, // Forward the authorization header
-  });
-  const user = await res.json();
+  })
+  const user = await res.json()
 
-  return <h1>{user.name}</h1>;
+  return <h1>{user.name}</h1>
 }
 ```
 

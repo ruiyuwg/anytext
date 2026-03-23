@@ -8,7 +8,7 @@ When you create prompts that include tools, getting good results can be tricky a
 
 Here are a few tips to help you get the best results:
 
-1. Use a model that is strong at tool calling, such as `gpt-5` or `gpt-4.1`. Weaker models will often struggle to call tools effectively and flawlessly.
+1. Use a model that is strong at tool calling, such as `gpt-4` or `gpt-4-turbo`. Weaker models will often struggle to call tools effectively and flawlessly.
 2. Keep the number of tools low, e.g. to 5 or less.
 3. Keep the complexity of the tool parameters low. Complex Zod schemas with many nested and optional elements, unions, etc. can be challenging for the model to work with.
 4. Use semantically meaningful names for your tools, parameters, parameter properties, etc. The more information you pass to the model, the better it can understand what you want.
@@ -28,82 +28,23 @@ Zod expects JavaScript Date objects, but models return dates as strings.
 You can specify and validate the date format using `z.string().datetime()` or `z.string().date()`,
 and then use a Zod transformer to convert the string to a Date object.
 
-```ts highlight="8-11"
-const result = await generateText({
-  model: __MODEL__,
-  output: Output.object({
-    schema: z.object({
-      events: z.array(
-        z.object({
-          event: z.string(),
-          date: z
-            .string()
-            .date()
-            .transform((value) => new Date(value)),
-        }),
-      ),
-    }),
-  }),
-  prompt: "List 5 important events from the year 2000.",
-});
-```
-
-#### Optional Parameters
-
-When working with tools that have optional parameters, you may encounter compatibility issues with certain providers that use strict schema validation.
-
-This is particularly relevant for OpenAI models with structured outputs
-(strict mode).
-
-For maximum compatibility, optional parameters should use `.nullable()` instead of `.optional()`:
-
-```ts highlight="6,7,16,17"
-// This may fail with strict schema validation
-const failingTool = tool({
-  description: "Execute a command",
-  inputSchema: z.object({
-    command: z.string(),
-    workdir: z.string().optional(), // This can cause errors
-    timeout: z.string().optional(),
-  }),
-});
-
-// This works with strict schema validation
-const workingTool = tool({
-  description: "Execute a command",
-  inputSchema: z.object({
-    command: z.string(),
-    workdir: z.string().nullable(), // Use nullable instead
-    timeout: z.string().nullable(),
-  }),
-});
-```
-
-#### Temperature Settings
-
-For tool calls and object generation, it's recommended to use `temperature: 0` to ensure deterministic and consistent results:
-
-```ts highlight="3"
-const result = await generateText({
-  model: __MODEL__,
-  temperature: 0, // Recommended for tool calls
-  tools: {
-    myTool: tool({
-      description: "Execute a command",
-      inputSchema: z.object({
-        command: z.string(),
+```ts highlight="7-10"
+const result = await generateObject({
+  model: openai('gpt-4-turbo'),
+  schema: z.object({
+    events: z.array(
+      z.object({
+        event: z.string(),
+        date: z
+          .string()
+          .date()
+          .transform(value => new Date(value)),
       }),
-    }),
-  },
-  prompt: "Execute the ls command",
+    ),
+  }),
+  prompt: 'List 5 important events from the year 2000.',
 });
 ```
-
-Lower temperature values reduce randomness in model outputs, which is particularly important when the model needs to:
-
-- Generate structured data with specific formats
-- Make precise tool calls with correct parameters
-- Follow strict schemas consistently
 
 ## Debugging
 
@@ -115,8 +56,8 @@ To check if your prompt, tools, and settings are handled correctly by the provid
 
 ```ts
 const result = await generateText({
-  model: __MODEL__,
-  prompt: "Hello, world!",
+  model: openai('gpt-4o'),
+  prompt: 'Hello, world!',
 });
 
 console.log(result.warnings);
@@ -131,8 +72,8 @@ Request bodies are available via the `request.body` property of the response:
 
 ```ts highlight="6"
 const result = await generateText({
-  model: __MODEL__,
-  prompt: "Hello, world!",
+  model: openai('gpt-4o'),
+  prompt: 'Hello, world!',
 });
 
 console.log(result.request.body);

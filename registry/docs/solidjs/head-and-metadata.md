@@ -6,9 +6,7 @@ Building your application
 
 SolidStart does not come with a metadata library. In cases where you want to customize the content in the `head` of your `document`, you can use the `@solidjs/meta` library.
 
-```
-npm i @solidjs/meta
-```
+`bash frame="none" npm i @solidjs/meta`
 
 The common elements used in the [`head`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) are:
 
@@ -66,14 +64,14 @@ For this example, `routeData` can be used to retrieve the user's name from the `
 SEO tags like `og:title`, `og:description`, `og:image`, use the `Meta` component. Since these tags may want to be used across multiple routes, they can be added inside the `Head` of the `root.tsx` file.
 
 ```
-export default function Root() {  return (    <Html lang="en">      <Head>        <Meta          property="og:image"          content="https://example.com/image.jpg"        />        <Meta          property="og:image:alt"          content="Welcome to my site"        />        <Meta property="og:image:width" content="1200" />        <Meta property="og:image:height" content="600" />        <Meta property="og:site_name" content="GitHub" />      </Head>    </Html>  );}
+export default function Root() {  return (    <Html lang="en">      <Head>        <Meta property="og:image" content="https://example.com/image.jpg" />        <Meta property="og:image:alt" content="Welcome to my site" />        <Meta property="og:image:width" content="1200" />        <Meta property="og:image:height" content="600" />        <Meta property="og:site_name" content="GitHub" />      </Head>    </Html>  );}
 ```
 
 If you need to add route-specific information inside your route, much like the `Title` component, you can use the `Meta` component within the desired route. This overrides the `Meta` tags used within the `Head` component.
 
 ```
 import MySiteTitle from "~/components/MySiteTitle";
-export default function About() {  return (    <>      <MySiteTitle>About</MySiteTitle>      <Meta name="description" content="This is my content tag." />      <Meta        property="og:title"        content="Welcome to my site!"      />      <Meta        property="og:description"        content="A website"      />      <h1>About</h1>    </>  );}
+export default function About() {  return (    <>      <MySiteTitle>About</MySiteTitle>      <Meta name="description" content="This is my content tag." />      <Meta property="og:title" content="Welcome to my site!" />      <Meta property="og:description" content="A website" />      <h1>About</h1>    </>  );}
 ```
 
 [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/solid-start/building-your-application/head-and-metadata.mdx\&page=https://docs.solidjs.com/solid-start/building-your-application/head-and-metadata)

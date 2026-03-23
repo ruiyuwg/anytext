@@ -1,0 +1,111 @@
+-   [Home](https://docs.cloud.google.com/)
+-   [Documentation](https://docs.cloud.google.com/docs)
+-   [Developer tools](https://docs.cloud.google.com/docs/costs-usage)
+-   [.NET](https://docs.cloud.google.com/dotnet/docs)
+-   [Client libraries](https://docs.cloud.google.com/dotnet/docs/reference)
+
+Send feedback
+
+# Class ComputeEnumConstants.InstanceProperties.PrivateIpv6GoogleAccess (1.1.0) Stay organized with collections Save and categorize content based on your preferences.
+
+3.26.0 (latest) 3.25.0 3.24.0 3.23.0 3.22.0 3.21.0 3.20.0 3.19.0 3.18.0 3.17.0 3.16.0 3.15.0 3.14.0 3.13.0 3.12.0 3.11.0 3.10.0 3.9.0 3.8.0 3.7.0 3.6.0 3.5.0 3.4.0 3.3.0 3.2.0 3.1.0 3.0.0 2.17.0 2.16.0 2.15.0 2.14.0 2.13.0 2.12.0 2.11.0 2.10.0 2.9.0 2.8.0 2.7.0 2.6.0 2.5.0 2.4.0 2.3.0 2.2.0 2.1.0 2.0.0 1.4.0 1.3.0 1.2.0 1.1.0 1.0.0
+
+```
+public static class PrivateIpv6GoogleAccess
+```
+
+Constants for wire representations of the [InstanceProperties.Types.PrivateIpv6GoogleAccess](/dotnet/docs/reference/Google.Cloud.Compute.V1/1.1.0/Google.Cloud.Compute.V1.InstanceProperties.Types.PrivateIpv6GoogleAccess) enum.
+
+## Inheritance
+
+[Object](https://learn.microsoft.com/dotnet/api/system.object) \> ComputeEnumConstants.InstanceProperties.PrivateIpv6GoogleAccess
+
+## Inherited Members
+
+[Object.GetHashCode()](https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode)
+
+[Object.GetType()](https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype)
+
+[Object.MemberwiseClone()](https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone)
+
+[Object.ToString()](https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring)
+
+## Namespace
+
+[Google.Cloud.Compute.V1](/dotnet/docs/reference/Google.Cloud.Compute.V1/1.1.0/Google.Cloud.Compute.V1)
+
+## Assembly
+
+Google.Cloud.Compute.V1.dll
+
+## Fields
+
+### EnableBidirectionalAccessToGoogle
+
+```
+public const string EnableBidirectionalAccessToGoogle = "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE"
+```
+
+Wire representation of [EnableBidirectionalAccessToGoogle](/dotnet/docs/reference/Google.Cloud.Compute.V1/1.1.0/Google.Cloud.Compute.V1.InstanceProperties.Types.PrivateIpv6GoogleAccess#Google_Cloud_Compute_V1_InstanceProperties_Types_PrivateIpv6GoogleAccess_EnableBidirectionalAccessToGoogle).
+
+**Field Value**
+
+**Type**
+
+**Description**
+
+`[String](https://learn.microsoft.com/dotnet/api/system.string)`
+
+### EnableOutboundVmAccessToGoogle
+
+```
+public const string EnableOutboundVmAccessToGoogle = "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE"
+```
+
+Wire representation of [EnableOutboundVmAccessToGoogle](/dotnet/docs/reference/Google.Cloud.Compute.V1/1.1.0/Google.Cloud.Compute.V1.InstanceProperties.Types.PrivateIpv6GoogleAccess#Google_Cloud_Compute_V1_InstanceProperties_Types_PrivateIpv6GoogleAccess_EnableOutboundVmAccessToGoogle).
+
+**Field Value**
+
+**Type**
+
+**Description**
+
+`[String](https://learn.microsoft.com/dotnet/api/system.string)`
+
+### InheritFromSubnetwork
+
+```
+public const string InheritFromSubnetwork = "INHERIT_FROM_SUBNETWORK"
+```
+
+Wire representation of [InheritFromSubnetwork](/dotnet/docs/reference/Google.Cloud.Compute.V1/1.1.0/Google.Cloud.Compute.V1.InstanceProperties.Types.PrivateIpv6GoogleAccess#Google_Cloud_Compute_V1_InstanceProperties_Types_PrivateIpv6GoogleAccess_InheritFromSubnetwork).
+
+**Field Value**
+
+**Type**
+
+**Description**
+
+`[String](https://learn.microsoft.com/dotnet/api/system.string)`
+
+### UndefinedPrivateIpv6GoogleAccess
+
+```
+public const string UndefinedPrivateIpv6GoogleAccess = "UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS"
+```
+
+Wire representation of [UndefinedPrivateIpv6GoogleAccess](/dotnet/docs/reference/Google.Cloud.Compute.V1/1.1.0/Google.Cloud.Compute.V1.InstanceProperties.Types.PrivateIpv6GoogleAccess#Google_Cloud_Compute_V1_InstanceProperties_Types_PrivateIpv6GoogleAccess_UndefinedPrivateIpv6GoogleAccess).
+
+**Field Value**
+
+**Type**
+
+**Description**
+
+`[String](https://learn.microsoft.com/dotnet/api/system.string)`
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-03-17 UTC.

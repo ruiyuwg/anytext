@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -44,7 +42,7 @@ Build checks are useful for:
 
 > Tip
 >
-> To improve linting, code navigation, and vulnerability scanning of your Dockerfiles in Visual Studio Code see [Docker VS Code Extension](https://marketplace.visualstudio.com/items?itemName=docker.docker).
+> To improve linting, code navigation, and vulnerability scanning of your Dockerfiles in Visual Studio Code see the [Docker DX](https://marketplace.visualstudio.com/items?itemName=docker.docker) extension.
 
 ## [Build with checks](#build-with-checks)
 
@@ -79,7 +77,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build and push
-        uses: docker/build-push-action@v6.6.0
+        uses: docker/build-push-action@v7
 ```
 
 ![GitHub Actions build check annotations](https://docs.docker.com/build/images/gha-check-annotations.png)

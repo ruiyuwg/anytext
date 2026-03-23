@@ -249,3 +249,13 @@ At this time, functions are limited to the formats displayed above. Additionally
 - Accessing the parent scope.
 - Passing multiple parameters.
 - Accessing the function parameter more than once in the function body.
+
+#### Related articles
+
+[Query Cheat Sheet - GROQ](https://www.sanity.io/docs/content-lake/query-cheat-sheet)
+
+[How Queries Work – GROQ](https://www.sanity.io/docs/content-lake/how-queries-work)
+
+[GROQ feature support across Sanity](https://www.sanity.io/docs/content-lake/groq-feature-support-by-context)
+
+[Paginating with GROQ](https://www.sanity.io/docs/developer-guides/paginating-with-groq)

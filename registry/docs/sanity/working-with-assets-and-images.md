@@ -22,10 +22,10 @@ import {createReadStream} from 'fs'
 import {basename} from 'path'
 
 const client = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   apiVersion: '2026-03-01',
-  token: 'your-write-token',
+  token: '<your-write-token>',
   useCdn: false
 })
 

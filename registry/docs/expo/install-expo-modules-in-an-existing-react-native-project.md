@@ -22,7 +22,7 @@ npx install-expo-modules@latest
 
 ## Manual installation
 
-The following instructions apply to installing the latest version of Expo modules in React Native 0.81. For previous versions, check the [native upgrade helper](/bare/upgrade) to see how these files are customized.
+The following instructions apply to installing the latest version of Expo modules in React Native 0.83. For previous versions, check the [native upgrade helper](/bare/upgrade) to see how these files are customized.
 
 ```sh
 npm install expo

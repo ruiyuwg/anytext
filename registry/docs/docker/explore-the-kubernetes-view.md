@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -36,7 +34,7 @@ With Docker Desktop version 4.51 and later, you can manage Kubernetes directly f
 2. Select **Create cluster**.
 3. Choose your cluster type:
    - **Kubeadm** creates a single-node cluster and the version is set by Docker Desktop.
-   - **kind** creates a multi-node cluster and you can set the version and number of nodes. For more detailed information on each cluster type, see [Cluster provisioining method](#cluster-provisioning-method).
+   - **kind** creates a multi-node cluster and you can set the version and number of nodes. For more detailed information on each cluster type, see [Cluster provisioning method](#cluster-provisioning-method).
 4. Optional: Select **Show system containers (advanced)** to view internal containers when using Docker commands.
 5. Select **Create**.
 

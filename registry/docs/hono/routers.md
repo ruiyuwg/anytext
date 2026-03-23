@@ -8,7 +8,7 @@ Hono has five routers.
 
 **RegExpRouter** is the fastest router in the JavaScript world.
 
-Although this is called "RegExp" it is not an Express-like implementation using [path-to-regexp](https://github.com/pillarjs/path-to-regexp).
+Although this is called "RegExp", it is not an Express-like implementation using [path-to-regexp](https://github.com/pillarjs/path-to-regexp).
 They are using linear loops.
 Therefore, regular expression matching will be performed for all routes and the performance will be degraded as you have more routes.
 
@@ -53,7 +53,7 @@ RegExpRouter is fast, but the route registration phase can be slightly slow.
 So, it's not suitable for an environment that initializes with every request.
 
 **LinearRouter** is optimized for "one shot" situations.
-Route registration is significantly faster than with RegExpRouter because it adds the route without compiling strings, using a linear approach.
+Route registration is significantly faster than RegExpRouter because it adds the route without compiling strings, using a linear approach.
 
 The following is one of the benchmark results, which includes the route registration phase.
 
@@ -85,29 +85,36 @@ An application using only PatternRouter is under 15KB in size.
 ```console
 $ npx wrangler deploy --minify ./src/index.ts
  ⛅️ wrangler 3.20.0
+-------------------
 Total Upload: 14.68 KiB / gzip: 5.38 KiB
 ```
 
-# Middleware
+# Developer Experience
 
-We call the primitive that returns `Response` as "Handler".
-"Middleware" is executed before and after the Handler and handles the `Request` and `Response`.
-It's like an onion structure.
+To create a great application, we need great development experience.
+Fortunately, we can write applications for Cloudflare Workers, Deno, and Bun in TypeScript without having the need to transpile it to JavaScript.
+Hono is written in TypeScript and can make applications type-safe.
 
-![](/images/onion.png)
+# Philosophy
 
-For example, we can write the middleware to add the "X-Response-Time" header as follows.
+In this section, we talk about the concept, or philosophy, of Hono.
 
-```ts twoslash
-import { Hono } from "hono";
-const app = new Hono();
-// ---cut---
-app.use(async (c, next) => {
-  const start = performance.now();
-  await next();
-  const end = performance.now();
-  c.res.headers.set("X-Response-Time", `${end - start}`);
-});
-```
+## Motivation
 
-With this simple method, we can write our own custom middleware and we can use the built-in or third party middleware.
+At first, I just wanted to create a web application on Cloudflare Workers.
+But, there was no good framework that works on Cloudflare Workers.
+So, I started building Hono.
+
+I thought it would be a good opportunity to learn how to build a router using Trie trees.
+Then a friend showed up with ultra crazy fast router called "RegExpRouter".
+And I also have a friend who created the Basic authentication middleware.
+
+Using only Web Standard APIs, we could make it work on Deno and Bun. When people asked "is there Express for Bun?", we could answer, "no, but there is Hono".
+(Although Express works on Bun now.)
+
+We also have friends who make GraphQL servers, Firebase authentication, and Sentry middleware.
+And, we also have a Node.js adapter.
+An ecosystem has sprung up.
+
+In other words, Hono is damn fast, makes a lot of things possible, and works anywhere.
+We might imagine that Hono could become the **Standard for Web Standards**.

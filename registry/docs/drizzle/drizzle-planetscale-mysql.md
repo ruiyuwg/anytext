@@ -1,4 +1,4 @@
-# Drizzle + PlanetScale MySQL
+# Drizzle  +  PlanetScale MySQL
 
 - Database [connection basics](/docs/connect-overview) with Drizzle
 - PlanetScale database - [website](https://planetscale.com/docs)
@@ -66,7 +66,7 @@ import CodeTabs from "@mdx/CodeTabs.astro";
 import Section from "@mdx/Section.astro";
 import WhatsNextPostgres from "@mdx/WhatsNextPostgres.astro";
 
-# Drizzle + Prisma Postgres
+# Drizzle  +  Prisma Postgres
 
 - Database [connection basics](/docs/connect-overview) with Drizzle
 - Prisma Postgres serverless database - [website](https://prisma.io/postgres)
@@ -90,7 +90,7 @@ drizzle-orm postres
 #### Step 2 - Initialize the driver and make a query
 
 ```typescript
-// Make sure to install the 'pg' package
+// Make sure to install the 'pg' package 
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
@@ -98,19 +98,19 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 const db = drizzle({ client: pool });
-
-const result = await db.execute("select 1");
+ 
+const result = await db.execute('select 1');
 ```
 
 ```typescript
 // Make sure to install the 'postgres' package
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 
 const queryClient = postgres(process.env.DATABASE_URL);
 const db = drizzle({ client: queryClient });
 
-const result = await db.execute("select 1");
+const result = await db.execute('select 1');
 ```
 
 #### What's next?
@@ -122,7 +122,7 @@ import Callout from '@mdx/Callout.astro';
 import AnchorCards from '@mdx/AnchorCards.astro';
 import Steps from '@mdx/Steps.astro';
 
-# Drizzle + React Native SQLite
+# Drizzle  +  React Native SQLite
 
 Please use [`Expo SQLite`](#expo-sqlite) to run Drizzle ORM with React Native apps.\
 The only [popular library](https://github.com/andpor/react-native-sqlite-storage) we've found does not support new Hermes JavaScript runtime,
@@ -141,7 +141,7 @@ import CodeTabs from "@mdx/CodeTabs.astro";
 import Section from "@mdx/Section.astro";
 import WhatsNextPostgres from "@mdx/WhatsNextPostgres.astro";
 
-# Drizzle + SQLite Cloud
+# Drizzle  +  SQLite Cloud
 
 - Database [connection basics](/docs/connect-overview) with Drizzle
 - **SQLite Cloud database** - [docs](https://docs.sqlitecloud.io/docs/overview)
@@ -157,23 +157,23 @@ drizzle-orm@beta @sqlitecloud/drivers
 #### Step 2 - Initialize the driver and make a query
 
 ```typescript
-import { drizzle } from "drizzle-orm/sqlite-cloud";
+import { drizzle } from 'drizzle-orm/sqlite-cloud';
 
 const db = drizzle(process.env.SQLITE_CLOUD_CONNECTION_STRING);
 
-const result = await db.execute("select 1");
+const result = await db.execute('select 1');
 ```
 
 If you need to provide your existing drivers:
 
 ```typescript
-import { Database } from "@sqlitecloud/drivers";
-import { drizzle } from "drizzle-orm/sqlite-cloud";
+import { Database } from '@sqlitecloud/drivers';
+import { drizzle } from 'drizzle-orm/sqlite-cloud';
 
 const client = new Database(process.env.SQLITE_CLOUD_CONNECTION_STRING!);
 const db = drizzle({ client });
 
-const result = await db.execute("select 1");
+const result = await db.execute('select 1');
 ```
 
 #### What's next?

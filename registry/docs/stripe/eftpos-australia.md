@@ -109,7 +109,7 @@ Stripe dynamically routes between the international scheme (Visa or Mastercard) 
 - If a payment requires [placing a hold on the card](https://docs.stripe.com/payments/place-a-hold-on-a-payment-method.md) (in other words, if there’s a delay between authorization and capture), Stripe always routes to the international scheme.
 - For other types of payments, Stripe generally defaults to the eftpos network.
 
-If you require that eftpos is never the default network for any payments, please contact [support](https://support.stripe.com/contact).
+If you require that eftpos is never the default network for any payments, contact [support](https://support.stripe.com/contact).
 
 To identify which network a payment was processed on, inspect the [network](https://docs.stripe.com/api/charges/object.md#charge_object-payment_method_details-card-network) field on the [Charge](https://docs.stripe.com/api/charges/object.md) object associated with a successful [Payment Intent](https://docs.stripe.com/api/payment_intents/object.md):
 

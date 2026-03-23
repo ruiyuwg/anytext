@@ -28,23 +28,27 @@ astro.config.mjs
 
 [Section titled “session.driver”](#sessiondriver)
 
-**Type:** `string | undefined`
+**Type:** `SessionDriverConfig | undefined`
 
 **Added in:** `astro@5.7.0`
 
-The Unstorage driver to use for session storage. The [Node](/en/guides/integrations-guide/node/#sessions), [Cloudflare](/en/guides/integrations-guide/cloudflare/#sessions), and [Netlify](/en/guides/integrations-guide/netlify/#sessions) adapters automatically configure a default driver for you, but you can specify your own if you would prefer or if you are using an adapter that does not provide one.
-
-The value is the “Driver name” from the [Unstorage driver documentation](https://unstorage.unjs.io/drivers).
+The driver to use for session storage. The [Node](/en/guides/integrations-guide/node/#sessions), [Cloudflare](/en/guides/integrations-guide/cloudflare/#sessions), and [Netlify](/en/guides/integrations-guide/netlify/#sessions) adapters automatically configure a default driver for you, but you can specify your own if you would prefer or if you are using an adapter that does not provide one.
 
 astro.config.mjs
 
 ```diff
-{
-  adapter: vercel(),
+import { defineConfig, sessionDrivers } from 'astro/config'
+import vercel from '@astrojs/vercel'
+
+
+export default defineConfig({
+  adapter: vercel()
   session: {
-+    driver: "redis",
-  },
-}
++    driver: sessionDrivers.redis({
++      url: process.env.REDIS_URL
++    }),
+  }
+})
 ```
 
 Note
@@ -59,6 +63,10 @@ Some drivers may need extra packages to be installed. Some drivers may also requ
 **Default:** `{}`
 
 **Added in:** `astro@5.7.0`
+
+Deprecated
+
+This is deprecated and will be removed in a future major version. Instead, pass options to the driver function.
 
 The driver-specific options to use for session storage. The options depend on the driver you are using. See the [Unstorage documentation](https://unstorage.unjs.io/drivers) for more information on the options available for each driver.
 
@@ -123,7 +131,7 @@ astro.config.mjs
 
 An optional default time-to-live expiration period for session values, in seconds.
 
-By default, session values persist until they are deleted or the session is destroyed, and do not automatically expire because a particular amount of time has passed. Set `session.ttl` to add a default expiration period for your session values. Passing a `ttl` option to [`session.set()`](/en/reference/api-reference/#set) will override the global default for that individual entry.
+By default, session values persist until they are deleted or the session is destroyed, and do not automatically expire because a particular amount of time has passed. Set `session.ttl` to add a default expiration period for your session values. Passing a `ttl` option to [`session.set()`](/en/reference/api-reference/#sessionset) will override the global default for that individual entry.
 
 astro.config.mjs
 

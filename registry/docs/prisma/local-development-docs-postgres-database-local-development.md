@@ -740,7 +740,7 @@ The `rm` command is interactive and includes safety prompts to prevent accidenta
 
 Using local Prisma Postgres with any ORM \[#using-local-prisma-postgres-with-any-orm]
 
-Local Prisma Postgres supports [direct TCP connections](/postgres/database/direct-connections), allowing you to connect to it via any tool.
+Local Prisma Postgres supports [direct PostgreSQL connections](/postgres/database/connecting-to-your-database), allowing you to connect to it via any tool.
 
 In order to connect to your local Prisma Postgres instance, use the `postgres://` connection string that's returned by `prisma dev`.
 
@@ -824,18 +824,6 @@ Notes:
 - This pattern is great for running tests that require a local database.
 
 Known limitations \[#known-limitations]
-
-Caching is mocked locally \[#caching-is-mocked-locally]
-
-[Prisma Postgres caching](/postgres/database/caching) is simulated locally. Queries always directly interact with the local Prisma Postgres instance, bypassing cache configurations:
-
-```typescript
-const users = await prisma.user.findMany({
-  cache: { ttl: 60 },
-});
-```
-
-Caching works normally when you're using Prisma Postgres in staging and production.
 
 Single connection only \[#single-connection-only]
 

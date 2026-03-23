@@ -1,10 +1,10 @@
 # Remote MCP servers
 
-Source: https://docs.langchain.com/langsmith/agent-builder-remote-mcp-servers
+Source: https://docs.langchain.com/langsmith/fleet/remote-mcp-servers
 
-Connect Agent Builder to popular remote MCP servers
+Connect Fleet to popular remote MCP servers
 
-You can connect Agent Builder to remote MCP servers to extend your agents with additional tools and integrations. This page covers how to add custom MCP servers and provides configuration details for popular remote servers.
+You can connect LangSmith Fleet to remote MCP servers to extend your agents with additional tools and integrations. This page covers how to add custom MCP servers and provides configuration details for popular remote servers.
 
 An [*MCP (Model Context Protocol) server*](https://modelcontextprotocol.io/docs/getting-started/intro) exposes tools that an agent can call at runtime.
 
@@ -14,19 +14,19 @@ A remote MCP server:
 - Owns its own authentication and authorization.
 - Acts as a bridge between your agent and an external system.
 
-LangSmith Agent Builder doesn't execute these tools itself, it forwards requests to the MCP server and returns the results to the agent.
+LangSmith Fleet doesn't execute these tools itself, it forwards requests to the MCP server and returns the results to the agent.
 
 ### How it works
 
-- Agent Builder discovers tools from remote MCP servers via the standard MCP protocol.
+- Fleet discovers tools from remote MCP servers via the standard MCP protocol.
 - Headers configured in your workspace are automatically attached when fetching tools or calling them. Headers are key-value pairs sent with every HTTP request to your MCP server. They're commonly used for authentication (like API keys or bearer tokens), but can also provide configuration information, content types, or custom metadata.
-- Tools from remote servers are available alongside built-in tools in Agent Builder.
+- Tools from remote servers are available alongside built-in tools in Fleet.
 
-**Runtime**: Agent Builder automatically connects to your MCP server and uses its tools.
+**Runtime**: Fleet automatically connects to your MCP server and uses its tools.
 
 ```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 sequenceDiagram
-    participant Agent as Agent Builder
+    participant Agent as Fleet
     participant MCP as Remote MCP Server
 
     Agent->>MCP: Discover available tools<br/>(with configured headers)
@@ -38,10 +38,10 @@ sequenceDiagram
     MCP-->>Agent: Return result
 ```
 
-The following sections show you how to connect a remote MCP server to Agent Builder:
+The following sections show you how to connect a remote MCP server to Fleet:
 
-- [General configuration](#general-configuration): Step-by-step instructions for connecting any remote MCP server with authentication headers. Use this if you're familiar with MCP servers and want a quick reference.
-- [Example: Connecting a custom MCP server](#example-connecting-a-custom-mcp-server): A detailed walkthrough using a GitHub-based MCP server as an example. Use this if you want to see a complete end-to-end example with specific authentication details.
+- [General configuration](#add-a-remote-mcp-server): Step-by-step instructions for connecting any remote MCP server with authentication headers. Use this if you're familiar with MCP servers and want a quick reference.
+- [Example: Connect a custom MCP server](#example-connect-a-custom-mcp-server): A detailed walkthrough using a GitHub-based MCP server as an example. Use this if you want to see a complete end-to-end example with specific authentication details.
 
 ## Add a remote MCP server
 
@@ -54,7 +54,7 @@ Adding MCP servers requires **admin** permissions.
 To add a remote MCP server to a specific agent:
 
 ```
-Open your agent in the [Agent Builder](https://smith.langchain.com/agents) inbox. Next to the agent name, click the  **Edit Agent** icon.
+Open your agent in the [Fleet](https://smith.langchain.com/agents) inbox. Next to the agent name, click the  **Edit Agent** icon.
 
 
 
@@ -62,7 +62,7 @@ In the **Toolbox** section, click **MCP**. Enter the server name and URL, then c
 
 
 
-Click **Save changes**. Agent Builder will discover available tools from your MCP server and make them available in this agent.
+Click **Save changes**. Fleet will discover available tools from your MCP server and make them available in this agent.
 ```
 
 ### Add from workspace settings
@@ -78,7 +78,7 @@ Click **Add server** and enter the server name and URL, then configure authentic
 
 
 
-Click **Save server**. Agent Builder will automatically discover available tools from your MCP server and make them available in your agents. The configured headers are applied to both tool discovery requests and tool execution requests.
+Click **Save server**. Fleet will automatically discover available tools from your MCP server and make them available in your agents. The configured headers are applied to both tool discovery requests and tool execution requests.
 ```
 
 ### Authentication types
@@ -102,7 +102,7 @@ Select an authentication type based on the server's requirements:
 
 Changing the URL of a custom MCP server will break any agents that use tools from that server.
 
-Agent Builder stores tool references by MCP server URL. If you update the URL of a custom MCP server, existing agents will fail when attempting to call those tools because the stored URL no longer matches.
+Fleet stores tool references by MCP server URL. If you update the URL of a custom MCP server, existing agents will fail when attempting to call those tools because the stored URL no longer matches.
 
 To update an MCP server URL:
 
@@ -114,7 +114,7 @@ To update an MCP server URL:
 
 ## Example: Connect a custom MCP server
 
-Here's a practical example of connecting Agent Builder to a GitHub MCP server that requires authentication:
+Here's a practical example of connecting Fleet to a GitHub MCP server that requires authentication:
 
 ````
 The MCP server needs permission to access GitHub on your behalf. You'll do this using a **GitHub Personal Access Token (PAT)**.
@@ -149,7 +149,7 @@ User-Agent: langsmith-agent-builder
 * The MCP server validates the token.
 * Every tool call from the agent includes these headers.
 
-Agent Builder will attach these headers automatically once configured.
+Fleet will attach these headers automatically once configured.
 
 
 
@@ -175,7 +175,7 @@ In **Settings** > **MCP Servers**:
 
 
 
-The tools from your MCP server are now available in Agent Builder. When you create or edit an agent, you'll see these tools alongside the built-in tools. All requests to your MCP server will include the authentication header automatically.
+The tools from your MCP server are now available in Fleet. When you create or edit an agent, you'll see these tools alongside the built-in tools. All requests to your MCP server will include the authentication header automatically.
 
 Once connected, the workflow for this example looks like this:
 
@@ -263,7 +263,53 @@ For more information, see the [Notion MCP documentation](https://developers.noti
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-builder-remote-mcp-servers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/remote-mcp-servers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# Schedules
+
+Source: https://docs.langchain.com/langsmith/fleet/schedules
+
+Configure schedules to run your Fleet agents on a recurring basis.
+
+Schedules run your agent on a recurring time-based schedule. Use schedules when your agent needs to do work proactively, not just in response to a message or event.
+
+Common use cases include:
+
+- **Daily briefings**: Summarize emails, calendar events, or Slack activity each morning.
+- **Memory synthesis**: Periodically review and consolidate the agent's memory files to keep context clean and relevant.
+- **Proactive outreach**: Draft weekly status updates, follow-up reminders, or recurring reports.
+- **Data monitoring**: Check dashboards, metrics, or feeds on a set cadence and surface anything noteworthy.
+
+  To start an agent based on an event (such as a Slack message or email), use [channels](/langsmith/fleet/channels) instead.
+
+## Add a schedule
+
+To add a schedule:
+
+1. In the **Schedules** section, click **+ Add**.
+
+2. Select when the schedule should run.
+
+   Schedules are in UTC. Convert your desired execution time to UTC when configuring the schedule.
+
+3. (Optional) Add a **Prompt**. With a custom prompt, you can tell the agent what to do on each scheduled run. For example:
+
+   - "Summarize my unread emails from the last 24 hours and post a digest to #team-updates in Slack."
+   - "Review your memory files and consolidate any redundant or outdated entries."
+
+4. Click **Create schedule**.
+
+5. Click **Save changes**.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/schedules.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

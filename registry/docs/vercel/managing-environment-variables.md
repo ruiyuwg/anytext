@@ -63,5 +63,5 @@ To find and view all environment variables.
 
 title: "Environment variables"
 description: "Learn more about environment variables on Vercel."
-last\_updated: "2026-03-08T05:03:14.054Z"
+last\_updated: "2026-03-23T09:40:09.562Z"
 source: "https://vercel.com/docs/environment-variables"

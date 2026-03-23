@@ -5,8 +5,8 @@ Reactive utilities
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/reactive-utilities/batch.mdx)
 
 ```
-import { batch } from "solid-js"
-function batch<T>(fn: () => T): T
+import { batch } from "solid-js";
+function batch<T>(fn: () => T): T;
 ```
 
 `batch` is a low-level API that batches updates together. More precisely, `batch(fn)` holds the execution of downstream computations during the `fn` block, executing them all together once the block `fn` returns. Thus, instead of a downstream computation executing after every dependency update, it will update just once at the end of the batch.
@@ -14,19 +14,19 @@ function batch<T>(fn: () => T): T
 Batching improves performance by avoiding unnecessary recalculation. Suppose you have a downstream memo `down` that depends on multiple upstream signals `up1`, `up2`, and `up3`:
 
 ```
-import { createSignal, createMemo, createEffect } from "solid-js"const [up1, setUp1] = createSignal(1)const [up2, setUp2] = createSignal(2)const [up3, setUp3] = createSignal(3)const down = createMemo(() => up1() + up2() + up3())// For illustration, monitor when `down` gets recomputed:createEffect(() => console.log(down())) // outputs 6
+import { createSignal, createMemo, createEffect } from "solid-js";const [up1, setUp1] = createSignal(1);const [up2, setUp2] = createSignal(2);const [up3, setUp3] = createSignal(3);const down = createMemo(() => up1() + up2() + up3());// For illustration, monitor when `down` gets recomputed:createEffect(() => console.log(down())); // outputs 6
 ```
 
 If you directly update all of the upstream signals outside of batch mode, then `down` will recompute every time.
 
 ```
-setUp1(4) // recomputes down, outputs 9setUp2(5) // recomputes down, outputs 12setUp3(6) // recomputes down, outputs 15
+setUp1(4); // recomputes down, outputs 9setUp2(5); // recomputes down, outputs 12setUp3(6); // recomputes down, outputs 15
 ```
 
 If instead you update the upstream signals within a `batch`, then `down` will update only once at the end:
 
 ```
-batch(() => {  setUp1(10) // doesn't update down yet  setUp2(10) // doesn't update down yet  setUp3(10) // doesn't update down yet}) // recomputes down, outputs 30
+batch(() => {  setUp1(10); // doesn't update down yet  setUp2(10); // doesn't update down yet  setUp3(10); // doesn't update down yet}); // recomputes down, outputs 30
 ```
 
 The impact is even more dramatic if you have *m* downstream computations (memos, effects, etc.) that each depends on *n* upstream signals. Without batching, modifying all *n* upstream signals would cause *m n* updates to the downstream computations. With batching, modifying all *n* upstream signals would cause *m* updates to the downstream computations. Given that each update takes at least *n* time (just to read the upstream signals), this cost savings can be significant. Batching is also especially helpful when the downstream effects include DOM updates, which can be expensive.
@@ -40,7 +40,7 @@ Solid uses `batch` internally to automatically batch updates for you in a few ca
 These save you from having to use `batch` yourself in many cases. For the most part, automatic batching should be transparent to you, because accessing a signal or memo will cause it to update if it is out of date (as of Solid 1.4). For example:
 
 ```
-batch(() => {  setUp1(11) // doesn't update down yet  setUp2(11) // doesn't update down yet  setUp3(11) // doesn't update down yet  console.log(down()) // recomputes down, outputs 33  setUp1(12) // doesn't update down yet  setUp2(12) // doesn't update down yet  setUp3(12) // doesn't update down yet}) // recomputes down, outputs 36
+batch(() => {  setUp1(11); // doesn't update down yet  setUp2(11); // doesn't update down yet  setUp3(11); // doesn't update down yet  console.log(down()); // recomputes down, outputs 33  setUp1(12); // doesn't update down yet  setUp2(12); // doesn't update down yet  setUp3(12); // doesn't update down yet}); // recomputes down, outputs 36
 ```
 
 You can think of `batch(fn)` as setting a global "batch mode" variable, calling the function `fn`, and then restoring the global variable to its previous value. This means that you can nest `batch` calls, and they will form one big batch. It also means that, if `fn` is asynchronous, only the updates before the first `await` will be batched.

@@ -37,5 +37,5 @@
 
 title: "OpenClaw (Clawdbot)"
 description: "Use OpenClaw (formerly Clawdbot) with AI Gateway."
-last\_updated: "2026-03-08T05:03:10.352Z"
+last\_updated: "2026-03-23T09:40:04.253Z"
 source: "https://vercel.com/docs/ai-gateway/chat-platforms/openclaw"

@@ -136,5 +136,5 @@ Now that you've created an Edge Config store and read from it, you can explore t
 
 title: "Vercel Edge Config"
 description: "An Edge Config is a global data store that enables experimentation with feature flags, A/B testing, critical redirects, and more."
-last\_updated: "2026-03-08T05:03:13.855Z"
+last\_updated: "2026-03-23T09:40:09.252Z"
 source: "https://vercel.com/docs/edge-config"

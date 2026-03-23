@@ -6,12 +6,11 @@ and calling them is slow and expensive.
 To enable you to unit test your code that uses the AI SDK, the AI SDK Core
 includes mock providers and test helpers. You can import the following helpers from `ai/test`:
 
-- `MockEmbeddingModelV3`: A mock embedding model using the [embedding model v3 specification](https://github.com/vercel/ai/blob/main/packages/provider/src/embedding-model/v3/embedding-model-v3.ts).
-- `MockLanguageModelV3`: A mock language model using the [language model v3 specification](https://github.com/vercel/ai/blob/main/packages/provider/src/language-model/v3/language-model-v3.ts).
+- `MockEmbeddingModelV1`: A mock embedding model using the [embedding model v1 specification](https://github.com/vercel/ai/blob/main/packages/provider/src/embedding-model/v1/embedding-model-v1.ts).
+- `MockLanguageModelV1`: A mock language model using the [language model v1 specification](https://github.com/vercel/ai/blob/main/packages/provider/src/language-model/v1/language-model-v1.ts).
 - `mockId`: Provides an incrementing integer ID.
 - `mockValues`: Iterates over an array of values with each call. Returns the last value when the array is exhausted.
-
-You can also import [`simulateReadableStream`](/docs/reference/ai-sdk-core/simulate-readable-stream) from `ai` to simulate a readable stream with delays.
+- [`simulateReadableStream`](/docs/reference/ai-sdk-core/simulate-readable-stream): Simulates a readable stream with delays.
 
 With mock providers and test helpers, you can control the output of the AI SDK
 and test your code in a repeatable and deterministic way without actually calling
@@ -24,165 +23,117 @@ You can use the test helpers with the AI Core functions in your unit tests:
 ### generateText
 
 ```ts
-import { generateText } from "ai";
-import { MockLanguageModelV3 } from "ai/test";
+import { generateText } from 'ai';
+import { MockLanguageModelV1 } from 'ai/test';
 
 const result = await generateText({
-  model: new MockLanguageModelV3({
+  model: new MockLanguageModelV1({
     doGenerate: async () => ({
-      content: [{ type: "text", text: `Hello, world!` }],
-      finishReason: { unified: "stop", raw: undefined },
-      usage: {
-        inputTokens: {
-          total: 10,
-          noCache: 10,
-          cacheRead: undefined,
-          cacheWrite: undefined,
-        },
-        outputTokens: {
-          total: 20,
-          text: 20,
-          reasoning: undefined,
-        },
-      },
-      warnings: [],
+      rawCall: { rawPrompt: null, rawSettings: {} },
+      finishReason: 'stop',
+      usage: { promptTokens: 10, completionTokens: 20 },
+      text: `Hello, world!`,
     }),
   }),
-  prompt: "Hello, test!",
+  prompt: 'Hello, test!',
 });
 ```
 
 ### streamText
 
 ```ts
-import { streamText, simulateReadableStream } from "ai";
-import { MockLanguageModelV3 } from "ai/test";
+import { streamText, simulateReadableStream } from 'ai';
+import { MockLanguageModelV1 } from 'ai/test';
 
 const result = streamText({
-  model: new MockLanguageModelV3({
+  model: new MockLanguageModelV1({
     doStream: async () => ({
       stream: simulateReadableStream({
         chunks: [
-          { type: "text-start", id: "text-1" },
-          { type: "text-delta", id: "text-1", delta: "Hello" },
-          { type: "text-delta", id: "text-1", delta: ", " },
-          { type: "text-delta", id: "text-1", delta: "world!" },
-          { type: "text-end", id: "text-1" },
+          { type: 'text-delta', textDelta: 'Hello' },
+          { type: 'text-delta', textDelta: ', ' },
+          { type: 'text-delta', textDelta: `world!` },
           {
-            type: "finish",
-            finishReason: { unified: "stop", raw: undefined },
+            type: 'finish',
+            finishReason: 'stop',
             logprobs: undefined,
-            usage: {
-              inputTokens: {
-                total: 3,
-                noCache: 3,
-                cacheRead: undefined,
-                cacheWrite: undefined,
-              },
-              outputTokens: {
-                total: 10,
-                text: 10,
-                reasoning: undefined,
-              },
-            },
+            usage: { completionTokens: 10, promptTokens: 3 },
           },
         ],
       }),
+      rawCall: { rawPrompt: null, rawSettings: {} },
     }),
   }),
-  prompt: "Hello, test!",
+  prompt: 'Hello, test!',
 });
 ```
 
-### generateText with Output
+### generateObject
 
 ```ts
-import { generateText, Output } from "ai";
-import { MockLanguageModelV3 } from "ai/test";
-import { z } from "zod";
+import { generateObject } from 'ai';
+import { MockLanguageModelV1 } from 'ai/test';
+import { z } from 'zod';
 
-const result = await generateText({
-  model: new MockLanguageModelV3({
+const result = await generateObject({
+  model: new MockLanguageModelV1({
+    defaultObjectGenerationMode: 'json',
     doGenerate: async () => ({
-      content: [{ type: "text", text: `{"content":"Hello, world!"}` }],
-      finishReason: { unified: "stop", raw: undefined },
-      usage: {
-        inputTokens: {
-          total: 10,
-          noCache: 10,
-          cacheRead: undefined,
-          cacheWrite: undefined,
-        },
-        outputTokens: {
-          total: 20,
-          text: 20,
-          reasoning: undefined,
-        },
-      },
-      warnings: [],
+      rawCall: { rawPrompt: null, rawSettings: {} },
+      finishReason: 'stop',
+      usage: { promptTokens: 10, completionTokens: 20 },
+      text: `{"content":"Hello, world!"}`,
     }),
   }),
-  output: Output.object({ schema: z.object({ content: z.string() }) }),
-  prompt: "Hello, test!",
+  schema: z.object({ content: z.string() }),
+  prompt: 'Hello, test!',
 });
 ```
 
-### streamText with Output
+### streamObject
 
 ```ts
-import { streamText, Output, simulateReadableStream } from "ai";
-import { MockLanguageModelV3 } from "ai/test";
-import { z } from "zod";
+import { streamObject, simulateReadableStream } from 'ai';
+import { MockLanguageModelV1 } from 'ai/test';
+import { z } from 'zod';
 
-const result = streamText({
-  model: new MockLanguageModelV3({
+const result = streamObject({
+  model: new MockLanguageModelV1({
+    defaultObjectGenerationMode: 'json',
     doStream: async () => ({
       stream: simulateReadableStream({
         chunks: [
-          { type: "text-start", id: "text-1" },
-          { type: "text-delta", id: "text-1", delta: "{ " },
-          { type: "text-delta", id: "text-1", delta: '"content": ' },
-          { type: "text-delta", id: "text-1", delta: `"Hello, ` },
-          { type: "text-delta", id: "text-1", delta: `world` },
-          { type: "text-delta", id: "text-1", delta: `!"` },
-          { type: "text-delta", id: "text-1", delta: " }" },
-          { type: "text-end", id: "text-1" },
+          { type: 'text-delta', textDelta: '{ ' },
+          { type: 'text-delta', textDelta: '"content": ' },
+          { type: 'text-delta', textDelta: `"Hello, ` },
+          { type: 'text-delta', textDelta: `world` },
+          { type: 'text-delta', textDelta: `!"` },
+          { type: 'text-delta', textDelta: ' }' },
           {
-            type: "finish",
-            finishReason: { unified: "stop", raw: undefined },
+            type: 'finish',
+            finishReason: 'stop',
             logprobs: undefined,
-            usage: {
-              inputTokens: {
-                total: 3,
-                noCache: 3,
-                cacheRead: undefined,
-                cacheWrite: undefined,
-              },
-              outputTokens: {
-                total: 10,
-                text: 10,
-                reasoning: undefined,
-              },
-            },
+            usage: { completionTokens: 10, promptTokens: 3 },
           },
         ],
       }),
+      rawCall: { rawPrompt: null, rawSettings: {} },
     }),
   }),
-  output: Output.object({ schema: z.object({ content: z.string() }) }),
-  prompt: "Hello, test!",
+  schema: z.object({ content: z.string() }),
+  prompt: 'Hello, test!',
 });
 ```
 
-### Simulate UI Message Stream Responses
+### Simulate Data Stream Protocol Responses
 
-You can also simulate [UI Message Stream](/docs/ai-sdk-ui/stream-protocol#ui-message-stream) responses for testing,
+You can also simulate [Data Stream Protocol](/docs/ai-sdk-ui/stream-protocol#data-stream-protocol) responses for testing,
 debugging, or demonstration purposes.
 
 Here is a Next example:
 
 ```ts filename="route.ts"
-import { simulateReadableStream } from "ai";
+import { simulateReadableStream } from 'ai';
 
 export async function POST(req: Request) {
   return new Response(
@@ -190,23 +141,18 @@ export async function POST(req: Request) {
       initialDelayInMs: 1000, // Delay before the first chunk
       chunkDelayInMs: 300, // Delay between chunks
       chunks: [
-        `data: {"type":"start","messageId":"msg-123"}\n\n`,
-        `data: {"type":"text-start","id":"text-1"}\n\n`,
-        `data: {"type":"text-delta","id":"text-1","delta":"This"}\n\n`,
-        `data: {"type":"text-delta","id":"text-1","delta":" is an"}\n\n`,
-        `data: {"type":"text-delta","id":"text-1","delta":" example."}\n\n`,
-        `data: {"type":"text-end","id":"text-1"}\n\n`,
-        `data: {"type":"finish"}\n\n`,
-        `data: [DONE]\n\n`,
+        `0:"This"\n`,
+        `0:" is an"\n`,
+        `0:"example."\n`,
+        `e:{"finishReason":"stop","usage":{"promptTokens":20,"completionTokens":50},"isContinued":false}\n`,
+        `d:{"finishReason":"stop","usage":{"promptTokens":20,"completionTokens":50}}\n`,
       ],
     }).pipeThrough(new TextEncoderStream()),
     {
       status: 200,
       headers: {
-        "Content-Type": "text/event-stream",
-        "Cache-Control": "no-cache",
-        Connection: "keep-alive",
-        "x-vercel-ai-ui-message-stream": "v1",
+        'X-Vercel-AI-Data-Stream': 'v1',
+        'Content-Type': 'text/plain; charset=utf-8',
       },
     },
   );

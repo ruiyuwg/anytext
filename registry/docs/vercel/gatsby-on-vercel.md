@@ -392,5 +392,5 @@ See [our Frameworks documentation page](/docs/frameworks) to learn about the ben
 
 title: "Frontends on Vercel"
 description: "Vercel supports a wide range of the most popular frontend frameworks, optimizing how your application builds and runs no matter what tooling you use."
-last\_updated: "2026-03-08T05:03:14.876Z"
+last\_updated: "2026-03-23T09:40:10.555Z"
 source: "https://vercel.com/docs/frameworks/frontend"

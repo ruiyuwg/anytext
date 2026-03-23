@@ -4,6 +4,10 @@ GPT-5.4, our newest mainline model, is designed to balance long-running task per
 
 GPT-5.4 is designed for production-grade assistants and agents that need strong multi-step reasoning, evidence-rich synthesis, and reliable performance over long contexts. It is especially effective when prompts clearly specify the output contract, tool-use expectations, and completion criteria. In practice, the biggest gains come from choosing the right reasoning effort for the task, using explicit grounding and citation rules, and giving the model a precise definition of what "done" looks like. This guide focuses on prompt patterns and migration practices that preserve those efficiency wins. For model capabilities, API parameters, and broader migration guidance, see [our latest model guide](https://developers.openai.com/api/docs/guides/latest-model).
 
+When troubleshooting cases where GPT-5.4 treats an intermediate update as the
+final answer, verify your integration preserves the assistant message `phase`
+field correctly. See [Phase parameter](#phase-parameter) for details.
+
 ## Understand GPT-5.4 behavior
 
 ### Where GPT-5.4 is strongest
@@ -413,9 +417,11 @@ For bbox tasks, be explicit about coordinate conventions and add drift tests.
 
 For long-running or tool-heavy agents, the runtime contract matters as much as the prompt contract.
 
-**Phase parameter**
+#### Phase parameter
 
-To better support preamble messages with GPT-5.4, the Responses API includes a `phase` field designed to prevent early stopping on longer-running tasks and other misbehaviors.
+For GPT-5.4, `gpt-5.3-codex`, and later Responses models, the `phase` field can
+help in the small number of long-running or tool-heavy flows where preambles or
+other intermediate assistant updates are mistaken for the final answer.
 
 - `phase` is optional at the API level, but it is highly recommended. Best-effort inference may exist server-side, but explicit round-tripping of `phase` is strictly better.
 - Use `phase` for long-running or tool-heavy agents that may emit commentary before tool calls or before a final answer.
@@ -423,7 +429,7 @@ To better support preamble messages with GPT-5.4, the Responses API includes a `
 - Do not add `phase` to user messages.
 - If you use `previous_response_id`, that is usually the simplest path, since OpenAI can often recover prior state without manually replaying assistant items.
 - If you replay assistant history yourself, preserve the original `phase` values.
-- Missing or dropped `phase` can cause preambles to be interpreted as final answers and degrade behavior on longer, multi-step tasks.
+- Missing or dropped `phase` can cause preambles to be interpreted as final answers and degrade behavior on those multi-step tasks.
 
 ### Preserve behavior in long sessions
 
@@ -528,6 +534,50 @@ These starting points work well for many migrations:
 | `gpt-4.1` or `gpt-4o`     | `none`                             | Keep snappy behavior, and increase only if evals regress.           |
 | Research-heavy assistants | `medium` or `high`                 | Use explicit research multi-pass and citation gating.               |
 | Long-horizon agents       | `medium` or `high`                 | Add tool persistence and completeness accounting.                   |
+
+### Small-model guidance for `gpt-5.4-mini` and `gpt-5.4-nano`
+
+`gpt-5.4-mini` and `gpt-5.4-nano` are highly steerable, but they are less likely than larger models to infer missing steps, resolve ambiguity implicitly, or package outputs the way you intended unless you specify that behavior directly. In practice, prompts for smaller models are often a bit longer and more explicit.
+
+**How `gpt-5.4-mini` differs**
+
+- `gpt-5.4-mini` is more literal and makes fewer assumptions.
+- It is strong when the task is clearly structured, but weaker on implicit workflows and ambiguity handling.
+- By default, it may try to keep the conversation going with a follow-up question unless you suppress that behavior explicitly.
+
+**Prompting `gpt-5.4-mini`**
+
+- Put critical rules first.
+- Specify the full execution order when tool use or side effects matter.
+- Do not rely on "you MUST" alone. Use structural scaffolding such as numbered steps, decision rules, and explicit action definitions.
+- Separate "do the action" from "report the action."
+- Show the correct flow, not just the final format.
+- Define ambiguity behavior explicitly: when to ask, abstain, or proceed.
+- Specify packaging directly: answer length, whether to ask a follow-up question, citation style, and section order.
+- Be careful with `output nothing else`. Prefer scoped instructions such as `after the final JSON, output nothing further`.
+
+**Prompting `gpt-5.4-nano`**
+
+- Use `gpt-5.4-nano` only for narrow, well-bounded tasks.
+- Prefer closed outputs: labels, enums, short JSON, or fixed templates.
+- Avoid multi-step orchestration unless the flow is extremely constrained.
+- Route ambiguous or planning-heavy tasks to a stronger model instead of over-prompting `gpt-5.4-nano`.
+
+**Good default pattern**
+
+1. Task
+2. Critical rule
+3. Exact step order
+4. Edge cases or clarification behavior
+5. Output format
+6. One correct example
+
+**Avoid**
+
+- Implied next steps
+- Unspecified edge cases
+- Schema-only prompts for tool workflows
+- Generic instructions without structure
 
 ### Web search and deep research
 

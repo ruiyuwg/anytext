@@ -41,8 +41,8 @@ npm install -D prisma @types/pg dotenv tsx
 ```bash
 pnpm dlx nuxi@latest init hello-prisma
 cd hello-prisma
-npm install @prisma/client @prisma/adapter-pg pg
-npm install -D prisma @types/pg dotenv tsx
+pnpm add @prisma/client @prisma/adapter-pg pg
+pnpm add -D prisma @types/pg dotenv tsx
 ```
 
 
@@ -50,8 +50,8 @@ npm install -D prisma @types/pg dotenv tsx
 ```bash
 yarn dlx nuxi@latest init hello-prisma
 cd hello-prisma
-npm install @prisma/client @prisma/adapter-pg pg
-npm install -D prisma @types/pg dotenv tsx
+yarn add @prisma/client @prisma/adapter-pg pg
+yarn add --dev prisma @types/pg dotenv tsx
 ```
 
 
@@ -59,8 +59,8 @@ npm install -D prisma @types/pg dotenv tsx
 ```bash
 bunx --bun nuxi@latest init hello-prisma
 cd hello-prisma
-npm install @prisma/client @prisma/adapter-pg pg
-npm install -D prisma @types/pg dotenv tsx
+bun add @prisma/client @prisma/adapter-pg pg
+bun add --dev prisma @types/pg dotenv tsx
 ```
 ````
 

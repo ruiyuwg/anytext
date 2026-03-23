@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/environment-variables
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 Environment variables are useful to store values like access tokens of web
 services. Each deployment has a set of environment variables defined at the

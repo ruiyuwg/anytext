@@ -1,9 +1,5 @@
 # Get started with Claude 3.7 Sonnet
 
-This guide is deprecated. [Claude 3.7 Sonnet was retired on February 19,
-2026](https://platform.claude.com/docs/en/about-claude/model-deprecations#2025-10-28-claude-sonnet-3-7-model)
-and can no longer be used with the Anthropic API.
-
 With the [release of Claude 3.7 Sonnet](https://www.anthropic.com/news/claude-3-7-sonnet), there has never been a better time to start building AI applications, particularly those that require complex reasoning capabilities.
 
 The [AI SDK](/) is a powerful TypeScript toolkit for building AI applications with large language models (LLMs) like Claude 3.7 Sonnet alongside popular frameworks like React, Next.js, Vue, Svelte, Node.js, and more.
@@ -21,12 +17,12 @@ The AI SDK abstracts away the differences between model providers, eliminates bo
 At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call Claude 3.7 Sonnet with the AI SDK:
 
 ```ts
-import { anthropic } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
+import { anthropic } from '@ai-sdk/anthropic';
+import { generateText } from 'ai';
 
-const { text, reasoningText, reasoning } = await generateText({
-  model: anthropic("claude-3-7-sonnet-20250219"),
-  prompt: "How many people will live in the world in 2040?",
+const { text, reasoning, reasoningDetails } = await generateText({
+  model: anthropic('claude-3-7-sonnet-20250219'),
+  prompt: 'How many people will live in the world in 2040?',
 });
 console.log(text); // text response
 ```
@@ -34,12 +30,12 @@ console.log(text); // text response
 The unified interface also means that you can easily switch between providers by changing just two lines of code. For example, to use Claude 3.7 Sonnet via Amazon Bedrock:
 
 ```ts
-import { bedrock } from "@ai-sdk/amazon-bedrock";
-import { generateText } from "ai";
+import { bedrock } from '@ai-sdk/amazon-bedrock';
+import { generateText } from 'ai';
 
 const { reasoning, text } = await generateText({
-  model: bedrock("anthropic.claude-3-7-sonnet-20250219-v1:0"),
-  prompt: "How many people will live in the world in 2040?",
+  model: bedrock('anthropic.claude-3-7-sonnet-20250219-v1:0'),
+  prompt: 'How many people will live in the world in 2040?',
 });
 ```
 
@@ -48,21 +44,21 @@ const { reasoning, text } = await generateText({
 Claude 3.7 Sonnet introduces a new extended thinking—the ability to solve complex problems with careful, step-by-step reasoning. You can enable it using the `thinking` provider option and specifying a thinking budget in tokens:
 
 ```ts
-import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
+import { anthropic, AnthropicProviderOptions } from '@ai-sdk/anthropic';
+import { generateText } from 'ai';
 
-const { text, reasoningText, reasoning } = await generateText({
-  model: anthropic("claude-3-7-sonnet-20250219"),
-  prompt: "How many people will live in the world in 2040?",
+const { text, reasoning, reasoningDetails } = await generateText({
+  model: anthropic('claude-3-7-sonnet-20250219'),
+  prompt: 'How many people will live in the world in 2040?',
   providerOptions: {
     anthropic: {
-      thinking: { type: "enabled", budgetTokens: 12000 },
-    } satisfies AnthropicLanguageModelOptions,
+      thinking: { type: 'enabled', budgetTokens: 12000 },
+    } satisfies AnthropicProviderOptions,
   },
 });
 
-console.log(reasoningText); // reasoning text
-console.log(reasoning); // reasoning details including redacted reasoning
+console.log(reasoning); // reasoning text
+console.log(reasoningDetails); // reasoning details including redacted reasoning
 console.log(text); // text response
 ```
 
@@ -81,19 +77,19 @@ In a new Next.js application, first install the AI SDK and the Anthropic provide
 Then, create a route handler for the chat endpoint:
 
 ```tsx filename="app/api/chat/route.ts"
-import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
-import { streamText, convertToModelMessages, type UIMessage } from "ai";
+import { anthropic, AnthropicProviderOptions } from '@ai-sdk/anthropic';
+import { streamText, UIMessage, convertToModelMessages } from 'ai';
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: anthropic("claude-3-7-sonnet-20250219"),
-    messages: await convertToModelMessages(messages),
+    model: anthropic('claude-3-7-sonnet-20250219'),
+    messages: convertToModelMessages(messages),
     providerOptions: {
       anthropic: {
-        thinking: { type: "enabled", budgetTokens: 12000 },
-      } satisfies AnthropicLanguageModelOptions,
+        thinking: { type: 'enabled', budgetTokens: 12000 },
+      } satisfies AnthropicProviderOptions,
     },
   });
 
@@ -109,50 +105,39 @@ You can forward the model's reasoning tokens to the client with
 Finally, update the root page (`app/page.tsx`) to use the `useChat` hook:
 
 ```tsx filename="app/page.tsx"
-"use client";
+'use client';
 
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
-import { useState } from "react";
+import { useChat } from '@ai-sdk/react';
 
 export default function Page() {
-  const [input, setInput] = useState("");
-  const { messages, sendMessage } = useChat({
-    transport: new DefaultChatTransport({ api: "/api/chat" }),
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (input.trim()) {
-      sendMessage({ text: input });
-      setInput("");
-    }
-  };
+  const { messages, input, handleInputChange, handleSubmit, error } = useChat();
 
   return (
     <>
-      {messages.map((message) => (
+      {messages.map(message => (
         <div key={message.id}>
-          {message.role === "user" ? "User: " : "AI: "}
+          {message.role === 'user' ? 'User: ' : 'AI: '}
           {message.parts.map((part, index) => {
             // text parts:
-            if (part.type === "text") {
+            if (part.type === 'text') {
               return <div key={index}>{part.text}</div>;
             }
             // reasoning parts:
-            if (part.type === "reasoning") {
-              return <pre key={index}>{part.text}</pre>;
+            if (part.type === 'reasoning') {
+              return (
+                <pre key={index}>
+                  {part.details.map(detail =>
+                    detail.type === 'text' ? detail.text : '<redacted>',
+                  )}
+                </pre>
+              );
             }
           })}
         </div>
       ))}
       <form onSubmit={handleSubmit}>
-        <input
-          name="prompt"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button type="submit">Send</button>
+        <input name="prompt" value={input} onChange={handleInputChange} />
+        <button type="submit">Submit</button>
       </form>
     </>
   );
@@ -162,7 +147,7 @@ export default function Page() {
 You can access the model's reasoning tokens with the `reasoning` part on the
 message `parts`.
 
-The useChat hook on your root page (`app/page.tsx`) will make a request to your LLM provider endpoint (`app/api/chat/route.ts`) whenever the user submits a message. The messages are then displayed in the chat UI.
+The useChat hook on your root page (`app/page.tsx`) will make a request to your AI provider endpoint (`app/api/chat/route.ts`) whenever the user submits a message. The messages are then displayed in the chat UI.
 
 ## Get Started
 
@@ -170,7 +155,7 @@ Ready to dive in? Here's how you can begin:
 
 1. Explore the documentation at [ai-sdk.dev/docs](/docs) to understand the capabilities of the AI SDK.
 2. Check out practical examples at [ai-sdk.dev/examples](/examples) to see the SDK in action.
-3. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) at [ai-sdk.dev/docs/guides](/cookbook/guides).
+3. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) at [ai-sdk.dev/docs/guides](/docs/guides).
 4. Use ready-to-deploy AI templates at [vercel.com/templates?type=ai](https://vercel.com/templates?type=ai).
 
 Claude 3.7 Sonnet opens new opportunities for reasoning-intensive AI applications. Start building today and leverage the power of advanced reasoning in your AI projects.

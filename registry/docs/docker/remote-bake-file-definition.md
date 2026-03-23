@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -177,7 +175,7 @@ One case where combining local and remote Bake definitions becomes necessary is 
 
 ```yml
       - name: Build
-        uses: docker/bake-action@v6
+        uses: docker/bake-action@v7
         with:
           files: |
             ./docker-bake.hcl

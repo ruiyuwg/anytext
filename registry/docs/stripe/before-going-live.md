@@ -2,7 +2,7 @@
 
 Best practices to build a production-ready Stripe Identity integration.
 
-As you complete each item and check it off, the state of each checkbox is stored within your browser’s cache. You can refer back to this page at any time to see what you have completed so far.
+As you complete each item and check it off, the state of each checkbox is stored within your browser’s cache. You can refer back to this page at any time to see what you’ve completed so far.
 
 ### Before going live
 

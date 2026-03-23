@@ -15,8 +15,7 @@ An agent runs until a stop condition is met - i.e., when the model emits a final
     "fontFamily": "monospace",
     "flowchart": {
       "curve": "curve"
-    },
-    "themeVariables": {"edgeLabelBackground": "transparent"}
+    }
   }
 }%%
 graph TD
@@ -599,7 +598,7 @@ In some situations, you may want the agent to return an output in a specific for
 
 #### ToolStrategy
 
-`ToolStrategy` uses artificial tool calling to generate structured output. This works with any model that supports tool calling. `ToolStrategy` should be used when provider-native structured output (via [`ProviderStrategy`](#ProviderStrategy)) is not available or reliable.
+`ToolStrategy` uses artificial tool calling to generate structured output. This works with any model that supports tool calling. `ToolStrategy` should be used when provider-native structured output (via [`ProviderStrategy`](#providerstrategy)) is not available or reliable.
 
 ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from pydantic import BaseModel

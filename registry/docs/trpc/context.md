@@ -11,17 +11,17 @@ When initializing tRPC using `initTRPC`, you should pipe `.context<TContext>()` 
 This will make sure your context is properly typed in your procedures and middlewares.
 
 ```ts twoslash
-import * as trpc from "@trpc/server";
+import * as trpc from '@trpc/server';
 // ---cut---
-import { initTRPC } from "@trpc/server";
-import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
-import { getSession } from "next-auth/react";
+import { initTRPC } from '@trpc/server';
+import type { CreateHTTPContextOptions } from '@trpc/server/adapters/standalone';
 
-export const createContext = async (opts: CreateNextContextOptions) => {
-  const session = await getSession({ req: opts.req });
+export const createContext = async (opts: CreateHTTPContextOptions) => {
+  // Example: extract a session token from the request headers
+  const token = opts.req.headers['authorization'];
 
   return {
-    session,
+    token,
   };
 };
 
@@ -38,15 +38,30 @@ t.procedure.use((opts) => {
 
 ## Creating the context
 
-The `createContext()` function must be passed to the handler that is mounting your appRouter, which may be via HTTP, a [server-side call](server-side-calls) or our [server-side helpers](/docs/client/nextjs/server-side-helpers).
+The `createContext()` function must be passed to the handler mounting your appRouter. The handler may use HTTP or a [server-side call](server-side-calls).
 
-`createContext()` is called for each invocation of tRPC, so batched requests will share a context.
+`createContext()` is called once per request, so all procedures within a single batched request share the same context.
 
-```ts
+```ts twoslash
+// @filename: context.ts
+import type { CreateHTTPContextOptions } from '@trpc/server/adapters/standalone';
+export async function createContext(opts: CreateHTTPContextOptions) {
+  return { token: opts.req.headers['authorization'] };
+}
+export type Context = Awaited<ReturnType<typeof createContext>>;
+
+// @filename: router.ts
+import { initTRPC } from '@trpc/server';
+import type { Context } from './context';
+const t = initTRPC.context<Context>().create();
+export const appRouter = t.router({});
+
+// @filename: server.ts
+// ---cut---
 // 1. HTTP request
-import { createHTTPHandler } from "@trpc/server/adapters/standalone";
-import { createContext } from "./context";
-import { appRouter } from "./router";
+import { createHTTPHandler } from '@trpc/server/adapters/standalone';
+import { createContext } from './context';
+import { appRouter } from './router';
 
 const handler = createHTTPHandler({
   router: appRouter,
@@ -54,19 +69,47 @@ const handler = createHTTPHandler({
 });
 ```
 
-```ts
+```ts twoslash
+// @target: esnext
+// @filename: context.ts
+export async function createContext() {
+  return { token: 'test' };
+}
+
+// @filename: router.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export const createCaller = t.createCallerFactory(appRouter);
+
+// @filename: call.ts
+// ---cut---
 // 2. Server-side call
-import { createContext } from "./context";
-import { createCaller } from "./router";
+import { createContext } from './context';
+import { createCaller } from './router';
 
 const caller = createCaller(await createContext());
 ```
 
-```ts
-// 3. servers-side helpers
-import { createServerSideHelpers } from "@trpc/react-query/server";
-import { createContext } from "./context";
-import { appRouter } from "./router";
+```ts twoslash
+// @target: esnext
+// @filename: context.ts
+export async function createContext() {
+  return {};
+}
+
+// @filename: router.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: helpers.ts
+// ---cut---
+// 3. Server-side helpers (Next.js-specific, see /docs/client/nextjs/pages-router/server-side-helpers)
+import { createServerSideHelpers } from '@trpc/react-query/server';
+import { createContext } from './context';
+import { appRouter } from './router';
 
 const helpers = createServerSideHelpers({
   router: appRouter,
@@ -76,22 +119,24 @@ const helpers = createServerSideHelpers({
 
 ## Example code
 
-```tsx twoslash
+```ts twoslash
 // -------------------------------------------------
 // @filename: context.ts
 // -------------------------------------------------
-import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
-import { getSession } from "next-auth/react";
+import type { CreateHTTPContextOptions } from '@trpc/server/adapters/standalone';
 
 /**
  * Creates context for an incoming request
  * @see https://trpc.io/docs/v11/context
  */
-export async function createContext(opts: CreateNextContextOptions) {
-  const session = await getSession({ req: opts.req });
+export async function createContext(opts: CreateHTTPContextOptions) {
+  const token = opts.req.headers['authorization'];
+
+  // In a real app, you would verify the token and look up the user
+  const user = token ? { email: 'user@example.com' } : null;
 
   return {
-    session,
+    user,
   };
 }
 
@@ -100,10 +145,11 @@ export type Context = Awaited<ReturnType<typeof createContext>>;
 // -------------------------------------------------
 // @filename: trpc.ts
 // -------------------------------------------------
-import { initTRPC, TRPCError } from "@trpc/server";
-import { Context } from "./context";
+import { initTRPC, TRPCError } from '@trpc/server';
+import { Context } from './context';
 
 const t = initTRPC.context<Context>().create();
+
 
 export const router = t.router;
 
@@ -116,15 +162,15 @@ export const publicProcedure = t.procedure;
  * Protected procedure
  */
 export const protectedProcedure = t.procedure.use(function isAuthed(opts) {
-  if (!opts.ctx.session?.user?.email) {
+  if (!opts.ctx.user?.email) {
     throw new TRPCError({
-      code: "UNAUTHORIZED",
+      code: 'UNAUTHORIZED',
     });
   }
   return opts.next({
     ctx: {
-      // Infers the `session` as non-nullable
-      session: opts.ctx.session,
+      // Infers the `user` as non-nullable
+      user: opts.ctx.user,
     },
   });
 });
@@ -134,7 +180,7 @@ export const protectedProcedure = t.procedure.use(function isAuthed(opts) {
 
 In some scenarios it could make sense to split up your context into "inner" and "outer" functions.
 
-**Inner context** is where you define context which doesn’t depend on the request, e.g. your database connection. You can use this function for integration testing or [server-side helpers](/docs/client/nextjs/server-side-helpers), where you don’t have a request object. Whatever is defined here will **always** be available in your procedures.
+**Inner context** is where you define context which doesn’t depend on the request, e.g. your database connection. You can use this function for integration testing or [server-side calls](/docs/server/server-side-calls), where you don’t have a request object. Whatever is defined here will **always** be available in your procedures.
 
 Putting a database client such as `prisma` on `createContextInner` is convenient and common, but large generated clients (like Prisma) can increase type-checking overhead because they become part of your context type across procedures.
 
@@ -144,15 +190,29 @@ If that overhead becomes noticeable, an alternative is to keep context smaller a
 
 ### Example for inner & outer context
 
-```ts
-import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
-import { getSessionFromCookie, type Session } from "./auth";
+```ts twoslash
+// @types: node
+// @filename: auth.ts
+import type { IncomingMessage } from 'http';
+export type Session = { user: { email: string } };
+export function getSessionFromCookie(req: IncomingMessage): Session | null {
+  return null;
+}
+
+// @filename: db.ts
+export const db = {};
+
+// @filename: context.ts
+// ---cut---
+import type { CreateHTTPContextOptions } from '@trpc/server/adapters/standalone';
+import { getSessionFromCookie, type Session } from './auth';
+import { db } from './db';
 
 /**
  * Defines your inner context shape.
  * Add fields here that the inner context brings.
  */
-interface CreateInnerContextOptions extends Partial<CreateNextContextOptions> {
+interface CreateInnerContextOptions {
   session: Session | null;
 }
 
@@ -160,15 +220,15 @@ interface CreateInnerContextOptions extends Partial<CreateNextContextOptions> {
  * Inner context. Will always be available in your procedures, in contrast to the outer context.
  *
  * Also useful for:
- * - testing, so you don't have to mock Next.js' `req`/`res`
- * - tRPC's `createServerSideHelpers` where we don't have `req`/`res`
+ * - testing, so you don't have to mock `req`/`res`
+ * - server-side calls where we don't have `req`/`res`
  *
  * @see https://trpc.io/docs/v11/context#inner-and-outer-context
  */
 export async function createContextInner(opts?: CreateInnerContextOptions) {
   return {
-    prisma,
-    session: opts.session,
+    db,
+    session: opts?.session,
   };
 }
 
@@ -177,7 +237,7 @@ export async function createContextInner(opts?: CreateInnerContextOptions) {
  *
  * @see https://trpc.io/docs/v11/context#inner-and-outer-context
  */
-export async function createContext(opts: CreateNextContextOptions) {
+export async function createContext(opts: CreateHTTPContextOptions) {
   const session = getSessionFromCookie(opts.req);
 
   const contextInner = await createContextInner({ session });
@@ -198,10 +258,23 @@ It is important to infer your `Context` from the **inner** context, as only what
 
 If you don't want to check `req` or `res` for `undefined` in your procedures all the time, you could build a small reusable procedure for that:
 
-```ts
+```ts twoslash
+// @types: node
+import type { IncomingMessage, ServerResponse } from 'http';
+import { initTRPC } from '@trpc/server';
+
+type Context = {
+  req: IncomingMessage | undefined;
+  res: ServerResponse | undefined;
+};
+
+const t = initTRPC.context<Context>().create();
+const publicProcedure = t.procedure;
+
+// ---cut---
 export const apiProcedure = publicProcedure.use((opts) => {
   if (!opts.ctx.req || !opts.ctx.res) {
-    throw new Error("You are missing `req` or `res` in your call.");
+    throw new Error('You are missing `req` or `res` in your call.');
   }
   return opts.next({
     ctx: {
@@ -218,8 +291,8 @@ export const apiProcedure = publicProcedure.use((opts) => {
 You can use the context to limit the number of requests that can be batched together.
 
 ```ts twoslash
-import { TRPCError } from "@trpc/server";
-import type { CreateHTTPContextOptions } from "@trpc/server/adapters/standalone";
+import { TRPCError } from '@trpc/server';
+import type { CreateHTTPContextOptions } from '@trpc/server/adapters/standalone';
 
 const MAX_BATCH_SIZE = 10;
 
@@ -227,7 +300,7 @@ const MAX_BATCH_SIZE = 10;
 export async function createContext(opts: CreateHTTPContextOptions) {
   if (opts.info.calls.length > MAX_BATCH_SIZE) {
     throw new TRPCError({
-      code: "TOO_MANY_REQUESTS",
+      code: 'TOO_MANY_REQUESTS',
       message: `Batch size limit of ${MAX_BATCH_SIZE} exceeded`,
     });
   }

@@ -9,7 +9,7 @@ Point your existing SDK to the gateway:
 #### AI SDK
 
 ```bash package-manager
-npm i ai @ai-sdk/openai
+npm i ai
 ```
 
 ```typescript
@@ -120,5 +120,5 @@ const response = await client.responses.create({
 
 title: "Python"
 description: "Use the AI Gateway with Python through OpenAI or Anthropic SDKs with full streaming, tool calling, and async support."
-last\_updated: "2026-03-08T05:03:10.884Z"
+last\_updated: "2026-03-23T09:40:04.955Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/python"

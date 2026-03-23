@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/oss/javascript/deepagents/customization
 
-Learn how to customize deep agents with system prompts, tools, subagents, and more
+Learn how to customize Deep Agents with system prompts, tools, subagents, and more
 
 `createDeepAgent` has the following configuration options:
 
@@ -416,7 +416,7 @@ const agent = createDeepAgent({
 
 ## System prompt
 
-Deep agents come with a built-in system prompt. The default system prompt contains detailed instructions for using the built-in planning tool, file system tools, and subagents.
+Deep Agents come with a built-in system prompt. The default system prompt contains detailed instructions for using the built-in planning tool, file system tools, and subagents.
 When middleware add special tools, like the filesystem tools, it appends them to the system prompt.
 
 Each deep agent should also include a custom system prompt specific to its specific use case:
@@ -435,7 +435,7 @@ const agent = createDeepAgent({
 
 ## Middleware
 
-By default, deep agents have access to the following [middleware](/oss/javascript/langchain/middleware/overview):
+By default, Deep Agents have access to the following [middleware](/oss/javascript/langchain/middleware/overview):
 
 - `TodoListMiddleware`: Tracks and manages todo lists for organizing agent tasks and work
 - `FilesystemMiddleware`: Handles file system operations such as reading, writing, and navigating directories
@@ -449,6 +449,12 @@ If you are using memory, skills, or human-in-the-loop, the following middleware 
 - `MemoryMiddleware`: Persists and retrieves conversation context across sessions when the `memory` argument is provided
 - `SkillsMiddleware`: Enables custom skills when the `skills` argument is provided
 - `HumanInTheLoopMiddleware`: Pauses for human approval or input at specified points when the `interrupt_on` argument is provided
+
+### Pre-built middleware
+
+LangChain exposes additional pre-built middleware that let you add-on various features, such as retries, fallbacks, or PII detection. See [Prebuilt middleware](/oss/javascript/langchain/middleware/built-in) for more.
+
+### Custom middleware
 
 You can provide additional middleware to extend functionality, add tools, or implement custom hooks:
 
@@ -578,7 +584,7 @@ For more information, see [Subagents](/oss/javascript/deepagents/subagents).
 
 ## Backends
 
-Deep agent tools can make use of virtual file systems to store, access, and edit files. By default, deep agents use a `StateBackend`.
+Deep agent tools can make use of virtual file systems to store, access, and edit files. By default, Deep Agents use a `StateBackend`.
 
 If you are using [skills](#skills) or [memory](#memory), you must add the expected skill or memory files to the backend before creating the agent.
 
@@ -650,7 +656,7 @@ agent = create_deep_agent(
 ```
 
 
-  When deploying to [LangSmith Deployment](/langsmith/deployments), omit the `store` parameter. The platform automatically provisions a store for your agent.
+  When deploying to [LangSmith Deployment](/langsmith/deployment), omit the `store` parameter. The platform automatically provisions a store for your agent.
 
 
 
@@ -1072,9 +1078,9 @@ const agent = await createDeepAgent({
 ```
 ````
 
-## Structured ouput
+## Structured output
 
-Deep agents support [structured ouput](/oss/javascript/langchain/structured-output).
+Deep Agents support [structured output](/oss/javascript/langchain/structured-output).
 
 You can set a desired structured output schema by passing it as the `responseFormat` argument to the call to `createDeepAgent()`.
 When the model generates the structured data, it's captured, validated, and returned in the 'structuredResponse' key of the agent's state.

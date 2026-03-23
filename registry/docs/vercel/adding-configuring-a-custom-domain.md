@@ -86,7 +86,7 @@ Once the domain has been configured and Vercel has verified it, the status of th
 
 title: "Assigning a custom domain to an environment"
 description: "Learn how to add a custom domain to your Vercel project, verify it, and correctly set the DNS or Nameserver values."
-last\_updated: "2026-03-08T05:03:13.506Z"
+last\_updated: "2026-03-23T09:40:08.802Z"
 source: "https://vercel.com/docs/domains/working-with-domains/add-a-domain-to-environment"
 
 # Assigning a custom domain to an environment
@@ -102,7 +102,7 @@ source: "https://vercel.com/docs/domains/working-with-domains/add-a-domain-to-en
 
 title: "Assigning a domain to a Git branch"
 description: "Learn how to assign a domain to a different Git branch with this guide."
-last\_updated: "2026-03-08T05:03:13.510Z"
+last\_updated: "2026-03-23T09:40:08.815Z"
 source: "https://vercel.com/docs/domains/working-with-domains/assign-domain-to-a-git-branch"
 
 # Assigning a domain to a Git branch
@@ -128,5 +128,5 @@ Pro and Enterprise teams can also set branch tracking for their [custom environm
 
 title: "Claiming Domain Ownership"
 description: "Learn how to claim ownership of a domain that is registered with another Vercel account by verifying DNS ownership."
-last\_updated: "2026-03-08T05:03:13.529Z"
+last\_updated: "2026-03-23T09:40:08.822Z"
 source: "https://vercel.com/docs/domains/working-with-domains/claim-domain-ownership"

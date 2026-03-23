@@ -2,7 +2,7 @@
 
 Handing off tasks to subagents isolates context, keeping the main (supervisor) agent's context window clean while still going deep on a task.
 
-The subagents middleware from [deep agents](/oss/python/deepagents/overview) allows you to supply subagents through a `task` tool.
+The subagents middleware from [Deep Agents](/oss/python/deepagents/overview) allows you to supply subagents through a `task` tool.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain.tools import tool
@@ -38,7 +38,7 @@ agent = create_agent(
 
 A subagent is defined with a **name**, **description**, **system prompt**, and **tools**. You can also provide a subagent with a custom **model**, or with additional **middleware**. This can be particularly useful when you want to give the subagent an additional state key to share with the main agent.
 
-For more complex use cases, you can also provide your own pre-built LangGraph graph as a subagent.
+For more complex use cases, you can also provide your own prebuilt LangGraph graph as a subagent.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain.agents import create_agent
@@ -81,6 +81,10 @@ These middleware are optimized for specific LLM providers. See each provider's d
 
 ```
 Prompt caching, bash tool, text editor, memory, and file search middleware for Claude models.
+
+
+
+Prompt caching middleware for Amazon Bedrock models.
 
 
 

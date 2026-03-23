@@ -1,6 +1,6 @@
 # HTTP Subscription Link
 
-`httpSubscriptionLink` is a [**terminating link**](./overview.md#the-terminating-link) that's uses [Server-sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE) for subscriptions.
+`httpSubscriptionLink` is a [**terminating link**](./overview.md#the-terminating-link) that uses [Server-sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE) for subscriptions.
 
 SSE is a good option for real-time as it's a bit easier than setting up a WebSockets-server.
 
@@ -10,14 +10,23 @@ If your client's environment doesn't support EventSource, you need an [EventSour
 
 To use `httpSubscriptionLink`, you need to use a [splitLink](./splitLink.mdx) to make it explicit that we want to use SSE for subscriptions.
 
-```ts title="client/index.ts"
-import type { TRPCLink } from "@trpc/client";
+```ts twoslash title="client/index.ts"
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+// ---cut---
 import {
+  createTRPCClient,
   httpBatchLink,
   httpSubscriptionLink,
   loggerLink,
   splitLink,
-} from "@trpc/client";
+} from '@trpc/client';
+import type { AppRouter } from './server';
 
 const trpcClient = createTRPCClient<AppRouter>({
   /**
@@ -28,7 +37,7 @@ const trpcClient = createTRPCClient<AppRouter>({
     loggerLink(),
     splitLink({
       // uses the httpSubscriptionLink for subscriptions
-      condition: (op) => op.type === "subscription",
+      condition: (op) => op.type === 'subscription',
       true: httpSubscriptionLink({
         url: `/api/trpc`,
       }),
@@ -56,10 +65,19 @@ If the client and server are not on the same domain, you can use `withCredential
 
 **Example:**
 
-```tsx
+```tsx twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+import { httpSubscriptionLink } from '@trpc/client';
+// ---cut---
 // [...]
 httpSubscriptionLink({
-  url: "https://example.com/api/trpc",
+  url: 'https://example.com/api/trpc',
   eventSourceOptions() {
     return {
       withCredentials: true, // <---
@@ -74,23 +92,33 @@ httpSubscriptionLink({
 
 You can ponyfill `EventSource` and use the `eventSourceOptions` -callback to populate headers.
 
-```tsx
+```tsx twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+declare function getSignature(op: any): Promise<string>;
+
+// ---cut---
 import {
   createTRPCClient,
   httpBatchLink,
   httpSubscriptionLink,
   splitLink,
-} from "@trpc/client";
-import { EventSourcePolyfill } from "event-source-polyfill";
-import type { AppRouter } from "../server/index.js";
+} from '@trpc/client';
+import { EventSourcePolyfill } from 'event-source-polyfill';
+import type { AppRouter } from './server';
 
 // Initialize the tRPC client
 const trpc = createTRPCClient<AppRouter>({
   links: [
     splitLink({
-      condition: (op) => op.type === "subscription",
+      condition: (op) => op.type === 'subscription',
       true: httpSubscriptionLink({
-        url: "http://localhost:3000",
+        url: 'http://localhost:3000',
         // ponyfill EventSource
         EventSource: EventSourcePolyfill,
         // options to pass to the EventSourcePolyfill constructor
@@ -100,14 +128,14 @@ const trpc = createTRPCClient<AppRouter>({
           const signature = await getSignature(op);
           return {
             headers: {
-              authorization: "Bearer supersecret",
-              "x-signature": signature,
+              authorization: 'Bearer supersecret',
+              'x-signature': signature,
             },
           };
         },
       }),
       false: httpBatchLink({
-        url: "http://localhost:3000",
+        url: 'http://localhost:3000',
       }),
     }),
   ],
@@ -122,27 +150,38 @@ To address this limitation, you can use a [`retryLink`](./retryLink.md) in conju
 
 Please note that restarting the connection will result in the `EventSource` being recreated from scratch, which means any previously tracked events will be lost.
 
-```tsx
+```tsx twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+declare function getAuthenticatedUri(): string;
+declare const auth: { getOrRenewToken(): Promise<string> };
+
+// ---cut---
 import {
   createTRPCClient,
   httpBatchLink,
   httpSubscriptionLink,
   retryLink,
   splitLink,
-} from "@trpc/client";
+} from '@trpc/client';
 import {
   EventSourcePolyfill,
   EventSourcePolyfillInit,
-} from "event-source-polyfill";
-import type { AppRouter } from "../server/index.js";
+} from 'event-source-polyfill';
+import type { AppRouter } from './server';
 
 // Initialize the tRPC client
 const trpc = createTRPCClient<AppRouter>({
   links: [
     splitLink({
-      condition: (op) => op.type === "subscription",
+      condition: (op) => op.type === 'subscription',
       false: httpBatchLink({
-        url: "http://localhost:3000",
+        url: 'http://localhost:3000',
       }),
       true: [
         retryLink({
@@ -152,11 +191,11 @@ const trpc = createTRPCClient<AppRouter>({
             const code = opts.error.data?.code;
             if (!code) {
               // This shouldn't happen as our httpSubscriptionLink will automatically retry within when there's a non-parsable response
-              console.error("No error code found, retrying", opts);
+              console.error('No error code found, retrying', opts);
               return true;
             }
-            if (code === "UNAUTHORIZED" || code === "FORBIDDEN") {
-              console.log("Retrying due to 401/403 error");
+            if (code === 'UNAUTHORIZED' || code === 'FORBIDDEN') {
+              console.log('Retrying due to 401/403 error');
               return true;
             }
             return false;
@@ -188,10 +227,10 @@ const trpc = createTRPCClient<AppRouter>({
 
 ### Connection params
 
-In order to authenticate with `EventSource`, you can define `connectionParams` in `httpSubscriptionLink`. This will be sent as part of the URL, which is why other methods are preferred).
+In order to authenticate with `EventSource`, you can define `connectionParams` in `httpSubscriptionLink`. This will be sent as part of the URL, which is why other methods are preferred.
 
 ```ts twoslash title="server/context.ts"
-import type { CreateHTTPContextOptions } from "@trpc/server/adapters/standalone";
+import type { CreateHTTPContextOptions } from '@trpc/server/adapters/standalone';
 
 export const createContext = async (opts: CreateHTTPContextOptions) => {
   const token = opts.info.connectionParams?.token;
@@ -205,31 +244,39 @@ export const createContext = async (opts: CreateHTTPContextOptions) => {
 export type Context = Awaited<ReturnType<typeof createContext>>;
 ```
 
-```ts title="client/trpc.ts"
+```ts twoslash title="client/trpc.ts"
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+// ---cut---
 import {
   createTRPCClient,
   httpBatchLink,
   httpSubscriptionLink,
   splitLink,
-} from "@trpc/client";
-import type { AppRouter } from "../server/index.js";
+} from '@trpc/client';
+import type { AppRouter } from './server';
 
 // Initialize the tRPC client
 const trpc = createTRPCClient<AppRouter>({
   links: [
     splitLink({
-      condition: (op) => op.type === "subscription",
+      condition: (op) => op.type === 'subscription',
       true: httpSubscriptionLink({
-        url: "http://localhost:3000",
+        url: 'http://localhost:3000',
         connectionParams: async () => {
           // Will be serialized as part of the URL
           return {
-            token: "supersecret",
+            token: 'supersecret',
           };
         },
       }),
       false: httpBatchLink({
-        url: "http://localhost:3000",
+        url: 'http://localhost:3000',
       }),
     }),
   ],
@@ -242,8 +289,8 @@ The `httpSubscriptionLink` supports configuring a timeout for inactivity through
 
 The timeout configuration is set on the server side when initializing tRPC:
 
-```ts title="server/trpc.ts"
-import { initTRPC } from "@trpc/server";
+```ts twoslash title="server/trpc.ts"
+import { initTRPC } from '@trpc/server';
 
 export const t = initTRPC.create({
   sse: {
@@ -258,13 +305,13 @@ export const t = initTRPC.create({
 
 The server can be configured to send periodic ping messages to keep the connection alive and prevent timeout disconnections. This is particularly useful when combined with the `reconnectAfterInactivityMs`-option.
 
-```ts title="server/trpc.ts"
-import { initTRPC } from "@trpc/server";
+```ts twoslash title="server/trpc.ts"
+import { initTRPC } from '@trpc/server';
 
 export const t = initTRPC.create({
   sse: {
     // Maximum duration of a single SSE connection in milliseconds
-    // maxDurationMs: 60_00,
+    // maxDurationMs: 60_000,
     ping: {
       // Enable periodic ping messages to keep connection alive
       enabled: true,
@@ -282,7 +329,7 @@ export const t = initTRPC.create({
 
 The `httpSubscriptionLink` makes use of the `EventSource` API, Streams API, and `AsyncIterator`s, these are not natively supported by React Native and will have to be ponyfilled.
 
-To ponyfill `EventSource` we recommend to use a polyfill that utilizes the networking library exposed by React Native, over using a polyfill that using the `XMLHttpRequest` API. Libraries that polyfill `EventSource` using `XMLHttpRequest` fail to reconnect after the app has been in the background. Consider using the [rn-eventsource-reborn](https://www.npmjs.com/package/rn-eventsource-reborn) package.
+To ponyfill `EventSource` we recommend to use a polyfill that utilizes the networking library exposed by React Native, over using a polyfill that uses the `XMLHttpRequest` API. Libraries that polyfill `EventSource` using `XMLHttpRequest` fail to reconnect after the app has been in the background. Consider using the [rn-eventsource-reborn](https://www.npmjs.com/package/rn-eventsource-reborn) package.
 
 The Streams API can be ponyfilled using the [web-streams-polyfill](https://www.npmjs.com/package/web-streams-polyfill) package.
 
@@ -297,9 +344,9 @@ import { InstallSnippet } from '@site/src/components/InstallSnippet';
 Add the polyfills to your project before the link is used (e.g. where you add your TRPCReact.Provider):
 
 ```ts title="utils/api.tsx"
-import "@azure/core-asynciterator-polyfill";
-import { RNEventSource } from "rn-eventsource-reborn";
-import { ReadableStream, TransformStream } from "web-streams-polyfill";
+import '@azure/core-asynciterator-polyfill';
+import { RNEventSource } from 'rn-eventsource-reborn';
+import { ReadableStream, TransformStream } from 'web-streams-polyfill';
 
 globalThis.ReadableStream = globalThis.ReadableStream || ReadableStream;
 globalThis.TransformStream = globalThis.TransformStream || TransformStream;
@@ -309,11 +356,36 @@ Once the ponyfills are added, you can continue setting up the `httpSubscriptionL
 
 ## `httpSubscriptionLink` Options
 
-```ts
+```ts twoslash
+type AnyClientTypes = any;
+type DataTransformerOptions = any;
+type Operation = any;
+namespace EventSourceLike { export type AnyConstructor = any; export type InitDictOf<T> = any; }
+// ---cut---
 type HTTPSubscriptionLinkOptions<
   TRoot extends AnyClientTypes,
   TEventSource extends EventSourceLike.AnyConstructor = typeof EventSource,
 > = {
+  /**
+   * The URL to connect to (can be a function that returns a URL)
+   */
+  url: string | (() => string | Promise<string>);
+  /**
+   * Connection params that are available in `createContext()`
+   * Serialized as part of the URL under the `connectionParams` query parameter
+   */
+  connectionParams?:
+    | Record<string, string>
+    | null
+    | (() =>
+        | Record<string, string>
+        | null
+        | Promise<Record<string, string> | null>);
+  /**
+   * Data transformer
+   * @see https://trpc.io/docs/v11/data-transformers
+   */
+  transformer?: DataTransformerOptions;
   /**
    * EventSource ponyfill
    */
@@ -333,7 +405,8 @@ type HTTPSubscriptionLinkOptions<
 
 ## SSE Options on the server
 
-```ts
+```ts twoslash
+
 export interface SSEStreamProducerOptions<TValue = unknown> {
   ping?: {
     /**

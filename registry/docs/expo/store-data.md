@@ -24,9 +24,9 @@ Storing data can be essential to the features implemented in your mobile app. Th
 
 ## Async Storage
 
-[Async Storage](https://react-native-async-storage.github.io/3.0/integrations/expo/) is an asynchronous, unencrypted, persistent key-value storage for React Native apps. It has a simple API and is a good choice for storing small amounts of data. It is also a good choice for storing data that does not need encryption, such as user preferences or app state.
+[Async Storage](https://react-native-async-storage.github.io/2.0/integrations/expo/) is an asynchronous, unencrypted, persistent key-value storage for React Native apps. It has a simple API and is a good choice for storing small amounts of data. It is also a good choice for storing data that does not need encryption, such as user preferences or app state.
 
-[Async Storage documentation](https://react-native-async-storage.github.io/3.0/api/usage/) — For more information on how to install and use Async Storage, see its documentation.
+[Async Storage documentation](https://react-native-async-storage.github.io/2.0/api/usage/) — For more information on how to install and use Async Storage, see its documentation.
 
 ## Other libraries
 

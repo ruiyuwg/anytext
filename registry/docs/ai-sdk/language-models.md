@@ -1,477 +1,451 @@
 ## Language Models
 
-You can create models that call the [Anthropic Messages API](https://docs.anthropic.com/claude/reference/messages_post) using the provider instance.
-The first argument is the model id, e.g. `claude-3-haiku-20240307`.
-Some models have multi-modal capabilities.
+The OpenAI provider instance is a function that you can invoke to create a language model:
 
 ```ts
-const model = anthropic("claude-3-haiku-20240307");
+const model = openai('gpt-5');
 ```
 
-You can also use the following aliases for model creation:
-
-- `anthropic.languageModel('claude-3-haiku-20240307')` - Creates a language model
-- `anthropic.chat('claude-3-haiku-20240307')` - Alias for `languageModel`
-- `anthropic.messages('claude-3-haiku-20240307')` - Alias for `languageModel`
-
-You can use Anthropic language models to generate text with the `generateText` function:
+It automatically selects the correct API based on the model id.
+You can also pass additional settings in the second argument:
 
 ```ts
-import { anthropic } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
-
-const { text } = await generateText({
-  model: anthropic("claude-3-haiku-20240307"),
-  prompt: "Write a vegetarian lasagna recipe for 4 people.",
+const model = openai('gpt-5', {
+  // additional settings
 });
 ```
 
-Anthropic language models can also be used in the `streamText` function
-and support structured data generation with [`Output`](/docs/reference/ai-sdk-core/output)
+The available options depend on the API that's automatically chosen for the model (see below).
+If you want to explicitly select a specific model API, you can use `.responses`, `.chat`, or `.completion`.
+
+Since AI SDK 5, the OpenAI responses API is called by default (unless you
+specify e.g. 'openai.chat')
+
+### Example
+
+You can use OpenAI language models to generate text with the `generateText` function:
+
+```ts
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const { text } = await generateText({
+  model: openai('gpt-5'),
+  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+});
+```
+
+OpenAI language models can also be used in the `streamText`, `generateObject`, and `streamObject` functions
 (see [AI SDK Core](/docs/ai-sdk-core)).
 
-The following optional provider options are available for Anthropic models:
+### Responses Models
 
-- `disableParallelToolUse` _boolean_
-
-  Optional. Disables the use of parallel tool calls. Defaults to `false`.
-
-  When set to `true`, the model will only call one tool at a time instead of potentially calling multiple tools in parallel.
-
-- `sendReasoning` _boolean_
-
-  Optional. Include reasoning content in requests sent to the model. Defaults to `true`.
-
-  If you are experiencing issues with the model handling requests involving
-  reasoning content, you can set this to `false` to omit them from the request.
-
-- `effort` _"high" | "medium" | "low"_
-
-  Optional. See [Effort section](#effort) for more details.
-
-- `speed` _"fast" | "standard"_
-
-  Optional. See [Fast Mode section](#fast-mode) for more details.
-
-- `thinking` _object_
-
-  Optional. See [Reasoning section](#reasoning) for more details.
-
-- `toolStreaming` _boolean_
-
-  Whether to enable tool streaming (and structured output streaming). Default to `true`.
-
-- `structuredOutputMode` _"outputFormat" | "jsonTool" | "auto"_
-
-  Determines how structured outputs are generated. Optional.
-  - `"outputFormat"`: Use the `output_format` parameter to specify the structured output format.
-  - `"jsonTool"`: Use a special `"json"` tool to specify the structured output format.
-  - `"auto"`: Use `"outputFormat"` when supported, otherwise fall back to `"jsonTool"` (default).
-
-### Structured Outputs and Tool Input Streaming
-
-Tool call streaming is enabled by default. You can opt out by setting the
-`toolStreaming` provider option to `false`.
+You can use the OpenAI responses API with the `openai(modelId)` or `openai.responses(modelId)` factory methods. It is the default API that is used by the OpenAI provider (since AI SDK 5).
 
 ```ts
-import { anthropic } from "@ai-sdk/anthropic";
-import { streamText, tool } from "ai";
-import { z } from "zod";
-
-const result = streamText({
-  model: anthropic("claude-sonnet-4-20250514"),
-  tools: {
-    writeFile: tool({
-      description: "Write content to a file",
-      inputSchema: z.object({
-        path: z.string(),
-        content: z.string(),
-      }),
-      execute: async ({ path, content }) => {
-        // Implementation
-        return { success: true };
-      },
-    }),
-  },
-  prompt: "Write a short story to story.txt",
-});
+const model = openai('gpt-5');
 ```
 
-### Effort
+Further configuration can be done using OpenAI provider options.
+You can validate the provider options using the `OpenAIResponsesProviderOptions` type.
 
-Anthropic introduced an `effort` option with `claude-opus-4-5` that affects thinking, text responses, and function calls. Effort defaults to `high` and you can set it to `medium` or `low` to save tokens and to lower time-to-last-token latency (TTLT).
-
-```ts highlight="8-10"
-import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
-
-const { text, usage } = await generateText({
-  model: anthropic("claude-opus-4-20250514"),
-  prompt: "How many people will live in the world in 2040?",
-  providerOptions: {
-    anthropic: {
-      effort: "low",
-    } satisfies AnthropicLanguageModelOptions,
-  },
-});
-
-console.log(text); // resulting text
-console.log(usage); // token usage
-```
-
-### Fast Mode
-
-Anthropic supports a [`speed` option](https://code.claude.com/docs/en/fast-mode) for `claude-opus-4-6` that enables faster inference with approximately 2.5x faster output token speeds.
-
-```ts highlight="8-10"
-import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
-
-const { text } = await generateText({
-  model: anthropic("claude-opus-4-6"),
-  prompt: "Write a short poem about the sea.",
-  providerOptions: {
-    anthropic: {
-      speed: "fast",
-    } satisfies AnthropicLanguageModelOptions,
-  },
-});
-```
-
-The `speed` option accepts `'fast'` or `'standard'` (default behavior).
-
-### Reasoning
-
-Anthropic has reasoning support for `claude-opus-4-20250514`, `claude-sonnet-4-20250514`, and `claude-sonnet-4-5-20250929` models.
-
-You can enable it using the `thinking` provider option
-and specifying a thinking budget in tokens.
-
-```ts highlight="4,8-10"
-import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
-
-const { text, reasoningText, reasoning } = await generateText({
-  model: anthropic("claude-opus-4-20250514"),
-  prompt: "How many people will live in the world in 2040?",
-  providerOptions: {
-    anthropic: {
-      thinking: { type: "enabled", budgetTokens: 12000 },
-    } satisfies AnthropicLanguageModelOptions,
-  },
-});
-
-console.log(reasoningText); // reasoning text
-console.log(reasoning); // reasoning details including redacted reasoning
-console.log(text); // text response
-```
-
-See [AI SDK UI: Chatbot](/docs/ai-sdk-ui/chatbot#reasoning) for more details
-on how to integrate reasoning into your chatbot.
-
-### Context Management
-
-Anthropic's Context Management feature allows you to automatically manage conversation context by clearing tool uses or thinking content when certain conditions are met. This helps optimize token usage and manage long conversations more efficiently.
-
-You can configure context management using the `contextManagement` provider option:
-
-```ts highlight="7-20"
-import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
+```ts
+import { openai, OpenAIResponsesProviderOptions } from '@ai-sdk/openai';
+import { generateText } from 'ai';
 
 const result = await generateText({
-  model: anthropic("claude-sonnet-4-5-20250929"),
-  prompt: "Continue our conversation...",
+  model: openai('gpt-5'), // or openai.responses('gpt-5')
   providerOptions: {
-    anthropic: {
-      contextManagement: {
-        edits: [
-          {
-            type: "clear_tool_uses_20250919",
-            trigger: { type: "input_tokens", value: 10000 },
-            keep: { type: "tool_uses", value: 5 },
-            clearAtLeast: { type: "input_tokens", value: 1000 },
-            clearToolInputs: true,
-            excludeTools: ["important_tool"],
-          },
-        ],
-      },
-    } satisfies AnthropicLanguageModelOptions,
+    openai: {
+      parallelToolCalls: false,
+      store: false,
+      user: 'user_123',
+      // ...
+    } satisfies OpenAIResponsesProviderOptions,
   },
+  // ...
 });
-
-// Check what was cleared
-console.log(result.providerMetadata?.anthropic?.contextManagement);
 ```
 
-#### Context Editing
+The following provider options are available:
 
-Context editing strategies selectively remove specific content types from earlier in the conversation to reduce token usage without losing the overall conversation flow.
+- **parallelToolCalls** *boolean*
+  Whether to use parallel tool calls. Defaults to `true`.
 
-##### Clear Tool Uses
+- **store** *boolean*
 
-The `clear_tool_uses_20250919` edit type removes old tool call/result pairs from the conversation history:
+  Whether to store the generation. Defaults to `true`.
 
-- **trigger** - Condition that triggers the clearing (e.g., `{ type: 'input_tokens', value: 10000 }` or `{ type: 'tool_uses', value: 10 }`)
-- **keep** - How many recent tool uses to preserve (e.g., `{ type: 'tool_uses', value: 5 }`)
-- **clearAtLeast** - Minimum amount to clear (e.g., `{ type: 'input_tokens', value: 1000 }`)
-- **clearToolInputs** - Whether to clear tool input parameters (boolean)
-- **excludeTools** - Array of tool names to never clear
+- **maxToolCalls** *integer*
+  The maximum number of total calls to built-in tools that can be processed in a response.
+  This maximum number applies across all built-in tool calls, not per individual tool.
+  Any further attempts to call a tool by the model will be ignored.
 
-##### Clear Thinking
+- **metadata** *Record\<string, string>*
+  Additional metadata to store with the generation.
 
-The `clear_thinking_20251015` edit type removes thinking/reasoning blocks from earlier turns, keeping only the most recent ones:
+- **conversation** *string*
+  The ID of the OpenAI Conversation to continue.
+  You must create a conversation first via the [OpenAI API](https://platform.openai.com/docs/api-reference/conversations/create).
+  Cannot be used in conjunction with `previousResponseId`.
+  Defaults to `undefined`.
 
-- **keep** - How many recent thinking turns to preserve (e.g., `{ type: 'thinking_turns', value: 2 }`) or `'all'` to keep everything
+- **previousResponseId** *string*
+  The ID of the previous response. You can use it to continue a conversation. Defaults to `undefined`.
+
+- **instructions** *string*
+  Instructions for the model.
+  They can be used to change the system or developer message when continuing a conversation using the `previousResponseId` option.
+  Defaults to `undefined`.
+
+- **user** *string*
+  A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Defaults to `undefined`.
+
+- **reasoningEffort** *'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh'*
+  Reasoning effort for reasoning models. Defaults to `medium`. If you use `providerOptions` to set the `reasoningEffort` option, this model setting will be ignored.
+
+  The 'none' type for `reasoningEffort` is only available for OpenAI's GPT-5.1
+  models. Also, the 'xhigh' type for `reasoningEffort` is only available for
+  OpenAI's GPT-5.1-Codex-Max model. Setting `reasoningEffort` to 'none' or
+  'xhigh' with unsupported models will result in an error.
+
+- **reasoningSummary** *'auto' | 'detailed'*
+  Controls whether the model returns its reasoning process. Set to `'auto'` for a condensed summary, `'detailed'` for more comprehensive reasoning. Defaults to `undefined` (no reasoning summaries). When enabled, reasoning summaries appear in the stream as events with type `'reasoning'` and in non-streaming responses within the `reasoning` field.
+
+- **strictJsonSchema** *boolean*
+  Whether to use strict JSON schema validation. Defaults to `false`.
+
+- **serviceTier** *'auto' | 'flex' | 'priority' | 'default'*
+  Service tier for the request. Set to 'flex' for 50% cheaper processing
+  at the cost of increased latency (available for o3, o4-mini, and gpt-5 models).
+  Set to 'priority' for faster processing with Enterprise access (available for gpt-4, gpt-5, gpt-5-mini, o3, o4-mini; gpt-5-nano is not supported).
+
+  Defaults to 'auto'.
+
+- **textVerbosity** *'low' | 'medium' | 'high'*
+  Controls the verbosity of the model's response. Lower values result in more concise responses,
+  while higher values result in more verbose responses. Defaults to `'medium'`.
+
+- **include** *Array\<string>*
+  Specifies additional content to include in the response. Supported values:
+  `['file_search_call.results']` for including file search results in responses.
+  `['message.output_text.logprobs']` for logprobs.
+  Defaults to `undefined`.
+
+- **truncation** *string*
+  The truncation strategy to use for the model response.
+
+  - Auto: If the input to this Response exceeds the model's context window size, the model will truncate the response to fit the context window by dropping items from the beginning of the conversation.
+  - disabled (default): If the input size will exceed the context window size for a model, the request will fail with a 400 error.
+
+- **promptCacheKey** *string*
+  A cache key for manual prompt caching control. Used by OpenAI to cache responses for similar requests to optimize your cache hit rates.
+
+- **promptCacheRetention** *'in\_memory' | '24h'*
+  The retention policy for the prompt cache. Set to `'24h'` to enable extended prompt caching, which keeps cached prefixes active for up to 24 hours. Defaults to `'in_memory'` for standard prompt caching. Note: `'24h'` is currently only available for the 5.1 series of models.
+
+- **safetyIdentifier** *string*
+  A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies. The IDs should be a string that uniquely identifies each user.
+
+The OpenAI responses provider also returns provider-specific metadata:
 
 ```ts
-const result = await generateText({
-  model: anthropic("claude-opus-4-20250514"),
-  prompt: "Continue reasoning...",
-  providerOptions: {
-    anthropic: {
-      thinking: { type: "enabled", budgetTokens: 12000 },
-      contextManagement: {
-        edits: [
-          {
-            type: "clear_thinking_20251015",
-            keep: { type: "thinking_turns", value: 2 },
-          },
-        ],
-      },
-    } satisfies AnthropicLanguageModelOptions,
-  },
+const { providerMetadata } = await generateText({
+  model: openai.responses('gpt-5'),
 });
+
+const openaiMetadata = providerMetadata?.openai;
 ```
 
-#### Compaction
+The following OpenAI-specific metadata is returned:
 
-The `compact_20260112` edit type automatically summarizes earlier conversation context when token limits are reached. This is useful for long-running conversations where you want to preserve the essence of earlier exchanges while staying within token limits.
+- **responseId** *string*
+  The ID of the response. Can be used to continue a conversation.
 
-```ts highlight="7-19"
-import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
-import { streamText } from "ai";
+- **cachedPromptTokens** *number*
+  The number of prompt tokens that were a cache hit.
+
+- **reasoningTokens** *number*
+  The number of reasoning tokens that the model generated.
+
+#### Reasoning Output
+
+For reasoning models like `gpt-5`, you can enable reasoning summaries to see the model's thought process. Different models support different summarizers—for example, `o4-mini` supports detailed summaries. Set `reasoningSummary: "auto"` to automatically receive the richest level available.
+
+```ts highlight="8-9,16"
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
 
 const result = streamText({
-  model: anthropic("claude-opus-4-6"),
-  messages: conversationHistory,
+  model: openai('gpt-5'),
+  prompt: 'Tell me about the Mission burrito debate in San Francisco.',
   providerOptions: {
-    anthropic: {
-      contextManagement: {
-        edits: [
-          {
-            type: "compact_20260112",
-            trigger: {
-              type: "input_tokens",
-              value: 50000, // trigger compaction when input exceeds 50k tokens
-            },
-            instructions:
-              "Summarize the conversation concisely, preserving key decisions and context.",
-            pauseAfterCompaction: false,
-          },
-        ],
-      },
-    } satisfies AnthropicLanguageModelOptions,
+    openai: {
+      reasoningSummary: 'detailed', // 'auto' for condensed or 'detailed' for comprehensive
+    },
   },
 });
-```
 
-**Configuration:**
-
-- **trigger** - Condition that triggers compaction (e.g., `{ type: 'input_tokens', value: 50000 }`)
-- **instructions** - Custom instructions for how the model should summarize the conversation. Use this to guide the compaction summary towards specific aspects of the conversation you want to preserve.
-- **pauseAfterCompaction** - When `true`, the model will pause after generating the compaction summary, allowing you to inspect or process it before continuing. Defaults to `false`.
-
-When compaction occurs, the model generates a summary of the earlier context. This summary appears as a text block with special provider metadata.
-
-##### Detecting Compaction in Streams
-
-When using `streamText`, you can detect compaction summaries by checking the `providerMetadata` on `text-start` events:
-
-```ts
 for await (const part of result.fullStream) {
-  switch (part.type) {
-    case "text-start": {
-      const isCompaction =
-        part.providerMetadata?.anthropic?.type === "compaction";
-      if (isCompaction) {
-        console.log("[COMPACTION SUMMARY START]");
-      }
-      break;
-    }
-    case "text-delta": {
-      process.stdout.write(part.text);
-      break;
-    }
+  if (part.type === 'reasoning') {
+    console.log(`Reasoning: ${part.textDelta}`);
+  } else if (part.type === 'text-delta') {
+    process.stdout.write(part.textDelta);
   }
 }
 ```
 
-##### Compaction in UI Applications
+For non-streaming calls with `generateText`, the reasoning summaries are available in the `reasoning` field of the response:
 
-When using `useChat` or other UI hooks, compaction summaries appear as regular text parts with `providerMetadata`. You can style them differently in your UI:
+```ts highlight="8-9,13"
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
 
-```tsx
-{
-  message.parts.map((part, index) => {
-    if (part.type === "text") {
-      const isCompaction =
-        (part.providerMetadata?.anthropic as { type?: string } | undefined)
-          ?.type === "compaction";
-
-      if (isCompaction) {
-        return (
-          <div
-            key={index}
-            className="bg-yellow-100 border-l-4 border-yellow-500 p-2"
-          >
-            <span className="font-bold">[Compaction Summary]</span>
-            <div>{part.text}</div>
-          </div>
-        );
-      }
-      return <div key={index}>{part.text}</div>;
-    }
-  });
-}
+const result = await generateText({
+  model: openai('gpt-5'),
+  prompt: 'Tell me about the Mission burrito debate in San Francisco.',
+  providerOptions: {
+    openai: {
+      reasoningSummary: 'auto',
+    },
+  },
+});
+console.log('Reasoning:', result.reasoning);
 ```
 
-#### Applied Edits Metadata
+Learn more about reasoning summaries in the [OpenAI documentation](https://platform.openai.com/docs/guides/reasoning?api-mode=responses#reasoning-summaries).
 
-After generation, you can check which edits were applied in the provider metadata:
+#### Verbosity Control
+
+You can control the length and detail of model responses using the `textVerbosity` parameter:
 
 ```ts
-const metadata = result.providerMetadata?.anthropic?.contextManagement;
-
-if (metadata?.appliedEdits) {
-  metadata.appliedEdits.forEach((edit) => {
-    if (edit.type === "clear_tool_uses_20250919") {
-      console.log(`Cleared ${edit.clearedToolUses} tool uses`);
-      console.log(`Freed ${edit.clearedInputTokens} tokens`);
-    } else if (edit.type === "clear_thinking_20251015") {
-      console.log(`Cleared ${edit.clearedThinkingTurns} thinking turns`);
-      console.log(`Freed ${edit.clearedInputTokens} tokens`);
-    } else if (edit.type === "compact_20260112") {
-      console.log("Compaction was applied");
-    }
-  });
-}
-```
-
-For more details, see [Anthropic's Context Management documentation](https://docs.anthropic.com/en/docs/build-with-claude/context-management).
-
-### Cache Control
-
-In the messages and message parts, you can use the `providerOptions` property to set cache control breakpoints.
-You need to set the `anthropic` property in the `providerOptions` object to `{ cacheControl: { type: 'ephemeral' } }` to set a cache control breakpoint.
-
-The cache creation input tokens are then returned in the `providerMetadata` object
-for `generateText`, again under the `anthropic` property.
-When you use `streamText`, the response contains a promise
-that resolves to the metadata. Alternatively you can receive it in the
-`onFinish` callback.
-
-```ts highlight="8,18-20,29-30"
-import { anthropic } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
-
-const errorMessage = "... long error message ...";
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
 
 const result = await generateText({
-  model: anthropic("claude-sonnet-4-5"),
-  messages: [
-    {
-      role: "user",
-      content: [
-        { type: "text", text: "You are a JavaScript expert." },
-        {
-          type: "text",
-          text: `Error message: ${errorMessage}`,
-          providerOptions: {
-            anthropic: { cacheControl: { type: "ephemeral" } },
-          },
-        },
-        { type: "text", text: "Explain the error message." },
-      ],
+  model: openai('gpt-5-mini'),
+  prompt: 'Write a poem about a boy and his first pet dog.',
+  providerOptions: {
+    openai: {
+      textVerbosity: 'low', // 'low' for concise, 'medium' (default), or 'high' for verbose
     },
-  ],
-});
-
-console.log(result.text);
-console.log(result.providerMetadata?.anthropic);
-// e.g. { cacheCreationInputTokens: 2118 }
-```
-
-You can also use cache control on system messages by providing multiple system messages at the head of your messages array:
-
-```ts highlight="3,7-9"
-const result = await generateText({
-  model: anthropic("claude-sonnet-4-5"),
-  messages: [
-    {
-      role: "system",
-      content: "Cached system message part",
-      providerOptions: {
-        anthropic: { cacheControl: { type: "ephemeral" } },
-      },
-    },
-    {
-      role: "system",
-      content: "Uncached system message part",
-    },
-    {
-      role: "user",
-      content: "User prompt",
-    },
-  ],
+  },
 });
 ```
 
-Cache control for tools:
+The `textVerbosity` parameter scales output length without changing the underlying prompt:
+
+- `'low'`: Produces terse, minimal responses
+- `'medium'`: Balanced detail (default)
+- `'high'`: Verbose responses with comprehensive detail
+
+#### Web Search Tool
+
+The OpenAI responses API supports web search through the `openai.tools.webSearch` tool.
 
 ```ts
 const result = await generateText({
-  model: anthropic("claude-haiku-4-5"),
+  model: openai('gpt-5'),
+  prompt: 'What happened in San Francisco last week?',
   tools: {
-    cityAttractions: tool({
-      inputSchema: z.object({ city: z.string() }),
-      providerOptions: {
-        anthropic: {
-          cacheControl: { type: "ephemeral" },
-        },
+    web_search: openai.tools.webSearch({
+      // optional configuration:
+      externalWebAccess: true,
+      searchContextSize: 'high',
+      userLocation: {
+        type: 'approximate',
+        city: 'San Francisco',
+        region: 'California',
       },
     }),
   },
-  messages: [
-    {
-      role: "user",
-      content: "User prompt",
-    },
-  ],
+  // Force web search tool (optional):
+  toolChoice: { type: 'tool', toolName: 'web_search' },
 });
+
+// URL sources
+const sources = result.sources;
 ```
 
-#### Longer cache TTL
+For detailed information on configuration options see the [OpenAI Web Search Tool documentation](https://platform.openai.com/docs/guides/tools-web-search?api-mode=responses).
 
-Anthropic also supports a longer 1-hour cache duration.
+#### File Search Tool
 
-Here's an example:
+The OpenAI responses API supports file search through the `openai.tools.fileSearch` tool.
+
+You can force the use of the file search tool by setting the `toolChoice` parameter to `{ type: 'tool', toolName: 'file_search' }`.
 
 ```ts
 const result = await generateText({
-  model: anthropic("claude-haiku-4-5"),
+  model: openai('gpt-5'),
+  prompt: 'What does the document say about user authentication?',
+  tools: {
+    file_search: openai.tools.fileSearch({
+      vectorStoreIds: ['vs_123'],
+      // configuration below is optional:
+      maxNumResults: 5,
+      filters: {
+        key: 'author',
+        type: 'eq',
+        value: 'Jane Smith',
+      },
+      ranking: {
+        ranker: 'auto',
+        scoreThreshold: 0.5,
+      },
+    }),
+  },
+  providerOptions: {
+    openai: {
+      // optional: include results
+      include: ['file_search_call.results'],
+    } satisfies OpenAIResponsesProviderOptions,
+  },
+});
+```
+
+The tool must be named `file_search` when using OpenAI's file search
+functionality. This name is required by OpenAI's API specification and cannot
+be customized.
+
+#### Image Generation Tool
+
+OpenAI's Responses API supports multi-modal image generation as a provider-defined tool.
+Availability is restricted to specific models (for example, `gpt-5` variants).
+
+You can use the image tool with either `generateText` or `streamText`:
+
+```ts
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const result = await generateText({
+  model: openai('gpt-5'),
+  prompt:
+    'Generate an image of an echidna swimming across the Mozambique channel.',
+  tools: {
+    image_generation: openai.tools.imageGeneration({ outputFormat: 'webp' }),
+  },
+});
+
+for (const toolResult of result.staticToolResults) {
+  if (toolResult.toolName === 'image_generation') {
+    const base64Image = toolResult.output.result;
+  }
+}
+```
+
+```ts
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
+
+const result = streamText({
+  model: openai('gpt-5'),
+  prompt:
+    'Generate an image of an echidna swimming across the Mozambique channel.',
+  tools: {
+    image_generation: openai.tools.imageGeneration({
+      outputFormat: 'webp',
+      quality: 'low',
+    }),
+  },
+});
+
+for await (const part of result.fullStream) {
+  if (part.type == 'tool-result' && !part.dynamic) {
+    const base64Image = part.output.result;
+  }
+}
+```
+
+When you set `store: false`, then previously generated images will not be
+accessible by the model. We recommend using the image generation tool without
+setting `store: false`.
+
+For complete details on model availability, image quality controls, supported sizes, and tool-specific parameters,
+refer to the OpenAI documentation:
+
+- Image generation overview and models: [OpenAI Image Generation](https://platform.openai.com/docs/guides/image-generation)
+- Image generation tool parameters (background, size, quality, format, etc.): [Image Generation Tool Options](https://platform.openai.com/docs/guides/tools-image-generation#tool-options)
+
+#### Code Interpreter Tool
+
+The OpenAI responses API supports the code interpreter tool through the `openai.tools.codeInterpreter` tool.
+This allows models to write and execute Python code.
+
+```ts
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const result = await generateText({
+  model: openai('gpt-5'),
+  prompt: 'Write and run Python code to calculate the factorial of 10',
+  tools: {
+    code_interpreter: openai.tools.codeInterpreter({
+      // optional configuration:
+      container: {
+        fileIds: ['file-123', 'file-456'], // optional file IDs to make available
+      },
+    }),
+  },
+});
+```
+
+The code interpreter tool can be configured with:
+
+- **container**: Either a container ID string or an object with `fileIds` to specify uploaded files that should be available to the code interpreter
+
+  The tool must be named `code_interpreter` when using OpenAI's code interpreter
+  functionality. This name is required by OpenAI's API specification and cannot
+  be customized.
+
+#### Local Shell Tool
+
+The OpenAI responses API support the local shell tool for Codex models through the `openai.tools.localShell` tool.
+Local shell is a tool that allows agents to run shell commands locally on a machine you or the user provides.
+
+```ts
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const result = await generateText({
+  model: openai.responses('gpt-5-codex'),
+  tools: {
+    local_shell: openai.tools.localShell({
+      execute: async ({ action }) => {
+        // ... your implementation, e.g. sandbox access ...
+        return { output: stdout };
+      },
+    }),
+  },
+  prompt: 'List the files in my home directory.',
+  stopWhen: stepCountIs(2),
+});
+```
+
+The tool must be named `local_shell`. This name is required by OpenAI's API
+specification and cannot be customized. The model can only be
+
+#### Image Inputs
+
+The OpenAI Responses API supports Image inputs for appropriate models.
+You can pass Image files as part of the message content using the 'image' type:
+
+```ts
+const result = await generateText({
+  model: openai('gpt-5'),
   messages: [
     {
-      role: "user",
+      role: 'user',
       content: [
         {
-          type: "text",
-          text: "Long cached message",
-          providerOptions: {
-            anthropic: {
-              cacheControl: { type: "ephemeral", ttl: "1h" },
-            },
-          },
+          type: 'text',
+          text: 'Please describe the image.',
+        },
+        {
+          type: 'image',
+          image: fs.readFileSync('./data/image.png'),
         },
       ],
     },
@@ -479,18 +453,523 @@ const result = await generateText({
 });
 ```
 
-#### Limitations
+The model will have access to the image and will respond to questions about it.
+The image should be passed using the `image` field.
 
-The minimum cacheable prompt length is:
+You can also pass a file-id from the OpenAI Files API.
 
-- 4096 tokens for Claude Opus 4.5
-- 1024 tokens for Claude Opus 4.1, Claude Opus 4, Claude Sonnet 4.5, Claude Sonnet 4, Claude Sonnet 3.7, and Claude Opus 3
-- 4096 tokens for Claude Haiku 4.5
-- 2048 tokens for Claude Haiku 3.5 and Claude Haiku 3
+```ts
+{
+  type: 'image',
+  image: 'file-8EFBcWHsQxZV7YGezBC1fq'
+}
+```
 
-Shorter prompts cannot be cached, even if marked with `cacheControl`. Any requests to cache fewer than this number of tokens will be processed without caching.
+You can also pass the URL of an image.
 
-For more on prompt caching with Anthropic, see [Anthropic's Cache Control documentation](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching).
+```ts
+{
+  type: 'image',
+  image: 'https://sample.edu/image.png',
+}
+```
+
+#### PDF Inputs
+
+The OpenAI Responses API supports reading PDF files.
+You can pass PDF files as part of the message content using the `file` type:
+
+```ts
+const result = await generateText({
+  model: openai('gpt-5'),
+  messages: [
+    {
+      role: 'user',
+      content: [
+        {
+          type: 'text',
+          text: 'What is an embedding model?',
+        },
+        {
+          type: 'file',
+          data: fs.readFileSync('./data/ai.pdf'),
+          mediaType: 'application/pdf',
+          filename: 'ai.pdf', // optional
+        },
+      ],
+    },
+  ],
+});
+```
+
+You can also pass a file-id from the OpenAI Files API.
+
+```ts
+{
+  type: 'file',
+  data: 'file-8EFBcWHsQxZV7YGezBC1fq',
+  mediaType: 'application/pdf',
+}
+```
+
+You can also pass the URL of a pdf.
+
+```ts
+{
+  type: 'file',
+  data: 'https://sample.edu/example.pdf',
+  mediaType: 'application/pdf',
+  filename: 'ai.pdf', // optional
+}
+```
+
+The model will have access to the contents of the PDF file and
+respond to questions about it.
+The PDF file should be passed using the `data` field,
+and the `mediaType` should be set to `'application/pdf'`.
+
+#### Structured Outputs
+
+The OpenAI Responses API supports structured outputs. You can enforce structured outputs using `generateObject` or `streamObject`, which expose a `schema` option. Additionally, you can pass a Zod or JSON Schema object to the `experimental_output` option when using `generateText` or `streamText`.
+
+```ts
+// Using generateObject
+const result = await generateObject({
+  model: openai('gpt-4.1'),
+  schema: z.object({
+    recipe: z.object({
+      name: z.string(),
+      ingredients: z.array(
+        z.object({
+          name: z.string(),
+          amount: z.string(),
+        }),
+      ),
+      steps: z.array(z.string()),
+    }),
+  }),
+  prompt: 'Generate a lasagna recipe.',
+});
+
+// Using generateText
+const result = await generateText({
+  model: openai('gpt-4.1'),
+  prompt: 'How do I make a pizza?',
+  experimental_output: Output.object({
+    schema: z.object({
+      ingredients: z.array(z.string()),
+      steps: z.array(z.string()),
+    }),
+  }),
+});
+```
+
+### Chat Models
+
+You can create models that call the [OpenAI chat API](https://platform.openai.com/docs/api-reference/chat) using the `.chat()` factory method.
+The first argument is the model id, e.g. `gpt-4`.
+The OpenAI chat models support tool calls and some have multi-modal capabilities.
+
+```ts
+const model = openai.chat('gpt-5');
+```
+
+OpenAI chat models support also some model specific provider options that are not part of the [standard call settings](/docs/ai-sdk-core/settings).
+You can pass them in the `providerOptions` argument:
+
+```ts
+import { openai, type OpenAIChatLanguageModelOptions } from '@ai-sdk/openai';
+
+const model = openai.chat('gpt-5');
+
+await generateText({
+  model,
+  providerOptions: {
+    openai: {
+      logitBias: {
+        // optional likelihood for specific tokens
+        '50256': -100,
+      },
+      user: 'test-user', // optional unique user identifier
+    } satisfies OpenAIChatLanguageModelOptions,
+  },
+});
+```
+
+The following optional provider options are available for OpenAI chat models:
+
+- **logitBias** *Record\<number, number>*
+
+  Modifies the likelihood of specified tokens appearing in the completion.
+
+  Accepts a JSON object that maps tokens (specified by their token ID in
+  the GPT tokenizer) to an associated bias value from -100 to 100. You
+  can use this tokenizer tool to convert text to token IDs. Mathematically,
+  the bias is added to the logits generated by the model prior to sampling.
+  The exact effect will vary per model, but values between -1 and 1 should
+  decrease or increase likelihood of selection; values like -100 or 100
+  should result in a ban or exclusive selection of the relevant token.
+
+  As an example, you can pass `{"50256": -100}` to prevent the token from being generated.
+
+- **logprobs** *boolean | number*
+
+  Return the log probabilities of the tokens. Including logprobs will increase
+  the response size and can slow down response times. However, it can
+  be useful to better understand how the model is behaving.
+
+  Setting to true will return the log probabilities of the tokens that
+  were generated.
+
+  Setting to a number will return the log probabilities of the top n
+  tokens that were generated.
+
+- **parallelToolCalls** *boolean*
+
+  Whether to enable parallel function calling during tool use. Defaults to `true`.
+
+- **user** *string*
+
+  A unique identifier representing your end-user, which can help OpenAI to
+  monitor and detect abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
+
+- **reasoningEffort** *'minimal' | 'low' | 'medium' | 'high' | 'xhigh'*
+
+  Reasoning effort for reasoning models. Defaults to `medium`. If you use
+  `providerOptions` to set the `reasoningEffort` option, this
+  model setting will be ignored.
+
+- **structuredOutputs** *boolean*
+
+  Whether to use structured outputs.
+  Defaults to `true`.
+
+  When enabled, tool calls and object generation will be strict and follow the provided schema.
+
+- **maxCompletionTokens** *number*
+
+  Maximum number of completion tokens to generate. Useful for reasoning models.
+
+- **store** *boolean*
+
+  Whether to enable persistence in Responses API.
+
+- **metadata** *Record\<string, string>*
+
+  Metadata to associate with the request.
+
+- **prediction** *Record\<string, any>*
+
+  Parameters for prediction mode.
+
+- **serviceTier** *'auto' | 'flex' | 'priority' | 'default'*
+
+  Service tier for the request. Set to 'flex' for 50% cheaper processing
+  at the cost of increased latency (available for o3, o4-mini, and gpt-5 models).
+  Set to 'priority' for faster processing with Enterprise access (available for gpt-4, gpt-5, gpt-5-mini, o3, o4-mini; gpt-5-nano is not supported).
+
+  Defaults to 'auto'.
+
+- **strictJsonSchema** *boolean*
+
+  Whether to use strict JSON schema validation.
+  Defaults to `false`.
+
+- **textVerbosity** *'low' | 'medium' | 'high'*
+
+  Controls the verbosity of the model's responses. Lower values will result in more concise responses, while higher values will result in more verbose responses.
+
+- **promptCacheKey** *string*
+
+  A cache key for manual prompt caching control. Used by OpenAI to cache responses for similar requests to optimize your cache hit rates.
+
+- **promptCacheRetention** *'in\_memory' | '24h'*
+
+  The retention policy for the prompt cache. Set to `'24h'` to enable extended prompt caching, which keeps cached prefixes active for up to 24 hours. Defaults to `'in_memory'` for standard prompt caching. Note: `'24h'` is currently only available for the 5.1 series of models.
+
+- **safetyIdentifier** *string*
+
+  A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies. The IDs should be a string that uniquely identifies each user.
+
+#### Reasoning
+
+OpenAI has introduced the `o1`,`o3`, and `o4` series of [reasoning models](https://platform.openai.com/docs/guides/reasoning).
+Currently, `o4-mini`, `o3`, `o3-mini`, and `o1` are available via both the chat and responses APIs. The
+models `codex-mini-latest` and `computer-use-preview` are available only via the [responses API](#responses-models).
+
+Reasoning models currently only generate text, have several limitations, and are only supported using `generateText` and `streamText`.
+
+They support additional settings and response metadata:
+
+- You can use `providerOptions` to set
+
+  - the `reasoningEffort` option (or alternatively the `reasoningEffort` model setting), which determines the amount of reasoning the model performs.
+
+- You can use response `providerMetadata` to access the number of reasoning tokens that the model generated.
+
+```ts highlight="4,7-11,17"
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const { text, usage, providerMetadata } = await generateText({
+  model: openai.chat('gpt-5'),
+  prompt: 'Invent a new holiday and describe its traditions.',
+  providerOptions: {
+    openai: {
+      reasoningEffort: 'low',
+    },
+  },
+});
+
+console.log(text);
+console.log('Usage:', {
+  ...usage,
+  reasoningTokens: providerMetadata?.openai?.reasoningTokens,
+});
+```
+
+System messages are automatically converted to OpenAI developer messages for
+reasoning models when supported.
+
+Reasoning models require additional runtime inference to complete their
+reasoning phase before generating a response. This introduces longer latency
+compared to other models.
+
+`maxOutputTokens` is automatically mapped to `max_completion_tokens` for
+reasoning models.
+
+#### Structured Outputs
+
+Structured outputs are enabled by default.
+You can disable them by setting the `structuredOutputs` option to `false`.
+
+```ts highlight="7"
+import { openai } from '@ai-sdk/openai';
+import { generateObject } from 'ai';
+import { z } from 'zod';
+
+const result = await generateObject({
+  model: openai.chat('gpt-4o-2024-08-06'),
+  providerOptions: {
+    openai: {
+      structuredOutputs: false,
+    },
+  },
+  schemaName: 'recipe',
+  schemaDescription: 'A recipe for lasagna.',
+  schema: z.object({
+    name: z.string(),
+    ingredients: z.array(
+      z.object({
+        name: z.string(),
+        amount: z.string(),
+      }),
+    ),
+    steps: z.array(z.string()),
+  }),
+  prompt: 'Generate a lasagna recipe.',
+});
+
+console.log(JSON.stringify(result.object, null, 2));
+```
+
+OpenAI structured outputs have several
+[limitations](https://openai.com/index/introducing-structured-outputs-in-the-api),
+in particular around the [supported schemas](https://platform.openai.com/docs/guides/structured-outputs/supported-schemas),
+and are therefore opt-in.
+
+For example, optional schema properties are not supported.
+You need to change Zod `.nullish()` and `.optional()` to `.nullable()`.
+
+#### Logprobs
+
+OpenAI provides logprobs information for completion/chat models.
+You can access it in the `providerMetadata` object.
+
+```ts highlight="11"
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const result = await generateText({
+  model: openai.chat('gpt-5'),
+  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  providerOptions: {
+    openai: {
+      // this can also be a number,
+      // refer to logprobs provider options section for more
+      logprobs: true,
+    },
+  },
+});
+
+const openaiMetadata = (await result.providerMetadata)?.openai;
+
+const logprobs = openaiMetadata?.logprobs;
+```
+
+#### Image Support
+
+The OpenAI Chat API supports Image inputs for appropriate models.
+You can pass Image files as part of the message content using the 'image' type:
+
+```ts
+const result = await generateText({
+  model: openai.chat('gpt-5'),
+  messages: [
+    {
+      role: 'user',
+      content: [
+        {
+          type: 'text',
+          text: 'Please describe the image.',
+        },
+        {
+          type: 'image',
+          image: fs.readFileSync('./data/image.png'),
+        },
+      ],
+    },
+  ],
+});
+```
+
+The model will have access to the image and will respond to questions about it.
+The image should be passed using the `image` field.
+
+You can also pass the URL of an image.
+
+```ts
+{
+  type: 'image',
+  image: 'https://sample.edu/image.png',
+}
+```
+
+#### PDF support
+
+The OpenAI Chat API supports reading PDF files.
+You can pass PDF files as part of the message content using the `file` type:
+
+```ts
+const result = await generateText({
+  model: openai.chat('gpt-5'),
+  messages: [
+    {
+      role: 'user',
+      content: [
+        {
+          type: 'text',
+          text: 'What is an embedding model?',
+        },
+        {
+          type: 'file',
+          data: fs.readFileSync('./data/ai.pdf'),
+          mediaType: 'application/pdf',
+          filename: 'ai.pdf', // optional
+        },
+      ],
+    },
+  ],
+});
+```
+
+The model will have access to the contents of the PDF file and
+respond to questions about it.
+The PDF file should be passed using the `data` field,
+and the `mediaType` should be set to `'application/pdf'`.
+
+You can also pass a file-id from the OpenAI Files API.
+
+```ts
+{
+  type: 'file',
+  data: 'file-8EFBcWHsQxZV7YGezBC1fq',
+  mediaType: 'application/pdf',
+}
+```
+
+You can also pass the URL of a PDF.
+
+```ts
+{
+  type: 'file',
+  data: 'https://sample.edu/example.pdf',
+  mediaType: 'application/pdf',
+  filename: 'ai.pdf', // optional
+}
+```
+
+#### Predicted Outputs
+
+OpenAI supports [predicted outputs](https://platform.openai.com/docs/guides/latency-optimization#use-predicted-outputs) for `gpt-4o` and `gpt-4o-mini`.
+Predicted outputs help you reduce latency by allowing you to specify a base text that the model should modify.
+You can enable predicted outputs by adding the `prediction` option to the `providerOptions.openai` object:
+
+```ts highlight="15-18"
+const result = streamText({
+  model: openai.chat('gpt-5'),
+  messages: [
+    {
+      role: 'user',
+      content: 'Replace the Username property with an Email property.',
+    },
+    {
+      role: 'user',
+      content: existingCode,
+    },
+  ],
+  providerOptions: {
+    openai: {
+      prediction: {
+        type: 'content',
+        content: existingCode,
+      },
+    },
+  },
+});
+```
+
+OpenAI provides usage information for predicted outputs (`acceptedPredictionTokens` and `rejectedPredictionTokens`).
+You can access it in the `providerMetadata` object.
+
+```ts highlight="11"
+const openaiMetadata = (await result.providerMetadata)?.openai;
+
+const acceptedPredictionTokens = openaiMetadata?.acceptedPredictionTokens;
+const rejectedPredictionTokens = openaiMetadata?.rejectedPredictionTokens;
+```
+
+OpenAI Predicted Outputs have several
+[limitations](https://platform.openai.com/docs/guides/predicted-outputs#limitations),
+e.g. unsupported API parameters and no tool calling support.
+
+#### Image Detail
+
+You can use the `openai` provider option to set the [image input detail](https://platform.openai.com/docs/guides/images-vision?api-mode=responses#specify-image-input-detail-level) to `high`, `low`, or `auto`:
+
+```ts highlight="13-16"
+const result = await generateText({
+  model: openai.chat('gpt-5'),
+  messages: [
+    {
+      role: 'user',
+      content: [
+        { type: 'text', text: 'Describe the image in detail.' },
+        {
+          type: 'image',
+          image:
+            'https://github.com/vercel/ai/blob/main/examples/ai-core/data/comic-cat.png?raw=true',
+
+          // OpenAI specific options - image detail:
+          providerOptions: {
+            openai: { imageDetail: 'low' },
+          },
+        },
+      ],
+    },
+  ],
+});
+```
 
 Because the `UIMessage` type (used by AI SDK UI hooks like `useChat`) does not
 support the `providerOptions` property, you can use `convertToModelMessages`
@@ -498,441 +977,288 @@ first before passing the messages to functions like `generateText` or
 `streamText`. For more details on `providerOptions` usage, see
 [here](/docs/foundations/prompts#provider-options).
 
-### Bash Tool
-
-The Bash Tool allows running bash commands. Here's how to create and use it:
-
-```ts
-const bashTool = anthropic.tools.bash_20250124({
-  execute: async ({ command, restart }) => {
-    // Implement your bash command execution logic here
-    // Return the result of the command execution
-  },
-});
-```
-
-Parameters:
-
-- `command` (string): The bash command to run. Required unless the tool is being restarted.
-- `restart` (boolean, optional): Specifying true will restart this tool.
-
-  Two versions are available: `bash_20250124` (recommended) and `bash_20241022`.
-  Only certain Claude versions are supported.
-
-### Memory Tool
-
-The [Memory Tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/memory-tool) allows Claude to use a local memory, e.g. in the filesystem.
-Here's how to create it:
-
-```ts
-const memory = anthropic.tools.memory_20250818({
-  execute: async (action) => {
-    // Implement your memory command execution logic here
-    // Return the result of the command execution
-  },
-});
-```
-
-Only certain Claude versions are supported.
-
-### Text Editor Tool
-
-The Text Editor Tool provides functionality for viewing and editing text files.
-
-```ts
-const tools = {
-  str_replace_based_edit_tool: anthropic.tools.textEditor_20250728({
-    maxCharacters: 10000, // optional
-    async execute({ command, path, old_str, new_str, insert_text }) {
-      // ...
-    },
-  }),
-} satisfies ToolSet;
-```
-
-Different models support different versions of the tool:
-
-- `textEditor_20250728` - For Claude Sonnet 4, Opus 4, and Opus 4.1 (recommended)
-- `textEditor_20250124` - For Claude Sonnet 3.7
-- `textEditor_20241022` - For Claude Sonnet 3.5
-
-Note: `textEditor_20250429` is deprecated. Use `textEditor_20250728` instead.
-
-Parameters:
-
-- `command` ('view' | 'create' | 'str_replace' | 'insert' | 'undo_edit'): The command to run. Note: `undo_edit` is only available in Claude 3.5 Sonnet and earlier models.
-- `path` (string): Absolute path to file or directory, e.g. `/repo/file.py` or `/repo`.
-- `file_text` (string, optional): Required for `create` command, with the content of the file to be created.
-- `insert_line` (number, optional): Required for `insert` command. The line number after which to insert the new string.
-- `new_str` (string, optional): New string for `str_replace` command.
-- `insert_text` (string, optional): Required for `insert` command, containing the text to insert.
-- `old_str` (string, optional): Required for `str_replace` command, containing the string to replace.
-- `view_range` (number\[], optional): Optional for `view` command to specify line range to show.
-
-### Computer Tool
-
-The Computer Tool enables control of keyboard and mouse actions on a computer:
-
-```ts
-const computerTool = anthropic.tools.computer_20251124({
-  displayWidthPx: 1920,
-  displayHeightPx: 1080,
-  displayNumber: 0, // Optional, for X11 environments
-  enableZoom: true, // Optional, enables the zoom action
-
-  execute: async ({ action, coordinate, text, region }) => {
-    // Implement your computer control logic here
-    // Return the result of the action
-
-    // Example code:
-    switch (action) {
-      case "screenshot": {
-        // multipart result:
-        return {
-          type: "image",
-          data: fs
-            .readFileSync("./data/screenshot-editor.png")
-            .toString("base64"),
-        };
-      }
-      case "zoom": {
-        // region is [x1, y1, x2, y2] defining the area to zoom into
-        return {
-          type: "image",
-          data: fs.readFileSync("./data/zoomed-region.png").toString("base64"),
-        };
-      }
-      default: {
-        console.log("Action:", action);
-        console.log("Coordinate:", coordinate);
-        console.log("Text:", text);
-        return `executed ${action}`;
-      }
-    }
-  },
-
-  // map to tool result content for LLM consumption:
-  toModelOutput({ output }) {
-    return typeof output === "string"
-      ? [{ type: "text", text: output }]
-      : [{ type: "image", data: output.data, mediaType: "image/png" }];
-  },
-});
-```
-
-Use `computer_20251124` for Claude Opus 4.5 which supports the zoom action.
-Use `computer_20250124` for Claude Sonnet 4.5, Haiku 4.5, Opus 4.1, Sonnet 4,
-Opus 4, and Sonnet 3.7.
-
-Parameters:
-
-- `action` ('key' | 'type' | 'mouse_move' | 'left_click' | 'left_click_drag' | 'right_click' | 'middle_click' | 'double_click' | 'screenshot' | 'cursor_position' | 'zoom'): The action to perform. The `zoom` action is only available with `computer_20251124`.
-- `coordinate` (number\[], optional): Required for `mouse_move` and `left_click_drag` actions. Specifies the (x, y) coordinates.
-- `text` (string, optional): Required for `type` and `key` actions.
-- `region` (number\[], optional): Required for `zoom` action. Specifies `[x1, y1, x2, y2]` coordinates for the area to inspect.
-- `displayWidthPx` (number): The width of the display in pixels.
-- `displayHeightPx` (number): The height of the display in pixels.
-- `displayNumber` (number, optional): The display number for X11 environments.
-- `enableZoom` (boolean, optional): Enable the zoom action. Only available with `computer_20251124`. Default: `false`.
-
-### Web Search Tool
-
-Anthropic provides a provider-defined web search tool that gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff.
-
-You can enable web search using the provider-defined web search tool:
-
-```ts
-import { anthropic } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
-
-const webSearchTool = anthropic.tools.webSearch_20250305({
-  maxUses: 5,
-});
-
-const result = await generateText({
-  model: anthropic("claude-opus-4-20250514"),
-  prompt: "What are the latest developments in AI?",
-  tools: {
-    web_search: webSearchTool,
-  },
-});
-```
-
-Web search must be enabled in your organization's [Console
-settings](https://console.anthropic.com/settings/privacy).
-
-#### Configuration Options
-
-The web search tool supports several configuration options:
-
-- **maxUses** _number_
-
-  Maximum number of web searches Claude can perform during the conversation.
-
-- **allowedDomains** _string\[]_
-
-  Optional list of domains that Claude is allowed to search. If provided, searches will be restricted to these domains.
-
-- **blockedDomains** _string\[]_
-
-  Optional list of domains that Claude should avoid when searching.
-
-- **userLocation** _object_
-
-  Optional user location information to provide geographically relevant search results.
-
-```ts
-const webSearchTool = anthropic.tools.webSearch_20250305({
-  maxUses: 3,
-  allowedDomains: ["techcrunch.com", "wired.com"],
-  blockedDomains: ["example-spam-site.com"],
-  userLocation: {
-    type: "approximate",
-    country: "US",
-    region: "California",
-    city: "San Francisco",
-    timezone: "America/Los_Angeles",
-  },
-});
-
-const result = await generateText({
-  model: anthropic("claude-opus-4-20250514"),
-  prompt: "Find local news about technology",
-  tools: {
-    web_search: webSearchTool,
-  },
-});
-```
-
-### Web Fetch Tool
-
-Anthropic provides a provider-defined web fetch tool that allows Claude to retrieve content from specific URLs. This is useful when you want Claude to analyze or reference content from a particular webpage or document.
-
-You can enable web fetch using the provider-defined web fetch tool:
-
-```ts
-import { anthropic } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
-
-const result = await generateText({
-  model: anthropic("claude-sonnet-4-0"),
-  prompt:
-    "What is this page about? https://en.wikipedia.org/wiki/Maglemosian_culture",
-  tools: {
-    web_fetch: anthropic.tools.webFetch_20250910({ maxUses: 1 }),
-  },
-});
-```
-
-### Tool Search
-
-Anthropic provides provider-defined tool search tools that enable Claude to work with hundreds or thousands of tools by dynamically discovering and loading them on-demand. Instead of loading all tool definitions into the context window upfront, Claude searches your tool catalog and loads only the tools it needs.
-
-There are two variants:
-
-- **BM25 Search** - Uses natural language queries to find tools
-- **Regex Search** - Uses regex patterns (Python `re.search()` syntax) to find tools
-
-#### Basic Usage
-
-```ts
-import { anthropic } from "@ai-sdk/anthropic";
-import { generateText, tool } from "ai";
-import { z } from "zod";
-
-const result = await generateText({
-  model: anthropic("claude-sonnet-4-5"),
-  prompt: "What is the weather in San Francisco?",
-  tools: {
-    toolSearch: anthropic.tools.toolSearchBm25_20251119(),
-
-    get_weather: tool({
-      description: "Get the current weather at a specific location",
-      inputSchema: z.object({
-        location: z.string().describe("The city and state"),
-      }),
-      execute: async ({ location }) => ({
-        location,
-        temperature: 72,
-        condition: "Sunny",
-      }),
-      // Defer tool here - Claude discovers these via the tool search tool
-      providerOptions: {
-        anthropic: { deferLoading: true },
-      },
-    }),
-  },
-});
-```
-
-#### Using Regex Search
-
-For more precise tool matching, you can use the regex variant:
-
-```ts
-const result = await generateText({
-  model: anthropic("claude-sonnet-4-5"),
-  prompt: "Get the weather data",
-  tools: {
-    toolSearch: anthropic.tools.toolSearchRegex_20251119(),
-    // ... deferred tools
-  },
-});
-```
-
-Claude will construct regex patterns like `weather|temperature|forecast` to find matching tools.
-
-#### Custom Tool Search
-
-You can implement your own tool search logic (e.g., using embeddings or semantic search) by returning `tool-reference` content blocks via `toModelOutput`:
-
-```ts
-import { anthropic } from "@ai-sdk/anthropic";
-import { generateText, tool } from "ai";
-import { z } from "zod";
-
-const result = await generateText({
-  model: anthropic("claude-sonnet-4-5"),
-  prompt: "What is the weather in San Francisco?",
-  tools: {
-    // Custom search tool
-    searchTools: tool({
-      description: "Search for tools by keyword",
-      inputSchema: z.object({ query: z.string() }),
-      execute: async ({ query }) => {
-        // Your custom search logic (embeddings, fuzzy match, etc.)
-        const allTools = ["get_weather", "get_forecast", "get_temperature"];
-        return allTools.filter((name) => name.includes(query.toLowerCase()));
-      },
-      toModelOutput: ({ output }) => ({
-        type: "content",
-        value: (output as string[]).map((toolName) => ({
-          type: "custom" as const,
-          providerOptions: {
-            anthropic: {
-              type: "tool-reference",
-              toolName,
-            },
-          },
-        })),
-      }),
-    }),
-
-    // Deferred tools
-    get_weather: tool({
-      description: "Get the current weather",
-      inputSchema: z.object({ location: z.string() }),
-      execute: async ({ location }) => ({ location, temperature: 72 }),
-      providerOptions: {
-        anthropic: { deferLoading: true },
-      },
-    }),
-  },
-});
-```
-
-This sends `tool_reference` blocks to Anthropic, which loads the corresponding deferred tool schemas into Claude's context.
-
-### MCP Connectors
-
-Anthropic supports connecting to [MCP servers](https://docs.claude.com/en/docs/agents-and-tools/mcp-connector) as part of their execution.
-
-You can enable this feature with the `mcpServers` provider option:
-
-```ts
-import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
-import { generateText } from "ai";
-
-const result = await generateText({
-  model: anthropic("claude-sonnet-4-5"),
-  prompt: `Call the echo tool with "hello world". what does it respond with back?`,
-  providerOptions: {
-    anthropic: {
-      mcpServers: [
-        {
-          type: "url",
-          name: "echo",
-          url: "https://echo.mcp.inevitable.fyi/mcp",
-          // optional: authorization token
-          authorizationToken: mcpAuthToken,
-          // optional: tool configuration
-          toolConfiguration: {
-            enabled: true,
-            allowedTools: ["echo"],
-          },
+#### Distillation
+
+OpenAI supports model distillation for some models.
+If you want to store a generation for use in the distillation process, you can add the `store` option to the `providerOptions.openai` object.
+This will save the generation to the OpenAI platform for later use in distillation.
+
+```typescript highlight="9-16"
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+import 'dotenv/config';
+
+async function main() {
+  const { text, usage } = await generateText({
+    model: openai.chat('gpt-4o-mini'),
+    prompt: 'Who worked on the original macintosh?',
+    providerOptions: {
+      openai: {
+        store: true,
+        metadata: {
+          custom: 'value',
         },
-      ],
-    } satisfies AnthropicLanguageModelOptions,
-  },
-});
-```
-
-The tool calls and results are dynamic, i.e. the input and output schemas are not known.
-
-#### Configuration Options
-
-The web fetch tool supports several configuration options:
-
-- **maxUses** _number_
-
-  The maxUses parameter limits the number of web fetches performed.
-
-- **allowedDomains** _string\[]_
-
-  Only fetch from these domains.
-
-- **blockedDomains** _string\[]_
-
-  Never fetch from these domains.
-
-- **citations** _object_
-
-  Unlike web search where citations are always enabled, citations are optional for web fetch. Set `"citations": {"enabled": true}` to enable Claude to cite specific passages from fetched documents.
-
-- **maxContentTokens** _number_
-
-  The maxContentTokens parameter limits the amount of content that will be included in the context.
-
-#### Error Handling
-
-Web search errors are handled differently depending on whether you're using streaming or non-streaming:
-
-**Non-streaming (`generateText`):**
-Web search errors throw exceptions that you can catch:
-
-```ts
-try {
-  const result = await generateText({
-    model: anthropic("claude-opus-4-20250514"),
-    prompt: "Search for something",
-    tools: {
-      web_search: webSearchTool,
+      },
     },
   });
-} catch (error) {
-  if (error.message.includes("Web search failed")) {
-    console.log("Search error:", error.message);
-    // Handle search error appropriately
-  }
+
+  console.log(text);
+  console.log();
+  console.log('Usage:', usage);
 }
+
+main().catch(console.error);
 ```
 
-**Streaming (`streamText`):**
-Web search errors are delivered as error parts in the stream:
+#### Prompt Caching
 
-```ts
-const result = await streamText({
-  model: anthropic("claude-opus-4-20250514"),
-  prompt: "Search for something",
-  tools: {
-    web_search: webSearchTool,
+OpenAI has introduced [Prompt Caching](https://platform.openai.com/docs/guides/prompt-caching) for supported models
+including `gpt-4o` and `gpt-4o-mini`.
+
+- Prompt caching is automatically enabled for these models, when the prompt is 1024 tokens or longer. It does
+  not need to be explicitly enabled.
+- You can use response `providerMetadata` to access the number of prompt tokens that were a cache hit.
+- Note that caching behavior is dependent on load on OpenAI's infrastructure. Prompt prefixes generally remain in the
+  cache following 5-10 minutes of inactivity before they are evicted, but during off-peak periods they may persist for up
+  to an hour.
+
+```ts highlight="11"
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const { text, usage, providerMetadata } = await generateText({
+  model: openai.chat('gpt-4o-mini'),
+  prompt: `A 1024-token or longer prompt...`,
+});
+
+console.log(`usage:`, {
+  ...usage,
+  cachedPromptTokens: providerMetadata?.openai?.cachedPromptTokens,
+});
+```
+
+To improve cache hit rates, you can manually control caching using the `promptCacheKey` option:
+
+```ts highlight="7-11"
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const { text, usage, providerMetadata } = await generateText({
+  model: openai.chat('gpt-5'),
+  prompt: `A 1024-token or longer prompt...`,
+  providerOptions: {
+    openai: {
+      promptCacheKey: 'my-custom-cache-key-123',
+    },
   },
 });
 
-for await (const part of result.textStream) {
-  if (part.type === "error") {
-    console.log("Search error:", part.error);
-    // Handle search error appropriately
-  }
-}
+console.log(`usage:`, {
+  ...usage,
+  cachedPromptTokens: providerMetadata?.openai?.cachedPromptTokens,
+});
 ```
+
+For GPT-5.1 models, you can enable extended prompt caching that keeps cached prefixes active for up to 24 hours:
+
+```ts highlight="7-12"
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const { text, usage, providerMetadata } = await generateText({
+  model: openai.chat('gpt-5.1'),
+  prompt: `A 1024-token or longer prompt...`,
+  providerOptions: {
+    openai: {
+      promptCacheKey: 'my-custom-cache-key-123',
+      promptCacheRetention: '24h', // Extended caching for GPT-5.1
+    },
+  },
+});
+
+console.log(`usage:`, {
+  ...usage,
+  cachedPromptTokens: providerMetadata?.openai?.cachedPromptTokens,
+});
+```
+
+#### Audio Input
+
+With the `gpt-4o-audio-preview` model, you can pass audio files to the model.
+
+The `gpt-4o-audio-preview` model is currently in preview and requires at least
+some audio inputs. It will not work with non-audio data.
+
+```ts highlight="12-14"
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+const result = await generateText({
+  model: openai.chat('gpt-4o-audio-preview'),
+  messages: [
+    {
+      role: 'user',
+      content: [
+        { type: 'text', text: 'What is the audio saying?' },
+        {
+          type: 'file',
+          mediaType: 'audio/mpeg',
+          data: fs.readFileSync('./data/galileo.mp3'),
+        },
+      ],
+    },
+  ],
+});
+```
+
+### Completion Models
+
+You can create models that call the [OpenAI completions API](https://platform.openai.com/docs/api-reference/completions) using the `.completion()` factory method.
+The first argument is the model id.
+Currently only `gpt-3.5-turbo-instruct` is supported.
+
+```ts
+const model = openai.completion('gpt-3.5-turbo-instruct');
+```
+
+OpenAI completion models support also some model specific settings that are not part of the [standard call settings](/docs/ai-sdk-core/settings).
+You can pass them as an options argument:
+
+```ts
+const model = openai.completion('gpt-3.5-turbo-instruct');
+
+await model.doGenerate({
+  providerOptions: {
+    openai: {
+      echo: true, // optional, echo the prompt in addition to the completion
+      logitBias: {
+        // optional likelihood for specific tokens
+        '50256': -100,
+      },
+      suffix: 'some text', // optional suffix that comes after a completion of inserted text
+      user: 'test-user', // optional unique user identifier
+    },
+  },
+});
+```
+
+The following optional provider options are available for OpenAI completion models:
+
+- **echo**: *boolean*
+
+  Echo back the prompt in addition to the completion.
+
+- **logitBias** *Record\<number, number>*
+
+  Modifies the likelihood of specified tokens appearing in the completion.
+
+  Accepts a JSON object that maps tokens (specified by their token ID in
+  the GPT tokenizer) to an associated bias value from -100 to 100. You
+  can use this tokenizer tool to convert text to token IDs. Mathematically,
+  the bias is added to the logits generated by the model prior to sampling.
+  The exact effect will vary per model, but values between -1 and 1 should
+  decrease or increase likelihood of selection; values like -100 or 100
+  should result in a ban or exclusive selection of the relevant token.
+
+  As an example, you can pass `{"50256": -100}` to prevent the <|endoftext|>
+  token from being generated.
+
+- **logprobs** *boolean | number*
+
+  Return the log probabilities of the tokens. Including logprobs will increase
+  the response size and can slow down response times. However, it can
+  be useful to better understand how the model is behaving.
+
+  Setting to true will return the log probabilities of the tokens that
+  were generated.
+
+  Setting to a number will return the log probabilities of the top n
+  tokens that were generated.
+
+- **suffix** *string*
+
+  The suffix that comes after a completion of inserted text.
+
+- **user** *string*
+
+  A unique identifier representing your end-user, which can help OpenAI to
+  monitor and detect abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
+
+### Model Capabilities
+
+| Model                 | Image Input         | Audio Input         | Object Generation   | Tool Usage          |
+| --------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| `gpt-5.4-pro`         |  |  |  |  |
+| `gpt-5.4`             |  |  |  |  |
+| `gpt-5.3-chat-latest` |  |  |  |  |
+| `gpt-5.2-pro`         |  |  |  |  |
+| `gpt-5.2-chat-latest` |  |  |  |  |
+| `gpt-5.2`             |  |  |  |  |
+| `gpt-5.1-codex-mini`  |  |  |  |  |
+| `gpt-5.1-codex`       |  |  |  |  |
+| `gpt-5.1-chat-latest` |  |  |  |  |
+| `gpt-5.1`             |  |  |  |  |
+| `gpt-5-pro`           |  |  |  |  |
+| `gpt-5`               |  |  |  |  |
+| `gpt-5-mini`          |  |  |  |  |
+| `gpt-5-nano`          |  |  |  |  |
+| `gpt-5-codex`         |  |  |  |  |
+| `gpt-5-chat-latest`   |  |  |  |  |
+| `gpt-4.1`             |  |  |  |  |
+| `gpt-4.1-mini`        |  |  |  |  |
+| `gpt-4.1-nano`        |  |  |  |  |
+| `gpt-4o`              |  |  |  |  |
+| `gpt-4o-mini`         |  |  |  |  |
+
+The table above lists popular models. Please see the [OpenAI
+docs](https://platform.openai.com/docs/models) for a full list of available
+models. The table above lists popular models. You can also pass any available
+provider model ID as a string if needed.
+
+## Embedding Models
+
+You can create models that call the [OpenAI embeddings API](https://platform.openai.com/docs/api-reference/embeddings)
+using the `.textEmbedding()` factory method.
+
+```ts
+const model = openai.textEmbedding('text-embedding-3-large');
+```
+
+OpenAI embedding models support several additional provider options.
+You can pass them as an options argument:
+
+```ts
+import { openai } from '@ai-sdk/openai';
+import { embed } from 'ai';
+
+const { embedding } = await embed({
+  model: openai.textEmbedding('text-embedding-3-large'),
+  value: 'sunny day at the beach',
+  providerOptions: {
+    openai: {
+      dimensions: 512, // optional, number of dimensions for the embedding
+      user: 'test-user', // optional unique user identifier
+    },
+  },
+});
+```
+
+The following optional provider options are available for OpenAI embedding models:
+
+- **dimensions**: *number*
+
+  The number of dimensions the resulting output embeddings should have.
+  Only supported in text-embedding-3 and later models.
+
+- **user** *string*
+
+  A unique identifier representing your end-user, which can help OpenAI to
+  monitor and detect abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
+
+### Model Capabilities
+
+| Model                    | Default Dimensions | Custom Dimensions   |
+| ------------------------ | ------------------ | ------------------- |
+| `text-embedding-3-large` | 3072               |  |
+| `text-embedding-3-small` | 1536               |  |
+| `text-embedding-ada-002` | 1536               |  |

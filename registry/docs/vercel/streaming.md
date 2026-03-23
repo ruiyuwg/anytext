@@ -87,5 +87,5 @@ for event in stream:
 
 title: "Text Generation"
 description: "Generate text responses using the OpenResponses API."
-last\_updated: "2026-03-08T05:03:10.818Z"
+last\_updated: "2026-03-23T09:40:04.917Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openresponses/text-generation"

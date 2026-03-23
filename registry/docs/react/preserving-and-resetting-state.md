@@ -6,7 +6,7 @@ State is isolated between components. React keeps track of which state belongs t
 - How to force React to reset component's state
 - How keys and types affect whether the state is preserved
 
-## State is tied to a position in the render tree {/_state-is-tied-to-a-position-in-the-tree_/}
+## State is tied to a position in the render tree {/*state-is-tied-to-a-position-in-the-tree*/}
 
 React builds [render trees](learn/understanding-your-ui-as-a-tree#the-render-tree) for the component structure in your UI.
 
@@ -15,7 +15,7 @@ When you give a component state, you might think the state "lives" inside the co
 Here, there is only one `<Counter />` JSX tag, but it's rendered at two different positions:
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const counter = <Counter />;
@@ -31,9 +31,9 @@ function Counter() {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(false);
 
-  let className = "counter";
+  let className = 'counter';
   if (hover) {
-    className += " hover";
+    className += ' hover';
   }
 
   return (
@@ -43,7 +43,9 @@ function Counter() {
       onPointerLeave={() => setHover(false)}
     >
       <h1>{score}</h1>
-      <button onClick={() => setScore(score + 1)}>Add one</button>
+      <button onClick={() => setScore(score + 1)}>
+        Add one
+      </button>
     </div>
   );
 }
@@ -81,7 +83,7 @@ In React, each component on the screen has fully isolated state. For example, if
 Try clicking both counters and notice they don't affect each other:
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   return (
@@ -96,9 +98,9 @@ function Counter() {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(false);
 
-  let className = "counter";
+  let className = 'counter';
   if (hover) {
-    className += " hover";
+    className += ' hover';
   }
 
   return (
@@ -108,7 +110,9 @@ function Counter() {
       onPointerLeave={() => setHover(false)}
     >
       <h1>{score}</h1>
-      <button onClick={() => setScore(score + 1)}>Add one</button>
+      <button onClick={() => setScore(score + 1)}>
+        Add one
+      </button>
     </div>
   );
 }
@@ -137,20 +141,20 @@ Updating state
 React will keep the state around for as long as you render the same component at the same position in the tree. To see this, increment both counters, then remove the second component by unchecking "Render the second counter" checkbox, and then add it back by ticking it again:
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [showB, setShowB] = useState(true);
   return (
     <div>
       <Counter />
-      {showB && <Counter />}
+      {showB && <Counter />} 
       <label>
         <input
           type="checkbox"
           checked={showB}
-          onChange={(e) => {
-            setShowB(e.target.checked);
+          onChange={e => {
+            setShowB(e.target.checked)
           }}
         />
         Render the second counter
@@ -163,9 +167,9 @@ function Counter() {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(false);
 
-  let className = "counter";
+  let className = 'counter';
   if (hover) {
-    className += " hover";
+    className += ' hover';
   }
 
   return (
@@ -175,7 +179,9 @@ function Counter() {
       onPointerLeave={() => setHover(false)}
     >
       <h1>{score}</h1>
-      <button onClick={() => setScore(score + 1)}>Add one</button>
+      <button onClick={() => setScore(score + 1)}>
+        Add one
+      </button>
     </div>
   );
 }
@@ -212,24 +218,28 @@ Adding a component
 
 **React preserves a component's state for as long as it's being rendered at its position in the UI tree.** If it gets removed, or a different component gets rendered at the same position, React discards its state.
 
-## Same component at the same position preserves state {/_same-component-at-the-same-position-preserves-state_/}
+## Same component at the same position preserves state {/*same-component-at-the-same-position-preserves-state*/}
 
 In this example, there are two different `<Counter />` tags:
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [isFancy, setIsFancy] = useState(false);
   return (
     <div>
-      {isFancy ? <Counter isFancy={true} /> : <Counter isFancy={false} />}
+      {isFancy ? (
+        <Counter isFancy={true} /> 
+      ) : (
+        <Counter isFancy={false} /> 
+      )}
       <label>
         <input
           type="checkbox"
           checked={isFancy}
-          onChange={(e) => {
-            setIsFancy(e.target.checked);
+          onChange={e => {
+            setIsFancy(e.target.checked)
           }}
         />
         Use fancy styling
@@ -242,12 +252,12 @@ function Counter({ isFancy }) {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(false);
 
-  let className = "counter";
+  let className = 'counter';
   if (hover) {
-    className += " hover";
+    className += ' hover';
   }
   if (isFancy) {
-    className += " fancy";
+    className += ' fancy';
   }
 
   return (
@@ -257,7 +267,9 @@ function Counter({ isFancy }) {
       onPointerLeave={() => setHover(false)}
     >
       <h1>{score}</h1>
-      <button onClick={() => setScore(score + 1)}>Add one</button>
+      <button onClick={() => setScore(score + 1)}>
+        Add one
+      </button>
     </div>
   );
 }
@@ -298,7 +310,7 @@ It's the same component at the same position, so from React's perspective, it's 
 Remember that **it's the position in the UI tree--not in the JSX markup--that matters to React!** This component has two `return` clauses with different `<Counter />` JSX tags inside and outside the `if`:
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [isFancy, setIsFancy] = useState(false);
@@ -310,8 +322,8 @@ export default function App() {
           <input
             type="checkbox"
             checked={isFancy}
-            onChange={(e) => {
-              setIsFancy(e.target.checked);
+            onChange={e => {
+              setIsFancy(e.target.checked)
             }}
           />
           Use fancy styling
@@ -326,8 +338,8 @@ export default function App() {
         <input
           type="checkbox"
           checked={isFancy}
-          onChange={(e) => {
-            setIsFancy(e.target.checked);
+          onChange={e => {
+            setIsFancy(e.target.checked)
           }}
         />
         Use fancy styling
@@ -340,12 +352,12 @@ function Counter({ isFancy }) {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(false);
 
-  let className = "counter";
+  let className = 'counter';
   if (hover) {
-    className += " hover";
+    className += ' hover';
   }
   if (isFancy) {
-    className += " fancy";
+    className += ' fancy';
   }
 
   return (
@@ -355,7 +367,9 @@ function Counter({ isFancy }) {
       onPointerLeave={() => setHover(false)}
     >
       <h1>{score}</h1>
-      <button onClick={() => setScore(score + 1)}>Add one</button>
+      <button onClick={() => setScore(score + 1)}>
+        Add one
+      </button>
     </div>
   );
 }
@@ -391,24 +405,28 @@ You might expect the state to reset when you tick checkbox, but it doesn't! This
 
 In both cases, the `App` component returns a `<div>` with `<Counter />` as a first child. To React, these two counters have the same "address": the first child of the first child of the root. This is how React matches them up between the previous and next renders, regardless of how you structure your logic.
 
-## Different components at the same position reset state {/_different-components-at-the-same-position-reset-state_/}
+## Different components at the same position reset state {/*different-components-at-the-same-position-reset-state*/}
 
 In this example, ticking the checkbox will replace `<Counter>` with a `<p>`:
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [isPaused, setIsPaused] = useState(false);
   return (
     <div>
-      {isPaused ? <p>See you later!</p> : <Counter />}
+      {isPaused ? (
+        <p>See you later!</p> 
+      ) : (
+        <Counter /> 
+      )}
       <label>
         <input
           type="checkbox"
           checked={isPaused}
-          onChange={(e) => {
-            setIsPaused(e.target.checked);
+          onChange={e => {
+            setIsPaused(e.target.checked)
           }}
         />
         Take a break
@@ -421,9 +439,9 @@ function Counter() {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(false);
 
-  let className = "counter";
+  let className = 'counter';
   if (hover) {
-    className += " hover";
+    className += ' hover';
   }
 
   return (
@@ -433,7 +451,9 @@ function Counter() {
       onPointerLeave={() => setHover(false)}
     >
       <h1>{score}</h1>
-      <button onClick={() => setScore(score + 1)}>Add one</button>
+      <button onClick={() => setScore(score + 1)}>
+        Add one
+      </button>
     </div>
   );
 }
@@ -460,7 +480,7 @@ label {
 }
 ```
 
-Here, you switch between _different_ component types at the same position. Initially, the first child of the `<div>` contained a `Counter`. But when you swapped in a `p`, React removed the `Counter` from the UI tree and destroyed its state.
+Here, you switch between *different* component types at the same position. Initially, the first child of the `<div>` contained a `Counter`. But when you swapped in a `p`, React removed the `Counter` from the UI tree and destroyed its state.
 
 When `Counter` changes to `p`, the `Counter` is deleted and the `p` is added
 
@@ -469,7 +489,7 @@ When switching back, the `p` is deleted and the `Counter` is added
 Also, **when you render a different component in the same position, it resets the state of its entire subtree.** To see how this works, increment the counter and then tick the checkbox:
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [isFancy, setIsFancy] = useState(false);
@@ -477,7 +497,7 @@ export default function App() {
     <div>
       {isFancy ? (
         <div>
-          <Counter isFancy={true} />
+          <Counter isFancy={true} /> 
         </div>
       ) : (
         <section>
@@ -488,8 +508,8 @@ export default function App() {
         <input
           type="checkbox"
           checked={isFancy}
-          onChange={(e) => {
-            setIsFancy(e.target.checked);
+          onChange={e => {
+            setIsFancy(e.target.checked)
           }}
         />
         Use fancy styling
@@ -502,12 +522,12 @@ function Counter({ isFancy }) {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(false);
 
-  let className = "counter";
+  let className = 'counter';
   if (hover) {
-    className += " hover";
+    className += ' hover';
   }
   if (isFancy) {
-    className += " fancy";
+    className += ' fancy';
   }
 
   return (
@@ -517,7 +537,9 @@ function Counter({ isFancy }) {
       onPointerLeave={() => setHover(false)}
     >
       <h1>{score}</h1>
-      <button onClick={() => setScore(score + 1)}>Add one</button>
+      <button onClick={() => setScore(score + 1)}>
+        Add one
+      </button>
     </div>
   );
 }
@@ -559,54 +581,57 @@ As a rule of thumb, **if you want to preserve the state between re-renders, the 
 
 This is why you should not nest component function definitions.
 
-Here, the `MyTextField` component function is defined _inside_ `MyComponent`:
+Here, the `MyTextField` component function is defined *inside* `MyComponent`:
 
 ```js {expectedErrors: {'react-compiler': [7]}}
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function MyComponent() {
   const [counter, setCounter] = useState(0);
 
   function MyTextField() {
-    const [text, setText] = useState("");
+    const [text, setText] = useState('');
 
-    return <input value={text} onChange={(e) => setText(e.target.value)} />;
+    return (
+      <input
+        value={text}
+        onChange={e => setText(e.target.value)}
+      />
+    );
   }
 
   return (
     <>
       <MyTextField />
-      <button
-        onClick={() => {
-          setCounter(counter + 1);
-        }}
-      >
-        Clicked {counter} times
-      </button>
+      <button onClick={() => {
+        setCounter(counter + 1)
+      }}>Clicked {counter} times</button>
     </>
   );
 }
 ```
 
-Every time you click the button, the input state disappears! This is because a _different_ `MyTextField` function is created for every render of `MyComponent`. You're rendering a _different_ component in the same position, so React resets all state below. This leads to bugs and performance problems. To avoid this problem, **always declare component functions at the top level, and don't nest their definitions.**
+Every time you click the button, the input state disappears! This is because a *different* `MyTextField` function is created for every render of `MyComponent`. You're rendering a *different* component in the same position, so React resets all state below. This leads to bugs and performance problems. To avoid this problem, **always declare component functions at the top level, and don't nest their definitions.**
 
-## Resetting state at the same position {/_resetting-state-at-the-same-position_/}
+## Resetting state at the same position {/*resetting-state-at-the-same-position*/}
 
 By default, React preserves state of a component while it stays at the same position. Usually, this is exactly what you want, so it makes sense as the default behavior. But sometimes, you may want to reset a component's state. Consider this app that lets two players keep track of their scores during each turn:
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Scoreboard() {
   const [isPlayerA, setIsPlayerA] = useState(true);
   return (
     <div>
-      {isPlayerA ? <Counter person="Taylor" /> : <Counter person="Sarah" />}
-      <button
-        onClick={() => {
-          setIsPlayerA(!isPlayerA);
-        }}
-      >
+      {isPlayerA ? (
+        <Counter person="Taylor" />
+      ) : (
+        <Counter person="Sarah" />
+      )}
+      <button onClick={() => {
+        setIsPlayerA(!isPlayerA);
+      }}>
         Next player!
       </button>
     </div>
@@ -617,9 +642,9 @@ function Counter({ person }) {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(false);
 
-  let className = "counter";
+  let className = 'counter';
   if (hover) {
-    className += " hover";
+    className += ' hover';
   }
 
   return (
@@ -628,10 +653,10 @@ function Counter({ person }) {
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
     >
-      <h1>
-        {person}'s score: {score}
-      </h1>
-      <button onClick={() => setScore(score + 1)}>Add one</button>
+      <h1>{person}'s score: {score}</h1>
+      <button onClick={() => setScore(score + 1)}>
+        Add one
+      </button>
     </div>
   );
 }
@@ -656,7 +681,7 @@ h1 {
 }
 ```
 
-Currently, when you change the player, the score is preserved. The two `Counter`s appear in the same position, so React sees them as _the same_ `Counter` whose `person` prop has changed.
+Currently, when you change the player, the score is preserved. The two `Counter`s appear in the same position, so React sees them as *the same* `Counter` whose `person` prop has changed.
 
 But conceptually, in this app they should be two separate counters. They might appear in the same place in the UI, but one is a counter for Taylor, and another is a counter for Sarah.
 
@@ -665,24 +690,26 @@ There are two ways to reset state when switching between them:
 1. Render components in different positions
 2. Give each component an explicit identity with `key`
 
-### Option 1: Rendering a component in different positions {/_option-1-rendering-a-component-in-different-positions_/}
+### Option 1: Rendering a component in different positions {/*option-1-rendering-a-component-in-different-positions*/}
 
 If you want these two `Counter`s to be independent, you can render them in two different positions:
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Scoreboard() {
   const [isPlayerA, setIsPlayerA] = useState(true);
   return (
     <div>
-      {isPlayerA && <Counter person="Taylor" />}
-      {!isPlayerA && <Counter person="Sarah" />}
-      <button
-        onClick={() => {
-          setIsPlayerA(!isPlayerA);
-        }}
-      >
+      {isPlayerA &&
+        <Counter person="Taylor" />
+      }
+      {!isPlayerA &&
+        <Counter person="Sarah" />
+      }
+      <button onClick={() => {
+        setIsPlayerA(!isPlayerA);
+      }}>
         Next player!
       </button>
     </div>
@@ -693,9 +720,9 @@ function Counter({ person }) {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(false);
 
-  let className = "counter";
+  let className = 'counter';
   if (hover) {
-    className += " hover";
+    className += ' hover';
   }
 
   return (
@@ -704,10 +731,10 @@ function Counter({ person }) {
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
     >
-      <h1>
-        {person}'s score: {score}
-      </h1>
-      <button onClick={() => setScore(score + 1)}>Add one</button>
+      <h1>{person}'s score: {score}</h1>
+      <button onClick={() => setScore(score + 1)}>
+        Add one
+      </button>
     </div>
   );
 }
@@ -745,16 +772,16 @@ Each `Counter`'s state gets destroyed each time it's removed from the DOM. This 
 
 This solution is convenient when you only have a few independent components rendered in the same place. In this example, you only have two, so it's not a hassle to render both separately in the JSX.
 
-### Option 2: Resetting state with a key {/_option-2-resetting-state-with-a-key_/}
+### Option 2: Resetting state with a key {/*option-2-resetting-state-with-a-key*/}
 
 There is also another, more generic, way to reset a component's state.
 
-You might have seen `key`s when [rendering lists.](/learn/rendering-lists#keeping-list-items-in-order-with-key) Keys aren't just for lists! You can use keys to make React distinguish between any components. By default, React uses order within the parent ("first counter", "second counter") to discern between components. But keys let you tell React that this is not just a _first_ counter, or a _second_ counter, but a specific counter--for example, _Taylor's_ counter. This way, React will know _Taylor's_ counter wherever it appears in the tree!
+You might have seen `key`s when [rendering lists.](/learn/rendering-lists#keeping-list-items-in-order-with-key) Keys aren't just for lists! You can use keys to make React distinguish between any components. By default, React uses order within the parent ("first counter", "second counter") to discern between components. But keys let you tell React that this is not just a *first* counter, or a *second* counter, but a specific counter--for example, *Taylor's* counter. This way, React will know *Taylor's* counter wherever it appears in the tree!
 
 In this example, the two `<Counter />`s don't share state even though they appear in the same place in JSX:
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Scoreboard() {
   const [isPlayerA, setIsPlayerA] = useState(true);
@@ -765,11 +792,9 @@ export default function Scoreboard() {
       ) : (
         <Counter key="Sarah" person="Sarah" />
       )}
-      <button
-        onClick={() => {
-          setIsPlayerA(!isPlayerA);
-        }}
-      >
+      <button onClick={() => {
+        setIsPlayerA(!isPlayerA);
+      }}>
         Next player!
       </button>
     </div>
@@ -780,9 +805,9 @@ function Counter({ person }) {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(false);
 
-  let className = "counter";
+  let className = 'counter';
   if (hover) {
-    className += " hover";
+    className += ' hover';
   }
 
   return (
@@ -791,10 +816,10 @@ function Counter({ person }) {
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
     >
-      <h1>
-        {person}'s score: {score}
-      </h1>
-      <button onClick={() => setScore(score + 1)}>Add one</button>
+      <h1>{person}'s score: {score}</h1>
+      <button onClick={() => setScore(score + 1)}>
+        Add one
+      </button>
     </div>
   );
 }
@@ -822,29 +847,27 @@ h1 {
 Switching between Taylor and Sarah does not preserve the state. This is because **you gave them different `key`s:**
 
 ```js
-{
-  isPlayerA ? (
-    <Counter key="Taylor" person="Taylor" />
-  ) : (
-    <Counter key="Sarah" person="Sarah" />
-  );
-}
+{isPlayerA ? (
+  <Counter key="Taylor" person="Taylor" />
+) : (
+  <Counter key="Sarah" person="Sarah" />
+)}
 ```
 
 Specifying a `key` tells React to use the `key` itself as part of the position, instead of their order within the parent. This is why, even though you render them in the same place in JSX, React sees them as two different counters, and so they will never share state. Every time a counter appears on the screen, its state is created. Every time it is removed, its state is destroyed. Toggling between them resets their state over and over.
 
-Remember that keys are not globally unique. They only specify the position _within the parent_.
+Remember that keys are not globally unique. They only specify the position *within the parent*.
 
-### Resetting a form with a key {/_resetting-a-form-with-a-key_/}
+### Resetting a form with a key {/*resetting-a-form-with-a-key*/}
 
 Resetting state with a key is particularly useful when dealing with forms.
 
 In this chat app, the `<Chat>` component contains the text input state:
 
 ```js src/App.js
-import { useState } from "react";
-import Chat from "./Chat.js";
-import ContactList from "./ContactList.js";
+import { useState } from 'react';
+import Chat from './Chat.js';
+import ContactList from './ContactList.js';
 
 export default function Messenger() {
   const [to, setTo] = useState(contacts[0]);
@@ -853,36 +876,38 @@ export default function Messenger() {
       <ContactList
         contacts={contacts}
         selectedContact={to}
-        onSelect={(contact) => setTo(contact)}
+        onSelect={contact => setTo(contact)}
       />
       <Chat contact={to} />
     </div>
-  );
+  )
 }
 
 const contacts = [
-  { id: 0, name: "Taylor", email: "taylor@mail.com" },
-  { id: 1, name: "Alice", email: "alice@mail.com" },
-  { id: 2, name: "Bob", email: "bob@mail.com" },
+  { id: 0, name: 'Taylor', email: 'taylor@mail.com' },
+  { id: 1, name: 'Alice', email: 'alice@mail.com' },
+  { id: 2, name: 'Bob', email: 'bob@mail.com' }
 ];
 ```
 
 ```js src/ContactList.js
-export default function ContactList({ selectedContact, contacts, onSelect }) {
+export default function ContactList({
+  selectedContact,
+  contacts,
+  onSelect
+}) {
   return (
     <section className="contact-list">
       <ul>
-        {contacts.map((contact) => (
+        {contacts.map(contact =>
           <li key={contact.id}>
-            <button
-              onClick={() => {
-                onSelect(contact);
-              }}
-            >
+            <button onClick={() => {
+              onSelect(contact);
+            }}>
               {contact.name}
             </button>
           </li>
-        ))}
+        )}
       </ul>
     </section>
   );
@@ -890,16 +915,16 @@ export default function ContactList({ selectedContact, contacts, onSelect }) {
 ```
 
 ```js src/Chat.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Chat({ contact }) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   return (
     <section className="chat">
       <textarea
         value={text}
-        placeholder={"Chat to " + contact.name}
-        onChange={(e) => setText(e.target.value)}
+        placeholder={'Chat to ' + contact.name}
+        onChange={e => setText(e.target.value)}
       />
       <br />
       <button>Send to {contact.email}</button>
@@ -909,13 +934,11 @@ export default function Chat({ contact }) {
 ```
 
 ```css
-.chat,
-.contact-list {
+.chat, .contact-list {
   float: left;
   margin-bottom: 20px;
 }
-ul,
-li {
+ul, li {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -943,9 +966,9 @@ This ensures that when you select a different recipient, the `Chat` component wi
 Now switching the recipient always clears the text field:
 
 ```js src/App.js
-import { useState } from "react";
-import Chat from "./Chat.js";
-import ContactList from "./ContactList.js";
+import { useState } from 'react';
+import Chat from './Chat.js';
+import ContactList from './ContactList.js';
 
 export default function Messenger() {
   const [to, setTo] = useState(contacts[0]);
@@ -954,36 +977,38 @@ export default function Messenger() {
       <ContactList
         contacts={contacts}
         selectedContact={to}
-        onSelect={(contact) => setTo(contact)}
+        onSelect={contact => setTo(contact)}
       />
       <Chat key={to.id} contact={to} />
     </div>
-  );
+  )
 }
 
 const contacts = [
-  { id: 0, name: "Taylor", email: "taylor@mail.com" },
-  { id: 1, name: "Alice", email: "alice@mail.com" },
-  { id: 2, name: "Bob", email: "bob@mail.com" },
+  { id: 0, name: 'Taylor', email: 'taylor@mail.com' },
+  { id: 1, name: 'Alice', email: 'alice@mail.com' },
+  { id: 2, name: 'Bob', email: 'bob@mail.com' }
 ];
 ```
 
 ```js src/ContactList.js
-export default function ContactList({ selectedContact, contacts, onSelect }) {
+export default function ContactList({
+  selectedContact,
+  contacts,
+  onSelect
+}) {
   return (
     <section className="contact-list">
       <ul>
-        {contacts.map((contact) => (
+        {contacts.map(contact =>
           <li key={contact.id}>
-            <button
-              onClick={() => {
-                onSelect(contact);
-              }}
-            >
+            <button onClick={() => {
+              onSelect(contact);
+            }}>
               {contact.name}
             </button>
           </li>
-        ))}
+        )}
       </ul>
     </section>
   );
@@ -991,16 +1016,16 @@ export default function ContactList({ selectedContact, contacts, onSelect }) {
 ```
 
 ```js src/Chat.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Chat({ contact }) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   return (
     <section className="chat">
       <textarea
         value={text}
-        placeholder={"Chat to " + contact.name}
-        onChange={(e) => setText(e.target.value)}
+        placeholder={'Chat to ' + contact.name}
+        onChange={e => setText(e.target.value)}
       />
       <br />
       <button>Send to {contact.email}</button>
@@ -1010,13 +1035,11 @@ export default function Chat({ contact }) {
 ```
 
 ```css
-.chat,
-.contact-list {
+.chat, .contact-list {
   float: left;
   margin-bottom: 20px;
 }
-ul,
-li {
+ul, li {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1031,72 +1054,64 @@ textarea {
 }
 ```
 
-#### Preserving state for removed components {/_preserving-state-for-removed-components_/}
+#### Preserving state for removed components {/*preserving-state-for-removed-components*/}
 
 In a real chat app, you'd probably want to recover the input state when the user selects the previous recipient again. There are a few ways to keep the state "alive" for a component that's no longer visible:
 
-- You could render _all_ chats instead of just the current one, but hide all the others with CSS. The chats would not get removed from the tree, so their local state would be preserved. This solution works great for simple UIs. But it can get very slow if the hidden trees are large and contain a lot of DOM nodes.
+- You could render *all* chats instead of just the current one, but hide all the others with CSS. The chats would not get removed from the tree, so their local state would be preserved. This solution works great for simple UIs. But it can get very slow if the hidden trees are large and contain a lot of DOM nodes.
 - You could [lift the state up](/learn/sharing-state-between-components) and hold the pending message for each recipient in the parent component. This way, when the child components get removed, it doesn't matter, because it's the parent that keeps the important information. This is the most common solution.
 - You might also use a different source in addition to React state. For example, you probably want a message draft to persist even if the user accidentally closes the page. To implement this, you could have the `Chat` component initialize its state by reading from the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage), and save the drafts there too.
 
-No matter which strategy you pick, a chat _with Alice_ is conceptually distinct from a chat _with Bob_, so it makes sense to give a `key` to the `<Chat>` tree based on the current recipient.
+No matter which strategy you pick, a chat *with Alice* is conceptually distinct from a chat *with Bob*, so it makes sense to give a `key` to the `<Chat>` tree based on the current recipient.
 
 - React keeps state for as long as the same component is rendered at the same position.
 - State is not kept in JSX tags. It's associated with the tree position in which you put that JSX.
 - You can force a subtree to reset its state by giving it a different key.
 - Don't nest component definitions, or you'll reset state by accident.
 
-#### Fix disappearing input text {/_fix-disappearing-input-text_/}
+#### Fix disappearing input text {/*fix-disappearing-input-text*/}
 
 This example shows a message when you press the button. However, pressing the button also accidentally resets the input. Why does this happen? Fix it so that pressing the button does not reset the input text.
 
 ```js src/App.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [showHint, setShowHint] = useState(false);
   if (showHint) {
     return (
       <div>
-        <p>
-          <i>Hint: Your favorite city?</i>
-        </p>
+        <p><i>Hint: Your favorite city?</i></p>
         <Form />
-        <button
-          onClick={() => {
-            setShowHint(false);
-          }}
-        >
-          Hide hint
-        </button>
+        <button onClick={() => {
+          setShowHint(false);
+        }}>Hide hint</button>
       </div>
     );
   }
   return (
     <div>
       <Form />
-      <button
-        onClick={() => {
-          setShowHint(true);
-        }}
-      >
-        Show hint
-      </button>
+      <button onClick={() => {
+        setShowHint(true);
+      }}>Show hint</button>
     </div>
   );
 }
 
 function Form() {
-  const [text, setText] = useState("");
-  return <textarea value={text} onChange={(e) => setText(e.target.value)} />;
+  const [text, setText] = useState('');
+  return (
+    <textarea
+      value={text}
+      onChange={e => setText(e.target.value)}
+    />
+  );
 }
 ```
 
 ```css
-textarea {
-  display: block;
-  margin: 10px 0;
-}
+textarea { display: block; margin: 10px 0; }
 ```
 
 The problem is that `Form` is rendered in different positions. In the `if` branch, it is the second child of the `<div>`, but in the `else` branch, it is the first child. Therefore, the component type in each position changes. The first position changes between holding a `p` and a `Form`, while the second position changes between holding a `Form` and a `button`. React resets the state every time the component type changes.
@@ -1104,73 +1119,59 @@ The problem is that `Form` is rendered in different positions. In the `if` branc
 The easiest solution is to unify the branches so that `Form` always renders in the same position:
 
 ```js src/App.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [showHint, setShowHint] = useState(false);
   return (
     <div>
-      {showHint && (
-        <p>
-          <i>Hint: Your favorite city?</i>
-        </p>
-      )}
+      {showHint &&
+        <p><i>Hint: Your favorite city?</i></p>
+      }
       <Form />
       {showHint ? (
-        <button
-          onClick={() => {
-            setShowHint(false);
-          }}
-        >
-          Hide hint
-        </button>
+        <button onClick={() => {
+          setShowHint(false);
+        }}>Hide hint</button>
       ) : (
-        <button
-          onClick={() => {
-            setShowHint(true);
-          }}
-        >
-          Show hint
-        </button>
+        <button onClick={() => {
+          setShowHint(true);
+        }}>Show hint</button>
       )}
     </div>
   );
 }
 
 function Form() {
-  const [text, setText] = useState("");
-  return <textarea value={text} onChange={(e) => setText(e.target.value)} />;
+  const [text, setText] = useState('');
+  return (
+    <textarea
+      value={text}
+      onChange={e => setText(e.target.value)}
+    />
+  );
 }
 ```
 
 ```css
-textarea {
-  display: block;
-  margin: 10px 0;
-}
+textarea { display: block; margin: 10px 0; }
 ```
 
 Technically, you could also add `null` before `<Form />` in the `else` branch to match the `if` branch structure:
 
 ```js src/App.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [showHint, setShowHint] = useState(false);
   if (showHint) {
     return (
       <div>
-        <p>
-          <i>Hint: Your favorite city?</i>
-        </p>
+        <p><i>Hint: Your favorite city?</i></p>
         <Form />
-        <button
-          onClick={() => {
-            setShowHint(false);
-          }}
-        >
-          Hide hint
-        </button>
+        <button onClick={() => {
+          setShowHint(false);
+        }}>Hide hint</button>
       </div>
     );
   }
@@ -1178,42 +1179,40 @@ export default function App() {
     <div>
       {null}
       <Form />
-      <button
-        onClick={() => {
-          setShowHint(true);
-        }}
-      >
-        Show hint
-      </button>
+      <button onClick={() => {
+        setShowHint(true);
+      }}>Show hint</button>
     </div>
   );
 }
 
 function Form() {
-  const [text, setText] = useState("");
-  return <textarea value={text} onChange={(e) => setText(e.target.value)} />;
+  const [text, setText] = useState('');
+  return (
+    <textarea
+      value={text}
+      onChange={e => setText(e.target.value)}
+    />
+  );
 }
 ```
 
 ```css
-textarea {
-  display: block;
-  margin: 10px 0;
-}
+textarea { display: block; margin: 10px 0; }
 ```
 
 This way, `Form` is always the second child, so it stays in the same position and keeps its state. But this approach is much less obvious and introduces a risk that someone else will remove that `null`.
 
-#### Swap two form fields {/_swap-two-form-fields_/}
+#### Swap two form fields {/*swap-two-form-fields*/}
 
 This form lets you enter first and last name. It also has a checkbox controlling which field goes first. When you tick the checkbox, the "Last name" field will appear before the "First name" field.
 
-It almost works, but there is a bug. If you fill in the "First name" input and tick the checkbox, the text will stay in the first input (which is now "Last name"). Fix it so that the input text _also_ moves when you reverse the order.
+It almost works, but there is a bug. If you fill in the "First name" input and tick the checkbox, the text will stay in the first input (which is now "Last name"). Fix it so that the input text *also* moves when you reverse the order.
 
 It seems like for these fields, their position within the parent is not enough. Is there some way to tell React how to match up the state between re-renders?
 
 ```js src/App.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [reverse, setReverse] = useState(false);
@@ -1222,7 +1221,7 @@ export default function App() {
       <input
         type="checkbox"
         checked={reverse}
-        onChange={(e) => setReverse(e.target.checked)}
+        onChange={e => setReverse(e.target.checked)}
       />
       Reverse order
     </label>
@@ -1230,7 +1229,7 @@ export default function App() {
   if (reverse) {
     return (
       <>
-        <Field label="Last name" />
+        <Field label="Last name" /> 
         <Field label="First name" />
         {checkbox}
       </>
@@ -1238,24 +1237,24 @@ export default function App() {
   } else {
     return (
       <>
-        <Field label="First name" />
+        <Field label="First name" /> 
         <Field label="Last name" />
         {checkbox}
       </>
-    );
+    );    
   }
 }
 
 function Field({ label }) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   return (
     <label>
-      {label}:{" "}
+      {label}:{' '}
       <input
         type="text"
         value={text}
         placeholder={label}
-        onChange={(e) => setText(e.target.value)}
+        onChange={e => setText(e.target.value)}
       />
     </label>
   );
@@ -1263,16 +1262,13 @@ function Field({ label }) {
 ```
 
 ```css
-label {
-  display: block;
-  margin: 10px 0;
-}
+label { display: block; margin: 10px 0; }
 ```
 
 Give a `key` to both `<Field>` components in both `if` and `else` branches. This tells React how to "match up" the correct state for either `<Field>` even if their order within the parent changes:
 
 ```js src/App.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [reverse, setReverse] = useState(false);
@@ -1281,7 +1277,7 @@ export default function App() {
       <input
         type="checkbox"
         checked={reverse}
-        onChange={(e) => setReverse(e.target.checked)}
+        onChange={e => setReverse(e.target.checked)}
       />
       Reverse order
     </label>
@@ -1289,7 +1285,7 @@ export default function App() {
   if (reverse) {
     return (
       <>
-        <Field key="lastName" label="Last name" />
+        <Field key="lastName" label="Last name" /> 
         <Field key="firstName" label="First name" />
         {checkbox}
       </>
@@ -1297,24 +1293,24 @@ export default function App() {
   } else {
     return (
       <>
-        <Field key="firstName" label="First name" />
+        <Field key="firstName" label="First name" /> 
         <Field key="lastName" label="Last name" />
         {checkbox}
       </>
-    );
+    );    
   }
 }
 
 function Field({ label }) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   return (
     <label>
-      {label}:{" "}
+      {label}:{' '}
       <input
         type="text"
         value={text}
         placeholder={label}
-        onChange={(e) => setText(e.target.value)}
+        onChange={e => setText(e.target.value)}
       />
     </label>
   );
@@ -1322,30 +1318,35 @@ function Field({ label }) {
 ```
 
 ```css
-label {
-  display: block;
-  margin: 10px 0;
-}
+label { display: block; margin: 10px 0; }
 ```
 
-#### Reset a detail form {/_reset-a-detail-form_/}
+#### Reset a detail form {/*reset-a-detail-form*/}
 
 This is an editable contact list. You can edit the selected contact's details and then either press "Save" to update it, or "Reset" to undo your changes.
 
 When you select a different contact (for example, Alice), the state updates but the form keeps showing the previous contact's details. Fix it so that the form gets reset when the selected contact changes.
 
 ```js src/App.js
-import { useState } from "react";
-import ContactList from "./ContactList.js";
-import EditContact from "./EditContact.js";
+import { useState } from 'react';
+import ContactList from './ContactList.js';
+import EditContact from './EditContact.js';
 
 export default function ContactManager() {
-  const [contacts, setContacts] = useState(initialContacts);
-  const [selectedId, setSelectedId] = useState(0);
-  const selectedContact = contacts.find((c) => c.id === selectedId);
+  const [
+    contacts,
+    setContacts
+  ] = useState(initialContacts);
+  const [
+    selectedId,
+    setSelectedId
+  ] = useState(0);
+  const selectedContact = contacts.find(c =>
+    c.id === selectedId
+  );
 
   function handleSave(updatedData) {
-    const nextContacts = contacts.map((c) => {
+    const nextContacts = contacts.map(c => {
       if (c.id === updatedData.id) {
         return updatedData;
       } else {
@@ -1360,37 +1361,45 @@ export default function ContactManager() {
       <ContactList
         contacts={contacts}
         selectedId={selectedId}
-        onSelect={(id) => setSelectedId(id)}
+        onSelect={id => setSelectedId(id)}
       />
       <hr />
-      <EditContact initialData={selectedContact} onSave={handleSave} />
+      <EditContact
+        initialData={selectedContact}
+        onSave={handleSave}
+      />
     </div>
-  );
+  )
 }
 
 const initialContacts = [
-  { id: 0, name: "Taylor", email: "taylor@mail.com" },
-  { id: 1, name: "Alice", email: "alice@mail.com" },
-  { id: 2, name: "Bob", email: "bob@mail.com" },
+  { id: 0, name: 'Taylor', email: 'taylor@mail.com' },
+  { id: 1, name: 'Alice', email: 'alice@mail.com' },
+  { id: 2, name: 'Bob', email: 'bob@mail.com' }
 ];
 ```
 
 ```js src/ContactList.js
-export default function ContactList({ contacts, selectedId, onSelect }) {
+export default function ContactList({
+  contacts,
+  selectedId,
+  onSelect
+}) {
   return (
     <section>
       <ul>
-        {contacts.map((contact) => (
+        {contacts.map(contact =>
           <li key={contact.id}>
-            <button
-              onClick={() => {
-                onSelect(contact.id);
-              }}
-            >
-              {contact.id === selectedId ? <b>{contact.name}</b> : contact.name}
+            <button onClick={() => {
+              onSelect(contact.id);
+            }}>
+              {contact.id === selectedId ?
+                <b>{contact.name}</b> :
+                contact.name
+              }
             </button>
           </li>
-        ))}
+        )}
       </ul>
     </section>
   );
@@ -1398,7 +1407,7 @@ export default function ContactList({ contacts, selectedId, onSelect }) {
 ```
 
 ```js src/EditContact.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function EditContact({ initialData, onSave }) {
   const [name, setName] = useState(initialData.name);
@@ -1406,39 +1415,35 @@ export default function EditContact({ initialData, onSave }) {
   return (
     <section>
       <label>
-        Name:{" "}
+        Name:{' '}
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={e => setName(e.target.value)}
         />
       </label>
       <label>
-        Email:{" "}
+        Email:{' '}
         <input
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
         />
       </label>
-      <button
-        onClick={() => {
-          const updatedData = {
-            id: initialData.id,
-            name: name,
-            email: email,
-          };
-          onSave(updatedData);
-        }}
-      >
+      <button onClick={() => {
+        const updatedData = {
+          id: initialData.id,
+          name: name,
+          email: email
+        };
+        onSave(updatedData);
+      }}>
         Save
       </button>
-      <button
-        onClick={() => {
-          setName(initialData.name);
-          setEmail(initialData.email);
-        }}
-      >
+      <button onClick={() => {
+        setName(initialData.name);
+        setEmail(initialData.email);
+      }}>
         Reset
       </button>
     </section>
@@ -1447,15 +1452,12 @@ export default function EditContact({ initialData, onSave }) {
 ```
 
 ```css
-ul,
-li {
+ul, li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-li {
-  display: inline-block;
-}
+li { display: inline-block; }
 li button {
   padding: 10px;
 }
@@ -1472,17 +1474,25 @@ button {
 Give `key={selectedId}` to the `EditContact` component. This way, switching between different contacts will reset the form:
 
 ```js src/App.js
-import { useState } from "react";
-import ContactList from "./ContactList.js";
-import EditContact from "./EditContact.js";
+import { useState } from 'react';
+import ContactList from './ContactList.js';
+import EditContact from './EditContact.js';
 
 export default function ContactManager() {
-  const [contacts, setContacts] = useState(initialContacts);
-  const [selectedId, setSelectedId] = useState(0);
-  const selectedContact = contacts.find((c) => c.id === selectedId);
+  const [
+    contacts,
+    setContacts
+  ] = useState(initialContacts);
+  const [
+    selectedId,
+    setSelectedId
+  ] = useState(0);
+  const selectedContact = contacts.find(c =>
+    c.id === selectedId
+  );
 
   function handleSave(updatedData) {
-    const nextContacts = contacts.map((c) => {
+    const nextContacts = contacts.map(c => {
       if (c.id === updatedData.id) {
         return updatedData;
       } else {
@@ -1497,7 +1507,7 @@ export default function ContactManager() {
       <ContactList
         contacts={contacts}
         selectedId={selectedId}
-        onSelect={(id) => setSelectedId(id)}
+        onSelect={id => setSelectedId(id)}
       />
       <hr />
       <EditContact
@@ -1506,32 +1516,37 @@ export default function ContactManager() {
         onSave={handleSave}
       />
     </div>
-  );
+  )
 }
 
 const initialContacts = [
-  { id: 0, name: "Taylor", email: "taylor@mail.com" },
-  { id: 1, name: "Alice", email: "alice@mail.com" },
-  { id: 2, name: "Bob", email: "bob@mail.com" },
+  { id: 0, name: 'Taylor', email: 'taylor@mail.com' },
+  { id: 1, name: 'Alice', email: 'alice@mail.com' },
+  { id: 2, name: 'Bob', email: 'bob@mail.com' }
 ];
 ```
 
 ```js src/ContactList.js
-export default function ContactList({ contacts, selectedId, onSelect }) {
+export default function ContactList({
+  contacts,
+  selectedId,
+  onSelect
+}) {
   return (
     <section>
       <ul>
-        {contacts.map((contact) => (
+        {contacts.map(contact =>
           <li key={contact.id}>
-            <button
-              onClick={() => {
-                onSelect(contact.id);
-              }}
-            >
-              {contact.id === selectedId ? <b>{contact.name}</b> : contact.name}
+            <button onClick={() => {
+              onSelect(contact.id);
+            }}>
+              {contact.id === selectedId ?
+                <b>{contact.name}</b> :
+                contact.name
+              }
             </button>
           </li>
-        ))}
+        )}
       </ul>
     </section>
   );
@@ -1539,7 +1554,7 @@ export default function ContactList({ contacts, selectedId, onSelect }) {
 ```
 
 ```js src/EditContact.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function EditContact({ initialData, onSave }) {
   const [name, setName] = useState(initialData.name);
@@ -1547,39 +1562,35 @@ export default function EditContact({ initialData, onSave }) {
   return (
     <section>
       <label>
-        Name:{" "}
+        Name:{' '}
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={e => setName(e.target.value)}
         />
       </label>
       <label>
-        Email:{" "}
+        Email:{' '}
         <input
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
         />
       </label>
-      <button
-        onClick={() => {
-          const updatedData = {
-            id: initialData.id,
-            name: name,
-            email: email,
-          };
-          onSave(updatedData);
-        }}
-      >
+      <button onClick={() => {
+        const updatedData = {
+          id: initialData.id,
+          name: name,
+          email: email
+        };
+        onSave(updatedData);
+      }}>
         Save
       </button>
-      <button
-        onClick={() => {
-          setName(initialData.name);
-          setEmail(initialData.email);
-        }}
-      >
+      <button onClick={() => {
+        setName(initialData.name);
+        setEmail(initialData.email);
+      }}>
         Reset
       </button>
     </section>
@@ -1588,15 +1599,12 @@ export default function EditContact({ initialData, onSave }) {
 ```
 
 ```css
-ul,
-li {
+ul, li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-li {
-  display: inline-block;
-}
+li { display: inline-block; }
 li button {
   padding: 10px;
 }
@@ -1610,14 +1618,14 @@ button {
 }
 ```
 
-#### Clear an image while it's loading {/_clear-an-image-while-its-loading_/}
+#### Clear an image while it's loading {/*clear-an-image-while-its-loading*/}
 
 When you press "Next", the browser starts loading the next image. However, because it's displayed in the same `<img>` tag, by default you would still see the previous image until the next one loads. This may be undesirable if it's important for the text to always match the image. Change it so that the moment you press "Next", the previous image immediately clears.
 
 Is there a way to tell React to re-create the DOM instead of reusing it?
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Gallery() {
   const [index, setIndex] = useState(0);
@@ -1634,59 +1642,52 @@ export default function Gallery() {
   let image = images[index];
   return (
     <>
-      <button onClick={handleClick}>Next</button>
+      <button onClick={handleClick}>
+        Next
+      </button>
       <h3>
         Image {index + 1} of {images.length}
       </h3>
       <img src={image.src} />
-      <p>{image.place}</p>
+      <p>
+        {image.place}
+      </p>
     </>
   );
 }
 
-let images = [
-  {
-    place: "Penang, Malaysia",
-    src: "https://i.imgur.com/FJeJR8M.jpg",
-  },
-  {
-    place: "Lisbon, Portugal",
-    src: "https://i.imgur.com/dB2LRbj.jpg",
-  },
-  {
-    place: "Bilbao, Spain",
-    src: "https://i.imgur.com/z08o2TS.jpg",
-  },
-  {
-    place: "Valparaíso, Chile",
-    src: "https://i.imgur.com/Y3utgTi.jpg",
-  },
-  {
-    place: "Schwyz, Switzerland",
-    src: "https://i.imgur.com/JBbMpWY.jpg",
-  },
-  {
-    place: "Prague, Czechia",
-    src: "https://i.imgur.com/QwUKKmF.jpg",
-  },
-  {
-    place: "Ljubljana, Slovenia",
-    src: "https://i.imgur.com/3aIiwfm.jpg",
-  },
-];
+let images = [{
+  place: 'Penang, Malaysia',
+  src: 'https://i.imgur.com/FJeJR8M.jpg'
+}, {
+  place: 'Lisbon, Portugal',
+  src: 'https://i.imgur.com/dB2LRbj.jpg'
+}, {
+  place: 'Bilbao, Spain',
+  src: 'https://i.imgur.com/z08o2TS.jpg'
+}, {
+  place: 'Valparaíso, Chile',
+  src: 'https://i.imgur.com/Y3utgTi.jpg'
+}, {
+  place: 'Schwyz, Switzerland',
+  src: 'https://i.imgur.com/JBbMpWY.jpg'
+}, {
+  place: 'Prague, Czechia',
+  src: 'https://i.imgur.com/QwUKKmF.jpg'
+}, {
+  place: 'Ljubljana, Slovenia',
+  src: 'https://i.imgur.com/3aIiwfm.jpg'
+}];
 ```
 
 ```css
-img {
-  width: 150px;
-  height: 150px;
-}
+img { width: 150px; height: 150px; }
 ```
 
 You can provide a `key` to the `<img>` tag. When that `key` changes, React will re-create the `<img>` DOM node from scratch. This causes a brief flash when each image loads, so it's not something you'd want to do for every image in your app. But it makes sense if you want to ensure the image always matches the text.
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Gallery() {
   const [index, setIndex] = useState(0);
@@ -1703,64 +1704,57 @@ export default function Gallery() {
   let image = images[index];
   return (
     <>
-      <button onClick={handleClick}>Next</button>
+      <button onClick={handleClick}>
+        Next
+      </button>
       <h3>
         Image {index + 1} of {images.length}
       </h3>
       <img key={image.src} src={image.src} />
-      <p>{image.place}</p>
+      <p>
+        {image.place}
+      </p>
     </>
   );
 }
 
-let images = [
-  {
-    place: "Penang, Malaysia",
-    src: "https://i.imgur.com/FJeJR8M.jpg",
-  },
-  {
-    place: "Lisbon, Portugal",
-    src: "https://i.imgur.com/dB2LRbj.jpg",
-  },
-  {
-    place: "Bilbao, Spain",
-    src: "https://i.imgur.com/z08o2TS.jpg",
-  },
-  {
-    place: "Valparaíso, Chile",
-    src: "https://i.imgur.com/Y3utgTi.jpg",
-  },
-  {
-    place: "Schwyz, Switzerland",
-    src: "https://i.imgur.com/JBbMpWY.jpg",
-  },
-  {
-    place: "Prague, Czechia",
-    src: "https://i.imgur.com/QwUKKmF.jpg",
-  },
-  {
-    place: "Ljubljana, Slovenia",
-    src: "https://i.imgur.com/3aIiwfm.jpg",
-  },
-];
+let images = [{
+  place: 'Penang, Malaysia',
+  src: 'https://i.imgur.com/FJeJR8M.jpg'
+}, {
+  place: 'Lisbon, Portugal',
+  src: 'https://i.imgur.com/dB2LRbj.jpg'
+}, {
+  place: 'Bilbao, Spain',
+  src: 'https://i.imgur.com/z08o2TS.jpg'
+}, {
+  place: 'Valparaíso, Chile',
+  src: 'https://i.imgur.com/Y3utgTi.jpg'
+}, {
+  place: 'Schwyz, Switzerland',
+  src: 'https://i.imgur.com/JBbMpWY.jpg'
+}, {
+  place: 'Prague, Czechia',
+  src: 'https://i.imgur.com/QwUKKmF.jpg'
+}, {
+  place: 'Ljubljana, Slovenia',
+  src: 'https://i.imgur.com/3aIiwfm.jpg'
+}];
 ```
 
 ```css
-img {
-  width: 150px;
-  height: 150px;
-}
+img { width: 150px; height: 150px; }
 ```
 
-#### Fix misplaced state in the list {/_fix-misplaced-state-in-the-list_/}
+#### Fix misplaced state in the list {/*fix-misplaced-state-in-the-list*/}
 
-In this list, each `Contact` has state that determines whether "Show email" has been pressed for it. Press "Show email" for Alice, and then tick the "Show in reverse order" checkbox. You will notice that it's _Taylor's_ email that is expanded now, but Alice's--which has moved to the bottom--appears collapsed.
+In this list, each `Contact` has state that determines whether "Show email" has been pressed for it. Press "Show email" for Alice, and then tick the "Show in reverse order" checkbox. You will notice that it's *Taylor's* email that is expanded now, but Alice's--which has moved to the bottom--appears collapsed.
 
 Fix it so that the expanded state is associated with each contact, regardless of the chosen ordering.
 
 ```js src/App.js
-import { useState } from "react";
-import Contact from "./Contact.js";
+import { useState } from 'react';
+import Contact from './Contact.js';
 
 export default function ContactList() {
   const [reverse, setReverse] = useState(false);
@@ -1776,51 +1770,45 @@ export default function ContactList() {
         <input
           type="checkbox"
           checked={reverse}
-          onChange={(e) => {
-            setReverse(e.target.checked);
+          onChange={e => {
+            setReverse(e.target.checked)
           }}
-        />{" "}
+        />{' '}
         Show in reverse order
       </label>
       <ul>
-        {displayedContacts.map((contact, i) => (
+        {displayedContacts.map((contact, i) =>
           <li key={i}>
             <Contact contact={contact} />
           </li>
-        ))}
+        )}
       </ul>
     </>
   );
 }
 
 const contacts = [
-  { id: 0, name: "Alice", email: "alice@mail.com" },
-  { id: 1, name: "Bob", email: "bob@mail.com" },
-  { id: 2, name: "Taylor", email: "taylor@mail.com" },
+  { id: 0, name: 'Alice', email: 'alice@mail.com' },
+  { id: 1, name: 'Bob', email: 'bob@mail.com' },
+  { id: 2, name: 'Taylor', email: 'taylor@mail.com' }
 ];
 ```
 
 ```js src/Contact.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Contact({ contact }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <>
-      <p>
-        <b>{contact.name}</b>
-      </p>
-      {expanded && (
-        <p>
-          <i>{contact.email}</i>
-        </p>
-      )}
-      <button
-        onClick={() => {
-          setExpanded(!expanded);
-        }}
-      >
-        {expanded ? "Hide" : "Show"} email
+      <p><b>{contact.name}</b></p>
+      {expanded &&
+        <p><i>{contact.email}</i></p>
+      }
+      <button onClick={() => {
+        setExpanded(!expanded);
+      }}>
+        {expanded ? 'Hide' : 'Show'} email
       </button>
     </>
   );
@@ -1828,8 +1816,7 @@ export default function Contact({ contact }) {
 ```
 
 ```css
-ul,
-li {
+ul, li {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1854,13 +1841,13 @@ The problem is that this example was using index as a `key`:
   <li key={i}>
 ```
 
-However, you want the state to be associated with _each particular contact_.
+However, you want the state to be associated with *each particular contact*.
 
 Using the contact ID as a `key` instead fixes the issue:
 
 ```js src/App.js
-import { useState } from "react";
-import Contact from "./Contact.js";
+import { useState } from 'react';
+import Contact from './Contact.js';
 
 export default function ContactList() {
   const [reverse, setReverse] = useState(false);
@@ -1876,51 +1863,45 @@ export default function ContactList() {
         <input
           type="checkbox"
           checked={reverse}
-          onChange={(e) => {
-            setReverse(e.target.checked);
+          onChange={e => {
+            setReverse(e.target.checked)
           }}
-        />{" "}
+        />{' '}
         Show in reverse order
       </label>
       <ul>
-        {displayedContacts.map((contact) => (
+        {displayedContacts.map(contact =>
           <li key={contact.id}>
             <Contact contact={contact} />
           </li>
-        ))}
+        )}
       </ul>
     </>
   );
 }
 
 const contacts = [
-  { id: 0, name: "Alice", email: "alice@mail.com" },
-  { id: 1, name: "Bob", email: "bob@mail.com" },
-  { id: 2, name: "Taylor", email: "taylor@mail.com" },
+  { id: 0, name: 'Alice', email: 'alice@mail.com' },
+  { id: 1, name: 'Bob', email: 'bob@mail.com' },
+  { id: 2, name: 'Taylor', email: 'taylor@mail.com' }
 ];
 ```
 
 ```js src/Contact.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Contact({ contact }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <>
-      <p>
-        <b>{contact.name}</b>
-      </p>
-      {expanded && (
-        <p>
-          <i>{contact.email}</i>
-        </p>
-      )}
-      <button
-        onClick={() => {
-          setExpanded(!expanded);
-        }}
-      >
-        {expanded ? "Hide" : "Show"} email
+      <p><b>{contact.name}</b></p>
+      {expanded &&
+        <p><i>{contact.email}</i></p>
+      }
+      <button onClick={() => {
+        setExpanded(!expanded);
+      }}>
+        {expanded ? 'Hide' : 'Show'} email
       </button>
     </>
   );
@@ -1928,8 +1909,7 @@ export default function Contact({ contact }) {
 ```
 
 ```css
-ul,
-li {
+ul, li {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1949,7 +1929,7 @@ button {
 
 State is associated with the tree position. A `key` lets you specify a named position instead of relying on order.
 
----
+***
 
 ## Sitemap
 

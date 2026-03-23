@@ -2,9 +2,9 @@
 
 Set a subscription's billing cycle anchor to a fixed date.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/billing-cycle?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/billing-cycle?payment-ui=stripe-hosted.
 
 You can explicitly set a subscription’s [billing cycle anchor](https://docs.stripe.com/api/checkout/sessions/create.md#create_checkout_session-subscription_data-billing_cycle_anchor) to a fixed date (for example, the 1st of the next month) when creating a Checkout Session. The billing cycle anchor determines the first full invoice date, when customers are billed the full subscription amount. The billing cycle anchor and the recurring interval of its [price](https://docs.stripe.com/products-prices/overview.md) also determine a subscription’s future billing dates. For example, a monthly subscription created on May 15 with an anchor at June 1 is billed on May 15, then always on the 1st of the month.
 
@@ -51,9 +51,9 @@ In the Checkout Session response object, amounts attached to the [line items](ht
 - You can’t use one-time prices in Checkout Sessions when `proration_behavior` is `none`.
 - You can’t apply [amount\_off coupons](https://docs.stripe.com/api/coupons/create.md#create_coupon-amount_off) to Checkout Sessions with a default `proration_behavior` of `create_prorations`.
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/billing-cycle?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/billing-cycle?payment-ui=embedded-form.
 
 You can explicitly set a subscription’s [billing cycle anchor](https://docs.stripe.com/api/checkout/sessions/create.md#create_checkout_session-subscription_data-billing_cycle_anchor) to a fixed date (for example, the 1st of the next month) when creating a Checkout Session. The billing cycle anchor determines the first full invoice date, when customers are billed the full subscription amount. The billing cycle anchor and the recurring interval of its [price](https://docs.stripe.com/products-prices/overview.md) also determine a subscription’s future billing dates. For example, a monthly subscription created on May 15 with an anchor at June 1 is billed on May 15, then always on the 1st of the month.
 

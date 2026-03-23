@@ -174,9 +174,9 @@ The following sites use Astro + Decap CMS in production:
 
 [Section titled “Themes”](#themes)
 
-- [![](/_astro/astros.CA8z6dbD_Z1fUXSm.webp) Astros](https://astro.build/themes/details/astros)
-- [![](/_astro/enhanced-astro-starter.BDAzOMVv_ghcL4.webp) Enhanced Astro Starter](https://astro.build/themes/details/enhanced-astro-starter)
-- [![](/_astro/astro-decap-starter.CuC8RtgM_IaqHQ.webp) Astro Decap CMS Starter](https://astro.build/themes/details/astro-decap-cms-starter)
+- [![](/_astro/astros.CA8z6dbD_1DAx4t.webp) Astros](https://astro.build/themes/details/astros)
+- [![](/_astro/enhanced-astro-starter.BDAzOMVv_1DBCpt.webp) Enhanced Astro Starter](https://astro.build/themes/details/enhanced-astro-starter)
+- [![](/_astro/astro-decap-starter.CuC8RtgM_1x5zxf.webp) Astro Decap CMS Starter](https://astro.build/themes/details/astro-decap-cms-starter)
 
 # Directus & Astro
 

@@ -1,6 +1,6 @@
 # Client-side Fetching
 
-Client-side data fetching is useful when your page doesn't require SEO indexing, when you don't need to pre-render your data, or when the content of your pages needs to update frequently. Unlike the server-side rendering APIs, you can use client-side data fetching at the component level.
+Client-side data fetching is useful when your page doesn't require SEO indexing, when you don't need to prerender your data, or when the content of your pages needs to update frequently. Unlike the server-side rendering APIs, you can use client-side data fetching at the component level.
 
 If done at the page level, the data is fetched at runtime, and the content of the page is updated as the data changes. When used at the component level, the data is fetched at the time of the component mount, and the content of the component is updated as the data changes.
 
@@ -11,30 +11,30 @@ It's important to note that using client-side data fetching can affect the perfo
 The following example shows how you can fetch data on the client side using the useEffect hook.
 
 ```jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 
 function Profile() {
-  const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch("/api/profile-data")
+    fetch('/api/profile-data')
       .then((res) => res.json())
       .then((data) => {
-        setData(data);
-        setLoading(false);
-      });
-  }, []);
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No profile data</p>;
+  if (isLoading) return <p>Loading...</p>
+  if (!data) return <p>No profile data</p>
 
   return (
     <div>
       <h1>{data.name}</h1>
       <p>{data.bio}</p>
     </div>
-  );
+  )
 }
 ```
 
@@ -47,22 +47,22 @@ Using the same example as above, we can now use SWR to fetch the profile data. S
 For more information on using SWR, check out the [SWR docs](https://swr.vercel.app/docs/getting-started).
 
 ```jsx
-import useSWR from "swr";
+import useSWR from 'swr'
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 function Profile() {
-  const { data, error } = useSWR("/api/profile-data", fetcher);
+  const { data, error } = useSWR('/api/profile-data', fetcher)
 
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  if (error) return <div>Failed to load</div>
+  if (!data) return <div>Loading...</div>
 
   return (
     <div>
       <h1>{data.name}</h1>
       <p>{data.bio}</p>
     </div>
-  );
+  )
 }
 ```
 

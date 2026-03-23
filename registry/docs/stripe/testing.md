@@ -484,13 +484,13 @@ Radar might block it [depending on your settings](https://docs.stripe.com/radar/
 If you use Radar for Fraud Teams, Radar might [queue it for review](https://docs.stripe.com/radar/reviews.md).                                                     |
 | High fraud dispute score                   | 4000008400000407 | This charge has a high fraud dispute score.
 
-Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md?radar_risk_controls=risk-modes).                                                                                                  |
+Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md).                                                                                                                                 |
 | High early fraud warning score             | 4000008400000159 | This charge has a high early fraud warning score.
 
-Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md?radar_risk_controls=risk-modes).                                                                                            |
+Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md).                                                                                                                           |
 | Dynamic risk threshold                     | 4000008400001017 | This charge triggers the Radar Dynamic risk threshold control, when enabled.
 
-Radar blocks the transaction if you enable the [Dynamic risk threshold](https://docs.stripe.com/radar/risk-settings.md?radar_risk_controls=risk-controls#dynamic-risk-threshold).                 |
+Radar blocks the transaction if you enable the [Dynamic risk threshold](https://docs.stripe.com/radar/risk-settings.md#dynamic-risk-threshold).                                                   |
 | Adaptive 3DS                               | 4000008405600003 | This charge triggers the Radar Adaptive 3DS risk control, when enabled.
 
 If you enable Adaptive 3DS, Radar requests 3DS authentication when using this test card.                                                                                                               |
@@ -531,13 +531,13 @@ Radar might block it depending on your settings.                                
 If you use Radar for Fraud Teams, Radar might [queue it for review](https://docs.stripe.com/radar/reviews.md).                                                     |
 | High fraud dispute score                   | `pm_card_highFraudDisputeScore`     | This charge has a high fraud dispute score.
 
-Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md?radar_risk_controls=risk-modes).                                                                                                  |
+Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md).                                                                                                                                 |
 | High early fraud warning score             | `pm_card_highEfwScore`              | This charge has a high early fraud warning score.
 
-Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md?radar_risk_controls=risk-modes).                                                                                            |
+Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md).                                                                                                                           |
 | Dynamic risk threshold                     | `pm_card_radarDynamicRiskThreshold` | This charge triggers the Radar Dynamic risk threshold control, when enabled.
 
-Radar blocks the transaction if you enable the [Dynamic risk threshold](https://docs.stripe.com/radar/risk-settings.md?radar_risk_controls=risk-controls#dynamic-risk-threshold).                 |
+Radar blocks the transaction if you enable the [Dynamic risk threshold](https://docs.stripe.com/radar/risk-settings.md#dynamic-risk-threshold).                                                   |
 | Adaptive 3DS                               | `pm_card_adaptive3dsChallenge`      | This charge triggers the Radar Adaptive 3DS risk control, when enabled.
 
 If you enable Adaptive 3DS, Radar requests 3DS authentication when using this test card.                                                                                                               |
@@ -580,13 +580,13 @@ Radar might block it depending on your settings.                                
 If you use Radar for Fraud Teams, Radar might [queue it for review](https://docs.stripe.com/radar/reviews.md).                                                     |
 | High fraud dispute score                   | `tok_highFraudDisputeScore`     | This charge has a high fraud dispute score.
 
-Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md?radar_risk_controls=risk-modes).                                                                                                  |
+Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md).                                                                                                                                 |
 | High early fraud warning score             | `tok_highEfwScore`              | This charge has a high early fraud warning score.
 
-Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md?radar_risk_controls=risk-modes).                                                                                            |
+Radar might block it [depending on your settings](https://docs.stripe.com/radar/risk-settings.md).                                                                                                                           |
 | Dynamic risk threshold                     | `tok_radarDynamicRiskThreshold` | This charge triggers the Radar Dynamic risk threshold control, when enabled.
 
-Radar blocks the transaction if you enable the [Dynamic risk threshold](https://docs.stripe.com/radar/risk-settings.md?radar_risk_controls=risk-controls#dynamic-risk-threshold).                 |
+Radar blocks the transaction if you enable the [Dynamic risk threshold](https://docs.stripe.com/radar/risk-settings.md#dynamic-risk-threshold).                                                   |
 | Adaptive 3DS                               | `tok_adaptive3dsChallenge`      | This charge triggers the Radar Adaptive 3DS risk control, when enabled.
 
 If you enable Adaptive 3DS, Radar requests 3DS authentication when using this test card.                                                                                                               |
@@ -1177,19 +1177,19 @@ Create a test `PaymentIntent` that either succeeds or fails by doing the followi
 
 There are several [test bank account numbers](https://docs.stripe.com/keys.md#test-live-modes) you can use in a *sandbox* (A sandbox is an isolated test environment that allows you to test Stripe functionality in your account without affecting your live integration. Use sandboxes to safely experiment with new features and changes) to make sure this integration is ready.
 
-| Sort code | Account number | Description                                                                                                                                                                                                                                                 |
-| --------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 108800    | 00012345       | The payment succeeds and the PaymentIntent transitions from `processing` to `succeeded`.                                                                                                                                                                    |
-| 108800    | 90012345       | The payment succeeds after three minutes and the PaymentIntent transitions from `processing` to `succeeded`.                                                                                                                                                |
-| 108800    | 33333335       | The payment is accepted but then immediately fails with a `debit_not_authorized` failure code and the PaymentIntent transitions from `processing` to `requires_payment_method`. The Mandate becomes `inactive` and the PaymentMethod can not be used again. |
-| 108800    | 93333335       | The payment fails after three minutes with a `debit_not_authorized` failure code and the PaymentIntent transitions from `processing` to `requires_payment_method`. The Mandate becomes `inactive` and the PaymentMethod can not be used again.              |
-| 108800    | 22222227       | The payment fails with an `insufficient_funds` failure code and the PaymentIntent transitions from `processing` to `requires_payment_method`. The Mandate remains `active` and the PaymentMethod can be used again.                                         |
-| 108800    | 92222227       | The payment fails after three minutes with an `insufficient_funds` failure code and the PaymentIntent transitions from `processing` to `requires_payment_method`. The Mandate remains `active` and the PaymentMethod can be used again.                     |
-| 108800    | 55555559       | The payment succeeds after three minutes and the PaymentIntent transitions from `processing` to `succeeded`, but a dispute is immediately created.                                                                                                          |
-| 108800    | 00033333       | Payment Method creation succeeds, but the Mandate is refused by the customer’s bank and immediately transitions to inactive.                                                                                                                                |
-| 108800    | 00044444       | The request to set up Bacs Direct Debit fails immediately due to an invalid account number and the customer is prompted to update their information before submitting. Payment details are not collected.                                                   |
-| 108800    | 34343434       | The payment fails with a `charge_exceeds_source_limit` failure code due to the payment amount causing the account to exceed its weekly payment volume limit.                                                                                                |
-| 108800    | 12121212       | The payment fails with a `charge_exceeds_weekly_limit` failure code due to the payment amount exceeding the account’s transaction volume limit.                                                                                                             |
+| Sort code | Account number | Description                                                                                                                                                                                                                                               |
+| --------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 108800    | 00012345       | The payment succeeds and the PaymentIntent transitions from `processing` to `succeeded`.                                                                                                                                                                  |
+| 108800    | 90012345       | The payment succeeds after three minutes and the PaymentIntent transitions from `processing` to `succeeded`.                                                                                                                                              |
+| 108800    | 33333335       | The payment is accepted but then immediately fails with a `debit_not_authorized` failure code and the PaymentIntent transitions from `processing` to `requires_payment_method`. The Mandate becomes `inactive` and the PaymentMethod can’t be used again. |
+| 108800    | 93333335       | The payment fails after three minutes with a `debit_not_authorized` failure code and the PaymentIntent transitions from `processing` to `requires_payment_method`. The Mandate becomes `inactive` and the PaymentMethod can’t be used again.              |
+| 108800    | 22222227       | The payment fails with an `insufficient_funds` failure code and the PaymentIntent transitions from `processing` to `requires_payment_method`. The Mandate remains `active` and the PaymentMethod can be used again.                                       |
+| 108800    | 92222227       | The payment fails after three minutes with an `insufficient_funds` failure code and the PaymentIntent transitions from `processing` to `requires_payment_method`. The Mandate remains `active` and the PaymentMethod can be used again.                   |
+| 108800    | 55555559       | The payment succeeds after three minutes and the PaymentIntent transitions from `processing` to `succeeded`, but a dispute is immediately created.                                                                                                        |
+| 108800    | 00033333       | Payment Method creation succeeds, but the Mandate is refused by the customer’s bank and immediately transitions to inactive.                                                                                                                              |
+| 108800    | 00044444       | The request to set up Bacs Direct Debit fails immediately due to an invalid account number and the customer is prompted to update their information before submitting. Payment details aren’t collected.                                                  |
+| 108800    | 34343434       | The payment fails with a `charge_exceeds_source_limit` failure code due to the payment amount causing the account to exceed its weekly payment volume limit.                                                                                              |
+| 108800    | 12121212       | The payment fails with a `charge_exceeds_weekly_limit` failure code due to the payment amount exceeding the account’s transaction volume limit.                                                                                                           |
 
 You can test using any of the account numbers provided above. However, because Bacs Direct Debit payments take several days to process, use the test account numbers that operate on a three-minute delay to better simulate the behavior of live payments.
 

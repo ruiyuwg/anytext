@@ -1,199 +1,345 @@
-## Tool calling
+# Tool calling
 
-Models can request to call tools that perform tasks such as fetching data from a database, searching the web, or running code. Tools are pairings of:
+Source: https://docs.langchain.com/oss/javascript/langchain/frontend/tool-calling
 
-1. A schema, including the name of the tool, a description, and/or argument definitions (often a JSON schema)
-2. A function or coroutine to execute.
+Display agent tool calls with rich, type-safe UI cards
 
-You may hear the term "function calling". We use this interchangeably with "tool calling".
+Agents can invoke external tools like weather APIs, calculators, web search,
+database queries, and more. The results are in raw JSON. This pattern shows you
+how to render
+structured, type-safe UI cards for every tool call your agent makes, complete
+with loading states and error handling.
 
-Here's the basic tool calling flow between a user and a model:
+## How tool calling works
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-sequenceDiagram
-    participant U as User
-    participant M as Model
-    participant T as Tools
+When a LangGraph agent decides it needs external data, it emits one or more
+**tool calls** as part of an AI message. Each tool call includes:
 
-    U->>M: "What's the weather in SF and NYC?"
-    M->>M: Analyze request & decide tools needed
+- **name**: the tool being invoked (e.g. `"get_weather"`, `"calculator"`)
+- **args**: the structured arguments passed to the tool
+- **id**: a unique identifier linking the call to its result
 
-    par Parallel Tool Calls
-        M->>T: getWeather("San Francisco")
-        M->>T: getWeather("New York")
-    end
+The agent runtime executes the tool, and the result comes back as a
+`ToolMessage`. The `useStream` hook unifies all of this into a single
+`toolCalls` array you can render directly.
 
-    par Tool Execution
-        T-->>M: SF weather data
-        T-->>M: NYC weather data
-    end
+## Setting up useStream
 
-    M->>M: Process results & generate response
-    M->>U: "SF: 72°F sunny, NYC: 68°F cloudy"
+The first step is wiring up `useStream` to your agent backend. The hook returns
+reactive state including a `toolCalls` array that updates in real time as the
+agent streams.
+
+Import your agent and pass `typeof myAgent` as a type parameter to `useStream` for type-safe access to state values:
+
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import type { myAgent } from "./agent";
 ```
 
-To make tools that you have defined available for use by a model, you must bind them using [`bindTools`](https://reference.langchain.com/javascript/classes/_langchain_core.language_models_chat_models.BaseChatModel.html#bindTools). In subsequent invocations, the model can choose to call any of the bound tools as needed.
+```tsx React theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { useStream } from "@langchain/react";
 
-Some model providers offer built-in tools that can be enabled via model or invocation parameters (e.g. [`ChatOpenAI`](/oss/javascript/integrations/chat/openai), [`ChatAnthropic`](/oss/javascript/integrations/chat/anthropic)). Check the respective [provider reference](/oss/javascript/integrations/providers/overview) for details.
+const AGENT_URL = "http://localhost:2024";
 
-See the [tools guide](/oss/javascript/langchain/tools) for details and other options for creating tools.
+export function Chat() {
+  const stream = useStream({
+    apiUrl: AGENT_URL,
+    assistantId: "tool_calling",
+  });
 
-```typescript Binding user tools theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { tool } from "langchain";
-import * as z from "zod";
-import { ChatOpenAI } from "@langchain/openai";
-
-const getWeather = tool(
-  (input) => `It's sunny in ${input.location}.`,
-  {
-    name: "get_weather",
-    description: "Get the weather at a location.",
-    schema: z.object({
-      location: z.string().describe("The location to get the weather for"),
-    }),
-  },
-);
-
-const model = new ChatOpenAI({ model: "gpt-4.1" });
-const modelWithTools = model.bindTools([getWeather]);  // [!code highlight]
-
-const response = await modelWithTools.invoke("What's the weather like in Boston?");
-const toolCalls = response.tool_calls || [];
-for (const tool_call of toolCalls) {
-  // View tool calls made by the model
-  console.log(`Tool: ${tool_call.name}`);
-  console.log(`Args: ${tool_call.args}`);
+  return (
+    
+      {stream.messages.map((msg) => (
+        
+      ))}
+    
+  );
 }
 ```
 
-When binding user-defined tools, the model's response includes a **request** to execute a tool. When using a model separately from an [agent](/oss/javascript/langchain/agents), it is up to you to execute the requested tool and return the result back to the model for use in subsequent reasoning. When using an [agent](/oss/javascript/langchain/agents), the agent loop will handle the tool execution loop for you.
+```vue Vue theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 
-Below, we show some common ways you can use tool calling.
+import { useStream } from "@langchain/vue";
 
-````
-When a model returns tool calls, you need to execute the tools and pass the results back to the model. This creates a conversation loop where the model can use tool results to generate its final response. LangChain includes [agent](/oss/javascript/langchain/agents) abstractions that handle this orchestration for you.
+const AGENT_URL = "http://localhost:2024";
 
-Here's a simple example of how to do this:
+const stream = useStream({
+  apiUrl: AGENT_URL,
+  assistantId: "tool_calling",
+});
 
-```typescript Tool execution loop theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-// Bind (potentially multiple) tools to the model
-const modelWithTools = model.bindTools([get_weather])
 
-// Step 1: Model generates tool calls
-const messages = [{"role": "user", "content": "What's the weather in Boston?"}]
-const ai_msg = await modelWithTools.invoke(messages)
-messages.push(ai_msg)
 
-// Step 2: Execute tools and collect results
-for (const tool_call of ai_msg.tool_calls) {
-    // Execute the tool with the generated arguments
-    const tool_result = await get_weather.invoke(tool_call)
-    messages.push(tool_result)
-}
+  
+    <Message
+      v-for="msg in stream.messages.value"
+      :key="msg.id"
+      :message="msg"
+      :tool-calls="stream.toolCalls.value"
+    />
+  
 
-// Step 3: Pass results back to model for final response
-const final_response = await modelWithTools.invoke(messages)
-console.log(final_response.text)
-// "The current weather in Boston is 72°F and sunny."
 ```
 
-Each [`ToolMessage`](https://reference.langchain.com/javascript/langchain-core/messages/ToolMessage) returned by the tool includes a `tool_call_id` that matches the original tool call, helping the model correlate results with requests.
+```svelte Svelte theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 
+  import { useStream } from "@langchain/svelte";
 
+  const AGENT_URL = "http://localhost:2024";
 
-By default, the model has the freedom to choose which bound tool to use based on the user's input. However, you might want to force choosing a tool, ensuring the model uses either a particular tool or **any** tool from a given list:
-
-
-  ```typescript Force use of any tool theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const modelWithTools = model.bindTools([tool_1], { toolChoice: "any" })
-  ```
-
-  ```typescript Force use of specific tools theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const modelWithTools = model.bindTools([tool_1], { toolChoice: "tool_1" })
-  ```
+  const { messages, toolCalls, submit } = useStream({
+    apiUrl: AGENT_URL,
+    assistantId: "tool_calling",
+  });
 
 
 
 
-Many models support calling multiple tools in parallel when appropriate. This allows the model to gather information from different sources simultaneously.
+    
+  {/each}
 
-```typescript Parallel tool calls theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-const modelWithTools = model.bind_tools([get_weather])
+```
 
-const response = await modelWithTools.invoke(
-    "What's the weather in Boston and Tokyo?"
-)
+```ts Angular theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { Component } from "@angular/core";
+import { useStream } from "@langchain/angular";
 
+const AGENT_URL = "http://localhost:2024";
 
-// The model may generate multiple tool calls
-console.log(response.tool_calls)
-// [
-//   { name: 'get_weather', args: { location: 'Boston' }, id: 'call_1' },
-//   { name: 'get_time', args: { location: 'Tokyo' }, id: 'call_2' }
-// ]
-
-
-// Execute all tools (can be done in parallel with async)
-const results = []
-for (const tool_call of response.tool_calls || []) {
-    if (tool_call.name === 'get_weather') {
-        const result = await get_weather.invoke(tool_call)
-        results.push(result)
+@Component({
+  selector: "app-chat",
+  template: `
+    @for (msg of stream.messages(); track msg.id) {
+      
     }
+  `,
+})
+export class ChatComponent {
+  stream = useStream({
+    apiUrl: AGENT_URL,
+    assistantId: "tool_calling",
+  });
 }
 ```
 
-The model intelligently determines when parallel execution is appropriate based on the independence of the requested operations.
+## The ToolCallWithResult type
 
+Each entry in the `toolCalls` array is a `ToolCallWithResult` object:
 
-  Most models supporting tool calling enable parallel tool calls by default. Some (including [OpenAI](/oss/javascript/integrations/chat/openai) and [Anthropic](/oss/javascript/integrations/chat/anthropic)) allow you to disable this feature. To do this, set `parallel_tool_calls=False`:
-
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  model.bind_tools([get_weather], parallel_tool_calls=False)
-  ```
-
-
-
-
-When streaming responses, tool calls are progressively built through [`ToolCallChunk`](https://reference.langchain.com/javascript/langchain-core/messages/ContentBlock/Tools/ToolCallChunk). This allows you to see tool calls as they're being generated rather than waiting for the complete response.
-
-```typescript Streaming tool calls theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-const stream = await modelWithTools.stream(
-    "What's the weather in Boston and Tokyo?"
-)
-for await (const chunk of stream) {
-    // Tool call chunks arrive progressively
-    if (chunk.tool_call_chunks) {
-        for (const tool_chunk of chunk.tool_call_chunks) {
-        console.log(`Tool: ${tool_chunk.get('name', '')}`)
-        console.log(`Args: ${tool_chunk.get('args', '')}`)
-        }
-    }
-}
-
-// Output:
-// Tool: get_weather
-// Args:
-// Tool:
-// Args: {"loc
-// Tool:
-// Args: ation": "BOS"}
-// Tool: get_time
-// Args:
-// Tool:
-// Args: {"timezone": "Tokyo"}
-```
-
-You can accumulate chunks to build complete tool calls:
-
-```typescript Accumulate tool calls theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-let full: AIMessageChunk | null = null
-const stream = await modelWithTools.stream("What's the weather in Boston?")
-for await (const chunk of stream) {
-    full = full ? full.concat(chunk) : chunk
-    console.log(full.contentBlocks)
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+interface ToolCallWithResult {
+  call: {
+    id: string;
+    name: string;
+    args: Record<string, unknown>;
+  };
+  result: ToolMessage | undefined;
+  state: "pending" | "completed" | "error";
 }
 ```
-````
+
+| Property    | Description                                                                                |
+| ----------- | ------------------------------------------------------------------------------------------ |
+| `call.id`   | Unique ID matching the AI message's `tool_calls` entry                                     |
+| `call.name` | The name of the tool (e.g. `"get_weather"`)                                                |
+| `call.args` | Structured arguments the agent passed to the tool                                          |
+| `result`    | The `ToolMessage` response, available once the tool finishes                               |
+| `state`     | Lifecycle state: `"pending"` while running, `"completed"` on success, `"error"` on failure |
+
+## Filtering tool calls per message
+
+An AI message may trigger multiple tool calls, and your chat may contain many AI
+messages. To render the right tool cards under each message, filter by matching
+`call.id` against the message's `tool_calls` array:
+
+```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+function Message({
+  message,
+  toolCalls,
+}: {
+  message: AIMessage;
+  toolCalls: ToolCallWithResult[];
+}) {
+  const messageToolCalls = toolCalls.filter((tc) =>
+    message.tool_calls?.find((t) => t.id === tc.call.id)
+  );
+
+  return (
+    <div>
+      <p>{message.content}</p>
+      {messageToolCalls.map((tc) => (
+        <ToolCard key={tc.call.id} toolCall={tc} />
+      ))}
+    </div>
+  );
+}
+```
+
+## Building specialized tool cards
+
+Rather than dumping raw JSON, build dedicated UI components for each tool. Use
+`call.name` to select the right card:
+
+```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+function ToolCard({ toolCall }: { toolCall: ToolCallWithResult }) {
+  if (toolCall.state === "pending") {
+    return <LoadingCard name={toolCall.call.name} />;
+  }
+
+  if (toolCall.state === "error") {
+    return <ErrorCard name={toolCall.call.name} error={toolCall.result} />;
+  }
+
+  switch (toolCall.call.name) {
+    case "get_weather":
+      return <WeatherCard args={toolCall.call.args} result={toolCall.result} />;
+    case "calculator":
+      return (
+        <CalculatorCard args={toolCall.call.args} result={toolCall.result} />
+      );
+    case "web_search":
+      return <SearchCard args={toolCall.call.args} result={toolCall.result} />;
+    default:
+      return <GenericToolCard toolCall={toolCall} />;
+  }
+}
+```
+
+### Weather card example
+
+```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+function WeatherCard({
+  args,
+  result,
+}: {
+  args: { location: string };
+  result: ToolMessage;
+}) {
+  const data = JSON.parse(result.content as string);
+
+  return (
+    <div className="rounded-lg border p-4">
+      <div className="flex items-center gap-2">
+        <CloudIcon />
+        <h3 className="font-semibold">{args.location}</h3>
+      </div>
+      <div className="mt-2 text-3xl font-bold">{data.temperature}°F</div>
+      <p className="text-muted-foreground">{data.condition}</p>
+    </div>
+  );
+}
+```
+
+### Loading and error states
+
+Always handle the pending and error states to give users clear feedback:
+
+```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+function LoadingCard({ name }: { name: string }) {
+  return (
+    <div className="flex items-center gap-2 rounded-lg border p-4 animate-pulse">
+      <Spinner />
+      <span>Running {name}...</span>
+    </div>
+  );
+}
+
+function ErrorCard({ name, error }: { name: string; error?: ToolMessage }) {
+  return (
+    <div className="rounded-lg border border-red-300 bg-red-50 p-4">
+      <h3 className="font-semibold text-red-700">Error in {name}</h3>
+      <p className="text-sm text-red-600">
+        {error?.content ?? "Tool execution failed"}
+      </p>
+    </div>
+  );
+}
+```
+
+## Type-safe tool arguments
+
+If your tools are defined with structured schemas, you can use the
+`ToolCallFromTool` utility type to get fully typed `args`:
+
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { tool } from "@langchain/core/tools";
+import { z } from "zod";
+
+const getWeather = tool(async ({ location }) => { /* ... */ }, {
+  name: "get_weather",
+  description: "Get the current weather for a location",
+  schema: z.object({
+    location: z.string().describe("City name"),
+  }),
+});
+
+type WeatherToolCall = ToolCallFromTool<typeof getWeather>;
+// WeatherToolCall.call.args is now { location: string }
+```
+
+Using `ToolCallFromTool` gives you compile-time safety. If the tool schema
+changes, your UI components will flag type errors immediately.
+
+## Rendering tool calls inline with streaming text
+
+Tool calls often arrive interleaved with streamed text. The `useStream` hook
+keeps `toolCalls` in sync with the stream, so pending cards appear as soon as
+the agent emits the call, before the tool has finished executing.
+
+This means users see:
+
+1. The AI's text as it streams in
+2. A loading card the moment a tool call is emitted
+3. The card updates to show the result once the tool completes
+
+Tool calls update in place. The same `call.id` transitions from `"pending"` to
+`"completed"` (or `"error"`), so your UI re-renders the same component
+with new state.
+
+## Handling multiple concurrent tool calls
+
+Agents can invoke several tools in parallel. The `toolCalls` array will contain
+multiple entries with `state: "pending"` simultaneously. Each resolves
+independently, so your UI should handle partial completion gracefully:
+
+```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+function ToolCallList({ toolCalls }: { toolCalls: ToolCallWithResult[] }) {
+  const pending = toolCalls.filter((tc) => tc.state === "pending");
+  const completed = toolCalls.filter((tc) => tc.state === "completed");
+
+  return (
+    <div className="space-y-2">
+      {completed.map((tc) => (
+        <ToolCard key={tc.call.id} toolCall={tc} />
+      ))}
+      {pending.map((tc) => (
+        <LoadingCard key={tc.call.id} name={tc.call.name} />
+      ))}
+    </div>
+  );
+}
+```
+
+## Best practices
+
+Follow these guidelines when building tool call UIs:
+
+- **Always handle all three states**: `pending`, `completed`, and `error`.
+  Users should never see a blank card.
+- **Parse results safely**. Tool results arrive as strings. Wrap
+  `JSON.parse()` in a try/catch and show a fallback on parse failure.
+- **Provide a generic fallback**. Not every tool needs a bespoke card. Render
+  a collapsible JSON view for unknown tool names.
+- **Show the tool name and args during loading**. Users want to know *what*
+  the agent is doing, even before the result arrives.
+- **Keep cards compact**. Tool cards sit inline with chat messages. Avoid
+  overwhelming the conversation with oversized widgets.
 
 ***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/tool-calling.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

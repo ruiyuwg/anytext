@@ -8,7 +8,7 @@ The `vercel target` command (alias: `vercel targets`) manages your Vercel projec
 vercel target list
 ```
 
-*Using vercel target list to list all targets for your project.*
+*Using \`vercel target list\` to list all targets for your project.*
 
 ## Commands
 
@@ -34,7 +34,7 @@ vercel deploy --target=staging
 ```
 
 *Deploy your project to a custom environment by specifying
-\--target=\<environment-name>.*
+\`--target=\&lt;environment-name\&gt;\`.*
 
 ## Examples
 
@@ -71,7 +71,7 @@ vercel env ls staging
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -86,7 +86,7 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel teams"
 description: "Learn how to list, add, remove, and manage your teams using the vercel teams CLI command."
-last\_updated: "2026-03-08T05:03:12.427Z"
+last\_updated: "2026-03-23T09:40:07.137Z"
 source: "https://vercel.com/docs/cli/teams"
 
 # vercel teams
@@ -102,7 +102,7 @@ The `vercel teams` command is used to manage [Teams](/docs/accounts/create-a-tea
 vercel teams list
 ```
 
-*Using the vercel teams command to list all teams
+*Using the \`vercel teams\` command to list all teams
 you’re a member of.*
 
 ## Extended Usage
@@ -111,18 +111,18 @@ you’re a member of.*
 vercel teams add
 ```
 
-*Using the vercel teams command to create a new team.*
+*Using the \`vercel teams\` command to create a new team.*
 
 ```bash filename="terminal"
 vercel teams invite [email]
 ```
 
-*Using the vercel teams command to invite a new Team
+*Using the \`vercel teams\` command to invite a new Team
 Member.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -137,52 +137,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel telemetry"
 description: "Learn how to manage telemetry collection."
-last\_updated: "2026-03-08T05:03:12.430Z"
+last\_updated: "2026-03-23T09:40:07.150Z"
 source: "https://vercel.com/docs/cli/telemetry"
-
-# vercel telemetry
-
-The `vercel telemetry` command allows you to enable or disable telemetry collection.
-
-## Usage
-
-```bash filename="terminal"
-vercel telemetry status
-```
-
-*Using the vercel telemetry status command to show
-whether telemetry collection is enabled or disabled.*
-
-```bash filename="terminal"
-vercel telemetry enable
-```
-
-*Using the vercel telemetry enable command to enable
-telemetry collection.*
-
-```bash filename="terminal"
-vercel telemetry disable
-```
-
-*Using the vercel telemetry disable command to disable
-telemetry collection.*
-
-## Global Options
-
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
-
-- [`--cwd`](/docs/cli/global-options#current-working-directory)
-- [`--debug`](/docs/cli/global-options#debug)
-- [`--global-config`](/docs/cli/global-options#global-config)
-- [`--help`](/docs/cli/global-options#help)
-- [`--local-config`](/docs/cli/global-options#local-config)
-- [`--no-color`](/docs/cli/global-options#no-color)
-- [`--scope`](/docs/cli/global-options#scope)
-- [`--token`](/docs/cli/global-options#token)
-
-For more information on global options and their usage, refer to the [options section](/docs/cli/global-options).
-
-title: "vercel usage"
-description: "Learn how to view billing usage and costs, for your Vercel account using the vercel usage CLI command."
-last\_updated: "2026-03-08T05:03:12.436Z"
-source: "https://vercel.com/docs/cli/usage"

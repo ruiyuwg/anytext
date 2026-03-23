@@ -2,11 +2,11 @@
 
 Validates correct usage of refs, not reading/writing during render. See the "pitfalls" section in [`useRef()` usage](/reference/react/useRef#usage).
 
-## Rule Details {/_rule-details_/}
+## Rule Details {/*rule-details*/}
 
 Refs hold values that aren't used for rendering. Unlike state, changing a ref doesn't trigger a re-render. Reading or writing `ref.current` during render breaks React's expectations. Refs might not be initialized when you try to read them, and their values can be stale or inconsistent.
 
-## How It Detects Refs {/_how-it-detects-refs_/}
+## How It Detects Refs {/*how-it-detects-refs*/}
 
 The lint only applies these rules to values it knows are refs. A value is inferred as a ref when the compiler sees any of the following patterns:
 
@@ -25,18 +25,17 @@ The lint only applies these rules to values it knows are refs. A value is inferr
 - Passed through a JSX `ref` prop (for example `<div ref={someRef} />`).
 
   ```jsx
-
   ```
 
 Once something is marked as a ref, that inference follows the value through assignments, destructuring, or helper calls. This lets the lint surface violations even when `ref.current` is accessed inside another function that received the ref as an argument.
 
-## Common Violations {/_common-violations_/}
+## Common Violations {/*common-violations*/}
 
 - Reading `ref.current` during render
 - Updating `refs` during render
 - Using `refs` for values that should be state
 
-### Invalid {/_invalid_/}
+### Invalid {/*invalid*/}
 
 Examples of incorrect code for this rule:
 
@@ -49,14 +48,14 @@ function Component() {
 }
 
 // ❌ Modifying ref during render
-function Component({ value }) {
+function Component({value}) {
   const ref = useRef(null);
   ref.current = value; // Don't modify during render
   return <div />;
 }
 ```
 
-### Valid {/_valid_/}
+### Valid {/*valid*/}
 
 Examples of correct code for this rule:
 
@@ -78,7 +77,11 @@ function Component() {
 function Component() {
   const [count, setCount] = useState(0);
 
-  return <button onClick={() => setCount(count + 1)}>{count}</button>;
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      {count}
+    </button>
+  );
 }
 
 // ✅ Lazy initialization of ref value
@@ -98,13 +101,13 @@ function Component() {
 }
 ```
 
-## Troubleshooting {/_troubleshooting_/}
+## Troubleshooting {/*troubleshooting*/}
 
-### The lint flagged my plain object with `.current` {/_plain-object-current_/}
+### The lint flagged my plain object with `.current` {/*plain-object-current*/}
 
 The name heuristic intentionally treats `ref.current` and `fooRef.current` as real refs. If you're modeling a custom container object, pick a different name (for example, `box`) or move the mutable value into state. Renaming avoids the lint because the compiler stops inferring it as a ref.
 
----
+***
 
 ## Sitemap
 

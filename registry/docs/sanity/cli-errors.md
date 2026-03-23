@@ -31,20 +31,49 @@ To fix this, ensure the variable is correctly set before rerunning the CLI. More
 
 ### Port 3333 is already in use
 
-This error often occurs when there is another process or service running on the Sanity studio's default port (3333).
+Sanity Studio's dev server defaults to port 3333 with strict port checking. If another process is using that port, the server exits with an error instead of switching to a different port.
 
-To fix this, try stopping or closing other applications running on that port.
+#### Find and stop the process
 
-If you're on Mac, you can quickly kill the process running on port 3333 using the following command:
+**Mac/Linux:**
 
-```sh
+```bash
 lsof -ti :3333 | xargs kill -9
-
 ```
 
-If you'd instead like to change which process the Studio runs on, you can do so by passing an alternative value to the [--port option](https://www.sanity.io/docs/cli-reference/start) of the `sanity start` and `sanity preview` commands.
+**Windows:**
 
-Just be sure to add this new development URL and port to your [Allowed CORS Origins](https://www.sanity.io/docs/content-lake/cors) list or the Studio will not be able query data from your project.
+```bash
+for /f "tokens=5" %a in ('netstat -ano ^| findstr :3333') do taskkill /PID %a /F
+```
+
+#### Use a different port
+
+Pass the `--port` flag to run the dev server on another port:
+
+```bash
+sanity dev --port 3334
+```
+
+To make this permanent, set `server.port` in your [CLI configuration](https://www.sanity.io/docs/cli-reference/cli-config):
+
+**sanity.cli.ts**
+
+```typescript
+import {defineCliConfig} from 'sanity/cli'
+
+export default defineCliConfig({
+  api: {
+    projectId: '<YOUR_PROJECT_ID>',
+    dataset: '<YOUR_DATASET>',
+  },
+  server: {
+    port: 3334,
+  },
+})
+```
+
+If you change the port, add the new origin to your project's [CORS origins](https://www.sanity.io/docs/content-lake/cors).
 
 ### Command `(start|dev|deploy|...)` is not available outside of a Sanity project context
 

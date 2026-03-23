@@ -113,7 +113,7 @@ Note that if using TypeScript, the `middleware` option is required to be provide
 
 Tuple
 
-TypeScript users are required to use a `Tuple` instance (if not using a `getDefaultEnhancer` result, which is already a `Tuple`), for better inference.
+TypeScript users are required to use a `Tuple` instance (if not using a `getDefaultEnhancers` result, which is already a `Tuple`), for better inference.
 
 ```
 import { configureStore, Tuple } from '@reduxjs/toolkit'configureStore({  reducer: rootReducer,  enhancers: () => new Tuple(offline),})

@@ -1,8 +1,8 @@
-# unstable_cache
+# unstable\_cache
 
 > **Note:**
 > This API has been replaced by [`use cache`](/docs/app/api-reference/directives/use-cache) in Next.js 16.
-> We recommend opting into [Cache Components](/docs/app/getting-started/cache-components) and replacing `unstable_cache` with the `use cache` directive.
+> We recommend opting into [Cache Components](/docs/app/getting-started/caching) and replacing `unstable_cache` with the `use cache` directive.
 
 `unstable_cache` allows you to cache the results of expensive operations, like database queries, and reuse them across multiple requests.
 
@@ -23,13 +23,13 @@ export default async function Component({ userID }) {
 
 > **Good to know**:
 >
-> - Accessing dynamic data sources such as `headers` or `cookies` inside a cache scope is not supported. If you need this data inside a cached function use `headers` outside of the cached function and pass the required dynamic data in as an argument.
-> - This API uses Next.js' built-in [Data Cache](/docs/app/guides/caching#data-cache) to persist the result across requests and deployments.
+> - Accessing uncached data sources such as `headers` or `cookies` inside a cache scope is not supported. If you need this data inside a cached function use `headers` outside of the cached function and pass the required uncached data in as an argument.
+> - This API uses Next.js' built-in cache to persist the result across requests and deployments. See [Caching and Revalidating](/docs/app/getting-started/caching).
 
 ## Parameters
 
 ```jsx
-const data = unstable_cache(fetchData, keyParts, options)();
+const data = unstable_cache(fetchData, keyParts, options)()
 ```
 
 - `fetchData`: This is an asynchronous function that fetches the data you want to cache. It must be a function that returns a `Promise`.
@@ -45,24 +45,24 @@ const data = unstable_cache(fetchData, keyParts, options)();
 ## Example
 
 ```tsx filename="app/page.tsx" switcher
-import { unstable_cache } from "next/cache";
+import { unstable_cache } from 'next/cache'
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ userId: string }>;
+  params: Promise<{ userId: string }>
 }) {
-  const { userId } = await params;
+  const { userId } = await params
   const getCachedUser = unstable_cache(
     async () => {
-      return { id: userId };
+      return { id: userId }
     },
     [userId], // add the user ID to the cache key
     {
-      tags: ["users"],
+      tags: ['users'],
       revalidate: 60,
-    },
-  );
+    }
+  )
 
   //...
 }
@@ -94,15 +94,15 @@ export default async function Page({ params } }) {
 | --------- | ---------------------------- |
 | `v14.0.0` | `unstable_cache` introduced. |
 
-# unstable_noStore
+# unstable\_noStore
 
-# unstable_noStore
+# unstable\_noStore
 
 > This is a legacy API and no longer recommended. It is still supported for backward compatibility.
 
 **In version 15, we recommend using [`connection`](/docs/app/api-reference/functions/connection) instead of `unstable_noStore`.**
 
-`unstable_noStore` can be used to declaratively opt out of static rendering and indicate a particular component should not be cached.
+`unstable_noStore` can be used to declaratively opt out of prerendering and indicate a particular component should not be cached.
 
 ```jsx
 import { unstable_noStore as noStore } from 'next/cache';
@@ -142,4 +142,4 @@ export default async function ServerComponent() {
 | `v15.0.0` | `unstable_noStore` deprecated for `connection`. |
 | `v14.0.0` | `unstable_noStore` introduced.                  |
 
-# unstable_rethrow
+# unstable\_rethrow

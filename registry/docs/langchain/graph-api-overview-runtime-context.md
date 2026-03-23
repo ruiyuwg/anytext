@@ -27,17 +27,17 @@ def node_a(state: State, runtime: Runtime[ContextSchema]):
     # ...
 ```
 
-See [this guide](/oss/python/langgraph/use-graph-api#add-runtime-configuration) for a full breakdown on configuration.
+See [Add runtime configuration](/oss/python/langgraph/use-graph-api#add-runtime-configuration) for a full breakdown on configuration.
 
 ### Recursion limit
 
-The recursion limit sets the maximum number of [super-steps](#graphs) the graph can execute during a single execution. Once the limit is reached, LangGraph will raise `GraphRecursionError`. Starting in version 1.0.6, the deafult recursion limit is set to 1000 steps. The recursion limit can be set on any graph at runtime, and is passed to `invoke`/`stream` via the config dictionary. Importantly, `recursion_limit` is a standalone `config` key and should not be passed inside the `configurable` key as all other user-defined configuration. See the example below:
+The recursion limit sets the maximum number of [super-steps](#graphs) the graph can execute during a single execution. Once the limit is reached, LangGraph will raise `GraphRecursionError`. Starting in version 1.0.6, the default recursion limit is set to 1000 steps. The recursion limit can be set on any graph at runtime, and is passed to `invoke`/`stream` via the config dictionary. Importantly, `recursion_limit` is a standalone `config` key and should not be passed inside the `configurable` key as all other user-defined configuration. See the example below:
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 graph.invoke(inputs, config={"recursion_limit": 5}, context={"llm": "anthropic"})
 ```
 
-Read [this how-to](/oss/python/langgraph/graph-api#impose-a-recursion-limit) to learn more about how the recursion limit works.
+Read [Recursion limit](/oss/python/langgraph/graph-api#recursion-limit) to learn more about how the recursion limit works.
 
 ### Accessing and handling the recursion counter
 
@@ -199,7 +199,7 @@ def inspect_metadata(state: dict, config: RunnableConfig) -> dict:
 
 ## Visualization
 
-It's often nice to be able to visualize graphs, especially as they get more complex. LangGraph comes with several built-in ways to visualize graphs. See [this how-to guide](/oss/python/langgraph/use-graph-api#visualize-your-graph) for more info.
+It's often nice to be able to visualize graphs, especially as they get more complex. LangGraph comes with several built-in ways to visualize graphs. See [Visualize your graph](/oss/python/langgraph/use-graph-api#visualize-your-graph) for more info.
 
 ## Observability and Tracing
 

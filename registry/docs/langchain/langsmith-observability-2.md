@@ -5,7 +5,7 @@ Source: https://docs.langchain.com/oss/javascript/langgraph/observability
 Traces are a series of steps that your application takes to go from input to output. Each of these individual steps is represented by a run. You can use [LangSmith](https://smith.langchain.com/) to visualize these execution steps. To use it, [enable tracing for your application](/langsmith/trace-with-langgraph). This enables you to do the following:
 
 - [Debug a locally running application](/langsmith/observability-studio#debug-langsmith-traces).
-- [Evaluate the application performance](/oss/javascript/langchain/evals).
+- [Evaluate the application performance](/oss/javascript/langchain/test/evals).
 - [Monitor the application](/langsmith/dashboards).
 
 ## Prerequisites

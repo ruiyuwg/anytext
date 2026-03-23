@@ -4,7 +4,7 @@ Learn how revenue recognition works with subscriptions and invoices.
 
 Because of the detailed information available on subscriptions and *invoices* (Invoices are statements of amounts owed by a customer. They track the status of payments from draft through paid or otherwise finalized. Subscriptions automatically generate invoices, or you can manually create a one-off invoice), Stripe Revenue Recognition can accurately defer and recognize revenue for these resources. Revenue recognition treats each invoice line item and subscription item as its own performance obligation.
 
-Revenue recognition amortizes revenue by the second, but our example uses a daily interval.
+Revenue recognition operates on finalized invoices, not on the status of the subscription itself. Revenue recognition amortizes revenue by the second, but our example uses a daily interval.
 
 ## Licensed subscriptions
 
@@ -33,6 +33,22 @@ This next example is for a subscription that’s upgraded mid-month.
 - On April 21, the customer upgrades the subscription to cost 120 USD instead, which generates an invoice that accounts for the remaining 10 days of the month.
 
 In this example, the customer receives 20 days of service with the 90 USD monthly subscription (60 USD in value) and 10 days of service with the 120 USD monthly subscription (40 USD in value). Therefore, in April, the recognized revenue is 100 USD.
+
+## Subscription cancellations
+
+Revenue recognition operates on finalized invoices, not subscription status. When a subscription is canceled, the revenue schedule for any already-finalized invoice remains unchanged. Stripe continues to amortize the revenue over the original service period defined on the invoice line items, regardless of whether the subscription is active, canceled, or otherwise modified.
+
+This next example is for a 3-month subscription that’s canceled after the first month.
+
+- On January 1, a customer starts a 3-month subscription for 90 USD, which generates and finalizes an invoice with a service period from January 1 to March 31.
+- On January 31, the customer cancels the subscription. The cancellation doesn’t result in any refund on the invoice.
+
+In this case, revenue recognition continues to amortize the 90 USD over the original 3-month service period. Canceling the subscription doesn’t change the journal entries because they’re based on the finalized invoice, not the subscription status. If you inspected the account balances at the end of March, you’d see the following:
+
+| Account         | Jan    | Feb    | Mar    |
+| --------------- | ------ | ------ | ------ |
+| Revenue         | +31.00 | +28.00 | +31.00 |
+| DeferredRevenue | +59.00 | -28.00 | -31.00 |
 
 ## Standalone invoices
 

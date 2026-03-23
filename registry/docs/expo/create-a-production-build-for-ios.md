@@ -4,7 +4,7 @@ Learn about the process of creating a production build for iOS and automating th
 
 In this chapter, we'll create our example app's production version and submit it for testing using TestFlight. After that, we'll submit them for App Store review to get it on the App Store.
 
-[Watch: Creating and releasing a production build for iOS](https://www.youtube.com/watch?v=VZL_e0cEwo8)
+[Watch: Creating and releasing a production build for iOS](https://www.youtube.com/watch?v=VZL_e0cEwo8) — Create a production build for iOS with EAS, test it using TestFlight, and submit it to the App Store.
 
 ## Prerequisites
 

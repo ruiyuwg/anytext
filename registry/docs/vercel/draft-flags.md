@@ -86,5 +86,5 @@ export const GET = createFlagsDiscoveryEndpoint(async () => {
 
 title: "Entities"
 description: "Define entities and their attributes for precise feature flag targeting."
-last\_updated: "2026-03-08T05:03:14.540Z"
+last\_updated: "2026-03-23T09:40:10.126Z"
 source: "https://vercel.com/docs/flags/vercel-flags/dashboard/entities"

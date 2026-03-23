@@ -47,7 +47,14 @@ messages = [
         langsmith_extra={"tags": ["my-other-tag"], "metadata": {"my-other-key": "my-value"}}
     )
 
-    # Alternatively, you can use the context manager
+    # or you can dynamically set default metadata for runs in the given scope
+    # tracing_context doesn't create a span itself, but it does initialze the
+    # context for child spans that are created.
+    with ls.tracing_context(metadata={"default-key": "default-value"}):
+        call_openai(messages)
+
+    # Alternatively, you can use the trace context manager
+    # This creates a new span with the given metadata and tags
     with ls.trace(
         name="OpenAI Call Trace",
         run_type="llm",
@@ -112,6 +119,8 @@ import { wrapOpenAI } from "langsmith/wrappers";
 // Call the traceable function
 await traceableCallOpenAI(messages);
 ```
+
+**LangSmith Deployments**: To add metadata dynamically per invocation in Agent Server deployments, we recommend using `tracing_context` in a [factory function](/langsmith/graph-rebuild). See [Customize tracing in deployed agents](/langsmith/conditional-tracing#customize-tracing-in-deployed-agents) for examples.
 
 ***
 

@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/deployments
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 A deployment is a snapshot of the code and environment variables required to run
 an application. A new deployment can be created

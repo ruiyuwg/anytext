@@ -5,8 +5,8 @@ Rendering
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/render-to-string-async.mdx)
 
 ```
-import { renderToStringAsync } from "solid-js/web"
-function renderToStringAsync<T>(  fn: () => T,  options?: {    timeoutMs?: number    renderId?: string    nonce?: string  }): Promise<string>
+import { renderToStringAsync } from "solid-js/web";
+function renderToStringAsync<T>(  fn: () => T,  options?: {    timeoutMs?: number;    renderId?: string;    nonce?: string;  }): Promise<string>;
 ```
 
 Same as `renderToString` except that it will wait for all `<Suspense>` boundaries to resolve before returning the results. Resource data is automatically serialized into the script tag and will be hydrated on client load.
@@ -14,7 +14,7 @@ Same as `renderToString` except that it will wait for all `<Suspense>` boundarie
 `renderId` is used to namespace renders when having multiple top level roots.
 
 ```
-const html = await renderToStringAsync(App)
+const html = await renderToStringAsync(App);
 ```
 
 ***

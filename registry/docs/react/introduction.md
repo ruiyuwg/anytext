@@ -8,32 +8,29 @@ React Compiler is a new build-time tool that automatically optimizes your React 
 - Debugging and troubleshooting when things go wrong
 - Using the compiler on your React library
 
-## What does React Compiler do? {/_what-does-react-compiler-do_/}
+## What does React Compiler do? {/*what-does-react-compiler-do*/}
 
 React Compiler automatically optimizes your React application at build time. React is often fast enough without optimization, but sometimes you need to manually memoize components and values to keep your app responsive. This manual memoization is tedious, easy to get wrong, and adds extra code to maintain. React Compiler does this optimization automatically for you, freeing you from this mental burden so you can focus on building features.
 
-### Before React Compiler {/_before-react-compiler_/}
+### Before React Compiler {/*before-react-compiler*/}
 
 Without the compiler, you need to manually memoize components and values to optimize re-renders:
 
 ```js
-import { useMemo, useCallback, memo } from "react";
+import { useMemo, useCallback, memo } from 'react';
 
 const ExpensiveComponent = memo(function ExpensiveComponent({ data, onClick }) {
   const processedData = useMemo(() => {
     return expensiveProcessing(data);
   }, [data]);
 
-  const handleClick = useCallback(
-    (item) => {
-      onClick(item.id);
-    },
-    [onClick],
-  );
+  const handleClick = useCallback((item) => {
+    onClick(item.id);
+  }, [onClick]);
 
   return (
     <div>
-      {processedData.map((item) => (
+      {processedData.map(item => (
         <Item key={item.id} onClick={() => handleClick(item)} />
       ))}
     </div>
@@ -51,7 +48,7 @@ Even though `handleClick` is wrapped in `useCallback`, the arrow function `() =>
 
 React Compiler is able to optimize this correctly with or without the arrow function, ensuring that `Item` only re-renders when `props.onClick` changes.
 
-### After React Compiler {/_after-react-compiler_/}
+### After React Compiler {/*after-react-compiler*/}
 
 With React Compiler, you write the same code without manual memoization:
 
@@ -65,7 +62,7 @@ function ExpensiveComponent({ data, onClick }) {
 
   return (
     <div>
-      {processedData.map((item) => (
+      {processedData.map(item => (
         <Item key={item.id} onClick={() => handleClick(item)} />
       ))}
     </div>
@@ -73,11 +70,11 @@ function ExpensiveComponent({ data, onClick }) {
 }
 ```
 
-_[See this example in the React Compiler Playground](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEAogB4AOCmYeAbggMIQC2Fh1OAFMEQCYBDHAIA0RQowA2eOAGsiAXwCURYAB1iROITA4iFGBERgwCPgBEhAogF4iCStVoMACoeO1MAcy6DhSgG4NDSItHT0ACwFMPkkmaTlbIi48HAQWFRsAPlUQ0PFMKRlZFLSWADo8PkC8hSDMPJgEHFhiLjzQgB4+eiyO-OADIwQTM0thcpYBClL02xz2zXz8zoBJMqJZBABPG2BU9Mq+BQKiuT2uTJyomLizkoOMk4B6PqX8pSUFfs7nnro3qEapgFCAFEA)_
+*[See this example in the React Compiler Playground](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEAogB4AOCmYeAbggMIQC2Fh1OAFMEQCYBDHAIA0RQowA2eOAGsiAXwCURYAB1iROITA4iFGBERgwCPgBEhAogF4iCStVoMACoeO1MAcy6DhSgG4NDSItHT0ACwFMPkkmaTlbIi48HAQWFRsAPlUQ0PFMKRlZFLSWADo8PkC8hSDMPJgEHFhiLjzQgB4+eiyO-OADIwQTM0thcpYBClL02xz2zXz8zoBJMqJZBABPG2BU9Mq+BQKiuT2uTJyomLizkoOMk4B6PqX8pSUFfs7nnro3qEapgFCAFEA)*
 
 React Compiler automatically applies the optimal memoization, ensuring your app only re-renders when necessary.
 
-#### What kind of memoization does React Compiler add? {/_what-kind-of-memoization-does-react-compiler-add_/}
+#### What kind of memoization does React Compiler add? {/*what-kind-of-memoization-does-react-compiler-add*/}
 
 React Compiler's automatic memoization is primarily focused on **improving update performance** (re-rendering existing components), so it focuses on these two use cases:
 
@@ -86,9 +83,9 @@ React Compiler's automatic memoization is primarily focused on **improving updat
 2. **Skipping expensive calculations from outside of React**
    - For example, calling `expensivelyProcessAReallyLargeArrayOfObjects()` inside of your component or hook that needs that data
 
-#### Optimizing Re-renders {/_optimizing-re-renders_/}
+#### Optimizing Re-renders {/*optimizing-re-renders*/}
 
-React lets you express your UI as a function of their current state (more concretely: their props, state, and context). In its current implementation, when a component's state changes, React will re-render that component _and all of its children_ — unless you have applied some form of manual memoization with `useMemo()`, `useCallback()`, or `React.memo()`. For example, in the following example, `<MessageButton>` will re-render whenever `<FriendList>`'s state changes:
+React lets you express your UI as a function of their current state (more concretely: their props, state, and context). In its current implementation, when a component's state changes, React will re-render that component *and all of its children* — unless you have applied some form of manual memoization with `useMemo()`, `useCallback()`, or `React.memo()`. For example, in the following example, `<MessageButton>` will re-render whenever `<FriendList>`'s state changes:
 
 ```javascript
 function FriendList({ friends }) {
@@ -108,19 +105,17 @@ function FriendList({ friends }) {
 }
 ```
 
-[_See this example in the React Compiler Playground_](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEAYjHgpgCYAyeYOAFMEWuZVWEQL4CURwADrEicQgyKEANnkwIAwtEw4iAXiJQwCMhWoB5TDLmKsTXgG5hRInjRFGbXZwB0UygHMcACzWr1ABn4hEWsYBBxYYgAeADkIHQ4uAHoAPksRbisiMIiYYkYs6yiqPAA3FMLrIiiwAAcAQ0wU4GlZBSUcbklDNqikusaKkKrgR0TnAFt62sYHdmp+VRT7SqrqhOo6Bnl6mCoiAGsEAE9VUfmqZzwqLrHqM7ubolTVol5eTOGigFkEMDB6u4EAAhKA4HCEZ5DNZ9ErlLIWYTcEDcIA)
+[*See this example in the React Compiler Playground*](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEAYjHgpgCYAyeYOAFMEWuZVWEQL4CURwADrEicQgyKEANnkwIAwtEw4iAXiJQwCMhWoB5TDLmKsTXgG5hRInjRFGbXZwB0UygHMcACzWr1ABn4hEWsYBBxYYgAeADkIHQ4uAHoAPksRbisiMIiYYkYs6yiqPAA3FMLrIiiwAAcAQ0wU4GlZBSUcbklDNqikusaKkKrgR0TnAFt62sYHdmp+VRT7SqrqhOo6Bnl6mCoiAGsEAE9VUfmqZzwqLrHqM7ubolTVol5eTOGigFkEMDB6u4EAAhKA4HCEZ5DNZ9ErlLIWYTcEDcIA)
 
-React Compiler automatically applies the equivalent of manual memoization, ensuring that only the relevant parts of an app re-render as state changes, which is sometimes referred to as "fine-grained reactivity". In the above example, React Compiler determines that the return value of `<FriendListCard />` can be reused even as `friends` changes, and can avoid recreating this JSX _and_ avoid re-rendering `<MessageButton>` as the count changes.
+React Compiler automatically applies the equivalent of manual memoization, ensuring that only the relevant parts of an app re-render as state changes, which is sometimes referred to as "fine-grained reactivity". In the above example, React Compiler determines that the return value of `<FriendListCard />` can be reused even as `friends` changes, and can avoid recreating this JSX *and* avoid re-rendering `<MessageButton>` as the count changes.
 
-#### Expensive calculations also get memoized {/_expensive-calculations-also-get-memoized_/}
+#### Expensive calculations also get memoized {/*expensive-calculations-also-get-memoized*/}
 
 React Compiler can also automatically memoize expensive calculations used during rendering:
 
 ```js
 // **Not** memoized by React Compiler, since this is not a component or hook
-function expensivelyProcessAReallyLargeArrayOfObjects() {
-  /* ... */
-}
+function expensivelyProcessAReallyLargeArrayOfObjects() { /* ... */ }
 
 // Memoized by React Compiler since this is a component
 function TableContainer({ items }) {
@@ -130,7 +125,7 @@ function TableContainer({ items }) {
 }
 ```
 
-[_See this example in the React Compiler Playground_](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAejQAgFTYHIQAuumAtgqRAJYBeCAJpgEYCemASggIZyGYDCEUgAcqAGwQwANJjBUAdokyEAFlTCZ1meUUxdMcIcIjyE8vhBiYVECAGsAOvIBmURYSonMCAB7CzcgBuCGIsAAowEIhgYACCnFxioQAyXDAA5gixMDBcLADyzvlMAFYIvGAAFACUmMCYaNiYAHStOFgAvk5OGJgAshTUdIysHNy8AkbikrIKSqpaWvqGIiZmhE6u7p7ymAAqXEwSguZcCpKV9VSEFBodtcBOmAYmYHz0XIT6ALzefgFUYKhCJRBAxeLcJIsVIZLI5PKFYplCqVa63aoAbm6u0wMAQhFguwAPPRAQA+YAfL4dIloUmBMlODogDpAA)
+[*See this example in the React Compiler Playground*](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAejQAgFTYHIQAuumAtgqRAJYBeCAJpgEYCemASggIZyGYDCEUgAcqAGwQwANJjBUAdokyEAFlTCZ1meUUxdMcIcIjyE8vhBiYVECAGsAOvIBmURYSonMCAB7CzcgBuCGIsAAowEIhgYACCnFxioQAyXDAA5gixMDBcLADyzvlMAFYIvGAAFACUmMCYaNiYAHStOFgAvk5OGJgAshTUdIysHNy8AkbikrIKSqpaWvqGIiZmhE6u7p7ymAAqXEwSguZcCpKV9VSEFBodtcBOmAYmYHz0XIT6ALzefgFUYKhCJRBAxeLcJIsVIZLI5PKFYplCqVa63aoAbm6u0wMAQhFguwAPPRAQA+YAfL4dIloUmBMlODogDpAA)
 
 However, if `expensivelyProcessAReallyLargeArrayOfObjects` is truly an expensive function, you may want to consider implementing its own memoization outside of React, because:
 
@@ -139,15 +134,15 @@ However, if `expensivelyProcessAReallyLargeArrayOfObjects` is truly an expensive
 
 So if `expensivelyProcessAReallyLargeArrayOfObjects` was used in many different components, even if the same exact items were passed down, that expensive calculation would be run repeatedly. We recommend [profiling](reference/react/useMemo#how-to-tell-if-a-calculation-is-expensive) first to see if it really is that expensive before making code more complicated.
 
-## Should I try out the compiler? {/_should-i-try-out-the-compiler_/}
+## Should I try out the compiler? {/*should-i-try-out-the-compiler*/}
 
 We encourage everyone to start using React Compiler. While the compiler is still an optional addition to React today, in the future some features may require the compiler in order to fully work.
 
-### Is it safe to use? {/_is-it-safe-to-use_/}
+### Is it safe to use? {/*is-it-safe-to-use*/}
 
 React Compiler is now stable and has been tested extensively in production. While it has been used in production at companies like Meta, rolling out the compiler to production for your app will depend on the health of your codebase and how well you've followed the [Rules of React](/reference/rules).
 
-## What build tools are supported? {/_what-build-tools-are-supported_/}
+## What build tools are supported? {/*what-build-tools-are-supported*/}
 
 React Compiler can be installed across [several build tools](/learn/react-compiler/installation) such as Babel, Vite, Metro, and Rsbuild.
 
@@ -155,7 +150,7 @@ React Compiler is primarily a light Babel plugin wrapper around the core compile
 
 Next.js users can enable the swc-invoked React Compiler by using [v15.3.1](https://github.com/vercel/next.js/releases/tag/v15.3.1) and up.
 
-## What should I do about useMemo, useCallback, and React.memo? {/_what-should-i-do-about-usememo-usecallback-and-reactmemo_/}
+## What should I do about useMemo, useCallback, and React.memo? {/*what-should-i-do-about-usememo-usecallback-and-reactmemo*/}
 
 By default, React Compiler will memoize your code based on its analysis and heuristics. In most cases, this memoization will be as precise, or moreso, than what you may have written.
 
@@ -165,7 +160,7 @@ For new code, we recommend relying on the compiler for memoization and using `us
 
 For existing code, we recommend either leaving existing memoization in place (removing it can change compilation output) or carefully testing before removing the memoization.
 
-## Try React Compiler {/_try-react-compiler_/}
+## Try React Compiler {/*try-react-compiler*/}
 
 This section will help you get started with React Compiler and understand how to use it effectively in your projects.
 
@@ -177,11 +172,11 @@ This section will help you get started with React Compiler and understand how to
 - **[Compiling Libraries](/reference/react-compiler/compiling-libraries)** - Best practices for shipping compiled code
 - **[API Reference](/reference/react-compiler/configuration)** - Detailed documentation of all configuration options
 
-## Additional resources {/_additional-resources_/}
+## Additional resources {/*additional-resources*/}
 
 In addition to these docs, we recommend checking the [React Compiler Working Group](https://github.com/reactwg/react-compiler) for additional information and discussion about the compiler.
 
----
+***
 
 ## Sitemap
 

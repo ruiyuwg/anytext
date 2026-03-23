@@ -1,4 +1,4 @@
-# Drizzle + PGlite
+# Drizzle  +  PGlite
 
 - Database [connection basics](/docs/connect-overview) with Drizzle
 - ElectricSQL - [website](https://electric-sql.com/)
@@ -45,8 +45,8 @@ await db.select().from(...);
 If you need to provide your existing driver:
 
 ```typescript copy"
-import { PGlite } from "@electric-sql/pglite";
-import { drizzle } from "drizzle-orm/pglite";
+import { PGlite } from '@electric-sql/pglite';
+import { drizzle } from 'drizzle-orm/pglite';
 
 // In-memory Postgres
 const client = new PGlite();

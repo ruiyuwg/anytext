@@ -15,28 +15,28 @@ When environment variables or project settings are updated on Vercel, remember t
 vercel pull
 ```
 
-*Using the vercel pull fetches the latest
+*Using the \`vercel pull\` fetches the latest
 "development" Environment Variables and Project Settings from the cloud.*
 
 ```bash filename="terminal"
 vercel pull --environment=preview
 ```
 
-*Using the vercel pull fetches the latest "preview"
+*Using the \`vercel pull\` fetches the latest "preview"
 Environment Variables and Project Settings from the cloud.*
 
 ```bash filename="terminal"
 vercel pull --environment=preview --git-branch=feature-branch
 ```
 
-*Using the vercel pull fetches the "feature-branch"
+*Using the \`vercel pull\` fetches the "feature-branch"
 Environment Variables and Project Settings from the cloud.*
 
 ```bash filename="terminal"
 vercel pull --environment=production
 ```
 
-*Using the vercel pull fetches the latest "production"
+*Using the \`vercel pull\` fetches the latest "production"
 Environment Variables and Project Settings from the cloud.*
 
 ## Unique Options
@@ -52,8 +52,8 @@ The questions will be answered with the default scope and current directory for 
 vercel pull --yes
 ```
 
-*Using the vercel pull command with the
-\--yes option.*
+*Using the \`vercel pull\` command with the
+\`--yes\` option.*
 
 ### environment
 
@@ -65,7 +65,7 @@ vercel pull --environment=staging
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -80,5 +80,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel redeploy"
 description: "Learn how to redeploy your project using the vercel redeploy CLI command."
-last\_updated: "2026-03-08T05:03:12.361Z"
+last\_updated: "2026-03-23T09:40:07.006Z"
 source: "https://vercel.com/docs/cli/redeploy"

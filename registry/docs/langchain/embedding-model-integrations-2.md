@@ -1,6 +1,6 @@
 # Embedding model integrations
 
-Source: https://docs.langchain.com/oss/python/integrations/text\_embedding/index
+Source: https://docs.langchain.com/oss/python/integrations/embeddings/index
 
 Integrate with embedding models using LangChain Python.
 
@@ -53,23 +53,23 @@ Two main methods are available:
 
 ## Top integrations
 
-| Model                                                                                          | Package                                                                                                                                                            |
-| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`OpenAIEmbeddings`](/oss/python/integrations/text_embedding/openai)                           | [`langchain-openai`](https://python.langchain.com/api_reference/openai/chat_models/langchain_openai.chat_models.base.ChatOpenAI.html)                              |
-| [`AzureOpenAIEmbeddings`](/oss/python/integrations/text_embedding/azure_openai)                | [`langchain-openai`](https://python.langchain.com/api_reference/openai/embeddings/langchain_openai.embeddings.azure.AzureOpenAIEmbeddings.html)                    |
-| [`GoogleGenerativeAIEmbeddings`](/oss/python/integrations/text_embedding/google_generative_ai) | [`langchain-google-genai`](https://python.langchain.com/api_reference/google_genai/embeddings/langchain_google_genai.embeddings.GoogleGenerativeAIEmbeddings.html) |
-| [`OllamaEmbeddings`](/oss/python/integrations/text_embedding/ollama)                           | [`langchain-ollama`](https://python.langchain.com/api_reference/ollama/embeddings/langchain_ollama.embeddings.OllamaEmbeddings.html)                               |
-| [`TogetherEmbeddings`](/oss/python/integrations/text_embedding/together)                       | [`langchain-together`](https://python.langchain.com/api_reference/together/embeddings/langchain_together.embeddings.TogetherEmbeddings.html)                       |
-| [`FireworksEmbeddings`](/oss/python/integrations/text_embedding/fireworks)                     | [`langchain-fireworks`](https://python.langchain.com/api_reference/fireworks/embeddings/langchain_fireworks.embeddings.FireworksEmbeddings.html)                   |
-| [`MistralAIEmbeddings`](/oss/python/integrations/text_embedding/mistralai)                     | [`langchain-mistralai`](https://python.langchain.com/api_reference/mistralai/embeddings/langchain_mistralai.embeddings.MistralAIEmbeddings.html)                   |
-| [`VoyageAIEmbeddings`](/oss/python/integrations/text_embedding/voyageai)                       | [`langchain-voyageai`](https://python.langchain.com/api_reference/voyageai/embeddings/langchain_voyageai.embeddings.VoyageAIEmbeddings.html)                       |
-| [`CohereEmbeddings`](/oss/python/integrations/text_embedding/cohere)                           | [`langchain-cohere`](https://python.langchain.com/api_reference/community/llms/langchain_community.llms.cohere.Cohere.html)                                        |
-| [`NomicEmbeddings`](/oss/python/integrations/text_embedding/nomic)                             | [`langchain-nomic`](https://python.langchain.com/api_reference/nomic/embeddings/langchain_nomic.embeddings.NomicEmbeddings.html)                                   |
-| [`FakeEmbeddings`](/oss/python/integrations/text_embedding/fake)                               | [`langchain-core`](https://python.langchain.com/api_reference/core/embeddings/langchain_core.embeddings.fake.FakeEmbeddings.html)                                  |
-| [`DatabricksEmbeddings`](/oss/python/integrations/text_embedding/databricks)                   | [`databricks-langchain`](https://api-docs.databricks.com/python/databricks-ai-bridge/latest/databricks_langchain.html#databricks_langchain.DatabricksEmbeddings)   |
-| [`WatsonxEmbeddings`](/oss/python/integrations/text_embedding/ibm_watsonx)                     | [`langchain-ibm`](https://python.langchain.com/api_reference/ibm/embeddings/langchain_ibm.embeddings.WatsonxEmbeddings.html)                                       |
-| [`NVIDIAEmbeddings`](/oss/python/integrations/text_embedding/nvidia_ai_endpoints)              | [`langchain-nvidia`](https://python.langchain.com/api_reference/nvidia_ai_endpoints/embeddings/langchain_nvidia_ai_endpoints.embeddings.NVIDIAEmbeddings.html)     |
-| [`AIMLAPIEmbeddings`](/oss/python/integrations/text_embedding/aimlapi)                         | [`langchain-aimlapi`](https://python.langchain.com/api_reference/aimlapi/embeddings/langchain_aimlapi.embeddings.AIMLAPIEmbeddings.html)                           |
+| Model                                                                                      | Package                                                                                                                                                            |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`OpenAIEmbeddings`](/oss/python/integrations/embeddings/openai)                           | [`langchain-openai`](https://python.langchain.com/api_reference/openai/chat_models/langchain_openai.chat_models.base.ChatOpenAI.html)                              |
+| [`AzureOpenAIEmbeddings`](/oss/python/integrations/embeddings/azure_openai)                | [`langchain-openai`](https://python.langchain.com/api_reference/openai/embeddings/langchain_openai.embeddings.azure.AzureOpenAIEmbeddings.html)                    |
+| [`GoogleGenerativeAIEmbeddings`](/oss/python/integrations/embeddings/google_generative_ai) | [`langchain-google-genai`](https://python.langchain.com/api_reference/google_genai/embeddings/langchain_google_genai.embeddings.GoogleGenerativeAIEmbeddings.html) |
+| [`OllamaEmbeddings`](/oss/python/integrations/embeddings/ollama)                           | [`langchain-ollama`](https://python.langchain.com/api_reference/ollama/embeddings/langchain_ollama.embeddings.OllamaEmbeddings.html)                               |
+| [`TogetherEmbeddings`](/oss/python/integrations/embeddings/together)                       | [`langchain-together`](https://python.langchain.com/api_reference/together/embeddings/langchain_together.embeddings.TogetherEmbeddings.html)                       |
+| [`FireworksEmbeddings`](/oss/python/integrations/embeddings/fireworks)                     | [`langchain-fireworks`](https://python.langchain.com/api_reference/fireworks/embeddings/langchain_fireworks.embeddings.FireworksEmbeddings.html)                   |
+| [`MistralAIEmbeddings`](/oss/python/integrations/embeddings/mistralai)                     | [`langchain-mistralai`](https://python.langchain.com/api_reference/mistralai/embeddings/langchain_mistralai.embeddings.MistralAIEmbeddings.html)                   |
+| [`VoyageAIEmbeddings`](/oss/python/integrations/embeddings/voyageai)                       | [`langchain-voyageai`](https://python.langchain.com/api_reference/voyageai/embeddings/langchain_voyageai.embeddings.VoyageAIEmbeddings.html)                       |
+| [`CohereEmbeddings`](/oss/python/integrations/embeddings/cohere)                           | [`langchain-cohere`](https://python.langchain.com/api_reference/community/llms/langchain_community.llms.cohere.Cohere.html)                                        |
+| [`NomicEmbeddings`](/oss/python/integrations/embeddings/nomic)                             | [`langchain-nomic`](https://python.langchain.com/api_reference/nomic/embeddings/langchain_nomic.embeddings.NomicEmbeddings.html)                                   |
+| [`FakeEmbeddings`](/oss/python/integrations/embeddings/fake)                               | [`langchain-core`](https://python.langchain.com/api_reference/core/embeddings/langchain_core.embeddings.fake.FakeEmbeddings.html)                                  |
+| [`DatabricksEmbeddings`](/oss/python/integrations/embeddings/databricks)                   | [`databricks-langchain`](https://api-docs.databricks.com/python/databricks-ai-bridge/latest/databricks_langchain.html#databricks_langchain.DatabricksEmbeddings)   |
+| [`WatsonxEmbeddings`](/oss/python/integrations/embeddings/ibm_watsonx)                     | [`langchain-ibm`](https://python.langchain.com/api_reference/ibm/embeddings/langchain_ibm.embeddings.WatsonxEmbeddings.html)                                       |
+| [`NVIDIAEmbeddings`](/oss/python/integrations/embeddings/nvidia_ai_endpoints)              | [`langchain-nvidia`](https://python.langchain.com/api_reference/nvidia_ai_endpoints/embeddings/langchain_nvidia_ai_endpoints.embeddings.NVIDIAEmbeddings.html)     |
+| [`AIMLAPIEmbeddings`](/oss/python/integrations/embeddings/aimlapi)                         | [`langchain-aimlapi`](https://python.langchain.com/api_reference/aimlapi/embeddings/langchain_aimlapi.embeddings.AIMLAPIEmbeddings.html)                           |
 
 ## Caching
 
@@ -125,7 +125,31 @@ In production, you would typically use a more robust persistent store, such as a
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/text_embedding/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# Middleware integrations
+
+Source: https://docs.langchain.com/oss/python/integrations/middleware/index
+
+Integrate with middleware using LangChain Python.
+
+Middleware designed for specific providers. Learn more about [middleware](/oss/python/langchain/middleware/overview).
+
+| Provider                                                   | Middleware available                                            |
+| ---------------------------------------------------------- | --------------------------------------------------------------- |
+| [Anthropic](/oss/python/integrations/middleware/anthropic) | Prompt caching, bash tool, text editor, memory, and file search |
+| [AWS](/oss/python/integrations/middleware/aws)             | Prompt caching                                                  |
+| [OpenAI](/oss/python/integrations/middleware/openai)       | Content moderation                                              |
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

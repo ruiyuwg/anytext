@@ -6,6 +6,14 @@ Pro Plan projects can access the last 7 days of daily backups. Team Plan project
 
 When you delete a project, we permanently remove all associated data, including any backups stored in S3. This action is irreversible, so consider it carefully before proceeding.
 
+## Types of backups
+
+Database backups can be categorized into two types: **logical** and **physical**. You can learn more about them [in this blog post](/blog/postgresql-physical-logical-backups).
+
+All projects on Postgres `15.8.1.079` and newer use the newer physical backup process.
+
+Projects on older Postgres versions have to upgrade in order to be transitioned to physical backups. Once upgraded to an eligible version, your project is automatically transitioned over to physical backups.
+
 For security purposes, daily backups do not store passwords for custom roles, and you will not find them in downloadable files. If you restore from a daily backup and use custom roles, you will need to reset their passwords after the restoration completes.
 
 Database backups do not include objects you store via the Storage API, as the database only includes metadata about these objects. Restoring an old backup does not restore objects you deleted after that backup.

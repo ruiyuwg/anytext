@@ -54,7 +54,7 @@ declare module 'vitest' {
 
 If you need to execute code in the same process as tests, use [`setupFiles`](/config/setupfiles) instead, but note that it runs before every test file.
 
-### Handling Test Reruns
+## Handling Test Reruns
 
 You can define a custom callback function to be called when Vitest reruns tests. The test runner will wait for it to complete before executing tests. Note that you cannot destruct the `project` like `{ onTestsRerun }` because it relies on the context.
 
@@ -77,44 +77,5 @@ export default function setup(project: TestProject) {
 - **Default:** `false`
 
 Hide logs for skipped tests
-
-***
-
-# hookTimeout
-
-- **Type:** `number`
-- **Default:** `10_000` in Node.js, `30_000` if `browser.enabled` is `true`
-- **CLI:** `--hook-timeout=10000`, `--hookTimeout=10000`
-
-Default timeout of a hook in milliseconds. Use `0` to disable timeout completely.
-
-***
-
-# IDE Integrations
-
-## VS Code Official
-
-[GitHub](https://github.com/vitest-dev/vscode) | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=vitest.explorer)
-
-![](https://i.ibb.co/bJCbCf2/202203292020.gif)
-
-## JetBrains IDE
-
-WebStorm, PhpStorm, IntelliJ IDEA Ultimate, and other JetBrains IDEs come with built-in support for Vitest.
-
-[WebStorm Help](https://www.jetbrains.com/help/webstorm/vitest.html) | [IntelliJ IDEA Ultimate Help](https://www.jetbrains.com/help/idea/vitest.html) | [PhpStorm Help](https://www.jetbrains.com/help/phpstorm/vitest.html)
-
-![Vitest WebStorm Demo](https://raw.githubusercontent.com/kricact/WS-info/main/gifs/vitest-run-all.gif)
-
-## Wallaby.js Paid (free for OSS)
-
-Created by [The Wallaby Team](https://wallabyjs.com)
-
-[Wallaby.js](https://wallabyjs.com) runs your Vitest tests immediately as you type, highlighting results in your IDE right next to your code.
-
-[VS Code](https://marketplace.visualstudio.com/items?itemName=WallabyJs.wallaby-vscode) | [JetBrains](https://plugins.jetbrains.com/plugin/15742-wallaby) |
-[Visual Studio](https://marketplace.visualstudio.com/items?itemName=vs-publisher-999439.WallabyjsforVisualStudio2022) | [Sublime Text](https://packagecontrol.io/packages/Wallaby)
-
-![Wallaby VS Code Demo](https://wallabyjs.com/assets/img/vitest_demo.gif)
 
 ***

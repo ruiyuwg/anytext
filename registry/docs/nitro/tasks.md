@@ -9,9 +9,9 @@ See [nitrojs/nitro#1974](https://github.com/nitrojs/nitro/issues/1974){rel=""nof
 
 In order to use the tasks API you need to enable experimental feature flag.
 
-::code-group
-
 ```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
 export default defineNitroConfig({
   experimental: {
     tasks: true
@@ -19,27 +19,15 @@ export default defineNitroConfig({
 })
 ```
 
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  nitro: {
-    experimental: {
-      tasks: true
-    }
-  }
-})
-```
-
-::
-
 ## Define tasks
 
-Tasks can be defined in `server/tasks/[name].ts` files.
+Tasks can be defined in `tasks/[name].ts` files.
 
-Nested directories are supported. The task name will be joined with `:`. (Example: `server/tasks/db/migrate.ts`task name will be `db:migrate`)
+Nested directories are supported. The task name will be joined with `:`. (Example: `tasks/db/migrate.ts` task name will be `db:migrate`)
 
 **Example:**
 
-```ts [server/tasks/db/migrate.ts]
+```ts [tasks/db/migrate.ts]
 export default defineTask({
   meta: {
     name: "db:migrate",
@@ -52,59 +40,133 @@ export default defineTask({
 });
 ```
 
-## Scheduled tasks
+### Task interface
 
-You can define scheduled tasks using Nitro configuration to automatically run after each period of time.
+The `defineTask` helper accepts an object with the following properties:
 
-::code-group
+- **`meta`** (optional): An object with optional `name` and `description` string fields used for display in the dev server and CLI.
+- **`run`** (required): A function that receives a [`TaskEvent`](https://nitro.build/#taskevent) and returns (or resolves to) an object with an optional `result` property.
 
-```ts [nitro.config.ts]
-export default defineNitroConfig({
-  scheduledTasks: {
-    // Run `cms:update` task every minute
-    '* * * * *': ['cms:update']
-  }
-})
+```ts
+interface Task<RT = unknown> {
+  meta?: { name?: string; description?: string };
+  run(event: TaskEvent): { result?: RT } | Promise<{ result?: RT }>;
+}
 ```
 
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  nitro: {
-    scheduledTasks: {
-      // Run `cms:update` task every minute
-      '* * * * *': ['cms:update']
+### `TaskEvent`
+
+The `run` function receives a `TaskEvent` object with the following properties:
+
+- **`name`**: The name of the task being executed.
+- **`payload`**: An object (`Record<string, unknown>`) containing any data passed to the task.
+- **`context`**: A `TaskContext` object (may include `waitUntil` depending on the runtime).
+
+```ts
+interface TaskEvent {
+  name: string;
+  payload: TaskPayload;
+  context: TaskContext;
+}
+```
+
+### Registering tasks via config
+
+In addition to file-based scanning, tasks can be registered directly in the Nitro config. This is useful for tasks provided by modules or pointing to custom handler paths.
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
+  experimental: {
+    tasks: true
+  },
+  tasks: {
+    "db:migrate": {
+      handler: "./tasks/custom-migrate.ts",
+      description: "Run database migrations"
     }
   }
 })
 ```
 
-::
+If a task is both scanned from the `tasks/` directory and defined in the config, the config-defined `handler` takes precedence.
+
+## Scheduled tasks
+
+You can define scheduled tasks using Nitro configuration to automatically run after each period of time.
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
+  scheduledTasks: {
+    // Run `cms:update` task every minute
+    '* * * * *': ['cms:update'],
+    // Run a single task (string shorthand)
+    '0 * * * *': 'db:cleanup'
+  }
+})
+```
+
+The `scheduledTasks` config maps cron expressions to either a single task name (string) or an array of task names. When multiple tasks are assigned to the same cron expression, they run in parallel.
 
 ::tip
 You can use [crontab.guru](https://crontab.guru/){rel=""nofollow""} to easily generate and understand cron tab patterns.
 ::
 
+When a scheduled task runs, it automatically receives a `payload` with `scheduledTime` set to the current timestamp (`Date.now()`).
+
 ### Platform support
 
-- `dev`, `node-server`, `bun` and `deno-server` presets are supported with [croner](https://croner.56k.guru/){rel=""nofollow""} engine.
-- `cloudflare_module` preset have native integration with [Cron Triggers](https://developers.cloudflare.com/workers/configuration/cron-triggers/){rel=""nofollow""}. Make sure to configure wrangler to use exactly same patterns you define in `scheduledTasks` to be matched.
+- **`dev`*\*, \**`node_server`*\*, \**`node_cluster`*\*, \**`node_middleware`*\*, \**`bun`*\* and \**`deno_server`** presets are supported with the [croner](https://croner.56k.guru/){rel=""nofollow""} engine.
+- **`cloudflare_module`*\* and \**`cloudflare_pages`** presets have native integration with [Cron Triggers](https://developers.cloudflare.com/workers/configuration/cron-triggers/){rel=""nofollow""}. Nitro automatically generates the cron triggers in the wrangler config at build time - no manual wrangler setup required.
+- **`vercel`** preset has native integration with [Vercel Cron Jobs](https://vercel.com/docs/cron-jobs){rel=""nofollow""}. Nitro automatically generates the cron job configuration at build time - no manual `vercel.json` setup required. You can secure cron endpoints by setting the `CRON_SECRET` environment variable.
 - More presets (with native primitives support) are planned to be supported!
+
+## `waitUntil`
+
+When running background tasks, you might want to make sure the server or worker waits until the task is done.
+
+An optional `context.waitUntil` function *might* be available depending on the runtime.
+
+```ts
+export default defineTask({
+  run({ context }) {
+    const promise = fetch(...)
+    context.waitUntil?.(promise);
+    await promise;
+    return { result: "Success" };
+  },
+});
+```
 
 ## Programmatically run tasks
 
-To manually run tasks, you can use `runTask(name, { payload? })` utility.
+To manually run tasks, you can use `runTask(name, { payload?, context? })` utility from `nitro/task`.
 
 **Example:**
 
-```ts [server/api/migrate.ts]
-export default eventHandler(async (event) => {
+```ts [api/migrate.ts]
+import { defineHandler } from "nitro";
+
+export default defineHandler(async (event) => {
   // IMPORTANT: Authenticate user and validate payload!
-  const payload = { ...getQuery(event) };
+  const payload = Object.fromEntries(event.url.searchParams);
   const { result } = await runTask("db:migrate", { payload });
 
   return { result };
 });
 ```
+
+### Error handling
+
+`runTask` throws an HTTP error if:
+
+- The task does not exist (status `404`).
+- The task has no handler implementation (status `501`).
+
+Any errors thrown inside the task's `run` function will propagate to the caller.
 
 ## Run tasks with dev server
 
@@ -144,7 +206,7 @@ This endpoint executes a task. You can provide a payload using both query parame
 
 ::code-group
 
-```ts [server/tasks/echo/payload.ts]
+```ts [tasks/echo/payload.ts]
 export default defineTask({
   meta: {
     name: "echo:payload",
@@ -209,6 +271,8 @@ nitro task list
 ```sh
 nitro task run db:migrate --payload "{}"
 ```
+
+The `--payload` flag accepts a JSON string that will be parsed and passed to the task. If the value is not a valid JSON object, the task runs without a payload.
 
 ## Notes
 

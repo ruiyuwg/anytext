@@ -6,18 +6,16 @@
 
 ## Why is telemetry collected?
 
-Vercel CLI Telemetry provides an accurate gauge of Vercel CLI feature usage, pain points, and customization across all users. This data enables tailoring the Vercel CLI to your needs, supports its continued growth and relevance, and optimal developer experience, as well as verifies if improvements are enhancing the baseline performance of all applications.
+Vercel CLI Telemetry collects telemetry to improve Vercel's products and services, including the developer experience, platform performance, and AI features. For full details on how Vercel uses the data it collects, see our [Privacy Notice](https://vercel.com/legal/privacy-policy).
 
 ## What is being collected?
 
-Vercel takes privacy and security seriously. Vercel CLI Telemetry tracks general usage information, such as commands and arguments used.
-Specifically, the following are tracked:
+Vercel takes privacy and security seriously. Vercel CLI Telemetry tracks general usage information, such as commands and arguments used. This includes:
 
 - Command invoked (`vercel build`, `vercel deploy`, `vercel login`, etc.)
 - Version of the Vercel CLI
 - General machine information (e.g. number of CPUs, macOS/Windows/Linux, whether or not the command was run within CI)
-
-> **💡 Note:** This list is regularly audited to ensure its accuracy.
+- Identifiers associated with your account
 
 You can view exactly what is being collected by setting the following environment variable: `VERCEL_TELEMETRY_DEBUG=1`.
 
@@ -40,8 +38,6 @@ An example telemetry event looks like this:
 ## What about sensitive data?
 
 Vercel CLI Telemetry **does not** collect any metrics which may contain sensitive data, including, but not limited to: environment variables, file paths, contents of files, logs, or serialized JavaScript errors.
-
-For more information about Vercel's privacy practices, please see our [Privacy Notice](https://vercel.com/legal/privacy-policy) and if you have any questions, feel free to reach out to privacy@vercel.com.
 
 ## How do I opt-out of Vercel CLI telemetry?
 
@@ -67,7 +63,7 @@ vercel telemetry enable
 
 Alternatively, you may opt-out by setting an environment variable: `VERCEL_TELEMETRY_DISABLED=1`. This will only apply for runs where the environment variable is set and will not change your configured telemetry status.
 
-title: "vercel alias"
-description: "Learn how to apply custom domain aliases to your Vercel deployments using the vercel alias CLI command."
-last\_updated: "2026-03-08T05:03:11.985Z"
-source: "https://vercel.com/docs/cli/alias"
+title: "vercel activity"
+description: "View activity events for your Vercel project or team, filtered by type, date range, and project."
+last\_updated: "2026-03-23T09:40:06.512Z"
+source: "https://vercel.com/docs/cli/activity"

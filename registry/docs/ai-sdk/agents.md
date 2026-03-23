@@ -10,22 +10,21 @@ These components work together:
   - **Context management** - Maintaining conversation history and deciding what the model sees (input) at each step
   - **Stopping conditions** - Determining when the loop (task) is complete
 
-## ToolLoopAgent Class
+## Agent Class
 
-The ToolLoopAgent class handles these three components. Here's an agent that uses multiple tools in a loop to accomplish a task:
+The Agent class handles these three components. Here's an agent that uses multiple tools in a loop to accomplish a task:
 
 ```ts
-import { ToolLoopAgent, stepCountIs, tool } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
+import { Experimental_Agent as Agent, stepCountIs, tool } from 'ai';
+import { z } from 'zod';
 
-const weatherAgent = new ToolLoopAgent({
+const weatherAgent = new Agent({
   model: __MODEL__,
   tools: {
     weather: tool({
-      description: "Get the weather in a location (in Fahrenheit)",
+      description: 'Get the weather in a location (in Fahrenheit)',
       inputSchema: z.object({
-        location: z.string().describe("The location to get the weather for"),
+        location: z.string().describe('The location to get the weather for'),
       }),
       execute: async ({ location }) => ({
         location,
@@ -33,9 +32,9 @@ const weatherAgent = new ToolLoopAgent({
       }),
     }),
     convertFahrenheitToCelsius: tool({
-      description: "Convert temperature from Fahrenheit to Celsius",
+      description: 'Convert temperature from Fahrenheit to Celsius',
       inputSchema: z.object({
-        temperature: z.number().describe("Temperature in Fahrenheit"),
+        temperature: z.number().describe('Temperature in Fahrenheit'),
       }),
       execute: async ({ temperature }) => {
         const celsius = Math.round((temperature - 32) * (5 / 9));
@@ -43,12 +42,11 @@ const weatherAgent = new ToolLoopAgent({
       },
     }),
   },
-  // Agent's default behavior is to stop after a maximum of 20 steps
-  // stopWhen: stepCountIs(20),
+  stopWhen: stepCountIs(20),
 });
 
 const result = await weatherAgent.generate({
-  prompt: "What is the weather in San Francisco in celsius?",
+  prompt: 'What is the weather in San Francisco in celsius?',
 });
 
 console.log(result.text); // agent's final answer
@@ -61,17 +59,17 @@ The agent automatically:
 2. Calls `convertFahrenheitToCelsius` to convert it
 3. Generates a final text response with the result
 
-The ToolLoopAgent handles the loop, context management, and stopping conditions.
+The Agent class handles the loop, context management, and stopping conditions.
 
-## Why Use the ToolLoopAgent?
+## Why Use the Agent Class?
 
-The ToolLoopAgent is the recommended approach for building agents with the AI SDK because it:
+The Agent class is the recommended approach for building agents with the AI SDK because it:
 
 - **Reduces boilerplate** - Manages loops and message arrays
 - **Improves reusability** - Define once, use throughout your application
 - **Simplifies maintenance** - Single place to update agent configuration
 
-For most use cases, start with the ToolLoopAgent. Use core functions (`generateText`, `streamText`) when you need explicit control over each step for complex structured workflows.
+For most use cases, start with the Agent class. Use core functions (`generateText`, `streamText`) when you need explicit control over each step for complex structured workflows.
 
 ## Structured Workflows
 
@@ -86,7 +84,7 @@ Agents are flexible and powerful, but non-deterministic. When you need reliable,
 
 ## Next Steps
 
-- **[Building Agents](/docs/agents/building-agents)** - Guide to creating agents with the ToolLoopAgent
+- **[Building Agents](/docs/agents/building-agents)** - Guide to creating agents with the Agent class
 - **[Workflow Patterns](/docs/agents/workflows)** - Structured patterns using core functions for complex workflows
 - **[Loop Control](/docs/agents/loop-control)** - Execution control with stopWhen and prepareStep
 

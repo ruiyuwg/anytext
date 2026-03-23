@@ -3,11 +3,11 @@
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
-This guide is for Next.js Pages Router. If you are using Next.js App Router with React Server components, check out [the RSC docs](/docs/client/react/server-components)
+This guide is for the **Next.js Pages Router**. If you are using the **Next.js App Router**, see the [App Router setup guide](/docs/client/nextjs/app-router-setup) instead.
 
 ## Recommended file structure
 
-We recommend a file structure like this one, although it is not enforced by tRPC. This is what you'll see in [our examples](/main/example-apps.mdx). The rest of this page will take you through the process of adding tRPC in to this structure.
+We recommend a file structure like this one, although it is not enforced by tRPC. This is what you'll see in [our examples](/docs/example-apps). The rest of this page will take you through the process of adding tRPC in to this structure.
 
 ```graphql
 .
@@ -38,7 +38,13 @@ We recommend a file structure like this one, although it is not enforced by tRPC
 
 import { InstallSnippet } from '@site/src/components/InstallSnippet';
 
-The Next.js integration is actually a combination of our [React Query Integration](../react/introduction.mdx) and some Next.js specific integrations.
+If you use an AI coding agent, install tRPC skills for better code generation:
+
+```bash
+npx @tanstack/intent@latest install
+```
+
+The Next.js integration is actually a combination of our [React Query Integration](../../react/overview.mdx) and some Next.js specific integrations.
 
 ### 2. Enable strict mode
 
@@ -62,13 +68,13 @@ If strict mode is too harsh, you'll at least want to enable `strictNullChecks`:
 
 Initialize your tRPC backend in `src/server/trpc.ts` using the `initTRPC` function, and create your first router. We're going to make a simple "hello world" router and procedure here - but for deeper information on creating your tRPC API you should refer to:
 
-- the [Quickstart guide](/docs/quickstart) and [Backend usage docs](/docs/server/introduction) for tRPC information
+- the [Quickstart guide](/docs/quickstart) and [Backend usage docs](/docs/server/overview) for tRPC information
 - the [Next.js Adapter docs](/docs/server/adapters/nextjs) for mounting tRPC within your Next.js server.
 
 View sample backend
 
-```ts title='server/trpc.ts'
-import { initTRPC } from "@trpc/server";
+```ts twoslash title='server/trpc.ts'
+import { initTRPC } from '@trpc/server';
 
 // Avoid exporting the entire t-object
 // since it's not very descriptive.
@@ -81,9 +87,17 @@ export const router = t.router;
 export const procedure = t.procedure;
 ```
 
-```ts title='server/routers/_app.ts'
-import { z } from "zod";
-import { procedure, router } from "../trpc";
+```ts twoslash title='server/routers/_app.ts'
+// @filename: server/trpc.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const router = t.router;
+export const procedure = t.procedure;
+
+// @filename: server/routers/_app.ts
+// ---cut---
+import { z } from 'zod';
+import { procedure, router } from '../trpc';
 
 export const appRouter = router({
   hello: procedure
@@ -103,12 +117,20 @@ export const appRouter = router({
 export type AppRouter = typeof appRouter;
 ```
 
-```ts title='pages/api/trpc/[trpc].ts'
-import * as trpcNext from "@trpc/server/adapters/next";
-import { appRouter } from "../../../server/routers/_app";
+```ts twoslash title='pages/api/trpc/[trpc].ts'
+// @filename: server/routers/_app.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: pages/api/trpc/[trpc].ts
+// ---cut---
+import * as trpcNext from '@trpc/server/adapters/next';
+import { appRouter } from '../../../server/routers/_app';
 
 // export API handler
-// @link https://trpc.io/docs/v11/server/adapters
+// @link https://trpc.io/docs/server/adapters
 export default trpcNext.createNextApiHandler({
   router: appRouter,
   createContext: () => ({}),
@@ -119,17 +141,25 @@ The backend above is using the [recommended file structure](#recommended-file-st
 
 ### 4. Create tRPC hooks
 
-use the `createTRPCNext` function to create a set of strongly-typed hooks from your API's type signature.
+Use the `createTRPCNext` function to create a set of strongly-typed hooks from your API's type signature.
 
-```tsx title='utils/trpc.ts'
-import { httpBatchLink } from "@trpc/client";
-import { createTRPCNext } from "@trpc/next";
-import type { AppRouter } from "../server/routers/_app";
+```tsx twoslash title='utils/trpc.ts'
+// @filename: server/routers/_app.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.ts
+// ---cut---
+import { httpBatchLink } from '@trpc/client';
+import { createTRPCNext } from '@trpc/next';
+import type { AppRouter } from '../server/routers/_app';
 
 function getBaseUrl() {
-  if (typeof window !== "undefined")
+  if (typeof window !== 'undefined')
     // browser should use relative path
-    return "";
+    return '';
 
   if (process.env.VERCEL_URL)
     // reference for vercel.com
@@ -150,7 +180,7 @@ export const trpc = createTRPCNext<AppRouter>({
         httpBatchLink({
           /**
            * If you want to use SSR, you need to use the server's full URL
-           * @see https://trpc.io/docs/v11/ssr
+           * @see https://trpc.io/docs/client/nextjs/pages-router/ssr
            **/
           url: `${getBaseUrl()}/api/trpc`,
 
@@ -165,21 +195,39 @@ export const trpc = createTRPCNext<AppRouter>({
     };
   },
   /**
-   * @see https://trpc.io/docs/v11/ssr
+   * @see https://trpc.io/docs/client/nextjs/pages-router/ssr
    **/
   ssr: false,
 });
 ```
 
-`createTRPCNext` does not work with the tRPC-v9 interop mode. If you are migrating from v9 using interop, you should continue using [the old way of initializing tRPC](../../../versioned_docs/version-9.x/nextjs/introduction.md#4-create-trpc-hooks).
+`createTRPCNext` does not work with the tRPC-v9 interop mode. If you are migrating from v9 using interop, you should continue using [the old way of initializing tRPC](../../../../versioned_docs/version-9.x/nextjs/introduction.md#4-create-trpc-hooks).
 
 ### 5. Configure `_app.tsx`
 
 Wrap your root app page in the `trpc.withTRPC` HOC, similar to this:
 
-```tsx title='pages/_app.tsx'
-import type { AppType } from "next/app";
-import { trpc } from "../utils/trpc";
+```tsx twoslash title='pages/_app.tsx'
+// @jsx: react-jsx
+// @filename: server/routers/_app.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.ts
+import { httpBatchLink } from '@trpc/client';
+import { createTRPCNext } from '@trpc/next';
+import type { AppRouter } from '../server/routers/_app';
+export const trpc = createTRPCNext<AppRouter>({
+  config() { return { links: [httpBatchLink({ url: '/api/trpc' })] }; },
+  ssr: false,
+});
+
+// @filename: pages/_app.tsx
+// ---cut---
+import type { AppType } from 'next/app';
+import { trpc } from '../utils/trpc';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return <Component {...pageProps} />;
@@ -192,13 +240,34 @@ export default trpc.withTRPC(MyApp);
 
 You're all set!
 
-You can now use the React hooks you have just created to invoke your API. For more detail see the [React Query Integration](../react/setup.mdx)
+You can now use the React hooks you have just created to invoke your API. For more detail see the [React Query Integration](../../react/setup.mdx)
 
-```tsx title='pages/index.tsx'
-import { trpc } from "../utils/trpc";
+```tsx twoslash title='pages/index.tsx'
+// @jsx: react-jsx
+// @filename: server/routers/_app.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+export const appRouter = t.router({
+  hello: t.procedure.input(z.object({ text: z.string() })).query(({ input }) => ({ greeting: `hello ${input.text}` })),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.ts
+import { httpBatchLink } from '@trpc/client';
+import { createTRPCNext } from '@trpc/next';
+import type { AppRouter } from '../server/routers/_app';
+export const trpc = createTRPCNext<AppRouter>({
+  config() { return { links: [httpBatchLink({ url: '/api/trpc' })] }; },
+  ssr: false,
+});
+
+// @filename: pages/index.tsx
+// ---cut---
+import { trpc } from '../utils/trpc';
 
 export default function IndexPage() {
-  const hello = trpc.hello.useQuery({ text: "client" });
+  const hello = trpc.hello.useQuery({ text: 'client' });
   if (!hello.data) {
     return <div>Loading...</div>;
   }
@@ -214,7 +283,7 @@ export default function IndexPage() {
 
 ### `config`-callback
 
-The `config`-argument is a function that returns an object that configures the tRPC and React Query clients. This function has a `ctx` input that gives you access to the Next.js `req` object, among other things. The returned value can contain the following properties:
+The `config`-argument is a function that returns an object that configures the tRPC and React Query clients. This function receives an object with an optional `ctx` property (of type `NextPageContext`) that gives you access to the Next.js `req` object during server-side rendering. The returned value can contain the following properties:
 
 - **Required**:
 - `links` to customize the flow of data between tRPC Client and the tRPC Server. [Read more](/docs/client/links).
@@ -239,13 +308,25 @@ Ability to set request headers and HTTP status when server-side rendering.
 
 #### Example
 
-```tsx title='utils/trpc.ts'
-import { createTRPCNext } from "@trpc/next";
-import type { AppRouter } from "../pages/api/trpc/[trpc]";
+```tsx twoslash title='utils/trpc.ts'
+// @filename: server/routers/_app.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.ts
+// ---cut---
+import { createTRPCNext } from '@trpc/next';
+import type { AppRouter } from '../server/routers/_app';
 
 export const trpc = createTRPCNext<AppRouter>({
   config(config) {
-    /* [...] */
+    return {
+      links: [
+        /* [...] */
+      ],
+    };
   },
 });
 ```

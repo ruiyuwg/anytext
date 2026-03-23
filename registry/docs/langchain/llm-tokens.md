@@ -15,13 +15,16 @@ agent = create_agent(
     model="gpt-5-nano",
     tools=[get_weather],
 )
-for token, metadata in agent.stream(  # [!code highlight]
+for chunk in agent.stream(  # [!code highlight]
     {"messages": [{"role": "user", "content": "What is the weather in SF?"}]},
     stream_mode="messages",
+    version="v2",  # [!code highlight]
 ):
-    print(f"node: {metadata['langgraph_node']}")
-    print(f"content: {token.content_blocks}")
-    print("\n")
+    if chunk["type"] == "messages":  # [!code highlight]
+        token, metadata = chunk["data"]  # [!code highlight]
+        print(f"node: {metadata['langgraph_node']}")
+        print(f"content: {token.content_blocks}")
+        print("\n")
 ```
 
 ```shell title="Output" expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
@@ -145,9 +148,11 @@ agent = create_agent(
 
 for chunk in agent.stream(
     {"messages": [{"role": "user", "content": "What is the weather in SF?"}]},
-    stream_mode="custom"  # [!code highlight]
+    stream_mode="custom",  # [!code highlight]
+    version="v2",  # [!code highlight]
 ):
-    print(chunk)
+    if chunk["type"] == "custom":  # [!code highlight]
+        print(chunk["data"])  # [!code highlight]
 ```
 
 ```shell title="Output" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}

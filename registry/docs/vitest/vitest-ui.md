@@ -38,7 +38,7 @@ To preview your HTML report, you can use the [vite preview](https://vitejs.dev/g
 npx vite preview --outDir ./html
 ```
 
-You can configure output with [`outputFile`](/config/#outputfile) config option. You need to specify `.html` path there. For example, `./html/index.html` is the default value.
+You can configure output with [`outputFile`](/config/outputfile) config option. You need to specify `.html` path there. For example, `./html/index.html` is the default value.
 
 ## Module Graph
 
@@ -76,7 +76,7 @@ If the module was inlined, you will see three more windows:
 
 All static imports in the "Source" window show a total time it took to evaluate them by the current module. If the import was already evaluated in the module graph, it will show `0ms` because it is cached by that point.
 
-If the module took longer than 500 milliseconds to load, the time will be displayed in red. If the module took longer than 100 milliseconds, the time will be displayed in orange.
+If the module took longer than the [`danger` threshold](/config/experimental#experimental-importdurations-thresholds) (default: 500ms) to load, the time will be displayed in red. If the module took longer than the [`warn` threshold](/config/experimental#experimental-importdurations-thresholds) (default: 100ms), the time will be displayed in orange.
 
 You can click on an import source to jump into that module and traverse the graph further (note `./support/assertions/index.ts` below).
 
@@ -90,88 +90,14 @@ If you are developing a custom integration on top of Vitest, you can use [`vites
 
 Please, leave feedback regarding this feature in a [GitHub Discussion](https://github.com/vitest-dev/vitest/discussions/9224).
 
-The Module Graph tab also provides an Import Breakdown with a list of modules that take the longest time to load (top 10 by default, but you can press "Show more" to load 10 more), sorted by Total Time.
+The Module Graph tab also provides an Import Breakdown with a list of modules that take the longest time to load (top 10 by default), sorted by Total Time.
 
 You can click on the module to see the Module Info. If the module is external, it will have the yellow color (the same color in the module graph).
 
 The breakdown shows a list of modules with self time, total time, and a percentage relative to the time it took to load the whole test file.
 
-The "Show Import Breakdown" icon will have a red color if there is at least one file that took longer than 500 milliseconds to load, and it will be orange if there is at least one file that took longer than 100 milliseconds.
+The "Show Import Breakdown" icon will have a red color if there is at least one file that took longer than the [`danger` threshold](/config/experimental#experimental-importdurations-thresholds) (default: 500ms) to load, and it will be orange if there is at least one file that took longer than the [`warn` threshold](/config/experimental#experimental-importdurations-thresholds) (default: 100ms).
 
-By default, Vitest shows the breakdown automatically if there is at least one module that took longer than 500 milliseconds to load. You can control the behaviour by setting the [`experimental.printImportBreakdown`](/config/experimental#experimental-printimportbreakdown) option.
-
-***
-
-# vmMemoryLimit
-
-- **Type:** `string | number`
-- **Default:** `1 / CPU Cores`
-
-This option affects only `vmForks` and `vmThreads` pools.
-
-Specifies the memory limit for workers before they are recycled. This value heavily depends on your environment, so it's better to specify it manually instead of relying on the default.
-
-The implementation is based on Jest's [`workerIdleMemoryLimit`](https://jestjs.io/docs/configuration#workeridlememorylimit-numberstring).
-
-The limit can be specified in a number of different ways and whatever the result is `Math.floor` is used to turn it into an integer value:
-
-- `<= 1` - The value is assumed to be a percentage of system memory. So 0.5 sets the memory limit of the worker to half of the total system memory
-- `\> 1` - Assumed to be a fixed byte value. Because of the previous rule if you wanted a value of 1 byte (I don't know why) you could use 1.1.
-- With units
-  - `50%` - As above, a percentage of total system memory
-  - `100KB`, `65MB`, etc - With units to denote a fixed memory limit.
-    - `K` / `KB` - Kilobytes (x1000)
-    - `KiB` - Kibibytes (x1024)
-    - `M` / `MB` - Megabytes
-    - `MiB` - Mebibytes
-    - `G` / `GB` - Gigabytes
-    - `GiB` - Gibibytes
-      :::
-
-Percentage based memory limit [does not work on Linux CircleCI](https://github.com/jestjs/jest/issues/11956#issuecomment-1212925677) workers due to incorrect system memory being reported.
-
-***
-
-# watch
-
-- **Type:** `boolean`
-- **Default:** `!process.env.CI && process.stdin.isTTY`
-- **CLI:** `-w`, `--watch`, `--watch=false`
-
-Enable watch mode
-
-In interactive environments, this is the default, unless `--run` is specified explicitly.
-
-In CI, or when run from a non-interactive shell, "watch" mode is not the default, but can be enabled explicitly with this flag.
-
-***
-
-# watchTriggerPatterns  3.2.0
-
-- **Type:** `WatcherTriggerPattern[]`
-
-Vitest reruns tests based on the module graph which is populated by static and dynamic `import` statements. However, if you are reading from the file system or fetching from a proxy, then Vitest cannot detect those dependencies.
-
-To correctly rerun those tests, you can define a regex pattern and a function that returns a list of test files to run.
-
-```ts
-import { defineConfig } from 'vitest/config'
-
-export default defineConfig({
-  test: {
-    watchTriggerPatterns: [
-      {
-        pattern: /^src\/(mailers|templates)\/(.*)\.(ts|html|txt)$/,
-        testsToRun: (id, match) => {
-          // relative to the root value
-          return `./api/tests/mailers/${match[2]}.test.ts`
-        },
-      },
-    ],
-  },
-})
-```
-
-Returned files should be either absolute or relative to the root. Note that this is a global option, and it cannot be used inside of [project](/guide/projects) configs.
+You can use [`experimental.importDurations.limit`](/config/experimental#experimental-importdurationslimit) to control the number of imports displayed.
 
 ***

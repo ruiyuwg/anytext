@@ -201,7 +201,7 @@ console.log(JSON.stringify(result.content, null, 2));
 
 ```
 
-Learn more about how RAG works in LangChain [here](https://js.langchain.com/docs/concepts/rag/)
+Learn more about [how RAG works in LangChain](https://js.langchain.com/docs/concepts/rag/)
 
 [Learn more about tool calling](/oss/javascript/langchain/tools)
 

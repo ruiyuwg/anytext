@@ -51,6 +51,7 @@ Most of this middleware leverages external libraries.
 - [OpenTelemetry](https://github.com/honojs/middleware/tree/main/packages/otel)
 - [Prometheus Metrics](https://github.com/honojs/middleware/tree/main/packages/prometheus)
 - [Sentry](https://github.com/honojs/middleware/tree/main/packages/sentry)
+- [Pino logger](https://github.com/maou-shonen/hono-pino)
 
 ### Server / Adapter
 
@@ -68,6 +69,14 @@ Most of this middleware leverages external libraries.
 - [Qwik City](https://github.com/honojs/middleware/tree/main/packages/qwik-city)
 - [React Compatibility](https://github.com/honojs/middleware/tree/main/packages/react-compat)
 - [React Renderer](https://github.com/honojs/middleware/tree/main/packages/react-renderer)
+
+### Queue / Job Processing
+
+- [GlideMQ (Message Queue REST API + SSE)](https://github.com/avifenesh/glidemq-hono)
+
+### Internationalization
+
+- [Intlayer i18n](https://intlayer.org/doc/environment/hono)
 
 ### Utilities
 

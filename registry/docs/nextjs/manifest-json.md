@@ -18,49 +18,49 @@ Add or generate a `manifest.(json|webmanifest)` file that matches the [Web Manif
 
 Add a `manifest.js` or `manifest.ts` file that returns a [`Manifest` object](#manifest-object).
 
-> Good to know: `manifest.js` is a special Route Handler that is cached by default unless it uses a [Dynamic API](/docs/app/guides/caching#dynamic-apis) or [dynamic config](/docs/app/guides/caching#segment-config-options) option.
+> Good to know: `manifest.js` is a special Route Handlers that is cached by default unless it uses a [Request-time API](/docs/app/glossary#request-time-apis) or [dynamic config](/docs/app/guides/caching-without-cache-components#dynamic) option.
 
 ```ts filename="app/manifest.ts" switcher
-import type { MetadataRoute } from "next";
+import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Next.js App",
-    short_name: "Next.js App",
-    description: "Next.js App",
-    start_url: "/",
-    display: "standalone",
-    background_color: "#fff",
-    theme_color: "#fff",
+    name: 'Next.js App',
+    short_name: 'Next.js App',
+    description: 'Next.js App',
+    start_url: '/',
+    display: 'standalone',
+    background_color: '#fff',
+    theme_color: '#fff',
     icons: [
       {
-        src: "/favicon.ico",
-        sizes: "any",
-        type: "image/x-icon",
+        src: '/favicon.ico',
+        sizes: 'any',
+        type: 'image/x-icon',
       },
     ],
-  };
+  }
 }
 ```
 
 ```js filename="app/manifest.js" switcher
 export default function manifest() {
   return {
-    name: "Next.js App",
-    short_name: "Next.js App",
-    description: "Next.js App",
-    start_url: "/",
-    display: "standalone",
-    background_color: "#fff",
-    theme_color: "#fff",
+    name: 'Next.js App',
+    short_name: 'Next.js App',
+    description: 'Next.js App',
+    start_url: '/',
+    display: 'standalone',
+    background_color: '#fff',
+    theme_color: '#fff',
     icons: [
       {
-        src: "/favicon.ico",
-        sizes: "any",
-        type: "image/x-icon",
+        src: '/favicon.ico',
+        sizes: 'any',
+        type: 'image/x-icon',
       },
     ],
-  };
+  }
 }
 ```
 

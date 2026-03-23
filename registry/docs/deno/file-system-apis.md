@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/api/runtime-fs
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 Deno Deploy Classic supports a limited set of the file system APIs available in
 Deno. These file system APIs can access static files from your deployments.

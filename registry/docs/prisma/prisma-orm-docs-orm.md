@@ -204,21 +204,21 @@ npx prisma generate
 
 
 ```bash
-npm install @prisma/client
+pnpm add @prisma/client
 pnpm dlx prisma generate
 ```
 
 
 
 ```bash
-npm install @prisma/client
+yarn add @prisma/client
 yarn dlx prisma generate
 ```
 
 
 
 ```bash
-npm install @prisma/client
+bun add @prisma/client
 bun x prisma generate
 ```
 ````

@@ -2,7 +2,17 @@
 
 Update shipping options based on a customer's shipping address.
 
-Learn how to dynamically update shipping options based on the address that your customer enters when you use the embedded version of Checkout. Dynamic updates aren’t available with the Stripe-hosted version of Checkout.
+# Hosted page
+
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/custom-shipping-options?payment-ui=stripe-hosted.
+
+The hosted page integration doesn’t support dynamically customizing shipping options. To dynamically customize shipping options, use the [Embedded page](https://docs.stripe.com/payments/checkout/custom-shipping-options.md?payment-ui=embedded-form) or the [Checkout elements](https://docs.stripe.com/payments/checkout/custom-shipping-options.md?payment-ui=embedded-components) integration instead.
+
+# Embedded page
+
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/custom-shipping-options?payment-ui=embedded-form.
+
+Learn how to dynamically update shipping options based on the address that your customer enters when you use Checkout.
 
 ### Use cases
 

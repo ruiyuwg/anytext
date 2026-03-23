@@ -44,5 +44,5 @@ When multiple visitors request the same uncached content at the same time, [requ
 
 title: "Data Cache for Next.js"
 description: "Vercel Data Cache is a specialized cache that stores responses from data fetches in Next.js App Router"
-last\_updated: "2026-03-08T05:03:11.787Z"
+last\_updated: "2026-03-23T09:40:05.872Z"
 source: "https://vercel.com/docs/caching/runtime-cache/data-cache"

@@ -45,7 +45,15 @@ For example, automatic page view tracking may track personal information `https:
 
 For [custom events](/docs/analytics/custom-events), you may want to prevent sending sensitive or personal information, such as email addresses, to Vercel.
 
+## Resilient Intake
+
+In version 2, Vercel generates a random seed at build time and passes it through dynamic configuration. `@vercel/analytics` uses this seed to build the injected script URL and intake URLs.
+
+The Resilient Intake does not depend on a single predictable URL path for data collection, enhancing reliability and increasing data collection efficiency.
+
+> **💡 Note:** Resilient Intake requires version 2 of the `@vercel/analytics` [package](/docs/analytics/package#whats-new-in-version-2).
+
 title: "Getting started with Vercel Web Analytics"
 description: "Vercel Web Analytics provides you detailed insights into your website"
-last\_updated: "2026-03-08T05:03:11.217Z"
+last\_updated: "2026-03-23T09:40:05.404Z"
 source: "https://vercel.com/docs/analytics/quickstart"

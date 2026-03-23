@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/kv\_on\_deploy
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 Deno Deploy Classic offers a built-in serverless key-value database called Deno
 KV.
@@ -90,9 +90,9 @@ restore the system to normal operations after a failure.
 
 URL: https://docs.deno.com/deploy/classic/logs
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 Applications can generate logs at runtime using the console API, with methods
 such as `console.log`, `console.error`, etc. These logs can be viewed in real
@@ -133,9 +133,9 @@ exceeded, we may terminate the deployment.
 
 URL: https://docs.deno.com/deploy/classic/middleware
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 This quickstart will cover how to deploy a small piece of middleware that
 reverse proxies another server (in this case example.com). For additional

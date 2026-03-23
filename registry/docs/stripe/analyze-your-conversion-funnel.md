@@ -2,9 +2,9 @@
 
 Analyze your Stripe Checkout conversion funnel with Google Analytics 4.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/analyze-conversion-funnel?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/analyze-conversion-funnel?payment-ui=stripe-hosted.
 
 Use Google Analytics 4 (GA4) to track users as they progress through your Stripe Checkout purchase funnel. Before you begin, set up a [GA4 account](https://support.google.com/analytics/answer/9304153) and add a [GA4 property](https://support.google.com/analytics/answer/9744165?hl=en#zippy=%2Cin-this-article).
 
@@ -670,8 +670,8 @@ In this example, we assume that redirects to Stripe happen on the client. If you
  </html>
 ```
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/analyze-conversion-funnel?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/analyze-conversion-funnel?payment-ui=embedded-form.
 
 Embedded Checkout supports tracking conversions and checkout behavior with real-time analytics events. See [Track analytics events in Embedded Checkout](https://docs.stripe.com/payments/checkout/embedded-analytics.md).

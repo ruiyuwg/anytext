@@ -107,5 +107,5 @@ example, the custom rule is also restricted to the `dashboard` and
 
 title: "Conformance Custom Rules"
 description: "Learn how Conformance improves collaboration, productivity, and software quality at scale."
-last\_updated: "2026-03-08T05:03:12.602Z"
+last\_updated: "2026-03-23T09:40:07.444Z"
 source: "https://vercel.com/docs/conformance/custom-rules"

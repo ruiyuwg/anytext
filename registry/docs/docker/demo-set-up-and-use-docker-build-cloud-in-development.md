@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -42,7 +40,7 @@ Resources:
 
 - [Product page](https://www.docker.com/products/build-cloud/)
 - [Docker Build Cloud overview](/build-cloud/)
-- [Subscriptions and features](https://www.docker.com/pricing/)
+- [Subscriptions and features](https://www.docker.com/pricing?ref=Docs\&refAction=DocsGuidesBuildCloud)
 - [Using Docker Build Cloud](/build-cloud/usage/)
 
 [« Back to all guides](/guides/)

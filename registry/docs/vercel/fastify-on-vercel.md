@@ -77,5 +77,5 @@ Learn more about deploying Fastify projects on Vercel with the following resourc
 
 title: "Flask on Vercel"
 description: "Deploy Flask applications to Vercel with zero configuration. Learn about the Python runtime, WSGI, static assets, and Vercel Functions."
-last\_updated: "2026-03-08T05:03:14.770Z"
+last\_updated: "2026-03-23T09:40:10.441Z"
 source: "https://vercel.com/docs/frameworks/backend/flask"

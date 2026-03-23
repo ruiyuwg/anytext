@@ -127,7 +127,7 @@ The value of `--inspect` is passed to the underlying Node.js process. Check out 
 
 > **Good to know**: Use `--inspect=0.0.0.0` to allow remote debugging access outside localhost, such as when running the app in a Docker container.
 
-Launching the Next.js dev server with the `--inspect` flag will look something like this:
+Launching the Next.js server with the `--inspect` flag will look something like this:
 
 ```bash filename="Terminal"
 Debugger listening on ws://127.0.0.1:9229/0cf90313-350d-4466-a748-cd60f4e47c95
@@ -162,7 +162,7 @@ Next.js will display a Node.js icon underneath the Next.js version indicator on 
 
 ### Debugging on Windows
 
-Ensure Windows Defender is disabled on your machine. This external service will check _every file read_, which has been reported to greatly increase Fast Refresh time with `next dev`. This is a known issue, not related to Next.js, but it does affect Next.js development.
+Ensure Windows Defender is disabled on your machine. This external service will check *every file read*, which has been reported to greatly increase Fast Refresh time with `next dev`. This is a known issue, not related to Next.js, but it does affect Next.js development.
 
 ## More information
 

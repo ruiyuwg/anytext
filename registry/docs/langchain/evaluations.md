@@ -2,9 +2,9 @@
 
 Now that we've got a testable version of our agent, let's run some evaluations. Agent evaluation can focus on at least 3 things:
 
-- [Final response](/langsmith/evaluation-concepts#evaluating-an-agents-final-response): The inputs are a prompt and an optional list of tools. The output is the final agent response.
-- [Trajectory](/langsmith/trajectory-evals): As before, the inputs are a prompt and an optional list of tools. The output is the list of tool calls
-- [Single step](/langsmith/evaluation-concepts#evaluating-a-single-step-of-an-agent): As before, the inputs are a prompt and an optional list of tools. The output is the tool call.
+- [Final response](#final-response-evaluator): The inputs are a prompt and an optional list of tools. The output is the final agent response.
+- [Trajectory](#trajectory-evaluator): As before, the inputs are a prompt and an optional list of tools. The output is the list of tool calls
+- [Single step](#single-step-evaluators): As before, the inputs are a prompt and an optional list of tools. The output is the tool call.
 
 Let's run each type of evaluation:
 

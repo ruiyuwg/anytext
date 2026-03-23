@@ -2,7 +2,7 @@
 
 ## Cache Components
 
-A feature that enables component and function-level caching using the [`"use cache"` directive](/docs/app/api-reference/directives/use-cache). Cache Components allows you to mix static, cached, and dynamic content within a single route by prerendering a static HTML shell that's served immediately, while dynamic content streams in when ready. Configure cache duration with [`cacheLife()`](/docs/app/api-reference/functions/cacheLife), tag cached data with [`cacheTag()`](/docs/app/api-reference/functions/cacheTag), and invalidate on-demand with [`updateTag()`](/docs/app/api-reference/functions/updateTag). Learn more in the [Cache Components guide](/docs/app/getting-started/cache-components).
+A feature that enables component and function-level caching using the [`"use cache"` directive](/docs/app/api-reference/directives/use-cache). Cache Components allows you to mix static, cached, and dynamic content within a single route by prerendering a static HTML shell that's served immediately, while dynamic content streams in when ready. Configure cache duration with [`cacheLife()`](/docs/app/api-reference/functions/cacheLife), tag cached data with [`cacheTag()`](/docs/app/api-reference/functions/cacheTag), and invalidate on-demand with [`updateTag()`](/docs/app/api-reference/functions/updateTag). Learn more in the [Cache Components guide](/docs/app/getting-started/caching).
 
 ## Catch-all Segments
 
@@ -20,6 +20,14 @@ A React component that runs in the browser. In Next.js, Client Components can al
 
 A navigation technique where the page content updates dynamically without a full page reload. Next.js uses client-side navigation with the [`<Link>` component](/docs/app/api-reference/components/link), keeping shared layouts interactive and preserving browser state. Learn more in [Linking and Navigating](/docs/app/getting-started/linking-and-navigating#client-side-transitions).
 
+## Client Cache
+
+An in-memory cache in the browser that stores [RSC Payload](#rsc-payload) for visited and prefetched routes. During [client-side navigation](#client-side-navigation), Next.js serves cached [layouts](#layout) and [loading states](#loading-ui) instantly without a server request. Pages are not cached by default but are reused during browser back/forward navigation.
+
+The client cache is cleared on page refresh. It can be invalidated programmatically with [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag), [`revalidatePath`](/docs/app/api-reference/functions/revalidatePath), [`updateTag`](/docs/app/api-reference/functions/updateTag), [`router.refresh`](/docs/app/api-reference/functions/use-router), [`cookies.set`](/docs/app/api-reference/functions/cookies), or [`cookies.delete`](/docs/app/api-reference/functions/cookies).
+
+You can configure the client cache duration with [`staleTimes`](/docs/app/api-reference/config/next-config-js/staleTimes) globally, or per-route via the `stale` property in [`cacheLife`](/docs/app/api-reference/functions/cacheLife#client-cache-behavior) (recommended).
+
 ## Code Splitting
 
 The process of dividing your application into smaller JavaScript chunks based on routes. Instead of loading all code upfront, only the code needed for the current route is loaded, reducing initial load time. Next.js automatically performs code splitting based on routes. Learn more in the [Package Bundling guide](/docs/app/guides/package-bundling).
@@ -28,7 +36,7 @@ The process of dividing your application into smaller JavaScript chunks based on
 
 ## Dynamic rendering
 
-See [Request-time rendering](#request-time-rendering).
+When a component is rendered at request time rather than [build time](#build-time). A component becomes dynamic when it uses [Request-time APIs](#request-time-apis).
 
 ## Dynamic route segments
 
@@ -102,7 +110,9 @@ Information about a page used by browsers and search engines, such as title, des
 
 ## Memoization
 
-Caching the return value of a function so that calling the same function multiple times during a render pass (request) only executes it once. In Next.js, fetch requests with the same URL and options are automatically memoized. Learn more about [React Cache](https://react.dev/reference/react/cache).
+Caching the return value of a function so that calling the same function multiple times during a render pass (request) only executes it once. In Next.js, `fetch` `GET` requests with the same URL and options are automatically memoized across Server Components, layouts, pages, and `generateMetadata`/`generateStaticParams` (but not [Route Handlers](/docs/app/api-reference/file-conventions/route) since they are not part of the React component tree).
+
+For non-`fetch` operations, use the React [`cache`](https://react.dev/reference/react/cache) function. Learn more in the [`fetch` API reference](/docs/app/api-reference/functions/fetch).
 
 ## Middleware
 

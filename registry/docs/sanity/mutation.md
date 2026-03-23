@@ -218,6 +218,8 @@ Note: Using this feature requires Sanity to send data to OpenAI and Pinecone to 
 - The Embeddings Index HTTP API rate limit depends on the OpenAI rate limit, which sets a cap for the HTTP API at about 8,000 tokens per minute.
 - The embeddings-index API does not support dataset aliases—you must use the real dataset name in all requests.
 
+# Content Agent
+
 # Media Library
 
 The Media Library API lets you programmatically interact with assets in your organization’s Media Library.

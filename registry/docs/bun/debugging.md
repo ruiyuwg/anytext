@@ -8,7 +8,7 @@ Bun speaks the [WebKit Inspector Protocol](https://github.com/oven-sh/bun/blob/m
 
 ## Debugging JavaScript and TypeScript
 
-```typescript icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" title="server.ts" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```typescript icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" title="server.ts" theme={"theme":{"light":"github-light","dark":"dracula"}}
 Bun.serve({
   fetch(req) {
     console.log(req.url);
@@ -120,7 +120,7 @@ The `BUN_CONFIG_VERBOSE_FETCH` environment variable lets you log network request
 
 Bun also supports printing `fetch()` and `node:http` network requests as `curl` commands by setting the environment variable `BUN_CONFIG_VERBOSE_FETCH` to `curl`. This prints the `fetch` request as a single-line `curl` command to let you copy-paste into your terminal to replicate the request.
 
-```ts index.ts icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts index.ts icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 process.env.BUN_CONFIG_VERBOSE_FETCH = "curl";
 
 await fetch("https://example.com", {
@@ -161,7 +161,7 @@ The `BUN_CONFIG_VERBOSE_FETCH` environment variable is supported in both `fetch(
 
 To print without the `curl` command, set `BUN_CONFIG_VERBOSE_FETCH` to `true`.
 
-```ts index.ts icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts index.ts icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 process.env.BUN_CONFIG_VERBOSE_FETCH = "true";
 
 await fetch("https://example.com", {
@@ -282,7 +282,7 @@ This can be helpful when you have callbacks or asynchronous code that makes it d
 
 For example, the below code will make `err.stack` point to the code calling `fn()`, even though the error was thrown at `myInner`.
 
-```ts index.ts icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts index.ts icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 const fn = () => {
   function myInner() {
     throw err;

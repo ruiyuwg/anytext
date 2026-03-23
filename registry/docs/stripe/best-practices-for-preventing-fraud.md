@@ -27,7 +27,7 @@ Clear and frequent contact with your customers can help prevent many of the [rea
   Set a recognizable name for your [statement descriptor](https://docs.stripe.com/get-started/account/activate.md#public-business-information) through your [account settings](https://dashboard.stripe.com/settings/account/?support_details=true). We recommend using your website domain or business name to make sure customers can easily identify their purchase when they look at their statement.
 
   ```
-  Statement descriptors are limited to between 5 and 22 characters. They must contain at least 5 letters and can’t use the special characters `<`, `>`, `\`, `'`, or `"`.
+  Statement descriptors are limited to between 5 and 22 characters. They must contain at least 5 letters and can’t use the special characters `<`, `>`, `'`, or `"`.
   ```
 
 - \[ ] Separate your business accounts
@@ -86,7 +86,7 @@ Your account’s [dispute rate](https://docs.stripe.com/disputes/measuring.md#di
 
 ### Manually review payments
 
-[Radar for Fraud Teams](https://stripe.com/radar/fraud-teams) includes a [review](https://docs.stripe.com/radar/reviews.md) feature that allows you to place certain payments into review—though keep in mind that these payments are still processed and the credit card charged, unless you are using a separate auth and capture process. These payments are placed into the [review queue](https://dashboard.stripe.com/radar) for you to take a closer look at. If you suspect the payment is fraudulent, you can refund it.
+[Radar for Fraud Teams](https://stripe.com/radar/fraud-teams) includes a [review](https://docs.stripe.com/radar/reviews.md) feature that allows you to place certain payments into review—though keep in mind that these payments are still processed and the credit card charged, unless you’re using a separate auth and capture process. These payments are placed into the [review queue](https://dashboard.stripe.com/radar) for you to take a closer look at. If you suspect the payment is fraudulent, you can refund it.
 
 You should review payments that Stripe has placed into your [review queue](https://dashboard.stripe.com/radar) as soon as possible. Payments with an [elevated risk](https://docs.stripe.com/radar/risk-evaluation.md#elevated-risk) of fraud are automatically marked for review. You can also create additional rules to customize the types of payments that should be placed in your review queue.
 
@@ -109,7 +109,7 @@ Using [rules](https://docs.stripe.com/radar/rules.md), you can automatically eva
 
 ### Country and card type limiting
 
-If you’re experiencing increased fraud coming from certain countries, you can set up rules to block payments from any country you do not want to accept payments from, using the `:ip_country:` and `:card_country:` rule attributes. For example, you can create the following rule to block all payments and cards originating from Canada: `Block if :ip_country: = ca and :card_country: = 'ca'`. Similarly, if your business only supports the country it operates in, you can create a rule that blocks any payments from all other countries. For example, a rule to block payments that don’t originate from Australia is: `Block if :ip_country: != au and :card_country: != 'au'`.
+If you’re experiencing increased fraud coming from certain countries, you can set up rules to block payments from any country you don’t want to accept payments from, using the `:ip_country:` and `:card_country:` rule attributes. For example, you can create the following rule to block all payments and cards originating from Canada: `Block if :ip_country: = ca and :card_country: = 'ca'`. Similarly, if your business only supports the country it operates in, you can create a rule that blocks any payments from all other countries. For example, a rule to block payments that don’t originate from Australia is: `Block if :ip_country: != au and :card_country: != 'au'`.
 
 You can set limits on which type of cards to accept, either by brand, (for example, Mastercard), or by funding type (for example, pre-paid). This can be particularly helpful if you see excessive fraud from certain card types. To block payments from all Visa-issued debit cards, an example rule would be: `Block if :card_brand: = visa and :card_funding: = 'debit'`.
 
@@ -141,7 +141,7 @@ Use [Checkout](https://docs.stripe.com/payments/checkout.md) or [Advanced fraud 
 
 ### Implement a cardholder authentication method such as 3D Secure
 
-*3D Secure* (3D Secure (3DS) provides an additional layer of authentication for credit card transactions that protects businesses from liability for fraudulent card payments) is a way to add a verification step between the customer and the *card issuer* (The entity that issued a payment card to a cardholder. This could be a bank, such as with the Visa or Mastercard network, or it could be the card network itself, such as with American Express) to your checkout flow. Payments that have been authenticated with 3D Secure might be protected from most fraudulent disputes through a rule known as [liability shift](https://docs.stripe.com/payments/3d-secure/authentication-flow.md#disputed-payments). You will, however, still receive [Early Fraud Warnings](https://docs.stripe.com/disputes/how-disputes-work.md#early-fraud-warnings) that can count against [card brand monitoring programs](https://docs.stripe.com/disputes/monitoring-programs.md).
+*3D Secure* (3D Secure (3DS) provides an additional layer of authentication for credit card transactions that protects businesses from liability for fraudulent card payments) is a way to add a verification step between the customer and the *card issuer* (The entity that issued a payment card to a cardholder. This could be a bank, such as with the Visa or Mastercard network, or it could be the card network itself, such as with American Express) to your checkout flow. Payments that have been authenticated with 3D Secure might be protected from most fraudulent disputes through a rule known as [liability shift](https://docs.stripe.com/payments/3d-secure/authentication-flow.md#disputed-payments). You’ll, however, still receive [Early Fraud Warnings](https://docs.stripe.com/disputes/how-disputes-work.md#early-fraud-warnings) that can count against [card brand monitoring programs](https://docs.stripe.com/disputes/monitoring-programs.md).
 
 Learn more at [Card Authentication and 3D Secure](https://docs.stripe.com/payments/3d-secure.md).
 
@@ -159,7 +159,7 @@ Similar to delayed shipping, this method can allow enough time for potential fra
 
 ### Set a custom statement descriptor for each payment
 
-The statement descriptor is the text that appears on customers’ card statements with information about the company that’s associated with a payment. One way to use a statement descriptor is to insert a short, random code that your customer then has to verify. When you suspect a transaction might be fraudulent, you can contact your customer and ask them to give you the code that is shown on their online statement, and if they do not, you would refund the payment.
+The statement descriptor is the text that appears on customers’ card statements with information about the company that’s associated with a payment. One way to use a statement descriptor is to insert a short, random code that your customer then has to verify. When you suspect a transaction might be fraudulent, you can contact your customer and ask them to give you the code that is shown on their online statement, and if they don’t, you would refund the payment.
 
 You can either edit your [default statement descriptor](https://dashboard.stripe.com/settings/public) within the Dashboard or set a [dynamic statement descriptor](https://docs.stripe.com/get-started/account/statement-descriptors.md#dynamic) whenever a payment is created through the API.
 

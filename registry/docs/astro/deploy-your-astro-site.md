@@ -12,25 +12,25 @@
 
   ### [AWS](/en/guides/deploy/aws/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/flightcontrol.svg)
 
   ### [AWS via Flightcontrol](/en/guides/deploy/aws-via-flightcontrol/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/sst.svg)
 
   ### [AWS via SST](/en/guides/deploy/aws-via-sst/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/azion.svg)
 
   ### [Azion](/en/guides/deploy/azion/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/buddy.svg)
 
@@ -42,19 +42,19 @@
 
   ### [Cleavr](/en/guides/deploy/cleavr/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/clever-cloud.svg)
 
   ### [Clever Cloud](/en/guides/deploy/clever-cloud/)
 
-  Static On demand
+  StaticOn demand
 
 - ![](/logos/cloudflare-pages.svg)
 
   ### [Cloudflare](/en/guides/deploy/cloudflare/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/cloudray.svg)
 
@@ -66,7 +66,7 @@
 
   ### [Deno Deploy](/en/guides/deploy/deno/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/deployhq.svg)
 
@@ -78,13 +78,13 @@
 
   ### [EdgeOne Pages](/en/guides/deploy/edgeone-pages/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/firebase.svg)
 
   ### [Firebase](/en/guides/deploy/firebase/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/fleek.svg)
 
@@ -96,7 +96,7 @@
 
   ### [Fly.io](/en/guides/deploy/flyio/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/github.svg)
 
@@ -114,7 +114,7 @@
 
   ### [Google Cloud](/en/guides/deploy/google-cloud/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/heroku.svg)
 
@@ -138,13 +138,13 @@
 
   ### [Netlify](/en/guides/deploy/netlify/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/railway.svg)
 
   ### [Railway](/en/guides/deploy/railway/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/render.svg)
 
@@ -162,7 +162,7 @@
 
   ### [Sevalla](/en/guides/deploy/sevalla/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/stormkit.svg)
 
@@ -180,13 +180,13 @@
 
   ### [Vercel](/en/guides/deploy/vercel/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/zeabur.svg)
 
   ### [Zeabur](/en/guides/deploy/zeabur/)
 
-  On demand Static
+  On demandStatic
 
 - ![](/logos/zephyr.svg)
 
@@ -198,7 +198,7 @@
 
   ### [Zerops](/en/guides/deploy/zerops/)
 
-  On demand Static
+  On demandStatic
 
 ## Quick Deploy Options
 

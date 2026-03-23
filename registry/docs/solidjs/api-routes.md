@@ -82,7 +82,7 @@ First, to implement a GraphQL API, install the `graphql` library. Following that
 import { buildSchema, graphql } from "graphql";import type { APIEvent } from "@solidjs/start/server";
 // Define GraphQL Schemaconst schema = buildSchema(`  type Message {      message: String  }
   type Query {    hello(input: String): Message    goodbye: String  }`);
-// Define GraphQL Resolversconst rootValue = {  hello: () => {    return {      message: "Hello World"    };  },  goodbye: () => {    return "Goodbye";  }};
+// Define GraphQL Resolversconst rootValue = {  hello: () => {    return {      message: "Hello World",    };  },  goodbye: () => {    return "Goodbye";  },};
 // request handlerconst handler = async (event: APIEvent) => {  // get request body  const body = await new Response(event.request.body).json();
   // pass query and save results  const result = await graphql({ rootValue, schema, source: body.query });
   // send query result  return result;};
@@ -101,7 +101,7 @@ To expose a tRPC server route, you need to write your router. Once you have writ
 ```
 import { initTRPC } from "@trpc/server";import { wrap } from "@decs/typeschema";import { string } from "valibot";
 const t = initTRPC.create();
-export const appRouter = t.router({  hello: t.procedure.input(wrap(string())).query(({ input }) => {    return `hello ${input ?? "world"}`;  })});
+export const appRouter = t.router({  hello: t.procedure.input(wrap(string())).query(({ input }) => {    return `hello ${input ?? "world"}`;  }),});
 export type AppRouter = typeof appRouter;
 ```
 
@@ -109,14 +109,14 @@ An example of a simple client that you can use to fetch data from your tRPC serv
 
 ```
 import { createTRPCProxyClient, httpBatchLink, loggerLink } from "@trpc/client";import type { AppRouter } from "./router";
-export const client = createTRPCProxyClient<AppRouter>({  links: [loggerLink(), httpBatchLink({ url: "http://localhost:3000/api/trpc" })]});
+export const client = createTRPCProxyClient<AppRouter>({  links: [    loggerLink(),    httpBatchLink({ url: "http://localhost:3000/api/trpc" }),  ],});
 ```
 
 Finally, you can use the `fetch` adapter to write an API route that acts as the tRPC server.
 
 ```
 import { type APIEvent } from "@solidjs/start/server";import { fetchRequestHandler } from "@trpc/server/adapters/fetch";import { appRouter } from "~/lib/router";
-const handler = (event: APIEvent) =>  fetchRequestHandler({    endpoint: "/api/trpc",    req: event.request,    router: appRouter,    createContext: () => ({})  });
+const handler = (event: APIEvent) =>  fetchRequestHandler({    endpoint: "/api/trpc",    req: event.request,    router: appRouter,    createContext: () => ({}),  });
 export const GET = handler;
 export const POST = handler;
 ```

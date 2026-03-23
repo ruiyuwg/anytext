@@ -71,7 +71,7 @@ The enhanced Sanity client accepts an optional `logger` parameter. Pass it the g
 ```typescript
 const client = createClient({
   projectId: '<projectId>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   apiVersion: '2022-05-03',
   useCdn: true,
   stega: {

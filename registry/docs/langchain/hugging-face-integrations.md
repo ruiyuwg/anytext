@@ -46,7 +46,7 @@ from langchain_huggingface import HuggingFacePipeline
 
 We can use the `HuggingFaceEmbeddings` class to run open source embedding models locally.
 
-See a [usage example](/oss/python/integrations/text_embedding/huggingfacehub).
+See a [usage example](/oss/python/integrations/embeddings/huggingfacehub).
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -56,7 +56,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 
 We can use the `HuggingFaceEndpointEmbeddings` class to run open source embedding models via a dedicated [Inference Endpoint](https://huggingface.co/inference-endpoints/dedicated).
 
-See a [usage example](/oss/python/integrations/text_embedding/huggingfacehub).
+See a [usage example](/oss/python/integrations/embeddings/huggingfacehub).
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
@@ -66,7 +66,7 @@ from langchain_huggingface import HuggingFaceEndpointEmbeddings
 
 We can use the `HuggingFaceInferenceAPIEmbeddings` class to run open source embedding models via [Inference Providers](https://huggingface.co/docs/inference-providers).
 
-See a [usage example](/oss/python/integrations/text_embedding/huggingfacehub).
+See a [usage example](/oss/python/integrations/embeddings/huggingfacehub).
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
@@ -76,7 +76,7 @@ from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
 
 We can use the `HuggingFaceInstructEmbeddings` class to run open source embedding models locally.
 
-See a [usage example](/oss/python/integrations/text_embedding/instruct_embeddings).
+See a [usage example](/oss/python/integrations/embeddings/instruct_embeddings).
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_community.embeddings import HuggingFaceInstructEmbeddings
@@ -87,7 +87,7 @@ from langchain_community.embeddings import HuggingFaceInstructEmbeddings
 > [BGE models on the HuggingFace](https://huggingface.co/BAAI/bge-large-en-v1.5) are one of [the best open-source embedding models](https://huggingface.co/spaces/mteb/leaderboard).
 > BGE model is created by the [Beijing Academy of Artificial Intelligence (BAAI)](https://en.wikipedia.org/wiki/Beijing_Academy_of_Artificial_Intelligence). `BAAI` is a private non-profit organization engaged in AI research and development.
 
-See a [usage example](/oss/python/integrations/text_embedding/bge_huggingface).
+See a [usage example](/oss/python/integrations/embeddings/bge_huggingface).
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings

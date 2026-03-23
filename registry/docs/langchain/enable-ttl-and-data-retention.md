@@ -153,3 +153,41 @@ If backups are present, copy them to an external filesystem or blob storage (e.g
 
 [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 ```
+
+# Customize the error support message
+
+Source: https://docs.langchain.com/langsmith/self-host-ui-customization
+
+Customize support contact information in the LangSmith frontend for self-hosted deployments.
+
+## Custom error support message
+
+By default, error messages in LangSmith direct users to contact `support@langchain.dev`. You can replace this with your own support contact information.
+
+When set, all error and support messages throughout the UI will display your custom text instead of the default LangChain support email.
+
+The custom message is rendered as **plain text** only. HTML tags will not be interpreted and will display as literal text.
+
+```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+config:
+  customErrorSupportMessage: "For help, contact your internal IT team at helpdesk@example.com"
+```
+
+```yaml Docker Compose theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+services:
+  langchain-frontend:
+    environment:
+      - CUSTOM_ERROR_SUPPORT_MESSAGE=For help, contact your internal IT team at helpdesk@example.com
+```
+
+To revert to the default behavior, remove the setting or set it to an empty string.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ui-customization.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

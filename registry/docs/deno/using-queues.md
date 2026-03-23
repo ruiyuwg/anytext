@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/queues
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 <deno-admonition></deno-admonition>
 
@@ -250,9 +250,9 @@ notification at that time.
 
 URL: https://docs.deno.com/deploy/classic/regions
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 Deno Deploy Classic deploys your code throughout the world. Each new request is
 served from the closest region to your user. Deno Deploy Classic is presently
@@ -277,9 +277,9 @@ in which your code is deployed.
 
 URL: https://docs.deno.com/deploy/classic/running-scripts-locally
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 For local development you can use the `deno` CLI. To install `deno`, follow the
 instructions in the

@@ -11,24 +11,6 @@ Integration with this provider is possible with [zero configuration](https://nit
 Normally, the deployment to Netlify does not require any configuration.
 Nitro will auto-detect that you are in a [Netlify](https://www.netlify.com){rel=""nofollow""} build environment and build the correct version of your server.
 
-To enabling Netlify Functions 2.0 and using its features (e.g. streaming responses and [Netlify Blobs](https://docs.netlify.com/blobs/overview/){rel=""nofollow""}), you need a compatibility date set to `2024-05-07` or later in your nitro configuration file.
-
-::code-group
-
-```ts [nitro.config.ts]
-export default defineNitroConfig({
-    compatibilityDate: "2024-05-07",
-})
-```
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-    compatibilityDate: "2024-05-07",
-})
-```
-
-::
-
 For new sites, Netlify will detect that you are using Nitro and set the publish directory to `dist` and build command to `npm run build`.
 
 If you are upgrading an existing site you should check these and update them if needed.
@@ -55,18 +37,6 @@ Nitro output can directly run the server at the edge. Closer to your users.
 Make sure the publish directory is set to `dist` when creating a new project.
 ::
 
-## On-demand builders
-
-**Preset:** `netlify_builder`
-
-::warning
-**Note:** This preset is deprecated. Instead, use the `netlify` preset with the `isr` route rule.
-::
-
-On-demand Builders are serverless functions used to generate web content as needed that’s automatically cached on Netlify’s Edge CDN. They enable you to build pages for your site when a user visits them for the first time and then cache them at the edge for subsequent visits.
-
-:read-more{title="Netlify On-demand Builders" to="https://docs.netlify.com/configure-builds/on-demand-builders/"}
-
 ## Custom deploy configuration
 
 You can provide additional deploy configuration using the `netlify` key inside `nitro.config`. It will be merged with built-in auto-generated config. Currently the only supported value is `images.remote_images`, for [configuring Netlify Image CDN](https://docs.netlify.com/image-cdn/create-integration/){rel=""nofollow""}.
@@ -85,7 +55,7 @@ Then in repository create `.platform.app.yaml` file:
 
 ```yaml [.platform.app.yaml]
 name: nitro-app
-type: 'nodejs:18'
+type: 'nodejs:20'
 disk: 128
 web:
   commands:
@@ -96,7 +66,7 @@ hooks:
   build: |
     corepack enable
     npx nypm install
-    NITR_PRESET=platform_sh npm run build
+    NITRO_PRESET=platform_sh npm run build
 mounts:
     '.data':
         source: local
@@ -123,7 +93,7 @@ mounts:
 
 #### Update the start command to `node .output/server/index.mjs`
 
-#### Click 'Advanced' and add an environment variable with `NITRO_PRESET` set to `render_com`. You may also need to add a `NODE_VERSION` environment variable set to `18` for the build to succeed ([docs](https://render.com/docs/node-version){rel=""nofollow""}).
+#### Click 'Advanced' and add an environment variable with `NITRO_PRESET` set to `render_com`. You may also need to add a `NODE_VERSION` environment variable set to `20` for the build to succeed ([docs](https://render.com/docs/node-version){rel=""nofollow""}).
 
 #### Click 'Create Web Service'.
 

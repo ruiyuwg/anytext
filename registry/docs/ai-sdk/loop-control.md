@@ -1,17 +1,10 @@
 # Loop Control
 
-You can control both the execution flow and the settings at each step of the agent loop. The loop continues until:
-
-- A finish reasoning other than tool-calls is returned, or
-- A tool that is invoked does not have an execute function, or
-- A tool call needs approval, or
-- A stop condition is met
-
-The AI SDK provides built-in loop control through two parameters: `stopWhen` for defining stopping conditions and `prepareStep` for modifying settings (model, tools, messages, and more) between steps.
+You can control both the execution flow and the settings at each step of the agent loop. The AI SDK provides built-in loop control through two parameters: `stopWhen` for defining stopping conditions and `prepareStep` for modifying settings (model, tools, messages, and more) between steps.
 
 ## Stop Conditions
 
-The `stopWhen` parameter controls when to stop execution when there are tool results in the last step. By default, agents stop after 20 steps using `stepCountIs(20)`.
+The `stopWhen` parameter controls when to stop execution when there are tool results in the last step. By default, agents stop after a single step using `stepCountIs(1)`.
 
 When you provide `stopWhen`, the agent continues executing after tool calls until a stopping condition is met. When the condition is an array, execution stops when any of the conditions are met.
 
@@ -20,19 +13,19 @@ When you provide `stopWhen`, the agent continues executing after tool calls unti
 The AI SDK provides several built-in stopping conditions:
 
 ```ts
-import { ToolLoopAgent, stepCountIs } from "ai";
+import { Experimental_Agent as Agent, stepCountIs } from 'ai';
 __PROVIDER_IMPORT__;
 
-const agent = new ToolLoopAgent({
+const agent = new Agent({
   model: __MODEL__,
   tools: {
     // your tools
   },
-  stopWhen: stepCountIs(20), // Default state: stop after 20 steps maximum
+  stopWhen: stepCountIs(20), // Stop after 20 steps maximum
 });
 
 const result = await agent.generate({
-  prompt: "Analyze this dataset and create a summary report",
+  prompt: 'Analyze this dataset and create a summary report',
 });
 ```
 
@@ -41,22 +34,22 @@ const result = await agent.generate({
 Combine multiple stopping conditions. The loop stops when it meets any condition:
 
 ```ts
-import { ToolLoopAgent, stepCountIs, hasToolCall } from "ai";
+import { Experimental_Agent as Agent, stepCountIs, hasToolCall } from 'ai';
 __PROVIDER_IMPORT__;
 
-const agent = new ToolLoopAgent({
+const agent = new Agent({
   model: __MODEL__,
   tools: {
     // your tools
   },
   stopWhen: [
     stepCountIs(20), // Maximum 20 steps
-    hasToolCall("someTool"), // Stop after calling 'someTool'
+    hasToolCall('someTool'), // Stop after calling 'someTool'
   ],
 });
 
 const result = await agent.generate({
-  prompt: "Research and analyze the topic",
+  prompt: 'Research and analyze the topic',
 });
 ```
 
@@ -65,7 +58,7 @@ const result = await agent.generate({
 Build custom stopping conditions for specific requirements:
 
 ```ts
-import { ToolLoopAgent, StopCondition, ToolSet } from "ai";
+import { Experimental_Agent as Agent, StopCondition, ToolSet } from 'ai';
 __PROVIDER_IMPORT__;
 
 const tools = {
@@ -74,10 +67,10 @@ const tools = {
 
 const hasAnswer: StopCondition<typeof tools> = ({ steps }) => {
   // Stop when the model generates text containing "ANSWER:"
-  return steps.some((step) => step.text?.includes("ANSWER:")) ?? false;
+  return steps.some(step => step.text?.includes('ANSWER:')) ?? false;
 };
 
-const agent = new ToolLoopAgent({
+const agent = new Agent({
   model: __MODEL__,
   tools,
   stopWhen: hasAnswer,
@@ -115,11 +108,11 @@ The `prepareStep` callback runs before each step in the loop and defaults to the
 Switch models based on step requirements:
 
 ```ts
-import { ToolLoopAgent } from "ai";
+import { Experimental_Agent as Agent } from 'ai';
 __PROVIDER_IMPORT__;
 
-const agent = new ToolLoopAgent({
-  model: "openai/gpt-4o-mini", // Default model
+const agent = new Agent({
+  model: 'openai/gpt-5.1-mini', // Default model
   tools: {
     // your tools
   },
@@ -136,7 +129,7 @@ const agent = new ToolLoopAgent({
 });
 
 const result = await agent.generate({
-  prompt: "...",
+  prompt: '...',
 });
 ```
 
@@ -145,10 +138,10 @@ const result = await agent.generate({
 Manage growing conversation history in long-running loops:
 
 ```ts
-import { ToolLoopAgent } from "ai";
+import { Experimental_Agent as Agent } from 'ai';
 __PROVIDER_IMPORT__;
 
-const agent = new ToolLoopAgent({
+const agent = new Agent({
   model: __MODEL__,
   tools: {
     // your tools
@@ -158,7 +151,7 @@ const agent = new ToolLoopAgent({
     if (messages.length > 20) {
       return {
         messages: [
-          messages[0], // Keep system instructions
+          messages[0], // Keep system message
           ...messages.slice(-10), // Keep last 10 messages
         ],
       };
@@ -168,7 +161,7 @@ const agent = new ToolLoopAgent({
 });
 
 const result = await agent.generate({
-  prompt: "...",
+  prompt: '...',
 });
 ```
 
@@ -177,10 +170,10 @@ const result = await agent.generate({
 Control which tools are available at each step:
 
 ```ts
-import { ToolLoopAgent } from "ai";
+import { Experimental_Agent as Agent } from 'ai';
 __PROVIDER_IMPORT__;
 
-const agent = new ToolLoopAgent({
+const agent = new Agent({
   model: __MODEL__,
   tools: {
     search: searchTool,
@@ -191,28 +184,28 @@ const agent = new ToolLoopAgent({
     // Search phase (steps 0-2)
     if (stepNumber <= 2) {
       return {
-        activeTools: ["search"],
-        toolChoice: "required",
+        activeTools: ['search'],
+        toolChoice: 'required',
       };
     }
 
     // Analysis phase (steps 3-5)
     if (stepNumber <= 5) {
       return {
-        activeTools: ["analyze"],
+        activeTools: ['analyze'],
       };
     }
 
     // Summary phase (step 6+)
     return {
-      activeTools: ["summarize"],
-      toolChoice: "required",
+      activeTools: ['summarize'],
+      toolChoice: 'required',
     };
   },
 });
 
 const result = await agent.generate({
-  prompt: "...",
+  prompt: '...',
 });
 ```
 
@@ -223,14 +216,14 @@ prepareStep: async ({ stepNumber }) => {
   if (stepNumber === 0) {
     // Force the search tool to be used first
     return {
-      toolChoice: { type: "tool", toolName: "search" },
+      toolChoice: { type: 'tool', toolName: 'search' },
     };
   }
 
   if (stepNumber === 5) {
     // Force the summarize tool after analysis
     return {
-      toolChoice: { type: "tool", toolName: "summarize" },
+      toolChoice: { type: 'tool', toolName: 'summarize' },
     };
   }
 
@@ -243,18 +236,18 @@ prepareStep: async ({ stepNumber }) => {
 Transform messages before sending them to the model:
 
 ```ts
-import { ToolLoopAgent } from "ai";
+import { Experimental_Agent as Agent } from 'ai';
 __PROVIDER_IMPORT__;
 
-const agent = new ToolLoopAgent({
+const agent = new Agent({
   model: __MODEL__,
   tools: {
     // your tools
   },
   prepareStep: async ({ messages, stepNumber }) => {
     // Summarize tool results to reduce token usage
-    const processedMessages = messages.map((msg) => {
-      if (msg.role === "tool" && msg.content.length > 1000) {
+    const processedMessages = messages.map(msg => {
+      if (msg.role === 'tool' && msg.content.length > 1000) {
         return {
           ...msg,
           content: summarizeToolResult(msg.content),
@@ -268,7 +261,7 @@ const agent = new ToolLoopAgent({
 });
 
 const result = await agent.generate({
-  prompt: "...",
+  prompt: '...',
 });
 ```
 
@@ -298,50 +291,6 @@ prepareStep: async ({
 },
 ```
 
-## Forced Tool Calling
-
-You can force the agent to always use tools by combining `toolChoice: 'required'` with a `done` tool that has no `execute` function. This pattern ensures the agent uses tools for every step and stops only when it explicitly signals completion.
-
-```ts
-import { ToolLoopAgent, tool } from "ai";
-import { z } from "zod";
-__PROVIDER_IMPORT__;
-
-const agent = new ToolLoopAgent({
-  model: __MODEL__,
-  tools: {
-    search: searchTool,
-    analyze: analyzeTool,
-    done: tool({
-      description: "Signal that you have finished your work",
-      inputSchema: z.object({
-        answer: z.string().describe("The final answer"),
-      }),
-      // No execute function - stops the agent when called
-    }),
-  },
-  toolChoice: "required", // Force tool calls at every step
-});
-
-const result = await agent.generate({
-  prompt: "Research and analyze this topic, then provide your answer.",
-});
-
-// extract answer from done tool call
-const toolCall = result.staticToolCalls[0]; // tool call from final step
-if (toolCall?.toolName === "done") {
-  console.log(toolCall.input.answer);
-}
-```
-
-Key aspects of this pattern:
-
-- **`toolChoice: 'required'`**: Forces the model to call a tool at every step instead of generating text directly. This ensures the agent follows a structured workflow.
-- **`done` tool without `execute`**: A tool that has no `execute` function acts as a termination signal. When the agent calls this tool, the loop stops because there's no function to execute.
-- **Accessing results**: The final answer is available in `result.staticToolCalls`, which contains tool calls that weren't executed.
-
-This pattern is useful when you want the agent to always use specific tools for operations (like code execution or data retrieval) rather than attempting to answer directly.
-
 ## Manual Loop Control
 
 For scenarios requiring complete control over the agent loop, you can use AI SDK Core functions (`generateText` and `streamText`) to implement your own loop management instead of using `stopWhen` and `prepareStep`. This approach provides maximum flexibility for complex workflows.
@@ -351,10 +300,10 @@ For scenarios requiring complete control over the agent loop, you can use AI SDK
 Build your own agent loop when you need full control over execution:
 
 ```ts
-import { generateText, ModelMessage } from "ai";
+import { generateText, ModelMessage } from 'ai';
 __PROVIDER_IMPORT__;
 
-const messages: ModelMessage[] = [{ role: "user", content: "..." }];
+const messages: ModelMessage[] = [{ role: 'user', content: '...' }];
 
 let step = 0;
 const maxSteps = 10;
@@ -388,4 +337,36 @@ This manual approach gives you complete control over:
 
 [Learn more about manual agent loops in the cookbook](/cookbook/node/manual-agent-loop).
 
-# Configuring Call Options
+# Agents
+
+# Agents
+
+The following section show you how to build agents with the AI SDK - systems where large language models (LLMs) use tools in a loop to accomplish tasks.
+
+\<IndexCards
+cards={\[
+{
+title: 'Overview',
+description: 'Learn what agents are and why to use the Agent class.',
+href: '/docs/agents/overview',
+},
+{
+title: 'Building Agents',
+description: 'Complete guide to creating agents with the Agent class.',
+href: '/docs/agents/building-agents',
+},
+{
+title: 'Workflow Patterns',
+description:
+'Structured patterns using core functions for complex workflows.',
+href: '/docs/agents/workflows',
+},
+{
+title: 'Loop Control',
+description: 'Advanced execution control with stopWhen and prepareStep.',
+href: '/docs/agents/loop-control',
+},
+]}
+/>
+
+# Overview

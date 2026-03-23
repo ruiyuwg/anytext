@@ -1,16 +1,16 @@
 # Call agents from code
 
-Source: https://docs.langchain.com/langsmith/agent-builder-code
+Source: https://docs.langchain.com/langsmith/fleet/code
 
-Invoke Agent Builder agents from Python, JavaScript, or any language through the REST API.
+Invoke Fleet agents from Python, JavaScript, or any language through the REST API.
 
-You can invoke Agent Builder agents from your applications using the [LangGraph SDK](/langsmith/reference) or the REST API. Agent Builder agents run on [Agent Server](/langsmith/agent-server), so you can use the same API methods as any other [LangSmith deployment](/langsmith/deployments).
+You can invoke LangSmith Fleet agents from your applications using the [LangGraph SDK](/langsmith/reference) or the REST API. Fleet agents run on [Agent Server](/langsmith/agent-server), so you can use the same API methods as any other [LangSmith deployment](/langsmith/deployments).
 
 The REST API lets you call your agent from any language or platform that supports HTTP requests.
 
 ## Prerequisites
 
-- A LangSmith account with an Agent Builder agent
+- A LangSmith account with a Fleet agent
 - A [Personal Access Token (PAT)](/langsmith/create-account-api-key) for authentication
 - (SDK only) The [LangGraph SDK](/langsmith/reference) installed:
 
@@ -24,7 +24,7 @@ The REST API lets you call your agent from any language or platform that support
 
 ## Authentication
 
-To authenticate with your agent's Agent Builder deployment, provide a LangSmith [Personal Access Token (PAT)](/langsmith/create-account-api-key) to the `api_key` argument when instantiating the LangGraph SDK client, or via the `X-API-Key` header. If using `X-API-Key`, you must also set the `X-Auth-Scheme` header to `langsmith-api-key`.
+To authenticate with your agent's Fleet deployment, provide a LangSmith [Personal Access Token (PAT)](/langsmith/create-account-api-key) to the `api_key` argument when instantiating the LangGraph SDK client, or via the `X-API-Key` header. If using `X-API-Key`, you must also set the `X-Auth-Scheme` header to `langsmith-api-key`.
 
 If the PAT you pass is not tied to the owner of the agent, your request will be rejected with a `404 Not Found` error.
 
@@ -482,7 +482,7 @@ For the full API specification, see the [Agent Server API reference](/langsmith/
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-builder-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

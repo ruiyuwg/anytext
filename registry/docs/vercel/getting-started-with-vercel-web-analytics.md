@@ -7,50 +7,59 @@ This guide will help you get started with using Vercel Web Analytics on your pro
 ## Prerequisites
 
 - A Vercel account. If you don't have one, you can [sign up for free](https://vercel.com/signup).
-
 - A Vercel project. If you don't have one, you can [create a new project](https://vercel.com/new).
-
 - The Vercel CLI installed. If you don't have it, you can install it using the following command:
 
-  ````
   ```bash
   pnpm i vercel
   ```
-
 
   ```bash
   yarn i vercel
   ```
 
-
   ```bash
   npm i vercel
   ```
 
-
   ```bash
   bun i vercel
   ```
-  ````
+
+> **💡 Note:** Version 2 package updates are available. For details, see [What's new in
+> version 2](/docs/analytics/package#what's-new-in-version-2.x).
+
+## Set up your project
 
 - ### Enable Web Analytics in Vercel
-  On the [Vercel dashboard](/dashboard), select your Project and then click [**Analytics**](https://vercel.com/d?to=%2F%5Bteam%5D%2F%5Bproject%5D%2Fanalytics\&title=Go+to+Analytics) in the sidebar and click **Enable** from the dialog.
-  > **💡 Note:** Enabling Web Analytics will add new routes (scoped at `/_vercel/insights/*`)
+
+  On the Vercel dashboard, navigate to **Analytics** in the sidebar and select a project.
+  Or select the button below to go there.
+
+  Then click the **Enable** button in the header.
+
+  > **💡 Note:** Enabling Web Analytics will add new routes (scoped at `/_vercel/insights/*` and `/<unique-path>/*`)
   > after your next deployment.
 
-> For \['nextjs', 'nextjs-app', 'sveltekit', 'remix',  'create-react-app', 'nuxt', 'vue', 'other', 'astro']:
+- ### Add `@vercel/analytics` to your project
+  > For \['nextjs', 'nextjs-app', 'sveltekit', 'remix',  'create-react-app', 'nuxt', 'vue', 'other', 'astro']:
+  > Using the package manager of your choice, add the `@vercel/analytics` package to your project:
+  > For \['html']:
 
 - > For \[
   > &#x20;   'nextjs',
   > &#x20;   'nextjs-app',
   > &#x20;   'remix',
   > &#x20;   'create-react-app',
-  > &#x20;   'nuxt',
   > &#x20;   'vue',
   > &#x20;   'astro',
   > &#x20; ]:
 
   ### Add the `Analytics` component to your app
+
+  > For \['nuxt']:
+
+  ### Enable the Nuxt module
 
   > For \['sveltekit']:
 
@@ -215,30 +224,21 @@ This guide will help you get started with using Vercel Web Analytics on your pro
   ```
 
   > For \['nuxt']:
-  > The `Analytics` component is a wrapper around the tracking script, offering more seamless integration with Nuxt, including route support.
+  > Enable the Nuxt module by adding `@vercel/analytics` to your
+  > `nuxt.config.ts` modules.
 
-  Add the following code to your main component.
+  For advanced configuration, use `injectAnalytics()` in a Nuxt plugin.
 
-  ```tsx {2,6} filename="app.vue" framework=nuxt
-
-  import { Analytics } from '@vercel/analytics/nuxt';
-
-
-
-    
-    
-
+  ```ts filename="nuxt.config.ts" framework=nuxt
+  export default defineNuxtConfig({
+    modules: ['@vercel/analytics'],
+  });
   ```
 
-  ```jsx {2,6} filename="app.vue" framework=nuxt
-
-  import { Analytics } from '@vercel/analytics/nuxt';
-
-
-
-    
-    
-
+  ```js filename="nuxt.config.js" framework=nuxt
+  export default defineNuxtConfig({
+    modules: ['@vercel/analytics'],
+  });
   ```
 
   > For \['sveltekit']:
@@ -341,14 +341,14 @@ This guide will help you get started with using Vercel Web Analytics on your pro
 
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 
-
+  /script.js">
   ```
 
   ```js filename="index.html" framework=html
 
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 
-
+  /script.js">
   ```
 
   > For \['html']:
@@ -443,7 +443,7 @@ This guide will help you get started with using Vercel Web Analytics on your pro
   Once your app is deployed, it will start tracking visitors and page views.
 
   > **💡 Note:** If everything is set up properly, you should be able to see a Fetch/XHR
-  > request in your browser's Network tab from `/_vercel/insights/view` when you
+  > request in your browser's Network tab from `/<unique-path>/view` when you
   > visit any page.
 
 - ### View your data in the dashboard
@@ -462,14 +462,15 @@ Learn more about how Vercel supports [privacy and data compliance standards](/do
 
 Now that you have Vercel Web Analytics set up, you can explore the following topics to learn more:
 
-- [Learn how to use the `@vercel/analytics` package](/docs/analytics/package)
+- [Explore your analytics dashboard](/docs/analytics/using-web-analytics)
 - [Learn how to set up custom events](/docs/analytics/custom-events)
-- [Learn about filtering data](/docs/analytics/filtering)
+- [Learn how to redact sensitive data](/docs/analytics/redacting-sensitive-data)
 - [Read about privacy and compliance](/docs/analytics/privacy-policy)
+- [Learn how to configure your client-side package](/docs/analytics/package)
 - [Explore pricing](/docs/analytics/limits-and-pricing)
 - [Troubleshooting](/docs/analytics/troubleshooting)
 
 title: "Redacting Sensitive Data from Web Analytics Events"
 description: "Learn how to redact sensitive data from your Web Analytics events."
-last\_updated: "2026-03-08T05:03:11.178Z"
+last\_updated: "2026-03-23T09:40:05.361Z"
 source: "https://vercel.com/docs/analytics/redacting-sensitive-data"

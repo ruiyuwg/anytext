@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -111,7 +109,7 @@ $ docker buildx bake --print
 
 The compose format has some limitations compared to the HCL format:
 
-- Specifying variables or global scope attributes is not yet supported
+- Specifying variables or global scope attributes is not supported
 - `inherits` service field is not supported, but you can use [YAML anchors](https://docs.docker.com/reference/compose-file/fragments/) to reference other services, as demonstrated in the previous example with `&build-dev`.
 
 ## [`.env` file](#env-file)

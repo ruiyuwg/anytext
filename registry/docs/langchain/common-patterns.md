@@ -58,7 +58,7 @@ for token, metadata in agent.stream(
 The weather in San Francisco is: It's always sunny in San Francisco!
 ```
 
-This works the same way regardless of the model provider — LangChain normalizes provider-specific formats (Anthropic `thinking` blocks, OpenAI `reasoning` summaries, etc.) into a standard `"reasoning"` content block type via the [`content_blocks`](/oss/python/langchain/messages#standard-content-blocks) property.
+This works the same way regardless of the model provider—LangChain normalizes provider-specific formats (Anthropic `thinking` blocks, OpenAI `reasoning` summaries, etc.) into a standard `"reasoning"` content block type via the [`content_blocks`](/oss/python/langchain/messages#standard-content-blocks) property.
 
 To stream reasoning tokens directly from a chat model (without an agent), see [streaming with chat models](/oss/python/langchain/models#reasoning).
 
@@ -108,16 +108,17 @@ def _render_completed_message(message: AnyMessage) -> None:
 
 
 input_message = {"role": "user", "content": "What is the weather in Boston?"}
-for stream_mode, data in agent.stream(
+for chunk in agent.stream(
     {"messages": [input_message]},
     stream_mode=["messages", "updates"],  # [!code highlight]
+    version="v2",  # [!code highlight]
 ):
-    if stream_mode == "messages":
-        token, metadata = data
+    if chunk["type"] == "messages":  # [!code highlight]
+        token, metadata = chunk["data"]  # [!code highlight]
         if isinstance(token, AIMessageChunk):
             _render_message_chunk(token)  # [!code highlight]
-    if stream_mode == "updates":
-        for source, update in data.items():
+    elif chunk["type"] == "updates":  # [!code highlight]
+        for source, update in chunk["data"].items():  # [!code highlight]
             if source in ("model", "tools"):  # `source` captures node name
                 _render_completed_message(update["messages"][-1])  # [!code highlight]
 ```
@@ -136,7 +137,7 @@ The| weather| in| Boston| is| **|sun|ny|**|.|
 
 #### Accessing completed messages
 
-If completed messages are tracked in an agent's [state](/oss/python/langchain/agents#memory), you can use `stream_mode=["messages", "updates"]` as demonstrated [above](#streaming-tool-calls) to access completed messages during streaming.
+If completed messages are tracked in an agent's [state](/oss/python/langchain/agents#memory), you can use `stream_mode=["messages", "updates"]` as demonstrated in the [Streaming tool calls](#streaming-tool-calls) section to access completed messages during streaming.
 
 In some cases, completed messages are not reflected in [state updates](#agent-progress). If you have access to the agent internals, you can use [custom updates](#custom-updates) to access these messages during streaming. Otherwise, you can aggregate message chunks in the streaming loop (see below).
 
@@ -231,21 +232,22 @@ def _render_completed_message(message: AnyMessage) -> None:
 
 
 input_message = {"role": "user", "content": "What is the weather in Boston?"}
-for stream_mode, data in agent.stream(
+for chunk in agent.stream(
     {"messages": [input_message]},
     stream_mode=["messages", "updates", "custom"],  # [!code highlight]
+    version="v2",  # [!code highlight]
 ):
-    if stream_mode == "messages":
-        token, metadata = data
+    if chunk["type"] == "messages":  # [!code highlight]
+        token, metadata = chunk["data"]  # [!code highlight]
         if isinstance(token, AIMessageChunk):
             _render_message_chunk(token)
-    if stream_mode == "updates":
-        for source, update in data.items():
+    elif chunk["type"] == "updates":  # [!code highlight]
+        for source, update in chunk["data"].items():  # [!code highlight]
             if source in ("model", "tools"):
                 _render_completed_message(update["messages"][-1])
-    if stream_mode == "custom":  # [!code highlight]
+    elif chunk["type"] == "custom":  # [!code highlight]
         # access completed message in stream
-        print(f"Tool calls: {data.tool_calls}")  # [!code highlight]
+        print(f"Tool calls: {chunk['data'].tool_calls}")  # [!code highlight]
 ```
 
 ```shell title="Output" expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
@@ -271,12 +273,13 @@ Alternatively, if you aren't able to add custom events to the stream, you can ag
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 input_message = {"role": "user", "content": "What is the weather in Boston?"}
 full_message = None  # [!code highlight]
-for stream_mode, data in agent.stream(
+for chunk in agent.stream(
     {"messages": [input_message]},
     stream_mode=["messages", "updates"],
+    version="v2",  # [!code highlight]
 ):
-    if stream_mode == "messages":
-        token, metadata = data
+    if chunk["type"] == "messages":  # [!code highlight]
+        token, metadata = chunk["data"]  # [!code highlight]
         if isinstance(token, AIMessageChunk):
             _render_message_chunk(token)
             full_message = token if full_message is None else full_message + token  # [!code highlight]
@@ -284,8 +287,8 @@ for stream_mode, data in agent.stream(
                 if full_message.tool_calls:  # [!code highlight]
                     print(f"Tool calls: {full_message.tool_calls}")  # [!code highlight]
                 full_message = None  # [!code highlight]
-    if stream_mode == "updates":
-        for source, update in data.items():
+    elif chunk["type"] == "updates":  # [!code highlight]
+        for source, update in chunk["data"].items():  # [!code highlight]
             if source == "tools":
                 _render_completed_message(update["messages"][-1])
 ```
@@ -354,17 +357,18 @@ input_message = {
 }
 config = {"configurable": {"thread_id": "some_id"}}  # [!code highlight]
 interrupts = []  # [!code highlight]
-for stream_mode, data in agent.stream(
+for chunk in agent.stream(
     {"messages": [input_message]},
     config=config,  # [!code highlight]
     stream_mode=["messages", "updates"],
+    version="v2",  # [!code highlight]
 ):
-    if stream_mode == "messages":
-        token, metadata = data
+    if chunk["type"] == "messages":  # [!code highlight]
+        token, metadata = chunk["data"]  # [!code highlight]
         if isinstance(token, AIMessageChunk):
             _render_message_chunk(token)
-    if stream_mode == "updates":
-        for source, update in data.items():
+    elif chunk["type"] == "updates":  # [!code highlight]
+        for source, update in chunk["data"].items():  # [!code highlight]
             if source in ("model", "tools"):
                 _render_completed_message(update["messages"][-1])
             if source == "__interrupt__":  # [!code highlight]
@@ -445,18 +449,19 @@ We can then resume by passing a [command](/oss/python/langchain/human-in-the-loo
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 interrupts = []
-for stream_mode, data in agent.stream(
+for chunk in agent.stream(
     Command(resume=decisions),  # [!code highlight]
     config=config,
     stream_mode=["messages", "updates"],
+    version="v2",  # [!code highlight]
 ):
     # Streaming loop is unchanged
-    if stream_mode == "messages":
-        token, metadata = data
+    if chunk["type"] == "messages":  # [!code highlight]
+        token, metadata = chunk["data"]  # [!code highlight]
         if isinstance(token, AIMessageChunk):
             _render_message_chunk(token)
-    if stream_mode == "updates":
-        for source, update in data.items():
+    elif chunk["type"] == "updates":  # [!code highlight]
+        for source, update in chunk["data"].items():  # [!code highlight]
             if source in ("model", "tools"):
                 _render_completed_message(update["messages"][-1])
             if source == "__interrupt__":
@@ -545,21 +550,22 @@ def _render_completed_message(message: AnyMessage) -> None:
 
 input_message = {"role": "user", "content": "What is the weather in Boston?"}
 current_agent = None  # [!code highlight]
-for _, stream_mode, data in agent.stream(
+for chunk in agent.stream(
     {"messages": [input_message]},
     stream_mode=["messages", "updates"],
     subgraphs=True,  # [!code highlight]
+    version="v2",  # [!code highlight]
 ):
-    if stream_mode == "messages":
-        token, metadata = data
+    if chunk["type"] == "messages":  # [!code highlight]
+        token, metadata = chunk["data"]  # [!code highlight]
         if agent_name := metadata.get("lc_agent_name"):  # [!code highlight]
             if agent_name != current_agent:  # [!code highlight]
                 print(f"🤖 {agent_name}: ")  # [!code highlight]
                 current_agent = agent_name  # [!code highlight]
         if isinstance(token, AIMessage):
             _render_message_chunk(token)
-    if stream_mode == "updates":
-        for source, update in data.items():
+    elif chunk["type"] == "updates":  # [!code highlight]
+        for source, update in chunk["data"].items():  # [!code highlight]
             if source in ("model", "tools"):
                 _render_completed_message(update["messages"][-1])
 ```
@@ -622,19 +628,59 @@ Not all chat model integrations support the `streaming` parameter. If your model
 
 See the [LangGraph streaming guide](/oss/python/langgraph/streaming#disable-streaming-for-specific-chat-models) for more details.
 
+## v2 streaming format
+
+Requires LangGraph >= 1.1.
+
+Pass `version="v2"` to `stream()` or `astream()` to get a unified output format. Every chunk is a `StreamPart` dict with `type`, `ns`, and `data` keys — the same shape regardless of stream mode or number of modes:
+
+```python v2 (new) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Unified format — no more tuple unpacking
+for chunk in agent.stream(
+    {"messages": [{"role": "user", "content": "What is the weather in SF?"}]},
+    stream_mode=["updates", "custom"],
+    version="v2",
+):
+    print(chunk["type"])  # "updates" or "custom"
+    print(chunk["data"])  # payload
+```
+
+```python v1 (current default) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Must unpack (mode, data) tuples
+for mode, chunk in agent.stream(
+    {"messages": [{"role": "user", "content": "What is the weather in SF?"}]},
+    stream_mode=["updates", "custom"],
+):
+    print(mode)   # "updates" or "custom"
+    print(chunk)  # payload
+```
+
+The v2 format also improves `invoke()` — it returns a `GraphOutput` object with `.value` and `.interrupts` attributes, cleanly separating state from interrupt metadata:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "Hello"}]},
+    version="v2",
+)
+print(result.value)       # state (dict, Pydantic model, or dataclass)
+print(result.interrupts)  # tuple of Interrupt objects (empty if none)
+```
+
+See the [LangGraph streaming docs](/oss/python/langgraph/streaming#stream-output-format-v2) for more details on the v2 format, including type narrowing, Pydantic/dataclass coercion, and subgraph streaming.
+
 ## Related
 
-- [Frontend streaming](/oss/python/langchain/streaming/frontend) — Build React UIs with `useStream` for real-time agent interactions
-- [Streaming with chat models](/oss/python/langchain/models#stream) — Stream tokens directly from a chat model without using an agent or graph
-- [Reasoning with chat models](/oss/python/langchain/models#reasoning) — Configure and access reasoning output from chat models
-- [Standard content blocks](/oss/python/langchain/messages#standard-content-blocks) — Understand the normalized content block format used for reasoning, text, and other content types
-- [Streaming with human-in-the-loop](/oss/python/langchain/human-in-the-loop#streaming-with-hil) — Stream agent progress while handling interrupts for human review
-- [LangGraph streaming](/oss/python/langgraph/streaming) — Advanced streaming options including `values`, `debug` modes, and subgraph streaming
+- [Frontend streaming](/oss/python/langchain/streaming/frontend)—Build React UIs with `useStream` for real-time agent interactions
+- [Streaming with chat models](/oss/python/langchain/models#stream)—Stream tokens directly from a chat model without using an agent or graph
+- [Reasoning with chat models](/oss/python/langchain/models#reasoning)—Configure and access reasoning output from chat models
+- [Standard content blocks](/oss/python/langchain/messages#standard-content-blocks)—Understand the normalized content block format used for reasoning, text, and other content types
+- [Streaming with human-in-the-loop](/oss/python/langchain/human-in-the-loop#streaming-with-human-in-the-loop)—Stream agent progress while handling interrupts for human review
+- [LangGraph streaming](/oss/python/langgraph/streaming)—Advanced streaming options including `values`, `debug` modes, and subgraph streaming
 
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/streaming/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

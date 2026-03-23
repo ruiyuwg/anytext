@@ -1,0 +1,2432 @@
+-   [Home](https://docs.cloud.google.com/)
+-   [Documentation](https://docs.cloud.google.com/docs)
+-   [Developer tools](https://docs.cloud.google.com/docs/costs-usage)
+-   [.NET](https://docs.cloud.google.com/dotnet/docs)
+-   [Client libraries](https://docs.cloud.google.com/dotnet/docs/reference)
+
+Send feedback
+
+# Live Stream v1 API - Class LivestreamServiceClientImpl (1.5.0) Stay organized with collections Save and categorize content based on your preferences.
+
+Version 1.5.0keyboard\_arrow\_down
+
+-   [1.11.0 (latest)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/latest/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+-   [1.10.0](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.10.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+-   [1.9.0](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.9.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+-   [1.8.0](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.8.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+-   [1.7.0](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.7.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+-   [1.6.0](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.6.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+-   [1.5.0](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+-   [1.4.0](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.4.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+-   [1.3.0](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.3.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+-   [1.2.0](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.2.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+-   [1.1.0](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.1.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+-   [1.0.0](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.0.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClientImpl)
+
+```
+public sealed class LivestreamServiceClientImpl : LivestreamServiceClient
+```
+
+Reference documentation and code samples for the Live Stream v1 API class LivestreamServiceClientImpl.
+
+LivestreamService client wrapper implementation, for convenient use.
+
+## Inheritance
+
+[object](https://learn.microsoft.com/dotnet/api/system.object) \> [LivestreamServiceClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient) \> LivestreamServiceClientImpl
+
+## Inherited Members
+
+[LivestreamServiceClient.DefaultEndpoint](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DefaultEndpoint)
+
+[LivestreamServiceClient.DefaultScopes](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DefaultScopes)
+
+[LivestreamServiceClient.ServiceMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ServiceMetadata)
+
+[LivestreamServiceClient.CreateAsync(CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateAsync_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.Create()](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_Create)
+
+[LivestreamServiceClient.ShutdownDefaultChannelsAsync()](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ShutdownDefaultChannelsAsync)
+
+[LivestreamServiceClient.CreateChannelAsync(CreateChannelRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateChannelAsync_Google_Cloud_Video_LiveStream_V1_CreateChannelRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.PollOnceCreateChannel(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceCreateChannel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.PollOnceCreateChannelAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceCreateChannelAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateChannel(string, Channel, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateChannel_System_String_Google_Cloud_Video_LiveStream_V1_Channel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateChannelAsync(string, Channel, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateChannelAsync_System_String_Google_Cloud_Video_LiveStream_V1_Channel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateChannelAsync(string, Channel, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateChannelAsync_System_String_Google_Cloud_Video_LiveStream_V1_Channel_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.CreateChannel(LocationName, Channel, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateChannel_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Video_LiveStream_V1_Channel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateChannelAsync(LocationName, Channel, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateChannelAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Video_LiveStream_V1_Channel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateChannelAsync(LocationName, Channel, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateChannelAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Video_LiveStream_V1_Channel_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.ListChannels(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListChannels_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListChannelsAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListChannelsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListChannels(LocationName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListChannels_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListChannelsAsync(LocationName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListChannelsAsync_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetChannelAsync(GetChannelRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetChannelAsync_Google_Cloud_Video_LiveStream_V1_GetChannelRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.GetChannel(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetChannel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetChannelAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetChannelAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetChannelAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetChannelAsync_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.GetChannel(ChannelName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetChannel_Google_Cloud_Video_LiveStream_V1_ChannelName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetChannelAsync(ChannelName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetChannelAsync_Google_Cloud_Video_LiveStream_V1_ChannelName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetChannelAsync(ChannelName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetChannelAsync_Google_Cloud_Video_LiveStream_V1_ChannelName_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.DeleteChannelAsync(DeleteChannelRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteChannelAsync_Google_Cloud_Video_LiveStream_V1_DeleteChannelRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.PollOnceDeleteChannel(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceDeleteChannel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.PollOnceDeleteChannelAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceDeleteChannelAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteChannel(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteChannel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteChannelAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteChannelAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteChannelAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteChannelAsync_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.DeleteChannel(ChannelName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteChannel_Google_Cloud_Video_LiveStream_V1_ChannelName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteChannelAsync(ChannelName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteChannelAsync_Google_Cloud_Video_LiveStream_V1_ChannelName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteChannelAsync(ChannelName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteChannelAsync_Google_Cloud_Video_LiveStream_V1_ChannelName_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.UpdateChannelAsync(UpdateChannelRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateChannelAsync_Google_Cloud_Video_LiveStream_V1_UpdateChannelRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.PollOnceUpdateChannel(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceUpdateChannel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.PollOnceUpdateChannelAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceUpdateChannelAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.UpdateChannel(Channel, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateChannel_Google_Cloud_Video_LiveStream_V1_Channel_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.UpdateChannelAsync(Channel, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateChannelAsync_Google_Cloud_Video_LiveStream_V1_Channel_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.UpdateChannelAsync(Channel, FieldMask, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateChannelAsync_Google_Cloud_Video_LiveStream_V1_Channel_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.StartChannelAsync(StartChannelRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StartChannelAsync_Google_Cloud_Video_LiveStream_V1_StartChannelRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.PollOnceStartChannel(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceStartChannel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.PollOnceStartChannelAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceStartChannelAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.StartChannel(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StartChannel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.StartChannelAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StartChannelAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.StartChannelAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StartChannelAsync_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.StartChannel(ChannelName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StartChannel_Google_Cloud_Video_LiveStream_V1_ChannelName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.StartChannelAsync(ChannelName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StartChannelAsync_Google_Cloud_Video_LiveStream_V1_ChannelName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.StartChannelAsync(ChannelName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StartChannelAsync_Google_Cloud_Video_LiveStream_V1_ChannelName_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.StopChannelAsync(StopChannelRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StopChannelAsync_Google_Cloud_Video_LiveStream_V1_StopChannelRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.PollOnceStopChannel(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceStopChannel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.PollOnceStopChannelAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceStopChannelAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.StopChannel(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StopChannel_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.StopChannelAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StopChannelAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.StopChannelAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StopChannelAsync_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.StopChannel(ChannelName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StopChannel_Google_Cloud_Video_LiveStream_V1_ChannelName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.StopChannelAsync(ChannelName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StopChannelAsync_Google_Cloud_Video_LiveStream_V1_ChannelName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.StopChannelAsync(ChannelName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StopChannelAsync_Google_Cloud_Video_LiveStream_V1_ChannelName_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.CreateInputAsync(CreateInputRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateInputAsync_Google_Cloud_Video_LiveStream_V1_CreateInputRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.PollOnceCreateInput(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceCreateInput_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.PollOnceCreateInputAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceCreateInputAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateInput(string, Input, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateInput_System_String_Google_Cloud_Video_LiveStream_V1_Input_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateInputAsync(string, Input, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateInputAsync_System_String_Google_Cloud_Video_LiveStream_V1_Input_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateInputAsync(string, Input, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateInputAsync_System_String_Google_Cloud_Video_LiveStream_V1_Input_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.CreateInput(LocationName, Input, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateInput_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Video_LiveStream_V1_Input_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateInputAsync(LocationName, Input, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateInputAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Video_LiveStream_V1_Input_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateInputAsync(LocationName, Input, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateInputAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Video_LiveStream_V1_Input_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.ListInputs(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListInputs_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListInputsAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListInputsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListInputs(LocationName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListInputs_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListInputsAsync(LocationName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListInputsAsync_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetInputAsync(GetInputRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetInputAsync_Google_Cloud_Video_LiveStream_V1_GetInputRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.GetInput(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetInput_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetInputAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetInputAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetInputAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetInputAsync_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.GetInput(InputName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetInput_Google_Cloud_Video_LiveStream_V1_InputName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetInputAsync(InputName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetInputAsync_Google_Cloud_Video_LiveStream_V1_InputName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetInputAsync(InputName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetInputAsync_Google_Cloud_Video_LiveStream_V1_InputName_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.DeleteInputAsync(DeleteInputRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteInputAsync_Google_Cloud_Video_LiveStream_V1_DeleteInputRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.PollOnceDeleteInput(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceDeleteInput_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.PollOnceDeleteInputAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceDeleteInputAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteInput(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteInput_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteInputAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteInputAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteInputAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteInputAsync_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.DeleteInput(InputName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteInput_Google_Cloud_Video_LiveStream_V1_InputName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteInputAsync(InputName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteInputAsync_Google_Cloud_Video_LiveStream_V1_InputName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteInputAsync(InputName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteInputAsync_Google_Cloud_Video_LiveStream_V1_InputName_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.UpdateInputAsync(UpdateInputRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateInputAsync_Google_Cloud_Video_LiveStream_V1_UpdateInputRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.PollOnceUpdateInput(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceUpdateInput_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.PollOnceUpdateInputAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceUpdateInputAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.UpdateInput(Input, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateInput_Google_Cloud_Video_LiveStream_V1_Input_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.UpdateInputAsync(Input, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateInputAsync_Google_Cloud_Video_LiveStream_V1_Input_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.UpdateInputAsync(Input, FieldMask, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateInputAsync_Google_Cloud_Video_LiveStream_V1_Input_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.CreateEventAsync(CreateEventRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateEventAsync_Google_Cloud_Video_LiveStream_V1_CreateEventRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.CreateEvent(string, Event, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateEvent_System_String_Google_Cloud_Video_LiveStream_V1_Event_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateEventAsync(string, Event, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateEventAsync_System_String_Google_Cloud_Video_LiveStream_V1_Event_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateEventAsync(string, Event, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateEventAsync_System_String_Google_Cloud_Video_LiveStream_V1_Event_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.CreateEvent(ChannelName, Event, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateEvent_Google_Cloud_Video_LiveStream_V1_ChannelName_Google_Cloud_Video_LiveStream_V1_Event_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateEventAsync(ChannelName, Event, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateEventAsync_Google_Cloud_Video_LiveStream_V1_ChannelName_Google_Cloud_Video_LiveStream_V1_Event_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateEventAsync(ChannelName, Event, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateEventAsync_Google_Cloud_Video_LiveStream_V1_ChannelName_Google_Cloud_Video_LiveStream_V1_Event_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.ListEvents(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListEvents_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListEventsAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListEventsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListEvents(ChannelName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListEvents_Google_Cloud_Video_LiveStream_V1_ChannelName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListEventsAsync(ChannelName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListEventsAsync_Google_Cloud_Video_LiveStream_V1_ChannelName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetEventAsync(GetEventRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetEventAsync_Google_Cloud_Video_LiveStream_V1_GetEventRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.GetEvent(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetEvent_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetEventAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetEventAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetEventAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetEventAsync_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.GetEvent(EventName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetEvent_Google_Cloud_Video_LiveStream_V1_EventName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetEventAsync(EventName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetEventAsync_Google_Cloud_Video_LiveStream_V1_EventName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetEventAsync(EventName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetEventAsync_Google_Cloud_Video_LiveStream_V1_EventName_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.DeleteEventAsync(DeleteEventRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteEventAsync_Google_Cloud_Video_LiveStream_V1_DeleteEventRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.DeleteEvent(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteEvent_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteEventAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteEventAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteEventAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteEventAsync_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.DeleteEvent(EventName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteEvent_Google_Cloud_Video_LiveStream_V1_EventName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteEventAsync(EventName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteEventAsync_Google_Cloud_Video_LiveStream_V1_EventName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteEventAsync(EventName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteEventAsync_Google_Cloud_Video_LiveStream_V1_EventName_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.CreateAssetAsync(CreateAssetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateAssetAsync_Google_Cloud_Video_LiveStream_V1_CreateAssetRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.PollOnceCreateAsset(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceCreateAsset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.PollOnceCreateAssetAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceCreateAssetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateAsset(string, Asset, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateAsset_System_String_Google_Cloud_Video_LiveStream_V1_Asset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateAssetAsync(string, Asset, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateAssetAsync_System_String_Google_Cloud_Video_LiveStream_V1_Asset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateAssetAsync(string, Asset, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateAssetAsync_System_String_Google_Cloud_Video_LiveStream_V1_Asset_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.CreateAsset(LocationName, Asset, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateAsset_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Video_LiveStream_V1_Asset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateAssetAsync(LocationName, Asset, string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateAssetAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Video_LiveStream_V1_Asset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.CreateAssetAsync(LocationName, Asset, string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateAssetAsync_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Video_LiveStream_V1_Asset_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.DeleteAssetAsync(DeleteAssetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteAssetAsync_Google_Cloud_Video_LiveStream_V1_DeleteAssetRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.PollOnceDeleteAsset(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceDeleteAsset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.PollOnceDeleteAssetAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceDeleteAssetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteAsset(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteAsset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteAssetAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteAssetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteAssetAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteAssetAsync_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.DeleteAsset(AssetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteAsset_Google_Cloud_Video_LiveStream_V1_AssetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteAssetAsync(AssetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteAssetAsync_Google_Cloud_Video_LiveStream_V1_AssetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.DeleteAssetAsync(AssetName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteAssetAsync_Google_Cloud_Video_LiveStream_V1_AssetName_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.GetAssetAsync(GetAssetRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetAssetAsync_Google_Cloud_Video_LiveStream_V1_GetAssetRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.GetAsset(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetAsset_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetAssetAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetAssetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetAssetAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetAssetAsync_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.GetAsset(AssetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetAsset_Google_Cloud_Video_LiveStream_V1_AssetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetAssetAsync(AssetName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetAssetAsync_Google_Cloud_Video_LiveStream_V1_AssetName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetAssetAsync(AssetName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetAssetAsync_Google_Cloud_Video_LiveStream_V1_AssetName_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.ListAssets(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListAssets_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListAssetsAsync(string, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListAssetsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListAssets(LocationName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListAssets_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.ListAssetsAsync(LocationName, string, int?, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListAssetsAsync_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetPoolAsync(GetPoolRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetPoolAsync_Google_Cloud_Video_LiveStream_V1_GetPoolRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.GetPool(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetPool_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetPoolAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetPoolAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetPoolAsync(string, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetPoolAsync_System_String_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.GetPool(PoolName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetPool_Google_Cloud_Video_LiveStream_V1_PoolName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetPoolAsync(PoolName, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetPoolAsync_Google_Cloud_Video_LiveStream_V1_PoolName_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.GetPoolAsync(PoolName, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetPoolAsync_Google_Cloud_Video_LiveStream_V1_PoolName_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.UpdatePoolAsync(UpdatePoolRequest, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdatePoolAsync_Google_Cloud_Video_LiveStream_V1_UpdatePoolRequest_System_Threading_CancellationToken_)
+
+[LivestreamServiceClient.PollOnceUpdatePool(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceUpdatePool_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.PollOnceUpdatePoolAsync(string, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_PollOnceUpdatePoolAsync_System_String_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.UpdatePool(Pool, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdatePool_Google_Cloud_Video_LiveStream_V1_Pool_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.UpdatePoolAsync(Pool, FieldMask, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdatePoolAsync_Google_Cloud_Video_LiveStream_V1_Pool_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_)
+
+[LivestreamServiceClient.UpdatePoolAsync(Pool, FieldMask, CancellationToken)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdatePoolAsync_Google_Cloud_Video_LiveStream_V1_Pool_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_)
+
+[object.GetHashCode()](https://learn.microsoft.com/dotnet/api/system.object.gethashcode)
+
+[object.GetType()](https://learn.microsoft.com/dotnet/api/system.object.gettype)
+
+[object.ToString()](https://learn.microsoft.com/dotnet/api/system.object.tostring)
+
+## Namespace
+
+[Google.Cloud.Video.LiveStream.V1](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1)
+
+## Assembly
+
+Google.Cloud.Video.LiveStream.V1.dll
+
+## Remarks
+
+Using Live Stream API, you can generate live streams in the various renditions and streaming formats. The streaming format include HTTP Live Streaming (HLS) and Dynamic Adaptive Streaming over HTTP (DASH). You can send a source stream in the various ways, including Real-Time Messaging Protocol (RTMP) and Secure Reliable Transport (SRT).
+
+## Constructors
+
+### LivestreamServiceClientImpl(LivestreamServiceClient, LivestreamServiceSettings, ILogger)
+
+```
+public LivestreamServiceClientImpl(LivestreamService.LivestreamServiceClient grpcClient, LivestreamServiceSettings settings, ILogger logger)
+```
+
+Constructs a client wrapper for the LivestreamService service, with the specified gRPC client and settings.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`grpcClient`
+
+`[LivestreamService](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamService)[LivestreamServiceClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamService.LivestreamServiceClient)`  
+
+The underlying gRPC client.
+
+`settings`
+
+`[LivestreamServiceSettings](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceSettings)`  
+
+The base [LivestreamServiceSettings](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceSettings) used within this client.
+
+`logger`
+
+`[ILogger](https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger)`  
+
+Optional [ILogger](https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger) to use within this client.
+
+## Properties
+
+### CreateAssetOperationsClient
+
+```
+public override OperationsClient CreateAssetOperationsClient { get; }
+```
+
+The long-running operations client for `CreateAsset`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.CreateAssetOperationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateAssetOperationsClient)
+
+### CreateChannelOperationsClient
+
+```
+public override OperationsClient CreateChannelOperationsClient { get; }
+```
+
+The long-running operations client for `CreateChannel`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.CreateChannelOperationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateChannelOperationsClient)
+
+### CreateInputOperationsClient
+
+```
+public override OperationsClient CreateInputOperationsClient { get; }
+```
+
+The long-running operations client for `CreateInput`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.CreateInputOperationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateInputOperationsClient)
+
+### DeleteAssetOperationsClient
+
+```
+public override OperationsClient DeleteAssetOperationsClient { get; }
+```
+
+The long-running operations client for `DeleteAsset`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.DeleteAssetOperationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteAssetOperationsClient)
+
+### DeleteChannelOperationsClient
+
+```
+public override OperationsClient DeleteChannelOperationsClient { get; }
+```
+
+The long-running operations client for `DeleteChannel`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.DeleteChannelOperationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteChannelOperationsClient)
+
+### DeleteInputOperationsClient
+
+```
+public override OperationsClient DeleteInputOperationsClient { get; }
+```
+
+The long-running operations client for `DeleteInput`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.DeleteInputOperationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteInputOperationsClient)
+
+### GrpcClient
+
+```
+public override LivestreamService.LivestreamServiceClient GrpcClient { get; }
+```
+
+The underlying gRPC LivestreamService client
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[LivestreamService](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamService)[LivestreamServiceClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamService.LivestreamServiceClient)`
+
+**Overrides**
+
+[LivestreamServiceClient.GrpcClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GrpcClient)
+
+### LocationsClient
+
+```
+public override LocationsClient LocationsClient { get; }
+```
+
+The [LocationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/e0e09db2bdb9b94d338fd1b26b0cad881a4918f6/apis/Google.Cloud.Location/Google.Cloud.Location/LocationsClient.g.cs) associated with this client.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[LocationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/e0e09db2bdb9b94d338fd1b26b0cad881a4918f6/apis/Google.Cloud.Location/Google.Cloud.Location/LocationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.LocationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_LocationsClient)
+
+### StartChannelOperationsClient
+
+```
+public override OperationsClient StartChannelOperationsClient { get; }
+```
+
+The long-running operations client for `StartChannel`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.StartChannelOperationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StartChannelOperationsClient)
+
+### StopChannelOperationsClient
+
+```
+public override OperationsClient StopChannelOperationsClient { get; }
+```
+
+The long-running operations client for `StopChannel`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.StopChannelOperationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StopChannelOperationsClient)
+
+### UpdateChannelOperationsClient
+
+```
+public override OperationsClient UpdateChannelOperationsClient { get; }
+```
+
+The long-running operations client for `UpdateChannel`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.UpdateChannelOperationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateChannelOperationsClient)
+
+### UpdateInputOperationsClient
+
+```
+public override OperationsClient UpdateInputOperationsClient { get; }
+```
+
+The long-running operations client for `UpdateInput`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.UpdateInputOperationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateInputOperationsClient)
+
+### UpdatePoolOperationsClient
+
+```
+public override OperationsClient UpdatePoolOperationsClient { get; }
+```
+
+The long-running operations client for `UpdatePool`.
+
+**Property Value**
+
+**Type**
+
+**Description**
+
+`[OperationsClient](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/OperationsClient.g.cs)`
+
+**Overrides**
+
+[LivestreamServiceClient.UpdatePoolOperationsClient](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdatePoolOperationsClient)
+
+## Methods
+
+### CreateAsset(CreateAssetRequest, CallSettings)
+
+```
+public override Operation<Asset, OperationMetadata> CreateAsset(CreateAssetRequest request, CallSettings callSettings = null)
+```
+
+Creates a Asset with the provided unique ID in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateAssetRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.CreateAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Asset](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Asset)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.CreateAsset(CreateAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateAsset_Google_Cloud_Video_LiveStream_V1_CreateAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateAssetAsync(CreateAssetRequest, CallSettings)
+
+```
+public override Task<Operation<Asset, OperationMetadata>> CreateAssetAsync(CreateAssetRequest request, CallSettings callSettings = null)
+```
+
+Creates a Asset with the provided unique ID in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateAssetRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.CreateAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Asset](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Asset)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.CreateAssetAsync(CreateAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateAssetAsync_Google_Cloud_Video_LiveStream_V1_CreateAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateChannel(CreateChannelRequest, CallSettings)
+
+```
+public override Operation<Channel, OperationMetadata> CreateChannel(CreateChannelRequest request, CallSettings callSettings = null)
+```
+
+Creates a channel with the provided unique ID in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.CreateChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Channel](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Channel)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.CreateChannel(CreateChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateChannel_Google_Cloud_Video_LiveStream_V1_CreateChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateChannelAsync(CreateChannelRequest, CallSettings)
+
+```
+public override Task<Operation<Channel, OperationMetadata>> CreateChannelAsync(CreateChannelRequest request, CallSettings callSettings = null)
+```
+
+Creates a channel with the provided unique ID in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.CreateChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Channel](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Channel)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.CreateChannelAsync(CreateChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateChannelAsync_Google_Cloud_Video_LiveStream_V1_CreateChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateEvent(CreateEventRequest, CallSettings)
+
+```
+public override Event CreateEvent(CreateEventRequest request, CallSettings callSettings = null)
+```
+
+Creates an event with the provided unique ID in the specified channel.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateEventRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.CreateEventRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Event](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Event)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.CreateEvent(CreateEventRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateEvent_Google_Cloud_Video_LiveStream_V1_CreateEventRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateEventAsync(CreateEventRequest, CallSettings)
+
+```
+public override Task<Event> CreateEventAsync(CreateEventRequest request, CallSettings callSettings = null)
+```
+
+Creates an event with the provided unique ID in the specified channel.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateEventRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.CreateEventRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Event](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Event)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.CreateEventAsync(CreateEventRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateEventAsync_Google_Cloud_Video_LiveStream_V1_CreateEventRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateInput(CreateInputRequest, CallSettings)
+
+```
+public override Operation<Input, OperationMetadata> CreateInput(CreateInputRequest request, CallSettings callSettings = null)
+```
+
+Creates an input with the provided unique ID in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateInputRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.CreateInputRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Input](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Input)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.CreateInput(CreateInputRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateInput_Google_Cloud_Video_LiveStream_V1_CreateInputRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### CreateInputAsync(CreateInputRequest, CallSettings)
+
+```
+public override Task<Operation<Input, OperationMetadata>> CreateInputAsync(CreateInputRequest request, CallSettings callSettings = null)
+```
+
+Creates an input with the provided unique ID in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[CreateInputRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.CreateInputRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Input](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Input)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.CreateInputAsync(CreateInputRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_CreateInputAsync_Google_Cloud_Video_LiveStream_V1_CreateInputRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteAsset(DeleteAssetRequest, CallSettings)
+
+```
+public override Operation<Empty, OperationMetadata> DeleteAsset(DeleteAssetRequest request, CallSettings callSettings = null)
+```
+
+Deletes the specified asset if it is not used.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteAssetRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.DeleteAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.DeleteAsset(DeleteAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteAsset_Google_Cloud_Video_LiveStream_V1_DeleteAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteAssetAsync(DeleteAssetRequest, CallSettings)
+
+```
+public override Task<Operation<Empty, OperationMetadata>> DeleteAssetAsync(DeleteAssetRequest request, CallSettings callSettings = null)
+```
+
+Deletes the specified asset if it is not used.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteAssetRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.DeleteAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.DeleteAssetAsync(DeleteAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteAssetAsync_Google_Cloud_Video_LiveStream_V1_DeleteAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteChannel(DeleteChannelRequest, CallSettings)
+
+```
+public override Operation<Empty, OperationMetadata> DeleteChannel(DeleteChannelRequest request, CallSettings callSettings = null)
+```
+
+Deletes the specified channel.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.DeleteChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.DeleteChannel(DeleteChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteChannel_Google_Cloud_Video_LiveStream_V1_DeleteChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteChannelAsync(DeleteChannelRequest, CallSettings)
+
+```
+public override Task<Operation<Empty, OperationMetadata>> DeleteChannelAsync(DeleteChannelRequest request, CallSettings callSettings = null)
+```
+
+Deletes the specified channel.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.DeleteChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.DeleteChannelAsync(DeleteChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteChannelAsync_Google_Cloud_Video_LiveStream_V1_DeleteChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteEvent(DeleteEventRequest, CallSettings)
+
+```
+public override void DeleteEvent(DeleteEventRequest request, CallSettings callSettings = null)
+```
+
+Deletes the specified event.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteEventRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.DeleteEventRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Overrides**
+
+[LivestreamServiceClient.DeleteEvent(DeleteEventRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteEvent_Google_Cloud_Video_LiveStream_V1_DeleteEventRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteEventAsync(DeleteEventRequest, CallSettings)
+
+```
+public override Task DeleteEventAsync(DeleteEventRequest request, CallSettings callSettings = null)
+```
+
+Deletes the specified event.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteEventRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.DeleteEventRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.DeleteEventAsync(DeleteEventRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteEventAsync_Google_Cloud_Video_LiveStream_V1_DeleteEventRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteInput(DeleteInputRequest, CallSettings)
+
+```
+public override Operation<Empty, OperationMetadata> DeleteInput(DeleteInputRequest request, CallSettings callSettings = null)
+```
+
+Deletes the specified input.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteInputRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.DeleteInputRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.DeleteInput(DeleteInputRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteInput_Google_Cloud_Video_LiveStream_V1_DeleteInputRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### DeleteInputAsync(DeleteInputRequest, CallSettings)
+
+```
+public override Task<Operation<Empty, OperationMetadata>> DeleteInputAsync(DeleteInputRequest request, CallSettings callSettings = null)
+```
+
+Deletes the specified input.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[DeleteInputRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.DeleteInputRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Empty](https://cloud.google.com/dotnet/docs/reference/Google.Protobuf/latest/Google.Protobuf.WellKnownTypes.Empty.html)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.DeleteInputAsync(DeleteInputRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_DeleteInputAsync_Google_Cloud_Video_LiveStream_V1_DeleteInputRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetAsset(GetAssetRequest, CallSettings)
+
+```
+public override Asset GetAsset(GetAssetRequest request, CallSettings callSettings = null)
+```
+
+Returns the specified asset.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetAssetRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.GetAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Asset](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Asset)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.GetAsset(GetAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetAsset_Google_Cloud_Video_LiveStream_V1_GetAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetAssetAsync(GetAssetRequest, CallSettings)
+
+```
+public override Task<Asset> GetAssetAsync(GetAssetRequest request, CallSettings callSettings = null)
+```
+
+Returns the specified asset.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetAssetRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.GetAssetRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Asset](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Asset)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.GetAssetAsync(GetAssetRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetAssetAsync_Google_Cloud_Video_LiveStream_V1_GetAssetRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetChannel(GetChannelRequest, CallSettings)
+
+```
+public override Channel GetChannel(GetChannelRequest request, CallSettings callSettings = null)
+```
+
+Returns the specified channel.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.GetChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Channel](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Channel)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.GetChannel(GetChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetChannel_Google_Cloud_Video_LiveStream_V1_GetChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetChannelAsync(GetChannelRequest, CallSettings)
+
+```
+public override Task<Channel> GetChannelAsync(GetChannelRequest request, CallSettings callSettings = null)
+```
+
+Returns the specified channel.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.GetChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Channel](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Channel)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.GetChannelAsync(GetChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetChannelAsync_Google_Cloud_Video_LiveStream_V1_GetChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetEvent(GetEventRequest, CallSettings)
+
+```
+public override Event GetEvent(GetEventRequest request, CallSettings callSettings = null)
+```
+
+Returns the specified event.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetEventRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.GetEventRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Event](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Event)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.GetEvent(GetEventRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetEvent_Google_Cloud_Video_LiveStream_V1_GetEventRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetEventAsync(GetEventRequest, CallSettings)
+
+```
+public override Task<Event> GetEventAsync(GetEventRequest request, CallSettings callSettings = null)
+```
+
+Returns the specified event.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetEventRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.GetEventRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Event](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Event)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.GetEventAsync(GetEventRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetEventAsync_Google_Cloud_Video_LiveStream_V1_GetEventRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetInput(GetInputRequest, CallSettings)
+
+```
+public override Input GetInput(GetInputRequest request, CallSettings callSettings = null)
+```
+
+Returns the specified input.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetInputRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.GetInputRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Input](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Input)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.GetInput(GetInputRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetInput_Google_Cloud_Video_LiveStream_V1_GetInputRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetInputAsync(GetInputRequest, CallSettings)
+
+```
+public override Task<Input> GetInputAsync(GetInputRequest request, CallSettings callSettings = null)
+```
+
+Returns the specified input.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetInputRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.GetInputRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Input](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Input)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.GetInputAsync(GetInputRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetInputAsync_Google_Cloud_Video_LiveStream_V1_GetInputRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetPool(GetPoolRequest, CallSettings)
+
+```
+public override Pool GetPool(GetPoolRequest request, CallSettings callSettings = null)
+```
+
+Returns the specified pool.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetPoolRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.GetPoolRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Pool](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Pool)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.GetPool(GetPoolRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetPool_Google_Cloud_Video_LiveStream_V1_GetPoolRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### GetPoolAsync(GetPoolRequest, CallSettings)
+
+```
+public override Task<Pool> GetPoolAsync(GetPoolRequest request, CallSettings callSettings = null)
+```
+
+Returns the specified pool.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[GetPoolRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.GetPoolRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Pool](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Pool)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.GetPoolAsync(GetPoolRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_GetPoolAsync_Google_Cloud_Video_LiveStream_V1_GetPoolRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListAssets(ListAssetsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListAssetsResponse, Asset> ListAssets(ListAssetsRequest request, CallSettings callSettings = null)
+```
+
+Returns a list of all assets in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListAssetsRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListAssetsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax/PagedEnumerable.cs)[ListAssetsResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListAssetsResponse)[Asset](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Asset)`
+
+A pageable sequence of [Asset](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Asset) resources.
+
+**Overrides**
+
+[LivestreamServiceClient.ListAssets(ListAssetsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListAssets_Google_Cloud_Video_LiveStream_V1_ListAssetsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListAssetsAsync(ListAssetsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListAssetsResponse, Asset> ListAssetsAsync(ListAssetsRequest request, CallSettings callSettings = null)
+```
+
+Returns a list of all assets in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListAssetsRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListAssetsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListAssetsResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListAssetsResponse)[Asset](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Asset)`
+
+A pageable asynchronous sequence of [Asset](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Asset) resources.
+
+**Overrides**
+
+[LivestreamServiceClient.ListAssetsAsync(ListAssetsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListAssetsAsync_Google_Cloud_Video_LiveStream_V1_ListAssetsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListChannels(ListChannelsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListChannelsResponse, Channel> ListChannels(ListChannelsRequest request, CallSettings callSettings = null)
+```
+
+Returns a list of all channels in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListChannelsRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListChannelsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax/PagedEnumerable.cs)[ListChannelsResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListChannelsResponse)[Channel](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Channel)`
+
+A pageable sequence of [Channel](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Channel) resources.
+
+**Overrides**
+
+[LivestreamServiceClient.ListChannels(ListChannelsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListChannels_Google_Cloud_Video_LiveStream_V1_ListChannelsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListChannelsAsync(ListChannelsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListChannelsResponse, Channel> ListChannelsAsync(ListChannelsRequest request, CallSettings callSettings = null)
+```
+
+Returns a list of all channels in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListChannelsRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListChannelsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListChannelsResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListChannelsResponse)[Channel](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Channel)`
+
+A pageable asynchronous sequence of [Channel](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Channel) resources.
+
+**Overrides**
+
+[LivestreamServiceClient.ListChannelsAsync(ListChannelsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListChannelsAsync_Google_Cloud_Video_LiveStream_V1_ListChannelsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListEvents(ListEventsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListEventsResponse, Event> ListEvents(ListEventsRequest request, CallSettings callSettings = null)
+```
+
+Returns a list of all events in the specified channel.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListEventsRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListEventsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax/PagedEnumerable.cs)[ListEventsResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListEventsResponse)[Event](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Event)`
+
+A pageable sequence of [Event](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Event) resources.
+
+**Overrides**
+
+[LivestreamServiceClient.ListEvents(ListEventsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListEvents_Google_Cloud_Video_LiveStream_V1_ListEventsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListEventsAsync(ListEventsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListEventsResponse, Event> ListEventsAsync(ListEventsRequest request, CallSettings callSettings = null)
+```
+
+Returns a list of all events in the specified channel.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListEventsRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListEventsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListEventsResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListEventsResponse)[Event](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Event)`
+
+A pageable asynchronous sequence of [Event](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Event) resources.
+
+**Overrides**
+
+[LivestreamServiceClient.ListEventsAsync(ListEventsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListEventsAsync_Google_Cloud_Video_LiveStream_V1_ListEventsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListInputs(ListInputsRequest, CallSettings)
+
+```
+public override PagedEnumerable<ListInputsResponse, Input> ListInputs(ListInputsRequest request, CallSettings callSettings = null)
+```
+
+Returns a list of all inputs in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListInputsRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListInputsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedEnumerable](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax/PagedEnumerable.cs)[ListInputsResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListInputsResponse)[Input](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Input)`
+
+A pageable sequence of [Input](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Input) resources.
+
+**Overrides**
+
+[LivestreamServiceClient.ListInputs(ListInputsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListInputs_Google_Cloud_Video_LiveStream_V1_ListInputsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### ListInputsAsync(ListInputsRequest, CallSettings)
+
+```
+public override PagedAsyncEnumerable<ListInputsResponse, Input> ListInputsAsync(ListInputsRequest request, CallSettings callSettings = null)
+```
+
+Returns a list of all inputs in the specified region.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[ListInputsRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListInputsRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[PagedAsyncEnumerable](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax/PagedAsyncEnumerable.cs)[ListInputsResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ListInputsResponse)[Input](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Input)`
+
+A pageable asynchronous sequence of [Input](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Input) resources.
+
+**Overrides**
+
+[LivestreamServiceClient.ListInputsAsync(ListInputsRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_ListInputsAsync_Google_Cloud_Video_LiveStream_V1_ListInputsRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### StartChannel(StartChannelRequest, CallSettings)
+
+```
+public override Operation<ChannelOperationResponse, OperationMetadata> StartChannel(StartChannelRequest request, CallSettings callSettings = null)
+```
+
+Starts the specified channel. Part of the video pipeline will be created only when the StartChannel request is received by the server.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[StartChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.StartChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[ChannelOperationResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ChannelOperationResponse)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.StartChannel(StartChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StartChannel_Google_Cloud_Video_LiveStream_V1_StartChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### StartChannelAsync(StartChannelRequest, CallSettings)
+
+```
+public override Task<Operation<ChannelOperationResponse, OperationMetadata>> StartChannelAsync(StartChannelRequest request, CallSettings callSettings = null)
+```
+
+Starts the specified channel. Part of the video pipeline will be created only when the StartChannel request is received by the server.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[StartChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.StartChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[ChannelOperationResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ChannelOperationResponse)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.StartChannelAsync(StartChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StartChannelAsync_Google_Cloud_Video_LiveStream_V1_StartChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### StopChannel(StopChannelRequest, CallSettings)
+
+```
+public override Operation<ChannelOperationResponse, OperationMetadata> StopChannel(StopChannelRequest request, CallSettings callSettings = null)
+```
+
+Stops the specified channel. Part of the video pipeline will be released when the StopChannel request is received by the server.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[StopChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.StopChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[ChannelOperationResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ChannelOperationResponse)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.StopChannel(StopChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StopChannel_Google_Cloud_Video_LiveStream_V1_StopChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### StopChannelAsync(StopChannelRequest, CallSettings)
+
+```
+public override Task<Operation<ChannelOperationResponse, OperationMetadata>> StopChannelAsync(StopChannelRequest request, CallSettings callSettings = null)
+```
+
+Stops the specified channel. Part of the video pipeline will be released when the StopChannel request is received by the server.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[StopChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.StopChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[ChannelOperationResponse](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.ChannelOperationResponse)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.StopChannelAsync(StopChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_StopChannelAsync_Google_Cloud_Video_LiveStream_V1_StopChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateChannel(UpdateChannelRequest, CallSettings)
+
+```
+public override Operation<Channel, OperationMetadata> UpdateChannel(UpdateChannelRequest request, CallSettings callSettings = null)
+```
+
+Updates the specified channel.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.UpdateChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Channel](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Channel)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.UpdateChannel(UpdateChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateChannel_Google_Cloud_Video_LiveStream_V1_UpdateChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateChannelAsync(UpdateChannelRequest, CallSettings)
+
+```
+public override Task<Operation<Channel, OperationMetadata>> UpdateChannelAsync(UpdateChannelRequest request, CallSettings callSettings = null)
+```
+
+Updates the specified channel.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateChannelRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.UpdateChannelRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Channel](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Channel)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.UpdateChannelAsync(UpdateChannelRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateChannelAsync_Google_Cloud_Video_LiveStream_V1_UpdateChannelRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateInput(UpdateInputRequest, CallSettings)
+
+```
+public override Operation<Input, OperationMetadata> UpdateInput(UpdateInputRequest request, CallSettings callSettings = null)
+```
+
+Updates the specified input.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateInputRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.UpdateInputRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Input](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Input)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.UpdateInput(UpdateInputRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateInput_Google_Cloud_Video_LiveStream_V1_UpdateInputRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdateInputAsync(UpdateInputRequest, CallSettings)
+
+```
+public override Task<Operation<Input, OperationMetadata>> UpdateInputAsync(UpdateInputRequest request, CallSettings callSettings = null)
+```
+
+Updates the specified input.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdateInputRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.UpdateInputRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Input](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Input)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.UpdateInputAsync(UpdateInputRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdateInputAsync_Google_Cloud_Video_LiveStream_V1_UpdateInputRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdatePool(UpdatePoolRequest, CallSettings)
+
+```
+public override Operation<Pool, OperationMetadata> UpdatePool(UpdatePoolRequest request, CallSettings callSettings = null)
+```
+
+Updates the specified pool.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdatePoolRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.UpdatePoolRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Pool](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Pool)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+The RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.UpdatePool(UpdatePoolRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdatePool_Google_Cloud_Video_LiveStream_V1_UpdatePoolRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+### UpdatePoolAsync(UpdatePoolRequest, CallSettings)
+
+```
+public override Task<Operation<Pool, OperationMetadata>> UpdatePoolAsync(UpdatePoolRequest request, CallSettings callSettings = null)
+```
+
+Updates the specified pool.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`request`
+
+`[UpdatePoolRequest](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.UpdatePoolRequest)`  
+
+The request object containing all of the parameters for the API call.
+
+`callSettings`
+
+`[CallSettings](https://github.com/googleapis/gax-dotnet/blob/83f42b5edc4529818dbdb34d9ea9ecc3c04f7b6e/Google.Api.Gax.Grpc/CallSettings.cs)`  
+
+If not null, applies overrides to this RPC call.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Task](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1)[Operation](https://github.com/googleapis/google-cloud-dotnet/blob/b5c8f66ad2f14a668fb3d064789346de55315c9d/apis/Google.LongRunning/Google.LongRunning/Operation.cs)[Pool](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.Pool)[OperationMetadata](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.OperationMetadata)`
+
+A Task containing the RPC response.
+
+**Overrides**
+
+[LivestreamServiceClient.UpdatePoolAsync(UpdatePoolRequest, CallSettings)](/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/1.5.0/Google.Cloud.Video.LiveStream.V1.LivestreamServiceClient#Google_Cloud_Video_LiveStream_V1_LivestreamServiceClient_UpdatePoolAsync_Google_Cloud_Video_LiveStream_V1_UpdatePoolRequest_Google_Api_Gax_Grpc_CallSettings_)
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-03-09 UTC.

@@ -143,3 +143,7 @@ const { render } = await import(mod.bundleUrl);
 
 render()
 ```
+
+### Next.js
+
+For Next.js applications, the `next-sanity` toolkit provides a `<NextStudio />` component that wraps the Studio in a Next.js-friendly layout with mobile viewport handling, loading states, and metadata configuration. The recommended approach is to mount the Studio on an App Router catch-all route (e.g., `/studio`). This works even if the rest of your application uses Pages Router. For the complete setup guide, see [Embedding Sanity Studio in Next.js](https://www.sanity.io/docs/nextjs/embedding-sanity-studio-in-nextjs).

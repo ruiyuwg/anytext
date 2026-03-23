@@ -116,7 +116,7 @@ The next step is to link the asset to your project dataset with the [assets/medi
 // Define your library ID, project ID, and dataset
 const mediaLibraryId = '<your-library-id>'
 const projectId = '<your-project-id>'
-const dataset = 'production'
+const dataset = '<your-dataset>'
 
 // Define your personal auth token.
 const token = '<personal-auth-token>'
@@ -180,7 +180,7 @@ In this example, we're adding the asset to a `poster` field on our target docume
 ```
 // Define your project ID, and dataset
 const projectId = '<your-project-id>'
-const dataset = 'production'
+const dataset = '<your-dataset>'
 
 // Define your personal auth token.
 const token = '<personal-auth-token>'

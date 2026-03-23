@@ -1085,15 +1085,14 @@ header("Location: " . $checkout\_session->url);
 // This is a public sample test API key.
 // Don’t submit any personally identifiable information in requests made with this key.
 // Sign in to see your own test API key embedded in code samples.
-StripeConfiguration.ApiKey = "<\<YOUR\_SECRET\_KEY>>";
+services.AddSingleton(new StripeClient("<\<YOUR\_SECRET\_KEY>>"));
 var priceOptions = new PriceListOptions
 {
 LookupKeys = new List {
 Request.Form\["lookup\_key"]
 }
 };
-var priceService = new PriceService();
-StripeList prices = priceService.List(priceOptions);
+StripeList prices = \_client.V1.Prices.List(priceOptions);
 var options = new SessionCreateOptions
 {
 LineItems = new List
@@ -1121,8 +1120,7 @@ CustomerAccount: stripe.String("acct\_123"),
 AutomaticTax = new SessionAutomaticTaxOptions { Enabled = true },
 CustomerAccount = "acct\_123",
 };
-var service = new SessionService();
-Session session = service.Create(options);
+Session session = \_client.V1.Checkout.Sessions.Create(options);
 Response.Headers.Add("Location", session.Url);
 return new StatusCodeResult(303);
 var options = new Stripe.BillingPortal.SessionCreateOptions
@@ -1130,15 +1128,13 @@ var options = new Stripe.BillingPortal.SessionCreateOptions
 Customer = checkoutSession.CustomerId,
 ReturnUrl = returnUrl,
 };
-var service = new Stripe.BillingPortal.SessionService();
-var session = service.Create(options);
+var session = \_client.V1.BillingPortal.Sessions.Create(options);
 var options = new Stripe.BillingPortal.SessionCreateOptions
 {
 CustomerAccount = checkoutSession.CustomerAccount,
 ReturnUrl = returnUrl,
 };
-var service = new Stripe.BillingPortal.SessionService();
-var session = service.Create(options);
+var session = \_client.V1.BillingPortal.Sessions.Create(options);
 Response.Headers.Add("Location", session.Url);
 return new StatusCodeResult(303);
 \[Route("webhook")]

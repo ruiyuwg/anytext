@@ -1,6 +1,6 @@
 # Hosting and deployment
 
-[Sanity Studio](https://sanity.io/docs/content-studio) is an open-source React-based Single Page Application (SPA) that runs entirely in the browser and connects with Sanity's hosted APIs and Content Lake.
+[Sanity Studio](https://www.sanity.io/studio) is an open-source React-based Single Page Application (SPA) that runs entirely in the browser and connects with Sanity's hosted APIs and Content Lake.
 
 There are two primary ways of hosting Sanity Studio:
 
@@ -101,6 +101,16 @@ export default defineCliConfig({
 
 You also need to provide an authorization token using the `SANITY_AUTH_TOKEN` environment variable. This is because deploying with the `sanity deploy` command uses your local user session for authenticating with our hosting service, which won't necessarily be available in your CI/CD workflows. You can create a deploy token in [the project management dashboard](https://sanity.io/manage).
 
+### Deploying pre-built Studios
+
+If your CI/CD pipeline builds the Studio in a separate step, use --no-build to skip the build and deploy the existing dist/ directory:
+
+```sh
+sanity deploy --no-build
+```
+
+Schema extraction and manifest upload still run during deploy. The dist/ directory must exist before running this command. See [Deploy](https://www.sanity.io/docs/cli-reference/deploy) for the full pipeline.
+
 ## Self-hosting the Studio
 
 Since the Studio consists of static HTML, CSS, and JavaScript files and communicates with Sanity through our HTTP API, it can be hosted anywhere. Popular hosting services like [Vercel](https://vercel.com/guides/deploying-sanity-studio-with-vercel) and [Netlify](https://www.netlify.com) make it possible to automatically deploy new versions of your Studio when you push it to code repositories like GitHub.
@@ -155,6 +165,16 @@ npx sanity build public
 Run the command above from the studio folder to generate the files for hosting. This will output the files to the `dist/` directory by default. Sometimes your environment requires another directory name, for instance `public`. You can specify this by entering the desired name after the `build` command.
 
 Once the build is complete, the directory can be uploaded and hosted from any web hosting where you can control redirects for a Single-Page Application, like [Vercel](https://vercel.com), [Netlify](https://netlify.com), or [Cloudflare](https://pages.cloudflare.com/).
+
+### Extract the manifest and deploy the schema
+
+When you use `sanity deploy` to deploy to Sanity-managed hosting, manifest extraction and schema deployment happen automatically. When you self-host, you need to run these steps separately after building.
+
+Without the manifest, features like the Dashboard, Canvas, and Agent Actions can’t discover your studio or its schema.
+
+After building your studio, extract the manifest and deploy the schema:
+
+Add these commands to your CI/CD pipeline or build script to keep your schema in sync with each deploy. For details on manifest extraction and schema deployment options, see [Schema deployment](https://www.sanity.io/docs/apis-and-sdks/schema-deployment).
 
 ### Registering the Studio
 

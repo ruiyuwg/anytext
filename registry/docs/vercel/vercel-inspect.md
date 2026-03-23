@@ -10,7 +10,7 @@ You can use this command to view either a deployment's information or its [build
 vercel inspect [deployment-id or url]
 ```
 
-*Using the vercel inspect command to retrieve
+*Using the \`vercel inspect\` command to retrieve
 information about a specific deployment.*
 
 ## Unique Options
@@ -27,8 +27,8 @@ Any valid time string for the [ms](https://www.npmjs.com/package/ms) package can
 vercel inspect https://example-app-6vd6bhoqt.vercel.app --timeout=5m
 ```
 
-*Using the vercel inspect command with the
-\--timeout option.*
+*Using the \`vercel inspect\` command with the
+\`--timeout\` option.*
 
 ### Wait
 
@@ -38,8 +38,8 @@ The `--wait` option will block the CLI until the specified deployment has comple
 vercel inspect https://example-app-6vd6bhoqt.vercel.app --wait
 ```
 
-*Using the vercel inspect command with the
-\--wait option.*
+*Using the \`vercel inspect\` command with the
+\`--wait\` option.*
 
 ### Logs
 
@@ -49,8 +49,8 @@ The `--logs` option, shorthand `-l`, prints the build logs instead of the deploy
 vercel inspect https://example-app-6vd6bhoqt.vercel.app --logs
 ```
 
-*Using the vercel inspect command with the
-\--logs option, to view available build logs.*
+*Using the \`vercel inspect\` command with the
+\`--logs\` option, to view available build logs.*
 
 If the deployment is queued or canceled, there will be no logs to display.
 
@@ -60,13 +60,13 @@ If the deployment is building, you may want to specify `--wait` option. The comm
 vercel inspect https://example-app-6vd6bhoqt.vercel.app --logs --wait
 ```
 
-*Using the vercel inspect command with the
-\--logs and --wait options,
+*Using the \`vercel inspect\` command with the
+\`--logs\` and \`--wait\` options,
 to view all build logs until the deployement is ready.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -81,7 +81,7 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel install"
 description: "Learn how to install marketplace native integrations and provision resources with the vercel install CLI command."
-last\_updated: "2026-03-08T05:03:12.284Z"
+last\_updated: "2026-03-23T09:40:06.867Z"
 source: "https://vercel.com/docs/cli/install"
 
 # vercel install
@@ -109,7 +109,7 @@ vercel install neon
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -124,5 +124,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel integration"
 description: "Learn how to manage marketplace native integrations, provision resources, and discover available products using the vercel integration CLI command."
-last\_updated: "2026-03-08T05:03:12.295Z"
+last\_updated: "2026-03-23T09:40:06.880Z"
 source: "https://vercel.com/docs/cli/integration"

@@ -9,7 +9,7 @@ This guide demonstrates how to implement a comprehensive CI/CD pipeline for AI a
 The CI/CD pipeline provides:
 
 - **Automated testing**: Unit, integration, and end-to-end tests.
-- **Offline evaluations**: Performance assessment using [AgentEvals](/oss/python/langchain/test), [OpenEvals](/langsmith/prebuilt-evaluators#setup) and [LangSmith](/langsmith/home).
+- **Offline evaluations**: Performance assessment using [AgentEvals](/oss/python/langchain/test/evals), [OpenEvals](/langsmith/prebuilt-evaluators#setup) and [LangSmith](/langsmith/home).
 - **Preview and production deployments**: Automated staging and quality-gated production releases using the Control Plane API.
 - **Monitoring**: Continuous evaluation and alerting.
 
@@ -104,7 +104,7 @@ The workflow includes:
 
 - **Agent deployment revision**: A revision happens when an existing deployment with the same ID is found, or when the PR is merged into main. In the case of merging to main, the preview deployment is deleted and a production deployment is created. This ensures that any updates to the agent are properly deployed and integrated into the production infrastructure.
 
-- **Testing and evaluation workflow**: In addition to the more traditional testing phases (unit tests, integration tests, end-to-end tests, etc.), the pipeline includes [offline evaluations](/langsmith/evaluation-concepts#offline-evaluation) and [Agent dev server testing](/langsmith/local-server) because you want to test the quality of your agent. These evaluations provide comprehensive assessment of the agent's performance using real-world scenarios and data.
+- **Testing and evaluation workflow**: In addition to the more traditional testing phases (unit tests, integration tests, end-to-end tests, etc.), the pipeline includes [offline evaluations](/langsmith/evaluation-concepts#offline-evaluations) and [Agent dev server testing](/langsmith/local-dev-testing) because you want to test the quality of your agent. These evaluations provide comprehensive assessment of the agent's performance using real-world scenarios and data.
 
   ```
   Evaluates the final output of your agent against expected results. This is the most common type of evaluation that checks if the agent's final response meets quality standards and answers the user's question correctly.
@@ -144,7 +144,7 @@ LangSmith supports multiple deployment methods, depending on how your [LangSmith
 
 The deployment flow starts by modifying your agent implementation. At minimum, you must have a [`langgraph.json`](/langsmith/application-structure) and dependency file in your project (`requirements.txt` or `pyproject.toml`). Use the `langgraph dev` CLI tool to check for errors—fix any errors; otherwise, the deployment will succeed when deployed to LangSmith Deployment.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 graph TD
     A[Agent Implementation] --> B[langgraph.json + dependencies]
     B --> C[Test Locally with langgraph dev]
@@ -314,7 +314,7 @@ export POSTGRES_URI_CUSTOM="postgresql://user:pass@host:5432/db"
 export REDIS_URI_CUSTOM="redis://host:6379/0"
 ```
 
-See the [environment variables documentation](/langsmith/env-var#postgres-uri-custom) for more details.
+See the [environment variables documentation](/langsmith/env-var#postgres_uri_custom) for more details.
 
 ## Troubleshooting
 
@@ -361,42 +361,3 @@ For self-hosted LangSmith instances, use `http(s)://<langsmith-url>/api-host` wh
 Source: https://docs.langchain.com/langsmith/cli
 
 **LangGraph CLI** is a command-line tool for building and running the [Agent Server](/langsmith/agent-server) locally. The resulting server exposes all API endpoints for runs, threads, assistants, etc., and includes supporting services such as a managed database for checkpointing and storage.
-
-## Installation
-
-1. Ensure Docker is installed (e.g., `docker --version`).
-
-2. Install the CLI:
-
-   ```bash [Python (pip)] theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-   pip install langgraph-cli
-   ```
-
-   ```bash JavaScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-   # Use latest on demand
-   npx @langchain/langgraph-cli
-
-   # Or install globally (available as `langgraphjs`)
-   npm install -g @langchain/langgraph-cli
-   ```
-
-3. Verify the install
-
-   ```bash [Python (pip)] theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-   langgraph --help
-   ```
-
-   ```bash JavaScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-   npx @langchain/langgraph-cli --help
-   ```
-
-### Quick commands
-
-| Command                               | What it does                                                                                                                         |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| [`langgraph dev`](#dev)               | Starts a lightweight local dev server (no Docker required), ideal for rapid testing.                                                 |
-| [`langgraph build`](#build)           | Builds a Docker image of your LangGraph API server for deployment.                                                                   |
-| [`langgraph dockerfile`](#dockerfile) | Emits a Dockerfile derived from your config for custom builds.                                                                       |
-| [`langgraph up`](#up)                 | Starts the LangGraph API server locally in Docker. Requires Docker running; LangSmith API key for local dev; license for production. |
-
-For JS, use `npx @langchain/langgraph-cli <command>` (or `langgraphjs` if installed globally).

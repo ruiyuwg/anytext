@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -276,8 +274,8 @@ You now know how to:
 - Integrate Docker Agent with your [editor](https://docs.docker.com/ai/docker-agent/integrations/acp/) or use agents as [tools in MCP clients](https://docs.docker.com/ai/docker-agent/integrations/mcp/)
 - Review the [Configuration reference](https://docs.docker.com/ai/docker-agent/reference/config/) for all available options
 - Explore the [Tools reference](https://docs.docker.com/ai/docker-agent/reference/toolsets/) to see what capabilities you can enable
-- Check out [example configurations](https://github.com/docker/cagent/tree/main/examples) for different use cases
-- See the full [golang\_developer.yaml](https://github.com/docker/cagent/blob/main/golang_developer.yaml) that the Docker Team uses to develop Docker Agent
+- Check out [example configurations](https://github.com/docker/docker-agent/tree/main/examples) for different use cases
+- See the full [golang\_developer.yaml](https://github.com/docker/docker-agent/blob/main/golang_developer.yaml) that the Docker Team uses to develop Docker Agent
 
 [Edit this page](https://github.com/docker/docs/edit/main/content/manuals/ai/docker-agent/tutorial.md)
 

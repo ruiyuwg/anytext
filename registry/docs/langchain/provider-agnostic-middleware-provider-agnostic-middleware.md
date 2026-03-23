@@ -18,5 +18,5 @@ The following middleware work with any LLM provider:
 | [Context editing](#context-editing)     | Manage conversation context by trimming or clearing tool uses.               |
 | [Shell tool](#shell-tool)               | Expose a persistent shell session to agents for command execution.           |
 | [File search](#file-search)             | Provide Glob and Grep search tools over filesystem files.                    |
-| [Filesystem](#filesystem-deepagents)    | Provide agents with a filesystem for storing context and long-term memories. |
-| [Subagent](#subagent-deepagents)        | Add the ability to spawn subagents.                                          |
+| [Filesystem](#filesystem-middleware)    | Provide agents with a filesystem for storing context and long-term memories. |
+| [Subagent](#subagent)                   | Add the ability to spawn subagents.                                          |

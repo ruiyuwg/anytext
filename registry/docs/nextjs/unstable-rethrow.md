@@ -1,4 +1,4 @@
-# unstable_rethrow
+# unstable\_rethrow
 
 > This feature is currently unstable and subject to change, it is not recommended for production.
 
@@ -7,17 +7,17 @@
 For example, calling the `notFound` function will throw an internal Next.js error and render the [`not-found.js`](/docs/app/api-reference/file-conventions/not-found) component. However, if used inside the `try` block of a `try/catch` statement, the error will be caught, preventing `not-found.js` from rendering:
 
 ```tsx filename="@/app/ui/component.tsx"
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation'
 
 export default async function Page() {
   try {
-    const post = await fetch("https://.../posts/1").then((res) => {
-      if (res.status === 404) notFound();
-      if (!res.ok) throw new Error(res.statusText);
-      return res.json();
-    });
+    const post = await fetch('https://.../posts/1').then((res) => {
+      if (res.status === 404) notFound()
+      if (!res.ok) throw new Error(res.statusText)
+      return res.json()
+    })
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 }
 ```
@@ -25,18 +25,18 @@ export default async function Page() {
 You can use `unstable_rethrow` API to re-throw the internal error and continue with the expected behavior:
 
 ```tsx filename="@/app/ui/component.tsx"
-import { notFound, unstable_rethrow } from "next/navigation";
+import { notFound, unstable_rethrow } from 'next/navigation'
 
 export default async function Page() {
   try {
-    const post = await fetch("https://.../posts/1").then((res) => {
-      if (res.status === 404) notFound();
-      if (!res.ok) throw new Error(res.statusText);
-      return res.json();
-    });
+    const post = await fetch('https://.../posts/1').then((res) => {
+      if (res.status === 404) notFound()
+      if (!res.ok) throw new Error(res.statusText)
+      return res.json()
+    })
   } catch (err) {
-    unstable_rethrow(err);
-    console.error(err);
+    unstable_rethrow(err)
+    console.error(err)
   }
 }
 ```
@@ -47,7 +47,7 @@ The following Next.js APIs rely on throwing an error which should be rethrown an
 - [`redirect()`](/docs/app/guides/redirecting#redirect-function)
 - [`permanentRedirect()`](/docs/app/guides/redirecting#permanentredirect-function)
 
-If a route segment is marked to throw an error unless it's static, a Dynamic API call will also throw an error that should similarly not be caught by the developer. Note that Partial Prerendering (PPR) affects this behavior as well. These APIs are:
+If a route segment is marked to throw an error unless it's static, a Request-time API call will also throw an error that should similarly not be caught by the developer. Note that Partial Prerendering (PPR) affects this behavior as well. These APIs are:
 
 - [`cookies`](/docs/app/api-reference/functions/cookies)
 - [`headers`](/docs/app/api-reference/functions/headers)

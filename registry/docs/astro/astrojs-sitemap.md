@@ -215,13 +215,13 @@ export default defineConfig({
 });
 ```
 
-### `filter`
+### `filter()`
 
-[Section titled “filter”](#filter)
+[Section titled “filter()”](#filter)
 
 **Type:** `(page: string) => boolean`
 
-All pages are included in your sitemap by default. By adding a custom `filter` function, you can filter included pages by URL.
+All pages are included in your sitemap by default. By adding a custom `filter()` function, you can filter included pages by URL.
 
 astro.config.mjs
 
@@ -383,35 +383,21 @@ export default defineConfig({
 });
 ```
 
-### `serialize`
+### `serialize()`
 
-[Section titled “serialize”](#serialize)
+[Section titled “serialize()”](#serialize)
 
 **Type:** `(item: SitemapItem) => SitemapItem | Promise<SitemapItem | undefined> | undefined`
 
-A function called for each sitemap entry just before writing to a disk. This function can be asynchronous.
+Generates an editable representation of each sitemap entry before returning either a [`SitemapItem`](#sitemapitem) or `undefined` to remove it from the sitemap. This function can be asynchronous and is called for each sitemap entry just before writing to disk.
 
-It receives as its parameter a `SitemapItem` object that can have these properties:
-
-- `url` (absolute page URL). This is the only property that is guaranteed to be on `SitemapItem`.
-- `changefreq`
-- `lastmod` (ISO formatted date, `String` type)
-- `priority`
-- `links`.
-
-This `links` property contains a `LinkItem` list of alternate pages including a parent page.
-
-The `LinkItem` type has two fields: `url` (the fully-qualified URL for the version of this page for the specified language) and `lang` (a supported language code targeted by this version of the page).
-
-The `serialize` function should return `SitemapItem`, touched or not.
-
-The example below shows the ability to add sitemap specific properties individually.
+The following example filters a page from the sitemap and updates a specific entry to modify its `changefreq`, `lastmod`, and `priority` properties:
 
 astro.config.mjs
 
 ```diff
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
+import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
 
 
 export default defineConfig({
@@ -423,8 +409,8 @@ export default defineConfig({
           +return undefined;
 +        }
         +if (/your-special-page/.test(item.url)) {
-          +item.changefreq = 'daily';
-          +item.lastmod = new Date();
+          +item.changefreq = ChangeFreqEnum.DAILY;
+          +item.lastmod = new Date().toISOString();
           +item.priority = 0.9;
 +        }
         +return item;
@@ -444,7 +430,7 @@ export default defineConfig({
 
 A map of functions that allows you to split your sitemap into multiple files based on custom logic. Each key in the object becomes the name of a separate sitemap file, and its corresponding function determines which URLs will be included in that chunk. This can be useful for instance if a specific section of your website changes very often and you’d like to specify a different change frequency for its entries.
 
-Each chunk function receives a `SitemapItem` and for each item returns either:
+Each chunk function receives a [`SitemapItem`](#sitemapitem) and for each item returns either:
 
 - the modified `SitemapItem`, if the URL should be included in this chunk
 - `undefined`, if the URL should not be included in this chunk
@@ -455,7 +441,7 @@ astro.config.mjs
 
 ```diff
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
+import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
 
 
 export default defineConfig({
@@ -465,16 +451,16 @@ export default defineConfig({
 +      chunks: {
         +'blog': (item) => {
           +if (/blog/.test(item.url)) {
-            +item.changefreq = 'weekly';
-            +item.lastmod = new Date();
+            +item.changefreq = ChangeFreqEnum.WEEKLY;
+            +item.lastmod = new Date().toISOString();
             +item.priority = 0.9;
             +return item;
 +          }
 +        },
         +'glossary': (item) => {
           +if (/glossary/.test(item.url)) {
-            +item.changefreq = 'monthly';
-            +item.lastmod = new Date();
+            +item.changefreq = ChangeFreqEnum.MONTHLY;
+            +item.lastmod = new Date().toISOString();
             +item.priority = 0.7;
             +return item;
 +          }
@@ -657,6 +643,159 @@ export default defineConfig({
   ]
 });
 ```
+
+## Astro Sitemap utilities reference
+
+[Section titled “Astro Sitemap utilities reference”](#astro-sitemap-utilities-reference)
+
+```ts
+import {
+  ChangeFreqEnum,
+} from "@astrojs/sitemap";
+```
+
+### `ChangeFreqEnum`
+
+[Section titled “ChangeFreqEnum”](#changefreqenum)
+
+**Added in:** `@astrojs/sitemap@1.3.2`
+
+A [Typescript enumeration](https://www.typescriptlang.org/docs/handbook/enums.html) where each key is the uppercase version of a valid value defined in the [specification of `<changefreq>`](https://www.sitemaps.org/protocol.html#changefreqdef).
+
+The following example uses `serialize()` to update the [`changefreq`](#sitemapitemchangefreq) of the blog index:
+
+astro.config.mjs
+
+```js
+import { defineConfig } from 'astro/config';
+import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
+
+
+export default defineConfig({
+  site: 'https://example.com',
+  integrations: [
+    sitemap({
+      serialize(item) {
+        if (/blog/.test(item.url)) {
+          item.changefreq = ChangeFreqEnum.DAILY;
+        }
+
+
+        return item;
+      },
+    }),
+  ],
+});
+```
+
+## Astro Sitemap types reference
+
+[Section titled “Astro Sitemap types reference”](#astro-sitemap-types-reference)
+
+```ts
+import type {
+  ChangeFreq,
+  LinkItem,
+  SitemapItem,
+  SitemapOptions,
+} from "@astrojs/sitemap";
+```
+
+### `ChangeFreq`
+
+[Section titled “ChangeFreq”](#changefreq)
+
+**Type:** `"daily" | "monthly" | "always" | "hourly" | "weekly" | "yearly" | "never"`
+
+A union of valid values to specify the update frequency of an entry.
+
+### `LinkItem`
+
+[Section titled “LinkItem”](#linkitem)
+
+**Type:** `{ lang: string; hreflang?: string; url: string; }`
+
+Describes the URL of a page. This could be the default version of the document or one of its translations.
+
+#### `LinkItem.lang`
+
+[Section titled “LinkItem.lang”](#linkitemlang)
+
+**Type:** `string`
+
+Specifies the language code supported by this version of the page. When a value is set, you do not need to also set [`hreflang`](#linkitemhreflang).
+
+#### `LinkItem.hreflang`
+
+[Section titled “LinkItem.hreflang”](#linkitemhreflang)
+
+**Type:** `string`
+
+Specifies the language code supported by this version of the page. When a value is set, you do not need to also set [`lang`](#linkitemlang).
+
+#### `LinkItem.url`
+
+[Section titled “LinkItem.url”](#linkitemurl)
+
+**Type:** `string`
+
+Specifies the absolute URL of the page for the specified language.
+
+### `SitemapItem`
+
+[Section titled “SitemapItem”](#sitemapitem)
+
+**Type:** `{ url: string; lastmod?: string | undefined; changefreq?: ChangeFreqEnum | undefined; priority?: number | undefined; links?: LinkItem[] | undefined; }`
+
+Describes an entry in a sitemap. This contains its `url` and additional optional properties.
+
+#### `SitemapItem.url`
+
+[Section titled “SitemapItem.url”](#sitemapitemurl)
+
+**Type:** `string`
+
+Specifies the absolute page URL.
+
+#### `SitemapItem.lastmod`
+
+[Section titled “SitemapItem.lastmod”](#sitemapitemlastmod)
+
+**Type:** `string | undefined`
+
+Defines the ISO formatted date of last modification of the page as a string.
+
+#### `SitemapItem.changefreq`
+
+[Section titled “SitemapItem.changefreq”](#sitemapitemchangefreq)
+
+**Type:** `ChangeFreqEnum | undefined`
+
+Defines how frequently the page is likely to change.
+
+#### `SitemapItem.priority`
+
+[Section titled “SitemapItem.priority”](#sitemapitempriority)
+
+**Type:** `number | undefined`
+
+Defines the priority of this URL relative to other URLs on your site. The value should be a number in the range from `0.0` to `1.0`.
+
+#### `SitemapItem.links`
+
+[Section titled “SitemapItem.links”](#sitemapitemlinks)
+
+**Type:** `LinkItem[] | undefined`
+
+Defines a list of alternate pages, including the current page.
+
+### `SitemapOptions`
+
+[Section titled “SitemapOptions”](#sitemapoptions)
+
+**Type:** `object`
+
+Describes the [configuration options](#configuration).
 
 ## Examples
 

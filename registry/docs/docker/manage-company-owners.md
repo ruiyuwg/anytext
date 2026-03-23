@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -32,7 +30,7 @@ A company can have multiple owners. Company owners have visibility across the en
 
 > Important
 >
-> Company owners do not occupy a seat unless they are added as a member of an organization under your company or SSO is enabled.
+> Company owners do not occupy a seat unless they are added as a member of an organization under your company, or SSO is enabled and the company owner signs in via SSO (which automatically adds them as an organization member).
 
 ## [Add a company owner](#add-a-company-owner)
 

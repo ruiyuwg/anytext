@@ -96,5 +96,5 @@ If you rotated a team-level environment variable and multiple projects broke, yo
 
 title: "Sensitive environment variables"
 description: "Environment variables that cannot be decrypted once created."
-last\_updated: "2026-03-08T05:03:14.026Z"
+last\_updated: "2026-03-23T09:40:09.486Z"
 source: "https://vercel.com/docs/environment-variables/sensitive-environment-variables"

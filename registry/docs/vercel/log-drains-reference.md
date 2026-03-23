@@ -132,5 +132,5 @@ For more information on Log Drains and how to use them, check out the following 
 
 title: "Speed Insights Drains Reference"
 description: "Learn about Speed Insights Drains - data formats and performance metrics configuration."
-last\_updated: "2026-03-08T05:03:13.665Z"
+last\_updated: "2026-03-23T09:40:08.963Z"
 source: "https://vercel.com/docs/drains/reference/speed-insights"

@@ -115,6 +115,7 @@ Stripe provides a set of test institutions and bank accounts to simulate various
 
 ## See also
 
+- [Link payment methods](https://docs.stripe.com/payments/link/link-payment-methods.md)
 - [Link with Checkout](https://docs.stripe.com/payments/link/checkout-link.md)
 - [Link with Elements](https://docs.stripe.com/payments/link/elements-link.md)
 - [Link with Invoicing](https://docs.stripe.com/payments/link/invoicing.md)

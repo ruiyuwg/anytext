@@ -1,20 +1,20 @@
 # BedrockEmbeddings integration
 
-Source: https://docs.langchain.com/oss/javascript/integrations/text\_embedding/bedrock
+Source: https://docs.langchain.com/oss/javascript/integrations/embeddings/bedrock
 
 Integrate with the BedrockEmbeddings embedding model using LangChain JavaScript.
 
 [Amazon Bedrock](https://aws.amazon.com/bedrock/) is a fully managed service that offers a choice of high-performing foundation models (FMs) from leading AI companies like AI21 Labs, Anthropic, Cohere, Meta, Stability AI, and Amazon via a single API, along with a broad set of capabilities you need to build generative AI applications with security, privacy, and responsible AI.
 
-This will help you get started with Amazon Bedrock [embedding models](/oss/javascript/integrations/text_embedding) using LangChain. For detailed documentation on `Bedrock` features and configuration options, please refer to the [API reference](https://api.js.langchain.com/classes/langchain_aws.BedrockEmbeddings.html).
+This will help you get started with Amazon Bedrock [embedding models](/oss/javascript/integrations/embeddings) using LangChain. For detailed documentation on `Bedrock` features and configuration options, please refer to the [API reference](https://api.js.langchain.com/classes/langchain_aws.BedrockEmbeddings.html).
 
 ## Overview
 
 ### Integration details
 
-| Class                                                                                | Package                                                                   | Local | [Py support](https://python.langchain.com/docs/integrations/text_embedding/bedrock/) |                                            Downloads                                           |                                           Version                                           |
-| :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------ | :---: | :----------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| [Bedrock](https://api.js.langchain.com/classes/langchain_aws.BedrockEmbeddings.html) | [@langchain/aws](https://api.js.langchain.com/modules/langchain_aws.html) |   ❌   |                                           ✅                                          | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/aws?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/aws?style=flat-square\&label=%20&) |
+| Class                                                                                | Package                                                                   | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/bedrock/) |                                            Downloads                                           |                                           Version                                           |
+| :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------ | :---: | :------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
+| [Bedrock](https://api.js.langchain.com/classes/langchain_aws.BedrockEmbeddings.html) | [@langchain/aws](https://api.js.langchain.com/modules/langchain_aws.html) |   ❌   |                                         ✅                                        | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/aws?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/aws?style=flat-square\&label=%20&) |
 
 ## Setup
 
@@ -230,7 +230,7 @@ For detailed documentation of all Bedrock features and configurations head to th
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/text_embedding/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

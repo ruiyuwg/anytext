@@ -12,7 +12,7 @@ Below are tutorials for common use cases, organized by framework.
 
 ### Deep Agents
 
-[Deep agents](/oss/python/deepagents/overview) include built-in functionality for managing context, a virtual filesystem, and other common agent requirements.
+[Deep Agents](/oss/python/deepagents/overview) include built-in functionality for managing context, a virtual filesystem, and other common agent requirements.
 
 Build a data analysis agent that sends reports to Slack.
 

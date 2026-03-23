@@ -107,5 +107,5 @@ Learn more about deploying Hono projects on Vercel with the following resources:
 
 title: "Koa on Vercel"
 description: "Deploy Koa applications to Vercel with zero configuration."
-last\_updated: "2026-03-08T05:03:14.785Z"
+last\_updated: "2026-03-23T09:40:10.361Z"
 source: "https://vercel.com/docs/frameworks/backend/koa"

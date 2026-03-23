@@ -57,13 +57,13 @@ You’ll automatically pay the flat fee through a percentage of your sales until
 
 Repayment is collected automatically through a percentage of your \[brand name + payment] sales as they’re processed which means you pay down more when business is busy and less if things slow down. As long as you meet your minimum payment requirement, what you pay each day adjusts to your sales.
 
-**What is a minimum payment?**
+**What’s a minimum payment?**
 
-A minimum payment is the minimum amount that you’re expected to repay every repayment period. That period will be determined during underwriting and based on the total term of your loan offer. If your automatic repayments do not meet this minimum, you’ll be required to pay the remaining amount at the end of the period. You can view your minimum payment amount in the Dashboard or in your loan agreement.
+A minimum payment is the minimum amount that you’re expected to repay every repayment period. That period will be determined during underwriting and based on the total term of your loan offer. If your automatic repayments don’t meet this minimum, you’ll be required to pay the remaining amount at the end of the period. You can view your minimum payment amount in the Dashboard or in your loan agreement.
 
 **How do I make my minimum payment?**
 
-If your payments deducted from sales cover the minimum payment requirement for payment period, no action will be taken. If you have not met the minimum payment amount by the end of the payment period, Stripe will automatically debit your bank account or account balance the balance needed to meet your minimum payment. There’s no action needed on your part.
+If your payments deducted from sales cover the minimum payment requirement for payment period, no action will be taken. If you’ve not met the minimum payment amount by the end of the payment period, Stripe will automatically debit your bank account or account balance the balance needed to meet your minimum payment. There’s no action needed on your part.
 
 **After I accept an offer, how quickly will I get my funds?**
 
@@ -87,7 +87,7 @@ After you repay the total amount owed, we’ll automatically evaluate you for a 
 
 **How should I report these funds on my taxes?**
 
-Tax reporting is often dependent on your specific situation, so we encourage you to talk with a tax advisor to ensure appropriate accounting. In general, Stripe Capital funds would not be considered taxable income at the time of receipt, and the amounts withheld to satisfy your obligations are not tax deductible.
+Tax reporting is often dependent on your specific situation, so we encourage you to talk with a tax advisor to ensure appropriate accounting. In general, Stripe Capital funds wouldn’t be considered taxable income at the time of receipt, and the amounts withheld to satisfy your obligations aren’t tax deductible.
 
 **Who can I contact to learn more about the Stripe Capital program?**
 
@@ -183,13 +183,13 @@ Sent on behalf of Celtic Bank.
 
 Thanks for your interest in Stripe Capital! I’m happy to explain how it works at a high level.
 
-Eligibility is based on a variety of factors, including your account’s history with \[platform] Payments. If you become eligible, we’ll email you with a few offers, including the maximum amount you’re eligible for, and let you choose the one that works best for you. After a final review of your loan application and if you are approved, the money is then transferred to your bank account.
+Eligibility is based on a variety of factors, including your account’s history with \[platform] Payments. If you become eligible, we’ll email you with a few offers, including the maximum amount you’re eligible for, and let you choose the one that works best for you. After a final review of your loan application and if you’re approved, the money is then transferred to your bank account.
 
 To pay down your loan, Stripe automatically withholds a percentage of each of your transactions. How it works:
 
 – Loan amount. This is the amount of money that will be deposited into your bank account. For example: 17,000 USD. – Loan fee. This is the amount you’ll pay for the loan itself. For example: 1,000 USD. (There are no other fees or interest charges.) – Total amount due. This is the total amount of money you’ll have to pay back. In this case, 18,000 USD. (17,000 USD + 1,000 USD = 18,000 USD) – Withhold rate. This is the percentage of your daily transactions that we’ll withhold to pay down your loan. For example: 7%. – Minimum payment. Every 60 days, you have to pay 1/9 of the total amount due. In this case, you’d have to pay 2,000 USD every 60 days. (18,000 USD / 9 = 2,000 USD.)
 
-Note: This example assumes a 60-day repayment period which may vary across loans. Refer to your loan contract for your specific minimum repayment period, which might be different.
+Note: This example assumes a 60-day repayment period which might vary across loans. Refer to your loan contract for your specific minimum repayment period, which might be different.
 
 In this example, the loans are designed so that withholding 7% of your transactions for 60 days should satisfy the 2,000 USD minimum payment requirement. But, if withholding 7% of your sales for 60 days only added up to 1,500 USD, we’d debit your bank account or account balance for the remaining 500 USD.
 
@@ -197,7 +197,7 @@ If you take a loan and later decide you want to pay it off early, you can do so 
 
 Sent on behalf of Celtic Bank.
 
-**What is the typical interest rate associated with loans through Stripe Capital?**
+**What’s the typical interest rate associated with loans through Stripe Capital?**
 
 Loans from Stripe Capital have a fixed fee, not an interest rate. This one fee is the only cost associated with your loan. If you take a loan from Stripe Capital, keep the following considerations in mind:
 
@@ -211,15 +211,15 @@ No matter how quickly you pay down your loan, the loan fee doesn’t change, whi
 
 Sent on behalf of Celtic Bank.
 
-**What is the repayment length of a loan?**
+**What’s the repayment length of a loan?**
 
 Thanks for your interest in Stripe Capital! Each loan offer is tailored specifically to your account - as such, repayment lengths might vary from business to business. On average, Stripe Capital expects most borrowers to take between 9-10 months to pay down their loan completely. You have a maximum of 9-18 months to pay down your loan, depending on your loan offer. You can also repay your loan in full or through partial manual payments at no extra cost.
 
 Sent on behalf of Celtic Bank.
 
-**What is Stripe Capital? How do \[platform] and Stripe work together?**
+**What’s Stripe Capital? How do \[platform] and Stripe work together?**
 
-We’ve partnered with Stripe to give businesses access to financing to invest in growth and manage cash flow. Through this partnership, \[platform] can connect you with Stripe Capital, which is a program offering small business loans originated by Celtic Bank. Stripe helps \[platform] identify merchants using \[platform] Payments who might be eligible for these loans, so be on the lookout for an email from Stripe about your eligibility for a Stripe Capital loan.
+We’ve partnered with Stripe to give businesses access to financing to invest in growth and manage cash flow. Through this partnership, \[platform] can connect you with Stripe Capital, which is a program offering small business loans originated by Celtic Bank. Stripe helps \[platform] identify businesses using \[platform] Payments who might be eligible for these loans, so be on the lookout for an email from Stripe about your eligibility for a Stripe Capital loan.
 
 Sent on behalf of Celtic Bank.
 
@@ -267,13 +267,13 @@ Sent on behalf of Celtic Bank.
 
 **What happens if I can’t make a minimum payment on time?**
 
-Please reach out to Stripe support directly by emailing capital+support@stripe.com and they can work with you to help you meet your obligation.
+Contact Stripe support directly by emailing capital+support@stripe.com and they can work with you to help you meet your obligation.
 
 Sent on behalf of Celtic Bank.
 
 **What happens if I want to stop using \[platform]?**
 
-We understand you still have an active loan and want to make sure you have the information you need to manage repayment. For this loan, we’ve partnered with Stripe, a leading payments platform, to connect you with Stripe Capital. Please reach out to the Stripe Capital team at capital+support@stripe.com where they can share the next best steps on how to continue to access your loan information and manage repayment.
+We understand you still have an active loan and want to make sure you have the information you need to manage repayment. For this loan, we’ve partnered with Stripe, a leading payments platform, to connect you with Stripe Capital. Contact the Stripe Capital team at capital+support@stripe.com where they can share the next best steps on how to continue to access your loan information and manage repayment.
 
 Sent on behalf of Celtic Bank.
 
@@ -311,7 +311,7 @@ No, you’ll pay one flat fee that doesn’t change. You won’t pay any interes
 
 **Will applying for an offer affect my personal credit rating?**
 
-When you apply, our partner, YouLend will conduct a soft credit check as part of your application. This credit check will not impact your credit score, but may be visible to other organisations carrying out credit searches. If approved, when you receive financing, a hard footprint will be left on your credit record, which will impact your credit score.
+When you apply, our partner, YouLend will conduct a soft credit check as part of your application. This credit check won’t impact your credit score, but may be visible to other organisations carrying out credit searches. If approved, when you receive financing, a hard footprint will be left on your credit record, which will impact your credit score.
 
 **Can I request a different offer amount?**
 
@@ -347,7 +347,7 @@ After you pay the total amount owed, you’ll automatically be evaluated for a n
 
 **How should I report these funds on my taxes?**
 
-Tax reporting is often dependent on your specific situation, so we encourage you to talk with a tax advisor to ensure appropriate accounting. In general, Stripe Capital funds would not be considered taxable income at the time of receipt, and the amounts withheld to satisfy your obligations are not tax deductible.
+Tax reporting is often dependent on your specific situation, so we encourage you to talk with a tax advisor to ensure appropriate accounting. In general, Stripe Capital funds wouldn’t be considered taxable income at the time of receipt, and the amounts withheld to satisfy your obligations aren’t tax deductible.
 
 **Who can I contact to learn more about the Stripe Capital program?**
 
@@ -431,7 +431,7 @@ Eligibility is based on a variety of factors, including your account’s transac
 
 Thanks for your interest in Stripe Capital! I’m happy to explain how it works at a high level.
 
-Eligibility is based on a variety of factors, including your account’s history with \[platform] Payments. If you become eligible, we’ll email you with a few offers, including the maximum amount you’re eligible for, and let you choose the one that works best for you. You can use the slider to choose the amount of finance you wish to apply for. After a final review of your financing application and if you are approved by Stripe’s finance partner, the money is then transferred to your bank account.
+Eligibility is based on a variety of factors, including your account’s history with \[platform] Payments. If you become eligible, we’ll email you with a few offers, including the maximum amount you’re eligible for, and let you choose the one that works best for you. You can use the slider to choose the amount of finance you wish to apply for. After a final review of your financing application and if you’re approved by Stripe’s finance partner, the money is then transferred to your bank account.
 
 To pay your financing, Stripe automatically withholds a percentage of each of your transactions. How it works:
 
@@ -441,11 +441,11 @@ If you take a financing and later decide you want to pay it off early, you can d
 
 *Financing types offered through Stripe Capital include loans and receivables purchase agreements. Financing provided by YouLend. All financing requests are subject to final review prior to approval.*
 
-**What is the typical interest rate associated with financing through Stripe Capital?**
+**What’s the typical interest rate associated with financing through Stripe Capital?**
 
 Financing from Stripe Capital has a fixed fee, not an interest rate. This one fee is the only fee associated with your financing. There is no interest rate. If you take financing from Stripe Capital, keep the following considerations in mind:
 
-– Financing amount. This is the amount of money that will be deposited into your bank account. – Financing fee. This is the amount you’ll pay for the financing. This is a fixed one time only fee and is not an interest rate. – Payment rate. This is the percentage of your daily sales we’ll withhold to pay your financing. For example: 7%.
+– Financing amount. This is the amount of money that will be deposited into your bank account. – Financing fee. This is the amount you’ll pay for the financing. This is a fixed one time only fee and isn’t an interest rate. – Payment rate. This is the percentage of your daily sales we’ll withhold to pay your financing. For example: 7%.
 
 Given that you pay your financing through per-transaction withholding, how quickly you pay your financing varies on a case-by-case basis. This is known as the payment rate.
 
@@ -455,17 +455,17 @@ For example, if your sales are going really well, you’ll pay a little more tow
 
 **Will applying for an offer affect my personal credit rating?**
 
-When you apply, Stripe’s finance partner, YouLend, will conduct a soft credit check as part of your application. This credit check will not impact your credit score, but may be visible to other organisations carrying out credit searches. If approved, when you receive financing, a hard footprint will be left on your credit record, which will impact your credit score.
+When you apply, Stripe’s finance partner, YouLend, will conduct a soft credit check as part of your application. This credit check won’t impact your credit score, but may be visible to other organisations carrying out credit searches. If approved, when you receive financing, a hard footprint will be left on your credit record, which will impact your credit score.
 
-**What is the payment length of a financing?**
+**What’s the payment length of a financing?**
 
 Thanks for your interest in Stripe Capital! Each financing offer is tailored specifically to your account - as such, payment lengths might vary from business to business. On average, Stripe Capital expects most borrowers to take between 9-10 months to pay their financing completely. You have a maximum of 9-18 months to pay your financing, depending on your offer. You can also pay your financing in full or through partial manual payments at no extra cost. To make manual payments, reach out to Stripe’s finance partner, YouLend, at stripecapital@youlend.com.
 
 *Financing types offered through Stripe Capital include loans and receivables purchase agreements. Financing provided by YouLend. All financing requests are subject to final review prior to approval.*
 
-**What is Stripe Capital? How do \[platform] and Stripe work together?**
+**What’s Stripe Capital? How do \[platform] and Stripe work together?**
 
-We’ve partnered with Stripe to give businesses access to financing to invest in growth and manage cash flow. Through this partnership, \[platform] can connect you with Stripe Capital, which is a program offering small business financing originated by Stripe’s finance partner, YouLend. Stripe helps \[platform] identify merchants using \[platform] Payments who might be eligible for these financing, so be on the lookout for an email from Stripe about your eligibility for Stripe Capital financing.
+We’ve partnered with Stripe to give businesses access to financing to invest in growth and manage cash flow. Through this partnership, \[platform] can connect you with Stripe Capital, which is a program offering small business financing originated by Stripe’s finance partner, YouLend. Stripe helps \[platform] identify businesses using \[platform] Payments who might be eligible for these financing, so be on the lookout for an email from Stripe about your eligibility for Stripe Capital financing.
 
 *Financing types offered through Stripe Capital include loans and receivables purchase agreements. Financing provided by YouLend. All financing requests are subject to final review prior to approval.*
 
@@ -507,7 +507,7 @@ At present, borrowers in the Stripe Capital program are limited to a single fina
 
 **What happens if I want to stop using \[platform]?**
 
-We understand you still have an active financing and want to make sure you have the information you need to manage payment. For this financing, we’ve partnered with Stripe, a leading payments platform, to connect you with Stripe Capital. Please reach out to the Stripe Capital team at capital+support@stripe.com where they can share the next best steps on how to continue to access your financing information and manage payment.
+We understand you still have an active financing and want to make sure you have the information you need to manage payment. For this financing, we’ve partnered with Stripe, a leading payments platform, to connect you with Stripe Capital. Contact the Stripe Capital team at capital+support@stripe.com where they can share the next best steps on how to continue to access your financing information and manage payment.
 
 *Financing types offered through Stripe Capital include loans and receivables purchase agreements. Financing provided by YouLend. All financing requests are subject to final review prior to approval.*
 

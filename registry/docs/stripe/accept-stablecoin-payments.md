@@ -6,14 +6,14 @@ You can accept *stablecoin* (A cryptocurrency that's pegged to the value of a fi
 
 ## Before you begin
 
-> Customers can use stablecoins as payment globally, but currently only US businesses can accept stablecoin payments.
+> Your customers can use stablecoins as payment globally, but only US businesses can accept stablecoin payments.
 
-To start accepting stablecoin payments, activate the **Crypto** payment method:
+To start accepting stablecoin payments:
 
-1. Make sure your Stripe account is [Active](https://docs.stripe.com/get-started/account/activate.md).
-2. Go to **Settings > Payments > [Payment methods](https://dashboard.stripe.com/settings/payment_methods)** and request the **Crypto** payment method.
-3. Stripe reviews your access request, and might contact you for more details if necessary. In this case, the payment method appears as **Pending** while we review your request.
-4. After you’re approved, **Crypto** becomes active in the Dashboard.
+1. Make sure your Stripe account is [active](https://docs.stripe.com/get-started/account/activate.md).
+2. Go to your [Payment methods](https://dashboard.stripe.com/settings/payment_methods) settings in the Dashboard and request the **Stablecoins and Crypto** payment method.
+3. Stripe reviews your access request and contact you for more details if necessary. The payment method appears as **Pending** while we review your request.
+4. After we approve your request, **Stablecoins and Crypto** becomes active in the Dashboard.
 
 ## Use with dynamic payment methods (Recommended)
 
@@ -67,7 +67,7 @@ Most cryptocurrencies offer testnet assets, or tokens that have no monetary valu
 1. In your MetaMask wallet, select **Networks** from the main menu.
 2. Click **Add custom network**.
 3. Enter the following details:
-   - **Network name**: `Polygon Amoy`
+   - **Network name**: `Amoy`
    - **Default RPC URL**: `https://rpc-amoy.polygon.technology/`
    - **Chain ID**: `80002`
    - **Currency symbol**: `POL`
@@ -76,9 +76,9 @@ Most cryptocurrencies offer testnet assets, or tokens that have no monetary valu
 
 #### Import a token
 
-1. In your MetaMask wallet, under **Tokens**, select **Polygon Amoy** from the network dropdown.
+1. In your MetaMask wallet, under **Tokens**, select **Amoy** from the network dropdown.
 2. Click the overflow menu (⋯), and select **Import tokens**.
-3. Click **Select a network** > **Polygon Amoy**.
+3. Click **Select a network** > **Amoy**.
 4. Under **Token contract address**, paste the Polygon Amoy testnet contract address:
    ```
    0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582
@@ -89,7 +89,7 @@ The **Token symbol** field automatically updates with `USDC` and the **Decimals*
 1. Click **Next**.
 2. Verify that you’re importing the `USDC` token, and then click **Import**.
 
-Your MetaMask wallet now shows **Polygon Amoy** and **USDC** in the tokens list.
+Your MetaMask wallet now shows **POL** and **USDC** in the tokens list.
 
 #### Get testnet assets
 
@@ -97,7 +97,7 @@ Your MetaMask wallet now shows **Polygon Amoy** and **USDC** in the tokens list.
 2. Click **USDC**.
 3. Under **Network**, select **Polygon PoS Amoy**.
 4. Under **Send to**, paste your wallet address.
-5. Click **Send 10 USDC**.
+5. Click **Send 20 USDC**.
 
 In addition to USDC for making payments, you need POL to pay transaction costs:
 
@@ -536,6 +536,11 @@ Render a **Pay** button that calls [confirm](https://docs.stripe.com/js/custom_c
 
 ```js
 const checkout = stripe.initCheckout({clientSecret});
+
+checkout.on('change', (session) => {
+  document.getElementById('pay-button').disabled = !session.canConfirm;
+});
+
 const loadActionsResult = await checkout.loadActions();
 
 if (loadActionsResult.type === 'success') {
@@ -583,7 +588,7 @@ const PayButton = () => {
 
   return (
     <div>
-      <button disabled={loading} onClick={handleClick}>
+      <button disabled={!checkoutState.checkout.canConfirm || loading} onClick={handleClick}>
         Pay
       </button>
       {error && <div>{error.message}</div>}
@@ -616,7 +621,7 @@ Most cryptocurrencies offer testnet assets, or tokens that have no monetary valu
 1. In your MetaMask wallet, select **Networks** from the main menu.
 2. Click **Add custom network**.
 3. Enter the following details:
-   - **Network name**: `Polygon Amoy`
+   - **Network name**: `Amoy`
    - **Default RPC URL**: `https://rpc-amoy.polygon.technology/`
    - **Chain ID**: `80002`
    - **Currency symbol**: `POL`
@@ -625,9 +630,9 @@ Most cryptocurrencies offer testnet assets, or tokens that have no monetary valu
 
 #### Import a token
 
-1. In your MetaMask wallet, under **Tokens**, select **Polygon Amoy** from the network dropdown.
+1. In your MetaMask wallet, under **Tokens**, select **Amoy** from the network dropdown.
 2. Click the overflow menu (⋯), and select **Import tokens**.
-3. Click **Select a network** > **Polygon Amoy**.
+3. Click **Select a network** > **Amoy**.
 4. Under **Token contract address**, paste the Polygon Amoy testnet contract address:
    ```
    0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582
@@ -638,7 +643,7 @@ The **Token symbol** field automatically updates with `USDC` and the **Decimals*
 1. Click **Next**.
 2. Verify that you’re importing the `USDC` token, and then click **Import**.
 
-Your MetaMask wallet now shows **Polygon Amoy** and **USDC** in the tokens list.
+Your MetaMask wallet now shows **POL** and **USDC** in the tokens list.
 
 #### Get testnet assets
 
@@ -646,7 +651,7 @@ Your MetaMask wallet now shows **Polygon Amoy** and **USDC** in the tokens list.
 2. Click **USDC**.
 3. Under **Network**, select **Polygon PoS Amoy**.
 4. Under **Send to**, paste your wallet address.
-5. Click **Send 10 USDC**.
+5. Click **Send 20 USDC**.
 
 In addition to USDC for making payments, you need POL to pay transaction costs:
 
@@ -1186,7 +1191,7 @@ Most cryptocurrencies offer testnet assets, or tokens that have no monetary valu
 1. In your MetaMask wallet, select **Networks** from the main menu.
 2. Click **Add custom network**.
 3. Enter the following details:
-   - **Network name**: `Polygon Amoy`
+   - **Network name**: `Amoy`
    - **Default RPC URL**: `https://rpc-amoy.polygon.technology/`
    - **Chain ID**: `80002`
    - **Currency symbol**: `POL`
@@ -1195,9 +1200,9 @@ Most cryptocurrencies offer testnet assets, or tokens that have no monetary valu
 
 #### Import a token
 
-1. In your MetaMask wallet, under **Tokens**, select **Polygon Amoy** from the network dropdown.
+1. In your MetaMask wallet, under **Tokens**, select **Amoy** from the network dropdown.
 2. Click the overflow menu (⋯), and select **Import tokens**.
-3. Click **Select a network** > **Polygon Amoy**.
+3. Click **Select a network** > **Amoy**.
 4. Under **Token contract address**, paste the Polygon Amoy testnet contract address:
    ```
    0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582
@@ -1208,7 +1213,7 @@ The **Token symbol** field automatically updates with `USDC` and the **Decimals*
 1. Click **Next**.
 2. Verify that you’re importing the `USDC` token, and then click **Import**.
 
-Your MetaMask wallet now shows **Polygon Amoy** and **USDC** in the tokens list.
+Your MetaMask wallet now shows **POL** and **USDC** in the tokens list.
 
 #### Get testnet assets
 
@@ -1216,7 +1221,7 @@ Your MetaMask wallet now shows **Polygon Amoy** and **USDC** in the tokens list.
 2. Click **USDC**.
 3. Under **Network**, select **Polygon PoS Amoy**.
 4. Under **Send to**, paste your wallet address.
-5. Click **Send 10 USDC**.
+5. Click **Send 20 USDC**.
 
 In addition to USDC for making payments, you need POL to pay transaction costs:
 
@@ -1382,8 +1387,9 @@ form.addEventListener('submit', async function(event) {
 
 The `return_url` corresponds to a page on your website that displays the result of the payment. You can determine what to display by [verifying the status](https://docs.stripe.com/payments/payment-intents/verifying-status.md#checking-status) of the PaymentIntent. To verify the status, the Stripe redirect to the `return_url` includes the following URL query parameters. You can also append your own query parameters to the `return_url`. They persist throughout the redirect process.
 
+|  |
+|  |
 | `payment_intent`               | The unique identifier for the `PaymentIntent`.                                                                                                |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `payment_intent_client_secret` | The [client secret](https://docs.stripe.com/api/payment_intents/object.md#payment_intent_object-client_secret) of the `PaymentIntent` object. |
 
 ## Optional: Handle post-payment events
@@ -1457,7 +1463,7 @@ Most cryptocurrencies offer testnet assets, or tokens that have no monetary valu
 1. In your MetaMask wallet, select **Networks** from the main menu.
 2. Click **Add custom network**.
 3. Enter the following details:
-   - **Network name**: `Polygon Amoy`
+   - **Network name**: `Amoy`
    - **Default RPC URL**: `https://rpc-amoy.polygon.technology/`
    - **Chain ID**: `80002`
    - **Currency symbol**: `POL`
@@ -1466,9 +1472,9 @@ Most cryptocurrencies offer testnet assets, or tokens that have no monetary valu
 
 #### Import a token
 
-1. In your MetaMask wallet, under **Tokens**, select **Polygon Amoy** from the network dropdown.
+1. In your MetaMask wallet, under **Tokens**, select **Amoy** from the network dropdown.
 2. Click the overflow menu (⋯), and select **Import tokens**.
-3. Click **Select a network** > **Polygon Amoy**.
+3. Click **Select a network** > **Amoy**.
 4. Under **Token contract address**, paste the Polygon Amoy testnet contract address:
    ```
    0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582
@@ -1479,7 +1485,7 @@ The **Token symbol** field automatically updates with `USDC` and the **Decimals*
 1. Click **Next**.
 2. Verify that you’re importing the `USDC` token, and then click **Import**.
 
-Your MetaMask wallet now shows **Polygon Amoy** and **USDC** in the tokens list.
+Your MetaMask wallet now shows **POL** and **USDC** in the tokens list.
 
 #### Get testnet assets
 
@@ -1487,7 +1493,7 @@ Your MetaMask wallet now shows **Polygon Amoy** and **USDC** in the tokens list.
 2. Click **USDC**.
 3. Under **Network**, select **Polygon PoS Amoy**.
 4. Under **Send to**, paste your wallet address.
-5. Click **Send 10 USDC**.
+5. Click **Send 20 USDC**.
 
 In addition to USDC for making payments, you need POL to pay transaction costs:
 
@@ -1847,9 +1853,9 @@ dependencies {
   // ...
 
   // Stripe Android SDK
-  implementation("com.stripe:stripe-android:22.8.1")
+  implementation("com.stripe:stripe-android:23.0.2")
   // Include the financial connections SDK to support US bank account as a payment method
-  implementation("com.stripe:financial-connections:22.8.1")
+  implementation("com.stripe:financial-connections:23.0.2")
 }
 ```
 
@@ -2057,7 +2063,7 @@ Most cryptocurrencies offer testnet assets, or tokens that have no monetary valu
 1. In your MetaMask wallet, select **Networks** from the main menu.
 2. Click **Add custom network**.
 3. Enter the following details:
-   - **Network name**: `Polygon Amoy`
+   - **Network name**: `Amoy`
    - **Default RPC URL**: `https://rpc-amoy.polygon.technology/`
    - **Chain ID**: `80002`
    - **Currency symbol**: `POL`
@@ -2066,9 +2072,9 @@ Most cryptocurrencies offer testnet assets, or tokens that have no monetary valu
 
 #### Import a token
 
-1. In your MetaMask wallet, under **Tokens**, select **Polygon Amoy** from the network dropdown.
+1. In your MetaMask wallet, under **Tokens**, select **Amoy** from the network dropdown.
 2. Click the overflow menu (⋯), and select **Import tokens**.
-3. Click **Select a network** > **Polygon Amoy**.
+3. Click **Select a network** > **Amoy**.
 4. Under **Token contract address**, paste the Polygon Amoy testnet contract address:
    ```
    0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582
@@ -2079,7 +2085,7 @@ The **Token symbol** field automatically updates with `USDC` and the **Decimals*
 1. Click **Next**.
 2. Verify that you’re importing the `USDC` token, and then click **Import**.
 
-Your MetaMask wallet now shows **Polygon Amoy** and **USDC** in the tokens list.
+Your MetaMask wallet now shows **POL** and **USDC** in the tokens list.
 
 #### Get testnet assets
 
@@ -2087,7 +2093,7 @@ Your MetaMask wallet now shows **Polygon Amoy** and **USDC** in the tokens list.
 2. Click **USDC**.
 3. Under **Network**, select **Polygon PoS Amoy**.
 4. Under **Send to**, paste your wallet address.
-5. Click **Send 10 USDC**.
+5. Click **Send 20 USDC**.
 
 In addition to USDC for making payments, you need POL to pay transaction costs:
 

@@ -35,7 +35,7 @@ Open event-based protocol for connecting LangGraph agents to any frontend.
 
 
 
-React framework with pre-built UI components for AI copilots.
+React framework with prebuilt UI components for AI copilots.
 ```
 
 ## Chat models
@@ -895,7 +895,7 @@ Modular AI actions and integrations with Connery.
 
 
 
-Access Connery's toolkit of pre-built actions.
+Access Connery's toolkit of prebuilt actions.
 
 
 

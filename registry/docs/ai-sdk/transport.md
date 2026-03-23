@@ -7,7 +7,7 @@ The `useChat` transport system provides fine-grained control over how messages a
 By default, `useChat` uses HTTP POST requests to send messages to `/api/chat`:
 
 ```tsx
-import { useChat } from "@ai-sdk/react";
+import { useChat } from '@ai-sdk/react';
 
 // Uses default HTTP transport
 const { messages, sendMessage } = useChat();
@@ -16,12 +16,12 @@ const { messages, sendMessage } = useChat();
 This is equivalent to:
 
 ```tsx
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
+import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport } from 'ai';
 
 const { messages, sendMessage } = useChat({
   transport: new DefaultChatTransport({
-    api: "/api/chat",
+    api: '/api/chat',
   }),
 });
 ```
@@ -31,17 +31,17 @@ const { messages, sendMessage } = useChat({
 Configure the default transport with custom options:
 
 ```tsx
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
+import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport } from 'ai';
 
 const { messages, sendMessage } = useChat({
   transport: new DefaultChatTransport({
-    api: "/api/custom-chat",
+    api: '/api/custom-chat',
     headers: {
-      Authorization: "Bearer your-token",
-      "X-API-Version": "2024-01",
+      Authorization: 'Bearer your-token',
+      'X-API-Version': '2024-01',
     },
-    credentials: "include",
+    credentials: 'include',
   }),
 });
 ```
@@ -53,16 +53,16 @@ You can also provide functions that return configuration values. This is useful 
 ```tsx
 const { messages, sendMessage } = useChat({
   transport: new DefaultChatTransport({
-    api: "/api/chat",
+    api: '/api/chat',
     headers: () => ({
       Authorization: `Bearer ${getAuthToken()}`,
-      "X-User-ID": getCurrentUserId(),
+      'X-User-ID': getCurrentUserId(),
     }),
     body: () => ({
       sessionId: getCurrentSessionId(),
       preferences: getUserPreferences(),
     }),
-    credentials: () => "include",
+    credentials: () => 'include',
   }),
 });
 ```
@@ -74,11 +74,11 @@ Transform requests before sending to your API:
 ```tsx
 const { messages, sendMessage } = useChat({
   transport: new DefaultChatTransport({
-    api: "/api/chat",
+    api: '/api/chat',
     prepareSendMessagesRequest: ({ id, messages, trigger, messageId }) => {
       return {
         headers: {
-          "X-Session-ID": id,
+          'X-Session-ID': id,
         },
         body: {
           messages: messages.slice(-10), // Only send last 10 messages
@@ -90,64 +90,6 @@ const { messages, sendMessage } = useChat({
   }),
 });
 ```
-
-## Direct Agent Transport
-
-For scenarios where you want to communicate directly with an [Agent](/docs/reference/ai-sdk-core/agent) without going through HTTP, you can use `DirectChatTransport`. This transport invokes the agent's `stream()` method directly in-process.
-
-This is useful for:
-
-- **Server-side rendering**: Run the agent on the server without an API endpoint
-- **Testing**: Test chat functionality without network requests
-- **Single-process applications**: Desktop or CLI apps where client and agent run together
-
-```tsx
-import { useChat } from "@ai-sdk/react";
-import { DirectChatTransport, ToolLoopAgent } from "ai";
-__PROVIDER_IMPORT__;
-
-const agent = new ToolLoopAgent({
-  model: __MODEL__,
-  instructions: "You are a helpful assistant.",
-  tools: {
-    weather: weatherTool,
-  },
-});
-
-const { messages, sendMessage } = useChat({
-  transport: new DirectChatTransport({ agent }),
-});
-```
-
-### How It Works
-
-Unlike `DefaultChatTransport` which sends HTTP requests:
-
-1. `DirectChatTransport` validates incoming UI messages
-2. Converts them to model messages using `convertToModelMessages`
-3. Calls the agent's `stream()` method directly
-4. Returns the result as a UI message stream via `toUIMessageStream()`
-
-### Configuration Options
-
-You can pass additional options to customize the stream output:
-
-```tsx
-const transport = new DirectChatTransport({
-  agent,
-  // Pass options to the agent
-  options: { customOption: "value" },
-  // Configure what's sent to the client
-  sendReasoning: true,
-  sendSources: true,
-});
-```
-
-`DirectChatTransport` does not support stream reconnection since there is no
-persistent server-side stream. The `reconnectToStream()` method always returns
-`null`.
-
-For complete API details, see the [DirectChatTransport reference](/docs/reference/ai-sdk-ui/direct-chat-transport).
 
 ## Building Custom Transports
 

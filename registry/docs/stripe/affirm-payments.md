@@ -202,7 +202,7 @@ After a customer uses Affirm to make a purchase, Affirm emails the customer with
 
 - Affirm confirms or denies a loan. Affirms sends these updates when the payment\_intent succeeds or when Affirm denies the loan.
 - A [refund](https://docs.stripe.com/refunds.md) completes.
-- A payment is cancelled, which results in Affirm cancellling the loan.
+- A payment is canceled, which results in Affirm canceling the loan.
 - The customer completes a payment as part of the payment plan.
 
 Affirm only sends email updates about Affirm’s loan issuance to your customer. Continue to separately send emails related to the purchase such as order confirmation and shipping updates.

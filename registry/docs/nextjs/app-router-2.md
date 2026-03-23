@@ -124,7 +124,7 @@ Moving to the App Router may be the first time using React features that Next.js
 
 We recommend reducing the combined complexity of these updates by breaking down your migration into smaller steps. The `app` directory is intentionally designed to work simultaneously with the `pages` directory to allow for incremental page-by-page migration.
 
-- The `app` directory supports nested routes _and_ layouts. [Learn more](/docs/app/getting-started/layouts-and-pages).
+- The `app` directory supports nested routes *and* layouts. [Learn more](/docs/app/getting-started/layouts-and-pages).
 - Use nested folders to define routes and a special `page.js` file to make a route segment publicly accessible. [Learn more](#step-4-migrating-pages).
 - [Special file conventions](/docs/app/api-reference/file-conventions) are used to create UI for each route segment. The most common special files are `page.js` and `layout.js`.
   - Use `page.js` to define UI unique to a route.
@@ -169,13 +169,13 @@ export default function RootLayout({
   // This will be populated with nested layouts or pages
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  );
+  )
 }
 ```
 
@@ -189,7 +189,7 @@ export default function RootLayout({
     <html lang="en">
       <body>{children}</body>
     </html>
-  );
+  )
 }
 ```
 
@@ -201,24 +201,24 @@ export default function RootLayout({
 To manage `<head>` HTML elements, you can use the [built-in SEO support](/docs/app/getting-started/metadata-and-og-images):
 
 ```tsx filename="app/layout.tsx" switcher
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: "Welcome to Next.js",
-};
+  title: 'Home',
+  description: 'Welcome to Next.js',
+}
 ```
 
 ```jsx filename="app/layout.js" switcher
 export const metadata = {
-  title: "Home",
-  description: "Welcome to Next.js",
-};
+  title: 'Home',
+  description: 'Welcome to Next.js',
+}
 ```
 
 #### Migrating `_document.js` and `_app.js`
 
-If you have an existing `_app` or `_document` file, you can copy the contents (e.g. global styles) to the root layout (`app/layout.tsx`). Styles in `app/layout.tsx` will _not_ apply to `pages/*`. You should keep `_app`/`_document` while migrating to prevent your `pages/*` routes from breaking. Once fully migrated, you can then safely delete them.
+If you have an existing `_app` or `_document` file, you can copy the contents (e.g. global styles) to the root layout (`app/layout.tsx`). Styles in `app/layout.tsx` will *not* apply to `pages/*`. You should keep `_app`/`_document` while migrating to prevent your `pages/*` routes from breaking. Once fully migrated, you can then safely delete them.
 
 If you are using any React Context providers, they will need to be moved to a [Client Component](/docs/app/getting-started/server-and-client-components).
 
@@ -237,20 +237,20 @@ export default function DashboardLayout({ children }) {
       <h2>My Dashboard</h2>
       {children}
     </div>
-  );
+  )
 }
 ```
 
 ```jsx filename="pages/dashboard/index.js"
-import DashboardLayout from "../components/DashboardLayout";
+import DashboardLayout from '../components/DashboardLayout'
 
 export default function Page() {
-  return <p>My Page</p>;
+  return <p>My Page</p>
 }
 
 Page.getLayout = function getLayout(page) {
-  return <DashboardLayout>{page}</DashboardLayout>;
-};
+  return <DashboardLayout>{page}</DashboardLayout>
+}
 ```
 
 **After**
@@ -271,10 +271,10 @@ Page.getLayout = function getLayout(page) {
   // This is a Client Component
   export default function DashboardLayout({ children }) {
     return (
-
+      
         My Dashboard
         {children}
-
+      
     )
   }
   ```
@@ -282,11 +282,11 @@ Page.getLayout = function getLayout(page) {
 - Import the `DashboardLayout` into a new `layout.js` file inside the `app` directory.
 
   ```jsx filename="app/dashboard/layout.js"
-  import DashboardLayout from "./DashboardLayout";
+  import DashboardLayout from './DashboardLayout'
 
   // This is a Server Component
   export default function Layout({ children }) {
-    return { children };
+    return {children}
   }
   ```
 
@@ -299,7 +299,7 @@ In the `pages` directory, the `next/head` React component is used to manage `<he
 **Before:**
 
 ```tsx filename="pages/index.tsx" switcher
-import Head from "next/head";
+import Head from 'next/head'
 
 export default function Page() {
   return (
@@ -308,12 +308,12 @@ export default function Page() {
         <title>My page title</title>
       </Head>
     </>
-  );
+  )
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Head from "next/head";
+import Head from 'next/head'
 
 export default function Page() {
   return (
@@ -322,31 +322,31 @@ export default function Page() {
         <title>My page title</title>
       </Head>
     </>
-  );
+  )
 }
 ```
 
 **After:**
 
 ```tsx filename="app/page.tsx" switcher
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "My Page Title",
-};
+  title: 'My Page Title',
+}
 
 export default function Page() {
-  return "...";
+  return '...'
 }
 ```
 
 ```jsx filename="app/page.js" switcher
 export const metadata = {
-  title: "My Page Title",
-};
+  title: 'My Page Title',
+}
 
 export default function Page() {
-  return "...";
+  return '...'
 }
 ```
 
@@ -377,7 +377,7 @@ We recommend breaking down the migration of a page into two main steps:
 - Move the default exported page component from `pages/index.js` to `app/home-page.tsx`.
 
 ```tsx filename="app/home-page.tsx" switcher
-"use client";
+'use client'
 
 // This is a Client Component (same as components in the `pages` directory)
 // It receives data as props, has access to state and effects, and is
@@ -389,12 +389,12 @@ export default function HomePage({ recentPosts }) {
         <div key={post.id}>{post.title}</div>
       ))}
     </div>
-  );
+  )
 }
 ```
 
 ```jsx filename="app/home-page.js" switcher
-"use client";
+'use client'
 
 // This is a Client Component. It receives data as props and
 // has access to state and effects just like Page components
@@ -406,7 +406,7 @@ export default function HomePage({ recentPosts }) {
         <div key={post.id}>{post.title}</div>
       ))}
     </div>
-  );
+  )
 }
 ```
 
@@ -420,37 +420,37 @@ export default function HomePage({ recentPosts }) {
 
   ```tsx filename="app/page.tsx" switcher
   // Import your Client Component
-  import HomePage from "./home-page";
+  import HomePage from './home-page'
 
   async function getPosts() {
-    const res = await fetch("https://...");
-    const posts = await res.json();
-    return posts;
+    const res = await fetch('https://...')
+    const posts = await res.json()
+    return posts
   }
 
   export default async function Page() {
     // Fetch data directly in a Server Component
-    const recentPosts = await getPosts();
+    const recentPosts = await getPosts()
     // Forward fetched data to your Client Component
-    return;
+    return 
   }
   ```
 
   ```jsx filename="app/page.js" switcher
   // Import your Client Component
-  import HomePage from "./home-page";
+  import HomePage from './home-page'
 
   async function getPosts() {
-    const res = await fetch("https://...");
-    const posts = await res.json();
-    return posts;
+    const res = await fetch('https://...')
+    const posts = await res.json()
+    return posts
   }
 
   export default async function Page() {
     // Fetch data directly in a Server Component
-    const recentPosts = await getPosts();
+    const recentPosts = await getPosts()
     // Forward fetched data to your Client Component
-    return;
+    return 
   }
   ```
 
@@ -472,28 +472,28 @@ In `app`, you should use the three new hooks imported from `next/navigation`: [`
 - These new hooks are only supported in Client Components. They cannot be used in Server Components.
 
 ```tsx filename="app/example-client-component.tsx" switcher
-"use client";
+'use client'
 
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
 export default function ExampleClientComponent() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   // ...
 }
 ```
 
 ```jsx filename="app/example-client-component.js" switcher
-"use client";
+'use client'
 
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
 export default function ExampleClientComponent() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   // ...
 }
@@ -505,7 +505,7 @@ In addition, the new `useRouter` hook has the following changes:
 - The `locale`, `locales`, `defaultLocales`, `domainLocales` values have been removed because built-in i18n Next.js features are no longer necessary in the `app` directory. [Learn more about i18n](/docs/app/guides/internationalization).
 - `basePath` has been removed. The alternative will not be part of `useRouter`. It has not yet been implemented.
 - `asPath` has been removed because the concept of `as` has been removed from the new router.
-- `isReady` has been removed because it is no longer necessary. During [static rendering](/docs/app/guides/caching#static-rendering), any component that uses the [`useSearchParams()`](/docs/app/api-reference/functions/use-search-params) hook will skip the prerendering step and instead be rendered on the client at runtime.
+- `isReady` has been removed because it is no longer necessary. During [prerendering](/docs/app/glossary#prerendering), any component that uses the [`useSearchParams()`](/docs/app/api-reference/functions/use-search-params) hook will skip the prerendering step and instead be rendered on the client at runtime.
 - `route` has been removed. `usePathname` or `useSelectedLayoutSegments()` provide an alternative.
 
 [View the `useRouter()` API reference](/docs/app/api-reference/functions/use-router).
@@ -524,19 +524,19 @@ export default async function Page() {
   // This request should be cached until manually invalidated.
   // Similar to `getStaticProps`.
   // `force-cache` is the default and can be omitted.
-  const staticData = await fetch(`https://...`, { cache: "force-cache" });
+  const staticData = await fetch(`https://...`, { cache: 'force-cache' })
 
   // This request should be refetched on every request.
   // Similar to `getServerSideProps`.
-  const dynamicData = await fetch(`https://...`, { cache: "no-store" });
+  const dynamicData = await fetch(`https://...`, { cache: 'no-store' })
 
   // This request should be cached with a lifetime of 10 seconds.
   // Similar to `getStaticProps` with the `revalidate` option.
   const revalidatedData = await fetch(`https://...`, {
     next: { revalidate: 10 },
-  });
+  })
 
-  return <div>...</div>;
+  return <div>...</div>
 }
 ```
 
@@ -545,19 +545,19 @@ export default async function Page() {
   // This request should be cached until manually invalidated.
   // Similar to `getStaticProps`.
   // `force-cache` is the default and can be omitted.
-  const staticData = await fetch(`https://...`, { cache: "force-cache" });
+  const staticData = await fetch(`https://...`, { cache: 'force-cache' })
 
   // This request should be refetched on every request.
   // Similar to `getServerSideProps`.
-  const dynamicData = await fetch(`https://...`, { cache: "no-store" });
+  const dynamicData = await fetch(`https://...`, { cache: 'no-store' })
 
   // This request should be cached with a lifetime of 10 seconds.
   // Similar to `getStaticProps` with the `revalidate` option.
   const revalidatedData = await fetch(`https://...`, {
     next: { revalidate: 10 },
-  });
+  })
 
-  return <div>...</div>;
+  return <div>...</div>
 }
 ```
 
@@ -569,10 +569,10 @@ In the `pages` directory, `getServerSideProps` is used to fetch data on the serv
 // `pages` directory
 
 export async function getServerSideProps() {
-  const res = await fetch(`https://...`);
-  const projects = await res.json();
+  const res = await fetch(`https://...`)
+  const projects = await res.json()
 
-  return { props: { projects } };
+  return { props: { projects } }
 }
 
 export default function Dashboard({ projects }) {
@@ -582,7 +582,7 @@ export default function Dashboard({ projects }) {
         <li key={project.id}>{project.name}</li>
       ))}
     </ul>
-  );
+  )
 }
 ```
 
@@ -595,14 +595,14 @@ By setting the `cache` option to `no-store`, we can indicate that the fetched da
 
 // This function can be named anything
 async function getProjects() {
-  const res = await fetch(`https://...`, { cache: "no-store" });
-  const projects = await res.json();
+  const res = await fetch(`https://...`, { cache: 'no-store' })
+  const projects = await res.json()
 
-  return projects;
+  return projects
 }
 
 export default async function Dashboard() {
-  const projects = await getProjects();
+  const projects = await getProjects()
 
   return (
     <ul>
@@ -610,7 +610,7 @@ export default async function Dashboard() {
         <li key={project.id}>{project.name}</li>
       ))}
     </ul>
-  );
+  )
 }
 ```
 
@@ -619,14 +619,14 @@ export default async function Dashboard() {
 
 // This function can be named anything
 async function getProjects() {
-  const res = await fetch(`https://...`, { cache: "no-store" });
-  const projects = await res.json();
+  const res = await fetch(`https://...`, { cache: 'no-store' })
+  const projects = await res.json()
 
-  return projects;
+  return projects
 }
 
 export default async function Dashboard() {
-  const projects = await getProjects();
+  const projects = await getProjects()
 
   return (
     <ul>
@@ -634,7 +634,7 @@ export default async function Dashboard() {
         <li key={project.id}>{project.name}</li>
       ))}
     </ul>
-  );
+  )
 }
 ```
 
@@ -666,58 +666,58 @@ The `app` directory exposes new read-only functions to retrieve request data:
 
 ```tsx filename="app/page.tsx" switcher
 // `app` directory
-import { cookies, headers } from "next/headers";
+import { cookies, headers } from 'next/headers'
 
 async function getData() {
-  const authHeader = (await headers()).get("authorization");
+  const authHeader = (await headers()).get('authorization')
 
-  return "...";
+  return '...'
 }
 
 export default async function Page() {
   // You can use `cookies` or `headers` inside Server Components
   // directly or in your data fetching function
-  const theme = (await cookies()).get("theme");
-  const data = await getData();
-  return "...";
+  const theme = (await cookies()).get('theme')
+  const data = await getData()
+  return '...'
 }
 ```
 
 ```jsx filename="app/page.js" switcher
 // `app` directory
-import { cookies, headers } from "next/headers";
+import { cookies, headers } from 'next/headers'
 
 async function getData() {
-  const authHeader = (await headers()).get("authorization");
+  const authHeader = (await headers()).get('authorization')
 
-  return "...";
+  return '...'
 }
 
 export default async function Page() {
   // You can use `cookies` or `headers` inside Server Components
   // directly or in your data fetching function
-  const theme = (await cookies()).get("theme");
-  const data = await getData();
-  return "...";
+  const theme = (await cookies()).get('theme')
+  const data = await getData()
+  return '...'
 }
 ```
 
 #### Static Site Generation (`getStaticProps`)
 
-In the `pages` directory, the `getStaticProps` function is used to pre-render a page at build time. This function can be used to fetch data from an external API or directly from a database, and pass this data down to the entire page as it's being generated during the build.
+In the `pages` directory, the `getStaticProps` function is used to prerender a page at build time. This function can be used to fetch data from an external API or directly from a database, and pass this data down to the entire page as it's being generated during the build.
 
 ```jsx filename="pages/index.js"
 // `pages` directory
 
 export async function getStaticProps() {
-  const res = await fetch(`https://...`);
-  const projects = await res.json();
+  const res = await fetch(`https://...`)
+  const projects = await res.json()
 
-  return { props: { projects } };
+  return { props: { projects } }
 }
 
 export default function Index({ projects }) {
-  return projects.map((project) => <div>{project.name}</div>);
+  return projects.map((project) => <div>{project.name}</div>)
 }
 ```
 
@@ -728,42 +728,42 @@ In the `app` directory, data fetching with [`fetch()`](/docs/app/api-reference/f
 
 // This function can be named anything
 async function getProjects() {
-  const res = await fetch(`https://...`);
-  const projects = await res.json();
+  const res = await fetch(`https://...`)
+  const projects = await res.json()
 
-  return projects;
+  return projects
 }
 
 export default async function Index() {
-  const projects = await getProjects();
+  const projects = await getProjects()
 
-  return projects.map((project) => <div>{project.name}</div>);
+  return projects.map((project) => <div>{project.name}</div>)
 }
 ```
 
 #### Dynamic paths (`getStaticPaths`)
 
-In the `pages` directory, the `getStaticPaths` function is used to define the dynamic paths that should be pre-rendered at build time.
+In the `pages` directory, the `getStaticPaths` function is used to define the dynamic paths that should be prerendered at build time.
 
 ```jsx filename="pages/posts/[id].js"
 // `pages` directory
-import PostLayout from "@/components/post-layout";
+import PostLayout from '@/components/post-layout'
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { id: "1" } }, { params: { id: "2" } }],
-  };
+    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
+  }
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`https://.../posts/${params.id}`);
-  const post = await res.json();
+  const res = await fetch(`https://.../posts/${params.id}`)
+  const post = await res.json()
 
-  return { props: { post } };
+  return { props: { post } }
 }
 
 export default function Post({ post }) {
-  return <PostLayout post={post} />;
+  return <PostLayout post={post} />
 }
 ```
 
@@ -773,33 +773,33 @@ In the `app` directory, `getStaticPaths` is replaced with [`generateStaticParams
 
 ```jsx filename="app/posts/[id]/page.js"
 // `app` directory
-import PostLayout from "@/components/post-layout";
+import PostLayout from '@/components/post-layout'
 
 export async function generateStaticParams() {
-  return [{ id: "1" }, { id: "2" }];
+  return [{ id: '1' }, { id: '2' }]
 }
 
 async function getPost(params) {
-  const res = await fetch(`https://.../posts/${(await params).id}`);
-  const post = await res.json();
+  const res = await fetch(`https://.../posts/${(await params).id}`)
+  const post = await res.json()
 
-  return post;
+  return post
 }
 
 export default async function Post({ params }) {
-  const post = await getPost(params);
+  const post = await getPost(params)
 
-  return <PostLayout post={post} />;
+  return <PostLayout post={post} />
 }
 ```
 
 Using the name `generateStaticParams` is more appropriate than `getStaticPaths` for the new model in the `app` directory. The `get` prefix is replaced with a more descriptive `generate`, which sits better alone now that `getStaticProps` and `getServerSideProps` are no longer necessary. The `Paths` suffix is replaced by `Params`, which is more appropriate for nested routing with multiple dynamic segments.
 
----
+***
 
 #### Replacing `fallback`
 
-In the `pages` directory, the `fallback` property returned from `getStaticPaths` is used to define the behavior of a page that isn't pre-rendered at build time. This property can be set to `true` to show a fallback page while the page is being generated, `false` to show a 404 page, or `blocking` to generate the page at request time.
+In the `pages` directory, the `fallback` property returned from `getStaticPaths` is used to define the behavior of a page that isn't prerendered at build time. This property can be set to `true` to show a fallback page while the page is being generated, `false` to show a 404 page, or `blocking` to generate the page at request time.
 
 ```jsx filename="pages/posts/[id].js"
 // `pages` directory
@@ -820,7 +820,7 @@ export default function Post({ post }) {
 }
 ```
 
-In the `app` directory the [`config.dynamicParams` property](/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams) controls how params outside of [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params) are handled:
+In the `app` directory the [`config.dynamicParams` property](/docs/app/api-reference/file-conventions/route-segment-config/dynamicParams) controls how params outside of [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params) are handled:
 
 - **`true`**: (default) Dynamic segments not included in `generateStaticParams` are generated on demand.
 - **`false`**: Dynamic segments not included in `generateStaticParams` will return a 404.
@@ -847,7 +847,7 @@ export default async function Post({ params }) {
 }
 ```
 
-With [`dynamicParams`](/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams) set to `true` (the default), when a route segment is requested that hasn't been generated, it will be server-rendered and cached.
+With [`dynamicParams`](/docs/app/api-reference/file-conventions/route-segment-config/dynamicParams) set to `true` (the default), when a route segment is requested that hasn't been generated, it will be server-rendered and cached.
 
 #### Incremental Static Regeneration (`getStaticProps` with `revalidate`)
 
@@ -857,13 +857,13 @@ In the `pages` directory, the `getStaticProps` function allows you to add a `rev
 // `pages` directory
 
 export async function getStaticProps() {
-  const res = await fetch(`https://.../posts`);
-  const posts = await res.json();
+  const res = await fetch(`https://.../posts`)
+  const posts = await res.json()
 
   return {
     props: { posts },
     revalidate: 60,
-  };
+  }
 }
 
 export default function Index({ posts }) {
@@ -871,7 +871,7 @@ export default function Index({ posts }) {
     <Layout>
       <PostList posts={posts} />
     </Layout>
-  );
+  )
 }
 ```
 
@@ -881,16 +881,16 @@ In the `app` directory, data fetching with [`fetch()`](/docs/app/api-reference/f
 // `app` directory
 
 async function getPosts() {
-  const res = await fetch(`https://.../posts`, { next: { revalidate: 60 } });
-  const data = await res.json();
+  const res = await fetch(`https://.../posts`, { next: { revalidate: 60 } })
+  const data = await res.json()
 
-  return data.posts;
+  return data.posts
 }
 
 export default async function PostList() {
-  const posts = await getPosts();
+  const posts = await getPosts()
 
-  return posts.map((post) => <div>{post.name}</div>);
+  return posts.map((post) => <div>{post.name}</div>)
 }
 ```
 
@@ -932,24 +932,24 @@ If you're using Tailwind CSS, you'll need to add the `app` directory to your `ta
 ```js filename="tailwind.config.js"
 module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}", // <-- Add this line
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    './app/**/*.{js,ts,jsx,tsx,mdx}', // <-- Add this line
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-};
+}
 ```
 
 You'll also need to import your global styles in your `app/layout.js` file:
 
 ```jsx filename="app/layout.js"
-import "../styles/globals.css";
+import '../styles/globals.css'
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  );
+  )
 }
 ```
 

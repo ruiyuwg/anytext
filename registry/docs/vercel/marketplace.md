@@ -8,16 +8,28 @@ You can keep using your existing provider while you use Vercel's developer tools
 
 You can find popular feature flag and experimentation platforms in the Vercel Marketplace:
 
-- [Statsig](https://vercel.com/marketplace/statsig)
-- [Hypertune](https://vercel.com/marketplace/hypertune)
-- [LaunchDarkly](https://vercel.com/marketplace/launchdarkly)
-- [PostHog](https://vercel.com/marketplace/posthog)
+### Native Integrations
 
-[Browse all experimentation integrations](https://vercel.com/marketplace?category=experimentation)
+Native integrations are purchased through the Marketplace, let you sign in with your Vercel account, show flags directly in the Vercel dashboard, and sync flag values to Edge Config for faster reads.
+
+- [Statsig](/marketplace/statsig)
+- [Hypertune](/marketplace/hypertune)
+- [PostHog](/marketplace/posthog)
+- [GrowthBook](/marketplace/growthbook)
+
+[Browse all experimentation integrations](/marketplace?category=experimentation)
+
+### External Integrations
+
+External integrations allow syncing feature flags of third-party providers to Edge Config faster reads but are billed through the provider. Feature Flags from external integrations do not appear in the Vercel dashboard.
+
+- [LaunchDarkly](/marketplace/launchdarkly)
+
+[Browse all experimentation integrations](/marketplace?category=experimentation)
 
 ## Flags dashboard
 
-Once you connect a marketplace provider, all your flags appear in the **Flags** section in your project sidebar. Use this dashboard to view and manage every flag in your project, regardless of the provider.
+Once you connect a native integration, all your flags appear in the **Flags** section in your project sidebar. Use this dashboard to view and manage every flag in your project.
 
 - **Unified overview**: See every flag, its current status, and which provider manages it in one list.
 - **Source of truth**: You can view marketplace flags in the Vercel Dashboard, but you manage their configuration in your provider's dashboard to keep it as the source of truth.
@@ -25,7 +37,7 @@ Once you connect a marketplace provider, all your flags appear in the **Flags** 
 
 ## Edge Config sync
 
-You can use providers that sync flag values to [Edge Config](/docs/storage/edge-config) for microsecond reads at the edge. This eliminates the network hop to your provider's API during flag evaluation.
+Native integrations and external integrations can sync flag values to [Edge Config](/docs/storage/edge-config) for microsecond reads at the edge. This eliminates the network hop to your provider's API during flag evaluation.
 
 See these integration guides for setup instructions:
 
@@ -58,8 +70,8 @@ To integrate a marketplace provider with your Vercel project:
 3. **Use the Toolbar**: Open the [Vercel Toolbar](/docs/flags/flags-explorer/getting-started) in your preview or local environment to interact with your flags.
 
 title: "Observability"
-description: "Track feature flag evaluations in Runtime Logs and analyze their impact with Web Analytics."
-last\_updated: "2026-03-08T05:03:14.492Z"
+description: "Track feature flag evaluations and analyze their impact with Web Analytics."
+last\_updated: "2026-03-23T09:40:10.004Z"
 source: "https://vercel.com/docs/flags/observability"
 
 # Observability
@@ -79,21 +91,20 @@ Tracking which flags are evaluated and when gives you insights into:
 
 ## How it works
 
-Both observability integrations work by reporting flag values as your application evaluates them:
+The observability integration works by reporting flag values as your application evaluates them:
 
 1. When your code evaluates a flag, call `reportValue(flagKey, flagValue)`
 2. Vercel captures these evaluations and associates them with the request or event
-3. View the data in Runtime Logs or Web Analytics dashboards
+3. View the data in the Web Analytics dashboard
 
 If you're using the Flags SDK, flag reporting happens automatically—no manual instrumentation required.
 
 ## Next steps
 
-- [Integrate flags with Runtime Logs](/docs/flags/observability/runtime-logs)
 - [Integrate flags with Web Analytics](/docs/flags/observability/web-analytics)
 - [Learn about the Flags SDK](/docs/flags/flags-sdk-reference)
 
-title: "Integrate flags with Runtime Logs"
-description: "Integrate your feature flag provider with runtime logs."
-last\_updated: "2026-03-08T05:03:14.486Z"
-source: "https://vercel.com/docs/flags/observability/runtime-logs"
+title: "Integrate flags with Vercel Web Analytics"
+description: "Learn how to tag your page views and custom events with feature flags"
+last\_updated: "2026-03-23T09:40:10.012Z"
+source: "https://vercel.com/docs/flags/observability/web-analytics"

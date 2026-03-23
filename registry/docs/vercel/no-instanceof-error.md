@@ -91,7 +91,7 @@ function isError(error) {
 
 title: "NO\_MIXED\_ASYNC\_MODULES"
 description: "Prevent imports to modules that contain top-level awaits in your applications."
-last\_updated: "2026-03-08T05:03:12.811Z"
+last\_updated: "2026-03-23T09:40:07.744Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_MIXED\_ASYNC\_MODULES"
 
 # NO\_MIXED\_ASYNC\_MODULES
@@ -151,7 +151,7 @@ async function doSomething(data) {
 
 title: "NO\_POSTINSTALL\_SCRIPT"
 description: "Prevent the use of "
-last\_updated: "2026-03-08T05:03:12.818Z"
+last\_updated: "2026-03-23T09:40:07.748Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_POSTINSTALL\_SCRIPT"
 
 # NO\_POSTINSTALL\_SCRIPT
@@ -174,5 +174,5 @@ If you hit this issue, you can resolve it by removing the `"postinstall"` script
 
 title: "NO\_SERIAL\_ASYNC\_CALLS"
 description: "Prevent blocking serial async await calls in your applications."
-last\_updated: "2026-03-08T05:03:12.815Z"
+last\_updated: "2026-03-23T09:40:07.755Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_SERIAL\_ASYNC\_CALLS"

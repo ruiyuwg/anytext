@@ -147,5 +147,5 @@ vercel cache dangerously-delete --srcimg /images/hero.png --yes
 
 title: "Encryption and TLS"
 description: "Learn how Vercel encrypts data in transit and at rest."
-last\_updated: "2026-03-08T05:03:11.901Z"
+last\_updated: "2026-03-23T09:40:06.329Z"
 source: "https://vercel.com/docs/cdn-security/encryption"

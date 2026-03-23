@@ -11,13 +11,13 @@ The Rev.ai provider is available in the `@ai-sdk/revai` module. You can install 
 You can import the default provider instance `revai` from `@ai-sdk/revai`:
 
 ```ts
-import { revai } from "@ai-sdk/revai";
+import { revai } from '@ai-sdk/revai';
 ```
 
 If you need a customized setup, you can import `createRevai` from `@ai-sdk/revai` and create a provider instance with your settings:
 
 ```ts
-import { createRevai } from "@ai-sdk/revai";
+import { createRevai } from '@ai-sdk/revai';
 
 const revai = createRevai({
   // custom settings, e.g.
@@ -27,16 +27,16 @@ const revai = createRevai({
 
 You can use the following optional settings to customize the Rev.ai provider instance:
 
-- **apiKey** _string_
+- **apiKey** *string*
 
   API key that is being sent using the `Authorization` header.
   It defaults to the `REVAI_API_KEY` environment variable.
 
-- **headers** _Record\<string,string>_
+- **headers** *Record\<string,string>*
 
   Custom headers to include in the requests.
 
-- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
+- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
@@ -51,152 +51,137 @@ using the `.transcription()` factory method.
 The first argument is the model id e.g. `machine`.
 
 ```ts
-const model = revai.transcription("machine");
+const model = revai.transcription('machine');
 ```
 
 You can also pass additional provider-specific options using the `providerOptions` argument. For example, supplying the input language in ISO-639-1 (e.g. `en`) format can sometimes improve transcription performance if known beforehand.
 
-```ts highlight="7"
-import { experimental_transcribe as transcribe } from "ai";
-import { revai } from "@ai-sdk/revai";
-import { type RevaiTranscriptionModelOptions } from "@ai-sdk/revai";
-import { readFile } from "fs/promises";
+```ts highlight="6"
+import { experimental_transcribe as transcribe } from 'ai';
+import { revai } from '@ai-sdk/revai';
+import { readFile } from 'fs/promises';
 
 const result = await transcribe({
-  model: revai.transcription("machine"),
-  audio: await readFile("audio.mp3"),
-  providerOptions: {
-    revai: { language: "en" } satisfies RevaiTranscriptionModelOptions,
-  },
+  model: revai.transcription('machine'),
+  audio: await readFile('audio.mp3'),
+  providerOptions: { revai: { language: 'en' } },
 });
 ```
 
 The following provider options are available:
 
-- **metadata** _string_
+- **metadata** *string*
 
-  Optional metadata string to associate with the transcription job.
+  Optional metadata that was provided during job submission.
 
-- **notification_config** _object_
+- **notification\_config** *object*
 
-  Configuration for webhook notifications when job is complete.
-  - **url** _string_ - URL to send the notification to.
-  - **auth_headers** _object_ - Optional authorization headers for the notification request.
-    - **Authorization** _string_ - Authorization header value.
+  Optional configuration for a callback url to invoke when processing is complete.
 
-- **delete_after_seconds** _integer_
+  - **url** *string* - Callback url to invoke when processing is complete.
+  - **auth\_headers** *object* - Optional authorization headers, if needed to invoke the callback.
 
-  Number of seconds after which the job will be automatically deleted.
+- **delete\_after\_seconds** *integer*
 
-- **verbatim** _boolean_
+  Amount of time after job completion when job is auto-deleted.
 
-  Whether to include filler words and false starts in the transcription.
+- **verbatim** *boolean*
 
-- **rush** _boolean_
+  Configures the transcriber to transcribe every syllable, including all false starts and disfluencies.
 
-  \[HIPAA Unsupported] Whether to prioritize the job for faster processing. Only available for human transcriber option.
+- **rush** *boolean*
 
-- **test_mode** _boolean_
+  \[HIPAA Unsupported] Only available for human transcriber option. When set to true, your job is given higher priority.
 
-  Whether to run the job in test mode. Default is `false`.
+- **skip\_diarization** *boolean*
 
-- **segments_to_transcribe** _Array_
+  Specify if speaker diarization will be skipped by the speech engine.
 
-  Specific segments of the audio to transcribe.
-  - **start** _number_ - Start time of the segment in seconds.
-  - **end** _number_ - End time of the segment in seconds.
+- **skip\_postprocessing** *boolean*
 
-- **speaker_names** _Array_
+  Only available for English and Spanish languages. User-supplied preference on whether to skip post-processing operations.
 
-  Names to assign to speakers in the transcription.
-  - **display_name** _string_ - Display name for the speaker.
+- **skip\_punctuation** *boolean*
 
-- **skip_diarization** _boolean_
+  Specify if "punct" type elements will be skipped by the speech engine.
 
-  Whether to skip speaker diarization. Default is `false`.
+- **remove\_disfluencies** *boolean*
 
-- **skip_postprocessing** _boolean_
+  When set to true, disfluencies (like 'ums' and 'uhs') will not appear in the transcript.
 
-  Whether to skip post-processing steps. Only available for English and Spanish languages. Default is `false`.
+- **remove\_atmospherics** *boolean*
 
-- **skip_punctuation** _boolean_
+  When set to true, atmospherics (like `<laugh>`, `<affirmative>`) will not appear in the transcript.
 
-  Whether to skip adding punctuation to the transcription. Default is `false`.
+- **filter\_profanity** *boolean*
 
-- **remove_disfluencies** _boolean_
+  When enabled, profanities will be filtered by replacing characters with asterisks except for the first and last.
 
-  Whether to remove disfluencies (um, uh, etc.) from the transcription. Default is `false`.
+- **speaker\_channels\_count** *integer*
 
-- **remove_atmospherics** _boolean_
+  Only available for English, Spanish and French languages. Specify the total number of unique speaker channels in the audio.
 
-  Whether to remove atmospheric sounds (like `<laugh>`, `<affirmative>`) from the transcription. Default is `false`.
+- **speakers\_count** *integer*
 
-- **filter_profanity** _boolean_
+  Only available for English, Spanish and French languages. Specify the total number of unique speakers in the audio.
 
-  Whether to filter profanity from the transcription by replacing characters with asterisks except for the first and last. Default is `false`.
+- **diarization\_type** *string*
 
-- **speaker_channels_count** _integer_
+  Specify diarization type. Possible values: "standard" (default), "premium".
 
-  Number of speaker channels in the audio. Only available for English, Spanish and French languages.
+- **custom\_vocabulary\_id** *string*
 
-- **speakers_count** _integer_
+  Supply the id of a pre-completed custom vocabulary submitted through the Custom Vocabularies API.
 
-  Expected number of speakers in the audio. Only available for English, Spanish and French languages.
+- **custom\_vocabularies** *Array*
 
-- **diarization_type** _string_
+  Specify a collection of custom vocabulary to be used for this job.
 
-  Type of diarization to use. Possible values: "standard" (default), "premium".
+- **strict\_custom\_vocabulary** *boolean*
 
-- **custom_vocabulary_id** _string_
+  If true, only exact phrases will be used as custom vocabulary.
 
-  ID of a custom vocabulary to use for the transcription, submitted through the Custom Vocabularies API.
+- **summarization\_config** *object*
 
-- **custom_vocabularies** _Array_
+  Specify summarization options.
 
-  Custom vocabularies to use for the transcription.
+  - **model** *string* - Model type for summarization. Possible values: "standard" (default), "premium".
+  - **type** *string* - Summarization formatting type. Possible values: "paragraph" (default), "bullets".
+  - **prompt** *string* - Custom prompt for flexible summaries (mutually exclusive with type).
 
-- **strict_custom_vocabulary** _boolean_
+- **translation\_config** *object*
 
-  Whether to strictly enforce custom vocabulary.
+  Specify translation options.
 
-- **summarization_config** _object_
+  - **target\_languages** *Array* - Array of target languages for translation.
+  - **model** *string* - Model type for translation. Possible values: "standard" (default), "premium".
 
-  Configuration for generating a summary of the transcription.
-  - **model** _string_ - Model to use for summarization. Possible values: "standard" (default), "premium".
-  - **type** _string_ - Format of the summary. Possible values: "paragraph" (default), "bullets".
-  - **prompt** _string_ - Custom prompt for the summarization (mutually exclusive with type).
+- **language** *string*
 
-- **translation_config** _object_
+  Language is provided as a ISO 639-1 language code. Default is "en".
 
-  Configuration for translating the transcription.
-  - **target_languages** _Array_ - Target languages for translation. Each item is an object with:
-    - **language** _string_ - Language code. Possible values: "en", "en-us", "en-gb", "ar", "pt", "pt-br", "pt-pt", "fr", "fr-ca", "es", "es-es", "es-la", "it", "ja", "ko", "de", "ru".
-  - **model** _string_ - Model to use for translation. Possible values: "standard" (default), "premium".
+- **forced\_alignment** *boolean*
 
-- **language** _string_
-
-  Language of the audio content, provided as an ISO 639-1 language code. Default is "en".
-
-- **forced_alignment** _boolean_
-
-  Whether to perform forced alignment, which provides improved accuracy for per-word timestamps.
+  When enabled, provides improved accuracy for per-word timestamps for a transcript.
   Default is `false`.
 
   Currently supported languages:
+
   - English (en, en-us, en-gb)
   - French (fr)
   - Italian (it)
   - German (de)
   - Spanish (es)
 
-  Note: This option is not available in low-cost environments.
+  Note: This option is not available in low-cost environment.
 
 ### Model Capabilities
 
-| Model      | Transcription | Duration | Segments | Language |
-| ---------- | ------------- | -------- | -------- | -------- |
-| `machine`  |               |          |          |          |
-| `low_cost` |               |          |          |          |
-| `fusion`   |               |          |          |          |
+| Model      | Transcription       | Duration            | Segments            | Language            |
+| ---------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| `machine`  |  |  |  |  |
+| `human`    |  |  |  |  |
+| `low_cost` |  |  |  |  |
+| `fusion`   |  |  |  |  |
 
-# Baseten
+# Mistral AI

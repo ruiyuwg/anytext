@@ -25,8 +25,8 @@ Usage is shown as "Function Invocations" on your invoice.
 
 ## Pricing
 
-per 1 million invocations. You are only charged for usage exceeding your subscription
-plan's quota.
+per 1 million invocations. You are only charged for usage exceeding your
+subscription plan's quota.
 
 | Plan       | Quota     | Over-Usage                                    |
 | ---------- | --------- | --------------------------------------------- |

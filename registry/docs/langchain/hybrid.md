@@ -48,7 +48,7 @@ AWS/Azure PrivateLink or GCP Private Service Connect is currently not supported.
 
 ## Listeners
 
-In the hybrid option, one or more ["listener" applications](/langsmith/data-plane#”listener”-application) can run depending on how your LangSmith workspaces and Kubernetes clusters are organized.
+In the hybrid option, one or more ["listener" applications](/langsmith/data-plane#listener-application) can run depending on how your LangSmith workspaces and Kubernetes clusters are organized.
 
 ### Kubernetes cluster organization
 

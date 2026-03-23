@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -26,7 +24,7 @@ Table of contents
 
 > Warning
 >
-> This install scenario is not recommended and is only supported for backward compatibility purposes.
+> This install scenario is not recommended and is only supported for backward compatibility purposes. Use [Docker Desktop](https://docs.docker.com/desktop/) or the [Docker Compose plugin](https://docs.docker.com/compose/install/linux/) instead. Use the standalone binary only if you cannot use either of these options.
 
 This page contains instructions on how to install Docker Compose standalone on Linux or Windows Server, from the command line.
 

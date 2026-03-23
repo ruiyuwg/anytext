@@ -317,17 +317,13 @@ Zed doesn’t support streaming HTTP, so it requires a local proxy configuration
 
 [Section titled “ChatGPT”](#chatgpt)
 
-Limited availability
-
-MCP server integration is only available for ChatGPT Pro, Team, and Enterprise users. The setup process is more complex than other tools.
-
 Refer to the [OpenAI MCP documentation](https://platform.openai.com/docs/mcp#test-and-connect-your-mcp-server) for specific setup instructions.
 
 #### Raycast
 
 [Section titled “Raycast”](#raycast)
 
-[Raycast](https://www.raycast.com/) can connect to MCP servers to enhance its AI capabilities. AI features such as MCP require a [Raycast Pro](https://www.raycast.com/pro) account, so ensure you have upgraded before trying to install. Adding the Astro Docs MCP server allows Raycast to access the latest Astro documentation while answering questions.
+[Raycast](https://www.raycast.com/) can connect to MCP servers to enhance its AI capabilities. Adding the Astro Docs MCP server allows Raycast to access the latest Astro documentation while answering questions.
 
 Install by clicking the button below:
 

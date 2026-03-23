@@ -78,78 +78,82 @@ Generate an app icon by creating an `icon` or `apple-icon` route that default ex
 The easiest way to generate an icon is to use the [`ImageResponse`](/docs/app/api-reference/functions/image-response) API from `next/og`.
 
 ```tsx filename="app/icon.tsx" switcher
-import { ImageResponse } from "next/og";
+import { ImageResponse } from 'next/og'
 
 // Image metadata
 export const size = {
   width: 32,
   height: 32,
-};
-export const contentType = "image/png";
+}
+export const contentType = 'image/png'
 
 // Image generation
 export default function Icon() {
   return new ImageResponse(
-    // ImageResponse JSX element
-    <div
-      style={{
-        fontSize: 24,
-        background: "black",
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "white",
-      }}
-    >
-      A
-    </div>,
+    (
+      // ImageResponse JSX element
+      <div
+        style={{
+          fontSize: 24,
+          background: 'black',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+        }}
+      >
+        A
+      </div>
+    ),
     // ImageResponse options
     {
       // For convenience, we can re-use the exported icons size metadata
       // config to also set the ImageResponse's width and height.
       ...size,
-    },
-  );
+    }
+  )
 }
 ```
 
 ```jsx filename="app/icon.js" switcher
-import { ImageResponse } from "next/og";
+import { ImageResponse } from 'next/og'
 
 // Image metadata
 export const size = {
   width: 32,
   height: 32,
-};
-export const contentType = "image/png";
+}
+export const contentType = 'image/png'
 
 // Image generation
 export default function Icon() {
   return new ImageResponse(
-    // ImageResponse JSX element
-    <div
-      style={{
-        fontSize: 24,
-        background: "black",
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "white",
-      }}
-    >
-      A
-    </div>,
+    (
+      // ImageResponse JSX element
+      <div
+        style={{
+          fontSize: 24,
+          background: 'black',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+        }}
+      >
+        A
+      </div>
+    ),
     // ImageResponse options
     {
       // For convenience, we can re-use the exported icons size metadata
       // config to also set the ImageResponse's width and height.
       ...size,
-    },
-  );
+    }
+  )
 }
 ```
 
@@ -159,10 +163,10 @@ export default function Icon() {
 
 > **Good to know**:
 >
-> - By default, generated icons are [**statically optimized**](/docs/app/guides/caching#static-rendering) (generated at build time and cached) unless they use [Dynamic APIs](/docs/app/guides/caching#dynamic-rendering) or uncached data.
+> - By default, generated icons are [**statically optimized**](/docs/app/glossary#prerendering) (generated at build time and cached) unless they use [Request-time APIs](/docs/app/glossary#request-time-apis) or uncached data.
 > - You can generate multiple icons in the same file using [`generateImageMetadata`](/docs/app/api-reference/functions/generate-image-metadata).
 > - You cannot generate a `favicon` icon. Use [`icon`](#icon) or a [favicon.ico](#favicon) file instead.
-> - App icons are special Route Handlers that are cached by default unless they use a [Dynamic API](/docs/app/guides/caching#dynamic-apis) or [dynamic config](/docs/app/guides/caching#segment-config-options) option.
+> - App icons are special Route Handlers that are cached by default unless they use a [Request-time API](/docs/app/glossary#request-time-apis) or [dynamic config](/docs/app/guides/caching-without-cache-components#dynamic) option.
 
 ### Props
 
@@ -178,16 +182,16 @@ A promise that resolves to an object containing the [dynamic route parameters](/
 export default async function Icon({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>
 }) {
-  const { slug } = await params;
+  const { slug } = await params
   // ...
 }
 ```
 
 ```jsx filename="app/shop/[slug]/icon.js" switcher
 export default async function Icon({ params }) {
-  const { slug } = await params;
+  const { slug } = await params
   // ...
 }
 ```
@@ -216,13 +220,13 @@ You can optionally configure the icon's metadata by exporting `size` and `conten
 #### `size`
 
 ```tsx filename="icon.tsx | apple-icon.tsx" switcher
-export const size = { width: 32, height: 32 };
+export const size = { width: 32, height: 32 }
 
 export default function Icon() {}
 ```
 
 ```jsx filename="icon.js | apple-icon.js" switcher
-export const size = { width: 32, height: 32 };
+export const size = { width: 32, height: 32 }
 
 export default function Icon() {}
 ```
@@ -234,13 +238,13 @@ export default function Icon() {}
 #### `contentType`
 
 ```tsx filename="icon.tsx | apple-icon.tsx" switcher
-export const contentType = "image/png";
+export const contentType = 'image/png'
 
 export default function Icon() {}
 ```
 
 ```jsx filename="icon.js | apple-icon.js" switcher
-export const contentType = "image/png";
+export const contentType = 'image/png'
 
 export default function Icon() {}
 ```

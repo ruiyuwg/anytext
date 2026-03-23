@@ -1,157 +1,391 @@
-## Structured output
+# Structured output
 
-Models can be requested to provide their response in a format matching a given schema. This is useful for ensuring the output can be easily parsed and used in subsequent processing. LangChain supports multiple schema types and methods for enforcing structured output.
+Source: https://docs.langchain.com/oss/javascript/langchain/frontend/structured-output
 
-To learn about structured output, see [Structured output](/oss/javascript/langchain/structured-output).
+Render structured agent responses with custom UI components instead of plain text
 
-````
-A [zod schema](https://zod.dev/) is the preferred method of defining an output schema. Note that when a zod schema is provided, the model output will also be validated against the schema using zod's parse methods.
+Structured output lets the agent return typed, machine-readable data instead of plain text. Instead of rendering a single string, you get a structured object you can map to any UI: cards, tables, charts, step-by-step breakdowns, or domain-specific renderers.
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import * as z from "zod";
+## What is structured output?
 
-const Movie = z.object({
-  title: z.string().describe("The title of the movie"),
-  year: z.number().describe("The year the movie was released"),
-  director: z.string().describe("The director of the movie"),
-  rating: z.number().describe("The movie's rating out of 10"),
-});
+Instead of returning a free-form text response, the agent uses a tool call to return a structured object conforming to a predefined schema. This gives you:
 
-const modelWithStructure = model.withStructuredOutput(Movie);
+- **Type-safe data**: parse the response into a known TypeScript type
+- **Precise rendering control**: render each field with its own UI treatment
+- **Consistent formatting**: every response follows the same structure regardless of the underlying model
 
-const response = await modelWithStructure.invoke("Provide details about the movie Inception");
-console.log(response);
-// {
-//   title: "Inception",
-//   year: 2010,
-//   director: "Christopher Nolan",
-//   rating: 8.8,
-// }
-```
+The agent accomplishes this by calling a "structured output" tool whose arguments contain the response data. The tool itself doesn't execute any logic and is purely a vehicle for returning typed data.
 
+## Use cases
 
+- **Product comparisons**: feature tables, pros/cons lists, ratings
+- **Data analysis**: summaries with metrics, breakdowns, and highlights
+- **Step-by-step guides**: ordered instructions with descriptions and code snippets
+- **Recipes**: ingredients, steps, timings, and nutritional info
+- **Math and science**: formulas rendered with LaTeX, step-by-step derivations
+- **Travel planning**: itineraries with dates, locations, and cost estimates
 
-For maximum control or interoperability, you can provide a raw JSON Schema.
+## Define a schema
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-const jsonSchema = {
-  "title": "Movie",
-  "description": "A movie with details",
-  "type": "object",
-  "properties": {
-    "title": {
-      "type": "string",
-      "description": "The title of the movie",
-    },
-    "year": {
-      "type": "integer",
-      "description": "The year the movie was released",
-    },
-    "director": {
-      "type": "string",
-      "description": "The director of the movie",
-    },
-    "rating": {
-      "type": "number",
-      "description": "The movie's rating out of 10",
-    },
-  },
-  "required": ["title", "year", "director", "rating"],
+Define a TypeScript type for the structured data the agent returns. The shape of this schema determines how you render the UI.
+
+Here's an example for a recipe assistant:
+
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+interface Ingredient {
+  name: string;
+  amount: string;
+  unit: string;
 }
 
-const modelWithStructure = model.withStructuredOutput(
-  jsonSchema,
-  { method: "jsonSchema" },
-)
+interface RecipeStep {
+  instruction: string;
+  duration?: string;
+}
 
-const response = await modelWithStructure.invoke("Provide details about the movie Inception")
-console.log(response)  // {'title': 'Inception', 'year': 2010, ...}
+interface Recipe {
+  title: string;
+  description: string;
+  servings: number;
+  ingredients: Ingredient[];
+  steps: RecipeStep[];
+  totalTime: string;
+}
 ```
 
+| Field         | Type           | Description                                  |
+| ------------- | -------------- | -------------------------------------------- |
+| `title`       | `string`       | Name of the recipe                           |
+| `description` | `string`       | Short summary of the dish                    |
+| `servings`    | `number`       | Number of servings                           |
+| `ingredients` | `Ingredient[]` | List of ingredients with amounts and units   |
+| `steps`       | `RecipeStep[]` | Ordered preparation steps                    |
+| `totalTime`   | `string`       | Estimated total preparation and cooking time |
 
+Your schema can be anything. The pattern works the same way regardless of shape.
 
-Any schema from a library implementing the [Standard Schema](https://standardschema.dev/) specification is also supported. Standard Schema objects are validated at runtime via the schema's `~standard.validate()` method.
+## Extract structured output from messages
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import * as v from "valibot";
-import { toStandardJsonSchema } from "@valibot/to-json-schema";
+The structured output lives in the `tool_calls` array of the last `AIMessage`. Extract it by finding the AI message and accessing the first tool call's arguments:
 
-const Movie = toStandardJsonSchema(
-  v.object({
-    title: v.pipe(v.string(), v.description("The title of the movie")),
-    year: v.pipe(v.number(), v.description("The year the movie was released")),
-    director: v.pipe(v.string(), v.description("The director of the movie")),
-    rating: v.pipe(v.number(), v.description("The movie's rating out of 10")),
-  })
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { AIMessage } from "@langchain/core/messages";
+
+function extractStructuredOutput<T>(messages: any[]): T | null {
+  const aiMessages = messages.filter(AIMessage.isInstance);
+  if (aiMessages.length === 0) return null;
+
+  const lastAI = aiMessages[aiMessages.length - 1];
+  const toolCall = lastAI.tool_calls?.[0];
+  if (!toolCall) return null;
+
+  return toolCall.args as T;
+}
+```
+
+The structured output tool call may not have `args` populated until the agent finishes streaming. During streaming, `args` may be partially populated or undefined. Always check for completeness before rendering.
+
+## Set up `useStream`
+
+Import your agent and pass `typeof myAgent` as a type parameter to `useStream` for type-safe access to state values:
+
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import type { myAgent } from "./agent";
+```
+
+```tsx React theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { useStream } from "@langchain/react";
+import { AIMessage } from "@langchain/core/messages";
+
+function RecipeChat() {
+  const stream = useStream({
+    apiUrl: "http://localhost:2024",
+    assistantId: "recipe_assistant",
+  });
+
+  const recipe = extractStructuredOutput(stream.messages);
+
+  return (
+    
+      {!recipe && !stream.isLoading && (
+        
+          stream.submit({ messages: [{ type: "human", content: text }] })
+        } />
+      )}
+      {stream.isLoading && }
+      {recipe && }
+    
+  );
+}
+```
+
+```vue Vue theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+
+import { useStream } from "@langchain/vue";
+import { AIMessage } from "@langchain/core/messages";
+import { computed } from "vue";
+
+const stream = useStream({
+  apiUrl: "http://localhost:2024",
+  assistantId: "recipe_assistant",
+});
+
+const recipe = computed(() =>
+  extractStructuredOutput(stream.messages.value)
 );
 
-const modelWithStructure = model.withStructuredOutput(Movie);
+function handleSubmit(text: string) {
+  stream.submit({ messages: [{ type: "human", content: text }] });
+}
 
-const response = await modelWithStructure.invoke("Provide details about the movie Inception");
-console.log(response);
-// {
-//   title: "Inception",
-//   year: 2010,
-//   director: "Christopher Nolan",
-//   rating: 8.8,
-// }
-```
-````
 
-**Key considerations for structured output:**
 
-- **Method parameter**: Some providers support different methods (`'jsonSchema'`, `'functionCalling'`, `'jsonMode'`)
-- **Include raw**: Use [`includeRaw: true`](https://reference.langchain.com/javascript/classes/_langchain_core.language_models_chat_models.BaseChatModel.html#withStructuredOutput) to get both the parsed output and the raw [`AIMessage`](https://reference.langchain.com/javascript/langchain-core/messages/AIMessage)
-- **Validation**: Zod and Standard Schema objects provide automatic validation, while JSON Schema requires manual validation
-- **Standard Schema**: Any schema library implementing the [Standard Schema](https://standardschema.dev/) spec is supported and validated at runtime
+  
+    
+    
+    
+  
 
-See your [provider's integration page](/oss/javascript/integrations/providers/overview) for supported methods and configuration options.
-
-It can be useful to return the raw [`AIMessage`](https://reference.langchain.com/javascript/langchain-core/messages/AIMessage) object alongside the parsed representation to access response metadata such as [token counts](#token-usage). To do this, set [`include_raw=True`](https://reference.langchain.com/javascript/classes/_langchain_core.language_models_chat_models.BaseChatModel.html#withStructuredOutput) when calling [`with_structured_output`](https://reference.langchain.com/javascript/classes/_langchain_core.language_models_chat_models.BaseChatModel.html#withStructuredOutput):
-
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import * as z from "zod";
-
-const Movie = z.object({
-  title: z.string().describe("The title of the movie"),
-  year: z.number().describe("The year the movie was released"),
-  director: z.string().describe("The director of the movie"),
-  rating: z.number().describe("The movie's rating out of 10"),
-  title: z.string().describe("The title of the movie"),
-  year: z.number().describe("The year the movie was released"),
-  director: z.string().describe("The director of the movie"),  // [!code highlight]
-  rating: z.number().describe("The movie's rating out of 10"),
-});
-
-const modelWithStructure = model.withStructuredOutput(Movie, { includeRaw: true });
-
-const response = await modelWithStructure.invoke("Provide details about the movie Inception");
-console.log(response);
-// {
-//   raw: AIMessage { ... },
-//   parsed: { title: "Inception", ... }
-// }
 ```
 
-Schemas can be nested:
+```svelte Svelte theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import * as z from "zod";
+  import { useStream } from "@langchain/svelte";
+  import { AIMessage } from "@langchain/core/messages";
 
-const Actor = z.object({
-  name: str
-  role: z.string(),
-});
+  const { messages, isLoading, submit } = useStream({
+    apiUrl: "http://localhost:2024",
+    assistantId: "recipe_assistant",
+  });
 
-const MovieDetails = z.object({
-  title: z.string(),
-  year: z.number(),
-  cast: z.array(Actor),
-  genres: z.array(z.string()),
-  budget: z.number().nullable().describe("Budget in millions USD"),
-});
+  $: recipe = extractStructuredOutput($messages);
 
-const modelWithStructure = model.withStructuredOutput(MovieDetails);
+  function handleSubmit(text: string) {
+    submit({ messages: [{ type: "human", content: text }] });
+  }
+
+
+
+
+     handleSubmit(e.detail)} />
+  {/if}
+
+    
+  {/if}
+
+    
+  {/if}
+
 ```
+
+```ts Angular theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { Component, computed } from "@angular/core";
+import { useStream } from "@langchain/angular";
+
+@Component({
+  selector: "app-recipe-chat",
+  template: `
+    @if (!recipe() && !stream.isLoading()) {
+      
+    }
+    @if (stream.isLoading()) {
+      
+    }
+    @if (recipe()) {
+      
+    }
+  `,
+})
+export class RecipeChatComponent {
+  stream = useStream({
+    apiUrl: "http://localhost:2024",
+    assistantId: "recipe_assistant",
+  });
+
+  recipe = computed(() =>
+    extractStructuredOutput(this.stream.messages())
+  );
+
+  handleSubmit(text: string) {
+    this.stream.submit({
+      messages: [{ type: "human", content: text }],
+    });
+  }
+}
+```
+
+## Render the structured data
+
+Once you have a typed object, build a component that maps each field to the
+appropriate UI element. This is the core of the pattern: turning structured
+data into a purpose-built interface.
+
+```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+function RecipeCard({ recipe }: { recipe: Recipe }) {
+  return (
+    <div className="recipe-card">
+      <div className="recipe-header">
+        <h3>{recipe.title}</h3>
+        <p className="recipe-description">{recipe.description}</p>
+        <div className="recipe-meta">
+          <span>{recipe.servings} servings</span>
+          <span>{recipe.totalTime}</span>
+        </div>
+      </div>
+
+      <div className="recipe-ingredients">
+        <h4>Ingredients</h4>
+        <ul>
+          {recipe.ingredients.map((ing, i) => (
+            <li key={i}>
+              <strong>{ing.amount} {ing.unit}</strong> {ing.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="recipe-steps">
+        <h4>Instructions</h4>
+        {recipe.steps.map((step, i) => (
+          <div key={i} className="step">
+            <div className="step-number">Step {i + 1}</div>
+            <p className="step-instruction">{step.instruction}</p>
+            {step.duration && (
+              <span className="step-duration">{step.duration}</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+The same approach works for any domain. Map each field to the UI element that best represents it:
+
+| Data type       | Rendering strategy                        |
+| --------------- | ----------------------------------------- |
+| Plain text      | Paragraphs, headings, list items          |
+| Numbers/metrics | Stat cards, progress bars, badges         |
+| Arrays          | Lists, tables, grids                      |
+| Nested objects  | Nested cards, accordion sections          |
+| Markdown        | Markdown renderer (e.g. `react-markdown`) |
+| LaTeX/math      | KaTeX or MathJax                          |
+| Dates/times     | Formatted timestamps, relative time       |
+| URLs            | Links, embedded previews                  |
+
+## Handle partial streaming data
+
+During streaming, the tool call arguments may be incomplete JSON. Guard against this in your extraction logic:
+
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+function extractStructuredOutput<T>(
+  messages: any[],
+  requiredFields: string[] = [],
+): T | null {
+  const aiMessages = messages.filter(AIMessage.isInstance);
+  if (aiMessages.length === 0) return null;
+
+  const lastAI = aiMessages[aiMessages.length - 1];
+  const toolCall = lastAI.tool_calls?.[0];
+  if (!toolCall?.args) return null;
+
+  const args = toolCall.args as Record<string, unknown>;
+  const hasRequired = requiredFields.every(
+    (field) => args[field] !== undefined
+  );
+
+  if (requiredFields.length > 0 && !hasRequired) return null;
+  return args as T;
+}
+```
+
+Use the `requiredFields` parameter to wait until critical fields are populated before rendering:
+
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+const recipe = extractStructuredOutput<Recipe>(stream.messages, [
+  "title",
+  "ingredients",
+  "steps",
+]);
+```
+
+## Render progressively during streaming
+
+Rather than waiting for the complete structured output, render fields as they arrive. This gives users immediate feedback while the agent is still generating:
+
+```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+function ProgressiveRecipeCard({ messages }: { messages: any[] }) {
+  const partial = extractStructuredOutput<Partial<Recipe>>(messages);
+  if (!partial) return null;
+
+  return (
+    <div className="recipe-card">
+      {partial.title && <h3>{partial.title}</h3>}
+      {partial.description && <p>{partial.description}</p>}
+
+      {partial.ingredients && partial.ingredients.length > 0 && (
+        <div className="recipe-ingredients">
+          <h4>Ingredients</h4>
+          <ul>
+            {partial.ingredients.map((ing, i) => (
+              <li key={i}>
+                {ing.amount} {ing.unit} {ing.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {partial.steps && partial.steps.length > 0 && (
+        <div className="recipe-steps">
+          <h4>Instructions</h4>
+          {partial.steps.map((step, i) => (
+            <div key={i} className="step">
+              <div className="step-number">Step {i + 1}</div>
+              <p>{step.instruction}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+Progressive rendering works well when the schema has a natural top-to-bottom
+order: title, then description, then details. The agent typically generates
+fields in schema order, so the UI fills in naturally.
+
+## Reset and re-submit
+
+To let the user submit a new query after viewing a result, add a button that starts a new thread:
+
+```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{recipe && (
+  <button onClick={() => stream.switchThread(null)}>
+    Start over
+  </button>
+)}
+```
+
+This clears the current conversation and lets the user begin a fresh interaction.
+
+## Best practices
+
+- **Validate before rendering**: always check that required fields exist before rendering, since streaming may deliver partial data
+- **Use a generic extraction function**: parameterize your extraction logic with a type and required fields so it works across different schemas
+- **Render progressively**: show fields as they arrive rather than waiting for the complete object, so users see immediate feedback
+- **Provide fallback representations**: if a field supports rich rendering (LaTeX, Markdown, charts), also include a plain-text equivalent in your schema as a fallback
+- **Keep schemas flat when possible**: deeply nested schemas are harder to render progressively and more likely to break during partial streaming
+- **Match UI to data**: choose the rendering strategy that best represents each field type (tables for arrays, cards for nested objects, badges for status fields)
 
 ***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

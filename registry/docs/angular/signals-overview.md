@@ -265,7 +265,7 @@ When you read a signal within an `OnPush` component's template, Angular tracks t
 When creating a signal, you can optionally provide an equality function, which will be used to check whether the new value is actually different than the previous one.
 
 ```
-import _ from 'lodash';const data = signal(['test'], {equal: _.isEqual});// Even though this is a different array instance, the deep equality// function will consider the values to be equal, and the signal won't// trigger any updates.data.set(['test']);
+import isEqual from 'lodash/isEqual';const data = signal(['test'], {equal: isEqual});// Even though this is a different array instance, the deep equality// function will consider the values to be equal, and the signal won't// trigger any updates.data.set(['test']);
 ```
 
 Equality functions can be provided to both writable and computed signals.

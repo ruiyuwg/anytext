@@ -418,5 +418,5 @@ print('\nParsed Product:', json.dumps(structured_data, indent=2))
 
 title: "Tool Calls"
 description: "Use function calling with the Chat Completions API to enable models to call tools and functions through AI Gateway."
-last\_updated: "2026-03-08T05:03:10.789Z"
+last\_updated: "2026-03-23T09:40:04.870Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-chat-completions/tool-calls"

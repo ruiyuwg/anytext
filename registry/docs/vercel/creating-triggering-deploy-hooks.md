@@ -104,5 +104,5 @@ If your deploy hook fails to create a deployment, check the status check on the 
 
 title: "Deployment Checks"
 description: "Set conditions that must be met before proceeding to the next phase of the deployment lifecycle."
-last\_updated: "2026-03-08T05:03:13.117Z"
+last\_updated: "2026-03-23T09:40:08.131Z"
 source: "https://vercel.com/docs/deployment-checks"

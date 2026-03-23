@@ -183,5 +183,5 @@ Viewers outside your Vercel team cannot enable Draft Mode or see your draft cont
 
 title: "Working with Drains"
 description: "Drains collect logs, traces, speed insights, and analytics from your applications. Forward observability data to custom endpoints or popular services."
-last\_updated: "2026-03-08T05:03:13.610Z"
+last\_updated: "2026-03-23T09:40:08.934Z"
 source: "https://vercel.com/docs/drains"

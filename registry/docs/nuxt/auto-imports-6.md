@@ -20,7 +20,7 @@ Watch Vue School video about Auto-imports Nuxt Kit utilities.
 Add imports to the Nuxt application. It makes your imports available in the Nuxt app context without the need to import them manually.
 
 ::tip
-To add imports for the Nitro server context, refer to the [`addServerImports`](https://nuxt.com/docs/4.x/api/kit/nitro#addserverimports) function.
+To add imports for the Nitro server context, refer to the [`addServerImports`](https://nuxt.com/docs/3.x/api/kit/nitro#addserverimports) function.
 ::
 
 ### Usage

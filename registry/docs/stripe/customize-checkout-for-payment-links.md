@@ -71,7 +71,7 @@ To collect addresses from your customers:
 
    To edit a payment link go to its details page and click the overflow menu (⋯).
 
-2. Select **Collect customers’ addresses** in the **Options** section.
+2. Select **Collect customer addresses** in the **Options** section.
 
 3. You  can collect **Billing addresses only** or you can collect **Billing and shipping addresses**. Choosing either makes these fields required for customers.
 
@@ -116,7 +116,7 @@ Collect customers’ business names and full names as fields on your Payment Lin
 To collect names from your customers using the Dashboard:
 
 1. [Create](https://dashboard.stripe.com/payment-links/create) or edit a payment link.
-2. Select **Collect customers’ names**
+2. Select **Collect customer names**
 3. Configure whether you want to collect business names, individual names or both.
 4. (Optional) Select **Mark as optional** if you want customers to provide their names if they choose. Otherwise, the name fields will be required before checkout.
 
@@ -236,7 +236,7 @@ curl https://api.stripe.com/v1/payment_links \
   -d "custom_fields[0][type]"=text
 ```
 
-After your customer completes the Checkout Session, the fields are available on the payments details page in the Dashboard, or you can [retrieve the completed custom fields](https://docs.stripe.com/payments/checkout/custom-fields.md#retrieve-fields).
+After your customer completes the Checkout Session, the fields are available on the payments details page in the Dashboard, or you can [retrieve the completed custom fields](https://docs.stripe.com/payments/checkout/custom-components.md#retrieve-fields).
 
 The custom fields are also included in the [checkout.session.completed](https://docs.stripe.com/api/events/types.md#event_types-checkout.session.completed) *webhook* (A webhook is a real-time push notification sent to your application as a JSON payload through HTTPS requests) upon payment completion.
 

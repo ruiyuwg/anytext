@@ -86,4 +86,4 @@ Resuming collection this way only affects future invoices.
 
 ## Pausing and subscription schedules
 
-If you pause a subscription on a [subscription schedule](https://docs.stripe.com/billing/subscriptions/subscription-schedules.md), the scheduled updates still take effect. However, payment is not collected while the subscription is paused. When you want to collect payment again, you need to [manually unpause](https://docs.stripe.com/billing/subscriptions/pause-payment.md#unpausing) the subscription. You also need to update `auto_advance` to `true` on any invoices with `status=draft` that you want to collect payment on.
+If you pause a subscription on a [subscription schedule](https://docs.stripe.com/billing/subscriptions/subscription-schedules.md), the scheduled updates still take effect. However, payment isn’t collected while the subscription is paused. When you want to collect payment again, you need to [manually unpause](https://docs.stripe.com/billing/subscriptions/pause-payment.md#unpausing) the subscription. You also need to update `auto_advance` to `true` on any invoices with `status=draft` that you want to collect payment on.

@@ -1,6 +1,63 @@
 # Context
 
-Context allows components to access values owned by parent components without passing them down as props (potentially through many layers of intermediate components, known as 'prop-drilling'). The parent component sets context with `setContext(key, value)`...
+Context allows components to access values owned by parent components without passing them down as props (potentially through many layers of intermediate components, known as 'prop-drilling').
+
+By creating a `[get, set]` pair of functions with `createContext`, you can set the context in a parent component and get it in a child component:
+
+```svelte
+<!--- file: App.svelte --->
+<script>
+	import Parent from './Parent.svelte';
+	import Child from './Child.svelte';
+</script>
+
+<Parent>
+	<Child />
+</Parent>
+```
+
+```svelte
+<!--- file: Parent.svelte --->
+<script>
+	import { setUserContext } from './context';
+
+	let { children } = $props();
+
+	setUserContext({ name: 'world' });
+</script>
+
+{@render children()}
+```
+
+```svelte
+<!--- file: Child.svelte --->
+<script>
+	import { getUserContext } from './context';
+
+	const user = getUserContext();
+</script>
+
+<h1>hello {user.name}, inside Child.svelte</h1>
+```
+
+```ts
+/// file: context.ts
+import { createContext } from 'svelte';
+
+interface User {
+	name: string;
+}
+
+export const [getUserContext, setUserContext] = createContext<User>();
+```
+
+> \[!NOTE] `createContext` was added in version 5.40. If you are using an earlier version of Svelte, you must use `setContext` and `getContext` instead.
+
+This is particularly useful when `Parent.svelte` is not directly aware of `Child.svelte`, but instead renders it as part of a `children` [snippet](snippet) as shown above.
+
+## `setContext` and `getContext`
+
+As an alternative to `createContext`, you can use `setContext` and `getContext` directly. The parent component sets context with `setContext(key, value)`...
 
 ```svelte
 <!--- file: Parent.svelte --->
@@ -24,32 +81,27 @@ Context allows components to access values owned by parent components without pa
 <h1>{message}, inside Child.svelte</h1>
 ```
 
-This is particularly useful when `Parent.svelte` is not directly aware of `Child.svelte`, but instead renders it as part of a `children` [snippet](snippet) (demo:
-
-```svelte
-<Parent>
-	<Child />
-</Parent>
-```
-
 The key (`'my-context'`, in the example above) and the context itself can be any JavaScript value.
+
+> \[!NOTE] `createContext` is preferred since it provides better type safety and makes it unnecessary to use keys.
 
 In addition to [`setContext`](svelte#setContext) and [`getContext`](svelte#getContext), Svelte exposes [`hasContext`](svelte#hasContext) and [`getAllContexts`](svelte#getAllContexts) functions.
 
 ## Using context with state
 
-You can store reactive state in context (demo...
+You can store reactive state in context...
 
 ```svelte
+<!--- file: App.svelte --->
 <script>
-	import { setContext } from 'svelte';
+	import { setCounter } from './context.ts';
 	import Child from './Child.svelte';
 
 	let counter = $state({
 		count: 0
 	});
 
-	setContext('counter', counter);
+	setCounter(counter);
 </script>
 
 <button onclick={() => counter.count += 1}>
@@ -59,12 +111,38 @@ You can store reactive state in context (demo...
 <Child />
 <Child />
 <Child />
+
+<button onclick={() => counter.count = 0}>
+	reset
+</button>
+```
+
+```svelte
+<!--- file: Child.svelte --->
+<script>
+	import { getCounter } from './context.ts';
+
+	const counter = getCounter();
+</script>
+
+<p>{counter.count}</p>
+```
+
+```ts
+/// file: context.ts
+import { createContext } from 'svelte';
+
+interface Counter {
+	count: number;
+}
+
+export const [getCounter, setCounter] = createContext<Counter>();
 ```
 
 ...though note that if you *reassign* `counter` instead of updating it, you will 'break the link' — in other words instead of this...
 
 ```svelte
-<button onclick={() => counter = { count: 0 }}>
+<button onclick={() => counter = { count: 0 } }>
 	reset
 </button>
 ```
@@ -79,21 +157,7 @@ You can store reactive state in context (demo...
 
 Svelte will warn you if you get it wrong.
 
-## Type-safe context
-
-As an alternative to using `setContext` and `getContext` directly, you can use them via `createContext`. This gives you type safety and makes it unnecessary to use a key:
-
-```ts
-/// file: context.ts
-// @filename: ambient.d.ts
-interface User {}
-
-// @filename: index.ts
-// ---cut---
-import { createContext } from 'svelte';
-
-export const [getUserContext, setUserContext] = createContext<User>();
-```
+## Component testing
 
 When writing [component tests](testing#Unit-and-component-tests-with-Vitest-Component-testing), it can be useful to create a wrapper component that sets the context in order to check the behaviour of a component that uses it. As of version 5.49, you can do this sort of thing:
 

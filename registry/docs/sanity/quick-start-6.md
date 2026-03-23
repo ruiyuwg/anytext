@@ -26,7 +26,7 @@ import { createClient } from "@sanity/client";
 
 export const client = createClient({
     projectId: '<project-id>',
-    dataset: '<datset-name>', // such as 'production'
+    dataset: '<dataset-name>',
     apiVersion: 'vX',
     token: '<editor-token>'
 })

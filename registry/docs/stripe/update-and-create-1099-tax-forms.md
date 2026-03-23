@@ -192,7 +192,7 @@ Stripe calculates a status for each tax form based on the type of form, year-to-
 
 - `NOT_REQUIRED` – Don’t file the form, even if it meets the threshold and is complete.
 - `REQUIRED` – File the form, even if it doesn’t meet the threshold or is incomplete. Conceptually this is the combination of `REQUIRED_EVEN_IF_INCOMPLETE` and `REQUIRED_EVEN_IF_BELOW_THRESHOLD`.
-- `REQUIRED_EVEN_IF_INCOMPLETE` – File the form if it’s above the threshold, even if it isn’t complete. This is particularly useful for forms with non-US addresses that may be missing state information.
+- `REQUIRED_EVEN_IF_INCOMPLETE` – File the form if it’s above the threshold, even if it isn’t complete. This is particularly useful for forms with non-US addresses that might be missing state information.
 - `REQUIRED_EVEN_IF_BELOW_THRESHOLD` – File the form if it’s complete, even if it’s below the threshold.
 - `DEFAULT` – Use federal and state thresholds to decide whether a form should be filed. This is what the initial filing requirement value is for all forms, which can be overridden to one of the other values by platform admins.
 
@@ -289,6 +289,6 @@ The following table describes the schema for CSV export when you update the valu
 
 ## User self-serve updates for connected accounts
 
-If you signed up for stripe hosted e-delivery, you can have your users update their tax information themselves before their tax form is filed. If users update their information after filing, the tax form page shows an option to correct the filed 1099 form with the updated information. For more information, see [Quick correct: Payee details](https://docs.stripe.com/connect/modify-tax-forms.md?method=dashboard#quick-correct:-payee-details).
+If you signed up for stripe hosted e-delivery, you can have your users update their tax information themselves before their tax form is filed. If users update their information after filing, the tax form page shows an option to correct the filed 1099 form with the updated information. For more information, see [Quick correct: Payee details](https://docs.stripe.com/connect/modify-tax-forms.md?method=dashboard#quick-correct-payee-details).
 
 Users can edit their Legal name, Taxpayer Identification Number (TIN), and address. Note that some information can’t be edited after a user’s legal entity is verified, including date of birth, and business type. To edit the information user must contact Stripe Support.

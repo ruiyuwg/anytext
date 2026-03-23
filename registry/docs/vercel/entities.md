@@ -151,5 +151,5 @@ See [Segments](/docs/flags/vercel-flags/dashboard/segments) for creating reusabl
 
 title: "Feature Flag Configuration"
 description: "Learn how to configure individual feature flags in the Vercel Dashboard."
-last\_updated: "2026-03-08T05:03:14.566Z"
+last\_updated: "2026-03-23T09:40:10.147Z"
 source: "https://vercel.com/docs/flags/vercel-flags/dashboard/feature-flag"

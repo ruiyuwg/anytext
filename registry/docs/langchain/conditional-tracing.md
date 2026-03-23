@@ -182,9 +182,9 @@ Use conditional tracing when you need to:
 
   This can be useful when you want to temporarily enable tracing for debugging within a normally non-traced section.
 
-  ## Customize tracing in LangSmith Deployment
+  ## Customize tracing in deployed agents
 
-  Tracing is enabled by default within LangSmith Deployment's Agent Server. When using a [factory function](/langsmith/graph-rebuild) to rebuild your graph at runtime, you can wrap the yielded graph with `tracing_context` to control tracing per-execution. This is useful for disabling tracing entirely for a specific graph, or for customizing tracing based on the authenticated user.
+  Tracing is enabled by default within LangSmith Deployment's [Agent Server](/langsmith/agent-server). When using a [factory function](/langsmith/graph-rebuild), you can wrap the yielded graph with `tracing_context` to control tracing per-execution. This is useful for adding custom metadata, disabling tracing entirely, or customizing tracing based on the authenticated user.
 
   ### Disable tracing for a graph
 
@@ -198,7 +198,9 @@ Use conditional tracing when you need to:
   async def make_graph(runtime: ServerRuntime):
       graph = build_my_graph()
 
-      with ls.tracing_context(enabled=False):
+      # You can use tracing_context to dynamically enable/disable tracing,
+      # set metadata or tags, override the tracing project, etc.
+      with ls.tracing_context(enabled=False, metadata={"foo": "bar"}):
           yield graph
   ```
 

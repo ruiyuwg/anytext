@@ -8,7 +8,7 @@ The `vercel redeploy` command is used to rebuild and [redeploy an existing deplo
 vercel redeploy [deployment-id or url]
 ```
 
-*Using vercel redeploy will rebuild and deploys an
+*Using \`vercel redeploy\` will rebuild and deploys an
 existing deployment.*
 
 ## Standard output usage
@@ -19,9 +19,9 @@ When redeploying, `stdout` is always the Deployment URL.
 vercel redeploy https://example-app-6vd6bhoqt.vercel.app > deployment-url.txt
 ```
 
-*Using the vercel redeploy command to redeploy and
-write stdout to a text file. When redeploying,
-stdout is always the Deployment URL.*
+*Using the \`vercel redeploy\` command to redeploy and
+write \`stdout\` to a text file. When redeploying,
+\`stdout\` is always the Deployment URL.*
 
 ## Standard error usage
 
@@ -58,8 +58,8 @@ The `--no-wait` option does not wait for a deployment to finish before exiting f
 vercel redeploy https://example-app-6vd6bhoqt.vercel.app --no-wait
 ```
 
-*Using the vercel redeploy command with the
-\--no-wait option.*
+*Using the \`vercel redeploy\` command with the
+\`--no-wait\` option.*
 
 ### target
 
@@ -71,7 +71,7 @@ vercel redeploy https://example-app-6vd6bhoqt.vercel.app --target=staging
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -86,5 +86,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel redirects"
 description: "Learn how to manage project-level redirects using the vercel redirects CLI command."
-last\_updated: "2026-03-08T05:03:12.373Z"
+last\_updated: "2026-03-23T09:40:07.020Z"
 source: "https://vercel.com/docs/cli/redirects"

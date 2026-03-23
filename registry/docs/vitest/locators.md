@@ -2,7 +2,7 @@
 
 A locator is a representation of an element or a number of elements. Every locator is defined by a string called a selector. Vitest abstracts this selector by providing convenient methods that generate them behind the scenes.
 
-The locator API uses a fork of [Playwright's locators](https://playwright.dev/docs/api/class-locator) called [Ivya](https://npmjs.com/ivya). However, Vitest provides this API to every [provider](/config/browser#browser-provider), not just playwright.
+The locator API uses a fork of [Playwright's locators](https://playwright.dev/docs/api/class-locator) called [Ivya](https://npmx.dev/ivya). However, Vitest provides this API to every [provider](/config/browser/provider), not just playwright.
 
 This page covers API usage. To better understand locators and their usage, read [Playwright's "Locators" documentation](https://playwright.dev/docs/locators).
 
@@ -54,7 +54,7 @@ By default, many semantic elements in HTML have a role; for example, `<input typ
 
 Providing roles via `role` or `aria-*` attributes to built-in elements that already have an implicit role is **highly discouraged** by ARIA guidelines.
 
-##### Options
+**Options**
 
 - `exact: boolean`
 
@@ -178,7 +178,7 @@ Providing roles via `role` or `aria-*` attributes to built-in elements that alre
   page.getByRole('button', { selected: false }) // ❌
   ```
 
-##### See also
+**See also**
 
 - [List of ARIA roles at MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles)
 - [List of ARIA roles at w3.org](https://www.w3.org/TR/wai-aria-1.2/#role_definitions)
@@ -202,13 +202,13 @@ page.getByAltText(/incredibles.*? poster/i) // ✅
 page.getByAltText('non existing alt text') // ❌
 ```
 
-#### Options
+**Options**
 
 - `exact: boolean`
 
   Whether the `text` is matched exactly: case-sensitive and whole-string. Disabled by default. This option is ignored if `text` is a regular expression. Note that exact match still trims whitespace.
 
-#### See also
+**See also**
 
 - [testing-library's `ByAltText`](https://testing-library.com/docs/queries/byalttext/)
 
@@ -249,13 +249,13 @@ The `page.getByLabelText('Username')` locator will find every input in the examp
 <input aria-label="Username" />
 ```
 
-#### Options
+**Options**
 
 - `exact: boolean`
 
   Whether the `text` is matched exactly: case-sensitive and whole-string. Disabled by default. This option is ignored if `text` is a regular expression. Note that exact match still trims whitespace.
 
-#### See also
+**See also**
 
 - [testing-library's `ByLabelText`](https://testing-library.com/docs/queries/bylabeltext/)
 
@@ -279,13 +279,13 @@ page.getByPlaceholder('not found') // ❌
 
 It is generally better to rely on a label using [`getByLabelText`](#getbylabeltext) than a placeholder.
 
-#### Options
+**Options**
 
 - `exact: boolean`
 
   Whether the `text` is matched exactly: case-sensitive and whole-string. Disabled by default. This option is ignored if `text` is a regular expression. Note that exact match still trims whitespace.
 
-#### See also
+**See also**
 
 - [testing-library's `ByPlaceholderText`](https://testing-library.com/docs/queries/byplaceholdertext/)
 
@@ -309,13 +309,13 @@ page.getByText('about', { exact: true }) // ❌
 
 This locator is useful for locating non-interactive elements. If you need to locate an interactive element, like a button or an input, prefer [`getByRole`](#getbyrole).
 
-#### Options
+**Options**
 
 - `exact: boolean`
 
   Whether the `text` is matched exactly: case-sensitive and whole-string. Disabled by default. This option is ignored if `text` is a regular expression. Note that exact match still trims whitespace.
 
-#### See also
+**See also**
 
 - [testing-library's `ByText`](https://testing-library.com/docs/queries/bytext/)
 
@@ -337,13 +337,13 @@ page.getByTitle('Delete') // ✅
 page.getByTitle('Create') // ❌
 ```
 
-#### Options
+**Options**
 
 - `exact: boolean`
 
   Whether the `text` is matched exactly: case-sensitive and whole-string. Disabled by default. This option is ignored if `text` is a regular expression. Note that exact match still trims whitespace.
 
-#### See also
+**See also**
 
 - [testing-library's `ByTitle`](https://testing-library.com/docs/queries/bytitle/)
 
@@ -364,13 +364,13 @@ page.getByTestId('non-existing-element') // ❌
 
 It is recommended to use this only after the other locators don't work for your use case. Using `data-testid` attributes does not resemble how your software is used and should be avoided if possible.
 
-#### Options
+**Options**
 
 - `exact: boolean`
 
   Whether the `text` is matched exactly: case-sensitive and whole-string. Disabled by default. This option is ignored if `text` is a regular expression. Note that exact match still trims whitespace.
 
-#### See also
+**See also**
 
 - [testing-library's `ByTestId`](https://testing-library.com/docs/queries/bytestid/)
 
@@ -621,6 +621,23 @@ await page.getByRole('img', { name: 'Rose' }).tripleClick()
 
 - [See more at `userEvent.tripleClick`](/api/browser/interactivity#userevent-tripleclick)
 
+### wheel 4.1.0
+
+```ts
+function wheel(options: UserEventWheelOptions): Promise<void>
+```
+
+Triggers a [`wheel` event](https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event) on an element. You can use the options to choose a general scroll `direction` or a precise `delta` value.
+
+```ts
+import { page } from 'vitest/browser'
+
+// Scroll right
+await page.getByRole('tablist').wheel({ direction: 'right' })
+```
+
+- [See more at `userEvent.wheel`](/api/browser/interactivity#userevent-wheel)
+
 ### clear
 
 ```ts
@@ -774,6 +791,28 @@ const { path, base64 } = await button.screenshot({
 Note that `screenshot` will always return a base64 string if `save` is set to `false`.
 The `path` is also ignored in that case.
 
+### mark
+
+```ts
+function mark(name: string, options?: { stack?: string }): Promise<void>
+```
+
+Adds a named marker to the trace timeline and uses the current locator as marker context.
+
+Pass `options.stack` to override the callsite location in trace metadata. This is useful for wrapper libraries that need to preserve the end-user source location.
+
+```ts
+import { page } from 'vitest/browser'
+
+const submitButton = page.getByRole('button', { name: 'Submit' })
+
+await submitButton.mark('before submit')
+await submitButton.click()
+await submitButton.mark('after submit')
+```
+
+This method is useful only when [`browser.trace`](/config/browser/trace) is enabled.
+
 ### query
 
 ```ts
@@ -783,6 +822,8 @@ function query(): Element | null
 This method returns a single element matching the locator's selector or `null` if no element is found.
 
 If multiple elements match the selector, this method will throw an error.  Use [`.elements()`](#elements) when you need all matching DOM Elements or [`.all()`](#all) if you need an array of locators matching the selector.
+
+This is an escape hatch for external APIs that do not support locators. Prefer using locator methods instead.
 
 Consider the following DOM structure:
 
@@ -820,7 +861,9 @@ If *no element* matches the selector, an error is thrown. Consider using [`.quer
 
 If *multiple elements* match the selector, an error is thrown. Use [`.elements()`](#elements) when you need all matching DOM Elements or [`.all()`](#all) if you need an array of locators matching the selector.
 
-This method can be useful if you need to pass it down to an external library. It is called automatically when locator is used with `expect.element` every time the assertion is [retried](/api/browser/assertions):
+This is an escape hatch for external APIs that do not support locators. Prefer using locator methods instead.
+
+It is called automatically when locator is used with `expect.element` every time the assertion is [retried](/api/browser/assertions):
 
 ```ts
 await expect.element(page.getByRole('button')).toBeDisabled()
@@ -879,6 +922,61 @@ page.getByText('World').elements() // ✅ [HTMLElement]
 page.getByText('Hello', { exact: true }).elements() // ✅ [HTMLElement]
 page.getByText('Hello').elements() // ✅ [HTMLElement, HTMLElement]
 page.getByText('Hello USA').elements() // ✅ []
+```
+
+### findElement 4.1.0
+
+```ts
+function findElement(
+  options?: SelectorOptions
+): Promise<HTMLElement | SVGElement>
+```
+
+This is an escape hatch for cases where you need the raw DOM element — for example, to pass it to a third-party library like FormKit that doesn't accept Vitest locators. If you are interacting with the element yourself, use other [builtin methods](#methods) instead.
+
+This method returns an element matching the locator. Unlike [`.element()`](#element), this method will wait and retry until a matching element appears in the DOM, using increasing intervals (0, 20, 50, 100, 100, 500ms).
+
+If *no element* is found before the timeout, an error is thrown. By default, the timeout matches the test timeout.
+
+If *multiple elements* match the selector and `strict` is `true` (the default), an error is thrown immediately without retrying. Set `strict` to `false` to return the first matching element instead.
+
+It accepts options:
+
+- `timeout: number` - How long to wait in milliseconds until at least one element is found. By default, this shares timeout with the test.
+- `strict: boolean` - When `true` (default), throws an error if multiple elements match the locator. When `false`, returns the first matching element.
+
+Consider the following DOM structure:
+
+```html
+<div>Hello <span>World</span></div>
+<div>Hello Germany</div>
+<div>Hello</div>
+```
+
+These locators will resolve successfully:
+
+```ts
+await page.getByText('Hello World').findElement() // ✅ HTMLDivElement
+await page.getByText('World').findElement() // ✅ HTMLSpanElement
+await page.getByText('Hello Germany').findElement() // ✅ HTMLDivElement
+```
+
+These locators will throw an error:
+
+```ts
+// multiple elements match, strict mode rejects
+await page.getByText('Hello').findElement() // ❌
+await page.getByText(/^Hello/).findElement() // ❌
+
+// no matching element before timeout
+await page.getByText('Hello USA').findElement() // ❌
+```
+
+Using `strict: false` to allow multiple matches:
+
+```ts
+// returns the first matching element instead of throwing
+await page.getByText('Hello').findElement({ strict: false }) // ✅ HTMLDivElement
 ```
 
 ### all
@@ -1031,9 +1129,9 @@ Show heap usage after each test. Useful for debugging memory leaks.
 - **Default**: `5`
 - **CLI**: `--max-concurrency=10`, `--maxConcurrency=10`
 
-A number of tests that are allowed to run at the same time marked with `test.concurrent`.
+The maximum number of tests and hooks that can run at the same time when using `test.concurrent` or `describe.concurrent`.
 
-Test above this limit will be queued to run when available slot appears.
+The hook execution order within a single group is also controlled by [`sequence.hooks`](/config/sequence#sequence-hooks). With `sequence.hooks: 'parallel'`, the execution is bounded by the same limit of [`maxConcurrency`](/config/maxconcurrency).
 
 ***
 

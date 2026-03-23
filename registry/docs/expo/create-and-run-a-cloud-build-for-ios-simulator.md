@@ -6,7 +6,7 @@ In this chapter, we'll create a development build that can run on an iOS Simulat
 
 Development builds for iOS Simulators are generated in the **.app** format which is different from iOS devices.
 
-[Watch: Creating a development build for iOS Simulator](https://www.youtube.com/watch?v=SgL97PFZctg)
+[Watch: Creating a development build for iOS Simulator](https://www.youtube.com/watch?v=SgL97PFZctg) — Learn how to create a simulator build profile in eas.json and run a development build on iOS Simulator.
 
 ## Create a simulator build profile in eas.json
 

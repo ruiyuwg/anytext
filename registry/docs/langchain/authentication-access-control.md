@@ -61,7 +61,7 @@ A typical authentication setup involves three main components:
 
 Here's how these components typically interact:
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 sequenceDiagram
     participant Client as Client App
     participant Auth as Auth Provider
@@ -137,7 +137,7 @@ The returned user information is available:
 
 Custom authentication permits delegated access. The values you return in  `@auth.authenticate` are added to the run context, giving agents user-scoped credentials lets them access resources on the user’s behalf.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 sequenceDiagram
   %% Actors
   participant ClientApp as Client

@@ -72,7 +72,7 @@ Complete the following steps to pay your Delaware franchise tax. You can save yo
   - You can easily find your company’s file number in two ways:
     - Use [Delaware’s entity search tool](https://icis.corp.delaware.gov/ecorp/EntitySearch/NameSearch.aspx) with your company’s legal name.
     - Find the State of Delaware stamp on the second page of your Filed Certificate of Incorporation. You can find this in the [Dashboard](https://dashboard.stripe.com/atlas/company).
-- Click on the “File annual report” link.
+- Click the “File annual report” link.
 - Enter your company information:
   - Complete the Stock information section to adjust your taxes owed shown in the upper right corner: enter the number of shares your company has issued, your gross assets (your Total assets on your corporate income tax return), and your Asset date (the same as your end of fiscal year). Then click the Recalculate tax button (can take some time to reload).
   - Complete all of the remaining required fields indicated with a red star.
@@ -127,7 +127,7 @@ If your US company has employees or makes payments to US vendors, you might also
 
 ### Tax obligations when dissolving your company
 
-Even if you are no longer operating your company, you might need to file taxes annually until you officially dissolve your company. Dissolution itself might trigger final tax obligations. Our [tax partners](https://support.stripe.com/questions/legal-and-tax-advice-for-your-stripe-atlas-company) can help determine your specific requirements.
+Even if you’re no longer operating your company, you might need to file taxes annually until you officially dissolve your company. Dissolution itself might trigger final tax obligations. Our [tax partners](https://support.stripe.com/questions/legal-and-tax-advice-for-your-stripe-atlas-company) can help determine your specific requirements.
 
 C corporations need to pay franchise tax and file an annual report before dissolution. LLCs can be dissolved only after they pay the annual LLC tax (no annual report is required).
 

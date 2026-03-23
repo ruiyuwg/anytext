@@ -6,6 +6,12 @@ Code contributions are welcome! Whether you're fixing bugs, adding features, or 
 
 ## Getting started
 
+If you are looking for something to work on, check out the issue labeled "help wanted" in our repos:
+
+Labels
+Labels
+Labels
+
 Before submitting large **new features or refactors**, please first open an issue or post to [the forum](https://forum.langchain.com/) for discussion. This ensures alignment with project goals and prevents duplicate work.
 
 ### Quick fix: submit a bugfix
@@ -194,6 +200,8 @@ Security checklist:
 
 ## Development environment
 
+**Using an AI coding agent?** Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks, then click the "Copy page" button on the top right of this page and paste the raw content into your agent to have it set up your environment automatically.
+
 Our Python projects use [`uv`](https://docs.astral.sh/uv/getting-started/installation/) for dependency management. Make sure you have the latest version installed.
 
 We strive to keep setup consistent across all Python packages. From the package directory, run:
@@ -276,6 +284,23 @@ Deep Agents is organized as a monorepo with multiple Python packages:
 ***
 
 ## Development workflow
+
+### Pre-commit hooks
+
+The [LangChain](https://github.com/langchain-ai/langchain) and [Deep Agents](https://github.com/langchain-ai/deepagents) repositories include [pre-commit](https://pre-commit.com/) hooks that automatically run formatting, linting, and validation checks before each commit. Install them from the repository root:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+pip install pre-commit  # or: uv tool install pre-commit
+pre-commit install
+```
+
+The hooks enforce:
+
+- No direct commits to protected branches
+- YAML and TOML syntax validation
+- Trailing whitespace and end-of-file fixes
+- Smart quote and non-standard space normalization
+- Per-package `make format` and `make lint`
 
 ### Running tests
 

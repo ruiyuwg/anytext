@@ -5,16 +5,16 @@
 The [AI Gateway](https://vercel.com/ai-gateway) provides a unified API to access [hundreds of models](https://vercel.com/ai-gateway/models) through a single endpoint.
 It gives you the ability to set budgets, monitor usage, load-balance requests, and manage fallbacks.
 
-The design allows it to work seamlessly with [AI SDK v5 and v6](/docs/ai-gateway/getting-started), [OpenAI Chat Completions](/docs/ai-gateway/sdks-and-apis/openai-chat-completions), [OpenAI Responses](/docs/ai-gateway/sdks-and-apis/responses), [Anthropic Messages](/docs/ai-gateway/sdks-and-apis/anthropic-messages-api), or your [preferred framework](/docs/ai-gateway/ecosystem/framework-integrations).
+AI Gateway works with [AI SDK v5 and v6](/docs/ai-gateway/getting-started), [OpenAI Chat Completions](/docs/ai-gateway/sdks-and-apis/openai-chat-completions), [OpenAI Responses](/docs/ai-gateway/sdks-and-apis/responses), [Anthropic Messages](/docs/ai-gateway/sdks-and-apis/anthropic-messages-api), or your [preferred framework](/docs/ai-gateway/ecosystem/framework-integrations).
 
-## Key features
+## What AI Gateway provides
 
-- **One key, hundreds of models**: access models from multiple providers with a single API key
-- **Unified API**: helps you switch between providers and models with minimal code changes
-- **High reliability**: automatically retries requests to other providers if one fails
-- **Embeddings support**: generate vector embeddings for search, retrieval, and other tasks
-- **Spend monitoring**: monitor your spending across different providers
-- **No markup on tokens**: tokens cost the same as they would from the provider directly, with zero markup, including with [Bring Your Own Key (BYOK)](/docs/ai-gateway/authentication-and-byok/byok).
+- **One key, hundreds of models.** Access models from multiple providers with a single API key
+- **Unified API.** Switch between providers and models with minimal code changes
+- **High reliability.** Automatically retries requests to other providers if one fails
+- **Embeddings support.** Generate vector embeddings for search, retrieval, and other tasks
+- **Spend monitoring.** Monitor your spending across different providers
+- **No markup on tokens.** Tokens cost the same as they would from the provider directly, with zero markup, including with [Bring Your Own Key (BYOK)](/docs/ai-gateway/authentication-and-byok/byok)
 
 #### TypeScript
 
@@ -68,7 +68,7 @@ curl -X POST "https://ai-gateway.vercel.sh/v1/chat/completions" \
 }'
 ```
 
-## More resources
+## Get started and learn more
 
 - [Getting started with AI Gateway](/docs/ai-gateway/getting-started)
 - [Models and providers](/docs/ai-gateway/models-and-providers)
@@ -86,5 +86,5 @@ curl -X POST "https://ai-gateway.vercel.sh/v1/chat/completions" \
 
 title: "Pricing"
 description: "Learn about pricing for AI Gateway."
-last\_updated: "2026-03-08T05:03:10.573Z"
+last\_updated: "2026-03-23T09:40:04.629Z"
 source: "https://vercel.com/docs/ai-gateway/pricing"

@@ -4,9 +4,9 @@
 
 If you receive an error that module cannot be found, it might mean several different things:
 
-- 1. You misspelled the path. Make sure the path is correct.
+1. You misspelled the path. Make sure the path is correct.
 
-- 2. It's possible that you rely on `baseUrl` in your `tsconfig.json`. Vite doesn't take into account `tsconfig.json` by default, so you might need to install [`vite-tsconfig-paths`](https://www.npmjs.com/package/vite-tsconfig-paths) yourself, if you rely on this behaviour.
+2. It's possible that you rely on `baseUrl` in your `tsconfig.json`. Vite doesn't take into account `tsconfig.json` by default, so you might need to install [`vite-tsconfig-paths`](https://npmx.dev/package/vite-tsconfig-paths) yourself, if you rely on this behavior.
 
 ```ts
 import { defineConfig } from 'vitest/config'
@@ -24,7 +24,7 @@ Or rewrite your path to not be relative to root:
 + import helpers from '../src/helpers'
 ```
 
-- 3. Make sure you don't have relative [aliases](/config/#alias). Vite treats them as relative to the file where the import is instead of the root.
+3. Make sure you don't have relative [aliases](/config/alias). Vite treats them as relative to the file where the import is instead of the root.
 
 ```ts
 import { defineConfig } from 'vitest/config'
@@ -41,23 +41,9 @@ export default defineConfig({
 
 ## Failed to Terminate Worker
 
-This error can happen when NodeJS's `fetch` is used with default [`pool: 'threads'`](/config/#threads). This issue is tracked on issue [Timeout abort can leave process(es) running in the background #3077](https://github.com/vitest-dev/vitest/issues/3077).
+This error can happen when NodeJS's `fetch` is used with [`pool: 'threads'`](/config/pool#threads). See [#3077](https://github.com/vitest-dev/vitest/issues/3077) for details.
 
-As work-around you can switch to [`pool: 'forks'`](/config/#forks) or [`pool: 'vmForks'`](/config/#vmforks).
-
-```ts [vitest.config.js]
-import { defineConfig } from 'vitest/config'
-
-export default defineConfig({
-  test: {
-    pool: 'forks',
-  },
-})
-```
-
-```bash [CLI]
-vitest --pool=forks
-```
+The default [`pool: 'forks'`](/config/pool#forks) does not have this issue. If you've explicitly set `pool: 'threads'`, switching back to `'forks'` or using [`'vmForks'`](/config/pool#vmforks) will resolve it.
 
 ## Custom package conditions are not resolved
 
@@ -114,7 +100,7 @@ Running [native NodeJS modules](https://nodejs.org/api/addons.html) in `pool: 't
 - `Abort trap: 6`
 - `internal error: entered unreachable code`
 
-In these cases the native module is likely not built to be multi-thread safe. As work-around, you can switch to `pool: 'forks'` which runs the test cases in multiple `node:child_process` instead of multiple `node:worker_threads`.
+In these cases the native module is likely not built to be multi-thread safe. As a workaround, you can switch to `pool: 'forks'` which runs the test cases in multiple `node:child_process` instead of multiple `node:worker_threads`.
 
 ```ts [vitest.config.js]
 import { defineConfig } from 'vitest/config'

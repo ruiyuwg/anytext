@@ -60,7 +60,7 @@ When you want to apply multiple classes to an element, you can use the [`classLi
 
 ```
 const [current, setCurrent] = createSignal("foo");
-<button  classList={{ "selected" : current() === "foo" }}  onClick={() => setCurrent("foo")}>  foo</button>;
+<button  classList={{ selected: current() === "foo" }}  onClick={() => setCurrent("foo")}>  foo</button>;
 ```
 
 `classList` is often more efficient than `class` when handling multiple conditional classes. This is because `classList` selectively toggles only the classes that require alteration, while `class` will be re-evaluated each time. For a single conditional class, using `class` might be simpler but as the number of conditional classes increases, `classList` offers a more readable and declarative approach.

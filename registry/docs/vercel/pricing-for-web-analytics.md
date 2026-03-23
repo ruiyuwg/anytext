@@ -96,5 +96,5 @@ While only the reporting window is guaranteed to be stored, Vercel may store you
 
 title: "Advanced Web Analytics Config with @vercel/analytics"
 description: "With the @vercel/analytics npm package, you are able to configure your application to send analytics data to Vercel."
-last\_updated: "2026-03-08T05:03:10.982Z"
+last\_updated: "2026-03-23T09:40:05.347Z"
 source: "https://vercel.com/docs/analytics/package"

@@ -74,18 +74,18 @@ Below is a basic directory structure.
 Edit `src/index.tsx` like the following:
 
 ```tsx
-import { Hono } from "hono";
-import { renderer } from "./renderer";
+import { Hono } from 'hono'
+import { renderer } from './renderer'
 
-const app = new Hono();
+const app = new Hono()
 
-app.get("*", renderer);
+app.get('*', renderer)
 
-app.get("/", (c) => {
-  return c.render(<h1>Hello, Cloudflare Pages!</h1>);
-});
+app.get('/', (c) => {
+  return c.render(<h1>Hello, Cloudflare Pages!</h1>)
+})
 
-export default app;
+export default app
 ```
 
 ## 3. Run
@@ -187,20 +187,20 @@ id = "abcdef"
 Edit the `vite.config.ts`:
 
 ```ts
-import devServer from "@hono/vite-dev-server";
-import adapter from "@hono/vite-dev-server/cloudflare";
-import build from "@hono/vite-cloudflare-pages";
-import { defineConfig } from "vite";
+import devServer from '@hono/vite-dev-server'
+import adapter from '@hono/vite-dev-server/cloudflare'
+import build from '@hono/vite-cloudflare-pages'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
     devServer({
-      entry: "src/index.tsx",
+      entry: 'src/index.tsx',
       adapter, // Cloudflare Adapter
     }),
     build(),
   ],
-});
+})
 ```
 
 ### Use Bindings in your application
@@ -209,21 +209,21 @@ Use Variable and KV in your application. Set the types.
 
 ```ts
 type Bindings = {
-  MY_NAME: string;
-  MY_KV: KVNamespace;
-};
+  MY_NAME: string
+  MY_KV: KVNamespace
+}
 
-const app = new Hono<{ Bindings: Bindings }>();
+const app = new Hono<{ Bindings: Bindings }>()
 ```
 
 Use them:
 
 ```tsx
-app.get("/", async (c) => {
-  await c.env.MY_KV.put("name", c.env.MY_NAME);
-  const name = await c.env.MY_KV.get("name");
-  return c.render(<h1>Hello! {name}</h1>);
-});
+app.get('/', async (c) => {
+  await c.env.MY_KV.put('name', c.env.MY_NAME)
+  const name = await c.env.MY_KV.get('name')
+  return c.render(<h1>Hello! {name}</h1>)
+})
 ```
 
 ### In production
@@ -237,54 +237,54 @@ If `/src/client.ts` is the entry point for the client, simply write it in the sc
 Additionally, `import.meta.env.PROD` is useful for detecting whether it's running on a dev server or in the build phase.
 
 ```tsx
-app.get("/", (c) => {
+app.get('/', (c) => {
   return c.html(
     <html>
       <head>
         {import.meta.env.PROD ? (
-          <script type="module" src="/static/client.js"></script>
+          <script type='module' src='/static/client.js'></script>
         ) : (
-          <script type="module" src="/src/client.ts"></script>
+          <script type='module' src='/src/client.ts'></script>
         )}
       </head>
       <body>
         <h1>Hello</h1>
       </body>
-    </html>,
-  );
-});
+    </html>
+  )
+})
 ```
 
 In order to build the script properly, you can use the example config file `vite.config.ts` as shown below.
 
 ```ts
-import pages from "@hono/vite-cloudflare-pages";
-import devServer from "@hono/vite-dev-server";
-import { defineConfig } from "vite";
+import pages from '@hono/vite-cloudflare-pages'
+import devServer from '@hono/vite-dev-server'
+import { defineConfig } from 'vite'
 
 export default defineConfig(({ mode }) => {
-  if (mode === "client") {
+  if (mode === 'client') {
     return {
       build: {
         rollupOptions: {
-          input: "./src/client.ts",
+          input: './src/client.ts',
           output: {
-            entryFileNames: "static/client.js",
+            entryFileNames: 'static/client.js',
           },
         },
       },
-    };
+    }
   } else {
     return {
       plugins: [
         pages(),
         devServer({
-          entry: "src/index.tsx",
+          entry: 'src/index.tsx',
         }),
       ],
-    };
+    }
   }
-});
+})
 ```
 
 You can run the following command to build the server and client script.
@@ -300,8 +300,8 @@ Cloudflare Pages uses its own [middleware](https://developers.cloudflare.com/pag
 ```ts
 // functions/_middleware.ts
 export async function onRequest(pagesContext) {
-  console.log(`You are accessing ${pagesContext.request.url}`);
-  return await pagesContext.next();
+  console.log(`You are accessing ${pagesContext.request.url}`)
+  return await pagesContext.next()
 }
 ```
 
@@ -309,33 +309,33 @@ Using `handleMiddleware`, you can use Hono's middleware as Cloudflare Pages midd
 
 ```ts
 // functions/_middleware.ts
-import { handleMiddleware } from "hono/cloudflare-pages";
+import { handleMiddleware } from 'hono/cloudflare-pages'
 
 export const onRequest = handleMiddleware(async (c, next) => {
-  console.log(`You are accessing ${c.req.url}`);
-  await next();
-});
+  console.log(`You are accessing ${c.req.url}`)
+  await next()
+})
 ```
 
 You can also use built-in and 3rd party middleware for Hono. For example, to add Basic Authentication, you can use [Hono's Basic Authentication Middleware](/docs/middleware/builtin/basic-auth).
 
 ```ts
 // functions/_middleware.ts
-import { handleMiddleware } from "hono/cloudflare-pages";
-import { basicAuth } from "hono/basic-auth";
+import { handleMiddleware } from 'hono/cloudflare-pages'
+import { basicAuth } from 'hono/basic-auth'
 
 export const onRequest = handleMiddleware(
   basicAuth({
-    username: "hono",
-    password: "acoolproject",
-  }),
-);
+    username: 'hono',
+    password: 'acoolproject',
+  })
+)
 ```
 
 If you want to apply multiple middleware, you can write it like this:
 
 ```ts
-import { handleMiddleware } from "hono/cloudflare-pages";
+import { handleMiddleware } from 'hono/cloudflare-pages'
 
 // ...
 
@@ -343,7 +343,7 @@ export const onRequest = [
   handleMiddleware(middleware1),
   handleMiddleware(middleware2),
   handleMiddleware(middleware3),
-];
+]
 ```
 
 ### Accessing `EventContext`
@@ -352,53 +352,53 @@ You can access [`EventContext`](https://developers.cloudflare.com/pages/function
 
 ```ts
 // functions/_middleware.ts
-import { handleMiddleware } from "hono/cloudflare-pages";
+import { handleMiddleware } from 'hono/cloudflare-pages'
 
 export const onRequest = [
   handleMiddleware(async (c, next) => {
-    c.env.eventContext.data.user = "Joe";
-    await next();
+    c.env.eventContext.data.user = 'Joe'
+    await next()
   }),
-];
+]
 ```
 
 Then, you can access the data value in via `c.env.eventContext` in the handler:
 
 ```ts
 // functions/api/[[route]].ts
-import type { EventContext } from "hono/cloudflare-pages";
-import { handle } from "hono/cloudflare-pages";
+import type { EventContext } from 'hono/cloudflare-pages'
+import { handle } from 'hono/cloudflare-pages'
 
 // ...
 
 type Env = {
   Bindings: {
-    eventContext: EventContext;
-  };
-};
+    eventContext: EventContext
+  }
+}
 
-const app = new Hono<Env>().basePath("/api");
+const app = new Hono<Env>().basePath('/api')
 
-app.get("/hello", (c) => {
+app.get('/hello', (c) => {
   return c.json({
     message: `Hello, ${c.env.eventContext.data.user}!`, // 'Joe'
-  });
-});
+  })
+})
 
-export const onRequest = handle(app);
+export const onRequest = handle(app)
 ```
 
-# Vercel
+# Netlify
 
-Vercel is the AI cloud, providing the developer tools and cloud infrastructure to build, scale, and secure a faster, more personalized web.
+Netlify provides static site hosting and serverless backend services. [Edge Functions](https://docs.netlify.com/edge-functions/overview/) enables us to make the web pages dynamic.
 
-Hono can be deployed to Vercel with zero-configuration.
+Edge Functions support writing in Deno and TypeScript, and deployment is made easy through the [Netlify CLI](https://docs.netlify.com/cli/get-started/). With Hono, you can create the application for Netlify Edge Functions.
 
 ## 1. Setup
 
-A starter for Vercel is available.
+A starter for Netlify is available.
 Start your project with "create-hono" command.
-Select `vercel` template for this example.
+Select `netlify` template for this example.
 
 ```sh [npm]
 npm create hono@latest my-app
@@ -420,71 +420,65 @@ bun create hono@latest my-app
 deno init --npm hono my-app
 ```
 
-Move into `my-app` and install the dependencies.
-
-```sh [npm]
-cd my-app
-npm i
-```
-
-```sh [yarn]
-cd my-app
-yarn
-```
-
-```sh [pnpm]
-cd my-app
-pnpm i
-```
-
-```sh [bun]
-cd my-app
-bun i
-```
-
-We will use Vercel CLI to work on the app locally in the next step. If you haven't already, install it globally following [the Vercel CLI documentation](https://vercel.com/docs/cli).
+Move into `my-app`.
 
 ## 2. Hello World
 
-In the `index.ts` or `src/index.ts` of your project, export the Hono application as a default export.
+Edit `netlify/edge-functions/index.ts`:
 
 ```ts
-import { Hono } from "hono";
+import { Hono } from 'jsr:@hono/hono'
+import { handle } from 'jsr:@hono/hono/netlify'
 
-const app = new Hono();
+const app = new Hono()
 
-const welcomeStrings = [
-  "Hello Hono!",
-  "To learn more about Hono on Vercel, visit https://vercel.com/docs/frameworks/backend/hono",
-];
+app.get('/', (c) => {
+  return c.text('Hello Hono!')
+})
 
-app.get("/", (c) => {
-  return c.text(welcomeStrings.join("\n\n"));
-});
-
-export default app;
+export default handle(app)
 ```
-
-If you started with the `vercel` template, this is already set up for you.
 
 ## 3. Run
 
-To run the development server locally:
+Run the development server with Netlify CLI. Then, access `http://localhost:8888` in your Web browser.
 
 ```sh
-vercel dev
+netlify dev
 ```
-
-Visiting `localhost:3000` will respond with a text response.
 
 ## 4. Deploy
 
-Deploy to Vercel using `vc deploy`.
+You can deploy with a `netlify deploy` command.
 
 ```sh
-vercel deploy
+netlify deploy --prod
 ```
 
-## Further reading
+## `Context`
 
-[Learn more about Hono in the Vercel documentation](https://vercel.com/docs/frameworks/backend/hono).
+You can access the Netlify's `Context` through `c.env`:
+
+```ts
+import { Hono } from 'jsr:@hono/hono'
+import { handle } from 'jsr:@hono/hono/netlify'
+
+// Import the type definition
+import type { Context } from 'https://edge.netlify.com/'
+
+export type Env = {
+  Bindings: {
+    context: Context
+  }
+}
+
+const app = new Hono<Env>()
+
+app.get('/country', (c) =>
+  c.json({
+    'You are in': c.env.context.geo.country?.name,
+  })
+)
+
+export default handle(app)
+```

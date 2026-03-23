@@ -97,5 +97,5 @@ There are two ways to remove a Shared Environment Variable from a project:
 
 title: "System environment variables"
 description: "System environment variables are automatically populated by Vercel, such as the URL of the deployment or the name of the Git branch deployed."
-last\_updated: "2026-03-08T05:03:14.034Z"
+last\_updated: "2026-03-23T09:40:09.522Z"
 source: "https://vercel.com/docs/environment-variables/system-environment-variables"

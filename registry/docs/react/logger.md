@@ -12,15 +12,15 @@ The `logger` option provides custom logging for React Compiler events during com
 }
 ```
 
----
+***
 
-## Reference {/_reference_/}
+## Reference {/*reference*/}
 
-### `logger` {/_logger_/}
+### `logger` {/*logger*/}
 
 Configures custom logging to track compiler behavior and debug issues.
 
-#### Type {/_type_/}
+#### Type {/*type*/}
 
 ```
 {
@@ -28,15 +28,15 @@ Configures custom logging to track compiler behavior and debug issues.
 } | null
 ```
 
-#### Default value {/_default-value_/}
+#### Default value {/*default-value*/}
 
 `null`
 
-#### Methods {/_methods_/}
+#### Methods {/*methods*/}
 
 - **`logEvent`**: Called for each compiler event with the filename and event details
 
-#### Event types {/_event-types_/}
+#### Event types {/*event-types*/}
 
 - **`CompileSuccess`**: Function successfully compiled
 - **`CompileError`**: Function skipped due to errors
@@ -45,16 +45,16 @@ Configures custom logging to track compiler behavior and debug issues.
 - **`PipelineError`**: Unexpected compilation error
 - **`Timing`**: Performance timing information
 
-#### Caveats {/_caveats_/}
+#### Caveats {/*caveats*/}
 
 - Event structure may change between versions
 - Large codebases generate many log entries
 
----
+***
 
-## Usage {/_usage_/}
+## Usage {/*usage*/}
 
-### Basic logging {/_basic-logging_/}
+### Basic logging {/*basic-logging*/}
 
 Track compilation success and failures:
 
@@ -78,7 +78,7 @@ Track compilation success and failures:
 }
 ```
 
-### Detailed error logging {/_detailed-error-logging_/}
+### Detailed error logging {/*detailed-error-logging*/}
 
 Get specific information about compilation failures:
 
@@ -108,7 +108,7 @@ Get specific information about compilation failures:
 }
 ```
 
----
+***
 
 ## Sitemap
 

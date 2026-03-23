@@ -2,12 +2,28 @@
 
 Source: https://docs.langchain.com/oss/python/langgraph/persistence
 
-LangGraph has a built-in persistence layer, implemented through checkpointers. When you compile a graph with a checkpointer, the checkpointer saves a `checkpoint` of the graph state at every super-step. Those checkpoints are saved to a `thread`, which can be accessed after graph execution. Because `threads` allow access to graph's state after execution, several powerful capabilities including human-in-the-loop, memory, time travel, and fault-tolerance are all possible. Below, we'll discuss each of these concepts in more detail.
+LangGraph has a built-in persistence layer that saves graph state as checkpoints. When you compile a graph with a checkpointer, a snapshot of the graph state is saved at every step of execution, organized into threads. This enables human-in-the-loop workflows, conversational memory, time travel debugging, and fault-tolerant execution.
 
 **Agent Server handles checkpointing automatically**
 When using the [Agent Server](/langsmith/agent-server), you don't need to implement or configure checkpointers manually. The server handles all persistence infrastructure for you behind the scenes.
 
-## Threads
+## Why use persistence
+
+Persistence is required for the following features:
+
+- **Human-in-the-loop**: Checkpointers facilitate [human-in-the-loop workflows](/oss/python/langgraph/interrupts) by allowing humans to inspect, interrupt, and approve graph steps. Checkpointers are needed for these workflows as the person has to be able to view the state of a graph at any point in time, and the graph has to be able to resume execution after the person has made any updates to the state. See [Interrupts](/oss/python/langgraph/interrupts) for examples.
+
+- **Memory**: Checkpointers allow for ["memory"](/oss/python/concepts/memory) between interactions. In the case of repeated human interactions (like conversations) any follow up messages can be sent to that thread, which will retain its memory of previous ones. See [Add memory](/oss/python/langgraph/add-memory) for information on how to add and manage conversation memory using checkpointers.
+
+- **Time travel**: Checkpointers allow for ["time travel"](/oss/python/langgraph/use-time-travel), allowing users to replay prior graph executions to review and / or debug specific graph steps. In addition, checkpointers make it possible to fork the graph state at arbitrary checkpoints to explore alternative trajectories.
+
+- **Fault-tolerance**: Checkpointing provides fault-tolerance and error recovery: if one or more nodes fail at a given superstep, you can restart your graph from the last successful step.
+
+- **Pending writes**: When a graph node fails mid-execution at a given [super-step](#super-steps), LangGraph stores pending checkpoint writes from any other nodes that completed successfully at that super-step. When you resume graph execution from that super-step you don't re-run the successful nodes.
+
+## Core concepts
+
+### Threads
 
 A thread is a unique ID or thread identifier assigned to each checkpoint saved by a checkpointer. It contains the accumulated state of a sequence of [runs](/langsmith/assistants#execution). When a run is executed, the [state](/oss/python/langgraph/graph-api#state) of the underlying graph of the assistant will be persisted to the thread.
 
@@ -21,15 +37,13 @@ A thread's current and historical state can be retrieved. To persist state, a th
 
 The checkpointer uses `thread_id` as the primary key for storing and retrieving checkpoints. Without it, the checkpointer cannot save state or resume execution after an [interrupt](/oss/python/langgraph/interrupts), since the checkpointer uses `thread_id` to load the saved state.
 
-## Checkpoints
+### Checkpoints
 
-The state of a thread at a particular point in time is called a checkpoint. Checkpoint is a snapshot of the graph state saved at each super-step and is represented by `StateSnapshot` object with the following key properties:
+The state of a thread at a particular point in time is called a checkpoint. A checkpoint is a snapshot of the graph state saved at each [super-step](#super-steps) and is represented by a `StateSnapshot` object (see [StateSnapshot fields](#statesnapshot-fields) for the full field reference).
 
-- `config`: Config associated with this checkpoint.
-- `metadata`: Metadata associated with this checkpoint.
-- `values`: Values of the state channels at this point in time.
-- `next` A tuple of the node names to execute next in the graph.
-- `tasks`: A tuple of `PregelTask` objects that contain information about next tasks to be executed. If the step was previously attempted, it will include error information. If a graph was interrupted [dynamically](/oss/python/langgraph/interrupts#pause-using-interrupt) from within a node, tasks will contain additional data associated with interrupts.
+#### Super-steps
+
+LangGraph created a checkpoint at each **super-step** boundary. A super-step is a single "tick" of the graph where all nodes scheduled for that step execute (potentially in parallel). For a sequential graph like `START -> A -> B -> END`, there are separate super-steps for the input, node A, and node B — producing a checkpoint after each one. Understanding super-step boundaries is important for [time travel](/oss/python/langgraph/use-time-travel), because you can only resume execution from a checkpoint (i.e., a super-step boundary).
 
 Checkpoints are persisted and can be used to restore the state of a thread at a later time.
 
@@ -77,6 +91,27 @@ After we run the graph, we expect to see exactly 4 checkpoints:
 
 Note that we `bar` channel values contain outputs from both nodes as we have a reducer for `bar` channel.
 
+#### Checkpoint namespace
+
+Each checkpoint has a `checkpoint_ns` (checkpoint namespace) field that identifies which graph or subgraph it belongs to:
+
+- **`""`** (empty string): The checkpoint belongs to the parent (root) graph.
+- **`"node_name:uuid"`**: The checkpoint belongs to a subgraph invoked as the given node. For nested subgraphs, namespaces are joined with `|` separators (e.g., `"outer_node:uuid|inner_node:uuid"`).
+
+You can access the checkpoint namespace from within a node via the config:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langchain_core.runnables import RunnableConfig
+
+def my_node(state: State, config: RunnableConfig):
+    checkpoint_ns = config["configurable"]["checkpoint_ns"]
+    # "" for the parent graph, "node_name:uuid" for a subgraph
+```
+
+See [Subgraphs](/oss/python/langgraph/use-subgraphs) for more details on working with subgraph state and checkpoints.
+
+## Get and update state
+
 ### Get state
 
 When interacting with the saved graph state, you **must** specify a [thread identifier](#threads). You can view the *latest* state of the graph by calling `graph.get_state(config)`. This will return a `StateSnapshot` object that corresponds to the latest checkpoint associated with the thread ID provided in the config or a checkpoint associated with a checkpoint ID for the thread, if provided.
@@ -103,6 +138,18 @@ StateSnapshot(
     parent_config={'configurable': {'thread_id': '1', 'checkpoint_ns': '', 'checkpoint_id': '1ef663ba-28f9-6ec4-8001-31981c2c39f8'}}, tasks=()
 )
 ```
+
+#### StateSnapshot fields
+
+| Field           | Type                     | Description                                                                                                                                                |
+| --------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `values`        | `dict`                   | State channel values at this checkpoint.                                                                                                                   |
+| `next`          | `tuple[str, ...]`        | Node names to execute next. Empty `()` means the graph is complete.                                                                                        |
+| `config`        | `dict`                   | Contains `thread_id`, `checkpoint_ns`, and `checkpoint_id`.                                                                                                |
+| `metadata`      | `dict`                   | Execution metadata. Contains `source` (`"input"`, `"loop"`, or `"update"`), `writes` (node outputs), and `step` (super-step counter).                      |
+| `created_at`    | `str`                    | ISO 8601 timestamp of when this checkpoint was created.                                                                                                    |
+| `parent_config` | `dict \| None`           | Config of the previous checkpoint. `None` for the first checkpoint.                                                                                        |
+| `tasks`         | `tuple[PregelTask, ...]` | Tasks to execute at this step. Each task has `id`, `name`, `error`, `interrupts`, and optionally `state` (subgraph snapshot, when using `subgraphs=True`). |
 
 ### Get state history
 
@@ -156,75 +203,46 @@ In our example, the output of [`get_state_history`](https://reference.langchain.
 ]
 ```
 
-### Replay
+#### Find a specific checkpoint
 
-It's also possible to play-back a prior graph execution. If we `invoke` a graph with a `thread_id` and a `checkpoint_id`, then we will *re-play* the previously executed steps *before* a checkpoint that corresponds to the `checkpoint_id`, and only execute the steps *after* the checkpoint.
-
-- `thread_id` is the ID of a thread.
-- `checkpoint_id` is an identifier that refers to a specific checkpoint within a thread.
-
-You must pass these when invoking the graph as part of the `configurable` portion of the config:
+You can filter the state history to find checkpoints matching specific criteria:
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-config = {"configurable": {"thread_id": "1", "checkpoint_id": "0c62ca34-ac19-445d-bbb0-5b4984975b2a"}}
-graph.invoke(None, config=config)
+history = list(graph.get_state_history(config))
+
+# Find the checkpoint before a specific node executed
+before_node_b = next(s for s in history if s.next == ("node_b",))
+
+# Find a checkpoint by step number
+step_2 = next(s for s in history if s.metadata["step"] == 2)
+
+# Find checkpoints created by update_state
+forks = [s for s in history if s.metadata["source"] == "update"]
+
+# Find the checkpoint where an interrupt occurred
+interrupted = next(
+    s for s in history
+    if s.tasks and any(t.interrupts for t in s.tasks)
+)
 ```
 
-Importantly, LangGraph knows whether a particular step has been executed previously. If it has, LangGraph simply *re-plays* that particular step in the graph and does not re-execute the step, but only for the steps *before* the provided `checkpoint_id`. All of the steps *after* `checkpoint_id` will be executed (i.e., a new fork), even if they have been executed previously. See this [how to guide on time-travel to learn more about replaying](/oss/python/langgraph/use-time-travel).
+### Replay
+
+Replay re-executes steps from a prior checkpoint. Invoke the graph with a prior `checkpoint_id` to re-run nodes after that checkpoint. Nodes before the checkpoint are skipped (their results are already saved). Nodes after the checkpoint re-execute, including any LLM calls, API requests, or [interrupts](/oss/python/langgraph/interrupts) — which are always re-triggered during replay.
+
+See [Time travel](/oss/python/langgraph/use-time-travel) for full details and code examples on replaying past executions.
 
 ### Update state
 
-In addition to re-playing the graph from specific `checkpoints`, we can also *edit* the graph state. We do this using [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state). This method accepts three different arguments:
+You can edit the graph state using [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state). This creates a new checkpoint with the updated values — it does not modify the original checkpoint. The update is treated the same as a node update: values are passed through [reducer](/oss/python/langgraph/graph-api#reducers) functions when defined, so channels with reducers *accumulate* values rather than overwrite them.
 
-#### `config`
-
-The config should contain `thread_id` specifying which thread to update. When only the `thread_id` is passed, we update (or fork) the current state. Optionally, if we include `checkpoint_id` field, then we fork that selected checkpoint.
-
-#### `values`
-
-These are the values that will be used to update the state. Note that this update is treated exactly as any update from a node is treated. This means that these values will be passed to the [reducer](/oss/python/langgraph/graph-api#reducers) functions, if they are defined for some of the channels in the graph state. This means that [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state) does NOT automatically overwrite the channel values for every channel, but only for the channels without reducers. Let's walk through an example.
-
-Let's assume you have defined the state of your graph with the following schema (see full example above):
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-from typing import Annotated
-from typing_extensions import TypedDict
-from operator import add
-
-class State(TypedDict):
-    foo: int
-    bar: Annotated[list[str], add]
-```
-
-Let's now assume the current state of the graph is
-
-```
-{"foo": 1, "bar": ["a"]}
-```
-
-If you update the state as below:
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-graph.update_state(config, {"foo": 2, "bar": ["b"]})
-```
-
-Then the new state of the graph will be:
-
-```
-{"foo": 2, "bar": ["a", "b"]}
-```
-
-The `foo` key (channel) is completely changed (because there is no reducer specified for that channel, so [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state) overwrites it). However, there is a reducer specified for the `bar` key, and so it appends `"b"` to the state of `bar`.
-
-#### `as_node`
-
-The final thing you can optionally specify when calling [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state) is `as_node`. If you provided it, the update will be applied as if it came from node `as_node`. If `as_node` is not provided, it will be set to the last node that updated the state, if not ambiguous. The reason this matters is that the next steps to execute depend on the last node to have given an update, so this can be used to control which node executes next. See this [how to guide on time-travel to learn more about forking state](/oss/python/langgraph/use-time-travel).
+You can optionally specify `as_node` to control which node the update is treated as coming from, which affects which node executes next. See [Time travel: `as_node`](/oss/python/langgraph/use-time-travel#control-which-node-runs-next-with-as_node) for details.
 
 ## Memory store
 
 A [state schema](/oss/python/langgraph/graph-api#schema) specifies a set of keys that are populated as a graph is executed. As discussed above, state can be written by a checkpointer to a thread at each graph step, enabling state persistence.
 
-But, what if we want to retain some information *across threads*? Consider the case of a chatbot where we want to retain specific information about the user across *all* chat conversations (e.g., threads) with that user!
+What if we want to retain some information *across threads*? Consider the case of a chatbot where we want to retain specific information about the user across *all* chat conversations (e.g., threads) with that user!
 
 With checkpointers alone, we cannot share information across threads. This motivates the need for the [`Store`](https://reference.langchain.com/python/langgraph/store/) interface. As an illustration, we can define an `InMemoryStore` to store information about a user across threads. We simply compile our graph with a checkpointer, as before, and pass the store.
 
@@ -477,12 +495,14 @@ See the [deployment guide](/langsmith/semantic-search) for more details and conf
 
 ## Checkpointer libraries
 
-Under the hood, checkpointing is powered by checkpointer objects that conform to [`BaseCheckpointSaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.base.BaseCheckpointSaver) interface. LangGraph provides several checkpointer implementations, all implemented via standalone, installable libraries:
+Under the hood, checkpointing is powered by checkpointer objects that conform to [`BaseCheckpointSaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.base.BaseCheckpointSaver) interface. LangGraph provides several checkpointer implementations, all implemented via standalone, installable libraries.
+
+See [checkpointer integrations](/oss/python/integrations/checkpointers/index) for available providers.
 
 - `langgraph-checkpoint`: The base interface for checkpointer savers ([`BaseCheckpointSaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.base.BaseCheckpointSaver)) and serialization/deserialization interface ([`SerializerProtocol`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.serde.base.SerializerProtocol)). Includes in-memory checkpointer implementation ([`InMemorySaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.memory.InMemorySaver)) for experimentation. LangGraph comes with `langgraph-checkpoint` included.
 - `langgraph-checkpoint-sqlite`: An implementation of LangGraph checkpointer that uses SQLite database ([`SqliteSaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.sqlite.SqliteSaver) / [`AsyncSqliteSaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.sqlite.aio.AsyncSqliteSaver)). Ideal for experimentation and local workflows. Needs to be installed separately.
 - `langgraph-checkpoint-postgres`: An advanced checkpointer that uses Postgres database ([`PostgresSaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.postgres.PostgresSaver) / [`AsyncPostgresSaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.postgres.aio.AsyncPostgresSaver)), used in LangSmith. Ideal for using in production. Needs to be installed separately.
-- `langgraph-checkpoint-cosmosdb`: An implementation of LangGraph checkpointer that uses Azure Cosmos DB (@\[`CosmosDBSaver`] / @\[`AsyncCosmosDBSaver`]). Ideal for using in production with Azure. Supports both sync and async operations. Needs to be installed separately.
+- `langgraph-checkpoint-cosmosdb`: An implementation of LangGraph checkpointer that uses Azure Cosmos DB (`CosmosDBSaver` / `AsyncCosmosDBSaver`). Ideal for using in production with Azure. Supports both sync and async operations. Needs to be installed separately.
 
 ### Checkpointer interface
 
@@ -544,28 +564,6 @@ checkpointer.setup()
 ```
 
 When running on LangSmith, encryption is automatically enabled whenever `LANGGRAPH_AES_KEY` is present, so you only need to provide the environment variable. Other encryption schemes can be used by implementing [`CipherProtocol`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.serde.base.CipherProtocol) and supplying it to [`EncryptedSerializer`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.serde.encrypted.EncryptedSerializer).
-
-## Capabilities
-
-### Human-in-the-loop
-
-First, checkpointers facilitate [human-in-the-loop workflows](/oss/python/langgraph/interrupts) by allowing humans to inspect, interrupt, and approve graph steps. Checkpointers are needed for these workflows as the human has to be able to view the state of a graph at any point in time, and the graph has to be to resume execution after the human has made any updates to the state. See [the how-to guides](/oss/python/langgraph/interrupts) for examples.
-
-### Memory
-
-Second, checkpointers allow for ["memory"](/oss/python/concepts/memory) between interactions. In the case of repeated human interactions (like conversations) any follow up messages can be sent to that thread, which will retain its memory of previous ones. See [Add memory](/oss/python/langgraph/add-memory) for information on how to add and manage conversation memory using checkpointers.
-
-### Time travel
-
-Third, checkpointers allow for ["time travel"](/oss/python/langgraph/use-time-travel), allowing users to replay prior graph executions to review and / or debug specific graph steps. In addition, checkpointers make it possible to fork the graph state at arbitrary checkpoints to explore alternative trajectories.
-
-### Fault-tolerance
-
-Lastly, checkpointing also provides fault-tolerance and error recovery: if one or more nodes fail at a given superstep, you can restart your graph from the last successful step. Additionally, when a graph node fails mid-execution at a given superstep, LangGraph stores pending checkpoint writes from any other nodes that completed successfully at that superstep, so that whenever we resume graph execution from that superstep we don't re-run the successful nodes.
-
-#### Pending writes
-
-Additionally, when a graph node fails mid-execution at a given superstep, LangGraph stores pending checkpoint writes from any other nodes that completed successfully at that superstep, so that whenever we resume graph execution from that superstep we don't re-run the successful nodes.
 
 ***
 

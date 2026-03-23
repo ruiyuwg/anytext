@@ -291,5 +291,5 @@ Learn more in the [OpenResponses API docs](/docs/ai-gateway/sdks-and-apis/openre
 
 title: "Video Generation Quickstart"
 description: "Generate videos from text prompts, images, or video input using AI Gateway."
-last\_updated: "2026-03-08T05:03:10.488Z"
+last\_updated: "2026-03-23T09:40:04.441Z"
 source: "https://vercel.com/docs/ai-gateway/getting-started/video"

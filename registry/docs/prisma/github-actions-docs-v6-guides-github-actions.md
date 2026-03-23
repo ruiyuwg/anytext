@@ -504,21 +504,21 @@ npx prisma studio
 
 
 ```bash
-npm run seed
+pnpm run seed
 pnpm dlx prisma studio
 ```
 
 
 
 ```bash
-npm run seed
+yarn seed
 yarn dlx prisma studio
 ```
 
 
 
 ```bash
-npm run seed
+bun run seed
 bun x prisma studio
 ```
 ````

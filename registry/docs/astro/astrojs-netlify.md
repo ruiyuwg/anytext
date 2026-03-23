@@ -101,9 +101,9 @@ The [Netlify Blog post on Astro](https://www.netlify.com/blog/how-to-deploy-astr
 
 [Section titled “Running Astro middleware on Netlify Edge Functions”](#running-astro-middleware-on-netlify-edge-functions)
 
-Any Astro middleware is applied to pre-rendered pages at build-time, and to on-demand-rendered pages at runtime.
+By default, Astro middleware is applied to pre-rendered pages at build-time and to on-demand-rendered pages at runtime.
 
-To implement redirects, access control, or custom response headers for pre-rendered pages, run your middleware on Netlify Edge Functions by enabling the [`edgeMiddleware` option](/en/reference/adapter-reference/#edgemiddleware):
+To implement redirects, access control, or custom response headers for pre-rendered pages, run your middleware on Netlify Edge Functions by setting the [`middlewareMode` option](/en/reference/adapter-reference/#middlewaremode) to `edge`:
 
 astro.config.mjs
 
@@ -115,12 +115,12 @@ import netlify from '@astrojs/netlify';
 export default defineConfig({
   // ...
   adapter: netlify({
-+    edgeMiddleware: true,
++    middlewareMode: 'edge',
   }),
 });
 ```
 
-When `edgeMiddleware` is enabled, an edge function will execute your middleware code for all requests including static assets, prerendered pages, and on-demand rendered pages.
+When `middlewareMode` is set to `'edge'`, an edge function will execute your middleware code for all requests, including static assets, prerendered pages, and on-demand rendered pages.
 
 For on-demand rendered pages, the `context.locals` object is serialized using JSON and sent in a header for the serverless function, which performs the rendering. As a security measure, the serverless function will refuse to serve requests with a `403 Forbidden` response unless they come from the generated edge function.
 
@@ -284,7 +284,7 @@ With [fine-grained cache control](https://www.netlify.com/blog/swr-and-fine-grai
 
 [Section titled “Skew Protection”](#skew-protection)
 
-**Added in:** `@astrojs/netlify@6.6.0` New
+**Added in:** `@astrojs/netlify@6.6.0`
 
 Netlify’s skew protection ensures that users accessing your site during a deployment continue to receive content from the same deploy version. The Netlify adapter automatically configures skew protection for Astro features like actions, server islands, view transitions, and prefetch requests by injecting the current deploy ID into internal requests. This prevents version mismatches between the client and server during active deployments.
 
@@ -467,26 +467,20 @@ Injects environment variables from your Netlify site into the development enviro
 
 This allows you to use the same values in development as you would in production. See [the Netlify docs on environment variables](https://docs.netlify.com/build/environment-variables/overview/) for more information, including how to use different variables for different environments.
 
-## Experimental features
+### `staticHeaders`
 
-[Section titled “Experimental features”](#experimental-features)
-
-The following features are also available for use, but may be subject to breaking changes in future updates. Please follow the [`@astrojs/netlify` CHANGELOG](https://github.com/withastro/astro/tree/main/packages/integrations/netlify/CHANGELOG.md) carefully for updates if you are using these features in your project.
-
-### `experimentalStaticHeaders`
-
-[Section titled “experimentalStaticHeaders”](#experimentalstaticheaders)
+[Section titled “staticHeaders”](#staticheaders)
 
 **Type:** `boolean`\
 **Default:** `false`
 
-**Added in:** `@astrojs/netlify@6.4.0`
+**Added in:** `@astrojs/netlify@7.0.0` New
 
 Enables specifying custom headers for prerendered pages in Netlify’s configuration.
 
 If enabled, the adapter will save [static headers in the Framework API config file](https://docs.netlify.com/frameworks-api/#headers) when provided by Astro features, such as Content Security Policy.
 
-For example, when [experimental Content Security Policy](/en/reference/experimental-flags/csp/) is enabled, `experimentalStaticHeaders` can be used to add the CSP `headers` to your Netlify configuration, instead of creating a `<meta>` element:
+For example, when [Content Security Policy](/en/reference/configuration-reference/#securitycsp) is enabled, `staticHeaders` can be used to add the CSP `headers` to your Netlify configuration, instead of creating a `<meta>` element:
 
 astro.config.mjs
 
@@ -496,11 +490,11 @@ import netlify from '@astrojs/netlify';
 
 
 export default defineConfig({
-  experimental: {
+  security: {
     csp: true
   },
   adapter: netlify({
-    experimentalStaticHeaders: true
+    staticHeaders: true
   })
 });
 ```

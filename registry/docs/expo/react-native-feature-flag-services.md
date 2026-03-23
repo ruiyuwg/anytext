@@ -48,7 +48,7 @@ In-app purchases (IAP) are transactions within a mobile or desktop application w
 
 ## Tutorial
 
-[Watch: How to Implement In-App Purchases in Expo](https://www.youtube.com/watch?v=R3fLKC-2Qh0)
+[Watch: How to Implement In-App Purchases in Expo](https://www.youtube.com/watch?v=R3fLKC-2Qh0) — Set up in-app purchases and subscriptions in your Expo app using RevenueCat.
 
 [Expo In-App Purchase Tutorial](https://www.revenuecat.com/blog/engineering/expo-in-app-purchase-tutorial/) — The getting started guide for in-app purchases and subscriptions with react-native-purchases library and RevenueCat. — react-native-purchases
 

@@ -56,7 +56,7 @@ Here are a few key points to keep in mind:
 
 By implementing these security measures, you can protect your application from potential threats and ensure that the webhooks you receive are genuine and trustworthy.
 
-# HTTP API reference
+# Webhooks API reference
 
 The Webhooks API allows you to programmatically interact with and monitor webhooks.
 

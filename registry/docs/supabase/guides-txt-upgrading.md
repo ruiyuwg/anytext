@@ -6,10 +6,6 @@ This guide refers to upgrading the Postgres version of your Supabase Project. Fo
 
 You can upgrade your project using in-place upgrades or by pausing and restoring your project.
 
-```
-The Migrating and Upgrading guide has been divided into two sections. To migrate between Supabase projects, see [Migrating within Supabase](/docs/guides/platform/migrating-within-supabase).
-```
-
 ## In-place upgrades
 
 For security purposes, passwords for custom roles are not backed up and, following a restore, they would need to be reset. See [here](/docs/guides/platform/backups#daily-backups) for more details

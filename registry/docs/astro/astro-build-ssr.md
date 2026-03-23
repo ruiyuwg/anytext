@@ -10,13 +10,11 @@
 
 **Why:** To access the SSR manifest and map of the emitted entry points. This is useful when creating custom SSR builds in plugins or integrations.
 
-- `entryPoints` maps a page route to the physical file emitted after the build;
 - `middlewareEntryPoint` is the file system path of the middleware file;
 
 ```js
 'astro:build:ssr'?: (options: {
   manifest: SerializedSSRManifest;
-  entryPoints: Map<IntegrationRouteData, URL>;
   middlewareEntryPoint: URL | undefined;
   logger: AstroIntegrationLogger;
 }) => void | Promise<void>;
@@ -45,6 +43,62 @@ export default {
   },
 }
 ```
+
+##### `manifest.rootDir`
+
+[Section titled “manifest.rootDir”](#manifestrootdir)
+
+**Type:** `string`
+
+Specifies a serialized version of the [`SSRManifest.rootDir`](#ssrmanifestrootdir).
+
+##### `manifest.srcDir`
+
+[Section titled “manifest.srcDir”](#manifestsrcdir)
+
+**Type:** `string`
+
+Specifies a serialized version of the [`SSRManifest.srcDir`](#ssrmanifestsrcdir).
+
+##### `manifest.cacheDir`
+
+[Section titled “manifest.cacheDir”](#manifestcachedir)
+
+**Type:** `string`
+
+Specifies a serialized version of the [`SSRManifest.cacheDir`](#ssrmanifestcachedir).
+
+##### `manifest.outDir`
+
+[Section titled “manifest.outDir”](#manifestoutdir)
+
+**Type:** `string`
+
+Specifies a serialized version of the [`SSRManifest.outDir`](#ssrmanifestoutdir).
+
+##### `manifest.publicDir`
+
+[Section titled “manifest.publicDir”](#manifestpublicdir)
+
+**Type:** `string`
+
+Specifies a serialized version of the [`SSRManifest.publicDir`](#ssrmanifestpublicdir).
+
+##### `manifest.buildClientDir`
+
+[Section titled “manifest.buildClientDir”](#manifestbuildclientdir)
+
+**Type:** `string`
+
+Specifies a serialized version of the [`SSRManifest.buildClientDir`](#ssrmanifestbuildclientdir).
+
+##### `manifest.buildServerDir`
+
+[Section titled “manifest.buildServerDir”](#manifestbuildserverdir)
+
+**Type:** `string`
+
+Specifies a serialized version of the [`SSRManifest.buildServerDir`](#ssrmanifestbuildserverdir).
 
 ##### `manifest.routes`
 
@@ -90,16 +144,6 @@ Defines an array of key-value pairs where each entry is a tuple. The first eleme
 
 Defines an array of key-value pairs where the first element is the directive name (e.g. `load`, `visible`) and the second is the directive’s implementation code.
 
-##### `manifest.serverIslandNameMap`
-
-[Section titled “manifest.serverIslandNameMap”](#manifestserverislandnamemap)
-
-**Type:** `[string, string][]`
-
-**Added in:** `astro@4.12.0`
-
-Defines an array of key-value pairs where each entry is a tuple. The first element is the component path and the second is the assigned name.
-
 ##### `manifest.key`
 
 [Section titled “manifest.key”](#manifestkey)
@@ -109,29 +153,6 @@ Defines an array of key-value pairs where each entry is a tuple. The first eleme
 **Added in:** `astro@4.13.4`
 
 Specifies the cryptographic key, serialized as a string, used for encrypting server island props.
-
-#### `entryPoints` option
-
-[Section titled “entryPoints option”](#entrypoints-option)
-
-**Type:** `Map<IntegrationRouteData, URL>`
-
-**Added in:** `astro@2.7.0`
-
-A `Map` of the emitted entry points with the `IntegrationRouteData` as key and the physical file URL as value.
-
-```js
-export default {
-  name: 'my-integration',
-  hooks: {
-    'astro:build:ssr': ({ entryPoints }) => {
-      entryPoints.forEach((url) => {
-        console.log(url.href);
-      });
-    },
-  },
-}
-```
 
 #### `middlewareEntryPoint` option
 

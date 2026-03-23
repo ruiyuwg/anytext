@@ -49,7 +49,7 @@ import {schemaTypes} from './schemas'
 export default defineConfig({
   name: 'default',
   projectId: '<projectId>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   plugins: [
     structureTool({
       structure: deskStructure,

@@ -26,7 +26,7 @@ Stripe-hosted onboarding is a web form hosted by Stripe with your brand’s name
 
 Additionally, Stripe-hosted onboarding lets existing connected accounts update their business type or previously submitted details.
 
-Stripe-hosted onboarding with Accounts v1 supports [networked onboarding](https://docs.stripe.com/connect/networked-onboarding.md), which allows owners of multiple Stripe accounts to share certain types of business information between them. When they onboard an account, they can reuse that information from an existing account instead of resubmitting it.
+Stripe-hosted onboarding supports [networked onboarding](https://docs.stripe.com/connect/networked-onboarding.md), which allows owners of multiple Stripe accounts to share certain types of business information between them. When they onboard an account, they can reuse that information from an existing account instead of resubmitting it.
 
 Use Stripe-hosted onboarding if you want Stripe to handle onboarding and reduce the amount of effort for your platform.
 
@@ -38,7 +38,7 @@ Embedded onboarding is a themeable onboarding UI with limited Stripe branding, a
 
 Additionally, Embedded onboarding lets existing connected accounts update their business type or previously submitted details.
 
-Embedded onboarding with Accounts v1 supports [networked onboarding](https://docs.stripe.com/connect/networked-onboarding.md), which allows owners of multiple Stripe accounts to share certain types of business information between them. When they onboard an account, they can reuse that information from an existing account instead of resubmitting it.
+Embedded onboarding supports [networked onboarding](https://docs.stripe.com/connect/networked-onboarding.md), which allows owners of multiple Stripe accounts to share certain types of business information between them. When they onboard an account, they can reuse that information from an existing account instead of resubmitting it.
 
 With embedded onboarding, you get a customized onboarding flow and don’t need to update your onboarding integration as compliance requirements change.
 

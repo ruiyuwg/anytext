@@ -196,7 +196,7 @@ const getWeather = tool(
 
 [`ToolNode`](https://reference.langchain.com/javascript/langchain-langgraph/prebuilt/ToolNode) is a prebuilt node that executes tools in LangGraph workflows. It handles parallel tool execution, error handling, and state injection automatically.
 
-For custom workflows where you need fine-grained control over tool execution patterns, use [`ToolNode`](https://reference.langchain.com/javascript/langchain-langgraph/prebuilt/ToolNode) instead of @\[`create_agent`]. It's the building block that powers agent tool execution.
+For custom workflows where you need fine-grained control over tool execution patterns, use [`ToolNode`](https://reference.langchain.com/javascript/langchain-langgraph/prebuilt/ToolNode) instead of [`create_agent`](https://reference.langchain.com/javascript/langchain/index/createAgent). It's the building block that powers agent tool execution.
 
 ### Basic usage
 
@@ -350,7 +350,7 @@ const toolNode = new ToolNode(tools, {
 
 ### Route with tools\_condition
 
-Use @\[`tools_condition`] for conditional routing based on whether the LLM made tool calls:
+Use [`tools_condition`](https://reference.langchain.com/javascript/langchain-langgraph/prebuilt/toolsCondition) for conditional routing based on whether the LLM made tool calls:
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { ToolNode, toolsCondition } from "@langchain/langgraph/prebuilt";
@@ -368,7 +368,7 @@ const graph = builder.compile();
 
 ### State injection
 
-Tools can access the current graph state through @\[`ToolRuntime`]:
+Tools can access the current graph state through [`ToolRuntime`](https://reference.langchain.com/javascript/langchain/index/Runtime):
 
 For more details on accessing state, context, and long-term memory from tools, see [Access context](#access-context).
 

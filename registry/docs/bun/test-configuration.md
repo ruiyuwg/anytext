@@ -63,7 +63,7 @@ bun test --preload ./test-setup.ts --preload ./global-mocks.ts
 
 #### Common Preload Use Cases
 
-```ts title="test-setup.ts" icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts title="test-setup.ts" icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 // Global test setup
 import { beforeAll, afterAll } from "bun:test";
 
@@ -78,7 +78,7 @@ afterAll(() => {
 });
 ```
 
-```ts title="global-mocks.ts" icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts title="global-mocks.ts" icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 // Global mocks
 import { mock } from "bun:test";
 
@@ -91,6 +91,57 @@ mock.module("./external-api", () => ({
   fetchData: mock(() => Promise.resolve({ data: "test" })),
 }));
 ```
+
+### Path Ignore Patterns
+
+Exclude files and directories from test discovery entirely using glob patterns. Unlike `coveragePathIgnorePatterns` which only affects coverage reports, `pathIgnorePatterns` prevents matching paths from being discovered and run as tests.
+
+This is useful when your project contains submodules, vendored code, or other directories with `*.test.ts` files that you don't want `bun test` to pick up.
+
+```toml title="bunfig.toml" icon="settings" theme={"theme":{"light":"github-light","dark":"dracula"}}
+[test]
+# Single pattern
+pathIgnorePatterns = "vendor/**"
+
+# Multiple patterns
+pathIgnorePatterns = [
+  "vendor/**",
+  "submodules/**",
+  "fixtures/**"
+]
+```
+
+This is equivalent to using `--path-ignore-patterns` on the command line:
+
+```bash terminal icon="terminal" theme={"theme":{"light":"github-light","dark":"dracula"}}
+bun test --path-ignore-patterns 'vendor/**' --path-ignore-patterns 'fixtures/**'
+```
+
+Directories matching a pattern are pruned during scanning, so their contents are never traversed. This means ignoring a large directory tree is efficient -- Bun won't spend time reading files inside it.
+
+#### Common Use Cases
+
+```toml title="bunfig.toml" icon="settings" theme={"theme":{"light":"github-light","dark":"dracula"}}
+[test]
+pathIgnorePatterns = [
+  # Git submodules with their own test suites
+  "submodules/**",
+
+  # Vendored dependencies
+  "vendor/**",
+  "third-party/**",
+
+  # Test fixtures that look like tests but aren't
+  "fixtures/**",
+  "**/test-data/**",
+
+  # Integration / E2E tests you want to run separately
+  "**/integration/**",
+  "e2e/**"
+]
+```
+
+Command-line `--path-ignore-patterns` flags override the `bunfig.toml` value entirely -- the two are not merged.
 
 ## Timeouts
 
@@ -105,7 +156,7 @@ timeout = 10000  # 10 seconds (default is 5000ms)
 
 This applies to all tests unless overridden by individual test timeouts:
 
-```ts title="test.ts" icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts title="test.ts" icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 // This test will use the default timeout from bunfig.toml
 test("uses default timeout", () => {
   // test implementation
@@ -414,6 +465,7 @@ exact = true
 # Test discovery
 root = "src"
 preload = ["./test-setup.ts", "./global-mocks.ts"]
+pathIgnorePatterns = ["vendor/**", "submodules/**"]
 
 # Execution settings
 timeout = 10000

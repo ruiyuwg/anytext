@@ -19,7 +19,7 @@ import {createClient} from '@sanity/client'
 
 const client = createClient({
   projectId: '<your-project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   useCdn: true,
   apiVersion: '2026-03-01',
 })
@@ -91,7 +91,7 @@ The `published` perspective returns only published documents, excluding drafts a
 ```typescript
 const client = createClient({
   projectId: '<your-project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   perspective: 'published', // default
   useCdn: true,
   apiVersion: '2026-03-01',
@@ -118,7 +118,7 @@ The `drafts` perspective returns draft versions when they exist, falling back to
 // Configure client for preview
 const previewClient = createClient({
   projectId: '<your-project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   perspective: 'drafts',
   useCdn: false, // Drafts are not cached on the CDN
   token: process.env.SANITY_API_TOKEN,
@@ -138,7 +138,7 @@ The `raw` perspective returns every version of every matching document as separa
 ```typescript
 const rawClient = createClient({
   projectId: '<your-project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   perspective: 'raw',
   useCdn: false,
   token: process.env.SANITY_API_TOKEN,

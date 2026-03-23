@@ -6,9 +6,18 @@ We have prefixed this as `unstable_` as it's a new API, but you're safe to use i
 
 ## Usage
 
-```tsx
-import { createTRPCClient, unstable_localLink } from "@trpc/client";
-import type { AppRouter } from "../server";
+```tsx twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+// ---cut---
+import { createTRPCClient, unstable_localLink } from '@trpc/client';
+import type { AppRouter } from './server';
+import { appRouter } from './server';
 
 const client = createTRPCClient<AppRouter>({
   links: [
@@ -20,7 +29,7 @@ const client = createTRPCClient<AppRouter>({
       },
       onError: (opts) => {
         // Log errors here, similarly to how you would in an API route
-        console.error("Error:", opts.error);
+        console.error('Error:', opts.error);
       },
     }),
   ],
@@ -39,7 +48,13 @@ const client = createTRPCClient<AppRouter>({
 
 The `localLink` accepts the following options:
 
-```ts
+```ts twoslash
+type AnyRouter = any;
+type inferRouterContext<T> = any;
+type inferClientTypes<T> = any;
+type ErrorHandlerOptions<T> = any;
+type TransformerOptions<T> = {};
+// ---cut---
 type LocalLinkOptions<TRouter extends AnyRouter> = {
   router: TRouter;
   createContext: () => Promise<inferRouterContext<TRouter>>;
@@ -69,62 +84,3 @@ Optional input/output transformers for serialization/deserialization of data.
 - For most client-side applications, you should use the `httpLink` or other HTTP-based links instead
 - The link supports all tRPC features including queries, mutations, and subscriptions
 - Error handling and transformation are handled automatically, just like with HTTP-based links
-
-# Logger Link
-
-`loggerLink` is a link that lets you implement a logger for your tRPC client. It allows you to see more clearly what operations are queries, mutations, or subscriptions, their requests, and responses. The link, by default, prints a prettified log to the browser's console. However, you can customize the logging behavior and the way it prints to the console with your own implementations.
-
-## Usage
-
-You can import and add the `loggerLink` to the `links` array as such:
-
-```ts title="client/index.ts"
-import { createTRPCClient, httpBatchLink, loggerLink } from "@trpc/client";
-import type { AppRouter } from "../server";
-
-const client = createTRPCClient<AppRouter>({
-  links: [
-    /**
-     * The function passed to enabled is an example in case you want to the link to
-     * log to your console in development and only log errors in production
-     */
-    loggerLink({
-      enabled: (opts) =>
-        (process.env.NODE_ENV === "development" &&
-          typeof window !== "undefined") ||
-        (opts.direction === "down" && opts.result instanceof Error),
-    }),
-    httpBatchLink({
-      url: "http://localhost:3000",
-    }),
-  ],
-});
-```
-
-## `loggerLink` Options
-
-The `loggerLink` function takes an options object that has the `LoggerLinkOptions` shape:
-
-```ts
-type LoggerLinkOptions<TRouter extends AnyRouter> = {
-  logger?: LogFn<TRouter>;
-  /**
-   * It is a function that returns a condition that determines whether to enable the logger.
-   * It is true by default.
-   */
-  enabled?: EnabledFn<TRouter>;
-  /**
-   * Used in the built-in defaultLogger
-   */
-  console?: ConsoleEsque;
-  /**
-   * Color mode used in the default logger.
-   * @default typeof window === 'undefined' ? 'ansi' : 'css'
-   */
-  colorMode?: "ansi" | "css";
-};
-```
-
-## Reference
-
-You can check out the source code for this link on [GitHub.](https://github.com/trpc/trpc/blob/main/packages/client/src/links/loggerLink.ts)

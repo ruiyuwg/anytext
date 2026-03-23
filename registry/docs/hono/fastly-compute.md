@@ -10,6 +10,8 @@ A starter for Fastly Compute is available.
 Start your project with "create-hono" command.
 Select `fastly` template for this example.
 
+::: code-group
+
 ```sh [npm]
 npm create hono@latest my-app
 ```
@@ -30,7 +32,11 @@ bun create hono@latest my-app
 deno init --npm hono my-app
 ```
 
+:::
+
 Move to `my-app` and install the dependencies.
+
+::: code-group
 
 ```sh [npm]
 cd my-app
@@ -52,20 +58,22 @@ cd my-app
 bun i
 ```
 
+:::
+
 ## 2. Hello World
 
 Edit `src/index.ts`:
 
 ```ts
 // src/index.ts
-import { Hono } from "hono";
-import { fire } from "@fastly/hono-fastly-compute";
+import { Hono } from 'hono'
+import { fire } from '@fastly/hono-fastly-compute'
 
-const app = new Hono();
+const app = new Hono()
 
-app.get("/", (c) => c.text("Hello Fastly!"));
+app.get('/', (c) => c.text('Hello Fastly!'))
 
-fire(app);
+fire(app)
 ```
 
 > \[!NOTE]
@@ -74,6 +82,8 @@ fire(app);
 ## 3. Run
 
 Run the development server locally. Then, access `http://localhost:7676` in your Web browser.
+
+::: code-group
 
 ```sh [npm]
 npm run start
@@ -91,11 +101,15 @@ pnpm run start
 bun run start
 ```
 
+:::
+
 ## 4. Deploy
 
 To build and deploy your application to your Fastly account, type the following command. The first time you deploy the application, you will be prompted to create a new service in your account.
 
 If you don't have an account yet, you must [create your Fastly account](https://www.fastly.com/signup/).
+
+::: code-group
 
 ```sh [npm]
 npm run deploy
@@ -113,6 +127,8 @@ pnpm run deploy
 bun run deploy
 ```
 
+:::
+
 ## Bindings
 
 In Fastly Compute, you can bind Fastly platform resources, such as KV Stores, Config Stores, Secret Stores, Backends, Access Control Lists, Named Log Streams, and Environment Variables. You can access them through `c.env`, and will have their individual SDK types.
@@ -121,20 +137,20 @@ To use these bindings, import `buildFire` instead of `fire` from `@fastly/hono-f
 
 ```ts
 // src/index.ts
-import { buildFire } from "@fastly/hono-fastly-compute";
+import { buildFire } from '@fastly/hono-fastly-compute'
 
 const fire = buildFire({
-  siteData: "KVStore:site-data", // I have a KV Store named "site-data"
-});
+  siteData: 'KVStore:site-data', // I have a KV Store named "site-data"
+})
 
-const app = new Hono<{ Bindings: typeof fire.Bindings }>();
+const app = new Hono<{ Bindings: typeof fire.Bindings }>()
 
-app.put("/upload/:key", async (c, next) => {
+app.put('/upload/:key', async (c, next) => {
   // e.g., Access the KV Store
-  const key = c.req.param("key");
-  await c.env.siteData.put(key, c.req.body);
-  return c.text(`Put ${key} successfully!`);
-});
+  const key = c.req.param('key')
+  await c.env.siteData.put(key, c.req.body)
+  return c.text(`Put ${key} successfully!`)
+})
 
-fire(app);
+fire(app)
 ```

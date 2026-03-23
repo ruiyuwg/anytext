@@ -2,7 +2,7 @@
 
 When creating a graph with a loop, we require a mechanism for terminating execution. This is most commonly done by adding a [conditional edge](/oss/javascript/langgraph/graph-api#conditional-edges) that routes to the [END](/oss/javascript/langgraph/graph-api#end-node) node once we reach some termination condition.
 
-You can also set the graph recursion limit when invoking or streaming the graph. The recursion limit sets the number of [supersteps](/oss/javascript/langgraph/graph-api#graphs) that the graph is allowed to execute before it raises an error. Read more about the concept of recursion limits [here](/oss/javascript/langgraph/graph-api#recursion-limit).
+You can also set the graph recursion limit when invoking or streaming the graph. The recursion limit sets the number of [super-steps](/oss/javascript/langgraph/graph-api#graphs) that the graph is allowed to execute before it raises an error. Read more about the [recursion limit concept](/oss/javascript/langgraph/graph-api#recursion-limit).
 
 Let's consider a simple graph with a loop to better understand how these mechanisms work.
 

@@ -6,7 +6,7 @@ Interrupts allow you to pause graph execution at specific points and wait for ex
 
 Interrupts work by calling the `interrupt()` function at any point in your graph nodes. The function accepts any JSON-serializable value which is surfaced to the caller. When you're ready to continue, you resume execution by re-invoking the graph using `Command`, which then becomes the return value of the `interrupt()` call from inside the node.
 
-Unlike static breakpoints (which pause before or after specific nodes), interrupts are **dynamic**—they can be placed anywhere in your code and can be conditional based on your application logic.
+Unlike static breakpoints (which pause before or after specific nodes), interrupts are **dynamic**: they can be placed anywhere in your code and can be conditional based on your application logic.
 
 - **Checkpointing keeps your place:** the checkpointer writes the exact graph state so you can resume later, even when in an error state.
 - **`thread_id` is your pointer:** use `{ configurable: { thread_id: ... } }` as options to the `invoke` method to tell the checkpointer which state to load.
@@ -73,7 +73,7 @@ await graph.invoke(new Command({ resume: true }), config);
 - The node restarts from the beginning of the node where the [`interrupt`](https://reference.langchain.com/javascript/langchain-langgraph/index/interrupt) was called when resumed, so any code before the [`interrupt`](https://reference.langchain.com/javascript/langchain-langgraph/index/interrupt) runs again
 - You can pass any JSON-serializable value as the resume value
 
-  `new Command({ resume: ... })` is the **only** `Command` pattern intended as input to `invoke()`/`stream()`. The other `Command` parameters (`update`, `goto`, `graph`) are designed for [returning from node functions](/oss/javascript/langgraph/graph-api#command). Do not pass `new Command({ update: ... })` as input to continue multi-turn conversations — pass a plain input object instead.
+  `new Command({ resume: ... })` is the **only** `Command` pattern intended as input to `invoke()`/`stream()`. The other `Command` parameters (`update`, `goto`, `graph`) are designed for [returning from node functions](/oss/javascript/langgraph/graph-api#command). Do not pass `new Command({ update: ... })` as input to continue multi-turn conversations—pass a plain input object instead.
 
 ## Common patterns
 
@@ -92,44 +92,11 @@ When building interactive agents with human-in-the-loop workflows, you can strea
 Use multiple stream modes (`"messages"` and `"updates"`) with `subgraphs=True` (if subgraphs are present) to:
 
 - Stream AI responses in real-time as they're generated
+
 - Detect when the graph encounters an interrupt
+
 - Handle user input and resume execution seamlessly
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-async for metadata, mode, chunk in graph.astream(
-    initial_input,
-    stream_mode=["messages", "updates"],
-    subgraphs=True,
-    config=config
-):
-    if mode == "messages":
-        # Handle streaming message content
-        msg, _ = chunk
-        if isinstance(msg, AIMessageChunk) and msg.content:
-            # Display content in real-time
-            display_streaming_content(msg.content)
-
-    elif mode == "updates":
-        # Check for interrupts
-        if "__interrupt__" in chunk:
-            # Stop streaming display
-            interrupt_info = chunk["__interrupt__"][0].value
-
-            # Handle user input
-            user_response = get_user_input(interrupt_info)
-
-            # Resume graph with updated input
-            initial_input = Command(resume=user_response)
-            break
-
-        else:
-            # Track node transitions
-            current_node = list(chunk.keys())[0]
-```
-
-- **`stream_mode=["messages", "updates"]`**: Enables dual streaming of both message chunks and graph state updates
-- **`subgraphs=True`**: Required for interrupt detection in nested graphs
-- **`"__interrupt__"` detection**: Signals when human input is needed
 - **`Command(resume=...)`**: Resumes graph execution with user-provided data
 
 ### Handling multiple interrupts
@@ -181,7 +148,7 @@ const graph = new StateGraph(State)
 const config = { configurable: { thread_id: "1" } };
 
 async function main() {
-  // Step 1: invoke — both parallel nodes hit interrupt() and pause
+  // Step 1: invoke - both parallel nodes hit interrupt() and pause
   const interruptedResult = await graph.invoke({ vals: [] }, config);
   console.log(interruptedResult);
   /*

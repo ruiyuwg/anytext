@@ -5,7 +5,7 @@ The Console workflows are based on four main concepts:
 - [**User account**](#user-account): In order to use Prisma products, you need to have a Console user account. A *user* will typically create one user account to manage all their workspaces, projects and resources. The *user* can also be invited to join other workspaces to collaborate on the projects in that workspace.
 - [**Workspaces**](#workspace): A user account can belong to multiple workspaces. A workspace typically represents a *team* of individuals working together on one or more projects. **Billing is on a workspace level**, i.e. the invoice for a workspace at the end of the month captures all costs associated with the projects in that workspace.
 - [**Projects**](#project): A project belongs to a workspace. It typically represents the *application* or *service* a team is working on.
-- [**Resources**](#resources): Resources represent the actual services or databases within a project. For example, in Prisma Postgres, each project can contain multiple databases. For Accelerate, resources might correspond to different environments (like `Development`, `Staging`, or `Production`). **API keys are provisioned at the resource level**, and products are configured per resource as well (e.g., the database connection string used for Accelerate).
+- [**Resources**](#resources): Resources represent the actual services or databases within a project. For example, in Prisma Postgres, each project can contain multiple databases. For Accelerate, resources might correspond to different environments (like `Development`, `Staging`, or `Production`). **Connection strings are provisioned at the resource level**, and products are configured per resource as well (e.g., the database connection string used for Accelerate).
 
 Here is a visual illustration of how these concepts relate to each other:
 
@@ -223,7 +223,7 @@ Resources represent the actual services or databases within a project. The type 
 In each project, you can:
 
 - Create and manage multiple resources (databases or environments)
-- Generate API keys specific to each resource
+- Generate connection strings specific to each resource
 - Configure product-specific settings:
   - **For Prisma Postgres databases**:
     - View database metrics and performance

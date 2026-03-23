@@ -1,107 +1,415 @@
 # Modules
 
-## Module Compatibility
+Modules are the building blocks of Nuxt. Kit provides a set of utilities to help you create and use modules. You can use these utilities to create your own modules or to reuse existing modules. For example, you can use the `defineNuxtModule` function to define a module and specify dependencies using the `moduleDependencies` option.
 
-Nuxt 3 has a basic backward compatibility layer for Nuxt 2 modules using `@nuxt/kit` auto wrappers. But there are usually steps to follow to make modules compatible with Nuxt 3 and sometimes, using Nuxt Bridge is required for cross-version compatibility.
+## `defineNuxtModule`
 
-We have prepared a [Dedicated Guide](https://nuxt.com/docs/3.x/guide/modules) for authoring Nuxt 3 ready modules using `@nuxt/kit`. Currently best migration path is to follow it and rewrite your modules. Rest of this guide includes preparation steps if you prefer to avoid a full rewrite yet making modules compatible with Nuxt 3.
+Define a Nuxt module, automatically merging defaults with user provided options, installing any hooks that are provided, and calling an optional setup function for full control.
 
-::tip{icon="i-lucide-puzzle" to="https://nuxt.com/modules"}
-Explore Nuxt 3 compatible modules.
-::
+### Usage
 
-### Plugin Compatibility
+```ts twoslash
+import { defineNuxtModule } from '@nuxt/kit'
 
-Nuxt 3 plugins are **not** fully backward compatible with Nuxt 2.
-
-:read-more{to="https://nuxt.com/docs/3.x/directory-structure/plugins"}
-
-### Vue Compatibility
-
-Plugins or components using the Composition API need exclusive Vue 2 or Vue 3 support.
-
-By using [vue-demi](https://github.com/vueuse/vue-demi){rel=""nofollow""} they should be compatible with both Nuxt 2 and 3.
-
-## Module Migration
-
-When Nuxt 3 users add your module, you will not have access to the module container (`this.*`) so you will need to use utilities from `@nuxt/kit` to access the container functionality.
-
-### Test with `@nuxt/bridge`
-
-Migrating to `@nuxt/bridge` is the first and most important step for supporting Nuxt 3.
-
-If you have a fixture or example in your module, add `@nuxt/bridge` package to its config (see [example](https://nuxt.com/docs/3.x/bridge/overview#update-nuxtconfig))
-
-### Migrate from CommonJS to ESM
-
-Nuxt 3 natively supports TypeScript and ECMAScript Modules. Please check [Native ES Modules](https://nuxt.com/docs/3.x/guide/concepts/esm) for more info and upgrading.
-
-### Ensure Plugins Default Export
-
-If you inject a Nuxt plugin that does not have `export default` (such as global Vue plugins), ensure you add `export default () => { }` to the end of it.
-
-::code-group
-
-```js [Before]
-// ~/plugins/vuelidate.js
-import Vue from 'vue'
-import Vuelidate from 'vuelidate'
-
-Vue.use(Vuelidate)
+export default defineNuxtModule({
+  meta: {
+    name: 'my-module',
+    configKey: 'myModule',
+  },
+  defaults: {
+    enabled: true,
+  },
+  setup (options) {
+    if (options.enabled) {
+      console.log('My Nuxt module is enabled!')
+    }
+  },
+})
 ```
 
-```js [After]
-// ~/plugins/vuelidate.js
-import Vue from 'vue'
-import Vuelidate from 'vuelidate'
+### Type
 
-Vue.use(Vuelidate)
+```ts twoslash
+// @errors: 2391
+import type { ModuleDefinition, ModuleOptions, NuxtModule } from '@nuxt/schema'
+// ---cut---
+export function defineNuxtModule<TOptions extends ModuleOptions> (
+  definition?: ModuleDefinition<TOptions, Partial<TOptions>, false> | NuxtModule<TOptions, Partial<TOptions>, false>,
+): NuxtModule<TOptions, TOptions, false>
 
-export default () => { }
+export function defineNuxtModule<TOptions extends ModuleOptions> (): {
+  with: <TOptionsDefaults extends Partial<TOptions>> (
+    definition: ModuleDefinition<TOptions, TOptionsDefaults, true> | NuxtModule<TOptions, TOptionsDefaults, true>,
+  ) => NuxtModule<TOptions, TOptionsDefaults, true>
+}
 ```
 
-::
+### Parameters
 
-### Avoid Runtime Modules
+**definition**: A module definition object or a module function. The module definition object should contain the following properties:
 
-With Nuxt 3, Nuxt is now a build-time-only dependency, which means that modules shouldn't attempt to hook into the Nuxt runtime.
+| Property             | Type                                                                                                                                                                                                                   | Required | Description                                                                                                                                                                                                                        |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `meta`               | `ModuleMeta`                                                                                                                                                                                                           | `false`  | Metadata of the module. It defines the module name, version, config key and compatibility.                                                                                                                                         |
+| `defaults`           | `T | ((nuxt: Nuxt) => T)`{.language-ts.shiki.shiki-themes.material-theme-lighter.material-theme-lighter.material-theme-palenight lang="ts"}                                                                            | `false`  | Default options for the module. If a function is provided, it will be called with the Nuxt instance as the first argument.                                                                                                         |
+| `schema`             | `T`                                                                                                                                                                                                                    | `false`  | Schema for the module options. If provided, options will be applied to the schema.                                                                                                                                                 |
+| `hooks`              | `Partial<NuxtHooks>`{.language-ts.shiki.shiki-themes.material-theme-lighter.material-theme-lighter.material-theme-palenight lang="ts"}                                                                                 | `false`  | Hooks to be installed for the module. If provided, the module will install the hooks.                                                                                                                                              |
+| `moduleDependencies` | `Record<string, ModuleDependency> | ((nuxt: Nuxt) => Record<string, ModuleDependency>)`{.language-ts.shiki.shiki-themes.material-theme-lighter.material-theme-lighter.material-theme-palenight lang="ts"}              | `false`  | Dependencies on other modules with version constraints and configuration. Can be an object or a function that receives the Nuxt instance. See [example](https://nuxt.com/docs/3.x/api/kit/modules#specifying-module-dependencies). |
+| `onInstall`          | `(nuxt: Nuxt) => Awaitable<void>`{.language-ts.shiki.shiki-themes.material-theme-lighter.material-theme-lighter.material-theme-palenight lang="ts"}                                                                    | `false`  | Lifecycle hook called when the module is first installed. Requires `meta.name` and `meta.version` to be defined.                                                                                                                   |
+| `onUpgrade`          | `(nuxt: Nuxt, options: T, previousVersion: string) => Awaitable<void>`{.language-ts.shiki.shiki-themes.material-theme-lighter.material-theme-lighter.material-theme-palenight lang="ts"}                               | `false`  | Lifecycle hook called when the module is upgraded to a newer version. Requires `meta.name` and `meta.version` to be defined.                                                                                                       |
+| `setup`              | `(this: void, resolvedOptions: T, nuxt: Nuxt) => Awaitable<void | false | ModuleSetupInstallResult>`{.language-ts.shiki.shiki-themes.material-theme-lighter.material-theme-lighter.material-theme-palenight lang="ts"} | `false`  | Setup function for the module. If provided, the module will call the setup function.                                                                                                                                               |
 
-Your module should work even if it's only added to [`buildModules`](https://nuxt.com/docs/3.x/api/nuxt-config#runtimeconfig) (instead of `modules`). For example:
+### Examples
 
-- Avoid updating `process.env` within a Nuxt module and reading by a Nuxt plugin; use [`runtimeConfig`](https://nuxt.com/docs/3.x/api/nuxt-config#runtimeconfig) instead.
-- (\*) Avoid depending on runtime hooks like `vue-renderer:*` for production
-- (\*) Avoid adding `serverMiddleware` by importing them inside the module. Instead, add them by referencing a file path so that they are independent of the module's context
+#### Using `configKey` to Make Your Module Configurable
 
-(\*) Unless it is for `nuxt dev` purpose only and guarded with `if (nuxt.options.dev) { }`.
+When defining a Nuxt module, you can set a `configKey` to specify how users should configure the module in their `nuxt.config`.
+
+```ts
+import { defineNuxtModule } from '@nuxt/kit'
+
+export default defineNuxtModule({
+  meta: {
+    name: 'my-module',
+    configKey: 'myModule',
+  },
+  defaults: {
+    // Module options
+    enabled: true,
+  },
+  setup (options) {
+    if (options.enabled) {
+      console.log('My Nuxt module is enabled!')
+    }
+  },
+})
+```
+
+Users can provide options for this module under the corresponding key in `nuxt.config`.
+
+```ts
+export default defineNuxtConfig({
+  myModule: {
+    enabled: false,
+  },
+})
+```
+
+Users can also completely disable a module by setting the config key to `false`. This prevents the module's setup function from running while still generating types for module options.
+
+```ts
+export default defineNuxtConfig({
+  // Disable the module entirely
+  myModule: false,
+})
+```
 
 ::tip
-Continue reading about Nuxt 3 modules in the [Modules Author Guide](https://nuxt.com/docs/3.x/guide/modules).
+This is particularly useful when you want to disable modules inherited from [Nuxt layers](https://nuxt.com/docs/3.x/guide/going-further/layers#disabling-modules-from-layers).
 ::
 
-### Use TypeScript (Optional)
+#### Defining Module Compatibility Requirements
 
-While it is not essential, most of the Nuxt ecosystem is shifting to use TypeScript, so it is highly recommended to consider migration.
+If you're developing a Nuxt module and using APIs that are only supported in specific Nuxt versions, it's highly recommended to include `compatibility.nuxt`.
 
-::tip
-You can start migration by renaming `.js` files, to `.ts`. TypeScript is designed to be progressive!
+```ts
+export default defineNuxtModule({
+  meta: {
+    name: '@nuxt/icon',
+    configKey: 'icon',
+    compatibility: {
+      // Required nuxt version in semver format.
+      nuxt: '>=3.0.0', // or use '^3.0.0'
+    },
+  },
+  setup () {
+    const resolver = createResolver(import.meta.url)
+    // Implement
+  },
+})
+```
+
+If the user tries to use your module with an incompatible Nuxt version, they will receive a warning in the console.
+
+```terminal
+ WARN  Module @nuxt/icon is disabled due to incompatibility issues:
+ - [nuxt] Nuxt version ^3.1.0 is required but currently using 3.0.0
+```
+
+#### Type Safety for Resolved Options with `.with()`
+
+When you need type safety for your resolved/merged module options, you can use the `.with()` method. This enables TypeScript to properly infer the relationship between your module's defaults and the final resolved options that your setup function receives.
+
+```ts
+import { defineNuxtModule } from '@nuxt/kit'
+
+// Define your module options interface
+interface ModuleOptions {
+  apiKey: string
+  baseURL: string
+  timeout?: number
+  retries?: number
+}
+
+export default defineNuxtModule<ModuleOptions>().with({
+  meta: {
+    name: '@nuxtjs/my-api',
+    configKey: 'myApi',
+  },
+  defaults: {
+    baseURL: 'https://api.example.com',
+    timeout: 5000,
+    retries: 3,
+  },
+  setup (resolvedOptions, nuxt) {
+    // resolvedOptions is properly typed as:
+    // {
+    //   apiKey: string          // Required, no default provided
+    //   baseURL: string         // Required, has default value
+    //   timeout: number         // Optional, has default value
+    //   retries: number         // Optional, has default value
+    // }
+
+    console.log(resolvedOptions.baseURL) // ✅ TypeScript knows this is always defined
+    console.log(resolvedOptions.timeout) // ✅ TypeScript knows this is always defined
+    console.log(resolvedOptions.retries) // ✅ TypeScript knows this is always defined
+  },
+})
+```
+
+Without using `.with()`, the `resolvedOptions` parameter would be typed as the raw `ModuleOptions` interface, where `timeout` and `retries` could be `undefined` even when defaults are provided. The `.with()` method enables TypeScript to understand that default values make those properties non-optional in the resolved options.
+
+#### Using Lifecycle Hooks for Module Installation and Upgrade
+
+You can define lifecycle hooks that run when your module is first installed or upgraded to a new version. These hooks are useful for performing one-time setup tasks, database migrations, or cleanup operations.
+
+::important
+For lifecycle hooks to work, you **must** provide both `meta.name` and `meta.version` in your module definition. The hooks use these values to track the module's installation state in the project's `.nuxtrc` file.
 ::
 
-::tip
-You can use TypeScript syntax for Nuxt 2 and 3 modules and plugins without any extra dependencies.
+Lifecycle hooks run before the main `setup` function, and if a hook throws an error, it's logged but doesn't stop the build process.
+
+**`onInstall`** runs only once when the module is first added to a project.
+
+**`onUpgrade`** runs each time the module version increases (using semver comparison) — but only once for each version bump.
+
+##### Example
+
+```ts
+import { defineNuxtModule } from '@nuxt/kit'
+import semver from 'semver'
+
+export default defineNuxtModule({
+  meta: {
+    name: 'my-awesome-module',
+    version: '1.2.0', // Required for lifecycle hooks
+    configKey: 'myAwesomeModule',
+  },
+  defaults: {
+    apiKey: '',
+    enabled: true,
+  },
+
+  onInstall (nuxt) {
+    // This runs only when the module is first installed
+    console.log('Setting up my-awesome-module for the first time!')
+
+    // You might want to:
+    // - Create initial configuration files
+    // - Set up database schemas
+    // - Display welcome messages
+    // - Perform initial data migration
+  },
+
+  onUpgrade (nuxt, options, previousVersion) {
+    // This runs when the module is upgraded to a newer version
+    console.log(`Upgrading my-awesome-module from ${previousVersion} to 1.2.0`)
+
+    // You might want to:
+    // - Migrate configuration files
+    // - Update database schemas
+    // - Clean up deprecated files
+    // - Display upgrade notes
+
+    if (semver.lt(previousVersion, '1.1.0')) {
+      console.log('⚠️  Breaking changes in 1.1.0 - please check the migration guide')
+    }
+  },
+
+  setup (options, nuxt) {
+    // Regular setup logic runs on every build
+    if (options.enabled) {
+      // Configure the module
+    }
+  },
+})
+```
+
+#### Specifying Module Dependencies
+
+You can use the `moduleDependencies` option to declare dependencies on other modules. This provides a robust way to ensure proper setup order, version compatibility, and configuration management.
+
+The `moduleDependencies` option can be either an object or a function that receives the Nuxt instance:
+
+##### Example
+
+```ts
+import { defineNuxtModule } from '@nuxt/kit'
+
+export default defineNuxtModule({
+  meta: {
+    name: 'my-module',
+  },
+  moduleDependencies: {
+    '@nuxtjs/tailwindcss': {
+      // Specify a version constraint (semver format)
+      version: '>=6.0.0',
+      // Configuration that overrides user settings
+      overrides: {
+        exposeConfig: true,
+      },
+      // Configuration that sets defaults but respects user settings
+      defaults: {
+        config: {
+          darkMode: 'class',
+        },
+      },
+    },
+    '@nuxtjs/fontaine': {
+      // Optional dependencies won't be installed but ensure that options
+      // can be set if they _are_ installed
+      optional: true,
+      defaults: {
+        fonts: [
+          {
+            family: 'Roboto',
+            fallbacks: ['Impact'],
+          },
+        ],
+      },
+    },
+  },
+  setup (options, nuxt) {
+
+  },
+})
+```
+
+You can also use a function to dynamically determine dependencies based on the Nuxt configuration:
+
+```ts
+import { defineNuxtModule } from '@nuxt/kit'
+
+export default defineNuxtModule({
+  meta: {
+    name: 'my-module',
+  },
+  moduleDependencies (nuxt) {
+    const dependencies: Record<string, any> = {
+      '@nuxtjs/tailwindcss': {
+        version: '>=6.0.0',
+      },
+    }
+
+    // Conditionally add dependencies based on Nuxt config
+    if (nuxt.options.experimental?.someFeature) {
+      dependencies['@nuxtjs/fontaine'] = {
+        optional: true,
+      }
+    }
+
+    return dependencies
+  },
+  setup (options, nuxt) {
+    // Your setup logic runs after all dependencies are initialized
+  },
+})
+```
+
+## `installModule`
+
+::callout{type="warning"}
+**Deprecated:** Use the [`moduleDependencies`](https://nuxt.com/docs/3.x/api/kit/modules#specifying-module-dependencies) option in `defineNuxtModule` instead. The `installModule` function will be removed (or may become non-blocking) in a future version.
 ::
 
-# Auto Imports
+Install specified Nuxt module programmatically. This is helpful when your module depends on other modules. You can pass the module options as an object to `inlineOptions` and they will be passed to the module's `setup` function.
 
-::note
-In the rest of the migration documentation, you will notice that key Nuxt and Vue utilities do not have explicit imports. This is not a typo; Nuxt will automatically import them for you, and you should get full type hinting if you have followed [the instructions](https://nuxt.com/docs/3.x/migration/configuration#typescript) to use Nuxt's TypeScript support.
-::
+### Usage
 
-[Read more about auto imports](https://nuxt.com/docs/3.x/guide/concepts/auto-imports)
+```ts twoslash
+import { defineNuxtModule, installModule } from '@nuxt/kit'
 
-## Migration
+export default defineNuxtModule({
+  async setup () {
+    // will install @nuxtjs/fontaine with Roboto font and Impact fallback
+    await installModule('@nuxtjs/fontaine', {
+      // module configuration
+      fonts: [
+        {
+          family: 'Roboto',
+          fallbacks: ['Impact'],
+          fallbackName: 'fallback-a',
+        },
+      ],
+    })
+  },
+})
+```
 
-1. If you have been using `@nuxt/components` in Nuxt 2, you can remove `components: true` in your `nuxt.config`. If you had a more complex setup, then note that the component options have changed somewhat. See the [components documentation](https://nuxt.com/docs/3.x/directory-structure/components) for more information.
+### Type
 
-::tip
-You can look at `.nuxt/types/components.d.ts` and `.nuxt/types/imports.d.ts` to see how Nuxt has resolved your components and composable auto-imports.
-::
+```ts
+async function installModule (moduleToInstall: string | NuxtModule, inlineOptions?: any, nuxt?: Nuxt)
+```
+
+### Parameters
+
+| Property          | Type                                                                                                                                    | Required | Description                                                                                   |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------- |
+| `moduleToInstall` | `string | NuxtModule`{.language-ts.shiki.shiki-themes.material-theme-lighter.material-theme-lighter.material-theme-palenight lang="ts"} | `true`   | The module to install. Can be either a string with the module name or a module object itself. |
+| `inlineOptions`   | `any`                                                                                                                                   | `false`  | An object with the module options to be passed to the module's `setup` function.              |
+| `nuxt`            | `Nuxt`                                                                                                                                  | `false`  | Nuxt instance. If not provided, it will be retrieved from the context via `useNuxt()` call.   |
+
+### Examples
+
+```ts
+import { defineNuxtModule, installModule } from '@nuxt/kit'
+
+export default defineNuxtModule({
+  async setup (options, nuxt) {
+    // will install @nuxtjs/fontaine with Roboto font and Impact fallback
+    await installModule('@nuxtjs/fontaine', {
+      // module configuration
+      fonts: [
+        {
+          family: 'Roboto',
+          fallbacks: ['Impact'],
+          fallbackName: 'fallback-a',
+        },
+      ],
+    })
+  },
+})
+```
+
+# Runtime Config
+
+## `useRuntimeConfig`
+
+At build-time, it is possible to access the resolved Nuxt [runtime config](https://nuxt.com/docs/3.x/guide/going-further/runtime-config).
+
+### Type
+
+```ts
+function useRuntimeConfig (): Record<string, unknown>
+```
+
+## `updateRuntimeConfig`
+
+It is also possible to update runtime configuration. This will be merged with the existing runtime configuration, and if Nitro has already been initialized it will trigger an HMR event to reload the Nitro runtime config.
+
+### Type
+
+```ts
+function updateRuntimeConfig (config: Record<string, unknown>): void | Promise<void>
+```

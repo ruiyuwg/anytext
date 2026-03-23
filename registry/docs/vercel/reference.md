@@ -661,5 +661,5 @@ For more information, see the following sections:
 
 title: "Flags SDK Reference"
 description: "API reference for the Flags SDK for Next.js and SvelteKit."
-last\_updated: "2026-03-08T05:03:14.420Z"
+last\_updated: "2026-03-23T09:40:09.989Z"
 source: "https://vercel.com/docs/flags/flags-sdk-reference"

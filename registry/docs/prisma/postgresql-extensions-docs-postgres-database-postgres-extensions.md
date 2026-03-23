@@ -218,3 +218,29 @@ Limitations \[#limitations]
 - **Prisma Studio** does not support tables that use custom types from extensions (e.g., `VECTOR`). Queries against those tables will return a deserialization error.
 - **Prisma ORM** does not natively support all extension types. Custom types are represented as [`Unsupported`](/orm/prisma-schema/data-model/models#unsupported-types) in your schema and must be queried with [raw SQL](/orm/prisma-client/using-raw-sql).
 - **PostGIS** is coming in 2026.
+
+# Query Insights (/docs/postgres/database/query-insights)
+
+Query Insights is built into Prisma Postgres and helps you understand which queries are slow, why they are expensive, and what to change next. It is available in the [Prisma Console](https://console.prisma.io).
+
+For Prisma ORM queries, it connects your Prisma calls to the SQL they generate, including when a single call expands into multiple statements. For raw SQL or queries issued outside Prisma ORM, it still shows full SQL behavior.
+
+What it shows \[#what-it-shows]
+
+The main view gives you a live summary of query activity: average latency, queries per second, and a time-based chart you can scrub through to isolate when a problem occurred.
+
+Below the charts, queries are grouped by statement shape. Each row shows latency, execution count, reads, and when the query was last seen. You can filter by table or sort by any metric to surface the most expensive patterns first.
+
+Selecting a query opens a detail view with a full stat summary, the raw SQL, and an AI-generated analysis explaining why the query is expensive and what to change. The detail view also includes a copyable prompt you can paste into your editor to apply the fix.
+
+What it helps with \[#what-it-helps-with]
+
+Query Insights is most useful for diagnosing N+1 patterns, missing indexes, over-fetching, offset pagination, and repeated queries. In most cases it points you toward one of four fixes: changing the Prisma query shape, adding or adjusting an index, returning fewer fields or rows, or caching repeated work.
+
+Availability \[#availability]
+
+Query Insights is included with Prisma Postgres at no extra cost.
+
+```
+Query Insights has its own dedicated section with full documentation, examples, and setup instructions. See [Query Insights](/query-insights).
+```

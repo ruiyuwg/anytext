@@ -5,19 +5,22 @@ The html Helper lets you write HTML in JavaScript template literal with a tag na
 ## Import
 
 ```ts
-import { Hono } from "hono";
-import { html, raw } from "hono/html";
+import { Hono } from 'hono'
+import { html, raw } from 'hono/html'
 ```
 
 ## `html`
 
 ```ts
-const app = new Hono();
+const app = new Hono()
 
-app.get("/:username", (c) => {
-  const { username } = c.req.param();
-  return c.html(html`<!doctype html> Hello! ${username}!`);
-});
+app.get('/:username', (c) => {
+  const { username } = c.req.param()
+  return c.html(
+    html`<!doctype html>
+      Hello! ${username}!`
+  )
+})
 ```
 
 ### Insert snippets into JSX
@@ -27,18 +30,18 @@ Insert the inline script into JSX:
 ```tsx
 app.get('/', (c) => {
   return c.html(
-
-
+    
+      
         Test Site
         {html`
-
+          
             // No need to use dangerouslySetInnerHTML.
             // If you write it here, it will not be escaped.
-
+          
         `}
-
+      
       Hello!
-
+    
   )
 })
 ```
@@ -50,7 +53,11 @@ Since `html` returns an HtmlEscapedString, it can act as a fully functional comp
 #### Use `html` to speed up the process instead of `memo`
 
 ```typescript
-const Footer = () => html` My Address... `;
+const Footer = () => html`
+  
+    My Address...
+  
+`
 ```
 
 ### Receives props and embeds values
@@ -65,14 +72,14 @@ interface SiteData {
 const Layout = (props: SiteData) => html`
 
 
-
+  
   ${props.title}
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
 
 
   ${props.children}
@@ -81,9 +88,9 @@ const Layout = (props: SiteData) => html`
 `
 
 const Content = (props: { siteData: SiteData; name: string }) => (
-
+  
     Hello {props.name}
-
+  
 )
 
 app.get('/', (c) => {
@@ -102,10 +109,10 @@ app.get('/', (c) => {
 ## `raw()`
 
 ```ts
-app.get("/", (c) => {
-  const name = "John &quot;Johnny&quot; Smith";
-  return c.html(html`<p>I'm ${raw(name)}.</p>`);
-});
+app.get('/', (c) => {
+  const name = 'John &quot;Johnny&quot; Smith'
+  return c.html(html`<p>I'm ${raw(name)}.</p>`)
+})
 ```
 
 ## Tips
@@ -115,174 +122,67 @@ Thanks to these libraries, Visual Studio Code and vim also interprets template l
 - <https://marketplace.visualstudio.com/items?itemName=bierner.lit-html>
 - <https://github.com/MaxMEllon/vim-jsx-pretty>
 
-# ConnInfo Helper
+# Dev Helper
 
-The ConnInfo Helper helps you to get the connection information. For example, you can get the client's remote address easily.
-
-## Import
-
-::: code-group
-
-```ts [Cloudflare Workers]
-import { Hono } from "hono";
-import { getConnInfo } from "hono/cloudflare-workers";
-```
-
-```ts [Deno]
-import { Hono } from "hono";
-import { getConnInfo } from "hono/deno";
-```
-
-```ts [Bun]
-import { Hono } from "hono";
-import { getConnInfo } from "hono/bun";
-```
-
-```ts [Vercel]
-import { Hono } from "hono";
-import { getConnInfo } from "hono/vercel";
-```
-
-```ts [AWS Lambda]
-import { Hono } from "hono";
-import { getConnInfo } from "hono/aws-lambda";
-```
-
-```ts [Cloudflare Pages]
-import { Hono } from "hono";
-import { getConnInfo } from "hono/cloudflare-pages";
-```
-
-```ts [Netlify]
-import { Hono } from "hono";
-import { getConnInfo } from "hono/netlify";
-```
-
-```ts [Lambda@Edge]
-import { Hono } from "hono";
-import { getConnInfo } from "hono/lambda-edge";
-```
-
-```ts [Node.js]
-import { Hono } from "hono";
-import { getConnInfo } from "@hono/node-server/conninfo";
-```
-
-:::
-
-## Usage
+Dev Helper provides useful methods you can use in development.
 
 ```ts
-const app = new Hono();
-
-app.get("/", (c) => {
-  const info = getConnInfo(c); // info is `ConnInfo`
-  return c.text(`Your remote address is ${info.remote.address}`);
-});
+import { Hono } from 'hono'
+import { getRouterName, showRoutes } from 'hono/dev'
 ```
 
-## Type Definitions
+## `getRouterName()`
 
-The type definitions of the values that you can get from `getConnInfo()` are the following:
+You can get the name of the currently used router with `getRouterName()`.
 
 ```ts
-type AddressType = "IPv6" | "IPv4" | undefined;
+const app = new Hono()
 
-type NetAddrInfo = {
-  /**
-   * Transport protocol type
-   */
-  transport?: "tcp" | "udp";
-  /**
-   * Transport port number
-   */
-  port?: number;
+// ...
 
-  address?: string;
-  addressType?: AddressType;
-} & (
-  | {
-      /**
-       * Host name such as IP Addr
-       */
-      address: string;
-
-      /**
-       * Host name type
-       */
-      addressType: AddressType;
-    }
-  | {}
-);
-
-/**
- * HTTP Connection information
- */
-interface ConnInfo {
-  /**
-   * Remote information
-   */
-  remote: NetAddrInfo;
-}
+console.log(getRouterName(app))
 ```
 
-# Accepts Helper
+## `showRoutes()`
 
-Accepts Helper helps to handle Accept headers in the Requests.
+`showRoutes()` function displays the registered routes in your console.
 
-## Import
+Consider an application like the following:
 
 ```ts
-import { Hono } from "hono";
-import { accepts } from "hono/accepts";
+const app = new Hono().basePath('/v1')
+
+app.get('/posts', (c) => {
+  // ...
+})
+
+app.get('/posts/:id', (c) => {
+  // ...
+})
+
+app.post('/posts', (c) => {
+  // ...
+})
+
+showRoutes(app, {
+  verbose: true,
+})
 ```
 
-## `accepts()`
+When this application starts running, the routes will be shown in your console as follows:
 
-The `accepts()` function looks at the Accept header, such as Accept-Encoding and Accept-Language, and returns the proper value.
-
-```ts
-import { accepts } from "hono/accepts";
-
-app.get("/", (c) => {
-  const accept = accepts(c, {
-    header: "Accept-Language",
-    supports: ["en", "ja", "zh"],
-    default: "en",
-  });
-  return c.json({ lang: accept });
-});
-```
-
-### `AcceptHeader` type
-
-The definition of the `AcceptHeader` type is as follows.
-
-```ts
-export type AcceptHeader =
-  | "Accept"
-  | "Accept-Charset"
-  | "Accept-Encoding"
-  | "Accept-Language"
-  | "Accept-Patch"
-  | "Accept-Post"
-  | "Accept-Ranges";
+```txt
+GET   /v1/posts
+GET   /v1/posts/:id
+POST  /v1/posts
 ```
 
 ## Options
 
-### <Badge type="danger" text="required" /> header: `AcceptHeader`
+### <Badge type="info" text="optional" /> verbose: `boolean`
 
-The target accept header.
+When set to `true`, it displays verbose information.
 
-### <Badge type="danger" text="required" /> supports: `string[]`
+### <Badge type="info" text="optional" /> colorize: `boolean`
 
-The header values which your application supports.
-
-### <Badge type="danger" text="required" /> default: `string`
-
-The default values.
-
-### <Badge type="info" text="optional" /> match: `(accepts: Accept[], config: acceptsConfig) => string`
-
-The custom match function.
+When set to `false`, the output will not be colored.

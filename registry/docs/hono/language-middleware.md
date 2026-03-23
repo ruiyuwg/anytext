@@ -5,8 +5,8 @@ The Language Detector middleware automatically determines a user's preferred lan
 ## Import
 
 ```ts
-import { Hono } from "hono";
-import { languageDetector } from "hono/language";
+import { Hono } from 'hono'
+import { languageDetector } from 'hono/language'
 ```
 
 ## Basic Usage
@@ -14,19 +14,19 @@ import { languageDetector } from "hono/language";
 Detect language from query string, cookie, and header (default order), with fallback to English:
 
 ```ts
-const app = new Hono();
+const app = new Hono()
 
 app.use(
   languageDetector({
-    supportedLanguages: ["en", "ar", "ja"], // Must include fallback
-    fallbackLanguage: "en", // Required
-  }),
-);
+    supportedLanguages: ['en', 'ar', 'ja'], // Must include fallback
+    fallbackLanguage: 'en', // Required
+  })
+)
 
-app.get("/", (c) => {
-  const lang = c.get("language");
-  return c.text(`Hello! Your language is ${lang}`);
-});
+app.get('/', (c) => {
+  const lang = c.get('language')
+  return c.text(`Hello! Your language is ${lang}`)
+})
 ```
 
 ### Client Examples
@@ -49,23 +49,23 @@ curl -H 'Accept-Language: ar,en;q=0.9' http://localhost:8787/
 
 ```ts
 export const DEFAULT_OPTIONS: DetectorOptions = {
-  order: ["querystring", "cookie", "header"],
-  lookupQueryString: "lang",
-  lookupCookie: "language",
-  lookupFromHeaderKey: "accept-language",
+  order: ['querystring', 'cookie', 'header'],
+  lookupQueryString: 'lang',
+  lookupCookie: 'language',
+  lookupFromHeaderKey: 'accept-language',
   lookupFromPathIndex: 0,
-  caches: ["cookie"],
+  caches: ['cookie'],
   ignoreCase: true,
-  fallbackLanguage: "en",
-  supportedLanguages: ["en"],
+  fallbackLanguage: 'en',
+  supportedLanguages: ['en'],
   cookieOptions: {
-    sameSite: "Strict",
+    sameSite: 'Strict',
     secure: true,
     maxAge: 365 * 24 * 60 * 60,
     httpOnly: true,
   },
   debug: false,
-};
+}
 ```
 
 ## Key Behaviors
@@ -90,12 +90,12 @@ Prioritize URL path detection (e.g., /en/about):
 ```ts
 app.use(
   languageDetector({
-    order: ["path", "cookie", "querystring", "header"],
+    order: ['path', 'cookie', 'querystring', 'header'],
     lookupFromPathIndex: 0, // /en/profile → index 0 = 'en'
-    supportedLanguages: ["en", "ar"],
-    fallbackLanguage: "en",
-  }),
-);
+    supportedLanguages: ['en', 'ar'],
+    fallbackLanguage: 'en',
+  })
+)
 ```
 
 ### Progressive Locale Matching
@@ -105,10 +105,10 @@ When a detected locale code like `ja-JP` is not in `supportedLanguages`, the mid
 ```ts
 app.use(
   languageDetector({
-    supportedLanguages: ["en", "ja", "zh-Hant"],
-    fallbackLanguage: "en",
-  }),
-);
+    supportedLanguages: ['en', 'ja', 'zh-Hant'],
+    fallbackLanguage: 'en',
+  })
+)
 
 // Accept-Language: ja-JP → matches 'ja'
 // Accept-Language: zh-Hant-CN → matches 'zh-Hant'
@@ -121,11 +121,11 @@ Normalize complex codes (e.g., en-US → en):
 ```ts
 app.use(
   languageDetector({
-    convertDetectedLanguage: (lang) => lang.split("-")[0],
-    supportedLanguages: ["en", "ja"],
-    fallbackLanguage: "en",
-  }),
-);
+    convertDetectedLanguage: (lang) => lang.split('-')[0],
+    supportedLanguages: ['en', 'ja'],
+    fallbackLanguage: 'en',
+  })
+)
 ```
 
 ### Cookie Configuration
@@ -133,18 +133,18 @@ app.use(
 ```ts
 app.use(
   languageDetector({
-    lookupCookie: "app_lang",
-    caches: ["cookie"],
+    lookupCookie: 'app_lang',
+    caches: ['cookie'],
     cookieOptions: {
-      path: "/", // Cookie path
-      sameSite: "Lax", // Cookie same-site policy
+      path: '/', // Cookie path
+      sameSite: 'Lax', // Cookie same-site policy
       secure: true, // Only send over HTTPS
       maxAge: 86400 * 365, // 1 year expiration
       httpOnly: true, // Not accessible via JavaScript
-      domain: ".example.com", // Optional: specific domain
+      domain: '.example.com', // Optional: specific domain
     },
-  }),
-);
+  })
+)
 ```
 
 To disable cookie caching:
@@ -152,7 +152,7 @@ To disable cookie caching:
 ```ts
 languageDetector({
   caches: false,
-});
+})
 ```
 
 ### Debugging
@@ -162,7 +162,7 @@ Log detection steps:
 ```ts
 languageDetector({
   debug: true, // Shows: "Detected from querystring: ar"
-});
+})
 ```
 
 ## Options Reference
@@ -216,17 +216,118 @@ languageDetector({
 ### Path-Based Routing
 
 ```ts
-app.get("/:lang/home", (c) => {
-  const lang = c.get("language"); // 'en', 'ar', etc.
-  return c.json({ message: getLocalizedContent(lang) });
-});
+app.get('/:lang/home', (c) => {
+  const lang = c.get('language') // 'en', 'ar', etc.
+  return c.json({ message: getLocalizedContent(lang) })
+})
 ```
 
 ### Multiple Supported Languages
 
 ```ts
 languageDetector({
-  supportedLanguages: ["en", "en-GB", "ar", "ar-EG"],
-  convertDetectedLanguage: (lang) => lang.replace("_", "-"), // Normalize
-});
+  supportedLanguages: ['en', 'en-GB', 'ar', 'ar-EG'],
+  convertDetectedLanguage: (lang) => lang.replace('_', '-'), // Normalize
+})
 ```
+
+# Vercel
+
+Vercel is the AI cloud, providing the developer tools and cloud infrastructure to build, scale, and secure a faster, more personalized web.
+
+Hono can be deployed to Vercel with zero-configuration.
+
+## 1. Setup
+
+A starter for Vercel is available.
+Start your project with "create-hono" command.
+Select `vercel` template for this example.
+
+```sh [npm]
+npm create hono@latest my-app
+```
+
+```sh [yarn]
+yarn create hono my-app
+```
+
+```sh [pnpm]
+pnpm create hono my-app
+```
+
+```sh [bun]
+bun create hono@latest my-app
+```
+
+```sh [deno]
+deno init --npm hono my-app
+```
+
+Move into `my-app` and install the dependencies.
+
+```sh [npm]
+cd my-app
+npm i
+```
+
+```sh [yarn]
+cd my-app
+yarn
+```
+
+```sh [pnpm]
+cd my-app
+pnpm i
+```
+
+```sh [bun]
+cd my-app
+bun i
+```
+
+We will use Vercel CLI to work on the app locally in the next step. If you haven't already, install it globally following [the Vercel CLI documentation](https://vercel.com/docs/cli).
+
+## 2. Hello World
+
+In the `index.ts` or `src/index.ts` of your project, export the Hono application as a default export.
+
+```ts
+import { Hono } from 'hono'
+
+const app = new Hono()
+
+const welcomeStrings = [
+  'Hello Hono!',
+  'To learn more about Hono on Vercel, visit https://vercel.com/docs/frameworks/backend/hono',
+]
+
+app.get('/', (c) => {
+  return c.text(welcomeStrings.join('\n\n'))
+})
+
+export default app
+```
+
+If you started with the `vercel` template, this is already set up for you.
+
+## 3. Run
+
+To run the development server locally:
+
+```sh
+vercel dev
+```
+
+Visiting `localhost:3000` will respond with a text response.
+
+## 4. Deploy
+
+Deploy to Vercel using `vc deploy`.
+
+```sh
+vercel deploy
+```
+
+## Further reading
+
+[Learn more about Hono in the Vercel documentation](https://vercel.com/docs/frameworks/backend/hono).

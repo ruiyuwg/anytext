@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/oss/python/langgraph/ui
 
-[Agent Chat UI](https://github.com/langchain-ai/agent-chat-ui) is a Next.js application that provides a conversational interface for interacting with any LangChain agent. It supports real-time chat, tool visualization, and advanced features like time-travel debugging and state forking. Agent Chat UI works seamlessly with agents created using [`create_agent`](../langchain/agents) and provides interactive experiences for your agents with minimal setup, whether you're running locally or in a deployed context (such as [LangSmith](/langsmith/home)).
+[Agent Chat UI](https://github.com/langchain-ai/agent-chat-ui) is a Next.js application that provides a conversational interface for interacting with any LangChain agent. It supports real-time chat, tool visualization, and advanced features like time-travel debugging and state forking. Agent Chat UI works seamlessly with agents created using [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) and provides interactive experiences for your agents with minimal setup, whether you're running locally or in a deployed context (such as [LangSmith](/langsmith/home)).
 
 Agent Chat UI is open source and can be adapted to your application needs.
 
@@ -42,7 +42,7 @@ pnpm dev
 
 ### Connect to your agent
 
-Agent Chat UI can connect to both [local](/oss/python/langgraph/studio#setup-local-agent-server) and [deployed agents](/oss/python/langgraph/deploy).
+Agent Chat UI can connect to both [local](/oss/python/langgraph/studio#set-up-local-agent-server) and [deployed agents](/oss/python/langgraph/deploy).
 
 After starting Agent Chat UI, you'll need to configure it to connect to your agent:
 

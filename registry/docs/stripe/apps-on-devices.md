@@ -2,7 +2,7 @@
 
 Learn about deploying your Android POS apps on Stripe smart readers.
 
-Apps on Devices isn’t available to all users. If you pay [standard pricing](https://stripe.com/pricing) on card present transactions, Apps on Devices is available at no extra cost. If you’re interested in using it, [contact your sales representative](https://stripe.com/contact/sales) so they can assess your eligibility and pricing. If you do not have a sales representative, contact us using the form at [Stripe support](https://support.stripe.com) to enable this feature.
+Apps on Devices isn’t available to all users. If you pay [standard pricing](https://stripe.com/pricing) on card present transactions, Apps on Devices is available at no extra cost. If you’re interested in using it, [contact your sales representative](https://stripe.com/contact/sales) so they can assess your eligibility and pricing. If you don’t have a sales representative, contact us using the form at [Stripe support](https://support.stripe.com) to enable this feature.
 
 To be eligible, you must have either an existing Android-based POS application or the resources to build an Android application. When using direct charges, a single platform must control your connected account.
 
@@ -52,8 +52,9 @@ APK files that you upload to the Stripe API have a 200MB size limit.
 - To see the hardware specifications for Verifone readers, see [Set up Verifone readers](https://docs.stripe.com/terminal/payments/setup-reader/verifone.md).
 - To see the hardware specifications for the [Stripe Reader S700/S710](https://docs.stripe.com/terminal/payments/setup-reader/stripe-reader-s700-s710.md), see the following table:
 
+|  |
+|  |
 | CPU                  | Qualcomm Snapdragon 665 QCM6125 |
-| -------------------- | ------------------------------- |
 | RAM                  | 4GB                             |
 | Storage              | 64GB                            |
 | OS                   | Android 10                      |

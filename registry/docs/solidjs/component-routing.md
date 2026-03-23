@@ -11,7 +11,7 @@ To define routes using JSX, the [`Route`](/solid-router/reference/components/rou
 ```
 import { render } from "solid-js/web";import { Router, Route } from "@solidjs/router";
 import Home from "./routes/Home";
-render(    () => (        <Router>            <Route path="/" component={Home} />        </Router>    ),    document.getElementById("app"));
+render(  () => (    <Router>      <Route path="/" component={Home} />    </Router>  ),  document.getElementById("app"));
 ```
 
 The Route component takes a `path` prop, which is the path to match, and a `component` prop, where you pass the component (or element) to render when the path matches. In the example above, the `Home` page is rendered when the user navigates to the root path `/`.
@@ -21,7 +21,7 @@ To apply multiple routes to the router, add additional `Route` components to the
 ```
 import { render } from "solid-js/web";import { Router, Route } from "@solidjs/router";
 import Home from "./routes/index.jsx";import About from "./routes/about.jsx";
-render(    () => (        <Router>            <Route path="/" component={Home} />            <Route path="/hello-world" component={() => <h1>Hello World!</h1>} />            <Route path="/about" component={About} />        </Router>    ),    document.getElementById("app"));
+render(  () => (    <Router>      <Route path="/" component={Home} />      <Route path="/hello-world" component={() => <h1>Hello World!</h1>} />      <Route path="/about" component={About} />    </Router>  ),  document.getElementById("app"));
 ```
 
 This example defines three routes: the root path (`/`) which renders the `Home` page, the path `/hello-world` which renders an `h1` element, and the path `/about` which renders the `About` component.

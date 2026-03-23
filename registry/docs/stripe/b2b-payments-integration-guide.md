@@ -92,7 +92,7 @@ At this point, there’s now an active card attached to a cardholder. See the [I
   "brand": "Visa",
   ...
   "status": "active",
-  "type": "virtual",
+  "type": "virtual"
 }
 ```
 
@@ -132,7 +132,7 @@ After approval, Stripe creates an `Authorization` in a `pending` state while it 
   "amount": 1000,
   ...
   "status": "pending",
-  "transactions": [],
+  "transactions": []
 }
 ```
 

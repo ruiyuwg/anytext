@@ -52,5 +52,5 @@ To manage database connections efficiently, [use the `attachDatabasePool` functi
 
 title: "xmcp on Vercel"
 description: "Build MCP-compatible backends with xmcp and deploy to Vercel. Learn the project structure, tool format, middleware, and how to run locally and in production."
-last\_updated: "2026-03-08T05:03:14.828Z"
+last\_updated: "2026-03-23T09:40:10.473Z"
 source: "https://vercel.com/docs/frameworks/backend/xmcp"

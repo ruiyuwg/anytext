@@ -128,5 +128,5 @@ The `:required` check ensures any modifications need the specified owners' revie
 
 title: "Conformance changelog"
 description: "Find out what"
-last\_updated: "2026-03-08T05:03:12.560Z"
+last\_updated: "2026-03-23T09:40:07.363Z"
 source: "https://vercel.com/docs/conformance/changelog"

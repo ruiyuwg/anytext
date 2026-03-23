@@ -51,5 +51,5 @@ The best way to satisfy all of these constraints is to ensure the domain is also
 
 title: "Promoting a preview deployment to production"
 description: "Test a preview deployment and promote it to production using the CLI."
-last\_updated: "2026-03-08T05:03:13.352Z"
+last\_updated: "2026-03-23T09:40:08.461Z"
 source: "https://vercel.com/docs/deployments/promote-preview-to-production"

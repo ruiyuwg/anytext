@@ -32,37 +32,37 @@ In addition to supporting the native [Request](https://developer.mozilla.org/doc
 
 ### Caching
 
-Route Handlers are not cached by default. You can, however, opt into caching for `GET` methods. Other supported HTTP methods are **not** cached. To cache a `GET` method, use a [route config option](/docs/app/api-reference/file-conventions/route-segment-config#dynamic) such as `export const dynamic = 'force-static'` in your Route Handler file.
+Route Handlers are not cached by default. You can, however, opt into caching for `GET` methods. Other supported HTTP methods are **not** cached. To cache a `GET` method, use a [route config option](/docs/app/guides/caching-without-cache-components#dynamic) such as `export const dynamic = 'force-static'` in your Route Handler file.
 
 ```ts filename="app/items/route.ts" switcher
-export const dynamic = "force-static";
+export const dynamic = 'force-static'
 
 export async function GET() {
-  const res = await fetch("https://data.mongodb-api.com/...", {
+  const res = await fetch('https://data.mongodb-api.com/...', {
     headers: {
-      "Content-Type": "application/json",
-      "API-Key": process.env.DATA_API_KEY,
+      'Content-Type': 'application/json',
+      'API-Key': process.env.DATA_API_KEY,
     },
-  });
-  const data = await res.json();
+  })
+  const data = await res.json()
 
-  return Response.json({ data });
+  return Response.json({ data })
 }
 ```
 
 ```js filename="app/items/route.js" switcher
-export const dynamic = "force-static";
+export const dynamic = 'force-static'
 
 export async function GET() {
-  const res = await fetch("https://data.mongodb-api.com/...", {
+  const res = await fetch('https://data.mongodb-api.com/...', {
     headers: {
-      "Content-Type": "application/json",
-      "API-Key": process.env.DATA_API_KEY,
+      'Content-Type': 'application/json',
+      'API-Key': process.env.DATA_API_KEY,
     },
-  });
-  const data = await res.json();
+  })
+  const data = await res.json()
 
-  return Response.json({ data });
+  return Response.json({ data })
 }
 ```
 
@@ -70,15 +70,15 @@ export async function GET() {
 
 #### With Cache Components
 
-When [Cache Components](/docs/app/getting-started/cache-components) is enabled, `GET` Route Handlers follow the same model as normal UI routes in your application. They run at request time by default, can be prerendered when they don't access dynamic or runtime data, and you can use `use cache` to include dynamic data in the static response.
+When [Cache Components](/docs/app/getting-started/caching) is enabled, `GET` Route Handlers follow the same model as normal UI routes in your application. They run at request time by default, can be prerendered when they don't access uncached or runtime data, and you can use `use cache` to include uncached data in the static response.
 
-**Static example** - doesn't access dynamic or runtime data, so it will be prerendered at build time:
+**Static example** - doesn't access uncached or runtime data, so it will be prerendered at build time:
 
 ```tsx filename="app/api/project-info/route.ts"
 export async function GET() {
   return Response.json({
-    projectName: "Next.js",
-  });
+    projectName: 'Next.js',
+  })
 }
 ```
 
@@ -88,40 +88,40 @@ export async function GET() {
 export async function GET() {
   return Response.json({
     randomNumber: Math.random(),
-  });
+  })
 }
 ```
 
 **Runtime data example** - accesses request-specific data. Prerendering terminates when runtime APIs like `headers()` are called:
 
 ```tsx filename="app/api/user-agent/route.ts"
-import { headers } from "next/headers";
+import { headers } from 'next/headers'
 
 export async function GET() {
-  const headersList = await headers();
-  const userAgent = headersList.get("user-agent");
+  const headersList = await headers()
+  const userAgent = headersList.get('user-agent')
 
-  return Response.json({ userAgent });
+  return Response.json({ userAgent })
 }
 ```
 
 > **Good to know**: Prerendering stops if the `GET` handler accesses network requests, database queries, async file system operations, request object properties (like `req.url`, `request.headers`, `request.cookies`, `request.body`), runtime APIs like [`cookies()`](/docs/app/api-reference/functions/cookies), [`headers()`](/docs/app/api-reference/functions/headers), [`connection()`](/docs/app/api-reference/functions/connection), or non-deterministic operations.
 
-**Cached example** - accesses dynamic data (database query) but caches it with `use cache`, allowing it to be included in the prerendered response:
+**Cached example** - accesses uncached data (database query) but caches it with `use cache`, allowing it to be included in the prerendered response:
 
 ```tsx filename="app/api/products/route.ts"
-import { cacheLife } from "next/cache";
+import { cacheLife } from 'next/cache'
 
 export async function GET() {
-  const products = await getProducts();
-  return Response.json(products);
+  const products = await getProducts()
+  return Response.json(products)
 }
 
 async function getProducts() {
-  "use cache";
-  cacheLife("hours");
+  'use cache'
+  cacheLife('hours')
 
-  return await db.query("SELECT * FROM products");
+  return await db.query('SELECT * FROM products')
 }
 ```
 
@@ -129,7 +129,7 @@ async function getProducts() {
 
 ### Special Route Handlers
 
-Special Route Handlers like [`sitemap.ts`](/docs/app/api-reference/file-conventions/metadata/sitemap), [`opengraph-image.tsx`](/docs/app/api-reference/file-conventions/metadata/opengraph-image), and [`icon.tsx`](/docs/app/api-reference/file-conventions/metadata/app-icons), and other [metadata files](/docs/app/api-reference/file-conventions/metadata) remain static by default unless they use Dynamic APIs or dynamic config options.
+Special Route Handlers like [`sitemap.ts`](/docs/app/api-reference/file-conventions/metadata/sitemap), [`opengraph-image.tsx`](/docs/app/api-reference/file-conventions/metadata/opengraph-image), and [`icon.tsx`](/docs/app/api-reference/file-conventions/metadata/app-icons), and other [metadata files](/docs/app/api-reference/file-conventions/metadata) remain static by default unless they use Request-time APIs or dynamic config options.
 
 ### Route Resolution
 
@@ -138,11 +138,11 @@ You can consider a `route` the lowest level routing primitive.
 - They **do not** participate in layouts or client-side navigations like `page`.
 - There **cannot** be a `route.js` file at the same route as `page.js`.
 
-| Page                 | Route              | Result   |
-| -------------------- | ------------------ | -------- |
-| `app/page.js`        | `app/route.js`     | Conflict |
-| `app/page.js`        | `app/api/route.js` | Valid    |
-| `app/[user]/page.js` | `app/api/route.js` | Valid    |
+| Page                 | Route              | Result                       |
+| -------------------- | ------------------ | ---------------------------- |
+| `app/page.js`        | `app/route.js`     |  Conflict |
+| `app/page.js`        | `app/api/route.js` |  Valid    |
+| `app/[user]/page.js` | `app/api/route.js` |  Valid    |
 
 Each `route.js` or `page.js` file takes over all HTTP verbs for that route.
 
@@ -158,7 +158,7 @@ export async function POST(request: Request) {}
 
 ```js filename="app/page.js" switcher
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>;
+  return <h1>Hello, Next.js!</h1>
 }
 
 // Conflict
@@ -173,11 +173,11 @@ Read more about how Route Handlers [complement your frontend application](/docs/
 In TypeScript, you can type the `context` parameter for Route Handlers with the globally available [`RouteContext`](/docs/app/api-reference/file-conventions/route#route-context-helper) helper:
 
 ```ts filename="app/users/[id]/route.ts" switcher
-import type { NextRequest } from "next/server";
+import type { NextRequest } from 'next/server'
 
-export async function GET(_req: NextRequest, ctx: RouteContext<"/users/[id]">) {
-  const { id } = await ctx.params;
-  return Response.json({ id });
+export async function GET(_req: NextRequest, ctx: RouteContext<'/users/[id]'>) {
+  const { id } = await ctx.params
+  return Response.json({ id })
 }
 ```
 

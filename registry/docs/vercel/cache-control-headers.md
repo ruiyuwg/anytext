@@ -269,5 +269,5 @@ Alternatively, a [Vercel Function](/docs/functions) can assign headers to the [R
 
 title: "Vercel CDN Cache"
 description: "Learn how Vercel"
-last\_updated: "2026-03-08T05:03:11.889Z"
+last\_updated: "2026-03-23T09:40:05.915Z"
 source: "https://vercel.com/docs/caching/cdn-cache"

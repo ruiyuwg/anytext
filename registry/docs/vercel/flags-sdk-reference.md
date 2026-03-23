@@ -161,5 +161,5 @@ For the full API documentation, including all functions, types, and advanced pat
 
 title: "Marketplace"
 description: "Connect your preferred feature flag provider through the Vercel Marketplace for a unified flags experience."
-last\_updated: "2026-03-08T05:03:14.480Z"
+last\_updated: "2026-03-23T09:40:09.999Z"
 source: "https://vercel.com/docs/flags/marketplace"

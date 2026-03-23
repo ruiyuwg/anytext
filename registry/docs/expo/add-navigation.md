@@ -4,7 +4,7 @@ In this chapter, learn how to add navigation to the Expo app.
 
 In this chapter, we'll learn Expo Router's fundamentals to create stack navigation and a bottom tab bar with two tabs.
 
-[Watch: Adding navigation in your universal Expo app](https://www.youtube.com/watch?v=8336fcFV_T4)
+[Watch: Adding navigation in your universal Expo app](https://www.youtube.com/watch?v=8336fcFV_T4) — Set up file-based routing with Expo Router, create stack navigation between screens, and build a bottom tab bar.
 
 ## Expo Router basics
 

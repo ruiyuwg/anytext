@@ -88,5 +88,5 @@ Twitter search might not always be able to resolve to the original post of that 
 
 title: "Pricing for Web Analytics"
 description: "Learn about pricing for Vercel Web Analytics."
-last\_updated: "2026-03-08T05:03:10.964Z"
+last\_updated: "2026-03-23T09:40:05.078Z"
 source: "https://vercel.com/docs/analytics/limits-and-pricing"

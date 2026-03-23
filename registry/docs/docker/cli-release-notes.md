@@ -5,12 +5,146 @@ You signed in with another tab or window. Reload to refresh your session. You si
 [docker](/docker) / **[scout-cli](/docker/scout-cli)** Public
 
 - [Notifications](/login?return_to=%2Fdocker%2Fscout-cli) You must be signed in to change notification settings
-- [Fork 123](/login?return_to=%2Fdocker%2Fscout-cli)
-- [Star 432](/login?return_to=%2Fdocker%2Fscout-cli)
+- [Fork 124](/login?return_to=%2Fdocker%2Fscout-cli)
+- [Star 438](/login?return_to=%2Fdocker%2Fscout-cli)
 
 # Releases: docker/scout-cli
 
 Releases · docker/scout-cli
+
+## v1.20.3
+
+20 Mar 12:06
+
+![@docker-scout-ci](https://avatars.githubusercontent.com/u/5429470?s=40\&v=4) [docker-scout-ci](/apps/docker-scout-ci)
+
+\[
+
+v1.20.3
+
+]\(/docker/scout-cli/tree/v1.20.3)
+
+[`48f3372`](/docker/scout-cli/commit/48f3372dc714a91f8ec2635913d9b9ad1c299ada)
+
+This commit was created on GitHub.com and signed with GitHub’s **verified signature**.
+
+GPG key ID: B5690EEEBB952194
+
+Verified
+
+[Learn about vigilant mode](https://docs.github.com/github/authenticating-to-github/displaying-verification-statuses-for-all-of-your-commits).
+
+Compare
+
+# Choose a tag to compare
+
+## Sorry, something went wrong.
+
+Filter
+
+Loading
+
+## Sorry, something went wrong.
+
+### Uh oh!
+
+There was an error while loading. Please reload this page.
+
+## No results found
+
+[View all tags](/docker/scout-cli/tags)
+
+[v1.20.3](/docker/scout-cli/releases/tag/v1.20.3) [Latest](/docker/scout-cli/releases/latest)
+
+[Latest](/docker/scout-cli/releases/latest)
+
+## What's Changed
+
+- Improve retries of temporary and network errors [@chrispatrick](https://github.com/chrispatrick)
+- Fix handling of dockerfiles included in provenance attestations [@chrispatrick](https://github.com/chrispatrick)
+- Fix handling of cosign sig tags [@chrispatrick](https://github.com/chrispatrick)
+- Use Docker Desktop HTTP proxy transport when available [@benja-M-1](https://github.com/benja-M-1)
+
+### Contributors
+
+- [![@benja-M-1](https://avatars.githubusercontent.com/u/212269?s=64\&v=4)](https://github.com/benja-M-1)
+- [![@chrispatrick](https://avatars.githubusercontent.com/u/1906514?s=64\&v=4)](https://github.com/chrispatrick)
+
+benja-M-1 and chrispatrick
+
+Assets 9
+
+Loading
+
+### Uh oh!
+
+There was an error while loading. Please reload this page.
+
+All reactions
+
+## v1.20.2
+
+09 Mar 17:44
+
+![@docker-scout-ci](https://avatars.githubusercontent.com/u/5429470?s=40\&v=4) [docker-scout-ci](/apps/docker-scout-ci)
+
+\[
+
+v1.20.2
+
+]\(/docker/scout-cli/tree/v1.20.2)
+
+[`48f3372`](/docker/scout-cli/commit/48f3372dc714a91f8ec2635913d9b9ad1c299ada)
+
+This commit was created on GitHub.com and signed with GitHub’s **verified signature**.
+
+GPG key ID: B5690EEEBB952194
+
+Verified
+
+[Learn about vigilant mode](https://docs.github.com/github/authenticating-to-github/displaying-verification-statuses-for-all-of-your-commits).
+
+Compare
+
+# Choose a tag to compare
+
+## Sorry, something went wrong.
+
+Filter
+
+Loading
+
+## Sorry, something went wrong.
+
+### Uh oh!
+
+There was an error while loading. Please reload this page.
+
+## No results found
+
+[View all tags](/docker/scout-cli/tags)
+
+[v1.20.2](/docker/scout-cli/releases/tag/v1.20.2)
+
+## What's Changed
+
+- Minor consistency fixes [@chrispatrick](https://github.com/chrispatrick)
+
+### Contributors
+
+- [![@chrispatrick](https://avatars.githubusercontent.com/u/1906514?s=64\&v=4)](https://github.com/chrispatrick)
+
+chrispatrick
+
+Assets 9
+
+Loading
+
+### Uh oh!
+
+There was an error while loading. Please reload this page.
+
+All reactions
 
 ## v1.19.0
 
@@ -510,118 +644,6 @@ There was an error while loading. Please reload this page.
 [v1.17.0](/docker/scout-cli/releases/tag/v1.17.0)
 
 Merge 06950db6f2ad31441a4c4de8d9a8f77e49939278 into 7c7e97734176f1bb6…
-
-Assets 9
-
-Loading
-
-### Uh oh!
-
-There was an error while loading. Please reload this page.
-
-All reactions
-
-## v1.16.3
-
-18 Mar 16:33
-
-![@github-actions](https://avatars.githubusercontent.com/in/15368?s=40\&v=4) [github-actions](/apps/github-actions)
-
-\[
-
-v1.16.3
-
-]\(/docker/scout-cli/tree/v1.16.3)
-
-[`7c7e977`](/docker/scout-cli/commit/7c7e97734176f1bb6765d427240a22a03dde4046)
-
-This commit was created on GitHub.com and signed with GitHub’s **verified signature**.
-
-GPG key ID: B5690EEEBB952194
-
-Verified
-
-[Learn about vigilant mode](https://docs.github.com/github/authenticating-to-github/displaying-verification-statuses-for-all-of-your-commits).
-
-Compare
-
-# Choose a tag to compare
-
-## Sorry, something went wrong.
-
-Filter
-
-Loading
-
-## Sorry, something went wrong.
-
-### Uh oh!
-
-There was an error while loading. Please reload this page.
-
-## No results found
-
-[View all tags](/docker/scout-cli/tags)
-
-[v1.16.3](/docker/scout-cli/releases/tag/v1.16.3)
-
-Merge 9d83a0e466620fe314516a67fd5c25a555a0f0eb into 127b463cf08f9854d…
-
-Assets 9
-
-Loading
-
-### Uh oh!
-
-There was an error while loading. Please reload this page.
-
-All reactions
-
-## v1.16.2
-
-18 Mar 16:33
-
-![@github-actions](https://avatars.githubusercontent.com/in/15368?s=40\&v=4) [github-actions](/apps/github-actions)
-
-\[
-
-v1.16.2
-
-]\(/docker/scout-cli/tree/v1.16.2)
-
-[`127b463`](/docker/scout-cli/commit/127b463cf08f9854d0a2ed7cecda4df996090c0a)
-
-This commit was created on GitHub.com and signed with GitHub’s **verified signature**.
-
-GPG key ID: B5690EEEBB952194
-
-Verified
-
-[Learn about vigilant mode](https://docs.github.com/github/authenticating-to-github/displaying-verification-statuses-for-all-of-your-commits).
-
-Compare
-
-# Choose a tag to compare
-
-## Sorry, something went wrong.
-
-Filter
-
-Loading
-
-## Sorry, something went wrong.
-
-### Uh oh!
-
-There was an error while loading. Please reload this page.
-
-## No results found
-
-[View all tags](/docker/scout-cli/tags)
-
-[v1.16.2](/docker/scout-cli/releases/tag/v1.16.2)
-
-Merge b2b49dd0f4f5ab8072365d3891136ff93dc4ea12 into d86161fc267f472f1…
 
 Assets 9
 

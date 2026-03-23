@@ -8,10 +8,12 @@ The following helpers are imported from the virtual assets module:
 import {
   Image,
   Picture,
+  Font,
   getImage,
   inferRemoteSize,
   getConfiguredImageService,
   imageConfig,
+  fontData,
 } from 'astro:assets';
 ```
 
@@ -20,8 +22,6 @@ import {
 [Section titled “\”](#image-)
 
 The `<Image />` component optimizes and transforms images.
-
-This component can also be used to create [responsive images](#responsive-image-properties) that can adjust based on the size of their container or a device screen size and resolution.
 
 src/components/MyComponent.astro
 
@@ -50,7 +50,7 @@ import myImage from "../assets/my_image.png"; // Image is 1600x900
 />
 ```
 
-The `<Image />` component accepts the following listed properties and [responsive image properties](#responsive-image-properties) in addition to all properties accepted by the HTML `<img>` tag.
+The `<Image />` component accepts the following listed properties in addition to all properties accepted by the HTML `<img>` tag.
 
 #### `src` (required)
 
@@ -138,7 +138,7 @@ However, both of these properties are required for images stored in your `public
 
 A list of pixel densities to generate for the image.
 
-The `densities` attribute is not compatible with [responsive images](#responsive-image-properties) with a `layout` prop or `image.layout` config set, and will be ignored if set.
+The `densities` attribute is not compatible with having the `layout` prop or `image.layout` config set, and will be ignored if set.
 
 If provided, this value will be used to generate a `srcset` attribute on the `<img>` tag. Do not provide a value for `widths` when using this value.
 
@@ -187,7 +187,7 @@ A list of widths to generate for the image.
 
 If provided, this value will be used to generate a `srcset` attribute on the `<img>` tag. A [`sizes` property](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes) must also be provided.
 
-The `widths` and `sizes` attributes will be automatically generated for responsive images using a `layout` property. Providing these values is generally not needed, but can be used to override any automatically generated values.
+The `widths` and `sizes` attributes will be automatically generated for images using a `layout` property. Providing these values is generally not needed, but can be used to override any automatically generated values.
 
 Do not provide a value for `densities` when using this value. Only one of these two values can be used to generate a `srcset`.
 
@@ -242,7 +242,7 @@ import myImage from '../assets/my_image.png'; // Image is 1600x900
 
 Specifies the layout width of the image for each of a list of media conditions. Must be provided when specifying `widths`.
 
-The `widths` and `sizes` attributes will be automatically generated for responsive images using a `layout` property. Providing these values is generally not needed, but can be used to override any automatically generated values.
+The `widths` and `sizes` attributes will be automatically generated for images using a `layout` property. Providing these values is generally not needed, but can be used to override any automatically generated values.
 
 The generated `sizes` attribute for `constrained` and `full-width` images is based on the assumption that the image is displayed close to the full width of the screen when the viewport is smaller than the image’s width. If it is significantly different (e.g. if it’s in a multi-column layout on small screens), you may need to adjust the `sizes` attribute manually for best results.
 
@@ -324,6 +324,126 @@ fetchpriority="high"
 
 These individual attributes can still be set manually if you need to customize them further.
 
+#### `layout`
+
+[Section titled “layout”](#layout)
+
+**Type:** `'constrained' | 'full-width' | 'fixed' | 'none'`\
+**Default:** `image.layout | 'none'`
+
+**Added in:** `astro@5.10.0`
+
+Determines how the image should resize when its container changes size. Can be used to override the default configured value for [`image.layout`](/en/reference/configuration-reference/#imagelayout).
+
+MyComponent.astro
+
+```astro
+---
+import { Image } from 'astro:assets';
+import myImage from '../assets/my_image.png';
+---
+<Image src={myImage} alt="A description of my image." layout='constrained' width={800} height={600} />
+```
+
+When a layout is set, `srcset` and `sizes` attributes are automatically generated based on the image’s dimensions and the layout type. The previous `<Image />` component will generate the following HTML output:
+
+```html
+<img
+  src="/_astro/my_image.hash3.webp"
+  srcset="/_astro/my_image.hash1.webp 640w,
+      /_astro/my_image.hash2.webp 750w,
+      /_astro/my_image.hash3.webp 800w,
+      /_astro/my_image.hash4.webp 828w,
+      /_astro/my_image.hash5.webp 1080w,
+      /_astro/my_image.hash6.webp 1280w,
+      /_astro/my_image.hash7.webp 1600w"
+  alt="A description of my image"
+  sizes="(min-width: 800px) 800px, 100vw"
+  loading="lazy"
+  decoding="async"
+  fetchpriority="auto"
+  width="800"
+  height="600"
+  style="--fit: cover; --pos: center;"
+  data-astro-image="constrained"
+>
+```
+
+`layout` supports the following values:
+
+- `constrained` - The image will scale down to fit the container, maintaining its aspect ratio, but will not scale up beyond the specified `width` and `height`, or the image’s original dimensions.
+
+  Use this if you want the image to display at the requested size where possible, but shrink to fit smaller screens. This matches the default behavior for images when using Tailwind. If you’re not sure, this is probably the layout you should choose.
+
+- `full-width` - The image will scale to fit the width of the container, maintaining its aspect ratio.
+
+  Use this for hero images or other images that should take up the full width of the page.
+
+- `fixed` - The image will maintain the requested dimensions and not resize. It will generate a `srcset` to support high density displays, but not for different screen sizes.
+
+  Use this if the image will not resize, for example icons or logos smaller than any screen width, or other images in a fixed-width container.
+
+- `none` - The image will not be responsive. No `srcset` or `sizes` will be automatically generated, and no styles will be applied.
+
+  This is useful if you have enabled a default layout, but want to disable it for a specific image.
+
+For example, with `constrained` set as the default layout, you can override any individual image’s `layout` property:
+
+src/components/MyComponent.astro
+
+```astro
+---
+import { Image } from 'astro:assets';
+import myImage from '../assets/my_image.png';
+---
+<Image src={myImage} alt="This will use constrained layout" width={800} height={600} />
+<Image src={myImage} alt="This will use full-width layout" layout="full-width" />
+<Image src={myImage} alt="This will disable responsive images" layout="none" />
+```
+
+The value for `layout` also defines the default styles applied to the `<img>` tag to determine how the image should resize according to its container:
+
+Responsive Image Styles
+
+```css
+:where([data-astro-image]) {
+  object-fit: var(--fit);
+  object-position: var(--pos);
+}
+:where([data-astro-image='full-width']) {
+  width: 100%;
+}
+:where([data-astro-image='constrained']) {
+  max-width: 100%;
+}
+```
+
+#### `fit`
+
+[Section titled “fit”](#fit)
+
+**Type:** `'contain' | 'cover' | 'fill' | 'none' | 'scale-down'`\
+**Default:** `image.objectFit | 'cover'`
+
+**Added in:** `astro@5.10.0`
+
+Defines how a image should be cropped if its aspect ratio is changed.
+
+Values match those of CSS `object-fit`. Defaults to `cover`, or the value of [`image.objectFit`](/en/reference/configuration-reference/#imageobjectfit) if set. Can be used to override the default `object-fit` styles.
+
+#### `position`
+
+[Section titled “position”](#position)
+
+**Type:** `string`\
+**Default:** `image.objectPosition | 'center'`
+
+**Added in:** `astro@5.10.0`
+
+Defines the position of the image crop for a image if the aspect ratio is changed.
+
+Values match those of CSS `object-position`. Defaults to `center`, or the value of [`image.objectPosition`](/en/reference/configuration-reference/#imageobjectposition) if set. Can be used to override the default `object-position` styles.
+
 #### `background`
 
 [Section titled “background”](#background)
@@ -339,10 +459,6 @@ By default, Sharp uses a black background when flattening an image. Specifying a
 src/components/MyComponent.astro
 
 ```astro
----
-import { Image } from 'astro:assets';
-import myImage from '../assets/my_image.png';
----
 <Image
   src={myImage}
   alt="A description of my image"
@@ -360,8 +476,6 @@ Values are passed directly to the image service. Sharp accepts [any value the `c
 **Added in:** `astro@3.3.0`
 
 The `<Picture />` component generates an optimized image with multiple formats and/or sizes.
-
-This component can also be used to create [responsive images](#responsive-image-properties) that can adjust based on the size of their container or a device screen size and resolution.
 
 src/pages/index.astro
 
@@ -392,7 +506,7 @@ import myImage from "../assets/my_image.png"; // Image is 1600x900
 </picture>
 ```
 
-`<Picture />` accepts all the properties of [the `<Image />` component](#image-), including [responsive image properties](#responsive-image-properties), plus the following:
+`<Picture />` accepts all the properties of [the `<Image />` component](#image-) plus the following:
 
 #### `formats`
 
@@ -451,131 +565,93 @@ import myImage from "../my_image.png"; // Image is 1600x900
 </picture>
 ```
 
-### Responsive image properties
+### `<Font />`
 
-[Section titled “Responsive image properties”](#responsive-image-properties)
+[Section titled “\”](#font-)
 
-Setting the [`layout`](#layout) property on an [`<Image />`](#image-) or [`<Picture />`](#picture-) component creates a responsive image and enables additional property settings.
+**Added in:** `astro@6.0.0` New
 
-src/components/MyComponent.astro
+The `<Font />` component outputs style tags and can optionally output preload links for a given font family.
 
-```astro
----
-import { Image } from 'astro:assets';
-import myImage from '../assets/my_image.png';
----
-<Image src={myImage} alt="A description of my image." layout='constrained' width={800} height={600} />
-```
+It must be imported and added to your page `<head>`. This is commonly done in a component such as `Head.astro` that is used in a common site layout for global use but may be added to individual pages as needed.
 
-When a layout is set, `srcset` and `sizes` attributes are automatically generated based on the image’s dimensions and the layout type. The previous `<Image />` component will generate the following HTML output:
+With this component, you have control over which font family is used on which page, and which fonts are preloaded.
 
-```html
-<img
-  src="/_astro/my_image.hash3.webp"
-  srcset="/_astro/my_image.hash1.webp 640w,
-      /_astro/my_image.hash2.webp 750w,
-      /_astro/my_image.hash3.webp 800w,
-      /_astro/my_image.hash4.webp 828w,
-      /_astro/my_image.hash5.webp 1080w,
-      /_astro/my_image.hash6.webp 1280w,
-      /_astro/my_image.hash7.webp 1600w"
-  alt="A description of my image"
-  sizes="(min-width: 800px) 800px, 100vw"
-  loading="lazy"
-  decoding="async"
-  fetchpriority="auto"
-  width="800"
-  height="600"
-  style="--fit: cover; --pos: center;"
-  data-astro-image="constrained"
->
-```
-
-The value for `layout` also defines the default styles applied to the `<img>` tag to determine how the image should resize according to its container:
-
-Responsive Image Styles
-
-```css
-:where([data-astro-image]) {
-  object-fit: var(--fit);
-  object-position: var(--pos);
-}
-:where([data-astro-image='full-width']) {
-  width: 100%;
-}
-:where([data-astro-image='constrained']) {
-  max-width: 100%;
-}
-```
-
-You can override the default `object-fit` and `object-position` styles by setting the [`fit`](#fit) and [`position`](#position) props on the `<Image />` or `<Picture />` component.
-
-##### `layout`
-
-[Section titled “layout”](#layout)
-
-**Type:** `'constrained' | 'full-width' | 'fixed' | 'none'`\
-**Default:** `image.layout | 'none'`
-
-**Added in:** `astro@5.10.0`
-
-Defines a [responsive image](#responsive-image-properties) and determines how the image should resize when its container changes size. Can be used to override the default configured value for [`image.layout`](/en/reference/configuration-reference/#imagelayout).
-
-- `constrained` - The image will scale down to fit the container, maintaining its aspect ratio, but will not scale up beyond the specified `width` and `height`, or the image’s original dimensions.
-
-  Use this if you want the image to display at the requested size where possible, but shrink to fit smaller screens. This matches the default behavior for images when using Tailwind. If you’re not sure, this is probably the layout you should choose.
-
-- `full-width` - The image will scale to fit the width of the container, maintaining its aspect ratio.
-
-  Use this for hero images or other images that should take up the full width of the page.
-
-- `fixed` - The image will maintain the requested dimensions and not resize. It will generate a `srcset` to support high density displays, but not for different screen sizes.
-
-  Use this if the image will not resize, for example icons or logos smaller than any screen width, or other images in a fixed-width container.
-
-- `none` - The image will not be responsive. No `srcset` or `sizes` will be automatically generated, and no styles will be applied.
-
-  This is useful if you have enabled a default layout, but want to disable it for a specific image.
-
-For example, with `constrained` set as the default layout, you can override any individual image’s `layout` property:
-
-src/components/MyComponent.astro
+src/components/Head.astro
 
 ```astro
 ---
-import { Image } from 'astro:assets';
-import myImage from '../assets/my_image.png';
+import { Font } from "astro:assets";
 ---
-<Image src={myImage} alt="This will use constrained layout" width={800} height={600} />
-<Image src={myImage} alt="This will use full-width layout" layout="full-width" />
-<Image src={myImage} alt="This will disable responsive images" layout="none" />
+
+
+<Font cssVariable="--font-roboto" />
 ```
 
-##### `fit`
+The `<Font />` component accepts the following properties:
 
-[Section titled “fit”](#fit)
+#### `cssVariable` (required)
 
-**Type:** `'contain' | 'cover' | 'fill' | 'none' | 'scale-down'`\
-**Default:** `image.objectFit | 'cover'`
+[Section titled “cssVariable (required)”](#cssvariable-required)
 
-**Added in:** `astro@5.10.0`
+**Type:** `CssVariable`\
+**Example type:** `"--font-roboto" | "--font-comic-sans" | ...`
 
-Enabled when the [`layout`](#layout) property is set or configured. Defines how a responsive image should be cropped if its aspect ratio is changed.
+The [`cssVariable`](/en/reference/configuration-reference/#fontcssvariable) registered in your Astro configuration:
 
-Values match those of CSS `object-fit`. Defaults to `cover`, or the value of [`image.objectFit`](/en/reference/configuration-reference/#imageobjectfit) if set. Can be used to override the default `object-fit` styles.
+src/components/Head.astro
 
-##### `position`
+```astro
+---
+import { Font } from "astro:assets";
+---
 
-[Section titled “position”](#position)
 
-**Type:** `string`\
-**Default:** `image.objectPosition | 'center'`
+<Font cssVariable="--font-roboto" />
+```
 
-**Added in:** `astro@5.10.0`
+#### `preload`
 
-Enabled when the [`layout`](#layout) property is set or configured. Defines the position of the image crop for a responsive image if the aspect ratio is changed.
+[Section titled “preload”](#preload)
 
-Values match those of CSS `object-position`. Defaults to `center`, or the value of [`image.objectPosition`](/en/reference/configuration-reference/#imageobjectposition) if set. Can be used to override the default `object-position` styles.
+**Type:** `boolean | { weight?: string | number; style?: string; subset?: string }[]`\
+**Default:** `false`
+
+Whether to output [preload links](https://web.dev/learn/performance/optimize-web-fonts#preload) or not. With the `preload` directive, the browser will immediately begin downloading all possible font links during page load:
+
+src/components/Head.astro
+
+```astro
+---
+import { Font } from "astro:assets";
+---
+
+
+<Font cssVariable="--font-roboto" preload />
+```
+
+Be very intentional about which fonts you preload. Preloading too many fonts can impact performance, as this can block loading other important resources or may download fonts that are not needed for the current page.
+
+To selectively control which font files are preloaded, you can provide an array of objects describing any combination of font `weight`, `style`, or `subset` to preload:
+
+src/components/Head.astro
+
+```astro
+---
+import { Font } from "astro:assets";
+---
+
+
+<Font
+  cssVariable="--font-roboto"
+  preload={[
+    { subset: "latin", style: "normal" },
+    { weight: "400" },
+  ]}
+/>
+```
+
+Variable weight font files will be preloaded if any weight within its range is requested. For example, a font file for font weight `100 900` will be included when `400` is specified in a `preload` object.
 
 ### `getImage()`
 
@@ -585,7 +661,9 @@ Values match those of CSS `object-position`. Defaults to `center`, or the value 
 
 Caution
 
-`getImage()` relies on server-only APIs and breaks the build when used on the client.
+`getImage()` relies on server-only APIs and will throw an error on the client.
+
+If you need the resulting image URL client-side, you can [pass the `src` from a server-rendered `getImage()` call to the client](/en/guides/images/#generating-images-with-getimage).
 
 The `getImage()` function is intended for generating images destined to be used somewhere else than directly in HTML, for example in an [API Route](/en/guides/endpoints/#server-endpoints-api-routes). It also allows you to create your own custom `<Image />` component.
 
@@ -643,6 +721,23 @@ Retrieves the resolved [image service](/en/reference/configuration-reference/#im
 
 The [configuration options for images](/en/reference/configuration-reference/#image-options) set by the user and merged with all defaults.
 
+### `fontData`
+
+[Section titled “fontData”](#fontdata)
+
+**Type:** `Record<CssVariable, Array<FontData>>`
+
+**Added in:** `astro@6.0.0` New
+
+An object where each key is a [`cssVariable`](/en/reference/configuration-reference/#fontcssvariable) and the value is an array describing the associated fonts. Each font is an object containing an array of `src` available for that font and the following optional properties: `weight` and `style`:
+
+```ts
+import { fontData } from "astro:assets"
+
+
+const data = fontData["--font-roboto"]
+```
+
 ## `astro:assets` types
 
 [Section titled “astro:assets types”](#astroassets-types)
@@ -653,6 +748,7 @@ The following types are imported from the virtual assets module:
 import type {
   LocalImageProps,
   RemoteImageProps,
+  FontData
 } from "astro/assets";
 ```
 
@@ -676,6 +772,16 @@ Learn more about [imported images in `src/`](/en/guides/images/#images-in-src) w
 - `ImageSharedProps<T> & { src: string; inferSize?: false | undefined; }`
 
 Describes the [properties of a remote image](#image-). This ensures that when [`inferSize`](#infersize) is not provided or is set to `false`, both [`width` and `height`](#width-and-height-required-for-images-in-public) are required.
+
+### `FontData`
+
+[Section titled “FontData”](#fontdata-1)
+
+**Type:** `{ src: Array<{ url: string; format?: string; tech?: string }>; weight?: string; style?: string; }`
+
+**Added in:** `astro@6.0.0` New
+
+Describes the font data associated with a given font family.
 
 ## Imports from `astro/assets`
 

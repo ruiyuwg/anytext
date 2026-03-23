@@ -60,10 +60,10 @@ The [official Sanity JavaScript client](https://www.sanity.io/docs/js-client) su
 const {createClient} = require('@sanity/client')
 
 const client = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   apiVersion: '2021-10-21', // use a UTC date string
-  token: 'sanity-auth-token', // or leave blank for unauthenticated usage
+  token: '<sanity-auth-token>', // or leave blank for unauthenticated usage
   useCdn: true, // `false` if you want to ensure fresh data
 })
 ```

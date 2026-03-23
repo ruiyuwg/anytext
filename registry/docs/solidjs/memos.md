@@ -15,11 +15,11 @@ Memos expose a *read-only* reactive value (like a [signal](/concepts/signals)) a
 A memo is created using the `createMemo` function. Within this function, you can define the derived value or computations you wish to memoize. When called, `createMemo` will return a **getter** function that reads the current value of the memo:
 
 ```
-import { createMemo, createSignal } from "solid-js"
-const [count, setCount] = createSignal(0)
-const isEven = createMemo(() => count() % 2 === 0)
-console.log(isEven()) // true
-setCount(3)console.log(isEven()) // false
+import { createMemo, createSignal } from "solid-js";
+const [count, setCount] = createSignal(0);
+const isEven = createMemo(() => count() % 2 === 0);
+console.log(isEven()); // true
+setCount(3);console.log(isEven()); // false
 ```
 
 While memos look similar to effects, they are different in that they *return a value*. This value is the result of the computation or derived state that you wish to memoize.
@@ -84,8 +84,8 @@ UI updates, network requests, or external integrations.
 When working with memos, it is recommended that you leave them "pure".
 
 ```
-import { createSignal, createMemo } from "solid-js"
-const [count, setCount] = createSignal(0)const isEven = createMemo(() => count() % 2 === 0) // example of a pure function
+import { createSignal, createMemo } from "solid-js";
+const [count, setCount] = createSignal(0);const isEven = createMemo(() => count() % 2 === 0); // example of a pure function
 ```
 
 A pure function is one that does not cause any side effects. This means that the function's output should solely depend on its inputs.
@@ -93,9 +93,9 @@ A pure function is one that does not cause any side effects. This means that the
 When you introduce side effects into a memo, it can complicate the reactivity chain. This can lead to unexpected behavior, such as infinite loops, that lead your application to crash.
 
 ```
-import { createSignal, createMemo } from "solid-js"
-const [count, setCount] = createSignal(0)const [message, setMessage] = createSignal("")
-const badMemo = createMemo(() => {  if (count() > 10) {    setMessage("Count is too high!") //  side effect  }  return count() % 2 === 0})
+import { createSignal, createMemo } from "solid-js";
+const [count, setCount] = createSignal(0);const [message, setMessage] = createSignal("");
+const badMemo = createMemo(() => {  if (count() > 10) {    setMessage("Count is too high!"); //  side effect  }  return count() % 2 === 0;});
 ```
 
 These infinite loops can be triggered when a memo has a side effect that causes its dependencies to change. This will cause the memo to re-evaluate, which will then trigger the side effect again, and so on until the application crashes.
@@ -103,10 +103,10 @@ These infinite loops can be triggered when a memo has a side effect that causes 
 This can be avoided by using a [`createEffect`](/reference/basic-reactivity/create-effect) to handle the side effects instead:
 
 ```
-import { createSignal, createMemo, createEffect } from "solid-js"
-const [count, setCount] = createSignal(0)const [message, setMessage] = createSignal("")
-const isEven = createMemo(() => count() % 2 === 0)
-createEffect(() => {  if (count() > 10) {    setMessage("Count is too high!")  }})
+import { createSignal, createMemo, createEffect } from "solid-js";
+const [count, setCount] = createSignal(0);const [message, setMessage] = createSignal("");
+const isEven = createMemo(() => count() % 2 === 0);
+createEffect(() => {  if (count() > 10) {    setMessage("Count is too high!");  }});
 ```
 
 Here, the `createEffect` will handle the side effects, while the `isEven` memo will remain pure.
@@ -118,8 +118,8 @@ Memos are optimized to execute only once for each change in their dependencies. 
 When working with derived state, memos are the recommended approach over effects. Keeping the logic in a memo prevents unnecessary re-renders that can occur when using an effect. Similarly, effects are better suited to handle side effects, such as DOM updates, rather than derived state. This separation of concerns can help keep your code clean and easy to understand.
 
 ```
-// effect - runs whenever `count` changescreateEffect(() => {  if (count() > 10) {    setMessage("Count is too high!")  } else {    setMessage("")  }})
-// memo - only runs when `count` changes to or from a value greater than 10const message = createMemo(() => {  if (count() > 10) {    return "Count is too high!"  } else {    return ""  }})
+// effect - runs whenever `count` changescreateEffect(() => {  if (count() > 10) {    setMessage("Count is too high!");  } else {    setMessage("");  }});
+// memo - only runs when `count` changes to or from a value greater than 10const message = createMemo(() => {  if (count() > 10) {    return "Count is too high!";  } else {    return "";  }});
 ```
 
 [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/concepts/derived-values/memos.mdx\&page=https://docs.solidjs.com/concepts/derived-values/memos)

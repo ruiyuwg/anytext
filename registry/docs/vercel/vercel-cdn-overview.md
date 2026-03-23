@@ -105,5 +105,5 @@ CDN pricing covers three resources: Fast Data Transfer, Fast Origin Transfer, an
 
 title: "Diagnosing and fixing cache issues"
 description: "Diagnose stale content and fix CDN cache, data cache, and build cache issues using the CLI."
-last\_updated: "2026-03-08T05:03:11.846Z"
+last\_updated: "2026-03-23T09:40:06.312Z"
 source: "https://vercel.com/docs/cdn-cache/debug-cache-issues"

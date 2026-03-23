@@ -6,15 +6,16 @@ Get the body and headers of a received email.
 
 Receiving emails contain the HTML and Plain Text body of the email, as well as the headers.
 
-Webhooks do not include the actual HTML or Plain Text body of the email. You
-must call the [received emails
-API](/api-reference/emails/retrieve-received-email) to retrieve them. This
-design choice supports large payloads in serverless environments that have
-limited request body sizes.
+Webhooks do not include the email body, headers, or attachments, only their
+metadata. You must call the [Received emails
+API](/api-reference/emails/retrieve-received-email) or the [Attachments
+API](/api-reference/emails/list-received-email-attachments) to retrieve them.
+This design choice supports large attachments in serverless environments that
+have limited request body sizes.
 
 After receiving the webhook event, call the [Receiving API](/api-reference/emails/retrieve-received-email).
 
-Here's an example in a Next.js application:
+Here are some examples:
 
 ```ts Next.js theme={"theme":{"light":"github-light","dark":"vesper"}}
 // app/api/events/route.ts
@@ -99,4 +100,36 @@ if ($event['type'] === 'email.received') {
 }
 
 echo json_encode([]);
+```
+
+```rust Rust theme={"theme":{"light":"github-light","dark":"vesper"}}
+use axum::{extract::State, response::Json};
+use resend_rs::Resend;
+use std::sync::Arc;
+
+#[derive(Serialize)]
+struct Empty {}
+
+async fn example(
+    State(state): State<Arc>,
+    Json(event): Json<resend_rs::events::EmailEvent>,
+) -> Response {
+    if matches!(
+        event.r#type,
+        resend_rs::events::EmailEventType::EmailReceived
+    ) {
+        let email = state
+            .resend
+            .receiving
+            .get(&event.data.email_id)
+            .await
+            .unwrap();
+
+        dbg!(&email.html, &email.text, &email.headers);
+
+        Json(email).into_response()
+    } else {
+        Json(Empty {}).into_response()
+    }
+}
 ```

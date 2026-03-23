@@ -72,5 +72,5 @@ console.log(result.text);
 
 title: "Anthropic Reasoning"
 description: "Configure extended thinking for Anthropic Claude models with the AI SDK and AI Gateway."
-last\_updated: "2026-03-08T05:03:10.185Z"
+last\_updated: "2026-03-23T09:40:03.915Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/reasoning/anthropic"

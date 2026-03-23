@@ -80,8 +80,6 @@ Accelerate does not have a consistency model. It is not a distributed system whe
 
 Accelerate implements a [read-through caching strategy](https://www.prisma.io/dataguide/managing-databases/introduction-database-caching#read-through) particularly suitable for read-heavy workloads.
 
-The freshness of the data served by the cache depends on the cache strategy defined in your query. Refer to [this section](/postgres/database/caching#selecting-a-cache-strategy) for more information on selecting the right cache strategy for your query.
-
 How is Accelerate different from other caching tools, such as Redis? \[#how-is-accelerate-different-from-other-caching-tools-such-as-redis]
 
 - Accelerate is a *specialized* cache that allows you to optimize data access in code at the query level with a cache strategy. On the other hand, tools such as Redis and Memcached are *general-purpose* caches designed to be adaptable and flexible.
@@ -108,7 +106,7 @@ No. We currently do not have any plans for supporting other ORMs/query builders 
 
 What is the maximum allowed value for the ttl parameter when configuring cacheStrategy? \[#what-is-the-maximum-allowed-value-for-the-ttl-parameter-when-configuring-cachestrategy]
 
-The [Time-to-live](/postgres/database/caching#time-to-live-ttl) (`ttl`) parameter can be set for up to a *year*. However, it's important to note that items within the cache may be evicted if they are not frequently accessed.
+The [Time-to-live](/accelerate/caching) (`ttl`) parameter can be set for up to a *year*. However, it's important to note that items within the cache may be evicted if they are not frequently accessed.
 
 Based on our experimentation, we’ve seen cache items persist for around 18 hours. While items may remain in the cache for an extended period if they are actively accessed, there is no guarantee.
 
@@ -174,11 +172,11 @@ What is the difference between Invalidate and Revalidate? \[#what-is-the-differe
 
 What is on-demand cache invalidation? \[#what-is-on-demand-cache-invalidation]
 
-[On-demand cache invalidation](/postgres/database/caching#on-demand-cache-invalidation) lets applications instantly update specific cached data when it changes, instead of waiting for regular cache refresh cycles. This keeps information accurate and up-to-date for users.
+[On-demand cache invalidation](/accelerate/caching) lets applications instantly update specific cached data when it changes, instead of waiting for regular cache refresh cycles. This keeps information accurate and up-to-date for users.
 
 When should I use the cache invalidate API? \[#when-should-i-use-the-cache-invalidate-api]
 
-The [cache invalidate API](/postgres/database/caching#on-demand-cache-invalidation) is essential when data consistency cannot wait for the cache’s standard expiration or revalidation. Key use cases include:
+The [cache invalidate API](/accelerate/caching) is essential when data consistency cannot wait for the cache’s standard expiration or revalidation. Key use cases include:
 
 - **Content updates**: When critical changes occur, such as edits to a published article, product updates, or profile modifications, that need to be visible immediately.
 - **Inventory management**: In real-time applications, like inventory or booking systems, where stock levels, availability, or reservation statuses must reflect the latest information.

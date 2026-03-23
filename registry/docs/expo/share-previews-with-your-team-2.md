@@ -6,7 +6,7 @@ Updates generally fix small bugs and push small changes in between app store rel
 
 In this chapter, we'll use [EAS Update](/eas-update/introduction) to share changes with our team. This will help [us and our team quickly share previews](/review/overview) of the change.
 
-[Watch: How to share previews with your team](https://www.youtube.com/watch?v=vPKh-tNm-yI)
+[Watch: How to share previews with your team](https://www.youtube.com/watch?v=vPKh-tNm-yI) — Set up EAS Update to share preview versions of your app with your team between app store releases.
 
 ## Install expo-updates library
 

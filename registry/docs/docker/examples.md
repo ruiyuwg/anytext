@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -24,7 +22,7 @@ Table of contents
 
 ***
 
-Get inspiration from the following agent examples. See more examples in the [Docker Agent GitHub repository](https://github.com/docker/cagent/tree/main/examples).
+Get inspiration from the following agent examples. See more examples in the [Docker Agent GitHub repository](https://github.com/docker/docker-agent/tree/main/examples).
 
 ## [Development team](#development-team)
 
@@ -272,7 +270,7 @@ agents:
       - type: todo
       - type: mcp
         command: gopls
-        version: "golang/tools@v0.25.0"
+        version: "golang/tools@v0.21.0"
         args: ["mcp"]
     commands:
       fix-lint:
@@ -372,7 +370,7 @@ agents:
       - type: shell
       - type: mcp
         command: gopls
-        version: "golang/tools@v0.25.0"
+        version: "golang/tools@v0.21.0"
         args: ["mcp"]
 
   librarian:
@@ -494,7 +492,7 @@ agents:
 models:
   anthropic:
     provider: anthropic
-    model: claude-3-7-sonnet-latest
+    model: claude-sonnet-4-6
 ```
 
 Hide

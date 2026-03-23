@@ -203,20 +203,22 @@ caution.
 
 Source: https://resend.com/docs/knowledge-base/how-can-i-receive-emails-with-resend
 
-Receiving emails is in early access.
+Receive emails with webhooks and process content, attachments, forwarding, and replies.
 
-We're currently working on inbound email, [sign-up to join our early access waitlist](https://resend.com/inbound). The key components of this feature will include:
+Yes. Resend supports receiving emails (inbound) via webhooks.
 
-- Receive emails using webhooks. Get notified when emails are received.
-- Parse content and attachments. Extract and process email data automatically.
-- Reply to your users. Respond directly to incoming messages.
+With Receiving, you can:
 
-While this feature is in early access, you can still [set a Reply To Address](api-reference/emails/send-email) (`reply_to`) on your outbound emails to direct any responses to a different location like an existing inbox, slack channel, etc.
+- Receive incoming emails and get notified with the `email.received` webhook event.
+- Retrieve full email content (HTML, text, headers) using the Receiving API.
+- Process attachments using attachment metadata and temporary download URLs.
 
-Here are a few current workarounds that could help:
+You can receive emails at:
 
-- **Sending to existing inbox**: You could set the `reply_to` as your personal email address. If any recipient replies to your email, it will be sent to the `reply_to` address. This could be a different address on the same domain, or a different domain entirely.
-- **Sending to Slack**: You could set the `reply_to` as a [channel email address in Slack](https://slack.com/help/articles/206819278-Send-emails-to-Slack). This will create a new message in slack with the contents of the reply.
+- A Resend-managed `*.resend.app` receiving domain, or
+- Your own custom domain by adding the required `MX` record.
+
+See the full guide: [Receiving Emails](/dashboard/receiving/introduction).
 
 # How do I create an email address or sender in Resend?
 

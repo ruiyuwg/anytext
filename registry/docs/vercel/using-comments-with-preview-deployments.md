@@ -78,5 +78,5 @@ You can copy a link to a comment in two ways:
 
 title: "Conformance Allowlists"
 description: "Learn how to use allowlists to bypass your Conformance rules to merge changes into your codebase."
-last\_updated: "2026-03-08T05:03:12.539Z"
+last\_updated: "2026-03-23T09:40:07.331Z"
 source: "https://vercel.com/docs/conformance/allowlist"

@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -40,6 +38,8 @@ Before you begin, make sure you have:
 Docker Desktop only applies settings from the `admin-settings.json` file when both authentication and Docker Business license checks succeed.
 
 > Important
+>
+> The presence of the `admin-settings.json` file enforces sign-in on Docker Desktop (behavior since version 4.29). This is intended for business features that require authentication.
 >
 > Users must be signed in and part of a Docker Business organization. If either condition isn't met, the settings file is ignored.
 
@@ -132,7 +132,7 @@ Show more
     "http": "",
     "https": "",
     "exclude": [],
-    "pac":"",
+    "pac": "",
     "embeddedPac": "",
     "transparentPorts": ""
   },
@@ -159,23 +159,23 @@ Show more
     },
     "dockerDaemonOptions": {
       "locked": false,
-      "value":"{\"debug\": false}"
+      "value": "{\"debug\": false}"
     },
     "vpnkitCIDR": {
       "locked": false,
-      "value":"192.168.65.0/24"
+      "value": "192.168.65.0/24"
     }
   },
   "kubernetes": {
-     "locked": false,
-     "enabled": false,
-     "showSystemContainers": false,
-     "imagesRepository": ""
+    "locked": false,
+    "enabled": false,
+    "showSystemContainers": false,
+    "imagesRepository": ""
   },
   "windowsContainers": {
     "dockerDaemonOptions": {
       "locked": false,
-      "value":"{\"debug\": false}"
+      "value": "{\"debug\": false}"
     }
   },
   "disableUpdate": {
@@ -209,7 +209,7 @@ Show more
       "sharedByDefault": true
     },
     {
-      "path":"$TMP",
+      "path": "$TMP",
       "sharedByDefault": false
     }
   ],
@@ -422,7 +422,7 @@ Version
 
 `proxy`
 
-If `mode` is set to `system` instead of `manual`, Docker Desktop gets the proxy values from the system and ignores and values set for `http`, `https` and `exclude`. Change `mode` to `manual` to manually configure proxy servers. If the proxy port is custom, specify it in the `http` or `https` property, for example `"https": "http://myotherproxy.com:4321"`. The `exclude` property specifies a comma-separated list of hosts and domains to bypass the proxy.
+If `mode` is set to `system` instead of `manual`, Docker Desktop gets the proxy values from the system and ignores any values set for `http`, `https` and `exclude`. Change `mode` to `manual` to manually configure proxy servers. If the proxy port is custom, specify it in the `http` or `https` property, for example `"https": "http://myotherproxy.com:4321"`. The `exclude` property specifies a comma-separated list of hosts and domains to bypass the proxy.
 
 `windowsDockerdPort`
 
@@ -442,7 +442,7 @@ Specifies a PAC file URL. For example, `"pac": "http://proxy/proxy.pac"`.
 
 `embeddedPac`
 
-Specifies an embedded PAC (Proxy Auto-Config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"DIRECT\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL.
+Specifies an embedded PAC (Proxy Auto-config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"DIRECT\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL.
 
 Docker Desktop version 4.46 and later.
 
@@ -468,7 +468,7 @@ Specifies a PAC file URL. For example, `"pac": "http://containerproxy/proxy.pac"
 
 `embeddedPac`
 
-Specifies an embedded PAC (Proxy Auto-Config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"PROXY 192.168.92.1:2003\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL.
+Specifies an embedded PAC (Proxy Auto-config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"PROXY 192.168.92.1:2003\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL.
 
 Docker Desktop version 4.46 and later.
 
@@ -632,7 +632,7 @@ If `value` is set to `true`, beta features are enabled.
 
 `enableDockerAI`
 
-If `allowBetaFeatures` is true, setting `enableDockerAI` to `true` enables [Docker AI (Ask Gordon)](https://docs.docker.com/ai/gordon/) by default. You can independently control this setting from the `allowBetaFeatures` setting.
+If `allowBetaFeatures` is true, setting `enableDockerAI` to `true` enables [Gordon](https://docs.docker.com/ai/gordon/) by default. You can independently control this setting from the `allowBetaFeatures` setting.
 
 `enableDockerMCPToolkit`
 

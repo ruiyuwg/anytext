@@ -570,7 +570,7 @@ main().catch(console.error);
 
 title: "Image Generation"
 description: "Generate and edit images using AI models through Vercel AI Gateway with support for multiple providers and modalities."
-last\_updated: "2026-03-08T05:03:10.162Z"
+last\_updated: "2026-03-23T09:40:03.859Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/image-generation"
 
 # Image Generation
@@ -589,5 +589,5 @@ To implement image generation with AI Gateway, use one of the following methods:
 
 title: "Observability"
 description: "Learn how to monitor and debug your AI Gateway requests."
-last\_updated: "2026-03-08T05:03:10.167Z"
+last\_updated: "2026-03-23T09:40:03.877Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/observability"

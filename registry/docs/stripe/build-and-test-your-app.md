@@ -8,7 +8,9 @@ Use your SmartPOS DevKit device to test and iterate your application without goi
 
 If you need a DevKit device, you can [order up to five per user](https://docs.stripe.com/terminal/fleet/order-and-return-readers.md) from the [Readers](https://dashboard.stripe.com/terminal) section in your Dashboard.
 
-> Verifone reader support is in public preview for the US and CA. To join the preview, you must [contact the Sales team to order the applicable reader](https://stripe.com/contact/sales).
+> #### Verifone reader support
+>
+> Verifone reader support is in public preview for the United States and Canada. Some verifone readers are in private preview for Ireland and the United Kingdom (V660p, UX700, P630) and for Singapore (V660p, P630). To join the preview, you must [contact the Sales team to order the applicable reader](https://stripe.com/contact/sales).
 
 ## Set up the DevKit
 
@@ -117,6 +119,25 @@ In your [app manifest](https://developer.android.com/guide/topics/manifest/manif
 
 Learn more about [setting up your integration](https://docs.stripe.com/terminal/payments/setup-integration.md?terminal-sdk-platform=react-native) or see the sample app on React Native GitHub repository for an example of [configuring the Application subclass](https://github.com/stripe/stripe-terminal-react-native/blob/main/dev-app/android/app/src/main/java/com/dev/app/stripeterminalreactnative/MainApplication.java#L58).
 
+### Serverless initialization
+
+For Apps on Devices, you can use `AppsOnDevicesConnectionTokenProvider` instead of a backend token provider. This enables initialization without a backend server providing connection tokens.
+
+```js
+import {
+  StripeTerminalProvider,
+  AppsOnDevicesConnectionTokenProvider,
+} from '@stripe/stripe-terminal-react-native';
+
+function Root() {
+  return (
+    <StripeTerminalProvider tokenProvider={AppsOnDevicesConnectionTokenProvider}>
+      <App />
+    </StripeTerminalProvider>
+  );
+}
+```
+
 ## Build the app \[Client-side]
 
 Follow the guidance below for Apps on Devices integrations.
@@ -192,13 +213,15 @@ private fun connectReader(reader: Reader) {
 
 #### React Native
 
+> In version `0.0.1-beta.29` of the React Native SDK, you can use the [easyConnect](https://stripe.dev/stripe-terminal-react-native/api-reference/interfaces/StripeTerminalSdkType.html#easyconnect) method to combine reader discovery and connection into a single API call to simplify integration.
+
 You must register a new Stripe device to your account as a new [Reader object](https://docs.stripe.com/api/terminal/readers/object.md). Use the pairing code provided in the device’s admin settings to [create the Reader object](https://docs.stripe.com/api/terminal/readers/create.md). Your app uses the Stripe Terminal React Native SDK to discover and connect to your device:
 
 1. Your app runs on your registered device.
-2. Your app discovers the reader by calling [discoverReaders](https://stripe.dev/stripe-terminal-react-native/api-reference/interfaces/StripeTerminalSdkType.html#discoverReaders) with `handoff` [discovery method](https://stripe.dev/stripe-terminal-react-native/api-reference/modules/Reader.Android.html#DiscoveryMethod).
+2. Your app discovers the reader by calling [discoverReaders](https://stripe.dev/stripe-terminal-react-native/api-reference/interfaces/StripeTerminalSdkType.html#discoverReaders) with `appsOnDevices` [discovery method](https://stripe.dev/stripe-terminal-react-native/api-reference/modules/Reader.Android.html#DiscoveryMethod).
 3. Your app connects to the reader by using [connectReader](https://stripe.dev/stripe-terminal-react-native/api-reference/interfaces/StripeTerminalSdkType.html#connectreader-1).
 
-The following example shows how to discover and connect to a Stripe reader using handoff mode in a React Native app:
+The following example shows how to discover and connect to a Stripe reader using Apps on Devices mode in a React Native app:
 
 ```js
 const { discoverReaders, connectReader, discoveredReaders } =
@@ -208,10 +231,10 @@ const { discoverReaders, connectReader, discoveredReaders } =
         // The discoverReaders method doesn't resolve until discovery completes,
         // so use this callback to handle discovered readers.
         if (readers.length > 0) {
-          const { reader, error } = await connectReader(
-            { reader: readers[0] },
-            'handoff'
-          );
+          const { reader, error } = await connectReader({
+              discoveryMethod: 'appsOnDevices',
+              reader: readers[0],
+          });
 
           if (error) {
             console.log('connectReader error:', error);
@@ -225,7 +248,7 @@ const { discoverReaders, connectReader, discoveredReaders } =
 
   const handleDiscoverReaders = async () => {
     const { error } = await discoverReaders({
-      discoveryMethod: 'handoff',
+      discoveryMethod: 'appsOnDevices',
     });
 
     if (error) {

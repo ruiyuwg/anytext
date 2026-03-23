@@ -21,8 +21,8 @@ Accessing DOM elements through element selectors is not recommended for this rea
 JSX can be used as a value and assigned to a variable when looking to directly access DOM elements.
 
 ```
-function Component() {  const myElement = <p>My Element</p>
-  return <div>{myElement}</div>}
+function Component() {  const myElement = <p>My Element</p>;
+  return <div>{myElement}</div>;}
 ```
 
 This lets you create and access DOM elements similar to [`document.createElement`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) but without having to wait until it is attached to the DOM. It can be used multiple times without having to worry about duplicate selectors.
@@ -39,13 +39,13 @@ To use [`ref`](/reference/jsx-attributes/ref), you declare a variable and use it
 
 ```
 function Component() {  let myElement;
-  return (    <div>      <p ref={myElement}>My Element</p>    </div>  )}
+  return (    <div>      <p ref={myElement}>My Element</p>    </div>  );}
 ```
 
 These assignments occur at *creation time* prior to the element being added to the DOM. If access to an element is needed before it is added to the DOM, you can use the callback form of `ref`:
 
 ```
-<p ref={(el) => {  myElement = el // el is created but not yet added to the DOM  }}>  My Element</p>
+<p  ref={(el) => {    myElement = el; // el is created but not yet added to the DOM  }}>  My Element</p>
 ```
 
 note
@@ -83,11 +83,11 @@ When a child component receives a `ref` attribute from its parent, the `ref` is 
 Once the child component receives the `ref`, it can be assigned to the element that the child component wants to expose through the `ref` attribute. To access the `ref` in the child component, it is passed as a prop:
 
 ```
-// Parent componentimport { Canvas } from "./Canvas.jsx"
-function ParentComponent() {  let canvasRef
-  const animateCanvas = () => {    // Manipulate the canvas using canvasRef...  }
-  return (    <div>      <Canvas ref={canvasRef} />      <button onClick={animateCanvas}>Animate Canvas</button>    </div>  )}
-// Child componentfunction Canvas(props) {  return (    <div className="canvas-container">      <canvas ref={props.ref} /> {/* Assign the ref to the canvas element */}    </div>  )}
+// Parent componentimport { Canvas } from "./Canvas.jsx";
+function ParentComponent() {  let canvasRef;
+  const animateCanvas = () => {    // Manipulate the canvas using canvasRef...  };
+  return (    <div>      <Canvas ref={canvasRef} />      <button onClick={animateCanvas}>Animate Canvas</button>    </div>  );}
+// Child componentfunction Canvas(props) {  return (    <div className="canvas-container">      <canvas ref={props.ref} /> {/* Assign the ref to the canvas element */}    </div>  );}
 ```
 
 In this example, the `canvas` element is directly assigned the `ref` attribute through the `props.ref` variable. This forwards the reference to the parent component, giving it direct access to the `canvas` element.
@@ -106,7 +106,7 @@ Directives are like callback refs but they enable two extra features:
 A directive is essentially a function with a specific signature:
 
 ```
-function directive(element: Element, accessor: () => any): void
+function directive(element: Element, accessor: () => any): void;
 ```
 
 - `element`: The DOM element that the directive is applied to.

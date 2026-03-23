@@ -36,30 +36,30 @@ The AI SDK abstracts away the differences between model providers, eliminates bo
 At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call Llama 3.1 (using [DeepInfra](https://deepinfra.com)) with the AI SDK:
 
 ```ts
-import { deepinfra } from "@ai-sdk/deepinfra";
-import { generateText } from "ai";
+import { deepinfra } from '@ai-sdk/deepinfra';
+import { generateText } from 'ai';
 
 const { text } = await generateText({
-  model: deepinfra("meta-llama/Meta-Llama-3.1-405B-Instruct"),
-  prompt: "What is love?",
+  model: deepinfra('meta-llama/Meta-Llama-3.1-405B-Instruct'),
+  prompt: 'What is love?',
 });
 ```
 
 Llama 3.1 is available to use with many AI SDK providers including
 [DeepInfra](/providers/ai-sdk-providers/deepinfra), [Amazon
 Bedrock](/providers/ai-sdk-providers/amazon-bedrock),
-[Baseten](/providers/ai-sdk-providers/baseten)
+[Baseten](/providers/openai-compatible-providers/baseten)
 [Fireworks](/providers/ai-sdk-providers/fireworks), and more.
 
 AI SDK Core abstracts away the differences between model providers, allowing you to focus on building great applications. Prefer to use [Amazon Bedrock](/providers/ai-sdk-providers/amazon-bedrock)? The unified interface also means that you can easily switch between models by changing just two lines of code.
 
 ```tsx highlight="2,5"
-import { generateText } from "ai";
-import { bedrock } from "@ai-sdk/amazon-bedrock";
+import { generateText } from 'ai';
+import { bedrock } from '@ai-sdk/amazon-bedrock';
 
 const { text } = await generateText({
-  model: bedrock("meta.llama3-1-405b-instruct-v1"),
-  prompt: "What is love?",
+  model: bedrock('meta.llama3-1-405b-instruct-v1'),
+  prompt: 'What is love?',
 });
 ```
 
@@ -68,38 +68,34 @@ const { text } = await generateText({
 To stream the model's response as it's being generated, update your code snippet to use the [`streamText`](/docs/reference/ai-sdk-core/stream-text) function.
 
 ```tsx
-import { streamText } from "ai";
-import { deepinfra } from "@ai-sdk/deepinfra";
+import { streamText } from 'ai';
+import { deepinfra } from '@ai-sdk/deepinfra';
 
 const { textStream } = streamText({
-  model: deepinfra("meta-llama/Meta-Llama-3.1-405B-Instruct"),
-  prompt: "What is love?",
+  model: deepinfra('meta-llama/Meta-Llama-3.1-405B-Instruct'),
+  prompt: 'What is love?',
 });
 ```
 
 ### Generating Structured Data
 
-While text generation can be useful, you might want to generate structured JSON data. For example, you might want to extract information from text, classify data, or generate synthetic data. AI SDK Core provides [`generateText`](/docs/reference/ai-sdk-core/generate-text) and [`streamText`](/docs/reference/ai-sdk-core/stream-text) with `Output` to generate structured data, allowing you to constrain model outputs to a specific schema.
+While text generation can be useful, you might want to generate structured JSON data. For example, you might want to extract information from text, classify data, or generate synthetic data. AI SDK Core provides two functions ([`generateObject`](/docs/reference/ai-sdk-core/generate-object) and [`streamObject`](/docs/reference/ai-sdk-core/stream-object)) to generate structured data, allowing you to constrain model outputs to a specific schema.
 
 ```ts
-import { generateText, Output } from "ai";
-import { deepinfra } from "@ai-sdk/deepinfra";
-import { z } from "zod";
+import { generateObject } from 'ai';
+import { deepinfra } from '@ai-sdk/deepinfra';
+import { z } from 'zod';
 
-const { output } = await generateText({
-  model: deepinfra("meta-llama/Meta-Llama-3.1-70B-Instruct"),
-  output: Output.object({
-    schema: z.object({
-      recipe: z.object({
-        name: z.string(),
-        ingredients: z.array(
-          z.object({ name: z.string(), amount: z.string() }),
-        ),
-        steps: z.array(z.string()),
-      }),
+const { object } = await generateObject({
+  model: deepinfra('meta-llama/Meta-Llama-3.1-70B-Instruct'),
+  schema: z.object({
+    recipe: z.object({
+      name: z.string(),
+      ingredients: z.array(z.object({ name: z.string(), amount: z.string() })),
+      steps: z.array(z.string()),
     }),
   }),
-  prompt: "Generate a lasagna recipe.",
+  prompt: 'Generate a lasagna recipe.',
 });
 ```
 
@@ -116,18 +112,18 @@ The AI SDK supports tool usage across several of its functions, including [`gene
 Here's an example of how you can use a tool with the AI SDK and Llama 3.1:
 
 ```ts
-import { generateText, tool } from "ai";
-import { deepinfra } from "@ai-sdk/deepinfra";
-import { z } from "zod";
+import { generateText, tool } from 'ai';
+import { deepinfra } from '@ai-sdk/deepinfra';
+import { z } from 'zod';
 
 const { text } = await generateText({
-  model: deepinfra("meta-llama/Meta-Llama-3.1-70B-Instruct"),
-  prompt: "What is the weather like today?",
+  model: deepinfra('meta-llama/Meta-Llama-3.1-70B-Instruct'),
+  prompt: 'What is the weather like today?',
   tools: {
     getWeather: tool({
-      description: "Get the weather in a location",
-      inputSchema: z.object({
-        location: z.string().describe("The location to get the weather for"),
+      description: 'Get the weather in a location',
+      parameters: z.object({
+        location: z.string().describe('The location to get the weather for'),
       }),
       execute: async ({ location }) => ({
         location,
@@ -153,23 +149,23 @@ The AI SDK supports agent implementation through the `maxSteps` parameter. This 
 Here's an example of an agent that solves math problems:
 
 ```tsx
-import { generateText, tool } from "ai";
-import { deepinfra } from "@ai-sdk/deepinfra";
-import * as mathjs from "mathjs";
-import { z } from "zod";
+import { generateText, tool } from 'ai';
+import { deepinfra } from '@ai-sdk/deepinfra';
+import * as mathjs from 'mathjs';
+import { z } from 'zod';
 
 const problem =
-  "Calculate the profit for a day if revenue is $5000 and expenses are $3500.";
+  'Calculate the profit for a day if revenue is $5000 and expenses are $3500.';
 
 const { text: answer } = await generateText({
-  model: deepinfra("meta-llama/Meta-Llama-3.1-70B-Instruct"),
+  model: deepinfra('meta-llama/Meta-Llama-3.1-70B-Instruct'),
   system:
-    "You are solving math problems. Reason step by step. Use the calculator when necessary.",
+    'You are solving math problems. Reason step by step. Use the calculator when necessary.',
   prompt: problem,
   tools: {
     calculate: tool({
-      description: "A tool for evaluating mathematical expressions.",
-      inputSchema: z.object({ expression: z.string() }),
+      description: 'A tool for evaluating mathematical expressions.',
+      parameters: z.object({ expression: z.string() }),
       execute: async ({ expression }) => mathjs.evaluate(expression),
     }),
   },
@@ -190,18 +186,18 @@ With four main hooks — [`useChat`](/docs/reference/ai-sdk-ui/use-chat), [`useC
 Let's explore building a chatbot with [Next.js](https://nextjs.org), the AI SDK, and Llama 3.1 (via [DeepInfra](https://deepinfra.com)):
 
 ```tsx filename="app/api/chat/route.ts"
-import { deepinfra } from "@ai-sdk/deepinfra";
-import { convertToModelMessages, streamText, UIMessage } from "ai";
+import { deepinfra } from '@ai-sdk/deepinfra';
+import { convertToModelMessages, streamText } from 'ai';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
+  const { messages } = await req.json();
 
   const result = streamText({
-    model: deepinfra("meta-llama/Meta-Llama-3.1-70B-Instruct"),
-    messages: await convertToModelMessages(messages),
+    model: deepinfra('meta-llama/Meta-Llama-3.1-70B-Instruct'),
+    messages: convertToModelMessages(messages),
   });
 
   return result.toUIMessageStreamResponse();
@@ -209,42 +205,23 @@ export async function POST(req: Request) {
 ```
 
 ```tsx filename="app/page.tsx"
-"use client";
+'use client';
 
-import { useChat } from "@ai-sdk/react";
-import { useState } from "react";
+import { useChat } from '@ai-sdk/react';
 
 export default function Page() {
-  const [input, setInput] = useState("");
-  const { messages, sendMessage } = useChat();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (input.trim()) {
-      sendMessage({ text: input });
-      setInput("");
-    }
-  };
+  const { messages, input, handleInputChange, handleSubmit } = useChat();
 
   return (
     <>
-      {messages.map((message) => (
+      {messages.map(message => (
         <div key={message.id}>
-          {message.role === "user" ? "User: " : "AI: "}
-          {message.parts.map((part, index) => {
-            if (part.type === "text") {
-              return <span key={index}>{part.text}</span>;
-            }
-            return null;
-          })}
+          {message.role === 'user' ? 'User: ' : 'AI: '}
+          {message.content}
         </div>
       ))}
       <form onSubmit={handleSubmit}>
-        <input
-          name="prompt"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
+        <input name="prompt" value={input} onChange={handleInputChange} />
         <button type="submit">Submit</button>
       </form>
     </>
@@ -265,24 +242,24 @@ Let's dive into how you can leverage tools with [AI SDK RSC](/docs/ai-sdk-rsc/ov
 First, create a Server Action.
 
 ```tsx filename="app/actions.tsx"
-"use server";
+'use server';
 
-import { streamUI } from "@ai-sdk/rsc";
-import { deepinfra } from "@ai-sdk/deepinfra";
-import { z } from "zod";
+import { streamUI } from '@ai-sdk/rsc';
+import { deepinfra } from '@ai-sdk/deepinfra';
+import { z } from 'zod';
 
 export async function streamComponent() {
   const result = await streamUI({
-    model: deepinfra("meta-llama/Meta-Llama-3.1-70B-Instruct"),
-    prompt: "Get the weather for San Francisco",
+    model: deepinfra('meta-llama/Meta-Llama-3.1-70B-Instruct'),
+    prompt: 'Get the weather for San Francisco',
     text: ({ content }) => <div>{content}</div>,
     tools: {
       getWeather: {
-        description: "Get the weather for a location",
-        inputSchema: z.object({ location: z.string() }),
+        description: 'Get the weather for a location',
+        parameters: z.object({ location: z.string() }),
         generate: async function* ({ location }) {
           yield <div>loading...</div>;
-          const weather = "25c"; // await getWeather(location);
+          const weather = '25c'; // await getWeather(location);
           return (
             <div>
               the weather in {location} is {weather}.
@@ -301,10 +278,10 @@ In this example, if the model decides to use the `getWeather` tool, it will firs
 On the frontend, you can call this Server Action like any other asynchronous function in your application. In this case, the function returns a regular React component.
 
 ```tsx filename="app/page.tsx"
-"use client";
+'use client';
 
-import { useState } from "react";
-import { streamComponent } from "./actions";
+import { useState } from 'react';
+import { streamComponent } from './actions';
 
 export default function Page() {
   const [component, setComponent] = useState<React.ReactNode>();
@@ -312,7 +289,7 @@ export default function Page() {
   return (
     <div>
       <form
-        onSubmit={async (e) => {
+        onSubmit={async e => {
           e.preventDefault();
           setComponent(await streamComponent());
         }}
@@ -336,24 +313,24 @@ Here's how simple the migration process can be:
 **OpenAI Example:**
 
 ```tsx
-import { generateText } from "ai";
-import { openai } from "@ai-sdk/openai";
+import { generateText } from 'ai';
+import { openai } from '@ai-sdk/openai';
 
 const { text } = await generateText({
-  model: openai("gpt-4.1"),
-  prompt: "What is love?",
+  model: openai('gpt-4.1'),
+  prompt: 'What is love?',
 });
 ```
 
 **Llama on DeepInfra Example:**
 
 ```tsx
-import { generateText } from "ai";
-import { deepinfra } from "@ai-sdk/deepinfra";
+import { generateText } from 'ai';
+import { deepinfra } from '@ai-sdk/deepinfra';
 
 const { text } = await generateText({
-  model: deepinfra("meta-llama/Meta-Llama-3.1-70B-Instruct"),
-  prompt: "What is love?",
+  model: deepinfra('meta-llama/Meta-Llama-3.1-70B-Instruct'),
+  prompt: 'What is love?',
 });
 ```
 
@@ -401,7 +378,7 @@ Ready to get started? Here's how you can dive in:
 
 1. Explore the documentation at [ai-sdk.dev/docs](/docs) to understand the full capabilities of the AI SDK.
 2. Check out practical examples at [ai-sdk.dev/examples](/examples) to see the SDK in action and get inspired for your own projects.
-3. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) and multi-modal chat at [ai-sdk.dev/docs/guides](/cookbook/guides).
+3. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) and multi-modal chat at [ai-sdk.dev/docs/guides](/docs/guides).
 4. Check out ready-to-deploy AI templates at [vercel.com/templates?type=ai](https://vercel.com/templates?type=ai).
 
-# Get started with GPT-5
+# Get started with GPT-4.5

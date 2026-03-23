@@ -75,5 +75,5 @@ These properties set by the [Open Graph protocol](https://ogp.me/#metadata).
 
 title: "Deploying to Vercel"
 description: "Learn how to create and manage deployments on Vercel."
-last\_updated: "2026-03-08T05:03:13.306Z"
+last\_updated: "2026-03-23T09:40:08.435Z"
 source: "https://vercel.com/docs/deployments"

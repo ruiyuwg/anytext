@@ -34,14 +34,16 @@ Integrate with chat models using LangChain Python.
 | [`ChatDatabricks`](/oss/python/integrations/chat/databricks)                   | ✅                                           | ✅                                                             | ❌                                                       |
 | [`ChatPerplexity`](/oss/python/integrations/chat/perplexity)                   | ❌                                           | ✅                                                             | ✅                                                       |
 | [`ChatOpenRouter`](/oss/python/integrations/chat/openrouter)                   | ✅                                           | ✅                                                             | ✅                                                       |
+| [`ChatLiteLLM`](/oss/python/integrations/chat/litellm)                         | ✅                                           | ✅                                                             | ✅                                                       |
 
 ### Routers & proxies
 
 Routers and proxies give you access to models from multiple providers through a single API and credential. They can simplify billing, let you switch between models without changing integrations, and offer features like automatic fallbacks.
 
-| Provider                             | Integration                                                  | Description                                                             |
-| ------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| [OpenRouter](https://openrouter.ai/) | [`ChatOpenRouter`](/oss/python/integrations/chat/openrouter) | Unified access to models from OpenAI, Anthropic, Google, Meta, and more |
+| Provider                             | Integration                                                  | Description                                                                                       |
+| ------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| [OpenRouter](https://openrouter.ai/) | [`ChatOpenRouter`](/oss/python/integrations/chat/openrouter) | Unified access to models from OpenAI, Anthropic, Google, Meta, and more                           |
+| [LiteLLM](https://www.litellm.ai/)   | [`ChatLiteLLM`](/oss/python/integrations/chat/litellm)       | Unified interface for OpenAI, Anthropic, Azure, Hugging Face, and more with routing and fallbacks |
 
 ## Chat Completions API
 

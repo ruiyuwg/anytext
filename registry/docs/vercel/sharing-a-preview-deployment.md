@@ -77,5 +77,5 @@ Deployment protection allows you to secure your preview deployments, with [Authe
 
 title: "Troubleshooting Build Errors"
 description: "Learn how to resolve common scenarios you may encounter during the Build step, including build errors that cancel a deployment and long build times."
-last\_updated: "2026-03-08T05:03:13.411Z"
+last\_updated: "2026-03-23T09:40:08.544Z"
 source: "https://vercel.com/docs/deployments/troubleshoot-a-build"

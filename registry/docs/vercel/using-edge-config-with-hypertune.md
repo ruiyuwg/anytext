@@ -148,5 +148,5 @@ Learn more about Hypertune and the Flags SDK adapter:
 
 title: "Using Edge Config with LaunchDarkly"
 description: "Learn how to use Edge Config with Vercel"
-last\_updated: "2026-03-08T05:03:13.722Z"
+last\_updated: "2026-03-23T09:40:09.129Z"
 source: "https://vercel.com/docs/edge-config/edge-config-integrations/launchdarkly-edge-config"

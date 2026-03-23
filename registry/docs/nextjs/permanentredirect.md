@@ -1,6 +1,6 @@
 # permanentRedirect
 
-The `permanentRedirect` function allows you to redirect the user to another URL. `permanentRedirect` can be used in Server Components, Client Components, [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Server Functions](/docs/app/getting-started/updating-data).
+The `permanentRedirect` function allows you to redirect the user to another URL. `permanentRedirect` can be used in Server Components, Client Components, [Route Handlers](/docs/app/api-reference/file-conventions/route), and [Server Functions](/docs/app/getting-started/mutating-data).
 
 When used in a streaming context, this will insert a meta tag to emit the redirect on the client side. When used in a server action, it will serve a 303 HTTP redirect response to the caller. Otherwise, it will serve a 308 (Permanent) HTTP redirect response to the caller.
 
@@ -13,7 +13,7 @@ If a resource doesn't exist, you can use the [`notFound` function](/docs/app/api
 The `permanentRedirect` function accepts two arguments:
 
 ```js
-permanentRedirect(path, type);
+permanentRedirect(path, type)
 ```
 
 | Parameter | Type                                                          | Description                                                 |
@@ -21,16 +21,16 @@ permanentRedirect(path, type);
 | `path`    | `string`                                                      | The URL to redirect to. Can be a relative or absolute path. |
 | `type`    | `'replace'` (default) or `'push'` (default in Server Actions) | The type of redirect to perform.                            |
 
-By default, `permanentRedirect` will use `push` (adding a new entry to the browser history stack) in [Server Actions](/docs/app/getting-started/updating-data) and `replace` (replacing the current URL in the browser history stack) everywhere else. You can override this behavior by specifying the `type` parameter.
+By default, `permanentRedirect` will use `push` (adding a new entry to the browser history stack) in [Server Actions](/docs/app/getting-started/mutating-data) and `replace` (replacing the current URL in the browser history stack) everywhere else. You can override this behavior by specifying the `type` parameter.
 
 The `RedirectType` object contains the available options for the `type` parameter.
 
 ```ts
-import { permanentRedirect, RedirectType } from "next/navigation";
+import { permanentRedirect, RedirectType } from 'next/navigation'
 
-permanentRedirect("/redirect-to", RedirectType.replace);
+permanentRedirect('/redirect-to', RedirectType.replace)
 // or
-permanentRedirect("/redirect-to", RedirectType.push);
+permanentRedirect('/redirect-to', RedirectType.push)
 ```
 
 The `type` parameter has no effect when used in Server Components.
@@ -44,19 +44,19 @@ The `type` parameter has no effect when used in Server Components.
 Invoking the `permanentRedirect()` function throws a `NEXT_REDIRECT` error and terminates rendering of the route segment in which it was thrown.
 
 ```jsx filename="app/team/[id]/page.js"
-import { permanentRedirect } from "next/navigation";
+import { permanentRedirect } from 'next/navigation'
 
 async function fetchTeam(id) {
-  const res = await fetch("https://...");
-  if (!res.ok) return undefined;
-  return res.json();
+  const res = await fetch('https://...')
+  if (!res.ok) return undefined
+  return res.json()
 }
 
 export default async function Profile({ params }) {
-  const { id } = await params;
-  const team = await fetchTeam(id);
+  const { id } = await params
+  const team = await fetchTeam(id)
   if (!team) {
-    permanentRedirect("/login");
+    permanentRedirect('/login')
   }
 
   // ...

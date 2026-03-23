@@ -51,12 +51,12 @@ The AI SDK abstracts away the differences between model providers, eliminates bo
 At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call DeepSeek V3.2 with the AI SDK:
 
 ```ts
-import { deepseek } from "@ai-sdk/deepseek";
-import { generateText } from "ai";
+import { deepseek } from '@ai-sdk/deepseek';
+import { generateText } from 'ai';
 
 const { text } = await generateText({
-  model: deepseek("deepseek-chat"),
-  prompt: "Explain the concept of sparse attention in transformers.",
+  model: deepseek('deepseek-chat'),
+  prompt: 'Explain the concept of sparse attention in transformers.',
 });
 ```
 
@@ -75,15 +75,15 @@ In a new Next.js application, first install the AI SDK and the DeepSeek provider
 Then, create a route handler for the chat endpoint:
 
 ```tsx filename="app/api/chat/route.ts"
-import { deepseek } from "@ai-sdk/deepseek";
-import { convertToModelMessages, streamText, UIMessage } from "ai";
+import { deepseek } from '@ai-sdk/deepseek';
+import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: deepseek("deepseek-reasoner"),
-    messages: await convertToModelMessages(messages),
+    model: deepseek('deepseek-reasoner'),
+    messages: convertToModelMessages(messages),
   });
 
   return result.toUIMessageStreamResponse({ sendReasoning: true });
@@ -93,30 +93,30 @@ export async function POST(req: Request) {
 Finally, update the root page (`app/page.tsx`) to use the `useChat` hook:
 
 ```tsx filename="app/page.tsx"
-"use client";
+'use client';
 
-import { useChat } from "@ai-sdk/react";
-import { useState } from "react";
+import { useChat } from '@ai-sdk/react';
+import { useState } from 'react';
 
 export default function Page() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const { messages, sendMessage } = useChat();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input.trim()) {
       sendMessage({ text: input });
-      setInput("");
+      setInput('');
     }
   };
 
   return (
     <>
-      {messages.map((message) => (
+      {messages.map(message => (
         <div key={message.id}>
-          {message.role === "user" ? "User: " : "AI: "}
+          {message.role === 'user' ? 'User: ' : 'AI: '}
           {message.parts.map((part, index) => {
-            if (part.type === "text" || part.type === "reasoning") {
+            if (part.type === 'text' || part.type === 'reasoning') {
               return <div key={index}>{part.text}</div>;
             }
             return null;
@@ -127,7 +127,7 @@ export default function Page() {
         <input
           name="prompt"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={e => setInput(e.target.value)}
         />
         <button type="submit">Submit</button>
       </form>
@@ -147,32 +147,32 @@ One of the key strengths of DeepSeek V3.2 is its agentic capabilities. You can e
 Let's add a weather tool to your agent. Update your route handler at `app/api/chat/route.ts`:
 
 ```tsx filename="app/api/chat/route.ts"
-import { deepseek } from "@ai-sdk/deepseek";
+import { deepseek } from '@ai-sdk/deepseek';
 import {
   convertToModelMessages,
   stepCountIs,
   streamText,
   tool,
   UIMessage,
-} from "ai";
-import { z } from "zod";
+} from 'ai';
+import { z } from 'zod';
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: deepseek("deepseek-reasoner"),
-    messages: await convertToModelMessages(messages),
+    model: deepseek('deepseek-reasoner'),
+    messages: convertToModelMessages(messages),
     tools: {
       weather: tool({
-        description: "Get the weather in a location",
+        description: 'Get the weather in a location',
         inputSchema: z.object({
-          location: z.string().describe("The location to get the weather for"),
+          location: z.string().describe('The location to get the weather for'),
         }),
         execute: async ({ location }) => ({
           location,
           temperature: 72,
-          unit: "fahrenheit",
+          unit: 'fahrenheit',
         }),
       }),
     },
@@ -191,7 +191,7 @@ Ready to dive in? Here's how you can begin:
 
 1. Explore the documentation at [ai-sdk.dev/docs](/docs) to understand the capabilities of the AI SDK.
 2. Check out practical examples at [ai-sdk.dev/examples](/examples) to see the SDK in action.
-3. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) at [ai-sdk.dev/docs/guides](/cookbook/guides).
+3. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) at [ai-sdk.dev/docs/guides](/docs/guides).
 4. Use ready-to-deploy AI templates at [vercel.com/templates?type=ai](https://vercel.com/templates?type=ai).
 
 # Guides

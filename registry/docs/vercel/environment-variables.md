@@ -81,7 +81,7 @@ In that case, the Integration that added the Variable will be displayed in your 
 
 title: "Reserved environment variables"
 description: "Reserved environment variables are reserved by Vercel Vercel Function runtimes."
-last\_updated: "2026-03-08T05:03:13.984Z"
+last\_updated: "2026-03-23T09:40:09.459Z"
 source: "https://vercel.com/docs/environment-variables/reserved-environment-variables"
 
 # Reserved environment variables
@@ -114,5 +114,5 @@ The following [environment variable](/docs/environment-variables) names are [all
 
 title: "Rotating environment variables"
 description: "Safely rotate API keys, tokens, and other secrets in your Vercel environment variables."
-last\_updated: "2026-03-08T05:03:13.997Z"
+last\_updated: "2026-03-23T09:40:09.472Z"
 source: "https://vercel.com/docs/environment-variables/rotating-secrets"

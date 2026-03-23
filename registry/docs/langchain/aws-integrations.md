@@ -45,7 +45,7 @@ import {
 
 ### Bedrock
 
-See a [usage example](/oss/javascript/integrations/text_embedding/bedrock).
+See a [usage example](/oss/javascript/integrations/embeddings/bedrock).
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { BedrockEmbeddings } from "@langchain/aws";

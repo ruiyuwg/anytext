@@ -10,7 +10,7 @@ Learn more about [purging Vercel cache](/docs/cdn-cache/purge).
 vercel cache purge
 ```
 
-*Using the vercel cache purge command to purge the CDN
+*Using the \`vercel cache purge\` command to purge the CDN
 cache and Data cache for the current project.*
 
 ## Extended Usage
@@ -19,21 +19,21 @@ cache and Data cache for the current project.*
 vercel cache purge --type cdn
 ```
 
-*Using the vercel cache purge --type cdn command to
+*Using the \`vercel cache purge --type cdn\` command to
 purge the CDN cache for the currenet project.*
 
 ```bash filename="terminal"
 vercel cache purge --type data
 ```
 
-*Using the vercel cache purge --type data command to
+*Using the \`vercel cache purge --type data\` command to
 purge the Data cache for the current project.*
 
 ```bash filename="terminal"
 vercel cache invalidate --tag blog-posts
 ```
 
-*Using the vercel cache invalidate --tag blog-posts command
+*Using the \`vercel cache invalidate --tag blog-posts\` command
 to invalidate the cached content associated with tag "blog-posts" for the current
 project. Subsequent requests for this cached content will serve STALE and
 revalidate in the background.*
@@ -42,7 +42,7 @@ revalidate in the background.*
 vercel cache dangerously-delete --tag blog-posts
 ```
 
-*Using the vercel cache dangerously-delete --tag blog-posts
+*Using the \`vercel cache dangerously-delete --tag blog-posts\`
 command to dangerously delete the cached content associated with tag "blog-posts" for
 the current project. Subsequent requests for this cached content will serve
 MISS and therefore block while revalidating.*
@@ -51,7 +51,7 @@ MISS and therefore block while revalidating.*
 vercel cache invalidate --srcimg /api/avatar/1
 ```
 
-*Using the vercel cache invalidate --srcimg /api/avatar/1 command
+*Using the \`vercel cache invalidate --srcimg /api/avatar/1\` command
 to invalidate all cached content associated with the source image "/api/avatar/1" for the current
 project. Subsequent requests for this cached content will serve STALE and
 revalidate in the background.*
@@ -60,7 +60,7 @@ revalidate in the background.*
 vercel cache dangerously-delete --srcimg /api/avatar/1
 ```
 
-*Using the vercel cache dangerously-delete --srcimg /api/avatar/1
+*Using the \`vercel cache dangerously-delete --srcimg /api/avatar/1\`
 command to dangerously delete all cached content associated with the source image "/api/avatar/1" for
 the current project. Subsequent requests for this cached content will serve
 MISS and therefore block while revalidating.*
@@ -69,7 +69,7 @@ MISS and therefore block while revalidating.*
 vercel cache dangerously-delete --srcimg /api/avatar/1 --revalidation-deadline-seconds 604800
 ```
 
-*Using the vercel cache dangerously-delete --srcimg /api/avatar/1 --revalidation-deadline-seconds 604800
+*Using the \`vercel cache dangerously-delete --srcimg /api/avatar/1 --revalidation-deadline-seconds 604800\`
 command to dangerously delete all cached content associated with the source image "/api/avatar/1" for
 the current project if not accessed in the next 604800 seconds (7 days).*
 
@@ -85,7 +85,7 @@ The `--tag` option specifies which tag to invalidate or delete from the cache. Y
 vercel cache invalidate --tag blog-posts,user-profiles,homepage
 ```
 
-*Using the vercel cache invalidate command with multiple tags.*
+*Using the \`vercel cache invalidate\` command with multiple tags.*
 
 ### srcimg
 
@@ -97,7 +97,7 @@ You can't use both `--tag` and `--srcimg` options together. Choose one based on 
 vercel cache invalidate --srcimg /api/avatar/1
 ```
 
-*Using the vercel cache invalidate command with a source image path.*
+*Using the \`vercel cache invalidate\` command with a source image path.*
 
 ### revalidation-deadline-seconds
 
@@ -107,7 +107,7 @@ The `--revalidation-deadline-seconds` option specifies the revalidation deadline
 vercel cache dangerously-delete --tag blog-posts --revalidation-deadline-seconds 3600
 ```
 
-*Using the vercel cache dangerously-delete command with a 1-hour (3600 seconds) revalidation deadline.*
+*Using the \`vercel cache dangerously-delete\` command with a 1-hour (3600 seconds) revalidation deadline.*
 
 ### Yes
 
@@ -117,12 +117,12 @@ The `--yes` option can be used to bypass the confirmation prompt when purging th
 vercel cache purge --yes
 ```
 
-*Using the vercel cache purge command with the
-\--yes option.*
+*Using the \`vercel cache purge\` command with the
+\`--yes\` option.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -137,5 +137,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel certs"
 description: "Learn how to manage certificates for your domains using the vercel certs CLI command."
-last\_updated: "2026-03-08T05:03:12.088Z"
+last\_updated: "2026-03-23T09:40:06.598Z"
 source: "https://vercel.com/docs/cli/certs"

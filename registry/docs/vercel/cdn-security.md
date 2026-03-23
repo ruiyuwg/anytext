@@ -69,5 +69,5 @@ The `.vercel.app` domain and all subdomains support HSTS by default and are prel
 
 title: "Content Security Policy"
 description: "Learn how the Content Security Policy (CSP) offers defense against web vulnerabilities, its key features, and best practices."
-last\_updated: "2026-03-08T05:03:11.939Z"
+last\_updated: "2026-03-23T09:40:06.347Z"
 source: "https://vercel.com/docs/cdn-security/security-headers"

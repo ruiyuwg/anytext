@@ -66,6 +66,21 @@ result = agent.run_sync("What is the capital of France?")
 
 See the [Framework Integrations documentation](/docs/ai-gateway/ecosystem/framework-integrations) for complete setup guides.
 
+## Stripe billing
+
+[Stripe Billing](/docs/ai-gateway/ecosystem/stripe-billing) integrates Stripe's metered billing with AI Gateway. Add two headers to your requests and the gateway automatically emits meter events for input and output tokens on every successful response.
+
+```typescript
+const gateway = createGateway({
+  headers: {
+    'stripe-customer-id': process.env.STRIPE_CUSTOMER_ID,
+    'stripe-restricted-access-key': process.env.STRIPE_RESTRICTED_ACCESS_KEY,
+  },
+});
+```
+
+Works with the AI SDK, OpenAI Chat Completions API, and Anthropic Messages API. See the [Stripe Billing guide](/docs/ai-gateway/ecosystem/stripe-billing) for full setup instructions.
+
 ## App attribution
 
 [App Attribution](/docs/ai-gateway/ecosystem/app-attribution) lets you identify your application in requests. When you include attribution headers, Vercel can feature your app—increasing visibility for your project.
@@ -90,8 +105,9 @@ Attribution is optional—your requests work normally without these headers.
 - [Set up LangChain](/docs/ai-gateway/ecosystem/framework-integrations/langchain)
 - [Install the LlamaIndex package](/docs/ai-gateway/ecosystem/framework-integrations/llamaindex) for knowledge apps
 - [Add app attribution](/docs/ai-gateway/ecosystem/app-attribution) to showcase your project
+- [Set up Stripe billing](/docs/ai-gateway/ecosystem/stripe-billing) for usage-based pricing
 
-title: "Image Generation Quickstart"
-description: "Generate images from text prompts using AI Gateway."
-last\_updated: "2026-03-08T05:03:10.448Z"
-source: "https://vercel.com/docs/ai-gateway/getting-started/image"
+title: "Stripe Billing"
+description: "Add usage-based billing to your AI application with Stripe and AI Gateway."
+last\_updated: "2026-03-23T09:40:04.373Z"
+source: "https://vercel.com/docs/ai-gateway/ecosystem/stripe-billing"

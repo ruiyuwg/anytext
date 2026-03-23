@@ -5,67 +5,70 @@ Proxy Helper provides useful functions when using Hono application as a (reverse
 ## Import
 
 ```ts
-import { Hono } from "hono";
-import { proxy } from "hono/proxy";
+import { Hono } from 'hono'
+import { proxy } from 'hono/proxy'
 ```
 
 ## `proxy()`
 
 `proxy()` is a `fetch()` API wrapper for proxy. The parameters and return value are the same as for `fetch()` (except for the proxy-specific options).
 
-The `Accept-Encoding` header is replaced with an encoding that the current runtime can handle. Unnecessary response headers are deleted, and a `Response` object is returned that you can return as a response from the handler.
+The `Accept-Encoding` header is replaced with an encoding that the current runtime can handle. Unnecessary response headers are removed, and a `Response` object is returned that can be sent from the handler.
 
 ### Examples
 
 Simple usage:
 
 ```ts
-app.get("/proxy/:path", (c) => {
-  return proxy(`http://${originServer}/${c.req.param("path")}`);
-});
+app.get('/proxy/:path', (c) => {
+  return proxy(`http://${originServer}/${c.req.param('path')}`)
+})
 ```
 
 Complicated usage:
 
 ```ts
-app.get("/proxy/:path", async (c) => {
-  const res = await proxy(`http://${originServer}/${c.req.param("path")}`, {
-    headers: {
-      ...c.req.header(), // optional, specify only when forwarding all the request data (including credentials) is necessary.
-      "X-Forwarded-For": "127.0.0.1",
-      "X-Forwarded-Host": c.req.header("host"),
-      Authorization: undefined, // do not propagate request headers contained in c.req.header('Authorization')
-    },
-  });
-  res.headers.delete("Set-Cookie");
-  return res;
-});
+app.get('/proxy/:path', async (c) => {
+  const res = await proxy(
+    `http://${originServer}/${c.req.param('path')}`,
+    {
+      headers: {
+        ...c.req.header(), // optional, specify only when forwarding all the request data (including credentials) is necessary.
+        'X-Forwarded-For': '127.0.0.1',
+        'X-Forwarded-Host': c.req.header('host'),
+        Authorization: undefined, // do not propagate request headers contained in c.req.header('Authorization')
+      },
+    }
+  )
+  res.headers.delete('Set-Cookie')
+  return res
+})
 ```
 
 Or you can pass the `c.req` as a parameter.
 
 ```ts
-app.all("/proxy/:path", (c) => {
-  return proxy(`http://${originServer}/${c.req.param("path")}`, {
+app.all('/proxy/:path', (c) => {
+  return proxy(`http://${originServer}/${c.req.param('path')}`, {
     ...c.req, // optional, specify only when forwarding all the request data (including credentials) is necessary.
     headers: {
       ...c.req.header(),
-      "X-Forwarded-For": "127.0.0.1",
-      "X-Forwarded-Host": c.req.header("host"),
+      'X-Forwarded-For': '127.0.0.1',
+      'X-Forwarded-Host': c.req.header('host'),
       Authorization: undefined, // do not propagate request headers contained in c.req.header('Authorization')
     },
-  });
-});
+  })
+})
 ```
 
 You can override the default global `fetch` function with the `customFetch` option:
 
 ```ts
-app.get("/proxy", (c) => {
-  return proxy("https://example.com/", {
+app.get('/proxy', (c) => {
+  return proxy('https://example.com/', {
     customFetch,
-  });
-});
+  })
+})
 ```
 
 ### Connection Header Processing
@@ -74,17 +77,17 @@ By default, `proxy()` ignores the `Connection` header to prevent Hop-by-Hop Head
 
 ```ts
 // Default behavior (recommended for untrusted clients)
-app.get("/proxy/:path", (c) => {
-  return proxy(`http://${originServer}/${c.req.param("path")}`, c.req);
-});
+app.get('/proxy/:path', (c) => {
+  return proxy(`http://${originServer}/${c.req.param('path')}`, c.req)
+})
 
 // Strict RFC 9110 compliance (use only in trusted environments)
-app.get("/internal-proxy/:path", (c) => {
-  return proxy(`http://${internalServer}/${c.req.param("path")}`, {
+app.get('/internal-proxy/:path', (c) => {
+  return proxy(`http://${internalServer}/${c.req.param('path')}`, {
     ...c.req,
     strictConnectionProcessing: true,
-  });
-});
+  })
+})
 ```
 
 ### `ProxyFetch`
@@ -92,18 +95,105 @@ app.get("/internal-proxy/:path", (c) => {
 The type of `proxy()` is defined as `ProxyFetch` and is as follows
 
 ```ts
-interface ProxyRequestInit extends Omit<RequestInit, "headers"> {
-  raw?: Request;
-  customFetch?: (request: Request) => Promise;
-  strictConnectionProcessing?: boolean;
+interface ProxyRequestInit extends Omit<RequestInit, 'headers'> {
+  raw?: Request
+  customFetch?: (request: Request) => Promise
+  strictConnectionProcessing?: boolean
   headers?:
     | HeadersInit
     | [string, string][]
     | Record<RequestHeader, string | undefined>
-    | Record<string, string | undefined>;
+    | Record<string, string | undefined>
 }
 
 interface ProxyFetch {
-  (input: string | URL | Request, init?: ProxyRequestInit): Promise;
+  (
+    input: string | URL | Request,
+    init?: ProxyRequestInit
+  ): Promise
 }
 ```
+
+# Accepts Helper
+
+Accepts Helper helps to handle Accept headers in the Requests.
+
+## Import
+
+```ts
+import { Hono } from 'hono'
+import { accepts } from 'hono/accepts'
+```
+
+## `accepts()`
+
+The `accepts()` function looks at the Accept header, such as Accept-Encoding and Accept-Language, and returns the proper value.
+
+```ts
+import { accepts } from 'hono/accepts'
+
+app.get('/', (c) => {
+  const accept = accepts(c, {
+    header: 'Accept-Language',
+    supports: ['en', 'ja', 'zh'],
+    default: 'en',
+  })
+  return c.json({ lang: accept })
+})
+```
+
+### `AcceptHeader` type
+
+The definition of the `AcceptHeader` type is as follows.
+
+```ts
+export type AcceptHeader =
+  | 'Accept'
+  | 'Accept-Charset'
+  | 'Accept-Encoding'
+  | 'Accept-Language'
+  | 'Accept-Patch'
+  | 'Accept-Post'
+  | 'Accept-Ranges'
+```
+
+## Options
+
+### <Badge type="danger" text="required" /> header: `AcceptHeader`
+
+The target accept header.
+
+### <Badge type="danger" text="required" /> supports: `string[]`
+
+The header values which your application supports.
+
+### <Badge type="danger" text="required" /> default: `string`
+
+The default values.
+
+### <Badge type="info" text="optional" /> match: `(accepts: Accept[], config: acceptsConfig) => string`
+
+The custom match function.
+
+# Frequently Asked Questions
+
+This guide is a collection of frequently asked questions (FAQ) about Hono and how to resolve them.
+
+## Is there an official Renovate config for Hono?
+
+The Hono team does not currently maintain [Renovate](https://github.com/renovatebot/renovate) Configuration.
+Therefore, please use third-party renovate-config as follows.
+
+In your `renovate.json` :
+
+```json
+// renovate.json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>shinGangan/renovate-config-hono" // [!code ++]
+  ]
+}
+```
+
+see [renovate-config-hono](https://github.com/shinGangan/renovate-config-hono) repository for more details.

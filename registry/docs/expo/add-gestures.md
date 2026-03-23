@@ -9,7 +9,7 @@ Gestures are a great way to provide an intuitive user experience in an app. The 
 
 We'll also use the [Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/handling-gestures/) library to animate between gesture states.
 
-[Watch: Adding gestures to your universal Expo app](https://www.youtube.com/watch?v=0q48LLvTGDU)
+[Watch: Adding gestures to your universal Expo app](https://www.youtube.com/watch?v=0q48LLvTGDU) — Add double tap and pan gestures to the emoji sticker using React Native Gesture Handler and Reanimated.
 
 ## Add GestureHandlerRootView
 

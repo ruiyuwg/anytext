@@ -10,7 +10,7 @@ const config = useRuntimeConfig()
 
 ```ts [server/api/foo.ts]
 export default defineEventHandler((event) => {
-  const config = useRuntimeConfig(event)
+  const config = useRuntimeConfig()
 })
 ```
 
@@ -48,7 +48,7 @@ To access runtime config, we can use `useRuntimeConfig()` composable:
 
 ```ts [server/api/test.ts]
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig(event)
+  const config = useRuntimeConfig()
 
   // Access public variables
   const result = await $fetch(`/test`, {
@@ -124,7 +124,7 @@ And then access the new CDN url using `config.app.cdnURL`.
 
 ```ts [server/api/foo.ts]
 export default defineEventHandler((event) => {
-  const config = useRuntimeConfig(event)
+  const config = useRuntimeConfig()
 
   // Access cdnURL universally
   const cdnURL = config.app.cdnURL

@@ -91,7 +91,7 @@ To see the complete list of configurable capabilities and their defaults, visit 
 
 ## Sandbox integrations
 
-Deep agents sandbox integrations use `sandboxStandardTests` from `@langchain/sandbox-standard-tests`.
+Deep Agents sandbox integrations use `sandboxStandardTests` from `@langchain/sandbox-standard-tests`.
 Call it with a config object that includes `createSandbox`, `resolvePath`, and `closeSandbox`.
 Use the [Daytona integration tests](https://github.com/langchain-ai/deepagentsjs/blob/main/libs/providers/daytona/src/sandbox.int.test.ts) as a reference implementation.
 See [Contributing a sandbox integration](/oss/javascript/contributing/integrations-langchain) for publishing guidelines.

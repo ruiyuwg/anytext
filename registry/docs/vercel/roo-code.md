@@ -29,5 +29,5 @@
 
 title: "Superset"
 description: "Use Superset with the AI Gateway."
-last\_updated: "2026-03-08T05:03:09.789Z"
+last\_updated: "2026-03-23T09:40:03.226Z"
 source: "https://vercel.com/docs/agent-resources/coding-agents/superset"

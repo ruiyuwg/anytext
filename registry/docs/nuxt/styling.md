@@ -154,7 +154,9 @@ If you need more advanced control, you can intercept the rendered html with a ho
 Create a plugin in `~~/server/plugins/my-plugin.ts` like this:
 
 ```ts [server/plugins/my-plugin.ts]
-export default defineNitroPlugin((nitro) => {
+import { definePlugin } from 'nitro'
+
+export default definePlugin((nitro) => {
   nitro.hooks.hook('render:html', (html) => {
     html.head.push('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">')
   })

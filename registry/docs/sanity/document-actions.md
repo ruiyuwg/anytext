@@ -53,7 +53,7 @@ import {HelloWorldAction} from './actions'
 export default defineConfig({
   name: 'default',
   projectId: '<project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
 
   plugins: [
     deskTool(),

@@ -11,7 +11,7 @@ The `vercel dns` command is used to manage DNS record for domains, providing fun
 vercel dns ls
 ```
 
-*Using the vercel dns command to list all DNS records
+*Using the \`vercel dns\` command to list all DNS records
 under the current scope.*
 
 ## Extended Usage
@@ -20,42 +20,42 @@ under the current scope.*
 vercel dns add [domain] [subdomain] [A || AAAA || ALIAS || CNAME || TXT] [value]
 ```
 
-*Using the vercel dns command to add an A record for a
+*Using the \`vercel dns\` command to add an A record for a
 subdomain.*
 
 ```bash filename="terminal"
 vercel dns add [domain] '@' MX [record-value] [priority]
 ```
 
-*Using the vercel dns command to add an MX record for
+*Using the \`vercel dns\` command to add an MX record for
 a domain.*
 
 ```bash filename="terminal"
 vercel dns add [domain] [name] SRV [priority] [weight] [port] [target]
 ```
 
-*Using the vercel dns command to add an SRV record for
+*Using the \`vercel dns\` command to add an SRV record for
 a domain.*
 
 ```bash filename="terminal"
 vercel dns add [domain] [name] CAA '[flags] [tag] "[value]"'
 ```
 
-*Using the vercel dns command to add a CAA record for
+*Using the \`vercel dns\` command to add a CAA record for
 a domain.*
 
 ```bash filename="terminal"
 vercel dns rm [record-id]
 ```
 
-*Using the vercel dns command to remove a record for a
+*Using the \`vercel dns\` command to remove a record for a
 domain.*
 
 ```bash filename="terminal"
 vercel dns import [domain] [path-to-zonefile]
 ```
 
-*Using the vercel dns command to import a zonefile for
+*Using the \`vercel dns\` command to import a zonefile for
 a domain.*
 
 ## Unique Options
@@ -70,12 +70,12 @@ The `--limit` option can be used to specify the maximum number of dns records re
 vercel dns ls --limit 100
 ```
 
-*Using the vercel dns ls command with the
-\--limit option.*
+*Using the \`vercel dns ls\` command with the
+\`--limit\` option.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -90,5 +90,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel domains"
 description: "Learn how to buy, sell, transfer, and manage your domains using the vercel domains CLI command."
-last\_updated: "2026-03-08T05:03:12.133Z"
+last\_updated: "2026-03-23T09:40:06.693Z"
 source: "https://vercel.com/docs/cli/domains"

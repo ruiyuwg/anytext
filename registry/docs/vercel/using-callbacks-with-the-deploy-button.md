@@ -22,8 +22,8 @@ Provide a custom name and logo for the redirect UI by using the [Developer ID](#
 
 Vercel additionally attaches some "Callback Parameters" to the defined Redirect URL when the user is redirected. The following parameters give you access to information about the project the user has created and deployed, for you to integrate with Vercel after the user is sent back to you.
 
-| Parameter                                                                                | Description                                                                                                                                                                                  |
-| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter                                                  | Description                                                                                                                                                                                  |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `project-dashboard-url`                                    | The URL to view the Project that was created through the Project creation flow on the Vercel Dashboard.                                                                                      |
 | `project-name`                                             | The Name of the Project that was created through the Project creation flow.                                                                                                                  |
 | `deployment-dashboard-url`                                 | The URL to view the Deployment that was created through the Project creation flow on the Vercel Dashboard.                                                                                   |
@@ -92,5 +92,5 @@ https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2F
 
 title: "Deploy Button Demo"
 description: "Learn how to use the Deploy Button Demo parameters to showcase an example of a successful deployment to the user when clicking the Deploy Button and entering the Project creation flow."
-last\_updated: "2026-03-08T05:03:13.075Z"
+last\_updated: "2026-03-23T09:40:08.080Z"
 source: "https://vercel.com/docs/deploy-button/demo"

@@ -34,12 +34,6 @@ description:
 href: '/cookbook/guides/computer-use',
 },
 {
-title: 'Add Skills to Your Agent',
-description:
-'Extend your agent with specialized capabilities loaded at runtime from markdown files.',
-href: '/cookbook/guides/agent-skills',
-},
-{
 title: 'Get started with Gemini 2.5',
 description: 'Get started with Gemini 2.5 using the AI SDK.',
 href: '/cookbook/guides/gemini-2-5',
@@ -63,7 +57,7 @@ href: '/cookbook/guides/sonnet-3-7',
 {
 title: 'Get started with Llama 3.1',
 description: 'Get started with Llama 3.1 using the AI SDK.',
-href: '/cookbook/guides/llama-3_1',
+href: '/cookbook/guides/llama-3\_1',
 },
 {
 title: 'Get started with GPT-5',

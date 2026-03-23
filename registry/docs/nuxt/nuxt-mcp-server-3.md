@@ -72,7 +72,7 @@ The Nuxt connector will appear in the composer's "Developer mode" tool later dur
 ### Claude Code
 
 ::note{icon="i-lucide-info"}
-**Ensure Claude Code is installed** - Visit [Anthropic's documentation](https://docs.claude.com/en/docs/claude-code/quickstart){rel=""nofollow""} for installation instructions.
+**Ensure Claude Code is installed** - Visit [Anthropic's documentation](https://code.claude.com/docs/en/quickstart){rel=""nofollow""} for installation instructions.
 ::
 
 Add the server using the CLI command:

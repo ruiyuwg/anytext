@@ -22,9 +22,11 @@ For cloud-specific IAM/Workload Identity authentication, refer to the [IAM authe
   - [Google Cloud Memorystore](https://cloud.google.com/memorystore)
   - [Azure Cache for Redis](https://azure.microsoft.com/en-us/services/cache/)
 
-- Note: We only officially support Redis versions >= 5.
+- Note: We only officially support Redis versions >= 5 and Valkey version 8.
 
 - We support both Standalone and Redis Cluster. See the appropriate sections for deployment instructions.
+
+- **Azure Cache for Redis:** LangSmith does not support the Enterprise clustering policy. Use the OSS clustering policy instead. See [Azure clustering policy documentation](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-best-practices-enterprise-tiers#clustering-policy) for details.
 
 - We support no authentication, password, and [IAM/Workload Identity](#iam-authentication) authentication.
 
@@ -406,6 +408,8 @@ See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/c
 
 
 
+
+
 ### Memorystore for Redis IAM authentication
 
 Memorystore for Redis supports [IAM authentication](https://docs.cloud.google.com/memorystore/docs/cluster/about-iam-auth) for **Cluster instances only** (not standalone Memorystore). This allows you to authenticate using GCP service accounts.
@@ -481,6 +485,8 @@ ingestQueue:
 ```
 
 See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
+
+
 
 
 

@@ -22,9 +22,9 @@ Stripe can collect tax if your business is based in Australia, Hong Kong, Japan,
 
 There are different rules for when and how you need to register to collect tax depending on the country.
 
-See [Thresholds](https://dashboard.stripe.com/tax/thresholds) to get insights about your potential tax registration obligations in each location. Stripe only monitors if you have reached a tax threshold for sales outside of the country your business is based in. Stripe also notifies you with email and Dashboard alerts when you might need to register to collect tax. Learn more about how the [monitoring tool works](https://docs.stripe.com/tax/monitoring.md).
+See [Thresholds](https://dashboard.stripe.com/tax/thresholds) to get insights about your potential tax registration obligations in each location. Stripe only monitors if you’ve reached a tax threshold for sales outside of the country your business is based in. Stripe also notifies you with email and Dashboard alerts when you might need to register to collect tax. Learn more about how the [monitoring tool works](https://docs.stripe.com/tax/monitoring.md).
 
-See [Needs attention](https://dashboard.stripe.com/tax/locations?primary_tab=needs_attention) tab to get insights about your potential tax registration obligations in each location. Stripe only monitors if you have reached a tax threshold for sales outside of the country your business is based in. Stripe also notifies you with email and Dashboard alerts when you might need to register to collect tax. Learn more about how the [monitoring tool works](https://docs.stripe.com/tax/monitoring.md).
+See [Needs attention](https://dashboard.stripe.com/tax/locations?primary_tab=needs_attention) tab to get insights about your potential tax registration obligations in each location. Stripe only monitors if you’ve reached a tax threshold for sales outside of the country your business is based in. Stripe also notifies you with email and Dashboard alerts when you might need to register to collect tax. Learn more about how the [monitoring tool works](https://docs.stripe.com/tax/monitoring.md).
 
 After you’ve registered with a country, go to [Registrations](https://dashboard.stripe.com/tax/registrations) to add your registrations to Stripe in the Dashboard to start collecting tax on your transactions in that location.
 

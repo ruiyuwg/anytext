@@ -59,7 +59,7 @@ await Promise.all(
 
 title: "NEXTJS\_NO\_SELF\_HOSTED\_VIDEOS"
 description: "Prevent video files from being added to Next.js applications."
-last\_updated: "2026-03-08T05:03:12.717Z"
+last\_updated: "2026-03-23T09:40:07.605Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_NO\_SELF\_HOSTED\_VIDEOS"
 
 # NEXTJS\_NO\_SELF\_HOSTED\_VIDEOS
@@ -81,7 +81,7 @@ See the [best practices for hosting videos on Vercel](/kb/guide/best-practices-f
 
 title: "NEXTJS\_NO\_TURBO\_CACHE"
 description: "Prevent Turborepo from caching the Next.js .next/cache folder to prevent an oversized cache."
-last\_updated: "2026-03-08T05:03:12.721Z"
+last\_updated: "2026-03-23T09:40:07.609Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_NO\_TURBO\_CACHE"
 
 # NEXTJS\_NO\_TURBO\_CACHE
@@ -125,5 +125,5 @@ To fix, add `"!.next/cache/**"` to the list of outputs for the task.
 
 title: "NEXTJS\_REQUIRE\_EXPLICIT\_DYNAMIC"
 description: "Requires explicitly setting the "
-last\_updated: "2026-03-08T05:03:12.730Z"
+last\_updated: "2026-03-23T09:40:07.631Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_REQUIRE\_EXPLICIT\_DYNAMIC"

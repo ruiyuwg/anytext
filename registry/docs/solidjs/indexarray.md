@@ -5,8 +5,8 @@ Reactive utilities
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/reactive-utilities/index-array.mdx)
 
 ```
-import { indexArray } from "solid-js"
-function indexArray<T, U>(  list: () => readonly T[],  mapFn: (v: () => T, i: number) => U): () => U[]
+import { indexArray } from "solid-js";
+function indexArray<T, U>(  list: () => readonly T[],  mapFn: (v: () => T, i: number) => U): () => U[];
 ```
 
 Similar to `mapArray` except it maps by index. The item is a signal and the index is now the constant.

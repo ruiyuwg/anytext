@@ -71,6 +71,12 @@ Or you can use the `--update` or `-u` flag in the CLI to make Vitest update snap
 vitest -u
 ```
 
+### CI behavior
+
+By default, Vitest does not write snapshots in CI (`process.env.CI` is truthy) and any snapshot mismatches, missing snapshots, and obsolete snapshots fail the run. See [`update`](/config/update) for the details.
+
+An **obsolete snapshot** is a snapshot entry (or snapshot file) that no longer matches any collected test. This usually happens after removing or renaming tests.
+
 ## File Snapshots
 
 When calling `toMatchSnapshot()`, we store all snapshots in a formatted snap file. That means we need to escape some characters (namely the double-quote `"` and backtick `` ` ``) in the snapshot string. Meanwhile, you might lose the syntax highlighting for the snapshot content (if they are in some language).
@@ -90,7 +96,7 @@ It will compare with the content of `./test/basic.output.html`. And can be writt
 
 ## Visual Snapshots
 
-For visual regression testing of UI components and pages, Vitest provides built-in support through [browser mode](/guide/browser/) with the [`toMatchScreenshot()`](/api/browser/assertions#tomatchscreenshot-experimental) assertion:
+For visual regression testing of UI components and pages, Vitest provides built-in support through [browser mode](/guide/browser/) with the [`toMatchScreenshot()`](/api/browser/assertions#tomatchscreenshot) assertion:
 
 ```ts
 import { expect, test } from 'vitest'
@@ -128,7 +134,7 @@ expect.addSnapshotSerializer({
 })
 ```
 
-We also support [snapshotSerializers](/config/#snapshotserializers) option to implicitly add custom serializers.
+We also support [snapshotSerializers](/config/snapshotserializers) option to implicitly add custom serializers.
 
 ```ts [path/to/custom-serializer.ts]
 import { SnapshotSerializer } from 'vitest'
@@ -317,7 +323,7 @@ You can extend default `VitestSnapshotEnvironment` from `vitest/snapshot` entry 
 
 This is a low-level option and should be used only for advanced cases where you don't have access to default Node.js APIs.
 
-If you just need to configure snapshots feature, use [`snapshotFormat`](#snapshotformat) or [`resolveSnapshotPath`](#resolvesnapshotpath) options.
+If you just need to configure snapshots feature, use [`snapshotFormat`](/config/snapshotformat) or [`resolveSnapshotPath`](/config/resolvesnapshotpath) options.
 
 ***
 
@@ -325,11 +331,11 @@ If you just need to configure snapshots feature, use [`snapshotFormat`](#snapsho
 
 - **Type:** `PrettyFormatOptions`
 
-Format options for snapshot testing. These options are passed down to our fork of [`pretty-format`](https://www.npmjs.com/package/pretty-format). In addition to the `pretty-format` options we support `printShadowRoot: boolean`.
+Format options for snapshot testing. These options are passed down to our fork of [`pretty-format`](https://npmx.dev/package/pretty-format). In addition to the `pretty-format` options we support `printShadowRoot: boolean`.
 
 Beware that `plugins` field on this object will be ignored.
 
-If you need to extend snapshot serializer via pretty-format plugins, please, use [`expect.addSnapshotSerializer`](/api/expect#expect-addsnapshotserializer) API or [snapshotSerializers](#snapshotserializers) option.
+If you need to extend snapshot serializer via pretty-format plugins, please, use [`expect.addSnapshotSerializer`](/api/expect#expect-addsnapshotserializer) API or [snapshotSerializers](/config/snapshotserializers) option.
 
 ***
 
@@ -339,5 +345,37 @@ If you need to extend snapshot serializer via pretty-format plugins, please, use
 - **Default:** `[]`
 
 A list of paths to snapshot serializer modules for snapshot testing, useful if you want add custom snapshot serializers. See [Custom Serializer](/guide/snapshot#custom-serializer) for more information.
+
+***
+
+# strictTags 4.1.0
+
+- **Type:** `boolean`
+- **Default:** `true`
+- **CLI:** `--strict-tags`, `--no-strict-tags`
+
+Should Vitest throw an error if test has a [`tag`](/config/tags) that is not defined in the config to avoid silently doing something surprising due to mistyped names (applying the wrong configuration or skipping the test due to a `--tags-filter` flag).
+
+Note that Vitest will always throw an error if `--tags-filter` flag defines a tag not present in the config.
+
+For example, this test will throw an error because the tag `fortnend` has a typo (it should be `frontend`):
+
+```js [form.test.js]
+test('renders a form', { tags: ['fortnend'] }, () => {
+  // ...
+})
+```
+
+```js [vitest.config.js]
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    tags: [
+      { name: 'frontend' },
+    ],
+  },
+})
+```
 
 ***

@@ -1,0 +1,134 @@
+When using Container Service for Kubernetes (ACK) for the first time, you must call the OpenAckService operation to activate the service.
+
+## Operation description
+
+-   You can activate ACK by using Alibaba Cloud accounts.
+-   To activate ACK by using RAM users, you need to grant the AdministratorAccess permission to the RAM users.
+
+## Debugging
+
+[You can run this interface directly in OpenAPI Explorer, saving you the trouble of calculating signatures. After running successfully, OpenAPI Explorer can automatically generate SDK code samples.](https://api.alibabacloud.com/api/CS/2015-12-15/OpenAckService)
+
+[![](https://img.alicdn.com/tfs/TB16JcyXHr1gK0jSZR0XXbP8XXa-24-26.png)Debug](https://api.alibabacloud.com/api/CS/2015-12-15/OpenAckService)
+
+## Authorization information
+
+The following table shows the authorization information corresponding to the API. The authorization information can be used in the `Action` policy element to grant a RAM user or RAM role the permissions to call this API operation. Description:
+
+-   Operation: the value that you can use in the Action element to specify the operation on a resource.
+-   Access level: the access level of each operation. The levels are read, write, and list.
+-   Resource type: the type of the resource on which you can authorize the RAM user or the RAM role to perform the operation. Take note of the following items:
+    -   For mandatory resource types, indicate with a prefix of \* .
+    -   If the permissions cannot be granted at the resource level, `All Resources` is used in the Resource type column of the operation.
+-   Condition Key: the condition key that is defined by the cloud service.
+-   Associated operation: other operations that the RAM user or the RAM role must have permissions to perform to complete the operation. To complete the operation, the RAM user or the RAM role must have the permissions to perform the associated operations.
+
+Operation
+
+Access level
+
+Resource type
+
+Condition key
+
+Associated operation
+
+cs:OpenAckService
+
+update
+
+\*All Resources
+
+`*`
+
+none
+
+none
+
+## Request syntax
+
+```
+POST /service/open HTTP/1.1
+```
+
+## Request parameters
+
+Parameter
+
+Type
+
+Required
+
+Description
+
+Example
+
+type
+
+string
+
+No
+
+The type of service that you want to activate. Valid values:
+
+-   `propayasgo`: ACK clusters (including ACK managed clusters and ACK dedicated clusters), ACK Serverless clusters, and registered clusters.
+-   `edgepayasgo`: ACK Edge clusters.
+
+propayasgo
+
+## Response parameters
+
+Parameter
+
+Type
+
+Description
+
+Example
+
+object
+
+The response body.
+
+request\_id
+
+string
+
+The request ID.
+
+20758A-585D-4A41-A9B2-28DA8F4F534F
+
+order\_id
+
+string
+
+The ID of the order.
+
+2067\*\*\*\*\*\*\*0374
+
+## Examples
+
+Sample success responses
+
+`JSON`format
+
+```
+{
+  "request_id": "20758A-585D-4A41-A9B2-28DA8F4F534F",
+  "order_id": "2067*******0374"
+}
+```
+
+## Error codes
+
+For a list of error codes, visit the [Service error codes]( https://api.alibabacloud.com/document/CS/2015-12-15/errorCode).
+
+## Change history
+
+Change time
+
+Summary of changes
+
+Operation
+
+No change history

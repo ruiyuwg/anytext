@@ -15,7 +15,8 @@ Drizzle Kit `export` command triggers a sequence of events:
 
 1. It will read through your Drizzle schema file(s) and compose a json snapshot of your schema
 2. Based on json differences it will generate SQL DDL statements
-3. Output SQL DDL statements to console </Callout>
+3. Output SQL DDL statements to console
+   </Callout>
 
 It's designed to cover [codebase first](/docs/migrations) approach of managing Drizzle migrations.
 You can export the SQL representation of the Drizzle schema, allowing external tools like Atlas to handle all the migrations for you
@@ -50,7 +51,7 @@ npx drizzle-kit export --dialect=postgresql --schema=./src/schema.ts
 ### Schema files path
 
 You can have a single `schema.ts` file or as many schema files as you want spread out across the project.
-Drizzle Kit requires you to specify path(s) to them as a [glob](https://www.digitalocean.com/community/tools/glob?comments=true&glob=/**/*.js&matches=false&tests=//%20This%20will%20match%20as%20it%20ends%20with%20'.js'&tests=/hello/world.js&tests=//%20This%20won't%20match!&tests=/test/some/globs) via `schema` configuration option.
+Drizzle Kit requires you to specify path(s) to them as a [glob](https://www.digitalocean.com/community/tools/glob?comments=true\&glob=/**/*.js\&matches=false\&tests=//%20This%20will%20match%20as%20it%20ends%20with%20'.js'\&tests=/hello/world.js\&tests=//%20This%20won't%20match!\&tests=/test/some/globs) via `schema` configuration option.
 
 <SchemaFilePaths/>
 
@@ -61,7 +62,7 @@ drizzle-kit export --config=drizzle-dev.config.ts
 drizzle-kit export --config=drizzle-prod.config.ts </Npx>
 
 ```plaintext {5-6}
-📦
+📦 
  ├ 📂 drizzle
  ├ 📂 src
  ├ 📜 .env
@@ -77,9 +78,9 @@ drizzle-kit export --config=drizzle-prod.config.ts </Npx>
 
 <rem025/>
 
-|         |                                                 |
-| :------ | :---------------------------------------------- |
-| `--sql` | generating SQL representation of Drizzle Schema |
+|               |                                                      |
+| :--------     | :--------------------------------------------------- |
+| `--sql`       | generating SQL representation of Drizzle Schema               |
 
 By default, Drizzle Kit outputs SQL files, but in the future, we want to support different formats
 
@@ -96,11 +97,11 @@ drizzle-kit push --name=seed_users --custom
 We recommend configuring `drizzle-kit` through [drizzle.config.ts](/docs/drizzle-config-file) file, 
 yet you can provide all configuration options through CLI if necessary, e.g. in CI/CD pipelines, etc.
 
-|           |            |                                                                           |
-| :-------- | :--------- | :------------------------------------------------------------------------ |
-| `dialect` | `required` | Database dialect, one of <Dialects/>                                      |
-| `schema`  | `required` | Path to typescript schema file(s) or folder(s) with multiple schema files |
-| `config`  |            | Configuration file path, default is `drizzle.config.ts`                   |
+|               |            |                                                                            |
+| :------------ | :-------   | :----------------------------------------------------------------------    |
+| `dialect`     | `required` | Database dialect, one of <Dialects/>                                       |
+| `schema`      | `required` | Path to typescript schema file(s) or folder(s) with multiple schema files  |
+| `config`      |            | Configuration file path, default is `drizzle.config.ts`                    |
 
 ### Example
 
@@ -111,7 +112,7 @@ We will also place drizzle config file in the `configs` folder.
 Let's create config file:
 
 ```plaintext {4}
-📦
+📦 
  ├ 📂 configs
  │ └ 📜 drizzle.config.ts
  ├ 📂 src
@@ -129,12 +130,12 @@ export default defineConfig({
 ```
 
 ```ts filename='schema.ts'
-import { pgTable, serial, text } from "drizzle-orm/pg-core";
+import { pgTable, serial, text } from 'drizzle-orm/pg-core'
 
-export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  email: text("email").notNull(),
-  name: text("name"),
+export const users = pgTable('users', {
+	id: serial('id').primaryKey(),
+	email: text('email').notNull(),
+	name: text('name')
 });
 ```
 

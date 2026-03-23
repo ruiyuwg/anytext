@@ -1,196 +1,545 @@
 # Dataset
 
-```markdown
-usage: sanity dataset [--default] [-v|--version] [-d|--debug] [-h|--help] <command> [<args>]
+**CLI output**
 
-Commands:
-   alias       You can manage your dataset alias using this command.
-   copy        Manages dataset copying, including starting a new copy job, listing copy jobs and following the progress of a running copy job
-   create      Create a new dataset within your project
-   delete      Delete a dataset within your project
-   export      Export dataset to local filesystem as a gzipped tarball
-   import      Import documents to given dataset from ndjson file
-   list        List datasets of your project
-   visibility  Set visibility of a dataset
-
-See 'sanity help dataset <command>' for specific information on a subcommand.
+```sh
+npx sanity dataset --help
 ```
 
 ## Commands
 
-### Alias
+### `alias`
 
-```text
-usage: sanity dataset alias SUBCOMMAND [ALIAS_NAME, TARGET_DATASET]
+#### `create`
 
-   You can manage your dataset alias using this command.
+**CLI output**
 
-Below are examples of the alias subcommand
+```sh
+USAGE
+  $ sanity dataset alias create [ALIASNAME] [TARGETDATASET] [-p <id>]
 
-Create Alias
-  sanity dataset alias create
-  sanity dataset alias create <alias-name>
-  sanity dataset alias create <alias-name> <target-dataset>
+ARGUMENTS
+  [ALIASNAME]      Dataset alias name to create
+  [TARGETDATASET]  Target dataset name to link the alias to
 
-Delete Alias
-  Options
-    --force Skips security prompt and forces link command
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to create dataset alias in (overrides CLI configuration)
 
-  Usage
-    sanity dataset alias delete <alias-name>
-    sanity dataset alias delete <alias-name> --force
+DESCRIPTION
+  Create a dataset alias within your project
 
-Link Alias
-  Options
-    --force Skips security prompt and forces link command
+EXAMPLES
+  Create alias in a specific project
 
-  Usage
-    sanity dataset alias link
-    sanity dataset alias link <alias-name>
-    sanity dataset alias link <alias-name> <target-dataset>
-    sanity dataset alias link <alias-name> <target-dataset> --force
+    $ sanity dataset alias create --project-id abc123 conference conf-2025
 
-Un-link Alias
-  Options
-    --force Skips security prompt and forces link command
+  Create an alias with interactive prompts
 
-  Usage
-    sanity dataset alias unlink
-    sanity dataset alias unlink <alias-name>
-    sanity dataset alias unlink <alias-name> --force
+    $ sanity dataset alias create
+
+  Create alias named "conference" with interactive dataset selection
+
+    $ sanity dataset alias create conference
+
+  Create alias "conference" linked to "conf-2025" dataset
+
+    $ sanity dataset alias create conference conf-2025
+
+  Create alias with explicit ~ prefix
+
+    $ sanity dataset alias create ~conference conf-2025
 ```
 
-### Copy
+#### `delete`
 
-```text
-usage: sanity dataset copy [SOURCE_DATASET] [TARGET_DATASET]
+**CLI output**
 
-   Manages dataset copying, including starting a new copy job, listing copy jobs and following the progress of a running copy job
+```sh
+USAGE
+  $ sanity dataset alias delete ALIASNAME [-p <id>] [--force]
 
-Options
-  --detach Start the copy without waiting for it to finish
-  --attach <job-id> Attach to the running copy process to show progress
-  --skip-history Don't preserve document history on copy
-  --list Lists all dataset copy jobs corresponding to a certain criteria.
-  --offset Start position in the list of jobs. Default 0. With --list.
-  --limit Maximum number of jobs returned. Default 10. Maximum 1000. With --list.
+ARGUMENTS
+  ALIASNAME  Dataset alias name to delete
 
-Examples
-  sanity dataset copy
-  sanity dataset copy <source-dataset>
-  sanity dataset copy <source-dataset> <target-dataset>
-  sanity dataset copy <source-dataset> <target-dataset> --skip-history
-  sanity dataset copy <source-dataset> <target-dataset> --detach
-  sanity dataset copy --attach <job-id>
-  sanity dataset copy --list
-  sanity dataset copy --list --offset=2
-  sanity dataset copy --list --offset=2 --limit=10
+FLAGS
+      --force  Skip confirmation prompt and delete immediately
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to delete dataset alias from (overrides CLI configuration)
+
+DESCRIPTION
+  Delete a dataset alias within your project
+
+EXAMPLES
+  Delete alias named "conference" with confirmation prompt
+
+    $ sanity dataset alias delete conference
+
+  Delete alias with explicit ~ prefix
+
+    $ sanity dataset alias delete ~conference
+
+  Delete alias named "conference" without confirmation prompt
+
+    $ sanity dataset alias delete conference --force
 ```
 
-### Create
+#### `link`
 
-```text
-usage: sanity dataset create [NAME]
+**CLI output**
 
-   Create a new dataset within your project
+```sh
+USAGE
+  $ sanity dataset alias link [ALIASNAME] [TARGETDATASET] [-p <id>] [--force]
 
-Options
-  --visibility <mode> Set visibility for this dataset (public/private)
+ARGUMENTS
+  [ALIASNAME]      Dataset alias name to link
+  [TARGETDATASET]  Target dataset name to link the alias to
 
-Examples
-  sanity dataset create
-  sanity dataset create <name>
-  sanity dataset create <name> --visibility private
+FLAGS
+      --force  Skip confirmation prompt when relinking existing alias
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to link dataset alias in (overrides CLI configuration)
+
+DESCRIPTION
+  Link a dataset alias to a dataset within your project
+
+EXAMPLES
+  Link an alias with interactive prompts
+
+    $ sanity dataset alias link
+
+  Link alias named "conference" with interactive dataset selection
+
+    $ sanity dataset alias link conference
+
+  Link alias "conference" to "conf-2025" dataset
+
+    $ sanity dataset alias link conference conf-2025
+
+  Link alias with explicit ~ prefix
+
+    $ sanity dataset alias link ~conference conf-2025
+
+  Force link without confirmation (skip relink prompt)
+
+    $ sanity dataset alias link conference conf-2025 --force
 ```
 
-### Delete
+#### `unlink`
 
-```text
-usage: sanity dataset delete [datasetName]
+**CLI output**
 
-   Delete a dataset within your project
+```sh
+USAGE
+  $ sanity dataset alias unlink [ALIASNAME] [-p <id>] [--force]
 
-Options
-  --force Do not prompt for delete confirmation - forcefully delete
+ARGUMENTS
+  [ALIASNAME]  Dataset alias name to unlink
 
-Examples
-  sanity dataset delete
-  sanity dataset delete my-dataset
-  sanity dataset delete my-dataset --force
+FLAGS
+      --force  Skip confirmation prompt and unlink immediately
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to unlink dataset alias in (overrides CLI configuration)
+
+DESCRIPTION
+  Unlink a dataset alias from its dataset within your project
+
+EXAMPLES
+  Unlink an alias with interactive selection
+
+    $ sanity dataset alias unlink
+
+  Unlink alias "conference" with confirmation prompt
+
+    $ sanity dataset alias unlink conference
+
+  Unlink alias with explicit ~ prefix
+
+    $ sanity dataset alias unlink ~conference
+
+  Unlink alias "conference" without confirmation prompt
+
+    $ sanity dataset alias unlink conference --force
 ```
 
-### Export
+### `copy`
 
-```text
-usage: sanity dataset export [NAME] [DESTINATION]
+**CLI output**
 
-   Export dataset to local filesystem as a gzipped tarball. Assets failing with HTTP status codes 401, 403 and 404 upon download are ignored and excluded from export.
+```sh
+USAGE
+  $ sanity dataset copy [SOURCE] [TARGET] [-p <id>] [--attach <value>] [--detach] [--limit <value>] [--list] [--offset <value>] [--skip-history]
 
-Options
-  --raw                     Extract only documents, without rewriting asset references
-  --no-assets               Export only non-asset documents and remove references to image assets
-  --no-drafts               Export only published versions of documents
-  --no-compress             Skips compressing tarball entries (still generates a gzip file)
-  --types                   Defines which document types to export
-  --overwrite               Overwrite any file with the same name
-  --asset-concurrency <num> Concurrent number of asset downloads
-  --mode <stream|cursor> Uses a cursor when exporting, this might be more performant for larger datasets, but might not be as accurate if the dataset is being modified during export. Defaults to stream.
+ARGUMENTS
+  [SOURCE]  Name of the dataset to copy from
+  [TARGET]  Name of the dataset to copy to
 
-Examples
-  sanity dataset export moviedb localPath.tar.gz
-  sanity dataset export moviedb assetless.tar.gz --no-assets
-  sanity dataset export staging staging.tar.gz --raw
-  sanity dataset export staging staging.tar.gz --types products,shops
+FLAGS
+      --attach=<value>  Attach to the running copy process to show progress
+      --detach          Start the copy without waiting for it to finish
+      --limit=<value>   Maximum number of jobs returned (default 10, max 1000)
+      --list            Lists all dataset copy jobs
+      --offset=<value>  Start position in the list of jobs (default 0)
+      --skip-history    Don't preserve document history on copy
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to copy dataset in (overrides CLI configuration)
+
+DESCRIPTION
+  Manages dataset copying, including starting a new copy job, listing copy jobs and following the progress of a running copy job
+
+EXAMPLES
+  Interactively copy a dataset
+
+    $ sanity dataset copy
+
+  Copy from source-dataset (prompts for target)
+
+    $ sanity dataset copy source-dataset
+
+  Copy from source-dataset to target-dataset
+
+    $ sanity dataset copy source-dataset target-dataset
+
+  Copy without preserving document history (faster for large datasets)
+
+    $ sanity dataset copy --skip-history source target
+
+  Start copy job without waiting for completion
+
+    $ sanity dataset copy --detach source target
+
+  Attach to a running copy job to follow progress
+
+    $ sanity dataset copy --attach <job-id>
+
+  List all dataset copy jobs
+
+    $ sanity dataset copy --list
+
+  List copy jobs with pagination
+
+    $ sanity dataset copy --list --offset 2 --limit 10
 ```
 
-### Import
+### `create`
 
-```text
-usage: sanity dataset import [FILE | FOLDER | URL] [TARGET_DATASET]
+**CLI output**
 
-   Import documents to given dataset from ndjson file
+```sh
+USAGE
+  $ sanity dataset create [NAME] [-p <id>] [--embeddings] [--embeddings-projection <value>] [--visibility <value>]
 
-Options
-  --missing On duplicate document IDs, skip importing document in question
-  --replace On duplicate document IDs, replace existing document with imported document
-  --allow-failing-assets Skip assets that cannot be fetched/uploaded
-  --replace-assets Skip reuse of existing assets
+ARGUMENTS
+  [NAME]  Name of the dataset to create
 
-Rarely used options (should generally not be used)
-  --allow-assets-in-different-dataset Allow asset documents to reference different project/dataset
-  --allow-system-documents Allow system documents like dataset permissions and custom retention to be imported
+FLAGS
+      --embeddings                     Enable embeddings for this dataset
+      --embeddings-projection=<value>  GROQ projection for embeddings indexing (e.g. "{ title, body }")
+      --visibility=<value>             Set visibility for this dataset (custom/private/public)
 
-Examples
-  # Import "moviedb.ndjson" from the current directory to the dataset called "moviedb"
-  sanity dataset import moviedb.ndjson moviedb
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to create dataset in (overrides CLI configuration)
 
-  # Import "moviedb.tar.gz" from the current directory to the dataset called "moviedb",
-  # replacing any documents encountered that have the same document IDs
-  sanity dataset import moviedb.tar.gz moviedb --replace
+DESCRIPTION
+  Create a new dataset within your project
 
-  # Import from a folder containing an ndjson file, such as an extracted tarball
-  # retrieved through "sanity dataset export".
-  sanity dataset import ~/some/folder moviedb
+EXAMPLES
+  Interactively create a dataset
 
-  # Import from a remote URL. Will download and extract the tarball to a temporary
-  # location before importing it.
-  sanity dataset import https://some.url/moviedb.tar.gz moviedb --replace
+    $ sanity dataset create
+
+  Create a dataset named "my-dataset"
+
+    $ sanity dataset create my-dataset
+
+  Create a private dataset named "my-dataset"
+
+    $ sanity dataset create my-dataset --visibility private
 ```
 
-### List
+### `delete`
 
-```text
-usage: sanity dataset list
+**CLI output**
 
-   List datasets of your project
+```sh
+USAGE
+  $ sanity dataset delete DATASETNAME [-p <id>] [--force]
+
+ARGUMENTS
+  DATASETNAME  Dataset name to delete
+
+FLAGS
+      --force  Do not prompt for delete confirmation - forcefully delete
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to delete dataset from (overrides CLI configuration)
+
+DESCRIPTION
+  Delete a dataset within your project
+
+EXAMPLES
+  Delete a specific dataset
+
+    $ sanity dataset delete my-dataset
+
+  Delete a specific dataset without confirmation
+
+    $ sanity dataset delete my-dataset --force
 ```
 
-### Visibility
+### `embeddings`
 
-```text
-usage: sanity dataset visibility get/set [dataset] [mode]
+#### `disable`
 
-   Set visibility of a dataset
+**CLI output**
+
+```sh
+USAGE
+  $ sanity dataset embeddings disable [DATASET] [-p <id>]
+
+ARGUMENTS
+  [DATASET]  Dataset name to disable embeddings for
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to disable embeddings for (overrides CLI configuration)
+
+DESCRIPTION
+  Disable embeddings for a dataset
+
+EXAMPLES
+  Disable embeddings for the production dataset
+
+    $ sanity dataset embeddings disable production
+```
+
+#### `enable`
+
+**CLI output**
+
+```sh
+USAGE
+  $ sanity dataset embeddings enable [DATASET] [-p <id>] [--projection <value>] [--wait]
+
+ARGUMENTS
+  [DATASET]  Dataset name to enable embeddings for
+
+FLAGS
+      --projection=<value>  GROQ projection defining which fields to embed (e.g. "{ title, body }")
+      --wait                Wait for embeddings processing to complete before returning
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to enable embeddings for (overrides CLI configuration)
+
+DESCRIPTION
+  Enable embeddings for a dataset
+
+EXAMPLES
+  Enable embeddings for the production dataset
+
+    $ sanity dataset embeddings enable production
+
+  Enable embeddings with a specific projection
+
+    $ sanity dataset embeddings enable production --projection "{ title, body }"
+
+  Enable embeddings and wait for processing to complete
+
+    $ sanity dataset embeddings enable production --wait
+```
+
+#### `status`
+
+**CLI output**
+
+```sh
+USAGE
+  $ sanity dataset embeddings status [DATASET] [-p <id>]
+
+ARGUMENTS
+  [DATASET]  The name of the dataset to check embeddings status for
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to check embeddings status for (overrides CLI configuration)
+
+DESCRIPTION
+  Show embeddings settings and status for a dataset
+
+EXAMPLES
+  Show embeddings status for the production dataset
+
+    $ sanity dataset embeddings status production
+```
+
+### `export`
+
+**CLI output**
+
+```sh
+USAGE
+  $ sanity dataset export [NAME] [DESTINATION] [-p <id>] [--asset-concurrency <value>] [--mode <value>] [--no-assets] [--no-compress] [--no-drafts] [--overwrite] [--raw] [--types <value>]
+
+ARGUMENTS
+  [NAME]         Name of the dataset to export
+  [DESTINATION]  Output destination file path
+
+FLAGS
+      --asset-concurrency=<value>  Concurrent number of asset downloads
+      --mode=<value>               Mode to export documents with `cursor` might be more performant for larger datasets, but might not be as accurate if the dataset is being modified during export
+      --no-assets                  Export only non-asset documents and remove references to image assets
+      --no-compress                Skips compressing tarball entries (still generates a gzip file)
+      --no-drafts                  Export only published versions of documents
+      --overwrite                  Overwrite any file with the same name
+      --raw                        Extract only documents, without rewriting asset references
+      --types=<value>              Defines which document types to export (comma-separated)
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to export dataset from (overrides CLI configuration)
+
+DESCRIPTION
+  Export dataset to local filesystem as a gzipped tarball. Assets failing with HTTP status codes 401, 403 and 404 upon download are ignored and excluded from export.
+
+EXAMPLES
+  Export dataset "moviedb" to localPath.tar.gz
+
+    $ sanity dataset export moviedb localPath.tar.gz
+
+  Export dataset without assets
+
+    $ sanity dataset export moviedb assetless.tar.gz --no-assets
+
+  Export raw documents without asset reference rewriting
+
+    $ sanity dataset export staging staging.tar.gz --raw
+
+  Export specific document types
+
+    $ sanity dataset export staging staging.tar.gz --types products,shops
+```
+
+### `import`
+
+**CLI output**
+
+```sh
+USAGE
+  $ sanity dataset import SOURCE [TARGETDATASET] [-d <name>] [-p <id>] [-t <value>] [--allow-assets-in-different-dataset] [--allow-failing-assets] [--allow-replacement-characters] [--allow-system-documents] [--asset-concurrency <value>] [--missing] [--replace] [--replace-assets] [--skip-cross-dataset-references]
+
+ARGUMENTS
+  SOURCE           Source file (use "-" for stdin)
+  [TARGETDATASET]  Target dataset (prefer --dataset flag instead)
+
+FLAGS
+  -d, --dataset=<name>                     Dataset to import to
+  -t, --token=<value>                      Token to authenticate with
+      --allow-assets-in-different-dataset  Allow asset documents to reference different project/dataset
+      --allow-failing-assets               Skip assets that cannot be fetched/uploaded
+      --allow-replacement-characters       Allow unicode replacement characters in imported documents
+      --allow-system-documents             Imports system documents
+      --asset-concurrency=<value>          Number of parallel asset imports
+      --missing                            Skip documents that already exist
+      --replace                            Replace documents with the same IDs
+      --replace-assets                     Skip reuse of existing assets
+      --skip-cross-dataset-references      Skips references to other datasets
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to import to (overrides CLI configuration)
+
+DESCRIPTION
+  Import documents to a Sanity dataset
+
+EXAMPLES
+  Import "./my-dataset.ndjson" into dataset "staging"
+
+    $ sanity dataset import -d staging -t someSecretToken my-dataset.ndjson
+
+  Import into dataset "test" from stdin
+
+    $ cat my-dataset.ndjson | sanity dataset import -d test -t someToken -
+
+  Import with explicit project ID (overrides CLI configuration)
+
+    $ sanity dataset import -p projectId -d staging -t someSecretToken my-dataset.ndjson
+```
+
+### `list`
+
+**CLI output**
+
+```sh
+USAGE
+  $ sanity dataset list [-p <id>]
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to list datasets for (overrides CLI configuration)
+
+DESCRIPTION
+  List datasets of your project
+
+EXAMPLES
+  List datasets of your project
+
+    $ sanity dataset list
+
+  List datasets for a specific project
+
+    $ sanity dataset list --project-id abc123
+```
+
+### `visibility`
+
+#### `get`
+
+**CLI output**
+
+```sh
+USAGE
+  $ sanity dataset visibility get DATASET [-p <id>]
+
+ARGUMENTS
+  DATASET  The name of the dataset to get visibility for
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to get dataset visibility for (overrides CLI configuration)
+
+DESCRIPTION
+  Get the visibility of a dataset
+
+EXAMPLES
+  Check the visibility of a dataset
+
+    $ sanity dataset visibility get my-dataset
+```
+
+#### `set`
+
+**CLI output**
+
+```sh
+USAGE
+  $ sanity dataset visibility set DATASET MODE [-p <id>]
+
+ARGUMENTS
+  DATASET  The name of the dataset to set visibility for
+  MODE     The visibility mode to set
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to set dataset visibility for (overrides CLI configuration)
+
+DESCRIPTION
+  Set the visibility of a dataset
+
+EXAMPLES
+  Make a dataset private
+
+    $ sanity dataset visibility set my-dataset private
+
+  Make a dataset public
+
+    $ sanity dataset visibility set my-dataset public
 ```
 
 # Debug
@@ -215,120 +564,159 @@ Examples
 
 # Deploy
 
-```markdown
-usage: sanity deploy [SOURCE_DIR] [--no-build] [--source-maps] [--no-minify] [--external]
+**CLI output**
 
-   Builds and deploys Sanity Studio or application to Sanity hosting
+```sh
+USAGE
+  $ sanity deploy [SOURCEDIR] [--yes] [--auto-updates] [--build] [--external] [--minify] [--schema-required] [--source-maps] [--verbose]
 
-Options
-  --external        Register an externally hosted studio
-                    Note: Ignores --source-maps, --no-minify, and --no-build flags
-                    Note: Schema deployment is skipped unless --schema-required is also passed
-  --source-maps     Enable source maps for built bundles (increases size of bundle)
-  --no-minify       Skip minifying built JavaScript (speeds up build, increases size of bundle)
-  --no-build        Don't build the studio prior to deploy, instead deploying the version currently in `dist/`
-  --schema-required Fail-fast deployment if schema store fails
-  --verbose         Enable verbose logging
-  -y, --yes         Unattended mode, answers "yes" to any "yes/no" prompt and otherwise uses defaults
+ARGUMENTS
+  [SOURCEDIR]  Source directory
 
-Examples
-  # Build and deploy the studio to Sanity hosting
-  sanity deploy
+FLAGS
+  -y, --yes              Unattended mode, answers "yes" to any "yes/no" prompt and otherwise uses defaults
+      --auto-updates     Automatically update the studio to the latest version
+      --build            Don't build the studio prior to deploy, instead deploying the version currently in `dist/`
+      --external         Register an externally hosted studio
+      --minify           Skip minifying built JavaScript (speeds up build, increases size of bundle)
+      --schema-required  Fail-fast deployment if schema store fails
+      --source-maps      Enable source maps for built bundles (increases size of bundle)
+      --verbose          Enable verbose logging
 
-  # Deploys non-minified build with source maps
-  sanity deploy --no-minify --source-maps
+DESCRIPTION
+  Builds and deploys Sanity Studio or application to Sanity hosting
 
-  # Fail fast on schema store fails – for when other services rely on the stored schema
-  sanity deploy --schema-required
+EXAMPLES
+  Build and deploy the studio to Sanity hosting
 
-  # Register an externally hosted studio (studioHost contains full URL)
-  sanity deploy --external
+    $ sanity deploy
+
+  Deploys non-minified build with source maps
+
+    $ sanity deploy --no-minify --source-maps
+
+  Fail fast on schema store fails - for when other services rely on the stored schema
+
+    $ sanity deploy --schema-required
+
+  Register an externally hosted studio (studioHost contains full URL)
+
+    $ sanity deploy --external
 ```
+
+## What --no-build skips
+
+By default, sanity deploy builds the Studio through Vite, extracts your schema and manifest, packages everything, and uploads it to Sanity hosting. Passing --no-build skips the build step but still runs schema extraction and upload. The dist/ directory must already exist. To make schema extraction fail instead of warn, pass --schema-required.
 
 # Dev
 
-**TERMINAL**
+**CLI output**
 
 ```sh
-usage: sanity dev [--port <port>] [--host <host>]
-   Starts a development server for the Sanity Studio
-Notes
-  Changing the hostname or port number might require a new entry to the CORS-origins allow list.
-Options
-  --port <port> TCP port to start server on. [default: 3333]
-  --host <host> The local network interface at which to listen. [default: "127.0.0.1"]
-  --load-in-dashboard Open the studio within Dashboard
-Examples
-  sanity dev --host=0.0.0.0
-  sanity dev --port=1942
+USAGE
+  $ sanity dev [--auto-updates] [--host <value>] [--load-in-dashboard] [--port <value>]
+
+FLAGS
+      --auto-updates       Automatically update Sanity Studio dependencies.
+      --host=<value>       [default: localhost] The local network interface at which to listen.
+      --load-in-dashboard  Load the app/studio in the Sanity dashboard.
+      --port=<value>       [default: 3333] TCP port to start server on.
+
+DESCRIPTION
+  Starts a local development server for Sanity Studio with live reloading
+
+EXAMPLES
+    $ sanity dev --host=0.0.0.0
+
+    $ sanity dev --port=1942
+
+    $ sanity dev --load-in-dashboard
 ```
 
 # Docs
 
-```text
-usage: npx sanity docs [--default] [-v|--version] [-d|--debug] [-h|--help] <command> [<args>]
+**CLI output**
 
-Commands:
-   browse  Open Sanity docs in a web browser
-   read    Read an article in terminal
-   search  Search Sanity docs
-
-See 'npx sanity help docs <command>' for specific information on a subcommand.
+```sh
+npx sanity docs --help
 ```
 
 ## Commands
 
-## `browse`
+### `browse`
 
-```text
-usage: npx sanity docs browse 
+**CLI output**
 
-   Open Sanity docs in a web browser
+```sh
+USAGE
+  $ sanity docs browse
+
+DESCRIPTION
+  Open Sanity docs in a web browser
 ```
 
 ### `read`
 
-```text
-usage: npx sanity docs read <path|url> [-w, --web]
+**CLI output**
 
-   Read an article in terminal
+```sh
+USAGE
+  $ sanity docs read PATH [--web]
 
-Arguments
-  <path> Path or URL to article, found in search results and docs content as links
+ARGUMENTS
+  PATH  Path or URL to article, found in search results and docs content as links
 
-Options
-  -w, --web               Open in a web browser
+FLAGS
+      --web  Open in a web browser
 
-Examples
-  # Read as markdown in terminal
-  sanity docs read /docs/studio/installation
-  sanity docs read https://www.sanity.io/docs/studio/installation
+DESCRIPTION
+  Read an article in terminal
 
-  # Open in web browser
-  sanity docs read /docs/studio/installation --web
-  sanity docs read https://www.sanity.io/docs/studio/installation -w
+EXAMPLES
+  Read as markdown in terminal
+
+    $ sanity docs read /docs/studio/installation
+
+  Read using full URL
+
+    $ sanity docs read https://www.sanity.io/docs/studio/installation
+
+  Open in web browser
+
+    $ sanity docs read /docs/studio/installation --web
+
+  Open using full URL in web browser
+
+    $ sanity docs read https://www.sanity.io/docs/studio/installation -w
 ```
 
 ### `search`
 
-```text
-usage: npx sanity docs search <query> [--limit <limit>]
+**CLI output**
 
-   Search Sanity docs
+```sh
+USAGE
+  $ sanity docs search QUERY [--limit <value>]
 
-Arguments
-  <query> Search query for documentation
+ARGUMENTS
+  QUERY  Search query for documentation
 
-Options
-  --limit <limit>   Maximum number of results to return [default: 10]
+FLAGS
+      --limit=<value>  Maximum number of results to return
 
-Examples
-  # Search for documentation about schemas
-  sanity docs search schema
+DESCRIPTION
+  Search Sanity docs
 
-  # Search with phrase
-  sanity docs search "groq functions"
+EXAMPLES
+  Search for documentation about schemas
 
-  # Limit search results
-  sanity docs search "deployment" --limit=5
+    $ sanity docs search schema
+
+  Search with phrase
+
+    $ sanity docs search "groq functions"
+
+  Limit search results
+
+    $ sanity docs search "deployment" --limit=5
 ```

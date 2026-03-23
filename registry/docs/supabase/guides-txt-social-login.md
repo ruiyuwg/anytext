@@ -40,6 +40,8 @@ Supabase supports a suite of social providers. Follow these guides to configure 
         }
 ```
 
+Need to integrate with a provider not listed here? You can add any OAuth2 or OIDC-compatible provider using [Custom OAuth/OIDC Providers](/docs/guides/auth/custom-oauth-providers).
+
 ## Provider tokens
 
 You can use the provider token and provider refresh token returned to make API calls to the OAuth provider. For example, you can use the Google provider token to access Google APIs on behalf of your user.

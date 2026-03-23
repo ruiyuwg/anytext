@@ -4,7 +4,7 @@ Learn about the process of creating a production build for Android and automatin
 
 In this chapter, we'll create our example app's production version and submit it to the Google Play Store. We'll also explore how to automate the creation and release of new app versions.
 
-[Watch: Creating and releasing a production build for Android](https://www.youtube.com/watch?v=nxlt8uwqhpE)
+[Watch: Creating and releasing a production build for Android](https://www.youtube.com/watch?v=nxlt8uwqhpE) — Create a production build for Android with EAS, submit it to the Google Play Store, and automate the release process.
 
 ## Prerequisites
 

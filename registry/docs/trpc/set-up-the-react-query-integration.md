@@ -5,14 +5,21 @@ import Tabs from '@theme/Tabs';
 
 ### 1. Install dependencies
 
-The following dependencies should be installed
+The following dependencies should be installed.
 
 import { InstallSnippet } from '@site/src/components/InstallSnippet';
+
+If you use an AI coding agent, install tRPC skills for better code generation:
+
+```bash
+npx @tanstack/intent@latest install
+```
 
 ### 2. Import your `AppRouter`
 
 ```twoslash include router
 // @filename: server/router.ts
+// ---cut---
 import { initTRPC } from '@trpc/server';
 import { z } from "zod";
 const t = initTRPC.create();
@@ -34,8 +41,8 @@ Create a set of strongly-typed React hooks from your `AppRouter` type signature 
 // @include: router
 // @filename: utils/trpc.ts
 // ---cut---
-import { createTRPCReact } from "@trpc/react-query";
-import type { AppRouter } from "../server/router";
+import { createTRPCReact } from '@trpc/react-query';
+import type { AppRouter } from '../server/router';
 
 export const trpc = createTRPCReact<AppRouter>();
 ```
@@ -46,11 +53,20 @@ Create a tRPC client, and wrap your application in the tRPC Provider, as below. 
 
 If you already use React Query in your application, you **should** re-use the `QueryClient` and `QueryClientProvider` you already have.
 
-```tsx title='App.tsx'
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { httpBatchLink } from "@trpc/client";
-import React, { useState } from "react";
-import { trpc } from "./utils/trpc";
+```tsx twoslash title='App.tsx'
+// @include: router
+// @filename: utils/trpc.ts
+import { createTRPCReact } from '@trpc/react-query';
+import type { AppRouter } from '../server/router';
+export const trpc = createTRPCReact<AppRouter>();
+
+// @filename: App.tsx
+declare function getAuthCookie(): string;
+// ---cut---
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { httpBatchLink } from '@trpc/client';
+import React, { useState } from 'react';
+import { trpc } from './utils/trpc';
 
 export function App() {
   const [queryClient] = useState(() => new QueryClient());
@@ -58,7 +74,7 @@ export function App() {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: "http://localhost:3000/trpc",
+          url: 'http://localhost:3000/trpc',
 
           // You can pass any HTTP headers you wish here
           async headers() {
@@ -83,32 +99,31 @@ export function App() {
 
 The reason for using `useState` in the creation of the `queryClient` and the `TRPCClient`, as opposed to declaring them outside of the component, is to ensure that each request gets a unique client when using SSR. If you use client side rendering then you can move them if you wish.
 
-#### 5. Fetch data
+### 5. Fetch data
 
 You can now use the tRPC React Query integration to call queries and mutations on your API.
 
 ```tsx twoslash title='pages/IndexPage.tsx'
 // @include: router
 // @filename: utils/trpc.ts
-// ---cut---
-import { createTRPCReact } from "@trpc/react-query";
-import type { AppRouter } from "../server/router";
+import { createTRPCReact } from '@trpc/react-query';
+import type { AppRouter } from '../server/router';
 
 export const trpc = createTRPCReact<AppRouter>();
 // @filename: pages/IndexPage.tsx
 import React from "react";
 // ---cut---
-import { trpc } from "../utils/trpc";
+import { trpc } from '../utils/trpc';
 
 export default function IndexPage() {
-  const userQuery = trpc.getUser.useQuery({ id: "id_bilbo" });
+  const userQuery = trpc.getUser.useQuery({ id: 'id_bilbo' });
   const userCreator = trpc.createUser.useMutation();
 
   return (
     <div>
       <p>{userQuery.data?.name}</p>
 
-      <button onClick={() => userCreator.mutate({ name: "Frodo" })}>
+      <button onClick={() => userCreator.mutate({ name: 'Frodo' })}>
         Create Frodo
       </button>
     </div>

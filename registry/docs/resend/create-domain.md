@@ -20,9 +20,14 @@ be exposed to recipients.
 
 Learn more about [custom return paths](/dashboard/domains/introduction#custom-return-path).
 
-Track the open rate of each email.
+Track clicks within the body of each HTML email. When enabled, links are
+rewritten to go through Resend and then redirect to the destination. Use
+[custom tracking domains](/api-reference/domains/create-tracking-domain) to
+serve click tracking from your own domain (e.g. `track.example.com`).
 
-Track clicks within the body of each HTML email.
+Track the open rate of each email. Use [custom tracking
+domains](/api-reference/domains/create-tracking-domain) to serve open tracking
+from your own domain (e.g. `track.example.com`).
 
 ```
   `opportunistic`: Opportunistic TLS means that it always attempts to make a

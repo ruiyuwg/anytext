@@ -10,79 +10,58 @@ The examples start a simple HTTP server that listens on port 8080. You can e.g. 
 curl -X POST http://localhost:8080
 ```
 
-The examples use the Vercel AI Gateway. Ensure that your AI Gateway API key is
-set in the `AI_GATEWAY_API_KEY` environment variable.
+The examples use the OpenAI `gpt-4o` model. Ensure that the OpenAI API key is
+set in the `OPENAI_API_KEY` environment variable.
 
 **Full example**: [github.com/vercel/ai/examples/node-http-server](https://github.com/vercel/ai/tree/main/examples/node-http-server)
 
-### UI Message Stream
+### Data Stream
 
-You can use the `pipeUIMessageStreamToResponse` method to pipe the stream data to the server response.
+You can use the `pipeDataStreamToResponse` method to pipe the stream data to the server response.
 
 ```ts filename='index.ts'
-import { streamText } from "ai";
-import { createServer } from "http";
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
+import { createServer } from 'http';
 
 createServer(async (req, res) => {
   const result = streamText({
-    model: "openai/gpt-4o",
-    prompt: "Invent a new holiday and describe its traditions.",
+    model: openai('gpt-4o'),
+    prompt: 'Invent a new holiday and describe its traditions.',
   });
 
-  result.pipeUIMessageStreamToResponse(res);
+  result.pipeDataStreamToResponse(res);
 }).listen(8080);
 ```
 
 ### Sending Custom Data
 
-`createUIMessageStream` and `pipeUIMessageStreamToResponse` can be used to send custom data to the client.
+`pipeDataStreamToResponse` can be used to send custom data to the client.
 
-```ts filename='index.ts'
-import {
-  createUIMessageStream,
-  pipeUIMessageStreamToResponse,
-  streamText,
-} from "ai";
-import { createServer } from "http";
+```ts filename='index.ts' highlight="6-9,16"
+import { openai } from '@ai-sdk/openai';
+import { pipeDataStreamToResponse, streamText } from 'ai';
+import { createServer } from 'http';
 
 createServer(async (req, res) => {
-  switch (req.url) {
-    case "/stream-data": {
-      const stream = createUIMessageStream({
-        execute: ({ writer }) => {
-          // write some custom data
-          writer.write({ type: "start" });
+  // immediately start streaming the response
+  pipeDataStreamToResponse(res, {
+    execute: async dataStreamWriter => {
+      dataStreamWriter.writeData('initialized call');
 
-          writer.write({
-            type: "data-custom",
-            data: {
-              custom: "Hello, world!",
-            },
-          });
-
-          const result = streamText({
-            model: "openai/gpt-4o",
-            prompt: "Invent a new holiday and describe its traditions.",
-          });
-
-          writer.merge(
-            result.toUIMessageStream({
-              sendStart: false,
-              onError: (error) => {
-                // Error messages are masked by default for security reasons.
-                // If you want to expose the error message to the client, you can do so here:
-                return error instanceof Error ? error.message : String(error);
-              },
-            }),
-          );
-        },
+      const result = streamText({
+        model: openai('gpt-4o'),
+        prompt: 'Invent a new holiday and describe its traditions.',
       });
 
-      pipeUIMessageStreamToResponse({ stream, response: res });
-
-      break;
-    }
-  }
+      result.mergeIntoDataStream(dataStreamWriter);
+    },
+    onError: error => {
+      // Error messages are masked by default for security reasons.
+      // If you want to expose the error message to the client, you can do so here:
+      return error instanceof Error ? error.message : String(error);
+    },
+  });
 }).listen(8080);
 ```
 
@@ -91,13 +70,14 @@ createServer(async (req, res) => {
 You can send a text stream to the client using `pipeTextStreamToResponse`.
 
 ```ts filename='index.ts'
-import { streamText } from "ai";
-import { createServer } from "http";
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
+import { createServer } from 'http';
 
 createServer(async (req, res) => {
   const result = streamText({
-    model: "openai/gpt-4o",
-    prompt: "Invent a new holiday and describe its traditions.",
+    model: openai('gpt-4o'),
+    prompt: 'Invent a new holiday and describe its traditions.',
   });
 
   result.pipeTextStreamToResponse(res);

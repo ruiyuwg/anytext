@@ -2,7 +2,7 @@
 
 Create and name your bundle design.
 
-To create and name your design in the Issuing Dashboard or API before issuing cards to your cardholders, go directly to the [Designs](https://dashboard.stripe.com/test/issuing/personalization-designs) tab and click on **New design**. The standard option is always available, while the custom option becomes available after you order a custom bundle.
+To create and name your design in the Issuing Dashboard or API before issuing cards to your cardholders, go directly to the [Designs](https://dashboard.stripe.com/test/issuing/personalization-designs) tab and click **New design**. The standard option is always available, while the custom option becomes available after you order a custom bundle.
 
 # Dashboard
 

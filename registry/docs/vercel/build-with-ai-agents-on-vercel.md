@@ -53,5 +53,5 @@ These services plug into your Vercel workflows so you can build agents specific 
 
 title: "Adding a Model"
 description: "Learn how to add a new AI model to your Vercel projects"
-last\_updated: "2026-03-08T05:03:09.822Z"
+last\_updated: "2026-03-23T09:40:03.259Z"
 source: "https://vercel.com/docs/agent-resources/integrations-for-models/adding-a-model"

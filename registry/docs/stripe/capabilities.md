@@ -275,9 +275,6 @@ Available with `card_payments`                                                  
 | [Link](https://docs.stripe.com/payments/link.md)
 
 `link_payments`                                                                       | Yes                                                                                                                    | Yes                                                                                                                    | No                                         | Connected account must be in a [supported country](https://docs.stripe.com/payments/link.md).                                               | Yes                                             |
-| Meta Pay
-
-`meta_pay_payments`                                                                                                           | No                                                                                                                     | No                                                                                                                     | No                                         | Connected account must be in the US.                                                                                                        | No                                              |
 | [MobilePay](https://docs.stripe.com/payments/mobilepay.md)
 
 `mobilepay_payments`                                                        | Yes                                                                                                                    | No, see [prohibited businesses](https://docs.stripe.com/payments/mobilepay.md#prohibited-business-categories).         | No                                         | Connected account must be in a [supported country](https://docs.stripe.com/payments/mobilepay.md).                                          | Yes                                             |

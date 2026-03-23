@@ -31,7 +31,7 @@ To refund a payment using the Dashboard:
 3. By default, you’ll issue a full refund. For a partial refund, enter a different refund amount.
 4. Select a reason for the refund. If you select **Other**, you must add a note that explains the reason for the refund. Click **Refund**.
 
-Alternatively, you can click on a specific payment and issue a refund from its details page. You can also send [refund receipts](https://docs.stripe.com/receipts.md#refund-receipts) automatically or manually send a receipt for each refund.
+Alternatively, you can click a specific payment and issue a refund from its details page. You can also send [refund receipts](https://docs.stripe.com/receipts.md#refund-receipts) automatically or manually send a receipt for each refund.
 
 > #### Bulk refunds
 >
@@ -123,8 +123,6 @@ Canceled refunds transition to a `canceled` status. As cancellations are a type 
 
 If your platform uses [Connect with destination charges](https://docs.stripe.com/connect/destination-charges.md#issue-refunds), funds from a canceled refund deposit to your platform account’s Stripe balance.
 
-#### Dashboard
-
 To cancel a refund using the Dashboard:
 
 1. Find the payment associated with the refund in the [Payments](https://dashboard.stripe.com/payments) page.
@@ -133,15 +131,6 @@ To cancel a refund using the Dashboard:
 4. Confirm the refund cancellation by selecting **Yes, cancel refund**.
 
 Alternatively, you can click a specific payment and cancel the refund from its details page.
-
-#### API
-
-To cancel a refund using the API, [cancel a refund](https://docs.stripe.com/api/refunds/cancel.md) by providing the refund’s ID.
-
-```curl
-curl -X POST https://api.stripe.com/v1/refunds/re_Aabcxyz01aDfoo/cancel \
-  -u "<<YOUR_SECRET_KEY>>:"
-```
 
 ## Refund and reversal
 
@@ -233,8 +222,8 @@ You can cancel a payment using the Dashboard only when its status is `uncaptured
 To cancel uncaptured payments using the Dashboard:
 
 1. Find the payment you want to cancel in the [Payments](https://dashboard.stripe.com/payments) page.
-2. Click the overflow menu (⋯) to the right of the payment, then select **Cancel payment**.
-3. Select a reason for canceling, and click **Yes**. If you select **Other**, you must add a note that explains the reason for canceling the payment.
+2. Click the payment, then select **Cancel**.
+3. Select a reason for canceling, then click **Yes**. If you select **Other**, you must add a note that explains the reason for canceling the payment.
 
 #### API
 

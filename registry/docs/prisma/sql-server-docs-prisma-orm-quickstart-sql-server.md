@@ -47,24 +47,24 @@ npx tsc --init
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+pnpm init -y
+pnpm add typescript tsx @types/node --save-dev
 pnpm dlx tsc --init
 ```
 
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+yarn init -y
+yarn add typescript tsx @types/node --dev
 yarn dlx tsc --init
 ```
 
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+bun init -y
+bun add typescript tsx @types/node --dev
 bun x tsc --init
 ```
 ````
@@ -277,12 +277,12 @@ datasource db {
 
 Update your `.env` file with your SQL Server connection string details:
 
-```text title=".env"
+```bash title=".env"
 DATABASE_URL="sqlserver://localhost:1433;database=mydb;user=username;password=password;encrypt=true"
-DB_USER="username" // [!code ++]
-DB_PASSWORD="password" // [!code ++]
-DB_NAME="mydb" // [!code ++]
-HOST="localhost" // [!code ++]
+DB_USER="username" # [!code ++]
+DB_PASSWORD="password" # [!code ++]
+DB_NAME="mydb" # [!code ++]
+HOST="localhost" # [!code ++]
 ```
 
 Replace the placeholders with your actual database credentials:

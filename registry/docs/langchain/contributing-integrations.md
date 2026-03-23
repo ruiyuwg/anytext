@@ -23,9 +23,10 @@ While any component can be integrated into LangChain, there are specific types o
 - [**Chat Models**](/oss/javascript/integrations/chat): Most actively used component type
 - [**Tools/Toolkits**](/oss/javascript/integrations/tools): Enable agent capabilities
 - [**Retrievers**](/oss/javascript/integrations/retrievers): Core to RAG applications
-- [**Embedding Models**](/oss/javascript/integrations/text_embedding): Foundation for vector operations
+- [**Embedding Models**](/oss/javascript/integrations/embeddings): Foundation for vector operations
 - [**Vector Stores**](/oss/javascript/integrations/vectorstores): Essential for semantic search
-- [**Sandboxes**](/oss/javascript/deepagents/sandboxes): Run code safely with deep agents
+- [**Middleware**](/oss/javascript/integrations/middleware): Extend agent behavior with hooks
+- [**Sandboxes**](/oss/javascript/deepagents/sandboxes): Run code safely with Deep Agents
 
   Be aware that we feature third-party sandbox integrations only when:
 

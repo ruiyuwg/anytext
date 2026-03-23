@@ -54,14 +54,14 @@ Once the steps are complete and you've added the secret, you're all set. If you 
 
 #### Common commands
 
-[Init](https://www.sanity.io/docs/cli-reference/init)
+[Init CLI command reference](https://www.sanity.io/docs/cli-reference/init)
 
-[Dev](https://www.sanity.io/docs/cli-reference/dev)
+[Dev CLI command reference](https://www.sanity.io/docs/cli-reference/dev)
 
-[Docs](https://www.sanity.io/docs/cli-reference/docs)
+[Docs CLI command reference](https://www.sanity.io/docs/cli-reference/docs)
 
-[Deploy](https://www.sanity.io/docs/cli-reference/deploy)
+[Deploy CLI command reference](https://www.sanity.io/docs/cli-reference/deploy)
 
-[TypeGen](https://www.sanity.io/docs/cli-reference/cli-typegen)
+[TypeGen CLI command reference](https://www.sanity.io/docs/cli-reference/cli-typegen)
 
-[Schema](https://www.sanity.io/docs/cli-reference/cli-schema)
+[Schema CLI command reference](https://www.sanity.io/docs/cli-reference/cli-schema)

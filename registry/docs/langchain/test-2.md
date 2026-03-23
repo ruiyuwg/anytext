@@ -1,17 +1,17 @@
 # Test
 
-Source: https://docs.langchain.com/oss/javascript/langgraph/test
+Source: https://docs.langchain.com/oss/python/langgraph/test
 
 After you've prototyped your LangGraph agent, a natural next step is to add tests. This guide covers some useful patterns you can use when writing unit tests.
 
-Note that this guide is LangGraph-specific and covers scenarios around graphs with custom structures - if you are just getting started, check out [this section](/oss/javascript/langchain/test/) that uses LangChain's built-in [`createAgent`](https://reference.langchain.com/javascript/langchain/index/createAgent) instead.
+Note that this guide is LangGraph-specific and covers scenarios around graphs with custom structures - if you are just getting started, check out [Test](/oss/python/langchain/test/) that uses LangChain's built-in [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) instead.
 
 ## Prerequisites
 
-First, make sure you have [`vitest`](https://vitest.dev/) installed:
+First, make sure you have [`pytest`](https://docs.pytest.org/) installed:
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-$ npm install -D vitest
+$ pip install -U pytest
 ```
 
 ## Getting started
@@ -20,147 +20,131 @@ Because many LangGraph agents depend on state, a useful pattern is to create you
 
 The below example shows how this works with a simple, linear graph that progresses through `node1` and `node2`. Each node updates the single state key `my_key`:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { test, expect } from 'vitest';
-import {
-  StateGraph,
-  StateSchema,
-  START,
-  END,
-  MemorySaver,
-} from '@langchain/langgraph';
-import * as z from "zod";
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import pytest
 
-const State = new StateSchema({
-  my_key: z.string(),
-});
+from typing_extensions import TypedDict
+from langgraph.graph import StateGraph, START, END
+from langgraph.checkpoint.memory import MemorySaver
 
-const createGraph = () => {
-  return new StateGraph(State)
-    .addNode('node1', (state) => ({ my_key: 'hello from node1' }))
-    .addNode('node2', (state) => ({ my_key: 'hello from node2' }))
-    .addEdge(START, 'node1')
-    .addEdge('node1', 'node2')
-    .addEdge('node2', END);
-};
+def create_graph() -> StateGraph:
+    class MyState(TypedDict):
+        my_key: str
 
-test('basic agent execution', async () => {
-  const uncompiledGraph = createGraph();
-  const checkpointer = new MemorySaver();
-  const compiledGraph = uncompiledGraph.compile({ checkpointer });
-  const result = await compiledGraph.invoke(
-    { my_key: 'initial_value' },
-    { configurable: { thread_id: '1' } }
-  );
-  expect(result.my_key).toBe('hello from node2');
-});
+    graph = StateGraph(MyState)
+    graph.add_node("node1", lambda state: {"my_key": "hello from node1"})
+    graph.add_node("node2", lambda state: {"my_key": "hello from node2"})
+    graph.add_edge(START, "node1")
+    graph.add_edge("node1", "node2")
+    graph.add_edge("node2", END)
+    return graph
+
+def test_basic_agent_execution() -> None:
+    checkpointer = MemorySaver()
+    graph = create_graph()
+    compiled_graph = graph.compile(checkpointer=checkpointer)
+    result = compiled_graph.invoke(
+        {"my_key": "initial_value"},
+        config={"configurable": {"thread_id": "1"}}
+    )
+    assert result["my_key"] == "hello from node2"
 ```
 
 ## Testing individual nodes and edges
 
 Compiled LangGraph agents expose references to each individual node as `graph.nodes`. You can take advantage of this to test individual nodes within your agent. Note that this will bypass any checkpointers passed when compiling the graph:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { test, expect } from 'vitest';
-import {
-  StateGraph,
-  START,
-  END,
-  MemorySaver,
-  StateSchema,
-} from '@langchain/langgraph';
-import * as z from "zod";
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import pytest
 
-const State = new StateSchema({
-  my_key: z.string(),
-});
+from typing_extensions import TypedDict
+from langgraph.graph import StateGraph, START, END
+from langgraph.checkpoint.memory import MemorySaver
 
-const createGraph = () => {
-  return new StateGraph(State)
-    .addNode('node1', (state) => ({ my_key: 'hello from node1' }))
-    .addNode('node2', (state) => ({ my_key: 'hello from node2' }))
-    .addEdge(START, 'node1')
-    .addEdge('node1', 'node2')
-    .addEdge('node2', END);
-};
+def create_graph() -> StateGraph:
+    class MyState(TypedDict):
+        my_key: str
 
-test('individual node execution', async () => {
-  const uncompiledGraph = createGraph();
-  // Will be ignored in this example
-  const checkpointer = new MemorySaver();
-  const compiledGraph = uncompiledGraph.compile({ checkpointer });
-  // Only invoke node 1
-  const result = await compiledGraph.nodes['node1'].invoke(
-    { my_key: 'initial_value' },
-  );
-  expect(result.my_key).toBe('hello from node1');
-});
+    graph = StateGraph(MyState)
+    graph.add_node("node1", lambda state: {"my_key": "hello from node1"})
+    graph.add_node("node2", lambda state: {"my_key": "hello from node2"})
+    graph.add_edge(START, "node1")
+    graph.add_edge("node1", "node2")
+    graph.add_edge("node2", END)
+    return graph
+
+def test_individual_node_execution() -> None:
+    # Will be ignored in this example
+    checkpointer = MemorySaver()
+    graph = create_graph()
+    compiled_graph = graph.compile(checkpointer=checkpointer)
+    # Only invoke node 1
+    result = compiled_graph.nodes["node1"].invoke(
+        {"my_key": "initial_value"},
+    )
+    assert result["my_key"] == "hello from node1"
 ```
 
 ## Partial execution
 
-For agents made up of larger graphs, you may wish to test partial execution paths within your agent rather than the entire flow end-to-end. In some cases, it may make semantic sense to [restructure these sections as subgraphs](/oss/javascript/langgraph/use-subgraphs), which you can invoke in isolation as normal.
+For agents made up of larger graphs, you may wish to test partial execution paths within your agent rather than the entire flow end-to-end. In some cases, it may make semantic sense to [restructure these sections as subgraphs](/oss/python/langgraph/use-subgraphs), which you can invoke in isolation as normal.
 
 However, if you do not wish to make changes to your agent graph's overall structure, you can use LangGraph's persistence mechanisms to simulate a state where your agent is paused right before the beginning of the desired section, and will pause again at the end of the desired section. The steps are as follows:
 
-1. Compile your agent with a checkpointer (the in-memory checkpointer [`MemorySaver`](https://reference.langchain.com/javascript/classes/_langchain_langgraph-checkpoint.MemorySaver.html) will suffice for testing).
-2. Call your agent's [`update_state`](/oss/javascript/langgraph/use-time-travel) method with an [`asNode`](/oss/javascript/langgraph/persistence#as-node) parameter set to the name of the node *before* the one you want to start your test.
-3. Invoke your agent with the same `thread_id` you used to update the state and an `interruptBefore` parameter set to the name of the node you want to stop at.
+1. Compile your agent with a checkpointer (the in-memory checkpointer [`InMemorySaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.memory.InMemorySaver) will suffice for testing).
+2. Call your agent's [`update_state`](/oss/python/langgraph/use-time-travel) method with an [`as_node`](/oss/python/langgraph/use-time-travel#from-a-specific-node) parameter set to the name of the node *before* the one you want to start your test.
+3. Invoke your agent with the same `thread_id` you used to update the state and an `interrupt_after` parameter set to the name of the node you want to stop at.
 
 Here's an example that executes only the second and third nodes in a linear graph:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { test, expect } from 'vitest';
-import {
-  StateGraph,
-  StateSchema,
-  START,
-  END,
-  MemorySaver,
-} from '@langchain/langgraph';
-import * as z from "zod";
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import pytest
 
-const State = new StateSchema({
-  my_key: z.string(),
-});
+from typing_extensions import TypedDict
+from langgraph.graph import StateGraph, START, END
+from langgraph.checkpoint.memory import MemorySaver
 
-const createGraph = () => {
-  return new StateGraph(State)
-    .addNode('node1', (state) => ({ my_key: 'hello from node1' }))
-    .addNode('node2', (state) => ({ my_key: 'hello from node2' }))
-    .addNode('node3', (state) => ({ my_key: 'hello from node3' }))
-    .addNode('node4', (state) => ({ my_key: 'hello from node4' }))
-    .addEdge(START, 'node1')
-    .addEdge('node1', 'node2')
-    .addEdge('node2', 'node3')
-    .addEdge('node3', 'node4')
-    .addEdge('node4', END);
-};
+def create_graph() -> StateGraph:
+    class MyState(TypedDict):
+        my_key: str
 
-test('partial execution from node2 to node3', async () => {
-  const uncompiledGraph = createGraph();
-  const checkpointer = new MemorySaver();
-  const compiledGraph = uncompiledGraph.compile({ checkpointer });
-  await compiledGraph.updateState(
-    { configurable: { thread_id: '1' } },
-    // The state passed into node 2 - simulating the state at
-    // the end of node 1
-    { my_key: 'initial_value' },
-    // Update saved state as if it came from node 1
-    // Execution will resume at node 2
-    'node1',
-  );
-  const result = await compiledGraph.invoke(
-    // Resume execution by passing None
-    null,
-    {
-      configurable: { thread_id: '1' },
-      // Stop after node 3 so that node 4 doesn't run
-      interruptAfter: ['node3']
-    },
-  );
-  expect(result.my_key).toBe('hello from node3');
-});
+    graph = StateGraph(MyState)
+    graph.add_node("node1", lambda state: {"my_key": "hello from node1"})
+    graph.add_node("node2", lambda state: {"my_key": "hello from node2"})
+    graph.add_node("node3", lambda state: {"my_key": "hello from node3"})
+    graph.add_node("node4", lambda state: {"my_key": "hello from node4"})
+    graph.add_edge(START, "node1")
+    graph.add_edge("node1", "node2")
+    graph.add_edge("node2", "node3")
+    graph.add_edge("node3", "node4")
+    graph.add_edge("node4", END)
+    return graph
+
+def test_partial_execution_from_node2_to_node3() -> None:
+    checkpointer = MemorySaver()
+    graph = create_graph()
+    compiled_graph = graph.compile(checkpointer=checkpointer)
+    compiled_graph.update_state(
+        config={
+          "configurable": {
+            "thread_id": "1"
+          }
+        },
+        # The state passed into node 2 - simulating the state at
+        # the end of node 1
+        values={"my_key": "initial_value"},
+        # Update saved state as if it came from node 1
+        # Execution will resume at node 2
+        as_node="node1",
+    )
+    result = compiled_graph.invoke(
+        # Resume execution by passing None
+        None,
+        config={"configurable": {"thread_id": "1"}},
+        # Stop after node 3 so that node 4 doesn't run
+        interrupt_after="node3",
+    )
+    assert result["my_key"] == "hello from node3"
 ```
 
 ***

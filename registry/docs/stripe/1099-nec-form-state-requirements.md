@@ -74,8 +74,9 @@ Stripe supports filing in all states that require 1099-NEC filing and don’t ha
 
 ### 1099-NEC FILING REQUIRED
 
+|  |
+|  |
 | State Portal         | Stripe submits the forms directly to these states. An additional state filing fee of 1.49 USD applies per 1099-NEC form filed directly with state revenue authorities.                                                                                                                                                                                                                                                                                                                                            |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | CFSF                 | States listed as CFSF are part of the Combined Federal / State Filing (CFSF) program. Forms filed to the IRS are automatically forwarded to the state, eliminating separate reporting to the participating states. If forms have already been filed with the IRS, you won’t be charged an additional state filing fee for filing in these states.
 
 Some states still require direct filing with the state, even though they participate in the CFSF program. Stripe submits the forms directly to these states. |

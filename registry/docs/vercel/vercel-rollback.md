@@ -8,13 +8,14 @@ The `vercel rollback` command is used to [roll back production deployments](/doc
 vercel rollback [deployment-id or url]
 ```
 
-*Using vercel rollback rolls back to a previous
+*Using \`vercel rollback\` rolls back to a previous
 deployment.*
 
 > **💡 Note:** On the hobby plan, you can only [roll
 > back](/docs/instant-rollback#who-can-roll-back-deployments) to the previous
 > production deployment. If you attempt to pass in a deployment id or url from
-> an earlier deployment, you will be given an error:.
+> an earlier deployment, you will be given an error:
+> `To roll back further than the previous production deployment, upgrade to pro`.
 
 ## Commands
 
@@ -26,7 +27,7 @@ Show the status of any current pending rollbacks.
 vercel rollback status [project]
 ```
 
-*Using vercel rollback status to check the status of
+*Using \`vercel rollback status\` to check the status of
 pending rollbacks.*
 
 **Examples:**
@@ -56,8 +57,8 @@ When rolling back a deployment, a timeout of `0` will immediately exit after req
 vercel rollback https://example-app-6vd6bhoqt.vercel.app
 ```
 
-*Using the vercel rollback command to the
-https://example-app-6vd6bhoqt.vercel.app deployment.*
+*Using the \`vercel rollback\` command to the
+\`https://example-app-6vd6bhoqt.vercel.app\` deployment.*
 
 ## Undo a rollback
 
@@ -71,7 +72,7 @@ This promotes the specified deployment to production and re-enables auto-assignm
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -86,5 +87,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel rolling-release"
 description: "Learn how to manage your project"
-last\_updated: "2026-03-08T05:03:12.396Z"
+last\_updated: "2026-03-23T09:40:07.050Z"
 source: "https://vercel.com/docs/cli/rolling-release"

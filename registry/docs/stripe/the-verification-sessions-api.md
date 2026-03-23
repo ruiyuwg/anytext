@@ -39,8 +39,8 @@ This example shows how to create the server endpoint that serves the client secr
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -134,7 +134,7 @@ If you want your user to attempt verification again, you’ll need to [Retrieve 
 
 Learn how to [access sensitive verification results](https://docs.stripe.com/identity/access-verification-results.md)
 
-## Cancelling a VerificationSession
+## Canceling a VerificationSession
 
 You can cancel a VerificationSession at any point before it’s `processing` or `verified`. This invalidates the VerificationSession for future submission attempts, and can’t be undone. The session will have a `canceled` status.
 
@@ -145,14 +145,14 @@ curl -X POST https://api.stripe.com/v1/identity/verification_sessions/{{IDENTITY
 
 ## Redacting a VerificationSession
 
-One of the reasons that you might want to redact a verification session is if you receive a data deletion request from your user. You can redact a session to ensure collected information is no longer returned by the Stripe API or visible in Dashboard. You can still [retrieve](https://docs.stripe.com/api/identity/verification_sessions/retrieve.md) redacted sessions with the API but you can’t update them. Sessions can be redacted from the Dashboard or through the API:
+One reason that you might want to redact a verification session is if you receive a data deletion request from your user. You can redact a session to make sure Stripe deletes personal information. After we delete the personal information, it’s no longer returned by the Stripe API or visible in the Dashboard. You can still [retrieve](https://docs.stripe.com/api/identity/verification_sessions/retrieve.md) redacted sessions with the API, but you can’t update them. You can redact sessions in the Dashboard or with the API:
 
 ```curl
 curl -X POST https://api.stripe.com/v1/identity/verification_sessions/{{IDENTITYVERIFICATIONSESSION_ID}}/redact \
   -u "<<YOUR_SECRET_KEY>>:"
 ```
 
-Redacted sessions show placeholder values for all fields that previously contained personally identifiable information (PII). The session includes a [redaction.status](https://docs.stripe.com/api/identity/verification_sessions/object.md#identity_verification_session_object-redaction-status) field indicating the status of the redaction process. An [identity.verification\_session.redacted](https://docs.stripe.com/api/events/types.md#event_types-identity.verification_session.redacted) webhook will be sent when the session is redacted. Please note redaction can take up to 4 days.
+Redacted sessions have placeholder values in all fields that previously contained personally identifiable information (PII). The session includes a [redaction.status](https://docs.stripe.com/api/identity/verification_sessions/object.md#identity_verification_session_object-redaction-status) field indicating the status of the redaction process. We send an [identity.verification\_session.redacted](https://docs.stripe.com/api/events/types.md#event_types-identity.verification_session.redacted) webhook when the session is redacted. Redaction can take up to 4 days.
 
 If a VerificationSession that has been redacted is retrieved with PII fields expanded, then these fields will still appear in the response but their values won’t contain any PII. For example, here is a response that has expanded the `verified_outputs` and `verified_outputs.dob` fields on a redacted VerificationSession.
 
@@ -193,7 +193,7 @@ If a VerificationSession that has been redacted is retrieved with PII fields exp
 }
 ```
 
-Any [VerificationReports](https://docs.stripe.com/api/identity/verification_reports.md), [Events](https://docs.stripe.com/api/events.md), and [Request Logs](https://dashboard.stripe.com/logs) associated with the VerificationSession are also redacted and [File](https://docs.stripe.com/api/files.md) contents are no longer downloadable.
+We redact any [VerificationReports](https://docs.stripe.com/api/identity/verification_reports.md), [Events](https://docs.stripe.com/api/events.md), and [Request Logs](https://dashboard.stripe.com/logs) associated with the `VerificationSession`. After we delete the [File](https://docs.stripe.com/api/files.md) contents, you can no longer download them.
 
 If the VerificationSession is in the `processing` state you must wait until it finishes before redacting it. Redacting a VerificationSession with `requires_action` status automatically cancels it.
 

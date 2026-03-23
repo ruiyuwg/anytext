@@ -96,5 +96,5 @@ For more details, see the [OpenAI reasoning docs](https://developers.openai.com/
 
 title: "Reasoning"
 description: "Enable reasoning and extended thinking across providers with the AI SDK and AI Gateway."
-last\_updated: "2026-03-08T05:03:10.200Z"
+last\_updated: "2026-03-23T09:40:03.954Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/reasoning"

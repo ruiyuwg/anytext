@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/api/dynamic-import
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 Deno Deploy Classic supports [dynamic import] but with some limitations. This
 page outlines these limitations.

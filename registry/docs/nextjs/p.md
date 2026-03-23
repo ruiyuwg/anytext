@@ -14,7 +14,7 @@ A pattern that allows simultaneously or conditionally rendering multiple pages w
 
 ## Partial Prerendering (PPR)
 
-A rendering optimization that combines static and dynamic rendering in a single route. The static shell is served immediately while dynamic content streams in when ready, providing the best of both rendering strategies. Learn more in [Cache Components](/docs/app/getting-started/cache-components).
+A rendering optimization that combines prerendering and dynamic rendering in a single route. The static shell is served immediately while dynamic content streams in when ready, providing the best of both rendering strategies. Learn more in [Cache Components](/docs/app/getting-started/caching).
 
 ## Prefetching
 

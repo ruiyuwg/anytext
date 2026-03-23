@@ -4,21 +4,55 @@ Reference project: https://github.com/trpc/examples-next-prisma-todomvc
 
 Static site generation requires executing tRPC queries inside `getStaticProps` on each page.
 
-This can be done using [server-side helpers](/docs/client/nextjs/server-side-helpers) to prefetch the queries, dehydrate them, and pass it to the page. The queries will then automatically pick up the `trpcState` and use it as an initial value.
+This can be done using [server-side helpers](/docs/client/nextjs/pages-router/server-side-helpers) to prefetch the queries, dehydrate them, and pass it to the page. The queries will then automatically pick up the `trpcState` and use it as an initial value.
 
 ## Fetch data in `getStaticProps`
 
-```tsx title='pages/posts/[id].tsx'
-import { createServerSideHelpers } from "@trpc/react-query/server";
-import { prisma } from "~/server/context";
-import { appRouter } from "~/server/routers/_app";
-import { trpc } from "~/utils/trpc";
+```tsx twoslash title='pages/posts/[id].tsx'
+// @jsx: react-jsx
+// @filename: server/context.ts
+export declare const prisma: {
+  post: {
+    findMany: (opts: { select: { id: true } }) => Promise<{ id: string }[]>;
+  };
+};
+
+// @filename: server/routers/_app.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+import superjson from 'superjson';
+const t = initTRPC.create({ transformer: superjson });
+export const appRouter = t.router({
+  post: t.router({
+    byId: t.procedure
+      .input(z.object({ id: z.string() }))
+      .query(() => ({
+        id: '1',
+        title: 'Example Post',
+        text: 'Hello world',
+        createdAt: new Date(),
+      })),
+  }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.tsx
+import { createTRPCReact } from '@trpc/react-query';
+import type { AppRouter } from '../server/routers/_app';
+export const trpc = createTRPCReact<AppRouter>();
+
+// @filename: page.tsx
+// ---cut---
+import { createServerSideHelpers } from '@trpc/react-query/server';
+import { prisma } from './server/context';
+import { appRouter } from './server/routers/_app';
+import { trpc } from './utils/trpc';
 import {
   GetStaticPaths,
   GetStaticPropsContext,
   InferGetStaticPropsType,
-} from "next";
-import superjson from "superjson";
+} from 'next';
+import superjson from 'superjson';
 
 export async function getStaticProps(
   context: GetStaticPropsContext<{ id: string }>,
@@ -56,7 +90,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       },
     })),
     // https://nextjs.org/docs/pages/api-reference/functions/get-static-paths#fallback-blocking
-    fallback: "blocking",
+    fallback: 'blocking',
   };
 };
 
@@ -66,7 +100,7 @@ export default function PostViewPage(
   const { id } = props;
   const postQuery = trpc.post.byId.useQuery({ id });
 
-  if (postQuery.status !== "success") {
+  if (postQuery.status !== 'success') {
     // won't happen since we're using `fallback: "blocking"`
     return <>Loading...</>;
   }
@@ -74,7 +108,7 @@ export default function PostViewPage(
   return (
     <>
       <h1>{data.title}</h1>
-      <em>Created {data.createdAt.toLocaleDateString("en-us")}</em>
+      <em>Created {data.createdAt.toLocaleDateString('en-us')}</em>
 
       <p>{data.text}</p>
 
@@ -85,13 +119,30 @@ export default function PostViewPage(
 }
 ```
 
-Note that the default behaviour of `react-query` is to refetch the data on the client-side when it mounts, so if you want to _only_ fetch the data via `getStaticProps`, you need to set `refetchOnMount` and `refetchOnWindowFocus` to `false` in the query options.
+Note that the default behaviour of `react-query` is to refetch the data on the client-side when it mounts, so if you want to *only* fetch the data via `getStaticProps`, you need to set `refetchOnMount` and `refetchOnWindowFocus` to `false` in the query options.
 
 This might be preferable if you want to minimize the number of requests to your API, which might be necessary if you're using a third-party rate-limited API for example.
 
 This can be done per query:
 
-```tsx
+```tsx twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+const appRouter = t.router({
+  example: t.procedure.query(() => 'hello'),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.tsx
+import { createTRPCReact } from '@trpc/react-query';
+import type { AppRouter } from '../server';
+export const trpc = createTRPCReact<AppRouter>();
+
+// @filename: component.tsx
+// ---cut---
+import { trpc } from './utils/trpc';
+
 const data = trpc.example.useQuery(
   // if your query takes no input, make sure that you don't
   // accidentally pass the query options as the first argument
@@ -102,7 +153,16 @@ const data = trpc.example.useQuery(
 
 Or globally, if every query across your app should behave the same way:
 
-```tsx title='utils/trpc.ts'
+```tsx twoslash title='utils/trpc.ts'
+// @filename: utils/api/trpc/[trpc].ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.ts
+declare function getBaseUrl(): string;
+// ---cut---
 import { httpBatchLink } from '@trpc/client';
 import { createTRPCNext } from '@trpc/next';
 import superjson from 'superjson';
@@ -124,7 +184,7 @@ export const trpc = createTRPCNext<AppRouter>({
           },
         },
       },
-    },
+    };
   },
 });
 ```

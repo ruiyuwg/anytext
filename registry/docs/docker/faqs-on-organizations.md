@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -28,7 +26,7 @@ Table of contents
 
 If your organization uses a Software Asset Management tool, you can use it to find out how many users have Docker Desktop installed. If your organization doesn't use this software, you can run an internal survey to find out who is using Docker Desktop.
 
-For more information, see [Identify your Docker users and their Docker accounts](https://docs.docker.com/admin/organization/onboard/#step-1-identify-your-docker-users-and-their-docker-accounts).
+For more information, see [Identify your Docker users and their Docker accounts](https://docs.docker.com/admin/organization/onboard/#step-one-identify-your-docker-users).
 
 ### [Do users need to authenticate with Docker before an owner can add them to an organization?](#do-users-need-to-authenticate-with-docker-before-an-owner-can-add-them-to-an-organization)
 
@@ -40,8 +38,9 @@ Yes. You can [enforce sign-in](https://docs.docker.com/enterprise/security/enfor
 
 Some benefits of enforcing sign-in are:
 
-- Administrators can enforce features like [Image Access Management](https://docs.docker.com/enterprise/security/hardened-desktop/image-access-management/) and [Registry Access Management](https://docs.docker.com/enterprise/security/hardened-desktop/registry-access-management/).
-- Administrators can ensure compliance by blocking Docker Desktop usage for users who don't sign in as members of the organization.
+- Ensures users receive the benefits of your subscription.
+- Ensures security features like [Image Access Management](https://docs.docker.com/enterprise/security/hardened-desktop/image-access-management/) and [Registry Access Management](https://docs.docker.com/enterprise/security/hardened-desktop/registry-access-management/) are applied.
+- Ensures you gain insights into users' activity.
 
 ### [Can I convert my personal Docker ID to an organization account?](#can-i-convert-my-personal-docker-id-to-an-organization-account)
 

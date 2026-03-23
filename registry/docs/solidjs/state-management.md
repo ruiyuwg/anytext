@@ -114,11 +114,11 @@ Derived values can be created using a signal within a function, which can be ref
 This approach can be used to simplify the `doubleCount` example above, where the additional signal and effect can be replaced with a derived signal:
 
 ```
-import { createSignal } from "solid-js"
+import { createSignal } from "solid-js";
 function Counter() {  const [count, setCount] = createSignal(0);  const [doubleCount, setDoubleCount] = createSignal(0);
   const increment = () => {    setCount((prev) => prev + 1);  };
   createEffect(() => {    setDoubleCount(count() * 2); // Update doubleCount whenever count changes  });
-  const doubleCount = () => count() * 2
+  const doubleCount = () => count() * 2;
   return (    <>      <div>Current count: {count()}</div>      <div>Doubled count: {doubleCount()}</div>      <button onClick={increment}>Increment</button>    </>  );}
 ```
 
@@ -127,11 +127,11 @@ While this approach works for simple use cases, if `doubleCount` is used several
 The derived signal would be re-evaluated not just each time `count` is changed, but also for each use of `doubleCount()`.
 
 ```
-import { createSignal } from "solid-js"
-function Counter() {  const [count, setCount] = createSignal(0)
-  const increment = () => {    setCount(count() + 1)  }
-  const doubleCount = () => count() * 2  const doubleCount = () => {    console.log('doubleCount called')    return count() * 2  }
-  return (    <>      <div>Current count: {count()}</div>      <div>Doubled count: {doubleCount()}</div>      <div>Doubled count: {doubleCount()}</div>      <div>Doubled count: {doubleCount()}</div>      <button onClick={increment}>Increment</button>    </>  )}
+import { createSignal } from "solid-js";
+function Counter() {  const [count, setCount] = createSignal(0);
+  const increment = () => {    setCount(count() + 1);  };
+  const doubleCount = () => count() * 2;  const doubleCount = () => {    console.log("doubleCount called");    return count() * 2;  };
+  return (    <>      <div>Current count: {count()}</div>      <div>Doubled count: {doubleCount()}</div>      <div>Doubled count: {doubleCount()}</div>      <div>Doubled count: {doubleCount()}</div>      <button onClick={increment}>Increment</button>    </>  );}
 ```
 
 ```
@@ -143,11 +143,11 @@ For cases like this, you can use [Memos](/concepts/derived-values/memos) to stor
 Using the [`createMemo`](/reference/basic-reactivity/create-memo) function, you can create a memoized value:
 
 ```
-import { createSignal, createMemo } from "solid-js"
-function Counter() {  const [count, setCount] = createSignal(0)
+import { createSignal, createMemo } from "solid-js";
+function Counter() {  const [count, setCount] = createSignal(0);
   const increment = () => {    setCount((prev) => prev + 1);  };
-  const doubleCount = () => {    console.log('doubleCount called')    return count() * 2  }
-  const doubleCountMemo = createMemo(() => {    console.log('doubleCountMemo called')    return count() * 2  })
+  const doubleCount = () => {    console.log("doubleCount called");    return count() * 2;  };
+  const doubleCountMemo = createMemo(() => {    console.log("doubleCountMemo called");    return count() * 2;  });
   return (    <>      <div>Current count: {count()}</div>      <div>Doubled count: {doubleCount()}</div>      <div>Doubled count: {doubleCount()}</div>      <div>Doubled count: {doubleCount()}</div>      <div>Doubled count: {doubleCountMemo()}</div>      <div>Doubled count: {doubleCountMemo()}</div>      <div>Doubled count: {doubleCountMemo()}</div>      <button onClick={increment}>Increment</button>    </>  );}
 ```
 

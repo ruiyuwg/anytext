@@ -12,7 +12,7 @@ LangGraph exposes a [`Runtime`](https://reference.langchain.com/javascript/langc
 2. **Store**: a [BaseStore](https://reference.langchain.com/javascript/langchain-core/stores/BaseStore) instance used for [long-term memory](/oss/javascript/langchain/long-term-memory)
 3. **Stream writer**: an object used for streaming information via the `"custom"` stream mode
 
-The runtime context is how you thread data through your agent. Rather than storing things in global state, you can attach values — like a database connection, user session, or configuration — to the context and access them inside tools and middleware. This keeps things stateless, testable, and reusable.
+The runtime context is how you thread data through your agent. Rather than storing things in global state, you can attach values—like a database connection, user session, or configuration—to the context and access them inside tools and middleware. This keeps things stateless, testable, and reusable.
 
 You can access the runtime information within [tools](#inside-tools) and [middleware](#inside-middleware).
 

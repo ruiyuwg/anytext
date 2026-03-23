@@ -8,22 +8,8 @@ The `blueprints` CLI command enables initializing, managing, and deploying Bluep
 
 **CLI output**
 
-```text
-usage: npx sanity blueprints [--default] [-v|--version] [-d|--debug] [-h|--help] <command> [<args>]
-
-Commands:
-   add     Add a Resource to a Blueprint
-   config  View or edit local Blueprints configuration
-   deploy  Deploy a Blueprint to create or update a Stack
-   destroy Destroy a Blueprint to undeploy the Stack
-   doctor   Check the health of a Blueprint project
-   info    Retrieve information about a Blueprint Stack
-   init    Initialize a new Blueprint manifest file
-   logs    Display logs for the current Blueprint Stack
-   plan    Enumerate Resources to be deployed
-   stacks  List all Blueprint Stacks for the current Project
-
-See 'npx sanity help blueprints <command>' for specific information on a subcommand.
+```sh
+npx sanity blueprints --help
 ```
 
 ## Commands
@@ -32,116 +18,126 @@ See 'npx sanity help blueprints <command>' for specific information on a subcomm
 
 **CLI output**
 
-```text
-usage: npx sanity blueprints add <type> [--name <name>] [--fn-type <document-publish>] [--fn-lang <ts|js>] [--javascript]
+```sh
+USAGE
+  $ sanity blueprints add TYPE [--install] [-n <value>] [--example <value>] [--fn-helpers] [--fn-installer <value>] [--fn-type <value>] [--javascript] [--language <value>]
 
-   Add a Resource to a Blueprint
+ARGUMENTS
+  TYPE  Type of resource to add (only "function" is supported)
 
-Arguments
-  <type>  Type of Resource to add (currently only 'function' is supported)
+FLAGS
+  -i, --install               Shortcut for --fn-installer npm
+  -n, --name=<value>          Name of the resource to add
+      --example=<value>       Example to use for the function resource. Discover examples at https://www.sanity.io/exchange/type=recipes/by=sanity
+      --fn-helpers            Add helpers to the new function
+      --fn-installer=<value>  Which package manager to use when installing the @sanity/functions helpers
+      --fn-type=<value>       Document change event(s) that should trigger the function; you can specify multiple events by specifying this flag multiple times
+      --javascript            Use JavaScript instead of TypeScript
+      --language=<value>      Language of the new function
 
-Options
-  --name, -n <name>              Name of the Resource
-  --fn-type <type>               Type of Function to add (e.g. document-publish)
-  --fn-language, --lang <ts|js>  Language of the Function. Default: "ts"
-  --js, --javascript             Shortcut for --fn-language=js
-  --fn-helpers, --helpers        Add helpers to the Function
-  --no-fn-helpers                Do not add helpers to the Function
-  --fn-installer,                Package manager to use for Function helpers
-    --installer <npm|pnpm|yarn>    sets --fn-helpers to true
-  --install, -i                  Shortcut for --fn-installer=npm
+DESCRIPTION
+  Scaffolds a new Sanity Function in your Blueprint. Functions are serverless handlers triggered by document events (create, update, delete, publish) or media library events.
+  
+  After adding a function, use 'functions dev' to test locally, then 'blueprints deploy' to publish it.
 
-Examples:
-  # Add a Function (TypeScript by default)
-  sanity blueprints add function
+EXAMPLES
+    $ sanity blueprints add function
 
-  # Add a Function with a specific name and install helpers with npm
-  sanity blueprints add function --name my-function -i
+    $ sanity blueprints add function --helpers
 
-  # Add a Function with a specific type
-  sanity blueprints add function --fn-type document-publish
+    $ sanity blueprints add function --name my-function
 
-  # Add a JavaScript Function
-  sanity blueprints add function --js
+    $ sanity blueprints add function --name my-function --fn-type document-create
 
-  # Add a Function without helpers
-  sanity blueprints add function --no-fn-helpers
-
-  # Add a document-publish .js Function with helpers and install with npm
-  sanity blueprints add function -n roboto --fn-type document-publish --js -i
+    $ sanity blueprints add function --name my-function --fn-type document-create --fn-type document-update --lang js
 ```
 
 ### `config`
 
 **CLI output**
 
-```text
-usage: npx sanity blueprints config [--edit] [-e] [--test] [-t] [--project-id <id>]
+```sh
+USAGE
+  $ sanity blueprints config [--edit] [--project-id <value>] [--stack <value>]
 
-   View or edit local Blueprints configuration
+FLAGS
+  -e, --edit                Modify the configuration interactively, or directly when combined with ID flags.
+      --project-id=<value>  Directly set the project ID in the configuration. Requires --edit flag
+      --stack=<value>       Stack name or ID to set in the configuration. Requires --edit flag
 
-Options
-  --edit, -e           Modify the configuration interactively, or directly when combined with ID flags.
-  --project-id <id>    Directly set the Project ID in the configuration. Requires --edit flag
-  --stack-id <id>      Directly set the Stack ID in the configuration. Requires --edit flag
-  --verbose            Output verbose logs
+DESCRIPTION
+  Manages the local Blueprint configuration, which links your Blueprint to a Sanity project and Stack.
+  
+  Without flags, displays the current configuration. Use --edit to interactively modify settings, or combine --edit with ID flags to update values directly (useful for scripting and automation).
+  
+  If you need to switch your Blueprint to a different Stack, use --edit --stack.
 
-Examples:
-  # View current configuration
-  sanity blueprints config
+EXAMPLES
+    $ sanity blueprints config
 
-  # Edit configuration
-  sanity blueprints config --edit
+    $ sanity blueprints config --edit
 
-  # Test configuration
-  sanity blueprints config --test
+    $ sanity blueprints config --edit --project-id <projectId>
 
-  # Edit and test configuration
-  sanity blueprints config -et
+    $ sanity blueprints config --edit --project-id <projectId> --stack <name-or-id>
 ```
 
 ### `deploy`
 
 **CLI output**
 
-```text
-usage: npx sanity blueprints deploy [--no-wait]
+```sh
+USAGE
+  $ sanity blueprints deploy [--no-wait] [--stack <value>]
 
-   Deploy a Blueprint to create or update a Stack
+FLAGS
+      --no-wait        Do not wait for Stack deployment to complete
+      --stack=<value>  Stack name or ID to use instead of the locally configured Stack
 
-Options
-  --no-wait    Do not wait for deployment to complete
+DESCRIPTION
+  Pushes your local Blueprint configuration to the remote Stack; provisioning, updating, or destroying resources as needed. This is the primary command for applying infrastructure changes.
+  
+  Before deploying, run 'blueprints plan' to preview changes. After deployment, use 'blueprints info' to verify Stack status or 'blueprints logs' to monitor activity.
+  
+  Use --no-wait to queue the deployment and return immediately without waiting for completion.
+  
+  Use --fn-installer to force which package manager to use when deploying functions.
+  
+  Set SANITY_ASSET_TIMEOUT (seconds) to override the 60-second timeout for processing resource assets.
 
-Examples:
-  # Deploy the current blueprint
-  sanity blueprints deploy
+EXAMPLES
+    $ sanity blueprints deploy
 
-  # Deploy the current blueprint without waiting for completion
-  sanity blueprints deploy --no-wait
+    $ sanity blueprints deploy --no-wait
+
+    $ sanity blueprints deploy --fn-installer npm
 ```
 
 ### `destroy`
 
 **CLI output**
 
-```text
-usage: npx sanity blueprints destroy [--force] [-f] [--no-wait]
+```sh
+USAGE
+  $ sanity blueprints destroy [--force] [--no-wait] [--project-id <value>] [--stack <value>]
 
-   Destroy a Blueprint deployment
+FLAGS
+      --force               Force Stack destruction (skip confirmation)
+      --no-wait             Do not wait for Stack destruction to complete
+      --project-id=<value>  Project associated with the Stack
+      --stack=<value>       Stack name or ID to destroy (defaults to the locally configured Stack)
 
-Options
-  --force, -f    Force destroy without confirmation
-  --no-wait      Do not wait for destroy to complete
+DESCRIPTION
+  Permanently removes the remote Stack and all its provisioned resources. Your local Blueprint files remain untouched, allowing you to redeploy later with 'blueprints init' + 'blueprints deploy'.
+  
+  This is a destructive operation. You will be prompted to confirm unless --force is specified.
+  
+  Use this to clean up test environments or decommission a Stack you no longer need.
 
-Examples:
-  # Destroy the current deployment
-  sanity blueprints destroy
+EXAMPLES
+    $ sanity blueprints destroy
 
-  # Force destroy without confirmation
-  sanity blueprints destroy --force
-
-  # Destroy without waiting for completion
-  sanity blueprints destroy --no-wait
+    $ sanity blueprints destroy --stack <name-or-id> --project-id <projectId> --force --no-wait
 ```
 
 ### `doctor`
@@ -149,182 +145,310 @@ Examples:
 **CLI output**
 
 ```sh
-usage: npx sanity blueprints doctor [--verbose]
+USAGE
+  $ sanity blueprints doctor [-p <value>] [--fix] [--json] [--verbose]
 
-   Check the health of a Blueprint project
+FLAGS
+  -p, --path=<value>  Path to a Blueprint file or directory containing one
+      --fix           Interactively fix configuration issues
+      --json          Format output as json.
+      --verbose       Verbose output; defaults to true
 
-Examples:
-  # Check the health of the current Blueprint project
-  sanity blueprints doctor --verbose
+DESCRIPTION
+  Analyzes your local Blueprint and remote Stack configuration for common issues, such as missing authentication, invalid project references, or misconfigured resources.
+  
+  Run this command when encountering errors with other Blueprint commands. Use --fix to interactively resolve detected issues.
 ```
 
 ### `info`
 
 **CLI output**
 
-```text
-usage: npx sanity blueprints info 
+```sh
+USAGE
+  $ sanity blueprints info [--stack <value>]
 
-   Retrieve information about a Blueprint Stack
+FLAGS
+      --stack=<value>  Stack name or ID to use instead of the locally configured Stack
 
-Examples:
-  # Retrieve information about the current Stack
-  sanity blueprints info
+DESCRIPTION
+  Displays the current state and metadata of your remote Stack deployment, including deployed resources, status, and configuration.
+  
+  Use this command to verify a deployment succeeded, check what resources are live, or confirm which Stack your local Blueprint is connected to.
+  
+  Run 'blueprints stacks' to see all available Stacks in your project or organization.
+
+EXAMPLES
+    $ sanity blueprints info
+
+    $ sanity blueprints info --stack <name-or-id>
 ```
 
 ### `init`
 
 **CLI output**
 
-```text
-usage: npx sanity blueprints init [dir] [--blueprint-type <type>] [--project-id <id>]
+```sh
+USAGE
+  $ sanity blueprints init [DIR] [--blueprint-type <value>] [--dir <value>] [--example <value>] [--project-id <value>] [--stack-id <value>] [--stack-name <value>] [--verbose]
 
-   Initialize a new Blueprint manifest file
+ARGUMENTS
+  [DIR]  Directory to create the local Blueprint in
 
-Arguments
-  [dir]  Path to initialize the Blueprint in
+FLAGS
+      --blueprint-type=<value>  Blueprint manifest type to use for the local Blueprint
+      --dir=<value>             Directory to create the local Blueprint in
+      --example=<value>         Example to use for the local Blueprint
+      --project-id=<value>      Sanity project ID used to scope local Blueprint and remote Stack
+      --stack-id=<value>        Existing Stack ID used to scope local Blueprint
+      --stack-name=<value>      Name to use for a new Stack provisioned during initialization
+      --verbose                 Verbose output
 
-Options
-  --blueprint-type, --type <json>    Type of Blueprint to create
-  --project-id <id>                  Project ID to use
+DESCRIPTION
+  A Blueprint is your local infrastructure-as-code configuration that defines Sanity resources (datasets, functions, etc.). A Stack is the remote deployment target where your Blueprint is applied.
+  [NOTE: Currently, accounts are limited to three (3) Stacks per project scope.]
+  
+  This is typically the first command you run in a new project. It creates a local Blueprint manifest file (sanity.blueprint.ts, .js, or .json) and provisions a new remote Stack.
+  Additionally, a Blueprint configuration file is created in .sanity/ containing the scope and Stack IDs. This is .gitignored by default.
+  
+  After initialization, use 'blueprints plan' to preview changes, then 'blueprints deploy' to apply them.
 
-Examples:
-  # Create a new Blueprint manifest file in the current directory
-  sanity blueprints init
+EXAMPLES
+    $ sanity blueprints init
 
-  # Create a new Blueprint manifest file in a specific directory
-  sanity blueprints init my-sanity-project --type json
+    $ sanity blueprints init [directory]
+
+    $ sanity blueprints init --blueprint-type <json|js|ts>
+
+    $ sanity blueprints init --blueprint-type <json|js|ts> --project-id <projectId> --stack-id <stackId>
+
+    $ sanity blueprints init --blueprint-type <json|js|ts> --stack-name <stackName>
 ```
 
 ### `logs`
 
 **CLI output**
 
-```text
-usage: npx sanity blueprints logs [--watch] [-w]
+```sh
+USAGE
+  $ sanity blueprints logs [--watch] [--stack <value>]
 
-   Display logs for the current Blueprint Stack
+FLAGS
+  -w, --watch          Watch for new Stack logs (streaming mode)
+      --stack=<value>  Stack name or ID to use instead of the locally configured Stack
 
-Options
-  --watch, -w    Watch for new logs (streaming mode)
+DESCRIPTION
+  Retrieves Stack deployment logs, useful for debugging and monitoring deployment activity.
+  
+  Use --watch (-w) to stream logs in real-time.
+  
+  If you're not seeing expected logs, verify your Stack is deployed with 'blueprints info'.
 
-Examples:
-  # Show logs for the current Stack
-  sanity blueprints logs
+EXAMPLES
+    $ sanity blueprints logs
 
-  # Watch for new logs (streaming mode)
-  sanity blueprints logs --watch
+    $ sanity blueprints logs --watch
 ```
 
 ### `plan`
 
 **CLI output**
 
-```text
-usage: npx sanity blueprints plan 
+```sh
+USAGE
+  $ sanity blueprints plan [--stack <value>]
 
-   Enumerate Resources to be deployed
+FLAGS
+      --stack=<value>  Stack name or ID to use instead of the locally configured Stack
 
-Safe to run at any time. Will not modify any Resources.
+DESCRIPTION
+  Use this command to preview what changes will be applied to your remote Stack before deploying. This is a safe, read-only operation—no resources are created, modified, or deleted.
+  
+  Run 'blueprints plan' after making local changes to your Blueprint manifest to verify the expected diff. When ready, run 'blueprints deploy' to apply changes.
 
-Examples:
-  # Show deployment plan for the current Blueprint
-  sanity blueprints plan
+EXAMPLES
+    $ sanity blueprints plan
+```
+
+### `stacks`
+
+**CLI output**
+
+```sh
+USAGE
+  $ sanity blueprints stacks [--project-id <value>]
+
+FLAGS
+      --project-id=<value>  Project ID to show Stack deployments for
+
+DESCRIPTION
+  Shows all Stacks associated with a project or organization. By default, lists Stacks scoped to the local Blueprint.
+  
+  Use this to discover existing Stacks you can scope a local Blueprint to (using 'blueprints config --edit'), or to audit what's deployed across your project.
+
+EXAMPLES
+    $ sanity blueprints stacks
+
+    $ sanity blueprints stacks --project-id <projectId>
+
+    $ sanity blueprints stacks --organization-id <organizationId>
 ```
 
 # Build
 
-```markdown
-usage: sanity build [OUTPUT_DIR]
+**CLI output**
 
-   Builds the current Sanity configuration to a static bundle
+```sh
+USAGE
+  $ sanity build [OUTPUTDIR] [--yes] [--auto-updates] [--minify] [--source-maps] [--stats]
 
-Options
-  --auto-updates / --no-auto-updates Enable/disable auto-updates of studio versions
-  --source-maps Enable source maps for built bundles (increases size of bundle)
-  --no-minify Skip minifying built Javascript (speeds up build, increases size of bundle)
-  -y, --yes Use unattended mode, accepting defaults and using only flags for choices
+ARGUMENTS
+  [OUTPUTDIR]  Output directory
 
-Examples
-  sanity build
-  sanity build --no-minify --source-maps
+FLAGS
+  -y, --yes           Unattended mode, answers "yes" to any "yes/no" prompt and otherwise uses defaults
+      --auto-updates  Enable/disable auto updates of studio versions
+      --minify        Enable/disable minifying of built bundles
+      --source-maps   Enable source maps for built bundles (increases size of bundle)
+      --stats         Show stats about the built bundles
+
+DESCRIPTION
+  Builds the Sanity Studio configuration into a static bundle
+
+EXAMPLES
+    $ sanity build
+
+    $ sanity build --no-minify --source-maps
 ```
 
 # Codemod
 
-```text
-usage: sanity codemod [CODEMOD_NAME]
+**CLI output**
 
-   Runs a code modification script
+```sh
+USAGE
+  $ sanity codemod [CODEMODNAME] [--dry] [--extensions <value>] [--no-verify]
 
-Runs a given code modification script on the current studio folder.
-Running the command without a specified codemod name will list available transformations.
+ARGUMENTS
+  [CODEMODNAME]  Name of the codemod to run
 
-Options
-  --dry Dry run (no changes are made to files)
-  --extensions=EXT Transform files with these file extensions (comma separated list)
-                   (default: js,ts,tsx)
-  --no-verify Skips verification steps before running codemod
+FLAGS
+      --dry                 Dry run (no changes are made to files)
+      --extensions=<value>  Transform files with these file extensions (comma separated)
+      --no-verify           Skip verification steps before running codemod
 
-Examples
-  # Show available code mods
-  sanity codemod
+DESCRIPTION
+  Updates Sanity Studio codebase with a code modification script
 
-  # Run codemod to transform react-icons imports from v2 style to v3 style,
-  # but only as a dry-run (do not write the files)
-  sanity codemod reactIconsV3 --dry
+EXAMPLES
+  Show available code mods
+
+    $ sanity codemod
+
+  Run codemod to transform react-icons imports (dry run)
+
+    $ sanity codemod reactIconsV3 --dry
 ```
 
 # CORS
 
-```markdown
-usage: sanity cors [-v|--version] [-d|--debug] [-h|--help] <command> [<args>]
+**CLI output**
 
-Commands:
-   add     Allow a new origin to use your project API through CORS
-   delete  Delete an existing CORS-origin from your project
-   list    List all origins allowed to access the API for this project
-
-See 'sanity help cors <command>' for specific information on a subcommand.
+```sh
+npx sanity cors --help
 ```
 
 ## Commands
 
-### Add
+### `add`
 
+**CLI output**
+
+```sh
+USAGE
+  $ sanity cors add ORIGIN [-p <id>] [--credentials]
+
+ARGUMENTS
+  ORIGIN  Origin to allow (e.g., https://example.com)
+
+FLAGS
+      --credentials  Allow credentials (token/cookie) to be sent from this origin
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to add CORS origin to (overrides CLI configuration)
+
+DESCRIPTION
+  Allow a new origin to use your project API through CORS
+
+EXAMPLES
+  Interactively add a CORS origin
+
+    $ sanity cors add
+
+  Add a localhost origin without credentials
+
+    $ sanity cors add http://localhost:3000 --no-credentials
+
+  Add a production origin with credentials allowed
+
+    $ sanity cors add https://myapp.com --credentials
+
+  Add a CORS origin for a specific project
+
+    $ sanity cors add https://myapp.com --project-id abc123
 ```
-usage: sanity cors add [ORIGIN]
 
-   Allow a new origin to use your project API through CORS
+### `delete`
 
-Options
-  --credentials Allow credentials (token/cookie) to be sent from this origin
-  --no-credentials Disallow credentials (token/cookie) to be sent from this origin
+**CLI output**
 
-Examples
-  sanity cors add
-  sanity cors add http://localhost:3000 --no-credentials
+```sh
+USAGE
+  $ sanity cors delete [ORIGIN] [-p <id>]
+
+ARGUMENTS
+  [ORIGIN]  Origin to delete (will prompt if not provided)
+
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to delete CORS origin from (overrides CLI configuration)
+
+DESCRIPTION
+  Delete an existing CORS origin from your project
+
+EXAMPLES
+  Interactively select and delete a CORS origin
+
+    $ sanity cors delete
+
+  Delete a specific CORS origin
+
+    $ sanity cors delete https://example.com
+
+  Delete a CORS origin from a specific project
+
+    $ sanity cors delete --project-id abc123
 ```
 
-### Delete
+### `list`
 
-```
-usage: sanity cors delete [ORIGIN]
+**CLI output**
 
-   Delete an existing CORS-origin from your project
+```sh
+USAGE
+  $ sanity cors list [-p <id>]
 
-Examples
-  sanity cors delete
-  sanity cors delete http://localhost:3000
-```
+OVERRIDE FLAGS
+  -p, --project-id=<id>  Project ID to list CORS origins for (overrides CLI configuration)
 
-### List
+DESCRIPTION
+  List all origins allowed to access the API for this project
 
-```
-usage: sanity cors list
+EXAMPLES
+  List CORS origins for the current project
 
-   List all origins allowed to access the API for this project
+    $ sanity cors list
 
-Examples
-  sanity cors list
+  List CORS origins for a specific project
+
+    $ sanity cors list --project-id abc123
 ```

@@ -180,22 +180,6 @@ Domains can have different statuses, including:
 - `failed`: Resend was unable to detect the DNS records within 72 hours.
 - `temporary_failure`: For a previously verified domain, Resend will periodically check for the DNS record required for verification. If at some point, Resend is unable to detect the record, the status would change to "Temporary Failure". Resend will recheck for the DNS record for 72 hours, and if it's unable to detect the record, the domain status would change to "Failure". If it's able to detect the record, the domain status would change to "Verified".
 
-## Open and Click Tracking
-
-Open and click tracking is disabled by default for all domains. You can enable it by clicking on the toggles within the domain settings.
-
-For best deliverability, we recommend disabling click and open tracking [for
-sensitive transactional
-emails](/dashboard/emails/deliverability-insights#disable-click-tracking).
-
-## How Open Tracking Works
-
-A 1x1 pixel transparent GIF image is inserted in each email and includes a unique reference to this image file. When the image is downloaded, Resend can tell exactly which message was opened and by whom.
-
-## How Click Tracking Works
-
-To track clicks, Resend modifies each link in the body of the HTML email. When recipients open a link, they are sent to a Resend server, and are immediately redirected to the URL destination.
-
 ## Export your data
 
 Admins can download your data in CSV format for the following resources:

@@ -76,11 +76,9 @@ Use the following views to manage the payment method feature:
   - Review event payloads to confirm correct back-end processing.
 
 - **Webhooks**:
-
   - Set up webhook endpoints or other destination types, such as Amazon EventBridge, for real-time updates on payment method status and payment confirmations.
 
 - **Shell and API Explorer**:
-
   - Simulate API requests and manage them using a command-line interface.
 
 ## Listen to real-time updates with event destinations
@@ -88,6 +86,7 @@ Use the following views to manage the payment method feature:
 At Kavholm, use event destinations to make sure all payment method features function as intended without affecting your live systems. Use event destinations to track real-time activities in your Stripe account, and to respond to critical events such as payment confirmations or subscription updates. You can:
 
 - Send events to AWS through [Amazon EventBridge](https://docs.stripe.com/event-destinations/eventbridge.md) or to an [HTTPS endpoint through webhooks](https://docs.stripe.com/webhooks.md).
+
 - Access real-time data using [thin or snapshot events](https://docs.stripe.com/event-destinations.md#events-overview).
 
 ### Testing
@@ -102,6 +101,7 @@ To simulate real-world conditions and evaluate the payment method’s performanc
 To track key events and maintain oversight of the payment method feature’s ongoing functionality:
 
 - Configure event destinations to [aggregate and alert you on events](https://docs.stripe.com/event-destinations.md#event-permissions) such as `payment_intent.succeeded`. Event destinations support receiving alerts at a webhook endpoint or Amazon EventBridge.
+
 - View payment event history to troubleshoot payment method processes and [track event deliveries](https://docs.stripe.com/event-destinations.md#event-retention). Use logs for debugging, especially when your focus is on event logs rather than API request logs.
 
 ### Debugging

@@ -75,5 +75,5 @@ In tools like Cursor, you can add documentation URLs to your [project rules](htt
 
 title: "Agent Resources"
 description: "Resources for building with AI on Vercel, including documentation access, MCP servers, and agent skills."
-last\_updated: "2026-03-08T05:03:09.981Z"
+last\_updated: "2026-03-23T09:40:03.550Z"
 source: "https://vercel.com/docs/agent-resources"

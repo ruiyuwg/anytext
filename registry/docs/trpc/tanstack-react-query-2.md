@@ -1,17 +1,31 @@
 # TanStack React Query
 
-Compared to our [classic React Query Integration](/docs/client/react) this client is simpler and more TanStack Query-native, providing factories for common TanStack React Query interfaces like QueryKeys, QueryOptions, and MutationOptions. We think it's the future and recommend using this over the classic client, read the announcement post for more information about this change.
-
 ## Quick example query
 
-```tsx
-import { useQuery } from "@tanstack/react-query";
-import { useTRPC } from "./trpc";
+```tsx twoslash
+// @filename: server/router.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  greeting: t.procedure.input(z.object({ name: z.string() })).query(({ input }) => `Hello ${input.name}` as const),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server/router';
+export const { TRPCProvider, useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.tsx
+// ---cut---
+import { useQuery } from '@tanstack/react-query';
+import { useTRPC } from './trpc';
 
 function Users() {
   const trpc = useTRPC();
 
-  const greetingQuery = useQuery(trpc.greeting.queryOptions({ name: "Jerry" }));
+  const greetingQuery = useQuery(trpc.greeting.queryOptions({ name: 'Jerry' }));
 
   // greetingQuery.data === 'Hello Jerry'
 }
@@ -21,7 +35,28 @@ function Users() {
 
 The philosophy of this client is to provide thin and type-safe factories which work natively and type-safely with Tanstack React Query. This means just by following the autocompletes the client gives you, you can focus on building just with the knowledge the [TanStack React Query docs](https://tanstack.com/query/latest/docs/framework/react/overview) provide.
 
-```tsx
+```tsx twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({
+    query: t.procedure.input(z.object({ id: z.string().optional() }).optional()).query(() => 'result'),
+    mutation: t.procedure.mutation(() => 'ok'),
+  }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.tsx
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTRPC } from './trpc';
+// ---cut---
 export default function Basics() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
@@ -37,7 +72,7 @@ export default function Basics() {
   const myMutationOptions = trpc.path.to.mutation.mutationOptions()
   const myMutation = useMutation(myMutationOptions)
 
-  // Create a QueryKey which can be used to manipulated many methods
+  // Create a QueryKey which can be used to manipulate many methods
   // on TanStack's QueryClient in a type-safe manner
   const myQueryKey = trpc.path.to.query.queryKey()
 
@@ -47,6 +82,7 @@ export default function Basics() {
 
   return (
     // Your app here
+    null
   )
 }
 ```
@@ -57,24 +93,66 @@ The `trpc` object is fully type-safe and will provide autocompletes for all the 
 
 Available for all query procedures. Provides a type-safe wrapper around [Tanstack's `queryOptions` function](https://tanstack.com/query/latest/docs/framework/react/reference/queryOptions). The first argument is the input for the procedure, and the second argument accepts any native Tanstack React Query options.
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({ query: t.procedure.input(z.object({ id: z.string() })).query(() => 'result') }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const queryOptions = trpc.path.to.query.queryOptions(
   {
     /** input */
+    id: 'foo',
   },
   {
     // Any Tanstack React Query options
     staleTime: 1000,
   },
 );
+// ---cut-after---
+}
 ```
 
 You can additionally provide a `trpc` object to the `queryOptions` function to provide tRPC request options to the client.
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({ query: t.procedure.input(z.object({ id: z.string() })).query(() => 'result') }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const queryOptions = trpc.path.to.query.queryOptions(
   {
     /** input */
+    id: 'foo',
   },
   {
     trpc: {
@@ -85,13 +163,37 @@ const queryOptions = trpc.path.to.query.queryOptions(
     },
   },
 );
+// ---cut-after---
+}
 ```
 
 If you want to disable a query in a type safe way, you can use `skipToken`:
 
-```ts
-import { skipToken } from "@tanstack/react-query";
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  user: t.router({
+    details: t.procedure.input(z.object({ userId: z.string(), projectId: z.string() })).query(() => ({ name: 'foo' })),
+  }),
+});
+export type AppRouter = typeof appRouter;
 
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useQuery, skipToken } from '@tanstack/react-query';
+import { useTRPC } from './trpc';
+declare const user: { id: string } | undefined;
+declare const project: { id: string } | undefined;
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const query = useQuery(
   trpc.user.details.queryOptions(
     user?.id && project?.id
@@ -105,15 +207,38 @@ const query = useQuery(
     },
   ),
 );
+// ---cut-after---
+}
 ```
 
 The result can be passed to `useQuery` or `useSuspenseQuery` hooks or query client methods like `fetchQuery`, `prefetchQuery`, `prefetchInfiniteQuery`, `invalidateQueries`, etc.
 
 ### `infiniteQueryOptions` - querying infinite data
 
-Available for all query procedures that takes a cursor input. Provides a type-safe wrapper around [Tanstack's `infiniteQueryOptions` function](https://tanstack.com/query/latest/docs/framework/react/reference/infiniteQueryOptions). The first argument is the input for the procedure, and the second argument accepts any native Tanstack React Query options.
+Available for all query procedures that take a cursor input. Provides a type-safe wrapper around [Tanstack's `infiniteQueryOptions` function](https://tanstack.com/query/latest/docs/framework/react/reference/infiniteQueryOptions). The first argument is the input for the procedure, and the second argument accepts any native Tanstack React Query options.
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({
+    query: t.procedure.input(z.object({ cursor: z.number().optional() })).query(() => ({ items: ['item'], nextCursor: 1 as number | undefined })),
+  }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const infiniteQueryOptions = trpc.path.to.query.infiniteQueryOptions(
   {
     /** input */
@@ -123,43 +248,148 @@ const infiniteQueryOptions = trpc.path.to.query.infiniteQueryOptions(
     getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
   },
 );
+// ---cut-after---
+}
 ```
 
 ### `queryKey` - getting the query key and performing operations on the query client
 
 Available for all query procedures. Allows you to access the query key in a type-safe manner.
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({ query: t.procedure.input(z.object({ id: z.string() })).query(() => 'result') }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const queryKey = trpc.path.to.query.queryKey();
+// ---cut-after---
+}
 ```
 
 Since Tanstack React Query uses fuzzy matching for query keys, you can also create a partial query key for any sub-path to match all queries belonging to a router:
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+const appRouter = t.router({
+  router: t.router({ someQuery: t.procedure.query(() => 'result') }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const queryKey = trpc.router.pathKey();
+// ---cut-after---
+}
 ```
 
 Or even the root path to match all tRPC queries:
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+const appRouter = t.router({ someQuery: t.procedure.query(() => 'result') });
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const queryKey = trpc.pathKey();
+// ---cut-after---
+}
 ```
 
 ### `infiniteQueryKey` - getting the infinite query key
 
-Available for all query procedures that takes a cursor input. Allows you to access the query key for an infinite query in a type-safe manner.
+Available for all query procedures that take a cursor input. Allows you to access the query key for an infinite query in a type-safe manner.
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({
+    query: t.procedure.input(z.object({ cursor: z.number().optional() })).query(() => ({ items: ['item'], nextCursor: 1 as number | undefined })),
+  }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const infiniteQueryKey = trpc.path.to.query.infiniteQueryKey({
   /** input */
 });
+// ---cut-after---
+}
 ```
 
 The result can be used with query client methods like `getQueryData`, `setQueryData`, `invalidateQueries`, etc.
 
-```ts
-const queryClient = useQueryClient();
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({
+    query: t.procedure.input(z.object({ cursor: z.number().optional() })).query(() => ({ items: ['item'], nextCursor: 1 as number | undefined })),
+  }) }),
+});
+export type AppRouter = typeof appRouter;
 
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useQueryClient } from '@tanstack/react-query';
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+const queryClient = useQueryClient();
+// ---cut---
 // Get cached data for an infinite query
 const cachedData = queryClient.getQueryData(
   trpc.path.to.query.infiniteQueryKey({ cursor: 0 }),
@@ -173,13 +403,34 @@ queryClient.setQueryData(
     return data;
   },
 );
+// ---cut-after---
+}
 ```
 
 ### `queryFilter` - creating query filters
 
 Available for all query procedures. Allows creating [query filters](https://tanstack.com/query/latest/docs/framework/react/guides/filters#query-filters) in a type-safe manner.
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({ query: t.procedure.input(z.object({ id: z.string() })).query(() => 'result') }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const queryFilter = trpc.path.to.query.queryFilter(
   {
     /** input */
@@ -187,30 +438,73 @@ const queryFilter = trpc.path.to.query.queryFilter(
   {
     // Any Tanstack React Query filter
     predicate: (query) => {
-      query.state.data;
+      return !!query.state.data;
     },
   },
 );
+// ---cut-after---
+}
 ```
 
 Like with query keys, if you want to run a filter across a whole router you can use `pathFilter` to target any sub-path.
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ someQuery: t.procedure.query(() => 'result') }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const queryFilter = trpc.path.pathFilter({
   // Any Tanstack React Query filter
   predicate: (query) => {
-    query.state.data;
+    return !!query.state.data;
   },
 });
+// ---cut-after---
+}
 ```
 
 Useful for creating filters that can be passed to client methods like `queryClient.invalidateQueries` etc.
 
 ### `infiniteQueryFilter` - creating infinite query filters
 
-Available for all query procedures that takes a cursor input. Allows creating [query filters](https://tanstack.com/query/latest/docs/framework/react/guides/filters#query-filters) for infinite queries in a type-safe manner.
+Available for all query procedures that take a cursor input. Allows creating [query filters](https://tanstack.com/query/latest/docs/framework/react/guides/filters#query-filters) for infinite queries in a type-safe manner.
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({
+    query: t.procedure.input(z.object({ cursor: z.number().optional() })).query(() => ({ items: ['item'], nextCursor: 1 as number | undefined })),
+  }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const infiniteQueryFilter = trpc.path.to.query.infiniteQueryFilter(
   {
     /** input */
@@ -218,56 +512,152 @@ const infiniteQueryFilter = trpc.path.to.query.infiniteQueryFilter(
   {
     // Any Tanstack React Query filter
     predicate: (query) => {
-      query.state.data;
+      return !!query.state.data;
     },
   },
 );
+// ---cut-after---
+}
 ```
 
 Useful for creating filters that can be passed to client methods like `queryClient.invalidateQueries` etc.
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({
+    query: t.procedure.input(z.object({ cursor: z.number().optional() })).query(() => ({ items: ['item'], nextCursor: 1 as number | undefined })),
+  }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useQueryClient } from '@tanstack/react-query';
+import { useTRPC } from './trpc';
+async function Component() {
+const trpc = useTRPC();
+const queryClient = useQueryClient();
+// ---cut---
 await queryClient.invalidateQueries(
   trpc.path.to.query.infiniteQueryFilter(
     {},
     {
       predicate: (query) => {
         // Filter logic based on query state
-        return query.state.data?.pages.length > 0;
+        return query.state.status === 'success';
       },
     },
   ),
 );
+// ---cut-after---
+}
 ```
 
 ### `mutationOptions` - creating mutation options
 
-Available for all mutation procedures. Provides a type-safe identify function for constructing options that can be passed to `useMutation`.
+Available for all mutation procedures. Provides a type-safe identity function for constructing options that can be passed to `useMutation`.
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({
+    mutation: t.procedure.input(z.object({ id: z.string() })).mutation(() => 'ok' as const),
+  }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const mutationOptions = trpc.path.to.mutation.mutationOptions({
   // Any Tanstack React Query options
   onSuccess: (data) => {
     // do something with the data
   },
 });
+// ---cut-after---
+}
 ```
 
 ### `mutationKey` - getting the mutation key
 
 Available for all mutation procedures. Allows you to get the mutation key in a type-safe manner.
 
-```ts
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({
+    mutation: t.procedure.input(z.object({ id: z.string() })).mutation(() => 'ok' as const),
+  }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+function Component() {
+const trpc = useTRPC();
+// ---cut---
 const mutationKey = trpc.path.to.mutation.mutationKey();
+// ---cut-after---
+}
 ```
 
 ### `subscriptionOptions` - creating subscription options
 
 TanStack does not provide a subscription hook, so we continue to expose our own abstraction here which works with a [standard tRPC subscription setup](/docs/server/subscriptions).
-Available for all subscription procedures. Provides a type-safe identify function for constructing options that can be passed to `useSubscription`.
+Available for all subscription procedures. Provides a type-safe identity function for constructing options that can be passed to `useSubscription`.
 Note that you need to have either the [`httpSubscriptionLink`](/docs/client/links/httpSubscriptionLink) or [`wsLink`](/docs/client/links/wsLink) configured in your tRPC client to use subscriptions.
 
-```tsx
+```tsx twoslash
+// @jsx: react-jsx
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({
+    subscription: t.procedure.input(z.object({ channel: z.string().optional() }).optional()).subscription(async function* () {
+      yield 'data' as string;
+    }),
+  }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.tsx
+import { useTRPC } from './trpc';
+import { useSubscription } from '@trpc/tanstack-react-query';
+// ---cut---
 function SubscriptionExample() {
   const trpc = useTRPC();
   const subscription = useSubscription(
@@ -319,15 +709,53 @@ function SubscriptionExample() {
 
 When using multiple tRPC providers in a single application (e.g., connecting to different backend services), queries with the same path will collide in the cache. You can prevent this by enabling query key prefixing.
 
-```tsx
+```tsx twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+const authRouter = t.router({ list: t.procedure.query(() => [{ id: '1' }]) });
+const billingRouter = t.router({ list: t.procedure.query(() => [{ id: '1' }]) });
+export type AuthRouter = typeof authRouter;
+export type BillingRouter = typeof billingRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AuthRouter, BillingRouter } from './server';
+const auth = createTRPCContext<AuthRouter>();
+const billing = createTRPCContext<BillingRouter>();
+export const useTRPCAuth = auth.useTRPC;
+export const useTRPCBilling = billing.useTRPC;
+
+// @filename: component.ts
+import { useQuery } from '@tanstack/react-query';
+import { useTRPCAuth, useTRPCBilling } from './trpc';
+function Component() {
+const trpcAuth = useTRPCAuth();
+const trpcBilling = useTRPCBilling();
+// ---cut---
 // Without prefixes - these would collide!
 const authQuery = useQuery(trpcAuth.list.queryOptions()); // auth service
 const billingQuery = useQuery(trpcBilling.list.queryOptions()); // billing service
+// ---cut-after---
+}
 ```
 
 Enable the feature flag when creating your context:
 
-```tsx title='utils/trpc.ts'
+```tsx twoslash title='utils/trpc.ts'
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+const billingRouter = t.router({ list: t.procedure.query(() => [{ id: '1' }]) });
+const accountRouter = t.router({ list: t.procedure.query(() => [{ id: '1' }]) });
+export type BillingRouter = typeof billingRouter;
+export type AccountRouter = typeof accountRouter;
+
+// @filename: utils/trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import { createTRPCClient } from '@trpc/client';
+import type { BillingRouter, AccountRouter } from '../server';
+// ---cut---
 // [...]
 
 const billing = createTRPCContext<BillingRouter, { keyPrefix: true }>();
@@ -351,7 +779,38 @@ export const createAccountClient = () =>
   });
 ```
 
-```tsx title='App.tsx'
+```tsx twoslash title='App.tsx'
+// @jsx: react-jsx
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+const billingRouter = t.router({ list: t.procedure.query(() => [{ id: '1' }]) });
+const accountRouter = t.router({ list: t.procedure.query(() => [{ id: '1' }]) });
+export type BillingRouter = typeof billingRouter;
+export type AccountRouter = typeof accountRouter;
+
+// @filename: utils/trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import { createTRPCClient } from '@trpc/client';
+import type { BillingRouter, AccountRouter } from '../server';
+const billing = createTRPCContext<BillingRouter, { keyPrefix: true }>();
+export const BillingProvider = billing.TRPCProvider;
+export const createBillingClient = () => createTRPCClient<BillingRouter>({ links: [] });
+const account = createTRPCContext<AccountRouter, { keyPrefix: true }>();
+export const AccountProvider = account.TRPCProvider;
+export const createAccountClient = () => createTRPCClient<AccountRouter>({ links: [] });
+
+// @filename: App.tsx
+// ---cut---
+import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  BillingProvider,
+  AccountProvider,
+  createBillingClient,
+  createAccountClient,
+} from './utils/trpc';
+
 // [...]
 
 export function App() {
@@ -371,7 +830,7 @@ export function App() {
           queryClient={queryClient}
           keyPrefix="account"
         >
-          {/* ... */}
+          <div>{/* ... */}</div>
         </AccountProvider>
       </BillingProvider>
     </QueryClientProvider>
@@ -379,7 +838,29 @@ export function App() {
 }
 ```
 
-```tsx title='components/MyComponent.tsx'
+```tsx twoslash title='components/MyComponent.tsx'
+// @jsx: react-jsx
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+const billingRouter = t.router({ list: t.procedure.query(() => [{ id: '1' }]) });
+const accountRouter = t.router({ list: t.procedure.query(() => [{ id: '1' }]) });
+export type BillingRouter = typeof billingRouter;
+export type AccountRouter = typeof accountRouter;
+
+// @filename: utils/trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { BillingRouter, AccountRouter } from '../server';
+const billing = createTRPCContext<BillingRouter, { keyPrefix: true }>();
+export const useBilling = billing.useTRPC;
+const account = createTRPCContext<AccountRouter, { keyPrefix: true }>();
+export const useAccount = account.useTRPC;
+
+// @filename: components/MyComponent.tsx
+// ---cut---
+import { useQuery } from '@tanstack/react-query';
+import { useBilling, useAccount } from '../utils/trpc';
+
 // [...]
 
 export function MyComponent() {
@@ -403,8 +884,8 @@ The query keys will be properly prefixed to avoid collisions:
 ```tsx twoslash
 // Example of how the query keys look with prefixes
 const queryKeys = [
-  [["billing"], ["list"], { type: "query" }],
-  [["account"], ["list"], { type: "query" }],
+  [['billing'], ['list'], { type: 'query' }],
+  [['account'], ['list'], { type: 'query' }],
 ];
 ```
 
@@ -414,9 +895,20 @@ When you need to infer the input and output types for a procedure or router, the
 
 Infer the input and output types of a full router
 
-```ts
-import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
-import { AppRouter } from "./path/to/server";
+```ts twoslash
+// @filename: server/router.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  getUser: t.procedure.input(z.object({ id: z.string() })).query(() => ({ name: 'foo' })),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: types.ts
+// ---cut---
+import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
+import type { AppRouter } from './server/router';
 
 export type Inputs = inferRouterInputs<AppRouter>;
 export type Outputs = inferRouterOutputs<AppRouter>;
@@ -424,8 +916,27 @@ export type Outputs = inferRouterOutputs<AppRouter>;
 
 Infer types for a single procedure
 
-```ts
-import type { inferInput, inferOutput } from "@trpc/tanstack-react-query";
+```ts twoslash
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({
+    procedure: t.procedure.input(z.object({ id: z.string() })).query(() => ({ name: 'foo' })),
+  }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server';
+export const { useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.ts
+import { useTRPC } from './trpc';
+// ---cut---
+import type { inferInput, inferOutput } from '@trpc/tanstack-react-query';
 
 function Component() {
   const trpc = useTRPC();
@@ -437,47 +948,92 @@ function Component() {
 
 ### Accessing the tRPC client
 
-If you used the [setup with React Context](/docs/client/tanstack-react-query/setup#3a-setup-the-trpc-context-provider), you can access the tRPC client using the `useTRPCClient` hook.
+If you used the [setup with React Context](/docs/client/tanstack-react-query/setup#3a-set-up-the-trpc-context-provider), you can access the tRPC client using the `useTRPCClient` hook.
 
-```tsx
-import { useTRPCClient } from "./trpc";
+```tsx twoslash
+// @filename: server/router.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  getUser: t.procedure.input(z.object({ id: z.string() })).query(() => ({ name: 'foo' })),
+});
+export type AppRouter = typeof appRouter;
 
-function Component() {
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server/router';
+export const { TRPCProvider, useTRPC, useTRPCClient } = createTRPCContext<AppRouter>();
+
+// @filename: component.tsx
+// ---cut---
+import { useTRPCClient } from './trpc';
+
+async function Component() {
   const trpcClient = useTRPCClient();
 
-  const result = await trpcClient.path.to.procedure.query({
-    /** input */
+  const result = await trpcClient.getUser.query({
+    id: '1',
   });
 }
 ```
 
-If you [setup without React Context](/docs/client/tanstack-react-query/setup#3b-setup-without-react-context),
+If you [setup without React Context](/docs/client/tanstack-react-query/setup#3c-set-up-without-react-context),
 you can import the global client instance directly instead.
 
-```ts
-import { client } from "./trpc";
+```ts twoslash
+// @module: esnext
+// @target: esnext
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  path: t.router({ to: t.router({
+    procedure: t.procedure.input(z.object({ id: z.string() })).query(() => ({ name: 'foo' })),
+  }) }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCClient } from '@trpc/client';
+import type { AppRouter } from './server';
+export const client = createTRPCClient<AppRouter>({ links: [] });
+
+// @filename: example.ts
+// ---cut---
+import { client } from './trpc';
 
 const result = await client.path.to.procedure.query({
   /** input */
+  id: 'foo',
 });
 ```
 
 # Aborting Procedure Calls
 
-tRPC adheres to the industry standard when it comes to aborting procedures. All you have to do is pass an `AbortSignal` to the query or mutation options, and call the `AbortController` instance's `abort` method if you need to cancel the request.
+tRPC supports the standard `AbortController`/`AbortSignal` API for aborting procedures. All you have to do is pass an `AbortSignal` to the query or mutation options, and call the `AbortController` instance's `abort` method if you need to cancel the request.
 
 ```ts twoslash title="utils.ts"
 // @target: esnext
-// ---cut---
 // @filename: server.ts
-import { createTRPCClient, httpBatchLink } from "@trpc/client";
-// @noErrors
-import type { AppRouter } from "./server.ts";
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  userById: t.procedure.input(z.string()).query(({ input }) => ({ id: input, name: 'Bilbo' })),
+});
+export type AppRouter = typeof appRouter;
 
-const proxy = createTRPCClient<AppRouter>({
+// @filename: client.ts
+// ---cut---
+import { createTRPCClient, httpBatchLink } from '@trpc/client';
+import type { AppRouter } from './server';
+
+const client = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: "http://localhost:3000/trpc",
+      url: 'http://localhost:3000/trpc',
     }),
   ],
 });
@@ -486,7 +1042,7 @@ const proxy = createTRPCClient<AppRouter>({
 const ac = new AbortController();
 
 // 2. Pass the signal to a query or mutation
-const query = proxy.userById.query("id_bilbo", { signal: ac.signal });
+const query = client.userById.query('id_bilbo', { signal: ac.signal });
 
 // 3. Cancel the request if needed
 ac.abort();

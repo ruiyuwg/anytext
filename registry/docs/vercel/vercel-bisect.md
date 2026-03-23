@@ -15,7 +15,7 @@ Note that if an alias URL is used for either the *good* or *bad* deployment, the
 vercel bisect
 ```
 
-*Using the vercel bisect command will initiate an
+*Using the \`vercel bisect\` command will initiate an
 interactive prompt where you specify a good deployment, followed by a bad
 deployment and step through the deployments in between to find the first bad
 deployment.*
@@ -32,8 +32,8 @@ The `--good` option, shorthand `-g`, can be used to specify the initial "good" d
 vercel bisect --good https://example.com
 ```
 
-*Using the vercel bisect command with the
-\--good option.*
+*Using the \`vercel bisect\` command with the
+\`--good\` option.*
 
 ### Bad
 
@@ -43,8 +43,8 @@ The `--bad` option, shorthand `-b`, can be used to specify the "bad" deployment 
 vercel bisect --bad https://example-s93n1nfa.vercel.app
 ```
 
-*Using the vercel bisect command with the
-\--bad option.*
+*Using the \`vercel bisect\` command with the
+\`--bad\` option.*
 
 ### Path
 
@@ -54,8 +54,8 @@ The `--path` option, shorthand `-p`, can be used to specify a subpath of the dep
 vercel bisect --path /blog/first-post
 ```
 
-*Using the vercel bisect command with the
-\--path option.*
+*Using the \`vercel bisect\` command with the
+\`--path\` option.*
 
 ### Open
 
@@ -65,8 +65,8 @@ The `--open` option, shorthand `-o`, will attempt to automatically open each dep
 vercel bisect --open
 ```
 
-*Using the vercel bisect command with the
-\--open option.*
+*Using the \`vercel bisect\` command with the
+\`--open\` option.*
 
 ### Run
 
@@ -76,12 +76,12 @@ The `--run` option, shorthand `-r`, provides the ability for the bisect session 
 vercel bisect --run ./test.sh
 ```
 
-*Using the vercel bisect command with the
-\--run option.*
+*Using the \`vercel bisect\` command with the
+\`--run\` option.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -100,5 +100,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel blob"
 description: "Learn how to interact with Vercel Blob storage using the vercel blob CLI command."
-last\_updated: "2026-03-08T05:03:12.006Z"
+last\_updated: "2026-03-23T09:40:06.557Z"
 source: "https://vercel.com/docs/cli/blob"

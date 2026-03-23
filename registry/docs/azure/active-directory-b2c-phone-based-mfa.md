@@ -1,0 +1,193 @@
+---
+title: Secure phone-based MFA in Azure AD B2C
+titleSuffix: Azure AD B2C
+description: Learn tips for securing phone-based multifactor authentication in your Azure AD B2C tenant by using Azure Monitor Log Analytics reports and alerts. Use our workbook to identify fraudulent phone authentications and mitigate fraudulent sign-ups. =
+
+author: kengaderdus
+manager: CelesteDG
+ms.service: azure-active-directory
+ms.topic: how-to
+ms.date: 02/03/2026
+ms.author: kengaderdus
+ms.subservice: b2c
+ms.custom: sfi-image-nochange
+
+
+
+#Customer intent: As an Azure AD B2C administrator, I want to monitor phone authentication failures and mitigate fraudulent sign-ups, so that I can protect against malicious use of the telephony service and ensure a secure authentication process.
+
+---
+# Secure phone-based multifactor authentication
+[!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
+
+With Microsoft Entra multifactor authentication, users can choose to receive an automated voice call at a phone number they register for verification. Malicious users could take advantage of this method by creating multiple accounts and placing phone calls without completing the MFA registration process. These numerous failed sign-ups could exhaust the allowed sign-up attempts, preventing other users from signing up for new accounts in your Azure AD B2C tenant. To help protect against these attacks, you can use Azure Monitor to monitor phone authentication failures and mitigate fraudulent sign-ups.
+
+> [!IMPORTANT]
+> Authenticator app (TOTP) provides stronger security than SMS/Phone multifactor authentication. To set this up please read our instructions for [enabling multifactor authentication in Azure Active Directory B2C](multi-factor-authentication.md).
+
+## Prerequisites
+
+Before you begin, create a [Log Analytics workspace](azure-monitor.md).
+
+## Create a phone-based MFA events workbook
+
+The [Azure AD B2C Reports & Alerts](https://github.com/azure-ad-b2c/siem#phone-authentication-failures) repository in GitHub contains artifacts you can use to create and publish reports, alerts, and dashboards based on Azure AD B2C logs. The draft workbook pictured below highlights phone-related failures.
+
+### Overview tab
+
+The following information is shown on the **Overview** tab:
+
+- Failure Reasons (the total number of failed phone authentications for each given reason)
+- Blocked Due to Bad Reputation
+- IP Address with Failed Phone Authentications (the total count of failed phone authentications for each given IP address)
+- Phone Numbers With IP address - Failed Phone Authentications
+- Browser (phone authentication failures per client browser)
+- Operating System (phone authentication failures per client operating system)
+
+![Overview tab](media/phone-based-mfa/overview-tab.png)
+
+### Details tab
+
+The following information is reported on the **Details** tab:
+
+- Azure AD B2C Policy - Failed Phone Authentications
+- Phone Authentication Failures by Phone Number – Time Chart (adjustable timeline)
+- Phone Authentication Failures by Azure AD B2C Policy – Time Chart (adjustable timeline)
+- Phone Authentication Failures by IP Address – Time Chart (adjustable timeline)
+- Select Phone Number to View Failure Details (select a phone number for a detailed list of failures)
+
+![Details tab 1 of 3](media/phone-based-mfa/details-tab-1.png)
+
+![Details tab 2 of 3](media/phone-based-mfa/details-tab-2.png)
+
+![Details tab 3 of 3](media/phone-based-mfa/details-tab-3.png)
+
+## Use the workbook to identify fraudulent sign-ups
+
+You can use the workbook to understand phone-based MFA events and identify potentially malicious use of the telephony service.
+
+1. Understand what’s normal for your tenant by answering these questions:
+
+   - Where are the regions from which you expect phone-based MFA?
+   - Examine the reasons shown for failed phone-based MFA attempts; are they considered normal or expected?
+
+2. Recognize the characteristics of fraudulent sign-up:
+
+   - **Location-based**: Examine **Phone Authentication Failures by IP Address** for any accounts that are associated with locations from which you don't expect users to sign up.
+
+   > [!NOTE]
+   > The IP Address provided is an approximate region.
+
+   - **Velocity-based**: Look at **Failed Phone Authentications Overtime (Per Day)**, which indicates phone numbers that are making an abnormal number of failed phone authentication attempts per day, ordered from highest (left) to lowest (right).
+
+3. Mitigate fraudulent sign-ups by following the steps in the next section.
+ 
+
+## Mitigate fraudulent sign-ups for user flow
+
+Take the following actions to help mitigate fraudulent sign-ups.
+
+- Use the **Recommended** versions of user flows to do the following:
+     
+   - [Enable the email one-time passcode feature (OTP)](phone-authentication-user-flows.md) for MFA (applies to both sign-up and sign-in flows).
+   - [Configure a Conditional Access policy](conditional-access-user-flow.md) to block sign-ins based on location (applies to sign-in flows only, not sign-up flows).
+   - To prevent automated attacks on your consumer-facing apps, [enable CAPTCHA](add-captcha.md). Azure AD B2C’s CAPTCHA supports both audio and visual CAPTCHA challenges, and applies to both sign-up and sign-in flows for your local accounts.
+
+- Remove country/region codes that aren't relevant to your organization from the drop-down menu where the user verifies their phone number (this change will apply to future sign-ups):
+    
+   1. Sign in to the [Azure portal](https://portal.azure.com) as the [External ID User Flow Administrator](/entra/identity/role-based-access-control/permissions-reference#external-id-user-flow-administrator) of your Azure AD B2C tenant.
+   1. If you have access to multiple tenants, select the **Settings** icon in the top menu to switch to your Azure AD B2C tenant from the **Directories + subscriptions** menu.
+   1. Choose **All services** in the top-left corner of the Azure portal, search for and select **Azure AD B2C**.
+   1. Select the user flow, and then select **Languages**. Select the language for your organization's primary geographic location to open the language details panel. (For this example, we'll select **English en** for the United States). Select **Multifactor authentication page**, and then select **Download defaults (en)**.
+ 
+      ![Upload new overrides to download defaults](media/phone-based-mfa/download-defaults.png)
+
+   1. Open the JSON file that was downloaded in the previous step. In the file, search for `DEFAULT`, and replace the line with `"Value": "{\"DEFAULT\":\"Country/Region\",\"US\":\"United States\"}"`. Be sure to set `Overrides` to `true`.
+
+ To implement SMS blocking effectively, make sure the Overrides setting is enabled (set to true) only for your organization’s primary or default language. Do not enable Overrides for any secondary or non-primary languages, as this can cause unexpected SMS blocking. Since the countryList in the JSON file acts as an allow list, be sure to include all countries/regions that should be permitted to send SMS in this list for the primary language configuration when Overrides is true.
+   > [!NOTE]
+   > You can customize the list of allowed country/region codes in the `countryList` element (see the [Phone factor authentication page example](localization-string-ids.md#phone-factor-authentication-page-example)).
+
+   1. Save the JSON file. In the language details panel, under **Upload new overrides**, select the modified JSON file to upload it.
+   1. Close the panel and select **Run user flow**. For this example, confirm that **United States** is the only country code available in the dropdown:
+ 
+      ![Country code drop-down](media/phone-based-mfa/country-code-drop-down.png)
+
+## Mitigate fraudulent sign-ups for custom policy
+
+To help prevent fraudulent sign-ups, remove any country/region codes that do not apply to your organization by following these steps:
+
+1. Locate the policy file that defines the `RelyingParty`. For example, in the [Starter Pack](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack), this is usually the SignUpOrSignin.xml file. See the following snippet.
+
+     ```xml
+    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+      xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+      PolicySchemaVersion="0.3.0.0"
+      TenantId="yourtenant.onmicrosoft.com"
+      PolicyId="B2C_1A_signup_signin"
+      PublicPolicyUri="http://yourtenant.onmicrosoft.com/B2C_1A_signup_signin">
+    
+      <BasePolicy>
+        <TenantId>yourtenant.onmicrosoft.com</TenantId>
+        <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+      </BasePolicy>
+
+      <!-- Add this BuildingBlocks section to the relying party policy. -->
+      <BuildingBlocks>
+         <!-- Add the XML code outlined in Step 2 in this section. -->
+      </BuildingBlocks>
+    
+      <RelyingParty>
+        ...
+      </RelyingParty>
+    </TrustFrameworkPolicy>
+    ```
+      > [!IMPORTANT]
+      >Add the code in step 2 to the _relying party policy_ to enforce country/region code restrictions on the server side. You must not define these elements only in parent policies; put them in the relying party policy.
+
+1. In the `BuildingBlocks` section of this policy file, add the following code. Make sure to include only the country/region codes relevant to your organization:
+
+   ```xml
+    <BuildingBlocks>
+
+      <ContentDefinitions>
+        <ContentDefinition Id="api.phonefactor">
+          <LoadUri>~/tenant/templates/AzureBlue/multifactor-1.0.0.cshtml</LoadUri>
+          <DataUri>urn:com:microsoft:aad:b2c:elements:contract:multifactor:1.2.20</DataUri>
+          <Metadata>
+            <Item Key="TemplateId">azureBlue</Item>
+          </Metadata>
+          <LocalizedResourcesReferences MergeBehavior="Prepend">
+            <!-- Add only primary business language here -->
+            <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.phonefactor.en" />        
+          </LocalizedResourcesReferences>
+        </ContentDefinition>
+      </ContentDefinitions>
+
+      <Localization Enabled="true">
+        <SupportedLanguages DefaultLanguage="en" MergeBehavior="ReplaceAll">
+          <!-- Add only primary business language here -->
+          <SupportedLanguage>en</SupportedLanguage>
+        </SupportedLanguages>
+
+        <!-- Phone factor for primary business language -->
+        <LocalizedResources Id="api.phonefactor.en">
+          <LocalizedStrings>
+           <LocalizedString ElementType="UxElement" StringId="countryList">{"DEFAULT":"Country/Region","JP":"Japan","BG":"Bulgaria","US":"United States"}</LocalizedString>
+          </LocalizedStrings>
+        </LocalizedResources>
+      </Localization>
+
+     </BuildingBlocks>
+    ```
+   
+    The countryList acts as an allow list. Only the countries/regions you specify in this list (for example, Japan, Bulgaria, and the United States) are permitted to use MFA. All other countries/regions are blocked.
+
+
+
+## Related content
+
+- Learn about [Identity Protection and Conditional Access for Azure AD B2C](conditional-access-identity-protection-overview.md) 
+

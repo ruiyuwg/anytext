@@ -50,7 +50,11 @@ The following commands are available:
 
 ### `next dev` options
 
-`next dev` starts the application in development mode with Hot Module Reloading (HMR), error reporting, and more. The following options are available when running `next dev`:
+`next dev` starts the application in development mode with Hot Module Reloading (HMR), error reporting, and more.
+
+> **Good to know**: Development builds output to `.next/dev` instead of `.next`. This allows you to run `next dev` and `next build` concurrently without conflicts.
+
+The following options are available when running `next dev`:
 
 | Option                                   | Description                                                                                                                                          |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -65,6 +69,7 @@ The following commands are available:
 | `--experimental-https-cert <path>`       | Path to a HTTPS certificate file.                                                                                                                    |
 | `--experimental-https-ca <path>`         | Path to a HTTPS certificate authority file.                                                                                                          |
 | `--experimental-upload-trace <traceUrl>` | Reports a subset of the debugging trace to a remote HTTP URL.                                                                                        |
+| `--experimental-cpu-prof`                | Enables CPU profiling using V8's inspector. Profiles are saved to `.next/cpu-profiles/` on exit.                                                     |
 
 ### `next build` options
 
@@ -90,12 +95,13 @@ The following options are available for the `next build` command:
 | `-d` or `--debug`                  | Enables a more verbose build output. With this flag enabled additional build output like rewrites, redirects, and headers will be shown.                                           |
 |                                    |
 | `--profile`                        | Enables production [profiling for React](https://react.dev/reference/react/Profiler).                                                                                              |
-| `--no-lint`                        | Disables linting. _Note: linting will be removed from `next build` in Next 16. If you're using Next 15.5+ with a linter other than `eslint`, linting during build will not occur._ |
+| `--no-lint`                        | Disables linting. *Note: linting will be removed from `next build` in Next 16. If you're using Next 15.5+ with a linter other than `eslint`, linting during build will not occur.* |
 | `--no-mangling`                    | Disables [mangling](https://en.wikipedia.org/wiki/Name_mangling). This may affect performance and should only be used for debugging purposes.                                      |
 | `--experimental-app-only`          | Builds only App Router routes.                                                                                                                                                     |
 | `--experimental-build-mode [mode]` | Uses an experimental build mode. (choices: "compile", "generate", default: "default")                                                                                              |
 | `--debug-prerender`                | Debug prerender errors in development.                                                                                                                                             |
 | `--debug-build-paths=<patterns>`   | Build only specific routes for debugging.                                                                                                                                          |
+| `--experimental-cpu-prof`          | Enables CPU profiling using V8's inspector. Profiles are saved to `.next/cpu-profiles/` on exit.                                                                                   |
 
 ### `next start` options
 
@@ -110,6 +116,7 @@ The following options are available for the `next start` command:
 | `-p` or `--port <port>`                 | Specify a port number on which to start the application. (default: 3000, env: PORT)                             |
 | `-H` or `--hostname <hostname>`         | Specify a hostname on which to start the application (default: 0.0.0.0).                                        |
 | `--keepAliveTimeout <keepAliveTimeout>` | Specify the maximum amount of milliseconds to wait before closing the inactive connections.                     |
+| `--experimental-cpu-prof`               | Enables CPU profiling using V8's inspector. Profiles are saved to `.next/cpu-profiles/` on exit.                |
 
 ### `next info` options
 
@@ -181,7 +188,7 @@ The following options are available for the `next typegen` command:
 | `-h, --help`  | Show all available options.                                                                  |
 | `[directory]` | A directory on which to generate types. If not provided, the current directory will be used. |
 
-Output files are written to `<distDir>/types` (typically: `.next/dev/types` or `.next/types`, see [`isolatedDevBuild`](/docs/app/api-reference/config/next-config-js/isolatedDevBuild)):
+Output files are written to `<distDir>/types` (typically: `.next/dev/types` in development or `.next/types` in production):
 
 ```bash filename="Terminal"
 next typegen
@@ -337,7 +344,7 @@ next dev --experimental-https --experimental-https-key ./certificates/localhost-
 
 ### Configuring a timeout for downstream proxies
 
-When deploying Next.js behind a downstream proxy (e.g. a load-balancer like AWS ELB/ALB), it's important to configure Next's underlying HTTP server with [keep-alive timeouts](https://nodejs.org/api/http.html#http_server_keepalivetimeout) that are _larger_ than the downstream proxy's timeouts. Otherwise, once a keep-alive timeout is reached for a given TCP connection, Node.js will immediately terminate that connection without notifying the downstream proxy. This results in a proxy error whenever it attempts to reuse a connection that Node.js has already terminated.
+When deploying Next.js behind a downstream proxy (e.g. a load-balancer like AWS ELB/ALB), it's important to configure Next's underlying HTTP server with [keep-alive timeouts](https://nodejs.org/api/http.html#http_server_keepalivetimeout) that are *larger* than the downstream proxy's timeouts. Otherwise, once a keep-alive timeout is reached for a given TCP connection, Node.js will immediately terminate that connection without notifying the downstream proxy. This results in a proxy error whenever it attempts to reuse a connection that Node.js has already terminated.
 
 To configure the timeout values for the production Next.js server, pass `--keepAliveTimeout` (in milliseconds) to `next start`, like so:
 
@@ -354,6 +361,46 @@ NODE_OPTIONS='--throw-deprecation' next
 NODE_OPTIONS='-r esm' next
 NODE_OPTIONS='--inspect' next
 ```
+
+### CPU profiling
+
+You can capture CPU profiles to analyze performance bottlenecks in your Next.js application. The `--experimental-cpu-prof` flag enables V8's built-in CPU profiler and saves profiles to `.next/cpu-profiles/` when the process exits:
+
+```bash filename="Terminal"
+# Profile the build process
+next build --experimental-cpu-prof
+
+# Profile the dev server (profile saved on Ctrl+C or SIGTERM)
+next dev --experimental-cpu-prof
+
+# Profile the production server
+next start --experimental-cpu-prof
+```
+
+The generated `.cpuprofile` files can be opened in Chrome DevTools (Performance tab → Load profile) or other V8-compatible profiling tools.
+
+> **Good to know**: Profile files are named with a descriptive prefix and timestamp. The profiles generated depend on the command:
+>
+> **`next dev`:**
+>
+> - `dev-main-*` - Parent process (dev server orchestration)
+> - `dev-server-*` - Child server process (request handling and rendering) - this is typically what you want to analyze
+>
+> **`next build` (Turbopack):**
+>
+> - `build-main-*` - Main build orchestration process
+> - `build-turbopack-*` - Turbopack compilation worker
+>
+> **`next build` (Webpack):**
+>
+> - `build-main-*` - Main build orchestration process
+> - `build-webpack-client-*` - Client bundle compilation worker
+> - `build-webpack-server-*` - Server bundle compilation worker
+> - `build-webpack-edge-server-*` - Edge runtime compilation worker
+>
+> **`next start`:**
+>
+> - `start-main-*` - Production server process
 
 | Version   | Changes                                                                         |
 | --------- | ------------------------------------------------------------------------------- |

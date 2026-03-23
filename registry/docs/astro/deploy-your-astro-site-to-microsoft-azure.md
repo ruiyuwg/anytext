@@ -36,7 +36,7 @@ The GitHub action yaml that is created for you assumes the use of node 14. This 
 
 ```plaintext
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.12.0"
   },
 ```
 

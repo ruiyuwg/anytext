@@ -12,7 +12,7 @@
 
 [Configuration reference](https://www.sanity.io/docs/blueprints/blueprint-config)
 
-[Blueprints](https://www.sanity.io/docs/cli-reference/cli-blueprints)
+[Blueprints CLI command reference](https://www.sanity.io/docs/cli-reference/cli-blueprints)
 
 # Introduction
 

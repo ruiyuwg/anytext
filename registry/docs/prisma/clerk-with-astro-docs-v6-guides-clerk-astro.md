@@ -126,7 +126,7 @@ bun add @clerk/astro @astrojs/node
 
 In the Clerk Dashboard, navigate to the **API keys** page. In the **Quick Copy** section, copy your Clerk Publishable and Secret Keys. Paste your keys into `.env` in the root of your project:
 
-```dotenv title=".env"
+```bash title=".env"
 PUBLIC_CLERK_PUBLISHABLE_KEY=<your-publishable-key>
 CLERK_SECRET_KEY=<your-secret-key>
 ```
@@ -785,14 +785,14 @@ Click ***Create*** to save the webhook endpoint.
 
 Copy the ***Signing Secret*** and add it to your `.env` file:
 
-```dotenv title=".env"
+```bash title=".env"
 # Prisma
 DATABASE_URL=<your-database-url>
 
 # Clerk
 PUBLIC_CLERK_PUBLISHABLE_KEY=<your-publishable-key>
 CLERK_SECRET_KEY=<your-secret-key>
-CLERK_WEBHOOK_SIGNING_SECRET=<your-signing-secret> {/* [!code ++] */}
+CLERK_WEBHOOK_SIGNING_SECRET=<your-signing-secret> # [!code ++]
 ```
 
 Restart your dev server to pick up the new environment variable:

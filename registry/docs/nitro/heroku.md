@@ -39,7 +39,7 @@ heroku config:set NITRO\_PRESET=heroku
 
 #### Add the heroku Nginx buildpack [here](https://github.com/heroku/heroku-buildpack-nginx.git){rel=""nofollow""}
 
-#### Change to the 'node' preset in your \`nuxt.config\`\`\`\`json5
+#### Change to the 'node' preset in your \`nitro.config\`\`\`\`json5
 
 "nitro": {
 "preset":"node",
@@ -63,7 +63,7 @@ server.listen('/tmp/nginx.socket') //following the buildpack doc
 
 import fs from "fs"
 
-export default defineNitroPlugin((nitroApp) => {
+export default definePlugin((nitroApp) => {
 if((process.env.NODE\_ENV || 'development') != 'development') {
 fs.openSync('/tmp/app-initialized', 'w')
 }
@@ -97,7 +97,7 @@ fs.openSync('/tmp/app-initialized', 'w')
 
 ## Using IIS handler
 
-**Preset:** `iis_handler` / `iis`
+**Preset:** `iis_handler`
 
 You can use IIS http handler directly.
 
@@ -111,8 +111,9 @@ You can use IIS http handler directly.
 
 ## IIS config options
 
-::code-group
 ```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
 export default defineNitroConfig({
   // IIS options default
   iis: {
@@ -123,19 +124,3 @@ export default defineNitroConfig({
   },
 });
 ````
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  nitro: {
-    // IIS options default
-    iis: {
-      // merges in a pre-existing web.config file to the nitro default file
-      mergeConfig: true,
-      // overrides the default nitro web.config file all together
-      overrideConfig: false,
-    },
-  },
-});
-```
-
-::

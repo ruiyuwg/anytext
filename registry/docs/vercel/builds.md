@@ -137,5 +137,5 @@ To explore more features and best practices for building and deploying with Verc
 
 title: "Cache-Control headers"
 description: "Learn about the cache-control headers sent to each Vercel deployment and how to use them to control the caching behavior of your application."
-last\_updated: "2026-03-08T05:03:11.864Z"
+last\_updated: "2026-03-23T09:40:05.892Z"
 source: "https://vercel.com/docs/caching/cache-control-headers"

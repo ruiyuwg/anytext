@@ -249,4 +249,4 @@ The default configuration is the equivalent of:
 
 ## Original Author
 
-[Troy Goode](https://github.com/TroyGoode) ([\[email protected\]](/cdn-cgi/l/email-protection#e89c9a87918f87878c8da88f85898184c68b8785))
+[Troy Goode](https://github.com/TroyGoode) ([\[email protected\]](/cdn-cgi/l/email-protection#bacec8d5c3ddd5d5dedffaddd7dbd3d694d9d5d7))

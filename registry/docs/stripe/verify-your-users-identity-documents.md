@@ -187,8 +187,8 @@ You need a server-side endpoint to [create the VerificationSession](https://docs
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -652,8 +652,8 @@ You need a server-side endpoint to [create the VerificationSession](https://docs
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -970,7 +970,7 @@ You can use verification flows for re-usable configuration, which is passed to t
 
 You need a server-side endpoint to [create the VerificationSession](https://docs.stripe.com/api/identity/verification_sessions/create.md). Creating the `VerificationSession` server-side prevents malicious users from overriding verification options and incurring processing charges on your account. Add authentication to this endpoint by including a user reference in the session metadata or storing the session ID in your database.
 
-For security, don’t create a `VerificationSession` object that’s directly accessible from the mobile client. Instead, your server provides the SDK with an ephemeral key — a short-lived API key with restricted access to the [VerificationSession](https://docs.stripe.com/api/identity/verification_sessions.md). You can think of an ephemeral key as a session, authorizing the SDK to retrieve and update a specific `VerificationSession` object for the duration of the session.
+For security, don’t create a `VerificationSession` object that’s directly accessible from the mobile client. Instead, your server provides the SDK with an ephemeral key—a short-lived API key with restricted access to the [VerificationSession](https://docs.stripe.com/api/identity/verification_sessions.md). You can think of an ephemeral key as a session, authorizing the SDK to retrieve and update a specific `VerificationSession` object for the duration of the session.
 
 After successfully creating a `VerificationSession` and ephemeral key, send the `VerificationSession` [ID](https://docs.stripe.com/api/identity/verification_sessions/object.md#identity_verification_session_object-id) and ephemeral key secret to the client to show the document upload sheet.
 
@@ -980,8 +980,8 @@ After successfully creating a `VerificationSession` and ephemeral key, send the 
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -1301,8 +1301,8 @@ If you had a [Modal](https://docs.stripe.com/identity/verify-identity-documents.
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -1329,8 +1329,8 @@ If you had a [redirect](https://docs.stripe.com/identity/verify-identity-documen
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -1359,8 +1359,8 @@ To use native SDK, create the same [VerificationSession](https://docs.stripe.com
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -1592,7 +1592,7 @@ dependencies {
   // ...
 
   // Stripe Identity Android SDK
-  implementation("com.stripe:identity:22.8.1")
+  implementation("com.stripe:identity:23.0.2")
 }
 ```
 
@@ -1609,10 +1609,10 @@ dependencies {
   // ...
 
   // Stripe Identity Android SDK
-  implementation('com.stripe:identity:22.8.1') {
+  implementation('com.stripe:identity:23.0.2') {
     exclude group: 'com.stripe', module: 'ml-core-default' // exclude the default TFLite runtime
   }
-  implementation('com.stripe:ml-core-googleplay:22.8.1') // include the Google Play TFLite runtime
+  implementation('com.stripe:ml-core-googleplay:23.0.2') // include the Google Play TFLite runtime
 }
 ```
 
@@ -1651,7 +1651,7 @@ You can use verification flows for re-usable configuration, which is passed to t
 
 You need a server-side endpoint to [create the VerificationSession](https://docs.stripe.com/api/identity/verification_sessions/create.md). Creating the `VerificationSession` server-side prevents malicious users from overriding verification options and incurring processing charges on your account. Add authentication to this endpoint by including a user reference in the session metadata or storing the session ID in your database.
 
-For security, don’t create a `VerificationSession` object that’s directly accessible from the mobile client. Instead, your server provides the SDK with an ephemeral key — a short-lived API key with restricted access to the [VerificationSession](https://docs.stripe.com/api/identity/verification_sessions.md). You can think of an ephemeral key as a session, authorizing the SDK to retrieve and update a specific `VerificationSession` object for the duration of the session.
+For security, don’t create a `VerificationSession` object that’s directly accessible from the mobile client. Instead, your server provides the SDK with an ephemeral key—a short-lived API key with restricted access to the [VerificationSession](https://docs.stripe.com/api/identity/verification_sessions.md). You can think of an ephemeral key as a session, authorizing the SDK to retrieve and update a specific `VerificationSession` object for the duration of the session.
 
 After successfully creating a `VerificationSession` and ephemeral key, send the `VerificationSession` [ID](https://docs.stripe.com/api/identity/verification_sessions/object.md#identity_verification_session_object-id) and ephemeral key secret to the client to show the document upload sheet.
 
@@ -1661,8 +1661,8 @@ After successfully creating a `VerificationSession` and ephemeral key, send the 
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -1917,7 +1917,7 @@ dependencies {
   // ...
 
   // Stripe Identity Android SDK
-  implementation("com.stripe:identity:22.8.1")
+  implementation("com.stripe:identity:23.0.2")
 }
 ```
 
@@ -1934,10 +1934,10 @@ dependencies {
   // ...
 
   // Stripe Identity Android SDK
-  implementation('com.stripe:identity:22.8.1') {
+  implementation('com.stripe:identity:23.0.2') {
     exclude group: 'com.stripe', module: 'ml-core-default' // exclude the default TFLite runtime
   }
-  implementation('com.stripe:ml-core-googleplay:22.8.1') // include the Google Play TFLite runtime
+  implementation('com.stripe:ml-core-googleplay:23.0.2') // include the Google Play TFLite runtime
 }
 ```
 
@@ -1976,8 +1976,8 @@ If you had a [Modal](https://docs.stripe.com/identity/verify-identity-documents.
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -2004,8 +2004,8 @@ If you had a [redirect](https://docs.stripe.com/identity/verify-identity-documen
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -2034,8 +2034,8 @@ To use native SDK, create the same [VerificationSession](https://docs.stripe.com
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -2320,7 +2320,7 @@ You can use verification flows for re-usable configuration, which is passed to t
 
 You need a server-side endpoint to [create the VerificationSession](https://docs.stripe.com/api/identity/verification_sessions/create.md). Creating the `VerificationSession` server-side prevents malicious users from overriding verification options and incurring processing charges on your account. Add authentication to this endpoint by including a user reference in the session metadata or storing the session ID in your database.
 
-For security, don’t create a `VerificationSession` object that’s directly accessible from the mobile client. Instead, your server provides the SDK with an ephemeral key — a short-lived API key with restricted access to the [VerificationSession](https://docs.stripe.com/api/identity/verification_sessions.md). You can think of an ephemeral key as a session, authorizing the SDK to retrieve and update a specific `VerificationSession` object for the duration of the session.
+For security, don’t create a `VerificationSession` object that’s directly accessible from the mobile client. Instead, your server provides the SDK with an ephemeral key—a short-lived API key with restricted access to the [VerificationSession](https://docs.stripe.com/api/identity/verification_sessions.md). You can think of an ephemeral key as a session, authorizing the SDK to retrieve and update a specific `VerificationSession` object for the duration of the session.
 
 After successfully creating a `VerificationSession` and ephemeral key, send the `VerificationSession` [ID](https://docs.stripe.com/api/identity/verification_sessions/object.md#identity_verification_session_object-id) and ephemeral key secret to the client to show the document upload sheet.
 
@@ -2330,8 +2330,8 @@ After successfully creating a `VerificationSession` and ephemeral key, send the 
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -2611,8 +2611,8 @@ If you had a [Modal](https://docs.stripe.com/identity/verify-identity-documents.
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -2639,8 +2639,8 @@ If you had a [redirect](https://docs.stripe.com/identity/verify-identity-documen
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:
@@ -2669,8 +2669,8 @@ To use native SDK, create the same [VerificationSession](https://docs.stripe.com
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 
 // In the route handler for /create-verification-session:

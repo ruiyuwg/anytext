@@ -45,5 +45,5 @@ Vercel will present a message when you have successfully submitted the nameserve
 
 title: "Domains Overview"
 description: "Learn the fundamentals of how domains, DNS, and nameservers work on Vercel."
-last\_updated: "2026-03-08T05:03:13.465Z"
+last\_updated: "2026-03-23T09:40:08.657Z"
 source: "https://vercel.com/docs/domains"

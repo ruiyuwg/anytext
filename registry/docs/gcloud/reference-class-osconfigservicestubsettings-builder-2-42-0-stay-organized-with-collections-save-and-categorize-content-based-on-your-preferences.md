@@ -1,0 +1,439 @@
+-   [Home](https://docs.cloud.google.com/)
+-   [Documentation](https://docs.cloud.google.com/docs)
+-   [Developer tools](https://docs.cloud.google.com/docs/costs-usage)
+-   [Java](https://docs.cloud.google.com/java/docs)
+-   [Client libraries](https://docs.cloud.google.com/java/docs/reference)
+
+Send feedback
+
+# Class OsConfigServiceStubSettings.Builder (2.42.0) Stay organized with collections Save and categorize content based on your preferences.
+
+2.89.0 (latest) 2.87.0 2.85.0 2.84.0 2.82.0 2.80.0 2.78.0 2.77.0 2.76.0 2.75.0 2.74.0 2.72.0 2.70.0 2.69.0 2.66.0 2.65.0 2.64.0 2.62.0 2.61.0 2.60.0 2.59.0 2.58.0 2.57.0 2.56.0 2.55.0 2.54.0 2.53.0 2.51.0 2.50.0 2.49.0 2.48.0 2.47.0 2.46.0 2.45.0 2.44.0 2.43.0 2.42.0 2.41.0 2.39.0 2.38.0 2.37.0 2.36.0 2.35.0 2.34.0 2.33.0 2.32.0 2.31.0 2.30.0 2.29.0 2.26.0 2.25.0 2.24.0 2.23.0 2.22.0 2.21.0 2.20.0 2.19.0 2.18.0 2.17.0 2.16.0 2.15.0 2.14.0 2.13.0 2.11.0 2.10.0 2.9.0 2.8.0 2.7.0 2.6.0 2.5.6 2.4.3 2.3.2
+
+```
+public static class OsConfigServiceStubSettings.Builder extends StubSettings.Builder<OsConfigServiceStubSettings,OsConfigServiceStubSettings.Builder>
+```
+
+Builder for OsConfigServiceStubSettings.
+
+## Inheritance
+
+[java.lang.Object](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html) \> [StubSettings.Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html) \> OsConfigServiceStubSettings.Builder
+
+## Inherited Members
+
+[StubSettings.Builder.<B>build()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder__B_build__)
+
+[StubSettings.Builder.applyToAllUnaryMethods(Iterable<UnaryCallSettings.Builder<?,?>>,ApiFunction<UnaryCallSettings.Builder<?,?>,Void>)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_applyToAllUnaryMethods_java_lang_Iterable_com_google_api_gax_rpc_UnaryCallSettings_Builder_______com_google_api_core_ApiFunction_com_google_api_gax_rpc_UnaryCallSettings_Builder______java_lang_Void__)
+
+[StubSettings.Builder.getBackgroundExecutorProvider()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getBackgroundExecutorProvider__)
+
+[StubSettings.Builder.getClock()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getClock__)
+
+[StubSettings.Builder.getCredentialsProvider()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getCredentialsProvider__)
+
+[StubSettings.Builder.getEndpoint()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getEndpoint__)
+
+[StubSettings.Builder.getExecutorProvider()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getExecutorProvider__)
+
+[StubSettings.Builder.getGdchApiAudience()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getGdchApiAudience__)
+
+[StubSettings.Builder.getHeaderProvider()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getHeaderProvider__)
+
+[StubSettings.Builder.getInternalHeaderProvider()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getInternalHeaderProvider__)
+
+[StubSettings.Builder.getMtlsEndpoint()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getMtlsEndpoint__)
+
+[StubSettings.Builder.getQuotaProjectId()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getQuotaProjectId__)
+
+[StubSettings.Builder.getStreamWatchdogCheckInterval()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getStreamWatchdogCheckInterval__)
+
+[StubSettings.Builder.getStreamWatchdogProvider()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getStreamWatchdogProvider__)
+
+[StubSettings.Builder.getTracerFactory()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getTracerFactory__)
+
+[StubSettings.Builder.getTransportChannelProvider()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getTransportChannelProvider__)
+
+[StubSettings.Builder.self()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_self__)
+
+[StubSettings.Builder.setBackgroundExecutorProvider(ExecutorProvider)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setBackgroundExecutorProvider_com_google_api_gax_core_ExecutorProvider_)
+
+[StubSettings.Builder.setClock(ApiClock)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setClock_com_google_api_core_ApiClock_)
+
+[StubSettings.Builder.setCredentialsProvider(CredentialsProvider)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setCredentialsProvider_com_google_api_gax_core_CredentialsProvider_)
+
+[StubSettings.Builder.setEndpoint(String)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setEndpoint_java_lang_String_)
+
+[StubSettings.Builder.setExecutorProvider(ExecutorProvider)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setExecutorProvider_com_google_api_gax_core_ExecutorProvider_)
+
+[StubSettings.Builder.setGdchApiAudience(String)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setGdchApiAudience_java_lang_String_)
+
+[StubSettings.Builder.setHeaderProvider(HeaderProvider)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setHeaderProvider_com_google_api_gax_rpc_HeaderProvider_)
+
+[StubSettings.Builder.setInternalHeaderProvider(HeaderProvider)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setInternalHeaderProvider_com_google_api_gax_rpc_HeaderProvider_)
+
+[StubSettings.Builder.setMtlsEndpoint(String)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setMtlsEndpoint_java_lang_String_)
+
+[StubSettings.Builder.setQuotaProjectId(String)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setQuotaProjectId_java_lang_String_)
+
+[StubSettings.Builder.setStreamWatchdogCheckInterval(Duration)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setStreamWatchdogCheckInterval_org_threeten_bp_Duration_)
+
+[StubSettings.Builder.setStreamWatchdogProvider(WatchdogProvider)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setStreamWatchdogProvider_com_google_api_gax_rpc_WatchdogProvider_)
+
+[StubSettings.Builder.setSwitchToMtlsEndpointAllowed(boolean)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setSwitchToMtlsEndpointAllowed_boolean_)
+
+[StubSettings.Builder.setTracerFactory(ApiTracerFactory)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setTracerFactory_com_google_api_gax_tracing_ApiTracerFactory_)
+
+[StubSettings.Builder.setTransportChannelProvider(TransportChannelProvider)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setTransportChannelProvider_com_google_api_gax_rpc_TransportChannelProvider_)
+
+[StubSettings.Builder.setUniverseDomain(String)](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_setUniverseDomain_java_lang_String_)
+
+[StubSettings.Builder.toString()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_toString__)
+
+[Object.clone()](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#clone--)
+
+[Object.equals(Object)](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-)
+
+[Object.finalize()](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#finalize--)
+
+[Object.getClass()](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#getClass--)
+
+[Object.hashCode()](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#hashCode--)
+
+[Object.notify()](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#notify--)
+
+[Object.notifyAll()](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#notifyAll--)
+
+[Object.wait()](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait--)
+
+[Object.wait(long)](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait-long-)
+
+[Object.wait(long,int)](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait-long-int-)
+
+## Constructors
+
+### Builder()
+
+```
+protected Builder()
+```
+
+### Builder(ClientContext clientContext)
+
+```
+protected Builder(ClientContext clientContext)
+```
+
+**Parameter**
+
+**Name**
+
+**Description**
+
+`clientContext`
+
+`[ClientContext](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.ClientContext.html)`  
+
+### Builder(OsConfigServiceStubSettings settings)
+
+```
+protected Builder(OsConfigServiceStubSettings settings)
+```
+
+**Parameter**
+
+**Name**
+
+**Description**
+
+`settings`
+
+`[OsConfigServiceStubSettings](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.stub.OsConfigServiceStubSettings)`  
+
+## Methods
+
+### applyToAllUnaryMethods(ApiFunction<UnaryCallSettings.Builder<?,?>,Void> settingsUpdater)
+
+```
+public OsConfigServiceStubSettings.Builder applyToAllUnaryMethods(ApiFunction<UnaryCallSettings.Builder<?,?>,Void> settingsUpdater)
+```
+
+Applies the given settings updater function to all of the unary API methods in this service.
+
+Note: This method does not support applying settings to streaming methods.
+
+**Parameter**
+
+**Name**
+
+**Description**
+
+`settingsUpdater`
+
+`[ApiFunction](https://cloud.google.com/java/docs/reference/api-common/latest/com.google.api.core.ApiFunction.html)<[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.UnaryCallSettings.Builder.html)<?,?>,java.lang.Void>`  
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[OsConfigServiceStubSettings.Builder](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.stub.OsConfigServiceStubSettings.Builder)`
+
+### build()
+
+```
+public OsConfigServiceStubSettings build()
+```
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[OsConfigServiceStubSettings](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.stub.OsConfigServiceStubSettings)`
+
+**Overrides**
+
+[StubSettings.Builder<SettingsT,B>.<B>build()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder__B_build__)
+
+**Exceptions**
+
+**Type**
+
+**Description**
+
+`[IOException](https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html)`
+
+### cancelPatchJobSettings()
+
+```
+public UnaryCallSettings.Builder<PatchJobs.CancelPatchJobRequest,PatchJobs.PatchJob> cancelPatchJobSettings()
+```
+
+Returns the builder for the settings used for calls to cancelPatchJob.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.UnaryCallSettings.Builder.html)<[CancelPatchJobRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchJobs.CancelPatchJobRequest),[PatchJob](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchJobs.PatchJob)>`
+
+### createPatchDeploymentSettings()
+
+```
+public UnaryCallSettings.Builder<PatchDeployments.CreatePatchDeploymentRequest,PatchDeployments.PatchDeployment> createPatchDeploymentSettings()
+```
+
+Returns the builder for the settings used for calls to createPatchDeployment.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.UnaryCallSettings.Builder.html)<[CreatePatchDeploymentRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.CreatePatchDeploymentRequest),[PatchDeployment](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.PatchDeployment)>`
+
+### deletePatchDeploymentSettings()
+
+```
+public UnaryCallSettings.Builder<PatchDeployments.DeletePatchDeploymentRequest,Empty> deletePatchDeploymentSettings()
+```
+
+Returns the builder for the settings used for calls to deletePatchDeployment.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.UnaryCallSettings.Builder.html)<[DeletePatchDeploymentRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.DeletePatchDeploymentRequest),[Empty](https://cloud.google.com/java/docs/reference/protobuf/latest/com.google.protobuf.Empty.html)>`
+
+### executePatchJobSettings()
+
+```
+public UnaryCallSettings.Builder<PatchJobs.ExecutePatchJobRequest,PatchJobs.PatchJob> executePatchJobSettings()
+```
+
+Returns the builder for the settings used for calls to executePatchJob.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.UnaryCallSettings.Builder.html)<[ExecutePatchJobRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchJobs.ExecutePatchJobRequest),[PatchJob](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchJobs.PatchJob)>`
+
+### getEndpoint()
+
+```
+public String getEndpoint()
+```
+
+Returns the endpoint set by the user or the the service's default endpoint.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html)`
+
+**Overrides**
+
+[StubSettings.Builder<SettingsT,B>.getEndpoint()](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.StubSettings.Builder.html#com_google_api_gax_rpc_StubSettings_Builder_getEndpoint__)
+
+### getPatchDeploymentSettings()
+
+```
+public UnaryCallSettings.Builder<PatchDeployments.GetPatchDeploymentRequest,PatchDeployments.PatchDeployment> getPatchDeploymentSettings()
+```
+
+Returns the builder for the settings used for calls to getPatchDeployment.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.UnaryCallSettings.Builder.html)<[GetPatchDeploymentRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.GetPatchDeploymentRequest),[PatchDeployment](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.PatchDeployment)>`
+
+### getPatchJobSettings()
+
+```
+public UnaryCallSettings.Builder<PatchJobs.GetPatchJobRequest,PatchJobs.PatchJob> getPatchJobSettings()
+```
+
+Returns the builder for the settings used for calls to getPatchJob.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.UnaryCallSettings.Builder.html)<[GetPatchJobRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchJobs.GetPatchJobRequest),[PatchJob](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchJobs.PatchJob)>`
+
+### listPatchDeploymentsSettings()
+
+```
+public PagedCallSettings.Builder<PatchDeployments.ListPatchDeploymentsRequest,PatchDeployments.ListPatchDeploymentsResponse,OsConfigServiceClient.ListPatchDeploymentsPagedResponse> listPatchDeploymentsSettings()
+```
+
+Returns the builder for the settings used for calls to listPatchDeployments.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.PagedCallSettings.Builder.html)<[ListPatchDeploymentsRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.ListPatchDeploymentsRequest),[ListPatchDeploymentsResponse](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.ListPatchDeploymentsResponse),[ListPatchDeploymentsPagedResponse](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.OsConfigServiceClient.ListPatchDeploymentsPagedResponse)>`
+
+### listPatchJobInstanceDetailsSettings()
+
+```
+public PagedCallSettings.Builder<PatchJobs.ListPatchJobInstanceDetailsRequest,PatchJobs.ListPatchJobInstanceDetailsResponse,OsConfigServiceClient.ListPatchJobInstanceDetailsPagedResponse> listPatchJobInstanceDetailsSettings()
+```
+
+Returns the builder for the settings used for calls to listPatchJobInstanceDetails.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.PagedCallSettings.Builder.html)<[ListPatchJobInstanceDetailsRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchJobs.ListPatchJobInstanceDetailsRequest),[ListPatchJobInstanceDetailsResponse](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchJobs.ListPatchJobInstanceDetailsResponse),[ListPatchJobInstanceDetailsPagedResponse](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.OsConfigServiceClient.ListPatchJobInstanceDetailsPagedResponse)>`
+
+### listPatchJobsSettings()
+
+```
+public PagedCallSettings.Builder<PatchJobs.ListPatchJobsRequest,PatchJobs.ListPatchJobsResponse,OsConfigServiceClient.ListPatchJobsPagedResponse> listPatchJobsSettings()
+```
+
+Returns the builder for the settings used for calls to listPatchJobs.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.PagedCallSettings.Builder.html)<[ListPatchJobsRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchJobs.ListPatchJobsRequest),[ListPatchJobsResponse](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchJobs.ListPatchJobsResponse),[ListPatchJobsPagedResponse](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.OsConfigServiceClient.ListPatchJobsPagedResponse)>`
+
+### pausePatchDeploymentSettings()
+
+```
+public UnaryCallSettings.Builder<PatchDeployments.PausePatchDeploymentRequest,PatchDeployments.PatchDeployment> pausePatchDeploymentSettings()
+```
+
+Returns the builder for the settings used for calls to pausePatchDeployment.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.UnaryCallSettings.Builder.html)<[PausePatchDeploymentRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.PausePatchDeploymentRequest),[PatchDeployment](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.PatchDeployment)>`
+
+### resumePatchDeploymentSettings()
+
+```
+public UnaryCallSettings.Builder<PatchDeployments.ResumePatchDeploymentRequest,PatchDeployments.PatchDeployment> resumePatchDeploymentSettings()
+```
+
+Returns the builder for the settings used for calls to resumePatchDeployment.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.UnaryCallSettings.Builder.html)<[ResumePatchDeploymentRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.ResumePatchDeploymentRequest),[PatchDeployment](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.PatchDeployment)>`
+
+### unaryMethodSettingsBuilders()
+
+```
+public ImmutableList<UnaryCallSettings.Builder<?,?>> unaryMethodSettingsBuilders()
+```
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`com.google.common.collect.ImmutableList<[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.UnaryCallSettings.Builder.html)<?,?>>`
+
+### updatePatchDeploymentSettings()
+
+```
+public UnaryCallSettings.Builder<PatchDeployments.UpdatePatchDeploymentRequest,PatchDeployments.PatchDeployment> updatePatchDeploymentSettings()
+```
+
+Returns the builder for the settings used for calls to updatePatchDeployment.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Builder](https://cloud.google.com/java/docs/reference/gax/latest/com.google.api.gax.rpc.UnaryCallSettings.Builder.html)<[UpdatePatchDeploymentRequest](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.UpdatePatchDeploymentRequest),[PatchDeployment](/java/docs/reference/google-cloud-os-config/2.42.0/com.google.cloud.osconfig.v1.PatchDeployments.PatchDeployment)>`
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-03-14 UTC.

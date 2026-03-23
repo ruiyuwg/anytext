@@ -77,7 +77,29 @@ For nested fields or more complex aspects, start with the outer-most name and wo
 
 ### Option 3: use `@sanity/client`
 
-We're actively working to make interacting with Media Library form the Sanity JavaScript client happen. This section will be updated once client support is available.
+- Configure your client with a Media Library resource, then use `client.patch()` to assign aspect values to an asset:
+
+**index.ts**
+
+```
+import {createClient} from '@sanity/client'
+
+const client = createClient({
+  useCdn: false,
+  token: '<personal-auth-token>',
+  resource: {
+    type: 'media-library',
+    id: '<your-media-library-id>',
+  },
+})
+
+// Assign an aspect value to an asset
+await client
+  .patch('<asset-id>')
+  .setIfMissing({aspects: {}})
+  .set({'aspects.comment': 'Spring campaign hero image'})
+  .commit()
+```
 
 #### Additional resources
 

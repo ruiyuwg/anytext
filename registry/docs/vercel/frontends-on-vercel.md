@@ -10,6 +10,8 @@ The following frontend frameworks are supported with zero-configuration.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/brunch) | [View Demo](https://brunch-template.vercel.app)
 - **React**: Create React App allows you to get going with React in no time.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/create-react-app) | [View Demo](https://create-react-template.vercel.app)
+- **Django**: Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.
+  - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/django)
 - **Docusaurus (v1)**: Docusaurus makes it easy to maintain Open Source documentation websites.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/docusaurus) | [View Demo](https://docusaurus-template.vercel.app)
 - **Docusaurus (v2+)**: Docusaurus makes it easy to maintain Open Source documentation websites.
@@ -24,6 +26,8 @@ The following frontend frameworks are supported with zero-configuration.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/fasthtml) | [View Demo](https://fasthtml-template.vercel.app)
 - **Gatsby.js**: Gatsby helps developers build blazing fast websites and apps with React.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/gatsby) | [View Demo](https://gatsby.vercel.app)
+- **Go**: An open-source programming language supported by Google.
+  - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/go)
 - **Gridsome**: Gridsome is a Vue.js-powered framework for building websites & apps that are fast by default.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/gridsome) | [View Demo](https://gridsome-template.vercel.app)
 - **Hexo**: Hexo is a fast, simple & powerful blog framework powered by Node.js.
@@ -46,6 +50,8 @@ The following frontend frameworks are supported with zero-configuration.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/polymer) | [View Demo](https://polymer-template.vercel.app)
 - **Preact**: Preact is a fast 3kB alternative to React with the same modern API.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/preact) | [View Demo](https://preact-template.vercel.app)
+- **Python**: Python is a programming language that lets you work quickly and integrate systems more effectively.
+  - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/python)
 - **React Router**: Declarative routing for React
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/react-router) | [View Demo](https://react-router-v7-template.vercel.app)
 - **Saber**: Saber is a framework for building static sites in Vue.js that supports data from any source.
@@ -104,7 +110,7 @@ We're committed to having support for all Vercel features across frameworks, and
 
 title: "React Router on Vercel"
 description: "Learn how to use Vercel"
-last\_updated: "2026-03-08T05:03:14.919Z"
+last\_updated: "2026-03-23T09:40:10.588Z"
 source: "https://vercel.com/docs/frameworks/frontend/react-router"
 
 # React Router on Vercel

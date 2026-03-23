@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -71,7 +69,7 @@ Gordon CLI is part of Docker Desktop. To disable it, disable Gordon in Docker De
 
 1. Open Docker Desktop Settings.
 2. Navigate to the **Beta features** section.
-3. Clear the **Enable Docker AI** option.
+3. Clear the **Enable Gordon** option.
 4. Select **Apply**.
 
 ## [Commands](#commands)

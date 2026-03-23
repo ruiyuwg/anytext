@@ -193,8 +193,10 @@ Double opt-in subscription flow
 Full Phoenix web framework application
 ```
 
-# Send emails with Express
+# Send emails with Encore
 
-Source: https://resend.com/docs/send-with-express
+Source: https://resend.com/docs/send-with-encore-go
 
-Learn how to send your first email using Express and the Resend Node.js SDK.
+Learn how to send your first email using Encore and the Resend Go SDK.
+
+[Encore](https://encore.dev) is an open-source Go framework that provisions infrastructure directly from your application code, with built-in observability and cloud deployment.

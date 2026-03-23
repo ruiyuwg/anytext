@@ -103,8 +103,8 @@ import {Sections} from '@/compoents/Sections'
 
 // Your Sanity configuration
 const config = {
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   baseUrl: 'https://your-studio-url.sanity.studio',
 }
 
@@ -220,8 +220,8 @@ type SectionsProps = {
 
 // Your Sanity configuration
 const config = {
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   baseUrl: 'https://your-studio-url.sanity.studio',
 }
 

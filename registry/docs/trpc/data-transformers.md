@@ -16,9 +16,9 @@ yarn add superjson
 
 #### 2. Add to your `initTRPC`
 
-```ts title='routers/router/_app.ts'
-import { initTRPC } from "@trpc/server";
-import superjson from "superjson";
+```ts twoslash title='server/routers/_app.ts'
+import { initTRPC } from '@trpc/server';
+import superjson from 'superjson';
 
 export const t = initTRPC.create({
   transformer: superjson,
@@ -31,15 +31,24 @@ export const t = initTRPC.create({
 
 `createTRPCClient()`:
 
-```ts title='src/app/_trpc/client.ts'
-import { createTRPCClient } from "@trpc/client";
-import type { AppRouter } from "~/server/routers/_app";
-import superjson from "superjson";
+```ts twoslash title='src/app/_trpc/client.ts'
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import superjson from 'superjson';
+const t = initTRPC.create({ transformer: superjson });
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+// ---cut---
+import { createTRPCClient, httpLink } from '@trpc/client';
+import type { AppRouter } from './server';
+import superjson from 'superjson';
 
 export const client = createTRPCClient<AppRouter>({
   links: [
     httpLink({
-      url: "http://localhost:3000",
+      url: 'http://localhost:3000',
       transformer: superjson,
     }),
   ],
@@ -48,22 +57,30 @@ export const client = createTRPCClient<AppRouter>({
 
 ## Using [devalue](https://github.com/Rich-Harris/devalue)
 
-Devalue works like superjson, but focus in performance and compact payloads, but at the cost of a less human readable body.
+Devalue works like superjson, focusing on performance and compact payloads, but at the cost of a less human-readable body.
 
 ### How to
 
 #### 1. Install
 
 ```bash
-yarn add superjson devalue
+yarn add devalue
 ```
 
 #### 2. Add to `utils/trpc.ts`
 
 Here we use `parse` and `stringify` as they [mitigate XSS](https://github.com/Rich-Harris/devalue?tab=readme-ov-file#xss-mitigation).
 
-```ts title='utils/trpc.ts'
-import { parse, stringify } from "devalue";
+```ts twoslash title='utils/trpc.ts'
+// @filename: devalue.d.ts
+declare module 'devalue' {
+  export function parse(str: string): any;
+  export function stringify(value: any): string;
+}
+
+// @filename: utils/trpc.ts
+// ---cut---
+import { parse, stringify } from 'devalue';
 
 // [...]
 
@@ -75,9 +92,17 @@ export const transformer = {
 
 #### 3. Add to your `initTRPC`
 
-```ts title='server/routers/_app.ts'
-import { initTRPC } from "@trpc/server";
-import { transformer } from "../../utils/trpc";
+```ts twoslash title='server/routers/_app.ts'
+// @filename: utils/trpc.ts
+export const transformer = {
+  deserialize: (object: any) => object,
+  serialize: (object: any) => object,
+};
+
+// @filename: server/routers/_app.ts
+// ---cut---
+import { initTRPC } from '@trpc/server';
+import { transformer } from '../../utils/trpc';
 
 export const t = initTRPC.create({
   transformer,
@@ -90,15 +115,30 @@ export const t = initTRPC.create({
 
 `createTRPCClient()`:
 
-```ts title='src/app/_trpc/client.ts'
-import { createTRPCClient } from "@trpc/client";
-import type { AppRouter } from "~/server/routers/_app";
-import { transformer } from "../../utils/trpc";
+```ts twoslash title='src/app/_trpc/client.ts'
+// @filename: utils/trpc.ts
+export const transformer = {
+  deserialize: (object: any) => object,
+  serialize: (object: any) => object,
+};
+
+// @filename: server/routers/_app.ts
+import { initTRPC } from '@trpc/server';
+import { transformer } from '../../utils/trpc';
+const t = initTRPC.create({ transformer });
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+// ---cut---
+import { createTRPCClient, httpLink } from '@trpc/client';
+import type { AppRouter } from './server/routers/_app';
+import { transformer } from './utils/trpc';
 
 export const client = createTRPCClient<AppRouter>({
   links: [
     httpLink({
-      url: "http://localhost:3000",
+      url: 'http://localhost:3000',
       transformer,
     }),
   ],
@@ -111,7 +151,7 @@ If a transformer should only be used for one direction or different transformers
 
 ## `DataTransformer` interface
 
-```ts
+```ts twoslash
 export interface DataTransformer {
   serialize(object: any): any;
   deserialize(object: any): any;
@@ -148,91 +188,5 @@ export interface CombinedDataTransformer {
    * Specify how the data sent from the server to the client should be transformed.
    */
   output: OutputDataTransformer;
-}
-```
-
-# Error Formatting
-
-The error formatting in your router will be inferred all the way to your client (& React components)
-
-## Usage example highlighted
-
-### Adding custom formatting
-
-```ts title='server.ts'
-import { initTRPC } from "@trpc/server";
-
-export const t = initTRPC.context<Context>().create({
-  errorFormatter(opts) {
-    const { shape, error } = opts;
-    return {
-      ...shape,
-      data: {
-        ...shape.data,
-        zodError:
-          error.code === "BAD_REQUEST" && error.cause instanceof ZodError
-            ? error.cause.flatten()
-            : null,
-      },
-    };
-  },
-});
-```
-
-### Usage in React
-
-```tsx title='components/MyComponent.tsx'
-export function MyComponent() {
-  const mutation = trpc.addPost.useMutation();
-
-  useEffect(() => {
-    mutation.mutate({ title: "example" });
-  }, []);
-
-  if (mutation.error?.data?.zodError) {
-    // zodError will be inferred
-    return (
-      <pre>Error: {JSON.stringify(mutation.error.data.zodError, null, 2)}</pre>
-    );
-  }
-  return <>[...]</>;
-}
-```
-
-## All properties sent to `errorFormatter()`
-
-> Since `v8.x` tRPC is compliant with [JSON-RPC 2.0](https://www.jsonrpc.org/specification)
-
-```ts
-{
-  error: TRPCError;
-  type: ProcedureType | "unknown";
-  path: string | undefined;
-  input: unknown;
-  ctx: undefined | TContext;
-  shape: DefaultErrorShape; // the default error shape
-}
-```
-
-**`DefaultErrorShape`:**
-
-```ts
-type DefaultErrorData = {
-  code: TRPC_ERROR_CODE_KEY;
-  httpStatus: number;
-  /**
-   * Path to the procedure that threw the error
-   */
-  path?: string;
-  /**
-   * Stack trace of the error (only in development)
-   */
-  stack?: string;
-};
-
-interface DefaultErrorShape {
-  message: string;
-  code: TRPC_ERROR_CODE_NUMBER;
-  data: DefaultErrorData;
 }
 ```

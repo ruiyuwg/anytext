@@ -101,11 +101,11 @@ It also adds extra features to standard MDX, including support for Markdown-styl
 
 `.mdx` files must be written in [MDX syntax](https://mdxjs.com/docs/what-is-mdx/#mdx-syntax) rather than Astro’s HTML-like syntax.
 
-### Using MDX with content collections
+### Using local MDX with content collections
 
-[Section titled “Using MDX with content collections”](#using-mdx-with-content-collections)
+[Section titled “Using local MDX with content collections”](#using-local-mdx-with-content-collections)
 
-To include MDX files in a content collection, make sure that your [collection loader](/en/guides/content-collections/#defining-the-collection-loader) is configured to load content from `.mdx` files:
+To include your local MDX files in a content collection, make sure that your [collection loader](/en/guides/content-collections/#build-time-collection-loaders) is configured to load content from `.mdx` files:
 
 src/content.config.ts
 

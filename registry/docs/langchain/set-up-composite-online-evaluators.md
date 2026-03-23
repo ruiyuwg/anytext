@@ -6,7 +6,7 @@ Source: https://docs.langchain.com/langsmith/online-evaluations-composite
 
 Before diving into this content, it might be helpful to read the following:
 
-- Running [online evaluations](/langsmith/evaluation-concepts#online-evaluation)
+- Running [online evaluations](/langsmith/evaluation-concepts#online-evaluations)
 - [Composite evaluators](/langsmith/composite-evaluators-ui)
 
 Online evaluations provide real-time feedback on your production traces. This is useful to continuously monitor the performance of your application—to identify issues, measure improvements, and ensure consistent quality over time.
@@ -21,7 +21,7 @@ Head to the **Tracing Projects** tab and select a tracing project. To view exist
 
 ## Configure composite online evaluators
 
-You can create composite evaluators on a [tracing project](/langsmith/observability-concepts#projects) for [online evaluations](/langsmith/evaluation-concepts#online-evaluation). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
+You can create composite evaluators on a [tracing project](/langsmith/observability-concepts#projects) for [online evaluations](/langsmith/evaluation-concepts#online-evaluations). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
 
 ### 1. Navigate to the tracing project
 

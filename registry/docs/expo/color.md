@@ -164,7 +164,7 @@ function MyComponent() {
 
 ## API reference
 
-[Color API reference](/versions/latest/sdk/router#color) — For the full list of available types and colors, see Expo Router's Color API reference.
+[Color API reference](/versions/latest/sdk/router/color) — For the full list of available types and colors, see Expo Router's Color API reference.
 
 ***
 

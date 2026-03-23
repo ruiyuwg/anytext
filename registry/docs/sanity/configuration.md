@@ -8,6 +8,27 @@ The `sanity` Command Line Interface (CLI) is a handy tool for managing your Sani
 
 Sanity CLI can read configuration from a `sanity.cli.js` (`.ts`) file in the same folder that the command is run in. It will fall back on the configuration in the `sanity.config.ts` file.
 
+Use `defineCliConfig` from `sanity/cli` to configure the CLI with TypeScript type-checking:
+
+**sanity.cli.ts**
+
+```typescript
+import {defineCliConfig} from 'sanity/cli'
+
+export default defineCliConfig({
+  api: {
+    projectId: '<YOUR_PROJECT_ID>',
+    dataset: '<YOUR_DATASET>',
+  },
+  server: {
+    hostname: 'localhost',
+    port: 3333,
+  },
+})
+```
+
+See the properties table below for all available options.
+
 #### Properties
 
 | Property | Description |
@@ -23,6 +44,9 @@ autoUpdates: Enable auto-updates for studios. |
 | reactStrictMode | Wraps the Studio in \<React.StrictMode> root to aid in flagging potential problems related to concurrent features (startTransition, useTransition, useDeferredValue, Suspense). Can also be enabled by setting SANITY\_STUDIO\_REACT\_STRICT\_MODE="true"|"false".  It only applies to sanity dev in development mode and is ignored in sanity build and in production. Defaults to false. |
 | server | Defines the hostname and port that the development server should run on. hostname defaults to localhost, and port to 3333. |
 | vite | Exposes the default Vite configuration for the Studio so it can be changed and extended. |
+| typegen | Configures automatic TypeScript type generation during sanity dev and sanity build. Properties include enabled, path, generates, and overloadClientMethods. See Sanity TypeGen for details. |
+| schemaExtraction | Configures automatic schema extraction during sanity dev and sanity build. Properties: enabled, path, enforceRequiredFields, watchPatterns, workspace. |
+| app | Configuration for App SDK applications. Properties: organizationId (required), entry (default: './src/App'). |
 
 > \[!WARNING]
 > Gotcha
@@ -123,53 +147,3 @@ Results can also be excluded by using a `-` prefix. `DEBUG=sanity*,-sanity:expor
 ## Authorizing the CLI
 
 In most cases, you'll use `sanity login` to authenticate with the Sanity API. When you need to run the CLI unattended, like in a CI/CD environment, set the `SANITY_AUTH_TOKEN` environment variable to a token. You can generate tokens in the [project management dashboard](https://sanity.io/manage).
-
-# Backup CLI command reference
-
-## enable
-
-```bash
-Examples
-  sanity backup enable DATASET_NAME
-
-```
-
-## disable
-
-```bash
-Examples
-  sanity backup disable DATASET_NAME
-
-```
-
-## download
-
-```bash
-Options
-  --backup-id <string> The backup ID to download. (required)
-  --out <string>       The file or directory path the backup should download to.
-  --overwrite          Allows overwriting of existing backup file.
-  --concurrency <num>  Concurrent number of backup item downloads. (max: 24)
-
-Examples
-  sanity backup download DATASET_NAME --backup-id 2024-01-01-backup-1
-  sanity backup download DATASET_NAME --backup-id 2024-01-01-backup-2 --out /path/to/file
-  sanity backup download DATASET_NAME --backup-id 2024-01-01-backup-3 --out /path/to/file --overwrite
-
-```
-
-## list
-
-```bash
-Options
-  --limit <int>     Maximum number of backups returned. Default 30.
-  --after <string>  Only return backups after this date (inclusive)
-  --before <string> Only return backups before this date (exclusive). Cannot be younger than <after> if specified.
-
-Examples
-  sanity backup list DATASET_NAME
-  sanity backup list DATASET_NAME --limit 50
-  sanity backup list DATASET_NAME --after 2024-01-31 --limit 10
-  sanity backup list DATASET_NAME --after 2024-01-31 --before 2024-01-10
-
-```

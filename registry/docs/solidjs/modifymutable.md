@@ -9,8 +9,8 @@ Store utilities
 It operates within a single [`batch`](/reference/reactive-utilities/batch), ensuring that dependent computations are updated just once, rather than triggering updates for each individual change.
 
 ```
-import { modifyMutable } from "solid-js/store"
-function modifyMutable<T>(mutable: T, modifier: (state: T) => T): void
+import { modifyMutable } from "solid-js/store";
+function modifyMutable<T>(mutable: T, modifier: (state: T) => T): void;
 ```
 
 The function takes two arguments:
@@ -25,7 +25,7 @@ When passing in your own modifier function, it's important to be aware that its 
 For example, if the UI depends on multiple fields of a mutable:
 
 ```
-import { createMutable } from "solid-js/store"
+import { createMutable } from "solid-js/store";
 const state = createMutable({  user: {    firstName: "John",    lastName: "Smith",  },});
 <h1>Hello {state.user.firstName + " " + state.user.lastName}</h1>;
 ```
@@ -39,19 +39,19 @@ state.user.firstName = "Jane";state.user.lastName = "Doe";
 To trigger just a single update, the fields can be modified using a `batch`:
 
 ```
-import { batch } from "solid-js"
+import { batch } from "solid-js";
 batch(() => {  state.user.firstName = "Jane";  state.user.lastName = "Doe";});
 ```
 
 `modifyMutable` combined with [`reconcile`](/reference/store-utilities/reconcile) or [`produce`](/reference/store-utilities/produce) provides two alternate ways to do similar things:
 
 ```
-import { modifyMutable, reconcile } from "solid-js/store"
+import { modifyMutable, reconcile } from "solid-js/store";
 // Replace state.user with the specified object (deleting any other fields)modifyMutable(  state.user,  reconcile({    firstName: "Jane",    lastName: "Doe",  }));
 ```
 
 ```
-import { modifyMutable, produce } from "solid-js/store"
+import { modifyMutable, produce } from "solid-js/store";
 // Modify two fields in a batch, triggering just one updatemodifyMutable(  state,  produce((state) => {    state.user.firstName = "Jane";    state.user.lastName = "Doe";  }));
 ```
 

@@ -170,7 +170,7 @@ The table below the chart shows the numeric values for each column. Hover over a
 
 ## Benchmarking
 
-Without a comparison, it’s hard to tell what a particular fraud rate means. Is a 0.02% dispute rate good or bad? The answer depends on your business model, your region, and many other factors. Radar provides merchants with a comparison to similar businesses on key fraud metrics to help inform actions you can take to improve the performance of Radar.
+Without a comparison, it’s hard to tell what a particular fraud rate means. Is a 0.02% dispute rate good or bad? The answer depends on your business model, your region, and many other factors. Radar provides businesses with a comparison to similar businesses on key fraud metrics to help inform actions you can take to improve the performance of Radar.
 
 Radar has a tool specifically for this—aggregated benchmarks for businesses in your region, and businesses that are similar to your own.
 ![](https://b.stripecdn.com/docs-statics-srv/assets/benchmarks.b3613b00faa97896806006794c96a4b9.png)

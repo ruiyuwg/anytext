@@ -243,7 +243,7 @@ Initial release of Conformance.
 
 title: "vercel-conformance"
 description: "Learn how Conformance improves collaboration, productivity, and software quality at scale."
-last\_updated: "2026-03-08T05:03:12.573Z"
+last\_updated: "2026-03-23T09:40:07.370Z"
 source: "https://vercel.com/docs/conformance/cli"
 
 # vercel-conformance
@@ -327,5 +327,5 @@ using this command.
 
 title: "forbidden-code"
 description: "Learn how to set custom rules to disallow code and code patterns through string and regular expression matches."
-last\_updated: "2026-03-08T05:03:12.569Z"
+last\_updated: "2026-03-23T09:40:07.389Z"
 source: "https://vercel.com/docs/conformance/custom-rules/forbidden-code"

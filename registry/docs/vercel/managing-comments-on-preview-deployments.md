@@ -115,5 +115,5 @@ On desktop, you can hover your cursor over a comment's timestamp to view less de
 
 title: "Comments Overview"
 description: "Comments allow teams and invited participants to give direct feedback on preview deployments. Learn more about Comments in this overview."
-last\_updated: "2026-03-08T05:03:12.524Z"
+last\_updated: "2026-03-23T09:40:07.312Z"
 source: "https://vercel.com/docs/comments"

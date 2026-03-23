@@ -1,165 +1,2338 @@
-<!DOCTYPE html>Overview | TanStack Pacer Docs(function(){try{var t=localStorage.getItem('theme')||'auto';var v=['light','dark','auto'].includes(t)?t:'auto';if(v==='auto'){var a=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.classList.add(a,'auto')}else{document.documentElement.classList.add(v)}}catch(e){var a=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.classList.add(a,'auto')}})()
+\[
 
-```
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-5N57KQT4');
-    window.googletag = window.googletag || { cmd: [] };
-```
+![](/.netlify/images?url=%2Fimages%2Flogos%2Flogo-color-100.png\&w=30\&q=80)![](/images/logos/logo-black.svg)![](/images/logos/logo-white.svg)
 
-googletag.cmd.push(function () {
-googletag.pubads().set("page\_url", "https://tanstack.com/ ");
-});TanStackPacer v0v0<a href="/cli/latest" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md
-         bg-gradient-to-r from-indigo-600 to-violet-700
-         hover:from-indigo-500 hover:to-violet-600
-         text-white text-xs font-medium
-         shadow-sm hover:shadow-md
-         transition-all duration-200">AlphaTry TanStack CLISearch... KAuto<a href="/login" class="flex items-center gap-1 rounded-md px-2 py-1.5
-         bg-black dark:bg-white text-white dark:text-black
-         hover:bg-gray-800 dark:hover:bg-gray-200
-         transition-colors duration-200 text-xs font-medium">Log InStartRCStartRCRouterRouterQueryQueryTableTableDBbetaDBbetaAIalphaAIalphaFormnewFormnewVirtualVirtualPacerbetaPacerbetaHotkeysalphaHotkeysalphaStorealphaStorealphaDevtoolsalphaDevtoolsalphaCLIalphaCLIalphaIntentalphaIntentalphaMore LibrariesMore LibrariesBuilderAlphaBuilderAlphaFeedBetaFeedBetaMaintainersMaintainersPartnersPartnersShowcaseShowcaseBlogBlogLearnNEWLearnNEWSupportSupportStatsStatsDiscordDiscordMerchMerchGitHubGitHubEthosEthosTenetsTenetsBrand GuideBrand Guide<div class="
-       min-h-[calc(100dvh-var(--navbar-height))]
-       flex flex-col sm:flex-row
-       w-full transition-all duration-300
-       [overflow-x:clip]"><div class="sm:hidden bg-white/50 sticky top-[var(--navbar-height)]
- max-h-[calc(100dvh-var(--navbar-height))] overflow-y-auto z-20 dark:bg-black/60 backdrop-blur-lg">DocsPartnersReactLatestSearch... KMenuHomeFrameworksContributorsNPM StatsGitHub Discord Getting StartedOverviewQuick StartInstallationDevtoolsReact AdapterGuidesWhich Utility Should I Choose?Debouncing GuideThrottling GuideRate Limiting GuideQueuing GuideBatching GuideAsync Debouncing GuideAsync Throttling GuideAsync Rate Limiting GuideAsync Queuing GuideAsync Batching GuideAsync Retrying GuideAPI ReferenceCore API ReferenceReact HooksDebouncer API ReferenceDebouncerOptionsDebouncerStateAsyncDebouncerOptionsAsyncDebouncerStatedebounceasyncDebounceDebouncerAsyncDebouncerReactDebouncerOptionsReactAsyncDebouncerOptionsReactDebouncerReactAsyncDebounceruseDebounceruseDebouncedCallbackuseDebouncedStateuseDebouncedValueuseAsyncDebounceruseAsyncDebouncedCallbackThrottler API ReferenceThrottlerOptionsThrottlerStateAsyncThrottlerOptionsAsyncThrottlerStatethrottleasyncThrottleThrottlerAsyncThrottlerReactThrottlerOptionsReactAsyncThrottlerOptionsReactThrottlerReactAsyncThrottleruseThrottleruseThrottledCallbackuseThrottledStateuseThrottledValueuseAsyncThrottleruseAsyncThrottledCallbackRate Limiter API ReferenceRateLimiterOptionsRateLimiterStateAsyncRateLimiterOptionsAsyncRateLimiterStaterateLimitasyncRateLimitRateLimiterAsyncRateLimiterReactRateLimiterReactAsyncRateLimiteruseRateLimiteruseRateLimitedCallbackuseRateLimitedStateuseRateLimitedValueuseAsyncRateLimiteruseAsyncRateLimitedCallbackQueue API ReferenceQueuerOptionsQueuerStateAsyncQueuerOptionsAsyncQueuerStatequeueasyncQueueQueuerAsyncQueuerReactQueuerOptionsReactAsyncQueuerOptionsReactQueuerReactAsyncQueueruseQueueruseQueuedStateuseQueuedValueuseAsyncQueueruseAsyncQueuedStateBatcher API ReferenceBatcherOptionsBatcherStateAsyncBatcherOptionsAsyncBatcherStatebatchasyncBatchBatcherAsyncBatcherReactBatcherOptionsReactAsyncBatcherOptionsReactBatcherReactAsyncBatcheruseBatcheruseAsyncBatcheruseBatchedCallbackuseAsyncBatchedCallbackDebouncer ExamplesliteDebounceLiteDebouncerdebounceasyncDebounceuseDebounceruseDebouncedCallbackuseDebouncedStateuseDebouncedValueuseAsyncDebounceruseAsyncDebouncedCallbackThrottler ExamplesliteThrottleLiteThrottlerthrottleasyncThrottleuseThrottleruseThrottledCallbackuseThrottledStateuseThrottledValueuseAsyncThrottlerRate Limiter ExamplesliteRateLimitLiteRateLimiterrateLimitasyncRateLimituseRateLimiteruseRateLimiterWithPersisteruseRateLimitedCallbackuseRateLimitedStateuseRateLimitedValueuseAsyncRateLimiteruseAsyncRateLimiterWithPersisterQueue ExamplesliteQueueLiteQueuerqueueuseQueueruseQueuerWithPersisteruseQueuedStateuseQueuedValueuseAsyncQueueruseAsyncQueuedStateBatcher ExamplesliteBatchLiteBatcherbatchasyncBatchuseBatcheruseAsyncBatcheruseBatchedCallbackuseAsyncBatchedCallbackTanStack Query ExamplesReact Query Debounced PrefetchReact Query Throttled PrefetchReact Query Queued PrefetchlatestReactLatestMenuHomeFrameworksContributorsNPM StatsGitHub Discord Getting StartedOverviewQuick StartInstallationDevtoolsReact AdapterGuidesWhich Utility Should I Choose?Debouncing GuideThrottling GuideRate Limiting GuideQueuing GuideBatching GuideAsync Debouncing GuideAsync Throttling GuideAsync Rate Limiting GuideAsync Queuing GuideAsync Batching GuideAsync Retrying GuideAPI ReferenceCore API ReferenceReact HooksDebouncer API ReferenceDebouncerOptionsDebouncerStateAsyncDebouncerOptionsAsyncDebouncerStatedebounceasyncDebounceDebouncerAsyncDebouncerReactDebouncerOptionsReactAsyncDebouncerOptionsReactDebouncerReactAsyncDebounceruseDebounceruseDebouncedCallbackuseDebouncedStateuseDebouncedValueuseAsyncDebounceruseAsyncDebouncedCallbackThrottler API ReferenceThrottlerOptionsThrottlerStateAsyncThrottlerOptionsAsyncThrottlerStatethrottleasyncThrottleThrottlerAsyncThrottlerReactThrottlerOptionsReactAsyncThrottlerOptionsReactThrottlerReactAsyncThrottleruseThrottleruseThrottledCallbackuseThrottledStateuseThrottledValueuseAsyncThrottleruseAsyncThrottledCallbackRate Limiter API ReferenceRateLimiterOptionsRateLimiterStateAsyncRateLimiterOptionsAsyncRateLimiterStaterateLimitasyncRateLimitRateLimiterAsyncRateLimiterReactRateLimiterReactAsyncRateLimiteruseRateLimiteruseRateLimitedCallbackuseRateLimitedStateuseRateLimitedValueuseAsyncRateLimiteruseAsyncRateLimitedCallbackQueue API ReferenceQueuerOptionsQueuerStateAsyncQueuerOptionsAsyncQueuerStatequeueasyncQueueQueuerAsyncQueuerReactQueuerOptionsReactAsyncQueuerOptionsReactQueuerReactAsyncQueueruseQueueruseQueuedStateuseQueuedValueuseAsyncQueueruseAsyncQueuedStateBatcher API ReferenceBatcherOptionsBatcherStateAsyncBatcherOptionsAsyncBatcherStatebatchasyncBatchBatcherAsyncBatcherReactBatcherOptionsReactAsyncBatcherOptionsReactBatcherReactAsyncBatcheruseBatcheruseAsyncBatcheruseBatchedCallbackuseAsyncBatchedCallbackDebouncer ExamplesliteDebounceLiteDebouncerdebounceasyncDebounceuseDebounceruseDebouncedCallbackuseDebouncedStateuseDebouncedValueuseAsyncDebounceruseAsyncDebouncedCallbackThrottler ExamplesliteThrottleLiteThrottlerthrottleasyncThrottleuseThrottleruseThrottledCallbackuseThrottledStateuseThrottledValueuseAsyncThrottlerRate Limiter ExamplesliteRateLimitLiteRateLimiterrateLimitasyncRateLimituseRateLimiteruseRateLimiterWithPersisteruseRateLimitedCallbackuseRateLimitedStateuseRateLimitedValueuseAsyncRateLimiteruseAsyncRateLimiterWithPersisterQueue ExamplesliteQueueLiteQueuerqueueuseQueueruseQueuerWithPersisteruseQueuedStateuseQueuedValueuseAsyncQueueruseAsyncQueuedStateBatcher ExamplesliteBatchLiteBatcherbatchasyncBatchuseBatcheruseAsyncBatcheruseBatchedCallbackuseAsyncBatchedCallbackTanStack Query ExamplesReact Query Debounced PrefetchReact Query Throttled PrefetchReact Query Queued PrefetchAI/LLM: This documentation page is available in plain markdown format at/pacer/latest/docs/overview.mdLearn about TanStack AdsHide AdsGetting StartedOn this pageOverviewCopy pageTanStack Pacer is a library focused on providing high-quality utilities for controlling function execution timing in your applications. While similar utilities exist elsewhere, we aim to get all the important details right - including type-safety, tree-shaking, and a consistent and intuitive API. By focusing on these fundamentals and making them available in a framework agnostic way, we hope to make these utilities and patterns more commonplace in your applications. Proper execution control is often an afterthought in application development, leading to performance issues, race conditions, and poor user experiences that could have been prevented. TanStack Pacer helps you implement these critical patterns correctly from the start!
-ImportantTanStack Pacer is currently in beta and its API is still subject to change.The scope of this library may grow, but we hope to keep the bundle size of each individual utility lean and focused.
-Origin
-Many of the ideas (and code) for TanStack Pacer are not new. In fact, many of these utilities have been living in other TanStack libraries for quite some time. We extracted code from TanStack Query, Router, Form, and even Tanner's original Swimmer library. Then we cleaned up these utilities, filled in some gaps, and shipped them as a standalone library.
-Features
-NoteTanStack Pacer is currently mostly a client-side only library, but it is being designed to be able to potentially be used on the server-side as well.
+TanStack
 
-Debouncing
+]\(/)
 
-Delay execution until after a period of inactivity for when you only care about the last execution in a sequence.
-Synchronous or Asynchronous Debounce utilities with promise support and error handling
-Control of leading, trailing, and enabled options
+[Pacer v0v0](/pacer)
 
-Throttling
+[NewTanStack Intent](/intent/latest)
 
-Smoothly limit the rate at which a function can fire
-Synchronous or Asynchronous Throttle utilities with promise support and error handling
-Control of leading, trailing, and enabled options.
+[](https://github.com/tanstack/pacer)[](https://x.com/tan_stack)[](https://bsky.app/profile/tanstack.com)[](https://instagram.com/tan_stack)[](https://youtube.com/@tan_stack)[](https://tlinz.com/discord)
 
-Rate Limiting
+Search...
 
-Limit the rate at which a function can fire over a period of time
-Synchronous or Asynchronous Rate Limiting utilities with promise support and error handling
-Fixed or Sliding Window variations of Rate Limiting
+K
 
-Queuing
+Auto
 
-Queue functions to be executed in a specific order
-Choose from FIFO, LIFO, and Priority queue implementations
-Control processing speed with configurable wait times or concurrency limits
-Manage queue execution with start/stop capabilities
-Expire items from the queue after a configurable duration
+[Log In](/login)
 
-Batching
+[StartRC](/start/latest)
 
-Chunk up multiple operations into larger batches to reduce total back-and-forth operations
-Batch by time period, batch size, whichever comes first, or a custom condition to trigger batch executions
+[StartRC](/start/latest)
 
-Async or Sync Variations
+[Router](/router/latest)
 
-Choose between synchronous and asynchronous versions of each utility
-Optional error, success, and settled handling for async variations
-Retry and Abort support for async variations
+[Router](/router/latest)
 
-State Management
+[Query](/query/latest)
 
-Uses TanStack Store under the hood for state management with fine-grained reactivity
-Easily integrate with your own state management library of choice
-Persist state to local or session storage for some utilities like rate limiting and queuing
+[Query](/query/latest)
 
-Convenient Hooks
+[Table](/table/latest)
 
-Reduce boilerplate code with pre-built hooks like useDebouncedCallback, useThrottledValue, and useQueuedState, and more.
-Multiple layers of abstraction to choose from depending on your use case.
-Works with each framework's default state management solutions, or with whatever custom state management library that you prefer.
+[Table](/table/latest)
 
-Type Safety
+[DBbeta](/db/latest)
 
-Full type safety with TypeScript that makes sure that your functions will always be called with the correct arguments
-Generics for flexible and reusable utilities
+[DBbeta](/db/latest)
 
-Framework Adapters
+[AIalpha](/ai/latest)
 
-React, Solid, and more
+[AIalpha](/ai/latest)
 
-Tree Shaking
+[Formnew](/form/latest)
 
-We, of course, get tree-shaking right for your applications by default, but we also provide extra deep imports for each utility, making it easier to embed these utilities into your libraries without increasing the bundle-phobia reports of your library.
+[Formnew](/form/latest)
 
-Interactive Comparison Demo
+[Virtual](/virtual/latest)
+
+[Virtual](/virtual/latest)
+
+[Pacerbeta](/pacer/latest)
+
+[Pacerbeta](/pacer/latest)
+
+[Hotkeysalpha](/hotkeys/latest)
+
+[Hotkeysalpha](/hotkeys/latest)
+
+[Storealpha](/store/latest)
+
+[Storealpha](/store/latest)
+
+[Devtoolsalpha](/devtools/latest)
+
+[Devtoolsalpha](/devtools/latest)
+
+[CLIalpha](/cli/latest)
+
+[CLIalpha](/cli/latest)
+
+[Intentalpha](/intent/latest)
+
+[Intentalpha](/intent/latest)
+
+\[
+
+More Libraries
+
+]\(/libraries)
+
+\[
+
+More Libraries
+
+]\(/libraries)
+
+\[
+
+BuilderAlpha
+
+]\(/builder)
+
+\[
+
+BuilderAlpha
+
+]\(/builder)
+
+\[
+
+Blog
+
+]\(/blog)
+
+\[
+
+Blog
+
+]\(/blog)
+
+\[
+
+Maintainers
+
+]\(/maintainers)
+
+\[
+
+Maintainers
+
+]\(/maintainers)
+
+\[
+
+Partners
+
+]\(/partners)
+
+\[
+
+Partners
+
+]\(/partners)
+
+\[
+
+Showcase
+
+]\(/showcase)
+
+\[
+
+Showcase
+
+]\(/showcase)
+
+\[
+
+LearnNEW
+
+]\(/learn)
+
+\[
+
+LearnNEW
+
+]\(/learn)
+
+\[
+
+Stats
+
+]\(/stats/npm)
+
+\[
+
+Stats
+
+]\(/stats/npm)
+
+\[
+
+YouTube
+
+]\(https://youtube.com/@tan\_stack)
+
+\[
+
+YouTube
+
+]\(https://youtube.com/@tan\_stack)
+
+\[
+
+Discord
+
+]\(https://tlinz.com/discord)
+
+\[
+
+Discord
+
+]\(https://tlinz.com/discord)
+
+\[
+
+Merch
+
+]\(/merch)
+
+\[
+
+Merch
+
+]\(/merch)
+
+\[
+
+Support
+
+]\(/support)
+
+\[
+
+Support
+
+]\(/support)
+
+\[
+
+GitHub
+
+]\(https://github.com/tanstack)
+
+\[
+
+GitHub
+
+]\(https://github.com/tanstack)
+
+\[
+
+Ethos
+
+]\(/ethos)
+
+\[
+
+Ethos
+
+]\(/ethos)
+
+\[
+
+Tenets
+
+]\(/tenets)
+
+\[
+
+Tenets
+
+]\(/tenets)
+
+\[
+
+Brand Guide
+
+]\(/brand-guide)
+
+\[
+
+Brand Guide
+
+]\(/brand-guide)
+
+Docs
+
+Partners
+
+\[
+
+![CodeRabbit](/assets/coderabbit-light-CIzGLYU_.svg)![CodeRabbit](/assets/coderabbit-dark-D643Zkrv.svg)
+
+]\(https://coderabbit.link/tanstack?utm\_source=tanstack\&via=tanstack)\[
+
+![Cloudflare](/assets/cloudflare-black-6Ojsn8yh.svg)![Cloudflare](/assets/cloudflare-white-Co-Tyjbl.svg)
+
+]\(https://www.cloudflare.com?utm\_source=tanstack)\[
+
+![AG Grid](data:image/svg+xml,%3csvg%20clip-rule='evenodd'%20fill-rule='evenodd'%20stroke-linejoin='round'%20stroke-miterlimit='2'%20viewBox='0%200%20235%2040'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20transform='matrix\(.635723%200%200%20.635723%20-492.921%20-323.608\)'%3e%3cg%20fill-rule='nonzero'%3e%3cpath%20d='m1099.4%20549.4v-12.5h-21.3l-12.5%2012.5z'%20fill='%23ff8b00'/%3e%3cpath%20d='m1123.4%20518.4h-26.7l-12.6%2012.5h39.3z'%20fill='%2355b2c6'/%3e%3cpath%20d='m1053.2%20561.9%206.4-6.4h21.6v12.5h-28z'%20fill='%23f00'/%3e%3cpath%20d='m1057.9%20543.3h13.8l12.6-12.5h-26.4z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1042.8%20561.9h10.4l12.4-12.5h-22.8z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1096.7%20518.4-6.4%206.4h-40.8v-12.5h47.2z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m828.6%20559.7h-19.6l-3.4%208.4h-8.6l18.1-42.4h7.5l18.1%2042.4h-8.7zm-2.7-6.7-7.1-17.3-7.1%2017.3z'%20fill='%23031c4c'/%3e%3cpath%20d='m960.1%20541.3c2.5-3.7%208.8-4.1%2011.4-4.1v7.2c-3.2%200-6.4.1-8.3%201.5s-2.9%203.3-2.9%205.6v16.6h-7.8v-30.9h7.5z'%20fill='%23031c4c'/%3e%3c/g%3e%3cpath%20d='m975.8%20537.2h7.8v30.9h-7.8z'%20fill='%23031c4c'/%3e%3cpath%20d='m975.8%20523.4h7.8v9.2h-7.8z'%20fill='%23031c4c'/%3e%3cpath%20d='m1022.3%20523.4v44.7h-7.5l-.2-4.7c-1.1%201.6-2.5%202.9-4.2%203.9-1.7.9-3.8%201.4-6.2%201.4-2.1%200-4.1-.4-5.8-1.1-1.8-.8-3.4-1.8-4.7-3.2s-2.4-3.1-3.1-5c-.8-1.9-1.1-4.1-1.1-6.5s.4-4.6%201.1-6.6c.8-2%201.8-3.7%203.1-5.1s2.9-2.5%204.7-3.3%203.7-1.2%205.8-1.2c2.4%200%204.4.4%206.1%201.3s3.1%202.1%204.2%203.8v-18.3h7.8zm-16.4%2038.6c2.6%200%204.6-.9%206.2-2.6s2.4-4%202.4-6.8-.8-5-2.4-6.8c-1.6-1.7-3.6-2.6-6.2-2.6-2.5%200-4.6.9-6.1%202.6-1.6%201.7-2.4%204-2.4%206.8s.8%205%202.4%206.7c1.6%201.8%203.6%202.7%206.1%202.7'%20fill='%23031c4c'%20fill-rule='nonzero'/%3e%3cpath%20d='m885.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23031c4c'%20fill-rule='nonzero'/%3e%3cpath%20d='m946.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23031c4c'%20fill-rule='nonzero'/%3e%3c/g%3e%3c/svg%3e)![AG Grid](data:image/svg+xml,%3csvg%20clip-rule='evenodd'%20fill-rule='evenodd'%20stroke-linejoin='round'%20stroke-miterlimit='2'%20viewBox='0%200%20235%2040'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20transform='matrix\(.635723%200%200%20.635723%20-492.921%20-323.608\)'%3e%3cg%20fill-rule='nonzero'%3e%3cpath%20d='m1099.4%20549.4v-12.5h-21.3l-12.5%2012.5z'%20fill='%23ff8b00'/%3e%3cpath%20d='m1123.4%20518.4h-26.7l-12.6%2012.5h39.3z'%20fill='%2355b2c6'/%3e%3cpath%20d='m1053.2%20561.9%206.4-6.4h21.6v12.5h-28z'%20fill='%23f00'/%3e%3cpath%20d='m1057.9%20543.3h13.8l12.6-12.5h-26.4z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1042.8%20561.9h10.4l12.4-12.5h-22.8z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1096.7%20518.4-6.4%206.4h-40.8v-12.5h47.2z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m828.6%20559.7h-19.6l-3.4%208.4h-8.6l18.1-42.4h7.5l18.1%2042.4h-8.7zm-2.7-6.7-7.1-17.3-7.1%2017.3z'%20fill='%23fff'/%3e%3cpath%20d='m960.1%20541.3c2.5-3.7%208.8-4.1%2011.4-4.1v7.2c-3.2%200-6.4.1-8.3%201.5s-2.9%203.3-2.9%205.6v16.6h-7.8v-30.9h7.5z'%20fill='%23fff'/%3e%3c/g%3e%3cpath%20d='m975.8%20537.2h7.8v30.9h-7.8z'%20fill='%23fff'/%3e%3cpath%20d='m975.8%20523.4h7.8v9.2h-7.8z'%20fill='%23fff'/%3e%3cpath%20d='m1022.3%20523.4v44.7h-7.5l-.2-4.7c-1.1%201.6-2.5%202.9-4.2%203.9-1.7.9-3.8%201.4-6.2%201.4-2.1%200-4.1-.4-5.8-1.1-1.8-.8-3.4-1.8-4.7-3.2s-2.4-3.1-3.1-5c-.8-1.9-1.1-4.1-1.1-6.5s.4-4.6%201.1-6.6c.8-2%201.8-3.7%203.1-5.1s2.9-2.5%204.7-3.3%203.7-1.2%205.8-1.2c2.4%200%204.4.4%206.1%201.3s3.1%202.1%204.2%203.8v-18.3h7.8zm-16.4%2038.6c2.6%200%204.6-.9%206.2-2.6s2.4-4%202.4-6.8-.8-5-2.4-6.8c-1.6-1.7-3.6-2.6-6.2-2.6-2.5%200-4.6.9-6.1%202.6-1.6%201.7-2.4%204-2.4%206.8s.8%205%202.4%206.7c1.6%201.8%203.6%202.7%206.1%202.7'%20fill='%23fff'%20fill-rule='nonzero'/%3e%3cpath%20d='m885.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23fff'%20fill-rule='nonzero'/%3e%3cpath%20d='m946.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23fff'%20fill-rule='nonzero'/%3e%3c/g%3e%3c/svg%3e)
+
+]\(https://ag-grid.com/react-data-grid/?utm\_source=reacttable\&utm\_campaign=githubreacttable)\[
+
+![SerpAPI](/assets/serpapi-black-DnXRiQQ3.svg)![SerpAPI](/assets/serpapi-white-CPxTEZSp.svg)
+
+]\(https://serpapi.com?utm\_source=tanstack)\[
+
+![Netlify](data:image/svg+xml,%3csvg%20width='512'%20height='209'%20viewBox='0%200%20512%20209'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_235_8\)'%3e%3cpath%20d='M117.436%20207.036V154.604L118.529%20153.51H129.452L130.545%20154.604V207.036L129.452%20208.13H118.529L117.436%20207.036Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M117.436%2053.5225V1.09339L118.529%200H129.452L130.545%201.09339V53.5225L129.452%2054.6159H118.529L117.436%2053.5225Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M69.9539%20169.238H68.4094L60.6869%20161.512V159.967L78.7201%20141.938L86.8976%20141.942L87.9948%20143.031V151.209L69.9539%20169.238Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M69.9462%2038.8917H68.4017L60.6792%2046.6181V48.1626L78.7124%2066.192L86.8899%2066.1882L87.9871%2065.0986V56.9212L69.9462%2038.8917Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M1.09339%2097.5104H75.3711L76.4645%2098.6038V109.526L75.3711%20110.62H1.09339L0%20109.526V98.6038L1.09339%2097.5104Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M440.999%2097.5104H510.91L512.004%2098.6038V109.526L510.91%20110.62H436.633L435.539%20109.526L439.905%2098.6038L440.999%2097.5104Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M212.056%20108.727L210.963%20109.821H177.079L175.986%20110.914C175.986%20113.101%20178.173%20119.657%20186.916%20119.657C190.196%20119.657%20193.472%20118.564%20194.566%20116.377L195.659%20115.284H208.776L209.869%20116.377C208.776%20122.934%20203.313%20132.774%20186.916%20132.774C168.336%20132.774%20159.589%20119.657%20159.589%20104.357C159.589%2089.0576%20168.332%2075.9408%20185.822%2075.9408C203.313%2075.9408%20212.056%2089.0576%20212.056%20104.357V108.731V108.727ZM195.659%2097.7971C195.659%2096.7037%20194.566%2089.0538%20185.822%2089.0538C177.079%2089.0538%20175.986%2096.7037%20175.986%2097.7971L177.079%2098.8905H194.566L195.659%2097.7971Z'%20fill='%23014847'/%3e%3cpath%20d='M242.66%20115.284C242.66%20117.47%20243.753%20118.564%20245.94%20118.564H255.776L256.87%20119.657V130.587L255.776%20131.681H245.94C236.103%20131.681%20227.36%20127.307%20227.36%20115.284V91.2368L226.266%2090.1434H218.617L217.523%2089.05V78.1199L218.617%2077.0265H226.266L227.36%2075.9332V66.0965L228.453%2065.0031H241.57L242.663%2066.0965V75.9332L243.757%2077.0265H255.78L256.874%2078.1199V89.05L255.78%2090.1434H243.757L242.663%2091.2368V115.284H242.66Z'%20fill='%23014847'/%3e%3cpath%20d='M283.1%20131.681H269.983L268.889%20130.587V56.2636L269.983%2055.1702H283.1L284.193%2056.2636V130.587L283.1%20131.681Z'%20fill='%23014847'/%3e%3cpath%20d='M312.61%2068.2871H299.493L298.399%2067.1937V56.2636L299.493%2055.1702H312.61L313.703%2056.2636V67.1937L312.61%2068.2871ZM312.61%20131.681H299.493L298.399%20130.587V78.1237L299.493%2077.0304H312.61L313.703%2078.1237V130.587L312.61%20131.681Z'%20fill='%23014847'/%3e%3cpath%20d='M363.98%2056.2636V67.1937L362.886%2068.2871H353.05C350.863%2068.2871%20349.769%2069.3805%20349.769%2071.5672V75.9408L350.863%2077.0342H361.793L362.886%2078.1276V89.0576L361.793%2090.151H350.863L349.769%2091.2444V130.591L348.676%20131.684H335.559L334.466%20130.591V91.2444L333.372%2090.151H325.723L324.629%2089.0576V78.1276L325.723%2077.0342H333.372L334.466%2075.9408V71.5672C334.466%2059.5438%20343.209%2055.1702%20353.046%2055.1702H362.882L363.976%2056.2636H363.98Z'%20fill='%23014847'/%3e%3cpath%20d='M404.42%20132.774C400.046%20143.704%20395.677%20150.261%20380.373%20150.261H374.906L373.813%20149.167V138.237L374.906%20137.144H380.373C385.836%20137.144%20386.929%20136.05%20388.023%20132.77V131.677L370.536%2089.05V78.1199L371.63%2077.0265H381.466L382.56%2078.1199L395.677%20115.284H396.77L409.887%2078.1199L410.98%2077.0265H420.817L421.91%2078.1199V89.05L404.424%20132.77L404.42%20132.774Z'%20fill='%23014847'/%3e%3cpath%20d='M135.454%20131.681L134.361%20130.587L134.368%2098.9172C134.368%2093.4541%20132.22%2089.2182%20125.625%2089.0806C122.234%2088.9926%20118.354%2089.0729%20114.209%2089.2488L113.59%2089.8834L113.598%20130.587L112.504%20131.681H99.3913L98.2979%20130.587V77.5388L99.3913%2076.4454L128.901%2076.1778C143.685%2076.1778%20149.668%2086.3356%20149.668%2097.8009V130.587L148.575%20131.681H135.454Z'%20fill='%23014847'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_235_8'%3e%3crect%20width='512'%20height='208.126'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)![Netlify](data:image/svg+xml,%3csvg%20width='512'%20height='209'%20viewBox='0%200%20512%20209'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_235_26\)'%3e%3cpath%20d='M117.436%20207.036V154.604L118.529%20153.51H129.452L130.545%20154.604V207.036L129.452%20208.13H118.529L117.436%20207.036Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M117.436%2053.5225V1.09339L118.529%200H129.452L130.545%201.09339V53.5225L129.452%2054.6159H118.529L117.436%2053.5225Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M69.9539%20169.238H68.4094L60.6869%20161.512V159.967L78.7201%20141.938L86.8976%20141.942L87.9948%20143.031V151.209L69.9539%20169.238Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M69.9462%2038.8917H68.4017L60.6792%2046.6181V48.1626L78.7124%2066.192L86.8899%2066.1882L87.9871%2065.0986V56.9212L69.9462%2038.8917Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M1.09339%2097.5104H75.3711L76.4645%2098.6038V109.526L75.3711%20110.62H1.09339L0%20109.526V98.6038L1.09339%2097.5104Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M440.999%2097.5104H510.91L512.004%2098.6038V109.526L510.91%20110.62H436.633L435.539%20109.526L439.905%2098.6038L440.999%2097.5104Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M212.056%20108.727L210.963%20109.821H177.079L175.986%20110.914C175.986%20113.101%20178.173%20119.657%20186.916%20119.657C190.196%20119.657%20193.472%20118.564%20194.566%20116.377L195.659%20115.284H208.776L209.869%20116.377C208.776%20122.934%20203.313%20132.774%20186.916%20132.774C168.336%20132.774%20159.589%20119.657%20159.589%20104.357C159.589%2089.0576%20168.332%2075.9408%20185.822%2075.9408C203.313%2075.9408%20212.056%2089.0576%20212.056%20104.357V108.731V108.727ZM195.659%2097.7971C195.659%2096.7037%20194.566%2089.0538%20185.822%2089.0538C177.079%2089.0538%20175.986%2096.7037%20175.986%2097.7971L177.079%2098.8905H194.566L195.659%2097.7971Z'%20fill='white'/%3e%3cpath%20d='M242.66%20115.284C242.66%20117.47%20243.753%20118.564%20245.94%20118.564H255.776L256.87%20119.657V130.587L255.776%20131.681H245.94C236.103%20131.681%20227.36%20127.307%20227.36%20115.284V91.2368L226.266%2090.1434H218.617L217.523%2089.05V78.1199L218.617%2077.0265H226.266L227.36%2075.9332V66.0965L228.453%2065.0031H241.57L242.663%2066.0965V75.9332L243.757%2077.0265H255.78L256.874%2078.1199V89.05L255.78%2090.1434H243.757L242.663%2091.2368V115.284H242.66Z'%20fill='white'/%3e%3cpath%20d='M283.1%20131.681H269.983L268.889%20130.587V56.2636L269.983%2055.1702H283.1L284.193%2056.2636V130.587L283.1%20131.681Z'%20fill='white'/%3e%3cpath%20d='M312.61%2068.2871H299.493L298.399%2067.1937V56.2636L299.493%2055.1702H312.61L313.703%2056.2636V67.1937L312.61%2068.2871ZM312.61%20131.681H299.493L298.399%20130.587V78.1237L299.493%2077.0304H312.61L313.703%2078.1237V130.587L312.61%20131.681Z'%20fill='white'/%3e%3cpath%20d='M363.98%2056.2636V67.1937L362.886%2068.2871H353.05C350.863%2068.2871%20349.769%2069.3805%20349.769%2071.5672V75.9408L350.863%2077.0342H361.793L362.886%2078.1276V89.0576L361.793%2090.151H350.863L349.769%2091.2444V130.591L348.676%20131.684H335.559L334.466%20130.591V91.2444L333.372%2090.151H325.723L324.629%2089.0576V78.1276L325.723%2077.0342H333.372L334.466%2075.9408V71.5672C334.466%2059.5438%20343.209%2055.1702%20353.046%2055.1702H362.882L363.976%2056.2636H363.98Z'%20fill='white'/%3e%3cpath%20d='M404.42%20132.774C400.046%20143.704%20395.677%20150.261%20380.373%20150.261H374.906L373.813%20149.167V138.237L374.906%20137.144H380.373C385.836%20137.144%20386.929%20136.05%20388.023%20132.77V131.677L370.536%2089.05V78.1199L371.63%2077.0265H381.466L382.56%2078.1199L395.677%20115.284H396.77L409.887%2078.1199L410.98%2077.0265H420.817L421.91%2078.1199V89.05L404.424%20132.77L404.42%20132.774Z'%20fill='white'/%3e%3cpath%20d='M135.454%20131.681L134.361%20130.587L134.368%2098.9172C134.368%2093.4541%20132.22%2089.2182%20125.625%2089.0806C122.234%2088.9926%20118.354%2089.0729%20114.209%2089.2488L113.59%2089.8834L113.598%20130.587L112.504%20131.681H99.3913L98.2979%20130.587V77.5388L99.3913%2076.4454L128.901%2076.1778C143.685%2076.1778%20149.668%2086.3356%20149.668%2097.8009V130.587L148.575%20131.681H135.454Z'%20fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_235_26'%3e%3crect%20width='512'%20height='208.126'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)
+
+]\(https://netlify.com?utm\_source=tanstack)\[
+
+![OpenRouter](/assets/openrouter-black-DNn7_580.svg)![OpenRouter](/assets/openrouter-white-COMTfjvn.svg)
+
+]\(https://openrouter.ai?utm\_source=tanstack)\[
+
+![Neon](data:image/svg+xml,%3csvg%20width='158'%20height='44'%20viewBox='0%200%20158%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_8138_23\)'%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='%2332C0ED'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint0_linear_8138_23\)'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint1_linear_8138_23\)'%20fill-opacity='0.35'/%3e%3cpath%20d='M36.8954%200C41.1406%200%2044.5819%203.39646%2044.5819%207.58621V32.104C44.5819%2036.4386%2039.0243%2038.3197%2036.3289%2034.8976L27.9022%2024.1991V37.1724C27.9022%2040.9432%2024.805%2044%2020.9844%2044C21.4089%2044%2021.753%2043.6604%2021.753%2043.2414V19.7752C21.753%2015.4407%2027.3106%2013.5594%2030.0061%2016.9816L38.4327%2027.6801V1.51724C38.4327%200.679292%2037.7445%200%2036.8954%200Z'%20fill='%2363F655'/%3e%3cpath%20d='M75.1561%2012.9622V24.4706L63.8496%2012.9622H57.9648V31.7844H63.332V19.4155L75.6465%2031.7844H80.5232V12.9622H75.1561Z'%20fill='%231A1A1A'/%3e%3cpath%20d='M90.4724%2027.5898V24.2555H102.487V20.2491H90.4724V17.1569H105.048V12.9622H84.9963V31.7844H105.348V27.5898H90.4724Z'%20fill='%231A1A1A'/%3e%3cpath%20d='M119.61%2032.4029C127.157%2032.4029%20132.061%2028.746%20132.061%2022.3733C132.061%2016.0006%20127.157%2012.3438%20119.61%2012.3438C112.063%2012.3438%20107.187%2016.0006%20107.187%2022.3733C107.187%2028.746%20112.063%2032.4029%20119.61%2032.4029ZM119.61%2027.9393C115.415%2027.9393%20112.826%2025.9226%20112.826%2022.3733C112.826%2018.824%20115.442%2016.8073%20119.61%2016.8073C123.806%2016.8073%20126.394%2018.824%20126.394%2022.3733C126.394%2025.9226%20123.806%2027.9393%20119.61%2027.9393Z'%20fill='%231A1A1A'/%3e%3cpath%20d='M152.632%2012.9622V24.4706L141.326%2012.9622H135.441V31.7844H140.808V19.4155L153.123%2031.7844H157.999V12.9622H152.632Z'%20fill='%231A1A1A'/%3e%3c/g%3e%3cdefs%3e%3clinearGradient%20id='paint0_linear_8138_23'%20x1='44.5818'%20y1='44'%20x2='5.96033'%20y2='-0.503114'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-color='%232EF51C'/%3e%3cstop%20offset='1'%20stop-color='%232EF51C'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='paint1_linear_8138_23'%20x1='44.5817'%20y1='44'%20x2='18.194'%20y2='33.6003'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-opacity='0.9'/%3e%3cstop%20offset='1'%20stop-color='%231A1A1A'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3cclipPath%20id='clip0_8138_23'%3e%3crect%20width='158'%20height='44'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)![Neon](data:image/svg+xml,%3csvg%20width='158'%20height='44'%20viewBox='0%200%20158%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='%2312FFF7'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint0_linear_10558_11751\)'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint1_linear_10558_11751\)'/%3e%3cpath%20d='M36.8954%200C41.1406%200%2044.5819%203.39646%2044.5819%207.58621V32.104C44.5819%2036.4386%2039.0243%2038.3197%2036.3289%2034.8976L27.9022%2024.1991V37.1724C27.9022%2040.9432%2024.805%2044%2020.9844%2044C21.4089%2044%2021.753%2043.6604%2021.753%2043.2414V19.7752C21.753%2015.4407%2027.3106%2013.5594%2030.0061%2016.9816L38.4327%2027.6801V1.51724C38.4327%200.679292%2037.7445%200%2036.8954%200Z'%20fill='%23B9FFB3'/%3e%3cpath%20d='M75.1561%2012.9622V24.4706L63.8496%2012.9622H57.9648V31.7844H63.332V19.4155L75.6465%2031.7844H80.5232V12.9622H75.1561Z'%20fill='white'/%3e%3cpath%20d='M90.4725%2027.5898V24.2555H102.487V20.2491H90.4725V17.1569H105.048V12.9622H84.9964V31.7844H105.348V27.5898H90.4725Z'%20fill='white'/%3e%3cpath%20d='M119.61%2032.4029C127.157%2032.4029%20132.061%2028.746%20132.061%2022.3733C132.061%2016.0006%20127.157%2012.3438%20119.61%2012.3438C112.063%2012.3438%20107.187%2016.0006%20107.187%2022.3733C107.187%2028.746%20112.063%2032.4029%20119.61%2032.4029ZM119.61%2027.9393C115.415%2027.9393%20112.826%2025.9226%20112.826%2022.3733C112.826%2018.824%20115.442%2016.8073%20119.61%2016.8073C123.806%2016.8073%20126.394%2018.824%20126.394%2022.3733C126.394%2025.9226%20123.806%2027.9393%20119.61%2027.9393Z'%20fill='white'/%3e%3cpath%20d='M152.632%2012.9622V24.4706L141.326%2012.9622H135.441V31.7844H140.808V19.4155L153.123%2031.7844H157.999V12.9622H152.632Z'%20fill='white'/%3e%3cdefs%3e%3clinearGradient%20id='paint0_linear_10558_11751'%20x1='44.5818'%20y1='44'%20x2='5.96033'%20y2='-0.503116'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-color='%23B9FFB3'/%3e%3cstop%20offset='1'%20stop-color='%23B9FFB3'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='paint1_linear_10558_11751'%20x1='44.5817'%20y1='44'%20x2='18.194'%20y2='33.6003'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-color='%231A1A1A'%20stop-opacity='0.9'/%3e%3cstop%20offset='1'%20stop-color='%231A1A1A'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e)
+
+]\(https://neon.tech?utm\_source=tanstack)\[
+
+![WorkOS](/assets/workos-black-DnPI5Ve5.svg)![WorkOS](data:image/svg+xml,%3csvg%20width='880'%20height='168'%20viewBox='0%200%20880%20168'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_1647_45\)'%3e%3cpath%20d='M255.264%2025.3765H279.579L297.086%2097.519C300.332%20111.135%20300.976%20119.244%20300.976%20119.244H301.304C301.304%20119.244%20302.435%20111.306%20305.681%2097.519L322.373%2025.3765H349.934L367.599%2097.519C371.003%20111.622%20371.818%20119.244%20371.818%20119.244H372.304C372.304%20119.244%20372.632%20111.622%20375.866%2097.519L392.729%2025.3765H417.043L386.249%20143.717H359.174L340.536%2072.0612C336.646%2056.4997%20336.318%2049.5334%20336.318%2049.5334H335.99C335.99%2049.5334%20335.661%2056.4997%20332.099%2072.0612L314.592%20143.717H286.715L255.264%2025.3765Z'%20fill='white'/%3e%3cpath%20d='M412.984%20100.726C412.984%2073.6509%20430.491%2056.1442%20456.921%2056.1442C483.181%2056.1442%20500.688%2073.6509%20500.688%20100.726C500.688%20127.958%20483.181%20145.635%20456.921%20145.635C430.503%20145.623%20412.984%20127.958%20412.984%20100.726ZM477.99%20100.726C477.99%2083.2189%20469.565%2073.3227%20456.921%2073.3227C443.305%2073.3227%20435.682%2084.3495%20435.682%20100.726C435.682%20118.561%20444.107%20128.445%20456.921%20128.445C470.537%20128.445%20477.99%20117.418%20477.99%20100.726Z'%20fill='white'/%3e%3cpath%20d='M511.545%2057.4711H533.101V73.3609H533.587C537.319%2065.0938%20546.231%2056.8267%20561.464%2056.8267C564.054%2056.8267%20565.683%2057.155%20566.813%2057.4711V79.0263H566.169C566.169%2079.0263%20564.224%2078.3819%20558.875%2078.3819C542.182%2078.3819%20533.101%2088.266%20533.101%20106.745V143.704H511.545V57.4711Z'%20fill='white'/%3e%3cpath%20d='M576.868%2025.3765H598.423V63.3079C598.423%2085.6776%20598.095%2089.7261%20598.095%2089.7261H598.423L630.519%2057.4723H657.424L619.833%2094.7592L663.442%20143.717H637.984L606.532%20108.047L598.423%20115.986V143.705H576.868V25.3765Z'%20fill='white'/%3e%3cpath%20d='M663.757%2084.9796C663.757%2048.5072%20686.455%2024.1923%20720.496%2024.1923C754.537%2024.1923%20777.235%2048.5072%20777.235%2084.9796C777.235%20121.452%20754.537%20145.767%20720.496%20145.767C686.455%20145.767%20663.757%20121.452%20663.757%2084.9796ZM753.722%2084.9796C753.722%2060.1784%20740.434%2043.474%20720.483%2043.474C700.533%2043.474%20687.257%2060.1784%20687.257%2084.9796C687.257%20109.781%20700.545%20126.485%20720.483%20126.485C740.422%20126.485%20753.722%20109.781%20753.722%2084.9796Z'%20fill='white'/%3e%3cpath%20d='M785.488%20104.326H810.131C810.131%20118.271%20819.699%20126.052%20834.288%20126.052C846.603%20126.052%20855.041%20119.888%20855.041%20111.135C855.041%20101.25%20848.561%2098.6488%20827.966%2094.6003C809.158%2090.868%20789.22%2084.5461%20789.22%2059.9029C789.22%2039.3203%20806.727%2023.7587%20833.473%2023.7587C861.35%2023.7587%20878.541%2038.3477%20878.541%2060.3892H853.898C853.898%2049.6906%20845.631%2043.0405%20833.473%2043.0405C821.158%2043.0405%20813.535%2049.0341%20813.535%2057.7875C813.535%2067.0272%20818.884%2070.5893%20835.419%2073.9934C859.892%2079.1847%20880%2081.9323%20880%20109.165C880%20130.745%20861.192%20145.333%20833.473%20145.333C805.268%20145.333%20785.488%20128.957%20785.488%20104.326Z'%20fill='white'/%3e%3cpath%20d='M0%2084.0003C0%2087.6782%200.967855%2091.356%202.83904%2094.5177L36.7785%20153.299C40.2628%20159.299%2045.5537%20164.203%2052.1351%20166.397C65.1044%20170.72%2078.5253%20165.171%2084.9131%20154.073L93.1076%20139.878L60.7813%2084.0003L94.9143%2024.8321L103.109%2010.6369C105.561%206.37836%20108.851%202.89408%20112.723%200.119568H109.174H60.0715C50.8446%200.119568%2042.3275%205.02337%2037.7463%2013.0243L2.83904%2073.483C0.967855%2076.6446%200%2080.3225%200%2084.0003Z'%20fill='white'/%3e%3cpath%20d='M193.571%2083.9997C193.571%2080.3219%20192.603%2076.644%20190.732%2073.4824L156.341%2013.9271C149.953%202.89352%20136.532%20-2.65551%20123.563%201.60305C116.982%203.79685%20111.691%208.70065%20108.206%2014.7013L100.464%2028.0577L132.79%2083.9997L98.6569%20143.168L90.4624%20157.363C88.0105%20161.557%2084.7198%20165.106%2080.8484%20167.88H84.3972H133.5C142.727%20167.88%20151.244%20162.977%20155.825%20154.976L190.732%2094.5171C192.603%2091.3554%20193.571%2087.6776%20193.571%2083.9997Z'%20fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_1647_45'%3e%3crect%20width='880'%20height='168'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)
+
+]\(https://workos.com?utm\_source=tanstack)\[
+
+![Clerk](/assets/clerk-logo-light-BYN-U_0H.svg)![Clerk](/assets/clerk-logo-dark-CRE22T_2.svg)
+
+]\(https://go.clerk.com/wOwHtuJ)\[
+
+![Electric](/assets/electric-light-C-5MDda4.svg)![Electric](/assets/electric-dark-Bfu2Vl2j.svg)
+
+]\(https://electric-sql.com)\[
+
+![PowerSync](/assets/powersync-black-BbBE6VAv.svg)![PowerSync](/assets/powersync-white-W6vtdqx_.svg)
+
+]\(https://powersync.com?utm\_source=tanstack\&utm\_campaign=tanstack\_partner)\[
+
+![Sentry](data:image/svg+xml,%3csvg%20height='119'%20viewBox='0%200%20222%2066'%20width='400'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='m29%202.26a4.67%204.67%200%200%200%20-8%200l-6.58%2011.27a32.21%2032.21%200%200%201%2017.75%2026.66h-4.62a27.68%2027.68%200%200%200%20-15.46-22.72l-6.09%2010.53a15.92%2015.92%200%200%201%209.23%2012.17h-10.61a.76.76%200%200%201%20-.62-1.11l2.94-5a10.74%2010.74%200%200%200%20-3.36-1.9l-2.91%205a4.54%204.54%200%200%200%201.69%206.24%204.66%204.66%200%200%200%202.26.6h14.53a19.4%2019.4%200%200%200%20-8-17.31l2.31-4a23.87%2023.87%200%200%201%2010.3%2021.31h12.31a35.88%2035.88%200%200%200%20-16.41-31.8l4.67-8a.77.77%200%200%201%201.05-.27c.53.29%2020.29%2034.77%2020.66%2035.17a.76.76%200%200%201%20-.68%201.13h-4.76q.09%201.91%200%203.81h4.78a4.59%204.59%200%200%200%204.62-4.61%204.49%204.49%200%200%200%20-.62-2.28zm95.32%2026.02-14.76-19.06h-3.68v25.55h3.73v-19.58l15.18%2019.58h3.26v-25.55h-3.73zm-37.17-4.74h13.23v-3.32h-13.24v-7.69h14.93v-3.32h-18.73v25.56h18.92v-3.32h-15.12zm-15.56-3.24c-5.15-1.24-6.59-2.22-6.59-4.6%200-2.14%201.89-3.59%204.71-3.59a12.06%2012.06%200%200%201%207.07%202.55l2-2.83a14.1%2014.1%200%200%200%20-9-3c-5.06%200-8.59%203-8.59%207.27%200%204.6%203%206.19%208.46%207.52%204.86%201.12%206.35%202.16%206.35%204.49s-2%203.77-5.09%203.77a12.34%2012.34%200%200%201%20-8.3-3.26l-2.25%202.69a15.94%2015.94%200%200%200%2010.42%203.85c5.48%200%209-2.95%209-7.51-.03-3.86-2.31-5.93-8.19-7.35zm124.11-11.08-7.69%2012-7.64-12h-4.46l10.09%2015.45v10.11h3.84v-10.23l10.16-15.33zm-64.63%203.46h8.37v22.1h3.84v-22.1h8.37v-3.46h-20.57zm38.34%2012.12c3.86-1.07%206-3.77%206-7.63%200-4.91-3.59-8-9.38-8h-11.36v25.59h3.8v-9.18h6.45l6.48%209.2h4.44l-7-9.82zm-10.95-2.5v-9.7h7.17c3.74%200%205.88%201.77%205.88%204.84s-2.29%204.86-5.84%204.86z'%20fill='%23362d59'%20transform='translate\(11%2011\)'/%3e%3c/svg%3e)![Sentry](data:image/svg+xml,%3csvg%20height='119'%20viewBox='0%200%20222%2066'%20width='400'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='m29%202.26a4.67%204.67%200%200%200%20-8%200l-6.58%2011.27a32.21%2032.21%200%200%201%2017.75%2026.66h-4.62a27.68%2027.68%200%200%200%20-15.46-22.72l-6.09%2010.53a15.92%2015.92%200%200%201%209.23%2012.17h-10.61a.76.76%200%200%201%20-.62-1.11l2.94-5a10.74%2010.74%200%200%200%20-3.36-1.9l-2.91%205a4.54%204.54%200%200%200%201.69%206.24%204.66%204.66%200%200%200%202.26.6h14.53a19.4%2019.4%200%200%200%20-8-17.31l2.31-4a23.87%2023.87%200%200%201%2010.3%2021.31h12.31a35.88%2035.88%200%200%200%20-16.41-31.8l4.67-8a.77.77%200%200%201%201.05-.27c.53.29%2020.29%2034.77%2020.66%2035.17a.76.76%200%200%201%20-.68%201.13h-4.76q.09%201.91%200%203.81h4.78a4.59%204.59%200%200%200%204.62-4.61%204.49%204.49%200%200%200%20-.62-2.28zm95.32%2026.02-14.76-19.06h-3.68v25.55h3.73v-19.58l15.18%2019.58h3.26v-25.55h-3.73zm-37.17-4.74h13.23v-3.32h-13.24v-7.69h14.93v-3.32h-18.73v25.56h18.92v-3.32h-15.12zm-15.56-3.24c-5.15-1.24-6.59-2.22-6.59-4.6%200-2.14%201.89-3.59%204.71-3.59a12.06%2012.06%200%200%201%207.07%202.55l2-2.83a14.1%2014.1%200%200%200%20-9-3c-5.06%200-8.59%203-8.59%207.27%200%204.6%203%206.19%208.46%207.52%204.86%201.12%206.35%202.16%206.35%204.49s-2%203.77-5.09%203.77a12.34%2012.34%200%200%201%20-8.3-3.26l-2.25%202.69a15.94%2015.94%200%200%200%2010.42%203.85c5.48%200%209-2.95%209-7.51-.03-3.86-2.31-5.93-8.19-7.35zm124.11-11.08-7.69%2012-7.64-12h-4.46l10.09%2015.45v10.11h3.84v-10.23l10.16-15.33zm-64.63%203.46h8.37v22.1h3.84v-22.1h8.37v-3.46h-20.57zm38.34%2012.12c3.86-1.07%206-3.77%206-7.63%200-4.91-3.59-8-9.38-8h-11.36v25.59h3.8v-9.18h6.45l6.48%209.2h4.44l-7-9.82zm-10.95-2.5v-9.7h7.17c3.74%200%205.88%201.77%205.88%204.84s-2.29%204.86-5.84%204.86z'%20fill='%23fff'%20transform='translate\(11%2011\)'/%3e%3c/svg%3e)
+
+]\(https://sentry.io?utm\_source=tanstack)\[
+
+![Railway](/assets/railway-black-DeBDfNao.svg)![Railway](/assets/railway-white-CFKFsfw2.svg)
+
+]\(https://railway.com/?utm\_medium=sponsor\&utm\_source=oss\&utm\_campaign=tanstack)\[
+
+![Prisma](/assets/prisma-light-Cloa3Onm.svg)![Prisma](/assets/prisma-dark-DwgDxLwn.svg)
+
+]\(https://www.prisma.io/?utm\_source=tanstack\&via=tanstack)\[
+
+![Strapi](/assets/strapi-light-6x7linao.svg)![Strapi](/assets/strapi-dark-CQ84tQTk.svg)
+
+]\(https://strapi.link/tanstack-start)\[
+
+![Unkey](data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='92px'%20height='27px'%20viewBox='0%200%2092%2027'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3ctitle%3eShape%3c/title%3e%3cg%20id='Page-1'%20stroke='none'%20stroke-width='1'%20fill='none'%20fill-rule='evenodd'%3e%3cpath%20d='M9.8,21.3%20C3.8,21.3%200.38,18.12%200.38,12.66%20L0.38,0.9%20L3.59,0.9%20L3.59,12.45%20C3.59,16.5%205.39,18.18%209.8,18.18%20C14.21,18.18%2016.01,16.5%2016.01,12.45%20L16.01,0.9%20L19.25,0.9%20L19.25,12.66%20C19.25,18.12%2015.83,21.3%209.8,21.3%20L9.8,21.3%20Z%20M25.3611,21%20L22.1211,21%20L22.1211,6.09%20L25.0911,6.09%20L25.0911,10.71%20L25.3011,10.71%20C25.7511,8.19%2027.7311,5.79%2031.5111,5.79%20C35.6511,5.79%2037.6911,8.58%2037.6911,12.03%20L37.6911,21%20L34.4511,21%20L34.4511,12.9%20C34.4511,10.11%2033.1911,8.7%2030.1011,8.7%20C26.8311,8.7%2025.3611,10.38%2025.3611,13.62%20L25.3611,21%20Z%20M43.8181,21%20L40.5781,21%20L40.5781,0.9%20L43.8181,0.9%20L43.8181,12%20L48.0781,12%20L52.5481,6.09%20L56.3281,6.09%20L50.7181,13.26%20L56.2981,21%20L52.4881,21%20L48.0781,14.91%20L43.8181,14.91%20L43.8181,21%20Z%20M65.4219,21.3%20C60.5319,21.3%2057.3219,18.54%2057.3219,13.56%20C57.3219,8.91%2060.5019,5.79%2065.3619,5.79%20C69.9819,5.79%2073.1319,8.34%2073.1319,12.87%20C73.1319,13.41%2073.1019,13.83%2073.0119,14.28%20L60.3519,14.28%20C60.4719,17.16%2061.8819,18.69%2065.3319,18.69%20C68.4519,18.69%2069.7419,17.67%2069.7419,15.9%20L69.7419,15.66%20L72.9819,15.66%20L72.9819,15.93%20C72.9819,19.11%2069.8619,21.3%2065.4219,21.3%20L65.4219,21.3%20Z%20M65.3019,8.34%20C62.0019,8.34%2060.5619,9.81%2060.3819,12.48%20L70.0719,12.48%20L70.0719,12.42%20C70.0719,9.66%2068.4819,8.34%2065.3019,8.34%20L65.3019,8.34%20Z%20M77.9586,26.1%20L75.8286,26.1%20L75.8286,23.16%20L78.7386,23.16%20C80.0586,23.16%2080.5986,22.8%2081.0486,21.78%20L81.4086,21%20L74.0586,6.09%20L77.6886,6.09%20L81.4986,14.01%20L82.9686,17.58%20L83.2086,17.58%20L84.6186,13.98%20L88.1286,6.09%20L91.6986,6.09%20L83.9286,22.62%20C82.6986,25.29%2081.0186,26.1%2077.9586,26.1%20Z'%20id='Shape'%20fill='%23000000'%20fill-rule='nonzero'%3e%3c/path%3e%3c/g%3e%3c/svg%3e)![Unkey](data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='92px'%20height='27px'%20viewBox='0%200%2092%2027'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3ctitle%3eShape%3c/title%3e%3cg%20id='Page-1'%20stroke='none'%20stroke-width='1'%20fill='none'%20fill-rule='evenodd'%3e%3cpath%20d='M9.8,21.3%20C3.8,21.3%200.38,18.12%200.38,12.66%20L0.38,0.9%20L3.59,0.9%20L3.59,12.45%20C3.59,16.5%205.39,18.18%209.8,18.18%20C14.21,18.18%2016.01,16.5%2016.01,12.45%20L16.01,0.9%20L19.25,0.9%20L19.25,12.66%20C19.25,18.12%2015.83,21.3%209.8,21.3%20L9.8,21.3%20Z%20M25.3611,21%20L22.1211,21%20L22.1211,6.09%20L25.0911,6.09%20L25.0911,10.71%20L25.3011,10.71%20C25.7511,8.19%2027.7311,5.79%2031.5111,5.79%20C35.6511,5.79%2037.6911,8.58%2037.6911,12.03%20L37.6911,21%20L34.4511,21%20L34.4511,12.9%20C34.4511,10.11%2033.1911,8.7%2030.1011,8.7%20C26.8311,8.7%2025.3611,10.38%2025.3611,13.62%20L25.3611,21%20Z%20M43.8181,21%20L40.5781,21%20L40.5781,0.9%20L43.8181,0.9%20L43.8181,12%20L48.0781,12%20L52.5481,6.09%20L56.3281,6.09%20L50.7181,13.26%20L56.2981,21%20L52.4881,21%20L48.0781,14.91%20L43.8181,14.91%20L43.8181,21%20Z%20M65.4219,21.3%20C60.5319,21.3%2057.3219,18.54%2057.3219,13.56%20C57.3219,8.91%2060.5019,5.79%2065.3619,5.79%20C69.9819,5.79%2073.1319,8.34%2073.1319,12.87%20C73.1319,13.41%2073.1019,13.83%2073.0119,14.28%20L60.3519,14.28%20C60.4719,17.16%2061.8819,18.69%2065.3319,18.69%20C68.4519,18.69%2069.7419,17.67%2069.7419,15.9%20L69.7419,15.66%20L72.9819,15.66%20L72.9819,15.93%20C72.9819,19.11%2069.8619,21.3%2065.4219,21.3%20L65.4219,21.3%20Z%20M65.3019,8.34%20C62.0019,8.34%2060.5619,9.81%2060.3819,12.48%20L70.0719,12.48%20L70.0719,12.42%20C70.0719,9.66%2068.4819,8.34%2065.3019,8.34%20L65.3019,8.34%20Z%20M77.9586,26.1%20L75.8286,26.1%20L75.8286,23.16%20L78.7386,23.16%20C80.0586,23.16%2080.5986,22.8%2081.0486,21.78%20L81.4086,21%20L74.0586,6.09%20L77.6886,6.09%20L81.4986,14.01%20L82.9686,17.58%20L83.2086,17.58%20L84.6186,13.98%20L88.1286,6.09%20L91.6986,6.09%20L83.9286,22.62%20C82.6986,25.29%2081.0186,26.1%2077.9586,26.1%20Z'%20id='Shape'%20fill='%23FFFFFF'%20fill-rule='nonzero'%3e%3c/path%3e%3c/g%3e%3c/svg%3e)
+
+]\(https://www.unkey.com/?utm\_source=tanstack)\[
+
+![CodeRabbit](/assets/coderabbit-light-CIzGLYU_.svg)![CodeRabbit](/assets/coderabbit-dark-D643Zkrv.svg)
+
+]\(https://coderabbit.link/tanstack?utm\_source=tanstack\&via=tanstack)\[
+
+![Cloudflare](/assets/cloudflare-black-6Ojsn8yh.svg)![Cloudflare](/assets/cloudflare-white-Co-Tyjbl.svg)
+
+]\(https://www.cloudflare.com?utm\_source=tanstack)\[
+
+![AG Grid](data:image/svg+xml,%3csvg%20clip-rule='evenodd'%20fill-rule='evenodd'%20stroke-linejoin='round'%20stroke-miterlimit='2'%20viewBox='0%200%20235%2040'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20transform='matrix\(.635723%200%200%20.635723%20-492.921%20-323.608\)'%3e%3cg%20fill-rule='nonzero'%3e%3cpath%20d='m1099.4%20549.4v-12.5h-21.3l-12.5%2012.5z'%20fill='%23ff8b00'/%3e%3cpath%20d='m1123.4%20518.4h-26.7l-12.6%2012.5h39.3z'%20fill='%2355b2c6'/%3e%3cpath%20d='m1053.2%20561.9%206.4-6.4h21.6v12.5h-28z'%20fill='%23f00'/%3e%3cpath%20d='m1057.9%20543.3h13.8l12.6-12.5h-26.4z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1042.8%20561.9h10.4l12.4-12.5h-22.8z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1096.7%20518.4-6.4%206.4h-40.8v-12.5h47.2z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m828.6%20559.7h-19.6l-3.4%208.4h-8.6l18.1-42.4h7.5l18.1%2042.4h-8.7zm-2.7-6.7-7.1-17.3-7.1%2017.3z'%20fill='%23031c4c'/%3e%3cpath%20d='m960.1%20541.3c2.5-3.7%208.8-4.1%2011.4-4.1v7.2c-3.2%200-6.4.1-8.3%201.5s-2.9%203.3-2.9%205.6v16.6h-7.8v-30.9h7.5z'%20fill='%23031c4c'/%3e%3c/g%3e%3cpath%20d='m975.8%20537.2h7.8v30.9h-7.8z'%20fill='%23031c4c'/%3e%3cpath%20d='m975.8%20523.4h7.8v9.2h-7.8z'%20fill='%23031c4c'/%3e%3cpath%20d='m1022.3%20523.4v44.7h-7.5l-.2-4.7c-1.1%201.6-2.5%202.9-4.2%203.9-1.7.9-3.8%201.4-6.2%201.4-2.1%200-4.1-.4-5.8-1.1-1.8-.8-3.4-1.8-4.7-3.2s-2.4-3.1-3.1-5c-.8-1.9-1.1-4.1-1.1-6.5s.4-4.6%201.1-6.6c.8-2%201.8-3.7%203.1-5.1s2.9-2.5%204.7-3.3%203.7-1.2%205.8-1.2c2.4%200%204.4.4%206.1%201.3s3.1%202.1%204.2%203.8v-18.3h7.8zm-16.4%2038.6c2.6%200%204.6-.9%206.2-2.6s2.4-4%202.4-6.8-.8-5-2.4-6.8c-1.6-1.7-3.6-2.6-6.2-2.6-2.5%200-4.6.9-6.1%202.6-1.6%201.7-2.4%204-2.4%206.8s.8%205%202.4%206.7c1.6%201.8%203.6%202.7%206.1%202.7'%20fill='%23031c4c'%20fill-rule='nonzero'/%3e%3cpath%20d='m885.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23031c4c'%20fill-rule='nonzero'/%3e%3cpath%20d='m946.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23031c4c'%20fill-rule='nonzero'/%3e%3c/g%3e%3c/svg%3e)![AG Grid](data:image/svg+xml,%3csvg%20clip-rule='evenodd'%20fill-rule='evenodd'%20stroke-linejoin='round'%20stroke-miterlimit='2'%20viewBox='0%200%20235%2040'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20transform='matrix\(.635723%200%200%20.635723%20-492.921%20-323.608\)'%3e%3cg%20fill-rule='nonzero'%3e%3cpath%20d='m1099.4%20549.4v-12.5h-21.3l-12.5%2012.5z'%20fill='%23ff8b00'/%3e%3cpath%20d='m1123.4%20518.4h-26.7l-12.6%2012.5h39.3z'%20fill='%2355b2c6'/%3e%3cpath%20d='m1053.2%20561.9%206.4-6.4h21.6v12.5h-28z'%20fill='%23f00'/%3e%3cpath%20d='m1057.9%20543.3h13.8l12.6-12.5h-26.4z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1042.8%20561.9h10.4l12.4-12.5h-22.8z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1096.7%20518.4-6.4%206.4h-40.8v-12.5h47.2z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m828.6%20559.7h-19.6l-3.4%208.4h-8.6l18.1-42.4h7.5l18.1%2042.4h-8.7zm-2.7-6.7-7.1-17.3-7.1%2017.3z'%20fill='%23fff'/%3e%3cpath%20d='m960.1%20541.3c2.5-3.7%208.8-4.1%2011.4-4.1v7.2c-3.2%200-6.4.1-8.3%201.5s-2.9%203.3-2.9%205.6v16.6h-7.8v-30.9h7.5z'%20fill='%23fff'/%3e%3c/g%3e%3cpath%20d='m975.8%20537.2h7.8v30.9h-7.8z'%20fill='%23fff'/%3e%3cpath%20d='m975.8%20523.4h7.8v9.2h-7.8z'%20fill='%23fff'/%3e%3cpath%20d='m1022.3%20523.4v44.7h-7.5l-.2-4.7c-1.1%201.6-2.5%202.9-4.2%203.9-1.7.9-3.8%201.4-6.2%201.4-2.1%200-4.1-.4-5.8-1.1-1.8-.8-3.4-1.8-4.7-3.2s-2.4-3.1-3.1-5c-.8-1.9-1.1-4.1-1.1-6.5s.4-4.6%201.1-6.6c.8-2%201.8-3.7%203.1-5.1s2.9-2.5%204.7-3.3%203.7-1.2%205.8-1.2c2.4%200%204.4.4%206.1%201.3s3.1%202.1%204.2%203.8v-18.3h7.8zm-16.4%2038.6c2.6%200%204.6-.9%206.2-2.6s2.4-4%202.4-6.8-.8-5-2.4-6.8c-1.6-1.7-3.6-2.6-6.2-2.6-2.5%200-4.6.9-6.1%202.6-1.6%201.7-2.4%204-2.4%206.8s.8%205%202.4%206.7c1.6%201.8%203.6%202.7%206.1%202.7'%20fill='%23fff'%20fill-rule='nonzero'/%3e%3cpath%20d='m885.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23fff'%20fill-rule='nonzero'/%3e%3cpath%20d='m946.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23fff'%20fill-rule='nonzero'/%3e%3c/g%3e%3c/svg%3e)
+
+]\(https://ag-grid.com/react-data-grid/?utm\_source=reacttable\&utm\_campaign=githubreacttable)\[
+
+![SerpAPI](/assets/serpapi-black-DnXRiQQ3.svg)![SerpAPI](/assets/serpapi-white-CPxTEZSp.svg)
+
+]\(https://serpapi.com?utm\_source=tanstack)\[
+
+![Netlify](data:image/svg+xml,%3csvg%20width='512'%20height='209'%20viewBox='0%200%20512%20209'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_235_8\)'%3e%3cpath%20d='M117.436%20207.036V154.604L118.529%20153.51H129.452L130.545%20154.604V207.036L129.452%20208.13H118.529L117.436%20207.036Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M117.436%2053.5225V1.09339L118.529%200H129.452L130.545%201.09339V53.5225L129.452%2054.6159H118.529L117.436%2053.5225Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M69.9539%20169.238H68.4094L60.6869%20161.512V159.967L78.7201%20141.938L86.8976%20141.942L87.9948%20143.031V151.209L69.9539%20169.238Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M69.9462%2038.8917H68.4017L60.6792%2046.6181V48.1626L78.7124%2066.192L86.8899%2066.1882L87.9871%2065.0986V56.9212L69.9462%2038.8917Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M1.09339%2097.5104H75.3711L76.4645%2098.6038V109.526L75.3711%20110.62H1.09339L0%20109.526V98.6038L1.09339%2097.5104Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M440.999%2097.5104H510.91L512.004%2098.6038V109.526L510.91%20110.62H436.633L435.539%20109.526L439.905%2098.6038L440.999%2097.5104Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M212.056%20108.727L210.963%20109.821H177.079L175.986%20110.914C175.986%20113.101%20178.173%20119.657%20186.916%20119.657C190.196%20119.657%20193.472%20118.564%20194.566%20116.377L195.659%20115.284H208.776L209.869%20116.377C208.776%20122.934%20203.313%20132.774%20186.916%20132.774C168.336%20132.774%20159.589%20119.657%20159.589%20104.357C159.589%2089.0576%20168.332%2075.9408%20185.822%2075.9408C203.313%2075.9408%20212.056%2089.0576%20212.056%20104.357V108.731V108.727ZM195.659%2097.7971C195.659%2096.7037%20194.566%2089.0538%20185.822%2089.0538C177.079%2089.0538%20175.986%2096.7037%20175.986%2097.7971L177.079%2098.8905H194.566L195.659%2097.7971Z'%20fill='%23014847'/%3e%3cpath%20d='M242.66%20115.284C242.66%20117.47%20243.753%20118.564%20245.94%20118.564H255.776L256.87%20119.657V130.587L255.776%20131.681H245.94C236.103%20131.681%20227.36%20127.307%20227.36%20115.284V91.2368L226.266%2090.1434H218.617L217.523%2089.05V78.1199L218.617%2077.0265H226.266L227.36%2075.9332V66.0965L228.453%2065.0031H241.57L242.663%2066.0965V75.9332L243.757%2077.0265H255.78L256.874%2078.1199V89.05L255.78%2090.1434H243.757L242.663%2091.2368V115.284H242.66Z'%20fill='%23014847'/%3e%3cpath%20d='M283.1%20131.681H269.983L268.889%20130.587V56.2636L269.983%2055.1702H283.1L284.193%2056.2636V130.587L283.1%20131.681Z'%20fill='%23014847'/%3e%3cpath%20d='M312.61%2068.2871H299.493L298.399%2067.1937V56.2636L299.493%2055.1702H312.61L313.703%2056.2636V67.1937L312.61%2068.2871ZM312.61%20131.681H299.493L298.399%20130.587V78.1237L299.493%2077.0304H312.61L313.703%2078.1237V130.587L312.61%20131.681Z'%20fill='%23014847'/%3e%3cpath%20d='M363.98%2056.2636V67.1937L362.886%2068.2871H353.05C350.863%2068.2871%20349.769%2069.3805%20349.769%2071.5672V75.9408L350.863%2077.0342H361.793L362.886%2078.1276V89.0576L361.793%2090.151H350.863L349.769%2091.2444V130.591L348.676%20131.684H335.559L334.466%20130.591V91.2444L333.372%2090.151H325.723L324.629%2089.0576V78.1276L325.723%2077.0342H333.372L334.466%2075.9408V71.5672C334.466%2059.5438%20343.209%2055.1702%20353.046%2055.1702H362.882L363.976%2056.2636H363.98Z'%20fill='%23014847'/%3e%3cpath%20d='M404.42%20132.774C400.046%20143.704%20395.677%20150.261%20380.373%20150.261H374.906L373.813%20149.167V138.237L374.906%20137.144H380.373C385.836%20137.144%20386.929%20136.05%20388.023%20132.77V131.677L370.536%2089.05V78.1199L371.63%2077.0265H381.466L382.56%2078.1199L395.677%20115.284H396.77L409.887%2078.1199L410.98%2077.0265H420.817L421.91%2078.1199V89.05L404.424%20132.77L404.42%20132.774Z'%20fill='%23014847'/%3e%3cpath%20d='M135.454%20131.681L134.361%20130.587L134.368%2098.9172C134.368%2093.4541%20132.22%2089.2182%20125.625%2089.0806C122.234%2088.9926%20118.354%2089.0729%20114.209%2089.2488L113.59%2089.8834L113.598%20130.587L112.504%20131.681H99.3913L98.2979%20130.587V77.5388L99.3913%2076.4454L128.901%2076.1778C143.685%2076.1778%20149.668%2086.3356%20149.668%2097.8009V130.587L148.575%20131.681H135.454Z'%20fill='%23014847'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_235_8'%3e%3crect%20width='512'%20height='208.126'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)![Netlify](data:image/svg+xml,%3csvg%20width='512'%20height='209'%20viewBox='0%200%20512%20209'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_235_26\)'%3e%3cpath%20d='M117.436%20207.036V154.604L118.529%20153.51H129.452L130.545%20154.604V207.036L129.452%20208.13H118.529L117.436%20207.036Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M117.436%2053.5225V1.09339L118.529%200H129.452L130.545%201.09339V53.5225L129.452%2054.6159H118.529L117.436%2053.5225Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M69.9539%20169.238H68.4094L60.6869%20161.512V159.967L78.7201%20141.938L86.8976%20141.942L87.9948%20143.031V151.209L69.9539%20169.238Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M69.9462%2038.8917H68.4017L60.6792%2046.6181V48.1626L78.7124%2066.192L86.8899%2066.1882L87.9871%2065.0986V56.9212L69.9462%2038.8917Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M1.09339%2097.5104H75.3711L76.4645%2098.6038V109.526L75.3711%20110.62H1.09339L0%20109.526V98.6038L1.09339%2097.5104Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M440.999%2097.5104H510.91L512.004%2098.6038V109.526L510.91%20110.62H436.633L435.539%20109.526L439.905%2098.6038L440.999%2097.5104Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M212.056%20108.727L210.963%20109.821H177.079L175.986%20110.914C175.986%20113.101%20178.173%20119.657%20186.916%20119.657C190.196%20119.657%20193.472%20118.564%20194.566%20116.377L195.659%20115.284H208.776L209.869%20116.377C208.776%20122.934%20203.313%20132.774%20186.916%20132.774C168.336%20132.774%20159.589%20119.657%20159.589%20104.357C159.589%2089.0576%20168.332%2075.9408%20185.822%2075.9408C203.313%2075.9408%20212.056%2089.0576%20212.056%20104.357V108.731V108.727ZM195.659%2097.7971C195.659%2096.7037%20194.566%2089.0538%20185.822%2089.0538C177.079%2089.0538%20175.986%2096.7037%20175.986%2097.7971L177.079%2098.8905H194.566L195.659%2097.7971Z'%20fill='white'/%3e%3cpath%20d='M242.66%20115.284C242.66%20117.47%20243.753%20118.564%20245.94%20118.564H255.776L256.87%20119.657V130.587L255.776%20131.681H245.94C236.103%20131.681%20227.36%20127.307%20227.36%20115.284V91.2368L226.266%2090.1434H218.617L217.523%2089.05V78.1199L218.617%2077.0265H226.266L227.36%2075.9332V66.0965L228.453%2065.0031H241.57L242.663%2066.0965V75.9332L243.757%2077.0265H255.78L256.874%2078.1199V89.05L255.78%2090.1434H243.757L242.663%2091.2368V115.284H242.66Z'%20fill='white'/%3e%3cpath%20d='M283.1%20131.681H269.983L268.889%20130.587V56.2636L269.983%2055.1702H283.1L284.193%2056.2636V130.587L283.1%20131.681Z'%20fill='white'/%3e%3cpath%20d='M312.61%2068.2871H299.493L298.399%2067.1937V56.2636L299.493%2055.1702H312.61L313.703%2056.2636V67.1937L312.61%2068.2871ZM312.61%20131.681H299.493L298.399%20130.587V78.1237L299.493%2077.0304H312.61L313.703%2078.1237V130.587L312.61%20131.681Z'%20fill='white'/%3e%3cpath%20d='M363.98%2056.2636V67.1937L362.886%2068.2871H353.05C350.863%2068.2871%20349.769%2069.3805%20349.769%2071.5672V75.9408L350.863%2077.0342H361.793L362.886%2078.1276V89.0576L361.793%2090.151H350.863L349.769%2091.2444V130.591L348.676%20131.684H335.559L334.466%20130.591V91.2444L333.372%2090.151H325.723L324.629%2089.0576V78.1276L325.723%2077.0342H333.372L334.466%2075.9408V71.5672C334.466%2059.5438%20343.209%2055.1702%20353.046%2055.1702H362.882L363.976%2056.2636H363.98Z'%20fill='white'/%3e%3cpath%20d='M404.42%20132.774C400.046%20143.704%20395.677%20150.261%20380.373%20150.261H374.906L373.813%20149.167V138.237L374.906%20137.144H380.373C385.836%20137.144%20386.929%20136.05%20388.023%20132.77V131.677L370.536%2089.05V78.1199L371.63%2077.0265H381.466L382.56%2078.1199L395.677%20115.284H396.77L409.887%2078.1199L410.98%2077.0265H420.817L421.91%2078.1199V89.05L404.424%20132.77L404.42%20132.774Z'%20fill='white'/%3e%3cpath%20d='M135.454%20131.681L134.361%20130.587L134.368%2098.9172C134.368%2093.4541%20132.22%2089.2182%20125.625%2089.0806C122.234%2088.9926%20118.354%2089.0729%20114.209%2089.2488L113.59%2089.8834L113.598%20130.587L112.504%20131.681H99.3913L98.2979%20130.587V77.5388L99.3913%2076.4454L128.901%2076.1778C143.685%2076.1778%20149.668%2086.3356%20149.668%2097.8009V130.587L148.575%20131.681H135.454Z'%20fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_235_26'%3e%3crect%20width='512'%20height='208.126'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)
+
+]\(https://netlify.com?utm\_source=tanstack)\[
+
+![OpenRouter](/assets/openrouter-black-DNn7_580.svg)![OpenRouter](/assets/openrouter-white-COMTfjvn.svg)
+
+]\(https://openrouter.ai?utm\_source=tanstack)\[
+
+![Neon](data:image/svg+xml,%3csvg%20width='158'%20height='44'%20viewBox='0%200%20158%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_8138_23\)'%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='%2332C0ED'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint0_linear_8138_23\)'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint1_linear_8138_23\)'%20fill-opacity='0.35'/%3e%3cpath%20d='M36.8954%200C41.1406%200%2044.5819%203.39646%2044.5819%207.58621V32.104C44.5819%2036.4386%2039.0243%2038.3197%2036.3289%2034.8976L27.9022%2024.1991V37.1724C27.9022%2040.9432%2024.805%2044%2020.9844%2044C21.4089%2044%2021.753%2043.6604%2021.753%2043.2414V19.7752C21.753%2015.4407%2027.3106%2013.5594%2030.0061%2016.9816L38.4327%2027.6801V1.51724C38.4327%200.679292%2037.7445%200%2036.8954%200Z'%20fill='%2363F655'/%3e%3cpath%20d='M75.1561%2012.9622V24.4706L63.8496%2012.9622H57.9648V31.7844H63.332V19.4155L75.6465%2031.7844H80.5232V12.9622H75.1561Z'%20fill='%231A1A1A'/%3e%3cpath%20d='M90.4724%2027.5898V24.2555H102.487V20.2491H90.4724V17.1569H105.048V12.9622H84.9963V31.7844H105.348V27.5898H90.4724Z'%20fill='%231A1A1A'/%3e%3cpath%20d='M119.61%2032.4029C127.157%2032.4029%20132.061%2028.746%20132.061%2022.3733C132.061%2016.0006%20127.157%2012.3438%20119.61%2012.3438C112.063%2012.3438%20107.187%2016.0006%20107.187%2022.3733C107.187%2028.746%20112.063%2032.4029%20119.61%2032.4029ZM119.61%2027.9393C115.415%2027.9393%20112.826%2025.9226%20112.826%2022.3733C112.826%2018.824%20115.442%2016.8073%20119.61%2016.8073C123.806%2016.8073%20126.394%2018.824%20126.394%2022.3733C126.394%2025.9226%20123.806%2027.9393%20119.61%2027.9393Z'%20fill='%231A1A1A'/%3e%3cpath%20d='M152.632%2012.9622V24.4706L141.326%2012.9622H135.441V31.7844H140.808V19.4155L153.123%2031.7844H157.999V12.9622H152.632Z'%20fill='%231A1A1A'/%3e%3c/g%3e%3cdefs%3e%3clinearGradient%20id='paint0_linear_8138_23'%20x1='44.5818'%20y1='44'%20x2='5.96033'%20y2='-0.503114'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-color='%232EF51C'/%3e%3cstop%20offset='1'%20stop-color='%232EF51C'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='paint1_linear_8138_23'%20x1='44.5817'%20y1='44'%20x2='18.194'%20y2='33.6003'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-opacity='0.9'/%3e%3cstop%20offset='1'%20stop-color='%231A1A1A'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3cclipPath%20id='clip0_8138_23'%3e%3crect%20width='158'%20height='44'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)![Neon](data:image/svg+xml,%3csvg%20width='158'%20height='44'%20viewBox='0%200%20158%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='%2312FFF7'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint0_linear_10558_11751\)'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint1_linear_10558_11751\)'/%3e%3cpath%20d='M36.8954%200C41.1406%200%2044.5819%203.39646%2044.5819%207.58621V32.104C44.5819%2036.4386%2039.0243%2038.3197%2036.3289%2034.8976L27.9022%2024.1991V37.1724C27.9022%2040.9432%2024.805%2044%2020.9844%2044C21.4089%2044%2021.753%2043.6604%2021.753%2043.2414V19.7752C21.753%2015.4407%2027.3106%2013.5594%2030.0061%2016.9816L38.4327%2027.6801V1.51724C38.4327%200.679292%2037.7445%200%2036.8954%200Z'%20fill='%23B9FFB3'/%3e%3cpath%20d='M75.1561%2012.9622V24.4706L63.8496%2012.9622H57.9648V31.7844H63.332V19.4155L75.6465%2031.7844H80.5232V12.9622H75.1561Z'%20fill='white'/%3e%3cpath%20d='M90.4725%2027.5898V24.2555H102.487V20.2491H90.4725V17.1569H105.048V12.9622H84.9964V31.7844H105.348V27.5898H90.4725Z'%20fill='white'/%3e%3cpath%20d='M119.61%2032.4029C127.157%2032.4029%20132.061%2028.746%20132.061%2022.3733C132.061%2016.0006%20127.157%2012.3438%20119.61%2012.3438C112.063%2012.3438%20107.187%2016.0006%20107.187%2022.3733C107.187%2028.746%20112.063%2032.4029%20119.61%2032.4029ZM119.61%2027.9393C115.415%2027.9393%20112.826%2025.9226%20112.826%2022.3733C112.826%2018.824%20115.442%2016.8073%20119.61%2016.8073C123.806%2016.8073%20126.394%2018.824%20126.394%2022.3733C126.394%2025.9226%20123.806%2027.9393%20119.61%2027.9393Z'%20fill='white'/%3e%3cpath%20d='M152.632%2012.9622V24.4706L141.326%2012.9622H135.441V31.7844H140.808V19.4155L153.123%2031.7844H157.999V12.9622H152.632Z'%20fill='white'/%3e%3cdefs%3e%3clinearGradient%20id='paint0_linear_10558_11751'%20x1='44.5818'%20y1='44'%20x2='5.96033'%20y2='-0.503116'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-color='%23B9FFB3'/%3e%3cstop%20offset='1'%20stop-color='%23B9FFB3'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='paint1_linear_10558_11751'%20x1='44.5817'%20y1='44'%20x2='18.194'%20y2='33.6003'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-color='%231A1A1A'%20stop-opacity='0.9'/%3e%3cstop%20offset='1'%20stop-color='%231A1A1A'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e)
+
+]\(https://neon.tech?utm\_source=tanstack)\[
+
+![WorkOS](/assets/workos-black-DnPI5Ve5.svg)![WorkOS](data:image/svg+xml,%3csvg%20width='880'%20height='168'%20viewBox='0%200%20880%20168'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_1647_45\)'%3e%3cpath%20d='M255.264%2025.3765H279.579L297.086%2097.519C300.332%20111.135%20300.976%20119.244%20300.976%20119.244H301.304C301.304%20119.244%20302.435%20111.306%20305.681%2097.519L322.373%2025.3765H349.934L367.599%2097.519C371.003%20111.622%20371.818%20119.244%20371.818%20119.244H372.304C372.304%20119.244%20372.632%20111.622%20375.866%2097.519L392.729%2025.3765H417.043L386.249%20143.717H359.174L340.536%2072.0612C336.646%2056.4997%20336.318%2049.5334%20336.318%2049.5334H335.99C335.99%2049.5334%20335.661%2056.4997%20332.099%2072.0612L314.592%20143.717H286.715L255.264%2025.3765Z'%20fill='white'/%3e%3cpath%20d='M412.984%20100.726C412.984%2073.6509%20430.491%2056.1442%20456.921%2056.1442C483.181%2056.1442%20500.688%2073.6509%20500.688%20100.726C500.688%20127.958%20483.181%20145.635%20456.921%20145.635C430.503%20145.623%20412.984%20127.958%20412.984%20100.726ZM477.99%20100.726C477.99%2083.2189%20469.565%2073.3227%20456.921%2073.3227C443.305%2073.3227%20435.682%2084.3495%20435.682%20100.726C435.682%20118.561%20444.107%20128.445%20456.921%20128.445C470.537%20128.445%20477.99%20117.418%20477.99%20100.726Z'%20fill='white'/%3e%3cpath%20d='M511.545%2057.4711H533.101V73.3609H533.587C537.319%2065.0938%20546.231%2056.8267%20561.464%2056.8267C564.054%2056.8267%20565.683%2057.155%20566.813%2057.4711V79.0263H566.169C566.169%2079.0263%20564.224%2078.3819%20558.875%2078.3819C542.182%2078.3819%20533.101%2088.266%20533.101%20106.745V143.704H511.545V57.4711Z'%20fill='white'/%3e%3cpath%20d='M576.868%2025.3765H598.423V63.3079C598.423%2085.6776%20598.095%2089.7261%20598.095%2089.7261H598.423L630.519%2057.4723H657.424L619.833%2094.7592L663.442%20143.717H637.984L606.532%20108.047L598.423%20115.986V143.705H576.868V25.3765Z'%20fill='white'/%3e%3cpath%20d='M663.757%2084.9796C663.757%2048.5072%20686.455%2024.1923%20720.496%2024.1923C754.537%2024.1923%20777.235%2048.5072%20777.235%2084.9796C777.235%20121.452%20754.537%20145.767%20720.496%20145.767C686.455%20145.767%20663.757%20121.452%20663.757%2084.9796ZM753.722%2084.9796C753.722%2060.1784%20740.434%2043.474%20720.483%2043.474C700.533%2043.474%20687.257%2060.1784%20687.257%2084.9796C687.257%20109.781%20700.545%20126.485%20720.483%20126.485C740.422%20126.485%20753.722%20109.781%20753.722%2084.9796Z'%20fill='white'/%3e%3cpath%20d='M785.488%20104.326H810.131C810.131%20118.271%20819.699%20126.052%20834.288%20126.052C846.603%20126.052%20855.041%20119.888%20855.041%20111.135C855.041%20101.25%20848.561%2098.6488%20827.966%2094.6003C809.158%2090.868%20789.22%2084.5461%20789.22%2059.9029C789.22%2039.3203%20806.727%2023.7587%20833.473%2023.7587C861.35%2023.7587%20878.541%2038.3477%20878.541%2060.3892H853.898C853.898%2049.6906%20845.631%2043.0405%20833.473%2043.0405C821.158%2043.0405%20813.535%2049.0341%20813.535%2057.7875C813.535%2067.0272%20818.884%2070.5893%20835.419%2073.9934C859.892%2079.1847%20880%2081.9323%20880%20109.165C880%20130.745%20861.192%20145.333%20833.473%20145.333C805.268%20145.333%20785.488%20128.957%20785.488%20104.326Z'%20fill='white'/%3e%3cpath%20d='M0%2084.0003C0%2087.6782%200.967855%2091.356%202.83904%2094.5177L36.7785%20153.299C40.2628%20159.299%2045.5537%20164.203%2052.1351%20166.397C65.1044%20170.72%2078.5253%20165.171%2084.9131%20154.073L93.1076%20139.878L60.7813%2084.0003L94.9143%2024.8321L103.109%2010.6369C105.561%206.37836%20108.851%202.89408%20112.723%200.119568H109.174H60.0715C50.8446%200.119568%2042.3275%205.02337%2037.7463%2013.0243L2.83904%2073.483C0.967855%2076.6446%200%2080.3225%200%2084.0003Z'%20fill='white'/%3e%3cpath%20d='M193.571%2083.9997C193.571%2080.3219%20192.603%2076.644%20190.732%2073.4824L156.341%2013.9271C149.953%202.89352%20136.532%20-2.65551%20123.563%201.60305C116.982%203.79685%20111.691%208.70065%20108.206%2014.7013L100.464%2028.0577L132.79%2083.9997L98.6569%20143.168L90.4624%20157.363C88.0105%20161.557%2084.7198%20165.106%2080.8484%20167.88H84.3972H133.5C142.727%20167.88%20151.244%20162.977%20155.825%20154.976L190.732%2094.5171C192.603%2091.3554%20193.571%2087.6776%20193.571%2083.9997Z'%20fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_1647_45'%3e%3crect%20width='880'%20height='168'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)
+
+]\(https://workos.com?utm\_source=tanstack)\[
+
+![Clerk](/assets/clerk-logo-light-BYN-U_0H.svg)![Clerk](/assets/clerk-logo-dark-CRE22T_2.svg)
+
+]\(https://go.clerk.com/wOwHtuJ)\[
+
+![Electric](/assets/electric-light-C-5MDda4.svg)![Electric](/assets/electric-dark-Bfu2Vl2j.svg)
+
+]\(https://electric-sql.com)\[
+
+![PowerSync](/assets/powersync-black-BbBE6VAv.svg)![PowerSync](/assets/powersync-white-W6vtdqx_.svg)
+
+]\(https://powersync.com?utm\_source=tanstack\&utm\_campaign=tanstack\_partner)\[
+
+![Sentry](data:image/svg+xml,%3csvg%20height='119'%20viewBox='0%200%20222%2066'%20width='400'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='m29%202.26a4.67%204.67%200%200%200%20-8%200l-6.58%2011.27a32.21%2032.21%200%200%201%2017.75%2026.66h-4.62a27.68%2027.68%200%200%200%20-15.46-22.72l-6.09%2010.53a15.92%2015.92%200%200%201%209.23%2012.17h-10.61a.76.76%200%200%201%20-.62-1.11l2.94-5a10.74%2010.74%200%200%200%20-3.36-1.9l-2.91%205a4.54%204.54%200%200%200%201.69%206.24%204.66%204.66%200%200%200%202.26.6h14.53a19.4%2019.4%200%200%200%20-8-17.31l2.31-4a23.87%2023.87%200%200%201%2010.3%2021.31h12.31a35.88%2035.88%200%200%200%20-16.41-31.8l4.67-8a.77.77%200%200%201%201.05-.27c.53.29%2020.29%2034.77%2020.66%2035.17a.76.76%200%200%201%20-.68%201.13h-4.76q.09%201.91%200%203.81h4.78a4.59%204.59%200%200%200%204.62-4.61%204.49%204.49%200%200%200%20-.62-2.28zm95.32%2026.02-14.76-19.06h-3.68v25.55h3.73v-19.58l15.18%2019.58h3.26v-25.55h-3.73zm-37.17-4.74h13.23v-3.32h-13.24v-7.69h14.93v-3.32h-18.73v25.56h18.92v-3.32h-15.12zm-15.56-3.24c-5.15-1.24-6.59-2.22-6.59-4.6%200-2.14%201.89-3.59%204.71-3.59a12.06%2012.06%200%200%201%207.07%202.55l2-2.83a14.1%2014.1%200%200%200%20-9-3c-5.06%200-8.59%203-8.59%207.27%200%204.6%203%206.19%208.46%207.52%204.86%201.12%206.35%202.16%206.35%204.49s-2%203.77-5.09%203.77a12.34%2012.34%200%200%201%20-8.3-3.26l-2.25%202.69a15.94%2015.94%200%200%200%2010.42%203.85c5.48%200%209-2.95%209-7.51-.03-3.86-2.31-5.93-8.19-7.35zm124.11-11.08-7.69%2012-7.64-12h-4.46l10.09%2015.45v10.11h3.84v-10.23l10.16-15.33zm-64.63%203.46h8.37v22.1h3.84v-22.1h8.37v-3.46h-20.57zm38.34%2012.12c3.86-1.07%206-3.77%206-7.63%200-4.91-3.59-8-9.38-8h-11.36v25.59h3.8v-9.18h6.45l6.48%209.2h4.44l-7-9.82zm-10.95-2.5v-9.7h7.17c3.74%200%205.88%201.77%205.88%204.84s-2.29%204.86-5.84%204.86z'%20fill='%23362d59'%20transform='translate\(11%2011\)'/%3e%3c/svg%3e)![Sentry](data:image/svg+xml,%3csvg%20height='119'%20viewBox='0%200%20222%2066'%20width='400'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='m29%202.26a4.67%204.67%200%200%200%20-8%200l-6.58%2011.27a32.21%2032.21%200%200%201%2017.75%2026.66h-4.62a27.68%2027.68%200%200%200%20-15.46-22.72l-6.09%2010.53a15.92%2015.92%200%200%201%209.23%2012.17h-10.61a.76.76%200%200%201%20-.62-1.11l2.94-5a10.74%2010.74%200%200%200%20-3.36-1.9l-2.91%205a4.54%204.54%200%200%200%201.69%206.24%204.66%204.66%200%200%200%202.26.6h14.53a19.4%2019.4%200%200%200%20-8-17.31l2.31-4a23.87%2023.87%200%200%201%2010.3%2021.31h12.31a35.88%2035.88%200%200%200%20-16.41-31.8l4.67-8a.77.77%200%200%201%201.05-.27c.53.29%2020.29%2034.77%2020.66%2035.17a.76.76%200%200%201%20-.68%201.13h-4.76q.09%201.91%200%203.81h4.78a4.59%204.59%200%200%200%204.62-4.61%204.49%204.49%200%200%200%20-.62-2.28zm95.32%2026.02-14.76-19.06h-3.68v25.55h3.73v-19.58l15.18%2019.58h3.26v-25.55h-3.73zm-37.17-4.74h13.23v-3.32h-13.24v-7.69h14.93v-3.32h-18.73v25.56h18.92v-3.32h-15.12zm-15.56-3.24c-5.15-1.24-6.59-2.22-6.59-4.6%200-2.14%201.89-3.59%204.71-3.59a12.06%2012.06%200%200%201%207.07%202.55l2-2.83a14.1%2014.1%200%200%200%20-9-3c-5.06%200-8.59%203-8.59%207.27%200%204.6%203%206.19%208.46%207.52%204.86%201.12%206.35%202.16%206.35%204.49s-2%203.77-5.09%203.77a12.34%2012.34%200%200%201%20-8.3-3.26l-2.25%202.69a15.94%2015.94%200%200%200%2010.42%203.85c5.48%200%209-2.95%209-7.51-.03-3.86-2.31-5.93-8.19-7.35zm124.11-11.08-7.69%2012-7.64-12h-4.46l10.09%2015.45v10.11h3.84v-10.23l10.16-15.33zm-64.63%203.46h8.37v22.1h3.84v-22.1h8.37v-3.46h-20.57zm38.34%2012.12c3.86-1.07%206-3.77%206-7.63%200-4.91-3.59-8-9.38-8h-11.36v25.59h3.8v-9.18h6.45l6.48%209.2h4.44l-7-9.82zm-10.95-2.5v-9.7h7.17c3.74%200%205.88%201.77%205.88%204.84s-2.29%204.86-5.84%204.86z'%20fill='%23fff'%20transform='translate\(11%2011\)'/%3e%3c/svg%3e)
+
+]\(https://sentry.io?utm\_source=tanstack)\[
+
+![Railway](/assets/railway-black-DeBDfNao.svg)![Railway](/assets/railway-white-CFKFsfw2.svg)
+
+]\(https://railway.com/?utm\_medium=sponsor\&utm\_source=oss\&utm\_campaign=tanstack)\[
+
+![Prisma](/assets/prisma-light-Cloa3Onm.svg)![Prisma](/assets/prisma-dark-DwgDxLwn.svg)
+
+]\(https://www.prisma.io/?utm\_source=tanstack\&via=tanstack)\[
+
+![Strapi](/assets/strapi-light-6x7linao.svg)![Strapi](/assets/strapi-dark-CQ84tQTk.svg)
+
+]\(https://strapi.link/tanstack-start)\[
+
+![Unkey](data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='92px'%20height='27px'%20viewBox='0%200%2092%2027'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3ctitle%3eShape%3c/title%3e%3cg%20id='Page-1'%20stroke='none'%20stroke-width='1'%20fill='none'%20fill-rule='evenodd'%3e%3cpath%20d='M9.8,21.3%20C3.8,21.3%200.38,18.12%200.38,12.66%20L0.38,0.9%20L3.59,0.9%20L3.59,12.45%20C3.59,16.5%205.39,18.18%209.8,18.18%20C14.21,18.18%2016.01,16.5%2016.01,12.45%20L16.01,0.9%20L19.25,0.9%20L19.25,12.66%20C19.25,18.12%2015.83,21.3%209.8,21.3%20L9.8,21.3%20Z%20M25.3611,21%20L22.1211,21%20L22.1211,6.09%20L25.0911,6.09%20L25.0911,10.71%20L25.3011,10.71%20C25.7511,8.19%2027.7311,5.79%2031.5111,5.79%20C35.6511,5.79%2037.6911,8.58%2037.6911,12.03%20L37.6911,21%20L34.4511,21%20L34.4511,12.9%20C34.4511,10.11%2033.1911,8.7%2030.1011,8.7%20C26.8311,8.7%2025.3611,10.38%2025.3611,13.62%20L25.3611,21%20Z%20M43.8181,21%20L40.5781,21%20L40.5781,0.9%20L43.8181,0.9%20L43.8181,12%20L48.0781,12%20L52.5481,6.09%20L56.3281,6.09%20L50.7181,13.26%20L56.2981,21%20L52.4881,21%20L48.0781,14.91%20L43.8181,14.91%20L43.8181,21%20Z%20M65.4219,21.3%20C60.5319,21.3%2057.3219,18.54%2057.3219,13.56%20C57.3219,8.91%2060.5019,5.79%2065.3619,5.79%20C69.9819,5.79%2073.1319,8.34%2073.1319,12.87%20C73.1319,13.41%2073.1019,13.83%2073.0119,14.28%20L60.3519,14.28%20C60.4719,17.16%2061.8819,18.69%2065.3319,18.69%20C68.4519,18.69%2069.7419,17.67%2069.7419,15.9%20L69.7419,15.66%20L72.9819,15.66%20L72.9819,15.93%20C72.9819,19.11%2069.8619,21.3%2065.4219,21.3%20L65.4219,21.3%20Z%20M65.3019,8.34%20C62.0019,8.34%2060.5619,9.81%2060.3819,12.48%20L70.0719,12.48%20L70.0719,12.42%20C70.0719,9.66%2068.4819,8.34%2065.3019,8.34%20L65.3019,8.34%20Z%20M77.9586,26.1%20L75.8286,26.1%20L75.8286,23.16%20L78.7386,23.16%20C80.0586,23.16%2080.5986,22.8%2081.0486,21.78%20L81.4086,21%20L74.0586,6.09%20L77.6886,6.09%20L81.4986,14.01%20L82.9686,17.58%20L83.2086,17.58%20L84.6186,13.98%20L88.1286,6.09%20L91.6986,6.09%20L83.9286,22.62%20C82.6986,25.29%2081.0186,26.1%2077.9586,26.1%20Z'%20id='Shape'%20fill='%23000000'%20fill-rule='nonzero'%3e%3c/path%3e%3c/g%3e%3c/svg%3e)![Unkey](data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='92px'%20height='27px'%20viewBox='0%200%2092%2027'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3ctitle%3eShape%3c/title%3e%3cg%20id='Page-1'%20stroke='none'%20stroke-width='1'%20fill='none'%20fill-rule='evenodd'%3e%3cpath%20d='M9.8,21.3%20C3.8,21.3%200.38,18.12%200.38,12.66%20L0.38,0.9%20L3.59,0.9%20L3.59,12.45%20C3.59,16.5%205.39,18.18%209.8,18.18%20C14.21,18.18%2016.01,16.5%2016.01,12.45%20L16.01,0.9%20L19.25,0.9%20L19.25,12.66%20C19.25,18.12%2015.83,21.3%209.8,21.3%20L9.8,21.3%20Z%20M25.3611,21%20L22.1211,21%20L22.1211,6.09%20L25.0911,6.09%20L25.0911,10.71%20L25.3011,10.71%20C25.7511,8.19%2027.7311,5.79%2031.5111,5.79%20C35.6511,5.79%2037.6911,8.58%2037.6911,12.03%20L37.6911,21%20L34.4511,21%20L34.4511,12.9%20C34.4511,10.11%2033.1911,8.7%2030.1011,8.7%20C26.8311,8.7%2025.3611,10.38%2025.3611,13.62%20L25.3611,21%20Z%20M43.8181,21%20L40.5781,21%20L40.5781,0.9%20L43.8181,0.9%20L43.8181,12%20L48.0781,12%20L52.5481,6.09%20L56.3281,6.09%20L50.7181,13.26%20L56.2981,21%20L52.4881,21%20L48.0781,14.91%20L43.8181,14.91%20L43.8181,21%20Z%20M65.4219,21.3%20C60.5319,21.3%2057.3219,18.54%2057.3219,13.56%20C57.3219,8.91%2060.5019,5.79%2065.3619,5.79%20C69.9819,5.79%2073.1319,8.34%2073.1319,12.87%20C73.1319,13.41%2073.1019,13.83%2073.0119,14.28%20L60.3519,14.28%20C60.4719,17.16%2061.8819,18.69%2065.3319,18.69%20C68.4519,18.69%2069.7419,17.67%2069.7419,15.9%20L69.7419,15.66%20L72.9819,15.66%20L72.9819,15.93%20C72.9819,19.11%2069.8619,21.3%2065.4219,21.3%20L65.4219,21.3%20Z%20M65.3019,8.34%20C62.0019,8.34%2060.5619,9.81%2060.3819,12.48%20L70.0719,12.48%20L70.0719,12.42%20C70.0719,9.66%2068.4819,8.34%2065.3019,8.34%20L65.3019,8.34%20Z%20M77.9586,26.1%20L75.8286,26.1%20L75.8286,23.16%20L78.7386,23.16%20C80.0586,23.16%2080.5986,22.8%2081.0486,21.78%20L81.4086,21%20L74.0586,6.09%20L77.6886,6.09%20L81.4986,14.01%20L82.9686,17.58%20L83.2086,17.58%20L84.6186,13.98%20L88.1286,6.09%20L91.6986,6.09%20L83.9286,22.62%20C82.6986,25.29%2081.0186,26.1%2077.9586,26.1%20Z'%20id='Shape'%20fill='%23FFFFFF'%20fill-rule='nonzero'%3e%3c/path%3e%3c/g%3e%3c/svg%3e)
+
+]\(https://www.unkey.com/?utm\_source=tanstack)
+
+![React](data:image/svg+xml,%3csvg%20viewBox='-11.5%20-10.23%2023%2020.46'%20xmlns='http://www.w3.org/2000/svg'%3e%3ccircle%20fill='%2361dafb'%20r='2.05'/%3e%3cg%20fill='none'%20stroke='%2361dafb'%3e%3cellipse%20rx='11'%20ry='4.2'/%3e%3cellipse%20rx='11'%20ry='4.2'%20transform='matrix\(.5%20.8660254%20-.8660254%20.5%200%200\)'/%3e%3cellipse%20rx='11'%20ry='4.2'%20transform='matrix\(-.5%20.8660254%20-.8660254%20-.5%200%200\)'/%3e%3c/g%3e%3c/svg%3e)React
+
+Latest
+
+Search...
+
+K
+
+Menu
+
+- \[
+
+  Home
+
+  ]\(/pacer/latest)
+- \[
+
+  Frameworks
+
+  ]\(/pacer/latest/docs/framework)
+- \[
+
+  Contributors
+
+  ]\(/pacer/latest/docs/contributors)
+- \[
+
+  NPM Stats
+
+  ]\(/pacer/latest/docs/npm-stats)
+- \[
+
+  GitHub
+
+  ]\(https://github.com/tanstack/pacer)
+- \[
+
+  YouTube
+
+  ]\(https://youtube.com/@tan\_stack)
+- \[
+
+  Discord
+
+  ]\(https://tlinz.com/discord)
+
+Getting Started
+
+- \[
+
+  Overview
+
+  ]\(/pacer/latest/docs/overview)
+- \[
+
+  Quick Start
+
+  ]\(/pacer/latest/docs/quick-start)
+- \[
+
+  Installation
+
+  ]\(/pacer/latest/docs/installation)
+- \[
+
+  Devtools
+
+  ]\(/pacer/latest/docs/devtools)
+- \[
+
+  React Adapter
+
+  ]\(/pacer/latest/docs/framework/react/adapter)
+
+Guides
+
+- \[
+
+  Which Utility Should I Choose?
+
+  ]\(/pacer/latest/docs/guides/which-pacer-utility-should-i-choose)
+- \[
+
+  Debouncing Guide
+
+  ]\(/pacer/latest/docs/guides/debouncing)
+- \[
+
+  Throttling Guide
+
+  ]\(/pacer/latest/docs/guides/throttling)
+- \[
+
+  Rate Limiting Guide
+
+  ]\(/pacer/latest/docs/guides/rate-limiting)
+- \[
+
+  Queuing Guide
+
+  ]\(/pacer/latest/docs/guides/queuing)
+- \[
+
+  Batching Guide
+
+  ]\(/pacer/latest/docs/guides/batching)
+- \[
+
+  Async Debouncing Guide
+
+  ]\(/pacer/latest/docs/guides/async-debouncing)
+- \[
+
+  Async Throttling Guide
+
+  ]\(/pacer/latest/docs/guides/async-throttling)
+- \[
+
+  Async Rate Limiting Guide
+
+  ]\(/pacer/latest/docs/guides/async-rate-limiting)
+- \[
+
+  Async Queuing Guide
+
+  ]\(/pacer/latest/docs/guides/async-queuing)
+- \[
+
+  Async Batching Guide
+
+  ]\(/pacer/latest/docs/guides/async-batching)
+- \[
+
+  Async Retrying Guide
+
+  ]\(/pacer/latest/docs/guides/async-retrying)
+
+API Reference
+
+- \[
+
+  Core API Reference
+
+  ]\(/pacer/latest/docs/reference/index)
+- \[
+
+  React Hooks
+
+  ]\(/pacer/latest/docs/framework/react/reference/index)
+
+Debouncer API Reference
+
+- \[
+
+  DebouncerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/DebouncerOptions)
+- \[
+
+  DebouncerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/DebouncerState)
+- \[
+
+  AsyncDebouncerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncDebouncerOptions)
+- \[
+
+  AsyncDebouncerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncDebouncerState)
+- \[
+
+  debounce
+
+  ]\(/pacer/latest/docs/reference/functions/debounce)
+- \[
+
+  asyncDebounce
+
+  ]\(/pacer/latest/docs/reference/functions/asyncDebounce)
+- \[
+
+  Debouncer
+
+  ]\(/pacer/latest/docs/reference/classes/Debouncer)
+- \[
+
+  AsyncDebouncer
+
+  ]\(/pacer/latest/docs/reference/classes/AsyncDebouncer)
+- \[
+
+  ReactDebouncerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactDebouncerOptions)
+- \[
+
+  ReactAsyncDebouncerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncDebouncerOptions)
+- \[
+
+  ReactDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactDebouncer)
+- \[
+
+  ReactAsyncDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncDebouncer)
+- \[
+
+  useDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useDebouncer)
+- \[
+
+  useDebouncedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useDebouncedCallback)
+- \[
+
+  useDebouncedState
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useDebouncedState)
+- \[
+
+  useDebouncedValue
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useDebouncedValue)
+- \[
+
+  useAsyncDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncDebouncer)
+- \[
+
+  useAsyncDebouncedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncDebouncedCallback)
+
+Throttler API Reference
+
+- \[
+
+  ThrottlerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/ThrottlerOptions)
+- \[
+
+  ThrottlerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/ThrottlerState)
+- \[
+
+  AsyncThrottlerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncThrottlerOptions)
+- \[
+
+  AsyncThrottlerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncThrottlerState)
+- \[
+
+  throttle
+
+  ]\(/pacer/latest/docs/reference/functions/throttle)
+- \[
+
+  asyncThrottle
+
+  ]\(/pacer/latest/docs/reference/functions/asyncThrottle)
+- \[
+
+  Throttler
+
+  ]\(/pacer/latest/docs/reference/classes/Throttler)
+- \[
+
+  AsyncThrottler
+
+  ]\(/pacer/latest/docs/reference/classes/AsyncThrottler)
+- \[
+
+  ReactThrottlerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactThrottlerOptions)
+- \[
+
+  ReactAsyncThrottlerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncThrottlerOptions)
+- \[
+
+  ReactThrottler
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactThrottler)
+- \[
+
+  ReactAsyncThrottler
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncThrottler)
+- \[
+
+  useThrottler
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useThrottler)
+- \[
+
+  useThrottledCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useThrottledCallback)
+- \[
+
+  useThrottledState
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useThrottledState)
+- \[
+
+  useThrottledValue
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useThrottledValue)
+- \[
+
+  useAsyncThrottler
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncThrottler)
+- \[
+
+  useAsyncThrottledCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncThrottledCallback)
+
+Rate Limiter API Reference
+
+- \[
+
+  RateLimiterOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/RateLimiterOptions)
+- \[
+
+  RateLimiterState
+
+  ]\(/pacer/latest/docs/reference/interfaces/RateLimiterState)
+- \[
+
+  AsyncRateLimiterOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncRateLimiterOptions)
+- \[
+
+  AsyncRateLimiterState
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncRateLimiterState)
+- \[
+
+  rateLimit
+
+  ]\(/pacer/latest/docs/reference/functions/rateLimit)
+- \[
+
+  asyncRateLimit
+
+  ]\(/pacer/latest/docs/reference/functions/asyncRateLimit)
+- \[
+
+  RateLimiter
+
+  ]\(/pacer/latest/docs/reference/classes/RateLimiter)
+- \[
+
+  AsyncRateLimiter
+
+  ]\(/pacer/latest/docs/reference/classes/AsyncRateLimiter)
+- \[
+
+  ReactRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactRateLimiter)
+- \[
+
+  ReactAsyncRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncRateLimiter)
+- \[
+
+  useRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useRateLimiter)
+- \[
+
+  useRateLimitedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useRateLimitedCallback)
+- \[
+
+  useRateLimitedState
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useRateLimitedState)
+- \[
+
+  useRateLimitedValue
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useRateLimitedValue)
+- \[
+
+  useAsyncRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncRateLimiter)
+- \[
+
+  useAsyncRateLimitedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncRateLimitedCallback)
+
+Queue API Reference
+
+- \[
+
+  QueuerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/QueuerOptions)
+- \[
+
+  QueuerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/QueuerState)
+- \[
+
+  AsyncQueuerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncQueuerOptions)
+- \[
+
+  AsyncQueuerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncQueuerState)
+- \[
+
+  queue
+
+  ]\(/pacer/latest/docs/reference/functions/queue)
+- \[
+
+  asyncQueue
+
+  ]\(/pacer/latest/docs/reference/functions/asyncQueue)
+- \[
+
+  Queuer
+
+  ]\(/pacer/latest/docs/reference/classes/Queuer)
+- \[
+
+  AsyncQueuer
+
+  ]\(/pacer/latest/docs/reference/classes/AsyncQueuer)
+- \[
+
+  ReactQueuerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactQueuerOptions)
+- \[
+
+  ReactAsyncQueuerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncQueuerOptions)
+- \[
+
+  ReactQueuer
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactQueuer)
+- \[
+
+  ReactAsyncQueuer
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncQueuer)
+- \[
+
+  useQueuer
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useQueuer)
+- \[
+
+  useQueuedState
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useQueuedState)
+- \[
+
+  useQueuedValue
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useQueuedValue)
+- \[
+
+  useAsyncQueuer
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncQueuer)
+- \[
+
+  useAsyncQueuedState
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncQueuedState)
+
+Batcher API Reference
+
+- \[
+
+  BatcherOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/BatcherOptions)
+- \[
+
+  BatcherState
+
+  ]\(/pacer/latest/docs/reference/interfaces/BatcherState)
+- \[
+
+  AsyncBatcherOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncBatcherOptions)
+- \[
+
+  AsyncBatcherState
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncBatcherState)
+- \[
+
+  batch
+
+  ]\(/pacer/latest/docs/reference/functions/batch)
+- \[
+
+  asyncBatch
+
+  ]\(/pacer/latest/docs/reference/functions/asyncBatch)
+- \[
+
+  Batcher
+
+  ]\(/pacer/latest/docs/reference/classes/Batcher)
+- \[
+
+  AsyncBatcher
+
+  ]\(/pacer/latest/docs/reference/classes/AsyncBatcher)
+- \[
+
+  ReactBatcherOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactBatcherOptions)
+- \[
+
+  ReactAsyncBatcherOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncBatcherOptions)
+- \[
+
+  ReactBatcher
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactBatcher)
+- \[
+
+  ReactAsyncBatcher
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncBatcher)
+- \[
+
+  useBatcher
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useBatcher)
+- \[
+
+  useAsyncBatcher
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncBatcher)
+- \[
+
+  useBatchedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useBatchedCallback)
+- \[
+
+  useAsyncBatchedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncBatchedCallback)
+
+Debouncer Examples
+
+- \[
+
+  liteDebounce
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/liteDebounce)
+- \[
+
+  LiteDebouncer
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/LiteDebouncer)
+- \[
+
+  debounce
+
+  ]\(/pacer/latest/docs/framework/react/examples/debounce)
+- \[
+
+  asyncDebounce
+
+  ]\(/pacer/latest/docs/framework/react/examples/asyncDebounce)
+- \[
+
+  useDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/examples/useDebouncer)
+- \[
+
+  useDebouncedCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useDebouncedCallback)
+- \[
+
+  useDebouncedState
+
+  ]\(/pacer/latest/docs/framework/react/examples/useDebouncedState)
+- \[
+
+  useDebouncedValue
+
+  ]\(/pacer/latest/docs/framework/react/examples/useDebouncedValue)
+- \[
+
+  useAsyncDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncDebouncer)
+- \[
+
+  useAsyncDebouncedCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncDebouncedCallback)
+
+Throttler Examples
+
+- \[
+
+  liteThrottle
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/liteThrottle)
+- \[
+
+  LiteThrottler
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/LiteThrottler)
+- \[
+
+  throttle
+
+  ]\(/pacer/latest/docs/framework/react/examples/throttle)
+- \[
+
+  asyncThrottle
+
+  ]\(/pacer/latest/docs/framework/react/examples/asyncThrottle)
+- \[
+
+  useThrottler
+
+  ]\(/pacer/latest/docs/framework/react/examples/useThrottler)
+- \[
+
+  useThrottledCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useThrottledCallback)
+- \[
+
+  useThrottledState
+
+  ]\(/pacer/latest/docs/framework/react/examples/useThrottledState)
+- \[
+
+  useThrottledValue
+
+  ]\(/pacer/latest/docs/framework/react/examples/useThrottledValue)
+- \[
+
+  useAsyncThrottler
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncThrottler)
+
+Rate Limiter Examples
+
+- \[
+
+  liteRateLimit
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/liteRateLimit)
+- \[
+
+  LiteRateLimiter
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/LiteRateLimiter)
+- \[
+
+  rateLimit
+
+  ]\(/pacer/latest/docs/framework/react/examples/rateLimit)
+- \[
+
+  asyncRateLimit
+
+  ]\(/pacer/latest/docs/framework/react/examples/asyncRateLimit)
+- \[
+
+  useRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/examples/useRateLimiter)
+- \[
+
+  useRateLimiterWithPersister
+
+  ]\(/pacer/latest/docs/framework/react/examples/useRateLimiterWithPersister)
+- \[
+
+  useRateLimitedCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useRateLimitedCallback)
+- \[
+
+  useRateLimitedState
+
+  ]\(/pacer/latest/docs/framework/react/examples/useRateLimitedState)
+- \[
+
+  useRateLimitedValue
+
+  ]\(/pacer/latest/docs/framework/react/examples/useRateLimitedValue)
+- \[
+
+  useAsyncRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncRateLimiter)
+- \[
+
+  useAsyncRateLimiterWithPersister
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncRateLimiterWithPersister)
+
+Queue Examples
+
+- \[
+
+  liteQueue
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/liteQueue)
+- \[
+
+  LiteQueuer
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/LiteQueuer)
+- \[
+
+  queue
+
+  ]\(/pacer/latest/docs/framework/react/examples/queue)
+- \[
+
+  useQueuer
+
+  ]\(/pacer/latest/docs/framework/react/examples/useQueuer)
+- \[
+
+  useQueuerWithPersister
+
+  ]\(/pacer/latest/docs/framework/react/examples/useQueuerWithPersister)
+- \[
+
+  useQueuedState
+
+  ]\(/pacer/latest/docs/framework/react/examples/useQueuedState)
+- \[
+
+  useQueuedValue
+
+  ]\(/pacer/latest/docs/framework/react/examples/useQueuedValue)
+- \[
+
+  useAsyncQueuer
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncQueuer)
+- \[
+
+  useAsyncQueuedState
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncQueuedState)
+
+Batcher Examples
+
+- \[
+
+  liteBatch
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/liteBatch)
+- \[
+
+  LiteBatcher
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/LiteBatcher)
+- \[
+
+  batch
+
+  ]\(/pacer/latest/docs/framework/react/examples/batch)
+- \[
+
+  asyncBatch
+
+  ]\(/pacer/latest/docs/framework/react/examples/asyncBatch)
+- \[
+
+  useBatcher
+
+  ]\(/pacer/latest/docs/framework/react/examples/useBatcher)
+- \[
+
+  useAsyncBatcher
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncBatcher)
+- \[
+
+  useBatchedCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useBatchedCallback)
+- \[
+
+  useAsyncBatchedCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncBatchedCallback)
+
+TanStack Query Examples
+
+- \[
+
+  React Query Debounced Prefetch
+
+  ]\(/pacer/latest/docs/framework/react/examples/react-query-debounced-prefetch)
+- \[
+
+  React Query Throttled Prefetch
+
+  ]\(/pacer/latest/docs/framework/react/examples/react-query-throttled-prefetch)
+- \[
+
+  React Query Queued Prefetch
+
+  ]\(/pacer/latest/docs/framework/react/examples/react-query-queued-prefetch)
+
+![](data:image/svg+xml,%3csvg%20viewBox='-11.5%20-10.23%2023%2020.46'%20xmlns='http://www.w3.org/2000/svg'%3e%3ccircle%20fill='%2361dafb'%20r='2.05'/%3e%3cg%20fill='none'%20stroke='%2361dafb'%3e%3cellipse%20rx='11'%20ry='4.2'/%3e%3cellipse%20rx='11'%20ry='4.2'%20transform='matrix\(.5%20.8660254%20-.8660254%20.5%200%200\)'/%3e%3cellipse%20rx='11'%20ry='4.2'%20transform='matrix\(-.5%20.8660254%20-.8660254%20-.5%200%200\)'/%3e%3c/g%3e%3c/svg%3e)
+
+latest
+
+![React](data:image/svg+xml,%3csvg%20viewBox='-11.5%20-10.23%2023%2020.46'%20xmlns='http://www.w3.org/2000/svg'%3e%3ccircle%20fill='%2361dafb'%20r='2.05'/%3e%3cg%20fill='none'%20stroke='%2361dafb'%3e%3cellipse%20rx='11'%20ry='4.2'/%3e%3cellipse%20rx='11'%20ry='4.2'%20transform='matrix\(.5%20.8660254%20-.8660254%20.5%200%200\)'/%3e%3cellipse%20rx='11'%20ry='4.2'%20transform='matrix\(-.5%20.8660254%20-.8660254%20-.5%200%200\)'/%3e%3c/g%3e%3c/svg%3e)React
+
+Latest
+
+Menu
+
+- \[
+
+  Home
+
+  ]\(/pacer/latest)
+- \[
+
+  Frameworks
+
+  ]\(/pacer/latest/docs/framework)
+- \[
+
+  Contributors
+
+  ]\(/pacer/latest/docs/contributors)
+- \[
+
+  NPM Stats
+
+  ]\(/pacer/latest/docs/npm-stats)
+- \[
+
+  GitHub
+
+  ]\(https://github.com/tanstack/pacer)
+- \[
+
+  YouTube
+
+  ]\(https://youtube.com/@tan\_stack)
+- \[
+
+  Discord
+
+  ]\(https://tlinz.com/discord)
+
+Getting Started
+
+- \[
+
+  Overview
+
+  ]\(/pacer/latest/docs/overview)
+- \[
+
+  Quick Start
+
+  ]\(/pacer/latest/docs/quick-start)
+- \[
+
+  Installation
+
+  ]\(/pacer/latest/docs/installation)
+- \[
+
+  Devtools
+
+  ]\(/pacer/latest/docs/devtools)
+- \[
+
+  React Adapter
+
+  ]\(/pacer/latest/docs/framework/react/adapter)
+
+Guides
+
+- \[
+
+  Which Utility Should I Choose?
+
+  ]\(/pacer/latest/docs/guides/which-pacer-utility-should-i-choose)
+- \[
+
+  Debouncing Guide
+
+  ]\(/pacer/latest/docs/guides/debouncing)
+- \[
+
+  Throttling Guide
+
+  ]\(/pacer/latest/docs/guides/throttling)
+- \[
+
+  Rate Limiting Guide
+
+  ]\(/pacer/latest/docs/guides/rate-limiting)
+- \[
+
+  Queuing Guide
+
+  ]\(/pacer/latest/docs/guides/queuing)
+- \[
+
+  Batching Guide
+
+  ]\(/pacer/latest/docs/guides/batching)
+- \[
+
+  Async Debouncing Guide
+
+  ]\(/pacer/latest/docs/guides/async-debouncing)
+- \[
+
+  Async Throttling Guide
+
+  ]\(/pacer/latest/docs/guides/async-throttling)
+- \[
+
+  Async Rate Limiting Guide
+
+  ]\(/pacer/latest/docs/guides/async-rate-limiting)
+- \[
+
+  Async Queuing Guide
+
+  ]\(/pacer/latest/docs/guides/async-queuing)
+- \[
+
+  Async Batching Guide
+
+  ]\(/pacer/latest/docs/guides/async-batching)
+- \[
+
+  Async Retrying Guide
+
+  ]\(/pacer/latest/docs/guides/async-retrying)
+
+API Reference
+
+- \[
+
+  Core API Reference
+
+  ]\(/pacer/latest/docs/reference/index)
+- \[
+
+  React Hooks
+
+  ]\(/pacer/latest/docs/framework/react/reference/index)
+
+Debouncer API Reference
+
+- \[
+
+  DebouncerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/DebouncerOptions)
+- \[
+
+  DebouncerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/DebouncerState)
+- \[
+
+  AsyncDebouncerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncDebouncerOptions)
+- \[
+
+  AsyncDebouncerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncDebouncerState)
+- \[
+
+  debounce
+
+  ]\(/pacer/latest/docs/reference/functions/debounce)
+- \[
+
+  asyncDebounce
+
+  ]\(/pacer/latest/docs/reference/functions/asyncDebounce)
+- \[
+
+  Debouncer
+
+  ]\(/pacer/latest/docs/reference/classes/Debouncer)
+- \[
+
+  AsyncDebouncer
+
+  ]\(/pacer/latest/docs/reference/classes/AsyncDebouncer)
+- \[
+
+  ReactDebouncerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactDebouncerOptions)
+- \[
+
+  ReactAsyncDebouncerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncDebouncerOptions)
+- \[
+
+  ReactDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactDebouncer)
+- \[
+
+  ReactAsyncDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncDebouncer)
+- \[
+
+  useDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useDebouncer)
+- \[
+
+  useDebouncedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useDebouncedCallback)
+- \[
+
+  useDebouncedState
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useDebouncedState)
+- \[
+
+  useDebouncedValue
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useDebouncedValue)
+- \[
+
+  useAsyncDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncDebouncer)
+- \[
+
+  useAsyncDebouncedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncDebouncedCallback)
+
+Throttler API Reference
+
+- \[
+
+  ThrottlerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/ThrottlerOptions)
+- \[
+
+  ThrottlerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/ThrottlerState)
+- \[
+
+  AsyncThrottlerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncThrottlerOptions)
+- \[
+
+  AsyncThrottlerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncThrottlerState)
+- \[
+
+  throttle
+
+  ]\(/pacer/latest/docs/reference/functions/throttle)
+- \[
+
+  asyncThrottle
+
+  ]\(/pacer/latest/docs/reference/functions/asyncThrottle)
+- \[
+
+  Throttler
+
+  ]\(/pacer/latest/docs/reference/classes/Throttler)
+- \[
+
+  AsyncThrottler
+
+  ]\(/pacer/latest/docs/reference/classes/AsyncThrottler)
+- \[
+
+  ReactThrottlerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactThrottlerOptions)
+- \[
+
+  ReactAsyncThrottlerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncThrottlerOptions)
+- \[
+
+  ReactThrottler
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactThrottler)
+- \[
+
+  ReactAsyncThrottler
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncThrottler)
+- \[
+
+  useThrottler
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useThrottler)
+- \[
+
+  useThrottledCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useThrottledCallback)
+- \[
+
+  useThrottledState
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useThrottledState)
+- \[
+
+  useThrottledValue
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useThrottledValue)
+- \[
+
+  useAsyncThrottler
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncThrottler)
+- \[
+
+  useAsyncThrottledCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncThrottledCallback)
+
+Rate Limiter API Reference
+
+- \[
+
+  RateLimiterOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/RateLimiterOptions)
+- \[
+
+  RateLimiterState
+
+  ]\(/pacer/latest/docs/reference/interfaces/RateLimiterState)
+- \[
+
+  AsyncRateLimiterOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncRateLimiterOptions)
+- \[
+
+  AsyncRateLimiterState
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncRateLimiterState)
+- \[
+
+  rateLimit
+
+  ]\(/pacer/latest/docs/reference/functions/rateLimit)
+- \[
+
+  asyncRateLimit
+
+  ]\(/pacer/latest/docs/reference/functions/asyncRateLimit)
+- \[
+
+  RateLimiter
+
+  ]\(/pacer/latest/docs/reference/classes/RateLimiter)
+- \[
+
+  AsyncRateLimiter
+
+  ]\(/pacer/latest/docs/reference/classes/AsyncRateLimiter)
+- \[
+
+  ReactRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactRateLimiter)
+- \[
+
+  ReactAsyncRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncRateLimiter)
+- \[
+
+  useRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useRateLimiter)
+- \[
+
+  useRateLimitedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useRateLimitedCallback)
+- \[
+
+  useRateLimitedState
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useRateLimitedState)
+- \[
+
+  useRateLimitedValue
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useRateLimitedValue)
+- \[
+
+  useAsyncRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncRateLimiter)
+- \[
+
+  useAsyncRateLimitedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncRateLimitedCallback)
+
+Queue API Reference
+
+- \[
+
+  QueuerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/QueuerOptions)
+- \[
+
+  QueuerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/QueuerState)
+- \[
+
+  AsyncQueuerOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncQueuerOptions)
+- \[
+
+  AsyncQueuerState
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncQueuerState)
+- \[
+
+  queue
+
+  ]\(/pacer/latest/docs/reference/functions/queue)
+- \[
+
+  asyncQueue
+
+  ]\(/pacer/latest/docs/reference/functions/asyncQueue)
+- \[
+
+  Queuer
+
+  ]\(/pacer/latest/docs/reference/classes/Queuer)
+- \[
+
+  AsyncQueuer
+
+  ]\(/pacer/latest/docs/reference/classes/AsyncQueuer)
+- \[
+
+  ReactQueuerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactQueuerOptions)
+- \[
+
+  ReactAsyncQueuerOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncQueuerOptions)
+- \[
+
+  ReactQueuer
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactQueuer)
+- \[
+
+  ReactAsyncQueuer
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncQueuer)
+- \[
+
+  useQueuer
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useQueuer)
+- \[
+
+  useQueuedState
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useQueuedState)
+- \[
+
+  useQueuedValue
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useQueuedValue)
+- \[
+
+  useAsyncQueuer
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncQueuer)
+- \[
+
+  useAsyncQueuedState
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncQueuedState)
+
+Batcher API Reference
+
+- \[
+
+  BatcherOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/BatcherOptions)
+- \[
+
+  BatcherState
+
+  ]\(/pacer/latest/docs/reference/interfaces/BatcherState)
+- \[
+
+  AsyncBatcherOptions
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncBatcherOptions)
+- \[
+
+  AsyncBatcherState
+
+  ]\(/pacer/latest/docs/reference/interfaces/AsyncBatcherState)
+- \[
+
+  batch
+
+  ]\(/pacer/latest/docs/reference/functions/batch)
+- \[
+
+  asyncBatch
+
+  ]\(/pacer/latest/docs/reference/functions/asyncBatch)
+- \[
+
+  Batcher
+
+  ]\(/pacer/latest/docs/reference/classes/Batcher)
+- \[
+
+  AsyncBatcher
+
+  ]\(/pacer/latest/docs/reference/classes/AsyncBatcher)
+- \[
+
+  ReactBatcherOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactBatcherOptions)
+- \[
+
+  ReactAsyncBatcherOptions
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncBatcherOptions)
+- \[
+
+  ReactBatcher
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactBatcher)
+- \[
+
+  ReactAsyncBatcher
+
+  ]\(/pacer/latest/docs/framework/react/reference/interfaces/ReactAsyncBatcher)
+- \[
+
+  useBatcher
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useBatcher)
+- \[
+
+  useAsyncBatcher
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncBatcher)
+- \[
+
+  useBatchedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useBatchedCallback)
+- \[
+
+  useAsyncBatchedCallback
+
+  ]\(/pacer/latest/docs/framework/react/reference/functions/useAsyncBatchedCallback)
+
+Debouncer Examples
+
+- \[
+
+  liteDebounce
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/liteDebounce)
+- \[
+
+  LiteDebouncer
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/LiteDebouncer)
+- \[
+
+  debounce
+
+  ]\(/pacer/latest/docs/framework/react/examples/debounce)
+- \[
+
+  asyncDebounce
+
+  ]\(/pacer/latest/docs/framework/react/examples/asyncDebounce)
+- \[
+
+  useDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/examples/useDebouncer)
+- \[
+
+  useDebouncedCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useDebouncedCallback)
+- \[
+
+  useDebouncedState
+
+  ]\(/pacer/latest/docs/framework/react/examples/useDebouncedState)
+- \[
+
+  useDebouncedValue
+
+  ]\(/pacer/latest/docs/framework/react/examples/useDebouncedValue)
+- \[
+
+  useAsyncDebouncer
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncDebouncer)
+- \[
+
+  useAsyncDebouncedCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncDebouncedCallback)
+
+Throttler Examples
+
+- \[
+
+  liteThrottle
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/liteThrottle)
+- \[
+
+  LiteThrottler
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/LiteThrottler)
+- \[
+
+  throttle
+
+  ]\(/pacer/latest/docs/framework/react/examples/throttle)
+- \[
+
+  asyncThrottle
+
+  ]\(/pacer/latest/docs/framework/react/examples/asyncThrottle)
+- \[
+
+  useThrottler
+
+  ]\(/pacer/latest/docs/framework/react/examples/useThrottler)
+- \[
+
+  useThrottledCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useThrottledCallback)
+- \[
+
+  useThrottledState
+
+  ]\(/pacer/latest/docs/framework/react/examples/useThrottledState)
+- \[
+
+  useThrottledValue
+
+  ]\(/pacer/latest/docs/framework/react/examples/useThrottledValue)
+- \[
+
+  useAsyncThrottler
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncThrottler)
+
+Rate Limiter Examples
+
+- \[
+
+  liteRateLimit
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/liteRateLimit)
+- \[
+
+  LiteRateLimiter
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/LiteRateLimiter)
+- \[
+
+  rateLimit
+
+  ]\(/pacer/latest/docs/framework/react/examples/rateLimit)
+- \[
+
+  asyncRateLimit
+
+  ]\(/pacer/latest/docs/framework/react/examples/asyncRateLimit)
+- \[
+
+  useRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/examples/useRateLimiter)
+- \[
+
+  useRateLimiterWithPersister
+
+  ]\(/pacer/latest/docs/framework/react/examples/useRateLimiterWithPersister)
+- \[
+
+  useRateLimitedCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useRateLimitedCallback)
+- \[
+
+  useRateLimitedState
+
+  ]\(/pacer/latest/docs/framework/react/examples/useRateLimitedState)
+- \[
+
+  useRateLimitedValue
+
+  ]\(/pacer/latest/docs/framework/react/examples/useRateLimitedValue)
+- \[
+
+  useAsyncRateLimiter
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncRateLimiter)
+- \[
+
+  useAsyncRateLimiterWithPersister
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncRateLimiterWithPersister)
+
+Queue Examples
+
+- \[
+
+  liteQueue
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/liteQueue)
+- \[
+
+  LiteQueuer
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/LiteQueuer)
+- \[
+
+  queue
+
+  ]\(/pacer/latest/docs/framework/react/examples/queue)
+- \[
+
+  useQueuer
+
+  ]\(/pacer/latest/docs/framework/react/examples/useQueuer)
+- \[
+
+  useQueuerWithPersister
+
+  ]\(/pacer/latest/docs/framework/react/examples/useQueuerWithPersister)
+- \[
+
+  useQueuedState
+
+  ]\(/pacer/latest/docs/framework/react/examples/useQueuedState)
+- \[
+
+  useQueuedValue
+
+  ]\(/pacer/latest/docs/framework/react/examples/useQueuedValue)
+- \[
+
+  useAsyncQueuer
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncQueuer)
+- \[
+
+  useAsyncQueuedState
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncQueuedState)
+
+Batcher Examples
+
+- \[
+
+  liteBatch
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/liteBatch)
+- \[
+
+  LiteBatcher
+
+  ]\(/pacer/latest/docs/framework/vanilla/examples/LiteBatcher)
+- \[
+
+  batch
+
+  ]\(/pacer/latest/docs/framework/react/examples/batch)
+- \[
+
+  asyncBatch
+
+  ]\(/pacer/latest/docs/framework/react/examples/asyncBatch)
+- \[
+
+  useBatcher
+
+  ]\(/pacer/latest/docs/framework/react/examples/useBatcher)
+- \[
+
+  useAsyncBatcher
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncBatcher)
+- \[
+
+  useBatchedCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useBatchedCallback)
+- \[
+
+  useAsyncBatchedCallback
+
+  ]\(/pacer/latest/docs/framework/react/examples/useAsyncBatchedCallback)
+
+TanStack Query Examples
+
+- \[
+
+  React Query Debounced Prefetch
+
+  ]\(/pacer/latest/docs/framework/react/examples/react-query-debounced-prefetch)
+- \[
+
+  React Query Throttled Prefetch
+
+  ]\(/pacer/latest/docs/framework/react/examples/react-query-throttled-prefetch)
+- \[
+
+  React Query Queued Prefetch
+
+  ]\(/pacer/latest/docs/framework/react/examples/react-query-queued-prefetch)
+
+[AI/LLM: This documentation page is available in plain markdown format at/pacer/latest/docs/overview.md](/pacer/latest/docs/overview.md)
+
+Getting StartedOn this page
+
+# Overview
+
+Copy page
+
+TanStack Pacer is a library focused on providing high-quality utilities for controlling function execution timing in your applications. While similar utilities exist elsewhere, we aim to get all the important details right - including ***type-safety***, ***tree-shaking***, and a consistent and ***intuitive API***. By focusing on these fundamentals and making them available in a ***framework agnostic*** way, we hope to make these utilities and patterns more commonplace in your applications. Proper execution control is often an afterthought in application development, leading to performance issues, race conditions, and poor user experiences that could have been prevented. TanStack Pacer helps you implement these critical patterns correctly from the start!
+
+Important
+
+TanStack Pacer is currently in **beta** and its API is still subject to change.
+
+The scope of this library may grow, but we hope to keep the bundle size of each individual utility lean and focused.
+
+\[
+
+## Origin
+
+]\(#origin)
+
+Many of the ideas (and code) for TanStack Pacer are not new. In fact, many of these utilities have been living in other TanStack libraries for quite some time. We extracted code from TanStack Query, Router, Form, and even Tanner's original [Swimmer](https://github.com/tannerlinsley/swimmer) library. Then we cleaned up these utilities, filled in some gaps, and shipped them as a standalone library.
+
+\[
+
+## Features
+
+]\(#features)
+
+Note
+
+TanStack Pacer is currently mostly a client-side only library, but it is being designed to be able to potentially be used on the server-side as well.
+
+- **Debouncing**
+  - Delay execution until after a period of inactivity for when you only care about the last execution in a sequence.
+  - Synchronous or Asynchronous Debounce utilities with promise support and error handling
+  - Control of leading, trailing, and enabled options
+- **Throttling**
+  - Smoothly limit the rate at which a function can fire
+  - Synchronous or Asynchronous Throttle utilities with promise support and error handling
+  - Control of leading, trailing, and enabled options.
+- **Rate Limiting**
+  - Limit the rate at which a function can fire over a period of time
+  - Synchronous or Asynchronous Rate Limiting utilities with promise support and error handling
+  - Fixed or Sliding Window variations of Rate Limiting
+- **Queuing**
+  - Queue functions to be executed in a specific order
+  - Choose from FIFO, LIFO, and Priority queue implementations
+  - Control processing speed with configurable wait times or concurrency limits
+  - Manage queue execution with start/stop capabilities
+  - Expire items from the queue after a configurable duration
+- **Batching**
+  - Chunk up multiple operations into larger batches to reduce total back-and-forth operations
+  - Batch by time period, batch size, whichever comes first, or a custom condition to trigger batch executions
+- **Async or Sync Variations**
+  - Choose between synchronous and asynchronous versions of each utility
+  - Optional error, success, and settled handling for async variations
+  - Retry and Abort support for async variations
+- **State Management**
+  - Uses TanStack Store under the hood for state management with fine-grained reactivity
+  - Easily integrate with your own state management library of choice
+  - Persist state to local or session storage for some utilities like rate limiting and queuing
+- **Convenient Hooks**
+  - Reduce boilerplate code with pre-built hooks like useDebouncedCallback, useThrottledValue, and useQueuedState, and more.
+  - Multiple layers of abstraction to choose from depending on your use case.
+  - Works with each framework's default state management solutions, or with whatever custom state management library that you prefer.
+- **Type Safety**
+  - Full type safety with TypeScript that makes sure that your functions will always be called with the correct arguments
+  - Generics for flexible and reusable utilities
+- **Framework Adapters**
+  - React, Solid, and more
+- **Tree Shaking**
+  - We, of course, get tree-shaking right for your applications by default, but we also provide extra deep imports for each utility, making it easier to embed these utilities into your libraries without increasing the bundle-phobia reports of your library.
+
+\[
+
+## Interactive Comparison Demo
+
+]\(#interactive-comparison-demo)
+
 Each utility is designed to be used in a specific way, and each utility has its own unique behavior.
+
 See how each utility behaves with this interactive comparison. Move the range slider to observe the differences between debouncing, throttling, rate limiting, queuing, and batching:
 
-Pacer Lite
-Pacer Lite (@tanstack/pacer-lite) is a stripped down version of the core TanStack Pacer library. It is designed to be used in libraries and npm packages that need minimal overhead, and no reactivity features. The Lite version of each utility has the same core functionality of its core counterpart, but is stripped down to have a slightly smaller API surface and a smaller bundle size. Pacer Lite lacks reactivity features, framework adapters, devtools support, and some of the advanced options that the core utilities have. If that sounds interesting to you, you can feel free to try it out!Edit on GitHubPreviousNPM StatsNextQuick StartOn this pageOriginFeaturesInteractive Comparison DemoPacer LiteLearn about TanStack AdsHide Ads<div class="w-full sm:w-[300px] shrink-0 sm:sticky
-       sm:top-[var(--navbar-height)]
-       ">PartnersBecome a Partner<a href="https://coderabbit.link/tanstack?utm_source=tanstack&amp;via=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:100%;flex-grow:1;flex-shrink:0"><a href="https://www.cloudflare.com?utm_source=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:86%;flex-grow:1;flex-shrink:0"><a href="https://ag-grid.com/react-data-grid/?utm_source=reacttable&amp;utm_campaign=githubreacttable" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:50%;flex-grow:1;flex-shrink:0"><a href="https://serpapi.com?utm_source=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:41%;flex-grow:1;flex-shrink:0"><a href="https://netlify.com?utm_source=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:34%;flex-grow:1;flex-shrink:0"><a href="https://neon.tech?utm_source=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:30%;flex-grow:1;flex-shrink:0"><a href="https://workos.com?utm_source=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:31%;flex-grow:1;flex-shrink:0"><a href="https://go.clerk.com/wOwHtuJ" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:29%;flex-grow:1;flex-shrink:0"><a href="https://convex.dev?utm_source=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:29%;flex-grow:1;flex-shrink:0"><a href="https://electric-sql.com" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:28%;flex-grow:1;flex-shrink:0"><a href="https://powersync.com?utm_source=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:14%;flex-grow:1;flex-shrink:0"><a href="https://sentry.io?utm_source=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:23%;flex-grow:1;flex-shrink:0"><a href="https://railway.com/?utm_medium=sponsor&amp;utm_source=oss&amp;utm_campaign=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:14%;flex-grow:1;flex-shrink:0"><a href="https://www.prisma.io/?utm_source=tanstack&amp;via=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:14%;flex-grow:1;flex-shrink:0"><a href="https://strapi.link/tanstack-start" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:7%;flex-grow:1;flex-shrink:0"><a href="https://www.unkey.com/?utm_source=tanstack" target="_blank" rel="noreferrer" class="flex items-center justify-center px-3 py-2
-                         border-r border-b border-gray-500/20
-                         hover:bg-gray-500/10 transition-colors duration-150 ease-out" style="flex-basis:5%;flex-grow:1;flex-shrink:0">Learn about TanStack AdsHide Ads(self.$R=self.$R||{})\["tsr"]=\[];self.$\_TSR={h(){this.hydrated=!0,this.c()},e(){this.streamEnded=!0,this.c()},c(){this.hydrated&\&this.streamEnded&&(delete self.$\_TSR,delete self.$R.tsr)},p(e){this.initialized?e():this.buffer.push(e)},buffer:\[]};
-;$\_TSR.router=($R=>$R\[0]={manifest:$R\[1]={routes:$R\[2]={**root**:$R\[3]={preloads:$R\[4]=\["/assets/main-BLpUAM3f.js","/assets/d3-charts-C\_pWHZ\_e.js","/assets/search-DPeAlcMs.js","/assets/icons-DFHKXUS4.js"],assets:$R\[5]=\[$R\[6]={tag:"script",attrs:$R\[7]={type:"module",async:!0},children:"import('/assets/main-BLpUAM3f.js')"}]},"/$libraryId":$R\[8]={preloads:$R\[9]=\["/assets/route-BM1blYlL.js","/assets/useMounted-q\_aRKA8j.js"]},"/$libraryId/$version":$R\[10]={preloads:$R\[11]=\["/assets/\_version-Cn\_1Fnwe.js","/assets/useLocalStorage-BK1IHjof.js","/assets/index-DXA8nvQF.js"]},"/$libraryId/$version/docs":$R\[12]={preloads:$R\[13]=\["/assets/*version.docs-Q1ra12-Q.js","/assets/DocsLayout-yFXxYAAM.js","/assets/frameworks-Cb8o9l0W.js","/assets/solid-logo-CT0JE-mv.js","/assets/LogoQueryGG-vdSraSzq.js","/assets/useQueryGGPPPDiscount-Dz6Vmyyw.js","/assets/partners-BvX3VFQs.js","/assets/AdsContext-KdS9VYu3.js","/assets/index-B3W54GeV.js","/assets/FrameworkSelect-BMasBWoM.js","/assets/Dropdown-CNqrQe7s.js","/assets/users.server-DqzYSbEt.js"]},"/$libraryId/$version/docs/$":$R\[14]={preloads:$R\[15]=\["/assets/*version.docs.*-1P05oGL*.js","/assets/Doc-lfeBU0lE.js","/assets/docs-CRqI39kb.js","/assets/DocContainer-BEmkHgoz.js","/assets/Breadcrumbs-DeP6cHlj.js","/assets/DocTitle-DEdqE1CX.js","/assets/Markdown-DivBGZsY.js","/assets/processor-DJYQWpXP.js","/assets/CodeBlock-ZSiKhi-G.js","/assets/bundle-full-CwUCBn9w.js","/assets/installCommand-Oh0cimkr.js","/assets/useMutation-DRi2yvBX.js","/assets/DocFeedbackNote-QJrnYy-U.js","/assets/docFeedback.functions-DzD8ddvB.js","/assets/docFeedback-B\_PzsLvE.js","/assets/queryOptions-CXd7YBrc.js"]}}},matches:$R\[16]=\[$R\[17]={i:"**root**/",u:1772952647011,s:"success",ssr:!0},$R\[18]={i:"/$libraryId/pacer",u:1772952647031,s:"success",ssr:!0},$R\[19]={i:"/$libraryId/$version/pacer/latest",u:1772952647072,s:"success",l:$R\[20]={config:$R\[21]={sections:$R\[22]=\[$R\[23]={label:"Getting Started",children:$R\[24]=\[$R\[25]={label:"Overview",to:"overview"},$R\[26]={label:"Quick Start",to:"quick-start"},$R\[27]={label:"Installation",to:"installation"},$R\[28]={label:"Devtools",to:"devtools"}],frameworks:$R\[29]=\[$R\[30]={label:"react",children:$R\[31]=\[$R\[32]={label:"React Adapter",to:"framework/react/adapter"}]},$R\[33]={label:"solid",children:$R\[34]=\[$R\[35]={label:"Solid Adapter",to:"framework/solid/adapter"}]},$R\[36]={label:"preact",children:$R\[37]=\[$R\[38]={label:"Preact Adapter",to:"framework/preact/adapter"}]},$R\[39]={label:"angular",children:$R\[40]=\[$R\[41]={label:"Angular Adapter",to:"framework/angular/adapter"}]}]},$R\[42]={label:"Guides",children:$R\[43]=\[$R\[44]={label:"Which Utility Should I Choose?",to:"guides/which-pacer-utility-should-i-choose"},$R\[45]={label:"Debouncing Guide",to:"guides/debouncing"},$R\[46]={label:"Throttling Guide",to:"guides/throttling"},$R\[47]={label:"Rate Limiting Guide",to:"guides/rate-limiting"},$R\[48]={label:"Queuing Guide",to:"guides/queuing"},$R\[49]={label:"Batching Guide",to:"guides/batching"},$R\[50]={label:"Async Debouncing Guide",to:"guides/async-debouncing"},$R\[51]={label:"Async Throttling Guide",to:"guides/async-throttling"},$R\[52]={label:"Async Rate Limiting Guide",to:"guides/async-rate-limiting"},$R\[53]={label:"Async Queuing Guide",to:"guides/async-queuing"},$R\[54]={label:"Async Batching Guide",to:"guides/async-batching"},$R\[55]={label:"Async Retrying Guide",to:"guides/async-retrying"}]},$R\[56]={label:"API Reference",children:$R\[57]=\[$R\[58]={label:"Core API Reference",to:"reference/index"}],frameworks:$R\[59]=\[$R\[60]={label:"react",children:$R\[61]=\[$R\[62]={label:"React Hooks",to:"framework/react/reference/index"}]},$R\[63]={label:"solid",children:$R\[64]=\[$R\[65]={label:"Solid Hooks",to:"framework/solid/reference/index"}]},$R\[66]={label:"preact",children:$R\[67]=\[$R\[68]={label:"Preact Hooks",to:"framework/preact/reference/index"}]},$R\[69]={label:"angular",children:$R\[70]=\[$R\[71]={label:"Angular inject API",to:"framework/angular/reference/index"}]}]},$R\[72]={label:"Debouncer API Reference",children:$R\[73]=\[$R\[74]={label:"DebouncerOptions",to:"reference/interfaces/DebouncerOptions"},$R\[75]={label:"DebouncerState",to:"reference/interfaces/DebouncerState"},$R\[76]={label:"AsyncDebouncerOptions",to:"reference/interfaces/AsyncDebouncerOptions"},$R\[77]={label:"AsyncDebouncerState",to:"reference/interfaces/AsyncDebouncerState"},$R\[78]={label:"debounce",to:"reference/functions/debounce"},$R\[79]={label:"asyncDebounce",to:"reference/functions/asyncDebounce"},$R\[80]={label:"Debouncer",to:"reference/classes/Debouncer"},$R\[81]={label:"AsyncDebouncer",to:"reference/classes/AsyncDebouncer"}],frameworks:$R\[82]=\[$R\[83]={label:"react",children:$R\[84]=\[$R\[85]={label:"ReactDebouncerOptions",to:"framework/react/reference/interfaces/ReactDebouncerOptions"},$R\[86]={label:"ReactAsyncDebouncerOptions",to:"framework/react/reference/interfaces/ReactAsyncDebouncerOptions"},$R\[87]={label:"ReactDebouncer",to:"framework/react/reference/interfaces/ReactDebouncer"},$R\[88]={label:"ReactAsyncDebouncer",to:"framework/react/reference/interfaces/ReactAsyncDebouncer"},$R\[89]={label:"useDebouncer",to:"framework/react/reference/functions/useDebouncer"},$R\[90]={label:"useDebouncedCallback",to:"framework/react/reference/functions/useDebouncedCallback"},$R\[91]={label:"useDebouncedState",to:"framework/react/reference/functions/useDebouncedState"},$R\[92]={label:"useDebouncedValue",to:"framework/react/reference/functions/useDebouncedValue"},$R\[93]={label:"useAsyncDebouncer",to:"framework/react/reference/functions/useAsyncDebouncer"},$R\[94]={label:"useAsyncDebouncedCallback",to:"framework/react/reference/functions/useAsyncDebouncedCallback"}]},$R\[95]={label:"solid",children:$R\[96]=\[$R\[97]={label:"SolidDebouncerOptions",to:"framework/solid/reference/interfaces/SolidDebouncerOptions"},$R\[98]={label:"SolidAsyncDebouncerOptions",to:"framework/solid/reference/interfaces/SolidAsyncDebouncerOptions"},$R\[99]={label:"SolidDebouncer",to:"framework/solid/reference/interfaces/SolidDebouncer"},$R\[100]={label:"SolidAsyncDebouncer",to:"framework/solid/reference/interfaces/SolidAsyncDebouncer"},$R\[101]={label:"createDebouncer",to:"framework/solid/reference/functions/createDebouncer"},$R\[102]={label:"createDebouncedSignal",to:"framework/solid/reference/functions/createDebouncedSignal"},$R\[103]={label:"createDebouncedValue",to:"framework/solid/reference/functions/createDebouncedValue"},$R\[104]={label:"createAsyncDebouncer",to:"framework/solid/reference/functions/createAsyncDebouncer"}]},$R\[105]={label:"preact",children:$R\[106]=\[$R\[107]={label:"PreactDebouncerOptions",to:"framework/preact/reference/interfaces/PreactDebouncerOptions"},$R\[108]={label:"PreactAsyncDebouncerOptions",to:"framework/preact/reference/interfaces/PreactAsyncDebouncerOptions"},$R\[109]={label:"PreactDebouncer",to:"framework/preact/reference/interfaces/PreactDebouncer"},$R\[110]={label:"PreactAsyncDebouncer",to:"framework/preact/reference/interfaces/PreactAsyncDebouncer"},$R\[111]={label:"useDebouncer",to:"framework/preact/reference/functions/useDebouncer"},$R\[112]={label:"useDebouncedCallback",to:"framework/preact/reference/functions/useDebouncedCallback"},$R\[113]={label:"useDebouncedState",to:"framework/preact/reference/functions/useDebouncedState"},$R\[114]={label:"useDebouncedValue",to:"framework/preact/reference/functions/useDebouncedValue"},$R\[115]={label:"useAsyncDebouncer",to:"framework/preact/reference/functions/useAsyncDebouncer"},$R\[116]={label:"useAsyncDebouncedCallback",to:"framework/preact/reference/functions/useAsyncDebouncedCallback"}]},$R\[117]={label:"angular",children:$R\[118]=\[$R\[119]={label:"AngularDebouncerOptions",to:"framework/angular/reference/interfaces/AngularDebouncerOptions"},$R\[120]={label:"AngularAsyncDebouncerOptions",to:"framework/angular/reference/interfaces/AngularAsyncDebouncerOptions"},$R\[121]={label:"AngularDebouncer",to:"framework/angular/reference/interfaces/AngularDebouncer"},$R\[122]={label:"AngularAsyncDebouncer",to:"framework/angular/reference/interfaces/AngularAsyncDebouncer"},$R\[123]={label:"injectDebouncer",to:"framework/angular/reference/functions/injectDebouncer"},$R\[124]={label:"injectDebouncedCallback",to:"framework/angular/reference/functions/injectDebouncedCallback"},$R\[125]={label:"injectDebouncedSignal",to:"framework/angular/reference/functions/injectDebouncedSignal"},$R\[126]={label:"injectDebouncedValue",to:"framework/angular/reference/functions/injectDebouncedValue"},$R\[127]={label:"injectAsyncDebouncer",to:"framework/angular/reference/functions/injectAsyncDebouncer"},$R\[128]={label:"injectAsyncDebouncedCallback",to:"framework/angular/reference/functions/injectAsyncDebouncedCallback"}]}],collapsible:!0,defaultCollapsed:!0},$R\[129]={label:"Throttler API Reference",children:$R\[130]=\[$R\[131]={label:"ThrottlerOptions",to:"reference/interfaces/ThrottlerOptions"},$R\[132]={label:"ThrottlerState",to:"reference/interfaces/ThrottlerState"},$R\[133]={label:"AsyncThrottlerOptions",to:"reference/interfaces/AsyncThrottlerOptions"},$R\[134]={label:"AsyncThrottlerState",to:"reference/interfaces/AsyncThrottlerState"},$R\[135]={label:"throttle",to:"reference/functions/throttle"},$R\[136]={label:"asyncThrottle",to:"reference/functions/asyncThrottle"},$R\[137]={label:"Throttler",to:"reference/classes/Throttler"},$R\[138]={label:"AsyncThrottler",to:"reference/classes/AsyncThrottler"}],frameworks:$R\[139]=\[$R\[140]={label:"react",children:$R\[141]=\[$R\[142]={label:"ReactThrottlerOptions",to:"framework/react/reference/interfaces/ReactThrottlerOptions"},$R\[143]={label:"ReactAsyncThrottlerOptions",to:"framework/react/reference/interfaces/ReactAsyncThrottlerOptions"},$R\[144]={label:"ReactThrottler",to:"framework/react/reference/interfaces/ReactThrottler"},$R\[145]={label:"ReactAsyncThrottler",to:"framework/react/reference/interfaces/ReactAsyncThrottler"},$R\[146]={label:"useThrottler",to:"framework/react/reference/functions/useThrottler"},$R\[147]={label:"useThrottledCallback",to:"framework/react/reference/functions/useThrottledCallback"},$R\[148]={label:"useThrottledState",to:"framework/react/reference/functions/useThrottledState"},$R\[149]={label:"useThrottledValue",to:"framework/react/reference/functions/useThrottledValue"},$R\[150]={label:"useAsyncThrottler",to:"framework/react/reference/functions/useAsyncThrottler"},$R\[151]={label:"useAsyncThrottledCallback",to:"framework/react/reference/functions/useAsyncThrottledCallback"}]},$R\[152]={label:"solid",children:$R\[153]=\[$R\[154]={label:"SolidThrottlerOptions",to:"framework/solid/reference/interfaces/SolidThrottlerOptions"},$R\[155]={label:"SolidAsyncThrottlerOptions",to:"framework/solid/reference/interfaces/SolidAsyncThrottlerOptions"},$R\[156]={label:"SolidThrottler",to:"framework/solid/reference/interfaces/SolidThrottler"},$R\[157]={label:"SolidAsyncThrottler",to:"framework/solid/reference/interfaces/SolidAsyncThrottler"},$R\[158]={label:"createThrottler",to:"framework/solid/reference/functions/createThrottler"},$R\[159]={label:"createThrottledSignal",to:"framework/solid/reference/functions/createThrottledSignal"},$R\[160]={label:"createThrottledValue",to:"framework/solid/reference/functions/createThrottledValue"},$R\[161]={label:"createAsyncThrottler",to:"framework/solid/reference/functions/createAsyncThrottler"}]},$R\[162]={label:"preact",children:$R\[163]=\[$R\[164]={label:"PreactThrottlerOptions",to:"framework/preact/reference/interfaces/PreactThrottlerOptions"},$R\[165]={label:"PreactAsyncThrottlerOptions",to:"framework/preact/reference/interfaces/PreactAsyncThrottlerOptions"},$R\[166]={label:"PreactThrottler",to:"framework/preact/reference/interfaces/PreactThrottler"},$R\[167]={label:"PreactAsyncThrottler",to:"framework/preact/reference/interfaces/PreactAsyncThrottler"},$R\[168]={label:"useThrottler",to:"framework/preact/reference/functions/useThrottler"},$R\[169]={label:"useThrottledCallback",to:"framework/preact/reference/functions/useThrottledCallback"},$R\[170]={label:"useThrottledState",to:"framework/preact/reference/functions/useThrottledState"},$R\[171]={label:"useThrottledValue",to:"framework/preact/reference/functions/useThrottledValue"},$R\[172]={label:"useAsyncThrottler",to:"framework/preact/reference/functions/useAsyncThrottler"},$R\[173]={label:"useAsyncThrottledCallback",to:"framework/preact/reference/functions/useAsyncThrottledCallback"}]},$R\[174]={label:"angular",children:$R\[175]=\[$R\[176]={label:"AngularThrottlerOptions",to:"framework/angular/reference/interfaces/AngularThrottlerOptions"},$R\[177]={label:"AngularAsyncThrottlerOptions",to:"framework/angular/reference/interfaces/AngularAsyncThrottlerOptions"},$R\[178]={label:"AngularThrottler",to:"framework/angular/reference/interfaces/AngularThrottler"},$R\[179]={label:"AngularAsyncThrottler",to:"framework/angular/reference/interfaces/AngularAsyncThrottler"},$R\[180]={label:"injectThrottler",to:"framework/angular/reference/functions/injectThrottler"},$R\[181]={label:"injectThrottledCallback",to:"framework/angular/reference/functions/injectThrottledCallback"},$R\[182]={label:"injectThrottledSignal",to:"framework/angular/reference/functions/injectThrottledSignal"},$R\[183]={label:"injectThrottledValue",to:"framework/angular/reference/functions/injectThrottledValue"},$R\[184]={label:"injectAsyncThrottler",to:"framework/angular/reference/functions/injectAsyncThrottler"},$R\[185]={label:"injectAsyncThrottledCallback",to:"framework/angular/reference/functions/injectAsyncThrottledCallback"}]}],collapsible:!0,defaultCollapsed:!0},$R\[186]={label:"Rate Limiter API Reference",children:$R\[187]=\[$R\[188]={label:"RateLimiterOptions",to:"reference/interfaces/RateLimiterOptions"},$R\[189]={label:"RateLimiterState",to:"reference/interfaces/RateLimiterState"},$R\[190]={label:"AsyncRateLimiterOptions",to:"reference/interfaces/AsyncRateLimiterOptions"},$R\[191]={label:"AsyncRateLimiterState",to:"reference/interfaces/AsyncRateLimiterState"},$R\[192]={label:"rateLimit",to:"reference/functions/rateLimit"},$R\[193]={label:"asyncRateLimit",to:"reference/functions/asyncRateLimit"},$R\[194]={label:"RateLimiter",to:"reference/classes/RateLimiter"},$R\[195]={label:"AsyncRateLimiter",to:"reference/classes/AsyncRateLimiter"}],frameworks:$R\[196]=\[$R\[197]={label:"react",children:$R\[198]=\[$R\[199]={label:"ReactRateLimiter",to:"framework/react/reference/interfaces/ReactRateLimiter"},$R\[200]={label:"ReactAsyncRateLimiter",to:"framework/react/reference/interfaces/ReactAsyncRateLimiter"},$R\[201]={label:"useRateLimiter",to:"framework/react/reference/functions/useRateLimiter"},$R\[202]={label:"useRateLimitedCallback",to:"framework/react/reference/functions/useRateLimitedCallback"},$R\[203]={label:"useRateLimitedState",to:"framework/react/reference/functions/useRateLimitedState"},$R\[204]={label:"useRateLimitedValue",to:"framework/react/reference/functions/useRateLimitedValue"},$R\[205]={label:"useAsyncRateLimiter",to:"framework/react/reference/functions/useAsyncRateLimiter"},$R\[206]={label:"useAsyncRateLimitedCallback",to:"framework/react/reference/functions/useAsyncRateLimitedCallback"}]},$R\[207]={label:"solid",children:$R\[208]=\[$R\[209]={label:"SolidRateLimiter",to:"framework/solid/reference/interfaces/SolidRateLimiter"},$R\[210]={label:"SolidAsyncRateLimiter",to:"framework/solid/reference/interfaces/SolidAsyncRateLimiter"},$R\[211]={label:"createRateLimiter",to:"framework/solid/reference/functions/createRateLimiter"},$R\[212]={label:"createRateLimitedSignal",to:"framework/solid/reference/functions/createRateLimitedSignal"},$R\[213]={label:"createRateLimitedValue",to:"framework/solid/reference/functions/createRateLimitedValue"},$R\[214]={label:"createAsyncRateLimiter",to:"framework/solid/reference/functions/createAsyncRateLimiter"}]},$R\[215]={label:"preact",children:$R\[216]=\[$R\[217]={label:"PreactRateLimiter",to:"framework/preact/reference/interfaces/PreactRateLimiter"},$R\[218]={label:"PreactAsyncRateLimiter",to:"framework/preact/reference/interfaces/PreactAsyncRateLimiter"},$R\[219]={label:"useRateLimiter",to:"framework/preact/reference/functions/useRateLimiter"},$R\[220]={label:"useRateLimitedCallback",to:"framework/preact/reference/functions/useRateLimitedCallback"},$R\[221]={label:"useRateLimitedState",to:"framework/preact/reference/functions/useRateLimitedState"},$R\[222]={label:"useRateLimitedValue",to:"framework/preact/reference/functions/useRateLimitedValue"},$R\[223]={label:"useAsyncRateLimiter",to:"framework/preact/reference/functions/useAsyncRateLimiter"},$R\[224]={label:"useAsyncRateLimitedCallback",to:"framework/preact/reference/functions/useAsyncRateLimitedCallback"}]},$R\[225]={label:"angular",children:$R\[226]=\[$R\[227]={label:"AngularRateLimiterOptions",to:"framework/angular/reference/interfaces/AngularRateLimiterOptions"},$R\[228]={label:"AngularAsyncRateLimiterOptions",to:"framework/angular/reference/interfaces/AngularAsyncRateLimiterOptions"},$R\[229]={label:"AngularRateLimiter",to:"framework/angular/reference/interfaces/AngularRateLimiter"},$R\[230]={label:"AngularAsyncRateLimiter",to:"framework/angular/reference/interfaces/AngularAsyncRateLimiter"},$R\[231]={label:"injectRateLimiter",to:"framework/angular/reference/functions/injectRateLimiter"},$R\[232]={label:"injectRateLimitedCallback",to:"framework/angular/reference/functions/injectRateLimitedCallback"},$R\[233]={label:"injectRateLimitedSignal",to:"framework/angular/reference/functions/injectRateLimitedSignal"},$R\[234]={label:"injectRateLimitedValue",to:"framework/angular/reference/functions/injectRateLimitedValue"},$R\[235]={label:"injectAsyncRateLimiter",to:"framework/angular/reference/functions/injectAsyncRateLimiter"},$R\[236]={label:"injectAsyncRateLimitedCallback",to:"framework/angular/reference/functions/injectAsyncRateLimitedCallback"}]}],collapsible:!0,defaultCollapsed:!0},$R\[237]={label:"Queue API Reference",children:$R\[238]=\[$R\[239]={label:"QueuerOptions",to:"reference/interfaces/QueuerOptions"},$R\[240]={label:"QueuerState",to:"reference/interfaces/QueuerState"},$R\[241]={label:"AsyncQueuerOptions",to:"reference/interfaces/AsyncQueuerOptions"},$R\[242]={label:"AsyncQueuerState",to:"reference/interfaces/AsyncQueuerState"},$R\[243]={label:"queue",to:"reference/functions/queue"},$R\[244]={label:"asyncQueue",to:"reference/functions/asyncQueue"},$R\[245]={label:"Queuer",to:"reference/classes/Queuer"},$R\[246]={label:"AsyncQueuer",to:"reference/classes/AsyncQueuer"}],frameworks:$R\[247]=\[$R\[248]={label:"react",children:$R\[249]=\[$R\[250]={label:"ReactQueuerOptions",to:"framework/react/reference/interfaces/ReactQueuerOptions"},$R\[251]={label:"ReactAsyncQueuerOptions",to:"framework/react/reference/interfaces/ReactAsyncQueuerOptions"},$R\[252]={label:"ReactQueuer",to:"framework/react/reference/interfaces/ReactQueuer"},$R\[253]={label:"ReactAsyncQueuer",to:"framework/react/reference/interfaces/ReactAsyncQueuer"},$R\[254]={label:"useQueuer",to:"framework/react/reference/functions/useQueuer"},$R\[255]={label:"useQueuedState",to:"framework/react/reference/functions/useQueuedState"},$R\[256]={label:"useQueuedValue",to:"framework/react/reference/functions/useQueuedValue"},$R\[257]={label:"useAsyncQueuer",to:"framework/react/reference/functions/useAsyncQueuer"},$R\[258]={label:"useAsyncQueuedState",to:"framework/react/reference/functions/useAsyncQueuedState"}]},$R\[259]={label:"solid",children:$R\[260]=\[$R\[261]={label:"SolidQueuerOptions",to:"framework/solid/reference/interfaces/SolidQueuerOptions"},$R\[262]={label:"SolidAsyncQueuerOptions",to:"framework/solid/reference/interfaces/SolidAsyncQueuerOptions"},$R\[263]={label:"SolidQueuer",to:"framework/solid/reference/interfaces/SolidQueuer"},$R\[264]={label:"SolidAsyncQueuer",to:"framework/solid/reference/interfaces/SolidAsyncQueuer"},$R\[265]={label:"createQueuer",to:"framework/solid/reference/functions/createQueuer"},$R\[266]={label:"createAsyncQueuer",to:"framework/solid/reference/functions/createAsyncQueuer"},$R\[267]={label:"createQueuedSignal",to:"framework/solid/reference/functions/createQueuedSignal"}]},$R\[268]={label:"preact",children:$R\[269]=\[$R\[270]={label:"PreactQueuerOptions",to:"framework/preact/reference/interfaces/PreactQueuerOptions"},$R\[271]={label:"PreactAsyncQueuerOptions",to:"framework/preact/reference/interfaces/PreactAsyncQueuerOptions"},$R\[272]={label:"PreactQueuer",to:"framework/preact/reference/interfaces/PreactQueuer"},$R\[273]={label:"PreactAsyncQueuer",to:"framework/preact/reference/interfaces/PreactAsyncQueuer"},$R\[274]={label:"useQueuer",to:"framework/preact/reference/functions/useQueuer"},$R\[275]={label:"useQueuedState",to:"framework/preact/reference/functions/useQueuedState"},$R\[276]={label:"useQueuedValue",to:"framework/preact/reference/functions/useQueuedValue"},$R\[277]={label:"useAsyncQueuer",to:"framework/preact/reference/functions/useAsyncQueuer"},$R\[278]={label:"useAsyncQueuedState",to:"framework/preact/reference/functions/useAsyncQueuedState"}]},$R\[279]={label:"angular",children:$R\[280]=\[$R\[281]={label:"AngularQueuerOptions",to:"framework/angular/reference/interfaces/AngularQueuerOptions"},$R\[282]={label:"AngularAsyncQueuerOptions",to:"framework/angular/reference/interfaces/AngularAsyncQueuerOptions"},$R\[283]={label:"AngularQueuer",to:"framework/angular/reference/interfaces/AngularQueuer"},$R\[284]={label:"AngularAsyncQueuer",to:"framework/angular/reference/interfaces/AngularAsyncQueuer"},$R\[285]={label:"injectQueuer",to:"framework/angular/reference/functions/injectQueuer"},$R\[286]={label:"injectQueuedSignal",to:"framework/angular/reference/functions/injectQueuedSignal"},$R\[287]={label:"injectQueuedValue",to:"framework/angular/reference/functions/injectQueuedValue"},$R\[288]={label:"injectAsyncQueuer",to:"framework/angular/reference/functions/injectAsyncQueuer"},$R\[289]={label:"injectAsyncQueuedSignal",to:"framework/angular/reference/functions/injectAsyncQueuedSignal"}]}],collapsible:!0,defaultCollapsed:!0},$R\[290]={label:"Batcher API Reference",children:$R\[291]=\[$R\[292]={label:"BatcherOptions",to:"reference/interfaces/BatcherOptions"},$R\[293]={label:"BatcherState",to:"reference/interfaces/BatcherState"},$R\[294]={label:"AsyncBatcherOptions",to:"reference/interfaces/AsyncBatcherOptions"},$R\[295]={label:"AsyncBatcherState",to:"reference/interfaces/AsyncBatcherState"},$R\[296]={label:"batch",to:"reference/functions/batch"},$R\[297]={label:"asyncBatch",to:"reference/functions/asyncBatch"},$R\[298]={label:"Batcher",to:"reference/classes/Batcher"},$R\[299]={label:"AsyncBatcher",to:"reference/classes/AsyncBatcher"}],frameworks:$R\[300]=\[$R\[301]={label:"react",children:$R\[302]=\[$R\[303]={label:"ReactBatcherOptions",to:"framework/react/reference/interfaces/ReactBatcherOptions"},$R\[304]={label:"ReactAsyncBatcherOptions",to:"framework/react/reference/interfaces/ReactAsyncBatcherOptions"},$R\[305]={label:"ReactBatcher",to:"framework/react/reference/interfaces/ReactBatcher"},$R\[306]={label:"ReactAsyncBatcher",to:"framework/react/reference/interfaces/ReactAsyncBatcher"},$R\[307]={label:"useBatcher",to:"framework/react/reference/functions/useBatcher"},$R\[308]={label:"useAsyncBatcher",to:"framework/react/reference/functions/useAsyncBatcher"},$R\[309]={label:"useBatchedCallback",to:"framework/react/reference/functions/useBatchedCallback"},$R\[310]={label:"useAsyncBatchedCallback",to:"framework/react/reference/functions/useAsyncBatchedCallback"}]},$R\[311]={label:"solid",children:$R\[312]=\[$R\[313]={label:"SolidBatcherOptions",to:"framework/solid/reference/interfaces/SolidBatcherOptions"},$R\[314]={label:"SolidAsyncBatcherOptions",to:"framework/solid/reference/interfaces/SolidAsyncBatcherOptions"},$R\[315]={label:"SolidBatcher",to:"framework/solid/reference/interfaces/SolidBatcher"},$R\[316]={label:"SolidAsyncBatcher",to:"framework/solid/reference/interfaces/SolidAsyncBatcher"},$R\[317]={label:"createBatcher",to:"framework/solid/reference/functions/createBatcher"},$R\[318]={label:"createAsyncBatcher",to:"framework/solid/reference/functions/createAsyncBatcher"}]},$R\[319]={label:"preact",children:$R\[320]=\[$R\[321]={label:"PreactBatcherOptions",to:"framework/preact/reference/interfaces/PreactBatcherOptions"},$R\[322]={label:"PreactAsyncBatcherOptions",to:"framework/preact/reference/interfaces/PreactAsyncBatcherOptions"},$R\[323]={label:"PreactBatcher",to:"framework/preact/reference/interfaces/PreactBatcher"},$R\[324]={label:"PreactAsyncBatcher",to:"framework/preact/reference/interfaces/PreactAsyncBatcher"},$R\[325]={label:"useBatcher",to:"framework/preact/reference/functions/useBatcher"},$R\[326]={label:"useAsyncBatcher",to:"framework/preact/reference/functions/useAsyncBatcher"},$R\[327]={label:"useBatchedCallback",to:"framework/preact/reference/functions/useBatchedCallback"},$R\[328]={label:"useAsyncBatchedCallback",to:"framework/preact/reference/functions/useAsyncBatchedCallback"}]},$R\[329]={label:"angular",children:$R\[330]=\[$R\[331]={label:"AngularBatcherOptions",to:"framework/angular/reference/interfaces/AngularBatcherOptions"},$R\[332]={label:"AngularAsyncBatcherOptions",to:"framework/angular/reference/interfaces/AngularAsyncBatcherOptions"},$R\[333]={label:"AngularBatcher",to:"framework/angular/reference/interfaces/AngularBatcher"},$R\[334]={label:"AngularAsyncBatcher",to:"framework/angular/reference/interfaces/AngularAsyncBatcher"},$R\[335]={label:"injectBatcher",to:"framework/angular/reference/functions/injectBatcher"},$R\[336]={label:"injectBatchedCallback",to:"framework/angular/reference/functions/injectBatchedCallback"},$R\[337]={label:"injectAsyncBatcher",to:"framework/angular/reference/functions/injectAsyncBatcher"},$R\[338]={label:"injectAsyncBatchedCallback",to:"framework/angular/reference/functions/injectAsyncBatchedCallback"}]}],collapsible:!0,defaultCollapsed:!0},$R\[339]={label:"Debouncer Examples",children:$R\[340]=\[$R\[341]={label:"liteDebounce",to:"framework/vanilla/examples/liteDebounce"},$R\[342]={label:"LiteDebouncer",to:"framework/vanilla/examples/LiteDebouncer"}],frameworks:$R\[343]=\[$R\[344]={label:"react",children:$R\[345]=\[$R\[346]={label:"debounce",to:"framework/react/examples/debounce"},$R\[347]={label:"asyncDebounce",to:"framework/react/examples/asyncDebounce"},$R\[348]={label:"useDebouncer",to:"framework/react/examples/useDebouncer"},$R\[349]={label:"useDebouncedCallback",to:"framework/react/examples/useDebouncedCallback"},$R\[350]={label:"useDebouncedState",to:"framework/react/examples/useDebouncedState"},$R\[351]={label:"useDebouncedValue",to:"framework/react/examples/useDebouncedValue"},$R\[352]={label:"useAsyncDebouncer",to:"framework/react/examples/useAsyncDebouncer"},$R\[353]={label:"useAsyncDebouncedCallback",to:"framework/react/examples/useAsyncDebouncedCallback"}]},$R\[354]={label:"solid",children:$R\[355]=\[$R\[356]={label:"debounce",to:"framework/solid/examples/debounce"},$R\[357]={label:"asyncDebounce",to:"framework/solid/examples/asyncDebounce"},$R\[358]={label:"createDebouncer",to:"framework/solid/examples/createDebouncer"},$R\[359]={label:"createDebouncedSignal",to:"framework/solid/examples/createDebouncedSignal"},$R\[360]={label:"createDebouncedValue",to:"framework/solid/examples/createDebouncedValue"},$R\[361]={label:"createAsyncDebouncer",to:"framework/solid/examples/createAsyncDebouncer"}]},$R\[362]={label:"preact",children:$R\[363]=\[$R\[364]={label:"debounce",to:"framework/preact/examples/debounce"},$R\[365]={label:"asyncDebounce",to:"framework/preact/examples/asyncDebounce"},$R\[366]={label:"useDebouncer",to:"framework/preact/examples/useDebouncer"},$R\[367]={label:"useDebouncedCallback",to:"framework/preact/examples/useDebouncedCallback"},$R\[368]={label:"useDebouncedState",to:"framework/preact/examples/useDebouncedState"},$R\[369]={label:"useDebouncedValue",to:"framework/preact/examples/useDebouncedValue"},$R\[370]={label:"useAsyncDebouncer",to:"framework/preact/examples/useAsyncDebouncer"},$R\[371]={label:"useAsyncDebouncedCallback",to:"framework/preact/examples/useAsyncDebouncedCallback"}]},$R\[372]={label:"angular",children:$R\[373]=\[$R\[374]={label:"debounce",to:"framework/angular/examples/debounce"},$R\[375]={label:"asyncDebounce",to:"framework/angular/examples/asyncDebounce"},$R\[376]={label:"injectDebouncer",to:"framework/angular/examples/injectDebouncer"},$R\[377]={label:"injectDebouncedCallback",to:"framework/angular/examples/injectDebouncedCallback"},$R\[378]={label:"injectDebouncedSignal",to:"framework/angular/examples/injectDebouncedSignal"},$R\[379]={label:"injectDebouncedValue",to:"framework/angular/examples/injectDebouncedValue"},$R\[380]={label:"injectAsyncDebouncer",to:"framework/angular/examples/injectAsyncDebouncer"},$R\[381]={label:"injectAsyncDebouncedCallback",to:"framework/angular/examples/injectAsyncDebouncedCallback"}]}]},$R\[382]={label:"Throttler Examples",children:$R\[383]=\[$R\[384]={label:"liteThrottle",to:"framework/vanilla/examples/liteThrottle"},$R\[385]={label:"LiteThrottler",to:"framework/vanilla/examples/LiteThrottler"}],frameworks:$R\[386]=\[$R\[387]={label:"react",children:$R\[388]=\[$R\[389]={label:"throttle",to:"framework/react/examples/throttle"},$R\[390]={label:"asyncThrottle",to:"framework/react/examples/asyncThrottle"},$R\[391]={label:"useThrottler",to:"framework/react/examples/useThrottler"},$R\[392]={label:"useThrottledCallback",to:"framework/react/examples/useThrottledCallback"},$R\[393]={label:"useThrottledState",to:"framework/react/examples/useThrottledState"},$R\[394]={label:"useThrottledValue",to:"framework/react/examples/useThrottledValue"},$R\[395]={label:"useAsyncThrottler",to:"framework/react/examples/useAsyncThrottler"}]},$R\[396]={label:"solid",children:$R\[397]=\[$R\[398]={label:"throttle",to:"framework/solid/examples/throttle"},$R\[399]={label:"asyncThrottle",to:"framework/solid/examples/asyncThrottle"},$R\[400]={label:"createThrottler",to:"framework/solid/examples/createThrottler"},$R\[401]={label:"createThrottledSignal",to:"framework/solid/examples/createThrottledSignal"},$R\[402]={label:"createThrottledValue",to:"framework/solid/examples/createThrottledValue"},$R\[403]={label:"createAsyncThrottler",to:"framework/solid/examples/createAsyncThrottler"}]},$R\[404]={label:"preact",children:$R\[405]=\[$R\[406]={label:"throttle",to:"framework/preact/examples/throttle"},$R\[407]={label:"asyncThrottle",to:"framework/preact/examples/asyncThrottle"},$R\[408]={label:"useThrottler",to:"framework/preact/examples/useThrottler"},$R\[409]={label:"useThrottledCallback",to:"framework/preact/examples/useThrottledCallback"},$R\[410]={label:"useThrottledState",to:"framework/preact/examples/useThrottledState"},$R\[411]={label:"useThrottledValue",to:"framework/preact/examples/useThrottledValue"},$R\[412]={label:"useAsyncThrottler",to:"framework/preact/examples/useAsyncThrottler"},$R\[413]={label:"useAsyncThrottledCallback",to:"framework/preact/examples/useAsyncThrottledCallback"}]},$R\[414]={label:"angular",children:$R\[415]=\[$R\[416]={label:"throttle",to:"framework/angular/examples/throttle"},$R\[417]={label:"asyncThrottle",to:"framework/angular/examples/asyncThrottle"},$R\[418]={label:"injectThrottler",to:"framework/angular/examples/injectThrottler"},$R\[419]={label:"injectThrottledCallback",to:"framework/angular/examples/injectThrottledCallback"},$R\[420]={label:"injectThrottledSignal",to:"framework/angular/examples/injectThrottledSignal"},$R\[421]={label:"injectThrottledValue",to:"framework/angular/examples/injectThrottledValue"},$R\[422]={label:"injectAsyncThrottler",to:"framework/angular/examples/injectAsyncThrottler"},$R\[423]={label:"injectAsyncThrottledCallback",to:"framework/angular/examples/injectAsyncThrottledCallback"}]}]},$R\[424]={label:"Rate Limiter Examples",children:$R\[425]=\[$R\[426]={label:"liteRateLimit",to:"framework/vanilla/examples/liteRateLimit"},$R\[427]={label:"LiteRateLimiter",to:"framework/vanilla/examples/LiteRateLimiter"}],frameworks:$R\[428]=\[$R\[429]={label:"react",children:$R\[430]=\[$R\[431]={label:"rateLimit",to:"framework/react/examples/rateLimit"},$R\[432]={label:"asyncRateLimit",to:"framework/react/examples/asyncRateLimit"},$R\[433]={label:"useRateLimiter",to:"framework/react/examples/useRateLimiter"},$R\[434]={label:"useRateLimiterWithPersister",to:"framework/react/examples/useRateLimiterWithPersister"},$R\[435]={label:"useRateLimitedCallback",to:"framework/react/examples/useRateLimitedCallback"},$R\[436]={label:"useRateLimitedState",to:"framework/react/examples/useRateLimitedState"},$R\[437]={label:"useRateLimitedValue",to:"framework/react/examples/useRateLimitedValue"},$R\[438]={label:"useAsyncRateLimiter",to:"framework/react/examples/useAsyncRateLimiter"},$R\[439]={label:"useAsyncRateLimiterWithPersister",to:"framework/react/examples/useAsyncRateLimiterWithPersister"}]},$R\[440]={label:"solid",children:$R\[441]=\[$R\[442]={label:"rateLimit",to:"framework/solid/examples/rateLimit"},$R\[443]={label:"asyncRateLimit",to:"framework/solid/examples/asyncRateLimit"},$R\[444]={label:"createRateLimiter",to:"framework/solid/examples/createRateLimiter"},$R\[445]={label:"createRateLimitedSignal",to:"framework/solid/examples/createRateLimitedSignal"},$R\[446]={label:"createRateLimitedValue",to:"framework/solid/examples/createRateLimitedValue"},$R\[447]={label:"createAsyncRateLimiter",to:"framework/solid/examples/createAsyncRateLimiter"}]},$R\[448]={label:"preact",children:$R\[449]=\[$R\[450]={label:"rateLimit",to:"framework/preact/examples/rateLimit"},$R\[451]={label:"asyncRateLimit",to:"framework/preact/examples/asyncRateLimit"},$R\[452]={label:"useRateLimiter",to:"framework/preact/examples/useRateLimiter"},$R\[453]={label:"useRateLimiterWithPersister",to:"framework/preact/examples/useRateLimiterWithPersister"},$R\[454]={label:"useRateLimitedCallback",to:"framework/preact/examples/useRateLimitedCallback"},$R\[455]={label:"useRateLimitedState",to:"framework/preact/examples/useRateLimitedState"},$R\[456]={label:"useRateLimitedValue",to:"framework/preact/examples/useRateLimitedValue"},$R\[457]={label:"useAsyncRateLimiter",to:"framework/preact/examples/useAsyncRateLimiter"},$R\[458]={label:"useAsyncRateLimiterWithPersister",to:"framework/preact/examples/useAsyncRateLimiterWithPersister"}]},$R\[459]={label:"angular",children:$R\[460]=\[$R\[461]={label:"rateLimit",to:"framework/angular/examples/rateLimit"},$R\[462]={label:"asyncRateLimit",to:"framework/angular/examples/asyncRateLimit"},$R\[463]={label:"injectRateLimiter",to:"framework/angular/examples/injectRateLimiter"},$R\[464]={label:"injectRateLimitedCallback",to:"framework/angular/examples/injectRateLimitedCallback"},$R\[465]={label:"injectRateLimitedSignal",to:"framework/angular/examples/injectRateLimitedSignal"},$R\[466]={label:"injectRateLimitedValue",to:"framework/angular/examples/injectRateLimitedValue"},$R\[467]={label:"injectRateLimiterWithPersister",to:"framework/angular/examples/injectRateLimiterWithPersister"},$R\[468]={label:"injectAsyncRateLimiter",to:"framework/angular/examples/injectAsyncRateLimiter"},$R\[469]={label:"injectAsyncRateLimitedCallback",to:"framework/angular/examples/injectAsyncRateLimitedCallback"},$R\[470]={label:"injectAsyncRateLimiterWithPersister",to:"framework/angular/examples/injectAsyncRateLimiterWithPersister"}]}]},$R\[471]={label:"Queue Examples",children:$R\[472]=\[$R\[473]={label:"liteQueue",to:"framework/vanilla/examples/liteQueue"},$R\[474]={label:"LiteQueuer",to:"framework/vanilla/examples/LiteQueuer"}],frameworks:$R\[475]=\[$R\[476]={label:"react",children:$R\[477]=\[$R\[478]={label:"queue",to:"framework/react/examples/queue"},$R\[479]={label:"useQueuer",to:"framework/react/examples/useQueuer"},$R\[480]={label:"useQueuerWithPersister",to:"framework/react/examples/useQueuerWithPersister"},$R\[481]={label:"useQueuedState",to:"framework/react/examples/useQueuedState"},$R\[482]={label:"useQueuedValue",to:"framework/react/examples/useQueuedValue"},$R\[483]={label:"useAsyncQueuer",to:"framework/react/examples/useAsyncQueuer"},$R\[484]={label:"useAsyncQueuedState",to:"framework/react/examples/useAsyncQueuedState"}]},$R\[485]={label:"solid",children:$R\[486]=\[$R\[487]={label:"queue",to:"framework/solid/examples/queue"},$R\[488]={label:"createQueuer",to:"framework/solid/examples/createQueuer"},$R\[489]={label:"createAsyncQueuer",to:"framework/solid/examples/createAsyncQueuer"},$R\[490]={label:"createQueuedSignal",to:"framework/solid/examples/createQueuedSignal"}]},$R\[491]={label:"preact",children:$R\[492]=\[$R\[493]={label:"queue",to:"framework/preact/examples/queue"},$R\[494]={label:"useQueuer",to:"framework/preact/examples/useQueuer"},$R\[495]={label:"useQueuerWithPersister",to:"framework/preact/examples/useQueuerWithPersister"},$R\[496]={label:"useQueuedState",to:"framework/preact/examples/useQueuedState"},$R\[497]={label:"useQueuedValue",to:"framework/preact/examples/useQueuedValue"},$R\[498]={label:"useAsyncQueuer",to:"framework/preact/examples/useAsyncQueuer"},$R\[499]={label:"useAsyncQueuedState",to:"framework/preact/examples/useAsyncQueuedState"}]},$R\[500]={label:"angular",children:$R\[501]=\[$R\[502]={label:"queue",to:"framework/angular/examples/queue"},$R\[503]={label:"injectQueuer",to:"framework/angular/examples/injectQueuer"},$R\[504]={label:"injectQueuedSignal",to:"framework/angular/examples/injectQueuedSignal"},$R\[505]={label:"injectQueuedValue",to:"framework/angular/examples/injectQueuedValue"},$R\[506]={label:"injectQueuerWithPersister",to:"framework/angular/examples/injectQueuerWithPersister"},$R\[507]={label:"injectAsyncQueuer",to:"framework/angular/examples/injectAsyncQueuer"},$R\[508]={label:"injectAsyncQueuedSignal",to:"framework/angular/examples/injectAsyncQueuedSignal"}]}]},$R\[509]={label:"Batcher Examples",children:$R\[510]=\[$R\[511]={label:"liteBatch",to:"framework/vanilla/examples/liteBatch"},$R\[512]={label:"LiteBatcher",to:"framework/vanilla/examples/LiteBatcher"}],frameworks:$R\[513]=\[$R\[514]={label:"react",children:$R\[515]=\[$R\[516]={label:"batch",to:"framework/react/examples/batch"},$R\[517]={label:"asyncBatch",to:"framework/react/examples/asyncBatch"},$R\[518]={label:"useBatcher",to:"framework/react/examples/useBatcher"},$R\[519]={label:"useAsyncBatcher",to:"framework/react/examples/useAsyncBatcher"},$R\[520]={label:"useBatchedCallback",to:"framework/react/examples/useBatchedCallback"},$R\[521]={label:"useAsyncBatchedCallback",to:"framework/react/examples/useAsyncBatchedCallback"}]},$R\[522]={label:"solid",children:$R\[523]=\[$R\[524]={label:"batch",to:"framework/solid/examples/batch"},$R\[525]={label:"createBatcher",to:"framework/solid/examples/createBatcher"},$R\[526]={label:"createAsyncBatcher",to:"framework/solid/examples/createAsyncBatcher"}]},$R\[527]={label:"preact",children:$R\[528]=\[$R\[529]={label:"batch",to:"framework/preact/examples/batch"},$R\[530]={label:"asyncBatch",to:"framework/preact/examples/asyncBatch"},$R\[531]={label:"useBatcher",to:"framework/preact/examples/useBatcher"},$R\[532]={label:"useAsyncBatcher",to:"framework/preact/examples/useAsyncBatcher"},$R\[533]={label:"useBatchedCallback",to:"framework/preact/examples/useBatchedCallback"},$R\[534]={label:"useAsyncBatchedCallback",to:"framework/preact/examples/useAsyncBatchedCallback"}]},$R\[535]={label:"angular",children:$R\[536]=\[$R\[537]={label:"batch",to:"framework/angular/examples/batch"},$R\[538]={label:"asyncBatch",to:"framework/angular/examples/asyncBatch"},$R\[539]={label:"injectBatcher",to:"framework/angular/examples/injectBatcher"},$R\[540]={label:"injectBatchedCallback",to:"framework/angular/examples/injectBatchedCallback"},$R\[541]={label:"injectAsyncBatcher",to:"framework/angular/examples/injectAsyncBatcher"},$R\[542]={label:"injectAsyncBatchedCallback",to:"framework/angular/examples/injectAsyncBatchedCallback"}]}]},$R\[543]={label:"TanStack Query Examples",children:$R\[544]=\[],frameworks:$R\[545]=\[$R\[546]={label:"react",children:$R\[547]=\[$R\[548]={label:"React Query Debounced Prefetch",to:"framework/react/examples/react-query-debounced-prefetch"},$R\[549]={label:"React Query Throttled Prefetch",to:"framework/react/examples/react-query-throttled-prefetch"},$R\[550]={label:"React Query Queued Prefetch",to:"framework/react/examples/react-query-queued-prefetch"}]}]}]}},ssr:!0},$R\[551]={i:"/$libraryId/$version/docs/pacer/latest/docs",u:1772952647031,s:"success",ssr:!0},$R\[552]={i:"/$libraryId/$version/docs/$/pacer/latest/docs/overview",u:1772952647078,s:"success",l:$R\[553]={title:"Overview",description:"TanStack Pacer is a library focused on providing high-quality utilities for controlling function execution timing in your applications. While similar utilities exist elsewhere, we aim to get all the i...",filePath:"docs/overview.md",content:"\nTanStack Pacer is a library focused on providing high-quality utilities for controlling function execution timing in your applications. While similar utilities exist elsewhere, we aim to get all the important details right - including ***type-safety***, ***tree-shaking***, and a consistent and ***intuitive API***. By focusing on these fundamentals and making them available in a ***framework agnostic*** way, we hope to make these utilities and patterns more commonplace in your applications. Proper execution control is often an afterthought in application development, leading to performance issues, race conditions, and poor user experiences that could have been prevented. TanStack Pacer helps you implement these critical patterns correctly from the start!\n\n> \[!IMPORTANT]\n> TanStack Pacer is currently in **beta** and its API is still subject to change.\n>\n> The scope of this library may grow, but we hope to keep the bundle size of each individual utility lean and focused.\n\n## Origin\n\nMany of the ideas (and code) for TanStack Pacer are not new. In fact, many of these utilities have been living in other TanStack libraries for quite some time. We extracted code from TanStack Query, Router, Form, and even Tanner's original [Swimmer](https://github.com/tannerlinsley/swimmer) library. Then we cleaned up these utilities, filled in some gaps, and shipped them as a standalone library.\n\n## Features\n\n> \[!NOTE]\n> TanStack Pacer is currently mostly a client-side only library, but it is being designed to be able to potentially be used on the server-side as well.\n\n- **Debouncing**\n  - Delay execution until after a period of inactivity for when you only care about the last execution in a sequence.\n  - Synchronous or Asynchronous Debounce utilities with promise support and error handling\n  - Control of leading, trailing, and enabled options\n- **Throttling**\n  - Smoothly limit the rate at which a function can fire\n  - Synchronous or Asynchronous Throttle utilities with promise support and error handling\n  - Control of leading, trailing, and enabled options.\n- **Rate Limiting**\n  - Limit the rate at which a function can fire over a period of time\n  - Synchronous or Asynchronous Rate Limiting utilities with promise support and error handling\n  - Fixed or Sliding Window variations of Rate Limiting\n- **Queuing**\n  - Queue functions to be executed in a specific order\n  - Choose from FIFO, LIFO, and Priority queue implementations\n  - Control processing speed with configurable wait times or concurrency limits\n  - Manage queue execution with start/stop capabilities\n  - Expire items from the queue after a configurable duration\n- **Batching**\n  - Chunk up multiple operations into larger batches to reduce total back-and-forth operations\n  - Batch by time period, batch size, whichever comes first, or a custom condition to trigger batch executions\n- **Async or Sync Variations**\n  - Choose between synchronous and asynchronous versions of each utility\n  - Optional error, success, and settled handling for async variations\n  - Retry and Abort support for async variations\n- **State Management**\n  - Uses TanStack Store under the hood for state management with fine-grained reactivity\n  - Easily integrate with your own state management library of choice\n  - Persist state to local or session storage for some utilities like rate limiting and queuing\n- **Convenient Hooks**\n  - Reduce boilerplate code with pre-built hooks like `useDebouncedCallback`, `useThrottledValue`, and `useQueuedState`, and more.\n  - Multiple layers of abstraction to choose from depending on your use case.\n  - Works with each framework's default state management solutions, or with whatever custom state management library that you prefer.\n- **Type Safety**\n  - Full type safety with TypeScript that makes sure that your functions will always be called with the correct arguments\n  - Generics for flexible and reusable utilities\n- **Framework Adapters**\n  - React, Solid, and more\n- **Tree Shaking**\n  - We, of course, get tree-shaking right for your applications by default, but we also provide extra deep imports for each utility, making it easier to embed these utilities into your libraries without increasing the bundle-phobia reports of your library.\n\n## Interactive Comparison Demo\n\nEach utility is designed to be used in a specific way, and each utility has its own unique behavior.\n\nSee how each utility behaves with this interactive comparison. Move the range slider to observe the differences between debouncing, throttling, rate limiting, queuing, and batching:\n\n\x3Ciframe src="https://stackblitz.com/github/TanStack/pacer/tree/main/examples/react/util-comparison?embed=1\&view=preview\&hideNavigation=1" width="100%" height="1200px" style="border: 1px solid #ccc; border-radius: 4px;">\x3C/iframe>\n\n## Pacer Lite\n\nPacer Lite (`@tanstack/pacer-lite`) is a stripped down version of the core TanStack Pacer library. It is designed to be used in libraries and npm packages that need minimal overhead, and no reactivity features. The Lite version of each utility has the same core functionality of its core counterpart, but is stripped down to have a slightly smaller API surface and a smaller bundle size. Pacer Lite lacks reactivity features, framework adapters, devtools support, and some of the advanced options that the core utilities have. If that sounds interesting to you, you can feel free to try it out!",frontmatter:$R\[554]={title:"Overview",id:"overview",description:"TanStack Pacer is a library focused on providing high-quality utilities for controlling function execution timing in your applications. While similar utilities exist elsewhere, we aim to get all the i..."}},ssr:!0}],lastMatchId:"/$libraryId/$version/docs/$/pacer/latest/docs/overview",dehydratedData:$R\[555]={queryStream:$R\[556]=($R\[557]=(e) => new ReadableStream({ start: (r) => {
-e.on({ next: (a) => {
-try {
-r.enqueue(a);
-} catch (t) {
-}
-}, throw: (a) => {
-r.error(a);
-}, return: () => {
-try {
-r.close();
-} catch (a) {
-}
-} });
-} }))($R\[558]=($R\[559]=() => {
-let e = \[], r = \[], t = true, n2 = false, a = 0, s = (l, g, S) => {
-for (S = 0; S < a; S++) r\[S] && r\[S][g](l);
-}, i = (l, g, S, d) => {
-for (g = 0, S = e.length; g < S; g++) d = e\[g], !t && g === S - 1 ? l[n2 ? "return" : "throw"](d) : l.next(d);
-}, u = (l, g) => (t && (g = a++, r\[g] = l), i(l), () => {
-t && (r\[g] = r\[a], r\[a--] = void 0);
-});
-return { **SEROVAL\_STREAM**: true, on: (l) => u(l), next: (l) => {
-t && (e.push(l), s(l, "next"));
-}, throw: (l) => {
-t && (e.push(l), s(l, "throw"), t = false, n2 = false, r.length = 0);
-}, return: (l) => {
-t && (e.push(l), s(l, "return"), t = false, n2 = true, r.length = 0);
-} };
-})())}})($R\["tsr"]);document.currentScript.remove()import('/assets/main-BLpUAM3f.js')($R=>$R\[558].return(void 0))($R\["tsr"]);$\_TSR.e();document.currentScript.remove()
+\[
+
+## Pacer Lite
+
+]\(#pacer-lite)
+
+Pacer Lite (@tanstack/pacer-lite) is a stripped down version of the core TanStack Pacer library. It is designed to be used in libraries and npm packages that need minimal overhead, and no reactivity features. The Lite version of each utility has the same core functionality of its core counterpart, but is stripped down to have a slightly smaller API surface and a smaller bundle size. Pacer Lite lacks reactivity features, framework adapters, devtools support, and some of the advanced options that the core utilities have. If that sounds interesting to you, you can feel free to try it out!
+
+[Edit on GitHub](https://github.com/tanstack/pacer/edit/main/docs/overview.md)
+
+\[
+
+PreviousNPM Stats
+
+]\(/pacer/latest/docs/npm-stats)
+
+\[
+
+NextQuick Start
+
+]\(/pacer/latest/docs/quick-start)
+
+[Blog](/blog)
+
+[@Tan\_Stack on X.com](https://x.com/tan_stack)
+
+[@TannerLinsley on X.com](https://twitter.com/tannerlinsley)
+
+[GitHub](https://github.com/tanstack)
+
+[YouTube](https://youtube.com/@tan_stack)
+
+[Nozzle.io - Keyword Rank Tracker](https://nozzle.io)
+
+[Ethos](/ethos)
+
+[Tenets](/tenets)
+
+[Privacy Policy](/privacy)
+
+[Terms of Service](/terms)
+
+© 2026 TanStack LLC
+
+[Partners](/partners)
+
+\[
+
+![CodeRabbit](/assets/coderabbit-light-CIzGLYU_.svg)![CodeRabbit](/assets/coderabbit-dark-D643Zkrv.svg)
+
+]\(https://coderabbit.link/tanstack?utm\_source=tanstack\&via=tanstack)\[
+
+![Cloudflare](/assets/cloudflare-black-6Ojsn8yh.svg)![Cloudflare](/assets/cloudflare-white-Co-Tyjbl.svg)
+
+]\(https://www.cloudflare.com?utm\_source=tanstack)\[
+
+![AG Grid](data:image/svg+xml,%3csvg%20clip-rule='evenodd'%20fill-rule='evenodd'%20stroke-linejoin='round'%20stroke-miterlimit='2'%20viewBox='0%200%20235%2040'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20transform='matrix\(.635723%200%200%20.635723%20-492.921%20-323.608\)'%3e%3cg%20fill-rule='nonzero'%3e%3cpath%20d='m1099.4%20549.4v-12.5h-21.3l-12.5%2012.5z'%20fill='%23ff8b00'/%3e%3cpath%20d='m1123.4%20518.4h-26.7l-12.6%2012.5h39.3z'%20fill='%2355b2c6'/%3e%3cpath%20d='m1053.2%20561.9%206.4-6.4h21.6v12.5h-28z'%20fill='%23f00'/%3e%3cpath%20d='m1057.9%20543.3h13.8l12.6-12.5h-26.4z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1042.8%20561.9h10.4l12.4-12.5h-22.8z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1096.7%20518.4-6.4%206.4h-40.8v-12.5h47.2z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m828.6%20559.7h-19.6l-3.4%208.4h-8.6l18.1-42.4h7.5l18.1%2042.4h-8.7zm-2.7-6.7-7.1-17.3-7.1%2017.3z'%20fill='%23031c4c'/%3e%3cpath%20d='m960.1%20541.3c2.5-3.7%208.8-4.1%2011.4-4.1v7.2c-3.2%200-6.4.1-8.3%201.5s-2.9%203.3-2.9%205.6v16.6h-7.8v-30.9h7.5z'%20fill='%23031c4c'/%3e%3c/g%3e%3cpath%20d='m975.8%20537.2h7.8v30.9h-7.8z'%20fill='%23031c4c'/%3e%3cpath%20d='m975.8%20523.4h7.8v9.2h-7.8z'%20fill='%23031c4c'/%3e%3cpath%20d='m1022.3%20523.4v44.7h-7.5l-.2-4.7c-1.1%201.6-2.5%202.9-4.2%203.9-1.7.9-3.8%201.4-6.2%201.4-2.1%200-4.1-.4-5.8-1.1-1.8-.8-3.4-1.8-4.7-3.2s-2.4-3.1-3.1-5c-.8-1.9-1.1-4.1-1.1-6.5s.4-4.6%201.1-6.6c.8-2%201.8-3.7%203.1-5.1s2.9-2.5%204.7-3.3%203.7-1.2%205.8-1.2c2.4%200%204.4.4%206.1%201.3s3.1%202.1%204.2%203.8v-18.3h7.8zm-16.4%2038.6c2.6%200%204.6-.9%206.2-2.6s2.4-4%202.4-6.8-.8-5-2.4-6.8c-1.6-1.7-3.6-2.6-6.2-2.6-2.5%200-4.6.9-6.1%202.6-1.6%201.7-2.4%204-2.4%206.8s.8%205%202.4%206.7c1.6%201.8%203.6%202.7%206.1%202.7'%20fill='%23031c4c'%20fill-rule='nonzero'/%3e%3cpath%20d='m885.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23031c4c'%20fill-rule='nonzero'/%3e%3cpath%20d='m946.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23031c4c'%20fill-rule='nonzero'/%3e%3c/g%3e%3c/svg%3e)![AG Grid](data:image/svg+xml,%3csvg%20clip-rule='evenodd'%20fill-rule='evenodd'%20stroke-linejoin='round'%20stroke-miterlimit='2'%20viewBox='0%200%20235%2040'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20transform='matrix\(.635723%200%200%20.635723%20-492.921%20-323.608\)'%3e%3cg%20fill-rule='nonzero'%3e%3cpath%20d='m1099.4%20549.4v-12.5h-21.3l-12.5%2012.5z'%20fill='%23ff8b00'/%3e%3cpath%20d='m1123.4%20518.4h-26.7l-12.6%2012.5h39.3z'%20fill='%2355b2c6'/%3e%3cpath%20d='m1053.2%20561.9%206.4-6.4h21.6v12.5h-28z'%20fill='%23f00'/%3e%3cpath%20d='m1057.9%20543.3h13.8l12.6-12.5h-26.4z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1042.8%20561.9h10.4l12.4-12.5h-22.8z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m1096.7%20518.4-6.4%206.4h-40.8v-12.5h47.2z'%20fill='%23b4bbbf'/%3e%3cpath%20d='m828.6%20559.7h-19.6l-3.4%208.4h-8.6l18.1-42.4h7.5l18.1%2042.4h-8.7zm-2.7-6.7-7.1-17.3-7.1%2017.3z'%20fill='%23fff'/%3e%3cpath%20d='m960.1%20541.3c2.5-3.7%208.8-4.1%2011.4-4.1v7.2c-3.2%200-6.4.1-8.3%201.5s-2.9%203.3-2.9%205.6v16.6h-7.8v-30.9h7.5z'%20fill='%23fff'/%3e%3c/g%3e%3cpath%20d='m975.8%20537.2h7.8v30.9h-7.8z'%20fill='%23fff'/%3e%3cpath%20d='m975.8%20523.4h7.8v9.2h-7.8z'%20fill='%23fff'/%3e%3cpath%20d='m1022.3%20523.4v44.7h-7.5l-.2-4.7c-1.1%201.6-2.5%202.9-4.2%203.9-1.7.9-3.8%201.4-6.2%201.4-2.1%200-4.1-.4-5.8-1.1-1.8-.8-3.4-1.8-4.7-3.2s-2.4-3.1-3.1-5c-.8-1.9-1.1-4.1-1.1-6.5s.4-4.6%201.1-6.6c.8-2%201.8-3.7%203.1-5.1s2.9-2.5%204.7-3.3%203.7-1.2%205.8-1.2c2.4%200%204.4.4%206.1%201.3s3.1%202.1%204.2%203.8v-18.3h7.8zm-16.4%2038.6c2.6%200%204.6-.9%206.2-2.6s2.4-4%202.4-6.8-.8-5-2.4-6.8c-1.6-1.7-3.6-2.6-6.2-2.6-2.5%200-4.6.9-6.1%202.6-1.6%201.7-2.4%204-2.4%206.8s.8%205%202.4%206.7c1.6%201.8%203.6%202.7%206.1%202.7'%20fill='%23fff'%20fill-rule='nonzero'/%3e%3cpath%20d='m885.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23fff'%20fill-rule='nonzero'/%3e%3cpath%20d='m946.8%20544.2h-19.3v6.7h11c-.3%203.4-1.6%206-3.8%208.1-2.2%202-5%203-8.6%203-2%200-3.9-.4-5.5-1.1-1.7-.7-3.1-1.7-4.3-3.1-1.2-1.3-2.1-2.9-2.8-4.8s-1-3.9-1-6.2.3-4.3%201-6.2c.6-1.9%201.6-3.4%202.8-4.8%201.2-1.3%202.6-2.3%204.3-3.1%201.7-.7%203.5-1.1%205.6-1.1%204.2%200%207.4%201%209.6%203l5.2-5.2c-3.9-3-8.9-4.6-14.8-4.6-3.3%200-6.3.5-9%201.6s-5%202.5-6.9%204.4-3.4%204.2-4.4%206.9-1.5%205.7-1.5%208.9.5%206.2%201.6%208.9%202.5%205%204.4%206.9%204.2%203.4%206.9%204.4c2.7%201.1%205.7%201.6%208.9%201.6s6.1-.5%208.7-1.6%204.8-2.5%206.6-4.4%203.2-4.2%204.2-6.9%201.5-5.7%201.5-8.9v-1.3c-.3-.2-.4-.7-.4-1.1'%20fill='%23fff'%20fill-rule='nonzero'/%3e%3c/g%3e%3c/svg%3e)
+
+]\(https://ag-grid.com/react-data-grid/?utm\_source=reacttable\&utm\_campaign=githubreacttable)\[
+
+![SerpAPI](/assets/serpapi-black-DnXRiQQ3.svg)![SerpAPI](/assets/serpapi-white-CPxTEZSp.svg)
+
+]\(https://serpapi.com?utm\_source=tanstack)\[
+
+![Netlify](data:image/svg+xml,%3csvg%20width='512'%20height='209'%20viewBox='0%200%20512%20209'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_235_8\)'%3e%3cpath%20d='M117.436%20207.036V154.604L118.529%20153.51H129.452L130.545%20154.604V207.036L129.452%20208.13H118.529L117.436%20207.036Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M117.436%2053.5225V1.09339L118.529%200H129.452L130.545%201.09339V53.5225L129.452%2054.6159H118.529L117.436%2053.5225Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M69.9539%20169.238H68.4094L60.6869%20161.512V159.967L78.7201%20141.938L86.8976%20141.942L87.9948%20143.031V151.209L69.9539%20169.238Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M69.9462%2038.8917H68.4017L60.6792%2046.6181V48.1626L78.7124%2066.192L86.8899%2066.1882L87.9871%2065.0986V56.9212L69.9462%2038.8917Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M1.09339%2097.5104H75.3711L76.4645%2098.6038V109.526L75.3711%20110.62H1.09339L0%20109.526V98.6038L1.09339%2097.5104Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M440.999%2097.5104H510.91L512.004%2098.6038V109.526L510.91%20110.62H436.633L435.539%20109.526L439.905%2098.6038L440.999%2097.5104Z'%20fill='%2305BDBA'/%3e%3cpath%20d='M212.056%20108.727L210.963%20109.821H177.079L175.986%20110.914C175.986%20113.101%20178.173%20119.657%20186.916%20119.657C190.196%20119.657%20193.472%20118.564%20194.566%20116.377L195.659%20115.284H208.776L209.869%20116.377C208.776%20122.934%20203.313%20132.774%20186.916%20132.774C168.336%20132.774%20159.589%20119.657%20159.589%20104.357C159.589%2089.0576%20168.332%2075.9408%20185.822%2075.9408C203.313%2075.9408%20212.056%2089.0576%20212.056%20104.357V108.731V108.727ZM195.659%2097.7971C195.659%2096.7037%20194.566%2089.0538%20185.822%2089.0538C177.079%2089.0538%20175.986%2096.7037%20175.986%2097.7971L177.079%2098.8905H194.566L195.659%2097.7971Z'%20fill='%23014847'/%3e%3cpath%20d='M242.66%20115.284C242.66%20117.47%20243.753%20118.564%20245.94%20118.564H255.776L256.87%20119.657V130.587L255.776%20131.681H245.94C236.103%20131.681%20227.36%20127.307%20227.36%20115.284V91.2368L226.266%2090.1434H218.617L217.523%2089.05V78.1199L218.617%2077.0265H226.266L227.36%2075.9332V66.0965L228.453%2065.0031H241.57L242.663%2066.0965V75.9332L243.757%2077.0265H255.78L256.874%2078.1199V89.05L255.78%2090.1434H243.757L242.663%2091.2368V115.284H242.66Z'%20fill='%23014847'/%3e%3cpath%20d='M283.1%20131.681H269.983L268.889%20130.587V56.2636L269.983%2055.1702H283.1L284.193%2056.2636V130.587L283.1%20131.681Z'%20fill='%23014847'/%3e%3cpath%20d='M312.61%2068.2871H299.493L298.399%2067.1937V56.2636L299.493%2055.1702H312.61L313.703%2056.2636V67.1937L312.61%2068.2871ZM312.61%20131.681H299.493L298.399%20130.587V78.1237L299.493%2077.0304H312.61L313.703%2078.1237V130.587L312.61%20131.681Z'%20fill='%23014847'/%3e%3cpath%20d='M363.98%2056.2636V67.1937L362.886%2068.2871H353.05C350.863%2068.2871%20349.769%2069.3805%20349.769%2071.5672V75.9408L350.863%2077.0342H361.793L362.886%2078.1276V89.0576L361.793%2090.151H350.863L349.769%2091.2444V130.591L348.676%20131.684H335.559L334.466%20130.591V91.2444L333.372%2090.151H325.723L324.629%2089.0576V78.1276L325.723%2077.0342H333.372L334.466%2075.9408V71.5672C334.466%2059.5438%20343.209%2055.1702%20353.046%2055.1702H362.882L363.976%2056.2636H363.98Z'%20fill='%23014847'/%3e%3cpath%20d='M404.42%20132.774C400.046%20143.704%20395.677%20150.261%20380.373%20150.261H374.906L373.813%20149.167V138.237L374.906%20137.144H380.373C385.836%20137.144%20386.929%20136.05%20388.023%20132.77V131.677L370.536%2089.05V78.1199L371.63%2077.0265H381.466L382.56%2078.1199L395.677%20115.284H396.77L409.887%2078.1199L410.98%2077.0265H420.817L421.91%2078.1199V89.05L404.424%20132.77L404.42%20132.774Z'%20fill='%23014847'/%3e%3cpath%20d='M135.454%20131.681L134.361%20130.587L134.368%2098.9172C134.368%2093.4541%20132.22%2089.2182%20125.625%2089.0806C122.234%2088.9926%20118.354%2089.0729%20114.209%2089.2488L113.59%2089.8834L113.598%20130.587L112.504%20131.681H99.3913L98.2979%20130.587V77.5388L99.3913%2076.4454L128.901%2076.1778C143.685%2076.1778%20149.668%2086.3356%20149.668%2097.8009V130.587L148.575%20131.681H135.454Z'%20fill='%23014847'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_235_8'%3e%3crect%20width='512'%20height='208.126'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)![Netlify](data:image/svg+xml,%3csvg%20width='512'%20height='209'%20viewBox='0%200%20512%20209'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_235_26\)'%3e%3cpath%20d='M117.436%20207.036V154.604L118.529%20153.51H129.452L130.545%20154.604V207.036L129.452%20208.13H118.529L117.436%20207.036Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M117.436%2053.5225V1.09339L118.529%200H129.452L130.545%201.09339V53.5225L129.452%2054.6159H118.529L117.436%2053.5225Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M69.9539%20169.238H68.4094L60.6869%20161.512V159.967L78.7201%20141.938L86.8976%20141.942L87.9948%20143.031V151.209L69.9539%20169.238Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M69.9462%2038.8917H68.4017L60.6792%2046.6181V48.1626L78.7124%2066.192L86.8899%2066.1882L87.9871%2065.0986V56.9212L69.9462%2038.8917Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M1.09339%2097.5104H75.3711L76.4645%2098.6038V109.526L75.3711%20110.62H1.09339L0%20109.526V98.6038L1.09339%2097.5104Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M440.999%2097.5104H510.91L512.004%2098.6038V109.526L510.91%20110.62H436.633L435.539%20109.526L439.905%2098.6038L440.999%2097.5104Z'%20fill='%2332E6E2'/%3e%3cpath%20d='M212.056%20108.727L210.963%20109.821H177.079L175.986%20110.914C175.986%20113.101%20178.173%20119.657%20186.916%20119.657C190.196%20119.657%20193.472%20118.564%20194.566%20116.377L195.659%20115.284H208.776L209.869%20116.377C208.776%20122.934%20203.313%20132.774%20186.916%20132.774C168.336%20132.774%20159.589%20119.657%20159.589%20104.357C159.589%2089.0576%20168.332%2075.9408%20185.822%2075.9408C203.313%2075.9408%20212.056%2089.0576%20212.056%20104.357V108.731V108.727ZM195.659%2097.7971C195.659%2096.7037%20194.566%2089.0538%20185.822%2089.0538C177.079%2089.0538%20175.986%2096.7037%20175.986%2097.7971L177.079%2098.8905H194.566L195.659%2097.7971Z'%20fill='white'/%3e%3cpath%20d='M242.66%20115.284C242.66%20117.47%20243.753%20118.564%20245.94%20118.564H255.776L256.87%20119.657V130.587L255.776%20131.681H245.94C236.103%20131.681%20227.36%20127.307%20227.36%20115.284V91.2368L226.266%2090.1434H218.617L217.523%2089.05V78.1199L218.617%2077.0265H226.266L227.36%2075.9332V66.0965L228.453%2065.0031H241.57L242.663%2066.0965V75.9332L243.757%2077.0265H255.78L256.874%2078.1199V89.05L255.78%2090.1434H243.757L242.663%2091.2368V115.284H242.66Z'%20fill='white'/%3e%3cpath%20d='M283.1%20131.681H269.983L268.889%20130.587V56.2636L269.983%2055.1702H283.1L284.193%2056.2636V130.587L283.1%20131.681Z'%20fill='white'/%3e%3cpath%20d='M312.61%2068.2871H299.493L298.399%2067.1937V56.2636L299.493%2055.1702H312.61L313.703%2056.2636V67.1937L312.61%2068.2871ZM312.61%20131.681H299.493L298.399%20130.587V78.1237L299.493%2077.0304H312.61L313.703%2078.1237V130.587L312.61%20131.681Z'%20fill='white'/%3e%3cpath%20d='M363.98%2056.2636V67.1937L362.886%2068.2871H353.05C350.863%2068.2871%20349.769%2069.3805%20349.769%2071.5672V75.9408L350.863%2077.0342H361.793L362.886%2078.1276V89.0576L361.793%2090.151H350.863L349.769%2091.2444V130.591L348.676%20131.684H335.559L334.466%20130.591V91.2444L333.372%2090.151H325.723L324.629%2089.0576V78.1276L325.723%2077.0342H333.372L334.466%2075.9408V71.5672C334.466%2059.5438%20343.209%2055.1702%20353.046%2055.1702H362.882L363.976%2056.2636H363.98Z'%20fill='white'/%3e%3cpath%20d='M404.42%20132.774C400.046%20143.704%20395.677%20150.261%20380.373%20150.261H374.906L373.813%20149.167V138.237L374.906%20137.144H380.373C385.836%20137.144%20386.929%20136.05%20388.023%20132.77V131.677L370.536%2089.05V78.1199L371.63%2077.0265H381.466L382.56%2078.1199L395.677%20115.284H396.77L409.887%2078.1199L410.98%2077.0265H420.817L421.91%2078.1199V89.05L404.424%20132.77L404.42%20132.774Z'%20fill='white'/%3e%3cpath%20d='M135.454%20131.681L134.361%20130.587L134.368%2098.9172C134.368%2093.4541%20132.22%2089.2182%20125.625%2089.0806C122.234%2088.9926%20118.354%2089.0729%20114.209%2089.2488L113.59%2089.8834L113.598%20130.587L112.504%20131.681H99.3913L98.2979%20130.587V77.5388L99.3913%2076.4454L128.901%2076.1778C143.685%2076.1778%20149.668%2086.3356%20149.668%2097.8009V130.587L148.575%20131.681H135.454Z'%20fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_235_26'%3e%3crect%20width='512'%20height='208.126'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)
+
+]\(https://netlify.com?utm\_source=tanstack)\[
+
+![OpenRouter](/assets/openrouter-black-DNn7_580.svg)![OpenRouter](/assets/openrouter-white-COMTfjvn.svg)
+
+]\(https://openrouter.ai?utm\_source=tanstack)\[
+
+![Neon](data:image/svg+xml,%3csvg%20width='158'%20height='44'%20viewBox='0%200%20158%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_8138_23\)'%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='%2332C0ED'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint0_linear_8138_23\)'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint1_linear_8138_23\)'%20fill-opacity='0.35'/%3e%3cpath%20d='M36.8954%200C41.1406%200%2044.5819%203.39646%2044.5819%207.58621V32.104C44.5819%2036.4386%2039.0243%2038.3197%2036.3289%2034.8976L27.9022%2024.1991V37.1724C27.9022%2040.9432%2024.805%2044%2020.9844%2044C21.4089%2044%2021.753%2043.6604%2021.753%2043.2414V19.7752C21.753%2015.4407%2027.3106%2013.5594%2030.0061%2016.9816L38.4327%2027.6801V1.51724C38.4327%200.679292%2037.7445%200%2036.8954%200Z'%20fill='%2363F655'/%3e%3cpath%20d='M75.1561%2012.9622V24.4706L63.8496%2012.9622H57.9648V31.7844H63.332V19.4155L75.6465%2031.7844H80.5232V12.9622H75.1561Z'%20fill='%231A1A1A'/%3e%3cpath%20d='M90.4724%2027.5898V24.2555H102.487V20.2491H90.4724V17.1569H105.048V12.9622H84.9963V31.7844H105.348V27.5898H90.4724Z'%20fill='%231A1A1A'/%3e%3cpath%20d='M119.61%2032.4029C127.157%2032.4029%20132.061%2028.746%20132.061%2022.3733C132.061%2016.0006%20127.157%2012.3438%20119.61%2012.3438C112.063%2012.3438%20107.187%2016.0006%20107.187%2022.3733C107.187%2028.746%20112.063%2032.4029%20119.61%2032.4029ZM119.61%2027.9393C115.415%2027.9393%20112.826%2025.9226%20112.826%2022.3733C112.826%2018.824%20115.442%2016.8073%20119.61%2016.8073C123.806%2016.8073%20126.394%2018.824%20126.394%2022.3733C126.394%2025.9226%20123.806%2027.9393%20119.61%2027.9393Z'%20fill='%231A1A1A'/%3e%3cpath%20d='M152.632%2012.9622V24.4706L141.326%2012.9622H135.441V31.7844H140.808V19.4155L153.123%2031.7844H157.999V12.9622H152.632Z'%20fill='%231A1A1A'/%3e%3c/g%3e%3cdefs%3e%3clinearGradient%20id='paint0_linear_8138_23'%20x1='44.5818'%20y1='44'%20x2='5.96033'%20y2='-0.503114'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-color='%232EF51C'/%3e%3cstop%20offset='1'%20stop-color='%232EF51C'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='paint1_linear_8138_23'%20x1='44.5817'%20y1='44'%20x2='18.194'%20y2='33.6003'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-opacity='0.9'/%3e%3cstop%20offset='1'%20stop-color='%231A1A1A'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3cclipPath%20id='clip0_8138_23'%3e%3crect%20width='158'%20height='44'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)![Neon](data:image/svg+xml,%3csvg%20width='158'%20height='44'%20viewBox='0%200%20158%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='%2312FFF7'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint0_linear_10558_11751\)'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%207.58621C0%203.39646%203.44137%200%207.68651%200H36.8952C41.1404%200%2044.5817%203.39646%2044.5817%207.58621V32.104C44.5817%2036.4386%2039.0241%2038.3197%2036.3287%2034.8976L27.902%2024.1991V37.1724C27.902%2040.9432%2024.8048%2044%2020.9842%2044H7.68651C3.44137%2044%200%2040.6035%200%2036.4138V7.58621ZM7.68651%206.06897C6.83748%206.06897%206.14921%206.74826%206.14921%207.58621V36.4138C6.14921%2037.2517%206.83748%2037.931%207.68651%2037.931H21.2148C21.6393%2037.931%2021.7528%2037.5914%2021.7528%2037.1724V19.7752C21.7528%2015.4407%2027.3104%2013.5594%2030.0059%2016.9816L38.4325%2027.6801V7.58621C38.4325%206.74826%2038.5129%206.06897%2037.6639%206.06897H7.68651Z'%20fill='url\(%23paint1_linear_10558_11751\)'/%3e%3cpath%20d='M36.8954%200C41.1406%200%2044.5819%203.39646%2044.5819%207.58621V32.104C44.5819%2036.4386%2039.0243%2038.3197%2036.3289%2034.8976L27.9022%2024.1991V37.1724C27.9022%2040.9432%2024.805%2044%2020.9844%2044C21.4089%2044%2021.753%2043.6604%2021.753%2043.2414V19.7752C21.753%2015.4407%2027.3106%2013.5594%2030.0061%2016.9816L38.4327%2027.6801V1.51724C38.4327%200.679292%2037.7445%200%2036.8954%200Z'%20fill='%23B9FFB3'/%3e%3cpath%20d='M75.1561%2012.9622V24.4706L63.8496%2012.9622H57.9648V31.7844H63.332V19.4155L75.6465%2031.7844H80.5232V12.9622H75.1561Z'%20fill='white'/%3e%3cpath%20d='M90.4725%2027.5898V24.2555H102.487V20.2491H90.4725V17.1569H105.048V12.9622H84.9964V31.7844H105.348V27.5898H90.4725Z'%20fill='white'/%3e%3cpath%20d='M119.61%2032.4029C127.157%2032.4029%20132.061%2028.746%20132.061%2022.3733C132.061%2016.0006%20127.157%2012.3438%20119.61%2012.3438C112.063%2012.3438%20107.187%2016.0006%20107.187%2022.3733C107.187%2028.746%20112.063%2032.4029%20119.61%2032.4029ZM119.61%2027.9393C115.415%2027.9393%20112.826%2025.9226%20112.826%2022.3733C112.826%2018.824%20115.442%2016.8073%20119.61%2016.8073C123.806%2016.8073%20126.394%2018.824%20126.394%2022.3733C126.394%2025.9226%20123.806%2027.9393%20119.61%2027.9393Z'%20fill='white'/%3e%3cpath%20d='M152.632%2012.9622V24.4706L141.326%2012.9622H135.441V31.7844H140.808V19.4155L153.123%2031.7844H157.999V12.9622H152.632Z'%20fill='white'/%3e%3cdefs%3e%3clinearGradient%20id='paint0_linear_10558_11751'%20x1='44.5818'%20y1='44'%20x2='5.96033'%20y2='-0.503116'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-color='%23B9FFB3'/%3e%3cstop%20offset='1'%20stop-color='%23B9FFB3'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='paint1_linear_10558_11751'%20x1='44.5817'%20y1='44'%20x2='18.194'%20y2='33.6003'%20gradientUnits='userSpaceOnUse'%3e%3cstop%20stop-color='%231A1A1A'%20stop-opacity='0.9'/%3e%3cstop%20offset='1'%20stop-color='%231A1A1A'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e)
+
+]\(https://neon.tech?utm\_source=tanstack)\[
+
+![WorkOS](/assets/workos-black-DnPI5Ve5.svg)![WorkOS](data:image/svg+xml,%3csvg%20width='880'%20height='168'%20viewBox='0%200%20880%20168'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url\(%23clip0_1647_45\)'%3e%3cpath%20d='M255.264%2025.3765H279.579L297.086%2097.519C300.332%20111.135%20300.976%20119.244%20300.976%20119.244H301.304C301.304%20119.244%20302.435%20111.306%20305.681%2097.519L322.373%2025.3765H349.934L367.599%2097.519C371.003%20111.622%20371.818%20119.244%20371.818%20119.244H372.304C372.304%20119.244%20372.632%20111.622%20375.866%2097.519L392.729%2025.3765H417.043L386.249%20143.717H359.174L340.536%2072.0612C336.646%2056.4997%20336.318%2049.5334%20336.318%2049.5334H335.99C335.99%2049.5334%20335.661%2056.4997%20332.099%2072.0612L314.592%20143.717H286.715L255.264%2025.3765Z'%20fill='white'/%3e%3cpath%20d='M412.984%20100.726C412.984%2073.6509%20430.491%2056.1442%20456.921%2056.1442C483.181%2056.1442%20500.688%2073.6509%20500.688%20100.726C500.688%20127.958%20483.181%20145.635%20456.921%20145.635C430.503%20145.623%20412.984%20127.958%20412.984%20100.726ZM477.99%20100.726C477.99%2083.2189%20469.565%2073.3227%20456.921%2073.3227C443.305%2073.3227%20435.682%2084.3495%20435.682%20100.726C435.682%20118.561%20444.107%20128.445%20456.921%20128.445C470.537%20128.445%20477.99%20117.418%20477.99%20100.726Z'%20fill='white'/%3e%3cpath%20d='M511.545%2057.4711H533.101V73.3609H533.587C537.319%2065.0938%20546.231%2056.8267%20561.464%2056.8267C564.054%2056.8267%20565.683%2057.155%20566.813%2057.4711V79.0263H566.169C566.169%2079.0263%20564.224%2078.3819%20558.875%2078.3819C542.182%2078.3819%20533.101%2088.266%20533.101%20106.745V143.704H511.545V57.4711Z'%20fill='white'/%3e%3cpath%20d='M576.868%2025.3765H598.423V63.3079C598.423%2085.6776%20598.095%2089.7261%20598.095%2089.7261H598.423L630.519%2057.4723H657.424L619.833%2094.7592L663.442%20143.717H637.984L606.532%20108.047L598.423%20115.986V143.705H576.868V25.3765Z'%20fill='white'/%3e%3cpath%20d='M663.757%2084.9796C663.757%2048.5072%20686.455%2024.1923%20720.496%2024.1923C754.537%2024.1923%20777.235%2048.5072%20777.235%2084.9796C777.235%20121.452%20754.537%20145.767%20720.496%20145.767C686.455%20145.767%20663.757%20121.452%20663.757%2084.9796ZM753.722%2084.9796C753.722%2060.1784%20740.434%2043.474%20720.483%2043.474C700.533%2043.474%20687.257%2060.1784%20687.257%2084.9796C687.257%20109.781%20700.545%20126.485%20720.483%20126.485C740.422%20126.485%20753.722%20109.781%20753.722%2084.9796Z'%20fill='white'/%3e%3cpath%20d='M785.488%20104.326H810.131C810.131%20118.271%20819.699%20126.052%20834.288%20126.052C846.603%20126.052%20855.041%20119.888%20855.041%20111.135C855.041%20101.25%20848.561%2098.6488%20827.966%2094.6003C809.158%2090.868%20789.22%2084.5461%20789.22%2059.9029C789.22%2039.3203%20806.727%2023.7587%20833.473%2023.7587C861.35%2023.7587%20878.541%2038.3477%20878.541%2060.3892H853.898C853.898%2049.6906%20845.631%2043.0405%20833.473%2043.0405C821.158%2043.0405%20813.535%2049.0341%20813.535%2057.7875C813.535%2067.0272%20818.884%2070.5893%20835.419%2073.9934C859.892%2079.1847%20880%2081.9323%20880%20109.165C880%20130.745%20861.192%20145.333%20833.473%20145.333C805.268%20145.333%20785.488%20128.957%20785.488%20104.326Z'%20fill='white'/%3e%3cpath%20d='M0%2084.0003C0%2087.6782%200.967855%2091.356%202.83904%2094.5177L36.7785%20153.299C40.2628%20159.299%2045.5537%20164.203%2052.1351%20166.397C65.1044%20170.72%2078.5253%20165.171%2084.9131%20154.073L93.1076%20139.878L60.7813%2084.0003L94.9143%2024.8321L103.109%2010.6369C105.561%206.37836%20108.851%202.89408%20112.723%200.119568H109.174H60.0715C50.8446%200.119568%2042.3275%205.02337%2037.7463%2013.0243L2.83904%2073.483C0.967855%2076.6446%200%2080.3225%200%2084.0003Z'%20fill='white'/%3e%3cpath%20d='M193.571%2083.9997C193.571%2080.3219%20192.603%2076.644%20190.732%2073.4824L156.341%2013.9271C149.953%202.89352%20136.532%20-2.65551%20123.563%201.60305C116.982%203.79685%20111.691%208.70065%20108.206%2014.7013L100.464%2028.0577L132.79%2083.9997L98.6569%20143.168L90.4624%20157.363C88.0105%20161.557%2084.7198%20165.106%2080.8484%20167.88H84.3972H133.5C142.727%20167.88%20151.244%20162.977%20155.825%20154.976L190.732%2094.5171C192.603%2091.3554%20193.571%2087.6776%20193.571%2083.9997Z'%20fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_1647_45'%3e%3crect%20width='880'%20height='168'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e)
+
+]\(https://workos.com?utm\_source=tanstack)\[
+
+![Clerk](/assets/clerk-logo-light-BYN-U_0H.svg)![Clerk](/assets/clerk-logo-dark-CRE22T_2.svg)
+
+]\(https://go.clerk.com/wOwHtuJ)\[
+
+![Electric](/assets/electric-light-C-5MDda4.svg)![Electric](/assets/electric-dark-Bfu2Vl2j.svg)
+
+]\(https://electric-sql.com)\[
+
+![PowerSync](/assets/powersync-black-BbBE6VAv.svg)![PowerSync](/assets/powersync-white-W6vtdqx_.svg)
+
+]\(https://powersync.com?utm\_source=tanstack\&utm\_campaign=tanstack\_partner)\[
+
+![Sentry](data:image/svg+xml,%3csvg%20height='119'%20viewBox='0%200%20222%2066'%20width='400'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='m29%202.26a4.67%204.67%200%200%200%20-8%200l-6.58%2011.27a32.21%2032.21%200%200%201%2017.75%2026.66h-4.62a27.68%2027.68%200%200%200%20-15.46-22.72l-6.09%2010.53a15.92%2015.92%200%200%201%209.23%2012.17h-10.61a.76.76%200%200%201%20-.62-1.11l2.94-5a10.74%2010.74%200%200%200%20-3.36-1.9l-2.91%205a4.54%204.54%200%200%200%201.69%206.24%204.66%204.66%200%200%200%202.26.6h14.53a19.4%2019.4%200%200%200%20-8-17.31l2.31-4a23.87%2023.87%200%200%201%2010.3%2021.31h12.31a35.88%2035.88%200%200%200%20-16.41-31.8l4.67-8a.77.77%200%200%201%201.05-.27c.53.29%2020.29%2034.77%2020.66%2035.17a.76.76%200%200%201%20-.68%201.13h-4.76q.09%201.91%200%203.81h4.78a4.59%204.59%200%200%200%204.62-4.61%204.49%204.49%200%200%200%20-.62-2.28zm95.32%2026.02-14.76-19.06h-3.68v25.55h3.73v-19.58l15.18%2019.58h3.26v-25.55h-3.73zm-37.17-4.74h13.23v-3.32h-13.24v-7.69h14.93v-3.32h-18.73v25.56h18.92v-3.32h-15.12zm-15.56-3.24c-5.15-1.24-6.59-2.22-6.59-4.6%200-2.14%201.89-3.59%204.71-3.59a12.06%2012.06%200%200%201%207.07%202.55l2-2.83a14.1%2014.1%200%200%200%20-9-3c-5.06%200-8.59%203-8.59%207.27%200%204.6%203%206.19%208.46%207.52%204.86%201.12%206.35%202.16%206.35%204.49s-2%203.77-5.09%203.77a12.34%2012.34%200%200%201%20-8.3-3.26l-2.25%202.69a15.94%2015.94%200%200%200%2010.42%203.85c5.48%200%209-2.95%209-7.51-.03-3.86-2.31-5.93-8.19-7.35zm124.11-11.08-7.69%2012-7.64-12h-4.46l10.09%2015.45v10.11h3.84v-10.23l10.16-15.33zm-64.63%203.46h8.37v22.1h3.84v-22.1h8.37v-3.46h-20.57zm38.34%2012.12c3.86-1.07%206-3.77%206-7.63%200-4.91-3.59-8-9.38-8h-11.36v25.59h3.8v-9.18h6.45l6.48%209.2h4.44l-7-9.82zm-10.95-2.5v-9.7h7.17c3.74%200%205.88%201.77%205.88%204.84s-2.29%204.86-5.84%204.86z'%20fill='%23362d59'%20transform='translate\(11%2011\)'/%3e%3c/svg%3e)![Sentry](data:image/svg+xml,%3csvg%20height='119'%20viewBox='0%200%20222%2066'%20width='400'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='m29%202.26a4.67%204.67%200%200%200%20-8%200l-6.58%2011.27a32.21%2032.21%200%200%201%2017.75%2026.66h-4.62a27.68%2027.68%200%200%200%20-15.46-22.72l-6.09%2010.53a15.92%2015.92%200%200%201%209.23%2012.17h-10.61a.76.76%200%200%201%20-.62-1.11l2.94-5a10.74%2010.74%200%200%200%20-3.36-1.9l-2.91%205a4.54%204.54%200%200%200%201.69%206.24%204.66%204.66%200%200%200%202.26.6h14.53a19.4%2019.4%200%200%200%20-8-17.31l2.31-4a23.87%2023.87%200%200%201%2010.3%2021.31h12.31a35.88%2035.88%200%200%200%20-16.41-31.8l4.67-8a.77.77%200%200%201%201.05-.27c.53.29%2020.29%2034.77%2020.66%2035.17a.76.76%200%200%201%20-.68%201.13h-4.76q.09%201.91%200%203.81h4.78a4.59%204.59%200%200%200%204.62-4.61%204.49%204.49%200%200%200%20-.62-2.28zm95.32%2026.02-14.76-19.06h-3.68v25.55h3.73v-19.58l15.18%2019.58h3.26v-25.55h-3.73zm-37.17-4.74h13.23v-3.32h-13.24v-7.69h14.93v-3.32h-18.73v25.56h18.92v-3.32h-15.12zm-15.56-3.24c-5.15-1.24-6.59-2.22-6.59-4.6%200-2.14%201.89-3.59%204.71-3.59a12.06%2012.06%200%200%201%207.07%202.55l2-2.83a14.1%2014.1%200%200%200%20-9-3c-5.06%200-8.59%203-8.59%207.27%200%204.6%203%206.19%208.46%207.52%204.86%201.12%206.35%202.16%206.35%204.49s-2%203.77-5.09%203.77a12.34%2012.34%200%200%201%20-8.3-3.26l-2.25%202.69a15.94%2015.94%200%200%200%2010.42%203.85c5.48%200%209-2.95%209-7.51-.03-3.86-2.31-5.93-8.19-7.35zm124.11-11.08-7.69%2012-7.64-12h-4.46l10.09%2015.45v10.11h3.84v-10.23l10.16-15.33zm-64.63%203.46h8.37v22.1h3.84v-22.1h8.37v-3.46h-20.57zm38.34%2012.12c3.86-1.07%206-3.77%206-7.63%200-4.91-3.59-8-9.38-8h-11.36v25.59h3.8v-9.18h6.45l6.48%209.2h4.44l-7-9.82zm-10.95-2.5v-9.7h7.17c3.74%200%205.88%201.77%205.88%204.84s-2.29%204.86-5.84%204.86z'%20fill='%23fff'%20transform='translate\(11%2011\)'/%3e%3c/svg%3e)
+
+]\(https://sentry.io?utm\_source=tanstack)\[
+
+![Railway](/assets/railway-black-DeBDfNao.svg)![Railway](/assets/railway-white-CFKFsfw2.svg)
+
+]\(https://railway.com/?utm\_medium=sponsor\&utm\_source=oss\&utm\_campaign=tanstack)\[
+
+![Prisma](/assets/prisma-light-Cloa3Onm.svg)![Prisma](/assets/prisma-dark-DwgDxLwn.svg)
+
+]\(https://www.prisma.io/?utm\_source=tanstack\&via=tanstack)\[
+
+![Strapi](/assets/strapi-light-6x7linao.svg)![Strapi](/assets/strapi-dark-CQ84tQTk.svg)
+
+]\(https://strapi.link/tanstack-start)\[
+
+![Unkey](data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='92px'%20height='27px'%20viewBox='0%200%2092%2027'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3ctitle%3eShape%3c/title%3e%3cg%20id='Page-1'%20stroke='none'%20stroke-width='1'%20fill='none'%20fill-rule='evenodd'%3e%3cpath%20d='M9.8,21.3%20C3.8,21.3%200.38,18.12%200.38,12.66%20L0.38,0.9%20L3.59,0.9%20L3.59,12.45%20C3.59,16.5%205.39,18.18%209.8,18.18%20C14.21,18.18%2016.01,16.5%2016.01,12.45%20L16.01,0.9%20L19.25,0.9%20L19.25,12.66%20C19.25,18.12%2015.83,21.3%209.8,21.3%20L9.8,21.3%20Z%20M25.3611,21%20L22.1211,21%20L22.1211,6.09%20L25.0911,6.09%20L25.0911,10.71%20L25.3011,10.71%20C25.7511,8.19%2027.7311,5.79%2031.5111,5.79%20C35.6511,5.79%2037.6911,8.58%2037.6911,12.03%20L37.6911,21%20L34.4511,21%20L34.4511,12.9%20C34.4511,10.11%2033.1911,8.7%2030.1011,8.7%20C26.8311,8.7%2025.3611,10.38%2025.3611,13.62%20L25.3611,21%20Z%20M43.8181,21%20L40.5781,21%20L40.5781,0.9%20L43.8181,0.9%20L43.8181,12%20L48.0781,12%20L52.5481,6.09%20L56.3281,6.09%20L50.7181,13.26%20L56.2981,21%20L52.4881,21%20L48.0781,14.91%20L43.8181,14.91%20L43.8181,21%20Z%20M65.4219,21.3%20C60.5319,21.3%2057.3219,18.54%2057.3219,13.56%20C57.3219,8.91%2060.5019,5.79%2065.3619,5.79%20C69.9819,5.79%2073.1319,8.34%2073.1319,12.87%20C73.1319,13.41%2073.1019,13.83%2073.0119,14.28%20L60.3519,14.28%20C60.4719,17.16%2061.8819,18.69%2065.3319,18.69%20C68.4519,18.69%2069.7419,17.67%2069.7419,15.9%20L69.7419,15.66%20L72.9819,15.66%20L72.9819,15.93%20C72.9819,19.11%2069.8619,21.3%2065.4219,21.3%20L65.4219,21.3%20Z%20M65.3019,8.34%20C62.0019,8.34%2060.5619,9.81%2060.3819,12.48%20L70.0719,12.48%20L70.0719,12.42%20C70.0719,9.66%2068.4819,8.34%2065.3019,8.34%20L65.3019,8.34%20Z%20M77.9586,26.1%20L75.8286,26.1%20L75.8286,23.16%20L78.7386,23.16%20C80.0586,23.16%2080.5986,22.8%2081.0486,21.78%20L81.4086,21%20L74.0586,6.09%20L77.6886,6.09%20L81.4986,14.01%20L82.9686,17.58%20L83.2086,17.58%20L84.6186,13.98%20L88.1286,6.09%20L91.6986,6.09%20L83.9286,22.62%20C82.6986,25.29%2081.0186,26.1%2077.9586,26.1%20Z'%20id='Shape'%20fill='%23000000'%20fill-rule='nonzero'%3e%3c/path%3e%3c/g%3e%3c/svg%3e)![Unkey](data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='92px'%20height='27px'%20viewBox='0%200%2092%2027'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3ctitle%3eShape%3c/title%3e%3cg%20id='Page-1'%20stroke='none'%20stroke-width='1'%20fill='none'%20fill-rule='evenodd'%3e%3cpath%20d='M9.8,21.3%20C3.8,21.3%200.38,18.12%200.38,12.66%20L0.38,0.9%20L3.59,0.9%20L3.59,12.45%20C3.59,16.5%205.39,18.18%209.8,18.18%20C14.21,18.18%2016.01,16.5%2016.01,12.45%20L16.01,0.9%20L19.25,0.9%20L19.25,12.66%20C19.25,18.12%2015.83,21.3%209.8,21.3%20L9.8,21.3%20Z%20M25.3611,21%20L22.1211,21%20L22.1211,6.09%20L25.0911,6.09%20L25.0911,10.71%20L25.3011,10.71%20C25.7511,8.19%2027.7311,5.79%2031.5111,5.79%20C35.6511,5.79%2037.6911,8.58%2037.6911,12.03%20L37.6911,21%20L34.4511,21%20L34.4511,12.9%20C34.4511,10.11%2033.1911,8.7%2030.1011,8.7%20C26.8311,8.7%2025.3611,10.38%2025.3611,13.62%20L25.3611,21%20Z%20M43.8181,21%20L40.5781,21%20L40.5781,0.9%20L43.8181,0.9%20L43.8181,12%20L48.0781,12%20L52.5481,6.09%20L56.3281,6.09%20L50.7181,13.26%20L56.2981,21%20L52.4881,21%20L48.0781,14.91%20L43.8181,14.91%20L43.8181,21%20Z%20M65.4219,21.3%20C60.5319,21.3%2057.3219,18.54%2057.3219,13.56%20C57.3219,8.91%2060.5019,5.79%2065.3619,5.79%20C69.9819,5.79%2073.1319,8.34%2073.1319,12.87%20C73.1319,13.41%2073.1019,13.83%2073.0119,14.28%20L60.3519,14.28%20C60.4719,17.16%2061.8819,18.69%2065.3319,18.69%20C68.4519,18.69%2069.7419,17.67%2069.7419,15.9%20L69.7419,15.66%20L72.9819,15.66%20L72.9819,15.93%20C72.9819,19.11%2069.8619,21.3%2065.4219,21.3%20L65.4219,21.3%20Z%20M65.3019,8.34%20C62.0019,8.34%2060.5619,9.81%2060.3819,12.48%20L70.0719,12.48%20L70.0719,12.42%20C70.0719,9.66%2068.4819,8.34%2065.3019,8.34%20L65.3019,8.34%20Z%20M77.9586,26.1%20L75.8286,26.1%20L75.8286,23.16%20L78.7386,23.16%20C80.0586,23.16%2080.5986,22.8%2081.0486,21.78%20L81.4086,21%20L74.0586,6.09%20L77.6886,6.09%20L81.4986,14.01%20L82.9686,17.58%20L83.2086,17.58%20L84.6186,13.98%20L88.1286,6.09%20L91.6986,6.09%20L83.9286,22.62%20C82.6986,25.29%2081.0186,26.1%2077.9586,26.1%20Z'%20id='Shape'%20fill='%23FFFFFF'%20fill-rule='nonzero'%3e%3c/path%3e%3c/g%3e%3c/svg%3e)
+
+]\(https://www.unkey.com/?utm\_source=tanstack)
+
+[Become a Partner](https://docs.google.com/document/d/1Hg2MzY2TU6U3hFEZ3MLe2oEOM3JS4-eByti3kdJU3I8)
+
+\[
+
+TanStack Start
+
+Full-stack Framework powered by TanStack Router for React and Solid
+
+Explore Start →]\(/start)\[
+
+TanStack Router
+
+Type-safe Routing for React and Solid applications
+
+Explore Router →]\(/router)
+
+TanStack OSS
+
+[Latest Posts](/blog)
+
+[5x SSR Throughput: Profiling SSR Hot Paths in TanStack StartMar 17, 2026](/blog/tanstack-start-5x-ssr-throughput)[Lazy Tool Discovery: Scaling AI Tool Systems Without Drowning in TokensMar 12, 2026](/blog/tanstack-ai-lazy-tool-discovery)[TanStack AI Just Got Middleware — And It Changes EverythingMar 12, 2026](/blog/tanstack-ai-middleware)

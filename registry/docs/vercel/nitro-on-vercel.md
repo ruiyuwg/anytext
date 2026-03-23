@@ -63,19 +63,23 @@ To revalidate a path to a prerendered function:
   });
   ```
   ```ts filename="nuxt.config.ts" framework=nuxt
-  export default defineNitroConfig({
-    vercel: {
-      config: {
-        bypassToken: process.env.VERCEL_BYPASS_TOKEN,
+  export default defineNuxtConfig({
+    nitro: {
+      vercel: {
+        config: {
+          bypassToken: process.env.VERCEL_BYPASS_TOKEN,
+        },
       },
     },
   });
   ```
-  ```js filename="nuxt.config.ts" framework=nuxt
-  export default defineNitroConfig({
-    vercel: {
-      config: {
-        bypassToken: process.env.VERCEL_BYPASS_TOKEN,
+  ```js filename="nuxt.config.js" framework=nuxt
+  export default defineNuxtConfig({
+    nitro: {
+      vercel: {
+        config: {
+          bypassToken: process.env.VERCEL_BYPASS_TOKEN,
+        },
       },
     },
   });
@@ -150,13 +154,13 @@ export default defineNitroConfig({
 ```
 
 ```ts filename="nuxt.config.ts" framework=nuxt
-export default defineNitroConfig({
+export default defineNuxtConfig({
   compatibilityDate: '2025-07-15', // or "latest"
 });
 ```
 
 ```js filename="nuxt.config.js" framework=nuxt
-export default defineNitroConfig({
+export default defineNuxtConfig({
   compatibilityDate: '2025-07-15', // or "latest"
 });
 ```
@@ -179,5 +183,5 @@ Learn more about deploying Nitro projects on Vercel with the following resources
 
 title: "Backends on Vercel"
 description: "Vercel supports a wide range of the most popular backend frameworks, optimizing how your application builds and runs no matter what tooling you use."
-last\_updated: "2026-03-08T05:03:14.803Z"
+last\_updated: "2026-03-23T09:40:10.390Z"
 source: "https://vercel.com/docs/frameworks/backend"

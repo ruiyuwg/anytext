@@ -130,5 +130,5 @@ The purge event itself is not billed but it can temporarily increase Function Du
 
 title: "Caching"
 description: "Learn how Vercel caches content across multiple layers to deliver fast responses and reduce load on your backend."
-last\_updated: "2026-03-08T05:03:11.772Z"
+last\_updated: "2026-03-23T09:40:05.831Z"
 source: "https://vercel.com/docs/caching"

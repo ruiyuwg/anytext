@@ -60,5 +60,5 @@ To learn about Edge Config limits and pricing, see [our Edge Config limits docs]
 
 title: "Using Edge Config"
 description: "Learn how to use Edge Configs in your projects."
-last\_updated: "2026-03-08T05:03:13.890Z"
+last\_updated: "2026-03-23T09:40:09.389Z"
 source: "https://vercel.com/docs/edge-config/using-edge-config"

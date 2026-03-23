@@ -98,5 +98,5 @@ For a complete breakdown, see the [SSL Labs report for vercel.com](https://www.s
 
 title: "CDN security"
 description: "Learn how Vercel"
-last\_updated: "2026-03-08T05:03:11.909Z"
+last\_updated: "2026-03-23T09:40:06.339Z"
 source: "https://vercel.com/docs/cdn-security"

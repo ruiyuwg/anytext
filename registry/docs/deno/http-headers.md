@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/api/runtime-headers
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 The [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers)
 interface is part of the Fetch API. It allows you create and manipulate the HTTP

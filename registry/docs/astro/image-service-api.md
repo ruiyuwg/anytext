@@ -268,6 +268,18 @@ This hook allows you to validate and augment the options passed by the user. Thi
 
 [See how `validateOptions()` is used in Astro built-in services](https://github.com/withastro/astro/blob/0ab6bad7dffd413c975ab00e545f8bc150f6a92f/packages/astro/src/assets/services/service.ts#L124).
 
+### `getRemoteSize()`
+
+[Section titled “getRemoteSize()”](#getremotesize)
+
+**Type:** `(url: string, imageConfig: AstroConfig[‘image’] ) => Omit<ImageMetadata, ‘src’ | ‘fsPath’> | Promise<Omit<ImageMetadata, ‘src’ | ‘fsPath’>>`
+
+**Added in:** `astro@6.0.0` New
+
+**Optional for both local and external services**
+
+This hook allows you to extend the behavior of [`inferRemoteSize()`](/en/reference/modules/astro-assets/#inferremotesize). This is useful for reducing network traffic by caching images, or when you can predict image information from the image URL.
+
 ## User configuration
 
 [Section titled “User configuration”](#user-configuration)

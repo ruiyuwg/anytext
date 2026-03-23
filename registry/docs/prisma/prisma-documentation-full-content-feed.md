@@ -108,142 +108,102 @@ icon={
 }>
 **Already have a database?** Use Prisma ORM for a type-safe developer experience and automated migrations.
 
-# Build faster with Prisma + AI (/docs/ai)
+# Caching queries (/docs/accelerate/caching)
 
-In the era of AI, where code is increasingly written by agents, ensuring clarity, type safety, and reliable infrastructure is essential. With 5+ years of leadership in the TypeScript ecosystem, Prisma ORM and Prisma Postgres provide the proven foundation for AI-assisted development.
+Prisma Accelerate provides global caching for read queries using TTL, Stale-While-Revalidate (SWR), or a combination of both. It's included as part of Prisma Postgres, but can also be used with your own database by enabling Accelerate in the [Prisma Data Platform](https://console.prisma.io?utm_source=docs) and [configuring it with your database](/accelerate/getting-started).
 
-Get started \[#get-started]
+# Compare Accelerate (/docs/accelerate/compare)
 
-Run the following command to bootstrap your database with a prompt:
+Prisma Accelerate supports products that serve a global audience, with a global caching system and connection pool that spans multiple regions, providing consistent access to data with low latency no matter where your user (or your database) is located in the world.
 
-````
-  npm
+The managed connection pool is designed to support serverless infrastructure, capable of handling high volumes of connections and adapting to traffic spikes with ease.
 
+Explore how Prisma Accelerate compares to other global cache and connection pool solutions on the market, and discover what sets it apart.
 
+What makes Accelerate unique? \[#what-makes-accelerate-unique]
 
-  pnpm
+Prisma Accelerate is chosen and loved by many for a number of key reasons which make Accelerate unique:
 
+- [**Query-Level policies**](/accelerate/compare#accelerate-global-cache): Accelerate is the only solution that offers query-level cache policies, allowing you to control the cache strategy for each query specifically. It is common to have some values that need to be cached for a long time, others that need caching for a short time, and some that should not be cached at all. With Accelerate you can do this, and even set different cache strategies per query.
+- [**Global by default**](/accelerate/compare#accelerate-global-cache): Accelerate is globally distributed by default. You never need to worry about where a user is located with respect to your database location.
+- [**Fully managed**](/accelerate/compare#management): You don't need to manage a server or worry about uptime. Accelerate is fully managed for you.
+- [**Auto-scaling**](/accelerate/compare#performance): Accelerate automatically adjusts resources to match workload demands, providing fast and consistent performance during traffic spikes.
 
+Accelerate global cache \[#accelerate-global-cache]
 
-  yarn
+Prisma Accelerate offers a powerful global cache, so you can serve data to your users at the edge — the closest point to where the users are located — no matter where your database is hosted. This not only speeds up the experience for users, but also reduces read load on your database as well by avoiding roundtrips.
 
+|                                     | Accelerate | Hyperdrive | PlanetScale Boost |
+| ----------------------------------- | ---------- | ---------- | ----------------- |
+| **Fully Managed**                   | ✅          | ✅          | ✅                 |
+| **Globally distributed edge infra** | ✅          | ✅          | ✅                 |
+| **Control cache policy from code**  | ✅          | ❌          | ❌                 |
+| **Query-level cache policies**      | ✅          | ❌          | ❌                 |
+| **Postgres compatible**             | ✅          | ✅          | ❌                 |
+| **MySQL compatible**                | ✅          | ❌          | ✅                 |
+| **MongoDB compatible**              | ✅          | ❌          | ❌                 |
+| **Automatic cache updates**         | ❌          | ❌          | ✅                 |
 
+**Why are these important?**
 
-  bun
+- Since Accelerate extends the Prisma client, you can control caching policies directly from your codebase with just an extra line of code. Integration is seamless. Here is an example using the stale-while-revalidating caching strategy:
+  ```jsx
+  await prisma.user.findMany({
+    cacheStrategy: {
+      swr: 60,
+    },
+  });
+  ```
+- Query level cache policies are critical for serious applications, so that you can control which queries are cached, and the characteristics of the policy. You may want certain data in your app to be cached for several days, other data to be cached for a just a few minutes, and other data to be not cached at all. This is only possible with Prisma Accelerate.
+- Automatic cache updates means that the cache is automatically updated when a change in the database occurs. With Accelerate, you are in control of how the cache is invalidated, using [various caching strategies](/accelerate/caching).
 
+Accelerate connection pool \[#accelerate-connection-pool]
 
+Prisma Accelerate includes a globally hosted connection pooler, which allows you to handle peak loads without any problem. Using a connection pool is important especially for serverless infrastructure, which by nature is not able to control connection volume to the database on its own. Prisma Accelerate offers a fully managed, globally colocated option, which auto scales to support any workload.
 
+Management \[#management]
 
-```bash
-npx prisma init --prompt "Create a habit tracker application"
-```
+|                                | Accelerate | pgbouncer | pgcat | Digital Ocean (pgbouncer) | Neon (pgbouncer) | Supavisor | Hyperdrive |
+| ------------------------------ | ---------- | --------- | ----- | ------------------------- | ---------------- | --------- | ---------- |
+| **Fully managed**              | ✅          | ❌         | ❌     | 🟠                        | ✅                | ❌         | ✅          |
+| **Globally distributed**       | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ✅          |
+| **Integrated with ORM client** | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ❌          |
+| **Authenticate with API key**  | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ❌          |
+| **Redundancy**                 | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ❌          |
 
+**Why are these important?**
 
+- If you decide to manage a connection pooler yourself (eg. using pgbouncer or pgcat) you will also be responsible for managing its uptime. If the server crashes, your application may be down until you recover it. Accelerate, as a fully managed solution will be recovered for you transparently, in the unlikely case of any infrastructure issue.
+- The hosted pgbouncer option on Digital Ocean is semi-managed, you will need to set it up in your Digital Ocean account, and ensure it is running smoothly at all times.
+- Authenticating with an API key can be a helpful security measure, allowing you to decouple database credentials from application secrets. Easily rotate API keys as often as you like, without needing any credential changes in your database
+- Redundancy is helpful in the unlikely scenario that your connection pool service goes down. With Accelerate, it is automatically and seamlessly handed over to another server and recovered without any interruption.
 
-```bash
-pnpm dlx prisma init --prompt "Create a habit tracker application"
-```
+Performance \[#performance]
 
+|                                 | Accelerate | pgbouncer | pgcat | Digital Ocean (pgbouncer) | Neon (pgbouncer) | Supavisor | Hyperdrive |
+| ------------------------------- | ---------- | --------- | ----- | ------------------------- | ---------------- | --------- | ---------- |
+| **Auto scaling**                | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ❌          |
+| **Globally distributed**        | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ✅          |
+| **Optimized queries over HTTP** | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ✅          |
+| **Isolated compute**            | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ❌          |
 
+**Why are these important?**
 
-```bash
-yarn dlx prisma init --prompt "Create a habit tracker application"
-```
+- Accelerate will automatically scale up and down to suit your application workload, meaning you'll never run out of compute resource. Additionally, this provides important redundancy to protect against any single compute instance failing — in the unlikely event of an instance going down, Accelerate will automatically spawn a new instance.
+- Cross-region TCP handshakes between the application server and PgBouncer or the database are costly and time-consuming. If connections are reused only at the PgBouncer layer, the TCP handshake and connection setup still consume unnecessary time on every single request, which undermines the efficiency of connection reuse. Prisma Accelerate improves this by leveraging HTTP, which is more efficient for connection management. It reduces the overhead associated with TCP handshakes, resulting in faster, more responsive interactions between your application and the database.
+- Never worry about 'noisy neighbors' with isolated compute resources. Other customers never impact on your own performance.
 
+Database Support \[#database-support]
 
+|                 | Accelerate | pgbouncer | pgcat | Digital Ocean (pgbouncer) | Neon (pgbouncer) | Supavisor | Hyperdrive |
+| --------------- | ---------- | --------- | ----- | ------------------------- | ---------------- | --------- | ---------- |
+| **PostgreSQL**  | ✅          | ✅         | ✅     | ✅                         | ✅                | ✅         | ✅          |
+| **MySQL**       | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ❌          |
+| **PlanetScale** | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ❌          |
+| **CockroachDB** | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ❌          |
+| **MongoDB**     | ✅          | ❌         | ❌     | ❌                         | ❌                | ❌         | ❌          |
 
-```bash
-bunx --bun prisma init --prompt "Create a habit tracker application"
-```
-````
+# Connection Pooling (/docs/accelerate/connection-pooling)
 
-AI Coding Tools \[#ai-coding-tools]
-
-Prisma ORM and Prisma Postgres integrate seamlessly with your AI coding tools. Check out our documentation with tips and tricks for working with Prisma in various AI editors.
-
-- [Cursor](/ai/tools/cursor) - Define project-specific rules and use your schema as context to generate accurate queries and code.
-- [Windsurf](/ai/tools/windsurf) - Automate your database workflows by generating schemas, queries, and seed data in this AI-powered editor.
-- [Github Copilot](/ai/tools/github-copilot) - Get Prisma-aware code suggestions, run CLI commands from chat, and query the Prisma docs.
-- [ChatGPT](/ai/tools/chatgpt) - Learn how to connect the Prisma MCP server to ChatGPT to manage your databases with natural language.
-
-Agent Skills \[#agent-skills]
-
-AI agents often generate outdated Prisma v6 code. Install Prisma Skills to give your agent accurate, up-to-date v7 knowledge - CLI commands, Client API, upgrade guides, database setup, and Prisma Postgres workflows.
-
-````
-  npm
-
-
-
-  pnpm
-
-
-
-  yarn
-
-
-
-  bun
-
-
-
-
-```bash
-npx skills add prisma/skills
-```
-
-
-
-```bash
-pnpm dlx skills add prisma/skills
-```
-
-
-
-```bash
-yarn dlx skills add prisma/skills
-```
-
-
-
-```bash
-bunx --bun skills add prisma/skills
-```
-````
-
-- [Available skills and setup](/ai/tools/skills) - See all available skills and learn how to install them.
-
-MCP server \[#mcp-server]
-
-With Prisma's MCP server, your AI tool can take database actions on your behalf: Provisioning a new Prisma Postgres instance, creating database backups and executing SQL queries are just a few of its capabilities.
-
-```json title="Integrate in AI tool"
-{
-  "mcpServers": {
-    "Prisma-Remote": {
-      "url": "https://mcp.prisma.io/mcp"
-    }
-  }
-}
-```
-
-- [Capabilities and tools](/ai/tools/mcp-server#tools) - Discover all the tools that make up the capabilities of the Prisma MCP server.
-- [Integrating in AI tools](/ai/tools/mcp-server#integrating-in-ai-tools) - Learn how to integrate Prisma's MCP server in your favorite AI tool, such as Cursor, Claude, Warp, and more.
-- [How we built it](https://www.prisma.io/blog/about-mcp-servers-and-how-we-built-one-for-prisma) - Read this technical deep dive about the MCP protocol and how we built the Prisma MCP server.
-
-Vibe Coding Tutorials \[#vibe-coding-tutorials]
-
-Build complete, production-ready applications from scratch with AI assistance.
-
-- [Build a Linktree Clone SaaS](/ai/tutorials/linktree-clone) - A complete vibe coding tutorial: build a full Linktree clone SaaS with Next.js, Prisma Postgres, and Clerk auth using AI assistance.
-
-Resources \[#resources]
-
-- [Vibe Coding with Limits](https://www.prisma.io/blog/vibe-coding-with-limits-how-to-build-apps-in-the-age-of-ai) - How to Build Apps in the Age of AI
-- [Vibe Coding an E-commerce App](https://www.prisma.io/blog/vibe-coding-with-prisma-mcp-and-nextjs) - with Prisma MCP and Next.js
-- [Integrating the Vercel AI SDK](/guides/integrations/ai-sdk) - in a Next.js application
-
-Integrations \[#integrations]
-
-- [Automate with Pipedream](https://pipedream.com/apps/prisma-management-api) - Connect Prisma Postgres to 2,800+ apps for powerful automation
-- [Firebase Studio](/guides/postgres/idx) - Prompt your application with Firebase Studio & Prisma Postgres
+Accelerate provides built-in connection pooling to efficiently manage database connections. It's included as part of [Prisma Postgres](/postgres), but you can also use it with your own database by enabling Accelerate in the [Prisma Data Platform](https://console.prisma.io?utm_source=docs) and [connecting it to your database](/accelerate/getting-started).
+This page has moved, connection pooling in Prisma Accelerate is now documented in the [Prisma Postgres section](/postgres/database/connection-pooling).

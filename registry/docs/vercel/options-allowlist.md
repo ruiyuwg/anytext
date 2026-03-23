@@ -54,7 +54,7 @@ For example, if you specify `/api`, all requests to paths that start with `/api`
 - ### Save changes
   Once all the paths are added, select **Save**
 
-title: "Methods to bypass Deployment Protection"
+title: "Bypass Deployment Protection for testing, sharing, and automation"
 description: "Learn how to bypass Deployment Protection for specific domains, or for all deployments in a project."
-last\_updated: "2026-03-08T05:03:13.145Z"
+last\_updated: "2026-03-23T09:40:08.210Z"
 source: "https://vercel.com/docs/deployment-protection/methods-to-bypass-deployment-protection"

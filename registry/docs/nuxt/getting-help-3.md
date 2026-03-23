@@ -52,7 +52,7 @@ We recommend taking a look at [how to report bugs](https://nuxt.com/docs/3.x/com
 
 ## "I need professional help"
 
-If the community couldn't provide the help you need in the time-frame you have, NuxtLabs offers professional support with the [Nuxt Experts](https://nuxt.com/enterprise/support){rel=""nofollow""}.
+If the community couldn't provide the help you need in the time-frame you have, NuxtLabs offers professional support with the [Nuxt Experts](https://nuxt.com/enterprise/agencies){rel=""nofollow""}.
 
 The objective of the Nuxt Expert is to provide support to the Vue ecosystem, while also creating freelance opportunities for those contributing to open-source solutions, thus helping to maintain the sustainability of the ecosystem.
 

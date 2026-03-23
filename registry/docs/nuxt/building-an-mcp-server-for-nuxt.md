@@ -161,7 +161,7 @@ export default defineMcpResource({
 })
 ```
 
-Unlike tools which are model-controlled, resources are application-driven, the host application determines how to incorporate them based on user needs, such as through UI elements for explicit selection or automatic context inclusion.
+Unlike tools, which are model-controlled, resources are application-driven, the host application determines how to incorporate them based on user needs, such as through UI elements for explicit selection or automatic context inclusion.
 
 ### Prompts: Reusable templates
 

@@ -101,7 +101,7 @@ export default defineConfig({
 
 **Type:** `string`
 
-**Added in:** `@astrojs/alpinejs@0.4.0` New
+**Added in:** `@astrojs/alpinejs@0.4.0`
 
 You can extend Alpine by setting the `entrypoint` option to a root-relative import specifier (e.g. `entrypoint: "/src/entrypoint"`).
 

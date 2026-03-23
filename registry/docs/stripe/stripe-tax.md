@@ -4,7 +4,7 @@ Automate sales tax, VAT, and GST compliance on all your transactions.
 
 Stripe Tax handles tax obligation monitoring, registrations, calculations, collections, and filings.
 
-> You might be eligible for a 1099 tax form through a platform that pays you with Stripe. Learn more about how to [receive your forms](https://support.stripe.com/express/topics/1099-tax-forms).
+You might be eligible for a 1099 tax form through a platform that pays you with Stripe. Learn more about how to [receive your forms](https://support.stripe.com/express/topics/1099-tax-forms).
 
 ## Stripe Tax API for custom payment flows
 
@@ -45,11 +45,13 @@ Calculate and report tax on all payments, even those that you process outside of
 
 ## Features
 
-- [End-to-end compliance solution](https://docs.stripe.com/tax/how-tax-works.md) Helps you manage tax calculations, registrations, and filings directly or through integrated partners.
-- [Automatic tax calculation](https://docs.stripe.com/tax/calculating.md) Calculate sales tax, VAT, and GST for transactions worldwide, determining tax rates based on [product type](https://docs.stripe.com/tax/tax-codes.md) and [customer and business location](https://docs.stripe.com/tax/supported-countries.md).
-- [Multi-country support](https://docs.stripe.com/tax/supported-countries.md) Handles tax calculations for international sales and cross-border transactions, supporting compliance in multiple countries.
-- [Threshold monitoring](https://docs.stripe.com/tax/monitoring.md) Tracks your sales against local tax registration thresholds and alerts you when you might have tax obligations, helping you stay compliant as your business grows.
-- [Tax registration management](https://docs.stripe.com/tax/registering.md) Helps you manage your global tax registrations. You can also use Stripe to [register for sales tax](https://docs.stripe.com/tax/use-stripe-to-register.md) on your behalf.
-- [Product tax codes](https://docs.stripe.com/tax/tax-codes.md) Categorizes your products and services for correct tax treatment, ensuring accurate tax calculations across different jurisdictions.
-- [Platform and marketplace integration](https://docs.stripe.com/tax/connect.md) Integrates with platforms and marketplaces using Stripe Connect, enabling tax calculation and collection on behalf of your connected accounts.
-- [Flexible pricing options](https://stripe.com/tax/pricing) Choose between pay-as-you-go or subscription-based pricing models to suit your business needs, with transparent fees based on usage and integration type.
+|  |
+|  |
+| [End-to-end compliance solution](https://docs.stripe.com/tax/how-tax-works.md) | Helps you manage tax calculations, registrations, and filings directly or through integrated partners.                                                                                                                                          |
+| [Automatic tax calculation](https://docs.stripe.com/tax/calculating.md)        | Calculate sales tax, VAT, and GST for transactions worldwide, determining tax rates based on [product type](https://docs.stripe.com/tax/tax-codes.md) and [customer and business location](https://docs.stripe.com/tax/supported-countries.md). |
+| [Multi-country support](https://docs.stripe.com/tax/supported-countries.md)    | Handles tax calculations for international sales and cross-border transactions, supporting compliance in multiple countries.                                                                                                                    |
+| [Threshold monitoring](https://docs.stripe.com/tax/monitoring.md)              | Tracks your sales against local tax registration thresholds and alerts you when you might have tax obligations, helping you stay compliant as your business grows.                                                                              |
+| [Tax registration management](https://docs.stripe.com/tax/registering.md)      | Helps you manage your global tax registrations. You can also use Stripe to [register for sales tax](https://docs.stripe.com/tax/use-stripe-to-register.md) on your behalf.                                                                      |
+| [Product tax codes](https://docs.stripe.com/tax/tax-codes.md)                  | Categorizes your products and services for correct tax treatment, ensuring accurate tax calculations across different jurisdictions.                                                                                                            |
+| [Platform and marketplace integration](https://docs.stripe.com/tax/connect.md) | Integrates with platforms and marketplaces using Stripe Connect, enabling tax calculation and collection on behalf of your connected accounts.                                                                                                  |
+| [Flexible pricing options](https://stripe.com/tax/pricing)                     | Choose between pay-as-you-go or subscription-based pricing models to suit your business needs, with transparent fees based on usage and integration type.                                                                                       |

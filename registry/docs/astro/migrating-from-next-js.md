@@ -80,7 +80,7 @@ Then, copy your existing Next project files over to your new Astro project in a 
 
 Tip
 
-Visit <https://astro.new> for the full list of official starter templates, and links for opening a new project in IDX, StackBlitz, CodeSandbox, or Gitpod.
+Visit <https://astro.new> for the full list of official starter templates, and links for opening a new project in StackBlitz or CodeSandbox.
 
 ### Install integrations (optional)
 
@@ -469,7 +469,7 @@ const randomUser = data.results[0];
 ---
 ```
 
-See more about local files imports with [`import.meta.glob()`](/en/guides/imports/#importmetaglob), [querying using the Collections API](/en/guides/content-collections/#querying-collections) or [fetching remote data](/en/guides/data-fetching/).
+See more about local files imports with [`import.meta.glob()`](/en/guides/imports/#importmetaglob), [querying with content collections](/en/guides/content-collections/#querying-build-time-collections) or [fetching remote data](/en/guides/data-fetching/).
 
 ### Next Styling to Astro
 

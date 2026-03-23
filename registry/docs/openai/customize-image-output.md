@@ -119,7 +119,7 @@ import fs from "fs";
 const openai = new OpenAI();
 
 const result = await openai.images.generate({
-    model: "gpt-image-1",
+    model: "gpt-image-1.5",
     prompt: "Draw a 2D pixel art style sprite sheet of a tabby gray cat",
     size: "1024x1024",
     background: "transparent",
@@ -138,7 +138,7 @@ import base64
 client = OpenAI()
 
 result = client.images.generate(
-    model="gpt-image-1",
+    model="gpt-image-1.5",
     prompt="Draw a 2D pixel art style sprite sheet of a tabby gray cat",
     size="1024x1024",
     background="transparent",
@@ -186,32 +186,3 @@ For image generation using GPT Image models (`gpt-image-1.5`, `gpt-image-1`, and
 ### Supported models
 
 When using image generation in the Responses API, most modern models starting with `gpt-4o` and newer should support the image generation tool. [Check the model detail page for your model](https://developers.openai.com/api/docs/models) to confirm if your desired model can use the image generation tool.
-
-## Cost and latency
-
-This model generates images by first producing specialized image tokens. Both latency and eventual cost are proportional to the number of tokens required to render an image—larger image sizes and higher quality settings result in more tokens.
-
-The number of tokens generated depends on image dimensions and quality:
-
-| Quality | Square (1024×1024) | Portrait (1024×1536) | Landscape (1536×1024) |
-| ------- | ------------------ | -------------------- | --------------------- |
-| Low     | 272 tokens         | 408 tokens           | 400 tokens            |
-| Medium  | 1056 tokens        | 1584 tokens          | 1568 tokens           |
-| High    | 4160 tokens        | 6240 tokens          | 6208 tokens           |
-
-Note that you will also need to account for [input tokens](https://developers.openai.com/api/docs/guides/images-vision?api-mode=responses#calculating-costs): text tokens for the prompt and image tokens for the input images if editing images.
-If you are using high input fidelity, the number of input tokens will be higher.
-
-Refer to our [pricing page](https://developers.openai.com/api/docs/pricing#image-generation) for more information about price per text and image tokens.
-
-So the final cost is the sum of:
-
-- input text tokens
-- input image tokens if using the edits endpoint
-- image output tokens
-
-### Partial images cost
-
-If you want to [stream image generation](#streaming) using the `partial_images` parameter, each partial image will incur an additional 100 image output tokens.
-
-***

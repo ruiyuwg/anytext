@@ -45,7 +45,7 @@ $ vitest basic/foo.test.ts:10-25 # ❌
 
 ## Specifying a Timeout
 
-You can optionally pass a timeout in milliseconds as a third argument to tests. The default is [5 seconds](/config/#testtimeout).
+You can optionally pass a timeout in milliseconds as a third argument to tests. The default is [5 seconds](/config/testtimeout).
 
 ```ts
 import { test } from 'vitest'
@@ -81,6 +81,24 @@ describe('suite', () => {
     assert.equal(Math.sqrt(4), 3)
   })
 })
+```
+
+## Filtering Tags
+
+If your test defines a [tag](/guide/test-tags), you can filter your tests with a `--tags-filter` option:
+
+```ts
+test('renders a form', { tags: ['frontend'] }, () => {
+  // ...
+})
+
+test('calls an external API', { tags: ['backend'] }, () => {
+  // ...
+})
+```
+
+```shell
+vitest --tags-filter=frontend
 ```
 
 ## Selecting Suites and Tests to Run

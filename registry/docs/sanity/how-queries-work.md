@@ -677,8 +677,12 @@ Like with any query language, it's important to be aware of performance as you d
 
 So there you go, this should cover most of what you need to understand in the day-to-day use of GROQ. You should now check out our [Query Cheat Sheet](https://www.sanity.io/docs/content-lake/query-cheat-sheet), [the GROQ Arcade](https://groq.dev), and [the reference docs](https://www.sanity.io/docs/groq-reference) which contain examples of all operators and functions currently supported.
 
-[High performance GROQ](https://www.sanity.io/docs/developer-guides/high-performance-groq)
+#### Related articles
 
-[Paginating with GROQ](https://www.sanity.io/docs/developer-guides/paginating-with-groq)
+[Introduction to schemas](https://www.sanity.io/docs/apis-and-sdks/introduction-to-schemas)
 
-[Syntax reference](https://www.sanity.io/docs/specifications/groq-syntax)
+[Query Cheat Sheet - GROQ](https://www.sanity.io/docs/content-lake/query-cheat-sheet)
+
+[Custom GROQ functions](https://www.sanity.io/docs/content-lake/custom-groq-functions)
+
+[Querying content with @sanity/client](https://www.sanity.io/docs/apis-and-sdks/js-client-querying)

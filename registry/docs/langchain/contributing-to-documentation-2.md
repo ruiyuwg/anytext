@@ -26,6 +26,8 @@ make dev
 
 This starts a development server with hot reload at `http://localhost:3000`. Edit files in `src/` and see changes immediately.
 
+**Using an AI coding agent?** Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks, then click the "Copy page" button on the top right of this page and paste the raw content into your agent to have it set up your environment automatically.
+
 If you are having issues with you local preview, try running `mint update` to ensure you're using the latest Mintlify version.
 
 **Required:**
@@ -56,7 +58,7 @@ For typos or small changes, edit directly on GitHub without local setup:
 2. Run [quality checks](#run-quality-checks) before submitting.
 3. Create a pull request for review.
 
-If your PR includes AI-generated content, you must follow our [acceptable uses of LLMs](/oss/python/contributing/overview#acceptable-uses-of-llms) policy.
+All pull requests must link to an issue or discussion where a solution has been approved by a maintainer. See our [pull request requirements](/oss/python/contributing/overview#pull-request-requirements).
 
 When you create or update a PR, a [preview branch/ID](https://github.com/langchain-ai/docs/actions/workflows/create-preview-branch.yml) is automatically generated. A comment will be left on the PR with the ID.
 

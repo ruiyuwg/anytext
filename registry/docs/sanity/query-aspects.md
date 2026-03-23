@@ -19,6 +19,8 @@ Some examples below use JavaScript's `fetch` to perform API calls, but the same 
 
 To retrieve aspect data in your dataset queries, is to supply the `media` reference along with the aspect name to the `media::aspect` GROQ function.
 
+The `media` field is a [Global Document Reference](https://www.sanity.io/docs/studio/global-document-reference-type) that links to the corresponding asset in the Media Library. Its `_ref` value follows the format `media-library:{LIBRARY_ID}:{ASSET_DOCUMENT_ID}`, where `ASSET_DOCUMENT_ID` is the full `_id` of the asset document (for example, `image-abc123-800x600-png`).
+
 **GROQ**
 
 ```groq

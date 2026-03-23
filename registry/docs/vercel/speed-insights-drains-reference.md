@@ -78,5 +78,5 @@ For more information on Speed Insights Drains and how to use them, check out the
 
 title: "Trace Drains Reference"
 description: "Learn about Trace Drains - OpenTelemetry-compliant distributed tracing data formats and configuration."
-last\_updated: "2026-03-08T05:03:13.746Z"
+last\_updated: "2026-03-23T09:40:09.008Z"
 source: "https://vercel.com/docs/drains/reference/traces"

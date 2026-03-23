@@ -169,5 +169,5 @@ Adding your repository to your team's Vercel [dashboard](https://vercel.com/d?to
 
 title: "Code Owners"
 description: "Use Code Owners to define users or teams that are responsible for directories and files in your codebase"
-last\_updated: "2026-03-08T05:03:12.483Z"
+last\_updated: "2026-03-23T09:40:07.255Z"
 source: "https://vercel.com/docs/code-owners"

@@ -2,45 +2,45 @@
 
 If a page has [Dynamic Routes](/docs/pages/building-your-application/routing/dynamic-routes) and uses `getStaticProps`, it needs to define a list of paths to be statically generated.
 
-When you export a function called `getStaticPaths` (Static Site Generation) from a page that uses dynamic routes, Next.js will statically pre-render all the paths specified by `getStaticPaths`.
+When you export a function called `getStaticPaths` (Static Site Generation) from a page that uses dynamic routes, Next.js will statically prerender all the paths specified by `getStaticPaths`.
 
 ```tsx filename="pages/repo/[name].tsx" switcher
 import type {
   InferGetStaticPropsType,
   GetStaticProps,
   GetStaticPaths,
-} from "next";
+} from 'next'
 
 type Repo = {
-  name: string;
-  stargazers_count: number;
-};
+  name: string
+  stargazers_count: number
+}
 
 export const getStaticPaths = (async () => {
   return {
     paths: [
       {
         params: {
-          name: "next.js",
+          name: 'next.js',
         },
       }, // See the "paths" section below
     ],
     fallback: true, // false or "blocking"
-  };
-}) satisfies GetStaticPaths;
+  }
+}) satisfies GetStaticPaths
 
 export const getStaticProps = (async (context) => {
-  const res = await fetch("https://api.github.com/repos/vercel/next.js");
-  const repo = await res.json();
-  return { props: { repo } };
+  const res = await fetch('https://api.github.com/repos/vercel/next.js')
+  const repo = await res.json()
+  return { props: { repo } }
 }) satisfies GetStaticProps<{
-  repo: Repo;
-}>;
+  repo: Repo
+}>
 
 export default function Page({
   repo,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return repo.stargazers_count;
+  return repo.stargazers_count
 }
 ```
 
@@ -50,22 +50,22 @@ export async function getStaticPaths() {
     paths: [
       {
         params: {
-          name: "next.js",
+          name: 'next.js',
         },
       }, // See the "paths" section below
     ],
     fallback: true, // false or "blocking"
-  };
+  }
 }
 
 export async function getStaticProps() {
-  const res = await fetch("https://api.github.com/repos/vercel/next.js");
-  const repo = await res.json();
-  return { props: { repo } };
+  const res = await fetch('https://api.github.com/repos/vercel/next.js')
+  const repo = await res.json()
+  return { props: { repo } }
 }
 
 export default function Page({ repo }) {
-  return repo.stargazers_count;
+  return repo.stargazers_count
 }
 ```
 
@@ -73,13 +73,13 @@ The [`getStaticPaths` API reference](/docs/pages/api-reference/functions/get-sta
 
 ## When should I use getStaticPaths?
 
-You should use `getStaticPaths` if you’re statically pre-rendering pages that use dynamic routes and:
+You should use `getStaticPaths` if you’re statically prerendering pages that use dynamic routes and:
 
 - The data comes from a headless CMS
 - The data comes from a database
 - The data comes from the filesystem
 - The data can be publicly cached (not user-specific)
-- The page must be pre-rendered (for SEO) and be very fast — `getStaticProps` generates `HTML` and `JSON` files, both of which can be cached by a CDN for performance
+- The page must be prerendered (for SEO) and be very fast — `getStaticProps` generates `HTML` and `JSON` files, both of which can be cached by a CDN for performance
 
 ## When does getStaticPaths run
 
@@ -117,23 +117,23 @@ export async function getStaticPaths() {
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
     return {
       paths: [],
-      fallback: "blocking",
-    };
+      fallback: 'blocking',
+    }
   }
 
   // Call an external API endpoint to get posts
-  const res = await fetch("https://.../posts");
-  const posts = await res.json();
+  const res = await fetch('https://.../posts')
+  const posts = await res.json()
 
   // Get the paths we want to prerender based on posts
   // In production environments, prerender all pages
   // (slower builds, but faster initial page load)
   const paths = posts.map((post) => ({
     params: { id: post.id },
-  }));
+  }))
 
   // { fallback: false } means other routes should 404
-  return { paths, fallback: false };
+  return { paths, fallback: false }
 }
 ```
 

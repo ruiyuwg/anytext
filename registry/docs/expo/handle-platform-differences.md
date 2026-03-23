@@ -6,7 +6,7 @@ Android, iOS, and the web have different capabilities. In our case, both Android
 
 In this chapter, we'll learn how to handle capturing screenshots for web browsers so our app has the same functionality on all platforms.
 
-[Watch: Handling platform differences in your universal Expo app](https://www.youtube.com/watch?v=mEKQvF4irBM)
+[Watch: Handling platform differences in your universal Expo app](https://www.youtube.com/watch?v=mEKQvF4irBM) — Handle platform differences between Android, iOS, and web by implementing platform-specific screenshot capture with dom-to-image.
 
 ## Install and import dom-to-image
 

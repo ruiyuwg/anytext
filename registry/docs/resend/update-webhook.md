@@ -245,3 +245,9 @@ To send emails to other email addresses:
 2. Add the custom domain to the `from` field in the `resend` function in Bolt.new (or ask the chat to update these fields).
 
 Get more help adding a custom domain in [Resend's documentation](/dashboard/domains/introduction).
+
+# Chat SDK
+
+Source: https://resend.com/docs/chat-sdk
+
+Build conversational email experiences using the Vercel Chat SDK and Resend.

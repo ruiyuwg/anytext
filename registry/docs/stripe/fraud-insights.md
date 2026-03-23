@@ -4,118 +4,81 @@ Review fraud trends specific to your business so you can tailor your strategy.
 
 Building an effective fraud fighting strategy requires understanding the specific drivers of fraud for your business. If you use *Radar for Fraud Teams* (Radar for Fraud Teams helps you fine-tune how Radar operates, get fraud insights on suspicious charges, and assess your fraud management performance from a unified dashboard), you can access the [Insights](https://dashboard.stripe.com/radar/insights) tab of the Radar page in your Dashboard to:
 
-- Visualize the ratio of fraudulent and legitimate transactions across your payments.
-- Identify combinations of Radar attributes that have material impact on your fraud rates.
-- Adjust your Radar rules to effectively balance fraud prevention and legitimate customer conversion.
+- **Visualize trends** in transaction volume and fraud rates over time.
+- **Identify combinations of Radar attributes** that have material impact on your fraud rates.
+- **Inspect high-level patterns** to verify your findings in individual transactions.
+- **Adjust your [Radar rules](https://docs.stripe.com/radar/rules.md) or [Risk controls](https://docs.stripe.com/radar/risk-settings.md#risk-controls)** based on the patterns you discover.
 
-## Configure your data set
+## Configure your view
 
-You can specify the time period analyzed and what types of payment activity constitute fraud to further customize your results.
+You can customize the data displayed on the Insights page by selecting a time period, defining what types of payments to view, and applying specific attribute filters.
+
+The initial Insights view applies the following default filters:
+
+- **Elevated risk scores**: Shows only transactions with a risk score greater than 65.
+- **High velocity**: Shows only transactions on cards where the total number of charges per card number is greater than 10 per hour.
 
 ### Specify the time period
 
-By default, we display statistics in near real-time for the prior 30 days of transaction history. To see data for a different time period:
+By default, we display transactions in near real-time for the prior 3 months of transaction history. To see data for a different time period, click the **date range** filter to open the time period editor and select either a default or custom range. Click **Apply** for the data to update to the new time period you set.
 
-1. Click the **Date** filter to open the time period editor.
-2. Use the dropdown to choose a relative comparator.
-3. Depending on the comparator you choose, set the parameters, such as *in the last 1 months* or *between 2/26/2024 and 3/18/2024*.
-4. Choose your local time zone or Greenwich Mean Time (UTC).
-5. Click **Apply**.
+### Choose payment status
 
-### Configure your fraud definition
+By default, the page shows all successful payments, but you can toggle the **Payment status** filter to focus specifically on fraud or disputes. Options include the following:
 
-Click **Configure** to choose which types of transactions to include as fraudulent in your Insights statistics.
+- **All payments**: Includes all payment outcomes (successful, blocked, and declined)
+- **Successful payments**: Includes only successful payments
+- **All fraud**: Payments disputed for fraud, reported as early fraud warning (EFW), or refunded as fraud
+- **Disputes**: Any disputed payment, regardless of [category](https://docs.stripe.com/disputes/categories.md)
+- **Early fraud warnings**: Issuer-flagged suspicious payment [EFWs](https://docs.stripe.com/disputes/how-disputes-work.md#early-fraud-warnings)
 
-- **All fraudulent transactions**: Payments disputed for fraud, reported as early fraud warning (EFW), or refunded as fraud
-- **Only disputes**: Any disputed payment, regardless of [category](https://docs.stripe.com/disputes/categories.md)
-- **Only fraudulent disputes**: Disputed payments in the fraud category
-- **Only early fraud warnings**: Issuer-flagged suspicious payment [EFWs](https://docs.stripe.com/disputes/how-disputes-work.md#early-fraud-warnings)
+### Filter by attributes
 
-## Evaluate your fraud markers
+You can refine your view by applying filters based on specific Radar attributes. Common filters include Risk score, Card BIN, Card brand, Card country, and IP country.
 
-Stripe analyzes all the payments for the specified time period, then presents:
+To see more options, click **More filters** to select from a comprehensive list of Radar attributes available for your account.
 
-- A summary of the total fraudulent and legitimate payments for the time period.
-- A table of the top rule attribute values that suggest a correlation with fraud, based on the ratio of fraudulent to legitimate payments.
+## Visualize patterns
 
-The summary and each attribute in the table provide the following statistics:
+After you configure your filters, the page displays summary metrics and a pivot chart to help you visualize the data.
 
-| Statistic             | Description                                                                        |
-| --------------------- | ---------------------------------------------------------------------------------- |
-| Fraud percentage      | The percentage of fraudulent payment volume where this rule attribute was present. |
-| Legitimate percentage | The percentage of legitimate payment volume where this rule attribute was present. |
-| Fraud volume          | The total amount of the fraudulent payments where this rule attribute was present. |
-| Legitimate volume     | The total amount of the legitimate payments where this rule attribute was present. |
-| Fraud count           | The total number of fraudulent payments where this rule attribute was present.     |
-| Legitimate count      | The total number of legitimate payments where this rule attribute was present.     |
-![Personalized fraud indicator results](https://b.stripecdn.com/docs-statics-srv/assets/fraud-insights-indicator-table.9f171b09a9e83d23e6cdb6b83a3fc2a7.png)
+### Summary metrics
 
-Personalized fraud indicator results
+The top of the view shows key metrics for the selected data set, such as the total Fraud volume and the count of Disputed payments.
 
-## Use filters to discover high-risk attribute combinations
+### Pivot chart
 
-You can add any of the attribute values presented as your top fraud indicators as a filter. Doing so adjusts the table to show a new set of top attribute values that corresponded to fraud *in combination with the filtered rule attribute value*. Continue applying filters in this way to find a combination of rule attribute values that block transactions with the attributes you desire.
+The pivot chart visualizes transaction counts over time, allowing you to spot trends and anomalies. You can adjust your grouping by either a time window or a transaction attribute:
 
-For example, say your top indicator shows that 19% of fraudulent payment volume had Delaware as the billing state. Blocking all payments from Delaware isn’t sensible, but to further explore through filters, you might take the following steps:
+- Time window: You can adjust the time granularity of the chart to group payments by Day, Week, or Month.
+- Attribute: You can pivot the data by a selected dimension like Risk score, Card Brand, or Card Country. For example, selecting “Risk score” stacks the bar chart segments by risk score ranges (0-9, 10-19, and so on), allowing you to see how the risk distribution changes over time.
 
-1. Filter on “billing state is Delaware” and identify which other rule attributes corresponded most to fraud when the billing state is Delaware. In this case, you find that 42% of fraudulent payment volume where Delaware is the billing state has a shipping state that isn’t Delaware. That’s only 8% of the total fraudulent payment volume, and blocking all payments with billing state Delaware and a different shipping state is too aggressive, so you continue.
-2. Add “shipping state is not Delaware” as a second filter. Applying both filters and looking at the resulting fraudulent payment volume reveals that 75% of it involves payments of greater than 500 USD. This amounts to 6% of the total fraudulent payment volume.
-3. Add “payment amount greater than 500 USD” as a third filter. Comparing the results of all three filters to total payment volumes shows 6% of all fraudulent payment volume, but only 0.1% of all legitimate payment volume.
-4. At this point, you might set up a rule to block payments of over 500 USD that have Delaware as the billing state and a different state for shipping. You can expect that rule to block 6% of fraudulent payment volume and only 0.1% of legitimate payment volume.
+## Investigate transactions
 
-As the example illustrates, you can apply a series of filters to determine a set of rule attribute values that together identify a material percentage of fraudulent payment volume. When that set also reflects a low percentage of legitimate payment volume, a rule to block those values can effectively reduce fraud while having limited impact on legitimate payments.
+Below the pivot chart is the transaction list. This view displays individual payments that match your current filters, enabling you to verify if a broad pattern corresponds to a specific type of fraud attack.
 
-### Customize filters
+The list provides key details for each transaction, including:
 
-![Example chart about the risk score attribute](https://b.stripecdn.com/docs-statics-srv/assets/fraud-insights-custom-filter.09750cf1a92546047e0f096bf5585f5b.png)
+| Column         | Description                                               |
+| -------------- | --------------------------------------------------------- |
+| Risk score     | The numeric risk score assigned by Stripe’s AI models.    |
+| Amount         | The value and currency of the transaction.                |
+| Status         | The outcome of the payment (Succeeded, Failed, Disputed). |
+| Customer       | The customer name or ID associated with the payment.      |
+| Payment method | The card brand and last 4 digits.                         |
+| Created        | The date and time the transaction occurred.               |
 
-Create your own filter
+Clicking on any row in the list takes you to the detailed page for that specific transaction.
 
-You can also create a filter without using the rule attributes presented in the table.
+## Take action
 
-1. Click **More filters**.
-2. Choose the rule attribute that you want to create a filter for.
-3. Depending on the attribute you choose, set the parameters, such as *Risk score is greater than 15* or *Card bin is 4242*.
-4. Click **Apply**.
+After identifying a fraud pattern—such as a spike in fraud from a specific card country or high-velocity attempts from a single IP range—you can take action to prevent future losses.
 
-## Create a rule
+### Act on individual payments
 
-When you assemble the set of filters that represent your optimum ratio between blocking the most risky transactions without compromising legitimate payments, you can automatically create a rule to prevent payments where all the selected attributes exist simultaneously.
+Consider refunding payments that are at high risk of being fraud. Click the overflow menu (⋯) next to the transaction, then click **Refund payment**.
 
-1. Click **Add block rule** to slide open the rule editor.
-2. Check that the rule accurately reflects the attributes you filtered.
-3. (Optional) Augment the rule to include other attributes or your own custom metadata, such as product codes or retail locations. Try [Radar Assistant](https://docs.stripe.com/radar/rules.md#how-to-create-effective-rules) to generate a rule based on your natural language prompts.
-4. Click **Test rule**.
-5. If necessary, correct any validation errors and retest.
-6. On the **Review new rule** page, review how this rule performs against your recent transactions to confirm whether you want to enable it.
-7. Click **Add rule** to begin applying this rule to all future transactions.
-   ![Sliding drawer to create a rule from your applied filters](https://b.stripecdn.com/docs-statics-srv/assets/fraud-insights-create-rule.a985df06aaeac7f3d30eb9426922bd8f.png)
+### Enable global controls
 
-## Inspect charts
-
-You can find visualizations of the attributes identified as your top drivers of fraud below the table of your most common fraud indicators. Each chart shows the percentages of total fraudulent and legitimate payment volume associated with given values of the attribute over a [specified time period](https://docs.stripe.com/radar/analytics/fraud-insights.md#specify-the-time-period).
-
-> The charts represent percentages of total payment volumes, not percentages of total numbers of payments. As an example, imagine that the **Billing state** graph shows 6% of fraudulent payment volume for Utah. That means the total amount charged for fraudulent payments with Utah as the billing state is 6% of the total amount charged for all fraudulent payments. It doesn’t indicate that 6% of all fraudulent payment transactions had Utah as the billing state.
-
-Hover over any point in the chart to see additional metrics for both fraudulent and legitimate payments associated with that attribute value.
-![Example chart about the card count by IP address attribute](https://b.stripecdn.com/docs-statics-srv/assets/fraud-insights-chart.f60beaf9b98c5ece9587228c9b23b449.png)
-
-Hovering displays additional volume and count metrics.
-
-| Metric         | Description                                             |
-| -------------- | ------------------------------------------------------- |
-| **Percentage** | Percent of payments by volume at the selected point     |
-| **Volume**     | Total amount charged for payments at the selected point |
-| **Count**      | Number of payments at the selected point                |
-
-### Change chart attributes
-
-The charts displayed reflect the [Radar rule attributes](https://docs.stripe.com/radar/rules/supported-attributes.md) corresponding to your top fraud drivers. To generate visualizations for other attributes:
-
-1. Click **Select attributes**.
-2. Scroll through the list or enter keywords in the search bar to find attributes.
-3. Click an attribute’s card to select or deselect it. Selected attributes display a checkmark and the button displays the total number of attributes selected.
-4. Click **Show x attributes** to generate the charts for your selected attributes.
-   ![Radar rule attribute selection modal](https://b.stripecdn.com/docs-statics-srv/assets/fraud-analytics-attribute-selector.686f8b86dbac286e1d030236176134f8.png)
-
-The Radar rule attribute modal allows you to choose from more than 150 attributes.
+- **Enable Risk controls**: If you spot patterns such as high fraud rates on non-3D Secure authenticated payments or an increase in payments that are triggering early fraud warnings, consider enabling relevant [Risk Controls](https://docs.stripe.com/radar/risk-settings.md#risk-controls).
+- **Write custom rules**: For more specific patterns, you can write [custom rules](https://docs.stripe.com/radar/rules.md) targeting the attributes you identified in your investigation.

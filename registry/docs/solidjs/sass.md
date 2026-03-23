@@ -48,7 +48,7 @@ In a Solid component:
 
 ```
 // Card.jsximport "./card.scss";
-function Card() {  return (    <>      <div class="grid grid-center screen">        <div class="card">Hello, world!</div>      </div>    </>  );}
+function Card() {  return (    <>      <div class="grid-center screen grid">        <div class="card">Hello, world!</div>      </div>    </>  );}
 ```
 
 By simply changing the file extension from `.css` to `.scss` or `.sass` , Vite will automatically recognize these files and compile SASS to CSS on demand. When building in production, all SASS files are converted to CSS. This ensures compatibility with most modern browsers.

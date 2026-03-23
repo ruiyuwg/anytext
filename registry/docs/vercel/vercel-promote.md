@@ -13,7 +13,7 @@ The `vercel promote` command is used to promote an existing deployment to be the
 vercel promote [deployment-id or url]
 ```
 
-*Using vercel promote will promote an existing
+*Using \`vercel promote\` will promote an existing
 deployment to be current.*
 
 ## Commands
@@ -26,7 +26,7 @@ Show the status of any current pending promotions.
 vercel promote status [project]
 ```
 
-*Using vercel promote status to check the status of
+*Using \`vercel promote status\` to check the status of
 pending promotions.*
 
 **Examples:**
@@ -56,12 +56,12 @@ When promoting a deployment, a timeout of `0` will immediately exit after reques
 vercel promote https://example-app-6vd6bhoqt.vercel.app --timeout=5m
 ```
 
-*Using the vercel promote command with the
-\--timeout option.*
+*Using the \`vercel promote\` command with the
+\`--timeout\` option.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -76,5 +76,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel pull"
 description: "Learn how to update your local project with remote environment variables using the vercel pull CLI command."
-last\_updated: "2026-03-08T05:03:12.347Z"
+last\_updated: "2026-03-23T09:40:06.998Z"
 source: "https://vercel.com/docs/cli/pull"

@@ -66,28 +66,28 @@ If you want to host static assets on a different domain or CDN, you can use the 
 
 By default, generated cache assets will be stored in memory (defaults to 50mb) and on disk. If you are hosting Next.js using a container orchestration platform like Kubernetes, each pod will have a copy of the cache. To prevent stale data from being shown since the cache is not shared between pods by default, you can configure the Next.js cache to provide a cache handler and disable in-memory caching.
 
-To configure the ISR/Data Cache location when self-hosting, you can configure a custom handler in your `next.config.js` file:
+To configure the cache location when self-hosting, you can configure a custom handler in your `next.config.js` file:
 
 ```jsx filename="next.config.js"
 module.exports = {
-  cacheHandler: require.resolve("./cache-handler.js"),
+  cacheHandler: require.resolve('./cache-handler.js'),
   cacheMaxMemorySize: 0, // disable default in-memory caching
-};
+}
 ```
 
 Then, create `cache-handler.js` in the root of your project, for example:
 
 ```jsx filename="cache-handler.js"
-const cache = new Map();
+const cache = new Map()
 
 module.exports = class CacheHandler {
   constructor(options) {
-    this.options = options;
+    this.options = options
   }
 
   async get(key) {
     // This could be stored anywhere, like durable storage
-    return cache.get(key);
+    return cache.get(key)
   }
 
   async set(key, data, ctx) {
@@ -96,17 +96,17 @@ module.exports = class CacheHandler {
       value: data,
       lastModified: Date.now(),
       tags: ctx.tags,
-    });
+    })
   }
 
   async revalidateTag(tags) {
     // tags is either a string or an array of strings
-    tags = [tags].flat();
+    tags = [tags].flat()
     // Iterate over all entries in the cache
     for (let [key, value] of cache) {
       // If the value's tags include the specified tag, delete this entry
       if (value.tags.some((tag) => tags.includes(tag))) {
-        cache.delete(key);
+        cache.delete(key)
       }
     }
   }
@@ -114,7 +114,7 @@ module.exports = class CacheHandler {
   // If you want to have temporary in memory cache for a single request that is reset
   // before the next request you can leverage this method
   resetRequestCache() {}
-};
+}
 ```
 
 Using a custom cache handler will allow you to ensure consistency across all pods hosting your Next.js application. For instance, you can save the cached values anywhere, like [Redis](https://github.com/vercel/next.js/tree/canary/examples/cache-handler-redis) or AWS S3.
@@ -133,9 +133,9 @@ If you are rebuilding for each stage of your environment, you will need to gener
 module.exports = {
   generateBuildId: async () => {
     // This could be anything, using the latest git hash
-    return process.env.GIT_HASH;
+    return process.env.GIT_HASH
   },
-};
+}
 ```
 
 ## Multi-Server Deployments
@@ -144,7 +144,7 @@ When running Next.js across multiple server instances (for example, containers b
 
 ### Server Functions encryption key
 
-Next.js encrypts [Server Function](/docs/app/getting-started/updating-data) closure variables before sending them to the client. By default, a unique encryption key is generated for each build.
+Next.js encrypts [Server Function](/docs/app/getting-started/mutating-data) closure variables before sending them to the client. By default, a unique encryption key is generated for each build.
 
 When running multiple server instances, all instances must use the same encryption key. Otherwise, a Server Function encrypted by one instance cannot be decrypted by another, causing "Failed to find Server Action" errors.
 
@@ -183,7 +183,7 @@ If a mismatch is detected, Next.js triggers a hard navigation (full page reload)
 ```js filename="next.config.js"
 module.exports = {
   deploymentId: process.env.DEPLOYMENT_VERSION,
-};
+}
 ```
 
 > **Good to know:** When the application is reloaded, there may be a loss of application state if it's not designed to persist between page navigations. URL state or local storage would persist, but component state like `useState` would be lost.
@@ -208,14 +208,14 @@ You can set the env variable `NEXT_MANUAL_SIG_HANDLE` to `true` and then registe
 
 ```js filename="pages/_document.js"
 if (process.env.NEXT_MANUAL_SIG_HANDLE) {
-  process.on("SIGTERM", () => {
-    console.log("Received SIGTERM: cleaning up");
-    process.exit(0);
-  });
-  process.on("SIGINT", () => {
-    console.log("Received SIGINT: cleaning up");
-    process.exit(0);
-  });
+  process.on('SIGTERM', () => {
+    console.log('Received SIGTERM: cleaning up')
+    process.exit(0)
+  })
+  process.on('SIGINT', () => {
+    console.log('Received SIGINT: cleaning up')
+    process.exit(0)
+  })
 }
 ```
 

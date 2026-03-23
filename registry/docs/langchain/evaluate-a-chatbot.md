@@ -140,7 +140,7 @@ def concision(outputs: dict, reference_outputs: dict) -> bool:
 
 ## Run evaluations
 
-Great! So now how do we run evaluations? Now that we have a dataset and evaluators, all that we need is our application! We will build a simple application that just has a system message with instructions on how to respond and then passes it to the LLM. We will build this using the OpenAI SDK directly:
+Great! Now how do we run evaluations? Now that we have a dataset and evaluators, all that we need is our application! We will build a simple application that just has a system message with instructions on how to respond and then passes it to the LLM. We will build this using the OpenAI SDK directly:
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 default_instructions = "Respond to the users question in a short, concise manner (one short sentence)."
@@ -219,7 +219,7 @@ If we go back to the `Experiments` tab on the datasets page, we should see that 
 
 Awesome, we've evaluated three different runs. But how can we compare results? The first way we can do this is just by looking at the runs in the `Experiments` tab. If we do that, we can see a high level view of the metrics for each run:
 
-Great! So we can tell that GPT-4 is better than GPT-3.5 at knowing who companies are, and we can see that the strict prompt helped a lot with the length. But what if we want to explore in more detail?
+We can tell that GPT-4 is better than GPT-3.5 at knowing who companies are, and that the strict prompt helped a lot with the length. But what if we want to explore in more detail?
 
 In order to do that, we can select all the runs we want to compare (in this case all three) and open them up in a comparison view. We immediately see all three tests side by side. Some of the cells are color coded - this is showing a regression of *a certain metric* compared to *a certain baseline*. We automatically choose defaults for the baseline and metric, but you can change those yourself. You can also choose which columns and which metrics you see by using the `Display` control. You can also automatically filter to only see the runs that have improvements/regressions by clicking on the icons at the top.
 
@@ -254,11 +254,11 @@ Now that we've got these experiments running in an automated fashion, we want to
 
 That's it for this tutorial!
 
-We've gone over how to create an initial test set, define some evaluation metrics, run experiments, compare them manually, set up CI/CD, and track results over time. Hopefully this can help you iterate with confidence.
+We've gone over how to create an initial test set, define some evaluation metrics, run experiments, compare them manually, set up CI/CD, and track results over time. This can help you iterate with confidence.
 
 This is just the start. As mentioned earlier, evaluation is an ongoing process. For example - the datapoints you will want to evaluate on will likely continue to change over time. There are many types of evaluators you may wish to explore. For information on this, check out the [how-to guides](/langsmith/evaluation).
 
-Additionally, there are other ways to evaluate data besides in this "offline" manner (e.g. you can evaluate production data). For more information on online evaluation, check out [this guide](/langsmith/online-evaluations-llm-as-judge).
+Additionally, there are other ways to evaluate data besides in this "offline" manner (e.g. you can evaluate production data). For more information on online evaluation, check out [Set up LLM-as-a-judge online evaluators](/langsmith/online-evaluations-llm-as-judge).
 
 ## Reference code
 
@@ -391,12 +391,10 @@ experiment_results_v3 = client.evaluate(
 
 Source: https://docs.langchain.com/langsmith/evaluate-complex-agent
 
-[Agent evaluation](/langsmith/evaluation-concepts#agents) | [Evaluators](/langsmith/evaluation-concepts#evaluators) | [LLM-as-judge evaluators](/langsmith/evaluation-concepts#llm-as-judge)
-
 In this tutorial, we'll build a customer support bot that helps users navigate a digital music store. Then, we'll go through the three most effective types of evaluations to run on chat bots:
 
-- [Final response](/langsmith/evaluation-concepts#evaluating-an-agents-final-response): Evaluate the agent's final response.
-- [Trajectory](/langsmith/trajectory-evals): Evaluate whether the agent took the expected path (e.g., of tool calls) to arrive at the final answer.
-- [Single step](/langsmith/evaluation-concepts#evaluating-a-single-step-of-an-agent): Evaluate any agent step in isolation (e.g., whether it selects the appropriate first tool for a given step).
+- **[Final response](#final-response-evaluator)**: Evaluate the agent's final response.
+- **[Trajectory](#trajectory-evaluator)**: Evaluate whether the agent took the expected path (e.g., of tool calls) to arrive at the final answer.
+- **[Single step](#single-step-evaluators)**: Evaluate any agent step in isolation (e.g., whether it selects the appropriate first tool for a given step).
 
 We'll build our agent using [LangGraph](https://github.com/langchain-ai/langgraph), but the techniques and LangSmith functionality shown here are framework-agnostic.

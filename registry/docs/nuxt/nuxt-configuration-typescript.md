@@ -20,9 +20,9 @@ Modules to generate deep aliases for within `compilerOptions.paths`. This does n
 
 ```json
 [
-  "nitropack/types",
-  "nitropack/runtime",
-  "nitropack",
+  "nitro/types",
+  "nitro/runtime-config",
+  "nitro",
   "defu",
   "h3",
   "consola",

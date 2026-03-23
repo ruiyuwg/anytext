@@ -43,7 +43,7 @@ On installation, you'll see the following prompts:
 ```txt filename="Terminal"
 What is your project named? my-app
 Would you like to use the recommended Next.js defaults?
-    Yes, use recommended defaults - TypeScript, ESLint, Tailwind CSS, App Router, Turbopack
+    Yes, use recommended defaults - TypeScript, ESLint, Tailwind CSS, App Router, AGENTS.md
     No, reuse previous settings
     No, customize settings - Choose your own preferences
 ```
@@ -59,6 +59,7 @@ Would you like your code inside a `src/` directory? No / Yes
 Would you like to use App Router? (recommended) No / Yes
 Would you like to customize the import alias (`@/*` by default)? No / Yes
 What import alias would you like configured? @/*
+Would you like to include AGENTS.md to guide coding agents to write up-to-date Next.js code? No / Yes
 ```
 
 After the prompts, [`create-next-app`](/docs/app/api-reference/cli/create-next-app) will create a folder with your project name and install the required dependencies.
@@ -119,36 +120,36 @@ Create a `pages` directory at the root of your project. Then, add an `index.tsx`
 
 ```tsx filename="pages/index.tsx" switcher
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>;
+  return <h1>Hello, Next.js!</h1>
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>;
+  return <h1>Hello, Next.js!</h1>
 }
 ```
 
 Next, add an `_app.tsx` file inside `pages/` to define the global layout. Learn more about the [custom App file](/docs/pages/building-your-application/routing/custom-app).
 
 ```tsx filename="pages/_app.tsx" switcher
-import type { AppProps } from "next/app";
+import type { AppProps } from 'next/app'
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return <Component {...pageProps} />
 }
 ```
 
 ```jsx filename="pages/_app.js" switcher
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return <Component {...pageProps} />
 }
 ```
 
 Finally, add a `_document.tsx` file inside `pages/` to control the initial response from the server. Learn more about the [custom Document file](/docs/pages/building-your-application/routing/custom-document).
 
 ```tsx filename="pages/_document.tsx" switcher
-import { Html, Head, Main, NextScript } from "next/document";
+import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
@@ -159,12 +160,12 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  );
+  )
 }
 ```
 
 ```jsx filename="pages/_document.js" switcher
-import { Html, Head, Main, NextScript } from "next/document";
+import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
@@ -175,7 +176,7 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  );
+  )
 }
 ```
 
@@ -186,18 +187,18 @@ Create a [`public` folder](/docs/app/api-reference/file-conventions/public-folde
 You can then reference these assets using the root path (`/`). For example, `public/profile.png` can be referenced as `/profile.png`:
 
 ```tsx filename="app/page.tsx" highlight={4} switcher
-import Image from "next/image";
+import Image from 'next/image'
 
 export default function Page() {
-  return <Image src="/profile.png" alt="Profile" width={100} height={100} />;
+  return <Image src="/profile.png" alt="Profile" width={100} height={100} />
 }
 ```
 
 ```jsx filename="app/page.js" highlight={4} switcher
-import Image from "next/image";
+import Image from 'next/image'
 
 export default function Page() {
-  return <Image src="/profile.png" alt="Profile" width={100} height={100} />;
+  return <Image src="/profile.png" alt="Profile" width={100} height={100} />
 }
 ```
 
@@ -261,10 +262,10 @@ These options allow you to alias project directories to absolute paths, making i
 
 ```jsx
 // Before
-import { Button } from "../../../components/button";
+import { Button } from '../../../components/button'
 
 // After
-import { Button } from "@/components/button";
+import { Button } from '@/components/button'
 ```
 
 To configure absolute imports, add the `baseUrl` configuration option to your `tsconfig.json` or `jsconfig.json` file. For example:

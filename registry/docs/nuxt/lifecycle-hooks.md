@@ -56,7 +56,9 @@ Explore all available App hooks.
 These hooks are available for [server plugins](https://nuxt.com/docs/4.x/directory-structure/server#server-plugins) to hook into Nitro's runtime behavior.
 
 ```ts [~~/server/plugins/test.ts]
-export default defineNitroPlugin((nitroApp) => {
+import { definePlugin } from 'nitro'
+
+export default definePlugin((nitroApp) => {
   nitroApp.hooks.hook('render:html', (html, { event }) => {
     console.log('render:html', html)
     html.bodyAppend.push('<hr>Appended by custom plugin')
@@ -89,7 +91,7 @@ declare module '#app' {
   }
 }
 
-declare module 'nitropack/types' {
+declare module 'nitro/types' {
   interface NitroRuntimeHooks {
     'your-nitro-hook': () => void
   }

@@ -34,7 +34,7 @@ curl https://api.stripe.com/v1/payment_intents \
 
 ### Best practices
 
-- We recommend creating a PaymentIntent as soon as you know the amount, such as when the customer begins the checkout process, to help track your [purchase funnel](https://en.wikipedia.org/wiki/Purchase_funnel). If the amount changes, you can [update](https://docs.stripe.com/api.md#update_payment_intent) its [amount](https://docs.stripe.com/api.md#payment_intent_object-amount). For example, if your customer backs out of the checkout process and adds new items to their cart, you may need to update the amount when they start the checkout process again.
+- We recommend creating a PaymentIntent as soon as you know the amount, such as when the customer begins the checkout process, to help track your [purchase funnel](https://en.wikipedia.org/wiki/Purchase_funnel). If the amount changes, you can [update](https://docs.stripe.com/api.md#update_payment_intent) its [amount](https://docs.stripe.com/api.md#payment_intent_object-amount). For example, if your customer backs out of the checkout process and adds new items to their cart, you might need to update the amount when they start the checkout process again.
 
 - If the checkout process is interrupted and resumes later, attempt to reuse the same PaymentIntent instead of creating a new one. Each PaymentIntent has a unique ID that you can use to [retrieve](https://docs.stripe.com/api.md#retrieve_payment_intent) it if you need it again. In the data model of your application, you can store the ID of the PaymentIntent on the customer’s shopping cart or session to facilitate retrieval. The benefit of reusing the PaymentIntent is that the [object state](https://docs.stripe.com/payments/paymentintents/lifecycle.md) helps track any failed payment attempts for a given cart or session.
 
@@ -126,7 +126,7 @@ curl https://api.stripe.com/v1/payment_intents \
 
 ## Dynamic statement descriptor
 
-By default, your Stripe account’s [statement descriptor](https://docs.stripe.com/get-started/account/activate.md#public-business-information) appears on customer statements whenever you charge their card. To provide a different description on a per-payment basis, include the `statement_descriptor` parameter.
+By default, your Stripe account’s [statement descriptor](https://docs.stripe.com/get-started/account/activate.md#public-business-information) appears on customer statements whenever you charge their card. To provide a different description on a per-payment basis, use the [statement\_descriptor](https://docs.stripe.com/api/payment_intents/object.md#payment_intent_object-statement_descriptor) parameter.
 
 ```curl
 curl https://api.stripe.com/v1/payment_intents \
@@ -134,10 +134,14 @@ curl https://api.stripe.com/v1/payment_intents \
   -d amount=1099 \
   -d currency=usd \
   -d "payment_method_types[]"=card \
-  -d statement_descriptor="Custom descriptor"
+  -d statement_descriptor_suffix="Custom descriptor"
 ```
 
-Statement descriptors are limited to 22 characters, can’t use the special characters `<`, `>`, `'`, `"`, or `*`, and must not consist solely of numbers. When using dynamic statement descriptors, the dynamic text is appended to the [statement descriptor prefix](https://dashboard.stripe.com/settings/public) set in the Stripe Dashboard. An asterisk (`*`) and an empty space are also added to separate the default statement descriptor from the dynamic portion. These 2 characters count towards the 22 character limit.
+> #### Note
+>
+> Use the `statement_descriptor` parameter for non-card charges and `statement_descriptor_suffix` for card charges.
+
+[Statement descriptors](https://docs.stripe.com/get-started/account/statement-descriptors.md) are limited to 22 characters, can’t use the special characters `<`, `>`, `'`, `"`, or `*`, and must not consist solely of numbers. When using dynamic statement descriptors, the dynamic text is appended to the [statement descriptor prefix](https://dashboard.stripe.com/settings/public) set in the Stripe Dashboard. An asterisk (`*`) and an empty space are also added to separate the default statement descriptor from the dynamic portion. These 2 characters count towards the 22 character limit.
 
 ## Storing information in metadata
 

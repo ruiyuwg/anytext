@@ -138,5 +138,5 @@ Learn more about deploying Flask projects on Vercel with the following resources
 
 title: "Hono on Vercel"
 description: "Deploy Hono applications to Vercel with zero configuration. Learn about observability, ISR, and custom build configurations."
-last\_updated: "2026-03-08T05:03:14.777Z"
+last\_updated: "2026-03-23T09:40:10.451Z"
 source: "https://vercel.com/docs/frameworks/backend/hono"

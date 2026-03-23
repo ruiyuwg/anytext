@@ -1,0 +1,107 @@
+# Modules
+
+## Module Compatibility
+
+Nuxt 3 has a basic backward compatibility layer for Nuxt 2 modules using `@nuxt/kit` auto wrappers. But there are usually steps to follow to make modules compatible with Nuxt 3 and sometimes, using Nuxt Bridge is required for cross-version compatibility.
+
+We have prepared a [Dedicated Guide](https://nuxt.com/docs/3.x/guide/modules) for authoring Nuxt 3 ready modules using `@nuxt/kit`. Currently best migration path is to follow it and rewrite your modules. Rest of this guide includes preparation steps if you prefer to avoid a full rewrite yet making modules compatible with Nuxt 3.
+
+::tip{icon="i-lucide-puzzle" to="https://nuxt.com/modules"}
+Explore Nuxt 3 compatible modules.
+::
+
+### Plugin Compatibility
+
+Nuxt 3 plugins are **not** fully backward compatible with Nuxt 2.
+
+:read-more{to="https://nuxt.com/docs/3.x/directory-structure/plugins"}
+
+### Vue Compatibility
+
+Plugins or components using the Composition API need exclusive Vue 2 or Vue 3 support.
+
+By using [vue-demi](https://github.com/vueuse/vue-demi){rel=""nofollow""} they should be compatible with both Nuxt 2 and 3.
+
+## Module Migration
+
+When Nuxt 3 users add your module, you will not have access to the module container (`this.*`) so you will need to use utilities from `@nuxt/kit` to access the container functionality.
+
+### Test with `@nuxt/bridge`
+
+Migrating to `@nuxt/bridge` is the first and most important step for supporting Nuxt 3.
+
+If you have a fixture or example in your module, add `@nuxt/bridge` package to its config (see [example](https://nuxt.com/docs/3.x/bridge/overview#update-nuxtconfig))
+
+### Migrate from CommonJS to ESM
+
+Nuxt 3 natively supports TypeScript and ECMAScript Modules. Please check [Native ES Modules](https://nuxt.com/docs/3.x/guide/concepts/esm) for more info and upgrading.
+
+### Ensure Plugins Default Export
+
+If you inject a Nuxt plugin that does not have `export default` (such as global Vue plugins), ensure you add `export default () => { }` to the end of it.
+
+::code-group
+
+```js [Before]
+// ~/plugins/vuelidate.js
+import Vue from 'vue'
+import Vuelidate from 'vuelidate'
+
+Vue.use(Vuelidate)
+```
+
+```js [After]
+// ~/plugins/vuelidate.js
+import Vue from 'vue'
+import Vuelidate from 'vuelidate'
+
+Vue.use(Vuelidate)
+
+export default () => { }
+```
+
+::
+
+### Avoid Runtime Modules
+
+With Nuxt 3, Nuxt is now a build-time-only dependency, which means that modules shouldn't attempt to hook into the Nuxt runtime.
+
+Your module should work even if it's only added to [`buildModules`](https://nuxt.com/docs/3.x/api/nuxt-config#runtimeconfig) (instead of `modules`). For example:
+
+- Avoid updating `process.env` within a Nuxt module and reading by a Nuxt plugin; use [`runtimeConfig`](https://nuxt.com/docs/3.x/api/nuxt-config#runtimeconfig) instead.
+- (\*) Avoid depending on runtime hooks like `vue-renderer:*` for production
+- (\*) Avoid adding `serverMiddleware` by importing them inside the module. Instead, add them by referencing a file path so that they are independent of the module's context
+
+(\*) Unless it is for `nuxt dev` purpose only and guarded with `if (nuxt.options.dev) { }`.
+
+::tip
+Continue reading about Nuxt 3 modules in the [Modules Author Guide](https://nuxt.com/docs/3.x/guide/modules).
+::
+
+### Use TypeScript (Optional)
+
+While it is not essential, most of the Nuxt ecosystem is shifting to use TypeScript, so it is highly recommended to consider migration.
+
+::tip
+You can start migration by renaming `.js` files, to `.ts`. TypeScript is designed to be progressive!
+::
+
+::tip
+You can use TypeScript syntax for Nuxt 2 and 3 modules and plugins without any extra dependencies.
+::
+
+# Auto Imports
+
+::note
+In the rest of the migration documentation, you will notice that key Nuxt and Vue utilities do not have explicit imports. This is not a typo; Nuxt will automatically import them for you, and you should get full type hinting if you have followed [the instructions](https://nuxt.com/docs/3.x/migration/configuration#typescript) to use Nuxt's TypeScript support.
+::
+
+[Read more about auto imports](https://nuxt.com/docs/3.x/guide/concepts/auto-imports)
+
+## Migration
+
+1. If you have been using `@nuxt/components` in Nuxt 2, you can remove `components: true` in your `nuxt.config`. If you had a more complex setup, then note that the component options have changed somewhat. See the [components documentation](https://nuxt.com/docs/3.x/directory-structure/components) for more information.
+
+::tip
+You can look at `.nuxt/types/components.d.ts` and `.nuxt/types/imports.d.ts` to see how Nuxt has resolved your components and composable auto-imports.
+::

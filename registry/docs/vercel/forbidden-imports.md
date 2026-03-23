@@ -117,5 +117,5 @@ which is optional.
 
 title: "forbidden-packages"
 description: "Learn how to set custom rules to disallow packages from being listed as dependencies."
-last\_updated: "2026-03-08T05:03:12.591Z"
+last\_updated: "2026-03-23T09:40:07.425Z"
 source: "https://vercel.com/docs/conformance/custom-rules/forbidden-packages"

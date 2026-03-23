@@ -2,20 +2,18 @@
 
 The `useCompletion` hook allows you to create a user interface to handle text completions in your application. It enables the streaming of text completions from your AI provider, manages the state for chat input, and updates the UI automatically as new messages are received.
 
-The `useCompletion` hook is now part of the `@ai-sdk/react` package.
-
 In this guide, you will learn how to use the `useCompletion` hook in your application to generate text completions and stream them in real-time to your users.
 
 ## Example
 
 ```tsx filename='app/page.tsx'
-"use client";
+'use client';
 
-import { useCompletion } from "@ai-sdk/react";
+import { useCompletion } from '@ai-sdk/react';
 
 export default function Page() {
   const { completion, input, handleInputChange, handleSubmit } = useCompletion({
-    api: "/api/completion",
+    api: '/api/completion',
   });
 
   return (
@@ -34,8 +32,8 @@ export default function Page() {
 ```
 
 ```ts filename='app/api/completion/route.ts'
-import { streamText } from "ai";
-__PROVIDER_IMPORT__;
+import { streamText } from 'ai';
+import { openai } from '@ai-sdk/openai';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -44,11 +42,11 @@ export async function POST(req: Request) {
   const { prompt }: { prompt: string } = await req.json();
 
   const result = streamText({
-    model: __MODEL__,
+    model: openai('gpt-3.5-turbo'),
     prompt,
   });
 
-  return result.toUIMessageStreamResponse();
+  return result.toDataStreamResponse();
 }
 ```
 
@@ -104,7 +102,7 @@ const { input, setInput } = useCompletion();
 
 return (
   <>
-    <MyCustomInput value={input} onChange={(value) => setInput(value)} />
+    <MyCustomInput value={input} onChange={value => setInput(value)} />
   </>
 );
 ```
@@ -145,8 +143,11 @@ const { completion, ... } = useCompletion({
 
 ```tsx
 const { ... } = useCompletion({
-  onFinish: (prompt: string, completion: string) => {
-    console.log('Finished streaming completion:', completion)
+  onResponse: (response: Response) => {
+    console.log('Received response from server:', response)
+  },
+  onFinish: (message: Message) => {
+    console.log('Finished streaming message:', message)
   },
   onError: (error: Error) => {
     console.error('An error occurred:', error)
@@ -154,20 +155,22 @@ const { ... } = useCompletion({
 })
 ```
 
+It's worth noting that you can abort the processing by throwing an error in the `onResponse` callback. This will trigger the `onError` callback and stop the message from being appended to the chat UI. This can be useful for handling unexpected responses from the AI provider.
+
 ## Configure Request Options
 
 By default, the `useCompletion` hook sends a HTTP POST request to the `/api/completion` endpoint with the prompt as part of the request body. You can customize the request by passing additional options to the `useCompletion` hook:
 
 ```tsx
 const { messages, input, handleInputChange, handleSubmit } = useCompletion({
-  api: "/api/custom-completion",
+  api: '/api/custom-completion',
   headers: {
-    Authorization: "your_token",
+    Authorization: 'your_token',
   },
   body: {
-    user_id: "123",
+    user_id: '123',
   },
-  credentials: "same-origin",
+  credentials: 'same-origin',
 });
 ```
 

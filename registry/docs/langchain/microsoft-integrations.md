@@ -75,7 +75,7 @@ const model = new AzureOpenAI({
 
 ### Azure OpenAI
 
-See a [usage example](/oss/javascript/integrations/text_embedding/azure_openai)
+See a [usage example](/oss/javascript/integrations/embeddings/azure_openai)
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { AzureOpenAIEmbeddings } from "@langchain/openai";

@@ -715,6 +715,9 @@
     - `lines.data.quantity` (integer, nullable)
       The quantity of the subscription, if the line item is a subscription or a proration.
 
+    - `lines.data.quantity_decimal` (decimal string, nullable)
+      Non-negative decimal with at most 12 decimal places. The quantity of units for the line item.
+
     - `lines.data.subtotal` (integer)
       The subtotal of the line item, in cents, before any discounts or taxes.
 
@@ -1008,6 +1011,32 @@
     - `payment_settings.payment_method_options.sepa_debit` (object, nullable)
       If paying by `sepa_debit`, this sub-hash contains details about the SEPA Direct Debit payment method options to pass to the invoice’s PaymentIntent.
 
+    - `payment_settings.payment_method_options.upi` (object, nullable)
+      If paying by `upi`, this sub-hash contains details about the UPI payment method options to pass to the invoice’s PaymentIntent.
+
+      - `payment_settings.payment_method_options.upi.mandate_options` (object, nullable)
+        Configuration options for setting up an eMandate
+
+        - `payment_settings.payment_method_options.upi.mandate_options.amount` (integer, nullable)
+          Amount to be charged for future payments.
+
+        - `payment_settings.payment_method_options.upi.mandate_options.amount_type` (enum, nullable)
+          One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
+          Possible enum values:
+          - `fixed`
+            If `fixed`, the `amount` param refers to the exact amount to be charged in future payments.
+
+          - `maximum`
+            If `maximum`, the amount charged can be up to the value passed for the `amount` param.
+
+        - `payment_settings.payment_method_options.upi.mandate_options.description` (string, nullable)
+          A description of the mandate or subscription that is meant to be displayed to the customer.
+
+          The maximum length is 20 characters.
+
+        - `payment_settings.payment_method_options.upi.mandate_options.end_date` (timestamp, nullable)
+          End date of the mandate or subscription.
+
     - `payment_settings.payment_method_options.us_bank_account` (object, nullable)
       If paying by `us_bank_account`, this sub-hash contains details about the ACH direct debit payment method options to pass to the invoice’s PaymentIntent.
 
@@ -1211,6 +1240,9 @@
       SOFORT
 
       If set, the Subscription `collection_method` must be `send_invoice`.
+
+    - `upi`
+      UPI
 
     - `us_bank_account`
       ACH direct debit

@@ -1,6 +1,6 @@
 # apikey (/docs/cli/console/apikey)
 
-The `prisma platform apikey` command manages API keys for Prisma Console environments.
+The `prisma platform apikey` command manages connection strings for Prisma Console environments.
 
 Usage \[#usage]
 
@@ -10,24 +10,24 @@ prisma platform apikey [action] [options] --early-access
 
 Actions \[#actions]
 
-| Action   | Description          |
-| -------- | -------------------- |
-| `show`   | List all API keys    |
-| `create` | Create a new API key |
-| `delete` | Delete an API key    |
+| Action   | Description                    |
+| -------- | ------------------------------ |
+| `show`   | List all connection strings    |
+| `create` | Create a new connection string |
+| `delete` | Delete a connection string     |
 
 Options \[#options]
 
-| Option                | Description                                                    |
-| --------------------- | -------------------------------------------------------------- |
-| `-h`, `--help`        | Display help message                                           |
-| `-e`, `--environment` | The environment ID (required for `show` and `create` commands) |
-| `-a`, `--apikey`      | The API key ID (required for `delete` command)                 |
-| `-n`, `--name`        | Display name for the API key (optional for `create` command)   |
+| Option                | Description                                                            |
+| --------------------- | ---------------------------------------------------------------------- |
+| `-h`, `--help`        | Display help message                                                   |
+| `-e`, `--environment` | The environment ID (required for `show` and `create` commands)         |
+| `-a`, `--apikey`      | The connection string ID (required for `delete` command)               |
+| `-n`, `--name`        | Display name for the connection string (optional for `create` command) |
 
 Examples \[#examples]
 
-List API keys \[#list-api-keys]
+List connection strings \[#list-connection-strings]
 
 ````
   npm
@@ -70,7 +70,7 @@ bunx --bun prisma platform apikey show --environment $ENVIRONMENT_ID --early-acc
 ```
 ````
 
-Create an API key \[#create-an-api-key]
+Create a connection string \[#create-a-connection-string]
 
 ````
   npm
@@ -113,7 +113,7 @@ bunx --bun prisma platform apikey create --environment $ENVIRONMENT_ID --name "p
 ```
 ````
 
-Delete an API key \[#delete-an-api-key]
+Delete a connection string \[#delete-a-connection-string]
 
 ````
   npm

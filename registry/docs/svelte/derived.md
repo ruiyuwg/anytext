@@ -48,6 +48,17 @@ In essence, `$derived(expression)` is equivalent to `$derived.by(() => expressio
 
 Anything read synchronously inside the `$derived` expression (or `$derived.by` function body) is considered a *dependency* of the derived state. When the state changes, the derived will be marked as *dirty* and recalculated when it is next read.
 
+In addition, if an expression contains an [`await`](await-expressions), Svelte transforms it such that any state *after* the `await` is also tracked — in other words, in a case like this...
+
+```js
+let a = Promise.resolve(1);
+let b = 2;
+// ---cut---
+let total = $derived(await a + b);
+```
+
+...both `a` and `b` are tracked, even though `b` is only read once `a` has resolved, after the initial execution. (This does not apply to `await` in functions that are called by the expression, only the expression itself.)
+
 To exempt a piece of state from being treated as a dependency, use [`untrack`](svelte#untrack).
 
 ## Overriding derived values

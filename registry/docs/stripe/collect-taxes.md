@@ -477,7 +477,7 @@ curl https://api.stripe.com/v1/tax/transactions/create_reversal \
   -d reference=pi_234567890-refund_1 \
   -d flat_amount=-1650 \
   -d "metadata[refund]"="{{REFUND_ID}}" \
-  --data-urlencode "metadata[refund_reason]"="Refunded $16.50 of pi_234567890 (customer was unhappy)" \
+  --data-urlencode "metadata[refund_reason]"="Refunded 16.50 USD of pi_234567890 (customer was unhappy)" \
   -d "expand[]"=line_items
 ```
 
@@ -580,7 +580,7 @@ curl https://api.stripe.com/v1/tax/transactions/create_reversal \
   -d reference=pi_234567890-refund_2 \
   -d flat_amount=-1650 \
   -d "metadata[refund]"="{{REFUND_ID}}" \
-  --data-urlencode "metadata[refund_reason]"="Refunded $16.50 of pi_234567890 (customer was still unhappy)" \
+  --data-urlencode "metadata[refund_reason]"="Refunded 16.50 USD of pi_234567890 (customer was still unhappy)" \
   -d "expand[]"=line_items
 ```
 
@@ -1531,7 +1531,7 @@ In testing environments, you can enter any alphanumeric string that is in the co
 
 ### Tax ID validation
 
-During payment or setup confirmation, Stripe verifies that the provided tax IDs are formatted correctly, but not that they’re valid. You’re responsible for ensuring the validity of customer information. To help, Stripe automatically performs asynchronous validation against government databases for [Australian Business Numbers (ABNs)](https://docs.stripe.com/tax/invoicing/tax-ids.md#australian-business-numbers-\(abn\)), [European Value Added Tax](https://docs.stripe.com/tax/invoicing/tax-ids.md#european-value-added-tax-\(eu-vat\)-numbers) (EU VAT), and [United Kingdom Value Added Tax](https://docs.stripe.com/tax/invoicing/tax-ids.md#united-kingdom-value-added-tax-\(gb-vat\)-numbers) (GB VAT) numbers. Learn more about the [validation we perform](https://docs.stripe.com/tax/invoicing/tax-ids.md#validation), and how to consume the status of those checks.
+During payment or setup confirmation, Stripe verifies that the provided tax IDs are formatted correctly, but not that they’re valid. You’re responsible for ensuring the validity of customer information. To help, Stripe automatically performs asynchronous validation against government databases for [Australian Business Numbers (ABNs)](https://docs.stripe.com/tax/invoicing/tax-ids.md#australian-business-numbers-abn), [European Value Added Tax](https://docs.stripe.com/tax/invoicing/tax-ids.md#european-value-added-tax-eu-vat-numbers) (EU VAT), and [United Kingdom Value Added Tax](https://docs.stripe.com/tax/invoicing/tax-ids.md#united-kingdom-value-added-tax-gb-vat-numbers) (GB VAT) numbers. Learn more about the [validation we perform](https://docs.stripe.com/tax/invoicing/tax-ids.md#validation), and how to consume the status of those checks.
 
 ### Supported Tax ID types
 

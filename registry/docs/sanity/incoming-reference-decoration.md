@@ -37,7 +37,7 @@ export default defineType({
 
 This adds a component into the document that looks like the following:
 
-![Incoming reference field studio interface](https://cdn.sanity.io/images/3do82whm/next/bf133a601e015d9558db7cf1cd99a66c012f39e1-1568x902.png)
+![The incoming reference interface showing "Posts by this author"](https://cdn.sanity.io/images/3do82whm/next/1ef34b6c429e5c08d2b8728c383069381685da05-1334x704.png)
 
 ### Create and reference new documents
 

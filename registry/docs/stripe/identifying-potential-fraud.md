@@ -50,7 +50,7 @@ Generally, Stripe can’t see the shipping address customers provide and shippin
 
 ## Digital goods or services
 
-*Customers* (Customer objects represent customers of your business. They let you reuse payment methods and give you the ability to track multiple payments) that misuse digital goods or services are more likely to be using stolen credit cards. It is very important to collect and verify as many card details as possible, including CVC, street address, and postal code. Consider rejecting charges that fail the CVC and postal code checks. As a general rule when selling digital goods or services, be sure to:
+*Customers* (Customer objects represent customers of your business. They let you reuse payment methods and give you the ability to track multiple payments) that misuse digital goods or services are more likely to be using stolen credit cards. It’s very important to collect and verify as many card details as possible, including CVC, street address, and postal code. Consider rejecting charges that fail the CVC and postal code checks. As a general rule when selling digital goods or services, be sure to:
 
 - Be aware of customers sending spam using a product for messaging or making many purchases in a short period of time for downloadable content or “in-game” items.
 - Watch for multiple accounts using similar email addresses or the same credit card. You can include this in your review queue through a [review rule](https://dashboard.stripe.com/fraud/rules).

@@ -65,7 +65,7 @@ Workspace level:
 
 Organization Admin permissions are required to make these changes.
 
-"Shared resources" in this context refer to [public prompts](/langsmith/create-a-prompt#save-your-prompt), [shared runs](/langsmith/share-trace), and [shared datasets](/langsmith/manage-datasets#share-a-dataset).
+"Shared resources" in this context refer to [public prompts](/langsmith/create-a-prompt#save-your-prompt), [shared runs](/langsmith/manage-trace#share-a-trace), and [shared datasets](/langsmith/manage-datasets#share-a-dataset).
 
 Updating these settings affects **all resources in the organization**.
 

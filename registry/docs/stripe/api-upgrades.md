@@ -69,4 +69,4 @@ We send information on new additions and changes to the Stripe API and language 
 
 > This section is no longer being updated. To learn about updates to the Stripe API, visit the new [Changelog](https://docs.stripe.com/changelog.md).
 
-Listed below are all the [breaking changes](https://docs.stripe.com/upgrades.md#breaking-change) to the Stripe API. Each date corresponds with a new version of the Stripe API. If you’re looking for all API additions and updates, see the [API changelog](https://docs.stripe.com/changelog.md). If you are looking for new product releases, see the [product changelog](https://stripe.com/blog/changelog).
+Listed below are all the [breaking changes](https://docs.stripe.com/upgrades.md#breaking-change) to the Stripe API. Each date corresponds with a new version of the Stripe API. If you’re looking for all API additions and updates, see the [API changelog](https://docs.stripe.com/changelog.md). If you’re looking for new product releases, see the [product changelog](https://stripe.com/blog/changelog).

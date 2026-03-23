@@ -17,7 +17,7 @@ This guide explains how to set up your project, initialize your first blueprint,
 Prerequisites:
 
 - The latest version of `sanity` CLI (`sanity@latest`) is recommended to interact with Blueprints and Functions as shown in this guide. You can always run the latest CLI commands with `npx sanity@latest`.
-- Node.js v22.x. We highly suggest working on this version as it is the same version that your functions will run when deployed to Sanity.
+- Node.js v24.x. We highly suggest working on this version as it is the same version that your functions will run when deployed to Sanity.
 - An existing project and [a role with Deploy Studio permissions](https://www.sanity.io/docs/user-guides/roles) (the `deployStudio` grant).
 
 > \[!WARNING]
@@ -53,7 +53,7 @@ Initialize your first blueprint with the `init` command. Replace <project-id> wi
 npx sanity@latest blueprints init . --type ts --stack-name production --project-id <project-id>
 ```
 
-This configures a new blueprint for your project, adds a `blueprint.config.ts` [config file](https://www.sanity.io/docs/blueprints/blueprint-config) to the current directory (`.`), and creates a new [stack](https://www.sanity.io/docs/blueprints/blueprints-introduction) named production.
+This configures a new blueprint for your project, adds a `sanity.blueprint.ts` [config file](https://www.sanity.io/docs/blueprints/blueprint-config) to the current directory (`.`), and creates a new [stack](https://www.sanity.io/docs/blueprints/blueprints-introduction) named production.
 
 Follow the prompt and run your package manager’s install command to add the dependencies.
 

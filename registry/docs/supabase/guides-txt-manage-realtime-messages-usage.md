@@ -31,8 +31,8 @@ Usage is shown as "Realtime Messages" on your invoice.
 
 ## Pricing
 
-per 1 million messages. You are only charged for usage exceeding your subscription
-plan's quota.
+per 1 million messages. You are only charged for usage exceeding your
+subscription plan's quota.
 
 | Plan       | Quota     | Over-Usage                                    |
 | ---------- | --------- | --------------------------------------------- |

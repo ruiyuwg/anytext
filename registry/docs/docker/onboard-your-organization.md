@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -43,7 +41,7 @@ These actions help administrators gain visibility into user activity and enforce
 
 Before you start onboarding your organization, ensure you:
 
-- Have a Docker Team or Business subscription. For more details, see [Docker subscriptions and features](https://www.docker.com/pricing/).
+- Have a Docker Team or Business subscription. For more details, see [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs\&refAction=DocsAdminOnboard).
 
   > Note
   >
@@ -113,7 +111,7 @@ Use your identity provider (IdP) to manage members and provision them to Docker 
 
 ### [Step five: Enforce sign-in for Docker Desktop](#step-five-enforce-sign-in-for-docker-desktop)
 
-By default, members of your organization can use Docker Desktop without signing in. When users don’t sign in as a member of your organization, they don’t receive the [benefits of your organization’s subscription](https://www.docker.com/pricing/) and they can circumvent [Docker’s security features](https://docs.docker.com/enterprise/security/hardened-desktop/).
+By default, members of your organization can use Docker Desktop without signing in. When users don’t sign in as a member of your organization, they don’t receive the [benefits of your organization’s subscription](https://www.docker.com/pricing?ref=Docs\&refAction=DocsAdminOnboard) and they can circumvent [Docker’s security features](https://docs.docker.com/enterprise/security/hardened-desktop/).
 
 There are multiple ways you can enforce sign-in, depending on your organization's Docker configuration:
 
@@ -135,7 +133,7 @@ Docker offers the following security features to manage your organization's secu
 - Configure [Hardened Docker Desktop](/desktop/hardened-desktop/) to improve your organization’s security posture for containerized development.
 - [Manage your domains](https://docs.docker.com/enterprise/security/domain-management/) to ensure that all Docker users in your domain are part of your organization.
 
-Your Docker subscription provides many more additional features. To learn more, see [Docker subscriptions and features](https://www.docker.com/pricing/).
+Your Docker subscription provides many more additional features. To learn more, see [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs\&refAction=DocsAdminOnboard).
 
 [Edit this page](https://github.com/docker/docs/edit/main/content/manuals/admin/organization/onboard.md)
 

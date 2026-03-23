@@ -170,35 +170,6 @@ We calculate tax for Canada customers from the [ISO country code](https://en.wik
 
 We can’t calculate tax for Canada customers with only an [ISO country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes).                                                                                                                                                    | ✗ Not supported |
 
-#### Ukraine
-
-| Example addresses                                                                                            | Explanation                                                                                                                                                                                                                                                                                                     | Supported       |
-| ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| - `line1`: Vyshneva St, 36
-
-- `city`: Kyiv
-- `province`: UA-32
-- `postal_code`: 01001
-- `country`: UA | **Full address**
-
-A full address includes at least a line1 (street address), city, province, postal code, and country.
-
-We calculate tax from the [ISO country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) and postal code. We don’t use the other address fields to calculate tax. | ✓ Supported     |
-| 5-digit postal code:
-
-- `postal_code`: 01001
-- `country`: UA                                             | **Country and postal code**
-
-We calculate tax from the [ISO country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) and postal code.                                                                                                                                                      | ✓ Supported     |
-| - `province`: UA-32
-
-- `country`: UA                                                                        | **Country and province**
-
-We can’t calculate tax for customers in Ukraine from the [ISO country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) and [oblast](https://www.iso.org/obp/ui/#iso:code:3166:UA) (province).                                                                    | ✗ Not supported |
-| - `country`: UA                                                                                              | **Country**
-
-We can’t calculate tax for customers in Ukraine with only an [ISO country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes).                                                                                                                                                   | ✗ Not supported |
-
 #### India
 
 | Example addresses                                                                                                                                                    | Explanation                                                                                                                                                                                                                                                                             | Supported       |
@@ -422,35 +393,6 @@ We calculate tax for Canada customers from the [ISO country code](https://en.wik
 | - `country`: CA                                                                                               | **Country**
 
 We can’t calculate tax for Canada customers with only an [ISO country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes).                                                                                                                                                    | ✗ Not supported |
-
-#### Ukraine
-
-| Example addresses                                                                                            | Explanation                                                                                                                                                                                                                                                                                                     | Supported       |
-| ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| - `line1`: Vyshneva St, 36
-
-- `city`: Kyiv
-- `province`: UA-32
-- `postal_code`: 01001
-- `country`: UA | **Full address**
-
-A full address includes at least a line1 (street address), city, province, postal code, and country.
-
-We calculate tax from the [ISO country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) and postal code. We don’t use the other address fields to calculate tax. | ✓ Supported     |
-| 5-digit postal code:
-
-- `postal_code`: 01001
-- `country`: UA                                             | **Country and postal code**
-
-We calculate tax from the [ISO country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) and postal code.                                                                                                                                                      | ✓ Supported     |
-| - `province`: UA-32
-
-- `country`: UA                                                                        | **Country and province**
-
-We can’t calculate tax for customers in Ukraine from the [ISO country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) and [oblast](https://www.iso.org/obp/ui/#iso:code:3166:UA) (province).                                                                    | ✗ Not supported |
-| - `country`: UA                                                                                              | **Country**
-
-We can’t calculate tax for customers in Ukraine with only an [ISO country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes).                                                                                                                                                   | ✗ Not supported |
 
 #### India
 

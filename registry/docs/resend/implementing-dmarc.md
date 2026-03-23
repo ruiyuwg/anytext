@@ -11,7 +11,12 @@ Since DMARC relies on DKIM and SPF, first ensure your existing emails are passin
 - DKIM verifies the email wasn't altered in transit using cryptographic authentication.
 - SPF authorizes IP addresses to send email for a domain.
 
-If you have a [verified](/dashboard/domains/introduction) domain with Resend, it means you are already passing SPF and DKIM
+If you have a [verified](/dashboard/domains/introduction) domain with Resend, it means you are already passing SPF and DKIM.
+
+For more details on understanding DMARC reports, see our [guide on how to read
+a DMARC report](https://resend.com/blog/how-to-read-a-dmarc-report). You can
+also use Resend's [DMARC analyzer](/dmarc-analyzer) to visualize your DMARC
+reports.
 
 ## What is DMARC?
 

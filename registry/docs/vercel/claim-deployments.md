@@ -61,5 +61,5 @@ Freelancers or employees can move deployments from their personal accounts to a 
 
 title: "Environments"
 description: "Environments are for developing locally, testing changes in a pre-production environment, and serving end-users in production."
-last\_updated: "2026-03-08T05:03:13.279Z"
+last\_updated: "2026-03-23T09:40:08.352Z"
 source: "https://vercel.com/docs/deployments/environments"

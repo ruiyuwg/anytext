@@ -225,5 +225,5 @@ If you [Instant Rollback](/docs/instant-rollback) to a previous deployment, acti
 
 title: "Cron Jobs"
 description: "Learn about cron jobs, how they work, and how to use them on Vercel."
-last\_updated: "2026-03-08T05:03:13.020Z"
+last\_updated: "2026-03-23T09:40:08.016Z"
 source: "https://vercel.com/docs/cron-jobs"

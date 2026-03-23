@@ -11,17 +11,17 @@ The Luma provider is available via the `@ai-sdk/luma` module. You can install it
 You can import the default provider instance `luma` from `@ai-sdk/luma`:
 
 ```ts
-import { luma } from "@ai-sdk/luma";
+import { luma } from '@ai-sdk/luma';
 ```
 
 If you need a customized setup, you can import `createLuma` and create a provider instance with your settings:
 
 ```ts
-import { createLuma } from "@ai-sdk/luma";
+import { createLuma } from '@ai-sdk/luma';
 
 const luma = createLuma({
-  apiKey: "your-api-key", // optional, defaults to LUMA_API_KEY environment variable
-  baseURL: "custom-url", // optional
+  apiKey: 'your-api-key', // optional, defaults to LUMA_API_KEY environment variable
+  baseURL: 'custom-url', // optional
   headers: {
     /* custom headers */
   }, // optional
@@ -30,21 +30,21 @@ const luma = createLuma({
 
 You can use the following optional settings to customize the Luma provider instance:
 
-- **baseURL** _string_
+- **baseURL** *string*
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://api.lumalabs.ai`.
 
-- **apiKey** _string_
+- **apiKey** *string*
 
   API key that is being sent using the `Authorization` header.
   It defaults to the `LUMA_API_KEY` environment variable.
 
-- **headers** _Record\<string,string>_
+- **headers** *Record\<string,string>*
 
   Custom headers to include in the requests.
 
-- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
+- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   You can use it as a middleware to intercept requests,
@@ -58,14 +58,14 @@ For more on image generation with the AI SDK see [generateImage()](/docs/referen
 ### Basic Usage
 
 ```ts
-import { luma, type LumaImageModelOptions } from "@ai-sdk/luma";
-import { generateImage } from "ai";
-import fs from "fs";
+import { luma } from '@ai-sdk/luma';
+import { experimental_generateImage as generateImage } from 'ai';
+import fs from 'fs';
 
 const { image } = await generateImage({
-  model: luma.image("photon-1"),
-  prompt: "A serene mountain landscape at sunset",
-  aspectRatio: "16:9",
+  model: luma.image('photon-1'),
+  prompt: 'A serene mountain landscape at sunset',
+  aspectRatio: '16:9',
 });
 
 const filename = `image-${Date.now()}.png`;
@@ -75,35 +75,28 @@ console.log(`Image saved to ${filename}`);
 
 ### Image Model Settings
 
-You can customize the generation behavior with optional settings:
+When creating an image model, you can customize the generation behavior with optional settings:
 
 ```ts
-const { image } = await generateImage({
-  model: luma.image("photon-1"),
-  prompt: "A serene mountain landscape at sunset",
-  aspectRatio: "16:9",
+const model = luma.image('photon-1', {
   maxImagesPerCall: 1, // Maximum number of images to generate per API call
-  providerOptions: {
-    luma: {
-      pollIntervalMillis: 5000, // How often to check for completed images (in ms)
-      maxPollAttempts: 10, // Maximum number of polling attempts before timeout
-    },
-  } satisfies LumaImageModelOptions,
+  pollIntervalMillis: 5000, // How often to check for completed images (in ms)
+  maxPollAttempts: 10, // Maximum number of polling attempts before timeout
 });
 ```
 
 Since Luma processes images through an asynchronous queue system, these settings allow you to tune the polling behavior:
 
-- **maxImagesPerCall** _number_
+- **maxImagesPerCall** *number*
 
   Override the maximum number of images generated per API call. Defaults to 1.
 
-- **pollIntervalMillis** _number_
+- **pollIntervalMillis** *number*
 
   Control how frequently the API is checked for completed images while they are
   being processed. Defaults to 500ms.
 
-- **maxPollAttempts** _number_
+- **maxPollAttempts** *number*
 
   Limit how long to wait for results before timing out, since image generation
   is queued asynchronously. Defaults to 120 attempts.
@@ -137,111 +130,97 @@ Key features of Luma models include:
 - Unique character consistency capabilities from single reference images
 - Multi-image reference support for precise style matching
 
-### Image editing
+### Advanced Options
 
-Luma supports different modes of generating images that reference other images.
+Luma models support several advanced features through the `providerOptions.luma` parameter.
 
-#### Modify an image
+#### Image Reference
 
-Images have to be passed as URLs. `weight` can be configured for each image in the `providerOptions.luma.images` array.
+Use up to 4 reference images to guide your generation. Useful for creating variations or visualizing complex concepts. Adjust the `weight` (0-1) to control the influence of reference images.
 
 ```ts
+// Example: Generate a salamander with reference
 await generateImage({
-  model: luma.image("photon-flash-1"),
-  prompt: {
-    text: "transform the bike to a boat",
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg",
-    ],
-  },
+  model: luma.image('photon-1'),
+  prompt: 'A salamander at dusk in a forest pond, in the style of ukiyo-e',
   providerOptions: {
     luma: {
-      referenceType: "modify_image",
-      images: [{ weight: 1.0 }],
-    } satisfies LumaImageModelOptions,
+      image_ref: [
+        {
+          url: 'https://example.com/reference.jpg',
+          weight: 0.85,
+        },
+      ],
+    },
   },
 });
 ```
-
-Learn more at https://docs.lumalabs.ai/docs/image-generation#modify-image.
-
-#### Reference an image
-
-Use up to 4 reference images to guide your generation. Useful for creating variations or visualizing complex concepts. Adjust the `weight` for each image (0-1) to control the influence of reference images.
-
-```ts
-await generateImage({
-  model: luma.image("photon-flash-1"),
-  prompt: {
-    text: "A salamander at dusk in a forest pond, in the style of ukiyo-e",
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg",
-    ],
-  },
-  aspectRatio: "1:1",
-  providerOptions: {
-    luma: {
-      referenceType: "image",
-      images: [{ weight: 0.8 }],
-    } satisfies LumaImageModelOptions,
-  },
-});
-```
-
-Learn more at https://docs.lumalabs.ai/docs/image-generation#image-reference
 
 #### Style Reference
 
 Apply specific visual styles to your generations using reference images. Control the style influence using the `weight` parameter.
 
 ```ts
+// Example: Generate with style reference
 await generateImage({
-  model: luma.image("photon-flash-1"),
-  prompt: {
-    text: "A blue cream Persian cat launching its website on Vercel",
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg",
-    ],
-  },
-  aspectRatio: "1:1",
+  model: luma.image('photon-1'),
+  prompt: 'A blue cream Persian cat launching its website on Vercel',
   providerOptions: {
     luma: {
-      referenceType: "style",
-      images: [{ weight: 0.8 }],
-    } satisfies LumaImageModelOptions,
+      style_ref: [
+        {
+          url: 'https://example.com/style.jpg',
+          weight: 0.8,
+        },
+      ],
+    },
   },
 });
 ```
-
-Learn more at https://docs.lumalabs.ai/docs/image-generation#style-reference
 
 #### Character Reference
 
 Create consistent and personalized characters using up to 4 reference images of the same subject. More reference images improve character representation.
 
 ```ts
+// Example: Generate character-based image
 await generateImage({
-  model: luma.image("photon-flash-1"),
-  prompt: {
-    text: "A woman with a cat riding a broomstick in a forest",
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg",
-    ],
-  },
-  aspectRatio: "1:1",
+  model: luma.image('photon-1'),
+  prompt: 'A woman with a cat riding a broomstick in a forest',
   providerOptions: {
     luma: {
-      referenceType: "character",
-      images: [
-        {
-          id: "identity0",
+      character_ref: {
+        identity0: {
+          images: ['https://example.com/character.jpg'],
         },
-      ],
-    } satisfies LumaImageModelOptions,
+      },
+    },
   },
 });
 ```
 
-Learn more at https://docs.lumalabs.ai/docs/image-generation#character-reference
+#### Modify Image
 
-# ByteDance
+Transform existing images using text prompts. Use the `weight` parameter to control how closely the result matches the input image (higher weight = closer to input but less creative).
+
+For color changes, it's recommended to use a lower weight value (0.0-0.1).
+
+```ts
+// Example: Modify existing image
+await generateImage({
+  model: luma.image('photon-1'),
+  prompt: 'transform the bike to a boat',
+  providerOptions: {
+    luma: {
+      modify_image_ref: {
+        url: 'https://example.com/image.jpg',
+        weight: 1.0,
+      },
+    },
+  },
+});
+```
+
+For more details about Luma's capabilities and features, visit the [Luma Image Generation documentation](https://docs.lumalabs.ai/docs/image-generation).
+
+# ElevenLabs

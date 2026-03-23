@@ -6,7 +6,7 @@ In this chapter, we'll learn how to take a screenshot using a third-party librar
 
 > So far, we have used third-party libraries, such as `react-native-gesture-handler`, `react-native-reanimated`. We can find hundreds of other third-party libraries on [React Native Directory](https://reactnative.directory/) depending on a use case.
 
-[Watch: Taking screenshots in your universal Expo app](https://www.youtube.com/watch?v=Jft3_Yfr-p4)
+[Watch: Taking screenshots in your universal Expo app](https://www.youtube.com/watch?v=Jft3_Yfr-p4) — Capture a screenshot with react-native-view-shot and save it to the device's media library using expo-media-library.
 
 ## Install libraries
 

@@ -1,10 +1,10 @@
 # Manage agent settings
 
-Source: https://docs.langchain.com/langsmith/agent-builder-manage-agent-settings
+Source: https://docs.langchain.com/langsmith/fleet/manage-agent-settings
 
-Manage your agents in Agent Builder.
+Manage your agents in Fleet.
 
-This page explains how to manage the settings for your agents in Agent Builder.
+This page explains how to manage the settings for your agents in LangSmith Fleet.
 
 ## Change the model
 
@@ -16,7 +16,7 @@ To change the model for your agent:
 4. Select the **Model** you want to use.
 5. Enter the API key for the model.
 
-For information on how to add a custom model, see [Custom models](/langsmith/agent-builder-essentials#custom-models).
+For information on how to add a custom model, see [Custom models](/langsmith/fleet/essentials#custom-models).
 
 ## Reconnect tool integrations
 
@@ -49,15 +49,15 @@ While workspace-scoped agents are shared, some details are public, while others 
 
 - **Threads are always user-scoped**, so even if an agent is workspace-scoped, the chat history created within that agent will always be private and only accessible to the specific user who created them.
 - **The system prompt, selected tools, and sub-agents will be public on workspace-scoped agents.** Users will not be able to modify these fields on the original workspace-scoped agent, but can make changes once they've cloned the agent.
-- **The trigger type on workspace-scoped agents is public** (for example, Slack message received), but the specific connection with the trigger (for example, the Slack channel, or Gmail address) is not shared. This way, users know what trigger to use when cloning an agent, but can't gain unauthorized access to any connections the original user has set up.
+- **The channel type on workspace-scoped agents is public** (for example, Slack message received), but the specific connection with the channel (for example, the Slack channel, or Gmail address) is not shared. This way, users know what channel to use when cloning an agent, but can't gain unauthorized access to any connections the original user has set up.
 
 ## Update memory
 
 Your agent can remember information from previous conversations and use it to make better decisions in future conversations. Agents persist memories by writing files to a **memories folder** using `write_file` and `edit_file` tool calls.
 
-By default, your agent requires approval before saving to the memories folder. When this setting is enabled, the agent pauses and waits for you to accept, edit, or reject each memory update in the Agent Builder UI before continuing.
+By default, your agent requires approval before saving to the memories folder. When this setting is enabled, the agent pauses and waits for you to accept, edit, or reject each memory update in the Fleet UI before continuing.
 
-If your agent runs on a [cron trigger](/langsmith/agent-builder-triggers#add-a-cron-trigger) or other automated schedule, disable the memory approval requirement. Otherwise, the agent will pause on every scheduled run that involves a memory update and wait indefinitely for manual approval.
+If your agent runs on a [schedule](/langsmith/fleet/channels#add-a-schedule) or other automated schedule, disable the memory approval requirement. Otherwise, the agent will pause on every scheduled run that involves a memory update and wait indefinitely for manual approval.
 
 To disable the memory approval requirement:
 
@@ -76,18 +76,18 @@ You can use the [LangGraph SDK](/langsmith/reference) to connect to your agent t
 4. Click the **View code snippets** button.
 5. Copy the pre-populated code snippets for your agent.
 
-For more information, see [Call agents from code](/langsmith/agent-builder-code).
+For more information, see [Call agents from code](/langsmith/fleet/code).
 
 ## Pause agent
 
-To pause an agent, pause its trigger:
+To pause an agent, pause its channels:
 
 1. In the [LangSmith UI](https://smith.langchain.com), navigate to your agent's inbox.
 2. Next to the agent name, click the  **Edit Agent** icon.
-3. In the graph view, click the **Pause** button in the **Triggers** box.
+3. In the graph view, click the **Pause** button in the **Channels** box.
 4. Click **Save Changes**.
 
-To resume, click the **Resume triggers** button in the **Triggers** box.
+To resume, click the **Resume channels** button in the **Channels** box.
 
 ## Delete agent
 
@@ -99,12 +99,12 @@ To permanently delete an agent:
 4. Click the **Delete Agent** button.
 5. To confirm the deletion, click the **Delete** button.
 
-This action cannot be undone. It will permanently delete the agent, all threads linked to the agent, and unlink any attached triggers.
+This action cannot be undone. It will permanently delete the agent, all threads linked to the agent, and unlink any attached channels.
 
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-builder-manage-agent-settings.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/manage-agent-settings.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

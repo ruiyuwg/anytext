@@ -4,11 +4,12 @@ When you select a flag from the Flags overview, you can configure how it behaves
 
 ## Flag types
 
-Vercel Flags supports three value types:
+Vercel Flags supports four value types:
 
 - **Boolean**: `true` or `false`. Use for simple feature toggles.
 - **String**: Text values like `"control"`, `"variant-a"`, `"variant-b"`. Use for A/B tests or multi-variant experiments.
 - **Number**: Numeric values. Use for scaling, limits, or thresholds.
+- **JSON**: Structured objects or arrays. Use for complex configuration like `{"theme": "dark", "limit": 10}`.
 
 The type is set when you create the flag and cannot be changed afterward.
 
@@ -210,5 +211,5 @@ When a flag is no longer needed:
 
 title: "Managing flags in the dashboard"
 description: "Learn how to manage your feature flags using the Vercel Dashboard."
-last\_updated: "2026-03-08T05:03:14.576Z"
+last\_updated: "2026-03-23T09:40:10.157Z"
 source: "https://vercel.com/docs/flags/vercel-flags/dashboard"

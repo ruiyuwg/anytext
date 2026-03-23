@@ -1,4 +1,4 @@
-# `deno task`
+# deno task
 
 > A configurable task runner for Deno
 

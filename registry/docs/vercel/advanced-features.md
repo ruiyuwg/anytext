@@ -216,5 +216,5 @@ For full details, supported providers, and examples, see [Automatic Caching](/do
 
 title: "File Attachments"
 description: "Send images and PDF documents as part of your Anthropic API message requests."
-last\_updated: "2026-03-08T05:03:10.627Z"
+last\_updated: "2026-03-23T09:40:04.660Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/anthropic-messages-api/file-attachments"

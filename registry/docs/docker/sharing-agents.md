@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -43,7 +41,7 @@ For other registries, use their authentication method.
 Push your agent configuration to a registry:
 
 ```console
-$ docker agent push ./agent.yml myusername/agent-name
+$ docker agent share push ./agent.yml myusername/agent-name
 ```
 
 Push creates the repository if it doesn't exist yet. Use Docker Hub or any OCI-compatible registry.
@@ -51,8 +49,8 @@ Push creates the repository if it doesn't exist yet. Use Docker Hub or any OCI-c
 Tag specific versions:
 
 ```console
-$ docker agent push ./agent.yml myusername/agent-name:v1.0.0
-$ docker agent push ./agent.yml myusername/agent-name:latest
+$ docker agent share push ./agent.yml myusername/agent-name:v1.0.0
+$ docker agent share push ./agent.yml myusername/agent-name:latest
 ```
 
 ## [Using published agents](#using-published-agents)
@@ -60,7 +58,7 @@ $ docker agent push ./agent.yml myusername/agent-name:latest
 Pull an agent to inspect it locally:
 
 ```console
-$ docker agent pull agentcatalog/pirate
+$ docker agent share pull agentcatalog/pirate
 ```
 
 This saves the configuration as a local YAML file.

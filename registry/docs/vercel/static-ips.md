@@ -89,5 +89,5 @@ When you configure static IPs in a project, they apply to all the [environments]
 
 title: "Vercel Enterprise Managed Infrastructure"
 
-last\_updated: "2026-03-08T05:03:13.012Z"
+last\_updated: "2026-03-23T09:40:07.981Z"
 source: "https://vercel.com/docs/contentful/managed-infrastructure"

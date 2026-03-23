@@ -109,5 +109,5 @@ To trigger "On-Demand Incremental Static Regeneration (ISR)" and revalidate a pa
 
 title: "Build Output API"
 description: "The Build Output API is a file-system-based specification for a directory structure that can produce a Vercel deployment."
-last\_updated: "2026-03-08T05:03:11.248Z"
+last\_updated: "2026-03-23T09:40:05.483Z"
 source: "https://vercel.com/docs/build-output-api"

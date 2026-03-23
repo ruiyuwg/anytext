@@ -1,0 +1,114 @@
+<!DOCTYPE html>    Challenge solve issues · Cloudflare challenges docs
+
+```
+window.StarlightThemeProvider = (() => {
+	const storedTheme =
+		typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+	const theme =
+		storedTheme ||
+		(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+	document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+	return {
+		updatePickers(theme = storedTheme || 'auto') {
+			document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+				const select = picker.querySelector('select');
+				if (select) select.value = theme;
+				/** @type {HTMLTemplateElement | null} */
+				const tmpl = document.querySelector(`#theme-icons`);
+				const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+				if (newIcon) {
+					const oldIcon = picker.querySelector('svg.label-icon');
+					if (oldIcon) {
+						oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+					}
+				}
+			});
+		},
+	};
+})();
+```
+
+.hero:where(.astro-opidluyl){display:grid;align-items:center;gap:1rem;padding-bottom:1rem}.hero:where(.astro-opidluyl)>img:where(.astro-opidluyl),.hero:where(.astro-opidluyl)>.hero-html:where(.astro-opidluyl){object-fit:contain;width:min(70%,20rem);height:auto;margin-inline:auto}.stack:where(.astro-opidluyl){flex-direction:column;gap:clamp(1.5rem,calc(1.5rem + 1vw),2rem);text-align:center}.copy:where(.astro-opidluyl){flex-direction:column;gap:1rem;align-items:center}a:where(.astro-opidluyl){color:var(--sl-color-white)}h1:where(.astro-opidluyl){font-size:clamp(var(--sl-text-3xl),calc(.25rem + 5vw),var(--sl-text-6xl));line-height:var(--sl-line-height-headings);font-weight:600;color:var(--sl-color-white)}.tagline:where(.astro-opidluyl){font-size:clamp(var(--sl-text-base),calc(.0625rem + 2vw),var(--sl-text-xl));color:var(--sl-color-gray-2)}.actions:where(.astro-opidluyl){gap:1rem 2rem;flex-wrap:wrap;justify-content:center}.copy:where(.astro-opidluyl)>.links:where(.astro-opidluyl){gap:0;flex-direction:row;flex-wrap:wrap}@media(min-width:50rem){.hero:where(.astro-opidluyl){grid-template-columns:7fr 4fr;gap:3%;padding-block:clamp(2.5rem,calc(1rem + 10vmin),10rem)}.hero:where(.astro-opidluyl)>img:where(.astro-opidluyl),.hero:where(.astro-opidluyl)>.hero-html:where(.astro-opidluyl){order:2;width:min(100%,25rem)}.stack:where(.astro-opidluyl){text-align:start}.copy:where(.astro-opidluyl){align-items:flex-start}.actions:where(.astro-opidluyl){justify-content:flex-start}}
+Skip to content  STOP! If you are an AI agent or LLM, read this before continuing. This is the HTML version of a Cloudflare documentation page. Always request the Markdown version instead — HTML wastes context. Get this page as Markdown: https://developers.cloudflare.com/cloudflare-challenges/troubleshooting/challenge-solve-issues/index.md (append index.md) or send Accept: text/markdown to https://developers.cloudflare.com/cloudflare-challenges/troubleshooting/challenge-solve-issues/. For this product's page index use https://developers.cloudflare.com/cloudflare-challenges/llms.txt. For all Cloudflare products use https://developers.cloudflare.com/llms.txt. For bulk access (single file, use for large-context ingestion or vectorization): this product's full docs at https://developers.cloudflare.com/cloudflare-challenges/llms-full.txt. All Cloudflare docs at https://developers.cloudflare.com/llms-full.txt.        Cloudflare Docs      <sl-doc-search data-translations="{&#34;placeholder&#34;:&#34;Search&#34;,&#34;translations&#34;:{&#34;button&#34;:{&#34;buttonText&#34;:&#34;Search&#34;,&#34;buttonAriaLabel&#34;:&#34;Search&#34;},&#34;modal&#34;:{&#34;searchBox&#34;:{},&#34;startScreen&#34;:{},&#34;errorScreen&#34;:{},&#34;footer&#34;:{},&#34;noResultsScreen&#34;:{}}}}">      Search    </sl-doc-search>     astro-island,astro-slot,astro-static-slot{display:contents}(()=>{var l=(n,t)=>{let i=async()=>{await(await n())()},e=typeof t.value=="object"?t.value:void 0,s={timeout:e==null?void 0:e.timeout};"requestIdleCallback"in window?window.requestIdleCallback(i,s):setTimeout(i,s.timeout||200)};(self.Astro||(self.Astro={})).idle=l;window.dispatchEvent(new Event("astro:idle"));})();(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i\[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE\_INFINITY\*t},o=t=>{let\[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map((\[l,e])=>\[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island\[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template\[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&\&s.isSameNode(this)&&(n\[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&\&s.isSameNode(this)&&(n\[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT\_NODE&\&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&\&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro\[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro\[c]\(async()=>{let n=this.getAttribute("renderer-url"),\[h,{default:p}]=await Promise.all(\[import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h\[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component\[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",\["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();<astro-island uid="Z2f4GKK" prefix="r7" component-url="/_astro/HeaderDropdowns.nIhFVh0M.js" component-export="default" renderer-url="/_astro/client.g8QBsImB.js" props="{}" ssr client="idle" opts="{&quot;name&quot;:&quot;HeaderDropdowns&quot;,&quot;value&quot;:true}" await-children>Docs DirectoryAPIsSDKsHelp</astro-island>\
+Log in <starlight-theme-select>   Select theme   DarkLightAuto    </starlight-theme-select>\
+StarlightThemeProvider.updatePickers();
+const r="starlight-theme",o=e=>e==="auto"||e==="dark"||e==="light"?e:"auto",c=()=>o(typeof localStorage<"u"&\&localStorage.getItem(r));function n(e){typeof localStorage<"u"&\&localStorage.setItem(r,e==="light"||e==="dark"?e:"")}const l=()=>matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";function t(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e==="auto"?l():e,n(e)}matchMedia("(prefers-color-scheme: light)").addEventListener("change",()=>{c()==="auto"&\&t("auto")});class s extends HTMLElement{constructor(){super(),t(c()),this.querySelector("select")?.addEventListener("change",a=>{a.currentTarget instanceof HTMLSelectElement&\&t(o(a.currentTarget.value))})}}customElements.define("starlight-theme-select",s); class s extends HTMLElement{constructor(){super();const e=this.querySelector("select");e&&(e.addEventListener("change",t=>{t.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=t.currentTarget.value)}),window.addEventListener("pageshow",t=>{if(!t.persisted)return;const n=e.querySelector("option\[selected]")?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}}customElements.define("starlight-lang-select",s);       <starlight-menu-button class="print:hidden astro-jif73yzw">     </starlight-menu-button> class s extends HTMLElement{constructor(){super(),this.btn=this.querySelector("button"),this.btn.addEventListener("click",()=>this.toggleExpanded());const t=this.closest("nav");t&\&t.addEventListener("keyup",e=>this.closeOnEscape(e))}setExpanded(t){this.setAttribute("aria-expanded",String(t)),document.body.toggleAttribute("data-mobile-menu-expanded",t)}toggleExpanded(){this.setExpanded(this.getAttribute("aria-expanded")!=="true")}closeOnEscape(t){t.code==="Escape"&&(this.setExpanded(!1),this.btn.focus())}}customElements.define("starlight-menu-button",s);              Challenges\
+No results found. Try a different search term, or use our global search. <sl-sidebar-state-persist data-hash="10f57ft" class="astro-kku4brbg">
+(() => {
+try {
+if (!matchMedia('(min-width: 50em)').matches) return;
+/\*\* @type {HTMLElement | null} \*/
+const target = document.querySelector('sl-sidebar-state-persist');
+const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+if (!target || !state || target.dataset.hash !== state.hash) return;
+window.\_starlightScrollRestore = state.scroll;
+customElements.define(
+'sl-sidebar-restore',
+class SidebarRestore extends HTMLElement {
+connectedCallback() {
+try {
+const idx = parseInt(this.dataset.index || '');
+const details = this.closest('details');
+if (details && typeof state.open\[idx] === 'boolean') details.open = state.open\[idx];
+} catch {}
+}
+}
+);
+} catch {}
+})();
+Overview       Concepts     <sl-sidebar-restore data-index="0" class="astro-ho4vn3za"></sl-sidebar-restore>      Challenges     Clearance             Available Challenges     <sl-sidebar-restore data-index="1" class="astro-ho4vn3za"></sl-sidebar-restore>        Interstitial Challenge Pages     <sl-sidebar-restore data-index="4" class="astro-ho4vn3za"></sl-sidebar-restore>      Overview     Implementation     Challenge Passage     Detect a Challenge Page response     Resolve a Challenge     Additional configuration           Turnstile     JavaScript Detections             Reference     <sl-sidebar-restore data-index="2" class="astro-ho4vn3za"></sl-sidebar-restore>      Challenge solve rate (CSR)     Private Access Tokens (PAT)     Supported browsers     Supported languages             Troubleshooting     <sl-sidebar-restore data-index="3" class="astro-ho4vn3za"></sl-sidebar-restore>      Common issues     Challenge solve issues\
+(() => {
+const scroller = document.getElementById('starlight\_\_sidebar');
+if (!window.\_starlightScrollRestore || !scroller) return;
+scroller.scrollTop = window.\_starlightScrollRestore;
+delete window.\_starlightScrollRestore;
+})(); </sl-sidebar-state-persist>    GitHubX.comYouTube  <starlight-theme-select>   Select theme   DarkLightAuto    </starlight-theme-select>\
+StarlightThemeProvider.updatePickers();
+const a=document.getElementById("starlight\_\_sidebar"),n=a?.querySelector("sl-sidebar-state-persist"),o="sl-sidebar-state",i=()=>{let t=\[];const e=n?.dataset.hash||"";try{const s=sessionStorage.getItem(o),r=JSON.parse(s||"{}");Array.isArray(r.open)&\&r.hash===e&&(t=r.open)}catch{}return{hash:e,open:t,scroll:a?.scrollTop||0}},c=t=>{try{sessionStorage.setItem(o,JSON.stringify(t))}catch{}},d=()=>c(i()),l=(t,e)=>{const s=i();s.open\[e]=t,c(s)};n?.addEventListener("click",t=>{if(!(t.target instanceof Element))return;const e=t.target.closest("summary")?.closest("details");if(!e)return;const s=e.querySelector("sl-sidebar-restore"),r=parseInt(s?.dataset.index||"");isNaN(r)||l(!e.open,r)});addEventListener("visibilitychange",()=>{document.visibilityState==="hidden"&\&d()});addEventListener("pageHide",d);    <mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-doynk5tl">On this page   Overview     Challenge loops     Troubleshooting    </mobile-starlight-toc>  <starlight-toc data-min-h="2" data-max-h="3">On this page   Overview     Challenge loops     Troubleshooting    </starlight-toc>    <astro-island uid="1gAukP" prefix="r6" component-url="/_astro/FeedbackPrompt.PMF1DbeE.js" component-export="default" renderer-url="/_astro/client.g8QBsImB.js" props="{}" ssr client="idle" opts="{&quot;name&quot;:&quot;FeedbackPrompt&quot;,&quot;value&quot;:true}" await-children>Was this helpful?YesNo</astro-island>     Edit page    Report issue            class t extends HTMLElement{constructor(){super(),this.isManualToggle=!1,this.breadcrumbs=null,this.mainBemClass=null,this.totalWidth=0,this.resizeObserver=null,this.handleTruncatedButtonClick=()=>{this.breadcrumbs?.classList.remove("is-truncated"),this.isManualToggle=!0},this.mainBemClass=this.dataset.mainBemClass||null;const e=this.dataset.id;!("truncated"in this.dataset)||!e||(this.breadcrumbs=document.getElementById(e),this.initializeCrumbs(),this.setupResizeObserver())}initializeCrumbs(){this.breadcrumbs?.querySelectorAll(`.${this.mainBemClass}__crumb`)?.forEach(s=>{this.totalWidth+=s.offsetWidth})}setupResizeObserver(){this.resizeObserver=new ResizeObserver(e=>{e.forEach(s=>{this.checkOverflow(s.target.clientWidth)})}),this.breadcrumbs&\&this.resizeObserver.observe(this.breadcrumbs)}connectedCallback(){this.showHiddenCrumbs()}disconnectedCallback(){this.resizeObserver&\&this.breadcrumbs&&(this.resizeObserver.unobserve(this.breadcrumbs),this.resizeObserver.disconnect())}toggleTruncated(e){this.breadcrumbs?.classList.toggle("is-truncated",e)}showHiddenCrumbs(){const e=this.breadcrumbs?.querySelector(`.${this.mainBemClass}__truncated-button`);e?.removeEventListener("click",this.handleTruncatedButtonClick),e?.addEventListener("click",this.handleTruncatedButtonClick.bind(this))}checkOverflow(e){const s=this.totalWidth>e&&!this.isManualToggle;this.toggleTruncated(s),s||(this.isManualToggle=!1)}}customElements.get("astro-breadcrumbs")||customElements.define("astro-breadcrumbs",t);    <astro-breadcrumbs data-main-bem-class="c-breadcrumbs" data-id="breadcrumbs" data-path-length="3" data-truncated="true">     Directory          …         Challenges          Troubleshooting          Challenge solve issues       </astro-breadcrumbs> {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":\[{"@type":"ListItem","position":1,"item":{"@id":"/directory/","name":"Directory"}},{"@type":"ListItem","position":2,"item":{"@id":"/cloudflare-challenges/","name":"Challenges"}},{"@type":"ListItem","position":3,"item":{"@id":"/cloudflare-challenges/troubleshooting/","name":"Troubleshooting"}},{"@type":"ListItem","position":4,"item":{"@id":"/cloudflare-challenges/troubleshooting/challenge-solve-issues/","name":"Challenge solve issues"}}]}  <astro-island uid="1s3Nfi" prefix="r5" component-url="/_astro/CopyPageButton.aujBhOdV.js" component-export="default" renderer-url="/_astro/client.g8QBsImB.js" props="{}" ssr client="idle" opts="{&quot;name&quot;:&quot;CopyPageButton&quot;,&quot;value&quot;:true}" await-children>Copy page</astro-island>  Challenge solve issues          <starlight-image-zoom>                   </starlight-image-zoom>      Challenge loops
+You may encounter a Challenge loop where the Challenge keeps reappearing without being solved. This is in very specific cases where we detect strong bot signals. If you are a legitimate human, you can follow the troubleshooting guide below to resolve the issue or submit a feedback report. Challenge loops can happen for several reasons:
+
+Network issues: Poor or unstable network connections can prevent the Challenge from being completed.
+Browser configuration: Some browser settings or extensions may block the scripts needed to execute the Challenge.
+Unsupported browsers: Using a browser that is not supported by Turnstile.
+JavaScript disabled: Turnstile relies on JavaScript to function properly.
+Detection errors: If Turnstile suspects bot-like behavior, you may encounter repeated Challenges for verification.
+
+Most Challenges are quick to complete and typically take only a few seconds. If it takes longer, ensure your network is stable and follow the troubleshooting steps.
+NoteIf the issue persists, try switching to a different network or device to rule out any issues with your browser environment.Ensure your browser is updated to the latest version to maintain compatibility.
+Troubleshooting
+Follow the steps below to ensure that your environment is properly configured.
+
+Verify your browser compatibility.
+
+Turnstile supports all major browsers, except Internet Explorer.
+Ensure your browser is up to date. For more information, refer to our Supported browsers.
+
+Disable your browser extensions.
+
+Some browser extensions, such as ad blockers, may block the scripts Turnstile needs to operate.
+Temporarily disable all extensions and reload the page.
+
+Enable JavaScript.
+
+Turnstile requires JavaScript to run. Ensure it is enabled in your browser settings. Refer to your browser's documentation for instructions on enabling JavaScript.
+
+Try Incognito or Private mode.
+
+Use your browser's incognito or private mode to rule out issues caused by extensions or cached data.
+
+Test another browser or device.
+
+Switch to a different browser or device to see if the issue is specific to your current setup.
+
+Avoid VPNs or proxies.
+
+Some virtual private networks (VPN) or proxies may interfere with Turnstile. Disable them temporarily to test.
+
+Switch to a different network.
+
+Your current network may have restrictions causing Turnstile challenges to fail. Try switching to another network, such as a mobile hotspot.
+
+If none of the above resolves your issue, contact the website administrator with the error code and Ray ID or submit a feedback report through the Turnstile widget by selecting Submit Feedback.        Resources     API     New to Cloudflare?     Directory     Sponsorships     Open Source     Support     Help Center     System Status     Compliance     GDPR     Company     cloudflare.com     Our team     Careers     Tools     Cloudflare Radar     Speed Test     Is BGP Safe Yet?     RPKI Toolkit     Certificate Transparency     Community     X     Discord     YouTube     GitHub       © 2026 Cloudflare, Inc.   Privacy Policy    Terms of Use    Report Security Issues    Trademark\
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function OptanonWrapper() {}
+Cookie Settings            Previous  Troubleshooting      Edit page Last updated: Jun 24, 2025    <astro-island uid="1gAukP" prefix="r4" component-url="/_astro/FeedbackPrompt.PMF1DbeE.js" component-export="default" renderer-url="/_astro/client.g8QBsImB.js" props="{}" ssr client="idle" opts="{&quot;name&quot;:&quot;FeedbackPrompt&quot;,&quot;value&quot;:true}" await-children>Was this helpful?YesNo</astro-island>

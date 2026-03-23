@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -160,7 +158,7 @@ At renewal time, instead of automatic payment, you'll receive an invoice via ema
 
 > Tip
 >
-> Do you need to pay by invoice? [Upgrade to a Docker Business or Docker Team plan](https://www.docker.com/pricing/) and choose the annual subscription.
+> Do you need to pay by invoice? [Upgrade to a Docker Business or Docker Team plan](https://www.docker.com/pricing?ref=Docs\&refAction=DocsBillingPaymentMethod) and choose the annual subscription.
 
 ## [Verify a bank account](#verify-a-bank-account)
 

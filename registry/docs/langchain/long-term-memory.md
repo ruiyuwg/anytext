@@ -2,11 +2,11 @@
 
 Source: https://docs.langchain.com/oss/javascript/deepagents/long-term-memory
 
-Learn how to extend deep agents with persistent memory across threads
+Learn how to extend Deep Agents with persistent memory across threads
 
-Deep agents come with a local filesystem to offload memory. By default, this filesystem is stored in agent state and is **transient to a single thread**—files are lost when the conversation ends.
+Deep Agents come with a local filesystem to offload memory. By default, this filesystem is stored in agent state and is **transient to a single thread** (files are lost when the conversation ends).
 
-You can extend deep agents with **long-term memory** by using a `CompositeBackend` that routes specific paths to persistent storage. This enables hybrid storage where some files persist across threads while others remain ephemeral.
+You can extend Deep Agents with **long-term memory** by using a `CompositeBackend` that routes specific paths to persistent storage. This enables hybrid storage where some files persist across threads while others remain ephemeral.
 
 ```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 graph LR
@@ -49,7 +49,7 @@ const agent = createDeepAgent({
 
 ## How it works
 
-When using `CompositeBackend`, deep agents maintain **two separate filesystems**:
+When using `CompositeBackend`, Deep Agents maintain **two separate filesystems**:
 
 ### 1. Short-term (transient) filesystem
 
@@ -110,7 +110,7 @@ await agent.invoke({
 
 ## Accessing memories from external code (LangSmith)
 
-If deploying your agent on LangSmith, you can read or write memories from server-side code (outside the agent) using the [Store API](/langsmith/agent-server-api/store). The `StoreBackend` stores files using the namespace `(assistant_id, "filesystem")`.
+If deploying your agent on LangSmith, you can read or write memories from server-side code (outside the agent) using the [Store API](/langsmith/custom-store). The `StoreBackend` stores files using the namespace `(assistant_id, "filesystem")`.
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { Client } from "@langchain/langgraph-sdk";
@@ -140,7 +140,7 @@ const items = await client.store.searchItems([assistantId, "filesystem"]);
 
 The key does not include the `/memories/` prefix because `CompositeBackend` strips it before storing. See [Path routing](#path-routing) for details.
 
-For more information, see the [Store API reference](/langsmith/agent-server-api/store).
+For more information, see the [Store API reference](/langsmith/custom-store).
 
 ## Use cases
 

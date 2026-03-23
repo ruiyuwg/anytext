@@ -148,7 +148,7 @@ You can reference the `Props` of these components using the [`ComponentProps` ty
 
 This component is powered internally by Shiki. It supports all popular Shiki themes and languages as well as several other Shiki options such as custom themes, languages, [transformers](#transformers), and default colors.
 
-These values are passed to the `<Code />` component using the `theme`, `lang`, `transformers`, and `defaultColor` attributes respectively as props. The `<Code />` component will not inherit your `shikiConfig` settings for Markdown code blocks.
+These values are passed to the `<Code />` component using the `theme`, `lang`, [`embeddedLangs`](#embeddedlangs), [`transformers`](#transformers), and `defaultColor` attributes respectively as props. The `<Code />` component will not inherit your `shikiConfig` settings for Markdown code blocks.
 
 ```astro
 ---
@@ -169,13 +169,53 @@ import { Code } from 'astro:components';
 <Code code={`const foo = 'bar';`} lang="js" defaultColor={false} />
 ```
 
-#### Transformers
+#### `embeddedLangs`
 
-[Section titled “Transformers”](#transformers)
+[Section titled “embeddedLangs”](#embeddedlangs)
+
+**Type:** `string[] | undefined`
+
+**Added in:** `astro@6.0.0` New
+
+Any additional languages to be included for syntax highlighting by Shiki.
+
+A `lang` value may include support for highlighting some additional languages by default (e.g. `lang="svelte"` will also provide highlighting for `ts`).
+
+Use `embeddedLangs` to include support for additional, non-standard language combinations (e.g. `jsx` support when `lang="vue"`).
+
+src/pages/index.astro
+
+```astro
+---
+import { Code } from 'astro:components'
+
+
+const code = `<script setup lang="tsx">
+const Text = ({ text }: { text: string }) => <div>{text}</div>;
+</script>
+
+
+<template>
+  <Text text="Hello world" />
+</template>
+`
+---
+<Code
+  lang="vue"
+  embeddedLangs={["tsx"]}
+  code={code}
+/>
+```
+
+#### `transformers`
+
+[Section titled “transformers”](#transformers)
+
+**Type:** `ShikiTransformer[] | undefined`
 
 **Added in:** `astro@4.11.0`
 
-[Shiki transformers](https://shiki.style/packages/transformers#shikijs-transformers) can optionally be applied to code by passing them in through the `transformers` property as an array. Since Astro v4.14.0, you can also provide a string for [Shiki’s `meta` attribute](https://shiki.style/guide/transformers#meta) to pass options to transformers.
+An array of [Shiki transformers](https://shiki.style/packages/transformers#shikijs-transformers) to be applied to your `code`. Since Astro v4.14.0, you can also provide a string for [Shiki’s `meta` attribute](https://shiki.style/guide/transformers#meta) to pass options to transformers.
 
 Note that `transformers` only applies classes and you must provide your own CSS rules to target the elements of your code block.
 

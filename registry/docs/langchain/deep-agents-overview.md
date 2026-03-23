@@ -4,7 +4,7 @@ Source: https://docs.langchain.com/oss/javascript/deepagents/overview
 
 Build agents that can plan, use subagents, and leverage file systems for complex tasks
 
-Deep agents are the easiest way to start building agents and applications powered by LLMs—with builtin capabilities for task planning, file systems for context management, subagent-spawning, and long-term memory.
+The easiest way to start building agents and applications powered by LLMs—with built-in capabilities for task planning, file systems for context management, subagent-spawning, and long-term memory.
 You can use deep agents for any task, including complex, multi-step tasks.
 
 We think of `deepagents` as an ["agent harness"](/oss/javascript/concepts/products#agent-harnesses-like-the-deep-agents-sdk). It is the same core tool calling loop as other agent frameworks, but with built-in tools and capabilities.
@@ -50,7 +50,7 @@ console.log(
 );
 ```
 
-See the [Quickstart](/oss/javascript/deepagents/quickstart/) and [Customization guide](/oss/javascript/deepagents/customization/) to get started building your own agents and applications with deep agents.
+See the [Quickstart](/oss/javascript/deepagents/quickstart/) and [Customization guide](/oss/javascript/deepagents/customization/) to get started building your own agents and applications with Deep Agents.
 
 Use [LangSmith](/langsmith/home) to trace requests, debug agent behavior, and evaluate outputs. Set `LANGSMITH_TRACING=true` and your API key to get started.
 
@@ -75,9 +75,9 @@ Use the **Deep Agents CLI** when you want a coding agent on the command line, bu
 
 ## Core capabilities
 
-Deep agents include a built-in [`write_todos`](/oss/javascript/langchain/middleware/built-in#to-do-list) tool that enables agents to break down complex tasks into discrete steps, track progress, and adapt plans as new information emerges.
+Deep Agents include a built-in [`write_todos`](/oss/javascript/langchain/middleware/built-in#to-do-list) tool that enables agents to break down complex tasks into discrete steps, track progress, and adapt plans as new information emerges.
 
-File system tools ([`ls`](/oss/javascript/deepagents/harness#file-system-access), [`read_file`](/oss/javascript/deepagents/harness#file-system-access), [`write_file`](/oss/javascript/deepagents/harness#file-system-access), [`edit_file`](/oss/javascript/deepagents/harness#file-system-access)) allow agents to offload large context to in-memory or filesystem storage, preventing context window overflow and enabling work with variable-length tool results.
+File system tools ([`ls`](/oss/javascript/deepagents/harness#virtual-filesystem-access), [`read_file`](/oss/javascript/deepagents/harness#virtual-filesystem-access), [`write_file`](/oss/javascript/deepagents/harness#virtual-filesystem-access), [`edit_file`](/oss/javascript/deepagents/harness#virtual-filesystem-access)) allow agents to offload large context to in-memory or filesystem storage, preventing context window overflow and enabling work with variable-length tool results.
 
 The virtual filesystem is powered by [pluggable backends](/oss/javascript/deepagents/backends) that you can swap to fit your use case. Choose from in-memory state, local disk, LangGraph store for cross-thread persistence, [sandboxes](/oss/javascript/deepagents/sandboxes) for isolated code execution (Modal, Daytona, Deno), or combine multiple backends with composite routing. You can also implement your own custom backend.
 

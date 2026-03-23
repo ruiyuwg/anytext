@@ -4,13 +4,18 @@ Use the Stripe Tax Extension for WooCommerce to automatically calculate sales ta
 
 Use the Stripe Tax Extension for WooCommerce to automatically calculate [sales tax, VAT, and GST](https://docs.stripe.com/tax/calculating.md) for all of your transactions. After you install the Stripe Tax Extension for WooCommerce, you can connect it to your Stripe account and configure your tax settings.
 
-If you previously configured these tax settings in the [Stripe Dashboard](https://dashboard.stripe.com/test/settings/tax), the values populate automatically in the Stripe Tax extension. When you edit the values in the extension, the changes automatically update in the Stripe Dashboard in live mode. The WooCommerce extension doesn’t support sandbox testing. You can conduct tests in live mode, but transactions incur fees according to the [Pay-as-you-go (PAYG) pricing plan](https://support.stripe.com/questions/understanding-stripe-tax-pricing#:~:text=Tax%20Basic%3A%20Pay%2Das%2Dyou%2Dgo).
+If you previously configured these tax settings in the [Stripe Dashboard](https://dashboard.stripe.com/test/settings/tax), the values populate automatically in the Stripe Tax extension.
 
 If your menu varies from the following steps, refer to the [WordPress instructions](https://wordpress.com/support/plugins/use-your-plugins/).
 
 ## Connect your Stripe account
 
-On your website’s dashboard, go to **WooCommerce** > **Settings**. On the **Stripe Tax** tab, click **Connect with Stripe** to log in to your Stripe account or create a new one.
+1. Install the [WooCommerce Tax Stripe App](https://marketplace.stripe.com/apps/woocommerce-tax) on your Stripe account and click **View API keys** and copy the restricted key. You can install and test the app on a sandbox before you deploy it.
+2. On your WooCommerce back office, navigate to **WooCommerce** > **Settings** and select the **Stripe Tax** tab.
+3. Choose the type of access:  **Live** mode or **Sandbox mode**.
+4. Enter the **Restricted key** from the Stripe App into the **Secret key**.
+
+Click **Test connection** to verify that your key is valid and entered correctly.
 
 ## Install the extension
 
@@ -22,13 +27,14 @@ On your website’s dashboard, go to **WooCommerce** > **Settings**. On the **St
 
 ## Configure your sales tax settings
 
-On the **Stripe Tax** tab, under **Configure your sales tax settings**, complete the following:
+The following configuration should be done in your WooCommerce back office:
 
-1. Enter your head office address, which is your company’s legal address.
-2. Choose your default [product tax code](https://docs.stripe.com/tax/tax-codes.md), which allows Stripe to calculate the tax rate for categories of products.
-3. Click **Save changes**.
+1. In the **Stripe Tax** tab, under **Configure your sales tax settings**, you can choose:
+   1. The default [product tax code](https://docs.stripe.com/tax/tax-codes.md) to use in the shop.
+   2. The [product tax code](https://docs.stripe.com/tax/tax-codes.md) to apply to all taxable fees.
+2. In the **Tax** tab, decide if the prices you set for your products are inclusive or exclusive of tax.
 
-On the **Tax** tab, you can decide if the prices you set for your products are inclusive or exclusive of tax.
+Set your business address in your Stripe Dashboard.
 
 ## Manage tax registrations
 

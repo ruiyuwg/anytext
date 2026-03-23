@@ -94,7 +94,7 @@ paymentElement.mount('#payment-element');
 Then you can listen to [change events](https://docs.stripe.com/js/element/events/on_change?type=paymentElement#element_on_change-event) on the Address Element. When the address changes, [re-estimate](https://docs.stripe.com/tax/subscriptions.md?estimate=after#estimate-taxes-total) the taxes and the total.
 
 ```javascript
-addressElement.on('change', function(event) {
+addressElement.on('change', async function(event) {
   // Throttle your requests to avoid overloading your server or hitting
   // Stripe's rate limits.
   const { tax, total } = await updateEstimate(event.value.address);
@@ -111,7 +111,7 @@ addressElement.on('change', function(event) {
 When your customer submits the form, call [elements.submit()](https://docs.stripe.com/js/elements/submit) to validate the form fields and collect any data required for wallets. You must wait for this function’s promise to resolve before performing any other operations.
 
 ```javascript
-document.querySelector("#form").addEventListener("submit", function(event) {
+document.querySelector("#form").addEventListener("submit", async function(event) {
   // We don't want to let default form submission happen here,
   // which would refresh the page.
   event.preventDefault();
@@ -319,8 +319,9 @@ You can apply taxes at the subscription level and the subscription item level an
 
 When invoices are generated for subscriptions, tax rates are copied from the subscription to the invoice. In the example below, the first subscription item has two tax rates: 3% and 5%, which overrides the 1% from the subscription level tax rate. The second item doesn’t have any tax rates set directly on it, so the 1% from the subscription level tax rate is automatically applied.
 
+|  |
+|  |
 | Subscription item 1 | 3% and 5%    | ➡️ | Invoice item 1 | 3% and 5%    |
-| ------------------- | ------------ | -- | -------------- | ------------ |
 | Subscription item 2 | (no tax set) | ➡️ | Invoice item 2 | (no tax set) |
 | Subscription        | 1%           | ➡️ | Invoice        | 1%           |
 

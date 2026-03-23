@@ -199,7 +199,7 @@ A list of messages containing the content of the conversation.
 
 
 
-  Use this field to send token counts and/or costs with your model's output. See [this guide](/langsmith/log-llm-trace#provide-token-and-cost-information) for more details.
+  Use this field to send token counts and/or costs with your model's output. See [Provide token and cost information](/langsmith/log-llm-trace#provide-token-and-cost-information) for more details.
 ```
 
 ### Examples

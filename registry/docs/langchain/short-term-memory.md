@@ -16,6 +16,8 @@ Even if your model supports the full context length, most LLMs still perform poo
 
 Chat models accept context using [messages](/oss/javascript/langchain/messages), which include instructions (a system message) and inputs (human messages). In chat applications, messages alternate between human inputs and model responses, resulting in a list of messages that grows longer over time. Because context windows are limited, many applications can benefit from using techniques to remove or "forget" stale information.
 
+Need to remember information **across** conversations? Use [long-term memory](/oss/javascript/langchain/long-term-memory) to store and recall user-specific or application-level data across different threads and sessions.
+
 ## Usage
 
 To add short-term memory (thread-level persistence) to an agent, you need to specify a `checkpointer` when creating an agent.
@@ -96,7 +98,7 @@ const result = await agent.invoke({
 
 ## Common patterns
 
-With [short-term memory](#add-short-term-memory) enabled, long conversations can exceed the LLM's context window. Common solutions are:
+With [short-term memory](#usage) enabled, long conversations can exceed the LLM's context window. Common solutions are:
 
 ```
 Remove first or last N messages (before calling LLM)
@@ -506,8 +508,7 @@ for (const message of result.messages) {
         "fontFamily": "monospace",
         "flowchart": {
         "curve": "basis"
-        },
-        "themeVariables": {"edgeLabelBackground": "transparent"}
+        }
     }
 }%%
 graph TD
@@ -567,8 +568,7 @@ const agent = createAgent({
         "fontFamily": "monospace",
         "flowchart": {
         "curve": "basis"
-        },
-        "themeVariables": {"edgeLabelBackground": "transparent"}
+        }
     }
 }%%
 graph TD

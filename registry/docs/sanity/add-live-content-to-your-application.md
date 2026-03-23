@@ -8,11 +8,17 @@ The next-sanity library offers the most seamless integration with the API. The J
 
 Enable live content with only a few lines of code with next-sanity.
 
-### Prerequisites:
+#### Next.js + Sanity + Visual Editing
+
+If you plan to set up Next.js, Sanity, Visual Editing, and the Live Content API, check out our Next.js Visual Editing guide for a complete implementation.
+[Set up Next.js, live content, and visual editing](https://www.sanity.io/docs/visual-editing/visual-editing-with-next-js-app-router)
+
+### Prerequisites
 
 - A new or existing Sanity project.
-- Add your front end or deployment target's  to the projects [CORS origins](https://www.sanity.io/docs/content-lake/cors). This is found in the project's API section at [sanity.io/manage](https://sanity.io/manage).
-- A Next.js application built with the [app router architecture](https://nextjs.org/docs/app/building-your-application/routing#the-app-router). The Live Content features in `next-sanity` do not support app built with pages router.
+- Add your frontend or deployment target's origin to the project's [CORS origins](https://www.sanity.io/docs/content-lake/cors). This is found in the project's API section at [sanity.io/manage](https://sanity.io/manage).
+- A Next.js application built with the [app router architecture](https://nextjs.org/docs/app/building-your-application/routing#the-app-router). The Live Content features in `next-sanity` do not support apps built with the pages router.
+- This guide assumes `next-sanity` v12 or later.
 
 ### Install and configure the client
 
@@ -22,9 +28,7 @@ You can install, setup, and configure Sanity in your existing Next.js project wi
 npx sanity@latest init
 ```
 
-The `init` command will guide you through linking your project.
-
-Alternatively, install the package or update it to the latest version if you have an earlier version.
+Alternatively, install the package or update it to the latest version.
 
 ```sh
 npm install next-sanity@latest
@@ -41,7 +45,7 @@ import { dataset, projectId } from "../env";
 export const client = createClient({
   projectId,
   dataset,
-  apiVersion: "v2021-03-25",
+  apiVersion: "2026-03-01",
   useCdn: true
 });
 ```
@@ -91,7 +95,7 @@ In this example, the `data` response is destructured to `post` and `sanityFetch`
 
 ### Enable the SanityLive component
 
-The final step to enable the Live Content API is adding the `SanityLive` React component. It listens for changes in your data and works with your `sanityFetch` queries to efficiently update content . Include it in application so it renders on any page that needs live content.
+The final step to enable the Live Content API is adding the `SanityLive` React component. It listens for changes in your data and works with your `sanityFetch` queries to efficiently update content. Include it in your application so it renders on any page that needs live content.
 
 > \[!WARNING]
 > Embedded studios
@@ -123,11 +127,9 @@ export default function RootLayout({
 
 ### Next steps
 
-- For more on how to incorporate the Live Content API in your Next.js application, as well as how to set up Visual Editing and Draft Previews, check out the [next-sanity](https://github.com/sanity-io/next-sanity/blob/main/packages/next-sanity/README.md#live-content-api) readme.
+- To learn more about the `next-sanity` toolkit and how it fits together with Visual Editing and caching, see the [Next.js overview](https://www.sanity.io/docs/nextjs/introduction).
 - Level up with [Work-ready Next.js](https://www.sanity.io/learn/track/work-ready-next-js) on Sanity Learn.
 - Dive into the [Sanity + Next.js example application](https://github.com/sanity-io/next.js/tree/canary/examples/cms-sanity).
-
-Looking for even more ways to incorporate Sanity and Next.js? Explore the ecosystem of guides, plugins, and starter templates available on the [Exchange](https://sanity.io/exchange).
 
 ## Create your own integration
 
@@ -135,18 +137,18 @@ If there isn't an official library for your framework that enables live content,
 
 [Live Content API Examples](https://github.com/sanity-io/lcapi-examples)
 
-Below, you'll find a minimal example using the Sanity JS client.
+Below, you'll find a minimal example using the [Sanity JS client](https://www.sanity.io/docs/apis-and-sdks/js-client-getting-started).
 
-### Prerequisites:
+### Prerequisites
 
 - A new or existing Sanity project.
-- Add your front end or deployment target's  to the projects [CORS origins](https://www.sanity.io/docs/content-lake/cors). This is found in the project's API section at [sanity.io/manage](https://sanity.io/manage).
+- Add your frontend or deployment target's origin to the project's [CORS origins](https://www.sanity.io/docs/content-lake/cors). This is found in the project's API section at [sanity.io/manage](https://sanity.io/manage).
 
 ### Install and configure the client
 
 First, install the latest version of the client.
 
-```
+```sh
 npm install @sanity/client@latest
 ```
 
@@ -156,7 +158,7 @@ Configure your `@sanity/client` with your project settings and the latest API ve
 const client = createClient({ 
   projectId: "your-project-id", 
   dataset: "your-dataset", 
-  apiVersion: "v2021-03-25",
+  apiVersion: "2026-03-01",
   useCdn: true
 })
 ```
@@ -165,14 +167,14 @@ const client = createClient({
 
 Here's a high-level overview of how the Live Content API works:
 
-1. Every response from the content lake now includes \*sync tags. \*If you want to keep that content up to date in real time, you need to store the tags.
+1. Every response from the Content Lake now includes \*sync tags. \*If you want to keep that content up to date in real time, you need to store the tags.
 2. Then you can subscribe to a stream of live updates by calling the `client.live.events()` method. This will return an Observable that emits events whenever the content in the dataset changes.
 3. Whenever you receive an event, you can check if any of the event tags match the sync tags from content you want to keep up to date.
 4. If there is a match, you can refetch the content using the event ID as the `lastLiveEventId` argument in your `client.fetch` call. This ensures that you always get the latest version of the content from the CDN, avoiding any stale data.
 
 ### Minimal example
 
-Here is a minimal example running in the console. It keeps a single, pre-defined, document in sync using sync tags:
+Here is a minimal example running in the console. It keeps a single, predefined document in sync using sync tags:
 
 ```typescript
 import { createClient } from "@sanity/client"
@@ -181,7 +183,7 @@ import { createClient } from "@sanity/client"
 const client = createClient({ 
   projectId: "your-project-id", 
   dataset: "your-dataset", 
-  apiVersion: "v2021-03-25", 
+  apiVersion: "2026-03-01", 
   useCdn: true
 })
 
@@ -238,6 +240,9 @@ In this example:
 7. We update the stored syncTags and re-render with the fresh data.
 8. Finally, we unsubscribe from the live updates when no longer needed.
 
-This pattern allows your application to efficiently keep its content in sync with the latest changes in your Sanity dataset. For additional examples, including listening for drafts, see the [JS client documentation](https://github.com/sanity-io/client?tab=readme-ov-file#listening-to-live-content-updates).
+This pattern allows your application to efficiently keep its content in sync with the latest changes in your Sanity dataset. For additional examples, including listening for drafts, see the [JS client documentation](https://www.sanity.io/docs/apis-and-sdks/js-client-getting-started).
 
-Learn more about the underpinnings of the Live Content API and sync tags by exploring the [Live reference docs](https://www.sanity.io/docs/http-reference/live).
+### Next steps
+
+- Learn more about sync tags and the underpinnings of the [Live Content API](https://www.sanity.io/docs/content-lake/live-content-api).
+- For reference details when interacting directly with the API, check the [Live reference docs](https://www.sanity.io/docs/http-reference/live).

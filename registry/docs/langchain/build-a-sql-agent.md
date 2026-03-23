@@ -310,105 +310,6 @@ async function getSchema() {
 }
 ```
 
-## 6. Implement human-in-the-loop review
-
-It can be prudent to check the agent's SQL queries before they are executed for any unintended actions or inefficiencies.
-
-LangChain agents feature support for built-in [human-in-the-loop middleware](/oss/javascript/langchain/human-in-the-loop) to add oversight to agent tool calls. Let's configure the agent to pause for human review on calling the `sql_db_query` tool:
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-from langchain.agents import create_agent
-from langchain.agents.middleware import HumanInTheLoopMiddleware # [!code highlight]
-from langgraph.checkpoint.memory import InMemorySaver # [!code highlight]
-
-
-agent = create_agent(
-    model,
-    tools,
-    system_prompt=system_prompt,
-    middleware=[ # [!code highlight]
-        HumanInTheLoopMiddleware( # [!code highlight]
-            interrupt_on={"sql_db_query": True}, # [!code highlight]
-            description_prefix="Tool execution pending approval", # [!code highlight]
-        ), # [!code highlight]
-    ], # [!code highlight]
-    checkpointer=InMemorySaver(), # [!code highlight]
-)
-```
-
-We've added a [checkpointer](/oss/javascript/langchain/short-term-memory) to our agent to allow execution to be paused and resumed. See the [human-in-the-loop guide](/oss/javascript/langchain/human-in-the-loop) for detalis on this as well as available middleware configurations.
-
-On running the agent, it will now pause for review before executing the `sql_db_query` tool:
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-question = "Which genre on average has the longest tracks?"
-config = {"configurable": {"thread_id": "1"}} # [!code highlight]
-
-for step in agent.stream(
-    {"messages": [{"role": "user", "content": question}]},
-    config, # [!code highlight]
-    stream_mode="values",
-):
-    if "__interrupt__" in step: # [!code highlight]
-        print("INTERRUPTED:") # [!code highlight]
-        interrupt = step["__interrupt__"][0] # [!code highlight]
-        for request in interrupt.value["action_requests"]: # [!code highlight]
-            print(request["description"]) # [!code highlight]
-    elif "messages" in step:
-        step["messages"][-1].pretty_print()
-    else:
-        pass
-```
-
-```
-...
-
-INTERRUPTED:
-Tool execution pending approval
-
-Tool: sql_db_query
-Args: {'query': 'SELECT g.Name AS Genre, AVG(t.Milliseconds) AS AvgTrackLength FROM Track t JOIN Genre g ON t.GenreId = g.GenreId GROUP BY g.Name ORDER BY AvgTrackLength DESC LIMIT 1;'}
-```
-
-We can resume execution, in this case accepting the query, using [Command](/oss/javascript/langgraph/use-graph-api#combine-control-flow-and-state-updates-with-command):
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-from langgraph.types import Command # [!code highlight]
-
-for step in agent.stream(
-    Command(resume={"decisions": [{"type": "approve"}]}), # [!code highlight]
-    config,
-    stream_mode="values",
-):
-    if "messages" in step:
-        step["messages"][-1].pretty_print()
-    elif "__interrupt__" in step:
-        print("INTERRUPTED:")
-        interrupt = step["__interrupt__"][0]
-        for request in interrupt.value["action_requests"]:
-            print(request["description"])
-    else:
-        pass
-```
-
-```
-================================== Ai Message ==================================
-Tool Calls:
-  sql_db_query (call_7oz86Epg7lYRqi9rQHbZPS1U)
- Call ID: call_7oz86Epg7lYRqi9rQHbZPS1U
-  Args:
-    query: SELECT Genre.Name, AVG(Track.Milliseconds) AS AvgDuration FROM Track JOIN Genre ON Track.GenreId = Genre.GenreId GROUP BY Genre.Name ORDER BY AvgDuration DESC LIMIT 5;
-================================= Tool Message =================================
-Name: sql_db_query
-
-[('Sci Fi & Fantasy', 2911783.0384615385), ('Science Fiction', 2625549.076923077), ('Drama', 2575283.78125), ('TV Shows', 2145041.0215053763), ('Comedy', 1585263.705882353)]
-================================== Ai Message ==================================
-
-The genre with the longest average track length is "Sci Fi & Fantasy" with an average duration of about 2,911,783 milliseconds, followed by "Science Fiction" and "Drama."
-```
-
-Refer to the [human-in-the-loop guide](/oss/javascript/langchain/human-in-the-loop) for details.
-
 ## 4. Execute SQL queries
 
 Before running the command, do a check to check the LLM generated command in ` _safe_sql`:
@@ -545,7 +446,7 @@ You can inspect all aspects of the above run, including steps taken, tools invok
 In addition to the previously mentioned packages, you will need to:
 
 ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-npm i -g langgraph-cli@latest
+npm i -g @langchain/langgraph-cli@latest
 ```
 
 In directory you will run in, you will need a `langgraph.json` file with the following contents:
@@ -680,27 +581,4 @@ For deeper customization, check out [this tutorial](/oss/javascript/langgraph/sq
 
 
 [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-```
-
-# Frontend
-
-Source: https://docs.langchain.com/oss/javascript/langchain/streaming/frontend
-
-Build generative UIs with real-time streaming from LangChain agents, LangGraph graphs, and custom APIs
-
-The `useStream` React hook provides seamless integration with LangGraph streaming capabilities. It handles all the complexities of streaming, state management, and branching logic, letting you focus on building great generative UI experiences.
-
-Key features:
-
-- **Messages streaming** — Handle a stream of message chunks to form a complete message
-- **Automatic state management** — for messages, interrupts, loading states, and errors
-- **Conversation branching** — Create alternate conversation paths from any point in the chat history
-- **UI-agnostic design** — Bring your own components and styling
-
-## Installation
-
-Install the LangGraph SDK to use the `useStream` hook in your React application:
-
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-npm install @langchain/langgraph-sdk
 ```

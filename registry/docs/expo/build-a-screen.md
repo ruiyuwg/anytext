@@ -8,7 +8,7 @@ The screen above displays an image and two buttons. The app user can select an i
 
 Once the user selects an image, they can add a sticker to it. So, let's start creating this screen.
 
-[Watch: Building a screen in your universal Expo app](https://www.youtube.com/watch?v=3rcOP8xDwTQ)
+[Watch: Building a screen in your universal Expo app](https://www.youtube.com/watch?v=3rcOP8xDwTQ) — Build the StickerSmash app's first screen using Pressable, Expo Image, and other core components to create an image picker layout.
 
 ## Break down the screen
 

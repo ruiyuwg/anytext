@@ -7,7 +7,7 @@ To configure Android App Links for your app, you need to:
 - Add `intentFilters` and set `autoVerify` to true in your project's app config
 - Set up two-way association to verify your website and native app
 
-[Watch: Set up Android App Links with Expo Router](https://www.youtube.com/watch?v=kNbEEYlFIPs\&t=399)
+[Watch: Set up Android App Links with Expo Router](https://www.youtube.com/watch?v=kNbEEYlFIPs\&t=399) — Configure intent filters with autoVerify, set up the two-way association between your website and app, and verify Android App Links.
 
 ## Add `intentFilters` to the app config
 

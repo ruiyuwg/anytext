@@ -17,9 +17,9 @@ Understanding these patterns helps you move beyond the pre-written code in Strip
 
 ### Everything is an object
 
-Everything in your Stripe account is an object, whether you create it with the API or not. Your balance corresponds to a [Balance](https://docs.stripe.com/api/balance.md) object, you track customers with [Customer](https://docs.stripe.com/api/customers.md) objects, you store payment details in [PaymentMethod](https://docs.stripe.com/api/payment_methods.md) objects, and so on.
+Everything in your Stripe account is an object, whether you create it with the API or not. Your balance corresponds to a [Balance](https://docs.stripe.com/api/balance.md) object, you track recurring customer charges with [Subscription](https://docs.stripe.com/api/subscriptions.md) objects, you store payment details in [PaymentMethod](https://docs.stripe.com/api/payment_methods.md) objects, and so on.
 
-Even low-code and no-code integrations produce these objects. So do actions you perform in the Dashboard. For instance, when you manually create a customer in the Dashboard, it still creates a Customer object.
+Even low-code and no-code integrations produce these objects. So do actions you perform in the Dashboard. For instance, when you manually create a product in the Dashboard, it still creates a [Product](https://docs.stripe.com/api/products.md) object.
 
 ### Objects have lives
 

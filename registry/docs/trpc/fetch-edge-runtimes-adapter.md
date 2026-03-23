@@ -5,13 +5,13 @@ import Tabs from '@theme/Tabs';
 
 You can create a tRPC server within any edge runtime that follow the [WinterCG](https://wintercg.org/), specifically the [Minimum Common Web Platform API](https://common-min-api.proposal.wintercg.org/) specification.
 
-Some of these runtimes includes, but not limited to:
+Some of these runtimes include, but are not limited to:
 
 - Cloudflare Workers
 - Deno Deploy
 - Vercel Edge Runtime (& Next.js Edge Runtime)
 
-This also makes it easy to integrate into frameworks that uses the web platform APIs to represent requests and responses, such as:
+This also makes it easy to integrate into frameworks that use the web platform APIs to represent requests and responses, such as:
 
 - Astro (SSR mode)
 - Remix
@@ -27,35 +27,35 @@ This also makes it easy to integrate into frameworks that uses the web platform 
 
 
   Cloudflare Workers example
-
-
+  
+    
       Source
-
-
+    
+  
 
 
   Deno Deploy example
-
-
+  
+    
       Source
-
-
+    
+  
 
 
   Next.js Edge Runtime example
-
-
+  
+    
       Source
-
-
+    
+  
 
 
   Vercel Edge Runtime example
-
-
+  
+    
       Source
-
-
+    
+  
 ```
 
 ## How to use tRPC server with an edge runtime
@@ -87,6 +87,12 @@ import { InstallSnippet } from '@site/src/components/InstallSnippet';
 
 > [Zod](https://github.com/colinhacks/zod) isn't a required dependency, but it's used in the sample router below.
 
+If you use an AI coding agent, install tRPC skills for better code generation:
+
+```bash
+npx @tanstack/intent@latest install
+```
+
 ### Create the router
 
 First of all you need a [router](/docs/server/routers) to handle your queries, mutations and subscriptions.
@@ -95,10 +101,20 @@ A sample router is given below, save it in a file named `router.ts`.
 
 router.ts
 
-```ts title='router.ts'
-import { initTRPC } from "@trpc/server";
-import { z } from "zod";
-import { Context } from "./context";
+```ts twoslash title='router.ts'
+// @filename: context.ts
+import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
+export function createContext({ req, resHeaders }: FetchCreateContextFnOptions) {
+  const user = { name: req.headers.get('username') ?? 'anonymous' };
+  return { req, resHeaders, user };
+}
+export type Context = Awaited<ReturnType<typeof createContext>>;
+
+// @filename: router.ts
+// ---cut---
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+import type { Context } from './context';
 
 type User = {
   id: string;
@@ -144,33 +160,51 @@ A sample context is given below, save it in a file named `context.ts`:
 
 context.ts
 
-```ts title='context.ts'
-import { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
+```ts twoslash title='context.ts'
+import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
 
 export function createContext({
   req,
   resHeaders,
 }: FetchCreateContextFnOptions) {
-  const user = { name: req.headers.get("username") ?? "anonymous" };
+  const user = { name: req.headers.get('username') ?? 'anonymous' };
   return { req, resHeaders, user };
 }
 
 export type Context = Awaited<ReturnType<typeof createContext>>;
 ```
 
-## Runtimes-specific setup
+## Runtime-specific setup
 
 ### Astro
 
-```ts title='src/pages/trpc/[trpc].ts'
-import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import type { APIRoute } from "astro";
-import { createContext } from "../../server/context";
-import { appRouter } from "../../server/router";
+```ts twoslash title='src/pages/trpc/[trpc].ts'
+// @filename: astro.d.ts
+declare module 'astro' {
+  export type APIRoute = (context: { request: Request }) => Response | Promise<Response>;
+}
+
+// @filename: src/server/context.ts
+import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
+export function createContext(opts: FetchCreateContextFnOptions) {
+  return { user: { name: opts.req.headers.get('username') ?? 'anonymous' } };
+}
+
+// @filename: src/server/router.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+
+// @filename: src/pages/trpc/[trpc].ts
+// ---cut---
+import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
+import type { APIRoute } from 'astro';
+import { createContext } from '../../server/context';
+import { appRouter } from '../../server/router';
 
 export const ALL: APIRoute = (opts) => {
   return fetchRequestHandler({
-    endpoint: "/trpc",
+    endpoint: '/trpc',
     req: opts.request,
     router: appRouter,
     createContext,
@@ -184,15 +218,28 @@ You need the [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)
 
 #### Create Cloudflare Worker
 
-```ts title='server.ts'
-import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { createContext } from "./context";
-import { appRouter } from "./router";
+```ts twoslash title='server.ts'
+// @filename: context.ts
+import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
+export function createContext(opts: FetchCreateContextFnOptions) {
+  return { user: { name: opts.req.headers.get('username') ?? 'anonymous' } };
+}
+
+// @filename: router.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+
+// @filename: server.ts
+// ---cut---
+import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
+import { createContext } from './context';
+import { appRouter } from './router';
 
 export default {
   async fetch(request: Request): Promise<Response> {
     return fetchRequestHandler({
-      endpoint: "/trpc",
+      endpoint: '/trpc',
       req: request,
       router: appRouter,
       createContext,
@@ -203,8 +250,8 @@ export default {
 
 Run `wrangler dev server.ts` and your endpoints will be available via HTTP!
 
-| Endpoint     | HTTP URI                                                                                             |
-| ------------ | ---------------------------------------------------------------------------------------------------- |
+| Endpoint     | HTTP URI                                                                                                       |
+| ------------ | -------------------------------------------------------------------------------------------------------------- |
 | `getUser`    | `GET http://localhost:8787/trpc/getUserById?input=INPUT` where `INPUT` is a URI-encoded JSON string. |
 | `createUser` | `POST http://localhost:8787/trpc/createUser` with `req.body` of type `User`                          |
 
@@ -215,36 +262,36 @@ This assumes you have Deno installed and setup. Refer to their [getting started 
 #### Update the imports in `router.ts`
 
 ```ts title='router.ts'
-import { initTRPC } from "npm:@trpc/server";
-import { z } from "npm:zod";
-import { Context } from "./context.ts";
+import { initTRPC } from 'npm:@trpc/server';
+import { z } from 'npm:zod';
+import { Context } from './context.ts';
 ```
 
 #### Update the imports in `context.ts`
 
 ```ts title='context.ts'
-import { FetchCreateContextFnOptions } from "npm:@trpc/server/adapters/fetch";
+import { FetchCreateContextFnOptions } from 'npm:@trpc/server/adapters/fetch';
 ```
 
 #### Use `fetchRequestHandler` with Oak in `app.ts`
 
 ```ts title='app.ts'
-import { Application, Router } from "https://deno.land/x/oak/mod.ts";
-import { fetchRequestHandler } from "npm:@trpc/server/adapters/fetch";
-import { createContext } from "./context.ts";
-import { appRouter } from "./router.ts";
+import { Application, Router } from 'https://deno.land/x/oak/mod.ts';
+import { fetchRequestHandler } from 'npm:@trpc/server/adapters/fetch';
+import { createContext } from './context.ts';
+import { appRouter } from './router.ts';
 
 const app = new Application();
 const router = new Router();
 
-router.all("/trpc/(.*)", async (ctx) => {
+router.all('/trpc/(.*)', async (ctx) => {
   const res = await fetchRequestHandler({
-    endpoint: "/trpc",
+    endpoint: '/trpc',
     req: new Request(ctx.request.url, {
       headers: ctx.request.headers,
       body:
-        ctx.request.method !== "GET" && ctx.request.method !== "HEAD"
-          ? ctx.request.body({ type: "stream" }).value
+        ctx.request.method !== 'GET' && ctx.request.method !== 'HEAD'
+          ? ctx.request.body({ type: 'stream' }).value
           : void 0,
       method: ctx.request.method,
     }),
@@ -272,27 +319,27 @@ See our example [Deno Deploy app](https://github.com/trpc/trpc/tree/main/example
 #### Update the imports in `router.ts`
 
 ```ts title='router.ts'
-import { initTRPC } from "npm:@trpc/server";
-import { z } from "npm:zod";
-import { Context } from "./context.ts";
+import { initTRPC } from 'npm:@trpc/server';
+import { z } from 'npm:zod';
+import { Context } from './context.ts';
 ```
 
 #### Update the imports in `context.ts`
 
 ```ts title='context.ts'
-import { FetchCreateContextFnOptions } from "npm:@trpc/server/adapters/fetch";
+import { FetchCreateContextFnOptions } from 'npm:@trpc/server/adapters/fetch';
 ```
 
 #### Create Deno Deploy Function
 
 ```ts title='server.ts'
-import { fetchRequestHandler } from "npm:@trpc/server/adapters/fetch";
-import { createContext } from "./context.ts";
-import { appRouter } from "./router.ts";
+import { fetchRequestHandler } from 'npm:@trpc/server/adapters/fetch';
+import { createContext } from './context.ts';
+import { appRouter } from './router.ts';
 
 function handler(request) {
   return fetchRequestHandler({
-    endpoint: "/trpc",
+    endpoint: '/trpc',
     req: request,
     router: appRouter,
     createContext,
@@ -304,8 +351,8 @@ Deno.serve(handler);
 
 Run `deno run --allow-net=:8000 --allow-env ./server.ts` and your endpoints will be available via HTTP!
 
-| Endpoint     | HTTP URI                                                                                             |
-| ------------ | ---------------------------------------------------------------------------------------------------- |
+| Endpoint     | HTTP URI                                                                                                       |
+| ------------ | -------------------------------------------------------------------------------------------------------------- |
 | `getUser`    | `GET http://localhost:8000/trpc/getUserById?input=INPUT` where `INPUT` is a URI-encoded JSON string. |
 | `createUser` | `POST http://localhost:8000/trpc/createUser` with `req.body` of type `User`                          |
 
@@ -315,11 +362,27 @@ See a full example [here](https://github.com/trpc/trpc/tree/main/examples/next-e
 
 ### Remix
 
-```ts title='app/routes/trpc.$trpc.ts'
-import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { createContext } from "~/server/context";
-import { appRouter } from "~/server/router";
+```ts twoslash title='app/routes/trpc.$trpc.ts'
+// @filename: remix.d.ts
+declare module '@remix-run/node' {
+  export type ActionFunctionArgs = { request: Request };
+  export type LoaderFunctionArgs = { request: Request };
+}
+declare module '~/server/context' {
+  import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
+  export function createContext(opts: FetchCreateContextFnOptions): any;
+}
+declare module '~/server/router' {
+  import type { AnyTRPCRouter } from '@trpc/server';
+  export const appRouter: AnyTRPCRouter;
+}
+
+// @filename: app/routes/trpc.$trpc.ts
+// ---cut---
+import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
+import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
+import { createContext } from '~/server/context';
+import { appRouter } from '~/server/router';
 
 export const loader = async (args: LoaderFunctionArgs) => {
   return handleRequest(args);
@@ -329,7 +392,7 @@ export const action = async (args: ActionFunctionArgs) => {
 };
 function handleRequest(args: LoaderFunctionArgs | ActionFunctionArgs) {
   return fetchRequestHandler({
-    endpoint: "/trpc",
+    endpoint: '/trpc',
     req: args.request,
     router: appRouter,
     createContext,
@@ -339,15 +402,33 @@ function handleRequest(args: LoaderFunctionArgs | ActionFunctionArgs) {
 
 ### SolidStart
 
-```ts title='src/routes/api/trpc/[trpc].ts'
-import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import type { APIEvent } from "solid-start";
-import { createContext } from "../../server/context";
-import { appRouter } from "../../server/router";
+```ts twoslash title='src/routes/api/trpc/[trpc].ts'
+// @filename: solidstart.d.ts
+declare module '@solidjs/start/server' {
+  export type APIEvent = { request: Request };
+}
+
+// @filename: src/routes/server/context.ts
+import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
+export function createContext(opts: FetchCreateContextFnOptions) {
+  return { user: { name: opts.req.headers.get('username') ?? 'anonymous' } };
+}
+
+// @filename: src/routes/server/router.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+
+// @filename: src/routes/api/trpc/[trpc].ts
+// ---cut---
+import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
+import type { APIEvent } from '@solidjs/start/server';
+import { createContext } from '../../server/context';
+import { appRouter } from '../../server/router';
 
 const handler = (event: APIEvent) =>
   fetchRequestHandler({
-    endpoint: "/api/trpc",
+    endpoint: '/api/trpc',
     req: event.request,
     router: appRouter,
     createContext,
@@ -381,15 +462,30 @@ bun add -g edge-runtime
 
 #### Create Edge Runtime Function
 
-```ts title='server.ts'
-import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { createContext } from "./context";
-import { appRouter } from "./router";
+```ts twoslash title='server.ts'
 
-addEventListener("fetch", (event) => {
+// @filename: context.ts
+import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
+export function createContext(opts: FetchCreateContextFnOptions) {
+  return { user: { name: opts.req.headers.get('username') ?? 'anonymous' } };
+}
+
+// @filename: router.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+
+// @filename: server.ts
+// ---cut---
+import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
+import { createContext } from './context';
+import { appRouter } from './router';
+
+// Vercel Edge Runtime uses Service Worker-style addEventListener
+addEventListener('fetch', (event: any) => {
   return event.respondWith(
     fetchRequestHandler({
-      endpoint: "/trpc",
+      endpoint: '/trpc',
       req: event.request,
       router: appRouter,
       createContext,
@@ -400,7 +496,7 @@ addEventListener("fetch", (event) => {
 
 Run `edge-runtime --listen server.ts --port 3000` and your endpoints will be available via HTTP!
 
-| Endpoint     | HTTP URI                                                                                             |
-| ------------ | ---------------------------------------------------------------------------------------------------- |
+| Endpoint     | HTTP URI                                                                                                       |
+| ------------ | -------------------------------------------------------------------------------------------------------------- |
 | `getUser`    | `GET http://localhost:3000/trpc/getUserById?input=INPUT` where `INPUT` is a URI-encoded JSON string. |
 | `createUser` | `POST http://localhost:3000/trpc/createUser` with `req.body` of type `User`                          |

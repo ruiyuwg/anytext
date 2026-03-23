@@ -928,5 +928,5 @@ print(response.choices[0].message.content)
 
 title: "Chat Completions"
 description: "Create chat completions using the Chat Completions API with support for streaming, image attachments, and PDF documents."
-last\_updated: "2026-03-08T05:03:10.709Z"
+last\_updated: "2026-03-23T09:40:04.790Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-chat-completions/chat-completions"

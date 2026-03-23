@@ -174,5 +174,5 @@ Streaming responses use [Server-Sent Events (SSE)](https://developer.mozilla.org
 
 title: "Anthropic Messages API"
 description: "Use the Anthropic Messages API with AI Gateway for seamless integration with Anthropic SDK tools."
-last\_updated: "2026-03-08T05:03:10.654Z"
+last\_updated: "2026-03-23T09:40:04.688Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/anthropic-messages-api"

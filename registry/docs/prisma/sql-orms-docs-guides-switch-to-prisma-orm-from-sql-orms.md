@@ -201,7 +201,7 @@ npx prisma migrate resolve --applied 0_init
 ```bash
 mkdir -p prisma/migrations/0_init
 pnpm dlx prisma migrate diff --from-empty --to-schema prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql
-npx prisma migrate resolve --applied 0_init
+pnpm dlx prisma migrate resolve --applied 0_init
 ```
 
 
@@ -209,7 +209,7 @@ npx prisma migrate resolve --applied 0_init
 ```bash
 mkdir -p prisma/migrations/0_init
 yarn dlx prisma migrate diff --from-empty --to-schema prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql
-npx prisma migrate resolve --applied 0_init
+yarn dlx prisma migrate resolve --applied 0_init
 ```
 
 
@@ -217,7 +217,7 @@ npx prisma migrate resolve --applied 0_init
 ```bash
 mkdir -p prisma/migrations/0_init
 bun x prisma migrate diff --from-empty --to-schema prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql
-npx prisma migrate resolve --applied 0_init
+bun x prisma migrate resolve --applied 0_init
 ```
 ````
 

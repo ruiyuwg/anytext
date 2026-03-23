@@ -4,7 +4,11 @@
 
 ## Options
 
-Options are identical to [`httpBatchLink options`](./httpBatchLink.md#options).
+Options are identical to [`httpBatchLink options`](./httpBatchLink.md#options), with the following addition:
+
+| Option         | Type                          | Default         | Description                                                                                                                                                                                                                                                                                 |
+| -------------- | ----------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `streamHeader` | `'trpc-accept'` | `'accept'` | `'trpc-accept'` | Which header to use to signal the server that the client wants a streaming response. `'accept'` uses the standard `Accept` header instead of the custom `trpc-accept` header, which can avoid CORS preflight for cross-origin streaming queries since `Accept` is a CORS-safelisted header. |
 
 ## Usage
 
@@ -14,14 +18,22 @@ If you require the ability to change/set response headers (which includes cookie
 
 You can import and add the `httpBatchStreamLink` to the `links` array as such:
 
-```ts title="client/index.ts"
-import { createTRPCClient, httpBatchStreamLink } from "@trpc/client";
-import type { AppRouter } from "../server";
+```ts twoslash title="client/index.ts"
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+// ---cut---
+import { createTRPCClient, httpBatchStreamLink } from '@trpc/client';
+import type { AppRouter } from './server';
 
 const client = createTRPCClient<AppRouter>({
   links: [
     httpBatchStreamLink({
-      url: "http://localhost:3000",
+      url: 'http://localhost:3000',
     }),
   ],
 });
@@ -29,7 +41,24 @@ const client = createTRPCClient<AppRouter>({
 
 After that, you can make use of batching by setting all your procedures in a `Promise.all`. The code below will produce exactly **one** HTTP request and on the server exactly **one** database query:
 
-```ts
+```ts twoslash
+// @target: esnext
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+export const appRouter = t.router({
+  post: t.router({
+    byId: t.procedure.input(z.number()).query(({ input }) => ({ id: input, title: `Post ${input}` })),
+  }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+import { createTRPCClient, httpBatchStreamLink } from '@trpc/client';
+import type { AppRouter } from './server';
+const trpc = createTRPCClient<AppRouter>({ links: [httpBatchStreamLink({ url: 'http://localhost:3000' })] });
+// ---cut---
 const somePosts = await Promise.all([
   trpc.post.byId.query(1),
   trpc.post.byId.query(2),
@@ -41,14 +70,22 @@ const somePosts = await Promise.all([
 
 When batching requests together, the behavior of a regular `httpBatchLink` is to wait for all requests to finish before sending the response. If you want to send responses as soon as they are ready, you can use `httpBatchStreamLink` instead. This is useful for long-running requests.
 
-```ts title="client/index.ts"
-import { createTRPCClient, httpBatchStreamLink } from "@trpc/client";
-import type { AppRouter } from "../server";
+```ts twoslash title="client/index.ts"
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+// ---cut---
+import { createTRPCClient, httpBatchStreamLink } from '@trpc/client';
+import type { AppRouter } from './server';
 
 const client = createTRPCClient<AppRouter>({
   links: [
     httpBatchStreamLink({
-      url: "http://localhost:3000",
+      url: 'http://localhost:3000',
     }),
   ],
 });
@@ -56,7 +93,7 @@ const client = createTRPCClient<AppRouter>({
 
 Compared to a regular `httpBatchLink`, a `httpBatchStreamLink` will:
 
-- Cause the requests to be sent with a `trpc-accept: application/jsonl` header
+- Cause the requests to be sent with a `trpc-accept: application/jsonl` header (or `Accept: application/jsonl` when using `streamHeader: 'accept'`)
 - Cause the response to be sent with a `transfer-encoding: chunked` and `content-type: application/jsonl`
 - Remove the `data` key from the argument object passed to `responseMeta` (because with a streamed response, the headers are sent before the data is available)
 
@@ -67,16 +104,16 @@ You can try this out on the homepage of tRPC.io: [https://trpc.io/?try=minimal#t
 ```ts twoslash
 // @target: esnext
 // @filename: trpc.ts
-import { initTRPC } from "@trpc/server";
+import { initTRPC } from '@trpc/server';
 
 const t = initTRPC.create({});
 
 export const router = t.router;
 export const publicProcedure = t.procedure;
 
-// ---cut---
 // @filename: server.ts
-import { publicProcedure, router } from "./trpc";
+// ---cut---
+import { publicProcedure, router } from './trpc';
 
 const appRouter = router({
   examples: {
@@ -91,14 +128,16 @@ const appRouter = router({
 
 export type AppRouter = typeof appRouter;
 
+
 // @filename: client.ts
-import { createTRPCClient, httpBatchStreamLink } from "@trpc/client";
-import type { AppRouter } from "./server";
+// ---cut---
+import { createTRPCClient, httpBatchStreamLink } from '@trpc/client';
+import type { AppRouter } from './server';
 
 const trpc = createTRPCClient<AppRouter>({
   links: [
     httpBatchStreamLink({
-      url: "http://localhost:3000",
+      url: 'http://localhost:3000',
     }),
   ],
 });
@@ -106,7 +145,7 @@ const iterable = await trpc.examples.iterable.query();
 //      ^?
 
 for await (const value of iterable) {
-  console.log("Iterable:", value);
+  console.log('Iterable:', value);
   //                         ^?
 }
 ```
@@ -128,26 +167,28 @@ This includes support for `undici`, `node-fetch`, native Node.js fetch implement
 
 ### React Native
 
-Receiving the stream relies on the `TextDecoder` and `TextDecoderStream` APIs, which is not available in React Native. It's important to note that if your `TextDecoderStream` polyfill does not automatically polyfill `ReadableStream` and `WritableStream` those will also need to be polyfilled. If you still want to enable streaming, you need to polyfill those.
+Receiving the stream relies on the `TextDecoder` and `TextDecoderStream` APIs, which are not available in React Native. It's important to note that if your `TextDecoderStream` polyfill does not automatically polyfill `ReadableStream` and `WritableStream` those will also need to be polyfilled. If you still want to enable streaming, you need to polyfill those.
 
-You will also need to overide the default fetch in the `httpBatchStreamLink` configuration options. In the below example we will be using the [Expo fetch](https://docs.expo.dev/versions/latest/sdk/expo/) package for the fetch implementation.
+You will also need to override the default fetch in the `httpBatchStreamLink` configuration options. In the below example we will be using the [Expo fetch](https://docs.expo.dev/versions/latest/sdk/expo/) package for the fetch implementation.
 
-```typescript
+```ts
+import { httpBatchStreamLink } from '@trpc/client';
+
 httpBatchStreamLink({
   fetch: (url, opts) =>
     fetch(url, {
       ...opts,
       reactNative: { textStreaming: true },
     }),
-  ...restOfConfig,
+  url: 'http://localhost:3000',
 });
 ```
 
 ## Compatibility (server-side)
 
-> ⚠️ for **aws lambda**, `httpBatchStreamLink` is not supported (will simply behave like a regular `httpBatchLink`). It should not break anything if enabled, but will not have any effect.
+`httpBatchStreamLink` only supported on AWS Lambda when your [infrastructure is set up](/docs/server/adapters/aws-lambda#aws-lambda-response-streaming-adapter) for streaming responses. If not this Link will simply behave like a regular `httpBatchLink`.
 
-> ⚠️ for **cloudflare workers**, you need to enable the `ReadableStream` API through a feature flag: [`streams_enable_constructors`](https://developers.cloudflare.com/workers/platform/compatibility-dates#streams-constructors)
+You need to enable the `ReadableStream` API through a feature flag: [`streams_enable_constructors`](https://developers.cloudflare.com/workers/platform/compatibility-dates#streams-constructors).
 
 ## Reference
 
@@ -157,8 +198,8 @@ You can check out the source code for this link on [GitHub.](https://github.com/
 
 When setting up your root config, you can pass in a `jsonl` option to configure a ping option to keep the connection alive.
 
-```ts
-import { initTRPC } from "@trpc/server";
+```ts twoslash
+import { initTRPC } from '@trpc/server';
 
 const t = initTRPC.create({
   jsonl: {
@@ -177,14 +218,22 @@ const t = initTRPC.create({
 
 You can import and add the `httpLink` to the `links` array as such:
 
-```ts title="client/index.ts"
-import { createTRPCClient, httpLink } from "@trpc/client";
-import type { AppRouter } from "../server";
+```ts twoslash title="client/index.ts"
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: client.ts
+// ---cut---
+import { createTRPCClient, httpLink } from '@trpc/client';
+import type { AppRouter } from './server';
 
 const client = createTRPCClient<AppRouter>({
   links: [
     httpLink({
-      url: "http://localhost:3000",
+      url: 'http://localhost:3000',
       // transformer,
     }),
   ],
@@ -195,25 +244,25 @@ const client = createTRPCClient<AppRouter>({
 
 The `httpLink` function takes an options object that has the `HTTPLinkOptions` shape.
 
-```ts
+```ts twoslash
+type DataTransformerOptions = any;
+type HTTPHeaders = Record<string, string[] | string | undefined>;
+type Operation = { id: number; type: string; input: unknown; path: string };
+// ---cut---
 export interface HTTPLinkOptions {
-  url: string;
+  url: string | URL;
   /**
    * Add ponyfill for fetch
    */
   fetch?: typeof fetch;
   /**
-   * Add ponyfill for AbortController
-   */
-  AbortController?: typeof AbortController | null;
-  /**
    * Data transformer
-   * @see https://trpc.io/docs/v11/data-transformers
+   * @see https://trpc.io/docs/server/data-transformers
    **/
   transformer?: DataTransformerOptions;
   /**
    * Headers to be set on outgoing requests or a callback that of said headers
-   * @see http://trpc.io/docs/v10/header
+   * @see https://trpc.io/docs/client/headers
    */
   headers?:
     | HTTPHeaders
@@ -223,7 +272,7 @@ export interface HTTPLinkOptions {
    * The server must separately allow overriding the method. See:
    * @see https://trpc.io/docs/rpc
    */
-  methodOverride?: "POST";
+  methodOverride?: 'POST';
 }
 ```
 

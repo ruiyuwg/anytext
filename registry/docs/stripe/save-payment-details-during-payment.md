@@ -2,9 +2,9 @@
 
 Learn how to accept a payment and save your customer's payment details for future purchases.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/save-during-payment?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/save-during-payment?payment-ui=stripe-hosted.
 
 Use [Stripe Checkout](https://docs.stripe.com/payments/checkout.md) for a fast, low-code integration that allows your customers to save their payment details for future purchases.
 
@@ -86,8 +86,8 @@ require 'json'
 require 'sinatra'
 require 'stripe'
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 post '/create-checkout-session' dosession = Stripe::Checkout::Session.create({
@@ -175,7 +175,7 @@ curl https://api.stripe.com/v1/checkout/sessions \
   -d "payment_intent_data[setup_future_usage]"=off_session
 ```
 
-If you use Checkout in `subscription` mode, Stripe automatically saves the payment method to charge it for subsequent payments. Card payment methods saved to customers using either `setup_future_usage` or `subscription` mode don’t appear for return purchases in Checkout (more on this below). We recommend using [custom text](https://docs.stripe.com/payments/checkout/customization/policies.md) to link out to any relevant terms regarding the usage of saved payment information.
+If you use Checkout in `subscription` mode, Stripe automatically saves the payment method to charge it for subsequent payments. Card payment methods saved to customers using either `setup_future_usage` or `subscription` mode don’t appear for return purchases in Checkout (more on this below). We recommend using [custom text](https://docs.stripe.com/payments/checkout/custom-components.md#customize-text) to link out to any relevant terms regarding the usage of saved payment information.
 
 > Global privacy laws are complicated and nuanced. We recommend contacting your legal and privacy team prior to implementing [setup\_future\_usage](https://docs.stripe.com/api/checkout/sessions/create.md#create_checkout_session-payment_intent_data-setup_future_usage) because it might implicate your existing privacy compliance framework. Refer to [the guidance issued by the European Protection Board](https://edpb.europa.eu/system/files/2021-05/recommendations022021_on_storage_of_credit_card_data_en_1.pdf) to learn more about saving payment details.
 
@@ -225,9 +225,9 @@ curl https://api.stripe.com/v1/checkout/sessions \
 
 The customer can’t remove a payment method if it’s tied to an active subscription and the customer doesn’t have a default payment method saved for invoice and subscription payments.
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/save-during-payment?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/save-during-payment?payment-ui=embedded-form.
 
 Use [Stripe Checkout](https://docs.stripe.com/payments/checkout.md) to embed a prebuilt payment form on your website that allows your customers to save their payment details for future purchases.
 
@@ -288,8 +288,8 @@ require 'json'
 require 'sinatra'
 require 'stripe'
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 post '/create-checkout-session' do
@@ -304,8 +304,7 @@ post '/create-checkout-session' do
       },
       quantity: 1,
     }],
-    mode: 'payment',ui_mode: 'embedded',
-    return_url: 'https://example.com/checkout/return?session_id={CHECKOUT_SESSION_ID}'
+    mode: 'payment',ui_mode: 'embedded',return_url: 'https://example.com/checkout/return?session_id={CHECKOUT_SESSION_ID}'
   })
 
   {clientSecret: session.client_secret}.to_json
@@ -436,7 +435,7 @@ curl https://api.stripe.com/v1/checkout/sessions \
   -d "payment_intent_data[setup_future_usage]"=off_session
 ```
 
-If you use Checkout in `subscription` mode, Stripe automatically saves the payment method to charge it for subsequent payments. Card payment methods saved to customers using either `setup_future_usage` or `subscription` mode don’t appear for return purchases in Checkout (more on this below). We recommend using [custom text](https://docs.stripe.com/payments/checkout/customization/policies.md) to link out to any relevant terms regarding the usage of saved payment information.
+If you use Checkout in `subscription` mode, Stripe automatically saves the payment method to charge it for subsequent payments. Card payment methods saved to customers using either `setup_future_usage` or `subscription` mode don’t appear for return purchases in Checkout (more on this below). We recommend using [custom text](https://docs.stripe.com/payments/checkout/custom-components.md#customize-text) to link out to any relevant terms regarding the usage of saved payment information.
 
 > Global privacy laws are complicated and nuanced. We recommend contacting your legal and privacy team prior to implementing [setup\_future\_usage](https://docs.stripe.com/api/checkout/sessions/create.md#create_checkout_session-payment_intent_data-setup_future_usage) because it might implicate your existing privacy compliance framework. Refer to [the guidance issued by the European Protection Board](https://edpb.europa.eu/system/files/2021-05/recommendations022021_on_storage_of_credit_card_data_en_1.pdf) to learn more about saving payment details.
 

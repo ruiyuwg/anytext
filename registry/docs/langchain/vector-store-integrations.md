@@ -6,7 +6,7 @@ Integrate with vector stores using LangChain JavaScript.
 
 ## Overview
 
-A [vector store](/oss/javascript/integrations/vectorstores) stores [embedded](/oss/javascript/integrations/text_embedding) data and performs similarity search.
+A [vector store](/oss/javascript/integrations/vectorstores) stores [embedded](/oss/javascript/integrations/embeddings) data and performs similarity search.
 
 ```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 flowchart LR

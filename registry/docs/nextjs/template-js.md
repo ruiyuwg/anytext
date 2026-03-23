@@ -16,13 +16,13 @@ A template can be defined by exporting a default React component from a `templat
 
 ```tsx filename="app/template.tsx" switcher
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
+  return <div>{children}</div>
 }
 ```
 
 ```jsx filename="app/template.js" switcher
 export default function Template({ children }) {
-  return <div>{children}</div>;
+  return <div>{children}</div>
 }
 ```
 
@@ -34,6 +34,8 @@ In terms of nesting, `template.js` is rendered between a layout and its children
   <Template key={routeParam}>{children}</Template>
 </Layout>
 ```
+
+In the [component hierarchy](/docs/app/getting-started/project-structure#component-hierarchy), `template.js` renders between `layout.js` and `error.js`. It wraps `error.js`, `loading.js`, `not-found.js`, and `page.js`, but does **not** wrap the `layout.js` in the same segment.
 
 ## Props
 

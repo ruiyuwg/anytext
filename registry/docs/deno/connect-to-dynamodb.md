@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/dynamodb
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 Amazon DynamoDB is a fully managed NoSQL database. To persist data to DynamoDB,
 follow the steps below:
@@ -109,9 +109,9 @@ different configuration options, read [here](how-to-deploy).
 
 URL: https://docs.deno.com/deploy/classic/edge\_cache
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 The [Web Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache) is
 supported on Deno Deploy. The cache is designed to provide microsecond-level

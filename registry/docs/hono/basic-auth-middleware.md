@@ -8,112 +8,114 @@ For more information about how the Basic auth scheme works under the hood, see t
 ## Import
 
 ```ts
-import { Hono } from "hono";
-import { basicAuth } from "hono/basic-auth";
+import { Hono } from 'hono'
+import { basicAuth } from 'hono/basic-auth'
 ```
 
 ## Usage
 
 ```ts
-const app = new Hono();
+const app = new Hono()
 
 app.use(
-  "/auth/*",
+  '/auth/*',
   basicAuth({
-    username: "hono",
-    password: "acoolproject",
-  }),
-);
+    username: 'hono',
+    password: 'acoolproject',
+  })
+)
 
-app.get("/auth/page", (c) => {
-  return c.text("You are authorized");
-});
+app.get('/auth/page', (c) => {
+  return c.text('You are authorized')
+})
 ```
 
 To restrict to a specific route + method:
 
 ```ts
-const app = new Hono();
+const app = new Hono()
 
-app.get("/auth/page", (c) => {
-  return c.text("Viewing page");
-});
+app.get('/auth/page', (c) => {
+  return c.text('Viewing page')
+})
 
 app.delete(
-  "/auth/page",
-  basicAuth({ username: "hono", password: "acoolproject" }),
+  '/auth/page',
+  basicAuth({ username: 'hono', password: 'acoolproject' }),
   (c) => {
-    return c.text("Page deleted");
-  },
-);
+    return c.text('Page deleted')
+  }
+)
 ```
 
 If you want to verify the user by yourself, specify the `verifyUser` option; returning `true` means it is accepted.
 
 ```ts
-const app = new Hono();
+const app = new Hono()
 
 app.use(
   basicAuth({
     verifyUser: (username, password, c) => {
-      return username === "dynamic-user" && password === "hono-password";
+      return (
+        username === 'dynamic-user' && password === 'hono-password'
+      )
     },
-  }),
-);
+  })
+)
 ```
 
 ## Options
 
-### <Badge type="danger" text="required" /> username: `string`
+### username: `string`
 
 The username of the user who is authenticating.
 
-### <Badge type="danger" text="required" /> password: `string`
+### password: `string`
 
 The password value for the provided username to authenticate against.
 
-### <Badge type="info" text="optional" /> realm: `string`
+### realm: `string`
 
 The domain name of the realm, as part of the returned WWW-Authenticate challenge header. The default is `"Secure Area"`.\
 See more: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/WWW-Authenticate#directives
 
-### <Badge type="info" text="optional" /> hashFunction: `Function`
+### hashFunction: `Function`
 
 A function to handle hashing for safe comparison of passwords.
 
-### <Badge type="info" text="optional" /> verifyUser: `(username: string, password: string, c: Context) => boolean | Promise<boolean>`
+### verifyUser: `(username: string, password: string, c: Context) => boolean | Promise<boolean>`
 
 The function to verify the user.
 
-### <Badge type="info" text="optional" /> invalidUserMessage: `string | object | MessageFunction`
+### invalidUserMessage: `string | object | MessageFunction`
 
 `MessageFunction` is `(c: Context) => string | object | Promise<string | object>`. The custom message if the user is invalid.
 
-### <Badge type="info" text="optional" /> onAuthSuccess: `(c: Context, username: string) => void | Promise<void>`
+### onAuthSuccess: `(c: Context, username: string) => void | Promise<void>`
 
 A callback function invoked after successful authentication. This allows you to set context variables or perform side effects without re-parsing the Authorization header.
 
 ```ts
 app.use(
-  "/auth/*",
+  '/auth/*',
   basicAuth({
-    username: "hono",
-    password: "acoolproject",
+    username: 'hono',
+    password: 'acoolproject',
     onAuthSuccess: (c, username) => {
-      c.set("username", username);
+      c.set('username', username)
     },
-  }),
-);
+  })
+)
 
-app.get("/auth/page", (c) => {
-  const username = c.get("username");
-  return c.text(`Hello, ${username}!`);
-});
+app.get('/auth/page', (c) => {
+  const username = c.get('username')
+  return c.text(`Hello, ${username}!`)
+})
 ```
 
 ## More Options
 
-### <Badge type="info" text="optional" /> ...users: `{ username: string, password: string }[]`
+### ...users: `{ username: string, password: string }[]`
 
 ## Recipes
 
@@ -123,41 +125,41 @@ This middleware also allows you to pass arbitrary parameters containing objects 
 
 ```ts
 app.use(
-  "/auth/*",
+  '/auth/*',
   basicAuth(
     {
-      username: "hono",
-      password: "acoolproject",
+      username: 'hono',
+      password: 'acoolproject',
       // Define other params in the first object
-      realm: "www.example.com",
+      realm: 'www.example.com',
     },
     {
-      username: "hono-admin",
-      password: "super-secure",
+      username: 'hono-admin',
+      password: 'super-secure',
       // Cannot redefine other params here
     },
     {
-      username: "hono-user-1",
-      password: "a-secret",
+      username: 'hono-user-1',
+      password: 'a-secret',
       // Or here
-    },
-  ),
-);
+    }
+  )
+)
 ```
 
 Or less hardcoded:
 
 ```ts
-import { users } from "../config/users";
+import { users } from '../config/users'
 
 app.use(
-  "/auth/*",
+  '/auth/*',
   basicAuth(
     {
-      realm: "www.example.com",
+      realm: 'www.example.com',
       ...users[0],
     },
-    ...users.slice(1),
-  ),
-);
+    ...users.slice(1)
+  )
+)
 ```

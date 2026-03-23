@@ -40,5 +40,5 @@ ideally the same as the platform [Build Image](/docs/deployments/build-image).
 
 title: "Vercel Primitives"
 description: "Learn about the Vercel platform primitives and how they work together to create a Vercel Deployment."
-last\_updated: "2026-03-08T05:03:11.390Z"
+last\_updated: "2026-03-23T09:40:05.596Z"
 source: "https://vercel.com/docs/build-output-api/primitives"

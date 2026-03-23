@@ -43,7 +43,7 @@ For support and discussion, please join the **#windows** channel on our [Discord
   npm install -g bun # the last `npm` command you'll ever need
   ```
 
-  ```bash Homebrew icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/homebrew.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5c6dc69e5e0d20fb807fba0a9cd45023" theme={"theme":{"light":"github-light","dark":"dracula"}}
+  ```bash Homebrew icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/homebrew.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=72e2bae1e891694752fa3352050dc96f" theme={"theme":{"light":"github-light","dark":"dracula"}}
   brew install oven-sh/bun/bun
   ```
 
@@ -305,7 +305,7 @@ powershell -c ~\.bun\uninstall.ps1
   npm uninstall -g bun
   ```
 
-  ```bash Homebrew icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/homebrew.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5c6dc69e5e0d20fb807fba0a9cd45023" theme={"theme":{"light":"github-light","dark":"dracula"}}
+  ```bash Homebrew icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/homebrew.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=72e2bae1e891694752fa3352050dc96f" theme={"theme":{"light":"github-light","dark":"dracula"}}
   brew uninstall bun
   ```
 

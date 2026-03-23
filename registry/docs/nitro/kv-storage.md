@@ -4,194 +4,253 @@ Nitro has built-in integration with [unstorage](https://unstorage.unjs.io){rel="
 
 ## Usage
 
-To use the storage layer, you can use the `useStorage()` and call `getItem(key)` to retrieve an item and `setItem(key, value)` to set an item.
+To use the storage layer, you can use the `useStorage()` utility to access the storage instance.
 
 ```ts
-// Default storage is in memory
-await useStorage().setItem('test:foo', { hello: 'world' })
-await useStorage().getItem('test:foo')
+import { useStorage } from "nitro/storage";
 
-// You can also specify the base in useStorage(base)
-await useStorage('test').setItem('foo', { hello: 'world' })
+// Default storage (in-memory)
+await useStorage().setItem("test:foo", { hello: "world" });
+const value = await useStorage().getItem("test:foo");
 
-// You can use data storage to write data to default .data/kv directory
-const dataStorage = useStorage('data')
-await dataStorage.setItem('test', 'works')
-await dataStorage.getItem('data:test') // Value persists
+// You can specify a base prefix with useStorage(base)
+const testStorage = useStorage("test");
+await testStorage.setItem("foo", { hello: "world" });
+await testStorage.getItem("foo"); // { hello: "world" }
 
-// You can use generics to define types
-await useStorage<{ hello: string }>('test').getItem('foo')
-await useStorage('test').getItem<{ hello: string }>('foo')
+// You can use generics to type the return value
+await useStorage<{ hello: string }>("test").getItem("foo");
+await useStorage("test").getItem<{ hello: string }>("foo");
 ```
 
 :read-more{to="https://unstorage.unjs.io"}
 
+### Available methods
+
+The storage instance returned by `useStorage()` provides the following methods:
+
+| Method                   | Description                                                                                  |
+| ------------------------ | -------------------------------------------------------------------------------------------- |
+| `getItem(key)`           | Get the value of a key. Returns `null` if the key does not exist.                            |
+| `getItems(items)`        | Get multiple items at once. Accepts an array of keys or `{ key, options }` objects.          |
+| `getItemRaw(key)`        | Get the raw value of a key without parsing. Useful for binary data.                          |
+| `setItem(key, value)`    | Set the value of a key.                                                                      |
+| `setItems(items)`        | Set multiple items at once. Accepts an array of `{ key, value }` objects.                    |
+| `setItemRaw(key, value)` | Set the raw value of a key without serialization.                                            |
+| `hasItem(key)`           | Check if a key exists. Returns a boolean.                                                    |
+| `removeItem(key)`        | Remove a key from storage.                                                                   |
+| `getKeys(base?)`         | Get all keys, optionally filtered by a base prefix.                                          |
+| `clear(base?)`           | Clear all keys, optionally filtered by a base prefix.                                        |
+| `getMeta(key)`           | Get metadata for a key (e.g., `mtime`, `atime`, `ttl`).                                      |
+| `setMeta(key, meta)`     | Set metadata for a key.                                                                      |
+| `removeMeta(key)`        | Remove metadata for a key.                                                                   |
+| `mount(base, driver)`    | Dynamically mount a storage driver at a base path.                                           |
+| `unmount(base)`          | Unmount a storage driver from a base path.                                                   |
+| `watch(callback)`        | Watch for changes. Callback receives `(event, key)` where event is `"update"` or `"remove"`. |
+| `unwatch()`              | Stop watching for changes.                                                                   |
+
+Shorthand aliases are also available: `get`, `set`, `has`, `del`, `remove`, `keys`.
+
+```ts
+import { useStorage } from "nitro/storage";
+
+// Get all keys under a prefix
+const keys = await useStorage("test").getKeys();
+
+// Check if a key exists
+const exists = await useStorage().hasItem("test:foo");
+
+// Remove a key
+await useStorage().removeItem("test:foo");
+
+// Get raw binary data
+const raw = await useStorage().getItemRaw("assets/server:image.png");
+
+// Get metadata (type, etag, mtime, etc.)
+const meta = await useStorage("assets/server").getMeta("file.txt");
+```
+
 ## Configuration
 
-You can mount one or multiple custom storage drivers using the `storage` config.
+You can mount one or multiple custom storage drivers using the `storage` option.
+
 The key is the mount point name, and the value is the driver name and configuration.
 
-::code-group
-
 ```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
 export default defineNitroConfig({
   storage: {
     redis: {
-      driver: 'redis',
+      driver: "redis",
       /* redis connector options */
-    },
-    db: {
-      driver: 'fs',
-      base: './data/db'
     }
   }
 })
 ```
 
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  nitro: {
-    storage: {
-      redis: {
-        driver: 'redis',
-        /* redis connector options */
-      },
-      db: {
-        driver: 'fs',
-        base: './.data/db'
-      }
-    }
-  }
-})
-```
-
-::
+Then, you can use the redis storage using the `useStorage("redis")` function.
 
 ::read-more{to="https://unstorage.unjs.io/"}
 You can find the driver list on [unstorage documentation](https://unstorage.unjs.io/){rel=""nofollow""} with their configuration.
 ::
 
-### Runtime configuration
+### Development storage
 
-In scenarios where the mount point configuration is not known until runtime, Nitro can dynamically add mount points during startup using [plugins](https://nitro.build/guide/plugins).
+You can use the `devStorage` option to override storage configuration during development and prerendering.
 
-::code-group
+This is useful when your production driver is not available in development (e.g., a managed Redis instance).
 
-```ts [server/plugins/storage.ts]
-import redisDriver from 'unstorage/drivers/redis'
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
 
-export default defineNitroPlugin(() => {
+export default defineNitroConfig({
+  storage: {
+    db: {
+      driver: "redis",
+      host: "prod.example.com",
+    }
+  },
+  devStorage: {
+    db: {
+      driver: "fs",
+      base: "./.data/db"
+    }
+  }
+})
+```
+
+When running in development mode, `devStorage` mounts are merged on top of `storage` mounts, allowing you to use a local filesystem driver or an in-memory driver while developing.
+
+## Built-in mount points
+
+Nitro automatically mounts the following storage paths:
+
+### `/assets`
+
+Server assets are mounted at the `/assets` base path. This mount point provides read-only access to bundled server assets (see [Server assets](https://nitro.build/#server-assets)).
+
+```ts
+import { useStorage } from "nitro/storage";
+
+// Access server assets via the /assets mount
+const content = await useStorage("assets/server").getItem("my-file.txt");
+```
+
+### Default (in-memory)
+
+The root storage (without a base path) uses an in-memory driver by default. Data stored here is not persisted across restarts.
+
+```ts
+import { useStorage } from "nitro/storage";
+
+// In-memory by default, not persisted
+await useStorage().setItem("counter", 1);
+```
+
+To persist data, mount a driver with a persistent backend (e.g., `fs`, `redis`, etc.) using the `storage` configuration option.
+
+## Server assets
+
+Nitro allows you to bundle files from an `assets/` directory at the root of your project. These files are accessible at runtime via the `assets/server` storage mount.
+
+```text
+my-project/
+  assets/
+    data.json
+    templates/
+      welcome.html
+  server/
+    routes/
+      index.ts
+```
+
+```ts [server/routes/index.ts]
+import { useStorage } from "nitro/storage";
+
+export default defineHandler(async () => {
+  const serverAssets = useStorage("assets/server");
+
+  const keys = await serverAssets.getKeys();
+  const data = await serverAssets.getItem("data.json");
+  const template = await serverAssets.getItem("templates/welcome.html");
+
+  return { keys, data, template };
+});
+```
+
+### Custom asset directories
+
+You can register additional asset directories using the `serverAssets` config option:
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
+  serverAssets: [
+    {
+      baseName: "templates",
+      dir: "./templates",
+    }
+  ]
+})
+```
+
+Custom asset directories are accessible under `assets/<baseName>`:
+
+```ts
+import { useStorage } from "nitro/storage";
+
+const templates = useStorage("assets/templates");
+const keys = await templates.getKeys();
+const html = await templates.getItem("email.html");
+```
+
+### Asset metadata
+
+Server assets include metadata such as content type, ETag, and modification time:
+
+```ts
+import { useStorage } from "nitro/storage";
+
+const serverAssets = useStorage("assets/server");
+
+const meta = await serverAssets.getMeta("image.png");
+// { type: "image/png", etag: "\"...\"", mtime: "2024-01-01T00:00:00.000Z" }
+
+// Useful for setting response headers
+const raw = await serverAssets.getItemRaw("image.png");
+```
+
+::note
+In development, server assets are read directly from the filesystem. In production, they are bundled and inlined into the build output.
+::
+
+## Runtime configuration
+
+In scenarios where the mount point configuration is not known until runtime, Nitro can dynamically add mount points during startup using [plugins](https://nitro.build/docs/plugins).
+
+```ts [plugins/storage.ts]
+import { useStorage } from "nitro/storage";
+import { definePlugin } from "nitro";
+import redisDriver from "unstorage/drivers/redis";
+
+export default definePlugin(() => {
   const storage = useStorage()
 
   // Dynamically pass in credentials from runtime configuration, or other sources
   const driver = redisDriver({
-      base: 'redis',
-      host: useRuntimeConfig().redis.host,
-      port: useRuntimeConfig().redis.port,
-      /* other redis connector options */
-    })
+    base: "redis",
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    /* other redis connector options */
+  })
 
   // Mount driver
-  storage.mount('redis', driver)
+  storage.mount("redis", driver)
 })
 ```
-
-```ts [nitro.config.ts]
-export default defineNitroConfig({
-  runtimeConfig: {
-    redis: { // Default values
-      host: '',
-      port: 0,
-      /* other redis connector options */
-    }
-  }
-})
-```
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  runtimeConfig: {
-    redis: { // Default values
-      host: '',
-      port: 0,
-      /* other redis connector options */
-    }
-  }
-})
-```
-
-::
 
 ::warning
 This is a temporary workaround, with a better solution coming in the future! Keep a lookout on the GitHub issue [here](https://github.com/nitrojs/nitro/issues/1161#issuecomment-1511444675){rel=""nofollow""}.
 ::
-
-### Development-only mount points
-
-By default, Nitro will mount the project directory and some other dirs using the filesystem driver in development time.
-
-```js
-// Access to project root dir
-const rootStorage = useStorage('root')
-
-// Access to project src dir (same as root by default)
-const srcStorage = useStorage('src')
-
-// Access to server cache dir
-const cacheStorage = useStorage('cache')
-
-// Access to the temp build dir
-const buildStorage = useStorage('build')
-```
-
-::tip
-You also can use the `devStorage` key to overwrite the storage configuration during development. This is very useful when you use a database in production and want to use the filesystem in development.
-::
-
-In order to use the `devStorage` key, you need to use the `nitro dev` command and the key in the `storage` option must be the same as the production one.
-
-::code-group
-
-```ts [nitro.config.ts]
-export default defineNitroConfig({
-  // Production
-  storage: {
-    db: {
-      driver: 'redis',
-      /* redis connector options */
-    }
-  },
-  // Development
-  devStorage: {
-    db: {
-      driver: 'fs',
-      base: './data/db'
-    }
-  }
-})
-```
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  nitro: {
-    // Production
-    storage: {
-      db: {
-        driver: 'redis',
-        /* redis connector options */
-      }
-    },
-    // Development
-    devStorage: {
-      db: {
-        driver: 'fs',
-        base: './data/db'
-      }
-    }
-  }
-})
-```
-
-::
-
-You will also be able to access to a `build` namespace in the storage layer only during development. It contains file generated by Nitro.

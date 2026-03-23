@@ -538,5 +538,5 @@ type CronsConfig = Cron[];
 
 title: "Features"
 description: "Learn how to implement common Vercel platform features through the Build Output API."
-last\_updated: "2026-03-08T05:03:11.365Z"
+last\_updated: "2026-03-23T09:40:05.573Z"
 source: "https://vercel.com/docs/build-output-api/features"

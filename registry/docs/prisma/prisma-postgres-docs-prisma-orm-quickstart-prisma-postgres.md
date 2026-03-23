@@ -40,24 +40,24 @@ npx tsc --init
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+pnpm init -y
+pnpm add typescript tsx @types/node --save-dev
 pnpm dlx tsc --init
 ```
 
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+yarn init -y
+yarn add typescript tsx @types/node --dev
 yarn dlx tsc --init
 ```
 
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+bun init -y
+bun add typescript tsx @types/node --dev
 bun x tsc --init
 ```
 ````
@@ -537,4 +537,3 @@ More info \[#more-info]
 - [Prisma Postgres documentation](/postgres)
 - [Prisma Config reference](/orm/reference/prisma-config-reference)
 - [Database connection management](/orm/prisma-client/setup-and-configuration/databases-connections)
-- [Cache your queries](/postgres/database/caching#setting-up-caching-in-prisma-postgres)

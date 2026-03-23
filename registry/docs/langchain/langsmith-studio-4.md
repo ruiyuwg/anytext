@@ -129,7 +129,7 @@ For more information on how to run Studio, refer to the following guides in the 
 
 ## Video guide
 
-For more information about local and deployed agents, see [Set up local Agent Server](/oss/python/langchain/studio#setup-local-agent-server) and [Deploy](/oss/python/langchain/deploy).
+For more information about local and deployed agents, see [Set up local Agent Server](/oss/python/langchain/studio#set-up-local-agent-server) and [Deploy](/oss/python/langchain/deploy).
 
 ***
 

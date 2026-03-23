@@ -45,15 +45,15 @@ predictable costs.
 
 ## Rate Limits
 
-All accounts start with a rate limit of 2 requests per second. The [rate limits](/api-reference/rate-limit) follow the [IETF standard](https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-ratelimit-headers) for stating the rate limit in the response header. If you have specific requirements, [contact support](https://resend.com/help) to request a rate increase.
+All accounts start with a rate limit of 5 requests per second. The [rate limits](/api-reference/rate-limit) follow the [IETF standard](https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-ratelimit-headers) for stating the rate limit in the response header. If you have specific requirements, [contact support](https://resend.com/help) to request a rate increase.
 
-The rate limit is enforced as a per-second window. There is no separate burst allowance above the stated limit. If your limit is 2 requests per second, a third request in the same second window will receive a `429` response.
+The rate limit is enforced as a per-second window. There is no separate burst allowance above the stated limit. If your limit is 5 requests per second, a sixth request in the same second window will receive a `429` response.
 
 ### Rate limit scope
 
-The rate limit is **per team**, not per API key or per domain. All API keys associated with your team share the same rate limit pool. If you have multiple services or applications sending through the same Resend team, their requests count together toward the 2 req/sec limit.
+The rate limit is **per team**, not per API key or per domain. All API keys associated with your team share the same rate limit pool. If you have multiple services or applications sending through the same Resend team, their requests count together toward the 5 req/sec limit.
 
-For example, if Service A sends 1 request and Service B sends 1 request in the same second, you have hit your 2 req/sec limit for that window. Any additional requests from either service will receive a `429` response.
+For example, if Service A sends 3 requests and Service B sends 2 requests in the same second, you have hit your 5 req/sec limit for that window. Any additional requests from either service will receive a `429` response.
 
 ### High-volume workloads
 

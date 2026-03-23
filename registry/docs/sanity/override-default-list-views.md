@@ -30,7 +30,7 @@ export default defineConfig({
   name: 'default',
   title: 'structure-builder-playground',
   projectId: '<projectId>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   plugins: [
     structureTool({
       structure: (S) =>

@@ -126,7 +126,7 @@ or code health.
 
 title: "Connectivity"
 description: "Connect your Vercel projects to backend services with static IPs and secure networking options."
-last\_updated: "2026-03-08T05:03:12.943Z"
+last\_updated: "2026-03-23T09:40:07.932Z"
 source: "https://vercel.com/docs/connectivity"
 
 # Connectivity
@@ -169,5 +169,5 @@ Keep tabs on your usage in the **Team Settings** **Usage** tab under the **Priva
 
 title: "Secure Compute"
 description: "Secure Compute provides dedicated private networks with VPC peering for Enterprise teams."
-last\_updated: "2026-03-08T05:03:12.967Z"
+last\_updated: "2026-03-23T09:40:07.957Z"
 source: "https://vercel.com/docs/connectivity/secure-compute"

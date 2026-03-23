@@ -215,5 +215,5 @@ vercel promote status
 
 title: "Sharing a Preview Deployment"
 description: "Learn how to share a preview deployment with your team and external collaborators."
-last\_updated: "2026-03-08T05:03:13.386Z"
+last\_updated: "2026-03-23T09:40:08.522Z"
 source: "https://vercel.com/docs/deployments/sharing-deployments"

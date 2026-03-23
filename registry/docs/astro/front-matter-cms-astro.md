@@ -2,7 +2,7 @@
 
 > Add content to your Astro project using Front Matter CMS
 
-[Front Matter CMS](https://frontmatter.codes/) brings the CMS to your editor, it runs within Visual Studio Code, Gitpod, and many more.
+[Front Matter CMS](https://frontmatter.codes/) brings the CMS to your editor, allowing you to create and preview content in real-time in Visual Studio Code.
 
 ## Integration with Astro
 

@@ -20,7 +20,23 @@ subdomain](/knowledge-base/is-it-better-to-send-emails-from-a-subdomain-or-the-r
 subdomain allows for proper reputation segmentation based on topics or purpose
 (e.g. marketing) and is especially important if receiving emails with Resend.
 
-## Log in to Vercel
+## Automatic Setup (Recommended)
+
+The fastest way to verify your domain on Vercel is using the **Auto Configure** button on Resend. This uses Domain Connect to automatically configure your DNS records.
+
+1. Go to your [Domains page](https://resend.com/domains) in Resend.
+2. (Optional) If you want to receive emails, select `Manual setup` and toggle the "Receiving" switch on the domain details page. ([Learn more below](#receiving-emails))
+3. Click **Auto Configure**.
+4. Authorize Resend to access your Vercel DNS settings.
+5. The DNS records will be added automatically.
+
+That's it. Your domain will be verified within a few minutes.
+
+## Manual Setup
+
+If you prefer to add DNS records manually, follow these steps.
+
+### Log in to Vercel
 
 Log in to your [Vercel account](https://vercel.com/login) and select the `Domains` tab.
 

@@ -5,7 +5,7 @@ This guide provides step-by-step instructions for importing data from an existin
 You can accomplish this migration in four steps:
 
 1. Create a new Prisma Postgres database.
-2. Connect directly to a Prisma Postgres instance using a [direct connection](/postgres/database/direct-connections).
+2. Connect directly to a Prisma Postgres instance using a [direct connection](/postgres/database/connecting-to-your-database).
 3. Migrate your MySQL data to Prisma Postgres using [pgloader](https://pgloader.io/).
 4. Configure your Prisma project for Prisma Postgres.
 
@@ -36,16 +36,16 @@ Follow these steps to create a new Prisma Postgres database:
 Once your database is\*\* \*\*provisioned, find your direct Prisma Postgres connection string:
 
 1. Navigate to your active Prisma Postgres instance.
-2. Click the **API Keys** tab in the project's sidenav.
-3. Click the **Create API key** button.
-4. In the popup, provide a **Name** for the API key and click **Create**.
+2. Click the **Connection Strings** tab in the project's sidenav.
+3. Click the **Create connection string** button.
+4. In the popup, provide a **Name** for the connection string and click **Create**.
 5. Copy the connection string starting with `postgres://`, this is your direct connection string.
 
 Save the connection string, as you'll need it in step 3.
 
 2. Prepare your direct connection string \[#2-prepare-your-direct-connection-string]
 
-In this step, you'll use the [direct connection string](/postgres/database/direct-connections) you obtained in step 1 to connect to your Prisma Postgres instance.
+In this step, you'll use the [direct connection string](/postgres/database/connecting-to-your-database) you obtained in step 1 to connect to your Prisma Postgres instance.
 
 Your direct connection string should look like this:
 

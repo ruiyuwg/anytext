@@ -4,7 +4,7 @@ In this tutorial, learn the basics of how to configure a status bar, app icon, a
 
 In this chapter, we'll address some app details before deploying our app to an app store, such as theming the status bar, customizing the app icon, and splash screen.
 
-[Watch: Adding the finishing touches to your universal Expo app](https://www.youtube.com/watch?v=OgGCYdElcZo)
+[Watch: Adding the finishing touches to your universal Expo app](https://www.youtube.com/watch?v=OgGCYdElcZo) — Configure the status bar, customize your app icon, and set up the splash screen before deploying to the app store.
 
 ## Configure the status bar
 

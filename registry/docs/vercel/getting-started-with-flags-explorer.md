@@ -250,7 +250,7 @@ This guide walks you through connecting your application to the Flags Explorer, 
 
 title: "Pricing for Flags Explorer"
 description: "Learn about pricing for Flags Explorer."
-last\_updated: "2026-03-08T05:03:14.389Z"
+last\_updated: "2026-03-23T09:40:09.944Z"
 source: "https://vercel.com/docs/flags/flags-explorer/limits-and-pricing"
 
 # Pricing for Flags Explorer
@@ -276,5 +276,5 @@ Explorer, which means that multiple flags can be overriden in one go.*
 
 title: "Flags Explorer"
 description: "View and override your application"
-last\_updated: "2026-03-08T05:03:14.396Z"
+last\_updated: "2026-03-23T09:40:09.952Z"
 source: "https://vercel.com/docs/flags/flags-explorer"

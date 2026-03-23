@@ -50,7 +50,7 @@ zerops:
     build:
       base: nodejs@20
       envVariables:
-        SERVER_PRESET: zerops
+        NITRO_PRESET: zerops
       buildCommands:
         - pnpm i
         - pnpm run build
@@ -72,7 +72,7 @@ zerops:
     build:
       base: nodejs@20
       envVariables:
-        SERVER_PRESET: zerops-static
+        NITRO_PRESET: zerops-static
       buildCommands:
         - pnpm i
         - pnpm build
@@ -92,7 +92,7 @@ Open [Settings > Access Token Management](https://app.zerops.io/settings/token-m
 
 Log in using your access token with the following command:
 
-:pm-x{command="@zerops/zcli login <token>"}
+:pm-x{command="@zerops/zcli login "}
 
 Navigate to the root of your app (where `zerops.yml` is located) and run the following command to trigger the deploy:
 

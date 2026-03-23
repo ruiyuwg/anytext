@@ -181,52 +181,52 @@ Set up a SolidJS component to manage logins and sign ups using Magic Links, so u
   import { supabase } from './supabaseClient'
 
   const Auth: Component = () => {
-  	const [loading, setLoading] = createSignal(false)
-  	const [email, setEmail] = createSignal('')
+    const [loading, setLoading] = createSignal(false)
+    const [email, setEmail] = createSignal('')
 
-  	const handleLogin = async (e: SubmitEvent) => {
-  		e.preventDefault()
+    const handleLogin = async (e: SubmitEvent) => {
+      e.preventDefault()
 
-  		try {
-  			setLoading(true)
-  			const { error } = await supabase.auth.signInWithOtp({ email: email() })
-  			if (error) throw error
-  			alert('Check your email for the login link!')
-  		} catch (error) {
-  			if (error instanceof Error) {
-  				alert(error.message)
-  			}
-  		} finally {
-  			setLoading(false)
-  		}
-  	}
+      try {
+        setLoading(true)
+        const { error } = await supabase.auth.signInWithOtp({ email: email() })
+        if (error) throw error
+        alert('Check your email for the login link!')
+      } catch (error) {
+        if (error instanceof Error) {
+          alert(error.message)
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
 
-  	return (
-  		
-  			
-  				Supabase + SolidJS
-  				Sign in via magic link with your email below
-  				
-  					
-  						Email
-  						<input
-  							id="email"
-  							class="inputField"
-  							type="email"
-  							placeholder="Your email"
-  							value={email()}
-  							onChange={(e) => setEmail(e.currentTarget.value)}
-  						/>
-  					
-  					
-  						
-  							{loading() ? Loading : Send magic link}
-  						
-  					
-  				
-  			
-  		
-  	)
+    return (
+      
+        
+          Supabase + SolidJS
+          Sign in via magic link with your email below
+          
+            
+              Email
+              <input
+                id="email"
+                class="inputField"
+                type="email"
+                placeholder="Your email"
+                value={email()}
+                onChange={(e) => setEmail(e.currentTarget.value)}
+              />
+            
+            
+              
+                {loading() ? Loading : Send magic link}
+              
+            
+          
+        
+      
+    )
   }
 
   export default Auth
@@ -248,112 +248,112 @@ Create a new component for that called `Account.tsx`.
   import { supabase } from './supabaseClient'
 
   interface Props {
-  	userId: string
-  	userEmail: string | null
+    userId: string
+    userEmail: string | null
   }
 
   const Account: Component = ({ userId, userEmail }) => {
-  	const [loading, setLoading] = createSignal(true)
-  	const [username, setUsername] = createSignal(null)
-  	const [website, setWebsite] = createSignal(null)
-  	const [avatarUrl, setAvatarUrl] = createSignal(null)
+    const [loading, setLoading] = createSignal(true)
+    const [username, setUsername] = createSignal(null)
+    const [website, setWebsite] = createSignal(null)
+    const [avatarUrl, setAvatarUrl] = createSignal(null)
 
-  	createEffect(() => {
-  		getProfile()
-  	})
+    createEffect(() => {
+      getProfile()
+    })
 
-  	const getProfile = async () => {
-  		try {
-  			setLoading(true)
+    const getProfile = async () => {
+      try {
+        setLoading(true)
 
-  			let { data, error, status } = await supabase
-  				.from('profiles')
-  				.select(`username, website, avatar_url`)
-  				.eq('id', userId)
-  				.single()
+        let { data, error, status } = await supabase
+          .from('profiles')
+          .select(`username, website, avatar_url`)
+          .eq('id', userId)
+          .single()
 
-  			if (error && status !== 406) {
-  				throw error
-  			}
+        if (error && status !== 406) {
+          throw error
+        }
 
-  			if (data) {
-  				setUsername(data.username)
-  				setWebsite(data.website)
-  				setAvatarUrl(data.avatar_url)
-  			}
-  		} catch (error) {
-  			if (error instanceof Error) {
-  				alert(error.message)
-  			}
-  		} finally {
-  			setLoading(false)
-  		}
-  	}
+        if (data) {
+          setUsername(data.username)
+          setWebsite(data.website)
+          setAvatarUrl(data.avatar_url)
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          alert(error.message)
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
 
-  	const updateProfile = async (e: Event) => {
-  		e.preventDefault()
+    const updateProfile = async (e: Event) => {
+      e.preventDefault()
 
-  		try {
-  			setLoading(true)
+      try {
+        setLoading(true)
 
-  			const updates = {
-  				id: userId,
-  				username: username(),
-  				website: website(),
-  				avatar_url: avatarUrl(),
-  				updated_at: new Date().toISOString(),
-  			}
+        const updates = {
+          id: userId,
+          username: username(),
+          website: website(),
+          avatar_url: avatarUrl(),
+          updated_at: new Date().toISOString(),
+        }
 
-  			let { error } = await supabase.from('profiles').upsert(updates)
+        let { error } = await supabase.from('profiles').upsert(updates)
 
-  			if (error) {
-  				throw error
-  			}
-  		} catch (error) {
-  			if (error instanceof Error) {
-  				alert(error.message)
-  			}
-  		} finally {
-  			setLoading(false)
-  		}
-  	}
+        if (error) {
+          throw error
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          alert(error.message)
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
 
-  	return (
-  		
-  			
+    return (
+      
+        
 
-  				{/* ... */}
+          {/* ... */}
 
-  				Email: {userEmail}
-  				
-  					Name
-  					<input
-  						id="username"
-  						type="text"
-  						value={username() || ''}
-  						onChange={(e) => setUsername(e.currentTarget.value)}
-  					/>
-  				
-  				
-  					Website
-  					<input
-  						id="website"
-  						type="text"
-  						value={website() || ''}
-  						onChange={(e) => setWebsite(e.currentTarget.value)}
-  					/>
-  				
-  				
-  					
-  						{loading() ? 'Saving ...' : 'Update profile'}
-  					
-  				
-  				 supabase.auth.signOut()}>
-  					Sign Out
-  				
-  			
-  		
-  	)
+          Email: {userEmail}
+          
+            Name
+            <input
+              id="username"
+              type="text"
+              value={username() || ''}
+              onChange={(e) => setUsername(e.currentTarget.value)}
+            />
+          
+          
+            Website
+            <input
+              id="website"
+              type="text"
+              value={website() || ''}
+              onChange={(e) => setWebsite(e.currentTarget.value)}
+            />
+          
+          
+            
+              {loading() ? 'Saving ...' : 'Update profile'}
+            
+          
+           supabase.auth.signOut()}>
+            Sign Out
+          
+        
+      
+    )
   }
 
   export default Account
@@ -372,28 +372,28 @@ Now that you have all the components in place, update `App.tsx`:
   import Auth from './Auth'
 
   const App: Component = () => {
-  	const [userId, setUserId] = createSignal(null)
-  	const [userEmail, setUserEmail] = createSignal(null)
+    const [userId, setUserId] = createSignal(null)
+    const [userEmail, setUserEmail] = createSignal(null)
 
-  	const syncClaims = async () => {
-  		const { data } = await supabase.auth.getClaims()
-  		setUserId((data?.claims.sub as string) ?? null)
-  		setUserEmail((data?.claims.email as string) ?? null)
-  	}
+    const syncClaims = async () => {
+      const { data } = await supabase.auth.getClaims()
+      setUserId((data?.claims.sub as string) ?? null)
+      setUserEmail((data?.claims.email as string) ?? null)
+    }
 
-  	createEffect(() => {
-  		syncClaims()
+    createEffect(() => {
+      syncClaims()
 
-  		supabase.auth.onAuthStateChange(() => {
-  			syncClaims()
-  		})
-  	})
+      supabase.auth.onAuthStateChange(() => {
+        syncClaims()
+      })
+    })
 
-  	return (
-  		
-  			{!userId() ?  : }
-  		
-  	)
+    return (
+      
+        {!userId() ?  : }
+      
+    )
   }
 
   export default App
@@ -424,95 +424,95 @@ Create an avatar for the user so that they can upload a profile photo. Start by 
   import { supabase } from './supabaseClient'
 
   interface Props {
-  	size: number
-  	url: string | null
-  	onUpload: (event: Event, filePath: string) => void
+    size: number
+    url: string | null
+    onUpload: (event: Event, filePath: string) => void
   }
 
   const Avatar: Component = (props) => {
-  	const [avatarUrl, setAvatarUrl] = createSignal(null)
-  	const [uploading, setUploading] = createSignal(false)
+    const [avatarUrl, setAvatarUrl] = createSignal(null)
+    const [uploading, setUploading] = createSignal(false)
 
-  	createEffect(() => {
-  		if (props.url) downloadImage(props.url)
-  	})
+    createEffect(() => {
+      if (props.url) downloadImage(props.url)
+    })
 
-  	const downloadImage = async (path: string) => {
-  		try {
-  			const { data, error } = await supabase.storage.from('avatars').download(path)
-  			if (error) {
-  				throw error
-  			}
-  			const url = URL.createObjectURL(data)
-  			setAvatarUrl(url)
-  		} catch (error) {
-  			if (error instanceof Error) {
-  				console.log('Error downloading image: ', error.message)
-  			}
-  		}
-  	}
+    const downloadImage = async (path: string) => {
+      try {
+        const { data, error } = await supabase.storage.from('avatars').download(path)
+        if (error) {
+          throw error
+        }
+        const url = URL.createObjectURL(data)
+        setAvatarUrl(url)
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log('Error downloading image: ', error.message)
+        }
+      }
+    }
 
-  	const uploadAvatar: JSX.EventHandler<HTMLInputElement, Event> = async (event) => {
-  		try {
-  			setUploading(true)
+    const uploadAvatar: JSX.EventHandler<HTMLInputElement, Event> = async (event) => {
+      try {
+        setUploading(true)
 
-  			const target = event.currentTarget
-  			if (!target?.files || target.files.length === 0) {
-  				throw new Error('You must select an image to upload.')
-  			}
+        const target = event.currentTarget
+        if (!target?.files || target.files.length === 0) {
+          throw new Error('You must select an image to upload.')
+        }
 
-  			const file = target.files[0]
-  			const fileExt = file.name.split('.').pop()
-  			const fileName = `${Math.random()}.${fileExt}`
-  			const filePath = `${fileName}`
+        const file = target.files[0]
+        const fileExt = file.name.split('.').pop()
+        const fileName = `${Math.random()}.${fileExt}`
+        const filePath = `${fileName}`
 
-  			let { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
+        let { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
 
-  			if (uploadError) {
-  				throw uploadError
-  			}
+        if (uploadError) {
+          throw uploadError
+        }
 
-  			props.onUpload(event, filePath)
-  		} catch (error) {
-  			if (error instanceof Error) {
-  				alert(error.message)
-  			}
-  		} finally {
-  			setUploading(false)
-  		}
-  	}
+        props.onUpload(event, filePath)
+      } catch (error) {
+        if (error instanceof Error) {
+          alert(error.message)
+        }
+      } finally {
+        setUploading(false)
+      }
+    }
 
-  	return (
-  		
-  			{avatarUrl() ? (
-  				<img
-  					src={avatarUrl()!}
-  					alt={avatarUrl() ? 'Avatar' : 'No image'}
-  					class="avatar image"
-  					style={{ height: `${props.size}px`, width: `${props.size}px` }}
-  				/>
-  			) : (
-  				<div
-  					class="avatar no-image"
-  					style={{ height: `${props.size}px`, width: `${props.size}px` }}
-  				/>
-  			)}
-  			
-  				
-  					{uploading() ? 'Uploading ...' : 'Upload avatar'}
-  				
-  				
-  					<input
-  						type="file"
-  						id="single"
-  						accept="image/*"
-  						onChange={uploadAvatar}
-  						disabled={uploading()}
-  					/>
-  				
-  			
-  		
-  	)
+    return (
+      
+        {avatarUrl() ? (
+          <img
+            src={avatarUrl()!}
+            alt={avatarUrl() ? 'Avatar' : 'No image'}
+            class="avatar image"
+            style={{ height: `${props.size}px`, width: `${props.size}px` }}
+          />
+        ) : (
+          <div
+            class="avatar no-image"
+            style={{ height: `${props.size}px`, width: `${props.size}px` }}
+          />
+        )}
+        
+          
+            {uploading() ? 'Uploading ...' : 'Upload avatar'}
+          
+          
+            <input
+              type="file"
+              id="single"
+              accept="image/*"
+              onChange={uploadAvatar}
+              disabled={uploading()}
+            />
+          
+        
+      
+    )
   }
 
   export default Avatar
@@ -529,23 +529,23 @@ And then add the widget to the Account page:
   import Avatar from './Avatar'
   import { supabase } from './supabaseClient'
 
-  	// ...
+    // ...
 
-  	return (
-  		
-  			
-  				<Avatar
-  					url={avatarUrl()}
-  					size={150}
-  					onUpload={(e: Event, url: string) => {
-  						setAvatarUrl(url)
-  						updateProfile(e)
-  					}}
-  				/>
-  				Email: {userEmail}
-  				
+    return (
+      
+        
+          <Avatar
+            url={avatarUrl()}
+            size={150}
+            onUpload={(e: Event, url: string) => {
+              setAvatarUrl(url)
+              updateProfile(e)
+            }}
+          />
+          Email: {userEmail}
+          
 
-  	// ...
+    // ...
   ```
 ````
 

@@ -1,83 +1,100 @@
 # Overview
 
-Source: https://docs.langchain.com/oss/python/langchain/middleware/overview
+Source: https://docs.langchain.com/oss/javascript/langgraph/frontend/overview
 
-Control and customize agent execution at every step
+Render LangGraph agents to the frontend
 
-Middleware provides a way to more tightly control what happens inside the agent. Middleware is useful for the following:
+Build frontends that visualize LangGraph pipelines in real time. These patterns show how to render multi-step graph execution with per-node status and streaming content from custom `StateGraph` workflows.
 
-- Tracking agent behavior with logging, analytics, and debugging.
-- Transforming prompts, [tool selection](/oss/python/langchain/middleware/built-in#llm-tool-selector), and output formatting.
-- Adding [retries](/oss/python/langchain/middleware/built-in#tool-retry), [fallbacks](/oss/python/langchain/middleware/built-in#model-fallback), and early termination logic.
-- Applying [rate limits](/oss/python/langchain/middleware/built-in#model-call-limit), guardrails, and [PII detection](/oss/python/langchain/middleware/built-in#pii-detection).
+## Architecture
 
-Add middleware by passing them to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent):
+LangGraph graphs are composed of named nodes connected by edges. Each node executes a step (classify, research, analyze, synthesize) and writes output to a specific state key. On the frontend, `useStream` provides reactive access to node outputs, streaming tokens, and graph metadata so you can map each node to a UI card.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-from langchain.agents import create_agent
-from langchain.agents.middleware import SummarizationMiddleware, HumanInTheLoopMiddleware
+```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+%%{
+  init: {
+    "fontFamily": "monospace",
+    "flowchart": {
+      "curve": "curve"
+    }
+  }
+}%%
+graph LR
+  FRONTEND["useStream()"]
+  GRAPH["StateGraph"]
+  N1["Node A"]
+  N2["Node B"]
+  N3["Node C"]
 
-agent = create_agent(
-    model="gpt-4.1",
-    tools=[...],
-    middleware=[
-        SummarizationMiddleware(...),
-        HumanInTheLoopMiddleware(...)
-    ],
-)
+  GRAPH --"stream"--> FRONTEND
+  FRONTEND --"submit"--> GRAPH
+  GRAPH --> N1
+  N1 --> N2
+  N2 --> N3
+
+  classDef blueHighlight fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A;
+  classDef greenHighlight fill:#DCFCE7,stroke:#16A34A,color:#14532D;
+  classDef orangeHighlight fill:#FEF3C7,stroke:#D97706,color:#92400E;
+  class FRONTEND blueHighlight;
+  class GRAPH greenHighlight;
+  class N1,N2,N3 orangeHighlight;
 ```
 
-## The agent loop
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { StateGraph, StateSchema, MessagesValue, START, END } from "@langchain/langgraph";
+import * as z from "zod";
 
-The core agent loop involves calling a model, letting it choose tools to execute, and then finishing when it calls no more tools:
+const State = new StateSchema({
+  messages: MessagesValue,
+  classification: z.string(),
+  research: z.string(),
+  analysis: z.string(),
+});
 
-Middleware exposes hooks before and after each of those steps:
+const graph = new StateGraph(State)
+  .addNode("classify", classifyNode)
+  .addNode("research", researchNode)
+  .addNode("analyze", analyzeNode)
+  .addEdge(START, "classify")
+  .addEdge("classify", "research")
+  .addEdge("research", "analyze")
+  .addEdge("analyze", END)
+  .compile();
+```
 
-## Additional resources
+On the frontend, `useStream` exposes `stream.values` for completed node outputs and `getMessagesMetadata` for identifying which node produced each streaming token.
+
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { useStream } from "@langchain/react";
+
+function Pipeline() {
+  const stream = useStream<typeof graph>({
+    apiUrl: "http://localhost:2024",
+    assistantId: "pipeline",
+  });
+
+  const classification = stream.values?.classification;
+  const research = stream.values?.research;
+  const analysis = stream.values?.analysis;
+}
+```
+
+## Patterns
 
 ```
-Explore built-in middleware for common use cases.
-
-
-
-Build your own middleware with hooks and decorators.
-
-
-
-Complete API reference for middleware.
-
-
-
-Test your agents with LangSmith.
+Visualize multi-step graph pipelines with per-node status and streaming content.
 ```
+
+## Related patterns
+
+The [LangChain frontend patterns](/oss/javascript/langchain/frontend/overview)—markdown messages, tool calling, optimistic updates, and more—work with any LangGraph graph. The `useStream` hook provides the same core API whether you use `createAgent`, `createDeepAgent`, or a custom `StateGraph`.
 
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/middleware/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/overview.md) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 
 [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 ```
-
-# Models
-
-Source: https://docs.langchain.com/oss/python/langchain/models
-
-[LLMs](https://en.wikipedia.org/wiki/Large_language_model) are powerful AI tools that can interpret and generate text like humans. They're versatile enough to write content, translate languages, summarize, and answer questions without needing specialized training for each task.
-
-In addition to text generation, many models support:
-
-- [Tool calling](#tool-calling) - calling external tools (like databases queries or API calls) and use results in their responses.
-- [Structured output](#structured-output) - where the model's response is constrained to follow a defined format.
-- [Multimodality](#multimodal) - process and return data other than text, such as images, audio, and video.
-- [Reasoning](#reasoning) - models perform multi-step reasoning to arrive at a conclusion.
-
-Models are the reasoning engine of [agents](/oss/python/langchain/agents). They drive the agent's decision-making process, determining which tools to call, how to interpret results, and when to provide a final answer.
-
-The quality and capabilities of the model you choose directly impact your agent's baseline reliability and performance. Different models excel at different tasks - some are better at following complex instructions, others at structured reasoning, and some support larger context windows for handling more information.
-
-LangChain's standard model interfaces give you access to many different provider integrations, which makes it easy to experiment with and switch between models to find the best fit for your use case.
-
-For provider-specific integration information and capabilities, see the provider's [chat model page](/oss/python/integrations/chat).

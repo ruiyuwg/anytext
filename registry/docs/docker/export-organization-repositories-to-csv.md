@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -24,7 +22,7 @@ Table of contents
 
 ***
 
-This guide shows you how to export a complete list of repositories from your Docker Hub organization, including private repositories. You'll use an Organization Access Token (OAT) to authenticate with the Docker Hub API and export repository details to a CSV file for reporting or analysis.
+This guide shows you how to export a complete list of repositories from your Docker Hub organization, including private repositories. You'll use a Personal Access Token (PAT) from an administrator account to authenticate with the Docker Hub API and export repository details to a CSV file for reporting or analysis.
 
 The exported data includes repository name, visibility status, last updated date, pull count, and star count.
 
@@ -37,47 +35,34 @@ Before you begin, ensure you have:
 - `jq` installed for JSON parsing
 - A spreadsheet application to view the CSV
 
-## [Create an organization access token](#create-an-organization-access-token)
+## [Create a personal access token](#create-a-personal-access-token)
 
-Organization access tokens let you authenticate API requests without interactive login steps.
-
-1. Navigate to your organization in [Docker Home](https://app.docker.com) and select **Admin Console**.
-
-2. Select **Access tokens** from the sidebar.
-
-3. Select **Generate access token**.
-
-4. Configure the token permissions:
-
-   - Under **Repository permissions**, add every repository you want the token to access
-   - Assign at least **Image Pull** (read) access to each repository
-   - You can add up to 50 repositories per token
-
-5. Copy the generated token and store it securely.
+[Create a personal access token](/security/access-tokens/) from a user account that has access to the organization's repositories. When creating the token, select at minimum **Read-only** access permissions to list repositories.
 
 > Important
 >
-> If you only enable **Read public repositories**, the API will only return public repositories. To include private repositories in your export, you must explicitly add them to the token's repository permissions.
+> Use a PAT from a user account that is a member of the organization. Users with owner roles can export all organization repositories. Members can only export repositories they have permission to access.
 
 ## [Authenticate with the Docker Hub API](#authenticate-with-the-docker-hub-api)
 
-Exchange your organization access token for a JWT bearer token that you'll use for subsequent API requests.
+Exchange your personal access token for a JWT bearer token that you'll use for subsequent API requests.
 
-1. Set your organization name and access token as variables:
+1. Set your Docker Hub username, organization name, and personal access token as variables:
 
    ```bash
-   ORG="<your-org>"
-   OAT="<your_org_access_token>"
+   USERNAME="<your-docker-username>"
+   ORG="<org-name>"
+   PAT="<your_personal_access_token>"
    ```
 
 2. Call the authentication endpoint to get a JWT:
 
    ```bash
    TOKEN=$(
-     curl -s https://hub.docker.com/v2/users/login \
+     curl -s https://hub.docker.com/v2/auth/token \
        -H 'Content-Type: application/json' \
-       -d "{\"username\":\"$ORG\",\"password\":\"$OAT\"}" \
-     | jq -r '.token'
+       -d "{\"identifier\":\"$USERNAME\",\"secret\":\"$PAT\"}" \
+     | jq -r '.access_token'
    )
    ```
 
@@ -147,18 +132,18 @@ Open the `repos.csv` file in your preferred spreadsheet application to view and 
 
 ### [Only public repositories appear](#only-public-repositories-appear)
 
-Your organization access token may only have **Read public repositories** enabled, or it lacks permissions for specific private repositories.
+The Docker Hub account associated with your personal access token may not have access to private repositories in the organization.
 
 To fix this:
 
-1. Navigate to your organization's access tokens in Docker Hub
-2. Select the token you created
-3. Add private repositories to the token's permissions with at least **Image Pull** access
+1. Verify the account is a member of the organization
+2. Check that the account has appropriate permissions (owner or member role)
+3. Ensure the personal access token has sufficient access permissions
 4. Regenerate the JWT and retry the export
 
 ### [API returns 403 or missing fields](#api-returns-403-or-missing-fields)
 
-Ensure you're using the JWT from the `/v2/users/login` endpoint as a Bearer token in the `Authorization` header, not the organization access token directly.
+Ensure you're using the JWT from the `/v2/auth/token` endpoint as a Bearer token in the `Authorization` header, not the personal access token directly.
 
 Verify your authentication:
 
@@ -168,15 +153,6 @@ $ curl -s "https://hub.docker.com/v2/namespaces/$ORG/repositories?page_size=1" \
 ```
 
 If this returns an error, re-run the authentication step to get a fresh JWT.
-
-### [Need access to all repositories](#need-access-to-all-repositories)
-
-Organization access tokens are scoped to specific repositories you select during token creation. To export all repositories, you have two options:
-
-1. Add all repositories to the organization access token (up to 50 repositories)
-2. Use a Personal Access Token (PAT) from an administrator account that has access across the entire organization
-
-The choice between these approaches depends on your organization's security policies.
 
 [Edit this page](https://github.com/docker/docs/edit/main/content/manuals/docker-hub/repos/manage/export.md)
 

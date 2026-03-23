@@ -655,21 +655,81 @@ For deeper customization, check out [this tutorial](/oss/python/langgraph/sql-ag
 [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 ```
 
-# Frontend
+# Streaming
 
-Source: https://docs.langchain.com/oss/python/langchain/streaming/frontend
+Source: https://docs.langchain.com/oss/python/langchain/streaming
 
-Build generative UIs with real-time streaming from LangChain agents, LangGraph graphs, and custom APIs
+Stream real-time updates from agent runs
 
-The `useStream` React hook provides seamless integration with LangGraph streaming capabilities. It handles all the complexities of streaming, state management, and branching logic, letting you focus on building great generative UI experiences.
+LangChain implements a streaming system to surface real-time updates.
 
-Key features:
+Streaming is crucial for enhancing the responsiveness of applications built on LLMs. By displaying output progressively, even before a complete response is ready, streaming significantly improves user experience (UX), particularly when dealing with the latency of LLMs.
 
-- **Messages streaming** — Handle a stream of message chunks to form a complete message
-- **Automatic state management** — for messages, interrupts, loading states, and errors
-- **Conversation branching** — Create alternate conversation paths from any point in the chat history
-- **UI-agnostic design** — Bring your own components and styling
+## Overview
 
-## Installation
+LangChain's streaming system lets you surface live feedback from agent runs to your application.
 
-Install the LangGraph SDK to use the `useStream` hook in your React application:
+What's possible with LangChain streaming:
+
+- [**Stream agent progress**](#agent-progress)—get state updates after each agent step.
+- [**Stream LLM tokens**](#llm-tokens)—stream language model tokens as they're generated.
+- [**Stream thinking / reasoning tokens**](#streaming-thinking-/-reasoning-tokens)—surface model reasoning as it's generated.
+- [**Stream custom updates**](#custom-updates)—emit user-defined signals (e.g., `"Fetched 10/100 records"`).
+- [**Stream multiple modes**](#stream-multiple-modes)—choose from `updates` (agent progress), `messages` (LLM tokens + metadata), or `custom` (arbitrary user data).
+
+See the [common patterns](#common-patterns) section below for additional end-to-end examples.
+
+## Supported stream modes
+
+Pass one or more of the following stream modes as a list to the [`stream`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.stream) or [`astream`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.astream) methods:
+
+| Mode       | Description                                                                                                                                                       |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `updates`  | Streams state updates after each agent step. If multiple updates are made in the same step (e.g., multiple nodes are run), those updates are streamed separately. |
+| `messages` | Streams tuples of `(token, metadata)` from any graph nodes where an LLM is invoked.                                                                               |
+| `custom`   | Streams custom data from inside your graph nodes using the stream writer.                                                                                         |
+
+## Agent progress
+
+To stream agent progress, use the [`stream`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.stream) or [`astream`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.astream) methods with `stream_mode="updates"`. This emits an event after every agent step.
+
+For example, if you have an agent that calls a tool once, you should see the following updates:
+
+- **LLM node**: [`AIMessage`](https://reference.langchain.com/python/langchain-core/messages/ai/AIMessage) with tool call requests
+- **Tool node**: [`ToolMessage`](https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage) with execution result
+- **LLM node**: Final AI response
+
+```python title="Streaming agent progress" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langchain.agents import create_agent
+
+
+def get_weather(city: str) -> str:
+    """Get weather for a given city."""
+
+    return f"It's always sunny in {city}!"
+
+agent = create_agent(
+    model="gpt-5-nano",
+    tools=[get_weather],
+)
+for chunk in agent.stream(  # [!code highlight]
+    {"messages": [{"role": "user", "content": "What is the weather in SF?"}]},
+    stream_mode="updates",
+    version="v2",  # [!code highlight]
+):
+    if chunk["type"] == "updates":  # [!code highlight]
+        for step, data in chunk["data"].items():  # [!code highlight]
+            print(f"step: {step}")
+            print(f"content: {data['messages'][-1].content_blocks}")
+```
+
+```shell title="Output" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+step: model
+content: [{'type': 'tool_call', 'name': 'get_weather', 'args': {'city': 'San Francisco'}, 'id': 'call_OW2NYNsNSKhRZpjW0wm2Aszd'}]
+
+step: tools
+content: [{'type': 'text', 'text': "It's always sunny in San Francisco!"}]
+
+step: model
+content: [{'type': 'text', 'text': 'It's always sunny in San Francisco!'}]
+```

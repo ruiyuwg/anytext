@@ -48,26 +48,22 @@ export default defineConfig({
 })
 ```
 
-## optimizeDeps.esbuildOptions&#x20;
+## optimizeDeps.rolldownOptions&#x20;
 
-- **Type:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
-  | 'bundle'
-  | 'entryPoints'
-  | 'external'
-  | 'write'
-  | 'watch'
-  | 'outdir'
-  | 'outfile'
-  | 'outbase'
-  | 'outExtension'
-  | 'metafile'>`
+- **Type:** Omit\<RolldownOptions, 'input' | 'logLevel' | 'output'> & { output?: Omit\<RolldownOutputOptions, 'format' | 'sourcemap' | 'dir' | 'banner'> }
 
-Options to pass to esbuild during the dep scanning and optimization.
+Options to pass to Rolldown during the dep scanning and optimization.
 
 Certain options are omitted since changing them would not be compatible with Vite's dep optimization.
 
-- `external` is also omitted, use Vite's `optimizeDeps.exclude` option
 - `plugins` are merged with Vite's dep plugin
+
+## optimizeDeps.esbuildOptions&#x20;
+
+- **Type:** Omit\<EsbuildBuildOptions, 'bundle' | 'entryPoints' | 'external' | 'write' | 'watch' | 'outdir' | 'outfile' | 'outbase' | 'outExtension' | 'metafile'>
+- **Deprecated**
+
+This option is converted to `optimizeDeps.rolldownOptions` internally. Use `optimizeDeps.rolldownOptions` instead.
 
 ## optimizeDeps.force&#x20;
 

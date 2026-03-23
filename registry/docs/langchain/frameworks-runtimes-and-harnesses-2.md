@@ -120,7 +120,7 @@ While you can accomplish similar tasks with LangChain, LangGraph, and Deep Agent
 | Skills            | [Multi-agent skills](/oss/python/langchain/multi-agent/skills)          | -                                                                           | [Skills](/oss/python/deepagents/skills)                                      |
 | Subagents         | [Multi-agent subagents](/oss/python/langchain/multi-agent/subagents)    | [Subgraphs](/oss/python/langgraph/use-subgraphs)                            | [Subagents](/oss/python/deepagents/subagents)                                |
 | Human-in-the-loop | [Human-in-the-loop middleware](/oss/python/langchain/human-in-the-loop) | [Interrupts](/oss/python/langgraph/interrupts)                              | [`interrupt_on` parameter](/oss/python/deepagents/harness#human-in-the-loop) |
-| Streaming         | [Agent Streaming](/oss/python/langchain/streaming/overview)             | [Streaming](/oss/python/langgraph/streaming)                                | [Streaming](/oss/python/deepagents/harness#streaming)                        |
+| Streaming         | [Agent Streaming](/oss/python/langchain/streaming/overview)             | [Streaming](/oss/python/langgraph/streaming)                                | [Streaming](/oss/python/deepagents/streaming/overview)                       |
 
 ## Learn more
 

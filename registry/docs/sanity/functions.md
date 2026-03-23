@@ -795,7 +795,7 @@ string::split(12, "1")
 string::split("This is 1 way to do it", 1)
 ```
 
-## Query Scoring
+## Query scoring functions
 
 ### `score(scoreExp)`
 
@@ -922,6 +922,50 @@ Boost values between `0` and `1` can be used to affect `_score` to a lesser exte
   { _score, title }
 ```
 
+## Text functions
+
+The `text` namespace contains functions for semantic text operations. Each function must be prefixed with the `text::` namespace syntax.
+
+### text::semanticSimilarity()
+
+Converts the given search term into a vector and ranks results by proximity to each document's embedding. Returns a numeric score used for ranking results relative to each other within a single query. The score is opaque and unitless; do not compare scores across different queries.
+
+This function requires [dataset embeddings](https://www.sanity.io/docs/content-lake/dataset-embeddings) to be enabled on the target dataset.
+
+> \[!WARNING]
+> Gotcha
+> `text::semanticSimilarity()` is only valid as an argument to `score()`. Using it elsewhere returns an error.
+
+```groq
+// Semantic search: rank all documents by meaning
+* | score(text::semanticSimilarity("how to handle user authentication"))
+
+// Filtered semantic search: restrict which documents are scored
+*[_type == "product" && category == "footwear"]
+    | score(text::semanticSimilarity("leather waterproof boots"))
+
+// Hybrid search: combine keyword matching with semantic scoring
+*[_type == "product"]
+    | score(
+        @ match text::query("leather waterproof boots"),
+        text::semanticSimilarity("leather waterproof boots")
+      )
+```
+
+## User functions
+
+### user::attributes()
+
+*This is a paid feature, available on the Enterprise plan.*
+
+Allows you to inspect the [user attributes](https://www.sanity.io/docs/http-reference/user-attributes) of the logged in user. The name of the attribute should be selected after the function.
+
+```groq
+*[_type == "post" && branch == user::attributes().branch]
+```
+
+Attribute values can be string, integer, number, boolean, and array types.
+
 ## Additional functions
 
 ### `releases::all()`
@@ -1022,34 +1066,4 @@ fn user::children($param) = $param[]->{name};
 
 // Usage
 *[_type == "person"] { "children": user::children(children) }
-```
-
-## Text functions
-
-The `text` namespace contains functions for semantic text operations. Each function must be prefixed with the `text::` namespace syntax.
-
-### text::semanticSimilarity()
-
-Converts the given search term into a vector and ranks results by proximity to each document's embedding. Returns a numeric score used for ranking results relative to each other within a single query. The score is opaque and unitless; do not compare scores across different queries.
-
-This function requires [dataset embeddings](https://www.sanity.io/docs/content-lake/dataset-embeddings) to be enabled on the target dataset.
-
-> \[!WARNING]
-> Gotcha
-> `text::semanticSimilarity()` is only valid as an argument to `score()`. Using it elsewhere returns an error.
-
-```groq
-// Semantic search: rank all documents by meaning
-* | score(text::semanticSimilarity("how to handle user authentication"))
-
-// Filtered semantic search: restrict which documents are scored
-*[_type == "product" && category == "footwear"]
-    | score(text::semanticSimilarity("leather waterproof boots"))
-
-// Hybrid search: combine keyword matching with semantic scoring
-*[_type == "product"]
-    | score(
-        @ match text::query("leather waterproof boots"),
-        text::semanticSimilarity("leather waterproof boots")
-      )
 ```

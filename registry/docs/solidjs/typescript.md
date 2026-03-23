@@ -466,7 +466,7 @@ declare module "solid-js" {  namespace JSX {    interface CustomEvents extends H
 To include specific native events, you can choose certain events (e.g. `mousemove` and `pointermove`):
 
 ```
-declare module "solid-js" {  namespace JSX {    interface CustomEvents      extends Pick<HTMLElementEventMap, "mousemove" | "pointermove"> {}  }}
+declare module "solid-js" {  namespace JSX {    interface CustomEvents extends Pick<      HTMLElementEventMap,      "mousemove" | "pointermove"    > {}  }}
 ```
 
 #### [Forcing properties and custom attributes](/configuration/typescript#forcing-properties-and-custom-attributes)

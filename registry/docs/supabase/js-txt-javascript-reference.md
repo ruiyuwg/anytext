@@ -1,1180 +1,799 @@
 # JavaScript Reference
 
-Fetch data: select()
+onAuthStateChange()
 
 ## Examples
 
-### Getting your data
+### Listen to auth changes
 
 ```js
-const { data, error } = await supabase
-  .from('characters')
-  .select()
+const { data } = supabase.auth.onAuthStateChange((event, session) => {
+  console.log(event, session)
+
+  if (event === 'INITIAL_SESSION') {
+    // handle initial session
+  } else if (event === 'SIGNED_IN') {
+    // handle sign in event
+  } else if (event === 'SIGNED_OUT') {
+    // handle sign out event
+  } else if (event === 'PASSWORD_RECOVERY') {
+    // handle password recovery event
+  } else if (event === 'TOKEN_REFRESHED') {
+    // handle token refreshed event
+  } else if (event === 'USER_UPDATED') {
+    // handle user updated event
+  }
+})
+
+// call unsubscribe to remove the callback
+data.subscription.unsubscribe()
 ```
 
-### Selecting specific columns
+### Listen to sign out
 
 ```js
-const { data, error } = await supabase
-  .from('characters')
-  .select('name')
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_OUT') {
+    console.log('SIGNED_OUT', session)
+
+    // clear local and session storage
+    [
+      window.localStorage,
+      window.sessionStorage,
+    ].forEach((storage) => {
+      Object.entries(storage)
+        .forEach(([key]) => {
+          storage.removeItem(key)
+        })
+    })
+  }
+})
 ```
 
-### Query referenced tables
+### Store OAuth provider tokens on sign in
 
 ```js
-const { data, error } = await supabase
-  .from('orchestal_sections')
-  .select(`
-    name,
-    instruments (
-      name
-    )
-  `)
+// Register this immediately after calling createClient!
+// Because signInWithOAuth causes a redirect, you need to fetch the
+// provider tokens from the callback.
+supabase.auth.onAuthStateChange((event, session) => {
+  if (session && session.provider_token) {
+    window.localStorage.setItem('oauth_provider_token', session.provider_token)
+  }
+
+  if (session && session.provider_refresh_token) {
+    window.localStorage.setItem('oauth_provider_refresh_token', session.provider_refresh_token)
+  }
+
+  if (event === 'SIGNED_OUT') {
+    window.localStorage.removeItem('oauth_provider_token')
+    window.localStorage.removeItem('oauth_provider_refresh_token')
+  }
+})
 ```
 
-### Query referenced tables with spaces in their names
+### Use React Context for the User's session
 
 ```js
-const { data, error } = await supabase
-  .from('orchestal sections')
-  .select(`
-    name,
-    "musical instruments" (
-      name
-    )
-  `)
-```
+const SessionContext = React.createContext(null)
 
-### Query referenced tables through a join table
+function main() {
+  const [session, setSession] = React.useState(null)
 
-```ts
-const { data, error } = await supabase
-  .from('users')
-  .select(`
-    name,
-    teams (
-      name
-    )
-  `)
-```
+  React.useEffect(() => {
+    const {data: { subscription }} = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === 'SIGNED_OUT') {
+          setSession(null)
+        } else if (session) {
+          setSession(session)
+        }
+      })
 
-### Query the same referenced table multiple times
-
-```ts
-const { data, error } = await supabase
-  .from('messages')
-  .select(`
-    content,
-    from:sender_id(name),
-    to:receiver_id(name)
-  `)
-
-// To infer types, use the name of the table (in this case `users`) and
-// the name of the foreign key constraint.
-const { data, error } = await supabase
-  .from('messages')
-  .select(`
-    content,
-    from:users!messages_sender_id_fkey(name),
-    to:users!messages_receiver_id_fkey(name)
-  `)
-```
-
-### Query nested foreign tables through a join table
-
-```ts
-  const { data, error } = await supabase
-    .from('games')
-    .select(`
-      game_id:id,
-      away_team:teams!games_away_team_fkey (
-        users (
-          id,
-          name
-        )
-      )
-    `)
-```
-
-### Filtering through referenced tables
-
-```ts
-const { data, error } = await supabase
-  .from('instruments')
-  .select('name, orchestral_sections(*)')
-  .eq('orchestral_sections.name', 'percussion')
-```
-
-### Querying referenced table with count
-
-```ts
-const { data, error } = await supabase
-  .from('orchestral_sections')
-  .select(`*, instruments(count)`)
-```
-
-### Querying with count option
-
-```ts
-const { count, error } = await supabase
-  .from('characters')
-  .select('*', { count: 'exact', head: true })
-```
-
-### Querying JSON data
-
-```ts
-const { data, error } = await supabase
-  .from('users')
-  .select(`
-    id, name,
-    address->city
-  `)
-```
-
-### Querying referenced table with inner join
-
-```ts
-const { data, error } = await supabase
-  .from('instruments')
-  .select('name, orchestral_sections!inner(name)')
-  .eq('orchestral_sections.name', 'woodwinds')
-  .limit(1)
-```
-
-### Switching schemas per query
-
-```ts
-const { data, error } = await supabase
-  .schema('myschema')
-  .from('mytable')
-  .select()
-```
-
-# JavaScript Reference
-
-Create data: insert()
-
-## Examples
-
-### Create a record
-
-```ts
-const { error } = await supabase
-  .from('countries')
-  .insert({ id: 1, name: 'Mordor' })
-```
-
-### Create a record and return it
-
-```ts
-const { data, error } = await supabase
-  .from('countries')
-  .insert({ id: 1, name: 'Mordor' })
-  .select()
-```
-
-### Bulk create
-
-```ts
-const { error } = await supabase
-  .from('countries')
-  .insert([
-    { id: 1, name: 'Mordor' },
-    { id: 1, name: 'The Shire' },
-  ])
-```
-
-# JavaScript Reference
-
-Modify data: update()
-
-## Examples
-
-### Updating your data
-
-```ts
-const { error } = await supabase
-  .from('instruments')
-  .update({ name: 'piano' })
-  .eq('id', 1)
-```
-
-### Update a record and return it
-
-```ts
-const { data, error } = await supabase
-  .from('instruments')
-  .update({ name: 'piano' })
-  .eq('id', 1)
-  .select()
-```
-
-### Updating JSON data
-
-```ts
-const { data, error } = await supabase
-  .from('users')
-  .update({
-    address: {
-      street: 'Melrose Place',
-      postcode: 90210
+    return () => {
+      subscription.unsubscribe()
     }
+  }, [])
+
+  return (
+    <SessionContext.Provider value={session}>
+      <App />
+    </SessionContext.Provider>
+  )
+}
+```
+
+### Listen to password recovery events
+
+```js
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'PASSWORD_RECOVERY') {
+    console.log('PASSWORD_RECOVERY', session)
+    // show screen to update user's password
+    showPasswordResetScreen(true)
+  }
+})
+```
+
+### Listen to sign in
+
+```js
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN') console.log('SIGNED_IN', session)
+})
+```
+
+### Listen to token refresh
+
+```js
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'TOKEN_REFRESHED') console.log('TOKEN_REFRESHED', session)
+})
+```
+
+### Listen to user updates
+
+```js
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'USER_UPDATED') console.log('USER_UPDATED', session)
+})
+```
+
+# JavaScript Reference
+
+signInAnonymously()
+
+## Examples
+
+### Create an anonymous user
+
+```js
+const { data, error } = await supabase.auth.signInAnonymously({
+  options: {
+    captchaToken
+  }
+});
+```
+
+### Create an anonymous user with custom user metadata
+
+```js
+const { data, error } = await supabase.auth.signInAnonymously({
+  options: {
+    data
+  }
+})
+```
+
+# JavaScript Reference
+
+signInWithPassword()
+
+## Examples
+
+### Sign in with email and password
+
+```js
+const { data, error } = await supabase.auth.signInWithPassword({
+  email: 'example@email.com',
+  password: 'example-password',
+})
+```
+
+### Sign in with phone and password
+
+```js
+const { data, error } = await supabase.auth.signInWithPassword({
+  phone: '+13334445555',
+  password: 'some-password',
+})
+```
+
+# JavaScript Reference
+
+signInWithIdToken
+
+## Examples
+
+### Sign In using ID Token
+
+```js
+const { data, error } = await supabase.auth.signInWithIdToken({
+  provider: 'google',
+  token: 'your-id-token'
+})
+```
+
+# JavaScript Reference
+
+signInWithOtp()
+
+## Examples
+
+### Sign in with email
+
+```js
+const { data, error } = await supabase.auth.signInWithOtp({
+  email: 'example@email.com',
+  options: {
+    emailRedirectTo: 'https://example.com/welcome'
+  }
+})
+```
+
+### Sign in with SMS OTP
+
+```js
+const { data, error } = await supabase.auth.signInWithOtp({
+  phone: '+13334445555',
+})
+```
+
+### Sign in with WhatsApp OTP
+
+```js
+const { data, error } = await supabase.auth.signInWithOtp({
+  phone: '+13334445555',
+  options: {
+    channel:'whatsapp',
+  }
+})
+```
+
+# JavaScript Reference
+
+signInWithOAuth()
+
+## Examples
+
+### Sign in using a third-party provider
+
+```js
+const { data, error } = await supabase.auth.signInWithOAuth({
+  provider: 'github'
+})
+```
+
+### Sign in using a third-party provider with redirect
+
+```js
+const { data, error } = await supabase.auth.signInWithOAuth({
+  provider: 'github',
+  options: {
+    redirectTo: 'https://example.com/welcome'
+  }
+})
+```
+
+### Sign in with scopes and access provider tokens
+
+```js
+// Register this immediately after calling createClient!
+// Because signInWithOAuth causes a redirect, you need to fetch the
+// provider tokens from the callback.
+supabase.auth.onAuthStateChange((event, session) => {
+  if (session && session.provider_token) {
+    window.localStorage.setItem('oauth_provider_token', session.provider_token)
+  }
+
+  if (session && session.provider_refresh_token) {
+    window.localStorage.setItem('oauth_provider_refresh_token', session.provider_refresh_token)
+  }
+
+  if (event === 'SIGNED_OUT') {
+    window.localStorage.removeItem('oauth_provider_token')
+    window.localStorage.removeItem('oauth_provider_refresh_token')
+  }
+})
+
+// Call this on your Sign in with GitHub button to initiate OAuth
+// with GitHub with the requested elevated scopes.
+await supabase.auth.signInWithOAuth({
+  provider: 'github',
+  options: {
+    scopes: 'repo gist notifications'
+  }
+})
+```
+
+# JavaScript Reference
+
+signInWithSSO()
+
+## Examples
+
+### Sign in with email domain
+
+```js
+  // You can extract the user's email domain and use it to trigger the
+  // authentication flow with the correct identity provider.
+
+  const { data, error } = await supabase.auth.signInWithSSO({
+    domain: 'company.com'
   })
-  .eq('address->postcode', 90210)
-  .select()
+
+  if (data?.url) {
+    // redirect the user to the identity provider's authentication flow
+    window.location.href = data.url
+  }
+```
+
+### Sign in with provider UUID
+
+```js
+  // Useful when you need to map a user's sign in request according
+  // to different rules that can't use email domains.
+
+  const { data, error } = await supabase.auth.signInWithSSO({
+    providerId: '21648a9d-8d5a-4555-a9d1-d6375dc14e92'
+  })
+
+  if (data?.url) {
+    // redirect the user to the identity provider's authentication flow
+    window.location.href = data.url
+  }
 ```
 
 # JavaScript Reference
 
-Upsert data: upsert()
+signInWithWeb3()
 
 ## Examples
 
-### Upsert your data
-
-```ts
-const { data, error } = await supabase
-  .from('instruments')
-  .upsert({ id: 1, name: 'piano' })
-  .select()
-```
-
-### Bulk Upsert your data
-
-```ts
-const { data, error } = await supabase
-  .from('instruments')
-  .upsert([
-    { id: 1, name: 'piano' },
-    { id: 2, name: 'harp' },
-  ])
-  .select()
-```
-
-### Upserting into tables with constraints
-
-```ts
-const { data, error } = await supabase
-  .from('users')
-  .upsert({ id: 42, handle: 'saoirse', display_name: 'Saoirse' }, { onConflict: 'handle' })
-  .select()
-```
-
-# JavaScript Reference
-
-Delete data: delete()
-
-## Examples
-
-### Delete a single record
-
-```ts
-const response = await supabase
-  .from('countries')
-  .delete()
-  .eq('id', 1)
-```
-
-### Delete a record and return it
-
-```ts
-const { data, error } = await supabase
-  .from('countries')
-  .delete()
-  .eq('id', 1)
-  .select()
-```
-
-### Delete multiple records
-
-```ts
-const response = await supabase
-  .from('countries')
-  .delete()
-  .in('id', [1, 2, 3])
-```
-
-# JavaScript Reference
-
-Postgres functions: rpc()
-
-## Examples
-
-### Call a Postgres function without arguments
-
-```ts
-const { data, error } = await supabase.rpc('hello_world')
-```
-
-### Call a Postgres function with arguments
-
-```ts
-const { data, error } = await supabase.rpc('echo', { say: '👋' })
-```
-
-### Bulk processing
-
-```ts
-const { data, error } = await supabase.rpc('add_one_each', { arr: [1, 2, 3] })
-```
-
-### Call a Postgres function with filters
-
-```ts
-const { data, error } = await supabase
-  .rpc('list_stored_countries')
-  .eq('id', 1)
-  .single()
-```
-
-### Call a read-only Postgres function
-
-```ts
-const { data, error } = await supabase.rpc('hello_world', undefined, { get: true })
-```
-
-# JavaScript Reference
-
-Using Filters
-
-Filters allow you to only return rows that match certain conditions.
-
-Filters can be used on `select()`, `update()`, `upsert()`, and `delete()` queries.
-
-If a Postgres function returns a table response, you can also apply filters.
-
-## Examples
-
-### Applying Filters
-
-```ts
-const { data, error } = await supabase
-  .from('instruments')
-  .select('name, section_id')
-  .eq('name', 'violin')    // Correct
-
-const { data, error } = await supabase
-  .from('instruments')
-  .eq('name', 'violin')    // Incorrect
-  .select('name, section_id')
-```
-
-### Chaining
-
-```ts
-const { data, error } = await supabase
-  .from('cities')
-  .select('name, country_id')
-  .gte('population', 1000)
-  .lt('population', 10000)
-```
-
-### Conditional Chaining
-
-```ts
-const filterByName = null
-const filterPopLow = 1000
-const filterPopHigh = 10000
-
-let query = supabase
-  .from('cities')
-  .select('name, country_id')
-
-if (filterByName)  { query = query.eq('name', filterByName) }
-if (filterPopLow)  { query = query.gte('population', filterPopLow) }
-if (filterPopHigh) { query = query.lt('population', filterPopHigh) }
-
-const { data, error } = await query
-```
-
-### Filter by values within a JSON column
-
-```ts
-const { data, error } = await supabase
-  .from('users')
-  .select()
-  .eq('address->postcode', 90210)
-```
-
-### Filter referenced tables
-
-```ts
-const { data, error } = await supabase
-  .from('orchestral_sections')
-  .select(`
-    name,
-    instruments!inner (
-      name
-    )
-  `)
-  .eq('instruments.name', 'flute')
-```
-
-# JavaScript Reference
-
-eq()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .eq('name', 'Leia')
-```
-
-# JavaScript Reference
-
-neq()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .neq('name', 'Leia')
-```
-
-# JavaScript Reference
-
-gt()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .gt('id', 2)
-```
-
-# JavaScript Reference
-
-gte()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .gte('id', 2)
-```
-
-# JavaScript Reference
-
-lt()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .lt('id', 2)
-```
-
-# JavaScript Reference
-
-lte()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .lte('id', 2)
-```
-
-# JavaScript Reference
-
-like()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .like('name', '%Lu%')
-```
-
-# JavaScript Reference
-
-ilike()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .ilike('name', '%lu%')
-```
-
-# JavaScript Reference
-
-is()
-
-## Examples
-
-### Checking for nullness, true or false
-
-```ts
-const { data, error } = await supabase
-  .from('countries')
-  .select()
-  .is('name', null)
-```
-
-# JavaScript Reference
-
-in()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .in('name', ['Leia', 'Han'])
-```
-
-# JavaScript Reference
-
-contains()
-
-## Examples
-
-### On array columns
-
-```ts
-const { data, error } = await supabase
-  .from('issues')
-  .select()
-  .contains('tags', ['is:open', 'priority:low'])
-```
-
-### On range columns
-
-```ts
-const { data, error } = await supabase
-  .from('reservations')
-  .select()
-  .contains('during', '[2000-01-01 13:00, 2000-01-01 13:30)')
-```
-
-### On `jsonb` columns
-
-```ts
-const { data, error } = await supabase
-  .from('users')
-  .select('name')
-  .contains('address', { postcode: 90210 })
-```
-
-# JavaScript Reference
-
-containedBy()
-
-## Examples
-
-### On array columns
-
-```ts
-const { data, error } = await supabase
-  .from('classes')
-  .select('name')
-  .containedBy('days', ['monday', 'tuesday', 'wednesday', 'friday'])
-```
-
-### On range columns
-
-```ts
-const { data, error } = await supabase
-  .from('reservations')
-  .select()
-  .containedBy('during', '[2000-01-01 00:00, 2000-01-01 23:59)')
-```
-
-### On `jsonb` columns
-
-```ts
-const { data, error } = await supabase
-  .from('users')
-  .select('name')
-  .containedBy('address', {})
-```
-
-# JavaScript Reference
-
-rangeGt()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('reservations')
-  .select()
-  .rangeGt('during', '[2000-01-02 08:00, 2000-01-02 09:00)')
-```
-
-# JavaScript Reference
-
-rangeGte()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('reservations')
-  .select()
-  .rangeGte('during', '[2000-01-02 08:30, 2000-01-02 09:30)')
-```
-
-# JavaScript Reference
-
-rangeLt()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('reservations')
-  .select()
-  .rangeLt('during', '[2000-01-01 15:00, 2000-01-01 16:00)')
-```
-
-# JavaScript Reference
-
-rangeLte()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('reservations')
-  .select()
-  .rangeLte('during', '[2000-01-01 14:00, 2000-01-01 16:00)')
-```
-
-# JavaScript Reference
-
-rangeAdjacent()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('reservations')
-  .select()
-  .rangeAdjacent('during', '[2000-01-01 12:00, 2000-01-01 13:00)')
-```
-
-# JavaScript Reference
-
-overlaps()
-
-## Examples
-
-### On array columns
-
-```ts
-const { data, error } = await supabase
-  .from('issues')
-  .select('title')
-  .overlaps('tags', ['is:closed', 'severity:high'])
-```
-
-### On range columns
-
-```ts
-const { data, error } = await supabase
-  .from('reservations')
-  .select()
-  .overlaps('during', '[2000-01-01 12:45, 2000-01-01 13:15)')
-```
-
-# JavaScript Reference
-
-textSearch()
-
-## Examples
-
-### Text search
-
-```ts
-const result = await supabase
-  .from("texts")
-  .select("content")
-  .textSearch("content", `'eggs' & 'ham'`, {
-    config: "english",
-  });
-```
-
-### Basic normalization
-
-```ts
-const { data, error } = await supabase
-  .from('quotes')
-  .select('catchphrase')
-  .textSearch('catchphrase', `'fat' & 'cat'`, {
-    type: 'plain',
-    config: 'english'
+### Sign in with Solana or Ethereum (Window API)
+
+```js
+  // uses window.ethereum for the wallet
+  const { data, error } = await supabase.auth.signInWithWeb3({
+    chain: 'ethereum',
+    statement: 'I accept the Terms of Service at https://example.com/tos'
+  })
+
+  // uses window.solana for the wallet
+  const { data, error } = await supabase.auth.signInWithWeb3({
+    chain: 'solana',
+    statement: 'I accept the Terms of Service at https://example.com/tos'
   })
 ```
 
-### Full normalization
+### Sign in with Ethereum (Message and Signature)
 
-```ts
-const { data, error } = await supabase
-  .from('quotes')
-  .select('catchphrase')
-  .textSearch('catchphrase', `'fat' & 'cat'`, {
-    type: 'phrase',
-    config: 'english'
+```js
+  const { data, error } = await supabase.auth.signInWithWeb3({
+    chain: 'ethereum',
+    message: '<sign in with ethereum message>',
+    signature: '<hex of the ethereum signature over the message>',
   })
 ```
 
-### Websearch
+### Sign in with Solana (Brave)
 
-```ts
-const { data, error } = await supabase
-  .from('quotes')
-  .select('catchphrase')
-  .textSearch('catchphrase', `'fat or cat'`, {
-    type: 'websearch',
-    config: 'english'
+```js
+  const { data, error } = await supabase.auth.signInWithWeb3({
+    chain: 'solana',
+    statement: 'I accept the Terms of Service at https://example.com/tos',
+    wallet: window.braveSolana
+  })
+```
+
+### Sign in with Solana (Wallet Adapter)
+
+```jsx
+  function SignInButton() {
+  const wallet = useWallet()
+
+  return (
+    <>
+      {wallet.connected ? (
+        <button
+          onClick={() => {
+            supabase.auth.signInWithWeb3({
+              chain: 'solana',
+              statement: 'I accept the Terms of Service at https://example.com/tos',
+              wallet,
+            })
+          }}
+        >
+          Sign in with Solana
+        </button>
+      ) : (
+        <WalletMultiButton />
+      )}
+    </>
+  )
+}
+
+function App() {
+  const endpoint = clusterApiUrl('devnet')
+  const wallets = useMemo(() => [], [])
+
+  return (
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets}>
+        <WalletModalProvider>
+          <SignInButton />
+        </WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  )
+}
+```
+
+# JavaScript Reference
+
+getClaims()
+
+## Examples
+
+### Get JWT claims, header and signature
+
+```js
+const { data, error } = await supabase.auth.getClaims()
+```
+
+# JavaScript Reference
+
+signOut()
+
+## Examples
+
+### Sign out (all sessions)
+
+```js
+const { error } = await supabase.auth.signOut()
+```
+
+### Sign out (current session)
+
+```js
+const { error } = await supabase.auth.signOut({ scope: 'local' })
+```
+
+### Sign out (other sessions)
+
+```js
+const { error } = await supabase.auth.signOut({ scope: 'others' })
+```
+
+# JavaScript Reference
+
+resetPasswordForEmail()
+
+## Examples
+
+### Reset password
+
+```js
+const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+  redirectTo: 'https://example.com/update-password',
+})
+```
+
+### Reset password (React)
+
+```js
+/**
+ * Step 1: Send the user an email to get a password reset token.
+ * This email contains a link which sends the user back to your application.
+ */
+const { data, error } = await supabase.auth
+  .resetPasswordForEmail('user@email.com')
+
+/**
+ * Step 2: Once the user is redirected back to your application,
+ * ask the user to reset their password.
+ */
+ useEffect(() => {
+   supabase.auth.onAuthStateChange(async (event, session) => {
+     if (event == "PASSWORD_RECOVERY") {
+       const newPassword = prompt("What would you like your new password to be?");
+       const { data, error } = await supabase.auth
+         .updateUser({ password: newPassword })
+
+       if (data) alert("Password updated successfully!")
+       if (error) alert("There was an error updating your password.")
+     }
+   })
+ }, [])
+```
+
+# JavaScript Reference
+
+verifyOtp()
+
+## Examples
+
+### Verify Signup One-Time Password (OTP)
+
+```js
+const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email'})
+```
+
+### Verify SMS One-Time Password (OTP)
+
+```js
+const { data, error } = await supabase.auth.verifyOtp({ phone, token, type: 'sms'})
+```
+
+### Verify Email Auth (Token Hash)
+
+```js
+const { data, error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type: 'email'})
+```
+
+# JavaScript Reference
+
+getSession()
+
+## Examples
+
+### Get the session data
+
+```js
+const { data, error } = await supabase.auth.getSession()
+```
+
+# JavaScript Reference
+
+refreshSession()
+
+## Examples
+
+### Refresh session using the current session
+
+```js
+const { data, error } = await supabase.auth.refreshSession()
+const { session, user } = data
+```
+
+### Refresh session using a refresh token
+
+```js
+const { data, error } = await supabase.auth.refreshSession({ refresh_token })
+const { session, user } = data
+```
+
+# JavaScript Reference
+
+getUser()
+
+## Examples
+
+### Get the logged in user with the current existing session
+
+```js
+const { data: { user } } = await supabase.auth.getUser()
+```
+
+### Get the logged in user with a custom access token jwt
+
+```js
+const { data: { user } } = await supabase.auth.getUser(jwt)
+```
+
+# JavaScript Reference
+
+updateUser()
+
+## Examples
+
+### Update the email for an authenticated user
+
+```js
+const { data, error } = await supabase.auth.updateUser({
+  email: 'new@email.com'
+})
+```
+
+### Update the phone number for an authenticated user
+
+```js
+const { data, error } = await supabase.auth.updateUser({
+  phone: '123456789'
+})
+```
+
+### Update the password for an authenticated user
+
+```js
+const { data, error } = await supabase.auth.updateUser({
+  password: 'new password'
+})
+```
+
+### Update the user's metadata
+
+```js
+const { data, error } = await supabase.auth.updateUser({
+  data: { hello: 'world' }
+})
+```
+
+### Update the user's password with a nonce
+
+```js
+const { data, error } = await supabase.auth.updateUser({
+  password: 'new password',
+  nonce: '123456'
+})
+```
+
+# JavaScript Reference
+
+getUserIdentities()
+
+## Examples
+
+### Returns a list of identities linked to the user
+
+```js
+const { data, error } = await supabase.auth.getUserIdentities()
+```
+
+# JavaScript Reference
+
+linkIdentity()
+
+## Examples
+
+### Link an identity to a user
+
+```js
+const { data, error } = await supabase.auth.linkIdentity({
+  provider: 'github'
+})
+```
+
+# JavaScript Reference
+
+unlinkIdentity()
+
+## Examples
+
+### Unlink an identity
+
+```js
+// retrieve all identities linked to a user
+const identities = await supabase.auth.getUserIdentities()
+
+// find the google identity
+const googleIdentity = identities.find(
+  identity => identity.provider === 'google'
+)
+
+// unlink the google identity
+const { error } = await supabase.auth.unlinkIdentity(googleIdentity)
+```
+
+# JavaScript Reference
+
+reauthenticate()
+
+## Examples
+
+### Send reauthentication nonce
+
+```js
+const { error } = await supabase.auth.reauthenticate()
+```
+
+# JavaScript Reference
+
+resend()
+
+## Examples
+
+### Resend an email signup confirmation
+
+```js
+const { error } = await supabase.auth.resend({
+  type: 'signup',
+  email: 'email@example.com',
+  options: {
+    emailRedirectTo: 'https://example.com/welcome'
+  }
+})
+```
+
+### Resend a phone signup confirmation
+
+```js
+const { error } = await supabase.auth.resend({
+  type: 'sms',
+  phone: '1234567890'
+})
+```
+
+### Resend email change email
+
+```js
+const { error } = await supabase.auth.resend({
+  type: 'email_change',
+  email: 'email@example.com'
+})
+```
+
+### Resend phone change OTP
+
+```js
+const { error } = await supabase.auth.resend({
+  type: 'phone_change',
+  phone: '1234567890'
+})
+```
+
+# JavaScript Reference
+
+setSession()
+
+## Examples
+
+### Set the session
+
+```js
+  const { data, error } = await supabase.auth.setSession({
+    access_token,
+    refresh_token
   })
 ```
 
 # JavaScript Reference
 
-match()
+exchangeCodeForSession()
 
 ## Examples
 
-### With `select()`
+### Exchange Auth Code
 
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select('name')
-  .match({ id: 2, name: 'Leia' })
+```js
+supabase.auth.exchangeCodeForSession('34e770dd-9ff9-416c-87fa-43b31d7ef225')
 ```
 
 # JavaScript Reference
 
-not()
+startAutoRefresh()
 
 ## Examples
 
-### With `select()`
+### Start and stop auto refresh in React Native
 
-```ts
-const { data, error } = await supabase
-  .from('countries')
-  .select()
-  .not('name', 'is', null)
+```js
+import { AppState } from 'react-native'
+
+// make sure you register this only once!
+AppState.addEventListener('change', (state) => {
+  if (state === 'active') {
+    supabase.auth.startAutoRefresh()
+  } else {
+    supabase.auth.stopAutoRefresh()
+  }
+})
 ```
 
 # JavaScript Reference
 
-or()
+stopAutoRefresh()
 
 ## Examples
 
-### With `select()`
+### Start and stop auto refresh in React Native
 
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select('name')
-  .or('id.eq.2,name.eq.Han')
-```
+```js
+import { AppState } from 'react-native'
 
-### Use `or` with `and`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select('name')
-  .or('id.gt.3,and(id.eq.1,name.eq.Luke)')
-```
-
-### Use `or` on referenced tables
-
-```ts
-const { data, error } = await supabase
-  .from('orchestral_sections')
-  .select(`
-    name,
-    instruments!inner (
-      name
-    )
-  `)
-  .or('section_id.eq.1,name.eq.guzheng', { referencedTable: 'instruments' })
+// make sure you register this only once!
+AppState.addEventListener('change', (state) => {
+  if (state === 'active') {
+    supabase.auth.startAutoRefresh()
+  } else {
+    supabase.auth.stopAutoRefresh()
+  }
+})
 ```
 
 # JavaScript Reference
 
-filter()
-
 ## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .filter('name', 'in', '("Han","Yoda")')
-```
-
-### On a referenced table
-
-```ts
-const { data, error } = await supabase
-  .from('orchestral_sections')
-  .select(`
-    name,
-    instruments!inner (
-      name
-    )
-  `)
-  .filter('instruments.name', 'eq', 'flute')
-```
-
-# JavaScript Reference
-
-Using Modifiers
-
-Filters work on the row level—they allow you to return rows that
-only match certain conditions without changing the shape of the rows.
-Modifiers are everything that don't fit that definition—allowing you to
-change the format of the response (e.g., returning a CSV string).
-
-Modifiers must be specified after filters. Some modifiers only apply for
-queries that return rows (e.g., `select()` or `rpc()` on a function that
-returns a table response).
-
-## Examples
-
-# JavaScript Reference
-
-select()
-
-## Examples
-
-### With `upsert()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .upsert({ id: 1, name: 'Han Solo' })
-  .select()
-```
-
-# JavaScript Reference
-
-order()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select('id, name')
-  .order('id', { ascending: false })
-```
-
-### On a referenced table
-
-```ts
-  const { data, error } = await supabase
-    .from('orchestral_sections')
-    .select(`
-      name,
-      instruments (
-        name
-      )
-    `)
-    .order('name', { referencedTable: 'instruments', ascending: false })
-```
-
-### Order parent table by a referenced table
-
-```ts
-  const { data, error } = await supabase
-    .from('instruments')
-    .select(`
-      name,
-      section:orchestral_sections (
-        name
-      )
-    `)
-    .order('section(name)', { ascending: true })
-```
-
-# JavaScript Reference
-
-limit()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select('name')
-  .limit(1)
-```
-
-### On a referenced table
-
-```ts
-const { data, error } = await supabase
-  .from('orchestral_sections')
-  .select(`
-    name,
-    instruments (
-      name
-    )
-  `)
-  .limit(1, { referencedTable: 'instruments' })
-```
-
-# JavaScript Reference
-
-range()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select('name')
-  .range(0, 1)
-```
-
-# JavaScript Reference
-
-abortSignal()
-
-## Examples
-
-### Aborting requests in-flight
-
-```ts
-const ac = new AbortController()
-ac.abort()
-const { data, error } = await supabase
-  .from('very_big_table')
-  .select()
-  .abortSignal(ac.signal)
-```
-
-### Set a timeout
-
-```ts
-const { data, error } = await supabase
-  .from('very_big_table')
-  .select()
-  .abortSignal(AbortSignal.timeout(1000 /* ms */))
-```
-
-# JavaScript Reference
-
-single()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select('name')
-  .limit(1)
-  .single()
-```
-
-# JavaScript Reference
-
-maybeSingle()
-
-## Examples
-
-### With `select()`
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .eq('name', 'Katniss')
-  .maybeSingle()
-```
-
-# JavaScript Reference
-
-csv()
-
-## Examples
-
-### Return data as CSV
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .csv()
-```
-
-# JavaScript Reference
-
-returns()
-
-## Examples
-
-### Override type of successful response
-
-```ts
-const { data } = await supabase
-  .from('countries')
-  .select()
-  .returns<Array<MyType>>()
-```
-
-### Override type of object response
-
-```ts
-const { data } = await supabase
-  .from('countries')
-  .select()
-  .maybeSingle()
-  .returns<MyType>()
-```
-
-# JavaScript Reference
-
-overrideTypes()
-
-## Examples
-
-### Complete Override type of successful response
-
-```ts
-const { data } = await supabase
-  .from('countries')
-  .select()
-  .overrideTypes<Array<MyType>, { merge: false }>()
-```
-
-### Complete Override type of object response
-
-```ts
-const { data } = await supabase
-  .from('countries')
-  .select()
-  .maybeSingle()
-  .overrideTypes<MyType, { merge: false }>()
-```
-
-### Partial Override type of successful response
-
-```ts
-const { data } = await supabase
-  .from('countries')
-  .select()
-  .overrideTypes<Array<{ status: "A" | "B" }>>()
-```
-
-### Partial Override type of object response
-
-```ts
-const { data } = await supabase
-  .from('countries')
-  .select()
-  .maybeSingle()
-  .overrideTypes<{ status: "A" | "B" }>()
-```
-
-### Example 5
-
-```typescript
-// Merge with existing types (default behavior)
-const query = supabase
-  .from('users')
-  .select()
-  .overrideTypes<{ custom_field: string }>()
-
-// Replace existing types completely
-const replaceQuery = supabase
-  .from('users')
-  .select()
-  .overrideTypes<{ id: number; name: string }, { merge: false }>()
-```
-
-# JavaScript Reference
-
-Using Explain
-
-## Examples
-
-### Get the execution plan
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .explain()
-```
-
-### Get the execution plan with analyze and verbose
-
-```ts
-const { data, error } = await supabase
-  .from('characters')
-  .select()
-  .explain({analyze:true,verbose:true})
-```
 
 # JavaScript Reference
 
@@ -1182,94 +801,566 @@ Overview
 
 ## Examples
 
-### Create auth client
+# JavaScript Reference
+
+mfa.enroll()
+
+## Examples
+
+### Enroll a time-based, one-time password (TOTP) factor
 
 ```js
-import { createClient } from '@supabase/supabase-js'
+const { data, error } = await supabase.auth.mfa.enroll({
+  factorType: 'totp',
+  friendlyName: 'your_friendly_name'
+})
 
-const supabase = createClient(supabase_url, anon_key)
+// Use the id to create a challenge.
+// The challenge can be verified by entering the code generated from the authenticator app.
+// The code will be generated upon scanning the qr_code or entering the secret into the authenticator app.
+const { id, type, totp: { qr_code, secret, uri }, friendly_name } = data
+const challenge = await supabase.auth.mfa.challenge({ factorId: id });
 ```
 
-### Create auth client (server-side)
+### Enroll a Phone Factor
 
 ```js
-import { createClient } from '@supabase/supabase-js'
+const { data, error } = await supabase.auth.mfa.enroll({
+  factorType: 'phone',
+  friendlyName: 'your_friendly_name',
+  phone: '+12345678',
+})
 
-const supabase = createClient(supabase_url, anon_key, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false,
-    detectSessionInUrl: false
-  }
+// Use the id to create a challenge and send an SMS with a code to the user.
+const { id, type, friendly_name, phone } = data
+
+const challenge = await supabase.auth.mfa.challenge({ factorId: id });
+```
+
+# JavaScript Reference
+
+mfa.challenge()
+
+## Examples
+
+### Create a challenge for a factor
+
+```js
+const { data, error } = await supabase.auth.mfa.challenge({
+  factorId: '34e770dd-9ff9-416c-87fa-43b31d7ef225'
+})
+```
+
+### Create a challenge for a phone factor
+
+```js
+const { data, error } = await supabase.auth.mfa.challenge({
+  factorId: '34e770dd-9ff9-416c-87fa-43b31d7ef225',
+})
+```
+
+### Create a challenge for a phone factor (WhatsApp)
+
+```js
+const { data, error } = await supabase.auth.mfa.challenge({
+  factorId: '34e770dd-9ff9-416c-87fa-43b31d7ef225',
+  channel: 'whatsapp',
 })
 ```
 
 # JavaScript Reference
 
-signUp()
+mfa.verify()
 
 ## Examples
 
-### Sign up with an email and password
+### Verify a challenge for a factor
 
 ```js
-const { data, error } = await supabase.auth.signUp({
-  email: 'example@email.com',
-  password: 'example-password',
+const { data, error } = await supabase.auth.mfa.verify({
+  factorId: '34e770dd-9ff9-416c-87fa-43b31d7ef225',
+  challengeId: '4034ae6f-a8ce-4fb5-8ee5-69a5863a7c15',
+  code: '123456'
 })
 ```
 
-### Sign up with a phone number and password (SMS)
+# JavaScript Reference
+
+mfa.challengeAndVerify()
+
+## Examples
+
+### Create and verify a challenge for a factor
 
 ```js
-const { data, error } = await supabase.auth.signUp({
-  phone: '123456789',
-  password: 'example-password',
-  options: {
-    channel: 'sms'
-  }
+const { data, error } = await supabase.auth.mfa.challengeAndVerify({
+  factorId: '34e770dd-9ff9-416c-87fa-43b31d7ef225',
+  code: '123456'
 })
 ```
 
-### Sign up with a phone number and password (whatsapp)
+# JavaScript Reference
+
+mfa.unenroll()
+
+## Examples
+
+### Unenroll a factor
 
 ```js
-const { data, error } = await supabase.auth.signUp({
-  phone: '123456789',
-  password: 'example-password',
-  options: {
-    channel: 'whatsapp'
-  }
+const { data, error } = await supabase.auth.mfa.unenroll({
+  factorId: '34e770dd-9ff9-416c-87fa-43b31d7ef225',
 })
 ```
 
-### Sign up with additional user metadata
+# JavaScript Reference
+
+mfa.getAuthenticatorAssuranceLevel()
+
+## Examples
+
+### Get the AAL details of a session
 
 ```js
-const { data, error } = await supabase.auth.signUp(
-  {
-    email: 'example@email.com',
-    password: 'example-password',
-    options: {
-      data: {
-        first_name: 'John',
-        age: 27,
-      }
-    }
+const { data, error } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+const { currentLevel, nextLevel, currentAuthenticationMethods } = data
+```
+
+### Get the AAL details for a specific JWT
+
+```js
+const { data, error } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel(jwt)
+```
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+OAuth Server API
+
+## Examples
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+AuthOAuthServerApi.revokeGrant()
+
+## Examples
+
+# JavaScript Reference
+
+Overview
+
+## Examples
+
+### Create server-side auth client
+
+```js
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(supabase_url, service_role_key, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false
   }
+})
+
+// Access auth admin api
+const adminAuthClient = supabase.auth.admin
+```
+
+# JavaScript Reference
+
+getUserById()
+
+## Examples
+
+### Fetch the user object using the access\_token jwt
+
+```js
+const { data, error } = await supabase.auth.admin.getUserById(1)
+```
+
+# JavaScript Reference
+
+listUsers()
+
+## Examples
+
+### Get a page of users
+
+```js
+const { data: { users }, error } = await supabase.auth.admin.listUsers()
+```
+
+### Paginated list of users
+
+```js
+const { data: { users }, error } = await supabase.auth.admin.listUsers({
+  page: 1,
+  perPage: 1000
+})
+```
+
+# JavaScript Reference
+
+createUser()
+
+## Examples
+
+### With custom user metadata
+
+```js
+const { data, error } = await supabase.auth.admin.createUser({
+  email: 'user@email.com',
+  password: 'password',
+  user_metadata: { name: 'Yoda' }
+})
+```
+
+### Auto-confirm the user's email
+
+```js
+const { data, error } = await supabase.auth.admin.createUser({
+  email: 'user@email.com',
+  email_confirm: true
+})
+```
+
+### Auto-confirm the user's phone number
+
+```js
+const { data, error } = await supabase.auth.admin.createUser({
+  phone: '1234567890',
+  phone_confirm: true
+})
+```
+
+# JavaScript Reference
+
+deleteUser()
+
+## Examples
+
+### Removes a user
+
+```js
+const { data, error } = await supabase.auth.admin.deleteUser(
+  '715ed5db-f090-4b8c-a067-640ecee36aa0'
 )
 ```
 
-### Sign up with a redirect URL
+# JavaScript Reference
+
+inviteUserByEmail()
+
+## Examples
+
+### Invite a user
 
 ```js
-const { data, error } = await supabase.auth.signUp(
-  {
-    email: 'example@email.com',
-    password: 'example-password',
-    options: {
-      emailRedirectTo: 'https://example.com/welcome'
-    }
-  }
+const { data, error } = await supabase.auth.admin.inviteUserByEmail('email@example.com')
+```
+
+# JavaScript Reference
+
+generateLink()
+
+## Examples
+
+### Generate a signup link
+
+```js
+const { data, error } = await supabase.auth.admin.generateLink({
+  type: 'signup',
+  email: 'email@example.com',
+  password: 'secret'
+})
+```
+
+### Generate an invite link
+
+```js
+const { data, error } = await supabase.auth.admin.generateLink({
+  type: 'invite',
+  email: 'email@example.com'
+})
+```
+
+### Generate a magic link
+
+```js
+const { data, error } = await supabase.auth.admin.generateLink({
+  type: 'magiclink',
+  email: 'email@example.com'
+})
+```
+
+### Generate a recovery link
+
+```js
+const { data, error } = await supabase.auth.admin.generateLink({
+  type: 'recovery',
+  email: 'email@example.com'
+})
+```
+
+### Generate links to change current email address
+
+```js
+// generate an email change link to be sent to the current email address
+const { data, error } = await supabase.auth.admin.generateLink({
+  type: 'email_change_current',
+  email: 'current.email@example.com',
+  newEmail: 'new.email@example.com'
+})
+
+// generate an email change link to be sent to the new email address
+const { data, error } = await supabase.auth.admin.generateLink({
+  type: 'email_change_new',
+  email: 'current.email@example.com',
+  newEmail: 'new.email@example.com'
+})
+```
+
+# JavaScript Reference
+
+updateUserById()
+
+## Examples
+
+### Updates a user's email
+
+```js
+const { data: user, error } = await supabase.auth.admin.updateUserById(
+  '11111111-1111-1111-1111-111111111111',
+  { email: 'new@email.com' }
 )
 ```
+
+### Updates a user's password
+
+```js
+const { data: user, error } = await supabase.auth.admin.updateUserById(
+  '6aa5d0d4-2a9f-4483-b6c8-0cf4c6c98ac4',
+  { password: 'new_password' }
+)
+```
+
+### Updates a user's metadata
+
+```js
+const { data: user, error } = await supabase.auth.admin.updateUserById(
+  '6aa5d0d4-2a9f-4483-b6c8-0cf4c6c98ac4',
+  { user_metadata: { hello: 'world' } }
+)
+```
+
+### Updates a user's app\_metadata
+
+```js
+const { data: user, error } = await supabase.auth.admin.updateUserById(
+  '6aa5d0d4-2a9f-4483-b6c8-0cf4c6c98ac4',
+  { app_metadata: { plan: 'trial' } }
+)
+```
+
+### Confirms a user's email address
+
+```js
+const { data: user, error } = await supabase.auth.admin.updateUserById(
+  '6aa5d0d4-2a9f-4483-b6c8-0cf4c6c98ac4',
+  { email_confirm: true }
+)
+```
+
+### Confirms a user's phone number
+
+```js
+const { data: user, error } = await supabase.auth.admin.updateUserById(
+  '6aa5d0d4-2a9f-4483-b6c8-0cf4c6c98ac4',
+  { phone_confirm: true }
+)
+```
+
+### Ban a user for 100 years
+
+```js
+const { data: user, error } = await supabase.auth.admin.updateUserById(
+  '6aa5d0d4-2a9f-4483-b6c8-0cf4c6c98ac4',
+  { ban_duration: '876000h' }
+)
+```
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+mfa.deleteFactor()
+
+## Examples
+
+### Delete a factor for a user
+
+```js
+const { data, error } = await supabase.auth.admin.mfa.deleteFactor({
+  id: '34e770dd-9ff9-416c-87fa-43b31d7ef225',
+  userId: 'a89baba7-b1b7-440f-b4bb-91026967f66b',
+})
+```
+
+# JavaScript Reference
+
+## Examples
+
+### List all factors for a user
+
+```js
+const { data, error } = await supabase.auth.admin.mfa.listFactors()
+```
+
+# JavaScript Reference
+
+OAuth Admin API
+
+## Examples
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+invoke()
+
+## Examples
+
+### Basic invocation
+
+```js
+const { data, error } = await supabase.functions.invoke('hello', {
+  body: { foo: 'bar' }
+})
+```
+
+### Error handling
+
+```js
+import { FunctionsHttpError, FunctionsRelayError, FunctionsFetchError } from "@supabase/supabase-js";
+
+const { data, error } = await supabase.functions.invoke('hello', {
+  headers: {
+    "my-custom-header": 'my-custom-header-value'
+  },
+  body: { foo: 'bar' }
+})
+
+if (error instanceof FunctionsHttpError) {
+  const errorMessage = await error.context.json()
+  console.log('Function returned an error', errorMessage)
+} else if (error instanceof FunctionsRelayError) {
+  console.log('Relay error:', error.message)
+} else if (error instanceof FunctionsFetchError) {
+  console.log('Fetch error:', error.message)
+}
+```
+
+### Passing custom headers
+
+```js
+const { data, error } = await supabase.functions.invoke('hello', {
+  headers: {
+    "my-custom-header": 'my-custom-header-value'
+  },
+  body: { foo: 'bar' }
+})
+```
+
+### Calling with DELETE HTTP verb
+
+```js
+const { data, error } = await supabase.functions.invoke('hello', {
+  headers: {
+    "my-custom-header": 'my-custom-header-value'
+  },
+  body: { foo: 'bar' },
+  method: 'DELETE'
+})
+```
+
+### Invoking a Function in the UsEast1 region
+
+```js
+import { createClient, FunctionRegion } from '@supabase/supabase-js'
+
+const { data, error } = await supabase.functions.invoke('hello', {
+  body: { foo: 'bar' },
+  region: FunctionRegion.UsEast1
+})
+```
+
+### Calling with GET HTTP verb
+
+```js
+const { data, error } = await supabase.functions.invoke('hello', {
+  headers: {
+    "my-custom-header": 'my-custom-header-value'
+  },
+  method: 'GET'
+})
+```
+
+### Example 7
+
+```ts
+const { data, error } = await functions.invoke('hello-world', {
+  body: { name: 'Ada' },
+})
+```
+
+# JavaScript Reference
+
+## Examples
+
+# JavaScript Reference
+
+## Examples

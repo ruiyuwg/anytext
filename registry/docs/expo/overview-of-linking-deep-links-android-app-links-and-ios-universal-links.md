@@ -6,7 +6,7 @@ An overview of available resources to implement Linking and Deep Links in your E
 
 Linking allows your app to interact with incoming and outgoing URLs. In this process, the user not only gets directed to open your app, but they are taken to a specific screen (route) within the app.
 
-[Watch: Setting up linking with Expo](https://www.youtube.com/watch?v=kNbEEYlFIPs)
+[Watch: Setting up linking with Expo](https://www.youtube.com/watch?v=kNbEEYlFIPs) — Set up deep links, universal links, and app links in your Expo app to handle incoming and outgoing URLs.
 
 ### Linking strategies
 

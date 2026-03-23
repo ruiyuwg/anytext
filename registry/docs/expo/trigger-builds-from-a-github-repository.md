@@ -6,7 +6,7 @@ Learn about the process of triggering builds from a GitHub repository.
 
 In this chapter, we'll configure this functionality. We already have a GitHub repository for our example app to demonstrate this.
 
-[Watch: How to trigger builds from a GitHub repository](https://www.youtube.com/watch?v=fBLFEFC0ip0)
+[Watch: How to trigger builds from a GitHub repository](https://www.youtube.com/watch?v=fBLFEFC0ip0) — Connect the Expo GitHub App to your repository and configure it to trigger EAS builds on push or pull request.
 
 ## Configure Expo GitHub app
 

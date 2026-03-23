@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/oss/python/langgraph/use-functional-api
 
-The [**Functional API**](/oss/python/langgraph/functional-api) allows you to add LangGraph's key features — [persistence](/oss/python/langgraph/persistence), [memory](/oss/python/langgraph/add-memory), [human-in-the-loop](/oss/python/langgraph/interrupts), and [streaming](/oss/python/langgraph/streaming) — to your applications with minimal changes to your existing code.
+The [**Functional API**](/oss/python/langgraph/functional-api) allows you to add LangGraph's key features ([persistence](/oss/python/langgraph/persistence), [memory](/oss/python/langgraph/add-memory), [human-in-the-loop](/oss/python/langgraph/interrupts), and [streaming](/oss/python/langgraph/streaming)) to your applications with minimal changes to your existing code.
 
 For conceptual information on the functional API, see [Functional API](/oss/python/langgraph/functional-api).
 
@@ -556,7 +556,7 @@ def review_tool_call(tool_call: ToolCall) -> Union[ToolCall, ToolMessage]:
         )
 ```
 
-We can now update our [entrypoint](/oss/python/langgraph/functional-api#entrypoint) to review the generated tool calls. If a tool call is accepted or revised, we execute in the same way as before. Otherwise, we just append the [`ToolMessage`](https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage) supplied by the human. The results of prior tasks — in this case the initial model call — are persisted, so that they are not run again following the [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt).
+We can now update our [entrypoint](/oss/python/langgraph/functional-api#entrypoint) to review the generated tool calls. If a tool call is accepted or revised, we execute in the same way as before. Otherwise, we just append the [`ToolMessage`](https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage) supplied by the human. The results of prior tasks—in this case the initial model call—are persisted, so that they are not run again following the [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt).
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langgraph.checkpoint.memory import InMemorySaver
@@ -833,4 +833,4 @@ uv add langgraph
 
 **Set up LangSmith for better debugging**
 
-Sign up for [LangSmith](https://smith.langchain.com) to quickly spot issues and improve the performance of your LangGraph projects. LangSmith lets you use trace data to debug, test, and monitor your LLM apps built with LangGraph — read more about how to get started in the [docs](/langsmith/observability).
+Sign up for [LangSmith](https://smith.langchain.com) to quickly spot issues and improve the performance of your LangGraph projects. LangSmith lets you use trace data to debug, test, and monitor your LLM apps built with LangGraph—read more about how to get started in the [docs](/langsmith/observability).

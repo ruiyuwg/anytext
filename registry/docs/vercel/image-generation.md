@@ -260,5 +260,5 @@ for chunk in stream:
 
 title: "OpenAI Chat Completions API"
 description: "Use the OpenAI Chat Completions API with AI Gateway for seamless integration with existing tools and libraries."
-last\_updated: "2026-03-08T05:03:10.756Z"
+last\_updated: "2026-03-23T09:40:04.819Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-chat-completions"

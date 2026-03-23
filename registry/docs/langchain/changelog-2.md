@@ -6,6 +6,18 @@ Log of updates and improvements to our Python packages
 
 **Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/oss/python/releases/changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
+## `langgraph` v1.1
+
+- **Type-safe streaming (`version="v2"`)**: Pass `version="v2"` to `stream()` / `astream()` for unified `StreamPart` output with `type`, `ns`, and `data` keys on every chunk. Each mode has its own `TypedDict`, all importable from `langgraph.types`. See [streaming docs](/oss/python/langgraph/streaming#stream-output-format-v2).
+
+- **Type-safe invoke (`version="v2"`)**: Pass `version="v2"` to `invoke()` / `ainvoke()` to get a `GraphOutput` object with `.value` and `.interrupts` attributes. See [invoke docs](/oss/python/langgraph/streaming#v2-invoke-format).
+
+- **Pydantic and dataclass coercion**: With `version="v2"`, `invoke()` and `values`-mode stream output are automatically coerced to your declared Pydantic model or dataclass type.
+
+- **Fixed time travel with interrupts and subgraphs**: Replays no longer reuse stale `RESUME` values, and subgraphs correctly restore the checkpoint for the parent's historical state.
+
+- **Fully backwards compatible**: `version="v2"` is opt-in. `GraphOutput` supports deprecated dict-style access for gradual migration.
+
 ## `deepagents` v0.4
 
 - New integration packages for pluggable sandboxes: [langchain-modal](https://pypi.org/project/langchain-modal/), [langchain-daytona](https://pypi.org/project/langchain-daytona/), and [langchain-runloop](https://pypi.org/project/langchain-daytona/). See [sandboxes guide](/oss/python/deepagents/sandboxes) and example [data analysis tutorial](/oss/python/deepagents/data-analysis).

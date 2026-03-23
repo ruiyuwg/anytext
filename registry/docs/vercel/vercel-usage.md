@@ -10,14 +10,14 @@ This is only available for Owner, Member, Developer, Security, Billing, and Ente
 vercel usage
 ```
 
-*Using the vercel usage command to view billing usage
+*Using the \`vercel usage\` command to view billing usage
 for the current billing period.*
 
 ```bash filename="terminal"
 vercel usage --from 2025-01-01 --to 2025-01-31
 ```
 
-*Using the vercel usage command to view billing usage
+*Using the \`vercel usage\` command to view billing usage
 for a custom date range.*
 
 The command outputs a table showing:
@@ -39,7 +39,7 @@ The `--from` option specifies the start date for the usage query. The date is in
 vercel usage --from 2025-01-01 --to 2025-01-31
 ```
 
-*Using the vercel usage command with a custom start
+*Using the \`vercel usage\` command with a custom start
 date.*
 
 When using `--from`, you must also specify `--to`.
@@ -52,7 +52,7 @@ The `--to` option specifies the end date for the usage query. The date is interp
 vercel usage --from 2025-01-01 --to 2025-01-31
 ```
 
-*Using the vercel usage command with a custom end
+*Using the \`vercel usage\` command with a custom end
 date.*
 
 When using `--to`, you must also specify `--from`.
@@ -65,14 +65,14 @@ The `--breakdown` option shows usage grouped by time period instead of aggregate
 vercel usage --breakdown daily
 ```
 
-*Using the vercel usage command to show daily usage
+*Using the \`vercel usage\` command to show daily usage
 breakdown.*
 
 ```bash filename="terminal"
 vercel usage --from 2025-01-01 --to 2025-01-31 --breakdown weekly
 ```
 
-*Combining --breakdown with a custom date range.*
+*Combining \`--breakdown\` with a custom date range.*
 
 When using the breakdown mode, the output shows:
 
@@ -90,7 +90,7 @@ The `--format` option, shorthand `-F`, specifies the output format. Currently, `
 vercel usage --format json
 ```
 
-*Using the vercel usage command to output usage data
+*Using the \`vercel usage\` command to output usage data
 as JSON.*
 
 The JSON output includes:
@@ -105,7 +105,7 @@ When using `--breakdown`, the JSON output includes a `breakdown` array containin
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -120,5 +120,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel webhooks"
 description: "Learn how to manage webhooks for your Vercel account using the vercel webhooks CLI command."
-last\_updated: "2026-03-08T05:03:12.445Z"
+last\_updated: "2026-03-23T09:40:07.181Z"
 source: "https://vercel.com/docs/cli/webhooks"

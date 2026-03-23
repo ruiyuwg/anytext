@@ -1,13 +1,13 @@
 # LangSmith Tool Server
 
-Source: https://docs.langchain.com/langsmith/agent-builder-mcp-framework
+Source: https://docs.langchain.com/langsmith/fleet/mcp-framework
 
 The LangSmith Tool Server is a standalone MCP framework for building and deploying tools with built-in authentication and authorization. Use the Tool Server when you want to:
 
 - [Create custom tools](#create-a-custom-toolkit) that integrate with LangSmith's [Agent Auth](/langsmith/agent-auth) for OAuth authentication
-- [Build an MCP gateway](#use-as-an-mcp-gateway) for agents you're building yourself (outside of Agent Builder)
+- [Build an MCP gateway](#use-as-an-mcp-gateway) for agents you're building yourself (outside of Fleet)
 
-  If you're using [Agent Builder](/langsmith/agent-builder), you don't need to interact with the Tool Server directly. Agent Builder provides [built-in tools](/langsmith/agent-builder-tools) and supports [remote MCP servers](/langsmith/agent-builder-tools#using-remote-mcp-servers) without requiring Tool Server setup.
+  If you're using [Fleet](/langsmith/fleet/index), you don't need to interact with the Tool Server directly. Fleet provides [built-in tools](/langsmith/fleet/tools) and supports [remote MCP servers](/langsmith/fleet/remote-mcp-servers) without requiring Tool Server setup.
 
   However, you can configure the associated tool server instance as an MCP server, which will allow you to use your custom MCP servers in your agent.
 
@@ -182,7 +182,7 @@ The handler runs on every request and must return a dict with `identity` (and op
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-builder-mcp-framework.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/mcp-framework.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

@@ -78,5 +78,5 @@ Learn more about deploying Koa projects on Vercel with the following resources:
 
 title: "NestJS on Vercel"
 description: "Deploy NestJS applications to Vercel with zero configuration."
-last\_updated: "2026-03-08T05:03:14.796Z"
+last\_updated: "2026-03-23T09:40:10.456Z"
 source: "https://vercel.com/docs/frameworks/backend/nestjs"

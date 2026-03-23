@@ -11,9 +11,13 @@ The Domain ID.
 
 ## Body Parameters
 
-Track clicks within the body of each HTML email.
+Track clicks within the body of each HTML email. Use [custom tracking
+domains](/api-reference/domains/create-tracking-domain) to serve click
+tracking from your own domain (e.g. `track.example.com`).
 
-Track the open rate of each email.
+Track the open rate of each email. Use [custom tracking
+domains](/api-reference/domains/create-tracking-domain) to serve open tracking
+from your own domain (e.g. `track.example.com`).
 
 ```
   `opportunistic`: Opportunistic TLS means that it always attempts to make a

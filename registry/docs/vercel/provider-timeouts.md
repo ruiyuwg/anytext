@@ -109,6 +109,6 @@ When a provider times out, the attempt metadata includes `providerTimeout` and `
 For more details on reading provider metadata, see [Provider Options](/docs/ai-gateway/models-and-providers/provider-options#example-provider-metadata-output).
 
 title: "AI Gateway"
-description: "TypeScript toolkit for building AI-powered applications with React, Next.js, Vue, Svelte and Node.js"
-last\_updated: "2026-03-08T05:03:10.566Z"
+description: "AI Gateway provides a unified API to access hundreds of AI models through a single endpoint, with built-in budgets, usage monitoring, and fallbacks."
+last\_updated: "2026-03-23T09:40:04.615Z"
 source: "https://vercel.com/docs/ai-gateway"

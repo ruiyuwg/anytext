@@ -253,27 +253,27 @@ npx prisma init --output ../generated/prisma
 
 
 ```bash
-npm create cloudflare@latest prisma-cloudflare-worker-example -- --type hello-world
+pnpm create cloudflare prisma-cloudflare-worker-example --type hello-world
 cd prisma-cloudflare-worker-example
-npm install prisma --save-dev && npm install @prisma/client
+pnpm add prisma --save-dev&& pnpm add @prisma/client
 pnpm dlx prisma init --output ../generated/prisma
 ```
 
 
 
 ```bash
-npm create cloudflare@latest prisma-cloudflare-worker-example -- --type hello-world
+yarn create cloudflare prisma-cloudflare-worker-example --type hello-world
 cd prisma-cloudflare-worker-example
-npm install prisma --save-dev && npm install @prisma/client
+yarn add prisma --dev&& yarn add @prisma/client
 yarn dlx prisma init --output ../generated/prisma
 ```
 
 
 
 ```bash
-npm create cloudflare@latest prisma-cloudflare-worker-example -- --type hello-world
+bunx create-cloudflare prisma-cloudflare-worker-example --type hello-world
 cd prisma-cloudflare-worker-example
-npm install prisma --save-dev && npm install @prisma/client
+bun add prisma --dev&& bun add @prisma/client
 bun x prisma init --output ../generated/prisma
 ```
 ````

@@ -2,11 +2,13 @@
 
 # Accept in-person payments
 
-This guide shows you how to accept in-person payments in your own point of sale (POS) application using Stripe Terminal. You don’t need any hardware to complete these steps with our [simulated reader](https://docs.stripe.com/terminal/references/testing.md#simulated-reader).
+This guide shows you how to accept in-person payments in your own point of sale (POS) application using Stripe Terminal. You don’t need any hardware to complete these steps with our [simulated reader](https://docs.stripe.com/terminal/references/testing.md#simulated-reader). Optionally, you can download the example and run the application.
 
 When you’re ready to use a physical reader, you only need to update the [reader registration step](https://docs.stripe.com/terminal/quickstart.md#register-reader) (for server-driven integrations) or [reader discovery step](https://docs.stripe.com/terminal/quickstart.md#discover-reader) (for SDK integrations).
 
-> Verifone reader support is in public preview for the US and CA. To join the preview, you must [contact the Sales team to order the applicable reader](https://stripe.com/contact/sales).
+> #### Verifone reader support
+>
+> Verifone reader support is in public preview for the United States and Canada. Some verifone readers are in private preview for Ireland and the United Kingdom (V660p, UX700, P630) and for Singapore (V660p, P630). To join the preview, you must [contact the Sales team to order the applicable reader](https://stripe.com/contact/sales).
 
 ### Install the Stripe Node library
 
@@ -2054,8 +2056,8 @@ PostalCode = "{{TERMINAL\_LOCATION\_POSTAL}}",
 };
 
 ```
-var service = new LocationService();
-var location = service.Create(options);
+var client = new StripeClient("<<YOUR_SECRET_KEY>>");
+var location = client.V1.Terminal.Locations.Create(options);
 
 return location;
 ```
@@ -2089,17 +2091,17 @@ PostalCode = "{{TERMINAL\_LOCATION\_POSTALCODEKANJI}}",
 };
 
 ```
-var service = new LocationService();
-var location = service.Create(options);
+var client = new StripeClient("<<YOUR_SECRET_KEY>>");
+var location = client.V1.Terminal.Locations.Create(options);
 
 return location;
 ```
 
 }
 // This is a public sample test API key.
-// Don’t submit any personally identifiable information in requests made with this key.
+// Don't submit any personally identifiable information in requests made with this key.
 // Sign in to see your own test API key embedded in code samples.
-StripeConfiguration.ApiKey = "<\<YOUR\_SECRET\_KEY>>";
+services.AddSingleton(new StripeClient("<\<YOUR\_SECRET\_KEY>>"));
 // The ConnectionToken's secret lets you connect to any Stripe Terminal reader
 // and take payments with your Stripe account.
 // Be sure to authenticate the endpoint for creating connection tokens.
@@ -2107,14 +2109,20 @@ StripeConfiguration.ApiKey = "<\<YOUR\_SECRET\_KEY>>";
 \[ApiController]
 public class ConnectionTokenApiController : Controller
 {
-\[HttpPost]
-public ActionResult Post()
-{
-var options = new ConnectionTokenCreateOptions{};
-var service = new ConnectionTokenService();
-var connectionToken = service.Create(options);
+private readonly StripeClient \_client;
 
 ```
+public ConnectionTokenApiController(StripeClient client)
+{
+  _client = client;
+}
+
+[HttpPost]
+public ActionResult Post()
+{
+  var options = new ConnectionTokenCreateOptions{};
+  var connectionToken = _client.V1.Terminal.ConnectionTokens.Create(options);
+
   return Json(new {secret = connectionToken.Secret});
 }
 ```
@@ -2124,25 +2132,34 @@ var connectionToken = service.Create(options);
 \[ApiController]
 public class CreateLocationApiController : Controller
 {
-\[HttpPost]
+private readonly StripeClient \_client;
+
+```
+public CreateLocationApiController(StripeClient client)
+{
+  _client = client;
+}
+
+[HttpPost]
 public ActionResult Post(CreateLocationRequest request)
 {
-var options = new LocationCreateOptions
-{
-DisplayName = request.DisplayName,
-Address = new AddressOptions
-{
-Line1 = request.Address.Line1,
-City = request.Address.City,
-State = request.Address.State,
-Country = request.Address.Country,
-PostalCode = request.Address.PostalCode,
-},
-};
-var service = new LocationService();
-var location = service.Create(options);
-return Json(location);
+  var options = new LocationCreateOptions
+  {
+    DisplayName = request.DisplayName,
+    Address = new AddressOptions
+    {
+      Line1 = request.Address.Line1,
+      City = request.Address.City,
+      State = request.Address.State,
+      Country = request.Address.Country,
+      PostalCode = request.Address.PostalCode,
+    },
+  };
+  var location = _client.V1.Terminal.Locations.Create(options);
+  return Json(location);
 }
+```
+
 }
 
 public class CreateLocationRequest
@@ -2181,62 +2198,80 @@ public string PostalCode { get; set; }
 \[ApiController]
 public class CreateLocationApiController : Controller
 {
-\[HttpPost]
+private readonly StripeClient \_client;
+
+```
+public CreateLocationApiController(StripeClient client)
+{
+  _client = client;
+}
+
+[HttpPost]
 public ActionResult Post()
 {
-var options = new LocationCreateOptions
-{
-DisplayName = "{{TERMINAL\_LOCATION\_NAME}}",
-DisplayNameKana = "{{TERMINAL\_LOCATION\_NAMEKANA}}",
-DisplayNameKanji = "{{TERMINAL\_LOCATION\_NAMEKANJI}}",
-Phone = "{{TERMINAL\_LOCATION\_PHONE}}",
-AddressKana = new AddressJapanOptions
-{
-Line1 = "{{TERMINAL\_LOCATION\_LINE1KANA}}",
-Line2 = "{{TERMINAL\_LOCATION\_LINE2KANA}}",
-Town = "{{TERMINAL\_LOCATION\_TOWNKANA}}",
-City = "{{TERMINAL\_LOCATION\_CITYKANA}}",
-State = "{{TERMINAL\_LOCATION\_STATEKANA}}",
-PostalCode = "{{TERMINAL\_LOCATION\_POSTALCODEKANA}}",
-},
-AddressKanji = new AddressJapanOptions
-{
-Line1 = "{{TERMINAL\_LOCATION\_LINE1KANJI}}",
-Line2 = "{{TERMINAL\_LOCATION\_LINE2KANJI}}",
-Town = "{{TERMINAL\_LOCATION\_TOWNKANJI}}",
-City = "{{TERMINAL\_LOCATION\_CITYKANJI}}",
-State = "{{TERMINAL\_LOCATION\_STATEKANJI}}",
-PostalCode = "{{TERMINAL\_LOCATION\_POSTALCODEKANJI}}",
-},
-};
-var service = new LocationService();
-var location = service.Create(options);
-return Json(location);
+  var options = new LocationCreateOptions
+  {
+    DisplayName = "{{TERMINAL_LOCATION_NAME}}",
+    DisplayNameKana = "{{TERMINAL_LOCATION_NAMEKANA}}",
+    DisplayNameKanji = "{{TERMINAL_LOCATION_NAMEKANJI}}",
+    Phone = "{{TERMINAL_LOCATION_PHONE}}",
+    AddressKana = new AddressJapanOptions
+    {
+      Line1 = "{{TERMINAL_LOCATION_LINE1KANA}}",
+      Line2 = "{{TERMINAL_LOCATION_LINE2KANA}}",
+      Town = "{{TERMINAL_LOCATION_TOWNKANA}}",
+      City = "{{TERMINAL_LOCATION_CITYKANA}}",
+      State = "{{TERMINAL_LOCATION_STATEKANA}}",
+      PostalCode = "{{TERMINAL_LOCATION_POSTALCODEKANA}}",
+    },
+    AddressKanji = new AddressJapanOptions
+    {
+      Line1 = "{{TERMINAL_LOCATION_LINE1KANJI}}",
+      Line2 = "{{TERMINAL_LOCATION_LINE2KANJI}}",
+      Town = "{{TERMINAL_LOCATION_TOWNKANJI}}",
+      City = "{{TERMINAL_LOCATION_CITYKANJI}}",
+      State = "{{TERMINAL_LOCATION_STATEKANJI}}",
+      PostalCode = "{{TERMINAL_LOCATION_POSTALCODEKANJI}}",
+    },
+  };
+  var location = _client.V1.Terminal.Locations.Create(options);
+  return Json(location);
 }
+```
+
 }
 \[Route("register\_reader")]
 \[ApiController]
 public class RegisterReaderApiController : Controller
 {
-\[HttpPost]
+private readonly StripeClient \_client;
+
+```
+public RegisterReaderApiController(StripeClient client)
+{
+  _client = client;
+}
+
+[HttpPost]
 public ActionResult Post(RegisterReaderRequest request)
 {
-var options = new ReaderCreateOptions
-{
-Location = request.LocationId,
-Label = "Quickstart - S700 Simulated Reader",
-RegistrationCode = "simulated-s700",
-Label = "Quickstart - S710 Simulated Reader",
-RegistrationCode = "simulated-s710",
-Label = "Quickstart - V660p Simulated Reader",
-RegistrationCode = "simulated-v660p",
-Label = "Quickstart - WisePOS E Simulated Reader",
-RegistrationCode = "simulated-wpe",
-};
-var service = new ReaderService();
-var reader = service.Create(options);
-return Json(reader);
+  var options = new ReaderCreateOptions
+  {
+    Location = request.LocationId,
+    Label = "Quickstart - S700 Simulated Reader",
+    RegistrationCode = "simulated-s700",
+    Label = "Quickstart - S710 Simulated Reader",
+    RegistrationCode = "simulated-s710",
+    Label = "Quickstart - V660p Simulated Reader",
+    RegistrationCode = "simulated-v660p",
+    Label = "Quickstart - WisePOS E Simulated Reader",
+    RegistrationCode = "simulated-wpe",
+  };
+  var reader = _client.V1.Terminal.Readers.Create(options);
+  return Json(reader);
 }
+```
+
 }
 
 public class RegisterReaderRequest
@@ -2248,12 +2283,17 @@ public string LocationId { get; set; }
 \[ApiController]
 public class PaymentIntentApiController : Controller
 {
-\[HttpPost]
-public ActionResult Post(PaymentIntentCreateRequest request)
-{
-var service = new PaymentIntentService();
+private readonly StripeClient \_client;
 
 ```
+public PaymentIntentApiController(StripeClient client)
+{
+  _client = client;
+}
+
+[HttpPost]
+public ActionResult Post(PaymentIntentCreateRequest request)
+{
   // For Terminal payments, the 'payment_method_types' parameter must include
   // 'card_present'.
   // To automatically capture funds when a charge is authorized,
@@ -2275,7 +2315,7 @@ var service = new PaymentIntentService();
           }
       }
   };
-  var intent = service.Create(options);
+  var intent = _client.V1.PaymentIntents.Create(options);
 
   return Json(intent);
 }
@@ -2292,16 +2332,22 @@ public class PaymentIntentCreateRequest
 \[ApiController]
 public class ProcessPaymentApiController : Controller
 {
-\[HttpPost]
-public ActionResult Post(ProcessPaymentRequest request)
-{
-var service = new ReaderService();
-var options = new ReaderProcessPaymentIntentOptions
-{
-PaymentIntent = request.PaymentIntentId,
-};
+private readonly StripeClient \_client;
 
 ```
+public ProcessPaymentApiController(StripeClient client)
+{
+  _client = client;
+}
+
+[HttpPost]
+public ActionResult Post(ProcessPaymentRequest request)
+{
+  var options = new ReaderProcessPaymentIntentOptions
+  {
+    PaymentIntent = request.PaymentIntentId,
+  };
+
   var attempt = 0;
   var tries = 3;
   while (true)
@@ -2309,7 +2355,7 @@ PaymentIntent = request.PaymentIntentId,
     attempt++;
     try
     {
-      var reader = service.ProcessPaymentIntent(request.ReaderId, options);
+      var reader = _client.V1.Terminal.Readers.ProcessPaymentIntent(request.ReaderId, options);
       return Json(reader);
     }
     catch (StripeException e)
@@ -2335,8 +2381,7 @@ PaymentIntent = request.PaymentIntentId,
         case "intent_invalid_state":
           // Check PaymentIntent status because it's not ready to be processed. It might have been already
           // successfully processed or canceled.
-          var paymentIntentService = new PaymentIntentService();
-          var paymentIntent = paymentIntentService.Get(request.PaymentIntentId);
+          var paymentIntent = _client.V1.PaymentIntents.Get(request.PaymentIntentId);
           Console.WriteLine($"PaymentIntent is already in {paymentIntent.Status} state.");
           return Json(e.StripeError);
         default:
@@ -2361,12 +2406,17 @@ public class ProcessPaymentRequest
 \[ApiController]
 public class SimulatePaymentApiController : Controller
 {
-\[HttpPost]
-public ActionResult Post(SimulatePaymentRequest request)
-{
-var service = new Stripe.TestHelpers.Terminal.ReaderService();
+private readonly StripeClient \_client;
 
 ```
+public SimulatePaymentApiController(StripeClient client)
+{
+  _client = client;
+}
+
+[HttpPost]
+public ActionResult Post(SimulatePaymentRequest request)
+{
   var parameters = new Stripe.TestHelpers.Terminal.ReaderPresentPaymentMethodOptions
   {
       CardPresent = new Stripe.TestHelpers.Terminal.ReaderCardPresentOptions
@@ -2376,7 +2426,7 @@ var service = new Stripe.TestHelpers.Terminal.ReaderService();
       Type = "card_present"
   };
 
-  var reader = service.PresentPaymentMethod(request.ReaderId, parameters);
+  var reader = _client.TestHelpers.Terminal.Readers.PresentPaymentMethod(request.ReaderId, parameters);
   return Json(reader);
 }
 
@@ -2395,15 +2445,21 @@ public class SimulatePaymentRequest
 \[ApiController]
 public class CapturePaymentIntentApiController : Controller
 {
-\[HttpPost]
-public ActionResult Post(PaymentIntentCaptureRequest request)
-{
-var service = new PaymentIntentService();
-var intent = service.Capture(request.PaymentIntentId, null);
-return Json(intent);
-}
+private readonly StripeClient \_client;
 
 ```
+public CapturePaymentIntentApiController(StripeClient client)
+{
+  _client = client;
+}
+
+[HttpPost]
+public ActionResult Post(PaymentIntentCaptureRequest request)
+{
+  var intent = _client.V1.PaymentIntents.Capture(request.PaymentIntentId, null);
+  return Json(intent);
+}
+
 public class PaymentIntentCaptureRequest
 {
   [JsonProperty("payment_intent_id")]
@@ -3137,18 +3193,20 @@ return true;
 return false;
 }
 };
-const { reader, error } = await connectReader(
-{ reader: selectedReader, locationId: selectedReader.locationId },
-'internet'
-);
-const { reader, error } = await connectReader(
-{ reader: selectedReader, locationId: selectedReader.locationId },
-'tapToPay'
-);
-const { reader, error } = await connectReader(
-{ reader: selectedReader, locationId: selectedReader.locationId },
-'bluetoothScan'
-);
+const { reader, error } = await connectReader({
+discoveryMethod: 'internet',
+reader: selectedReader,
+});
+const { reader, error } = await connectReader({
+discoveryMethod: 'tapToPay',
+reader: selectedReader,
+locationId: selectedReader.locationId,
+});
+const { reader, error } = await connectReader({
+discoveryMethod: 'bluetoothScan',
+reader: selectedReader,
+locationId: selectedReader.locationId,
+});
 useEffect(() => {
 async function init() {
 try {

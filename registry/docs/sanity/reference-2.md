@@ -309,15 +309,3 @@ export type payloadCollectionsDelete = {
 
 export type requestPayload = payloadProductsDelete | payloadProductsSync | payloadCollectionsDelete | payloadCollectionsSync
 ```
-
-# Content Agent
-
-#### Get started
-
-[Get started with Sanity Content Agent](https://www.sanity.io/docs/content-agent/introduction)
-
-[How AI Credits work](https://www.sanity.io/docs/platform-management/how-ai-credits-work)
-
-#### Additional resources
-
-[Community discord](https://snty.link/community)

@@ -11,7 +11,7 @@ If you’re a platform that wants to set up Stripe Tax for your connected accoun
 ## Get started with a video demo
 
 This short video shows you how to enable automatic tax collection through the Dashboard.
-[Watch on YouTube](https://www.youtube.com/watch?v=_A2tC63ooSs)
+[Watch on YouTube](https://www.youtube.com/watch?v=PFzV64TjSmo)
 
 ## Set your head office address
 
@@ -108,4 +108,4 @@ To stop calculating and collecting tax in your payments integrations:
 
 - [Subscriptions](https://dashboard.stripe.com/subscriptions)
 - [Payment links](https://dashboard.stripe.com/payment-links)
-- [Invoices](https://dashboard.stripe.com/invoices) You can also set `automatic_tax[enabled]=false` in the [subscriptions](https://docs.stripe.com/api/subscriptions/update.md#update_subscription-automatic_tax-enabled), [payment-links](https://docs.stripe.com/api/payment-link/update.md#update_payment_link-automatic_tax-enabled), or [invoices](https://docs.stripe.com/api/invoices/update.md#update_invoice-automatic_tax-enabled) APIs instead of the Dashboard.
+- [Invoices](https://dashboard.stripe.com/invoices): You can also set `automatic_tax[enabled]=false` in the [subscriptions](https://docs.stripe.com/api/subscriptions/update.md#update_subscription-automatic_tax-enabled), [payment-links](https://docs.stripe.com/api/payment-link/update.md#update_payment_link-automatic_tax-enabled), or [invoices](https://docs.stripe.com/api/invoices/update.md#update_invoice-automatic_tax-enabled) APIs instead of the Dashboard.

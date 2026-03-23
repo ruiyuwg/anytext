@@ -40,6 +40,8 @@ Inside the Framework Preset settings, use the drop-down menu to select the frame
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/brunch) | [View Demo](https://brunch-template.vercel.app)
 - **React**: Create React App allows you to get going with React in no time.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/create-react-app) | [View Demo](https://create-react-template.vercel.app)
+- **Django**: Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.
+  - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/django)
 - **Docusaurus (v1)**: Docusaurus makes it easy to maintain Open Source documentation websites.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/docusaurus) | [View Demo](https://docusaurus-template.vercel.app)
 - **Docusaurus (v2+)**: Docusaurus makes it easy to maintain Open Source documentation websites.
@@ -64,6 +66,8 @@ Inside the Framework Preset settings, use the drop-down menu to select the frame
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/flask)
 - **Gatsby.js**: Gatsby helps developers build blazing fast websites and apps with React.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/gatsby) | [View Demo](https://gatsby.vercel.app)
+- **Go**: An open-source programming language supported by Google.
+  - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/go)
 - **Gridsome**: Gridsome is a Vue.js-powered framework for building websites & apps that are fast by default.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/gridsome) | [View Demo](https://gridsome-template.vercel.app)
 - **H3**: Universal, Tiny, and Fast Servers
@@ -100,6 +104,8 @@ Inside the Framework Preset settings, use the drop-down menu to select the frame
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/polymer) | [View Demo](https://polymer-template.vercel.app)
 - **Preact**: Preact is a fast 3kB alternative to React with the same modern API.
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/preact) | [View Demo](https://preact-template.vercel.app)
+- **Python**: Python is a programming language that lets you work quickly and integrate systems more effectively.
+  - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/python)
 - **React Router**: Declarative routing for React
   - [Deploy](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/react-router) | [View Demo](https://react-router-v7-template.vercel.app)
 - **RedwoodJS**: RedwoodJS is a full-stack framework for the Jamstack.
@@ -205,7 +211,7 @@ Then, set the [`packageManager`](https://nodejs.org/docs/latest-v16.x/api/packag
 }
 ```
 
-*A package.json file with pnpm
+*A \`package.json\` file with pnpm
 version 7.5.1*
 
 #### Custom Install Command for your API
@@ -269,5 +275,5 @@ In a monorepo, you can [skip deployments](/docs/monorepos#skipping-unaffected-pr
 
 title: "Managing Builds"
 description: "Vercel allows you to increase the speed of your builds when needed in specific situations and workflows."
-last\_updated: "2026-03-08T05:03:11.691Z"
+last\_updated: "2026-03-23T09:40:05.729Z"
 source: "https://vercel.com/docs/builds/managing-builds"

@@ -132,7 +132,7 @@ box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 
 You can combine `<Teleport>` with [`<Transition>`](./transition) to create animated modals - see [Example here](/examples/#modal).
 
-The teleport `to` target must be already in the DOM when the `<Teleport>` component is mounted. Ideally, this should be an element outside the entire Vue application. If targeting another element rendered by Vue, you need to make sure that element is mounted before the `<Teleport>`.
+The teleport `to` target must be already in the DOM when the `<Teleport>` component is mounted. Ideally, this should be an element outside the entire Vue application. If targeting another element rendered by Vue, you need to make sure that element is mounted before the `<Teleport>`. If you are using SSR, see [Handling Teleports in SSR](/guide/scaling-up/ssr#teleports).
 
 ## Using with Components
 

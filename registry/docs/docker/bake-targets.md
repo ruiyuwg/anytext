@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -71,6 +69,18 @@ $ docker buildx bake
 ## [Target properties](#target-properties)
 
 The properties you can set for a target closely resemble the CLI flags for `docker build`, with a few additional properties that are specific to Bake.
+
+The `dockerfile` property specifies the path to the Dockerfile for a target. If you also set a `context`, the `dockerfile` path resolves relative to that context.
+
+docker-bake.hcl
+
+```hcl
+target "default" {
+  context = "app"
+  # resolves to app/src/www/Dockerfile
+  dockerfile = "src/www/Dockerfile"
+}
+```
 
 For all the properties you can set for a target, see the [Bake reference](/build/bake/reference#target).
 

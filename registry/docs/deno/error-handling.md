@@ -65,35 +65,6 @@ to known failure modes instead of treating every thrown error the same.
 
 ***
 
-# Evaluating JavaScript
-
-> Learn how to evaluate JavaScript code in a sandbox.
-
-URL: https://docs.deno.com/examples/sandbox\_evaluating\_javascript/
-
-You can evaluate JavaScript code in a sandbox using the `eval` function.
-
-```ts
-import { Sandbox } from "@deno/sandbox";
-
-await using sandbox = await Sandbox.create();
-
-const result = await sandbox.deno.eval(`
-  const a = 1;
-  const b = 2;
-  a + b;
-`);
-console.log("result:", result);
-```
-
-Calling `sandbox.deno.eval()` lets you run arbitrary JavaScript snippets
-directly inside the sandbox’s Deno runtime without writing files or shelling
-out. This is useful when you want to prototype logic, run small computations, or
-inspect the sandbox environment itself quickly. Use it for dynamic scripts or
-exploratory debugging where creating a full module would be overkill.
-
-***
-
 # Interactive JavaScript REPL
 
 > Learn how to provide an interactive Deno REPL in a sandbox.
@@ -177,7 +148,7 @@ configured value due to system overhead.
 
 ***
 
-# Spawn a subprocess, and get buffered output
+# Spawn a subprocess and get buffered output
 
 > Learn how to spawn a subprocess, and get buffered output in a sandbox.
 

@@ -8,7 +8,7 @@ The `vercel deploy` command deploys Vercel projects, executable from the project
 vercel
 ```
 
-*Using the vercel command from the root of a Vercel
+*Using the \`vercel\` command from the root of a Vercel
 project directory.*
 
 ## Extended usage
@@ -17,15 +17,15 @@ project directory.*
 vercel --cwd [path-to-project]
 ```
 
-*Using the vercel command and supplying a path to the
+*Using the \`vercel\` command and supplying a path to the
 root directory of the Vercel project.*
 
 ```bash filename="terminal"
 vercel deploy --prebuilt
 ```
 
-*Using the vercel command to deploy a prebuilt Vercel
-project, typically with vercel build. See
+*Using the \`vercel\` command to deploy a prebuilt Vercel
+project, typically with \`vercel build\`. See
 vercel build and
 Build Output API for more details.*
 
@@ -37,9 +37,9 @@ When deploying, `stdout` is always the Deployment URL.
 vercel > deployment-url.txt
 ```
 
-*Using the vercel command to deploy and write
-stdout to a text file. When deploying,
-stdout is always the Deployment URL.*
+*Using the \`vercel\` command to deploy and write
+\`stdout\` to a text file. When deploying,
+\`stdout\` is always the Deployment URL.*
 
 ### Deploying to a custom domain
 
@@ -63,8 +63,8 @@ fi
 ```
 
 *The script deploys your project and assigns the deployment URL saved in
-stdout to the custom domain using
-vercel alias.*
+\`stdout\` to the custom domain using
+\`vercel alias\`.*
 
 ## Standard error usage
 
@@ -99,9 +99,11 @@ The `--prebuilt` option can be used to upload and deploy the results of a previo
 
 #### When not to use --prebuilt
 
-When using the `--prebuilt` flag, no deployment ID will be made available for supported frameworks (like Next.js) to use, which means [Skew Protection](/docs/skew-protection) will not be enabled. Additionally, [System Environment Variables](/docs/environment-variables/system-environment-variables) will be missing at build time, so frameworks that rely on them at build time may not function correctly.
+When using the `--prebuilt` flag, [System Environment Variables](/docs/environment-variables/system-environment-variables) will be missing at build time, so frameworks that rely on them at build time may not function correctly.
 
-If you need Skew Protection or System Environment Variables, do not use the `--prebuilt` flag or use Git-based deployments.
+For Next.js projects, [Skew Protection](/docs/skew-protection) is supported with `--prebuilt` by configuring a custom deployment ID. See [Custom Deployment ID](/docs/skew-protection#custom-deployment-id) for setup instructions. Prebuilt deployments cannot use `dpl_` as a user-configured deployment ID prefix.
+
+If you need System Environment Variables at build time, do not use the `--prebuilt` flag or use Git-based deployments.
 
 ```bash filename="terminal"
 vercel --prebuilt
@@ -127,8 +129,8 @@ The `--build-env` option, shorthand `-b`, can be used to provide environment var
 vercel --build-env KEY1=value1 --build-env KEY2=value2
 ```
 
-*Using the vercel command with the
-\--build-env option.*
+*Using the \`vercel\` command with the
+\`--build-env\` option.*
 
 ### Yes
 
@@ -139,8 +141,8 @@ The questions will be answered with the provided defaults, inferred from `vercel
 vercel --yes
 ```
 
-*Using the vercel command with the
-\--yes option.*
+*Using the \`vercel\` command with the
+\`--yes\` option.*
 
 ### Env
 
@@ -150,8 +152,8 @@ The `--env` option, shorthand `-e`, can be used to provide [environment variable
 vercel --env KEY1=value1 --env KEY2=value2
 ```
 
-*Using the vercel command with the
-\--env option.*
+*Using the \`vercel\` command with the
+\`--env\` option.*
 
 ### Name
 
@@ -166,8 +168,8 @@ The `--name` option, shorthand `-n`, can be used to provide a Vercel project nam
 vercel --name foo
 ```
 
-*Using the vercel command with the
-\--name option.*
+*Using the \`vercel\` command with the
+\`--name\` option.*
 
 ### Prod
 
@@ -177,8 +179,8 @@ The `--prod` option can be used to create a deployment for a production domain s
 vercel --prod
 ```
 
-*Using the vercel command with the
-\--prod option.*
+*Using the \`vercel\` command with the
+\`--prod\` option.*
 
 ### Skip Domain
 
@@ -192,8 +194,8 @@ Must be used with [`--prod`](#prod). The `--skip-domain` option will disable the
 vercel --prod --skip-domain
 ```
 
-*Using the vercel command with the
-\--skip-domain option.*
+*Using the \`vercel\` command with the
+\`--skip-domain\` option.*
 
 ### Public
 
@@ -203,8 +205,8 @@ The `--public` option can be used to ensure the source code is publicly availabl
 vercel --public
 ```
 
-*Using the vercel command with the
-\--public option.*
+*Using the \`vercel\` command with the
+\`--public\` option.*
 
 ### Regions
 
@@ -214,8 +216,8 @@ The `--regions` option can be used to specify which [regions](/docs/regions) the
 vercel --regions sfo1
 ```
 
-*Using the vercel command with the
-\--regions option.*
+*Using the \`vercel\` command with the
+\`--regions\` option.*
 
 ### No wait
 
@@ -259,8 +261,8 @@ The `--logs` option, shorthand `-l`, also prints the build logs.
 vercel deploy --logs
 ```
 
-*Using the vercel deploy command with the
-\--logs option, to view logs from the build process.*
+*Using the \`vercel deploy\` command with the
+\`--logs\` option, to view logs from the build process.*
 
 ### Meta
 
@@ -288,12 +290,12 @@ The `--guidance` option displays suggested next steps and commands after deploym
 vercel deploy --guidance
 ```
 
-*Using the vercel deploy command with the
-\--guidance option to receive command suggestions.*
+*Using the \`vercel deploy\` command with the
+\`--guidance\` option to receive command suggestions.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -308,5 +310,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "Deploying Projects from Vercel CLI"
 description: "Learn how to deploy your Vercel Projects from Vercel CLI using the vercel or vercel deploy commands."
-last\_updated: "2026-03-08T05:03:12.115Z"
+last\_updated: "2026-03-23T09:40:06.664Z"
 source: "https://vercel.com/docs/cli/deploying-from-cli"

@@ -62,6 +62,9 @@ You can also install the CLI as dev dependency via [npm](https://www.npmjs.com/p
 ```sh
 npm install supabase --save-dev
 ```
+
+
+  Global installation using `npm install -g supabase` is not supported. For global CLI usage, install via [Homebrew](/docs/guides/local-development/cli/getting-started?queryGroups=platform\&platform=macos), [Scoop](/docs/guides/local-development/cli/getting-started?queryGroups=platform\&platform=windows), or the [standalone binary](/docs/guides/local-development/cli/getting-started?queryGroups=platform\&platform=linux).
 ````
 
 ## Updating the Supabase CLI

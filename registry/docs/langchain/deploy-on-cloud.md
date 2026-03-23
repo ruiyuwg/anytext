@@ -2,7 +2,9 @@
 
 Source: https://docs.langchain.com/langsmith/deploy-to-cloud
 
-This is the comprehensive setup and management guide for deploying applications to LangSmith Cloud.
+Create and manage LangSmith Cloud deployments including revisions, logs, metrics, and settings.
+
+This is the comprehensive setup and management guide for deploying applications to LangSmith Cloud. It covers two deployment methods: the [LangSmith UI](https://smith.langchain.com), which deploys from a connected GitHub repository, and the [`langgraph deploy` CLI command](/langsmith/cli#deploy), which builds and pushes directly from your local machine.
 
 **If you're looking for a quick setup**, try the [quickstart guide](/langsmith/deployment-quickstart) first.
 
@@ -10,25 +12,29 @@ Before setting up, review the [Cloud overview page](/langsmith/cloud) to underst
 
 ## Prerequisites
 
-- Applications are deployed from GitHub repositories. Configure and upload an application to a GitHub repository.
-- [Verify that the LangGraph API runs locally](/langsmith/local-server). If the API does not run successfully (i.e., `langgraph dev`), deploying to LangSmith will fail as well.
-
-  **One-Time Setup Required**: A GitHub organization owner or admin must complete the OAuth flow in the LangSmith UI to authorize the `hosted-langserve` GitHub app. This only needs to be done once per workspace. After the initial OAuth authorization, all developers with deployment permissions can create and manage deployments without requiring GitHub admin access.
+- A LangSmith account on the [Plus plan or above](https://www.langchain.com/pricing).
+- [Verify that the LangGraph API runs locally](/langsmith/local-dev-testing). If the API does not run successfully (i.e., `langgraph dev`), deploying to LangSmith will fail as well.
 
 ## Create new deployment
+
+Choose the deployment method that fits your workflow—the LangSmith UI connects to a GitHub repository and supports automatic deploys on push, while the `langgraph deploy` CLI command builds and deploys directly from your local project directory.
+
+````
+  **One-Time Setup Required**: A GitHub organization owner or admin must complete the OAuth flow in the LangSmith UI to authorize the `hosted-langserve` GitHub app. This only needs to be done once per workspace. After the initial OAuth authorization, all developers with deployment permissions can create and manage deployments without requiring GitHub admin access.
+
 
 Starting from the [LangSmith UI](https://smith.langchain.com), select **Deployments** in the left-hand navigation panel, **Deployments**. In the top-right corner, select **+ New Deployment** to create a new deployment:
 
 1. In the **Create New Deployment** panel, fill out the required fields. For **Deployment details**:
    1. Select **Import from GitHub** and follow the GitHub OAuth workflow to install and authorize LangChain's `hosted-langserve` GitHub app to access the selected repositories. After installation is complete, return to the **Create New Deployment** panel and select the GitHub repository to deploy from the dropdown menu.
-      The GitHub user installing LangChain's `hosted-langserve` GitHub app must be an [owner](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/roles-in-an-organization#organization-owners) of the organization or account. This authorization only needs to be completed once per LangSmith workspace—subsequent deployments can be created by any user with deployment permissions.
+       The GitHub user installing LangChain's `hosted-langserve` GitHub app must be an [owner](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/roles-in-an-organization#organization-owners) of the organization or account. This authorization only needs to be completed once per LangSmith workspace—subsequent deployments can be created by any user with deployment permissions.
    2. Specify a name for the deployment.
    3. Specify the desired **Git Branch**. A deployment is linked to a branch. When a new revision is created, code for the linked branch will be deployed. The branch can be updated later in the [Deployment Settings](#deployment-settings).
    4. Specify the full path to the [LangGraph API config file](/langsmith/cli#configuration-file) including the file name. For example, if the file `langgraph.json` is in the root of the repository, specify `langgraph.json`.
    5. Use the checkbox to **Automatically update deployment on push to branch**. If checked, the deployment will automatically be updated when changes are pushed to the specified **Git Branch**. You can enable or disable this setting on the [Deployment Settings](#deployment-settings) in [the UI](https://smith.langchain.com).
       For **Deployment Type**:
-      - Development deployments are meant for non-production use cases and are provisioned with minimal resources.
-      - Production deployments can serve up to 500 requests/second and are provisioned with highly available storage with automatic backups.
+      * Development deployments are meant for non-production use cases and are provisioned with minimal resources.
+      * Production deployments can serve up to 500 requests/second and are provisioned with highly available storage with automatic backups.
    6. Determine if the deployment should be **Shareable through Studio**.
       1. If unchecked, the deployment will only be accessible with a valid LangSmith API key for the [workspace](/langsmith/administration-overview#workspaces).
       2. If checked, the deployment will be accessible through [Studio](/langsmith/studio) to any LangSmith user. A direct URL to Studio for the deployment will be provided to share with other LangSmith users.
@@ -38,37 +44,128 @@ Starting from the [LangSmith UI](https://smith.langchain.com), select **Deployme
    8. A new LangSmith [tracing project](/langsmith/observability) is automatically created with the same name as the deployment.
 2. In the top-right corner, select **Submit**. After a few seconds, the **Deployment** view appears and the new deployment will be queued for provisioning.
 
+
+
+
+  The `langgraph deploy` command is in **beta**. It requires [Docker](https://docs.docker.com/get-docker/) to be installed and running. On Apple Silicon (M1/M2/M3), [Docker Buildx](https://docs.docker.com/build/install-buildx/) is also required for cross-compiling to `linux/amd64`.
+
+
+1. Install the [LangGraph CLI](/langsmith/cli):
+   ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   uv tool install langgraph-cli
+   ```
+2. Add your LangSmith API key to a `.env` file in your project root:
+   ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   LANGSMITH_API_KEY=lsv2_...
+   ```
+3. Run the deploy command from your project directory:
+   ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   langgraph deploy
+   ```
+   This creates a `dev` deployment named after your project directory. Use `--name` to specify a different name or `--deployment-type prod` for a production deployment:
+   ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   langgraph deploy --name my-agent --deployment-type prod
+   ```
+   After the command completes, the deployment is queued for provisioning. Environment variables can be managed through the [LangSmith UI](https://smith.langchain.com) after the deployment is created, or configured in the [`env` field of your `langgraph.json`](/langsmith/cli#configuration-file).
+````
+
 ## Create new revision
 
 When [creating a new deployment](#create-new-deployment), a new revision is created by default. You can create subsequent revisions to deploy new code changes.
 
+````
 Starting from the [LangSmith UI](https://smith.langchain.com), select **Deployments** in the left-hand navigation panel. Select an existing deployment to create a new revision for.
 
 1. In the **Deployment** view, in the top-right corner, select **+ New Revision**.
 2. In the **New Revision** modal, fill out the required fields.
    1. Specify the full path to the [API config file](/langsmith/cli#configuration-file) including the file name. For example, if the file `langgraph.json` is in the root of the repository, specify `langgraph.json`.
    2. Determine if the deployment should be **Shareable through Studio**.
-      - If unchecked, the deployment will only be accessible with a valid LangSmith API key for the [workspace](/langsmith/administration-overview#workspaces).
-      - If checked, the deployment will be accessible through [Studio](/langsmith/studio) to any LangSmith user. A direct URL to Studio for the deployment will be provided to share with other LangSmith users.
+      * If unchecked, the deployment will only be accessible with a valid LangSmith API key for the [workspace](/langsmith/administration-overview#workspaces).
+      * If checked, the deployment will be accessible through [Studio](/langsmith/studio) to any LangSmith user. A direct URL to Studio for the deployment will be provided to share with other LangSmith users.
    3. Specify **Environment Variables** and secrets. Existing secrets and environment variables are prepopulated. To configure additional variables for the revision, refer to the [Environment Variables reference](/langsmith/env-var).
       1. Add new secrets or environment variables.
       2. Remove existing secrets or environment variables.
       3. Update the value of existing secrets or environment variables.
-3. Select **Submit\`**. After a few seconds, the **New Revision** modal will close and the new revision will be queued for deployment.
+3. Select **Submit**. After a few seconds, the **New Revision** modal will close and the new revision will be queued for deployment.
+
+
+
+Re-run `langgraph deploy` from your project directory. The command finds the existing deployment by name and creates a new revision with your latest code changes:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy
+```
+
+To target a specific deployment by ID rather than by name, use `--deployment-id`:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy --deployment-id <DEPLOYMENT_ID>
+```
+
+Use `langgraph deploy list` to view all deployments and find their IDs:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy list
+```
+
+
+  `langgraph deploy` can only update deployments that were originally created by `langgraph deploy`. Deployments created through the LangSmith UI or GitHub integration cannot be updated with this command.
+````
 
 ## View build and server logs
 
 Build and server logs are available for each revision.
 
+````
 Starting from the **Deployments** view:
 
 1. Select the desired revision from the **Revisions** table. A panel slides open from the right-hand side and the **Build** tab is selected by default, which displays build logs for the revision.
 2. In the panel, select the **Server** tab to view server logs for the revision. Server logs are only available after a revision has been deployed.
 3. Within the **Server** tab, adjust the date/time range picker as needed. By default, the date/time range picker is set to the **Last 7 days**.
 
+
+
+Use `langgraph deploy logs` to fetch logs for a deployment.
+
+To view server (runtime) logs:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy logs
+```
+
+To view build logs:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy logs --type build
+```
+
+To tail logs continuously as they arrive:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy logs --follow
+```
+
+Filter logs by time range, log level, or search string:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy logs --start-time 2026-03-01T00:00:00Z --level ERROR
+```
+
+If you have multiple deployments, specify the target by name or ID:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy logs --name my-agent
+langgraph deploy logs --deployment-id <DEPLOYMENT_ID>
+```
+
+For all available options, refer to the [`deploy logs` CLI reference](/langsmith/cli#deploy-logs).
+````
+
 ## View deployment metrics
 
-Starting from the [LangSmith UI](https://smith.langchain.com):
+Once your deployment is live, you can monitor its performance from the [LangSmith UI](https://smith.langchain.com).
+
+Starting from the LangSmith UI:
 
 1. In the left-hand navigation panel, select **Deployments**.
 2. Select an existing deployment to monitor.
@@ -90,11 +187,33 @@ Starting from the **Deployments** view:
 
 ## Delete deployment
 
+````
 Starting from the [LangSmith UI](https://smith.langchain.com):
 
 1. In the left-hand navigation panel, select **Deployments**, which contains a list of existing deployments.
 2. Select the menu icon (three dots) on the right-hand side of the row for the desired deployment and select **Delete**.
 3. A **Confirmation** modal will appear. Select **Delete**.
+
+
+
+Use `langgraph deploy list` to find the ID of the deployment you want to delete:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy list
+```
+
+Then delete it by ID:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy delete <DEPLOYMENT_ID>
+```
+
+To skip the confirmation prompt, use `--force`:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy delete --force <DEPLOYMENT_ID>
+```
+````
 
 ## Deployment settings
 

@@ -14,7 +14,7 @@ import {schemaTypes} from './schemas'
 export default defineConfig([
   {
     projectId: '<projectId>',
-    dataset: 'production',
+    dataset: '<your-dataset>',
     name: 'us-workspace',
     basePath: '/us',
     title: 'USA',
@@ -27,7 +27,7 @@ export default defineConfig([
   },
   {
     projectId: '<projectId>',
-    dataset: 'production',
+    dataset: '<your-dataset>',
     name: 'eu-workspace',
     basePath: '/eu',
     title: 'Europe',

@@ -26,14 +26,12 @@ This guide walks you through creating a feature flag in the Vercel Dashboard and
 - ### Evaluate the flag in your application
   Toggle the flag off for the **Development** environment in the Vercel Dashboard, then press **Review and save** and leave a message for the change. Reload the page to see the change.
 
+- ### Add targeting with the identify function
+  Now that your flag is working, you can add an `identify` function to pass user and team context for [targeting rules](/docs/flags/vercel-flags/dashboard/entities). This lets you roll out flags to specific users, plans, or teams from the dashboard.
+
 ## Built-in resilience
 
-The SDK can fetch your flag definitions once at build time and bundle them into the deployment. This guarantees every function uses the same snapshot during the build, and provides a runtime fallback if the Vercel Flags service is temporarily unreachable.
-
-> **💡 Note:** Embedding is experimental. Enable it by adding a
-> `VERCEL_EXPERIMENTAL_EMBED_FLAG_DEFINITIONS=1` environment variable to your
-> project. This is recommended to avoid downtime during service outages, and
-> will become the default in a future release.
+When you deploy to Vercel, the build process fetches your latest flag definitions once at build time and bundles them into the deployment. This guarantees every function uses the same snapshot during the build, and provides a runtime fallback if the Vercel Flags service is temporarily unreachable. Definitions are only fetched when your project has at least one environment variable containing an SDK key for Vercel Flags.
 
 Learn more about [embedded definitions](/docs/flags/vercel-flags/sdks/core#embedded-definitions).
 
@@ -50,5 +48,5 @@ Your flag is working. Here's what to explore next:
 
 title: "Using the Core Library"
 description: "Use the Vercel Flags core evaluation library directly for custom setups."
-last\_updated: "2026-03-08T05:03:14.642Z"
+last\_updated: "2026-03-23T09:40:10.248Z"
 source: "https://vercel.com/docs/flags/vercel-flags/sdks/core"

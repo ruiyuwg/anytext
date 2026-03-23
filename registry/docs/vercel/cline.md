@@ -45,5 +45,5 @@ Common issues and solutions:
 
 title: "Conductor"
 description: "Use Conductor with the AI Gateway."
-last\_updated: "2026-03-08T05:03:09.760Z"
+last\_updated: "2026-03-23T09:40:03.137Z"
 source: "https://vercel.com/docs/agent-resources/coding-agents/conductor"

@@ -138,5 +138,5 @@ For more details, see the [Google AI thinking docs](https://ai.google.dev/gemini
 
 title: "OpenAI Reasoning"
 description: "Configure reasoning and thinking for OpenAI models with the AI SDK and AI Gateway."
-last\_updated: "2026-03-08T05:03:10.229Z"
+last\_updated: "2026-03-23T09:40:03.945Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/reasoning/openai"

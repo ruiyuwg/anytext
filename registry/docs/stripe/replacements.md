@@ -65,7 +65,7 @@ The following example illustrates how a connected account might receive a replac
                    "currency": "usd",
                    "advance_amount": 100000,
                    "fee_amount": 10000,
-                   "withhold_rate": 0.15,
+                   "withhold_rate": 0.15
                },
                "replacement_for": "financingoffer_abc123",
                ...

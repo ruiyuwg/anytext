@@ -6,7 +6,7 @@ Learn more about [testing](https://docs.stripe.com/testing.md) your Stripe integ
 
 You can issue cards and simulate purchases using your own Stripe integration in a *sandbox* (A sandbox is an isolated test environment that allows you to test Stripe functionality in your account without affecting your live integration. Use sandboxes to safely experiment with new features and changes) environment. This allows you to test your integration before you go live without having to make real purchases. You can only use these cards for testing within your Stripe account and not for external purchases.
 
-> When testing your [authorization endpoint](https://docs.stripe.com/issuing/purchases/authorizations.md), make sure that you have set the test endpoint in your [Issuing settings](https://dashboard.stripe.com/account/issuing). You can view test data by switching into your *sandbox* (A sandbox is an isolated test environment that allows you to test Stripe functionality in your account without affecting your live integration. Use sandboxes to safely experiment with new features and changes) environment.
+> When testing your [authorization endpoint](https://docs.stripe.com/issuing/purchases/authorizations.md), make sure that you’ve set the test endpoint in your [Issuing settings](https://dashboard.stripe.com/account/issuing). You can view test data by switching into your *sandbox* (A sandbox is an isolated test environment that allows you to test Stripe functionality in your account without affecting your live integration. Use sandboxes to safely experiment with new features and changes) environment.
 
 ## Fund your test Issuing balance
 

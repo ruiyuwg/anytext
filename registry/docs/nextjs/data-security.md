@@ -19,18 +19,18 @@ We recommend choosing one data fetching approach and avoiding mixing them. This 
 You should follow a **Zero Trust** model when adopting Server Components in an existing project. You can continue calling your existing API endpoints such as REST or GraphQL from Server Components using [`fetch`](/docs/app/api-reference/functions/fetch), just as you would in Client Components.
 
 ```tsx filename="app/page.tsx"
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers'
 
 export default async function Page() {
-  const cookieStore = cookies();
-  const token = cookieStore.get("AUTH_TOKEN")?.value;
+  const cookieStore = cookies()
+  const token = cookieStore.get('AUTH_TOKEN')?.value
 
-  const res = await fetch("https://api.example.com/profile", {
+  const res = await fetch('https://api.example.com/profile', {
     headers: {
       Cookie: `AUTH_TOKEN=${token}`,
       // Other headers
     },
-  });
+  })
 
   // ....
 }
@@ -54,44 +54,44 @@ A Data Access Layer should:
 This approach centralizes all data access logic, making it easier to enforce consistent data access and reduces the risk of authorization bugs. You also get the benefit of sharing an in-memory cache across different parts of a request.
 
 ```ts filename="data/auth.ts"
-import { cache } from "react";
-import { cookies } from "next/headers";
+import { cache } from 'react'
+import { cookies } from 'next/headers'
 
 // Cached helper methods makes it easy to get the same value in many places
 // without manually passing it around. This discourages passing it from Server
 // Component to Server Component which minimizes risk of passing it to a Client
 // Component.
 export const getCurrentUser = cache(async () => {
-  const token = cookies().get("AUTH_TOKEN");
-  const decodedToken = await decryptAndValidate(token);
+  const token = cookies().get('AUTH_TOKEN')
+  const decodedToken = await decryptAndValidate(token)
   // Don't include secret tokens or private information as public fields.
   // Use classes to avoid accidentally passing the whole object to the client.
-  return new User(decodedToken.id);
-});
+  return new User(decodedToken.id)
+})
 ```
 
 ```tsx filename="data/user-dto.tsx"
-import "server-only";
-import { getCurrentUser } from "./auth";
+import 'server-only'
+import { getCurrentUser } from './auth'
 
 function canSeeUsername(viewer: User) {
   // Public info for now, but can change
-  return true;
+  return true
 }
 
 function canSeePhoneNumber(viewer: User, team: string) {
   // Privacy rules
-  return viewer.isAdmin || team === viewer.team;
+  return viewer.isAdmin || team === viewer.team
 }
 
 export async function getProfileDTO(slug: string) {
   // Don't pass values, read back cached values, also solves context and easier to make it lazy
 
   // use a database API that supports safe templating of queries
-  const [rows] = await sql`SELECT * FROM user WHERE slug = ${slug}`;
-  const userData = rows[0];
+  const [rows] = await sql`SELECT * FROM user WHERE slug = ${slug}`
+  const userData = rows[0]
 
-  const currentUser = await getCurrentUser();
+  const currentUser = await getCurrentUser()
 
   // only return the data relevant for this query and not everything
   // <https://www.w3.org/2001/tag/doc/APIMinimization>
@@ -100,7 +100,7 @@ export async function getProfileDTO(slug: string) {
     phonenumber: canSeePhoneNumber(currentUser, userData.team)
       ? userData.phonenumber
       : null,
-  };
+  }
 }
 ```
 
@@ -124,19 +124,19 @@ For quick prototypes and iteration, database queries can be placed directly in S
 This approach, however, makes it easier to accidentally expose private data to the client, for example:
 
 ```tsx filename="app/page.tsx"
-import Profile from "./components/profile.tsx";
+import Profile from './components/profile.tsx'
 
 export async function Page({ params: { slug } }) {
-  const [rows] = await sql`SELECT * FROM user WHERE slug = ${slug}`;
-  const userData = rows[0];
+  const [rows] = await sql`SELECT * FROM user WHERE slug = ${slug}`
+  const userData = rows[0]
   // EXPOSED: This exposes all the fields in userData to the client because
   // we are passing the data from the Server Component to the Client.
-  return <Profile user={userData} />;
+  return <Profile user={userData} />
 }
 ```
 
 ```tsx filename="app/ui/profile.tsx"
-"use client";
+'use client'
 
 // BAD: This is a bad props interface because it accepts way more data than the
 // Client Component needs and it encourages server components to pass all that
@@ -148,37 +148,37 @@ export default async function Profile({ user }: { user: User }) {
       <h1>{user.name}</h1>
       ...
     </div>
-  );
+  )
 }
 ```
 
 You should sanitize the data before passing it to the Client Component:
 
 ```ts filename="data/user.ts"
-import { sql } from "./db";
+import { sql } from './db'
 
 export async function getUser(slug: string) {
-  const [rows] = await sql`SELECT * FROM user WHERE slug = ${slug}`;
-  const user = rows[0];
+  const [rows] = await sql`SELECT * FROM user WHERE slug = ${slug}`
+  const user = rows[0]
 
   // Return only the public fields
   return {
     name: user.name,
-  };
+  }
 }
 ```
 
 ```tsx filename="app/page.tsx"
-import { getUser } from "../data/user";
-import Profile from "./ui/profile";
+import { getUser } from '../data/user'
+import Profile from './ui/profile'
 
 export default async function Page({
   params: { slug },
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }) {
-  const publicProfile = await getUser(slug);
-  return <Profile user={publicProfile} />;
+  const publicProfile = await getUser(slug)
+  return <Profile user={publicProfile} />
 }
 ```
 
@@ -195,7 +195,7 @@ On the initial load, both Server and Client Components run on the server to gene
 
 **Client Components:**
 
-- Run on the server during pre-rendering, but must follow the same security assumptions as code running in the browser.
+- Run on the server during prerendering, but must follow the same security assumptions as code running in the browser.
 - Must not access privileged data or server-only modules.
 
 This ensures the app is secure by default, but it's possible to accidentally expose private data through how data is fetched or passed to components.
@@ -214,7 +214,7 @@ module.exports = {
   experimental: {
     taint: true,
   },
-};
+}
 ```
 
 This prevents the tainted objects or values from being passed to the client. However, it's an additional layer of protection, you should still filter and sanitize the data in your [DAL](#data-access-layer) before passing it to React's render context.
@@ -245,7 +245,7 @@ bun add server-only
 ```
 
 ```ts filename="lib/data.ts"
-import "server-only";
+import 'server-only'
 
 //...
 ```
@@ -258,7 +258,7 @@ Next.js handles mutations with [Server Actions](https://react.dev/reference/rsc/
 
 ### Built-in Server Actions Security features
 
-By default, when a Server Action is created and exported, it creates a public HTTP endpoint and should be treated with the same security assumptions and authorization checks. This means, even if a Server Action or utility function is not imported elsewhere in your code, it's still publicly accessible.
+By default, when a Server Action is created and exported, it is reachable via a direct POST request, not just through your application's UI. This means, even if a Server Action or utility function is not imported elsewhere in your code, it can still be called externally.
 
 To improve security, Next.js has the following built-in features:
 
@@ -268,11 +268,11 @@ To improve security, Next.js has the following built-in features:
 > **Good to know**:
 >
 > The IDs are created during compilation and are cached for a maximum of 14 days. They will be regenerated when a new build is initiated or when the build cache is invalidated.
-> This security improvement reduces the risk in cases where an authentication layer is missing. However, you should still treat Server Actions like public HTTP endpoints.
+> This security improvement reduces the risk in cases where an authentication layer is missing. However, you should still treat Server Actions as reachable via direct POST requests and verify authentication and authorization inside each one.
 
 ```jsx
 // app/actions.js
-"use server";
+'use server'
 
 // If this action **is** used in our application, Next.js
 // will create a secure ID to allow the client to reference
@@ -292,47 +292,169 @@ You should always validate input from client, as they can be easily modified. Fo
 ```tsx filename="app/page.tsx"
 // BAD: Trusting searchParams directly
 export default async function Page({ searchParams }) {
-  const isAdmin = searchParams.get("isAdmin");
-  if (isAdmin === "true") {
+  const isAdmin = searchParams.get('isAdmin')
+  if (isAdmin === 'true') {
     // Vulnerable: relies on untrusted client data
-    return <AdminPanel />;
+    return <AdminPanel />
   }
 }
 
 // GOOD: Re-verify every time
-import { cookies } from "next/headers";
-import { verifyAdmin } from "./auth";
+import { cookies } from 'next/headers'
+import { verifyAdmin } from './auth'
 
 export default async function Page() {
-  const token = cookies().get("AUTH_TOKEN");
-  const isAdmin = await verifyAdmin(token);
+  const token = cookies().get('AUTH_TOKEN')
+  const isAdmin = await verifyAdmin(token)
 
   if (isAdmin) {
-    return <AdminPanel />;
+    return <AdminPanel />
   }
 }
 ```
 
 ### Authentication and authorization
 
-You should always ensure that a user is authorized to perform an action. For example:
+A page-level authentication check does not extend to the Server Actions defined within it. Always re-verify inside the action:
 
-```tsx filename="app/actions.ts"
-"use server";
+```tsx filename="app/admin/page.tsx" highlight={13,14,15,16}
+import { auth } from '@/lib/auth'
+import { redirect } from 'next/navigation'
 
-import { auth } from "./lib";
-
-export function addItem() {
-  const { user } = auth();
-  if (!user) {
-    throw new Error("You must be signed in to perform this action");
+export default async function AdminPage() {
+  const session = await auth()
+  if (!session?.user?.isAdmin) {
+    redirect('/login')
   }
 
-  // ...
+  return (
+    <form
+      action={async () => {
+        'use server'
+        const session = await auth()
+        if (!session?.user?.isAdmin) {
+          throw new Error('Unauthorized')
+        }
+        await db.record.deleteMany()
+      }}
+    >
+      <button>Delete Records</button>
+    </form>
+  )
+}
+```
+
+The highlighted `auth()` check inside the action is critical. The page-level redirect on line 6 controls which UI is rendered, but the Server Action is a separate entry point and must verify the caller on its own.
+
+Beyond authentication (is the user logged in?), remember to check **authorization** (does this user have permission to act on this specific resource?). This prevents [Insecure Direct Object Reference (IDOR)](https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html) vulnerabilities:
+
+```tsx filename="app/actions.ts"
+'use server'
+
+import { auth } from '@/lib/auth'
+import { db } from '@/lib/db'
+
+export async function deletePost(postId: string) {
+  const session = await auth()
+  if (!session?.user) {
+    throw new Error('Unauthorized')
+  }
+
+  const post = await db.post.findUnique({ where: { id: postId } })
+
+  // Check that the user owns this resource
+  if (post.authorId !== session.user.id) {
+    throw new Error('Forbidden')
+  }
+
+  await db.post.delete({ where: { id: postId } })
 }
 ```
 
 Learn more about [Authentication](/docs/app/guides/authentication) in Next.js.
+
+### Using a Data Access Layer for mutations
+
+Just as we recommend a [Data Access Layer](#data-access-layer) for reading data, you can apply the same pattern to mutations. This keeps authentication, authorization, and database logic in a dedicated `server-only` module, while `"use server"` actions stay thin.
+
+```ts filename="data/posts.ts"
+import 'server-only'
+
+import { auth } from '@/lib/auth'
+import { db } from '@/lib/db'
+
+export async function deletePost(postId: string) {
+  const session = await auth()
+  if (!session?.user) {
+    throw new Error('Unauthorized')
+  }
+
+  const post = await db.post.findUnique({ where: { id: postId } })
+
+  if (post.authorId !== session.user.id) {
+    throw new Error('Forbidden')
+  }
+
+  await db.post.delete({ where: { id: postId } })
+}
+```
+
+The `"use server"` action then delegates to the DAL:
+
+```ts filename="app/actions.ts"
+'use server'
+
+import { deletePost } from '@/data/posts'
+import { revalidatePath } from 'next/cache'
+
+export async function deletePostAction(postId: string) {
+  await deletePost(postId) // Auth + authz happen inside the DAL
+  revalidatePath('/posts')
+}
+```
+
+> **Good to know:** You can use `import 'server-only'` in both the Data Access Layer and the `"use server"` file itself. Both work when the action is imported into a Client Component (for example, to pass it to `useActionState`), because `"use server"` modules are resolved in a server-only webpack layer.
+
+### Controlling return values
+
+Server Action return values are serialized and sent to the client. Only return what the UI needs, not raw database records.
+
+```tsx filename="app/actions.ts"
+'use server'
+
+import { auth } from '@/lib/auth'
+import { db } from '@/lib/db'
+
+// BAD: Returns the full database record, which may include
+// internal fields the client should not see.
+export async function updateUser(data: FormData) {
+  const session = await auth()
+  if (!session?.user) {
+    throw new Error('Unauthorized')
+  }
+  return db.user.update({
+    where: { id: session.user.id },
+    data: { name: data.get('name') as string },
+  })
+}
+
+// GOOD: Returns only what the client needs.
+export async function updateUserSafe(data: FormData) {
+  const session = await auth()
+  if (!session?.user) {
+    throw new Error('Unauthorized')
+  }
+  await db.user.update({
+    where: { id: session.user.id },
+    data: { name: data.get('name') as string },
+  })
+  return { success: true }
+}
+```
+
+### Rate limiting
+
+For expensive operations (sending emails, writing to a database), consider adding rate limiting to prevent abuse. See the [Rate limiting](/docs/app/guides/backend-for-frontend#rate-limiting) example in the Backend for Frontend guide.
 
 ### Closures and encryption
 
@@ -378,7 +500,7 @@ export default async function Page() {
 }
 ```
 
-Closures are useful when you need to capture a _snapshot_ of data (e.g. `publishVersion`) at the time of rendering so that it can be used later when the action is invoked.
+Closures are useful when you need to capture a *snapshot* of data (e.g. `publishVersion`) at the time of rendering so that it can be used later when the action is invoked.
 
 However, for this to happen, the captured variables are sent to the client and back to the server when the action is invoked. To prevent sensitive data from being exposed to the client, Next.js automatically encrypts the closed-over variables. A new private key is generated for each action every time a Next.js application is built. This means actions can only be invoked for a specific build.
 
@@ -413,10 +535,10 @@ For large applications that use reverse proxies or multi-layered backend archite
 module.exports = {
   experimental: {
     serverActions: {
-      allowedOrigins: ["my-proxy.com", "*.my-proxy.com"],
+      allowedOrigins: ['my-proxy.com', '*.my-proxy.com'],
     },
   },
-};
+}
 ```
 
 Learn more about [Security and Server Actions](https://nextjs.org/blog/security-nextjs-server-components-actions).
@@ -428,11 +550,11 @@ Mutations (e.g. logging out users, updating databases, invalidating caches) shou
 ```tsx filename="app/page.tsx"
 // BAD: Triggering a mutation during rendering
 export default async function Page({ searchParams }) {
-  if (searchParams.get("logout")) {
-    cookies().delete("AUTH_TOKEN");
+  if (searchParams.get('logout')) {
+    cookies().delete('AUTH_TOKEN')
   }
 
-  return <UserProfile />;
+  return <UserProfile />
 }
 ```
 
@@ -440,7 +562,7 @@ Instead, you should use Server Actions to handle mutations.
 
 ```tsx filename="app/page.tsx"
 // GOOD: Using Server Actions to handle mutations
-import { logout } from "./actions";
+import { logout } from './actions'
 
 export default function Page() {
   return (
@@ -450,7 +572,7 @@ export default function Page() {
         <button type="submit">Logout</button>
       </form>
     </>
-  );
+  )
 }
 ```
 
@@ -462,7 +584,7 @@ If you're doing an audit of a Next.js project, here are a few things we recommen
 
 - **Data Access Layer:** Is there an established practice for an isolated Data Access Layer? Verify that database packages and environment variables are not imported outside the Data Access Layer.
 - **`"use client"` files:** Are the Component props expecting private data? Are the type signatures overly broad?
-- **`"use server"` files:** Are the Action arguments validated in the action or inside the Data Access Layer? Is the user re-authorized inside the action?
+- **`"use server"` files:** Are the Action arguments validated in the action or inside the Data Access Layer? Is the user re-authorized inside the action? Does the action check ownership of the resource (authorization, not just authentication)? Are return values filtered to only what the client needs? Is database access delegated to a `server-only` Data Access Layer?
 - **`/[param]/.`** Folders with brackets are user input. Are params validated?
 - **`proxy.ts` and `route.ts`:** Have a lot of power. Spend extra time auditing these using traditional techniques. Perform Penetration Testing or Vulnerability Scanning regularly or in alignment with your team's software development lifecycle.
 

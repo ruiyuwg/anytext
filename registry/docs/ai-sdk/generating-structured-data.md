@@ -7,44 +7,43 @@ Many language models are capable of generating structured data, often defined as
 However, you need to manually provide schemas and then validate the generated data as LLMs can produce incorrect or incomplete structured data.
 
 The AI SDK standardises structured object generation across model providers
-using the `output` property on [`generateText`](/docs/reference/ai-sdk-core/generate-text)
-and [`streamText`](/docs/reference/ai-sdk-core/stream-text).
+with the [`generateObject`](/docs/reference/ai-sdk-core/generate-object)
+and [`streamObject`](/docs/reference/ai-sdk-core/stream-object) functions.
+You can use both functions with different output strategies, e.g. `array`, `object`, or `no-schema`,
+and with different generation modes, e.g. `auto`, `tool`, or `json`.
 You can use [Zod schemas](/docs/reference/ai-sdk-core/zod-schema), [Valibot](/docs/reference/ai-sdk-core/valibot-schema), or [JSON schemas](/docs/reference/ai-sdk-core/json-schema) to specify the shape of the data that you want,
 and the AI model will generate data that conforms to that structure.
 
-Structured output generation is part of the `generateText` and `streamText`
-flow. This means you can combine it with tool calling in the same request.
+You can pass Zod objects directly to the AI SDK functions or use the
+`zodSchema` helper function.
 
-## Generating Structured Outputs
+**Zod v4 Compatibility**: AI SDK v4 requires Zod v3. If you're using Zod v4,
+you'll encounter schema validation errors. [See troubleshooting
+guide](/docs/troubleshooting/zod-v4-json-schema-type-error).
 
-Use `generateText` with `Output.object()` to generate structured data from a prompt.
+## Generate Object
+
+The `generateObject` generates structured data from a prompt.
 The schema is also used to validate the generated data, ensuring type safety and correctness.
 
 ```ts
-import { generateText, Output } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
+import { generateObject } from 'ai';
+import { z } from 'zod';
 
-const { output } = await generateText({
-  model: __MODEL__,
-  output: Output.object({
-    schema: z.object({
-      recipe: z.object({
-        name: z.string(),
-        ingredients: z.array(
-          z.object({ name: z.string(), amount: z.string() }),
-        ),
-        steps: z.array(z.string()),
-      }),
+const { object } = await generateObject({
+  model: yourModel,
+  schema: z.object({
+    recipe: z.object({
+      name: z.string(),
+      ingredients: z.array(z.object({ name: z.string(), amount: z.string() })),
+      steps: z.array(z.string()),
     }),
   }),
-  prompt: "Generate a lasagna recipe.",
+  prompt: 'Generate a lasagna recipe.',
 });
 ```
 
-Structured output generation counts as a step in the AI SDK's multi-turn
-execution model (where each model call or tool execution is one step). When
-combining with tools, account for this in your `stopWhen` configuration.
+See `generateObject` in action with [these examples](#more-examples)
 
 ### Accessing response headers & body
 
@@ -54,353 +53,169 @@ e.g. to access some provider-specific headers or body content.
 You can access the raw response headers and body using the `response` property:
 
 ```ts
-import { generateText, Output } from "ai";
+import { generateText } from 'ai';
 
 const result = await generateText({
   // ...
-  output: Output.object({ schema }),
 });
 
 console.log(JSON.stringify(result.response.headers, null, 2));
 console.log(JSON.stringify(result.response.body, null, 2));
 ```
 
-## Stream Structured Outputs
+## Stream Object
 
 Given the added complexity of returning structured data, model response time can be unacceptable for your interactive use case.
-With `streamText` and `output`, you can stream the model's structured response as it is generated.
+With the [`streamObject`](/docs/reference/ai-sdk-core/stream-object) function, you can stream the model's response as it is generated.
 
 ```ts
-import { streamText, Output } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
+import { streamObject } from 'ai';
 
-const { partialOutputStream } = streamText({
-  model: __MODEL__,
-  output: Output.object({
-    schema: z.object({
-      recipe: z.object({
-        name: z.string(),
-        ingredients: z.array(
-          z.object({ name: z.string(), amount: z.string() }),
-        ),
-        steps: z.array(z.string()),
-      }),
-    }),
-  }),
-  prompt: "Generate a lasagna recipe.",
+const { partialObjectStream } = streamObject({
+  // ...
 });
 
-// use partialOutputStream as an async iterable
-for await (const partialObject of partialOutputStream) {
+// use partialObjectStream as an async iterable
+for await (const partialObject of partialObjectStream) {
   console.log(partialObject);
 }
 ```
 
-You can consume the structured output on the client with the [`useObject`](/docs/reference/ai-sdk-ui/use-object) hook.
+You can use `streamObject` to stream generated UIs in combination with React Server Components (see [Generative UI](../ai-sdk-rsc))) or the [`useObject`](/docs/reference/ai-sdk-ui/use-object) hook.
 
-### Error Handling in Streams
+See `streamObject` in action with [these examples](#more-examples)
 
-`streamText` starts streaming immediately. When errors occur during streaming, they become part of the stream rather than thrown exceptions (to prevent stream crashes).
+### `onError` callback
 
-To handle errors, provide an `onError` callback:
+`streamObject` immediately starts streaming.
+Errors become part of the stream and are not thrown to prevent e.g. servers from crashing.
+
+To log errors, you can provide an `onError` callback that is triggered when an error occurs.
 
 ```tsx highlight="5-7"
-import { streamText, Output } from "ai";
+import { streamObject } from 'ai';
 
-const result = streamText({
+const result = streamObject({
   // ...
-  output: Output.object({ schema }),
   onError({ error }) {
-    console.error(error); // log to your error tracking service
+    console.error(error); // your error logging logic here
   },
 });
 ```
 
-For non-streaming error handling with `generateText`, see the [Error Handling](#error-handling) section below.
+## Output Strategy
 
-## Output Types
+You can use both functions with different output strategies, e.g. `array`, `object`, or `no-schema`.
 
-The AI SDK supports multiple ways of specifying the expected structure of generated data via the `Output` object. You can select from various strategies for structured/text generation and validation.
+### Object
 
-### `Output.text()`
+The default output strategy is `object`, which returns the generated data as an object.
+You don't need to specify the output strategy if you want to use the default.
 
-Use `Output.text()` to generate plain text from a model. This option doesn't enforce any schema on the result: you simply receive the model's text as a string. This is the default behavior when no `output` is specified.
+### Array
 
-```ts
-import { generateText, Output } from "ai";
+If you want to generate an array of objects, you can set the output strategy to `array`.
+When you use the `array` output strategy, the schema specifies the shape of an array element.
+With `streamObject`, you can also stream the generated array elements using `elementStream`.
 
-const { output } = await generateText({
-  // ...
-  output: Output.text(),
-  prompt: "Tell me a joke.",
-});
-// output will be a string (the joke)
-```
+```ts highlight="7,18"
+import { openai } from '@ai-sdk/openai';
+import { streamObject } from 'ai';
+import { z } from 'zod';
 
-### `Output.object()`
-
-Use `Output.object({ schema })` to generate a structured object based on a schema (for example, a Zod schema). The output is type-validated to ensure the returned result matches the schema.
-
-```ts
-import { generateText, Output } from "ai";
-import { z } from "zod";
-
-const { output } = await generateText({
-  // ...
-  output: Output.object({
-    schema: z.object({
-      name: z.string(),
-      age: z.number().nullable(),
-      labels: z.array(z.string()),
-    }),
+const { elementStream } = streamObject({
+  model: openai('gpt-4-turbo'),
+  output: 'array',
+  schema: z.object({
+    name: z.string(),
+    class: z
+      .string()
+      .describe('Character class, e.g. warrior, mage, or thief.'),
+    description: z.string(),
   }),
-  prompt: "Generate information for a test user.",
-});
-// output will be an object matching the schema above
-```
-
-Partial outputs streamed via `streamText` cannot be validated against your
-provided schema, as incomplete data may not yet conform to the expected
-structure.
-
-### `Output.array()`
-
-Use `Output.array({ element })` to specify that you expect an array of typed objects from the model, where each element should conform to a schema (defined in the `element` property).
-
-```ts
-import { generateText, Output } from "ai";
-import { z } from "zod";
-
-const { output } = await generateText({
-  // ...
-  output: Output.array({
-    element: z.object({
-      location: z.string(),
-      temperature: z.number(),
-      condition: z.string(),
-    }),
-  }),
-  prompt: "List the weather for San Francisco and Paris.",
-});
-// output will be an array of objects like:
-// [
-//   { location: 'San Francisco', temperature: 70, condition: 'Sunny' },
-//   { location: 'Paris', temperature: 65, condition: 'Cloudy' },
-// ]
-```
-
-When streaming arrays with `streamText`, you can use `elementStream` to receive each completed element as it is generated:
-
-```ts
-import { streamText, Output } from "ai";
-import { z } from "zod";
-
-const { elementStream } = streamText({
-  // ...
-  output: Output.array({
-    element: z.object({
-      name: z.string(),
-      class: z.string(),
-      description: z.string(),
-    }),
-  }),
-  prompt: "Generate 3 hero descriptions for a fantasy role playing game.",
+  prompt: 'Generate 3 hero descriptions for a fantasy role playing game.',
 });
 
 for await (const hero of elementStream) {
-  console.log(hero); // Each hero is complete and validated
+  console.log(hero);
 }
 ```
 
-Each element emitted by `elementStream` is complete and validated against your
-element schema. This differs from `partialOutputStream`, which streams the
-entire partial array including incomplete elements.
+### Enum
 
-### `Output.choice()`
+If you want to generate a specific enum value, e.g. for classification tasks,
+you can set the output strategy to `enum`
+and provide a list of possible values in the `enum` parameter.
 
-Use `Output.choice({ options })` when you expect the model to choose from a specific set of string options, such as for classification or fixed-enum answers.
+Enum output is only available with `generateObject`.
 
-```ts
-import { generateText, Output } from "ai";
+```ts highlight="5-6"
+import { generateObject } from 'ai';
 
-const { output } = await generateText({
-  // ...
-  output: Output.choice({
-    options: ["sunny", "rainy", "snowy"],
-  }),
-  prompt: "Is the weather sunny, rainy, or snowy today?",
-});
-// output will be one of: 'sunny', 'rainy', or 'snowy'
-```
-
-You can provide any set of string options, and the output will always be a single string value that matches one of the specified options. The AI SDK validates that the result matches one of your options, and will throw if the model returns something invalid.
-
-This is especially useful for making classification-style generations or forcing valid values for API compatibility.
-
-### `Output.json()`
-
-Use `Output.json()` when you want to generate and parse unstructured JSON values from the model, without enforcing a specific schema. This is useful if you want to capture arbitrary objects, flexible structures, or when you want to rely on the model's natural output rather than rigid validation.
-
-```ts
-import { generateText, Output } from "ai";
-
-const { output } = await generateText({
-  // ...
-  output: Output.json(),
+const { object } = await generateObject({
+  model: yourModel,
+  output: 'enum',
+  enum: ['action', 'comedy', 'drama', 'horror', 'sci-fi'],
   prompt:
-    "For each city, return the current temperature and weather condition as a JSON object.",
-});
-
-// output could be any valid JSON, for example:
-// {
-//   "San Francisco": { "temperature": 70, "condition": "Sunny" },
-//   "Paris": { "temperature": 65, "condition": "Cloudy" }
-// }
-```
-
-With `Output.json`, the AI SDK only checks that the response is valid JSON; it doesn't validate the structure or types of the values. If you need schema validation, use the `.object` or `.array` outputs instead.
-
-For more advanced validation or different structures, see [the Output API reference](/docs/reference/ai-sdk-core/output).
-
-## Generating Structured Outputs with Tools
-
-One of the key advantages of using structured output with `generateText` and `streamText` is the ability to combine it with tool calling.
-
-```ts
-import { generateText, Output, tool, stepCountIs } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
-
-const { output } = await generateText({
-  model: __MODEL__,
-  tools: {
-    weather: tool({
-      description: "Get the weather for a location",
-      inputSchema: z.object({ location: z.string() }),
-      execute: async ({ location }) => {
-        // fetch weather data
-        return { temperature: 72, condition: "sunny" };
-      },
-    }),
-  },
-  output: Output.object({
-    schema: z.object({
-      summary: z.string(),
-      recommendation: z.string(),
-    }),
-  }),
-  stopWhen: stepCountIs(5),
-  prompt: "What should I wear in San Francisco today?",
+    'Classify the genre of this movie plot: ' +
+    '"A group of astronauts travel through a wormhole in search of a ' +
+    'new habitable planet for humanity."',
 });
 ```
 
-When using tools with structured output, remember that generating the
-structured output counts as a step. Configure `stopWhen` to allow enough steps
-for both tool execution and output generation.
+### No Schema
 
-## Property Descriptions
+In some cases, you might not want to use a schema,
+for example when the data is a dynamic user request.
+You can use the `output` setting to set the output format to `no-schema` in those cases
+and omit the schema parameter.
 
-You can add `.describe("...")` to individual schema properties to give the model hints about what each property is for. This helps improve the quality and accuracy of generated structured data:
+```ts highlight="6"
+import { openai } from '@ai-sdk/openai';
+import { generateObject } from 'ai';
 
-```ts highlight="5,9"
-import { generateText, Output } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
-
-const { output } = await generateText({
-  model: __MODEL__,
-  output: Output.object({
-    schema: z.object({
-      name: z.string().describe("The name of the recipe"),
-      ingredients: z
-        .array(
-          z.object({
-            name: z.string(),
-            amount: z
-              .string()
-              .describe("The amount of the ingredient (grams or ml)"),
-          }),
-        )
-        .describe("List of ingredients with amounts"),
-      steps: z.array(z.string()).describe("Step-by-step cooking instructions"),
-    }),
-  }),
-  prompt: "Generate a lasagna recipe.",
+const { object } = await generateObject({
+  model: openai('gpt-4-turbo'),
+  output: 'no-schema',
+  prompt: 'Generate a lasagna recipe.',
 });
 ```
 
-Property descriptions are particularly useful for:
+## Generation Mode
 
-- Clarifying ambiguous property names
-- Specifying expected formats or conventions
-- Providing context for complex nested structures
+While some models (like OpenAI) natively support object generation, others require alternative methods, like modified [tool calling](/docs/ai-sdk-core/tools-and-tool-calling). The `generateObject` function allows you to specify the method it will use to return structured data.
 
-## Output Name and Description
+- `auto`: The provider will choose the best mode for the model. This recommended mode is used by default.
+- `tool`: A tool with the JSON schema as parameters is provided and the provider is instructed to use it.
+- `json`: The response format is set to JSON when supported by the provider, e.g. via json modes or grammar-guided generation. If grammar-guided generation is not supported, the JSON schema and instructions to generate JSON that conforms to the schema are injected into the system prompt.
 
-You can optionally specify a `name` and `description` for the output. These are used by some providers for additional LLM guidance, e.g. via tool or schema name.
+  Please note that not every provider supports all generation modes. Some
+  providers do not support object generation at all.
+
+## Schema Name and Description
+
+You can optionally specify a name and description for the schema. These are used by some providers for additional LLM guidance, e.g. via tool or schema name.
 
 ```ts highlight="6-7"
-import { generateText, Output } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
+import { generateObject } from 'ai';
+import { z } from 'zod';
 
-const { output } = await generateText({
-  model: __MODEL__,
-  output: Output.object({
-    name: "Recipe",
-    description: "A recipe for a dish.",
-    schema: z.object({
-      name: z.string(),
-      ingredients: z.array(z.object({ name: z.string(), amount: z.string() })),
-      steps: z.array(z.string()),
-    }),
+const { object } = await generateObject({
+  model: yourModel,
+  schemaName: 'Recipe',
+  schemaDescription: 'A recipe for a dish.',
+  schema: z.object({
+    name: z.string(),
+    ingredients: z.array(z.object({ name: z.string(), amount: z.string() })),
+    steps: z.array(z.string()),
   }),
-  prompt: "Generate a lasagna recipe.",
+  prompt: 'Generate a lasagna recipe.',
 });
-```
-
-This works with all output types that support structured generation:
-
-- `Output.object({ name, description, schema })`
-- `Output.array({ name, description, element })`
-- `Output.choice({ name, description, options })`
-- `Output.json({ name, description })`
-
-## Accessing Reasoning
-
-You can access the reasoning used by the language model to generate the object via the `reasoning` property on the result. This property contains a string with the model's thought process, if available.
-
-```ts
-import { generateText, Output } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
-
-const result = await generateText({
-  model: __MODEL__, // must be a reasoning model
-  output: Output.object({
-    schema: z.object({
-      recipe: z.object({
-        name: z.string(),
-        ingredients: z.array(
-          z.object({
-            name: z.string(),
-            amount: z.string(),
-          }),
-        ),
-        steps: z.array(z.string()),
-      }),
-    }),
-  }),
-  prompt: "Generate a lasagna recipe.",
-});
-
-console.log(result.reasoningText);
 ```
 
 ## Error Handling
 
-When `generateText` with structured output cannot generate a valid object, it throws a [`AI_NoObjectGeneratedError`](/docs/reference/ai-sdk-errors/ai-no-object-generated-error).
+When `generateObject` cannot generate a valid object, it throws a [`AI_NoObjectGeneratedError`](/docs/reference/ai-sdk-errors/ai-no-object-generated-error).
 
 This error occurs when the AI provider fails to generate a parsable object that conforms to the schema.
 It can arise due to the following reasons:
@@ -417,66 +232,147 @@ The error preserves the following information to help you log the issue:
 - `cause`: The cause of the error (e.g. a JSON parsing error). You can use this for more detailed error handling.
 
 ```ts
-import { generateText, Output, NoObjectGeneratedError } from "ai";
+import { generateObject, NoObjectGeneratedError } from 'ai';
 
 try {
-  await generateText({
-    model,
-    output: Output.object({ schema }),
-    prompt,
-  });
+  await generateObject({ model, schema, prompt });
 } catch (error) {
   if (NoObjectGeneratedError.isInstance(error)) {
-    console.log("NoObjectGeneratedError");
-    console.log("Cause:", error.cause);
-    console.log("Text:", error.text);
-    console.log("Response:", error.response);
-    console.log("Usage:", error.usage);
+    console.log('NoObjectGeneratedError');
+    console.log('Cause:', error.cause);
+    console.log('Text:', error.text);
+    console.log('Response:', error.response);
+    console.log('Usage:', error.usage);
   }
 }
 ```
 
+## Repairing Invalid or Malformed JSON
+
+The `repairText` function is experimental and may change in the future.
+
+Sometimes the model will generate invalid or malformed JSON.
+You can use the `repairText` function to attempt to repair the JSON.
+
+It receives the error, either a `JSONParseError` or a `TypeValidationError`,
+and the text that was generated by the model.
+You can then attempt to repair the text and return the repaired text.
+
+```ts highlight="7-10"
+import { generateObject } from 'ai';
+
+const { object } = await generateObject({
+  model,
+  schema,
+  prompt,
+  experimental_repairText: async ({ text, error }) => {
+    // example: add a closing brace to the text
+    return text + '}';
+  },
+});
+```
+
+## Structured outputs with `generateText` and `streamText`
+
+You can generate structured data with `generateText` and `streamText` by using the `experimental_output` setting.
+
+Some models, e.g. those by OpenAI, support structured outputs and tool calling
+at the same time. This is only possible with `generateText` and `streamText`.
+
+Structured output generation with `generateText` and `streamText` is
+experimental and may change in the future.
+
+### `generateText`
+
+```ts highlight="2,4-18"
+// experimental_output is a structured object that matches the schema:
+const { experimental_output } = await generateText({
+  // ...
+  experimental_output: Output.object({
+    schema: z.object({
+      name: z.string(),
+      age: z.number().nullable().describe('Age of the person.'),
+      contact: z.object({
+        type: z.literal('email'),
+        value: z.string(),
+      }),
+      occupation: z.object({
+        type: z.literal('employed'),
+        company: z.string(),
+        position: z.string(),
+      }),
+    }),
+  }),
+  prompt: 'Generate an example person for testing.',
+});
+```
+
+### `streamText`
+
+```ts highlight="2,4-18"
+// experimental_partialOutputStream contains generated partial objects:
+const { experimental_partialOutputStream } = await streamText({
+  // ...
+  experimental_output: Output.object({
+    schema: z.object({
+      name: z.string(),
+      age: z.number().nullable().describe('Age of the person.'),
+      contact: z.object({
+        type: z.literal('email'),
+        value: z.string(),
+      }),
+      occupation: z.object({
+        type: z.literal('employed'),
+        company: z.string(),
+        position: z.string(),
+      }),
+    }),
+  }),
+  prompt: 'Generate an example person for testing.',
+});
+```
+
 ## More Examples
 
-You can see structured output generation in action using various frameworks in the following examples:
+You can see `generateObject` and `streamObject` in action using various frameworks in the following examples:
 
-### `generateText` with Output
+### `generateObject`
 
 \<ExampleLinks
 examples={\[
 {
-title: 'Learn to generate structured data in Node.js',
+title: 'Learn to generate objects in Node.js',
 link: '/examples/node/generating-structured-data/generate-object',
 },
 {
 title:
-'Learn to generate structured data in Next.js with Route Handlers (AI SDK UI)',
+'Learn to generate objects in Next.js with Route Handlers (AI SDK UI)',
 link: '/examples/next-pages/basics/generating-object',
 },
 {
 title:
-'Learn to generate structured data in Next.js with Server Actions (AI SDK RSC)',
+'Learn to generate objects in Next.js with Server Actions (AI SDK RSC)',
 link: '/examples/next-app/basics/generating-object',
 },
 ]}
 />
 
-### `streamText` with Output
+### `streamObject`
 
 \<ExampleLinks
 examples={\[
 {
-title: 'Learn to stream structured data in Node.js',
+title: 'Learn to stream objects in Node.js',
 link: '/examples/node/streaming-structured-data/stream-object',
 },
 {
 title:
-'Learn to stream structured data in Next.js with Route Handlers (AI SDK UI)',
+'Learn to stream objects in Next.js with Route Handlers (AI SDK UI)',
 link: '/examples/next-pages/basics/streaming-object-generation',
 },
 {
 title:
-'Learn to stream structured data in Next.js with Server Actions (AI SDK RSC)',
+'Learn to stream objects in Next.js with Server Actions (AI SDK RSC)',
 link: '/examples/next-app/basics/streaming-object-generation',
 },
 ]}

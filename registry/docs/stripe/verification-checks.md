@@ -296,8 +296,8 @@ To access the captured selfie and document images, you’ll need to retrieve the
 
 ```javascript
 
-// Set your secret key. Remember to switch to your live secret key in production.
-// See your keys here: https://dashboard.stripe.com/apikeys
+// Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+// Find your keys at https://dashboard.stripe.com/apikeys.
 const stripe = require('stripe')('<<YOUR_SECRET_KEY>>');
 const verificationSession = await stripe.identity.verificationSessions.retrieve(
   '{{SESSION_ID}}',

@@ -152,6 +152,9 @@ Send auth and billing emails using Kinde
 }>
 Send status page notifications using Pulsetic
 
+}>
+Scan inbound emails for phishing before your app processes them
+
 ## Build your own integration
 
 Here's how to build your own integration with Resend:
@@ -159,3 +162,55 @@ Here's how to build your own integration with Resend:
 1. Read the documentation on [how to send emails](/api-reference/emails/send-email).
 2. Integrate with your product offering.
 3. [Reach out to us](https://resend.com/contact) to feature your product on this page.
+
+# Introduction
+
+Source: https://resend.com/docs/introduction
+
+Resend is the email API for developers.
+
+## Quickstart
+
+Learn how to get Resend set up in your project.
+
+} href="/send-with-nodejs" />
+
+} href="/send-with-nextjs" />
+
+} href="send-with-express/" />
+
+} href="send-with-php/" />
+
+} href="send-with-laravel/" />
+
+} href="/send-with-python" />
+
+} href="/send-with-ruby" />
+
+} href="/send-with-rails" />
+
+} href="/send-with-go" />
+
+} href="/send-with-rust" />
+
+} href="/send-with-elixir" />
+
+} href="/send-with-java" />
+
+} href="/send-with-dotnet" />
+
+## Explore
+
+Discover the full range of features and capabilities.
+
+```
+Visualize all the activity in your account.
+
+
+
+Ensure deliverability of your emails.
+
+
+
+Notify your application about email events.
+```

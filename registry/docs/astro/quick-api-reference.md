@@ -51,17 +51,16 @@ interface AstroIntegration {
     }) => void | Promise<void>;
     'astro:build:start'?: (options: {
       logger: AstroIntegrationLogger;
+      setPrerenderer: (prerenderer: AstroPrerenderer | ((defaultPrerenderer: AstroPrerenderer) => AstroPrerenderer)) => void;
     }) => void | Promise<void>;
     'astro:build:setup'?: (options: {
       vite: vite.InlineConfig;
       pages: Map<string, PageBuildData>;
-      target: 'client' | 'server';
       updateConfig: (newConfig: vite.InlineConfig) => void;
       logger: AstroIntegrationLogger;
     }) => void | Promise<void>;
     'astro:build:ssr'?: (options: {
       manifest: SerializedSSRManifest;
-      entryPoints: Map<IntegrationRouteData, URL>;
       middlewareEntryPoint: URL | undefined;
       logger: AstroIntegrationLogger;
     }) => void | Promise<void>;

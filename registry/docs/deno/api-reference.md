@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/api/
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 This is a reference for runtime APIs available on Deno Deploy Classic. This API
 is very similar to the standard [runtime API](/runtime/manual/runtime), but some

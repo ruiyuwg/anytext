@@ -125,5 +125,5 @@ Learn more about deploying CRA projects on Vercel with the following resources:
 
 title: "Gatsby on Vercel"
 description: "Learn how to use Vercel"
-last\_updated: "2026-03-08T05:03:14.968Z"
+last\_updated: "2026-03-23T09:40:10.712Z"
 source: "https://vercel.com/docs/frameworks/frontend/gatsby"

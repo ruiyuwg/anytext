@@ -1527,7 +1527,7 @@ export default defineAssetAspect({
 
 ```
 
-# HTTP API reference
+# Media Library API reference
 
 The Media Library API lets you programmatically interact with assets in your organization’s Media Library.
 

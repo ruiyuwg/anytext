@@ -418,5 +418,5 @@ For more information on generating images with the AI SDK, see the [AI SDK docum
 
 title: "Image Generation with Chat Completions API"
 description: "Generate and edit images using AI models through Vercel AI Gateway with the Chat Completions API."
-last\_updated: "2026-03-08T05:03:10.159Z"
+last\_updated: "2026-03-23T09:40:03.853Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/image-generation/openai"

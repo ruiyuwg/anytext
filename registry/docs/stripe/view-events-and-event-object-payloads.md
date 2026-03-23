@@ -30,4 +30,4 @@ Use these steps to view events and their event object payload.
 
 ## Next steps
 
-- [Webhooks](https://docs.stripe.com/webhooks.md)
+[Set up webhooks](https://docs.stripe.com/webhooks.md)

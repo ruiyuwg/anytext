@@ -2,7 +2,9 @@
 
 Source: https://docs.langchain.com/langsmith/streaming
 
-[LangGraph SDK](/langsmith/langgraph-python-sdk) allows you to [stream outputs](/oss/python/langgraph/streaming/) from the [LangSmith Deployment API](/langsmith/server-api-ref).
+Agents need to show their work in real time. Agent Server provides resumable streaming: if a client disconnects mid-stream (network switch, tab sleep, mobile backgrounding), it reconnects and picks up where it left off. Multiple streaming modes give you control over granularity, from full state snapshots after each step to token-by-token LLM output as it arrives from the provider.
+
+The [LangGraph SDK](/langsmith/langgraph-python-sdk) allows you to [stream outputs](/oss/python/langgraph/streaming/) from the [LangSmith Deployment API](/langsmith/server-api-ref).
 
 LangGraph SDK and Agent Server are a part of [LangSmith](/langsmith/home).
 
@@ -205,14 +207,14 @@ Once you have a running Agent Server, you can interact with it using
 
 ### Supported stream modes
 
-| Mode                             | Description                                                                                                                                                                         | LangGraph Library Method                                                                                      |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| [`values`](#stream-graph-state)  | Stream the full graph state after each [super-step](/langsmith/graph-rebuild#graphs).                                                                                               | `.stream()` / `.astream()` with [`stream_mode="values"`](/oss/python/langgraph/streaming#stream-graph-state)  |
-| [`updates`](#stream-graph-state) | Streams the updates to the state after each step of the graph. If multiple updates are made in the same step (e.g., multiple nodes are run), those updates are streamed separately. | `.stream()` / `.astream()` with [`stream_mode="updates"`](/oss/python/langgraph/streaming#stream-graph-state) |
-| [`messages-tuple`](#messages)    | Streams LLM tokens and metadata for the graph node where the LLM is invoked (useful for chat apps).                                                                                 | `.stream()` / `.astream()` with [`stream_mode="messages"`](/oss/python/langgraph/streaming#messages)          |
-| [`debug`](#debug)                | Streams as much information as possible throughout the execution of the graph.                                                                                                      | `.stream()` / `.astream()` with [`stream_mode="debug"`](/oss/python/langgraph/streaming#stream-graph-state)   |
-| [`custom`](#stream-custom-data)  | Streams custom data from inside your graph                                                                                                                                          | `.stream()` / `.astream()` with [`stream_mode="custom"`](/oss/python/langgraph/streaming#stream-custom-data)  |
-| [`events`](#stream-events)       | Stream all events (including the state of the graph); mainly useful when migrating large LCEL apps.                                                                                 | `.astream_events()`                                                                                           |
+| Mode                             | Description                                                                                                                                                                         | LangGraph Library Method                                                                               |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| [`values`](#stream-graph-state)  | Stream the full graph state after each [super-step](/langsmith/graph-rebuild#define-graphs).                                                                                        | `.stream()` / `.astream()` with [`stream_mode="values"`](/oss/python/langgraph/streaming#graph-state)  |
+| [`updates`](#stream-graph-state) | Streams the updates to the state after each step of the graph. If multiple updates are made in the same step (e.g., multiple nodes are run), those updates are streamed separately. | `.stream()` / `.astream()` with [`stream_mode="updates"`](/oss/python/langgraph/streaming#graph-state) |
+| [`messages-tuple`](#messages)    | Streams LLM tokens and metadata for the graph node where the LLM is invoked (useful for chat apps).                                                                                 | `.stream()` / `.astream()` with [`stream_mode="messages"`](/oss/python/langgraph/streaming#messages)   |
+| [`debug`](#debug)                | Streams as much information as possible throughout the execution of the graph.                                                                                                      | `.stream()` / `.astream()` with [`stream_mode="debug"`](/oss/python/langgraph/streaming#graph-state)   |
+| [`custom`](#stream-custom-data)  | Streams custom data from inside your graph                                                                                                                                          | `.stream()` / `.astream()` with [`stream_mode="custom"`](/oss/python/langgraph/streaming#custom-data)  |
+| [`events`](#stream-events)       | Stream all events (including the state of the graph); mainly useful when migrating large LCEL apps.                                                                                 | `.astream_events()`                                                                                    |
 
 ### Stream multiple modes
 

@@ -93,6 +93,12 @@ Returns null if there are no unpublished changes. |
 Returns null if the document isn't published. |
 | liveEdit | Whether the document is published continuously (live) or not. liveEdit-enabled documents skip the draft workflow. This is not to be confused with the Live Content API, which handles how published changes are handled by queries. |
 
+### Identifying built-in actions
+
+Built-in document action components have an optional `action` property that identifies which built-in action they represent. Use this to selectively replace or extend a specific action:
+
+The `action` property uses values like `'publish'`, `'delete'`, `'duplicate'`, `'unpublish'`, `'discardChanges'`, and `'restore'`. Custom actions don't have this property unless you set it.
+
 ## Document Action description
 
 Every Document Action component must return either `null` or an action description object ([DocumentActionDescription](https://reference.sanity.io/sanity/index/DocumentActionDescription/)). An action description describes the action state that can be used to render action components in different render contexts (e.g. in a toolbar, as a menu item, etc.). This table describes the different properties of an action description object.

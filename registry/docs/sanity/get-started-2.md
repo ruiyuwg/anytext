@@ -40,8 +40,8 @@ Create a client instance using the `createClient()` function with your project c
 import {createClient} from '@sanity/client'
 
 export const client = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   useCdn: true,
   apiVersion: '2026-03-01',
 })
@@ -57,8 +57,8 @@ Retrieving your content from Content Lake is often done with `client.fetch`.
 import {createClient} from '@sanity/client'
 
 export const client = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   useCdn: true,
   apiVersion: '2026-03-01',
 })
@@ -101,8 +101,8 @@ You can extend the functionality of an existing client and change some values as
 import {createClient} from '@sanity/client'
 
 export const client = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   useCdn: false, // set to false when used with token
   apiVersion: '2026-03-01',
   token: 'your-auth-token'
@@ -136,8 +136,8 @@ The `@sanity/client` library works across different JavaScript environments. Her
 import {createClient} from '@sanity/client'
 
 const client = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   useCdn: true,
   apiVersion: '2026-03-01',
 })
@@ -153,8 +153,8 @@ console.log(posts)
 const {createClient} = require('@sanity/client')
 
 const client = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   useCdn: true,
   apiVersion: '2026-03-01',
 })
@@ -178,8 +178,8 @@ interface Post {
 }
 
 const client: SanityClient = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   useCdn: true,
   apiVersion: '2026-03-01',
 })
@@ -222,8 +222,8 @@ export default async function Page() {
 import {createClient} from '@sanity/client'
 
 const client = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   useCdn: true,
   apiVersion: '2026-03-01',
 })
@@ -238,8 +238,8 @@ console.log(posts)
 import {createClient} from 'npm:@sanity/client'
 
 const client = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   useCdn: true,
   apiVersion: '2026-03-01',
 })
@@ -258,8 +258,8 @@ export const config = {
 }
 
 const client = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   useCdn: true,
   apiVersion: '2026-03-01',
 })
@@ -287,8 +287,8 @@ export default async function handler(request) {
     import {createClient} from 'https://esm.sh/@sanity/client'
     
     const client = createClient({
-      projectId: 'your-project-id',
-      dataset: 'production',
+      projectId: '<your-project-id>',
+      dataset: '<your-dataset>',
       useCdn: true,
       apiVersion: '2026-03-01',
     })
@@ -316,8 +316,8 @@ export default async function handler(request) {
   
   <script>
     var client = sanityClient.createClient({
-      projectId: 'your-project-id',
-      dataset: 'production',
+      projectId: '<your-project-id>',
+      dataset: '<your-dataset>',
       useCdn: true,
       apiVersion: '2026-03-01',
     })

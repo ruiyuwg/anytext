@@ -718,7 +718,6 @@ Now that you have a working Astro app connected to a Prisma Postgres database, y
 - Extend your Prisma schema with more models and relationships
 - Add create/update/delete routes and forms
 - Explore authentication and validation
-- Enable query caching with [Prisma Postgres](/postgres/database/caching) for better performance
 
 More Info \[#more-info]
 

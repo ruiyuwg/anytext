@@ -8,7 +8,7 @@ The `vercel guidance` command allows you to enable or disable guidance messages.
 vercel guidance <subcommand>
 ```
 
-*Using the vercel guidance command to manage guidance
+*Using the \`vercel guidance\` command to manage guidance
 message settings.*
 
 ## Subcommands
@@ -21,7 +21,7 @@ Enable guidance messages to receive command suggestions after operations complet
 vercel guidance enable
 ```
 
-*Using vercel guidance enable to turn on guidance
+*Using \`vercel guidance enable\` to turn on guidance
 messages.*
 
 ### disable
@@ -32,7 +32,7 @@ Disable guidance messages if you prefer a quieter CLI experience.
 vercel guidance disable
 ```
 
-*Using vercel guidance disable to turn off guidance
+*Using \`vercel guidance disable\` to turn off guidance
 messages.*
 
 ### status
@@ -43,7 +43,7 @@ Check whether guidance messages are currently enabled or disabled.
 vercel guidance status
 ```
 
-*Using vercel guidance status to see the current
+*Using \`vercel guidance status\` to see the current
 guidance setting.*
 
 ## Examples
@@ -67,7 +67,7 @@ vercel guidance status
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -82,7 +82,7 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel help"
 description: "Learn how to use the vercel help CLI command to get information about all available Vercel CLI commands."
-last\_updated: "2026-03-08T05:03:12.179Z"
+last\_updated: "2026-03-23T09:40:06.783Z"
 source: "https://vercel.com/docs/cli/help"
 
 # vercel help
@@ -97,7 +97,7 @@ Alternatively, the [`--help` global option](/docs/cli/global-options#help) can b
 vercel help
 ```
 
-*Using the vercel help command to generate a list of
+*Using the \`vercel help\` command to generate a list of
 Vercel CLI commands and options.*
 
 ## Extended Usage
@@ -106,10 +106,10 @@ Vercel CLI commands and options.*
 vercel help [command]
 ```
 
-*Using the vercel help command to generate detailed
+*Using the \`vercel help\` command to generate detailed
 information about a specific Vercel CLI command.*
 
 title: "vercel httpstat"
 description: "Learn how to visualize HTTP request timing statistics for your Vercel deployments using the vercel httpstat CLI command."
-last\_updated: "2026-03-08T05:03:12.192Z"
+last\_updated: "2026-03-23T09:40:06.798Z"
 source: "https://vercel.com/docs/cli/httpstat"

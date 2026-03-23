@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -24,7 +22,7 @@ AI Labs
 
 Resources:
 
-- [Docker Agent documentation](https://github.com/docker/cagent)
+- [Docker Agent documentation](https://github.com/docker/docker-agent)
 - [Docker MCP Toolkit](https://docs.docker.com/ai/mcp-catalog-and-toolkit/toolkit/)
 - [Labspace repository](https://github.com/ajeetraina/labspace-cagent)
 

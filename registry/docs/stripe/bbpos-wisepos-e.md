@@ -45,11 +45,11 @@ If the first LED is red, there might be an issue with charging.
 
 When you connect to the BBPOS WisePOS E, you can check the reader status in the right LED array.
 
-| LEDs | Meaning                                                                                                                                                                                                                                                                                   |
-| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|      | Reader is in bootloader mode and has reverted to default keys.                                                                                                                                                                                                                            |
-|      | Reader integrity check failed or reader tampered. If this occurs, and your reader is under warranty, [contact support](https://support.stripe.com/contact/) from the Stripe account that ordered your reader and include the serial number of the device to arrange a replacement reader. |
-|      | (2 seconds) Reader is experiencing a hard fault and might need replacing. [Contact support](https://support.stripe.com/contact/).                                                                                                                                                         |
+| LEDs | Meaning                                                                                                                                                                                                                                                                                                            |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|      | Reader is in bootloader mode and has reverted to default keys.                                                                                                                                                                                                                                                     |
+|      | Reader integrity check failed or reader tampered. If this occurs, and your reader is under warranty, [submit a warranty claim](https://support.stripe.com/questions/warranty-for-broken-or-malfunctioning-terminal-card-reader). If purchased through a Connect platform, contact your platform provider directly. |
+|      | (2 seconds) Reader is experiencing a hard fault and might need replacing. [Contact support](https://support.stripe.com/contact/).                                                                                                                                                                                  |
 
 ## Expected sounds during payment
 
@@ -123,15 +123,19 @@ The BBPOS WisePOS E software consists of four components: the reader application
 
 | Countries                    | Reader     | Firmware            | Configuration           | ROM     |
 | ---------------------------- | ---------- | ------------------- | ----------------------- | ------- |
-| US                           | `2.39.3.0` | `5.01.01.00`        | `szzz_us_v19`           | `1.8.4` |
-| CA                           | `2.39.3.0` | `5.01.01.00`        | `szzz_ca_v17`           | `1.8.4` |
-| AU                           | `2.39.3.0` | `5.01.01.00.eftpos` | `szzz_prod_au_v11`      | `1.8.4` |
-| MYNZ                         | `2.39.3.0` | `5.01.01.00`        | `szzz_prod_apac_on_v4`  | `1.8.4` |
-| SG                           | `2.39.3.0` | `5.01.01.00`        | `szzz_prod_apac_off_v4` | `1.8.4` |
-| GBIEFI                       | `2.39.3.0` | `5.01.01.00`        | `szzz_prod_eu_off_v11`  | `1.8.4` |
-| ATBEDKFRITDENLESSECZLUPTCHNO | `2.39.3.0` | `5.01.01.00`        | `szzz_prod_eu_on_v7`    | `1.8.4` |
+| US                           | `2.40.1.0` | `5.01.02.00`        | `szzz_us_v19`           | `1.8.4` |
+| CA                           | `2.40.1.0` | `5.01.02.00`        | `szzz_ca_v17`           | `1.8.4` |
+| AU                           | `2.40.1.0` | `5.01.02.00.eftpos` | `szzz_prod_au_v11`      | `1.8.4` |
+| MYNZ                         | `2.40.1.0` | `5.01.02.00`        | `szzz_prod_apac_on_v4`  | `1.8.4` |
+| SG                           | `2.40.1.0` | `5.01.02.00`        | `szzz_prod_apac_off_v4` | `1.8.4` |
+| GBIEFI                       | `2.40.1.0` | `5.01.02.00`        | `szzz_prod_eu_off_v11`  | `1.8.4` |
+| ATBEDKFRITDENLESSECZLUPTCHNO | `2.40.1.0` | `5.01.02.00`        | `szzz_prod_eu_on_v7`    | `1.8.4` |
 
 ### Reader software changelog
+
+#### 2026-03-18 (version 2.40.1.0)
+
+- General bug fixes and improvements.
 
 #### 2026-02-24 (version 2.39.3.0)
 

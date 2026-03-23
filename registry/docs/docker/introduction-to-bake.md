@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -93,7 +91,7 @@ target "myapp" {
 
 > Tip
 >
-> Want a better editing experience for Bake files in VS Code? Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
+> Want a better editing experience for Bake files in VS Code? Check out the [Docker DX](https://marketplace.visualstudio.com/items?itemName=docker.docker) extension for linting, code navigation, and vulnerability scanning.
 
 ## [Next steps](#next-steps)
 

@@ -19,10 +19,10 @@ The first thing we want to do is fetch a list of document handles for all the mo
 
 ```json
 {
-    "dataset": "production",
+    "dataset": "<your-dataset>",
     "documentId": "movie_679",
     "documentType": "movie",
-    "projectId": "your-project-id"
+    "projectId": "<your-project-id>"
 }
 ```
 
@@ -215,8 +215,8 @@ function App() {
   // apps can access many different projects or other sources of data
   const sanityConfigs: SanityConfig[] = [
     {
-      projectId: 'your-project-id',
-      dataset: 'production',
+      projectId: '<your-project-id>',
+      dataset: '<your-dataset>',
     }
   ]
 

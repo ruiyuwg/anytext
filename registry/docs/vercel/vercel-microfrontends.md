@@ -16,9 +16,9 @@ Currently, it supports pulling the remote configuration to your local repository
 vercel microfrontends pull [options]
 ```
 
-*Using the vercel microfrontends pull command to
-download the project's microfrontends.json (or
-microfrontends.jsonc) file for local development.*
+*Using the \`vercel microfrontends pull\` command to
+download the project's \`microfrontends.json\` (or
+\`microfrontends.jsonc\`) file for local development.*
 
 ## Unique options
 
@@ -52,7 +52,7 @@ vercel mf pull --dpl dpl_123xyz
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -67,5 +67,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel open"
 description: "Learn how to open your current project in the Vercel Dashboard using the vercel open CLI command."
-last\_updated: "2026-03-08T05:03:12.304Z"
+last\_updated: "2026-03-23T09:40:06.935Z"
 source: "https://vercel.com/docs/cli/open"

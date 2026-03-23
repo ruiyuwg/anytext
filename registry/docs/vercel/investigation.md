@@ -69,5 +69,5 @@ Once disabled, Agent Investigation won't run automatically on any new alerts. Yo
 
 title: "Vercel Agent"
 description: "AI-powered development tools that speed up your workflow and help resolve issues faster"
-last\_updated: "2026-03-08T05:03:09.640Z"
+last\_updated: "2026-03-23T09:40:03.008Z"
 source: "https://vercel.com/docs/agent"

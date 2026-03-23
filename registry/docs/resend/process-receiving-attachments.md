@@ -153,4 +153,58 @@ if ($event['type'] === 'email.received') {
 echo json_encode([]);
 ```
 
+```rust Rust theme={"theme":{"light":"github-light","dark":"vesper"}}
+use axum::{
+    extract::State,
+    response::{IntoResponse, Json, Response},
+};
+use resend_rs::{json, list_opts::ListOptions, Resend};
+use serde::Serialize;
+use std::sync::Arc;
+
+#[derive(Serialize)]
+struct Empty {}
+
+async fn example(
+    State(state): State<Arc>,
+    Json(event): Json<resend_rs::events::EmailEvent>,
+) -> Response {
+    if matches!(
+        event.r#type,
+        resend_rs::events::EmailEventType::EmailReceived
+    ) {
+        let attachments = state
+            .resend
+            .receiving
+            .list_attachments(&event.data.email_id, ListOptions::default())
+            .await
+            .unwrap();
+
+        for attachment in &attachments.data {
+            // use the download_url to download attachments however you want
+            let response = reqwest::get(&attachment.download_url).await;
+
+            if response.is_err() {
+                dbg!(format!(
+                    "Failed to download {}",
+                    attachment.filename.clone().unwrap()
+                ));
+            }
+
+            // get the file's contents
+            let _buffer = response.unwrap().bytes().await.unwrap();
+
+            // process the content (e.g., save to storage, analyze, etc.)
+        }
+
+        Json(json!({
+            "attachmentsProcessed": attachments.len()
+        }))
+        .into_response()
+    } else {
+        Json(Empty {}).into_response()
+    }
+}
+```
+
 Once you process attachments, you may want to forward the email to another address. Learn more about [forwarding emails](/dashboard/receiving/forward-emails).

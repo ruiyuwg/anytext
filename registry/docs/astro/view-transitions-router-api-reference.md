@@ -117,7 +117,7 @@ import {
   supportsViewTransitions,
   swapFunctions,
   transitionEnabledOnThisPage,
-  /* The following are scheduled for deprecation in v6: */
+  /* The following were deprecated in v6: */
   isTransitionBeforePreparationEvent,
   isTransitionBeforeSwapEvent,
   TRANSITION_AFTER_PREPARATION,
@@ -301,7 +301,7 @@ Replaces the old body with the new body. Then, goes through every element in the
 
 [Section titled “Deprecated imports”](#deprecated-imports)
 
-The following imports are scheduled for deprecation in v6. You can still use them in your project, but you may prefer to update your code now.
+The following imports are deprecated in v6 and will be removed in v7. You can still use them in your project, but you may prefer to update your code now. [See how to upgrade](/en/guides/upgrade-to/v6/#deprecated-exposed-astrotransitions-internals).
 
 #### `isTransitionBeforePreparationEvent()`
 
@@ -309,9 +309,9 @@ The following imports are scheduled for deprecation in v6. You can still use the
 
 **Added in:** `astro@3.6.0`
 
-Scheduled for deprecation
+Deprecated
 
-This function is scheduled for deprecation in v6. You can still use it in your project, but you may prefer to update your code now.
+This function is deprecated in v6 and will be removed in v7. You can still use it in your project, but you may prefer to update your code now.
 
 Determines whether the given value matches a [`TransitionBeforePreparationEvent`](#transitionbeforepreparationevent). This can be useful when you need to narrow the type of an event in an event listener.
 
@@ -345,9 +345,9 @@ src/pages/index.astro
 
 **Added in:** `astro@3.6.0`
 
-Scheduled for deprecation
+Deprecated
 
-This function is scheduled for deprecation in v6. You can still use it in your project, but you may prefer to update your code now.
+This function is deprecated in v6 and will be removed in v7. You can still use it in your project, but you may prefer to update your code now.
 
 Determines whether the given value matches a [`TransitionBeforeSwapEvent`](#transitionbeforeswapevent). This can be useful when you need to narrow the type of an event in an event listener.
 
@@ -381,9 +381,9 @@ src/pages/index.astro
 
 **Added in:** `astro@3.6.0`
 
-Scheduled for deprecation
+Deprecated
 
-This constant is scheduled for deprecation in v6. You can still use it in your project, but you may prefer to update your code now.
+This constant is deprecated in v6 and will be removed in v7. You can still use it in your project, but you may prefer to update your code now.
 
 A constant to avoid writing the `astro:before-preparation` event name in plain text when you define an event.
 
@@ -410,9 +410,9 @@ src/pages/index.astro
 
 **Added in:** `astro@3.6.0`
 
-Scheduled for deprecation
+Deprecated
 
-This constant is scheduled for deprecation in v6. You can still use it in your project, but you may prefer to update your code now.
+This constant is deprecated in v6 and will be removed in v7. You can still use it in your project, but you may prefer to update your code now.
 
 A constant to avoid writing the `astro:after-preparation` event name in plain text when you define an event.
 
@@ -439,9 +439,9 @@ src/pages/index.astro
 
 **Added in:** `astro@3.6.0`
 
-Scheduled for deprecation
+Deprecated
 
-This constant is scheduled for deprecation in v6. You can still use it in your project, but you may prefer to update your code now.
+This constant is deprecated in v6 and will be removed in v7. You can still use it in your project, but you may prefer to update your code now.
 
 A constant to avoid writing the `astro:before-swap` event name in plain text when you define an event.
 
@@ -468,9 +468,9 @@ src/pages/index.astro
 
 **Added in:** `astro@3.6.0`
 
-Scheduled for deprecation
+Deprecated
 
-This constant is scheduled for deprecation in v6. You can still use it in your project, but you may prefer to update your code now.
+This constant is deprecated in v6 and will be removed in v7. You can still use it in your project, but you may prefer to update your code now.
 
 A constant to avoid writing the `astro:after-swap` event name in plain text when you define an event.
 
@@ -497,9 +497,9 @@ src/pages/index.astro
 
 **Added in:** `astro@3.6.0`
 
-Scheduled for deprecation
+Deprecated
 
-This constant is scheduled for deprecation in v6. You can still use it in your project, but you may prefer to update your code now.
+This constant is deprecated in v6 and will be removed in v7. You can still use it in your project, but you may prefer to update your code now.
 
 A constant to avoid writing the `astro:page-load` event name in plain text when you define an event.
 
@@ -592,10 +592,7 @@ src/pages/index.astro
 
 
 <script>
-  import {
-    TRANSITION_BEFORE_PREPARATION,
-    type TransitionBeforePreparationEvent
-  } from "astro:transitions/client";
+  import type { TransitionBeforePreparationEvent } from "astro:transitions/client";
 
 
   function listener(event: TransitionBeforePreparationEvent) {
@@ -603,7 +600,7 @@ src/pages/index.astro
   }
 
 
-  document.addEventListener(TRANSITION_BEFORE_PREPARATION, listener);
+  document.addEventListener("astro:before-preparation", listener);
 </script>
 ```
 
@@ -625,10 +622,7 @@ src/pages/index.astro
 
 
 <script>
-  import {
-    TRANSITION_BEFORE_SWAP,
-    type TransitionBeforeSwapEvent
-  } from "astro:transitions/client";
+  import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
 
 
   function listener(event: TransitionBeforeSwapEvent) {
@@ -636,7 +630,7 @@ src/pages/index.astro
   }
 
 
-  document.addEventListener(TRANSITION_BEFORE_SWAP, listener);
+  document.addEventListener("astro:before-swap", listener);
 </script>
 ```
 

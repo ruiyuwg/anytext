@@ -65,6 +65,8 @@ export default defineNuxtModule({
 ```
 
 ```ts [runtime/robots.get.ts] twoslash
+import { defineEventHandler } from 'nitro/h3'
+
 export default defineEventHandler(() => {
   return {
     body: `User-agent: *\nDisallow: /`,
@@ -88,7 +90,7 @@ Adds a Nitro server handler to be used only in development mode. This handler wi
 ### Usage
 
 ```ts twoslash
-import { defineEventHandler } from 'h3'
+import { defineEventHandler } from 'nitro/h3'
 import { addDevServerHandler, createResolver, defineNuxtModule } from '@nuxt/kit'
 
 export default defineNuxtModule({
@@ -109,7 +111,7 @@ export default defineNuxtModule({
 
 ```ts twoslash
 // @errors: 2391
-import type { NitroDevEventHandler } from 'nitropack/types'
+import type { NitroDevEventHandler } from 'nitro/types'
 // ---cut---
 function addDevServerHandler (handler: NitroDevEventHandler): void
 ```
@@ -190,7 +192,7 @@ You can read more about Nitro plugins in the [Nitro documentation](https://nitro
 ::
 
 ::warning
-It is necessary to explicitly import `defineNitroPlugin` from `nitropack/runtime` within your plugin file. The same requirement applies to utilities such as `useRuntimeConfig`.
+It is necessary to explicitly import `definePlugin` from \`\` within your plugin file. The same requirement applies to utilities such as `useRuntimeConfig`.
 ::
 
 ### Usage
@@ -234,17 +236,15 @@ export default defineNuxtModule({
 ```
 
 ```ts [runtime/plugin.ts]
-export default defineNitroPlugin((nitroApp) => {
+import { definePlugin } from 'nitro'
+
+export default definePlugin((nitroApp) => {
   nitroApp.hooks.hook('request', (event) => {
-    console.log('on request', event.path)
+    console.log('on request', event.req.url)
   })
 
-  nitroApp.hooks.hook('beforeResponse', (event, { body }) => {
-    console.log('on response', event.path, { body })
-  })
-
-  nitroApp.hooks.hook('afterResponse', (event, { body }) => {
-    console.log('on after response', event.path, { body })
+  nitroApp.hooks.hook('response', async (res) => {
+    console.log('on response', await res.text())
   })
 })
 ```
@@ -407,6 +407,8 @@ export function useApiSecret () {
 You can then use the `useApiSecret` function in your server code:
 
 ```ts [runtime/server/api/hello.ts] twoslash
+import { defineEventHandler } from 'nitro/h3'
+
 const useApiSecret = (): string => ''
 // ---cut---
 export default defineEventHandler(() => {
@@ -486,6 +488,8 @@ export function hello () {
 You can then use the `hello` function in your server code.
 
 ```ts [runtime/server/api/hello.ts] twoslash
+import { defineEventHandler } from 'nitro/h3'
+
 function hello () {
   return 'Hello from server utils!'
 }

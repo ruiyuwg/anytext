@@ -20,7 +20,7 @@ Having a (correct) owner is important for two reasons:
 Manually setting the owner is especially helpful when doing reactivity outside of any owner scope. In particular, asynchronous computation (via either `async` functions or callbacks like `setTimeout`) lose their automatically set owner, so remembering the original owner via `getOwner` and restoring it via `runWithOwner` is necessary in these cases. For example:
 
 ```
-const owner = getOwner()setTimeout(() => {  // This callback gets run without owner.  // Restore owner via runWithOwner:  runWithOwner(owner, () => {    const foo = useContext(FooContext)    createEffect(() => {      console.log(foo)    })  })}, 1000)
+const owner = getOwner();setTimeout(() => {  // This callback gets run without owner.  // Restore owner via runWithOwner:  runWithOwner(owner, () => {    const foo = useContext(FooContext);    createEffect(() => {      console.log(foo);    });  });}, 1000);
 ```
 
 **Note:** that owners are not what determines dependency tracking, so `runWithOwner` does not help with tracking in asynchronous functions; use of reactive state in the asynchronous part (e.g. after the first `await`) will not be tracked as a dependency.

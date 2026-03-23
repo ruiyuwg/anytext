@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -363,7 +361,7 @@ Upgrade and downgrade plans
 
 > Tip
 >
-> If you want more granular access control, you can [upgrade to a Docker Business plan](https://www.docker.com/pricing/) for custom roles and advanced permissions.
+> If you want more granular access control, you can [upgrade to a Docker Business plan](https://www.docker.com/pricing?ref=Docs\&refAction=DocsEnterpriseCoreRoles) for custom roles and advanced permissions.
 
 *\* If not part of a company*
 

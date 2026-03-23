@@ -20,7 +20,7 @@ you have the most recent Project Settings and Environment Variables stored local
 vercel build
 ```
 
-*Using the vercel build command to build a Vercel
+*Using the \`vercel build\` command to build a Vercel
 Project.*
 
 ## Unique Options
@@ -35,8 +35,8 @@ The `--prod` option can be specified when you want to build the Vercel Project u
 vercel build --prod
 ```
 
-*Using the vercel build command with the
-\--prod option.*
+*Using the \`vercel build\` command with the
+\`--prod\` option.*
 
 ### Yes
 
@@ -46,8 +46,8 @@ The `--yes` option can be used to bypass the confirmation prompt and automatical
 vercel build --yes
 ```
 
-*Using the vercel build command with the
-\--yes option.*
+*Using the \`vercel build\` command with the
+\`--yes\` option.*
 
 ### target
 
@@ -65,12 +65,12 @@ The `--output` option specifies a custom directory where the build artifacts wil
 vercel build --output ./custom-output
 ```
 
-*Using the vercel build command with the
-\--output option to specify a custom output directory.*
+*Using the \`vercel build\` command with the
+\`--output\` option to specify a custom output directory.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -89,5 +89,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel buy"
 description: "Learn how to purchase Vercel products like credits, addons, subscriptions, and domains using the vercel buy CLI command."
-last\_updated: "2026-03-08T05:03:12.018Z"
+last\_updated: "2026-03-23T09:40:06.584Z"
 source: "https://vercel.com/docs/cli/buy"

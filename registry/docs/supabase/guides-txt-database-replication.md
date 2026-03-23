@@ -26,7 +26,11 @@ Additional databases that are kept in sync with your Primary database. These rea
 
 Replication is currently in private alpha. Access is limited and features may change.
 
-Replication powered by [Supabase ETL](https://github.com/supabase/etl) automatically replicates data to supported systems.
+Replication powered by [Supabase ETL](https://github.com/supabase/etl) automatically replicates data to supported systems. Right now, **BigQuery** is the only supported managed destination.
+
+We are currently working on a new Supabase Warehouse product designed to address the limitations of the previous Analytics Buckets. Our goal is to build a solution we can confidently stand behind, rather than continuing to support an approach that does not meet the quality and flexibility we want for our users.
+
+At the moment, BigQuery is the only supported destination, but we are actively working on expanding capabilities.
 
 - [Set up replication](/docs/guides/database/replication/replication-setup)
 
@@ -105,6 +109,6 @@ Supabase and Postgres provide you with multiple ways to manage security, includi
 
 - [Row Level Security](/docs/guides/database/postgres/row-level-security)
 - [Column Level Security](/docs/guides/database/postgres/column-level-security)
-- [Hardening the Data API](/docs/guides/database/hardening-data-api)
+- [Hardening the Data API](/docs/guides/api/hardening-data-api)
 - [Managing Postgres roles](/docs/guides/database/postgres/roles)
 - [Managing secrets with Vault](/docs/guides/database/vault)

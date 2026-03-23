@@ -776,7 +776,7 @@ inject({
 
 title: "Vercel Web Analytics Troubleshooting"
 description: "Learn how to troubleshoot common issues with Vercel Web Analytics."
-last\_updated: "2026-03-08T05:03:11.054Z"
+last\_updated: "2026-03-23T09:40:05.193Z"
 source: "https://vercel.com/docs/analytics/troubleshooting"
 
 # Vercel Web Analytics Troubleshooting
@@ -798,7 +798,7 @@ source: "https://vercel.com/docs/analytics/troubleshooting"
 **How to fix**:
 
 1. Check your proxy configuration to make sure that all desired pages are correctly proxied to the deployment.
-2. Additionally, forward all requests to `/_vercel/insights/*` to the deployments to ensure proper functioning of Web Analytics through the proxy.
+2. Additionally, forward all requests to `/_vercel/insights/*` and `/<unique-path>` to the deployments so Web Analytics works through the proxy.
 
 ## Routes are not visible in Web Analytics dashboard
 
@@ -819,5 +819,5 @@ import { Analytics } from '@vercel/analytics/react'; // Generic React import
 
 title: "Using Web Analytics"
 description: "Learn how to use Vercel"
-last\_updated: "2026-03-08T05:03:11.065Z"
+last\_updated: "2026-03-23T09:40:05.209Z"
 source: "https://vercel.com/docs/analytics/using-web-analytics"

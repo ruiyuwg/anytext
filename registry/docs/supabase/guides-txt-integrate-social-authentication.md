@@ -71,11 +71,11 @@ Then create the iOS specific button component `AppleSignInButton`:
 
   
     ```tsx name=components/social-auth-buttons/apple/apple-sign-in-button.ios.tsx
-    import { supabase } from '@/lib/supabase';
-    import { AppleButton, appleAuth } from '@invertase/react-native-apple-authentication';
-    import type { SignInWithIdTokenCredentials } from '@supabase/supabase-js';
-    import { router } from 'expo-router';
-    import { Platform } from 'react-native';
+    import { supabase } from '@/lib/supabase'
+    import { AppleButton, appleAuth } from '@invertase/react-native-apple-authentication'
+    import type { SignInWithIdTokenCredentials } from '@supabase/supabase-js'
+    import { router } from 'expo-router'
+    import { Platform } from 'react-native'
 
     async function onAppleButtonPress() {
       // Performs login request
@@ -83,44 +83,52 @@ Then create the iOS specific button component `AppleSignInButton`:
         requestedOperation: appleAuth.Operation.LOGIN,
         // Note: it appears putting FULL_NAME first is important, see issue #293
         requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
-      });
+      })
 
       // Get the current authentication state for user
       // Note: This method must be tested on a real device. On the iOS simulator it always throws an error.
-      const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
+      const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user)
 
-      console.log('Apple sign in successful:', { credentialState, appleAuthRequestResponse });
+      console.log('Apple sign in successful:', { credentialState, appleAuthRequestResponse })
 
-      if (credentialState === appleAuth.State.AUTHORIZED && appleAuthRequestResponse.identityToken && appleAuthRequestResponse.authorizationCode) {
+      if (
+        credentialState === appleAuth.State.AUTHORIZED &&
+        appleAuthRequestResponse.identityToken &&
+        appleAuthRequestResponse.authorizationCode
+      ) {
         const signInWithIdTokenCredentials: SignInWithIdTokenCredentials = {
           provider: 'apple',
           token: appleAuthRequestResponse.identityToken,
           nonce: appleAuthRequestResponse.nonce,
           access_token: appleAuthRequestResponse.authorizationCode,
-        };
+        }
 
-        const { data, error } = await supabase.auth.signInWithIdToken(signInWithIdTokenCredentials);
+        const { data, error } = await supabase.auth.signInWithIdToken(signInWithIdTokenCredentials)
 
         if (error) {
-          console.error('Error signing in with Apple:', error);
+          console.error('Error signing in with Apple:', error)
         }
 
         if (data) {
-          console.log('Apple sign in successful:', data);
-          router.navigate('/(tabs)');
+          console.log('Apple sign in successful:', data)
+          router.navigate('/(tabs)')
         }
       }
     }
 
     export default function AppleSignInButton() {
-      if (Platform.OS !== 'ios') { return <></>; }
+      if (Platform.OS !== 'ios') {
+        return <></>
+      }
 
-      return <AppleButton
-        buttonStyle={AppleButton.Style.BLACK}
-        buttonType={AppleButton.Type.SIGN_IN}
-        style={{ width: 160, height: 45 }}
-        onPress={() => onAppleButtonPress()}
-      />;
+      return (
+        <AppleButton
+          buttonStyle={AppleButton.Style.BLACK}
+          buttonType={AppleButton.Type.SIGN_IN}
+          style={{ width: 160, height: 45 }}
+          onPress={() => onAppleButtonPress()}
+        />
+      )
     }
     ```
   
@@ -206,17 +214,17 @@ Next, create the Android-specific `AppleSignInButton` component:
 
   
     ```tsx name=components/social-auth-buttons/apple/apple-sign-in-button.android.tsx
-    import { supabase } from '@/lib/supabase';
-    import { appleAuthAndroid, AppleButton } from '@invertase/react-native-apple-authentication';
-    import { SignInWithIdTokenCredentials } from '@supabase/supabase-js';
-    import { Platform } from 'react-native';
-    import 'react-native-get-random-values';
-    import { v4 as uuid } from 'uuid';
+    import { supabase } from '@/lib/supabase'
+    import { appleAuthAndroid, AppleButton } from '@invertase/react-native-apple-authentication'
+    import { SignInWithIdTokenCredentials } from '@supabase/supabase-js'
+    import { Platform } from 'react-native'
+    import 'react-native-get-random-values'
+    import { v4 as uuid } from 'uuid'
 
     async function onAppleButtonPress() {
       // Generate secure, random values for state and nonce
-      const rawNonce = uuid();
-      const state = uuid();
+      const rawNonce = uuid()
+      const state = uuid()
 
       // Configure the request
       appleAuthAndroid.configure({
@@ -238,11 +246,11 @@ Next, create the Android-specific `AppleSignInButton` component:
 
         // Unique state value used to prevent CSRF attacks. A UUID will be generated if nothing is provided.
         state,
-      });
+      })
 
       // Open the browser window for user sign in
-      const credentialState = await appleAuthAndroid.signIn();
-      console.log('Apple sign in successful:', credentialState);
+      const credentialState = await appleAuthAndroid.signIn()
+      console.log('Apple sign in successful:', credentialState)
 
       if (credentialState.id_token && credentialState.code && credentialState.nonce) {
         const signInWithIdTokenCredentials: SignInWithIdTokenCredentials = {
@@ -250,28 +258,32 @@ Next, create the Android-specific `AppleSignInButton` component:
           token: credentialState.id_token,
           nonce: credentialState.nonce,
           access_token: credentialState.code,
-        };
+        }
 
-        const { data, error } = await supabase.auth.signInWithIdToken(signInWithIdTokenCredentials);
+        const { data, error } = await supabase.auth.signInWithIdToken(signInWithIdTokenCredentials)
 
         if (error) {
-          console.error('Error signing in with Apple:', error);
+          console.error('Error signing in with Apple:', error)
         }
 
         if (data) {
-          console.log('Apple sign in successful:', data);
+          console.log('Apple sign in successful:', data)
         }
       }
     }
 
     export default function AppleSignInButton() {
-      if (Platform.OS !== 'android' || appleAuthAndroid.isSupported !== true) { return <></> }
+      if (Platform.OS !== 'android' || appleAuthAndroid.isSupported !== true) {
+        return <></>
+      }
 
-      return <AppleButton
-        buttonStyle={AppleButton.Style.BLACK}
-        buttonType={AppleButton.Type.SIGN_IN}
-        onPress={() => onAppleButtonPress()}
-      />;
+      return (
+        <AppleButton
+          buttonStyle={AppleButton.Style.BLACK}
+          buttonType={AppleButton.Type.SIGN_IN}
+          onPress={() => onAppleButtonPress()}
+        />
+      )
     }
     ```
   
@@ -309,73 +321,82 @@ Next, create the Web-specific `AppleSignInButton` component:
 
   
     ```tsx name=components/social-auth-buttons/apple/apple-sign-in-button.web.tsx
-    import { supabase } from '@/lib/supabase';
-    import type { SignInWithIdTokenCredentials } from '@supabase/supabase-js';
-    import { useEffect, useState } from 'react';
-    import AppleSignin, { type AppleAuthResponse } from 'react-apple-signin-auth';
-    import { Platform } from 'react-native';
+    import { supabase } from '@/lib/supabase'
+    import type { SignInWithIdTokenCredentials } from '@supabase/supabase-js'
+    import { useEffect, useState } from 'react'
+    import AppleSignin, { type AppleAuthResponse } from 'react-apple-signin-auth'
+    import { Platform } from 'react-native'
 
     export default function AppleSignInButton() {
-      const [nonce, setNonce] = useState('');
-      const [sha256Nonce, setSha256Nonce] = useState('');
+      const [nonce, setNonce] = useState('')
+      const [sha256Nonce, setSha256Nonce] = useState('')
 
       async function onAppleButtonSuccess(appleAuthRequestResponse: AppleAuthResponse) {
-        console.debug('Apple sign in successful:', { appleAuthRequestResponse });
-        if (appleAuthRequestResponse.authorization && appleAuthRequestResponse.authorization.id_token && appleAuthRequestResponse.authorization.code) {
+        console.debug('Apple sign in successful:', { appleAuthRequestResponse })
+        if (
+          appleAuthRequestResponse.authorization &&
+          appleAuthRequestResponse.authorization.id_token &&
+          appleAuthRequestResponse.authorization.code
+        ) {
           const signInWithIdTokenCredentials: SignInWithIdTokenCredentials = {
             provider: 'apple',
             token: appleAuthRequestResponse.authorization.id_token,
             nonce,
             access_token: appleAuthRequestResponse.authorization.code,
-          };
+          }
 
           const { data, error } = await supabase.auth.signInWithIdToken(signInWithIdTokenCredentials)
 
           if (error) {
-            console.error('Error signing in with Apple:', error);
+            console.error('Error signing in with Apple:', error)
           }
 
           if (data) {
-            console.log('Apple sign in successful:', data);
+            console.log('Apple sign in successful:', data)
           }
-        };
+        }
       }
 
       useEffect(() => {
         function generateNonce(): string {
-          const array = new Uint32Array(1);
-          window.crypto.getRandomValues(array);
-          return array[0].toString();
-        };
-
-        async function generateSha256Nonce(nonce: string): Promise {
-          const buffer = await window.crypto.subtle.digest('sha-256', new TextEncoder().encode(nonce));
-          const array = Array.from(new Uint8Array(buffer));
-          return array.map(b => b.toString(16).padStart(2, '0')).join('');
+          const array = new Uint32Array(1)
+          window.crypto.getRandomValues(array)
+          return array[0].toString()
         }
 
-        let nonce = generateNonce();
-        setNonce(nonce);
+        async function generateSha256Nonce(nonce: string): Promise {
+          const buffer = await window.crypto.subtle.digest('sha-256', new TextEncoder().encode(nonce))
+          const array = Array.from(new Uint8Array(buffer))
+          return array.map((b) => b.toString(16).padStart(2, '0')).join('')
+        }
 
-        generateSha256Nonce(nonce)
-          .then((sha256Nonce) => { setSha256Nonce(sha256Nonce) });
-      }, []);
+        let nonce = generateNonce()
+        setNonce(nonce)
 
-      if (Platform.OS !== 'web') { return <></>; }
+        generateSha256Nonce(nonce).then((sha256Nonce) => {
+          setSha256Nonce(sha256Nonce)
+        })
+      }, [])
 
-      return <AppleSignin
-        authOptions={{
-          clientId: process.env.EXPO_PUBLIC_APPLE_AUTH_SERVICE_ID ?? '',
-          redirectURI: process.env.EXPO_PUBLIC_APPLE_AUTH_REDIRECT_URI ?? '',
-          scope: 'email name',
-          state: 'state',
-          nonce: sha256Nonce,
-          usePopup: true,
-        }}
-        uiType="dark"
-        onSuccess={onAppleButtonSuccess}
-        onError={(error: any) => console.error('Apple sign in error:', error)}
-      />;
+      if (Platform.OS !== 'web') {
+        return <></>
+      }
+
+      return (
+        <AppleSignin
+          authOptions={{
+            clientId: process.env.EXPO_PUBLIC_APPLE_AUTH_SERVICE_ID ?? '',
+            redirectURI: process.env.EXPO_PUBLIC_APPLE_AUTH_REDIRECT_URI ?? '',
+            scope: 'email name',
+            state: 'state',
+            nonce: sha256Nonce,
+            usePopup: true,
+          }}
+          uiType="dark"
+          onSuccess={onAppleButtonSuccess}
+          onError={(error: any) => console.error('Apple sign in error:', error)}
+        />
+      )
     }
     ```
   
@@ -427,11 +448,11 @@ Then create the iOS specific button component `AppleSignInButton`:
 
   
     ```tsx name=components/social-auth-buttons/apple/apple-sign-in-button.tsx
-    import { supabase } from '@/lib/supabase';
-    import { AppleButton, appleAuth } from '@invertase/react-native-apple-authentication';
-    import type { SignInWithIdTokenCredentials } from '@supabase/supabase-js';
-    import { router } from 'expo-router';
-    import { Platform } from 'react-native';
+    import { supabase } from '@/lib/supabase'
+    import { AppleButton, appleAuth } from '@invertase/react-native-apple-authentication'
+    import type { SignInWithIdTokenCredentials } from '@supabase/supabase-js'
+    import { router } from 'expo-router'
+    import { Platform } from 'react-native'
 
     async function onAppleButtonPress() {
       // Performs login request
@@ -439,44 +460,52 @@ Then create the iOS specific button component `AppleSignInButton`:
         requestedOperation: appleAuth.Operation.LOGIN,
         // Note: it appears putting FULL_NAME first is important, see issue #293
         requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
-      });
+      })
 
       // Get the current authentication state for user
       // Note: This method must be tested on a real device. On the iOS simulator it always throws an error.
-      const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
+      const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user)
 
-      console.log('Apple sign in successful:', { credentialState, appleAuthRequestResponse });
+      console.log('Apple sign in successful:', { credentialState, appleAuthRequestResponse })
 
-      if (credentialState === appleAuth.State.AUTHORIZED && appleAuthRequestResponse.identityToken && appleAuthRequestResponse.authorizationCode) {
+      if (
+        credentialState === appleAuth.State.AUTHORIZED &&
+        appleAuthRequestResponse.identityToken &&
+        appleAuthRequestResponse.authorizationCode
+      ) {
         const signInWithIdTokenCredentials: SignInWithIdTokenCredentials = {
           provider: 'apple',
           token: appleAuthRequestResponse.identityToken,
           nonce: appleAuthRequestResponse.nonce,
           access_token: appleAuthRequestResponse.authorizationCode,
-        };
+        }
 
-        const { data, error } = await supabase.auth.signInWithIdToken(signInWithIdTokenCredentials);
+        const { data, error } = await supabase.auth.signInWithIdToken(signInWithIdTokenCredentials)
 
         if (error) {
-          console.error('Error signing in with Apple:', error);
+          console.error('Error signing in with Apple:', error)
         }
 
         if (data) {
-          console.log('Apple sign in successful:', data);
-          router.navigate('/(tabs)');
+          console.log('Apple sign in successful:', data)
+          router.navigate('/(tabs)')
         }
       }
     }
 
     export default function AppleSignInButton() {
-      if (Platform.OS !== 'ios') { return <></>; }
+      if (Platform.OS !== 'ios') {
+        return <></>
+      }
 
-      return <AppleButton
-        buttonStyle={AppleButton.Style.BLACK}
-        buttonType={AppleButton.Type.SIGN_IN}
-        style={{ width: 160, height: 45 }}
-        onPress={() => onAppleButtonPress()}
-      />;
+      return (
+        <AppleButton
+          buttonStyle={AppleButton.Style.BLACK}
+          buttonType={AppleButton.Type.SIGN_IN}
+          style={{ width: 160, height: 45 }}
+          onPress={() => onAppleButtonPress()}
+        />
+      )
     }
     ```
   
@@ -535,93 +564,92 @@ Create the mobile generic button component `GoogleSignInButton`:
 
   
     ```tsx name=components/social-auth-buttons/google/google-sign-in-button.tsx
-    import { supabase } from '@/lib/supabase';
-    import { useEffect } from 'react';
-    import { TouchableOpacity } from 'react-native';
+    import { supabase } from '@/lib/supabase'
+    import { useEffect } from 'react'
+    import { TouchableOpacity } from 'react-native'
 
-    import { expo } from '@/app.json';
-    import { Text } from '@react-navigation/elements';
-    import { Image } from 'expo-image';
-    import * as WebBrowser from "expo-web-browser";
+    import { expo } from '@/app.json'
+    import { Text } from '@react-navigation/elements'
+    import { Image } from 'expo-image'
+    import * as WebBrowser from 'expo-web-browser'
 
-    WebBrowser.maybeCompleteAuthSession();
+    WebBrowser.maybeCompleteAuthSession()
 
     export default function GoogleSignInButton() {
-
       function extractParamsFromUrl(url: string) {
-        const parsedUrl = new URL(url);
-        const hash = parsedUrl.hash.substring(1); // Remove the leading '#'
-        const params = new URLSearchParams(hash);
+        const parsedUrl = new URL(url)
+        const hash = parsedUrl.hash.substring(1) // Remove the leading '#'
+        const params = new URLSearchParams(hash)
 
         return {
-          access_token: params.get("access_token"),
-          expires_in: parseInt(params.get("expires_in") || "0"),
-          refresh_token: params.get("refresh_token"),
-          token_type: params.get("token_type"),
-          provider_token: params.get("provider_token"),
-          code: params.get("code"),
-        };
-      };
+          access_token: params.get('access_token'),
+          expires_in: parseInt(params.get('expires_in') || '0'),
+          refresh_token: params.get('refresh_token'),
+          token_type: params.get('token_type'),
+          provider_token: params.get('provider_token'),
+          code: params.get('code'),
+        }
+      }
 
       async function onSignInButtonPress() {
-        console.debug('onSignInButtonPress - start');
+        console.debug('onSignInButtonPress - start')
         const res = await supabase.auth.signInWithOAuth({
-          provider: "google",
+          provider: 'google',
           options: {
             redirectTo: `${expo.scheme}://google-auth`,
-            queryParams: { prompt: "consent" },
+            queryParams: { prompt: 'consent' },
             skipBrowserRedirect: true,
           },
-        });
+        })
 
-        const googleOAuthUrl = res.data.url;
+        const googleOAuthUrl = res.data.url
 
         if (!googleOAuthUrl) {
-          console.error("no oauth url found!");
-          return;
+          console.error('no oauth url found!')
+          return
         }
 
         const result = await WebBrowser.openAuthSessionAsync(
           googleOAuthUrl,
           `${expo.scheme}://google-auth`,
-          { showInRecents: true },
+          { showInRecents: true }
         ).catch((err) => {
-          console.error('onSignInButtonPress - openAuthSessionAsync - error', { err });
-          console.log(err);
-        });
+          console.error('onSignInButtonPress - openAuthSessionAsync - error', { err })
+          console.log(err)
+        })
 
-        console.debug('onSignInButtonPress - openAuthSessionAsync - result', { result });
+        console.debug('onSignInButtonPress - openAuthSessionAsync - result', { result })
 
-        if (result && result.type === "success") {
-          console.debug('onSignInButtonPress - openAuthSessionAsync - success');
-          const params = extractParamsFromUrl(result.url);
-          console.debug('onSignInButtonPress - openAuthSessionAsync - success', { params });
+        if (result && result.type === 'success') {
+          console.debug('onSignInButtonPress - openAuthSessionAsync - success')
+          const params = extractParamsFromUrl(result.url)
+          console.debug('onSignInButtonPress - openAuthSessionAsync - success', { params })
 
           if (params.access_token && params.refresh_token) {
-            console.debug('onSignInButtonPress - setSession');
+            console.debug('onSignInButtonPress - setSession')
             const { data, error } = await supabase.auth.setSession({
               access_token: params.access_token,
               refresh_token: params.refresh_token,
-            });
-            console.debug('onSignInButtonPress - setSession - success', { data, error });
-            return;
+            })
+            console.debug('onSignInButtonPress - setSession - success', { data, error })
+            return
           } else {
-            console.error('onSignInButtonPress - setSession - failed');
+            console.error('onSignInButtonPress - setSession - failed')
             // sign in/up failed
           }
         } else {
-          console.error('onSignInButtonPress - openAuthSessionAsync - failed');
+          console.error('onSignInButtonPress - openAuthSessionAsync - failed')
         }
       }
 
       // to warm up the browser
       useEffect(() => {
-        WebBrowser.warmUpAsync();
+        WebBrowser.warmUpAsync()
 
         return () => {
-          WebBrowser.coolDownAsync();
-        };
-      }, []);
+          WebBrowser.coolDownAsync()
+        }
+      }, [])
 
       return (
         <TouchableOpacity
@@ -659,7 +687,7 @@ Create the mobile generic button component `GoogleSignInButton`:
             Sign in with Google
           
         
-      );
+      )
     }
     ```
   
@@ -719,63 +747,63 @@ Then create the iOS specific button component `GoogleSignInButton`:
 
   
     ```tsx name=components/social-auth-buttons/google/google-sign-in-button.web.tsx
-    import { supabase } from '@/lib/supabase';
-    import { CredentialResponse, GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-    import { SignInWithIdTokenCredentials } from '@supabase/supabase-js';
-    import { useEffect, useState } from 'react';
+    import { supabase } from '@/lib/supabase'
+    import { CredentialResponse, GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
+    import { SignInWithIdTokenCredentials } from '@supabase/supabase-js'
+    import { useEffect, useState } from 'react'
 
-    import 'react-native-get-random-values';
+    import 'react-native-get-random-values'
 
     export default function GoogleSignInButton() {
-
       // Generate secure, random values for state and nonce
-      const [nonce, setNonce] = useState('');
-      const [sha256Nonce, setSha256Nonce] = useState('');
+      const [nonce, setNonce] = useState('')
+      const [sha256Nonce, setSha256Nonce] = useState('')
 
       async function onGoogleButtonSuccess(authRequestResponse: CredentialResponse) {
-        console.debug('Google sign in successful:', { authRequestResponse });
+        console.debug('Google sign in successful:', { authRequestResponse })
         if (authRequestResponse.clientId && authRequestResponse.credential) {
           const signInWithIdTokenCredentials: SignInWithIdTokenCredentials = {
             provider: 'google',
             token: authRequestResponse.credential,
             nonce: nonce,
-          };
+          }
 
-          const { data, error } = await supabase.auth.signInWithIdToken(signInWithIdTokenCredentials);
+          const { data, error } = await supabase.auth.signInWithIdToken(signInWithIdTokenCredentials)
 
           if (error) {
-            console.error('Error signing in with Google:', error);
+            console.error('Error signing in with Google:', error)
           }
 
           if (data) {
-            console.log('Google sign in successful:', data);
+            console.log('Google sign in successful:', data)
           }
         }
       }
 
       function onGoogleButtonFailure() {
-        console.error('Error signing in with Google');
+        console.error('Error signing in with Google')
       }
 
       useEffect(() => {
         function generateNonce(): string {
-          const array = new Uint32Array(1);
-          window.crypto.getRandomValues(array);
-          return array[0].toString();
+          const array = new Uint32Array(1)
+          window.crypto.getRandomValues(array)
+          return array[0].toString()
         }
 
         async function generateSha256Nonce(nonce: string): Promise {
-          const buffer = await window.crypto.subtle.digest('sha-256', new TextEncoder().encode(nonce));
-          const array = Array.from(new Uint8Array(buffer));
-          return array.map(b => b.toString(16).padStart(2, '0')).join('');
+          const buffer = await window.crypto.subtle.digest('sha-256', new TextEncoder().encode(nonce))
+          const array = Array.from(new Uint8Array(buffer))
+          return array.map((b) => b.toString(16).padStart(2, '0')).join('')
         }
 
-        let nonce = generateNonce();
-        setNonce(nonce);
+        let nonce = generateNonce()
+        setNonce(nonce)
 
-        generateSha256Nonce(nonce)
-          .then((sha256Nonce) => { setSha256Nonce(sha256Nonce) });
-      }, []);
+        generateSha256Nonce(nonce).then((sha256Nonce) => {
+          setSha256Nonce(sha256Nonce)
+        })
+      }, [])
 
       return (
         <GoogleOAuthProvider
@@ -790,7 +818,7 @@ Then create the iOS specific button component `GoogleSignInButton`:
             auto_select={true}
           />
         
-      );
+      )
     }
     ```
   

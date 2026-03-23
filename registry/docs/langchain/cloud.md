@@ -9,7 +9,7 @@ The **Cloud** option is a fully managed model where LangChain hosts and operates
 - **Fully managed infrastructure**: LangChain handles all infrastructure, updates, scaling, and maintenance.
 - **Deploy from GitHub**: Connect your repositories and deploy with a few clicks.
 - **Automated CI/CD**: Build process is handled automatically by the platform.
-- **LangSmith UI**: Full access to [observability](/langsmith/observability), [evaluation](/langsmith/evaluation), [deployment management](/langsmith/deployments), and [Studio](/langsmith/studio).
+- **LangSmith UI**: Full access to [observability](/langsmith/observability), [evaluation](/langsmith/evaluation), [deployment management](/langsmith/deployment), and [Studio](/langsmith/studio).
 
 |                                               | **Who manages it** | **Where it runs** |
 | --------------------------------------------- | ------------------ | ----------------- |
@@ -39,14 +39,14 @@ The [EU-based LangSmith service](https://eu.smith.langchain.com) is now availabl
 
 The resources and services in this table are stored in the location corresponding to the URL where sign-up occurred (either the US or EU). Cloud-managed LangSmith uses [Supabase](https://supabase.com) for authentication/authorization and [ClickHouse Cloud](https://clickhouse.com/cloud) for data warehouse.
 
-|                                                | US                                                                 | EU                                                                       |
-| ---------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| URL                                            | <https://smith.langchain.com>         | <https://eu.smith.langchain.com>         |
-| API URL                                        | <https://api.smith.langchain.com> | <https://eu.api.smith.langchain.com> |
-| GCP                                            | us-central1 (Iowa)                                                 | europe-west4 (Netherlands)                                               |
-| Supabase                                       | AWS us-east-1 (N. Virginia)                                        | AWS eu-central-1 (Germany)                                               |
-| ClickHouse Cloud                               | us-central1 (Iowa)                                                 | europe-west4 (Netherlands)                                               |
-| [LangSmith deployment](/langsmith/deployments) | us-central1 (Iowa)                                                 | europe-west4 (Netherlands)                                               |
+|                                               | US                                                                 | EU                                                                       |
+| --------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| URL                                           | <https://smith.langchain.com>         | <https://eu.smith.langchain.com>         |
+| API URL                                       | <https://api.smith.langchain.com> | <https://eu.api.smith.langchain.com> |
+| GCP                                           | us-central1 (Iowa)                                                 | europe-west4 (Netherlands)                                               |
+| Supabase                                      | AWS us-east-1 (N. Virginia)                                        | AWS eu-central-1 (Germany)                                               |
+| ClickHouse Cloud                              | us-central1 (Iowa)                                                 | europe-west4 (Netherlands)                                               |
+| [LangSmith deployment](/langsmith/deployment) | us-central1 (Iowa)                                                 | europe-west4 (Netherlands)                                               |
 
 See the [Regions FAQ](/langsmith/regions-faq) for more information.
 
@@ -77,7 +77,7 @@ Some additional GCP services we use include:
 
 - Google Cloud Load Balancer for routing traffic to the LangSmith services.
 - Google Cloud CDN for caching static assets.
-- Google Cloud Armor for security and rate limits. For more information on rate limits we enforce, please refer to [this guide](/langsmith/administration-overview#rate-limits).
+- Google Cloud Armor for security and rate limits. For more information on rate limits we enforce, please refer to [Rate limits](/langsmith/administration-overview#rate-limits).
 
 ### Allowlisting IP addresses
 

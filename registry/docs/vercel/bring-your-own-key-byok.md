@@ -106,5 +106,5 @@ Once the test completes, you can click on the test result badge to open a detail
 
 title: "Authentication & BYOK"
 description: "Learn how to authenticate with the AI Gateway and configure your own provider keys."
-last\_updated: "2026-03-08T05:03:10.123Z"
+last\_updated: "2026-03-23T09:40:03.774Z"
 source: "https://vercel.com/docs/ai-gateway/authentication-and-byok"

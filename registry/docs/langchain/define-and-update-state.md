@@ -9,7 +9,7 @@ Here we show how to define and update [state](/oss/javascript/langgraph/graph-ap
 
 [State](/oss/javascript/langgraph/graph-api#state) in LangGraph is defined using the `StateSchema` class. This provides a unified API that accepts [standard schemas](https://standardschema.dev/) (like [Zod](https://zod.dev/)) for individual fields along with special value types like `ReducedValue`, `MessagesValue`, and `UntrackedValue`.
 
-By default, graphs will have the same input and output schema, and the state determines that schema. See [this section](#define-input-and-output-schemas) for how to define distinct input and output schemas.
+By default, graphs will have the same input and output schema, and the state determines that schema. See [Define input and output schemas](#define-input-and-output-schemas) for how to define distinct input and output schemas.
 
 Let's consider a simple example using [messages](/oss/javascript/langgraph/graph-api#messagesstate). This represents a versatile formulation of state for many LLM applications. See our [concepts page](/oss/javascript/langgraph/graph-api#working-with-messages-in-graph-state) for more detail.
 
@@ -55,7 +55,7 @@ const graph = new StateGraph(State)
   .compile();
 ```
 
-LangGraph provides built-in utilities for visualizing your graph. Let's inspect our graph. See [this section](#visualize-your-graph) for detail on visualization.
+LangGraph provides built-in utilities for visualizing your graph. Let's inspect our graph. See [Visualize your graph](#visualize-your-graph) for detail on visualization.
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import * as fs from "node:fs/promises";
@@ -192,7 +192,7 @@ human: Hi
 ai: Hello!
 ```
 
-This is a versatile representation of state for applications involving [chat models](https://js.langchain.com/docs/concepts/chat_models/). LangGraph includes the pre-built `MessagesValue` for convenience, so that we can have:
+This is a versatile representation of state for applications involving [chat models](https://js.langchain.com/docs/concepts/chat_models/). LangGraph includes the prebuilt `MessagesValue` for convenience, so that we can have:
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { StateSchema, MessagesValue } from "@langchain/langgraph";

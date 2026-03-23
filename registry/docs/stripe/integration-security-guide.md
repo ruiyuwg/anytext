@@ -120,7 +120,7 @@ Cross-origin isolation requires support by all dependencies, and several key dep
 
 ## See also
 
-- [What is PCI DSS compliance](https://stripe.com/guides/pci-compliance)
+- [PCI DSS compliance](https://stripe.com/guides/pci-compliance)
 - [Best practices for managing secret API keys](https://docs.stripe.com/keys-best-practices.md)
 - [Webhooks](https://docs.stripe.com/webhooks.md)
 - [Declines and failed payments](https://docs.stripe.com/declines.md)

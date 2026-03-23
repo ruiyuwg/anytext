@@ -525,8 +525,8 @@ response = supabase.storage.from_('bucket').download(
 | BMP    | `bmp`     | ☑️     | ☑️     |
 | TIFF   | `tiff`    | ☑️     | ☑️     |
 
-per 1,000 origin images. You are only charged for usage exceeding your subscription
-plan's quota.
+per 1,000 origin images. You are only charged for usage exceeding your
+subscription plan's quota.
 
 The count resets at the start of each billing cycle.
 

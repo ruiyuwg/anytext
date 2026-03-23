@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -26,7 +24,7 @@ Table of contents
 
 Docker subscriptions provide features and benefits for individual developers, teams, and enterprise businesses. This page explains how to set up subscriptions for personal accounts and organizations.
 
-Before you begin, make sure you have a [Docker ID](https://docs.docker.com/accounts/create-account/). To learn more about what's included with each tier, see [Docker Pricing](https://www.docker.com/pricing/).
+Before you begin, make sure you have a [Docker ID](https://docs.docker.com/accounts/create-account/). To learn more about what's included in each tier, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs\&refAction=DocsSubscriptionSetup).
 
 > Important
 >

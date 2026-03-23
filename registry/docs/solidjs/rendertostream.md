@@ -5,15 +5,15 @@ Rendering
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/render-to-stream.mdx)
 
 ```
-import { renderToStream } from "solid-js/web"
-function renderToStream<T>(  fn: () => T,  options?: {    nonce?: string    renderId?: string    onCompleteShell?: () => void    onCompleteAll?: () => void  }): {  pipe: (writable: { write: (v: string) => void }) => void  pipeTo: (writable: WritableStream) => void}
+import { renderToStream } from "solid-js/web";
+function renderToStream<T>(  fn: () => T,  options?: {    nonce?: string;    renderId?: string;    onCompleteShell?: () => void;    onCompleteAll?: () => void;  }): {  pipe: (writable: { write: (v: string) => void }) => void;  pipeTo: (writable: WritableStream) => void;};
 ```
 
 This method renders to a stream. It renders the content synchronously including any Suspense fallback placeholders, and then continues to stream the data and HTML from any async resource as it completes.
 
 ```
-// noderenderToStream(App).pipe(res)
-// web streamconst { readable, writable } = new TransformStream()renderToStream(App).pipeTo(writable)
+// noderenderToStream(App).pipe(res);
+// web streamconst { readable, writable } = new TransformStream();renderToStream(App).pipeTo(writable);
 ```
 
 `onCompleteShell` fires when synchronous rendering is complete before writing the first flush to the stream out to the browser. `onCompleteAll` is called when all server Suspense boundaries have settled. `renderId` is used to namespace renders when having multiple top level roots.

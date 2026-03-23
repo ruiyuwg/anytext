@@ -2,14 +2,14 @@
 
 Source: https://docs.langchain.com/oss/javascript/langgraph/functional-api
 
-The **Functional API** allows you to add LangGraph's key features — [persistence](/oss/javascript/langgraph/persistence), [memory](/oss/javascript/langgraph/add-memory), [human-in-the-loop](/oss/javascript/langgraph/interrupts), and [streaming](/oss/javascript/langgraph/streaming) — to your applications with minimal changes to your existing code.
+The **Functional API** allows you to add LangGraph's key features ([persistence](/oss/javascript/langgraph/persistence), [memory](/oss/javascript/langgraph/add-memory), [human-in-the-loop](/oss/javascript/langgraph/interrupts), and [streaming](/oss/javascript/langgraph/streaming)) to your applications with minimal changes to your existing code.
 
 It is designed to integrate these features into existing code that may use standard language primitives for branching and control flow, such as `if` statements, `for` loops, and function calls. Unlike many data orchestration frameworks that require restructuring code into an explicit pipeline or DAG, the Functional API allows you to incorporate these capabilities without enforcing a rigid execution model.
 
 The Functional API uses two key building blocks:
 
-- **`entrypoint`** – An entrypoint encapsulates workflow logic and manages execution flow, including handling long-running tasks and interrupts.
-- **`task`** – Represents a discrete unit of work, such as an API call or data processing step, that can be executed asynchronously within an entrypoint. Tasks return a future-like object that can be awaited or resolved synchronously.
+- **`entrypoint`**: An entrypoint encapsulates workflow logic and manages execution flow, including handling long-running tasks and interrupts.
+- **`task`**: Represents a discrete unit of work, such as an API call or data processing step, that can be executed asynchronously within an entrypoint. Tasks return a future-like object that can be awaited or resolved synchronously.
 
 This provides a minimal abstraction for building workflows with state management and streaming.
 

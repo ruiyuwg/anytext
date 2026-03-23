@@ -23,5 +23,5 @@ You can enable Code Approvers by adding a `.vercel.approvers` file to a director
 
 title: "Enabling and Disabling Comments"
 description: "Learn when and where Comments are available, and how to enable and disable Comments at the account, project, and session or interface levels."
-last\_updated: "2026-03-08T05:03:12.548Z"
+last\_updated: "2026-03-23T09:40:07.271Z"
 source: "https://vercel.com/docs/comments/how-comments-work"

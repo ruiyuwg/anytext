@@ -1,0 +1,131 @@
+-   [Home](https://docs.cloud.google.com/)
+-   [Documentation](https://docs.cloud.google.com/docs)
+-   [Developer tools](https://docs.cloud.google.com/docs/costs-usage)
+-   [Java](https://docs.cloud.google.com/java/docs)
+-   [Client libraries](https://docs.cloud.google.com/java/docs/reference)
+
+Send feedback
+
+# Interface SignJwtRequestOrBuilder (3.44.0) Stay organized with collections Save and categorize content based on your preferences.
+
+3.82.0 (latest) 3.80.0 3.78.0 3.77.0 3.76.0 3.75.0 3.73.0 3.71.0 3.70.0 3.69.0 3.68.0 3.67.0 3.65.0 3.63.0 3.62.0 3.59.0 3.58.0 3.57.0 3.55.0 3.54.0 3.53.0 3.52.0 3.51.0 3.50.0 3.49.0 3.48.0 3.47.0 3.44.0 3.43.0 3.42.0 3.41.0 3.40.0 3.39.0 3.38.0 3.37.0 3.36.0 3.35.0 3.34.0 3.32.0 3.31.0 3.30.0 3.29.0 3.28.0 3.27.0 3.26.0 3.25.0 3.24.0 3.23.0 3.22.0 3.19.0 3.18.0 3.17.0 3.16.0 3.15.0 3.14.0 3.13.0 3.12.0 3.11.0 3.10.0 3.9.0 3.8.0 3.7.0 3.6.0 3.4.0 3.3.0 3.2.0 3.1.0 3.0.0 2.0.0 1.2.5 1.1.8 0.2.0
+
+```
+public interface SignJwtRequestOrBuilder extends MessageOrBuilder
+```
+
+## Implements
+
+[MessageOrBuilder](https://cloud.google.com/java/docs/reference/protobuf/latest/com.google.protobuf.MessageOrBuilder.html)
+
+## Methods
+
+### getName() (deprecated)
+
+```
+public abstract String getName()
+```
+
+**Deprecated.** _google.iam.admin.v1.SignJwtRequest.name is deprecated. See google/iam/admin/v1/iam.proto;l=1023_
+
+Required. Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+The resource name of the service account in the following format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`. Using `-` as a wildcard for the `PROJECT_ID` will infer the project from the account. The `ACCOUNT` value can be the `email` address or the `unique_id` of the service account.
+
+`string name = 1 [deprecated = true, (.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }`
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html)`
+
+The name.
+
+### getNameBytes() (deprecated)
+
+```
+public abstract ByteString getNameBytes()
+```
+
+**Deprecated.** _google.iam.admin.v1.SignJwtRequest.name is deprecated. See google/iam/admin/v1/iam.proto;l=1023_
+
+Required. Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+The resource name of the service account in the following format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`. Using `-` as a wildcard for the `PROJECT_ID` will infer the project from the account. The `ACCOUNT` value can be the `email` address or the `unique_id` of the service account.
+
+`string name = 1 [deprecated = true, (.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = { ... }`
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[ByteString](https://cloud.google.com/java/docs/reference/protobuf/latest/com.google.protobuf.ByteString.html)`
+
+The bytes for name.
+
+### getPayload() (deprecated)
+
+```
+public abstract String getPayload()
+```
+
+**Deprecated.** _google.iam.admin.v1.SignJwtRequest.payload is deprecated. See google/iam/admin/v1/iam.proto;l=1044_
+
+Required. Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+The JWT payload to sign. Must be a serialized JSON object that contains a JWT Claims Set. For example: `{"sub": "user@example.com", "iat": 313435}`
+
+If the JWT Claims Set contains an expiration time (`exp`) claim, it must be an integer timestamp that is not in the past and no more than 12 hours in the future.
+
+If the JWT Claims Set does not contain an expiration time (`exp`) claim, this claim is added automatically, with a timestamp that is 1 hour in the future.
+
+`string payload = 2 [deprecated = true, (.google.api.field_behavior) = REQUIRED];`
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[String](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html)`
+
+The payload.
+
+### getPayloadBytes() (deprecated)
+
+```
+public abstract ByteString getPayloadBytes()
+```
+
+**Deprecated.** _google.iam.admin.v1.SignJwtRequest.payload is deprecated. See google/iam/admin/v1/iam.proto;l=1044_
+
+Required. Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api).
+
+The JWT payload to sign. Must be a serialized JSON object that contains a JWT Claims Set. For example: `{"sub": "user@example.com", "iat": 313435}`
+
+If the JWT Claims Set contains an expiration time (`exp`) claim, it must be an integer timestamp that is not in the past and no more than 12 hours in the future.
+
+If the JWT Claims Set does not contain an expiration time (`exp`) claim, this claim is added automatically, with a timestamp that is 1 hour in the future.
+
+`string payload = 2 [deprecated = true, (.google.api.field_behavior) = REQUIRED];`
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[ByteString](https://cloud.google.com/java/docs/reference/protobuf/latest/com.google.protobuf.ByteString.html)`
+
+The bytes for payload.
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-03-14 UTC.

@@ -692,7 +692,7 @@ async function processCheckout(data: any) {
 
 title: "Local Development Behavior"
 description: "How BotID behaves in local development environments and testing options"
-last\_updated: "2026-03-08T05:03:11.166Z"
+last\_updated: "2026-03-23T09:40:05.452Z"
 source: "https://vercel.com/docs/botid/local-development-behavior"
 
 # Local Development Behavior
@@ -733,5 +733,5 @@ This allows you to:
 
 title: "BotID"
 description: "Protect your applications from automated attacks with intelligent bot detection and verification, powered by Kasada."
-last\_updated: "2026-03-08T05:03:11.229Z"
+last\_updated: "2026-03-23T09:40:05.464Z"
 source: "https://vercel.com/docs/botid"

@@ -193,3 +193,53 @@ To start sending emails with Resend:
 4. Start sending emails immediately
 
 If you're having trouble with domain verification or DNS records, see our [domain verification troubleshooting guide](/knowledge-base/what-if-my-domain-is-not-verifying) or check our [DNS setup guides](/knowledge-base/introduction) for your specific DNS provider.
+
+# Domain Already Registered by Another Account
+
+Source: https://resend.com/docs/knowledge-base/domain-already-registered
+
+Resolve the 403 domain already registered error by verifying domain ownership and requesting a release.
+
+## Overview
+
+When you add a domain to Resend, you may see this error: `The example.com domain has been registered already`.
+
+This means the domain is currently associated with a different Resend account. A domain can only be active on one Resend account at a time.
+
+## Why This Happens
+
+Common reasons a domain may already be registered:
+
+- A team member or contractor added it to a separate account.
+- You are logged into a different account than the one where the domain was originally added.
+
+## How to Resolve It
+
+To resolve this issue, confirm ownership and account access:
+
+1. Check with your team to see if someone is already using Resend.
+2. Check to make sure you're logged into the right account.
+3. If you still cannot locate the domain, contact [Resend support](https://resend.com/help) and share the domain name so the team can help you recover access.
+
+## Related Resources
+
+- [What if my domain is not verifying?](/knowledge-base/what-if-my-domain-is-not-verifying)
+- [DNS provider setup guides](/knowledge-base/introduction)
+
+# Where can I find Resend documents like DPA or W-9?
+
+Source: https://resend.com/docs/knowledge-base/downloading-documents
+
+How to download compliance and tax documents from your Resend account.
+
+You can find and download all available documents from the [Documents](https://resend.com/settings/documents) page under your account settings.
+
+The following documents are available for download:
+
+- **DPA** (Data Processing Agreement) — Outlines how Resend processes and protects your data in compliance with privacy regulations like GDPR.
+- **W-9** (Request for Taxpayer Identification Number and Certification) — Resend's tax identification form for US tax reporting purposes.
+- **SOC 2 Type II** report — An independent audit report that verifies Resend's security controls and practices.
+- **Penetration test** report — A third-party security assessment of Resend's product and cloud infrastructure.
+
+  You must be logged in to your Resend account to access the
+  [Documents](https://resend.com/settings/documents) page.

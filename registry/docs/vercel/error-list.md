@@ -24,8 +24,8 @@ When properly configured, your `package.json` file would look similar to this:
 }
 ```
 
-*An example build script in a
-package.json file that specifies the output
+*An example \`build\` script in a
+\`package.json\` file that specifies the output
 directory.*
 
 Once you have defined the `build` [script](https://docs.npmjs.com/misc/scripts), this error will disappear. Furthermore, it will not be displayed if you are using `package.json` purely to provide dependencies for your Vercel functions located inside the `api` directory.
@@ -44,11 +44,11 @@ This ensures no team invites are accidentally accepted.
 
 ## Request access with the required Git account
 
-When the deployment for a commit fails with the message "Team access required to deploy.", the Git account of the commit author is not connected to a Hobby team that is a member of the team.
+When a deployment fails with the message "Team access required to deploy.", the commit author either does not have a Vercel account, or the team has enabled **Manual Approval**.
 
-The link attached to the error allows someone to connect their Hobby team to the Git account of the commit author. If the Hobby team is connected to a different Git account, it will fail stating that a different Git account must be used to request access to the team.
+If the committer has a Vercel account and manual approval is enabled, a [team Owner](/docs/rbac/access-roles#owner-role) must approve their membership in [team settings](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fsettings%2Fmembers\&title=Collaboration+Settings).
 
-Once the Git account is connected to the Hobby team on Vercel, it is possible to request access to the team. A [Team Owner](/docs/rbac/access-roles#owner-role) can then approve or decline this access request. If the request was approved, the failed commit would be retried, and the following commits would not fail due to missing team access.
+If the committer does not have a Vercel account, they must create one and link their Git provider.
 
 ## Blocked scopes
 
@@ -137,14 +137,6 @@ When running the `vercel build` or `vercel dev` commands, `npm install` errors c
 - The Builder that is defined in your configuration is not published to the npm registry
 
 Double-check that the name and version of the Builder you are requesting is correct.
-
-## Mixed routing properties
-
-If you have [`rewrites`](/docs/project-configuration/vercel-json#rewrites), [`redirects`](/docs/project-configuration/vercel-json#redirects), [`headers`](/docs/project-configuration/vercel-json#headers), [`cleanUrls`](/docs/project-configuration/vercel-json#cleanurls) or [`trailingSlash`](/docs/project-configuration/vercel-json#trailingslash) defined in your [configuration](/docs/project-configuration) file, then [`routes`](/docs/project-configuration/vercel-json#routes) cannot be defined.
-
-This is a necessary limitation because `routes` is a lower-level primitive that contains all of the other types. Therefore, it cannot be merged safely with the new properties.
-
-See the [Upgrading Routes](/docs/project-configuration/vercel-json#upgrading-legacy-routes) section for examples of `routes` compared to the new properties.
 
 ## Conflicting configuration files
 
@@ -425,7 +417,7 @@ To fix this error, add the packages to your `package.json` file as a dependency.
 
 title: "Error Codes"
 description: "Use this guide to find specific solutions and insights for common Vercel errors."
-last\_updated: "2026-03-08T05:03:14.377Z"
+last\_updated: "2026-03-23T09:40:09.931Z"
 source: "https://vercel.com/docs/errors"
 
 # Error Codes
@@ -440,5 +432,5 @@ For general error handling guidance, that covers dashboard related errors, see [
 
 title: "Getting started with Flags Explorer"
 description: "Learn how to set up the Flags Explorer so you can see and override your application"
-last\_updated: "2026-03-08T05:03:14.450Z"
+last\_updated: "2026-03-23T09:40:10.031Z"
 source: "https://vercel.com/docs/flags/flags-explorer/getting-started"

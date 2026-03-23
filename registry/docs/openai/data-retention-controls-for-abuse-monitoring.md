@@ -103,4 +103,4 @@ Images and files may be uploaded as inputs to `/v1/responses` (including when us
 
 #### Web Search
 
-Web Search is ZDR eligible, but Web Search is not HIPAA eligible and is not covered by a BAA.
+Web Search is ZDR eligible. Web Search with live internet access is not HIPAA eligible and is not covered by a BAA. Web Search in offline/cache-only mode (`external_web_access: false`) is HIPAA eligible and covered by a BAA when used with an API key from a ZDR-enabled project within a ZDR organization. This HIPAA/BAA guidance applies only to the Responses API `web_search` tool. Note: Preview variants (`web_search_preview`) ignore this parameter and behave as if `external_web_access` is `true`. We recommend using `web_search`.

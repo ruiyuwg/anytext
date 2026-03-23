@@ -18,7 +18,7 @@ export default defineNuxtConfig({
 
 When you set your `future.compatibilityVersion` to `5`, defaults throughout your Nuxt configuration will change to opt in to Nuxt v5 behavior, including:
 
-- **Vite Environment API**: Uses the new [Vite Environment API](https://nuxt.com/docs/4.x/getting-started/upgrade#migration-to-vite-environment-api) for improved build configuration
+- **Vite Environment API**: Automatically enables the new [Vite Environment API](https://nuxt.com/docs/4.x/getting-started/upgrade#migration-to-vite-environment-api) for improved build configuration
 - **Normalized Page Names**: Page component names will [match their route names](https://nuxt.com/docs/4.x/getting-started/upgrade#normalized-page-component-names) for consistent `<KeepAlive>` behavior
 - **`clearNuxtState` resets to defaults**: `clearNuxtState` will [reset state to its initial value](https://nuxt.com/docs/4.x/getting-started/upgrade#respect-defaults-when-clearing-usestate) instead of setting it to `undefined`
 - **Non-async `callHook`**: [`callHook` may return `void`](https://nuxt.com/docs/4.x/getting-started/upgrade#non-async-callhook) instead of always returning a `Promise`
@@ -40,8 +40,8 @@ Nuxt 5 migrates to Vite 6's new [Environment API](https://vite.dev/guide/api-env
 
 Previously, Nuxt used separate client and server Vite configurations. Now, Nuxt uses a shared Vite configuration with environment-specific plugins that use the `applyToEnvironment()` method to target specific environments.
 
-::note
-The Vite Environment API is always enabled in Nuxt 5. The `experimental.viteEnvironmentApi` option has been removed.
+::tip
+You can test this feature early by setting `future.compatibilityVersion: 5` (see [Testing Nuxt 5](https://nuxt.com/docs/4.x/getting-started/upgrade#testing-nuxt-5)) or by enabling it explicitly with `experimental.viteEnvironmentApi: true`.
 ::
 
 **Key changes:**
@@ -138,28 +138,6 @@ addVitePlugin(() => ({
 
 ::read-more{target="\_blank" to="https://vite.dev/guide/api-environment"}
 Learn more about Vite's Environment API
-::
-
-### Migration to Vite 8
-
-🚦 **Impact Level**: Medium
-
-#### What Changed
-
-Nuxt 5 upgrades from Vite 7 to [Vite 8](https://main.vite.dev/guide/migration){rel=""nofollow""}, which replaces esbuild and Rollup with [Rolldown](https://rolldown.rs){rel=""nofollow""} as the underlying bundler. This brings significantly faster builds but includes several breaking changes.
-
-::note
-Unlike the Vite Environment API migration, this change cannot be opted into early with `future.compatibilityVersion: 5`. If you want to test Vite 8 compatibility ahead of time, you can add a `"vite": "^8.0.0-beta.15"` resolution override in your `package.json`.
-::
-
-Most of the migration is handled by Nuxt internally, but there are some user-facing changes to be aware of:
-
-- **`vite.esbuild` and `vite.optimizeDeps.esbuildOptions`** are deprecated in favour of `vite.oxc` and `vite.optimizeDeps.rolldownOptions`. Vite 8 converts these automatically for now, but they will be removed in the future.
-- **`build.rollupOptions`** is deprecated in favour of `build.rolldownOptions`.
-- **CommonJS interop behaviour** has changed. If you import CJS modules, review the [Vite 8 migration guide](https://main.vite.dev/guide/migration#consistent-commonjs-interop){rel=""nofollow""} for details.
-
-::read-more{target="\_blank" to="https://main.vite.dev/guide/migration"}
-See the full Vite 8 migration guide for all breaking changes and migration steps.
 ::
 
 ### Non-Async `callHook`

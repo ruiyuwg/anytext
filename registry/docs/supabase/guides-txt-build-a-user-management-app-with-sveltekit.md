@@ -240,22 +240,22 @@ As this tutorial uses TypeScript the compiler complains about `event.locals.supa
   // See https://kit.svelte.dev/docs/types#app
   // for information about these interfaces
   declare global {
-  	namespace App {
-  		// interface Error {}
-  		interface Locals {
-  			supabase: SupabaseClient
-  			safeGetSession(): Promise<{ session: Session | null; user?: Session["user"] | null }>
-  		}
-  		interface PageData {
-  			session: Session | null
-  			user?: Session["user"] | null
-  		}
-  		// interface PageState {}
-  		// interface Platform {}
-  	}
+    namespace App {
+      // interface Error {}
+      interface Locals {
+        supabase: SupabaseClient
+        safeGetSession(): Promise<{ session: Session | null; user?: Session['user'] | null }>
+      }
+      interface PageData {
+        session: Session | null
+        user?: Session['user'] | null
+      }
+      // interface PageState {}
+      // interface Platform {}
+    }
   }
 
-  export {};
+  export {}
   ```
 ````
 
@@ -443,35 +443,35 @@ Create a `src/routes/+page.server.ts` file that handles the magic link form when
   }
 
   export const actions: Actions = {
-  	default: async (event) => {
-  		const {
-  			url,
-  			request,
-  			locals: { supabase }
-  		} = event
-  		const formData = await request.formData()
-  		const email = formData.get('email') as string
+    default: async (event) => {
+      const {
+        url,
+        request,
+        locals: { supabase },
+      } = event
+      const formData = await request.formData()
+      const email = formData.get('email') as string
       const validEmail = /^[\w-\.+]+@([\w-]+\.)+[\w-]{2,8}$/.test(email)
-      
-  		if (!validEmail) {
-  			return fail(400, { errors: { email: "Please enter a valid email address" }, email })
-  		}
 
-  		const { error } = await supabase.auth.signInWithOtp({ email })
+      if (!validEmail) {
+        return fail(400, { errors: { email: 'Please enter a valid email address' }, email })
+      }
 
-  		if (error) {
-  			return fail(400, {
-  				success: false,
-  				email,
-  				message: `There was an issue, Please contact support.`
-  			})
-  		}
+      const { error } = await supabase.auth.signInWithOtp({ email })
 
-  		return {
-  			success: true,
-  			message: 'Please check your email for a magic link to log into the website.'
-  		}
-  	}
+      if (error) {
+        return fail(400, {
+          success: false,
+          email,
+          message: `There was an issue, Please contact support.`,
+        })
+      }
+
+      return {
+        success: true,
+        message: 'Please check your email for a magic link to log into the website.',
+      }
+    },
   }
   ```
 ````

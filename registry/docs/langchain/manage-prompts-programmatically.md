@@ -86,7 +86,7 @@ Prompt prompt = Prompt.builder()
 var url = client.prompts().push(prompt);
 ```
 
-You can also push a prompt as a RunnableSequence of a prompt and a model. This is useful for storing the model configuration you want to use with this prompt. The provider must be supported by the LangSmith playground. (see settings here: [Supported Providers](https://langsmith.com/playground))
+You can also push a prompt as a RunnableSequence of a prompt and a model. This is useful for storing the model configuration you want to use with this prompt. The provider must be supported by the Playground, see [supported model providers](/langsmith/playground-model-providers).
 
 ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langsmith import Client
@@ -124,6 +124,92 @@ const chain = prompt.pipe(model);
 await hub.push("joke-generator-with-model", {
   object: chain,
 });
+```
+
+## Push a StructuredPrompt
+
+A `StructuredPrompt` combines a prompt template with an output schema, ensuring the model returns data in a defined structure. Use `StructuredPrompt.from_messages_and_schema` (Python) or `StructuredPrompt.fromMessagesAndSchema` (TypeScript) to create one, then push it to the hub like any other prompt.
+
+### Without a model
+
+Push the structured prompt on its own when you want to store the template and schema independently of any model configuration.
+
+```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langsmith import Client
+from langchain_core.prompts.structured import StructuredPrompt
+from pydantic import BaseModel, Field
+
+class ResponseSchema(BaseModel):
+    positive_sentiment: bool = Field(description="Was the user sentiment positive?")
+
+prompt = StructuredPrompt.from_messages_and_schema(
+    [
+        ("system", "Evaluate the sentiment of the following conversation."),
+        ("human", "{conversation}"),
+    ],
+    schema=ResponseSchema.model_json_schema(),
+)
+
+client = Client()
+url = client.push_prompt("sentiment-evaluator", object=prompt)
+print(url)
+```
+
+```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import * as hub from "langchain/hub";
+import { StructuredPrompt } from "@langchain/core/prompts";
+
+const schema = {
+  title: "ResponseSchema",
+  type: "object",
+  properties: {
+    positive_sentiment: {
+      type: "boolean",
+      description: "Was the user sentiment positive?",
+    },
+  },
+  required: ["positive_sentiment"],
+};
+
+const prompt = StructuredPrompt.fromMessagesAndSchema(
+  [
+    ["system", "Evaluate the sentiment of the following conversation."],
+    ["human", "{conversation}"],
+  ],
+  schema
+);
+
+const url = await hub.push("sentiment-evaluator", prompt);
+console.log(url);
+```
+
+### With a model
+
+Push the structured prompt as a RunnableSequence with a model to store the full pipeline, including model configuration, in the hub.
+
+```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langsmith import Client
+from langchain_core.prompts.structured import StructuredPrompt
+from langchain_openai import ChatOpenAI
+from pydantic import BaseModel, Field
+
+class ResponseSchema(BaseModel):
+    positive_sentiment: bool = Field(description="Was the user sentiment positive?")
+
+prompt = StructuredPrompt.from_messages_and_schema(
+    [
+        ("system", "Evaluate the sentiment of the following conversation."),
+        ("human", "{conversation}"),
+    ],
+    schema=ResponseSchema.model_json_schema(),
+)
+
+model = ChatOpenAI(model="gpt-4o-mini")
+chain = prompt | model
+
+client = Client()
+url = client.push_prompt("sentiment-evaluator-with-model", object=chain)
+print(url)
 ```
 
 ## Pull a prompt

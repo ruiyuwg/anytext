@@ -47,5 +47,5 @@ When you create your first flag in the Vercel Dashboard, these variables are aut
 
 title: "Fluid compute"
 description: "Learn about fluid compute, an execution model for Vercel Functions that provides a more flexible and efficient way to run your functions."
-last\_updated: "2026-03-08T05:03:14.677Z"
+last\_updated: "2026-03-23T09:40:10.287Z"
 source: "https://vercel.com/docs/fluid-compute"

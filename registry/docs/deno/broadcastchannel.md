@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/api/runtime-broadcast-channel
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 In Deno Deploy Classic, code is run in different data centers around the world
 in order to reduce latency by servicing requests at the data center nearest to

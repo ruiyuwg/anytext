@@ -1,438 +1,172 @@
 # Test
 
-Source: https://docs.langchain.com/oss/javascript/langchain/test
+Source: https://docs.langchain.com/oss/javascript/langgraph/test
 
-Agentic applications let an LLM decide its own next steps to solve a problem. That flexibility is powerful, but the model's black-box nature makes it hard to predict how a tweak in one part of your agent will affect the rest. To build production-ready agents, thorough testing is essential.
+After you've prototyped your LangGraph agent, a natural next step is to add tests. This guide covers some useful patterns you can use when writing unit tests.
 
-There are a few approaches to testing your agents:
+Note that this guide is LangGraph-specific and covers scenarios around graphs with custom structures - if you are just getting started, check out [Test](/oss/javascript/langchain/test/) that uses LangChain's built-in [`createAgent`](https://reference.langchain.com/javascript/langchain/index/createAgent) instead.
 
-- Unit tests exercise small, deterministic pieces of your agent in isolation using in-memory fakes so you can assert exact behavior quickly and deterministically.
+## Prerequisites
 
-- [Integration tests](#integration-testing) test the agent using real network calls to confirm that components work together, credentials and schemas line up, and latency is acceptable.
-
-Agentic applications tend to lean more on integration because they chain multiple components together and must deal with flakiness due to the nondeterministic nature of LLMs.
-
-## Integration testing
-
-Many agent behaviors only emerge when using a real LLM, such as which tool the agent decides to call, how it formats responses, or whether a prompt modification affects the entire execution trajectory. LangChain's [`agentevals`](https://github.com/langchain-ai/agentevals) package provides evaluators specifically designed for testing agent trajectories with live models.
-
-AgentEvals lets you easily evaluate the trajectory of your agent (the exact sequence of messages, including tool calls) by performing a **trajectory match** or by using an **LLM judge**:
-
-Hard-code a reference trajectory for a given input and validate the run via a step-by-step comparison.
-
-Ideal for testing well-defined workflows where you know the expected behavior. Use when you have specific expectations about which tools should be called and in what order. This approach is deterministic, fast, and cost-effective since it doesn't require additional LLM calls.
-
-Use a LLM to qualitatively validate your agent's execution trajectory. The "judge" LLM reviews the agent's decisions against a prompt rubric (which can include a reference trajectory).
-
-More flexible and can assess nuanced aspects like efficiency and appropriateness, but requires an LLM call and is less deterministic. Use when you want to evaluate the overall quality and reasonableness of the agent's trajectory without strict tool call or ordering requirements.
-
-### Installing AgentEvals
+First, make sure you have [`vitest`](https://vitest.dev/) installed:
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-npm install agentevals @langchain/core
+$ npm install -D vitest
 ```
 
-Or, clone the [AgentEvals repository](https://github.com/langchain-ai/agentevals) directly.
+## Getting started
 
-### Trajectory match evaluator
+Because many LangGraph agents depend on state, a useful pattern is to create your graph before each test where you use it, then compile it within tests with a new checkpointer instance.
 
-AgentEvals offers the `createTrajectoryMatchEvaluator` function to match your agent's trajectory against a reference trajectory. There are four modes to choose from:
-
-| Mode        | Description                                               | Use Case                                                              |
-| ----------- | --------------------------------------------------------- | --------------------------------------------------------------------- |
-| `strict`    | Exact match of messages and tool calls in the same order  | Testing specific sequences (e.g., policy lookup before authorization) |
-| `unordered` | Same tool calls allowed in any order                      | Verifying information retrieval when order doesn't matter             |
-| `subset`    | Agent calls only tools from reference (no extras)         | Ensuring agent doesn't exceed expected scope                          |
-| `superset`  | Agent calls at least the reference tools (extras allowed) | Verifying minimum required actions are taken                          |
-
-The `strict` mode ensures trajectories contain identical messages in the same order with the same tool calls, though it allows for differences in message content. This is useful when you need to enforce a specific sequence of operations, such as requiring a policy lookup before authorizing an action.
+The below example shows how this works with a simple, linear graph that progresses through `node1` and `node2`. Each node updates the single state key `my_key`:
 
 ```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { createAgent, tool, HumanMessage, AIMessage, ToolMessage } from "langchain"
-import { createTrajectoryMatchEvaluator } from "agentevals";
+import { test, expect } from 'vitest';
+import {
+  StateGraph,
+  StateSchema,
+  START,
+  END,
+  MemorySaver,
+} from '@langchain/langgraph';
 import * as z from "zod";
 
-const getWeather = tool(
-  async ({ city }: { city: string }) => {
-    return `It's 75 degrees and sunny in ${city}.`;
-  },
-  {
-    name: "get_weather",
-    description: "Get weather information for a city.",
-    schema: z.object({
-      city: z.string(),
-    }),
-  }
-);
-
-const agent = createAgent({
-  model: "gpt-4.1",
-  tools: [getWeather]
+const State = new StateSchema({
+  my_key: z.string(),
 });
 
-const evaluator = createTrajectoryMatchEvaluator({  // [!code highlight]
-  trajectoryMatchMode: "strict",  // [!code highlight]
-});  // [!code highlight]
+const createGraph = () => {
+  return new StateGraph(State)
+    .addNode('node1', (state) => ({ my_key: 'hello from node1' }))
+    .addNode('node2', (state) => ({ my_key: 'hello from node2' }))
+    .addEdge(START, 'node1')
+    .addEdge('node1', 'node2')
+    .addEdge('node2', END);
+};
 
-async function testWeatherToolCalledStrict() {
-  const result = await agent.invoke({
-    messages: [new HumanMessage("What's the weather in San Francisco?")]
-  });
-
-  const referenceTrajectory = [
-    new HumanMessage("What's the weather in San Francisco?"),
-    new AIMessage({
-      content: "",
-      tool_calls: [
-        { id: "call_1", name: "get_weather", args: { city: "San Francisco" } }
-      ]
-    }),
-    new ToolMessage({
-      content: "It's 75 degrees and sunny in San Francisco.",
-      tool_call_id: "call_1"
-    }),
-    new AIMessage("The weather in San Francisco is 75 degrees and sunny."),
-  ];
-
-  const evaluation = await evaluator({
-    outputs: result.messages,
-    referenceOutputs: referenceTrajectory
-  });
-  // {
-  //     'key': 'trajectory_strict_match',
-  //     'score': true,
-  //     'comment': null,
-  // }
-  expect(evaluation.score).toBe(true);
-}
+test('basic agent execution', async () => {
+  const uncompiledGraph = createGraph();
+  const checkpointer = new MemorySaver();
+  const compiledGraph = uncompiledGraph.compile({ checkpointer });
+  const result = await compiledGraph.invoke(
+    { my_key: 'initial_value' },
+    { configurable: { thread_id: '1' } }
+  );
+  expect(result.my_key).toBe('hello from node2');
+});
 ```
 
-The `unordered` mode allows the same tool calls in any order, which is helpful when you want to verify that specific information was retrieved but don't care about the sequence. For example, an agent might need to check both weather and events for a city, but the order doesn't matter.
+## Testing individual nodes and edges
+
+Compiled LangGraph agents expose references to each individual node as `graph.nodes`. You can take advantage of this to test individual nodes within your agent. Note that this will bypass any checkpointers passed when compiling the graph:
 
 ```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { createAgent, tool, HumanMessage, AIMessage, ToolMessage } from "langchain"
-import { createTrajectoryMatchEvaluator } from "agentevals";
+import { test, expect } from 'vitest';
+import {
+  StateGraph,
+  START,
+  END,
+  MemorySaver,
+  StateSchema,
+} from '@langchain/langgraph';
 import * as z from "zod";
 
-const getWeather = tool(
-  async ({ city }: { city: string }) => {
-    return `It's 75 degrees and sunny in ${city}.`;
-  },
-  {
-    name: "get_weather",
-    description: "Get weather information for a city.",
-    schema: z.object({ city: z.string() }),
-  }
-);
-
-const getEvents = tool(
-  async ({ city }: { city: string }) => {
-    return `Concert at the park in ${city} tonight.`;
-  },
-  {
-    name: "get_events",
-    description: "Get events happening in a city.",
-    schema: z.object({ city: z.string() }),
-  }
-);
-
-const agent = createAgent({
-  model: "gpt-4.1",
-  tools: [getWeather, getEvents]
+const State = new StateSchema({
+  my_key: z.string(),
 });
 
-const evaluator = createTrajectoryMatchEvaluator({  // [!code highlight]
-  trajectoryMatchMode: "unordered",  // [!code highlight]
-});  // [!code highlight]
+const createGraph = () => {
+  return new StateGraph(State)
+    .addNode('node1', (state) => ({ my_key: 'hello from node1' }))
+    .addNode('node2', (state) => ({ my_key: 'hello from node2' }))
+    .addEdge(START, 'node1')
+    .addEdge('node1', 'node2')
+    .addEdge('node2', END);
+};
 
-async function testMultipleToolsAnyOrder() {
-  const result = await agent.invoke({
-    messages: [new HumanMessage("What's happening in SF today?")]
-  });
-
-  // Reference shows tools called in different order than actual execution
-  const referenceTrajectory = [
-    new HumanMessage("What's happening in SF today?"),
-    new AIMessage({
-      content: "",
-      tool_calls: [
-        { id: "call_1", name: "get_events", args: { city: "SF" } },
-        { id: "call_2", name: "get_weather", args: { city: "SF" } },
-      ]
-    }),
-    new ToolMessage({
-      content: "Concert at the park in SF tonight.",
-      tool_call_id: "call_1"
-    }),
-    new ToolMessage({
-      content: "It's 75 degrees and sunny in SF.",
-      tool_call_id: "call_2"
-    }),
-    new AIMessage("Today in SF: 75 degrees and sunny with a concert at the park tonight."),
-  ];
-
-  const evaluation = await evaluator({
-    outputs: result.messages,
-    referenceOutputs: referenceTrajectory,
-  });
-  // {
-  //     'key': 'trajectory_unordered_match',
-  //     'score': true,
-  // }
-  expect(evaluation.score).toBe(true);
-}
+test('individual node execution', async () => {
+  const uncompiledGraph = createGraph();
+  // Will be ignored in this example
+  const checkpointer = new MemorySaver();
+  const compiledGraph = uncompiledGraph.compile({ checkpointer });
+  // Only invoke node 1
+  const result = await compiledGraph.nodes['node1'].invoke(
+    { my_key: 'initial_value' },
+  );
+  expect(result.my_key).toBe('hello from node1');
+});
 ```
 
-The `superset` and `subset` modes match partial trajectories. The `superset` mode verifies that the agent called at least the tools in the reference trajectory, allowing additional tool calls. The `subset` mode ensures the agent did not call any tools beyond those in the reference.
+## Partial execution
+
+For agents made up of larger graphs, you may wish to test partial execution paths within your agent rather than the entire flow end-to-end. In some cases, it may make semantic sense to [restructure these sections as subgraphs](/oss/javascript/langgraph/use-subgraphs), which you can invoke in isolation as normal.
+
+However, if you do not wish to make changes to your agent graph's overall structure, you can use LangGraph's persistence mechanisms to simulate a state where your agent is paused right before the beginning of the desired section, and will pause again at the end of the desired section. The steps are as follows:
+
+1. Compile your agent with a checkpointer (the in-memory checkpointer [`MemorySaver`](https://reference.langchain.com/javascript/classes/_langchain_langgraph-checkpoint.MemorySaver.html) will suffice for testing).
+2. Call your agent's [`update_state`](/oss/javascript/langgraph/use-time-travel) method with an [`asNode`](/oss/javascript/langgraph/use-time-travel#from-a-specific-node) parameter set to the name of the node *before* the one you want to start your test.
+3. Invoke your agent with the same `thread_id` you used to update the state and an `interruptBefore` parameter set to the name of the node you want to stop at.
+
+Here's an example that executes only the second and third nodes in a linear graph:
 
 ```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { createAgent } from "langchain"
-import { tool } from "@langchain/core/tools";
-import { HumanMessage, AIMessage, ToolMessage } from "@langchain/core/messages";
-import { createTrajectoryMatchEvaluator } from "agentevals";
+import { test, expect } from 'vitest';
+import {
+  StateGraph,
+  StateSchema,
+  START,
+  END,
+  MemorySaver,
+} from '@langchain/langgraph';
 import * as z from "zod";
 
-const getWeather = tool(
-  async ({ city }: { city: string }) => {
-    return `It's 75 degrees and sunny in ${city}.`;
-  },
-  {
-    name: "get_weather",
-    description: "Get weather information for a city.",
-    schema: z.object({ city: z.string() }),
-  }
-);
-
-const getDetailedForecast = tool(
-  async ({ city }: { city: string }) => {
-    return `Detailed forecast for ${city}: sunny all week.`;
-  },
-  {
-    name: "get_detailed_forecast",
-    description: "Get detailed weather forecast for a city.",
-    schema: z.object({ city: z.string() }),
-  }
-);
-
-const agent = createAgent({
-  model: "gpt-4.1",
-  tools: [getWeather, getDetailedForecast]
+const State = new StateSchema({
+  my_key: z.string(),
 });
 
-const evaluator = createTrajectoryMatchEvaluator({  // [!code highlight]
-  trajectoryMatchMode: "superset",  // [!code highlight]
-});  // [!code highlight]
+const createGraph = () => {
+  return new StateGraph(State)
+    .addNode('node1', (state) => ({ my_key: 'hello from node1' }))
+    .addNode('node2', (state) => ({ my_key: 'hello from node2' }))
+    .addNode('node3', (state) => ({ my_key: 'hello from node3' }))
+    .addNode('node4', (state) => ({ my_key: 'hello from node4' }))
+    .addEdge(START, 'node1')
+    .addEdge('node1', 'node2')
+    .addEdge('node2', 'node3')
+    .addEdge('node3', 'node4')
+    .addEdge('node4', END);
+};
 
-async function testAgentCallsRequiredToolsPlusExtra() {
-  const result = await agent.invoke({
-    messages: [new HumanMessage("What's the weather in Boston?")]
-  });
-
-  // Reference only requires getWeather, but agent may call additional tools
-  const referenceTrajectory = [
-    new HumanMessage("What's the weather in Boston?"),
-    new AIMessage({
-      content: "",
-      tool_calls: [
-        { id: "call_1", name: "get_weather", args: { city: "Boston" } },
-      ]
-    }),
-    new ToolMessage({
-      content: "It's 75 degrees and sunny in Boston.",
-      tool_call_id: "call_1"
-    }),
-    new AIMessage("The weather in Boston is 75 degrees and sunny."),
-  ];
-
-  const evaluation = await evaluator({
-    outputs: result.messages,
-    referenceOutputs: referenceTrajectory,
-  });
-  // {
-  //     'key': 'trajectory_superset_match',
-  //     'score': true,
-  //     'comment': null,
-  // }
-  expect(evaluation.score).toBe(true);
-}
-```
-
-You can also set the `toolArgsMatchMode` property and/or `toolArgsMatchOverrides` to customize how the evaluator considers equality between tool calls in the actual trajectory vs. the reference. By default, only tool calls with the same arguments to the same tool are considered equal. Visit the [repository](https://github.com/langchain-ai/agentevals?tab=readme-ov-file#tool-args-match-modes) for more details.
-
-### LLM-as-Judge evaluator
-
-You can also use an LLM to evaluate the agent's execution path with the `createTrajectoryLLMAsJudge` function. Unlike the trajectory match evaluators, it doesn't require a reference trajectory, but one can be provided if available.
-
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { createAgent } from "langchain"
-import { tool } from "@langchain/core/tools";
-import { HumanMessage, AIMessage, ToolMessage } from "@langchain/core/messages";
-import { createTrajectoryLLMAsJudge, TRAJECTORY_ACCURACY_PROMPT } from "agentevals";
-import * as z from "zod";
-
-const getWeather = tool(
-  async ({ city }: { city: string }) => {
-    return `It's 75 degrees and sunny in ${city}.`;
-  },
-  {
-    name: "get_weather",
-    description: "Get weather information for a city.",
-    schema: z.object({ city: z.string() }),
-  }
-);
-
-const agent = createAgent({
-  model: "gpt-4.1",
-  tools: [getWeather]
-});
-
-const evaluator = createTrajectoryLLMAsJudge({  // [!code highlight]
-  model: "openai:o3-mini",  // [!code highlight]
-  prompt: TRAJECTORY_ACCURACY_PROMPT,  // [!code highlight]
-});  // [!code highlight]
-
-async function testTrajectoryQuality() {
-  const result = await agent.invoke({
-    messages: [new HumanMessage("What's the weather in Seattle?")]
-  });
-
-  const evaluation = await evaluator({
-    outputs: result.messages,
-  });
-  // {
-  //     'key': 'trajectory_accuracy',
-  //     'score': true,
-  //     'comment': 'The provided agent trajectory is reasonable...'
-  // }
-  expect(evaluation.score).toBe(true);
-}
-```
-
-If you have a reference trajectory, you can add an extra variable to your prompt and pass in the reference trajectory. Below, we use the prebuilt `TRAJECTORY_ACCURACY_PROMPT_WITH_REFERENCE` prompt and configure the `reference_outputs` variable:
-
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { TRAJECTORY_ACCURACY_PROMPT_WITH_REFERENCE } from "agentevals";
-
-const evaluator = createTrajectoryLLMAsJudge({
-  model: "openai:o3-mini",
-  prompt: TRAJECTORY_ACCURACY_PROMPT_WITH_REFERENCE,
-});
-
-const evaluation = await evaluator({
-  outputs: result.messages,
-  referenceOutputs: referenceTrajectory,
-});
-```
-
-For more configurability over how the LLM evaluates the trajectory, visit the [repository](https://github.com/langchain-ai/agentevals?tab=readme-ov-file#trajectory-llm-as-judge).
-
-## LangSmith integration
-
-For tracking experiments over time, you can log evaluator results to [LangSmith](https://smith.langchain.com/), a platform for building production-grade LLM applications that includes tracing, evaluation, and experimentation tools.
-
-First, set up LangSmith by setting the required environment variables:
-
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-export LANGSMITH_API_KEY="your_langsmith_api_key"
-export LANGSMITH_TRACING="true"
-```
-
-LangSmith offers two main approaches for running evaluations: [Vitest/Jest](/langsmith/vitest-jest) integration and the `evaluate` function.
-
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import * as ls from "langsmith/vitest";
-// import * as ls from "langsmith/jest";
-
-import { createTrajectoryLLMAsJudge, TRAJECTORY_ACCURACY_PROMPT } from "agentevals";
-
-const trajectoryEvaluator = createTrajectoryLLMAsJudge({
-  model: "openai:o3-mini",
-  prompt: TRAJECTORY_ACCURACY_PROMPT,
-});
-
-ls.describe("trajectory accuracy", () => {
-  ls.test("accurate trajectory", {
-    inputs: {
-      messages: [
-        {
-          role: "user",
-          content: "What is the weather in SF?"
-        }
-      ]
+test('partial execution from node2 to node3', async () => {
+  const uncompiledGraph = createGraph();
+  const checkpointer = new MemorySaver();
+  const compiledGraph = uncompiledGraph.compile({ checkpointer });
+  await compiledGraph.updateState(
+    { configurable: { thread_id: '1' } },
+    // The state passed into node 2 - simulating the state at
+    // the end of node 1
+    { my_key: 'initial_value' },
+    // Update saved state as if it came from node 1
+    // Execution will resume at node 2
+    'node1',
+  );
+  const result = await compiledGraph.invoke(
+    // Resume execution by passing None
+    null,
+    {
+      configurable: { thread_id: '1' },
+      // Stop after node 3 so that node 4 doesn't run
+      interruptAfter: ['node3']
     },
-    referenceOutputs: {
-      messages: [
-        new HumanMessage("What is the weather in SF?"),
-        new AIMessage({
-          content: "",
-          tool_calls: [
-            { id: "call_1", name: "get_weather", args: { city: "SF" } }
-          ]
-        }),
-        new ToolMessage({
-          content: "It's 75 degrees and sunny in SF.",
-          tool_call_id: "call_1"
-        }),
-        new AIMessage("The weather in SF is 75 degrees and sunny."),
-      ],
-    },
-  }, async ({ inputs, referenceOutputs }) => {
-    const result = await agent.invoke({
-      messages: [new HumanMessage("What is the weather in SF?")]
-    });
-
-    ls.logOutputs({ messages: result.messages });
-
-    await trajectoryEvaluator({
-      inputs,
-      outputs: result.messages,
-      referenceOutputs,
-    });
-  });
+  );
+  expect(result.my_key).toBe('hello from node3');
 });
 ```
-
-Run the evaluation with your test runner:
-
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-vitest run test_trajectory.eval.ts
-# or
-jest test_trajectory.eval.ts
-```
-
-Alternatively, you can create a dataset in LangSmith and use the `evaluate` function:
-
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { evaluate } from "langsmith/evaluation";
-import { createTrajectoryLLMAsJudge, TRAJECTORY_ACCURACY_PROMPT } from "agentevals";
-
-const trajectoryEvaluator = createTrajectoryLLMAsJudge({
-  model: "openai:o3-mini",
-  prompt: TRAJECTORY_ACCURACY_PROMPT,
-});
-
-async function runAgent(inputs: any) {
-  const result = await agent.invoke(inputs);
-  return result.messages;
-}
-
-await evaluate(
-  runAgent,
-  {
-    data: "your_dataset_name",
-    evaluators: [trajectoryEvaluator],
-  }
-);
-```
-
-Results will be automatically logged to LangSmith.
-
-To learn more about evaluating your agent, see the [LangSmith docs](/langsmith/vitest-jest).
 
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/test.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

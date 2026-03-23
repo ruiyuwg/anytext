@@ -7,14 +7,14 @@ The special file `loading.js` helps you create meaningful Loading UI with [React
 ```tsx filename="app/feed/loading.tsx" switcher
 export default function Loading() {
   // Or a custom loading skeleton component
-  return <p>Loading...</p>;
+  return <p>Loading...</p>
 }
 ```
 
 ```jsx filename="app/feed/loading.js" switcher
 export default function Loading() {
   // Or a custom loading skeleton component
-  return <p>Loading...</p>;
+  return <p>Loading...</p>
 }
 ```
 
@@ -38,7 +38,7 @@ Loading UI components do not accept any parameters.
 
 ### Instant Loading States
 
-An instant loading state is fallback UI that is shown immediately upon navigation. You can pre-render loading indicators such as skeletons and spinners, or a small but meaningful part of future screens such as a cover photo, title, etc. This helps users understand the app is responding and provides a better user experience.
+An instant loading state is fallback UI that is shown immediately upon navigation. You can prerender loading indicators such as skeletons and spinners, or a small but meaningful part of future screens such as a cover photo, title, etc. This helps users understand the app is responding and provides a better user experience.
 
 Create a loading state by adding a `loading.js` file inside a folder.
 
@@ -47,20 +47,29 @@ Create a loading state by adding a `loading.js` file inside a folder.
 ```tsx filename="app/dashboard/loading.tsx" switcher
 export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
-  return <LoadingSkeleton />;
+  return <LoadingSkeleton />
 }
 ```
 
 ```jsx filename="app/dashboard/loading.js" switcher
 export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
-  return <LoadingSkeleton />;
+  return <LoadingSkeleton />
 }
 ```
 
 In the same folder, `loading.js` will be nested inside `layout.js`. It will automatically wrap the `page.js` file and any children below in a `<Suspense>` boundary.
 
 ![loading.js overview](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/loading-overview.png)
+
+In the [component hierarchy](/docs/app/getting-started/project-structure#component-hierarchy), `loading.js` wraps `not-found.js`, `page.js`, and nested `layout.js` files in a `<Suspense>` boundary. It does **not** wrap the `layout.js`, `template.js`, or `error.js` in the same segment.
+
+> **Good to know**: If the layout accesses uncached or runtime data (e.g. `cookies()`, `headers()`, or uncached fetches), `loading.js` will not show a fallback for it.
+>
+> - **Without [Cache Components](/docs/app/getting-started/caching):** Navigation blocks until the layout finishes rendering.
+> - **With [Cache Components](/docs/app/getting-started/caching):** Uncached or runtime data access in the layout must be explicitly wrapped in `<Suspense>`, otherwise Next.js guides you with a build-time error. The static shell streams first, and the uncached content fills in.
+>
+> To ensure instant navigation, move uncached data fetching from `layout.js` into `page.js`, or wrap the runtime data access in your layout in its own `<Suspense>` boundary. See [layout.js Caveats](/docs/app/api-reference/file-conventions/layout#interaction-with-loadingjs) for details and examples.
 
 ### SEO
 
@@ -107,13 +116,13 @@ Learn how to [configure streaming](/docs/app/guides/self-hosting#streaming-and-s
 
 ### Streaming with Suspense
 
-In addition to `loading.js`, you can also manually create Suspense Boundaries for your own UI components. The App Router supports streaming with [Suspense](https://react.dev/reference/react/Suspense).
+In addition to `loading.js`, you can also manually create Suspense Boundaries for your own UI components. The App Router supports streaming with [Suspense](https://react.dev/reference/react/Suspense). See the [Streaming guide](/docs/app/guides/streaming) for more on how streaming works, including granular Suspense patterns, Route Handler streaming, and infrastructure considerations.
 
 `<Suspense>` works by wrapping a component that performs an asynchronous action (e.g. fetch data), showing fallback UI (e.g. skeleton, spinner) while it's happening, and then swapping in your component once the action completes.
 
 ```tsx filename="app/dashboard/page.tsx" switcher
-import { Suspense } from "react";
-import { PostFeed, Weather } from "./Components";
+import { Suspense } from 'react'
+import { PostFeed, Weather } from './Components'
 
 export default function Posts() {
   return (
@@ -125,13 +134,13 @@ export default function Posts() {
         <Weather />
       </Suspense>
     </section>
-  );
+  )
 }
 ```
 
 ```jsx filename="app/dashboard/page.js" switcher
-import { Suspense } from "react";
-import { PostFeed, Weather } from "./Components";
+import { Suspense } from 'react'
+import { PostFeed, Weather } from './Components'
 
 export default function Posts() {
   return (
@@ -143,7 +152,7 @@ export default function Posts() {
         <Weather />
       </Suspense>
     </section>
-  );
+  )
 }
 ```
 
@@ -169,20 +178,20 @@ The `mdx-components.js|tsx` file is **required** to use [`@next/mdx` with App Ro
 Use the file `mdx-components.tsx` (or `.js`) in the root of your project to define MDX Components. For example, at the same level as `pages` or `app`, or inside `src` if applicable.
 
 ```tsx filename="mdx-components.tsx" switcher
-import type { MDXComponents } from "mdx/types";
+import type { MDXComponents } from 'mdx/types'
 
-const components: MDXComponents = {};
+const components: MDXComponents = {}
 
 export function useMDXComponents(): MDXComponents {
-  return components;
+  return components
 }
 ```
 
 ```js filename="mdx-components.js" switcher
-const components = {};
+const components = {}
 
 export function useMDXComponents() {
-  return components;
+  return components
 }
 ```
 
@@ -193,20 +202,20 @@ export function useMDXComponents() {
 The file must export a single function named `useMDXComponents`. This function does not accept any arguments.
 
 ```tsx filename="mdx-components.tsx" switcher
-import type { MDXComponents } from "mdx/types";
+import type { MDXComponents } from 'mdx/types'
 
-const components: MDXComponents = {};
+const components: MDXComponents = {}
 
 export function useMDXComponents(): MDXComponents {
-  return components;
+  return components
 }
 ```
 
 ```js filename="mdx-components.js" switcher
-const components = {};
+const components = {}
 
 export function useMDXComponents() {
-  return components;
+  return components
 }
 ```
 

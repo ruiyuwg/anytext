@@ -54,13 +54,13 @@ If you’re more comfortable using a browser-based tool, go to [MXLookup’s DNS
 
 ## Create required DNS records
 
-In this section, you’ll create the DNS records you need to connect your domain. As you go through each step, check each checkbox to keep track of where you are in the process.
+In this section, you’ll create the DNS records you need to connect your domain. As you go through each step, check each checkbox to keep track of where you’re in the process.
 
 Select the tab that matches your DNS provider from the tabs below—this gives you specific, guided instructions for creating the required DNS records. If your DNS provider isn’t an option, follow the Standard instructions:
 
 #### Standard instructions
 
-These are standard instructions for creating your DNS records. If you have issues with any of the steps, please contact your DNS provider for more assistance.
+These are standard instructions for creating your DNS records. If you have issues with any of the steps, contact your DNS provider for more assistance.
 
 > To track your progress, go through each step  and check it off when you’ve completed it.
 
@@ -346,7 +346,7 @@ Use these instructions to create your DNS records with GoDaddy. If you have issu
   When you finish this step, your DNS records are configured.
   ````
 
-If you need any additional information, please read GoDaddy’s official developer guides, starting with [Manage DNS records](https://www.godaddy.com/help/manage-dns-records-680).
+If you need any additional information, read GoDaddy’s official developer guides, starting with [Manage DNS records](https://www.godaddy.com/help/manage-dns-records-680).
 
 #### Cloudflare
 
@@ -371,7 +371,7 @@ Use these instructions to create your DNS records with Cloudflare. If you have i
 ![The table of websites you'll see on the Cloudflare dashboard](https://b.stripecdn.com/docs-statics-srv/assets/websites-table.c794d196f321659ff795e7456e8c1438.png)
 
 ```
-     In this example image, you’d click on the powdur.me table row.
+     In this example image, you’d click the powdur.me table row.
 
   1. You should now be on the admin page for your domain.
 
@@ -650,7 +650,7 @@ Cloudflare,
 
 We’re in the process of adding a custom domain name to Stripe Checkout that leverages Cloudflare. It’s currently blocked by you. Can you please unblock this hostname for us?
 
-Domain/Hostname we are attempting to add: **\[insert your domain name]**
+Domain/Hostname we’re attempting to add: **\[insert your domain name]**
 
 Association with the domain: **\[provide an explanation of your association with/ownership of the domain]**
 

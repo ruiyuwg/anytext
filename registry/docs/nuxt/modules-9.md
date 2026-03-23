@@ -1,58 +1,82 @@
-# Modules
+# modules
 
-## Exploring Nuxt Modules
+It is a good place to place any local modules you develop while building your application.
 
-When developing production-grade applications with Nuxt you might find that the framework's core functionality is not enough. Nuxt can be extended with configuration options and plugins, but maintaining these customizations across multiple projects can be tedious, repetitive and time-consuming. On the other hand, supporting every project's needs out of the box would make Nuxt very complex and hard to use.
+The auto-registered files patterns are:
 
-This is one of the reasons why Nuxt provides a module system that makes it possible to extend the core. Nuxt modules are async functions that sequentially run when starting Nuxt in development mode using [`nuxt dev`](https://nuxt.com/docs/3.x/api/commands/dev) or building a project for production with [`nuxt build`](https://nuxt.com/docs/3.x/api/commands/build). They can override templates, configure webpack loaders, add CSS libraries, and perform many other useful tasks.
+- `modules/*/index.ts`
+- `modules/*.ts`
 
-Best of all, Nuxt modules can be distributed in npm packages. This makes it possible for them to be reused across projects and shared with the community, helping create an ecosystem of high-quality add-ons.
+You don't need to add those local modules to your [`nuxt.config.ts`](https://nuxt.com/docs/3.x/directory-structure/nuxt-config) separately.
 
-::read-more{to="https://nuxt.com/modules"}
-Explore Nuxt Modules
-::
+::code-group
 
-## Add Nuxt Modules
+```ts [modules/hello/index.ts] twoslash
+// `nuxt/kit` is a helper subpath import you can use when defining local modules
+// that means you do not need to add `@nuxt/kit` to your project's dependencies
+import { addComponentsDir, addServerHandler, createResolver, defineNuxtModule } from 'nuxt/kit'
 
-Once you have installed the modules you can add them to your [`nuxt.config.ts`](https://nuxt.com/docs/3.x/directory-structure/nuxt-config) file under the `modules` property. Module developers usually provide additional steps and details for usage.
+export default defineNuxtModule({
+  meta: {
+    name: 'hello',
+  },
+  setup () {
+    const resolver = createResolver(import.meta.url)
 
-```ts [nuxt.config.ts] twoslash
-export default defineNuxtConfig({
-  modules: [
-    // Using package name (recommended usage)
-    '@nuxtjs/example',
+    // Add an API route
+    addServerHandler({
+      route: '/api/hello',
+      handler: resolver.resolve('./runtime/api-route'),
+    })
 
-    // Load a local module
-    './modules/example',
-
-    // Add module with inline-options
-    ['./modules/example', { token: '123' }],
-
-    // Inline module definition
-    async (inlineOptions, nuxt) => { },
-  ],
+    // Add components
+    addComponentsDir({
+      path: resolver.resolve('./runtime/app/components'),
+      pathPrefix: true, // Prefix your exports to avoid conflicts with user code or other modules
+    })
+  },
 })
 ```
 
-::warning
-Nuxt modules are now build-time-only, and the `buildModules` property used in Nuxt 2 is deprecated in favor of `modules`.
-::
-
-## Disabling Modules
-
-You can disable a module by setting its config key to `false` in your Nuxt config. This is particularly useful when you want to disable modules inherited from layers.
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  // Disable `@nuxt/image` module
-  image: false,
+```ts [modules/hello/runtime/api-route.ts] twoslash
+export default defineEventHandler(() => {
+  return { hello: 'world' }
 })
 ```
 
-:read-more{to="https://nuxt.com/docs/3.x/guide/going-further/layers#disabling-modules-from-layers"}
+::
 
-## Create a Nuxt Module
+When starting Nuxt, the `hello` module will be registered and the `/api/hello` route will be available.
 
-Everyone has the opportunity to develop modules and we cannot wait to see what you will build.
+::note
+Note that all components, pages, composables and other files that would be normally placed in your `app/` directory need to be in `modules/your-module/runtime/app/`. This ensures they can be type-checked properly.
+::
 
-:read-more{title="Module Author Guide" to="https://nuxt.com/docs/3.x/guide/modules"}
+Modules are executed in the following sequence:
+
+- First, the modules defined in [`nuxt.config.ts`](https://nuxt.com/docs/3.x/api/nuxt-config#modules-1) are loaded.
+- Then, modules found in the `modules/` directory are executed, and they load in alphabetical order.
+
+You can change the order of local module by adding a number to the front of each directory name:
+
+```bash [Directory structure]
+modules/
+  1.first-module/
+    index.ts
+  2.second-module.ts
+```
+
+:read-more{to="https://nuxt.com/docs/3.x/guide/modules"}
+
+::tip
+
+Watch Vue School video about Nuxt private modules.
+::
+
+# node\_modules
+
+The package manager ([`npm`](https://docs.npmjs.com/cli/commands/npm/){rel=""nofollow""} or [`yarn`](https://yarnpkg.com){rel=""nofollow""} or [`pnpm`](https://pnpm.io/cli/install){rel=""nofollow""} or [`bun`](https://bun.com/package-manager){rel=""nofollow""} or [`deno`](https://docs.deno.com/runtime/getting_started/installation/){rel=""nofollow""}) creates this directory to store the dependencies of your project.
+
+::important
+This directory should be added to your [`.gitignore`](https://nuxt.com/docs/3.x/directory-structure/gitignore) file to avoid pushing the dependencies to your repository.
+::

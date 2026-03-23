@@ -6,6 +6,12 @@ Code contributions are welcome! Whether you're fixing bugs, adding features, or 
 
 ## Getting started
 
+If you are looking for something to work on, check out the issue labeled "help wanted" in our repos:
+
+Labels
+Labels
+Labels
+
 Before submitting large **new features or refactors**, please first open an issue or post to [the forum](https://forum.langchain.com/) for discussion. This ensures alignment with project goals and prevents duplicate work.
 
 ### Quick fix: submit a bugfix
@@ -210,6 +216,8 @@ Security checklist:
 
 ## Development environment
 
+**Using an AI coding agent?** Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks, then click the "Copy page" button on the top right of this page and paste the raw content into your agent to have it set up your environment automatically.
+
 Our JS/TS projects uses [`pnpm`](https://pnpm.io/) for dependency management. Make sure you have the latest version installed, or run `corepack enable` (on Node 24+) to setup the required pnpm version.
 
 We strive to keep setup consistent across all JS/TS packages. From the repo root, run:
@@ -290,6 +298,8 @@ Deep Agents is organized as a monorepo with multiple Python packages:
 ***
 
 ## Development workflow
+
+### Pre-commit hooks
 
 ### Running tests
 

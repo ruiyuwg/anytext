@@ -264,5 +264,5 @@ For more information on Drains security and how to use them, check out the follo
 
 title: "Using Drains"
 description: "Learn how to configure drains to forward observability data to custom HTTP endpoints and add integrations."
-last\_updated: "2026-03-08T05:03:13.758Z"
+last\_updated: "2026-03-23T09:40:09.057Z"
 source: "https://vercel.com/docs/drains/using-drains"

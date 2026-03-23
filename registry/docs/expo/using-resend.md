@@ -6,7 +6,7 @@ Learn how to integrate Resend in your Expo and React Native app to programmatica
 
 This guide demonstrates the **essential steps to integrate Resend with your Expo and React Native project**.
 
-[How to send emails with Resend from your Expo app](https://www.youtube.com/watch?v=8sPD8SNcUFA)
+[How to send emails with Resend from your Expo app](https://www.youtube.com/watch?v=8sPD8SNcUFA) — Integrate Resend with Expo Router API routes to send emails programmatically and deploy to EAS Hosting.
 
 ## Prerequisites
 

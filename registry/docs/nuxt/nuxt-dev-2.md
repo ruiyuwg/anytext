@@ -1,7 +1,7 @@
 # nuxt dev
 
 ```bash [Terminal]
-npx nuxt dev [ROOTDIR] [--cwd=<directory>] [--logLevel=<silent|info|verbose>] [--dotenv] [--envName] [-e, --extends=<layer-name>] [--clear] [--no-f, --no-fork] [-p, --port] [-h, --host] [--clipboard] [-o, --open] [--https] [--publicURL] [--qr] [--public] [--tunnel] [--sslCert] [--sslKey]
+npx nuxt dev [ROOTDIR] [--cwd=<directory>] [--logLevel=<silent|info|verbose>] [--dotenv] [--envName] [-e, --extends=<layer-name>] [--clear] [--no-f, --no-fork] [-p, --port] [-h, --host] [--clipboard] [-o, --open] [--https] [--publicURL] [--qr] [--public] [--tunnel] [--profile[=verbose]] [--sslCert] [--sslKey]
 ```
 
 The `dev` command starts a development server with hot module replacement at [http://localhost:3000](https://localhost:3000){rel=""nofollow""}
@@ -32,6 +32,7 @@ The `dev` command starts a development server with hot module replacement at [ht
 | `--qr`                             |         | Display The QR code of public URL when available                                                                                                     |
 | `--public`                         |         | Listen to all network interfaces                                                                                                                     |
 | `--tunnel`                         |         | Open a tunnel using <https://github.com/unjs/untun>{rel=""nofollow""}                                                                      |
+| `--profile`                        |         | Profile performance (v4.4+). Writes a V8 CPU profile and JSON report on exit. Use `--profile=verbose` for a full console report.                     |
 | `--sslCert`                        |         | (DEPRECATED) Use `--https.cert` instead.                                                                                                             |
 | `--sslKey`                         |         | (DEPRECATED) Use `--https.key` instead.                                                                                                              |
 

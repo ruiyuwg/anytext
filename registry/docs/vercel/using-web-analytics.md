@@ -54,5 +54,5 @@ The export will include up to 250 entries from the panel, not just the top entri
 
 title: "Audit Logs"
 description: "Learn how to track and analyze your team members"
-last\_updated: "2026-03-08T05:03:11.107Z"
+last\_updated: "2026-03-23T09:40:05.247Z"
 source: "https://vercel.com/docs/audit-log"

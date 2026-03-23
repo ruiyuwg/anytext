@@ -376,7 +376,7 @@ To be upfront, the main trade-offs for each are:
 The trick here is keeping visual tests separate from your regular tests,
 otherwise, you'll waste hours checking failing logs of screenshot mismatches.
 
-#### Organizing Your Tests
+### Organizing Your Tests
 
 First, isolate your visual tests. Stick them in a `visual` folder (or whatever
 makes sense for your project):
@@ -400,13 +400,13 @@ Not a fan of glob patterns? You could also use separate
 - `vitest --project visual`
   :::
 
-#### CI Setup
+### CI Setup
 
 Your CI needs browsers installed. How you do this depends on your provider:
 
 \== Playwright
 
-[Playwright](https://npmjs.com/package/playwright) makes this easy. Just pin
+[Playwright](https://npmx.dev/package/playwright) makes this easy. Just pin
 your version and add this before running tests:
 
 ```yaml [.github/workflows/ci.yml]
@@ -417,7 +417,7 @@ your version and add this before running tests:
 
 \== WebdriverIO
 
-[WebdriverIO](https://www.npmjs.com/package/webdriverio) expects you to bring
+[WebdriverIO](https://npmx.dev/package/webdriverio) expects you to bring
 your own browsers. The folks at
 [@browser-actions](https://github.com/browser-actions) have your back:
 
@@ -437,7 +437,7 @@ Then run your visual tests:
   run: npm run test:visual
 ```
 
-#### The Update Workflow
+### The Update Workflow
 
 Here's where it gets interesting. You don't want to update screenshots on every
 PR automatically *(chaos!)*. Instead, create a
@@ -575,7 +575,7 @@ jobs:
 Your tests stay local, only the browsers run in the cloud. It's Playwright's
 remote browser feature, but Microsoft handles all the infrastructure.
 
-#### Organizing Your Tests
+### Organizing Your Tests
 
 Keep visual tests separate to control costs. Only tests that actually take
 screenshots should use the service.
@@ -612,9 +612,9 @@ export default defineConfig({
               connectOptions: {
                 wsEndpoint: `${env.PLAYWRIGHT_SERVICE_URL}?${new URLSearchParams({
                   'api-version': '2025-09-01',
-                  os: 'linux', // always use Linux for consistency
+                  'os': 'linux', // always use Linux for consistency
                   // helps identifying runs in the service's dashboard
-                  runName: `Vitest ${env.CI ? 'CI' : 'local'} run @${new Date().toISOString()}`,
+                  'runName': `Vitest ${env.CI ? 'CI' : 'local'} run @${new Date().toISOString()}`,
                 })}`,
                 exposeNetwork: '<loopback>',
                 headers: {
@@ -660,7 +660,7 @@ Then split your `test` script like this:
 }
 ```
 
-#### Running Tests
+### Running Tests
 
 ```bash
 # Local development
@@ -678,7 +678,7 @@ The best part of this approach is that it just works:
 - **Pay for what you use**, only visual tests consume service minutes
 - **No Docker or workflow setups needed**, nothing to manage or maintain
 
-#### CI Setup
+### CI Setup
 
 In your CI, add the secrets:
 

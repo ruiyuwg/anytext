@@ -149,7 +149,7 @@ vercel ir create-threshold my-database 50 100 2000 --yes
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -164,5 +164,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel link"
 description: "Learn how to link a local directory to a Vercel Project using the vercel link CLI command."
-last\_updated: "2026-03-08T05:03:12.229Z"
+last\_updated: "2026-03-23T09:40:06.850Z"
 source: "https://vercel.com/docs/cli/link"

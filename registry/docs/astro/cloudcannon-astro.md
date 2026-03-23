@@ -145,7 +145,7 @@ The following example will create a new blog post from the CloudCannon Site Dash
 
 [Section titled “Rendering CloudCannon content”](#rendering-cloudcannon-content)
 
-Use Astro’s Content Collections API to [query and display your posts and collections](/en/guides/content-collections/#querying-collections), just as you would in any Astro project.
+Use Astro’s Content Collections API to [query and display your posts and collections](/en/guides/content-collections/#querying-build-time-collections), just as you would in any Astro project.
 
 ### Displaying a collection list
 
@@ -165,7 +165,7 @@ const posts = await getCollection('blog');
 <ul>
   {posts.map(post => (
     <li>
-      <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+      <a href={`/posts/${post.id}`}>{post.data.title}</a>
     </li>
   ))}
 </ul>

@@ -20,7 +20,7 @@ Although these examples use Claude, you can use [any supported model](/oss/javas
 
 ## Build a basic agent
 
-Start by creating a simple agent that can answer questions and call tools. The agent will use Claude Sonnet 4.5 as its language model, a basic weather function as a tool, and a simple prompt to guide its behavior.
+Start by creating a simple agent that can answer questions and call tools. The agent will use Claude Sonnet 4.6 as its language model, a basic weather function as a tool, and a simple prompt to guide its behavior.
 
 ```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { createAgent, tool } from "langchain";
@@ -58,7 +58,7 @@ Next, build a practical weather forecasting agent that demonstrates key producti
 1. **Detailed system prompts** for better agent behavior
 2. **Create tools** that integrate with external data
 3. **Model configuration** for consistent responses
-4. **Structured output** for predictable results
+4. **[Structured output](/oss/javascript/langchain/structured-output)** for predictable results
 5. **Conversational memory** for chat-like interactions
 6. **Create and run the agent** to test the fully functional agent
 
@@ -156,7 +156,7 @@ Depending on the model and provider chosen, initialization parameters may vary; 
 
 
 
-Optionally, define a structured response format if you need the agent responses to match
+Optionally, define a [structured response format](/oss/javascript/langchain/structured-output) if you need the agent responses to match
 a specific schema.
 
 ```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
@@ -339,3 +339,7 @@ Congratulations! You now have an AI agent that can:
 
 [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 ```
+
+# Build a RAG agent with LangChain
+
+Source: https://docs.langchain.com/oss/javascript/langchain/rag

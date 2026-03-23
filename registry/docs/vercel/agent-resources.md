@@ -68,5 +68,5 @@ See [CLI Workflows](/docs/agent-resources/workflows) for the full list, includin
 
 title: "Agent Skills"
 description: "Install skills to enhance AI coding agents with specialized capabilities for React, Next.js, deployment, and more."
-last\_updated: "2026-03-08T05:03:10.008Z"
+last\_updated: "2026-03-23T09:40:03.594Z"
 source: "https://vercel.com/docs/agent-resources/skills"

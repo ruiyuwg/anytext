@@ -104,6 +104,8 @@ The following API parameters are available:
 | `sort`             | String or Array  | [Sort the response](/cms/api/rest/sort-pagination.md#sorting) |
 | `pagination`       | Object        | [Page through entries](/cms/api/rest/sort-pagination.md#pagination) |
 
+Long bracket-encoded lists in a parameter (for example `populate` or `fields`) are limited by [`arrayLimit` on `strapi::query`](/cms/configurations/middlewares#query). See [Population](/cms/api/rest/populate-select#population).
+
 Query parameters use the  (i.e. they are encoded using square brackets `[]`).
 
 A wide range of REST API parameters can be used and combined to query your content, which can result in long and complex query URLs.👉 You can use Strapi's [interactive query builder](/cms/api/rest/interactive-query-builder) tool to build query URLs more conveniently. 🤗

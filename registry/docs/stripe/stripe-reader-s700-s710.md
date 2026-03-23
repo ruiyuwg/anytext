@@ -103,15 +103,19 @@ The Stripe Reader S700/S710 software consists of four components: the reader app
 
 | Countries                    | Reader     | Firmware     | Configuration          | ROM      |
 | ---------------------------- | ---------- | ------------ | ---------------------- | -------- |
-| US                           | `2.39.3.0` | `1.00.01.00` | `szzz_us_v11`          | `2.2.21` |
-| CA                           | `2.39.3.0` | `1.00.01.00` | `szzz_ca_v4`           | `2.2.21` |
-| AU                           | `2.39.3.0` | `1.00.01.00` | `szzz_prod_au_v11`     | `2.2.21` |
-| MYNZ                         | `2.39.3.0` | `1.00.01.00` | `szzz_prod_apac_on_v5` | `2.2.21` |
-| SG                           | `2.39.3.0` | `1.00.01.00` | `szzz_prod_apac_on_v5` | `2.2.21` |
-| GBIEFI                       | `2.39.3.0` | `1.00.01.00` | `szzz_prod_eu_off_v3`  | `2.2.21` |
-| ATBEDKFRITDENLESSECZLUPTCHNO | `2.39.3.0` | `1.00.01.00` | `szzz_prod_eu_on_v5`   | `2.2.21` |
+| US                           | `2.40.1.0` | `1.00.02.00` | `szzz_us_v11`          | `2.2.21` |
+| CA                           | `2.40.1.0` | `1.00.02.00` | `szzz_ca_v4`           | `2.2.21` |
+| AU                           | `2.40.1.0` | `1.00.02.00` | `szzz_prod_au_v11`     | `2.2.21` |
+| MYNZ                         | `2.40.1.0` | `1.00.02.00` | `szzz_prod_apac_on_v5` | `2.2.21` |
+| SG                           | `2.40.1.0` | `1.00.02.00` | `szzz_prod_apac_on_v5` | `2.2.21` |
+| GBIEFI                       | `2.40.1.0` | `1.00.02.00` | `szzz_prod_eu_off_v3`  | `2.2.21` |
+| ATBEDKFRITDENLESSECZLUPTCHNO | `2.40.1.0` | `1.00.02.00` | `szzz_prod_eu_on_v5`   | `2.2.21` |
 
 ### Reader software changelog
+
+#### 2026-03-18 (version 2.40.1.0)
+
+- General bug fixes and improvements.
 
 #### 2026-02-24 (version 2.39.3.0)
 
@@ -321,6 +325,7 @@ The Stripe Reader S700/S710 software consists of four components: the reader app
 
 | Version      | Release date | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ------------ | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `1.00.02.00` | `2026-03-18` | - General bug fixes and improvements.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `1.00.01.00` | `2026-02-24` | - General bug fixes and improvements.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `1.00.00.35` | `2025-10-22` | - General bug fixes and improvements.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `1.00.00.31` | `2025-09-10` | - General bug fixes and improvements.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |

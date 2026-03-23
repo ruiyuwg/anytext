@@ -387,14 +387,14 @@ export const server = {
         // Matches when the `type` field has the value `create`
         type: z.literal('create'),
         name: z.string(),
-        email: z.string().email(),
+        email: z.email(),
       }),
       z.object({
         // Matches when the `type` field has the value `update`
         type: z.literal('update'),
         id: z.number(),
         name: z.string(),
-        email: z.string().email(),
+        email: z.email(),
       }),
     ]),
     async handler(input) {
@@ -434,7 +434,7 @@ The following example shows a validated newsletter registration form that accept
 
    ```
 
-2. Define a `newsletter` action to handle the submitted form. Validate the `email` field using the `z.string().email()` validator, and the `terms` checkbox using `z.boolean()`:
+2. Define a `newsletter` action to handle the submitted form. Validate the `email` field using the `z.email()` validator, and the `terms` checkbox using `z.boolean()`:
 
    src/actions/index.ts
 
@@ -447,7 +447,7 @@ The following example shows a validated newsletter registration form that accept
      newsletter: defineAction({
        accept: 'form',
        input: z.object({
-         email: z.string().email(),
+         email: z.email(),
          terms: z.boolean(),
        }),
        +handler: async ({ email, terms }) => { /* ... */ },

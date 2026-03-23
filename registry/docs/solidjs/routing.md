@@ -186,7 +186,7 @@ export default function UsersLayout(props: RouteSectionProps) {  return (    <di
 ```
 
 ```
-export const route = {  preload() {    // define preload function  }};
+export const route = {  preload() {    // define preload function  },};
 export default function UsersLayout(props) {  return (    <div>      <h1>Users</h1>      {props.children}    </div>  );}
 ```
 

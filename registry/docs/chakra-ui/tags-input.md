@@ -267,8 +267,9 @@ export const TagsInputWithMax = () => {
 
 ### Editable Tags
 
-Use the `editable` prop to enable inline editing of existing tags by clicking on
-them, allowing users to quickly update tag values.
+Use the `editable` prop to enable inline editing of existing tags by double
+clicking or pressing `Enter` when highlighted, allowing users to quickly update
+tag values.
 
 ```tsx
 "use client"

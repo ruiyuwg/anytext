@@ -35,7 +35,7 @@ The following reference is a complete list of the errors you may encounter while
 - [**GetStaticPathsExpectedParams**](/en/reference/errors/get-static-paths-expected-params/)\
   Missing params property on `getStaticPaths` route.
 - [**GetStaticPathsInvalidRouteParam**](/en/reference/errors/get-static-paths-invalid-route-param/)\
-  Invalid value for `getStaticPaths` route parameter.
+  Invalid route parameter returned by `getStaticPaths()`.
 - [**GetStaticPathsRequired**](/en/reference/errors/get-static-paths-required/)\
   `getStaticPaths()` function required for dynamic routes.
 - [**ReservedSlotName**](/en/reference/errors/reserved-slot-name/)\
@@ -68,6 +68,8 @@ The following reference is a complete list of the errors you may encounter while
   Unsupported image format
 - [**UnsupportedImageConversion**](/en/reference/errors/unsupported-image-conversion/)\
   Unsupported image conversion
+- [**CannotOptimizeSvg**](/en/reference/errors/cannot-optimize-svg/)\
+  Cannot optimize SVG
 - [**PrerenderDynamicEndpointPathCollide**](/en/reference/errors/prerender-dynamic-endpoint-path-collide/)\
   Prerendered dynamic endpoint has path collision.
 - [**PrerenderRouteConflict**](/en/reference/errors/prerender-route-conflict/)\
@@ -78,6 +80,8 @@ The following reference is a complete list of the errors you may encounter while
   Expected image options.
 - [**ExpectedNotESMImage**](/en/reference/errors/expected-not-esmimage/)\
   Expected image options, not an ESM-imported image.
+- [**GetImageNotUsedOnServer**](/en/reference/errors/get-image-not-used-on-server/)\
+  `getImage()` must be used on the server.
 - [**IncompatibleDescriptorOptions**](/en/reference/errors/incompatible-descriptor-options/)\
   Cannot set both `densities` and `widths`
 - [**ImageNotFound**](/en/reference/errors/image-not-found/)\
@@ -112,6 +116,8 @@ The following reference is a complete list of the errors you may encounter while
   A redirect must be given a location with the `Location` header.
 - [**UnsupportedExternalRedirect**](/en/reference/errors/unsupported-external-redirect/)\
   Unsupported or malformed URL.
+- [**InvalidRedirectDestination**](/en/reference/errors/invalid-redirect-destination/)\
+  Invalid redirect destination.
 - [**InvalidDynamicRoute**](/en/reference/errors/invalid-dynamic-route/)\
   Invalid dynamic route.
 - [**MissingSharp**](/en/reference/errors/missing-sharp/)\
@@ -134,6 +140,8 @@ The following reference is a complete list of the errors you may encounter while
   Prerendered routes aren’t supported when internationalization domains are enabled.
 - [**MissingMiddlewareForInternationalization**](/en/reference/errors/missing-middleware-for-internationalization/)\
   Enabled manual internationalization routing without having a middleware.
+- [**InvalidI18nMiddlewareConfiguration**](/en/reference/errors/invalid-i18n-middleware-configuration/)\
+  Invalid internationalization middleware configuration
 - [**CantRenderPage**](/en/reference/errors/cant-render-page/)\
   Astro can’t render the route.
 - [**UnhandledRejection**](/en/reference/errors/unhandled-rejection/)\
@@ -146,6 +154,8 @@ The following reference is a complete list of the errors you may encounter while
   Route not found.
 - [**EnvInvalidVariables**](/en/reference/errors/env-invalid-variables/)\
   Invalid Environment Variables
+- [**EnvPrefixConflictsWithSecret**](/en/reference/errors/env-prefix-conflicts-with-secret/)\
+  envPrefix conflicts with secret environment variables
 - [**ServerOnlyModule**](/en/reference/errors/server-only-module/)\
   Module is only available server-side
 - [**RewriteWithBodyUsed**](/en/reference/errors/rewrite-with-body-used/)\
@@ -160,14 +170,10 @@ The following reference is a complete list of the errors you may encounter while
   Cannot determine weight and style from font file.
 - [**CannotFetchFontFile**](/en/reference/errors/cannot-fetch-font-file/)\
   Cannot fetch the given font file.
-- [**CannotLoadFontProvider**](/en/reference/errors/cannot-load-font-provider/)\
-  Cannot load font provider
-- [**ExperimentalFontsNotEnabled**](/en/reference/errors/experimental-fonts-not-enabled/)\
-  Experimental fonts are not enabled
 - [**FontFamilyNotFound**](/en/reference/errors/font-family-not-found/)\
   Font family not found
-- [**CspNotEnabled**](/en/reference/errors/csp-not-enabled/)\
-  CSP feature isn’t enabled
+- [**UnavailableAstroGlobal**](/en/reference/errors/unavailable-astro-global/)\
+  Unavailable Astro global in getStaticPaths()
 
 ## CSS Errors
 
@@ -220,6 +226,12 @@ The following reference is a complete list of the errors you may encounter while
   Content entry frontmatter does not match schema.
 - [**InvalidContentEntryDataError**](/en/reference/errors/invalid-content-entry-data-error/)\
   Content entry data does not match schema.
+- [**LegacyContentConfigError**](/en/reference/errors/legacy-content-config-error/)\
+  Legacy content config file found.
+- [**ContentCollectionMissingLoader**](/en/reference/errors/content-collection-missing-loader/)\
+  Content collection is missing a `loader` definition.
+- [**ContentCollectionInvalidType**](/en/reference/errors/content-collection-invalid-type/)\
+  Content collection has an invalid `type` field.
 - [**ContentLoaderReturnsInvalidId**](/en/reference/errors/content-loader-returns-invalid-id/)\
   Content loader returned an entry with an invalid `id`.
 - [**ContentEntryDataError**](/en/reference/errors/content-entry-data-error/)\
@@ -270,14 +282,17 @@ The following reference is a complete list of the errors you may encounter while
   Session storage could not be initialized.
 - [**SessionStorageSaveError**](/en/reference/errors/session-storage-save-error/)\
   Session data could not be saved.
-- [**SessionWithoutSupportedAdapterOutputError**](/en/reference/errors/session-without-supported-adapter-output-error/)\
-  Sessions cannot be used with an adapter that doesn’t support server output.
-- [**SessionConfigMissingError**](/en/reference/errors/session-config-missing-error/)\
-  Session storage was enabled but not configured.
-- [**SessionConfigWithoutFlagError**](/en/reference/errors/session-config-without-flag-error/)\
-  Session flag not set
-- [**CannotOptimizeSvg**](/en/reference/errors/cannot-optimize-svg/)\
-  Cannot optimize SVG
+
+## Cache Errors
+
+[Section titled “Cache Errors”](#cache-errors)
+
+- [**CacheProviderNotFound**](/en/reference/errors/cache-provider-not-found/)\
+  Cache provider not found.
+- [**CacheNotEnabled**](/en/reference/errors/cache-not-enabled/)\
+  Cache is not enabled.
+- [**CacheQueryConfigConflict**](/en/reference/errors/cache-query-config-conflict/)\
+  Conflicting cache query configuration.
 
 # Action unexpected called from the server.
 
@@ -395,6 +410,10 @@ Depending on your adapter, there may be a different entrypoint to use for server
 
 # Astro.glob() did not match any files.
 
+Deprecated
+
+This error was removed in Astro v6.0.0 along with the removal of `Astro.glob()`.
+
 > **AstroGlobNoMatch**: `Astro.glob(GLOB_STR)` did not return any matching files.
 
 ## What went wrong?
@@ -403,11 +422,11 @@ Depending on your adapter, there may be a different entrypoint to use for server
 
 `Astro.glob()` did not return any matching files. There might be a typo in the glob pattern.
 
-**See Also:**
-
-- [Astro.glob](/en/reference/api-reference/#astroglob)
-
 # Astro.glob() used outside of an Astro file.
+
+Deprecated
+
+This error was removed in Astro v6.0.0 along with the removal of `Astro.glob()`.
 
 > **AstroGlobUsedOutside**: `Astro.glob(GLOB_STR)` can only be used in `.astro` files. `import.meta.glob(GLOB_STR)` can be used instead to achieve a similar result.
 
@@ -416,10 +435,6 @@ Depending on your adapter, there may be a different entrypoint to use for server
 [Section titled “What went wrong?”](#what-went-wrong)
 
 `Astro.glob()` can only be used in `.astro` files. You can use [`import.meta.glob()`](https://vite.dev/guide/features.html#glob-import) instead to achieve the same result.
-
-**See Also:**
-
-- [Astro.glob](/en/reference/api-reference/#astroglob)
 
 # Astro.response.headers must not be reassigned.
 
@@ -430,6 +445,36 @@ Depending on your adapter, there may be a different entrypoint to use for server
 [Section titled “What went wrong?”](#what-went-wrong)
 
 Thrown when a value is being set as the `headers` field on the `ResponseInit` object available as `Astro.response`.
+
+# Cache is not enabled.
+
+> `Astro.cache` is not available because the cache feature is not enabled.
+
+## What went wrong?
+
+[Section titled “What went wrong?”](#what-went-wrong)
+
+Thrown when `Astro.cache` or `context.cache` is used but the cache feature has not been enabled in the Astro config.
+
+# Cache provider not found.
+
+> Could not resolve the cache provider `PROVIDER`. Make sure the package is installed.
+
+## What went wrong?
+
+[Section titled “What went wrong?”](#what-went-wrong)
+
+Thrown when the configured cache provider cannot be resolved. This usually means the package is not installed or the import path is wrong.
+
+# Conflicting cache query configuration.
+
+> `query.include` and `query.exclude` cannot be used together.
+
+## What went wrong?
+
+[Section titled “What went wrong?”](#what-went-wrong)
+
+The memory cache provider’s `query.include` and `query.exclude` options are mutually exclusive. Use `include` to allowlist specific query parameters that affect the cache key, or `exclude` to blocklist parameters. When `include` is set, all other parameters are automatically ignored.
 
 # Cannot determine weight and style from font file.
 
@@ -460,16 +505,6 @@ Cannot extract the font type from the given URL.
 [Section titled “What went wrong?”](#what-went-wrong)
 
 Cannot fetch the given font file
-
-# Cannot load font provider
-
-> Astro is unable to load the given font provider. Open an issue on the corresponding provider’s repository.
-
-## What went wrong?
-
-[Section titled “What went wrong?”](#what-went-wrong)
-
-Cannot load font provider
 
 # Cannot optimize SVG
 
@@ -555,6 +590,28 @@ The specified configuration file using `--config` could not be found. Make sure 
 **See Also:**
 
 - [--config](/en/reference/cli-reference/#--config-path)
+
+# Content collection has an invalid type field.
+
+> **Example error message:**\
+> Invalid collection type “data”. Remove the type from your collection definition in your content config file.
+
+## What went wrong?
+
+[Section titled “What went wrong?”](#what-went-wrong)
+
+Content collections should no longer have a `type` field. Remove this field from your content config file. See the [Astro 6 migration guide](/en/guides/upgrade-to/v6/#removed-legacy-content-collections) for more information.
+
+# Content collection is missing a loader definition.
+
+> **Example error message:**\
+> Collections must have a `loader` defined. Check your collection definitions in your content config file.
+
+## What went wrong?
+
+[Section titled “What went wrong?”](#what-went-wrong)
+
+A content collection is missing a `loader` definition. Make sure that each collection in your content config file has a `loader`. See the [Content collections documentation](/en/guides/content-collections/) for more information.
 
 # Collection contains entries of a different type.
 
@@ -642,7 +699,11 @@ Depending on the image service you are using, the stack trace may contain more i
 
 # CSP feature isn't enabled
 
-> The `experimental.csp` configuration isn’t enabled.
+Deprecated
+
+This error is from an older version of Astro and is no longer in use. If you are unable to upgrade your project to a more recent version, then you can consult [unmaintained snapshots of older documentation](/en/upgrade-astro/#older-docs-unmaintained) for assistance.
+
+> The `security.csp` configuration isn’t enabled.
 
 ## What went wrong?
 
@@ -729,6 +790,26 @@ An environment variable does not match the data type and/or properties defined i
 [Section titled “What went wrong?”](#what-went-wrong)
 
 Some environment variables do not match the data type and/or properties defined in `env.schema`.
+
+# envPrefix conflicts with secret environment variables
+
+> **EnvPrefixConflictsWithSecret**: The following environment variables are declared with `access: "secret"` in `env.schema`, but their names match a prefix in `vite.envPrefix`, which would expose them in client-side bundles:\
+> \
+> CONFLICTS.MAP((C) =\ >`- ${C`).join('\
+> ')}\
+> \
+> Either remove the conflicting prefixes from `vite.envPrefix`, or rename these variables to use a prefix not in `vite.envPrefix`.
+
+## What went wrong?
+
+[Section titled “What went wrong?”](#what-went-wrong)
+
+The configured `vite.envPrefix` includes prefixes that match environment variables declared with `access: "secret"` in `env.schema`. This would cause Vite to expose those secret values in client-side JavaScript bundles, bypassing the `access: "secret"` protection.
+
+To fix this, either:
+
+- Remove the conflicting prefixes from `vite.envPrefix`, or
+- Rename your secret environment variables to use a prefix that is not in `vite.envPrefix`.
 
 # Unsupported astro:env getSecret
 
@@ -818,16 +899,6 @@ import myImage from "../assets/my_image.png";
 
 - [Images](/en/guides/images/)
 
-# Experimental fonts are not enabled
-
-> **ExperimentalFontsNotEnabled**: The Font component is used but experimental fonts have not been registered in the config.
-
-## What went wrong?
-
-[Section titled “What went wrong?”](#what-went-wrong)
-
-Font component is used but experimental fonts have not been registered in the config.
-
 # Failed to retrieve remote image dimensions
 
 > Failed to get the dimensions for `IMAGE_URL`.
@@ -876,7 +947,7 @@ The `file` loader must be passed a single local file. Glob patterns are not supp
 
 **See Also:**
 
-- [Astro’s built-in loaders](/en/guides/content-collections/#built-in-loaders)
+- [Astro’s built-in `file()` loader](/en/reference/content-loader-reference/#file-loader)
 
 # File parser not found
 
@@ -890,7 +961,7 @@ The `file` loader can’t determine which parser to use. Please provide a custom
 
 **See Also:**
 
-- [Passing a `parser` to the `file` loader](/en/guides/content-collections/#parser-function)
+- [Passing a `parser` to the `file` loader](/en/reference/content-loader-reference/#parser)
 
 # Font family not found
 
@@ -906,7 +977,7 @@ Font family not found
 
 > **ForbiddenRewrite**: You tried to rewrite the on-demand route ‘FROM’ with the static route ‘TO’, when using the ‘server’ output.\
 > \
-> The static route ‘TO’ is rendered by the component ‘COMPONENT’, which is marked as prerendered. This is a forbidden operation because during the build the component ‘COMPONENT’ is compiled to an HTML file, which can’t be retrieved at runtime by Astro.
+> The static route ‘TO’ is rendered by the component ‘COMPONENT’, which is marked as prerendered. This is a forbidden operation because during the build, the component ‘COMPONENT’ is compiled to an HTML file, which can’t be retrieved at runtime by Astro.
 
 ## What went wrong?
 
@@ -936,7 +1007,38 @@ Font family not found
 
 [Section titled “What went wrong?”](#what-went-wrong)
 
-The `getDataEntryById` and `getEntryBySlug` functions are deprecated and cannot be used with content layer collections. Use the `getEntry` function instead.
+The `getDataEntryById` and `getEntryBySlug` functions are deprecated and cannot be used with content collections. Use the `getEntry` function instead.
+
+# getImage() must be used on the server.
+
+> **GetImageNotUsedOnServer**: `getImage()` should only be used on the server. To use images on the client, render the `src` from `getImage()` during the server render, then pass it to the client for usage.
+
+## What went wrong?
+
+[Section titled “What went wrong?”](#what-went-wrong)
+
+The `getImage()` function is only available on the server. To use images on the client, either render the `src` from `getImage()` during the server render so it can be used in client-side scripts, or use a standard `<img>` tag.
+
+```astro
+---
+import { getImage } from "astro:assets";
+import myImage from "../assets/my_image.png";
+
+
+const optimizedImage = await getImage({ src: myImage, width: 300 });
+---
+
+
+<script define:vars={{ imageSrc: optimizedImage.src }}>
+  // Use imageSrc in client-side code
+  document.getElementById('myImage').src = imageSrc;
+</script>
+```
+
+**See Also:**
+
+- [Images](/en/guides/images/)
+- [getImage()](/en/reference/modules/astro-assets/#getimage)
 
 # Missing params property on getStaticPaths route.
 
@@ -969,9 +1071,9 @@ Will create the following route: `site.com/blog/1`.
 - [`getStaticPaths()`](/en/reference/routing-reference/#getstaticpaths)
 - [`params`](/en/reference/api-reference/#params)
 
-# Invalid value for getStaticPaths route parameter.
+# Invalid route parameter returned by getStaticPaths().
 
-> **GetStaticPathsInvalidRouteParam**: Invalid getStaticPaths route parameter for `KEY`. Expected undefined, a string or a number, received `VALUE_TYPE` (`VALUE`)
+> **GetStaticPathsInvalidRouteParam**: Invalid `getStaticPaths()` route parameter for `KEY`. Expected a string or undefined, received `VALUE_TYPE` (`VALUE`)
 
 ## What went wrong?
 
@@ -986,8 +1088,9 @@ Since `params` are encoded into the URL, only certain types are supported as val
 export async function getStaticPaths() {
   return [
     { params: { id: '1' } } // Works
-    { params: { id: 2 } } // Works
+    { params: { id: 2 } } // Does not work
     { params: { id: false } } // Does not work
+    { params: { id: [1, 2] } } // Does not work
   ];
 }
 ---
@@ -1001,8 +1104,8 @@ In routes using [rest parameters](/en/guides/routing/#rest-parameters), `undefin
 ---
 export async function getStaticPaths() {
   return [
-    { params: { id: 1 } } // /route/1
-    { params: { id: 2 } } // /route/2
+    { params: { id: '1' } } // /route/1
+    { params: { id: '2' } } // /route/2
     { params: { id: undefined } } // /route/
   ];
 }
@@ -1060,13 +1163,13 @@ An i18n utility tried to use the locale from a URL path that does not contain on
 
 # i18n Not Enabled
 
-> **i18nNotEnabled**: The `astro:i18n` module can not be used without enabling i18n in your Astro config.
+> **i18nNotEnabled**: The `astro:i18n` module cannot be used without enabling i18n in your Astro config.
 
 ## What went wrong?
 
 [Section titled “What went wrong?”](#what-went-wrong)
 
-The `astro:i18n` module can not be used without enabling i18n in your Astro config. To enable i18n, add a default locale and a list of supported locales to your Astro config:
+The `astro:i18n` module cannot be used without enabling i18n in your Astro config. To enable i18n, add a default locale and a list of supported locales to your Astro config:
 
 ```js
 import { defineConfig } from 'astro'
@@ -1161,7 +1264,7 @@ Astro components cannot be rendered manually via a function call, such as `Compo
 # Content entry data does not match schema.
 
 > **Example error message:**\
-> **blog** → **post** frontmatter does not match collection schema.\
+> **blog** → **post** data does not match collection schema.\
 > “title” is required.\
 > “date” must be a valid date.
 
@@ -1172,6 +1275,10 @@ Astro components cannot be rendered manually via a function call, such as `Compo
 A content entry does not match its collection schema. Make sure that all required fields are present, and that all fields are of the correct type. You can check against the collection schema in your `src/content.config.*` file. See the [Content collections documentation](/en/guides/content-collections/) for more information.
 
 # Content entry frontmatter does not match schema.
+
+Deprecated
+
+This error only applies to legacy content collections which were removed in Astro 6.
 
 > **Example error message:**\
 > **blog** → **post.md** frontmatter does not match collection schema.\
@@ -1307,6 +1414,10 @@ export async function getStaticPaths() {
 
 # Invalid glob pattern.
 
+Deprecated
+
+This error was removed in Astro v6.0.0 along with the removal of `Astro.glob()`.
+
 > **InvalidGlob**: Invalid glob pattern: `GLOB_PATTERN`. Glob patterns must start with ’./’, ‘../’ or ’/‘.
 
 ## What went wrong?
@@ -1318,6 +1429,16 @@ Astro encountered an invalid glob pattern. This is often caused by the glob patt
 **See Also:**
 
 - [Glob Patterns](/en/guides/imports/#glob-patterns)
+
+# Invalid internationalization middleware configuration
+
+> **InvalidI18nMiddlewareConfiguration**: The option `redirectToDefaultLocale` can be enabled only when `prefixDefaultLocale` is also set to `true`; otherwise, redirects might cause infinite loops. Enable the option `prefixDefaultLocale` to continue to use `redirectToDefaultLocale`, or ensure both are set to `false`.
+
+## What went wrong?
+
+[Section titled “What went wrong?”](#what-went-wrong)
+
+An invalid i18n middleware configuration was detected.
 
 # Error while loading image service.
 
@@ -1346,6 +1467,20 @@ If you believe that your service is properly configured and this error is wrong,
 
 The `prerender` feature only supports a subset of valid JavaScript — be sure to use exactly `export const prerender = true` so that our compiler can detect this directive at build time. Variables, `let`, and `var` declarations are not supported.
 
+# Invalid redirect destination.
+
+> **InvalidRedirectDestination**: The redirect from “FROM” to “TO” is invalid. The destination “TO” does not match any existing route in your project.
+
+## What went wrong?
+
+[Section titled “What went wrong?”](#what-went-wrong)
+
+A dynamic redirect destination must match an existing route pattern. This error occurs when a redirect with dynamic parameters points to a destination that doesn’t correspond to any page in your project.
+
+**See Also:**
+
+- [Configured redirects](/en/guides/routing/#configured-redirects)
+
 # You attempted to rewrite a 404 inside a static page, and this isn't allowed.
 
 Deprecated
@@ -1360,6 +1495,17 @@ This error is from an older version of Astro and is no longer in use. If you are
 
 The user tried to rewrite a 404 page inside a static page.
 
+# Legacy content config file found.
+
+> **Example error message:**\
+> Found legacy content config file in “src/content/config.ts”. Please move this file to “src/content.config.ts” and ensure each collection has a loader defined.
+
+## What went wrong?
+
+[Section titled “What went wrong?”](#what-went-wrong)
+
+A legacy content config file was found. Move the file to `src/content.config.ts` and update any collection definitions if needed. See the [Astro 6 migration guide](/en/guides/upgrade-to/v6/#removed-legacy-content-collections) for more information.
+
 # Error in live content config.
 
 > **Example error message:**\
@@ -1373,7 +1519,7 @@ Error in live content config.
 
 **See Also:**
 
-- [Experimental live content](/en/reference/experimental-flags/live-content-collections/)
+- [Defining live content schemas](/en/reference/modules/astro-content/#schema-1)
 
 # Local images must be imported.
 
@@ -1464,7 +1610,7 @@ export const onRequest = defineMiddleware((context, next) => {
 
 # locals must not be reassigned.
 
-> **LocalsReassigned**: `locals` can not be assigned directly.
+> **LocalsReassigned**: `locals` cannot be assigned directly.
 
 ## What went wrong?
 
@@ -1492,9 +1638,9 @@ A Markdown document’s frontmatter in `src/content/` does not match its collect
 # Failed to parse Markdown frontmatter.
 
 > **Example error messages:**\
-> can not read an implicit mapping pair; a colon is missed\
+> cannot read an implicit mapping pair; a colon is missed\
 > unexpected end of the stream within a double quoted scalar\
-> can not read a block mapping entry; a multiline key may not be an implicit key
+> cannot read a block mapping entry; a multiline key may not be an implicit key
 
 ## What went wrong?
 
@@ -1918,8 +2064,8 @@ Two prerendered routes generate the same path, resulting in a collision. A stati
 
 **See Also:**
 
-- [`getStaticPaths()`](/en/reference/routing-reference/#getstaticpaths)
-- [`params`](/en/reference/api-reference/#params)
+- [Route Priority Order](/en/guides/routing/#route-priority-order)
+- [`prerenderConflictBehavior`](/en/reference/configuration-reference/#prerenderconflictbehavior)
 
 # A redirect must be given a location with the Location header.
 
@@ -2154,6 +2300,16 @@ To redirect on a static website, the [meta refresh attribute](https://developer.
 
 - [Enabling SSR in Your Project](/en/guides/on-demand-rendering/)
 - [Astro.redirect](/en/reference/api-reference/#redirect)
+
+# Unavailable Astro global in getStaticPaths()
+
+> The Astro global is not available in getStaticPaths().
+
+## What went wrong?
+
+[Section titled “What went wrong?”](#what-went-wrong)
+
+Unavailable Astro global in getStaticPaths
 
 # Unhandled rejection
 
@@ -2404,7 +2560,10 @@ Enable client side prerendering in your `astro.config.mjs` along with any desire
 astro.config.mjs
 
 ```js
-{
+import { defineConfig } from 'astro/config';
+
+
+export default defineConfig({
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'viewport',
@@ -2412,7 +2571,7 @@ astro.config.mjs
   experimental: {
     clientPrerender: true,
   },
-}
+});
 ```
 
 Continue to use the `data-astro-prefetch` attribute on any `<a />` link on your site to opt in to prefetching. Instead of appending a `<link>` tag to the head of the document or fetching the page with JavaScript, a `<script>` tag will be appended with the corresponding speculation rules.
@@ -2432,12 +2591,17 @@ Enables Intellisense features (e.g. code completion, quick hints) for your conte
 
 When enabled, this feature will generate and add JSON schemas to the `.astro` directory in your project. These files can be used by the Astro language server to provide Intellisense inside content files (`.md`, `.mdx`, `.mdoc`).
 
+astro.config.mjs
+
 ```js
-{
+import { defineConfig } from 'astro/config';
+
+
+export default defineConfig({
   experimental: {
     contentIntellisense: true,
   },
-}
+});
 ```
 
 To use this feature with the Astro VS Code extension, you must also enable the `astro.content-intellisense` option in your VS Code settings. For editors using the Astro language server directly, pass the `contentIntellisense: true` initialization parameter to enable this feature.

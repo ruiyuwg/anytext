@@ -53,9 +53,9 @@ const app = new Hono()
 
 const Layout: FC = (props) => {
   return (
-
+    
       {props.children}
-
+    
   )
 }
 
@@ -63,14 +63,14 @@ const Top: FC<{ messages: string[] }> = (props: {
   messages: string[]
 }) => {
   return (
-
+    
       Hello Hono!
-
+      
         {props.messages.map((message) => {
           return {message}!!
         })}
-
-
+      
+    
   )
 }
 
@@ -87,22 +87,33 @@ export default app
 You can write document metadata tags such as `<title>`, `<link>`, and `<meta>` directly inside your components. These tags will be automatically hoisted to the `<head>` section of the document. This is especially useful when the `<head>` element is rendered far from the component that determines the appropriate metadata.
 
 ```tsx
-import { Hono } from "hono";
+import { Hono } from 'hono'
 
-const app = new Hono();
+const app = new Hono()
 
-app.use("*", async (c, next) => {
+app.use('*', async (c, next) => {
   c.setRenderer((content) => {
-    return c.html({ content });
-  });
-  await next();
-});
+    return c.html(
+      
+        
+        {content}
+      
+    )
+  })
+  await next()
+})
 
-app.get("/about", (c) => {
-  return c.render(<>About Page about page content</>);
-});
+app.get('/about', (c) => {
+  return c.render(
+    <>
+      About Page
+      
+      about page content
+    </>
+  )
+})
 
-export default app;
+export default app
 ```
 
 :::info
@@ -117,18 +128,24 @@ Use Fragment to group multiple elements without adding extra nodes:
 import { Fragment } from 'hono/jsx'
 
 const List = () => (
-
+  
     first child
     second child
     third child
-
+  
 )
 ```
 
-Or you can write it with `<></>` if it set up properly.
+Or you can write it with `<></>` if it sets up properly.
 
 ```tsx
-const List = () => <>first child second child third child</>;
+const List = () => (
+  <>
+    first child
+    second child
+    third child
+  </>
+)
 ```
 
 ## `PropsWithChildren`
@@ -145,10 +162,10 @@ type Post = {
 
 function Component({ title, children }: PropsWithChildren) {
   return (
-
+    
       {title}
       {children}
-
+    
   )
 }
 ```
@@ -160,7 +177,7 @@ To directly insert HTML, use `dangerouslySetInnerHTML`:
 ```tsx
 app.get('/foo', (c) => {
   const inner = { __html: 'JSX &middot; SSR' }
-  const Div =
+  const Div = 
 })
 ```
 
@@ -174,11 +191,11 @@ import { memo } from 'hono/jsx'
 const Header = memo(() => Welcome to Hono)
 const Footer = memo(() => Powered by Hono)
 const Layout = (
-
-
+  
+    
     Hono is cool!
-
-
+    
+  
 )
 ```
 
@@ -210,9 +227,9 @@ const Button: FC = () => {
 
 const Toolbar: FC = () => {
   return (
-
-
-
+    
+      
+    
   )
 }
 
@@ -220,11 +237,11 @@ const Toolbar: FC = () => {
 
 app.get('/', (c) => {
   return c.html(
-
+    
       <ThemeContext.Provider value={themes.dark}>
-
+        
       </ThemeContext.Provider>
-
+    
   )
 })
 ```
@@ -236,13 +253,19 @@ If you render it with `c.html()`, it will await automatically.
 
 ```tsx
 const AsyncComponent = async () => {
-  await new Promise((r) => setTimeout(r, 1000)); // sleep 1s
-  return Done!;
-};
+  await new Promise((r) => setTimeout(r, 1000)) // sleep 1s
+  return Done!
+}
 
-app.get("/", (c) => {
-  return c.html();
-});
+app.get('/', (c) => {
+  return c.html(
+    
+      
+        
+      
+    
+  )
+})
 ```
 
 ## Suspense <Badge style="vertical-align: middle;" type="warning" text="Experimental" />
@@ -258,13 +281,13 @@ import { renderToReadableStream, Suspense } from 'hono/jsx/streaming'
 
 app.get('/', (c) => {
   const stream = renderToReadableStream(
-
-
+    
+      
         loading...}>
-
-
-
-
+          
+        
+      
+    
   )
   return c.body(stream, {
     headers: {
@@ -289,13 +312,13 @@ function SyncComponent() {
 
 app.get('/sync', async (c) => {
   return c.html(
-
-
+    
+      
         Out of Service}>
-
-
-
-
+          
+        
+      
+    
   )
 })
 ```
@@ -311,15 +334,15 @@ async function AsyncComponent() {
 
 app.get('/with-suspense', async (c) => {
   return c.html(
-
-
+    
+      
         Out of Service}>
           Loading...}>
-
-
-
-
-
+            
+          
+        
+      
+    
   )
 })
 ```
@@ -335,17 +358,17 @@ import { Suspense, StreamingContext } from 'hono/jsx/streaming'
 
 app.get('/', (c) => {
   const stream = renderToReadableStream(
-
-
+    
+      
         <StreamingContext
           value={{ scriptNonce: 'random-nonce-value' }}
         >
           Loading...}>
-
-
-
-
-
+            
+          
+        
+      
+    
   )
 
   return c.body(stream, {
@@ -363,8 +386,8 @@ The `scriptNonce` value will be automatically added to any `<script>` tags gener
 
 ## Integration with html Middleware
 
-Combine the JSX and html middlewares for powerful templating.
-For in-depth details, consult the [html middleware documentation](/docs/helpers/html).
+Combine the JSX and HTML middlewares for powerful templating.
+For in-depth details, consult the [HTML middleware documentation](/docs/helpers/html).
 
 ```tsx
 import { Hono } from 'hono'
@@ -379,19 +402,19 @@ interface SiteData {
 
 const Layout = (props: SiteData) =>
   html`<!doctype html>
-
-
+    
+      
         ${props.title}
-
-
+      
+      
         ${props.children}
-
+      
     `
 
 const Content = (props: { siteData: SiteData; name: string }) => (
-
+  
     Hello {props.name}
-
+  
 )
 
 app.get('/:name', (c) => {
@@ -417,70 +440,13 @@ The [JSX Renderer Middleware](/docs/middleware/builtin/jsx-renderer) allows you 
 You can override the type definition to add your custom elements and attributes.
 
 ```ts
-declare module "hono/jsx" {
+declare module 'hono/jsx' {
   namespace JSX {
     interface IntrinsicElements {
-      "my-custom-element": HTMLAttributes & {
-        "x-event"?: "click" | "scroll";
-      };
+      'my-custom-element': HTMLAttributes & {
+        'x-event'?: 'click' | 'scroll'
+      }
     }
   }
 }
 ```
-
-# Helpers
-
-Helpers are available to assist in developing your application. Unlike middleware, they don't act as handlers, but rather provide useful functions.
-
-For instance, here's how to use the [Cookie helper](/docs/helpers/cookie):
-
-```ts
-import { getCookie, setCookie } from "hono/cookie";
-
-const app = new Hono();
-
-app.get("/cookie", (c) => {
-  const yummyCookie = getCookie(c, "yummy_cookie");
-  // ...
-  setCookie(c, "delicious_cookie", "macha");
-  //
-});
-```
-
-## Available Helpers
-
-- [Accepts](/docs/helpers/accepts)
-- [Adapter](/docs/helpers/adapter)
-- [Cookie](/docs/helpers/cookie)
-- [css](/docs/helpers/css)
-- [Dev](/docs/helpers/dev)
-- [Factory](/docs/helpers/factory)
-- [html](/docs/helpers/html)
-- [JWT](/docs/helpers/jwt)
-- [SSG](/docs/helpers/ssg)
-- [Streaming](/docs/helpers/streaming)
-- [Testing](/docs/helpers/testing)
-- [WebSocket](/docs/helpers/websocket)
-
-# Frequently Asked Questions
-
-This guide is a collection of frequently asked questions (FAQ) about Hono and how to resolve them.
-
-## Is there an official Renovate config for Hono?
-
-The Hono teams does not currently maintain [Renovate](https://github.com/renovatebot/renovate) Configuration.
-Therefore, please use third-party renovate-config as follows.
-
-In your `renovate.json` :
-
-```json
-// renovate.json
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "github>shinGangan/renovate-config-hono" // [!code ++]
-  ]
-}
-```
-
-see [renovate-config-hono](https://github.com/shinGangan/renovate-config-hono) repository for more details.

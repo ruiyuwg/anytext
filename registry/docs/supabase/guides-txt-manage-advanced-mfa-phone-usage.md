@@ -31,8 +31,8 @@ Usage is shown as "Auth MFA Phone Hours" on your invoice.
 
 ## Pricing
 
-per hour ( per month) for the first project.  per
-hour ( per month) for every additional project.
+per hour ( per month) for the first project.
+per hour ( per month) for every additional project.
 
 | Plan       | Project 1 per month  | Project 2 per month  | Project 3 per month  |
 | ---------- | -------------------- | -------------------- | -------------------- |

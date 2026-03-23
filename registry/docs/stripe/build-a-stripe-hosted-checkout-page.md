@@ -474,7 +474,7 @@ $stripeSecretKey = '<\<YOUR\_SECRET\_KEY>>';
 // This test secret API key is a placeholder. Don't include personal details in requests with this key.
 // To see your test secret API key embedded in code samples, sign in to your Stripe account.
 // You can also find your test secret API key at https://dashboard.stripe.com/test/apikeys.
-StripeConfiguration.ApiKey = "<\<YOUR\_SECRET\_KEY>>";
+services.AddSingleton(new StripeClient("<\<YOUR\_SECRET\_KEY>>"));
 CustomerEmail = "customer@example.com",
 SubmitType = "donate",
 BillingAddressCollection = "auto",
@@ -502,8 +502,7 @@ AutomaticTax = new SessionAutomaticTaxOptions { Enabled = true },
 CustomerCreation = "always",
 // Provide the Customer ID (for example, cus\_1234) for an existing customer to associate it with this session
 // Customer="cus\_RnhPlBnbBbXapY",
-var service = new SessionService();
-Session session = service.Create(options);
+Session session = \_client.V1.Checkout.Sessions.Create(options);
 
 ```
         Response.Headers.Add("Location", session.Url);

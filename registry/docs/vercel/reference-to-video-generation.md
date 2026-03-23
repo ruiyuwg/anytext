@@ -91,5 +91,5 @@ fs.writeFileSync('output.mp4', result.videos[0].uint8Array);
 
 title: "Text-to-Video Generation"
 description: "Generate videos from text prompts using Google Veo, KlingAI, Wan, Grok Imagine Video, or ByteDance Seedance through AI Gateway."
-last\_updated: "2026-03-08T05:03:10.271Z"
+last\_updated: "2026-03-23T09:40:04.140Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/video-generation/text-to-video"

@@ -36,7 +36,7 @@ https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2F
 
 title: "Working with the Deploy Button"
 description: "Deploy public Git projects with the Deploy Button, and set up new projects with Vercel and GitHub, GitLab, or Bitbucket"
-last\_updated: "2026-03-08T05:03:13.089Z"
+last\_updated: "2026-03-23T09:40:08.094Z"
 source: "https://vercel.com/docs/deploy-button"
 
 # Working with the Deploy Button
@@ -53,5 +53,5 @@ With the Vercel Project creation flow, you can add various URL query parameters 
 
 title: "Deploy Button Source"
 description: "Learn how to use the Vercel Deploy Button source URL parameters."
-last\_updated: "2026-03-08T05:03:13.098Z"
+last\_updated: "2026-03-23T09:40:08.103Z"
 source: "https://vercel.com/docs/deploy-button/source"

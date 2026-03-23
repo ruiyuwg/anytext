@@ -174,7 +174,7 @@ For more details, see the [Image Generation Capabilities docs](/docs/ai-gateway/
 
 title: "Getting Started"
 description: "Get started with AI Gateway by generating text, images, or video."
-last\_updated: "2026-03-08T05:03:10.454Z"
+last\_updated: "2026-03-23T09:40:04.405Z"
 source: "https://vercel.com/docs/ai-gateway/getting-started"
 
 # Getting Started
@@ -189,5 +189,5 @@ Choose a quickstart to set up a project and make your first request:
 
 title: "Text Generation Quickstart"
 description: "Generate and stream text responses using AI Gateway."
-last\_updated: "2026-03-08T05:03:10.473Z"
+last\_updated: "2026-03-23T09:40:04.422Z"
 source: "https://vercel.com/docs/ai-gateway/getting-started/text"

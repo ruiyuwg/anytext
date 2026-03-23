@@ -29,19 +29,18 @@ name: p.text(),
 };
 
 ```
-
 ```
 
 ┌─────────────────────┐\
-│ ~ drizzle-kit push │\
+│ ~ drizzle-kit push  │\
 └─┬───────────────────┘\
-│ ┌──────────────────────────┐
-└ Pull current datatabase schema ---------> │ │
-│ │
-┌ Generate alternations based on diff <---- │ DATABASE │
-│ │ │
-└ Apply migrations to the database -------> │ │
-│ └──────────────────────────┘
+│                                           ┌──────────────────────────┐
+└ Pull current datatabase schema ---------> │                          │
+│                          │
+┌ Generate alternations based on diff <---- │         DATABASE         │
+│                                           │                          │
+└ Apply migrations to the database -------> │                          │
+│      └──────────────────────────┘
 │
 ┌────────────────────────────────────┴────────────────┐
 create table users(id serial primary key, name text);
@@ -94,7 +93,7 @@ npx drizzle-kit push --dialect=postgresql --schema=./src/schema.ts --url=postgre
 ### Schema files path
 
 You can have a single `schema.ts` file or as many schema files as you want spread out across the project.
-Drizzle Kit requires you to specify path(s) to them as a [glob](https://www.digitalocean.com/community/tools/glob?comments=true&glob=/**/*.js&matches=false&tests=//%20This%20will%20match%20as%20it%20ends%20with%20'.js'&tests=/hello/world.js&tests=//%20This%20won't%20match!&tests=/test/some/globs) via `schema` configuration option.
+Drizzle Kit requires you to specify path(s) to them as a [glob](https://www.digitalocean.com/community/tools/glob?comments=true\&glob=/**/*.js\&matches=false\&tests=//%20This%20will%20match%20as%20it%20ends%20with%20'.js'\&tests=/hello/world.js\&tests=//%20This%20won't%20match!\&tests=/test/some/globs) via `schema` configuration option.
 
 <SchemaFilePaths />
 
@@ -137,10 +136,10 @@ as for exceptions like `aws-data-api`, `pglight` and `d1-http` - you will have t
 You can configure list of tables, schemas and extensions via `tablesFilters`, `schemaFilter` and `extensionFilters` options.
 
 |                     |                                                                                               |
-| :------------------ | :-------------------------------------------------------------------------------------------- | ----- |
+| :------------------ | :-------------------------------------------------------------------------------------------- |
 | `tablesFilter`      | `glob` based table names filter, e.g. `["users", "user_info"]` or `"user*"`. Default is `"*"` |
 | `schemaFilter`      | Schema names filter, e.g. `["public", "drizzle"]`. Default is `["public"]`                    |
-| `extensionsFilters` | List of installed database extensions, e.g. `["postgis"]`. Default is `[]`                    | <br/> |
+| `extensionsFilters` | List of installed database extensions, e.g. `["postgis"]`. Default is `[]`                    | <br/>
 
 Let's configure drizzle-kit to only operate with **all tables** in **public** schema
 and let drizzle-kit know that there's a **postgis** extension installed,
@@ -174,12 +173,11 @@ npx drizzle-kit push
 
 <rem025/>
 
-|           |                                                         |
-| :-------- | :------------------------------------------------------ | ----------- |
-| `verbose` | print all SQL statements prior to execution             |
-| `strict`  | always ask for approval before executing SQL statements |
-| `force`   | auto-accept all data-loss statements                    | <br/> <Npx> |
-
+|           |                                                          |
+| :-------- | :---------------------------------------------------     |
+| `verbose` | print all SQL statements prior to execution              |
+| `strict`  | always ask for approval before executing SQL statements  |
+| `force`   | auto-accept all data-loss statements                     | <br/> <Npx>
 drizzle-kit push --strict --verbose --force </Npx>
 
 <br/>
@@ -202,7 +200,7 @@ yet you can provide all configuration options through CLI if necessary, e.g. in 
 | `host`              |            | Host                                                                      |
 | `port`              |            | Port                                                                      |
 | `database`          |            | Database name                                                             |
-| `config`            |            | Configuration file path, default=`drizzle.config.ts`                      |
+| `config`            |            | Configuration file path, default=`drizzle.config.ts`                             |
 
 <Npx>
 drizzle-kit push dialect=postgresql schema=src/schema.ts url=postgresql://user:password@host:port/dbname
@@ -215,7 +213,7 @@ drizzle-kit push dialect=postgresql schema=src/schema.ts --tablesFilter='user*' 
 Let's declare drizzle schema in the project and push it to the database via `drizzle-kit push` command
 
 ```plaintext
-📦
+📦 
  ├ 📂 src
  │ ├ 📜 schema.ts
  │ └ 📜 index.ts
@@ -232,7 +230,7 @@ export default defineConfig({
   dialect: "postgresql",
   schema: "./src/schema.ts",
   dbCredentials: {
-    url: "postgresql://user:password@host:port/dbname",
+    url: "postgresql://user:password@host:port/dbname"
   },
 });
 ```
@@ -243,7 +241,7 @@ import * as p from "drizzle-orm/pg-core";
 export const users = p.pgTable("users", {
   id: p.serial().primaryKey(),
   name: p.text(),
-});
+})
 ```
 
 </CodeTabs>

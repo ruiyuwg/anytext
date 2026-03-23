@@ -39,7 +39,7 @@ You can use the [Blackbox AI](https://blackbox.ai) CLI for AI-powered code gener
 - ### (Optional) Monitor usage and spend
   View your usage, spend, and request activity in the [**AI Gateway**](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai-gateway\&title=Go+to+AI+Gateway) section in the Vercel dashboard sidebar. See the [observability documentation](/docs/ai-gateway/capabilities/observability) for more details.
 
-title: "Claude Code"
-description: "Use Claude Code with the AI Gateway."
-last\_updated: "2026-03-08T05:03:09.707Z"
+title: "Claude Code and Claude Agent SDK"
+description: "Use Claude Code and the Claude Agent SDK with AI Gateway."
+last\_updated: "2026-03-23T09:40:03.115Z"
 source: "https://vercel.com/docs/agent-resources/coding-agents/claude-code"

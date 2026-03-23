@@ -82,5 +82,5 @@ To follow this guide, you'll need the following:
 
 title: "Vercel LMNT Integration"
 description: "Learn how to add LMNT connectable account integration with Vercel."
-last\_updated: "2026-03-08T05:03:09.895Z"
+last\_updated: "2026-03-23T09:40:03.422Z"
 source: "https://vercel.com/docs/agent-resources/integrations-for-models/lmnt"

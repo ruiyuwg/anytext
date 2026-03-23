@@ -453,3 +453,11 @@ const result = await container.renderToString(Card, {
 });
 console.log(result) // includes `<!DOCTYPE html>` at the beginning of the HTML
 ```
+
+# Astro Content Loader API
+
+Astro’s Content Loader API allows you to load your data from any source, local or remote, and interact with Astro’s content layer to manage your [content collections](/en/guides/content-collections/).
+
+This API includes two ready-to-use loaders for content stored locally. It also provides tools for building your own custom objects that can load data from any source into content collections.
+
+Learn more about [querying data loaded from build-time loaders](/en/guides/content-collections/#querying-build-time-collections) or [accessing live data from live loaders](/en/guides/content-collections/#accessing-live-data) with guided explanations and example usage in the content collections guide.

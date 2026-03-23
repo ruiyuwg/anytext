@@ -41,7 +41,7 @@ The project name is set at project creation (see [Project creation](/cloud/getti
 
 #### Adding a CMS license key
 
-A CMS license key can be added and connected to a Strapi Cloud project to unlock additional Strapi CMS features across all of the project’s environments. The CMS features that will be accessible via the license key depend on the type of license that was purchased: please refer to the  for more information and/or to purchase a license.
+A CMS license key can be added and connected to a Strapi Cloud project to unlock additional Strapi CMS features across all of the project’s environments. The CMS features that will be accessible via the license key depend on the type of license that was purchased. Please refer to the  for more information and/or to purchase a license.
 
 If you don't see the *Strapi CMS license key* section, it probably means that your subscription is a legacy one and does not support custom CMS licenses. It means that you already have one that is automatically included on your project.
 
@@ -106,11 +106,11 @@ Once the ownership transfer is done, the project will be disconnected from Strap
 
 #### Deleting a Strapi Cloud project
 
-You can delete any Strapi Cloud project, but it will be permanent and irreversible. Associated domains, deployments and data will be deleted as well and the subscription for the project will automatically be canceled.
+You can delete any Strapi Cloud project, but it will be permanent and irreversible. Associated domains, deployments and data will be deleted and the subscription for the project will automatically be canceled.
 
 1. In the *Danger zone* section of the  *General* tab, click on the **Delete project** button.
-2. In the dialog, select the reason why you are deleting your project. If selecting "Other" or "Missing feature", a textbox will appear to let you write additional information.
-3. Confirm the deletion of your project by clicking on the **Delete project** button at the bottom of the dialog.
+2. In the dialog, select the reason for deleting your project.
+3. Confirm the deletion of your project by clicking on the **Delete project** button.
 
 ### Environments
 
@@ -122,19 +122,21 @@ To create a new environment:
 
 1. Click on the **Add a new environment** button.
 
-2. In the dialog that opens, you can see the price for the new environment and the date of the next invoice.
-
-3. Fill in the available settings:
+2. In the setup step, fill in the available settings:
 
    | Setting name     | Instructions                                                             |
    | ---------------- | ------------------------------------------------------------------------ |
    | Environment name | (mandatory) Write a name for your project's new environment.             |
    | Git branch       | (mandatory) Select the right branch for your new environment.            |
    | Base directory   | Write the name of the base directory of your new environment.            |
-   | Import variables | Tick the box to import variable names from an existing environment. Values will not be imported, and all variables will remain blank. |
    | Deploy on push      | Tick this box to automatically trigger a deployment when changes are pushed to your selected branch. When disabled, you will need to manually deploy the latest changes. |
+   | Import variables | Tick the box to import variable names from an existing environment. Values will not be imported, and all variables will remain blank. |
 
-4. Click on the **Add environment** button to create your project's new environment. You will then be redirected to your *Project dashboard* where you will be able to follow your new environment's creation and first deployment.
+3. Click **Confirm** to proceed to the checkout step.
+
+4. Review the environment price, applicable taxes and proration adjustment.
+
+5. Click on the **Add environment** button to create your project's new environment. You will then be redirected to your *Project dashboard* where you will be able to follow your new environment's creation and first deployment.
 
 If an error occurs during the environment creation, the progress indicator will stop and display an error message. You will see a **Retry** button next to the failed step, allowing you to restart the creation process.
 
@@ -144,7 +146,7 @@ The  *Billing & Usage* tab displays your next estimated payment, all information
 
 Through this tab, you also have the possibility to:
 
-- click the **Change** button to be redirected to the  *Plans* tab, where you can change you subscription plan or billing cycle ([see related documentation](#plans)),
+- click the **Change** button to be redirected to the  *Plans* tab, where you can change your subscription plan or billing cycle ([see related documentation](#plans)),
 - click the **Edit** button in order to set a new payment method (see [related documentation](/cloud/account/account-billing)).
 
 You can attach a dedicated card to your project by choosing the payment method directly from this page. In that way, you can manage your subscriptions with different cards.
@@ -181,7 +183,9 @@ Plan downgrades can be managed, for each project, via the project settings. Down
 
 Make sure to check the usage of your Strapi Cloud project before downgrading: if your current usage exceeds the limits of the lower plan, you are taking the risk of getting charged for overages. You may also lose access to some features: for example, downgrading to the Essential plan would result in the loss of all your project's backups. Please refer to [Information on billing & usage](/cloud/getting-started/usage-billing) for more information.
 
-Note also that you cannot downgrade if you have additional paid environments. You will first need to delete all additional environments that were not included in the base price of you plan (see [Resetting & Deleting environment](#resetting--deleting-environment)) before you can schedule a downgrade. When downgrading from Pro to Scale, the additional included environment will automatically be deleted when the downgrade takes effect.
+Note also that you cannot downgrade if you have additional paid environments. You will first need to delete all additional environments that were not included in the base price of you plan (see [Resetting & Deleting environment](#resetting--deleting-environment)) before you can schedule a downgrade. When downgrading from Scale to Pro, the additional included environment will automatically be deleted when the downgrade takes effect.
+
+You cannot downgrade to the Free plan if a GitHub organization repository is connected to the project. To downgrade, first switch to a personal repository in the [Connected Git repository](#modifying-git-repository--branch) settings.
 
 To downgrade your current plan to a lower one:
 
@@ -243,7 +247,7 @@ Ensure the Node version configured in your Strapi project matches the Node versi
 
 #### Editing Git branch
 
-2. In the *Edit branch* dialog, edit the available settings. Note that the branch can be edited for all environments at the same time via the project settings, see [General](#general).
+1. In the *Edit branch* dialog, edit the available settings. Note that the branch can be edited for all environments at the same time via the project settings, see [General](#general).
 
    | Setting name    | Instructions                                                             |
    | --------------- | ------------------------------------------------------------------------ |
@@ -251,7 +255,7 @@ Ensure the Node version configured in your Strapi project matches the Node versi
    | Base directory  | Write the path of the base directory in the textbox.                     |
    | Deploy the project on every commit pushed to this branch | Tick the box to automatically trigger a new deployment whenever a new commit is pushed to the selected branch. Untick it to disable the option. |
 
-3. Click on the **Save & deploy** button for the changes to take effect.
+2. Click on the **Save & deploy** button for the changes to take effect.
 
 #### Transferring data between environments
 
@@ -269,7 +273,7 @@ To transfer data to a secondary environment:
 
 1. Create and deploy both the source and target [environments](#environments).
 2. In the *Environment data* section of the  *Configuration* tab, click on the **Import data** button.
-3. In the modal that opens, select the source environment from the dropdown list. Only fully created and deployed environments are available as sources.
+3. In the modal that opens, select the source environment from the drop-down list. Only fully created and deployed environments are available as sources.
 4. Click on **Import data** to proceed, and follow the steps to confirm the transfer.
 5. Once initiated, you will be redirected to the environment's dashboard where you can monitor the transfer's progress. Once the transfer is completed, the dashboard will refresh, showing both the ongoing and historic deployments.
 
@@ -277,7 +281,7 @@ The CMS of the target environment will be inaccessible whilst the transfer is on
 
 #### Resetting & Deleting environment
 
-You can reset or delete any additional environment of your Strapi Cloud project, but it will be permanent and irreversible. The default, production environment, can however not be neither reset nor deleted.
+You can reset or delete any additional environment of your Strapi Cloud project, but it will be permanent and irreversible. The default, production environment, can however neither be reset nor deleted.
 
 ##### Resetting an environment
 
@@ -295,7 +299,7 @@ Resetting an environment deletes all environments data and resets the variables 
    | Git branch      | (mandatory) Choose a branch from the drop-down list.                     |
    | Base directory  | Write the path of the base directory in the textbox.                     |
    | Import variables | Tick the box to import variable names from an existing environment. Values will not be imported, and all variables will remain blank. |
-   | Auto-deploy     | Deploy the project on every commit pushed to this branch | Tick the box to automatically trigger a new deployment whenever a new commit is pushed to the selected branch. Untick it to disable the option. |
+   | Auto-deploy     | Deploy the project on every commit pushed to this branch. Tick the box to automatically trigger a new deployment whenever a new commit is pushed to the selected branch. Untick it to disable the option. |
 
 4. Click on the **Reset** button.
 
@@ -353,7 +357,7 @@ All existing domains for your Strapi Cloud project are listed in the  *Domains* 
 - see its current status:
   - Active: the domain is currently confirmed and active
   - Pending: the domain transfer is being processed, waiting for DNS changes to propagate
-  - Failed: the domain change request did not complete as an error occured
+  - Failed: the domain change request did not complete as an error occurred
 - click the  edit button to access the settings of the domain
 - click the  delete button to delete the domain
 
@@ -375,13 +379,13 @@ Custom domains are not available on the Free plan. Downgrading to the Free plan 
 
 3. Click on **Save & deploy** for the changes to take effect.
 
-To finish setting up your custom domain, in the settings of your domain registar or hosting platform, please add the Target value (e.g., `proud-unicorn-123456af.strapiapp.com`) as a CNAME alias to the DNS records of your domain.
+To finish setting up your custom domain, in the settings of your domain registrar or hosting platform, please add the Target value (e.g., `proud-unicorn-123456af.strapiapp.com`) as a CNAME alias to the DNS records of your domain.
 
 When using custom domains, these domains do not apply to the URLs of uploaded assets. Uploaded assets keep the Strapi Cloud project-based URL.
 
 This means that, if your custom domain is hosted at `https://my-custom-domain.com` and your Strapi Cloud project name is `my-strapi-cloud-instance`, API calls will still return URLs such as `https://my-strapi-cloud-instance.media.strapiapp.com/example.png`.
 
-Media library queries over REST or GraphQL always return the project media domain on Strapi Cloud. If you move from a self-hosted project, where media URLs can match your own domain or CDN, plan to keep using the absolute URLs from the API or adjust your frontend to allow the Strapi Cloud media domain (see [Cloud Fundamentals](/cloud/cloud-fundamentals) for more details).
+Media library queries over REST or GraphQL always return the project media domain on Strapi Cloud. If you move from a self-hosted project, media URLs will no longer match your own domain or CDN. Plan to use the absolute URLs returned by the API, or adjust your frontend to allow the Strapi Cloud media domain (see [Cloud Fundamentals](/cloud/cloud-fundamentals) for more details).
 
 ### Variables
 

@@ -1,6 +1,6 @@
 # Payment Methods API
 
-Learn more about the API that powers a range of global payment methods.
+Learn about the API that allows you to accept a range of global payment methods.
 
 The Payment Methods API allows you to accept a variety of payment methods through a single API. A [PaymentMethod](https://docs.stripe.com/api/payment_methods/object.md) object contains the payment method details to create payments. With the Payment Methods API, you can combine a *PaymentMethod* (PaymentMethods represent your customer's payment instruments, used with the Payment Intents or Setup Intents APIs):
 

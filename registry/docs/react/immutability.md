@@ -2,13 +2,13 @@
 
 Validates against mutating props, state, and other values that [are immutable](/reference/rules/components-and-hooks-must-be-pure#props-and-state-are-immutable).
 
-## Rule Details {/_rule-details_/}
+## Rule Details {/*rule-details*/}
 
 A component’s props and state are immutable snapshots. Never mutate them directly. Instead, pass new props down, and use the setter function from `useState`.
 
-## Common Violations {/_common-violations_/}
+## Common Violations {/*common-violations*/}
 
-### Invalid {/_invalid_/}
+### Invalid {/*invalid*/}
 
 ```js
 // ❌ Array push mutation
@@ -23,10 +23,10 @@ function Component() {
 
 // ❌ Object property assignment
 function Component() {
-  const [user, setUser] = useState({ name: "Alice" });
+  const [user, setUser] = useState({name: 'Alice'});
 
   const updateName = () => {
-    user.name = "Bob"; // Mutating!
+    user.name = 'Bob'; // Mutating!
     setUser(user); // Same reference
   };
 }
@@ -41,7 +41,7 @@ function Component() {
 }
 ```
 
-### Valid {/_valid_/}
+### Valid {/*valid*/}
 
 ```js
 // ✅ Create new array
@@ -55,17 +55,17 @@ function Component() {
 
 // ✅ Create new object
 function Component() {
-  const [user, setUser] = useState({ name: "Alice" });
+  const [user, setUser] = useState({name: 'Alice'});
 
   const updateName = () => {
-    setUser({ ...user, name: "Bob" }); // New object
+    setUser({...user, name: 'Bob'}); // New object
   };
 }
 ```
 
-## Troubleshooting {/_troubleshooting_/}
+## Troubleshooting {/*troubleshooting*/}
 
-### I need to add items to an array {/_add-items-array_/}
+### I need to add items to an array {/*add-items-array*/}
 
 Mutating arrays with methods like `push()` won't trigger re-renders:
 
@@ -75,15 +75,13 @@ function TodoList() {
   const [todos, setTodos] = useState([]);
 
   const addTodo = (id, text) => {
-    todos.push({ id, text });
+    todos.push({id, text});
     setTodos(todos); // Same array reference!
   };
 
   return (
     <ul>
-      {todos.map((todo) => (
-        <li key={todo.id}>{todo.text}</li>
-      ))}
+      {todos.map(todo => <li key={todo.id}>{todo.text}</li>)}
     </ul>
   );
 }
@@ -97,21 +95,19 @@ function TodoList() {
   const [todos, setTodos] = useState([]);
 
   const addTodo = (id, text) => {
-    setTodos([...todos, { id, text }]);
+    setTodos([...todos, {id, text}]);
     // Or: setTodos(todos => [...todos, {id: Date.now(), text}])
   };
 
   return (
     <ul>
-      {todos.map((todo) => (
-        <li key={todo.id}>{todo.text}</li>
-      ))}
+      {todos.map(todo => <li key={todo.id}>{todo.text}</li>)}
     </ul>
   );
 }
 ```
 
-### I need to update nested objects {/_update-nested-objects_/}
+### I need to update nested objects {/*update-nested-objects*/}
 
 Mutating nested properties doesn't trigger re-renders:
 
@@ -119,15 +115,15 @@ Mutating nested properties doesn't trigger re-renders:
 // ❌ Wrong: Mutating nested object
 function UserProfile() {
   const [user, setUser] = useState({
-    name: "Alice",
+    name: 'Alice',
     settings: {
-      theme: "light",
-      notifications: true,
-    },
+      theme: 'light',
+      notifications: true
+    }
   });
 
   const toggleTheme = () => {
-    user.settings.theme = "dark"; // Mutation!
+    user.settings.theme = 'dark'; // Mutation!
     setUser(user); // Same object reference
   };
 }
@@ -139,11 +135,11 @@ Spread at each level that needs updating:
 // ✅ Better: Create new objects at each level
 function UserProfile() {
   const [user, setUser] = useState({
-    name: "Alice",
+    name: 'Alice',
     settings: {
-      theme: "light",
-      notifications: true,
-    },
+      theme: 'light',
+      notifications: true
+    }
   });
 
   const toggleTheme = () => {
@@ -151,14 +147,14 @@ function UserProfile() {
       ...user,
       settings: {
         ...user.settings,
-        theme: "dark",
-      },
+        theme: 'dark'
+      }
     });
   };
 }
 ```
 
----
+***
 
 ## Sitemap
 

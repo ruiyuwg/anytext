@@ -23,7 +23,7 @@ For example, you can create a T-shirt *product* that has 2 *prices* for differen
 
 #### Dashboard
 
-> Products created in a sandbox can be copied to live mode so that you don’t need to re-create them. In the Product detail view in the Dashboard, click **Copy to live mode** in the upper right corner. You can only do this once for each product created in a sandbox. Subsequent updates to the test product are not reflected for the live product.
+> Products created in a sandbox can be copied to live mode so that you don’t need to re-create them. In the Product detail view in the Dashboard, click **Copy to live mode** in the upper right corner. You can only do this once for each product created in a sandbox. Subsequent updates to the test product aren’t reflected for the live product.
 
 Make sure you’re in a sandbox, and define the items you want to sell. To create a new product and price:
 
@@ -196,8 +196,8 @@ The following example endpoint demonstrates how to acknowledge and handle events
 
 ```ruby
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 # You can find your endpoint's secret in your webhook settings
@@ -342,7 +342,7 @@ const {error} = await stripe.redirectToCheckout({
 // using `error.message`.
 ```
 
-In this example (for a 5 USD donation), your customized Checkout submit button would read **Donate $5.00**. See the [Stripe.js Reference](https://docs.stripe.com/js.md#stripe-redirect-to-checkout) for a complete list of `submitType` options.
+In this example (for a 5 USD donation), your customized Checkout submit button would read **Donate 5.00 USD**. See the [Stripe.js Reference](https://docs.stripe.com/js.md#stripe-redirect-to-checkout) for a complete list of `submitType` options.
 
 ## Optional: Prefill customer email \[Client-side]
 

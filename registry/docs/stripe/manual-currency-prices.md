@@ -2,9 +2,9 @@
 
 Present local currencies to customers with manual currency prices.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/localize-prices/manual-currency-prices?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/localize-prices/manual-currency-prices?payment-ui=stripe-hosted.
 
 Stripe supports manually defining prices in different currencies when creating [products](https://docs.stripe.com/products-prices/overview.md#get-started). However, Stripe recommends using [Adaptive Pricing](https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing.md) instead of manual currency prices to reduce currency exchange rate fluctuation risk and to automatically enable support for over 100 local currencies.
 
@@ -142,9 +142,9 @@ Stripe’s standard transaction fees apply to automatically converted transactio
 
 See the [pricing page](https://stripe.com/pricing) for more details about these fees.
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/localize-prices/manual-currency-prices?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/localize-prices/manual-currency-prices?payment-ui=embedded-form.
 
 Stripe supports manually defining prices in different currencies when creating [products](https://docs.stripe.com/products-prices/overview.md#get-started). However, Stripe recommends using [Adaptive Pricing](https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing.md) instead of manual currency prices to reduce currency exchange rate fluctuation risk and to automatically enable support for over 100 local currencies.
 

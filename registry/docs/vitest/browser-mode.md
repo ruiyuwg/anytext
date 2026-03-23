@@ -46,12 +46,12 @@ pnpm add -D vitest @vitest/browser-preview
 bun add -D vitest @vitest/browser-preview
 ```
 
-However, to run tests in CI you need to install either [`playwright`](https://npmjs.com/package/playwright) or [`webdriverio`](https://www.npmjs.com/package/webdriverio). We also recommend switching to either one of them for testing locally instead of using the default `preview` provider since it relies on simulating events instead of using Chrome DevTools Protocol.
+However, to run tests in CI you need to install either [`playwright`](https://npmx.dev/package/playwright) or [`webdriverio`](https://npmx.dev/package/webdriverio). We also recommend switching to either one of them for testing locally instead of using the default `preview` provider since it relies on simulating events instead of using Chrome DevTools Protocol.
 
 If you don't already use one of these tools, we recommend starting with Playwright because it supports parallel execution, which makes your tests run faster.
 
 \== Playwright
-[Playwright](https://npmjs.com/package/playwright) is a framework for Web Testing and Automation.
+[Playwright](https://npmx.dev/package/playwright) is a framework for Web Testing and Automation.
 
 ```bash [npm]
 npm install -D vitest @vitest/browser-playwright
@@ -71,7 +71,7 @@ bun add -D vitest @vitest/browser-playwright
 
 \== WebdriverIO
 
-[WebdriverIO](https://www.npmjs.com/package/webdriverio) allows you to run tests locally using the WebDriver protocol.
+[WebdriverIO](https://npmx.dev/package/webdriverio) allows you to run tests locally using the WebDriver protocol.
 
 ```bash [npm]
 npm install -D vitest @vitest/browser-webdriverio
@@ -111,7 +111,7 @@ export default defineConfig({
 })
 ```
 
-Vitest assigns port `63315` to avoid conflicts with the development server, allowing you to run both in parallel. You can change that with the [`browser.api`](/config/#browser-api) option.
+Vitest assigns port `63315` to avoid conflicts with the development server, allowing you to run both in parallel. You can change that with the [`browser.api`](/config/browser/api) option.
 
 The CLI does not print the Vite server URL automatically. You can press "b" to print the URL when running in watch mode.
 
@@ -319,7 +319,7 @@ npx vitest --browser.headless
 
 Since Vitest 3.2, if you don't have the `browser` option in your config but specify the `--browser` flag, Vitest will fail because it can't assume that config is meant for the browser and not Node.js tests.
 
-By default, Vitest will automatically open the browser UI for development. Your tests will run inside an iframe in the center. You can configure the viewport by selecting the preferred dimensions, calling `page.viewport` inside the test, or setting default values in [the config](/config/#browser-viewport).
+By default, Vitest will automatically open the browser UI for development. Your tests will run inside an iframe in the center. You can configure the viewport by selecting the preferred dimensions, calling `page.viewport` inside the test, or setting default values in [the config](/config/browser/viewport).
 
 ## Headless
 
@@ -352,7 +352,7 @@ npx vitest --browser.headless
 
 In this case, Vitest will run in headless mode using the Chrome browser.
 
-Headless mode is not available by default. You need to use either [`playwright`](https://npmjs.com/package/playwright) or [`webdriverio`](https://www.npmjs.com/package/webdriverio) providers to enable this feature.
+Headless mode is not available by default. You need to use either [`playwright`](https://npmx.dev/package/playwright) or [`webdriverio`](https://npmx.dev/package/webdriverio) providers to enable this feature.
 
 ## Examples
 
@@ -391,7 +391,7 @@ Community packages are available for other frameworks:
 
 - [`vitest-browser-lit`](https://github.com/EskiMojo14/vitest-browser-lit) to render [lit](https://lit.dev) components
 - [`vitest-browser-preact`](https://github.com/JoviDeCroock/vitest-browser-preact) to render [preact](https://preactjs.com) components
-- [`vitest-browser-qwik`](https://github.com/kunai-consulting/vitest-browser-qwik) to render [qwik](https://qwik.dev) components
+- [`vitest-browser-qwik`](https://github.com/QwikDev/vitest-browser-qwik) to render [qwik](https://qwik.dev) components
 
 If your framework is not represented, feel free to create your own package - it is a simple wrapper around the framework renderer and `page.elementLocator` API. We will add a link to it on this page. Make sure it has a name starting with `vitest-browser-`.
 
@@ -626,11 +626,27 @@ expect(MODE).toBe('production')
 
 # browser.api
 
-- **Type:** `number | { port?, strictPort?, host? }`
+- **Type:** `number | object`
 - **Default:** `63315`
 - **CLI:** `--browser.api=63315`, `--browser.api.port=1234, --browser.api.host=example.com`
 
-Configure options for Vite server that serves code in the browser. Does not affect [`test.api`](#api) option. By default, Vitest assigns port `63315` to avoid conflicts with the development server, allowing you to run both in parallel.
+Configure options for Vite server that serves code in the browser. Does not affect [`test.api`](/config/api) option. By default, Vitest assigns port `63315` to avoid conflicts with the development server, allowing you to run both in parallel.
+
+## api.allowWrite 4.1.0
+
+- **Type:** `boolean`
+- **Default:** `true` if not exposed to the network, `false` otherwise
+
+Vitest saves [annotation attachments](/guide/test-annotations), [artifacts](/api/advanced/artifacts) and [snapshots](/guide/snapshot) by receiving a WebSocket connection from the browser. This allows anyone who can connect to the API write any arbitary code on your machine within the root of your project (configured by [`fs.allow`](https://vite.dev/config/server-options#server-fs-allow)).
+
+If browser server is not exposed to the internet (the host is `localhost`), this should not be a problem, so the default value in that case is `true`. If you override the host, Vitest will set `allowWrite` to `false` by default to prevent potentially harmful writes.
+
+## api.allowExec 4.1.0
+
+- **Type:** `boolean`
+- **Default:** `true` if not exposed to the network, `false` otherwise
+
+Allows running any test file via the UI. This only applies to the interactive elements (and the server code behind them) in the [UI](/guide/ui) that can run the code. If UI is disabled, this has no effect. See [`api.allowExec`](/config/api#api-allowexec) for more information.
 
 ***
 
@@ -651,6 +667,36 @@ Custom [commands](/api/browser/commands) that can be imported during browser tes
 The timeout in milliseconds. If connection to the browser takes longer, the test suite will fail.
 
 This is the time it should take for the browser to establish the WebSocket connection with the Vitest server. In normal circumstances, this timeout should never be reached.
+
+***
+
+# browser.detailsPanelPosition
+
+- **Type:** `'right' | 'bottom'`
+- **Default:** `'right'`
+- **CLI:** `--browser.detailsPanelPosition=bottom`, `--browser.detailsPanelPosition=right`
+
+Controls the default position of the details panel in the Vitest UI when running browser tests.
+
+- `'right'` - Shows the details panel on the right side with a horizontal split between the browser viewport and the details panel.
+- `'bottom'` - Shows the details panel at the bottom with a vertical split between the browser viewport and the details panel.
+
+```ts [vitest.config.ts]
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    browser: {
+      enabled: true,
+      detailsPanelPosition: 'bottom', // or 'right'
+    },
+  },
+})
+```
+
+## Example
+
+\== bottom
 
 ***
 

@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -26,7 +24,7 @@ Table of contents
 
 > **Docker Desktop terms**
 >
-> Commercial use of Docker Desktop in larger enterprises (more than 250 employees or more than $10 million USD in annual revenue) requires a [paid subscription](https://www.docker.com/pricing/).
+> Commercial use of Docker Desktop in larger enterprises (more than 250 employees or more than $10 million USD in annual revenue) requires a [paid subscription](https://www.docker.com/pricing?ref=Docs\&refAction=DocsDesktopMacInstall).
 
 This page provides download links, system requirements, and step-by-step installation instructions for Docker Desktop on Mac.
 
@@ -168,7 +166,7 @@ $ sudo /Applications/Docker.app/Contents/MacOS/install --user testuser --proxy-h
 
 ## [Where to go next](#where-to-go-next)
 
-- Explore [Docker's subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
+- Explore [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs\&refAction=DocsDesktopMacInstall) to see what Docker can offer you.
 - [Get started with Docker](https://docs.docker.com/get-started/introduction/).
 - [Explore Docker Desktop](https://docs.docker.com/desktop/use-desktop/) and all its features.
 - [Troubleshooting](https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.

@@ -122,5 +122,5 @@ print('Response:', message.content[0].text)
 
 title: "Messages"
 description: "Create messages using the Anthropic Messages API format with support for streaming."
-last\_updated: "2026-03-08T05:03:10.635Z"
+last\_updated: "2026-03-23T09:40:04.667Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/anthropic-messages-api/messages"

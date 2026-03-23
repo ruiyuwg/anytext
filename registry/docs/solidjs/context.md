@@ -31,7 +31,7 @@ export const MyContext = createContext();
 
 ```
 import { MyContext } from "./create";
-export function Provider (props) {  return (    <MyContext.Provider>      {props.children}    </MyContext.Provider>  )};
+export function Provider(props) {  return <MyContext.Provider>{props.children}</MyContext.Provider>;}
 ```
 
 ***
@@ -59,9 +59,9 @@ Once the values are available to all the components in the context's component t
 
 ```
 import { createContext, useContext } from "solid-js";import { MyContext } from "./create";
-const Provider = (props) => (  <MyContext.Provider value="new value">    {props.children}  </MyContext.Provider>);
+const Provider = (props) => (  <MyContext.Provider value="new value">{props.children}</MyContext.Provider>);
 const Child = () => {  const value = useContext(MyContext);
-  return (    <span>      {value}    </span>  );};
+  return <span>{value}</span>;};
 export const App = () => (  <Provider>    <Child />  </Provider>);
 ```
 
@@ -108,20 +108,20 @@ App.jsxContext.jsxChild.jsx
 
 ```
 import { CounterProvider } from "./Context";import { Child } from "./Child";
-export function App() {  return (    <CounterProvider count={1}>      <h1>Welcome to Counter App</h1>      <Child />    </CounterProvider>  )}
+export function App() {  return (    <CounterProvider count={1}>      <h1>Welcome to Counter App</h1>      <Child />    </CounterProvider>  );}
 ```
 
 ```
 import { createSignal, useContext } from "solid-js";
-export function CounterProvider(props) {  const [count, setCount] = createSignal(props.initialCount || 0);  const counter = [    count,    {      increment() {      setCount(prev => prev + 1);      },      decrement() {      setCount(prev => prev - 1);      }    }  ];
+export function CounterProvider(props) {  const [count, setCount] = createSignal(props.initialCount || 0);  const counter = [    count,    {      increment() {        setCount((prev) => prev + 1);      },      decrement() {        setCount((prev) => prev - 1);      },    },  ];
   return (    <CounterContext.Provider value={counter}>      {props.children}    </CounterContext.Provider>  );}
-export function useCounter() { return useContext(CounterContext); }
+export function useCounter() {  return useContext(CounterContext);}
 ```
 
 ```
 // /context/counter-component.tsximport { useCounter } from "./Context";
 export function Child(props) {  const [count, { increment, decrement }] = useCounter();
-  return (  <>    <div>{count()}</div>    <button onClick={increment}>+</button>    <button onClick={decrement}>-</button>  </>  );};
+  return (    <>      <div>{count()}</div>      <button onClick={increment}>+</button>      <button onClick={decrement}>-</button>    </>  );}
 ```
 
 This offers a way to manage state across your components without having to pass props through intermediate elements.
@@ -158,7 +158,7 @@ Because of this, if an initial value was not passed to `createContext`, the TS t
 The most common solution for it is to wrap all uses of `useContext` in a function that will explicitly throw a helpful error if the context is `undefined`. This also serves to narrow the type returned, so TS doesn't complain. As an example:
 
 ```
-function useCounterContext() {  const context = useContext(CounterContext)  if (!context) {    throw new Error("can't find CounterContext")  }  return context}
+function useCounterContext() {  const context = useContext(CounterContext);  if (!context) {    throw new Error("can't find CounterContext");  }  return context;}
 ```
 
 [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/concepts/context.mdx\&page=https://docs.solidjs.com/concepts/context)

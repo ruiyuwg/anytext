@@ -1,6 +1,6 @@
 # useUtils
 
-`useUtils` is a hook that gives you access to helpers that let you manage the cached data of the queries you execute via `@trpc/react-query`. These helpers are actually thin wrappers around `@tanstack/react-query`'s [`queryClient`](https://tanstack.com/query/v5/docs/reference/QueryClient) methods. If you want more in-depth information about options and usage patterns for `useContext` helpers than what we provide here, we will link to their respective `@tanstack/react-query` docs so you can refer to them accordingly.
+`useUtils` is a hook that gives you access to helpers that let you manage the cached data of the queries you execute via `@trpc/react-query`. These helpers are actually thin wrappers around `@tanstack/react-query`'s [`queryClient`](https://tanstack.com/query/v5/docs/reference/QueryClient) methods. If you want more in-depth information about options and usage patterns for `useUtils` helpers than what we provide here, we will link to their respective `@tanstack/react-query` docs so you can refer to them accordingly.
 
 This hook was called `useContext()` until `10.41.0` (and is still aliased for the foreseeable future)
 
@@ -34,7 +34,28 @@ export type AppRouter = typeof appRouter;
 ```
 
 ```ts twoslash title='server.ts'
-// @include: server
+// @target: esnext
+// @filename: server.ts
+// ---cut---
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+
+const t = initTRPC.create();
+
+const appRouter = t.router({
+  post: t.router({
+    all: t.procedure.query(() => {
+      return {
+        posts: [
+          { id: 1, title: 'everlong' },
+          { id: 2, title: 'After Dark' },
+        ],
+      };
+    }),
+  }),
+});
+
+export type AppRouter = typeof appRouter;
 ```
 
 Now in our component, when we navigate the object `useUtils` gives us and reach the `post.all` query, we'll get access to our query helpers!
@@ -43,18 +64,17 @@ Now in our component, when we navigate the object `useUtils` gives us and reach 
 // @target: esnext
 // @include: server
 // @filename: MyComponent.tsx
-import { createTRPCReact } from "@trpc/react-query";
-import type { AppRouter } from "./server";
+// ---cut---
+// @errors: 2339
+import { createTRPCReact } from '@trpc/react-query';
+import type { AppRouter } from './server';
 
 const trpc = createTRPCReact<AppRouter>();
 
-// ---cut---
-// @noErrors
 function MyComponent() {
   const utils = trpc.useUtils();
   utils.post.all.f;
   //              ^|
-  // [...]
 }
 ```
 
@@ -80,33 +100,53 @@ These are the helpers you'll get access to via `useUtils`. The table below will 
 | `setMutationDefaults` | [`queryClient.setMutationDefaults`](https://tanstack.com/query/v5/docs/reference/QueryClient#queryclientsetmutationdefaults)     |
 | `getMutationDefaults` | [`queryClient.getMutationDefaults`](https://tanstack.com/query/v5/docs/reference/QueryClient#queryclientgetmutationdefaults)     |
 | `isMutating`          | [`queryClient.isMutating`](https://tanstack.com/query/v5/docs/reference/QueryClient#queryclientismutating)                       |
+| `reset`               | [`queryClient.resetQueries`](https://tanstack.com/query/v5/docs/reference/QueryClient#queryclientresetqueries)                   |
 
 ### ❓ The function I want isn't here!
 
 `@tanstack/react-query` has a lot of functions that we haven't put in the tRPC context yet. If you need a function that isn't here, feel free to [open a feature request](https://github.com/trpc/trpc/issues/new/choose) requesting it.
 
-In the meantime, you can import and use the function directly from `@tanstack/react-query`. We also provide a [getQueryKey](https://trpc.io/docs/getQueryKey) which you can use to get the correct queryKey on the filters when using these functions.
+In the meantime, you can import and use the function directly from `@tanstack/react-query`. We also provide a [getQueryKey](/docs/client/react/getQueryKey) which you can use to get the correct queryKey on the filters when using these functions.
 
 ## Proxy client
 
 In addition to the above react-query helpers, the context also exposes your tRPC proxy client. This lets you call your procedures with `async`/`await` without needing to create an additional vanilla client.
 
-```tsx
-import { trpc } from "../utils/trpc";
+```tsx twoslash
+// @jsx: react-jsx
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({
+  apiKey: t.router({
+    create: t.procedure.mutation(() => 'new-api-key'),
+  }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.tsx
+import { createTRPCReact } from '@trpc/react-query';
+import type { AppRouter } from '../server';
+export const trpc = createTRPCReact<AppRouter>();
+
+// @filename: MyComponent.tsx
+// ---cut---
+import { useState } from 'react';
+import { trpc } from './utils/trpc';
 
 function MyComponent() {
-  const [apiKey, setApiKey] = useState();
+  const [apiKey, setApiKey] = useState('');
   const utils = trpc.useUtils();
 
   return (
-    <Form
-      handleSubmit={async (event) => {
-        const apiKey = await utils.client.apiKey.create.mutate(event);
+    <form
+      onSubmit={async (event) => {
+        const apiKey = await utils.client.apiKey.create.mutate();
         setApiKey(apiKey);
       }}
     >
-      ...
-    </Form>
+      {/* form content */}
+    </form>
   );
 }
 ```
@@ -122,8 +162,35 @@ on the input passed to it to prevent unnecessary calls to the back end.
 
 #### Example code
 
-```tsx
-import { trpc } from "../utils/trpc";
+```tsx twoslash
+// @target: esnext
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  post: t.router({
+    all: t.procedure.query(() => {
+      return { posts: [{ id: 1, title: 'everlong' }] };
+    }),
+    byId: t.procedure
+      .input(z.object({ id: z.number() }))
+      .query(({ input }) => ({ post: { id: input.id, title: 'Look me up!' } })),
+    edit: t.procedure
+      .input(z.object({ id: z.number(), title: z.string() }))
+      .mutation(({ input }) => ({ id: input.id, title: input.title })),
+  }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.tsx
+import { createTRPCReact } from '@trpc/react-query';
+import type { AppRouter } from '../server';
+export const trpc = createTRPCReact<AppRouter>();
+
+// @filename: MyComponent.tsx
+// ---cut---
+import { trpc } from './utils/trpc';
 
 function MyComponent() {
   const utils = trpc.useUtils();
@@ -131,7 +198,7 @@ function MyComponent() {
   const mutation = trpc.post.edit.useMutation({
     onSuccess(input) {
       utils.post.all.invalidate();
-      utils.post.byId.invalidate({ id: input.id }); // Will not invalidate queries for other id's 👍
+      utils.post.byId.invalidate({ id: input.id }); // Will not invalidate queries for other id's
     },
   });
 
@@ -141,16 +208,16 @@ function MyComponent() {
 
 ### Invalidating across whole routers
 
-It is also possible to invalidate queries across an entire router rather then
+It is also possible to invalidate queries across an entire router rather than
 just one query.
 
 #### Example code
 
 Backend code
 
-```tsx title='server/routers/_app.ts'
-import { initTRPC } from "@trpc/server";
-import { z } from "zod";
+```tsx twoslash title='server/routers/_app.ts'
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
 
 export const t = initTRPC.create();
 
@@ -160,8 +227,8 @@ export const appRouter = t.router({
     all: t.procedure.query(() => {
       return {
         posts: [
-          { id: 1, title: "everlong" },
-          { id: 2, title: "After Dark" },
+          { id: 1, title: 'everlong' },
+          { id: 2, title: 'After Dark' },
         ],
       };
     }),
@@ -173,7 +240,7 @@ export const appRouter = t.router({
       )
       .query(({ input }) => {
         return {
-          post: { id: input?.id, title: "Look me up!" },
+          post: { id: input?.id, title: 'Look me up!' },
         };
       }),
     edit: t.procedure
@@ -185,33 +252,65 @@ export const appRouter = t.router({
   // separate user router
   user: t.router({
     all: t.procedure.query(() => {
-      return { users: [{ name: "Dave Grohl" }, { name: "Haruki Murakami" }] };
+      return { users: [{ name: 'Dave Grohl' }, { name: 'Haruki Murakami' }] };
     }),
   }),
 });
 ```
 
-```tsx
-import { trpc } from "../utils/trpc";
+```tsx twoslash
+// @target: esnext
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  post: t.router({
+    all: t.procedure.query(() => ({
+      posts: [{ id: 1, title: 'everlong' }, { id: 2, title: 'After Dark' }],
+    })),
+    byId: t.procedure
+      .input(z.object({ id: z.number() }))
+      .query(({ input }) => ({ post: { id: input.id, title: 'Look me up!' } })),
+    edit: t.procedure
+      .input(z.object({ id: z.number(), title: z.string() }))
+      .mutation(({ input }) => ({ post: { id: input.id, title: input.title } })),
+  }),
+  user: t.router({
+    all: t.procedure.query(() => ({
+      users: [{ name: 'Dave Grohl' }, { name: 'Haruki Murakami' }],
+    })),
+  }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.tsx
+import { createTRPCReact } from '@trpc/react-query';
+import type { AppRouter } from '../server';
+export const trpc = createTRPCReact<AppRouter>();
+
+// @filename: MyComponent.tsx
+// ---cut---
+import { trpc } from './utils/trpc';
 
 function MyComponent() {
   const utils = trpc.useUtils();
 
   const invalidateAllQueriesAcrossAllRouters = () => {
     // 1️⃣
-    // All queries on all routers will be invalidated 🔥
+    // All queries on all routers will be invalidated
     utils.invalidate();
   };
 
   const invalidateAllPostQueries = () => {
     // 2️⃣
-    // All post queries will be invalidated 📭
+    // All post queries will be invalidated
     utils.post.invalidate();
   };
 
   const invalidatePostById = () => {
     // 3️⃣
-    // All queries in the post router with input {id:1} invalidated 📭
+    // All queries in the post router with input {id:1} invalidated
     utils.post.byId.invalidate({ id: 1 });
   };
 
@@ -227,12 +326,19 @@ function MyComponent() {
 
 ### Invalidate full cache on every mutation
 
-Keeping track of exactly what queries a mutation should invalidate is hard, therefore, it can be a pragmatic solution to invalidate the _full cache_ as a side-effect on any mutation. Since we have request batching, this invalidation will simply refetch all queries on the page you're looking at in one single request.
+Keeping track of exactly what queries a mutation should invalidate is hard, therefore, it can be a pragmatic solution to invalidate the *full cache* as a side-effect on any mutation. Since we have request batching, this invalidation will simply refetch all queries on the page you're looking at in one single request.
 
 We have added a feature to help with this:
 
-```ts
-export const trpc = createTRPCReact<AppRouter, SSRContext>({
+```ts twoslash
+// @target: esnext
+// @include: server
+// @filename: utils/trpc.ts
+// ---cut---
+import { createTRPCReact } from '@trpc/react-query';
+import type { AppRouter } from '../server';
+
+export const trpc = createTRPCReact<AppRouter>({
   overrides: {
     useMutation: {
       /**
@@ -260,7 +366,11 @@ export const trpc = createTRPCReact<AppRouter, SSRContext>({
 
 Aside from the query helpers, the object `useUtils` returns also contains the following properties:
 
-```ts
+```ts twoslash
+type AnyRouter = any;
+type TRPCClient<T> = any;
+type SSRState = false | 'prepass' | 'mounting' | 'mounted';
+// ---cut---
 interface ProxyTRPCContextProps<TRouter extends AnyRouter, TSSRContext> {
   /**
    * The `TRPCClient`

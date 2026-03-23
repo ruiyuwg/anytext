@@ -153,5 +153,5 @@ Backups are taken when you make any changes either through the dashboard or API.
 
 title: "Managing Edge Configs with Vercel REST API"
 description: "Learn how to use the Vercel REST API to create and update Edge Configs. You can also read data stored in Edge Configs with the Vercel REST API."
-last\_updated: "2026-03-08T05:03:13.928Z"
+last\_updated: "2026-03-23T09:40:09.437Z"
 source: "https://vercel.com/docs/edge-config/vercel-api"

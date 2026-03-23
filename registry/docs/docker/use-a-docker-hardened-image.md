@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -26,17 +24,20 @@ Table of contents
 
 You can use a Docker Hardened Image (DHI) just like any other image on Docker Hub. DHIs follow the same familiar usage patterns. Pull them with `docker pull`, reference them in your Dockerfile, and run containers with `docker run`.
 
-The key difference is that DHIs are security-focused and intentionally minimal to reduce the attack surface. This means some variants don't include a shell or package manager, and may run as a nonroot user by default.
+The key difference is that DHIs are security-focused and intentionally minimal to reduce the attack surface. This means some variants don't include a shell or package manager, and may run as a non-root user by default.
 
 > Important
 >
-> You must authenticate to the Docker Hardened Images registry (`dhi.io`) to pull images. Use your Docker ID credentials (the same username and password you use for Docker Hub) when signing in. If you don't have a Docker account, [create one](https://docs.docker.com/accounts/create-account/) for free.
+> You must authenticate to the Docker Hardened Images registry (`dhi.io`) to pull images. You can authenticate using either of the following:
+>
+> - **Docker ID (personal credentials):** Use the same username and password you use for Docker Hub. If you don't have a Docker account, [create one](https://docs.docker.com/accounts/create-account/) for free.
+> - **Organization access token (OAT):** Use your organization name as the username and an OAT as the password. OATs are recommended for CI/CD pipelines and automated workflows. See [Organization access tokens](https://docs.docker.com/enterprise/security/access-tokens/).
 >
 > Run `docker login dhi.io` to authenticate.
 
 ## [Considerations when adopting DHIs](#considerations-when-adopting-dhis)
 
-Docker Hardened Images are intentionally minimal to improve security. If you're updating existing Dockerfiles or frameworks to use DHIs, keep the following considerations in mind:
+Docker Hardened Images are intentionally minimal to improve security. If you're updating existing Dockerfiles or frameworks to use DHIs, keep the considerations in mind:
 
 Feature
 
@@ -52,7 +53,7 @@ Runtime DHIs default to running as a non-root user. Ensure your application does
 
 Ports
 
-Applications running as non-root users can't bind to ports below 1024 in older versions of Docker or in some Kubernetes configurations. Use ports above 1024 for compatibility.
+Applications running as non-root users can't bind to ports lower than 1024 in older versions of Docker or in some Kubernetes configurations. Use ports higher than 1024 for compatibility.
 
 Entry point
 

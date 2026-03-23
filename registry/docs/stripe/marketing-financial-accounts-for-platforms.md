@@ -66,8 +66,9 @@ We understand that FDIC pass-through insurance eligibility can be a valuable fea
 1. Financial Accounts are eligible for FDIC pass-through deposit insurance if they meet certain requirements. The accounts are eligible only to the extent pass-through insurance is permitted by the rules and regulations of the FDIC, and if the requirements for pass-through insurance are satisfied. The FDIC insurance applies up to 250,000 USD per depositor, per financial institution, for deposits held in the same ownership category.
 2. You must also disclose that neither Stripe nor you’re an FDIC insured institution and that the FDIC’s deposit insurance coverage only protects against the failure of an FDIC insured depository institution.
 
+|  |
+|  |
 | The following terms that incorporate the term “eligible” are approved:                                                                                                                                                                                                                        | Don’t use the following terms:                                                            |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | - “FDIC pass-through insurance-eligible accounts”
 
 - “Eligible for FDIC pass-through insurance”
@@ -78,7 +79,8 @@ We understand that FDIC pass-through insurance eligibility can be a valuable fea
 
 We’ve also prepared these FAQs that you can use when your customers have questions about FDIC pass-through insurance eligibility or any of the disclosures:
 
+|  |
+|  |
 | **Is FDIC pass-through insurance impacted if a customer holds deposits in other accounts with the same institution?** | It can be. It’s your responsibility to know which insured institutions hold your funds. If you have other business-purpose accounts with the same institution where Financial Accounts for platforms funds are held, the FDIC might aggregate all of your business account balances with that institution in applying the 250,000 USD limit. The FDIC generally doesn’t, however, aggregate your personal accounts with your business accounts. |
-| --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Does FDIC pass-through insurance eligibility protect from fraud or financial loss?**                                | No, FDIC pass-through insurance eligibility is applicable only in the event of a bank failure.                                                                                                                                                                                                                                                                                                                                                  |
 | **How do I know if the requirements for FDIC pass-through insurance are met?**                                        | Financial Accounts are designed to be eligible for FDIC pass-through insurance. The FDIC makes the final determination about the availability of pass-through insurance at the time of a bank’s failure.                                                                                                                                                                                                                                        |

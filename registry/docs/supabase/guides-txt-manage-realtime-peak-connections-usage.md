@@ -36,8 +36,8 @@ Usage is shown as "Realtime Peak Connections" on your invoice.
 
 ## Pricing
 
-per 1,000 peak connections. You are only charged for usage exceeding your subscription
-plan's quota.
+per 1,000 peak connections. You are only charged for usage exceeding your
+subscription plan's quota.
 
 | Plan       | Quota  | Over-Usage                                      |
 | ---------- | ------ | ----------------------------------------------- |

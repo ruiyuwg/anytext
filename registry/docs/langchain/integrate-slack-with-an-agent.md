@@ -1,145 +1,148 @@
 # Integrate Slack with an agent
 
-Source: https://docs.langchain.com/langsmith/agent-builder-slack-app
+Source: https://docs.langchain.com/langsmith/fleet/slack-app
 
-Connect the LangSmith Agent Builder to your Slack workspace to let your agents communicate with users in Slack.
+Connect LangSmith Fleet to your Slack workspace to let your agents communicate with users in Slack.
 
-The LangSmith Agent Builder App for Slack integrates your agents with Slack for secure, context-aware communication inside your Slack workspace.
+With LangSmith Fleet, you can securely connect your agents to your Slack workspace to let your agents communicate with users in Slack.
 
 After integrating, your agents will be able to:
 
-- Send direct messages.
-- Post to channels.
-- Read thread messages.
-- Reply in threads.
-- Read conversation history.
+- Receive messages directly from your Slack bot, starting a new run with the message content.
+- Communicate back to your Slack workspace after processing the message.
+- Obtain relevant context from Slack by reading thread messages and conversation history.
 
-  The LangSmith Agent Builder App for Slack itself does not have any direct pricing. However, agent runs and traces are billed through the [LangSmith platform](https://smith.langchain.com) according to your organization's plan.
+  The Slack integration with Fleet does not have any direct pricing. However, agent runs and traces are billed through the [LangSmith platform](https://smith.langchain.com) according to your organization's plan.
 
   For current pricing information, see the [LangSmith pricing page](https://www.langchain.com/pricing).
 
-## How it works
-
-When a message is posted in your monitored Slack channel:
-
-1. Slack sends an event to LangSmith.
-2. The trigger activates your agent with the message content.
-3. Your agent processes the message and uses Slack tools to respond.
-4. The response appears in Slack (in the same thread if replying to a thread).
-
-Your agent receives the full thread context when responding to threaded messages, so it can provide contextually relevant responses.
-
 ## Prerequisites
 
-- An existing agent in Agent Builder (see [Quickstart](/langsmith/agent-builder-quickstart) to create one)
+- An existing agent in Fleet (see [Quickstart](/langsmith/fleet/quickstart) to create one)
 - Admin access to a Slack workspace or permission to install apps
 
-## Connect to Slack
+## Create a Slack bot
 
-First, authorize LangSmith to access your Slack workspace and invite the bot to your channel.
-
-````
-1. In LangSmith, navigate to **Agent Builder**.
-2. Select your agent from **My Agents**.
-3. Click  **Edit Agent**.
-
+```
+1. Navigate to the **Integrations** page in Fleet.
+2. Click **Add Slack App**.
+3. Enter a name for the bot.
+4. Click **Create Slack App**. You will be redirected to the Slack API site with a popup asking you to pick a workspace.
 
 
-1. Scroll down to the **Triggers** section.
-2. Click **+ Add trigger**.
-3. Select **Slack - Message Received**.
-
-
-
-1. Click **Connect** to authorize the Slack connection.
-2. Sign in to your Slack workspace.
-3. Review the permissions and click **Allow**.
-4. You'll be redirected back to LangSmith.
-
-
-  Agent Builder requires the following permissions to your Slack workspace:
-
-  * **Send messages** - Send direct messages and post to channels
-  * **Read messages** - Read channel history and thread messages
-  * **View channels** - Access basic channel information
-  * **View users** - Look up user information for messaging
-
-  These permissions enable agents to communicate effectively within your Slack workspace.
+  Do not create a separate Slack app outside of this flow. The app must be created through this popup.
 
 
 
 
-Before selecting a channel, invite the bot to the channel you want to use. In Slack, go to that channel and type:
+1. Choose the workspace where you want to install the bot.
+2. Click **Next**.
+3. Click **Create Bot**.
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-/invite @LangSmith Agent Builder
+
+
+After creating the bot, you will receive your app credentials. Enter the following credentials in Fleet:
+
+* App ID
+* Client ID
+* Client secret
+* Signing secret
+
+
+  Copy the full client secret and signing secret carefully to ensure a successful connection.
+
+
+
+
+1. Click **Connect OAuth**.
+2. Click **Allow** to give Fleet access to your app.
+
+
+
+Link your Slack bot to an existing agent, or click **Finish** to link later.
 ```
 
+## Link the Slack bot to an agent
 
+You can link a Slack bot to an agent from the integrations page or from the agent editor. Each agent can only have one Slack app, and each Slack app can only be linked to one agent.
 
-1. Back in LangSmith, choose the Slack channel you invited the bot to.
-2. Click **Save**.
-````
+### Link from the integrations page
 
-Your agent will now be triggered whenever a message is posted in that channel.
+1. Navigate to the **Slack Apps** section on the **Integrations** page in Fleet.
+2. Select the bot you want to link.
+3. From the dropdown menu, choose the agent you want to link to.
+4. Verify that \**\** appears next to the bot name.
+
+### Link from the agent editor
+
+1. Select your agent from **My Agents** in the left-hand navigation.
+
+2. Click  **Edit Agent**.
+
+3. Scroll to the **Channels** section.
+
+   You may need to set the agent identity first. Click **Set Identity** in the top right corner.
+
+4. Click **Slack**.
+
+5. From the dropdown menu, select the Slack app you want to link.
+
+You can also use the default LangSmith Slack bot instead of a custom app:
+
+1. In the **Channels** section, click **LangSmith Bot**.
+2. In Slack, invite the default app to an existing channel and copy the channel ID.
+3. In the agent editor, click **Add Slack Channel** and paste the channel ID.
+4. Send any message in the channel to start a run.
 
 ## Add Slack tools
 
 Tools let your agent take actions. To respond in Slack, you need to add Slack tools.
 
-You can also ask your agent to add these tools itself! In the agent chat, try: "Add the Slack tools so you can respond to messages."
+You can also ask your agent to add these tools itself. In the agent chat, try: "Add the Slack tools so you can respond to messages."
 
-```
 1. In the agent editor, scroll to the **Tools** section.
-2. Click **+ Add tool**.
-3. Search for "Slack" and add the tools you need:
-   * **slack\_send\_channel\_message** - Post messages to a channel
-   * **slack\_reply\_to\_message** - Reply in a thread
-   * **slack\_write\_private\_message** - Send direct messages
-   * **slack\_read\_channel\_history** - Read recent messages
-   * **slack\_read\_thread\_messages** - Read thread replies
+2. Click **+ Add**.
+3. Search for "Slack" and add the tools you need, if not already added:
+   - **slack\_send\_channel\_message**—Post messages to a channel
+   - **slack\_reply\_to\_message**—Reply in a thread
+   - **slack\_write\_private\_message**—Send direct messages
+   - **slack\_read\_channel\_history**—Read recent messages
+   - **slack\_read\_thread\_messages**—Read thread replies
+4. If prompted, click **Connect** to authorize the Slack tools.
+5. Click **Save changes**.
 
+## Invite the bot to your channel
 
-
-If prompted, click **Connect** to authorize the Slack tools. This may use the same authorization from Step 1.
-
-
-
-Click **Save changes** to save your agent configuration.
-```
+1. In Slack, go to the channel where you want to use the bot.
+2. Type `/invite @YourSlackBotName` to invite the bot.
+3. Send a message mentioning the bot to verify it responds.
 
 ## Configure agent behavior (optional)
 
-Your agent needs to know how to handle incoming Slack messages. You can update its instructions by prompting it directly.
-
-In the agent chat, try something like:
+Your agent needs to know how to handle incoming Slack messages. Update its instructions by prompting it directly in the agent chat:
 
 ```
 Update your instructions to handle the Slack Trigger and Slack Tools
 for bidirectional communication
 ```
 
-Adjust the instructions based on your use case - for example, you might want the agent to only respond to certain types of questions, or to pull information from specific sources before replying.
+Adjust the instructions based on your use case—for example, you might want the agent to only respond to certain types of questions, or to pull information from specific sources before replying.
 
-## Test the integration
+## Troubleshooting
 
-```
-In your Slack channel, send a message to test the agent:
+### Agent does not respond
 
-> *Hello, can you help me?*
+If your agent is not responding, you can try the following:
 
+- Check the thread in Fleet for any approvals that need human input.
+- Verify the bot was invited to the channel.
+- Check the **Feed** tab for errors.
+- Ensure the channel is not paused in the **Channels** section.
+- Try reauthenticating with Slack to make sure Fleet has your most up-to-date Slack user ID stored.
 
+### Not allowed to tag the bot
 
-Your agent should respond in the channel. You can view the agent's activity in the **Feed** tab in Agent Builder.
-
-
-
-If your agent doesn't respond:
-
-* Verify the bot was invited to the channel
-* Check the **Feed** tab for any errors
-* Ensure the trigger is not paused (check the toggle in the Triggers section)
-```
+If you receive a private message saying you are not allowed to tag the bot, your Slack ID is not authorized for that agent. The agent's owner needs to share the agent with you—either by sharing run access with the whole workspace or with you individually.
 
 ## Next steps
 
@@ -148,17 +151,17 @@ Connect additional services to your agent
 
 
 
-Set up email, schedule, or webhook triggers
+Set up email, schedule, or webhook channels
 
 
 
-Start from a pre-built agent template
+Start from a prebuilt agent template
 ```
 
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-builder-slack-app.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/slack-app.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

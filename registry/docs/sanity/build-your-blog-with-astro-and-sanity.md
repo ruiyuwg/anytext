@@ -12,8 +12,6 @@ In this guide, we'll dive deeper into what you'll need to know in order to make 
 - Work with images from the [Sanity CDN](https://www.sanity.io/docs/apis-and-sdks/presenting-images)
 - Configure Sanity's [Presentation Tool](https://www.sanity.io/docs/visual-editing/configuring-the-presentation-tool) tool for live [Visual Editing](https://www.sanity.io/docs/visual-editing/introduction-to-visual-editing)
 
-If you prefer to see the code in your own IDE first, you can find the finished code [here](https://github.com/ChrisLaRocque/sanity-astro).
-
 This guide won't add styling to the markup, we'll leave that up to you. That said, it's often easier to develop the design when the basic markup and content are in place.
 
 ## Prerequisites
@@ -22,9 +20,10 @@ This guide uses TypeScript for code examples, but you can adapt them to JavaScri
 
 Before starting, make sure you have
 
-- Node.js 18 and npm 9 or higher installed ([link](https://nodejs.org/en/download/package-manager))
-- A code editor
-- Basic familiarity with TypeScript (optional)
+- Node.js 22 or later. ([link](https://nodejs.org/en/download/package-manager))
+- A code editor.
+- Basic familiarity with TypeScript (optional).
+- This guide uses Astro v6 and Sanity v5.16. We recommend following along with these major versions.
 
 ## Initialize a new Astro project
 
@@ -48,6 +47,33 @@ The command should add the Sanity and React configuration to your `astro.config.
 
 The `@astrojs/react` dependency is needed to embed the Studio on a route.
 
+**Note:** If you plan to add server-rendered pages or use the Visual Editing features mentioned later in this guide, you’ll also need to add a server adapter. For this example, we’ll use Node.
+
+**TERMINAL**
+
+```sh
+npx astro add @astrojs/node
+```
+
+Then update the `astro.config.mjs` to include it.
+
+**astro.config.mjs**
+
+```
+import node from "@astrojs/node";
+
+export default defineConfig({
+  adapter: node({ mode: "standalone" }),
+  integrations: [
+    // ...
+  ],
+});
+```
+
+> \[!NOTE]
+> Note for static-site users
+> If you don't plan to use the Presentation Tool and want a fully static build, you can avoid the adapter by adding `studioRouterHistory: 'hash'` to the Sanity integration config instead. This switches the embedded Studio to hash-based routing, which allows it to be prerendered. However, the default browser history mode provides cleaner Studio URLs and is required for the Presentation Tool.
+
 To add TypeScript support, create a file `/src/env.d.ts` and add the types for the Astro module:
 
 ```typescript
@@ -63,7 +89,7 @@ You may need to restart your TypeScript server for this file to be recognized.
 To initialize your Sanity project and configure environment variables, run:
 
 ```sh
-npx sanity@latest init --env
+npx sanity@latest init --env .env
 ```
 
 Follow the instructions from the CLI, and don't worry about messing up, with Sanity, you can make as many projects as you want. You can always go to [sanity.io/manage](https://sanity.io/manage) to find information about your projects.
@@ -492,7 +518,7 @@ Of course, you want to display more than just the slugs, and you don't want to h
 
 ```typescript
 // ./src/sanity/lib/load-query.ts
-import { type QueryParams } from "sanity";
+import type { QueryParams } from "sanity";
 import { sanityClient } from "sanity:client";
 
 export async function loadQuery<QueryResponse>({
@@ -752,7 +778,7 @@ Live Visual Editing is made possible via Sanity's Presentation Tool. To enable t
 import { VisualEditing } from "@sanity/astro/visual-editing";
 
 const visualEditingEnabled =
-  import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED == "true";
+  import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
 ---
 <!doctype html>
 <html lang="en">
@@ -783,6 +809,8 @@ const visualEditingEnabled =
 In `Layout.astro` you're importing the `VisualEditing` component, which enables overlays and live mode for the Presentation Tool. Note the `visualEditingEnabled` constant tied to an environment variable `PUBLIC_SANITY_VISUAL_EDITING_ENABLED` set to `true`. If you haven't already, update your `.env` file to include this variable. When you're ready to deploy your site you'll want to have this variable set to `false` in production, but have another environment that's a copy of production with this variable set to `true`.
 
 **Update** your `[slug].astro` template to be wrapped in the new layout:
+
+**/src/pages/post/\[slug].astro**
 
 ```javascript
 ---
@@ -821,6 +849,21 @@ const { data: post } = await loadQuery<{ title: string; body: any[] }>({
 
 ```
 
+**Update** your `index.astro` template to be wrapped in the new layout:
+
+**/src/pages/index.astro**
+
+```javascript
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <h1>Astro</h1>
+</Layout>
+
+```
+
 ### Update settings in `astro.config` file
 
 **Update** the Sanity integration settings in `astro.config.mjs` to include `stega.studioUrl`
@@ -828,6 +871,7 @@ const { data: post } = await loadQuery<{ title: string; body: any[] }>({
 ```javascript
 // astro.config.mjs
 import { defineConfig } from "astro/config";
+import node from "@astrojs/node";
 
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
@@ -841,6 +885,8 @@ const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_DATASET } = loadEnv(
 
 // https://astro.build/config
 export default defineConfig({
+  output: "server",
+  adapter: node({ mode: "standalone" }),
   integrations: [
     sanity({
       projectId: PUBLIC_SANITY_PROJECT_ID,
@@ -896,7 +942,7 @@ export async function loadQuery<QueryResponse>({
     );
   }
 
-  const perspective = visualEditingEnabled ? "previewDrafts" : "published";
+  const perspective = visualEditingEnabled ? "drafts" : "published";
 
   const { result, resultSourceMap } = await sanityClient.fetch<QueryResponse>(
     query,
@@ -1020,6 +1066,41 @@ export default defineConfig({
 ```
 
 Now each `post` document in your Studio should include a link to open it in the Presentation Tool
+
+### Enable vite overrides (if needed)
+
+With the release of Astro v6, there are some in-progress compatibility updates. If you’re experiencing issues with visual editing, add the configuration below.
+
+Several transitive dependencies of `@sanity/visual-editing` are CommonJS modules that Vite doesn't automatically pre-bundle. Without this, the `VisualEditing` component fails to hydrate in the browser with errors like:
+
+**astro.config.mjs**
+
+```javascript
+export default defineConfig({
+  output: "server",
+  adapter: node({ mode: "standalone" }),
+  integrations: [
+    // ...
+  ],
+  vite: {
+    optimizeDeps: {
+      include: [
+        "react/compiler-runtime",
+        "lodash/isObject.js",
+        "lodash/groupBy.js",
+        "lodash/keyBy.js",
+        "lodash/partition.js",
+        "lodash/sortedIndex.js",
+      ],
+    },
+  },
+});
+```
+
+This will likely be fixed in upcoming versions of @sanity/astro.
+
+> \[!NOTE]
+> **This is a dev-server-only issue**. Production builds (`astro build`) are unaffected because Rollup handles CJS-to-ESM interop during bundling. The `optimizeDeps` config only controls Vite's dev-server pre-bundling step, where individual modules are served to the browser on demand. It's still important to include because developers will hit these errors immediately when running `npm run dev`.
 
 ## Demo of Visual Editing with Astro
 

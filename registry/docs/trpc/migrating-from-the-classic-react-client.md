@@ -26,11 +26,22 @@ Query Keys are identical, which means you can use the new client and classic cli
 
 A classic query would look like this
 
-```tsx
-import { trpc } from "./trpc";
+```tsx twoslash
+// @filename: trpc.ts
+import type { UseQueryResult } from '@tanstack/react-query';
+declare const trpc: {
+  greeting: {
+    useQuery: (input: { name: string }) => UseQueryResult<`Hello ${string}`>;
+  };
+};
+export { trpc };
+
+// @filename: component.tsx
+// ---cut---
+import { trpc } from './trpc';
 
 function Users() {
-  const greetingQuery = trpc.greeting.useQuery({ name: "Jerry" });
+  const greetingQuery = trpc.greeting.useQuery({ name: 'Jerry' });
 
   // greetingQuery.data === 'Hello Jerry'
 }
@@ -38,14 +49,30 @@ function Users() {
 
 and changes to
 
-```tsx
-import { useQuery } from "@tanstack/react-query";
-import { useTRPC } from "./trpc";
+```tsx twoslash
+// @filename: server/router.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  greeting: t.procedure.input(z.object({ name: z.string() })).query(({ input }) => `Hello ${input.name}` as const),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server/router';
+export const { TRPCProvider, useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.tsx
+// ---cut---
+import { useQuery } from '@tanstack/react-query';
+import { useTRPC } from './trpc';
 
 function Users() {
   const trpc = useTRPC();
 
-  const greetingQuery = useQuery(trpc.greeting.queryOptions({ name: "Jerry" }));
+  const greetingQuery = useQuery(trpc.greeting.queryOptions({ name: 'Jerry' }));
 
   // greetingQuery.data === 'Hello Jerry'
 }
@@ -53,25 +80,53 @@ function Users() {
 
 ### Migrating Invalidations and other QueryClient usages
 
-A classic query would look like this
+A classic invalidation pattern would look like this
 
-```tsx
-import { trpc } from "./trpc";
+```tsx twoslash
+// @filename: trpc.ts
+declare const trpc: {
+  useUtils: () => {
+    greeting: {
+      invalidate: (input: { name: string }) => Promise<void>;
+    };
+  };
+};
+export { trpc };
+
+// @filename: component.tsx
+// ---cut---
+import { trpc } from './trpc';
 
 function Users() {
   const utils = trpc.useUtils();
 
   async function invalidateGreeting() {
-    await utils.greeting.invalidate({ name: "Jerry" });
+    await utils.greeting.invalidate({ name: 'Jerry' });
   }
 }
 ```
 
 and changes to
 
-```tsx
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useTRPC } from "./trpc";
+```tsx twoslash
+// @filename: server/router.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  greeting: t.procedure.input(z.object({ name: z.string() })).query(({ input }) => `Hello ${input.name}` as const),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server/router';
+export const { TRPCProvider, useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.tsx
+// ---cut---
+import { useQueryClient } from '@tanstack/react-query';
+import { useTRPC } from './trpc';
 
 function Users() {
   const trpc = useTRPC();
@@ -79,7 +134,7 @@ function Users() {
 
   async function invalidateGreeting() {
     await queryClient.invalidateQueries(
-      trpc.greeting.queryFilter({ name: "Jerry" }),
+      trpc.greeting.queryFilter({ name: 'Jerry' }),
     );
   }
 }
@@ -91,27 +146,62 @@ This is the same for any QueryClient usage, instead of using tRPC's `useUtils` y
 
 A classic mutation might look like this
 
-```tsx
-import { trpc } from "./trpc";
+```tsx twoslash
+// @filename: trpc.ts
+import type { UseMutationResult } from '@tanstack/react-query';
+declare const trpc: {
+  createUser: {
+    useMutation: () => UseMutationResult<string, unknown, { name: string }>;
+  };
+};
+export { trpc };
+
+// @filename: component.tsx
+// ---cut---
+import { trpc } from './trpc';
 
 function Users() {
   const createUserMutation = trpc.createUser.useMutation();
 
-  createUserMutation.mutate({ name: "Jerry" });
+  createUserMutation.mutate({ name: 'Jerry' });
 }
 ```
 
 and changes to
 
-```tsx
-import { useMutation } from "@tanstack/react-query";
-import { useTRPC } from "./trpc";
+```tsx twoslash
+// @filename: server/router.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  createUser: t.procedure.input(z.object({ name: z.string() })).mutation(() => 'created'),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: trpc.ts
+import { createTRPCContext } from '@trpc/tanstack-react-query';
+import type { AppRouter } from './server/router';
+export const { TRPCProvider, useTRPC } = createTRPCContext<AppRouter>();
+
+// @filename: component.tsx
+// ---cut---
+import { useMutation } from '@tanstack/react-query';
+import { useTRPC } from './trpc';
 
 function Users() {
   const trpc = useTRPC();
 
   const createUserMutation = useMutation(trpc.createUser.mutationOptions());
 
-  createUserMutation.mutate({ name: "Jerry" });
+  createUserMutation.mutate({ name: 'Jerry' });
 }
 ```
+
+# TanStack React Query
+
+This is the recommended way to use tRPC with React and TanStack Query. It provides factories for common TanStack React Query interfaces like `QueryKeys`, `QueryOptions`, and `MutationOptions`, giving you a more TanStack Query-native experience.
+
+If you're starting a new project, we recommend using this integration over the [classic React Query integration](/docs/client/react). Read the [announcement post](/blog/introducing-tanstack-react-query-client) for more information about this change.
+
+Head to the [Setup](/docs/client/tanstack-react-query/setup) guide to get started.

@@ -6,7 +6,7 @@ In this chapter, we'll create a development build that can run on an iOS device 
 
 Development builds for iOS devices are generated in the **.ipa** format, which is standard for iOS app installations.
 
-[Watch: Creating a development build for iOS physical device](https://www.youtube.com/watch?v=HbfWU7_o4cU)
+[Watch: Creating a development build for iOS physical device](https://www.youtube.com/watch?v=HbfWU7_o4cU) — Learn how to build and run a development build on a physical iOS device using EAS Build, including setting up code signing.
 
 ## Prerequisites
 

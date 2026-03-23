@@ -8,7 +8,7 @@ You can accomplish this migration in three steps:
 2. Export your existing data via `pg_dump`.
 3. Import the previously exported data into Prisma Postgres via `pg_restore`.
 
-In the third step, you will be using a [direct connection](/postgres/database/direct-connections) to securely connect to your Prisma Postgres database to run `pg_restore`.
+In the third step, you will be using a [direct connection](/postgres/database/connecting-to-your-database) to securely connect to your Prisma Postgres database to run `pg_restore`.
 
 Prerequisites \[#prerequisites]
 
@@ -35,9 +35,9 @@ Follow these steps to create a new Prisma Postgres database:
 Once your database is provisioned, obtain your direct connection string:
 
 1. Navigate to your active Prisma Postgres instance.
-2. Click the **API Keys** tab in the project's sidenav.
-3. Click the **Create API key** button.
-4. In the popup, provide a **Name** for the API key and click **Create**.
+2. Click the **Connection Strings** tab in the project's sidenav.
+3. Click the **Create connection string** button.
+4. In the popup, provide a **Name** for the connection string and click **Create**.
 5. Copy the connection string starting with `postgres://`, this is your direct connection string.
 
 Save the connection string, as you'll need it in step 3.
@@ -96,7 +96,7 @@ Running this command will create a backup file named `db_dump.bak` which you wil
 
 3. Import data into Prisma Postgres \[#3-import-data-into-prisma-postgres]
 
-In this section, you'll use your [direct connection string](/postgres/database/direct-connections) to connect to your Prisma Postgres instance and import data via `pg_restore`.
+In this section, you'll use your [direct connection string](/postgres/database/connecting-to-your-database) to connect to your Prisma Postgres instance and import data via `pg_restore`.
 
 Your direct connection string from step 1 should look like this:
 

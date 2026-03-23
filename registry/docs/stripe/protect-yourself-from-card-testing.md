@@ -94,7 +94,7 @@ Card testers often use automated scripts that CAPTCHA can block. The scripts are
 
 ### Limit access to your payment form
 
-The easier it is for fraudulent actors to reach your payment form (for example, using guest checkout), the easier it is for them to execute card testing attacks. You can reduce your exposure to card testers by requiring login or session validation before they can make a payment. Some of [the safeguards that protect against cross-site request forgery (CSRF) attacks](https://owasp.org/www-project-cheat-sheets/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html) are also effective against some types of card testing, such as CSRF tokens.
+The easier it’s for fraudulent actors to reach your payment form (for example, using guest checkout), the easier it’s for them to execute card testing attacks. You can reduce your exposure to card testers by requiring login or session validation before they can make a payment. Some of [the safeguards that protect against cross-site request forgery (CSRF) attacks](https://owasp.org/www-project-cheat-sheets/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html) are also effective against some types of card testing, such as CSRF tokens.
 
 ### Add rate limits
 

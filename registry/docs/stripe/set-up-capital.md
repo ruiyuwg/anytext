@@ -55,12 +55,13 @@ As you wait for connected accounts to accept their Capital financing offers or a
 
 4. (Optional) Increase eligibility.
 
-   Stripe may be able to improve the eligibility of your connected accounts if you share additional payment data from current connected accounts that also process payments off Stripe. Providing non-Stripe payment data allows us to review the full scope of each connected account’s business for financing eligibility. To learn more, see [Import non-Stripe data into Capital underwiting](https://docs.stripe.com/capital/import-non-stripe-data.md).
+   Stripe might be able to improve the eligibility of your connected accounts if you share additional payment data from current connected accounts that also process payments off Stripe. Providing non-Stripe payment data allows us to review the full scope of each connected account’s business for financing eligibility. To learn more, see [Import non-Stripe data into Capital underwiting](https://docs.stripe.com/capital/import-non-stripe-data.md).
 
 ## Onboarding integration types
 
+|  |
+|  |
 | [No-code](https://docs.stripe.com/capital/no-code-integration.md)                        | Launch a program without code using the Dashboard. You also have the option to use minimal code to customize your integration with embedded components or the API after launch.                                                                                                                                                                                 |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Embedded components](https://docs.stripe.com/capital/embedded-component-integration.md) | Build a Capital program with minimal coding. This option might require additional compliance reviews from Stripe, with approval taking up to 5-7 business days. This integration also allows you to customize your program by adding embedded components directly in your platform’s UI.                                                                        |
 | [API](https://docs.stripe.com/capital/api-integration.md)                                | Build a Capital program with the most control over your Capital program. However, if you send custom emails, these emails still redirect connected accounts to complete their financing application in a Stripe-hosted UI for compliance reasons. This option requires additional compliance reviews from Stripe, with approval taking up to 5-7 business days. |
 

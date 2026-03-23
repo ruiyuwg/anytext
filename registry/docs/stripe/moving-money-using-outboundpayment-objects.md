@@ -142,6 +142,10 @@ When entering the `billing_details.address` for a payment method, all address fi
 
 > When sending a wire using an `OutboundTransfer`, if you don’t fill out any address fields, Stripe defaults to the legal entity of the primary Stripe account holder.
 
+### NACHA payroll compliance
+
+NACHA requires originators to explicitly identify ACH payments intended for payroll. When sending an OutboundPayment, set the `purpose` parameter to `payroll` to ensure compliance with this requirement.
+
 ## Create an OutboundPayment to a financial account
 
 To move money between financial accounts, call `POST /v1/treasury/outbound_payments` on the origin account and specify the destination account in the `destination_payment_method_data` parameter. Both financial accounts must be associated with the same platform, but can’t be associated with the same connected account. To transfer money between financial accounts associated with the same connected account, use an [OutboundTransfer](https://docs.stripe.com/financial-accounts/connect/moving-money/out-of/outbound-transfers.md).
@@ -484,10 +488,6 @@ For the `return` endpoint, include the optional `returned_details.code` paramete
 We also provide a [test update endpoint](https://docs.stripe.com/api/treasury/outbound_payments/test_mode_update.md) to simulate the posting of tracking details on a test `Outbound Payment`. The `tracking_details` field can only be set for test objects.
 
 In all cases, Stripe triggers [webhooks](https://docs.stripe.com/webhooks.md) for each relevant state transition, and fetching the `OutboundPayment` after transition returns the expected state.
-
-## How OutboundPayment fees are billed
-
-Stripe charges the source financial account a fee for each `OutboundPayment`. When the `OutboundPayment` originates from a connected account’s financial account, Stripe instead charges the platform’s oldest financial account that holds the source currency. Fees are charged within 1 business day of the `OutboundPayment` occurring. If the `OutboundPayment` fails to post, Stripe refunds the fee.
 
 ## OutboundPayment webhooks
 

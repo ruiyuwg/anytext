@@ -312,3 +312,9 @@ console.log(isDeprecated(Schema.String))
 console.log(isDeprecated(MyString))
 // Output: true
 ```
+
+# [Advanced Usage](https://effect.website/docs/schema/advanced-usage/)
+
+## Overview
+
+import { Aside } from "@astrojs/starlight/components"

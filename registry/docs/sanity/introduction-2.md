@@ -13,6 +13,10 @@ Canvas is designed around two key principles:
 
 Canvas helps you produce high-quality work more efficiently. Whether you're drafting a blog post, crafting product copy, or assembling a comprehensive report, Canvas supports your writing process.
 
+> \[!NOTE]
+> No tokens billed
+> Using the Canvas Ghostwriter does not incur any AI usage cost to your Sanity account. Feel free to experiment!
+
 ## Feature walk-through video
 
 ![Video](https://stream.mux.com/vCtyUNV00Et6kHsOOhqLfn29NgBOTF5rK)
@@ -116,7 +120,7 @@ This will inform the AI assistant about your goal and intention, which in turn w
 
 ![Shows the Blip in "Show me options"-mode](https://cdn.sanity.io/images/3do82whm/next/4eeb70b58c8a746c58d2d52f188e53c74324f518-2124x962.png)
 
-#### Next steps:
+### Next steps:
 
 - Experiment with notes:- Try to add a **Style** note to influence the tone of the blog post.
 
@@ -203,7 +207,7 @@ Every writer knows that behind every polished piece of prose lies a mountain of 
 
 Notes are a key feature in Canvas that provide context, facts, style guidelines, and inspiration to inform your writing and enable the built-in AI co-writer to make relevant and informed suggestions. By attaching relevant notes to your document, you give the AI the background knowledge and topical awareness it needs to be of actual help.
 
-#### Show or hide the notes side panel
+### Show or hide the notes side panel
 
 Your notes live in the side panel to the left of your main content editing area. If you don't see the side panel it might have been closed when someone needed to unclutter a bit. If this is the case you can open the side panel by clicking the button labeled **Notes** in the left sidebar area.
 

@@ -237,5 +237,5 @@ The following example shows a directory structure where the Prerender will be ac
 
 title: "Build Features for Customizing Deployments"
 description: "Learn how to customize your deployments using Vercel"
-last\_updated: "2026-03-08T05:03:11.298Z"
+last\_updated: "2026-03-23T09:40:05.532Z"
 source: "https://vercel.com/docs/builds/build-features"

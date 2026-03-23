@@ -4,7 +4,7 @@ Source: https://docs.langchain.com/langsmith/evaluate-with-opentelemetry
 
 This guide shows you how to run an evaluation using OpenTelemetry tracing with LangSmith.
 
-[Evaluations](/langsmith/evaluation-concepts#applying-evaluations) | [Datasets](/langsmith/evaluation-concepts#datasets) | [Trace with OpenTelemetry](/langsmith/trace-with-opentelemetry)
+[Evaluations](/langsmith/evaluation-concepts#evaluation-lifecycle) | [Datasets](/langsmith/evaluation-concepts#datasets) | [Trace with OpenTelemetry](/langsmith/trace-with-opentelemetry)
 
 If you're already using OpenTelemetry for tracing your LLM application, you can run evaluations by routing traces to an experiment session. This approach is useful when you want to evaluate applications that are instrumented with OpenTelemetry but don't use the LangSmith SDK's [`evaluate()`](https://reference.langchain.com/python/langsmith/client/Client/evaluate) function.
 

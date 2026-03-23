@@ -5,8 +5,8 @@ Rendering
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/dev.mdx)
 
 ```
-import { DEV } from "solid-js"
-const DEV: object | undefined
+import { DEV } from "solid-js";
+const DEV: object | undefined;
 ```
 
 On the client, Solid provides (via [conditional exports](https://nodejs.org/api/packages.html#conditional-exports)) different builds depending on whether the **development** condition is set. Development mode provides some additional checking — e.g. detecting accidental use of multiple instances of Solid — which are removed in production builds.

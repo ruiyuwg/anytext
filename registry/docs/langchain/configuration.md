@@ -36,6 +36,7 @@ models = ["gpt-4o"]
 api_key_env = "OPENAI_API_KEY"
 base_url = "https://api.openai.com/v1"
 class_path = "my_package.models:MyChatModel"
+enabled = true
 
 [models.providers.<name>.params]
 temperature = 0
@@ -53,7 +54,7 @@ Models listed here **bypass** the profile-based [filtering criteria](/oss/python
 
 This key is optional. You can always pass any model name directly to `/model` or `--model` regardless of whether it appears in the switcher; the provider validates the name at request time.
 
-Optionally override the environment variable name checked for credentials.
+Optionally override the environment variable name checked for credentials. Most chat model packages read from a default env var automatically — see the [Provider reference](/oss/python/deepagents/cli/providers#provider-reference) table for which variable each provider checks.
 
 Optionally override the base URL used by the provider, if supported. Refer to your provider packages' [reference docs](https://reference.langchain.com/python/integrations/) for more info.
 
@@ -62,6 +63,8 @@ Extra keyword arguments forwarded to the model constructor. Flat keys (e.g., `te
 (Advanced) Override fields in the model's runtime [profile](/oss/python/langchain/models#model-profiles) (e.g., `max_input_tokens`). Flat keys apply to every model from this provider. Model-keyed sub-tables (e.g., `[profile."claude-sonnet-4-5"]`) override individual values for that model only; the merge is shallow (model wins on conflict). These overrides are applied after the model is created, so they take effect for context-limit display, auto-summarization, and any other feature that reads the profile.
 
 Used for [arbitrary model](#arbitrary-providers) providers. Optional fully-qualified Python class in `module.path:ClassName` format. When set, the CLI imports and instantiates this class directly for provider `<name>`. The class must be a `BaseChatModel` subclass.
+
+Whether this provider appears in the `/model` selector. Set to `false` to hide a provider that was auto-discovered from an installed package (e.g., a transitive dependency you don't want cluttering the switcher). You can still use a disabled provider directly via `/model provider:model` or `--model`.
 
 ### Model constructor params
 
@@ -158,6 +161,8 @@ deepagents -n "Summarize this repo" --profile-override '{"max_input_tokens": 409
 
 These are merged on top of config file profile overrides (CLI wins). The priority chain is: model default < config.toml profile < CLI `--profile-override`.
 
+`--profile-override` values persist across mid-session `/model` hot-swaps — switching models re-applies the override to the new model.
+
 ### Custom base URL
 
 Some provider packages accept a `base_url` to override the default endpoint. For example, `langchain-ollama` defaults to `http://localhost:11434` via the underlying `ollama` client. To point it elsewhere, set `base_url` in your configuration:
@@ -208,7 +213,7 @@ This is entirely optional. You can always switch to any model by specifying its 
 
 ### Arbitrary providers
 
-You can use any [LangChain `BaseChatModel`](https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.BaseChatModel) subclass using `class_path`. The CLI will import and instantiate it directly:
+You can use any [LangChain `BaseChatModel`](https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.BaseChatModel) subclass using `class_path`. The CLI imports and instantiates the class directly — no built-in provider package required.
 
 ```toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 [models.providers.my_custom]
@@ -221,7 +226,31 @@ temperature = 0
 max_tokens = 4096
 ```
 
-The package must be installed in the same Python environment as `deepagents-cli`:
+`api_key_env` and `base_url` are optional. `class_path` providers are expected to handle their own authentication internally — useful when your model uses custom auth (JWT tokens, proprietary headers, mTLS, etc.) rather than a standard API key:
+
+```toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+[models.providers.xyz]
+class_path = "abc.integrations.deepagents:DeepAgentsXYZChat"
+models = ["abc-xyz-1"]
+
+[models.providers.xyz.params]
+bypass_auth = true
+temperature = 0
+```
+
+With this config, switch to the model with `/model xyz:abc-xyz-1` or `--model xyz:abc-xyz-1`.
+
+Deep Agents requires **tool calling** support. If your custom model supports tool calling but the CLI doesn't know about it, declare it in the provider profile:
+
+```toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+[models.providers.xyz.profile]
+tool_calling = true
+max_input_tokens = 128000
+```
+
+Set `max_input_tokens` to what your model supports to enable accurate context length tracking and auto-summarization.
+
+The provider package must be installed in the same Python environment as `deepagents-cli`:
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 # If deepagents-cli was installed with uv tool:
@@ -237,6 +266,18 @@ MyChatModel(model="my-model-v1", base_url="...", api_key="...", temperature=0, m
 `class_path` executes arbitrary Python code from your config file. This has the same trust model as `pyproject.toml` build scripts — you control your own machine.
 
 Your provider package may optionally provide model profiles at a `_PROFILES` dict in `<package>.data._profiles` in lieu of defining them under the `models` key. See LangChain [model profiles](https://github.com/langchain-ai/langchain/tree/master/libs/model-profiles) for more info.
+
+***
+
+## External editor
+
+Press `Ctrl+X` or type `/editor` to compose prompts in an external editor. The CLI checks `$VISUAL`, then `$EDITOR`, then falls back to `vi` (macOS/Linux) or `notepad` (Windows). GUI editors (VS Code, Cursor, Zed, Sublime Text, Windsurf) automatically receive a `--wait` flag so the CLI blocks until you close the file.
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Set in your shell profile (~/.zshrc, ~/.bashrc, etc.)
+export VISUAL="code"    # GUI editor (--wait auto-injected)
+export EDITOR="nvim"    # Terminal fallback
+```
 
 ***
 

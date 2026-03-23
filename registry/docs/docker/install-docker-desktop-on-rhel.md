@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -26,7 +24,7 @@ Table of contents
 
 > **Docker Desktop terms**
 >
-> Commercial use of Docker Desktop in larger enterprises (more than 250 employees or more than $10 million USD in annual revenue) requires a [paid subscription](https://www.docker.com/pricing/).
+> Commercial use of Docker Desktop in larger enterprises (more than 250 employees or more than $10 million USD in annual revenue) requires a [paid subscription](https://www.docker.com/pricing?ref=Docs\&refAction=DocsDesktopRhelInstall).
 
 This page contains information on how to install, launch and upgrade Docker Desktop on a Red Hat Enterprise Linux (RHEL) distribution.
 
@@ -184,7 +182,7 @@ $ sudo dnf install ./docker-desktop-<arch>-rhel.rpm
 
 ## [Next steps](#next-steps)
 
-- Review [Docker's subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
+- Review [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs\&refAction=DocsDesktopRhelInstall) to see what Docker can offer you.
 - Take a look at the [Docker workshop](https://docs.docker.com/get-started/workshop/) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](https://docs.docker.com/desktop/use-desktop/) and all its features.
 - [Troubleshooting](https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.

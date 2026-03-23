@@ -24,7 +24,7 @@ For more information on Vercel Functions timeouts, see [What can I do about Verc
 
 title: "FUNCTION\_PAYLOAD\_TOO\_LARGE"
 description: "The payload sent to the function is too large. This is a function error."
-last\_updated: "2026-03-08T05:03:14.124Z"
+last\_updated: "2026-03-23T09:40:09.632Z"
 source: "https://vercel.com/docs/errors/FUNCTION\_PAYLOAD\_TOO\_LARGE"
 
 # FUNCTION\_PAYLOAD\_TOO\_LARGE
@@ -47,7 +47,7 @@ To troubleshoot this error, follow these steps:
 
 title: "FUNCTION\_RESPONSE\_PAYLOAD\_TOO\_LARGE"
 description: "The function returned a response that is too large. This is a function error."
-last\_updated: "2026-03-08T05:03:14.127Z"
+last\_updated: "2026-03-23T09:40:09.635Z"
 source: "https://vercel.com/docs/errors/FUNCTION\_RESPONSE\_PAYLOAD\_TOO\_LARGE"
 
 # FUNCTION\_RESPONSE\_PAYLOAD\_TOO\_LARGE
@@ -67,7 +67,7 @@ To troubleshoot this error, follow these steps:
 
 title: "FUNCTION\_THROTTLED"
 description: "The function you are trying to call has exceeded the rate limit."
-last\_updated: "2026-03-08T05:03:14.130Z"
+last\_updated: "2026-03-23T09:40:09.640Z"
 source: "https://vercel.com/docs/errors/FUNCTION\_THROTTLED"
 
 # FUNCTION\_THROTTLED
@@ -86,7 +86,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INFINITE\_LOOP\_DETECTED"
 description: "An infinite loop was detected within the application."
-last\_updated: "2026-03-08T05:03:14.134Z"
+last\_updated: "2026-03-23T09:40:09.644Z"
 source: "https://vercel.com/docs/errors/INFINITE\_LOOP\_DETECTED"
 
 # INFINITE\_LOOP\_DETECTED
@@ -109,7 +109,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_CACHE\_ERROR"
 description: "An unexpected error happened when CDN is fetching data from the Vercel CDN cache."
-last\_updated: "2026-03-08T05:03:14.138Z"
+last\_updated: "2026-03-23T09:40:09.655Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_CACHE\_ERROR"
 
 # INTERNAL\_CACHE\_ERROR
@@ -128,7 +128,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_CACHE\_KEY\_TOO\_LONG"
 description: "The CDN is failing to fetch from the internal cache due to a cache key being too long. This error can be caused by a request URL that is too long."
-last\_updated: "2026-03-08T05:03:14.141Z"
+last\_updated: "2026-03-23T09:40:09.658Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_CACHE\_KEY\_TOO\_LONG"
 
 # INTERNAL\_CACHE\_KEY\_TOO\_LONG
@@ -147,7 +147,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_CACHE\_LOCK\_FULL"
 description: "An unexpected error happened when CDN is accessing internal cache."
-last\_updated: "2026-03-08T05:03:14.144Z"
+last\_updated: "2026-03-23T09:40:09.662Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_CACHE\_LOCK\_FULL"
 
 # INTERNAL\_CACHE\_LOCK\_FULL
@@ -166,7 +166,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_CACHE\_LOCK\_TIMEOUT"
 description: "An unexpected error happened when CDN is accessing internal cache."
-last\_updated: "2026-03-08T05:03:14.146Z"
+last\_updated: "2026-03-23T09:40:09.666Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_CACHE\_LOCK\_TIMEOUT"
 
 # INTERNAL\_CACHE\_LOCK\_TIMEOUT
@@ -185,7 +185,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_DEPLOYMENT\_FETCH\_FAILED"
 description: "Failed to fetch the internal deployment. This is a deployment error."
-last\_updated: "2026-03-08T05:03:14.150Z"
+last\_updated: "2026-03-23T09:40:09.673Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_DEPLOYMENT\_FETCH\_FAILED"
 
 # INTERNAL\_DEPLOYMENT\_FETCH\_FAILED
@@ -206,7 +206,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_EDGE\_FUNCTION\_INVOCATION\_FAILED"
 description: "The request for a Edge Function was not completed successfully due to an internal error."
-last\_updated: "2026-03-08T05:03:14.152Z"
+last\_updated: "2026-03-23T09:40:09.669Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_EDGE\_FUNCTION\_INVOCATION\_FAILED"
 
 # INTERNAL\_EDGE\_FUNCTION\_INVOCATION\_FAILED
@@ -223,7 +223,7 @@ While this error can be caused by a variety of issues, it's transient and retryi
 
 title: "INTERNAL\_EDGE\_FUNCTION\_INVOCATION\_TIMEOUT"
 description: "The Edge Function invocation timed out unexpectedly."
-last\_updated: "2026-03-08T05:03:14.157Z"
+last\_updated: "2026-03-23T09:40:09.677Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_EDGE\_FUNCTION\_INVOCATION\_TIMEOUT"
 
 # INTERNAL\_EDGE\_FUNCTION\_INVOCATION\_TIMEOUT
@@ -247,7 +247,7 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_FUNCTION\_INVOCATION\_FAILED"
 description: "The internal invocation of a function failed. This is Vercel"
-last\_updated: "2026-03-08T05:03:14.160Z"
+last\_updated: "2026-03-23T09:40:09.681Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_FUNCTION\_INVOCATION\_FAILED"
 
 # INTERNAL\_FUNCTION\_INVOCATION\_FAILED
@@ -269,5 +269,5 @@ To troubleshoot this error, follow these steps:
 
 title: "INTERNAL\_FUNCTION\_INVOCATION\_TIMEOUT"
 description: "The internal invocation of a function timed out. This is Vercel"
-last\_updated: "2026-03-08T05:03:14.165Z"
+last\_updated: "2026-03-23T09:40:09.685Z"
 source: "https://vercel.com/docs/errors/INTERNAL\_FUNCTION\_INVOCATION\_TIMEOUT"

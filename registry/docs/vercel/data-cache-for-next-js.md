@@ -230,5 +230,5 @@ Both Data cache and ISR support time-based revalidation, on-demand revalidation,
 
 title: "Runtime Cache"
 description: "Vercel Runtime Cache is a specialized cache that stores responses from data fetches in Vercel functions"
-last\_updated: "2026-03-08T05:03:11.822Z"
+last\_updated: "2026-03-23T09:40:06.272Z"
 source: "https://vercel.com/docs/caching/runtime-cache"

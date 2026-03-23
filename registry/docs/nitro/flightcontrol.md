@@ -4,10 +4,6 @@
 
 :read-more{title="flightcontrol.dev" to="https://flightcontrol.dev?ref=nitro"}
 
-::note
-Flightcontrol has zero config support for [Nuxt](https://nuxt.com/){rel=""nofollow""} projects.
-::
-
 ## Set Up your flightcontrol account
 
 On a high level, the steps you will need to follow to deploy a project for the first time are:
@@ -186,9 +182,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - run: corepack enable
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v6
         with:
           node-version: "18"
 

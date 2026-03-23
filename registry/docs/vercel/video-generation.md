@@ -110,5 +110,5 @@ export async function register() {
 
 title: "Reference-to-Video Generation"
 description: "Generate videos featuring characters from reference images or videos using Wan through AI Gateway."
-last\_updated: "2026-03-08T05:03:10.249Z"
+last\_updated: "2026-03-23T09:40:04.105Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/video-generation/reference-to-video"

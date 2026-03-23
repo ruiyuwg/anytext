@@ -46,11 +46,11 @@ In addition to environment variables from the `node_server` preset, you can cust
 
 ## Handler (advanced)
 
-**Preset:** `node`
+**Preset:** `node_middleware`
 
-Nitro also has a more low-level preset that directly exports a function with `(req, res) => {}` signature usable for middleware and custom servers.
+Nitro also has a more low-level preset that directly exports a middleware usable for custom servers.
 
-When running `nitro build` with the Node preset, the result will be an entry point exporting a function with the `(req, res) => {}` signature.
+When running `nitro build` with the Node middleware preset, the result will be an entry point exporting a middleware handler.
 
 **Example:**
 
@@ -60,32 +60,6 @@ import { listener } from './.output/server'
 
 const server = createServer(listener)
 server.listen(8080)
-```
-
-# WinterJS
-
-**Preset:** `winterjs`
-
-You can easily build Nitro powered applications to run with [wasmerio/winterjs](https://github.com/wasmerio/winterjs){rel=""nofollow""} runtime.
-
-[WinterJS](https://github.com/wasmerio/winterjs){rel=""nofollow""} is a JavaScript Service Workers server written in Rust, that uses the SpiderMonkey runtime to execute JavaScript (the same runtime that Firefox uses) ([announcement](https://wasmer.io/posts/announcing-winterjs-service-workers){rel=""nofollow""}).
-
-::warning
-🚧 WinterJS runtime is unstable and under heavy development. Follow [nitrojs/nitro#1861](https://github.com/nitrojs/nitro/issues/1861){rel=""nofollow""} for status and information.
-::
-
-In order to build for this runtime, use `NITRO_PRESET="winterjs"` environment variable:
-
-```sh
-NITRO_PRESET="winterjs" npm run build
-```
-
-Make sure you have `wasmer` installed locally ([install wasmer](https://docs.wasmer.io/install){rel=""nofollow""})
-
-Run locally:
-
-```sh
-wasmer run wasmer/winterjs --forward-host-env --net --mapdir app:.output app/server/index.mjs
 ```
 
 # Bun
@@ -102,12 +76,6 @@ bun run ./.output/server/index.mjs
 
 :read-more{to="https://bun.sh"}
 
-## Environment Variables
-
-You can use the `PORT` or `NITRO_PORT` and `HOST` or `NITRO_HOST` environment variables to set the server port.
-
-Use the `NITRO_BUN_IDLE_TIMEOUT` environment variable to change the default [idleTimeout](https://bun.sh/docs/runtime/http/server#idletimeout){rel=""nofollow""}.
-
 # Deno
 
 **Preset:** `deno_server`
@@ -122,24 +90,98 @@ NITRO_PRESET=deno_server npm run build
 deno run --unstable --allow-net --allow-read --allow-env .output/server/index.ts
 ```
 
-To enabling Node.js compatibility, you need to upgrade to Deno v2, and a compatibility date set to `2025-01-30` or later in your nitro configuration file.
-
-::code-group
-
-```ts [nitro.config.ts]
-export default defineNitroConfig({
-    compatibilityDate: "2025-01-30",
-})
-```
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-    compatibilityDate: "2025-01-30",
-})
-```
-
-::
-
 ## Deno Deploy
 
 :read-more{to="https://nitro.build/deploy/providers/deno-deploy"}
+
+# Alwaysdata
+
+**Preset:** `alwaysdata`
+
+:read-more{to="https://alwaysdata.com"}
+
+## Set up application
+
+### Pre-requisites
+
+::steps{level="4"}
+
+#### [Register a new profile](https://www.alwaysdata.com/en/register/){rel=""nofollow""} on alwaysdata platform if you don't have one.
+
+#### Get a free 100Mb plan to host your app.
+
+::
+
+::note
+Keep in mind your *account name* will be used to provide you a default URL in the form of `account_name.alwaysdata.net`, so choose it wisely. You can also link your existing domains to your account later or register as many accounts under your profile as you need.
+::
+
+### Local deployment
+
+::steps{level="4"}
+
+#### Build your project locally with `npm run build -- preset alwaysdata`
+
+#### [Upload your app](https://help.alwaysdata.com/en/remote-access/){rel=""nofollow""} to your account in its own directory (e.g. `$HOME/www/my-app`). You can use any protocol you prefer (SSH/FTP/WebDAV…) to do so.
+
+#### On your admin panel, [create a new site](https://admin.alwaysdata.com/site/add/){rel=""nofollow""} for your app with the following features:\* *Addresses*: `[account_name].alwaysdata.net`
+
+- *Type*: Node.js
+- *Command*: `node .output/server/index.mjs`
+- *Working directory*: `www/my-app` (adapt it to your deployment path)
+- *Environment*:
+  ```ini
+  NITRO_PRESET=alwaysdata
+  ```
+- *Node.js version*: `Default version` is fine; pick no less than `20.0.0` (you can also [set your Node.js version globally](https://help.alwaysdata.com/en/languages/nodejs/configuration/#supported-versions){rel=""nofollow""})
+- *Hot restart*: `SIGHUP`:read-more{title="Get more information about alwaysdata Node.js sites type" to="https://help.alwaysdata.com/en/languages/nodejs"}
+
+#### Your app is now live at `http(s)://[account_name].alwaysdata.net`.
+
+::
+
+# AWS Lambda
+
+**Preset:** `aws_lambda`
+
+:read-more{title="AWS Lambda" to="https://aws.amazon.com/lambda/"}
+
+Nitro provides a built-in preset to generate output format compatible with [AWS Lambda](https://aws.amazon.com/lambda/){rel=""nofollow""}.
+The output entrypoint in `.output/server/index.mjs` is compatible with [AWS Lambda format](https://docs.aws.amazon.com/lex/latest/dg/lambda-input-response-format.html){rel=""nofollow""}.
+
+It can be used programmatically or as part of a deployment.
+
+```ts
+import { handler } from './.output/server'
+
+// Use programmatically
+const { statusCode, headers, body } = handler({ rawPath: '/' })
+```
+
+## Inlining chunks
+
+Nitro output, by default uses dynamic chunks for lazy loading code only when needed. However this sometimes can not be ideal for performance. (See discussions in [nitrojs/nitro#650](https://github.com/nitrojs/nitro/pull/650){rel=""nofollow""}). You can enabling chunk inlining behavior using [`inlineDynamicImports`](https://nitro.build/config#inlinedynamicimports) config.
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
+  inlineDynamicImports: true
+});
+```
+
+## Response streaming
+
+:read-more{title="Introducing AWS Lambda response streaming" to="https://aws.amazon.com/blogs/compute/introducing-aws-lambda-response-streaming/"}
+
+In order to enable response streaming, enable `awsLambda.streaming` flag:
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
+  awsLambda: {
+    streaming: true
+  }
+});
+```

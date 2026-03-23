@@ -2,9 +2,7 @@
 
 Learn about the Embedded Components onramp.
 
-Build an entire onramp flow native to your app with components that provide authentication and secure data collection, tailored to your app’s design.
-
-[Sign up to join the waitlist](https://docs.stripe.com/crypto/onramp.md#sign-up)
+Build an entire onramp flow native to your app with components that provide authentication and secure data collection, tailored to your app’s design. [Get started](https://docs.stripe.com/crypto/onramp/embedded-components-integration-guide.md)
 
 ## Customer flow
 
@@ -16,7 +14,10 @@ Build an entire onramp flow native to your app with components that provide auth
 
 ## Integration overview
 
-The integration breaks down into a few phases: SDK setup, authentication, identity, and payment.
+Choose how you want to get started with your integration, using one of the following:
+
+- **[Quickstart](https://docs.stripe.com/crypto/onramp/embedded-components-quickstart.md?client=react)**: Provides minimal code that you can run to see the full flow and explore the integration.
+- **[Integration guide](https://docs.stripe.com/crypto/onramp/embedded-components-integration-guide.md)**: Provides step-by-step instructions that you can follow to build your own flow.
 
 ### Mobile SDK configuration
 
@@ -39,4 +40,6 @@ For checkout, your backend creates a [CryptoOnrampSession](https://docs.stripe.c
 ## Next steps
 
 - [Sign up to join the private preview](https://docs.stripe.com/crypto/onramp.md#sign-up)
+- [Embedded Components onramp quickstart](https://docs.stripe.com/crypto/onramp/embedded-components-quickstart.md)
+- [Integrate the Embedded Components onramp](https://docs.stripe.com/crypto/onramp/embedded-components-integration-guide.md)
 - Try our sample apps: [iOS](https://github.com/stripe/stripe-ios/tree/master/Example/CryptoOnramp%20Example) and [Android](https://github.com/stripe/stripe-android/tree/master/crypto-onramp-example)

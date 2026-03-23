@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -41,7 +39,7 @@ Key benefits include:
 
 To use Insights, you must meet the following requirements:
 
-- [Docker Business subscription](https://www.docker.com/pricing/)
+- [Docker Business subscription](https://www.docker.com/pricing?ref=Docs\&refAction=DocsAdminInsights)
 - Administrators must [enforce sign-in](/security/for-admins/enforce-sign-in/) for users
 - Your Account Executive must turn on Insights for your organization
 

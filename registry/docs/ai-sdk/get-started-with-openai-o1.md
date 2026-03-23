@@ -1,6 +1,6 @@
 # Get started with OpenAI o1
 
-With the [release of OpenAI's o1 series models](https://openai.com/index/learning-to-reason-with-llms/), there has never been a better time to start building AI applications, particularly those that require complex reasoning capabilities.
+With the [release of OpenAI's o1 series models](https://openai.com/index/introducing-openai-o1-preview/), there has never been a better time to start building AI applications, particularly those that require complex reasoning capabilities.
 
 The [AI SDK](/) is a powerful TypeScript toolkit for building AI applications with large language models (LLMs) like OpenAI o1 alongside popular frameworks like React, Next.js, Vue, Svelte, Node.js, and more.
 
@@ -8,13 +8,17 @@ The [AI SDK](/) is a powerful TypeScript toolkit for building AI applications wi
 
 OpenAI released a series of AI models designed to spend more time thinking before responding. They can reason through complex tasks and solve harder problems than previous models in science, coding, and math. These models, named the o1 series, are trained with reinforcement learning and can "think before they answer". As a result, they are able to produce a long internal chain of thought before responding to a prompt.
 
-The main reasoning model available in the API is:
+There are three reasoning models available in the API:
 
 1. [**o1**](https://platform.openai.com/docs/models#o1): Designed to reason about hard problems using broad general knowledge about the world.
+2. [**o1-preview**](https://platform.openai.com/docs/models#o1): The original preview version of o1 - slower than o1 but supports streaming.
+3. [**o1-mini**](https://platform.openai.com/docs/models#o1): A faster and cheaper version of o1, particularly adept at coding, math, and science tasks where extensive general knowledge isn't required. o1-mini supports streaming.
 
-| Model | Streaming | Tools | Object Generation | Reasoning Effort |
-| ----- | --------- | ----- | ----------------- | ---------------- |
-| o1    |           |       |                   |                  |
+| Model      | Streaming           | Tools               | Object Generation   | Reasoning Effort    |
+| ---------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| o1         |  |  |  |  |
+| o1-preview |  |  |  |  |
+| o1-mini    |  |  |  |  |
 
 ### Benchmarks
 
@@ -41,30 +45,30 @@ The AI SDK is the TypeScript toolkit designed to help developers build AI-powere
 
 The AI SDK abstracts away the differences between model providers, eliminates boilerplate code for building chatbots, and allows you to go beyond text output to generate rich, interactive components.
 
-At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call OpenAI o1 with the AI SDK:
+At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call OpenAI o1-mini with the AI SDK:
 
 ```ts
-import { generateText } from "ai";
-import { openai } from "@ai-sdk/openai";
+import { generateText } from 'ai';
+import { openai } from '@ai-sdk/openai';
 
 const { text } = await generateText({
-  model: openai("o1"),
-  prompt: "Explain the concept of quantum entanglement.",
+  model: openai('o1-mini'),
+  prompt: 'Explain the concept of quantum entanglement.',
 });
 ```
 
-To use the o1 model, you must either be using @ai-sdk/openai version 0.0.59 or
-greater, or set `temperature: 1`.
+To use the o1 series of models, you must either be using @ai-sdk/openai
+version 0.0.59 or greater, or set `temperature: 1`.
 
 AI SDK Core abstracts away the differences between model providers, allowing you to focus on building great applications. The unified interface also means that you can easily switch between models by changing just one line of code.
 
 ```ts highlight="5"
-import { generateText } from "ai";
-import { openai } from "@ai-sdk/openai";
+import { generateText } from 'ai';
+import { openai } from '@ai-sdk/openai';
 
 const { text } = await generateText({
-  model: openai("o1"),
-  prompt: "Explain the concept of quantum entanglement.",
+  model: openai('o1'),
+  prompt: 'Explain the concept of quantum entanglement.',
 });
 ```
 
@@ -76,15 +80,15 @@ You can control the amount of reasoning effort expended by o1 through the `reaso
 This parameter can be set to `'low'`, `'medium'`, or `'high'` to adjust how much time and computation the model spends on internal reasoning before producing a response.
 
 ```ts highlight="9"
-import { generateText } from "ai";
-import { openai } from "@ai-sdk/openai";
+import { generateText } from 'ai';
+import { openai } from '@ai-sdk/openai';
 
 // Reduce reasoning effort for faster responses
 const { text } = await generateText({
-  model: openai("o1"),
-  prompt: "Explain quantum entanglement briefly.",
+  model: openai('o1'),
+  prompt: 'Explain quantum entanglement briefly.',
   providerOptions: {
-    openai: { reasoningEffort: "low" },
+    openai: { reasoningEffort: 'low' },
   },
 });
 ```
@@ -94,33 +98,30 @@ other models.
 
 ### Generating Structured Data
 
-While text generation can be useful, you might want to generate structured JSON data. For example, you might want to extract information from text, classify data, or generate synthetic data. AI SDK Core provides [`generateText`](/docs/reference/ai-sdk-core/generate-text) and [`streamText`](/docs/reference/ai-sdk-core/stream-text) with `Output` to generate structured data, allowing you to constrain model outputs to a specific schema.
+While text generation can be useful, you might want to generate structured JSON data. For example, you might want to extract information from text, classify data, or generate synthetic data. AI SDK Core provides two functions ([`generateObject`](/docs/reference/ai-sdk-core/generate-object) and [`streamObject`](/docs/reference/ai-sdk-core/stream-object)) to generate structured data, allowing you to constrain model outputs to a specific schema.
 
 ```ts
-import { generateText, Output } from "ai";
-import { openai } from "@ai-sdk/openai";
-import { z } from "zod";
+import { generateObject } from 'ai';
+import { openai } from '@ai-sdk/openai';
+import { z } from 'zod';
 
-const { output } = await generateText({
-  model: openai("o1"),
-  output: Output.object({
-    schema: z.object({
-      recipe: z.object({
-        name: z.string(),
-        ingredients: z.array(
-          z.object({ name: z.string(), amount: z.string() }),
-        ),
-        steps: z.array(z.string()),
-      }),
+const { object } = await generateObject({
+  model: openai('o1'),
+  schema: z.object({
+    recipe: z.object({
+      name: z.string(),
+      ingredients: z.array(z.object({ name: z.string(), amount: z.string() })),
+      steps: z.array(z.string()),
     }),
   }),
-  prompt: "Generate a lasagna recipe.",
+  prompt: 'Generate a lasagna recipe.',
 });
 ```
 
 This code snippet will generate a type-safe recipe that conforms to the specified zod schema.
 
-Structured object generation is supported with o1.
+Structured object generation is only supported with o1, not o1-preview or
+o1-mini.
 
 ### Tools
 
@@ -133,18 +134,18 @@ The AI SDK supports tool usage across several of its functions, like [`generateT
 Here's an example of how you can use a tool with the AI SDK and o1:
 
 ```ts
-import { generateText, tool } from "ai";
-import { openai } from "@ai-sdk/openai";
-import { z } from "zod";
+import { generateText, tool } from 'ai';
+import { openai } from '@ai-sdk/openai';
+import { z } from 'zod';
 
 const { text } = await generateText({
-  model: openai("o1"),
-  prompt: "What is the weather like today?",
+  model: openai('o1'),
+  prompt: 'What is the weather like today?',
   tools: {
     getWeather: tool({
-      description: "Get the weather in a location",
-      inputSchema: z.object({
-        location: z.string().describe("The location to get the weather for"),
+      description: 'Get the weather in a location',
+      parameters: z.object({
+        location: z.string().describe('The location to get the weather for'),
       }),
       execute: async ({ location }) => ({
         location,
@@ -157,7 +158,7 @@ const { text } = await generateText({
 
 In this example, the `getWeather` tool allows the model to fetch real-time weather data (simulated for simplicity), enhancing its ability to provide accurate and up-to-date information.
 
-Tools are compatible with o1.
+Tools are only compatible with o1, not o1-preview or o1-mini.
 
 ### Building Interactive Interfaces
 
@@ -170,8 +171,8 @@ With four main hooks — [`useChat`](/docs/reference/ai-sdk-ui/use-chat), [`useC
 Let's explore building a chatbot with [Next.js](https://nextjs.org), the AI SDK, and OpenAI o1:
 
 ```tsx filename="app/api/chat/route.ts"
-import { openai } from "@ai-sdk/openai";
-import { convertToModelMessages, streamText, UIMessage } from "ai";
+import { openai } from '@ai-sdk/openai';
+import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
 // Allow responses up to 5 minutes
 export const maxDuration = 300;
@@ -180,8 +181,8 @@ export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: openai("o1"),
-    messages: await convertToModelMessages(messages),
+    model: openai('o1-mini'),
+    messages: convertToModelMessages(messages),
   });
 
   return result.toUIMessageStreamResponse();
@@ -189,18 +190,18 @@ export async function POST(req: Request) {
 ```
 
 ```tsx filename="app/page.tsx"
-"use client";
+'use client';
 
-import { useChat } from "@ai-sdk/react";
+import { useChat } from '@ai-sdk/react';
 
 export default function Page() {
   const { messages, input, handleInputChange, handleSubmit, error } = useChat();
 
   return (
     <>
-      {messages.map((message) => (
+      {messages.map(message => (
         <div key={message.id}>
-          {message.role === "user" ? "User: " : "AI: "}
+          {message.role === 'user' ? 'User: ' : 'AI: '}
           {message.content}
         </div>
       ))}
@@ -222,7 +223,7 @@ Ready to get started? Here's how you can dive in:
 1. Explore the documentation at [ai-sdk.dev/docs](/docs) to understand the full capabilities of the AI SDK.
 2. Check out our support for the o1 series of reasoning models in the [OpenAI Provider](/providers/ai-sdk-providers/openai#reasoning-models).
 3. Check out practical examples at [ai-sdk.dev/examples](/examples) to see the SDK in action and get inspired for your own projects.
-4. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) and multi-modal chat at [ai-sdk.dev/docs/guides](/cookbook/guides).
+4. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) and multi-modal chat at [ai-sdk.dev/docs/guides](/docs/guides).
 5. Check out ready-to-deploy AI templates at [vercel.com/templates?type=ai](https://vercel.com/templates?type=ai).
 
 # Get started with OpenAI o3-mini

@@ -103,7 +103,7 @@ More details from Netlify on [Deploy an Astro site using the Netlify CLI](https:
 
 [Section titled “Set a Node.js version”](#set-a-nodejs-version)
 
-If you are using a legacy [build image](https://docs.netlify.com/configure-builds/get-started/#build-image-selection) (Xenial) on Netlify, make sure that your Node.js version is set. Astro requires `v18.20.8` or `v20.3.0` or higher.
+If you are using a legacy [build image](https://docs.netlify.com/configure-builds/get-started/#build-image-selection) (Xenial) on Netlify, make sure that your Node.js version is set. Astro requires `v22.12.0` or higher.
 
 You can [specify your Node.js version in Netlify](https://docs.netlify.com/configure-builds/manage-dependencies/#node-js-and-javascript) using:
 

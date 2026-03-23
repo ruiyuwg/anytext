@@ -327,7 +327,7 @@ const agent = createAgent({
 - [Middleware documentation](/oss/javascript/langchain/middleware) - Complete guide to custom middleware
 - [Middleware API reference](https://reference.langchain.com/python/langchain/middleware/) - Complete guide to custom middleware
 - [Human-in-the-loop](/oss/javascript/langchain/human-in-the-loop) - Add human review for sensitive operations
-- [Testing agents](/oss/javascript/langchain/test) - Strategies for testing safety mechanisms
+- [Testing agents](/oss/javascript/langchain/test/) - Strategies for testing safety mechanisms
 
 ***
 

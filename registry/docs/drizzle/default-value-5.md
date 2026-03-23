@@ -12,10 +12,11 @@ a string constant, a blob constant, a signed-number, or any constant expression 
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = sqliteTable("table", {
-  int1: integer().default(42),
-  int2: integer().default(sql`(abs(42))`),
+const table = sqliteTable('table', {
+	int1: integer().default(42),
+	int2: integer().default(sql`(abs(42))`)
 });
+
 ```
 
 ```sql
@@ -56,10 +57,10 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 
 ```ts
 import { text, sqliteTable } from "drizzle-orm/sqlite-core";
-import { createId } from "@paralleldrive/cuid2";
+import { createId } from '@paralleldrive/cuid2';
 
-const table = sqliteTable("table", {
-  id: text().$defaultFn(() => createId()),
+const table = sqliteTable('table', {
+	id: text().$defaultFn(() => createId()),
 });
 ```
 
@@ -78,10 +79,8 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 ```ts
 import { text, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = sqliteTable("table", {
-  alwaysNull: text()
-    .$type<string | null>()
-    .$onUpdate(() => null),
+const table = sqliteTable('table', {
+    alwaysNull: text().$type<string | null>().$onUpdate(() => null),
 });
 ```
 
@@ -89,7 +88,7 @@ Source: https://orm.drizzle.team/docs/connect-aws-data-api-mysql
 
 import Callout from '@mdx/Callout.astro';
 
-# Drizzle + AWS Data API MySQL
+# Drizzle  +  AWS Data API MySQL
 
 Currently AWS Data API for MySQL is not implemented in Drizzle ORM
 
@@ -103,7 +102,7 @@ import WhatsNextPostgres from "@mdx/WhatsNextPostgres.astro";
 import Prerequisites from "@mdx/Prerequisites.astro";
 import CodeTabs from "@mdx/CodeTabs.astro";
 
-# Drizzle + AWS Data API Postgres
+# Drizzle  +  AWS Data API Postgres
 
 - Database [connection basics](/docs/connect-overview) with Drizzle
 - AWS Data API - [website](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
@@ -159,7 +158,7 @@ import WhatsNextPostgres from "@mdx/WhatsNextPostgres.astro";
 import Prerequisites from "@mdx/Prerequisites.astro";
 import CodeTabs from "@mdx/CodeTabs.astro";
 
-# Drizzle + Bun SQL
+# Drizzle  +  Bun SQL
 
 - Database [connection basics](/docs/connect-overview) with Drizzle
 - Bun - [website](https://bun.sh/docs)
@@ -188,9 +187,9 @@ const result = await db.select().from(...);
 If you need to provide your existing driver:
 
 ```typescript copy
-import "dotenv/config";
-import { drizzle } from "drizzle-orm/bun-sql";
-import { SQL } from "bun";
+import 'dotenv/config';
+import { drizzle } from 'drizzle-orm/bun-sql';
+import { SQL } from 'bun';
 
 const client = new SQL(process.env.DATABASE_URL!);
 const db = drizzle({ client });

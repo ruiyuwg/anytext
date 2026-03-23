@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -368,32 +366,6 @@ models:
     context_size: 2048
     runtime_flags:
       - "--embeddings"          # Required for embedding models
-```
-
-## [Alternative configuration with provider services](#alternative-configuration-with-provider-services)
-
-> Important
->
-> This approach is deprecated. Use the [`models` top-level element](#basic-model-definition) instead.
-
-You can also use the `provider` service type, which allows you to declare platform capabilities required by your application. For AI models, you can use the `model` type to declare model dependencies.
-
-To define a model provider:
-
-```yaml
-services:
-  chat:
-    image: my-chat-app
-    depends_on:
-      - ai_runner
-
-  ai_runner:
-    provider:
-      type: model
-      options:
-        model: ai/smollm2
-        context-size: 1024
-        runtime-flags: "--no-prefill-assistant"
 ```
 
 ## [Reference](#reference)

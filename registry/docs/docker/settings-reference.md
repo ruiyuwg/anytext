@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -1364,7 +1362,7 @@ Boolean
 >
 > For Docker Desktop versions 4.41 and earlier, these settings were under the **Experimental features** tab on the **Features in development** page.
 
-### [Enable Docker AI](#enable-docker-ai)
+### [Enable Gordon](#enable-gordon)
 
 Default value
 
@@ -1380,17 +1378,17 @@ Business tier: `"Disabled"`, `"Enabled"`, `"Always Enabled"`
 Boolean for individuals\
 Toggle in Admin Console
 
-- **Description:** Docker AI features including "Ask Gordon" functionality.
+- **Description:** Enable the Gordon AI agent
 - **OS:** All
 - **Use case:** Turn on AI-powered assistance and recommendations within Docker Desktop.
 - **Configure this setting with:**
   - **Beta** settings in [Docker Desktop GUI](https://docs.docker.com/desktop/settings-and-maintenance/settings/)
   - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/configure-json-file/)
-  - Settings Management: **Enable Docker AI** setting in the [Admin Console](https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/configure-admin-console/)
+  - Settings Management: **Enable Gordon** setting in the [Admin Console](https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/configure-admin-console/)
 
 > Important
 >
-> Docker Business customers must set this to `"Enabled"` or `"Always Enabled"` in the Admin Console. Setting to `"User Defined"` alone will not activate Docker AI features. This secure-by-default approach prevents unintended deployment of AI features in security-conscious organizations.
+> Docker Business customers must set this to `"Enabled"` or `"Always Enabled"` in the Admin Console. Setting to `"User Defined"` alone will not activate Gordon features. This secure-by-default approach prevents unintended deployment of AI features in security-conscious organizations.
 
 ### [Enable Docker MCP Toolkit](#enable-docker-mcp-toolkit)
 

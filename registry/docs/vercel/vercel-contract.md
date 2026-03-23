@@ -8,7 +8,7 @@ The `vercel contract` command displays contract commitment information for your 
 vercel contract
 ```
 
-*Using the vercel contract command to view all
+*Using the \`vercel contract\` command to view all
 contract commitments.*
 
 The command outputs a table grouped by contract ID showing:
@@ -35,7 +35,7 @@ The `--format` option, shorthand `-F`, specifies the output format. Currently, `
 vercel contract --format json
 ```
 
-*Using the vercel contract command to output contract
+*Using the \`vercel contract\` command to output contract
 data as JSON.*
 
 The JSON output includes:
@@ -46,7 +46,7 @@ The JSON output includes:
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -61,5 +61,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel curl"
 description: "Learn how to make HTTP requests to your Vercel deployments with automatic deployment protection bypass using the vercel curl CLI command."
-last\_updated: "2026-03-08T05:03:12.081Z"
+last\_updated: "2026-03-23T09:40:06.621Z"
 source: "https://vercel.com/docs/cli/curl"

@@ -80,5 +80,5 @@ To follow this guide, you'll need the following:
 
 title: "Markdown Access"
 description: "Access Vercel documentation as markdown using .md endpoints or the copy button."
-last\_updated: "2026-03-08T05:03:09.973Z"
+last\_updated: "2026-03-23T09:40:03.539Z"
 source: "https://vercel.com/docs/agent-resources/markdown-access"

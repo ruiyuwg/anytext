@@ -12,7 +12,7 @@ export function GET(request: Request) {
 
 Server features require a custom server, which can be deployed to EAS or most [other hosting providers](/router/web/api-routes#deployment).
 
-[Watch: Expo Router API Routes Handle Requests & Stream Data](https://www.youtube.com/watch?v=2_UzR1wdimI)
+[Watch: Expo Router API Routes Handle Requests & Stream Data](https://www.youtube.com/watch?v=2_UzR1wdimI) — Create server endpoints with Expo Router API routes to handle requests, return JSON, and stream data.
 
 ## What are API Routes
 

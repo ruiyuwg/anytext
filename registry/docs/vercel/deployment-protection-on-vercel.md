@@ -2,15 +2,14 @@
 
 Deployment Protection lets you control who can access your preview and production URLs. You configure it at the project level, choosing both a **protection method** (how you protect) and a **protection scope** (what you protect).
 
-> **⚠️ Warning:** On the Hobby plan, you can use Vercel Authentication with Standard Protection.
-> This protects your preview deployments and deployment URLs, but your
+> **⚠️ Warning:** On the Hobby plan, Vercel Authentication with Standard Protection is
+> available. This protects your preview deployments and deployment URLs, but your
 > production domain remains publicly accessible. To protect production domains,
-> you need a Pro or Enterprise plan. Deployment Protection requires
-> authentication for all requests, including those to Routing Middleware.
+> you need a Pro or Enterprise plan.
 
-You can start a Pro trial to explore Deployment Protection features using the button below.
+Deployment Protection requires authentication for all requests, including those to Routing Middleware.
 
-## Protection methods
+## What protection methods are available
 
 You can choose from three methods to protect your deployments:
 
@@ -18,7 +17,7 @@ You can choose from three methods to protect your deployments:
 - [**Password Protection**](/docs/security/deployment-protection/methods-to-protect-deployments/password-protection): Restricts access to users with the correct password. **Available on the Enterprise plan, or as a paid add-on for Pro plans**
 - [**Trusted IPs**](/docs/security/deployment-protection/methods-to-protect-deployments/trusted-ips): Restricts access to users with the correct IP address. **Available on the Enterprise plan**
 
-## Protection scope
+## Choose which URLs to protect
 
 The protection scope determines which URLs you protect:
 
@@ -29,18 +28,18 @@ The protection scope determines which URLs you protect:
 
 To protect [**only production URLs**](#only-production-deployments), use [Trusted IPs](/docs/security/deployment-protection/methods-to-protect-deployments/trusted-ips). This option is **only available on the Enterprise plan**.
 
-## How to configure Deployment Protection
+## Where to find Deployment Protection settings
 
 You manage Deployment Protection through your project settings:
 
 1. From the [dashboard](/dashboard), select the project you want to configure
 2. Open **Settings** in the sidebar and select [**Deployment Protection**](https://vercel.com/d?to=%2F%5Bteam%5D%2F%5Bproject%5D%2Fsettings%2Fdeployment-protection\&title=Go+to+Deployment+Protection+settings)
 
-### Team default settings
+### How team default settings apply to new projects
 
 You can set a default Deployment Protection configuration for new projects in your team settings. You can override this default on individual projects as needed.
 
-When setting a team default, choose the protection level (All Deployments, Standard Protection, or None) and the protection method (Vercel Authentication or Password Protection).
+When setting a team default, choose the protection level (All Deployments, Standard Protection, or None) and one of the available protection methods, including Vercel Authentication or Password Protection.
 
 ![Image](https://vercel.com/docs-assets/static/docs/deployment-protection/deployment-protection-team-default-light.png)
 
@@ -58,11 +57,9 @@ You can combine Standard Protection with any of the following methods:
 - [Password Protection](/docs/security/deployment-protection/methods-to-protect-deployments/password-protection)
 - [Trusted IPs](/docs/security/deployment-protection/methods-to-protect-deployments/trusted-ips)
 
-### Migrating to Standard Protection
+### How to migrate to Standard Protection
 
-Enabling Standard Protection restricts public access to the production [generated deployment URL](/docs/deployments/generated-urls). This affects `VERCEL_URL` and `VERCEL_BRANCH_URL` from [System Environment Variables](/docs/environment-variables/system-environment-variables#system-environment-variables), making them unsuitable for fetch requests.
-
-If you use `VERCEL_URL` or `VERCEL_BRANCH_URL` for fetch requests, update your requests to target the same domain the user requested.
+When you enable Standard Protection, the production [generated deployment URL](/docs/deployments/generated-urls) becomes restricted. Update any fetch requests that use `VERCEL_URL` or `VERCEL_BRANCH_URL` from [System Environment Variables](/docs/environment-variables/system-environment-variables#system-environment-variables) to target the same domain the user requested, since those variables will no longer be publicly accessible.
 
 > **💡 Note:** The Framework Environment Variable `VERCEL_URL` is prefixed with the name of
 > the framework. For example, `VERCEL_URL` for Next.js is
@@ -96,7 +93,7 @@ Bypassing protection using [Protection Bypass for Automation](/docs/security/dep
 
 > **🔒 Permissions Required**: Protecting all deployments
 
-Select **All Deployments** to secure all deployments, both preview and production, restricting public access entirely.
+Select **All Deployments** to secure all deployments (both preview and production), restricting public access entirely.
 
 With this configuration, all URLs are protected, including your production domain `example.com` and [generated URLs](/docs/deployments/generated-urls) like `my-project-1234.vercel.app`.
 
@@ -108,7 +105,7 @@ You can combine All Deployments protection with any of the following methods:
 - [Password Protection](/docs/security/deployment-protection/methods-to-protect-deployments/password-protection)
 - [Trusted IPs](/docs/security/deployment-protection/methods-to-protect-deployments/trusted-ips)
 
-## Only production deployments
+## Only Production Deployments
 
 > **🔒 Permissions Required**: Protecting production deployments
 
@@ -133,7 +130,7 @@ For example, Vercel generates a preview URL such as `my-preview-5678.vercel.app`
 Advanced Deployment Protection features are available to Enterprise customers by default. Pro plan customers can access these features for an additional $150 per month:
 
 - [Password Protection](/docs/security/deployment-protection/methods-to-protect-deployments/password-protection)
-- [Private Production Deployments](/docs/security/deployment-protection#configuring-deployment-protection)
+- [Private Production Deployments](/docs/security/deployment-protection#all-deployments)
 - [Deployment Protection Exceptions](/docs/security/deployment-protection/methods-to-bypass-deployment-protection/deployment-protection-exceptions)
 
 ### Enabling Advanced Deployment Protection
@@ -155,7 +152,7 @@ To disable Advanced Deployment Protection:
 
 You must have used the feature for **a minimum of 30 days** before you can disable it. Once cancelled, all Advanced Deployment Protection features are disabled.
 
-## More resources
+## Related resources
 
 - [Methods to protect deployments](/docs/deployment-protection/methods-to-protect-deployments): Learn about each protection method in detail
 - [Methods to bypass deployment protection](/docs/deployment-protection/methods-to-bypass-deployment-protection): Configure exceptions and shareable links
@@ -163,5 +160,5 @@ You must have used the feature for **a minimum of 30 days** before you can disab
 
 title: "Deployment Retention"
 description: "Learn how Deployment Retention policies affect a deployment"
-last\_updated: "2026-03-08T05:03:13.258Z"
+last\_updated: "2026-03-23T09:40:08.330Z"
 source: "https://vercel.com/docs/deployment-retention"

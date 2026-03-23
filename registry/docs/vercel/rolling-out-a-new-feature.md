@@ -1,11 +1,11 @@
 # Rolling out a new feature
 
-This workflow creates a feature flag, wires it into your application, and progressively enables it across environments.
+This workflow creates a boolean feature flag, wires it into your application, and progressively enables it across environments.
 
 ## 1. Create the flag
 
 ```bash filename="terminal"
-vercel flags add redesigned-checkout --kind boolean \
+vercel flags create redesigned-checkout --kind boolean \
   --description "New checkout flow with streamlined steps"
 ```
 
@@ -47,7 +47,7 @@ export const redesignedCheckout = flag({
 });
 ```
 
-The flag returns `false` until you enable it in the dashboard.
+A new boolean flag serves `true` in development and `false` in preview and production. That lets you build against the new checkout locally while preview and production keep serving the old flow.
 
 ## 6. Use the flag in a component
 
@@ -67,23 +67,18 @@ export default async function CheckoutPage() {
 vercel deploy
 ```
 
-Visit the preview URL to confirm the old checkout renders. The flag defaults to `false` since it hasn't been enabled yet.
+Visit the preview URL to confirm the old checkout renders. Preview still serves `false` until you enable the flag there.
 
-## 8. Enable across environments
+## 8. Enable the flag in preview
 
-Enable the flag progressively, starting with development:
-
-```bash filename="terminal"
-vercel flags enable redesigned-checkout --environment development
-```
+When the preview deployment looks good, enable the flag there:
 
 ```bash filename="terminal"
-vercel flags enable redesigned-checkout --environment preview
+vercel flags enable redesigned-checkout --environment preview \
+  --message "Start preview rollout"
 ```
 
-```bash filename="terminal"
-vercel flags enable redesigned-checkout --environment production
-```
+Visit the preview URL again to confirm the new checkout renders.
 
 ## 9. Deploy to production
 
@@ -91,9 +86,16 @@ vercel flags enable redesigned-checkout --environment production
 vercel deploy --prod
 ```
 
+## 10. Enable the flag in production
+
+```bash filename="terminal"
+vercel flags enable redesigned-checkout --environment production \
+  --message "Roll out redesigned checkout in production"
+```
+
 Visit the production URL to confirm the new checkout is live.
 
 title: "Running an A/B test"
 description: "Set up an A/B test with a feature flag, track results through Web Analytics, and clean up afterward using the Vercel CLI."
-last\_updated: "2026-03-08T05:03:14.518Z"
+last\_updated: "2026-03-23T09:40:10.090Z"
 source: "https://vercel.com/docs/flags/vercel-flags/cli/run-ab-test"

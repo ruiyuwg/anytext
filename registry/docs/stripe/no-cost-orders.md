@@ -2,9 +2,9 @@
 
 Accept orders for no-cost line items or apply 100% off discounts for one-time payments.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/no-cost-orders?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/no-cost-orders?payment-ui=stripe-hosted.
 
 You can process no-cost orders for one-time payments with [no-cost line items](https://docs.stripe.com/payments/checkout/no-cost-orders.md#no-cost-line-items) or discounts for 100% off with [coupons and customer-facing promotion codes](https://docs.stripe.com/payments/checkout/no-cost-orders.md#full-cost-discounts).
 
@@ -107,9 +107,9 @@ To use no-cost orders with a payment link in a sandbox, specify a `prefilled_ema
 
 To use no-cost orders with a pricing table in a sandbox, set the pricing table’s `customer-email` [property](https://docs.stripe.com/payments/checkout/pricing-table.md#customer-email) to an email whose local part includes the suffix `+no_cost_orders`. For example, `j.appleseed+no_cost_orders@example.com`. The resulting checkout session lets you apply a discount that reduces the order total to zero.
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/no-cost-orders?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/no-cost-orders?payment-ui=embedded-form.
 
 You can process no-cost orders for one-time payments with [no-cost line items](https://docs.stripe.com/payments/checkout/no-cost-orders.md#no-cost-line-items) or discounts for 100% off with [coupons and customer-facing promotion codes](https://docs.stripe.com/payments/checkout/no-cost-orders.md#full-cost-discounts).
 

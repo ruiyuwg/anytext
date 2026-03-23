@@ -239,8 +239,8 @@ import {createClient} from '@sanity/client'
 
 // Set default tag on client
 const client = createClient({
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
   apiVersion: '2026-03-01',
   requestTagPrefix: 'myapp', // Prefix for all requests
 })

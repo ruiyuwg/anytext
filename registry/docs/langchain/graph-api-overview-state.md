@@ -19,7 +19,7 @@ Typically, all graph nodes communicate with a single schema. This means that the
 
 It is possible to have nodes write to private state channels inside the graph for internal node communication. We can simply define a private schema, `PrivateState`.
 
-It is also possible to define explicit input and output schemas for a graph. In these cases, we define an "internal" schema that contains *all* keys relevant to graph operations. But, we also define `input` and `output` schemas that are sub-sets of the "internal" schema to constrain the input and output of the graph. See [this guide](/oss/python/langgraph/graph-api#define-input-and-output-schemas) for more detail.
+It is also possible to define explicit input and output schemas for a graph. In these cases, we define an "internal" schema that contains *all* keys relevant to graph operations. But, we also define `input` and `output` schemas that are sub-sets of the "internal" schema to constrain the input and output of the graph. See [Define input and output schemas](/oss/python/langgraph/use-graph-api#define-input-and-output-schemas) for more detail.
 
 Let's look at an example:
 
@@ -78,7 +78,7 @@ There are two subtle and important points to note here:
    )
    ```
 
-   So, how can we write to `PrivateState` in `node_2`? How does the graph gain access to this schema if it was not passed in the `StateGraph` initialization?
+   How can we write to `PrivateState` in `node_2`? How does the graph gain access to this schema if it was not passed in the `StateGraph` initialization?
 
    We can do this because `_nodes` can also declare additional state `channels_` as long as the state schema definition exists. In this case, the `PrivateState` schema is defined, so we can add `bar` as a new state channel in the graph and write to it.
 
@@ -136,7 +136,7 @@ However, you might also want to manually update messages in your graph state (e.
 
 In addition to keeping track of message IDs, the [`add_messages`](https://reference.langchain.com/python/langgraph/graph/message/add_messages) function will also try to deserialize messages into LangChain `Message` objects whenever a state update is received on the `messages` channel.
 
-See more information on LangChain serialization/deserialization [here](https://python.langchain.com/docs/how_to/serialization/). This allows sending graph inputs / state updates in the following format:
+For more information, see [LangChain serialization/deserialization](https://python.langchain.com/docs/how_to/serialization/). This allows sending graph inputs / state updates in the following format:
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 # this is supported

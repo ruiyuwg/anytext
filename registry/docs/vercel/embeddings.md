@@ -103,5 +103,5 @@ response = client.embeddings.create(
 
 title: "Image Generation"
 description: "Generate images using AI models that support multimodal output through the Chat Completions API."
-last\_updated: "2026-03-08T05:03:10.739Z"
+last\_updated: "2026-03-23T09:40:04.830Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-chat-completions/image-generation"

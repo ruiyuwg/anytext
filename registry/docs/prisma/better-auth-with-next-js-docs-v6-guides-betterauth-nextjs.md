@@ -476,10 +476,10 @@ bunx --bun @better-auth/cli@latest secret
 
 Copy the generated secret and add it, along with your application's URL, to your `.env` file:
 
-```dotenv title=".env" showLineNumbers
+```bash title=".env"
 # Better Auth
-BETTER_AUTH_SECRET=your-generated-secret // [!code ++]
-BETTER_AUTH_URL=http://localhost:3000 // [!code ++]
+BETTER_AUTH_SECRET=your-generated-secret # [!code ++]
+BETTER_AUTH_URL=http://localhost:3000 # [!code ++]
 
 # Prisma
 DATABASE_URL="your-database-url"

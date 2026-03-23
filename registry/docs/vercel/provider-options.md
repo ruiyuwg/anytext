@@ -195,6 +195,7 @@ or in the public [models page](https://vercel.com/ai-gateway/models).
 | `vercel`     | [Vercel](https://ai-sdk.dev/providers/ai-sdk-providers/vercel)                       | [v0.app](https://v0.app/docs/api/model)                          |
 | `vertex`     | [Vertex AI](https://ai-sdk.dev/providers/ai-sdk-providers/google-vertex)             | [cloud.google.com/vertex-ai](https://cloud.google.com/vertex-ai) |
 | `voyage`     | [Voyage AI](https://ai-sdk.dev/providers/community-providers/voyage-ai)              | [voyageai.com](https://www.voyageai.com)                         |
+| `xiaomi`     | Xiaomi                                                                               | [mimo.xiaomi.com](https://mimo.xiaomi.com)                       |
 | `xai`        | [xAI](https://ai-sdk.dev/providers/ai-sdk-providers/xai)                             | [x.ai](https://x.ai)                                             |
 | `zai`        | Z.ai                                                                                 | [z.ai](https://z.ai/model-api)                                   |
 
@@ -204,5 +205,5 @@ or in the public [models page](https://vercel.com/ai-gateway/models).
 
 title: "Provider Timeouts"
 description: "Configure per-provider timeouts for fast failover when a provider is slow to respond."
-last\_updated: "2026-03-08T05:03:10.554Z"
+last\_updated: "2026-03-23T09:40:04.593Z"
 source: "https://vercel.com/docs/ai-gateway/models-and-providers/provider-timeouts"

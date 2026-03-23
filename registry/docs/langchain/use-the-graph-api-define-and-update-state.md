@@ -7,9 +7,9 @@ Here we show how to define and update [state](/oss/python/langgraph/graph-api#st
 
 ### Define state
 
-[State](/oss/python/langgraph/graph-api#state) in LangGraph can be a `TypedDict`, `Pydantic` model, or dataclass. Below we will use `TypedDict`. See [this section](#use-pydantic-models-for-graph-state) for detail on using Pydantic.
+[State](/oss/python/langgraph/graph-api#state) in LangGraph can be a `TypedDict`, `Pydantic` model, or dataclass. Below we will use `TypedDict`. See [Use Pydantic models for graph state](#use-pydantic-models-for-graph-state) for detail on using Pydantic.
 
-By default, graphs will have the same input and output schema, and the state determines that schema. See [this section](#define-input-and-output-schemas) for how to define distinct input and output schemas.
+By default, graphs will have the same input and output schema, and the state determines that schema. See [Define input and output schemas](#define-input-and-output-schemas) for how to define distinct input and output schemas.
 
 Let's consider a simple example using [messages](/oss/python/langgraph/graph-api#messagesstate). This represents a versatile formulation of state for many LLM applications. See our [concepts page](/oss/python/langgraph/graph-api#working-with-messages-in-graph-state) for more detail.
 
@@ -52,7 +52,7 @@ builder.set_entry_point("node")
 graph = builder.compile()
 ```
 
-LangGraph provides built-in utilities for visualizing your graph. Let's inspect our graph. See [this section](#visualize-your-graph) for detail on visualization.
+LangGraph provides built-in utilities for visualizing your graph. Let's inspect our graph. See [Visualize your graph](#visualize-your-graph) for detail on visualization.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from IPython.display import Image, display
@@ -183,7 +183,7 @@ Hi
 Hello!
 ```
 
-This is a versatile representation of state for applications involving [chat models](https://python.langchain.com/docs/concepts/chat_models/). LangGraph includes a pre-built `MessagesState` for convenience, so that we can have:
+This is a versatile representation of state for applications involving [chat models](https://python.langchain.com/docs/concepts/chat_models/). LangGraph includes a prebuilt `MessagesState` for convenience, so that we can have:
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langgraph.graph import MessagesState

@@ -7,7 +7,7 @@ ImageSquare,
 Code,
 } from "@components/react/oai/platform/ui/Icon.react";
 
-When generating model responses, you can extend capabilities using built‑in tools, function calling, tool search, and remote MCP servers. These enable the model to search the web, retrieve from your files, load deferred tool definitions at runtime, call your own functions, or access third‑party services.
+When generating model responses, you can extend capabilities using built‑in tools, function calling, tool search, and remote MCP servers. These enable the model to search the web, retrieve from your files, load deferred tool definitions at runtime, call your own functions, or access third‑party services. Only `gpt-5.4` and later models support `tool_search`.
 
 ```
 Web search
@@ -252,7 +252,7 @@ response.
 
   
 Dynamically load relevant tools into the model’s context to optimize token
-usage and latency.
+usage.
 ```
 
 ## Usage in the API

@@ -127,7 +127,7 @@ curl https://api.stripe.com/v1/checkout/sessions \
   -d "line_items[][price]"="{{PRICE_ID}}" \
   -d "line_items[][quantity]"=1 \
   -d mode=subscription \-d "discounts[][coupon]"="{{COUPON_ID}}" \
-  -d success_url="https://example.com/success" \
+  -d success_url="https://example.com/success"
 ```
 
 ### Delete coupons
@@ -282,13 +282,13 @@ To set an expiration date for a promotion code, on the [Create a coupon](https:/
 
 If the underlying coupon already has an expiration date set, then the promotion code’s expiration date can’t be later than the coupon’s.
 
-For example, you might have plans to support a coupon for a year, but you only want it to be redeemable for one week after a customer receives it. To do this, set the coupon’s expiration date to one year from now, and set each the promotion code’s expiration date to one week after it is created.
+For example, you might have plans to support a coupon for a year, but you only want it to be redeemable for one week after a customer receives it. To do this, set the coupon’s expiration date to one year from now, and set each the promotion code’s expiration date to one week after it’s created.
 
 #### API
 
 Set an expiration date on the promotion code using `expires_at`. If the underlying coupon already has `redeem_by` set, then the promotion code’s expiration date can’t be later than the coupon’s. If `promotion_code[expires_at]` isn’t specified, the coupon’s `redeem_by` automatically populates `expires_at`.
 
-- For example, you might have plans to support a coupon for a year, but you only want it to be redeemable for one week after a customer receives it. You would set `coupon[redeem_by]` to one year from now, and set each `promotion_code[expires_at]` to one week after it is created.
+- For example, you might have plans to support a coupon for a year, but you only want it to be redeemable for one week after a customer receives it. You would set `coupon[redeem_by]` to one year from now, and set each `promotion_code[expires_at]` to one week after it’s created.
 
 ### Limit redemptions
 
@@ -394,8 +394,8 @@ There are some restrictions to using multiple discounts.
 
 - You can set up to 20 entries in the `discounts` parameter.
 - Each entry in `discounts` has to be unique.
-- You can not pass in a coupon and a promotion code created from the same coupon.
-- You can not pass in a coupon and a discount that is generated from the same coupon.
+- You can’t pass in a coupon and a promotion code created from the same coupon.
+- You can’t pass in a coupon and a discount that is generated from the same coupon.
 - Redeemed discounts must already be attached to the customer or subscription that you’re updating.
 
 ### Update a subscription
@@ -406,7 +406,7 @@ When updating `discounts`, you need to pass in any previously set `coupon`, `pro
 
 Pass `discounts = ""` to clear all discounts from the subscription. When a subscription has no discounts, the customer-level discount, if any, applies to invoices.
 
-If you have already set more than one discount on a subscription with the new `discounts` parameter, you can not update the subscription with the deprecated `coupon` or `promotion_code` parameter. Similarly, you can not update a schedule’s phases with the deprecated `coupon` or `promotion_code` parameter if you have set more than one discount on a prior phase.
+If you’ve already set more than one discount on a subscription with the new `discounts` parameter, you can’t update the subscription with the deprecated `coupon` or `promotion_code` parameter. Similarly, you can’t update a schedule’s phases with the deprecated `coupon` or `promotion_code` parameter if you’ve set more than one discount on a prior phase.
 
 Updating `discounts` doesn’t incur prorations or generate an invoice on its own. The new discounts are applied the next time the subscription creates an invoice.
 

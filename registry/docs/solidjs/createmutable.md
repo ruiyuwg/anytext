@@ -9,7 +9,7 @@ Store utilities
 By intercepting property access, it allows automatic tracking of deep nesting via proxy making it useful for integrating external systems or serving as a compatibility layer with frameworks like MobX or Vue.
 
 ```
-import { createMutable } from "solid-js/store"import type { Store, StoreNode } from "solid-js/store"
+import { createMutable } from "solid-js/store";import type { Store, StoreNode } from "solid-js/store";
 function createMutable<T extends StoreNode>(state: T | Store<T>): Store<T>;
 ```
 
@@ -20,7 +20,7 @@ It's important to recognize that a mutable state, which can be passed around and
 For a more robust alternative, it is generally recommended to use `createStore` instead. Additionally, the [`produce`](/reference/store-utilities/produce) utility can provide many of these same benefits without the associated downsides.
 
 ```
-import { createMutable } from "solid-js/store"
+import { createMutable } from "solid-js/store";
 const state = createMutable({  someValue: 0,  list: [],});
 // read valuestate.someValue;
 // set valuestate.someValue = 5;

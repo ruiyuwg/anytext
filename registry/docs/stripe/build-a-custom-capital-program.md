@@ -60,7 +60,7 @@ If the offer is successfully created, you receive a response similar to the foll
   "data": [
     {
       "id": "financingoffer_abc123",
-      "object": "capital.financing_offer",
+      "object": "capital.financing_offer"
       ...,
     },
     {...}
@@ -84,6 +84,16 @@ Stripe sends the `capital.financing_offer.created` *webhook* (A webhook is a rea
 > Make sure the contents of your offer email comply with banking regulations by reviewing the [marketing guidance](https://docs.stripe.com/capital/marketing.md) page. Submit all changes to user-facing materials for review and approval using the [Change Request Form](https://form.asana.com/?k=8K51UWmWhttehNFD5qBLdg\&d=974470123217835).
 
 In the email, link users to a dedicated Capital section in your platform dashboard. Users access the Capital financing application with [Account Links](https://docs.stripe.com/api/account_links.md). Account Links expire shortly after they’re generated, so provide a way for users to regenerate the application link. Include a link to the financing application in your platform dashboard by generating an Account Link of type `capital_financing_offer`.
+
+### Handle Account Link Expiration
+
+Don’t send an Account Link URL directly in an offer email because the Account Link can expire before the recipient even opens the email. Instead, include a stable URL hosted on your platform (for example, `https://yourplatform.com/capital/accept_offer`). Configure the link to:
+
+1. Authenticate the user.
+2. Generate a new Account Link using the API.
+3. Redirect the user to the newly generated Account Link URL.
+
+This way, the user always receives a fresh, valid Account Link regardless of when they open the email.
 
 #### curl
 

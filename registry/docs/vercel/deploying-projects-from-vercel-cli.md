@@ -25,7 +25,7 @@ When deploying, stdout is always the Deployment URL.
 vercel > deployment-url.txt
 ```
 
-*Writes the Deployment URL output from the deploy
+*Writes the Deployment URL output from the \`deploy\`
 command to a text file.*
 
 ### Relevant commands
@@ -63,7 +63,7 @@ It's also useful for debugging build outputs.
 vercel build
 ```
 
-*Using the vercel command to deploy and write stdout
+*Using the \`vercel\` command to deploy and write stdout
 to a text file.*
 
 This produces `.vercel/output` in the [Build Output API](/docs/build-output-api/v3) format. You can review the output, then [deploy](/docs/cli/deploy) with:
@@ -72,8 +72,8 @@ This produces `.vercel/output` in the [Build Output API](/docs/build-output-api/
 vercel deploy --prebuilt
 ```
 
-*Deploy the build outputs in .vercel/output produced
-by vercel build.*
+*Deploy the build outputs in \`.vercel/output\` produced
+by \`vercel build\`.*
 
 > **⚠️ Warning:** Review the [When not to use
 > \--prebuilt](/docs/cli/deploy#when-not-to-use---prebuilt) section to understand
@@ -88,5 +88,5 @@ See more details at [Build Output API](/docs/build-output-api/v3).
 
 title: "vercel dev"
 description: "Learn how to replicate the Vercel deployment environment locally and test your Vercel Project before deploying using the vercel dev CLI command."
-last\_updated: "2026-03-08T05:03:12.120Z"
+last\_updated: "2026-03-23T09:40:06.673Z"
 source: "https://vercel.com/docs/cli/dev"

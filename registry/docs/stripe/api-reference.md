@@ -10,7 +10,7 @@ The Stripe API differs for every account as we release new [versions](https://do
 
 ## Just getting started?
 
-Check out our [development quickstart](https://docs.stripe.com/development/quickstart.md) guide.
+Check out our [development quickstart](https://docs.stripe.com/get-started/development-environment.md) guide.
 
 ## Not a developer?
 

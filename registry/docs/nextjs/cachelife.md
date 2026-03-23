@@ -9,21 +9,21 @@ The `cacheLife` function is used to set the cache lifetime of a function or comp
 To use `cacheLife`, first enable the [`cacheComponents` flag](/docs/app/api-reference/config/next-config-js/cacheComponents) in your `next.config.js` file:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
-};
+}
 
-export default nextConfig;
+export default nextConfig
 ```
 
 ```js filename="next.config.js" switcher
 const nextConfig = {
   cacheComponents: true,
-};
+}
 
-export default nextConfig;
+export default nextConfig
 ```
 
 `cacheLife` requires the `use cache` directive, which must be placed at the file level or at the top of an async function or component.
@@ -53,14 +53,14 @@ Choose a profile based on how frequently your content changes:
 Import `cacheLife` and pass a profile name:
 
 ```tsx filename="app/blog/page.tsx" highlight={1,5}
-"use cache";
-import { cacheLife } from "next/cache";
+'use cache'
+import { cacheLife } from 'next/cache'
 
 export default async function BlogPage() {
-  cacheLife("days"); // Blog content updated daily
+  cacheLife('days') // Blog content updated daily
 
-  const posts = await getBlogPosts();
-  return <div>{/* render posts */}</div>;
+  const posts = await getBlogPosts()
+  return <div>{/* render posts */}</div>
 }
 ```
 
@@ -85,7 +85,7 @@ During this time, the client-side router displays cached content immediately wit
 - If omitted, defaults to the `default` profile's `stale` value (5 minutes, see [`staleTimes`](/docs/app/api-reference/config/next-config-js/staleTimes))
 
 ```tsx
-cacheLife({ stale: 300 }); // 5 minutes
+cacheLife({ stale: 300 }) // 5 minutes
 ```
 
 #### `revalidate`
@@ -100,7 +100,7 @@ How often the server regenerates cached content in the background.
 - If omitted, defaults to the `default` profile's `revalidate` value (15 minutes)
 
 ```tsx
-cacheLife({ revalidate: 900 }); // 15 minutes
+cacheLife({ revalidate: 900 }) // 15 minutes
 ```
 
 #### `expire`
@@ -112,7 +112,7 @@ Maximum time before the server must regenerate cached content.
 - If omitted, defaults to the `default` profile's `expire` value (never expires)
 
 ```tsx
-cacheLife({ expire: 3600 }); // 1 hour
+cacheLife({ expire: 3600 }) // 1 hour
 ```
 
 ### Preset cache profiles
@@ -134,7 +134,7 @@ If you don't specify a profile, Next.js uses the `default` profile. We recommend
 Define reusable cache profiles in your `next.config.ts` file:
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
@@ -145,9 +145,9 @@ const nextConfig: NextConfig = {
       expire: 60 * 60 * 24 * 14, // 14 days
     },
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig
 ```
 
 ```js filename="next.config.js" switcher
@@ -160,9 +160,9 @@ const nextConfig = {
       expire: 60 * 60 * 24 * 14, // 14 days
     },
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
 ```
 
 The example above caches for 14 days, checks for updates daily, and expires the cache after 14 days. You can then reference this profile throughout your application by its name:
@@ -170,12 +170,12 @@ The example above caches for 14 days, checks for updates daily, and expires the 
 > **Good to know**: Any omitted properties in a custom profile inherit from the `default` profile. This also applies to inline profile objects passed directly to `cacheLife()`.
 
 ```tsx filename="app/page.tsx" highlight={5}
-"use cache";
-import { cacheLife } from "next/cache";
+'use cache'
+import { cacheLife } from 'next/cache'
 
 export default async function Page() {
-  cacheLife("biweekly");
-  return <div>Page</div>;
+  cacheLife('biweekly')
+  return <div>Page</div>
 }
 ```
 
@@ -198,9 +198,9 @@ const nextConfig = {
       expire: 86400, // 1 day
     },
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig
 ```
 
 ### Inline cache profiles
@@ -208,17 +208,17 @@ export default nextConfig;
 For one-off cases, pass a profile object directly to `cacheLife`:
 
 ```tsx filename="app/page.tsx"
-"use cache";
-import { cacheLife } from "next/cache";
+'use cache'
+import { cacheLife } from 'next/cache'
 
 export default async function Page() {
   cacheLife({
     stale: 3600,
     revalidate: 900,
     expire: 86400,
-  });
+  })
 
-  return <div>Page</div>;
+  return <div>Page</div>
 }
 ```
 
@@ -226,9 +226,9 @@ Inline profiles apply only to the specific function or component. For reusable c
 
 Using `cacheLife({})` with an empty object applies the `default` profile values.
 
-### Client router cache behavior
+### Client cache behavior
 
-The `stale` property controls the client-side router cache, not the `Cache-Control` header:
+The `stale` property controls the [Client Cache](/docs/app/glossary#client-cache), not the `Cache-Control` header:
 
 - The server sends the stale time via the `x-nextjs-stale-time` response header
 - The client router uses this value to determine when to revalidate
@@ -240,6 +240,12 @@ When you call revalidation functions from a Server Action ([`revalidateTag`](/do
 
 > **Good to know**: The `stale` property in `cacheLife` differs from [`staleTimes`](/docs/app/api-reference/config/next-config-js/staleTimes). While `staleTimes` is a global setting affecting all routes, `cacheLife` allows per-function or per-route configuration. Updating `staleTimes.static` also updates the `stale` value of the `default` cache profile.
 
+### Prerendering behavior
+
+Caches with very short lifetimes — zero `revalidate` or `expire` under 5 minutes — are automatically excluded from prerenders and become "dynamic holes" instead. This includes the `seconds` profile.
+
+This behavior allows you to mix static and dynamic content within the same page. Static parts are prerendered, while short-lived caches create boundaries where data is fetched at request time rather than build time. Use a `<Suspense>` boundary around dynamic caches to provide a fallback while content loads.
+
 ## Examples
 
 ### Using preset profiles
@@ -247,26 +253,26 @@ When you call revalidation functions from a Server Action ([`revalidateTag`](/do
 The simplest way to configure caching is using preset profiles. Choose one that matches your content's update pattern:
 
 ```tsx filename="app/blog/[slug]/page.tsx"
-import { cacheLife } from "next/cache";
+import { cacheLife } from 'next/cache'
 
 export default async function BlogPost() {
-  "use cache";
-  cacheLife("days"); // Blog posts updated daily
+  'use cache'
+  cacheLife('days') // Blog posts updated daily
 
-  const post = await fetchBlogPost();
-  return <article>{post.content}</article>;
+  const post = await fetchBlogPost()
+  return <article>{post.content}</article>
 }
 ```
 
 ```tsx filename="app/products/[id]/page.tsx"
-import { cacheLife } from "next/cache";
+import { cacheLife } from 'next/cache'
 
 export default async function ProductPage() {
-  "use cache";
-  cacheLife("hours"); // Product data updated multiple times per day
+  'use cache'
+  cacheLife('hours') // Product data updated multiple times per day
 
-  const product = await fetchProduct();
-  return <div>{product.name}</div>;
+  const product = await fetchProduct()
+  return <div>{product.name}</div>
 }
 ```
 
@@ -275,7 +281,7 @@ export default async function ProductPage() {
 Define custom profiles when preset options don't match your requirements:
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
@@ -291,19 +297,19 @@ const nextConfig: NextConfig = {
       expire: 43200, // 12 hours
     },
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig
 ```
 
 Then use these profiles throughout your application:
 
 ```tsx filename="app/editorial/page.tsx"
-import { cacheLife } from "next/cache";
+import { cacheLife } from 'next/cache'
 
 export default async function EditorialPage() {
-  "use cache";
-  cacheLife("editorial");
+  'use cache'
+  cacheLife('editorial')
   // ...
 }
 ```
@@ -313,30 +319,30 @@ export default async function EditorialPage() {
 Use inline profiles when a specific function needs one-off caching behavior:
 
 ```tsx filename="app/api/limited-offer/route.ts"
-import { cacheLife } from "next/cache";
-import { getDb } from "@lib/db";
+import { cacheLife } from 'next/cache'
+import { getDb } from '@lib/db'
 
 async function getLimitedOffer() {
-  "use cache";
+  'use cache'
 
   cacheLife({
     stale: 60, // 1 minute
     revalidate: 300, // 5 minutes
     expire: 3600, // 1 hour
-  });
+  })
 
   const offer = await getDb().offer.findFirst({
-    where: { type: "limited" },
-    orderBy: { created_at: "desc" },
-  });
+    where: { type: 'limited' },
+    orderBy: { created_at: 'desc' },
+  })
 
-  return offer;
+  return offer
 }
 
 export async function GET() {
-  const offer = await getLimitedOffer();
+  const offer = await getLimitedOffer()
 
-  return Response.json(offer);
+  return Response.json(offer)
 }
 ```
 
@@ -345,24 +351,24 @@ export async function GET() {
 Apply caching to utility functions for granular control:
 
 ```tsx filename="lib/api.ts"
-import { cacheLife } from "next/cache";
+import { cacheLife } from 'next/cache'
 
 export async function getSettings() {
-  "use cache";
-  cacheLife("max"); // Settings rarely change
+  'use cache'
+  cacheLife('max') // Settings rarely change
 
-  return await fetchSettings();
+  return await fetchSettings()
 }
 ```
 
 ```tsx filename="lib/stats.ts"
-import { cacheLife } from "next/cache";
+import { cacheLife } from 'next/cache'
 
 export async function getRealtimeStats() {
-  "use cache";
-  cacheLife("seconds"); // Stats update constantly
+  'use cache'
+  cacheLife('seconds') // Stats update constantly
 
-  return await fetchStats();
+  return await fetchStats()
 }
 ```
 
@@ -375,19 +381,19 @@ When you nest `use cache` directives (a cached function or component using anoth
 The outer cache uses its own lifetime, regardless of inner cache lifetimes. When the outer cache hits, it returns the complete output including all nested data. An explicit `cacheLife` always takes precedence, whether it's longer or shorter than inner lifetimes.
 
 ```tsx filename="app/dashboard/page.tsx"
-import { cacheLife } from "next/cache";
-import { Widget } from "./widget";
+import { cacheLife } from 'next/cache'
+import { Widget } from './widget'
 
 export default async function Dashboard() {
-  "use cache";
-  cacheLife("hours"); // Outer scope sets its own lifetime
+  'use cache'
+  cacheLife('hours') // Outer scope sets its own lifetime
 
   return (
     <div>
       <h1>Dashboard</h1>
       <Widget /> {/* Inner scope has 'minutes' lifetime */}
     </div>
-  );
+  )
 }
 ```
 
@@ -396,10 +402,10 @@ export default async function Dashboard() {
 If you don't call `cacheLife` in the outer cache, it uses the `default` profile (15 min revalidate). Inner caches with shorter lifetimes can reduce the outer cache's `default` lifetime. Inner caches with longer lifetimes cannot extend it beyond the default.
 
 ```tsx filename="app/dashboard/page.tsx"
-import { Widget } from "./widget";
+import { Widget } from './widget'
 
 export default async function Dashboard() {
-  "use cache";
+  'use cache'
   // No cacheLife call - uses default (15 min)
   // If Widget has 5 min → Dashboard becomes 5 min
   // If Widget has 1 hour → Dashboard stays 15 min
@@ -409,39 +415,129 @@ export default async function Dashboard() {
       <h1>Dashboard</h1>
       <Widget />
     </div>
-  );
+  )
 }
 ```
 
 **It is recommended to specify an explicit `cacheLife`.** With explicit lifetime values, you can inspect a cached function or component and immediately know its behavior without tracing through nested caches. Without explicit lifetime values, the behavior becomes dependent on inner cache lifetimes, making it harder to reason about.
+
+#### Nested short-lived caches
+
+As described in [Prerendering behavior](#prerendering-behavior), short-lived caches (zero `revalidate` or `expire` under 5 minutes) become dynamic holes excluded from prerenders.
+
+When a short-lived cache is nested inside another `use cache` without an explicit `cacheLife`, the outer cache's lifetime would silently become short too via propagation. To prevent this accidental misconfiguration, Next.js throws an error during prerendering.
+
+Note that the nested cache may not be obvious — it could be in an imported module or even a third-party dependency:
+
+```tsx filename="components/short-lived-widget.tsx" highlight={5}
+import { cacheLife } from 'next/cache'
+
+export async function ShortLivedWidget() {
+  'use cache'
+  cacheLife('seconds')
+  const data = await fetchRealtimeData()
+  return <div>{data}</div>
+}
+```
+
+Using this component from another `use cache` without an explicit `cacheLife` will error during prerendering:
+
+```tsx filename="app/page.tsx"
+import { ShortLivedWidget } from '@/components/short-lived-widget'
+
+export default async function Page() {
+  'use cache'
+  // Error: no explicit cacheLife on outer cache
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <p>Last updated: {new Date().toISOString()}</p>
+      <ShortLivedWidget />
+    </div>
+  )
+}
+```
+
+To fix the error, add an explicit `cacheLife()` to the outer `use cache`:
+
+**If you want the outer cache to remain static (prerendered)**, set a longer cache lifetime:
+
+```tsx filename="app/page.tsx" highlight={6}
+import { cacheLife } from 'next/cache'
+import { ShortLivedWidget } from '@/components/short-lived-widget'
+
+export default async function Page() {
+  'use cache'
+  cacheLife('default') // Explicit cacheLife prevents the error
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <p>Last updated: {new Date().toISOString()}</p>
+      <ShortLivedWidget />
+    </div>
+  )
+}
+```
+
+**If you want the outer cache to also be short-lived**, explicitly set a short cache lifetime to confirm this is intentional. Wrap the component in a `<Suspense>` boundary to provide a fallback while content loads:
+
+```tsx filename="app/page.tsx" highlight={7,17-19}
+import { Suspense } from 'react'
+import { cacheLife } from 'next/cache'
+import { ShortLivedWidget } from '@/components/short-lived-widget'
+
+async function Content() {
+  'use cache: remote'
+  cacheLife('seconds') // Explicit cacheLife confirms this is intentionally short-lived
+  return (
+    <>
+      <p>Last updated: {new Date().toISOString()}</p>
+      <ShortLivedWidget />
+    </>
+  )
+}
+
+export default function Page() {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <Suspense fallback={<p>Loading...</p>}>
+        <Content />
+      </Suspense>
+    </div>
+  )
+}
+```
+
+> **Note:** This example uses `"use cache: remote"` because runtime caching in serverless deployments doesn't persist across requests with the default in-memory cache. For self-hosted environments, `"use cache"` may be sufficient. See [Runtime caching considerations](/docs/app/api-reference/directives/use-cache#runtime-caching-considerations) for more details.
 
 ### Conditional cache lifetimes
 
 You can call `cacheLife` conditionally in different code paths to set different cache durations based on your application logic:
 
 ```tsx filename="lib/posts.ts" highlight={14,19}
-import { cacheLife, cacheTag } from "next/cache";
+import { cacheLife, cacheTag } from 'next/cache'
 
 async function getPostContent(slug: string) {
-  "use cache";
+  'use cache'
 
-  const post = await fetchPost(slug);
+  const post = await fetchPost(slug)
 
   // Tag the cache entry for targeted revalidation
-  cacheTag(`post-${slug}`);
+  cacheTag(`post-${slug}`)
 
   if (!post) {
     // Content may not be published yet or could be in draft
     // Cache briefly to reduce database load
-    cacheLife("minutes");
-    return null;
+    cacheLife('minutes')
+    return null
   }
 
   // Published content can be cached longer
-  cacheLife("days");
+  cacheLife('days')
 
   // Return only the necessary data to keep cache size minimal
-  return post.data;
+  return post.data
 }
 ```
 
@@ -452,17 +548,17 @@ This pattern is useful when different outcomes need different cache durations, f
 If you want to calculate cache lifetime at runtime, for example by reading it from the fetched data, use an [inline cache profile](#inline-cache-profiles) object:
 
 ```tsx filename="lib/posts.ts" highlight={15,16,17,18}
-import { cacheLife, cacheTag } from "next/cache";
+import { cacheLife, cacheTag } from 'next/cache'
 
 async function getPostContent(slug: string) {
-  "use cache";
+  'use cache'
 
-  const post = await fetchPost(slug);
-  cacheTag(`post-${slug}`);
+  const post = await fetchPost(slug)
+  cacheTag(`post-${slug}`)
 
   if (!post) {
-    cacheLife("minutes");
-    return null;
+    cacheLife('minutes')
+    return null
   }
 
   // Use cache timing from CMS data directly as an object
@@ -470,9 +566,9 @@ async function getPostContent(slug: string) {
     // Ensure post.revalidateSeconds is a number in seconds
     // stale and expire inherit from 'default' profile
     revalidate: post.revalidateSeconds ?? 3600,
-  });
+  })
 
-  return post.data;
+  return post.data
 }
 ```
 

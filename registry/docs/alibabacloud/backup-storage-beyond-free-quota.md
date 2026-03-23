@@ -1,0 +1,718 @@
+PolarDB offers backup and recovery features free of charge. However, backup files consume storage space. PolarDB provides a free quota for backup storage. If your usage exceeds the free quota, you are charged on a pay-as-you-go basis. This topic describes the billing rules for backup storage. PolarDB also provides storage plans to help you reduce costs.
+
+The following figure shows the backup policies for backup storage. The backup policies vary based on the product edition. For more information about the billing rules, see the relevant sections in this topic.
+
+![image](https://help-static-aliyun-doc.aliyuncs.com/assets/img/en-US/4431592671/CAEQORiBgIDE6faUqhkiIDgzZjViZDk2NTZkMTRlMTliMzk5MzI3ZDU3YjhmMWZi4607593_20240912100608.071.svg)
+
+**Note**
+
+Unlike PL0, PL1, PL2, PL3, and AutoPL enterprise SSDs (ESSDs), the PSL4/PSL5 storage class supports level-2 backups. The data for level-2 backups comes from level-1 backups. Level-2 backups can be stored for a long time at a low cost. However, data recovery from level-2 backups is slow.
+
+## **Free quota**
+
+PolarDB provides a free quota for backup storage. The billing rules for backup storage that exceeds the free quota vary based on the Edition and storage class.
+
+## Enterprise Edition
+
+If your backup storage usage exceeds the free quota, you are charged for single-region backups based on the storage capacity and retention period of the backup files (data and logs). For cross-region backups, you are also charged for the generated network traffic.
+
+**Backup type**
+
+**Free quota**
+
+**Level-1 Backup**
+
+The formula used to calculate the free quota varies based on the **Storage Billing Method**. Formula:
+
+-   Subscription (billed by storage space): Storage capacity × 50%.
+    
+-   Pay-as-you-go (billed by storage usage): Storage usage × 50%.
+    
+
+**Level-2 Backup**
+
+None
+
+**Log Backup**
+
+100 GB
+
+**Note**
+
+To view the database storage usage, log on to the [PolarDB console](https://polardb.console.alibabacloud.com/). On the **Basic Information** page of the cluster, find the **Database Storage Usage** value in the **Distributed Storage** section.
+
+## Standard Edition
+
+Standard Edition clusters support multiple storage classes. The supported backup types vary based on the storage class.
+
+If your backup storage usage exceeds the free quota, you are charged for single-region backups based on the storage capacity and retention period of the backup files (data and logs). For cross-region backups, you are also charged for the generated network traffic.
+
+**Storage class**
+
+**Backup type**
+
+**Free quota**
+
+PL0, PL1, PL2, PL3, and AutoPL ESSDs
+
+**Level-1 Backup**
+
+Storage capacity × 50%
+
+**Log Backup**
+
+100 GB
+
+PSL4/PSL5
+
+**Level-1 Backup**
+
+The formula used to calculate the free quota varies based on the **Storage Billing Method**. Formula:
+
+-   Subscription (billed by storage space): Storage capacity × 50%.
+    
+-   Pay-as-you-go (billed by storage usage): Storage usage × 50%.
+    
+
+**Level-2 Backup**
+
+None
+
+**Log Backup**
+
+100 GB
+
+**Note**
+
+To view the database storage usage, log on to the [PolarDB console](https://polardb.console.alibabacloud.com/). On the **Basic Information** page of the cluster, find the **Database Storage Usage** value in the **Distributed Storage** section.
+
+## Pricing
+
+## Enterprise Edition
+
+### **Level-1 Backup**
+
+**Storage class**
+
+**The Chinese mainland**
+
+**Hong Kong (China) and other regions outside China**
+
+**Hourly fee formula**
+
+**PSL5**
+
+Dual-zone deployment (hot standby storage cluster enabled)
+
+USD 0.000464 per GB-hour
+
+USD 0.000650 per GB-hour
+
+Hourly fee = (Total size of level-1 backups - Free quota) × Unit price per hour
+
+Dual-zone deployment (hot standby storage cluster and hot standby compute cluster enabled)
+
+Three-zone deployment (hot standby storage cluster and logger node enabled)
+
+Single-zone deployment (hot standby storage cluster disabled)
+
+**PSL4**
+
+Dual-zone deployment (hot standby storage cluster enabled)
+
+USD 0.0003 per GB-hour
+
+USD 0.000433 per GB-hour
+
+Dual-zone deployment (hot standby storage cluster and hot standby compute cluster enabled)
+
+Three-zone deployment (hot standby storage cluster and logger node enabled)
+
+Single-zone deployment (hot standby storage cluster disabled)
+
+Example: Consider the PSL5 storage class in the Chinese mainland. If the total size of level-1 backups (snapshots) is 700 GB and the database storage usage is 1,000 GB, the hourly fee is \[700 GB - (1000 GB × 50%)\] × USD 0.000464 per GB-hour = USD 0.0928 per hour.
+
+### **Level-2 Backup** **and** **Log Backup**
+
+Level-2 backup and log backup are available in two types: **Single-region Backup** and **Cross-region Backup**.For single-region backups, PolarDB charges fees based on the storage capacity and retention period of the backup files (data and logs). For cross-region backups, PolarDB charges fees based on the storage capacity and retention period of the backup files (data and logs), and the network traffic generated by the cross-region backup.
+
+-   **Single-region Backup**
+    
+    **Backup type**
+    
+    **The Chinese mainland**
+    
+    **Hong Kong (China) and other regions outside China**
+    
+    **Hourly fee formula**
+    
+    **Level-2 Backup**
+    
+    USD 0.0000325 per GB-hour
+    
+    USD 0.0000455 per GB-hour
+    
+    Hourly fee = Total size of level-2 backups × Unit price per hour
+    
+    **Log Backup**
+    
+    Hourly fee = (Total size of log backups - 100 GB) × Unit price per hour
+    
+    Example 1: If the total size of level-2 backups in the Chinese mainland is 1,000 GB, the hourly fee is 1,000 GB × USD 0.0000325 per GB-hour = USD 0.0325 per hour.
+    
+    Example 2: In the Chinese mainland, if the total size of log backups is 1,000 GB, the hourly fee is (1,000 GB - 100 GB) × USD 0.0000325 per GB-hour = USD 0.02925 per hour.
+    
+-   **Cross-region Backup**
+    
+    **Backup type**
+    
+    **Billable item**
+    
+    **The Chinese mainland**
+    
+    **Hong Kong (China) and other regions outside China**
+    
+    **Hourly fee formula**
+    
+    **Level-2 Backup**
+    
+    Backup storage
+    
+    USD 0.0000325 per GB-hour
+    
+    USD 0.0000455 per GB-hour
+    
+    Hourly fee = Total size of level-2 backups × Unit price per hour + Cross-region network traffic fee
+    
+    Network traffic
+    
+    For more information about network traffic fees, see [Network fees](/help/en/dbs/product-overview/network-traffic-fees#task-2039249).
+    
+    **Log Backup**
+    
+    Backup storage
+    
+    USD 0.0000325 per GB-hour
+    
+    USD 0.0000455 per GB-hour
+    
+    Hourly fee = (Total size of log backups - 100 GB) × Unit price per hour + Cross-region network traffic fee
+    
+    Network traffic
+    
+    For more information about network traffic fees, see [Network fees](/help/en/dbs/product-overview/network-traffic-fees#task-2039249).
+    
+    Example 1: A cross-region backup is performed between regions in the Chinese mainland. The total size of the level-2 backup is 1000 GB, and the network traffic used by the cross-region backup dump is 500 MB. The hourly fee is 1000 GB × USD 0.0000325 per GB-hour + 500 MB / 1024 × USD 0.075 per GB = USD 0.0691 per hour.
+    
+    Example 2: A cross-region log backup is performed between regions in the Chinese mainland. The total size of log backups is 1,000 GB, and the network traffic used for the cross-region backup is 500 MB. The hourly fee is (1,000 GB - 100 GB) × USD 0.0000325 per GB-hour + 500 MB / 1,024 × USD 0.075 per GB = USD 0.0659 per hour.
+    
+    **Note**
+    
+    -   Cross-region backups are billed on a daily basis. In this topic, the daily prices are converted into hourly rates.
+        
+    -   Fees for cross-region backups are recorded in Data Disaster Recovery bills.
+        
+    
+
+## Standard Edition
+
+Standard Edition clusters support multiple storage classes. The supported backup types vary based on the storage class.
+
+## PL0, PL1, PL2, PL3, and AutoPL ESSDs
+
+**Backup type**
+
+**The Chinese mainland**
+
+**Hong Kong (China) and other regions outside China**
+
+**Hourly fee formula**
+
+**Level-1 Backup**
+
+USD 0.00003231 per GB-hour
+
+USD 0.00004523 per GB-hour
+
+Data backup storage fee per hour = (Total size of **Level-1 Backup** - free quota) × unit price per hour
+
+**Log Backup**
+
+USD 0.0000325029 per GB-hour
+
+USD 0.0000455041 per GB-hour
+
+Log backup storage hourly fee = (Total size of **Log Backups** - 100 GB) × Unit price per hour
+
+Example 1: In the Chinese mainland, the total size of **Level-1 Backups** is 700 GB, and the database storage usage is 1,000 GB. The hourly fee is \[700 GB - (1,000 GB × 50%)\] × USD 0.00003231 per GB-hour = USD 0.006462 per hour.
+
+Example 2: In the Chinese mainland, if the total size of log backups is 1,000 GB, the hourly fee is (1,000 GB - 100 GB) × USD 0.00004523 per GB-hour = USD 0.040707 per hour.
+
+## PSL4/PSL5
+
+### **Level-1 Backup**
+
+**Storage class**
+
+**The Chinese mainland**
+
+**Hong Kong (China) and other regions outside China**
+
+**Hourly fee formula**
+
+**PSL5**
+
+Dual-zone deployment (hot standby storage cluster enabled)
+
+USD 0.000464 per GB-hour
+
+USD 0.000650 per GB-hour
+
+Hourly fee = (Total size of level-1 backups - Free quota) × Unit price per hour
+
+Dual-zone deployment (hot standby storage cluster and hot standby compute cluster enabled)
+
+Three-zone deployment (hot standby storage cluster and logger node enabled)
+
+Single-zone deployment (hot standby storage cluster disabled)
+
+**PSL4**
+
+Dual-zone deployment (hot standby storage cluster enabled)
+
+USD 0.0003 per GB-hour
+
+USD 0.000433 per GB-hour
+
+Dual-zone deployment (hot standby storage cluster and hot standby compute cluster enabled)
+
+Three-zone deployment (hot standby storage cluster and logger node enabled)
+
+Single-zone deployment (hot standby storage cluster disabled)
+
+Example: Consider the PSL5 storage class in the Chinese mainland. If the total size of level-1 backups (snapshots) is 700 GB and the database storage usage is 1,000 GB, the hourly fee is \[700 GB - (1000 GB × 50%)\] × USD 0.000464 per GB-hour = USD 0.0928 per hour.
+
+### **Level-2 Backup** **and** **Log Backup**
+
+Level-2 backup and log backup are available in two types: **Single-region Backup** and **Cross-region Backup**.For single-region backups, PolarDB charges fees based on the storage capacity and retention period of the backup files (data and logs). For cross-region backups, PolarDB charges fees based on the storage capacity and retention period of the backup files (data and logs), and the network traffic generated by the cross-region backup.
+
+-   **Single-region Backup**
+    
+    **Backup type**
+    
+    **The Chinese mainland**
+    
+    **Hong Kong (China) and other regions outside China**
+    
+    **Hourly fee formula**
+    
+    **Level-2 Backup**
+    
+    USD 0.0000325 per GB-hour
+    
+    USD 0.0000455 per GB-hour
+    
+    Hourly fee = Total size of level-2 backups × Unit price per hour
+    
+    **Log Backup**
+    
+    Hourly fee = (Total size of log backups - 100 GB) × Unit price per hour
+    
+    Example 1: If the total size of level-2 backups in the Chinese mainland is 1,000 GB, the hourly fee is 1,000 GB × USD 0.0000325 per GB-hour = USD 0.0325 per hour.
+    
+    Example 2: In the Chinese mainland, if the total size of log backups is 1,000 GB, the hourly fee is (1,000 GB - 100 GB) × USD 0.0000325 per GB-hour = USD 0.02925 per hour.
+    
+-   **Cross-region Backup**
+    
+    **Backup type**
+    
+    **Billable item**
+    
+    **The Chinese mainland**
+    
+    **Hong Kong (China) and other regions outside China**
+    
+    **Hourly fee formula**
+    
+    **Level-2 Backup**
+    
+    Backup storage
+    
+    USD 0.0000325 per GB-hour
+    
+    USD 0.0000455 per GB-hour
+    
+    Hourly fee = Total size of level-2 backups × Unit price per hour + Cross-region network traffic fee
+    
+    Network traffic
+    
+    For more information about network traffic fees, see [Network fees](/help/en/dbs/product-overview/network-traffic-fees#task-2039249).
+    
+    **Log Backup**
+    
+    Backup storage
+    
+    USD 0.0000325 per GB-hour
+    
+    USD 0.0000455 per GB-hour
+    
+    Hourly fee = (Total size of log backups - 100 GB) × Unit price per hour + Cross-region network traffic fee
+    
+    Network traffic
+    
+    For more information about network traffic fees, see [Network fees](/help/en/dbs/product-overview/network-traffic-fees#task-2039249).
+    
+    Example 1: A cross-region backup is performed between regions in the Chinese mainland. The total size of the level-2 backup is 1000 GB, and the network traffic used by the cross-region backup dump is 500 MB. The hourly fee is 1000 GB × USD 0.0000325 per GB-hour + 500 MB / 1024 × USD 0.075 per GB = USD 0.0691 per hour.
+    
+    Example 2: A cross-region log backup is performed between regions in the Chinese mainland. The total size of log backups is 1,000 GB, and the network traffic used for the cross-region backup is 500 MB. The hourly fee is (1,000 GB - 100 GB) × USD 0.0000325 per GB-hour + 500 MB / 1,024 × USD 0.075 per GB = USD 0.0659 per hour.
+    
+    **Note**
+    
+    -   Cross-region backups are billed on a daily basis. In this topic, the daily prices are converted into hourly rates.
+        
+    -   Fees for cross-region backups are recorded in Data Disaster Recovery bills.
+        
+    
+
+## **Backup storage usage**
+
+### **View the size of level-1 and data backups**
+
+## PSL4/PSL5
+
+1.  Log on to the [**PolarDB console**](https://polardb.console.alibabacloud.com/).
+    
+2.  Choose your cluster.
+    
+3.  Navigate to **Settings and Management** > **Backup and Restoration**.
+    
+
+![image](https://help-static-aliyun-doc.aliyuncs.com/assets/img/en-US/3549989371/p902669.png)
+
+**Note**
+
+-   The **Physical Size of Level-1 Backups** value of the PolarDB cluster is the sum of the dedicated physical storage space occupied by all level-1 backup sets, as shown in part ①. The actual storage space occupied by level-1 backup files is based on this value.
+    
+-   The **Logical Size of Backups** value of the PolarDB cluster indicates the logical size of a backup set, as shown in part ②. This size is not billed.
+    
+-   The data of the PolarDB cluster and multiple level-1 backup files (snapshots) can be stored in the same physical data block that is billed only once.
+    
+
+For more information about data backup, see [FAQ](/help/en/polardb/polardb-for-mysql/user-guide/backup-and-restoration-faq).
+
+## PL0, PL1, PL2, PL3, and AutoPL ESSDs
+
+1.  Log on to the [**PolarDB console**](https://polardb.console.alibabacloud.com/)
+    
+2.  Choose your cluster.
+    
+3.  Navigate to **Settings and Management** > **Backup and Restoration**.
+    
+
+![image](https://help-static-aliyun-doc.aliyuncs.com/assets/img/en-US/3549989371/p902669.png)
+
+**Note**
+
+-   The **Physical Size of Level-1 Backups** value of the PolarDB cluster is the sum of the dedicated physical storage occupied by all level-1 backup sets, as shown in part ①. The actual storage space occupied by level-1 backup files is based on this value.
+    
+-   The **Logical Size of Backups** value of the PolarDB cluster indicates the logical size of a backup set, as shown in part ②. This size is not billed.
+    
+-   The data of the PolarDB cluster and multiple level-1 backup sets (snapshots) can be stored in the same physical data block that is billed only once.
+    
+
+For more information about data backup, see [FAQ](/help/en/polardb/polardb-for-mysql/user-guide/backup-and-restoration-faq#concept-2494547).
+
+### **View the size of level-2 backups**
+
+1.  Log on to the [**PolarDB console**](https://polardb.console.alibabacloud.com/).
+    
+2.  Choose your cluster.
+    
+3.  Navigate to **Settings and Management** > **Backup and Restoration**. The total size of level-2 backup files is the sum of the size of each level-2 backup file.
+    
+
+![2](https://help-static-aliyun-doc.aliyuncs.com/assets/img/en-US/1098313261/p259814.png)
+
+### **View the size of log backups**
+
+The following figure shows that the total size of log backup files is the sum of the size of each log backup file.
+
+![日志大小](https://help-static-aliyun-doc.aliyuncs.com/assets/img/en-US/2554614661/p436405.png)
+
+## **Storage plans**
+
+You can use storage plans to offset the storage usage of level-1 backups or data backups, level-2 backups, and log backups.
+
+**Note**
+
+Storage plans can also offset the storage usage of [cluster storage](/help/en/polardb/polardb-for-mysql/storage-package-3#3d8384ba50bw8) and [cold data archiving](/help/en/polardb/polardb-for-mysql/storage-package-3#df4720aab1v9s).
+
+### Pricing
+
+The prices of storage plans vary based on the **subscription duration** and **specifications**. The larger the storage capacity and the longer the subscription duration, the more cost-effective the storage plan. For details about pricing, see the [price comparison table](/help/en/polardb/polardb-for-mysql/storage-package-3#d125b426bayne).
+
+### Offset rules
+
+A storage plan provides a fixed hourly quota to offset the storage usage of level-1 backups, data backups, level-2 backups, and log backups. For example, if you purchase a 100 GB storage plan, you receive a fixed quota of 100 GB per hour to offset the corresponding storage usage.
+
+#### Enterprise Edition
+
+**Backup type**
+
+**Offset factor**
+
+**Storage usage offset by using a 1-GB storage plan**
+
+**Region in the Chinese mainland**
+
+**China (Hong Kong) and regions outside China**
+
+**Region in the Chinese mainland**
+
+**China (Hong Kong) and regions outside China**
+
+**Level-1 backups**
+
+**PSL5**
+
+0.617
+
+1/0.617=1.62 GB
+
+**PSL4**
+
+0.40
+
+1/0.40=2.5 GB
+
+**Level-2 backup storage usage**
+
+0.043
+
+0.054
+
+1/0.043=23.26 GB
+
+1/0.054=18.52 GB
+
+**Log backup storage usage**
+
+**Note**
+
+-   Level-2 backup includes backup sets that are permanently retained in the cluster recycle bin.
+    
+-   Storage plans cannot be used to offest level-2 cross-region backup storage costs.
+    
+
+#### Standard Edition
+
+The Standard Edition clusters support multiple storage types. The supported backup types vary based on the storage type.
+
+##### PL0, PL1, PL2, PL3, and AutoPL Enterprise SSDs (ESSDs)
+
+**Backup type**
+
+**Offset factor**
+
+**Storage usage offset by using a 1-GB storage plan**
+
+**Region in the Chinese mainland**
+
+**China (Hong Kong) and regions outside China**
+
+**Region in the Chinese mainland**
+
+**China (Hong Kong) and regions outside China**
+
+**Data backups**
+
+0.043
+
+0.054
+
+1/0.043=23.26 GB
+
+1/0.054=18.52 GB
+
+**Log backup storage usage**
+
+**Note**
+
+-   Level-2 backup includes backup sets that are permanently retained in the cluster recycle bin.
+    
+-   Storage plans cannot be used to offest level-2 cross-region backup storage costs.
+    
+
+##### PSL4/PSL5
+
+**Backup type**
+
+**Offset factor**
+
+**Storage usage offset by using a 1-GB storage plan**
+
+**Region in the Chinese mainland**
+
+**China (Hong Kong) and regions outside China**
+
+**Region in the Chinese mainland**
+
+**China (Hong Kong) and regions outside China**
+
+**Level-1 backups**
+
+**PSL5**
+
+0.617
+
+1/0.617=1.62 GB
+
+**PSL4**
+
+0.40
+
+1/0.40=2.5 GB
+
+**Level-2 backup storage usage**
+
+0.043
+
+0.054
+
+1/0.043=23.26 GB
+
+1/0.054=18.52 GB
+
+**Log backup storage usage**
+
+**Note**
+
+-   Level-2 backup includes backup sets that are permanently retained in the cluster recycle bin.
+    
+-   Storage plans cannot be used to offest level-2 cross-region backup storage costs.
+    
+
+#### **Example: Use a storage plan to offset the backup storage usage of the cluster beyond the free quota.**
+
+Your Alibaba Cloud account has a storage plan of 50 GB and the following PolarDB clusters:
+
+**Cluster name**
+
+**Edition**
+
+**Hot standby storage cluster enabled**
+
+**Billing method (compute nodes)**
+
+**Storage type**
+
+**Storage billing method**
+
+**Cluster storage usage**
+
+**Level-1 backup/data backup storage usage**
+
+**Level-2 backup storage usage**
+
+**Log backup storage usage**
+
+A
+
+RDS Cluster Edition
+
+Yes
+
+Subscription
+
+PSL5
+
+Subscription
+
+2.76 GB (subscribed amount: 50.00 GB)
+
+322.00 MB (a free quota of approximately 25 GB)
+
+2.45 GB
+
+70 GB
+
+C
+
+RDS Cluster Edition
+
+No
+
+Pay-as-you-go
+
+PSL5
+
+Pay-as-you-go
+
+100 GB
+
+3.21 GB (a free quota of approximately 50 GB)
+
+2.38 GB
+
+219 GB
+
+E
+
+Standard Edition
+
+No
+
+Subscription
+
+PL1 ESSD
+
+Subscription
+
+2.38 GB (subscribed amount: 100.00 GB)
+
+480.00 MB (a free quota of approximately 50 GB)
+
+No
+
+79 GB
+
+50-GB storage plan automatically offsets the storage usage of the clusters:
+
+-   The storage plan offsets the backup storage usage based on the offset order. For more information about the offset order, see the "[Offset order](/help/en/polardb/polardb-for-mysql/storage-package-3#d40b339b77fy8)" section of this topic.
+    
+    -   Level-1 backup storage usage beyond the free quota of Enterprise Edition clusters:
+        
+        -   The level-1 backup storage usage of Cluster A does not exceed the free quota.
+            
+        -   The level-1 backup storage usage of Cluster C does not exceed the free quota.
+            
+    -   Level-2 backup storage usage of Enterprise Edition clusters:
+        
+        -   Cluster A has a level-2 backup storage usage of 2.45 GB. An offset ratio of 0.043 is applied to the level-2 backup storage usage. As a result, 0.10535 GB (calculated as 2.45 GB × 0.043) of the storage plan is used to offset the level-2 backup storage usage of the cluster. Then, the storage plan has a **remaining capacity** of 49.89465 GB (calculated as 50 GB - 0.10535 GB).
+            
+        -   Cluster C has a level-2 backup storage usage of 2.38 GB. An offset ratio of 0.043 is applied to the level-2 backup storage usage. As a result, 0.10234 (calculated as 2.38 GB × 0.043) of the storage plan is used to offset the level-2 backup storage usage of the cluster. Then, the storage plan has a **remaining capacity** of 49.79231 GB (calculated as 49.89465 GB - 0.10234 GB).
+            
+    -   Log backup storage usage beyond the free quota of Enterprise Edition clusters:
+        
+        -   The log backup storage usage of Cluster A does not exceed the free quota.
+            
+        -   Cluster C has a log backup storage usage of 119 GB beyond the free quota (calculated as 219 GB - a free quota of 100 GB). An offset ratio of 0.043 is applied to the log backup storage usage. As a result, 5.117 GB (calculated as 119 GB × 0.043) of the storage plan is used to offset the log backup storage usage of the cluster. Then, the storage plan has a **remaining capacity** of 44.67531 GB (calculated as 49.79231 GB - 5.117 GB).
+            
+    -   Data backup storage usage beyond the free quota of Standard Edition clusters:
+        
+        -   The data backup storage usage of Cluster E does not exceed the free quota.
+            
+    -   Log backup storage usage beyond the free quota of Standard Edition clusters:
+        
+        -   The log backup storage usage of Cluster E does not exceed the free quota.
+            
+
+To sum up, a total of 5.32469 GB (calculated as 0.10535 GB + 0.10234 GB + 5.117 GB) of the storage plan is used to offset the backup storage usage beyond the free quota of the clusters. The storage plan has a **remaining capacity** of 44.67531 GB (50 GB - 5.32469 GB).
+
+**Note**
+
+This example describes only how a storage plan offsets the storage usage of level-1 backups/data backups, level-2 backups, and log backups of the PolarDB clusters. Other types of storage usage, such as the cluster storage usage and cold data archiving storage usage, are not included in this example.
+
+### **More**
+
+For more information about storage plans, see [Storage plans](/help/en/polardb/polardb-for-mysql/storage-package-3).

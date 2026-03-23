@@ -2,7 +2,7 @@
 
 `hono/jsx` supports not only server side but also client side. This means that it is possible to create an interactive UI that runs in the browser. We call it Client Components or `hono/jsx/dom`.
 
-It is fast and very small. The counter program in `hono/jsx/dom` is only 2.8KB with Brotli compression. But, 47.8KB for React.
+It is fast and very small. The counter program in `hono/jsx/dom` is only 2.8KB with Brotli compression, but 47.8KB for React.
 
 This section introduces Client Components-specific features.
 
@@ -17,20 +17,20 @@ import { render } from 'hono/jsx/dom'
 function Counter() {
   const [count, setCount] = useState(0)
   return (
-
+    
       Count: {count}
        setCount(count + 1)}>Increment
-
+    
   )
 }
 
 function App() {
   return (
-
-
-
-
-
+    
+      
+        
+      
+    
   )
 }
 
@@ -93,7 +93,7 @@ export default function App() {
   const [showLargeImage, setShowLargeImage] = useState(false)
   return (
     <>
-
+      
       <button
         onClick={() =>
           startViewTransition(() =>
@@ -102,10 +102,10 @@ export default function App() {
         }
       >
         Click!
-
-
+      
+      
         {!showLargeImage ? (
-
+          
         ) : (
           <div
             class={css`
@@ -118,7 +118,7 @@ export default function App() {
             `}
           >
         )}
-
+      
     </>
   )
 }
@@ -158,7 +158,7 @@ export default function App() {
   )
   return (
     <>
-
+      
       <button
         onClick={() =>
           startViewTransition(() =>
@@ -167,10 +167,10 @@ export default function App() {
         }
       >
         Click!
-
-
+      
+      
         {!showLargeImage ? (
-
+          
         ) : (
           <div
             class={css`
@@ -184,7 +184,7 @@ export default function App() {
             `}
           >
         )}
-
+      
     </>
   )
 }
@@ -228,7 +228,7 @@ export default function App() {
   )
   return (
     <>
-
+      
       <button
         onClick={() =>
           startViewTransition(() =>
@@ -237,10 +237,10 @@ export default function App() {
         }
       >
         Click!
-
-
+      
+      
         {!showLargeImage ? (
-
+          
         ) : (
           <div
             class={css`
@@ -264,7 +264,7 @@ export default function App() {
             `}
           >
         )}
-
+      
     </>
   )
 }
@@ -286,38 +286,11 @@ There is a small JSX Runtime for Client Components. Using this will result in sm
 Alternatively, you can specify `hono/jsx/dom` in the esbuild transform options in `vite.config.ts`.
 
 ```ts
-import { defineConfig } from "vite";
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   esbuild: {
-    jsxImportSource: "hono/jsx/dom",
+    jsxImportSource: 'hono/jsx/dom',
   },
-});
+})
 ```
-
-# Miscellaneous
-
-## Contributing
-
-Contributions Welcome! You can contribute in the following ways.
-
-- Create an Issue - Propose a new feature. Report a bug.
-- Pull Request - Fix a bug and typo. Refactor the code.
-- Create third-party middleware - Instruct below.
-- Share - Share your thoughts on the Blog, X(Twitter), and others.
-- Make your application - Please try to use Hono.
-
-For more details, see [Contribution Guide](https://github.com/honojs/hono/blob/main/docs/CONTRIBUTING.md).
-
-## Sponsoring
-
-You can sponsor Hono authors via the GitHub sponsor program.
-
-- [Sponsor @yusukebe on GitHub Sponsors](https://github.com/sponsors/yusukebe)
-- [Sponsor @usualoma on GitHub Sponsors](https://github.com/sponsors/usualoma)
-
-## Other Resources
-
-- GitHub repository: <a href="https://github.com/honojs">https://github.com/honojs</a>
-- npm registry: <a href="https://www.npmjs.com/package/hono">https://www.npmjs.com/package/hono</a>
-- JSR: <a href="https://jsr.io/@hono/hono">https://jsr.io/@hono/hono</a>

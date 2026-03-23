@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -102,7 +100,7 @@ After inviting members, you can resend or remove invitations as needed. Each inv
 
 > Tip
 >
-> Need to manage more than 1,000 team members? [Upgrade to Docker Business for unlimited user invites](https://www.docker.com/pricing/) and advanced role management. You can also [add seats](/subscription/manage-seats) to your subscription.
+> Need to manage more than 1,000 team members? [Upgrade to Docker Business for unlimited user invites](https://www.docker.com/pricing?ref=Docs\&refAction=DocsAdminMembers) and advanced role management. You can also [add seats](/subscription/manage-seats) to your subscription.
 
 ### [Resend an invitation](#resend-an-invitation)
 

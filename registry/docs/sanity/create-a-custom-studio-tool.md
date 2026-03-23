@@ -38,7 +38,7 @@ export default defineConfig({
   name: 'default',
   title: 'Studio with custom tool',
   projectId: 'your-project-id',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   plugins: [structureTool()],
   tools: [myCustomTool()],
   schema: {

@@ -44,7 +44,7 @@ export default defineConfig({
   title: 'my-studio',
 
   projectId: '<project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
 
   plugins: [deskTool()],
 

@@ -65,8 +65,8 @@ npx prisma init
 
 ```bash
 # Initialize a new project
-npm init -y
-npm install prisma @prisma/client
+pnpm init -y
+pnpm add prisma @prisma/client
 
 # Initialize Prisma
 pnpm dlx prisma init
@@ -76,8 +76,8 @@ pnpm dlx prisma init
 
 ```bash
 # Initialize a new project
-npm init -y
-npm install prisma @prisma/client
+yarn init -y
+yarn add prisma @prisma/client
 
 # Initialize Prisma
 yarn dlx prisma init
@@ -87,8 +87,8 @@ yarn dlx prisma init
 
 ```bash
 # Initialize a new project
-npm init -y
-npm install prisma @prisma/client
+bun init -y
+bun add prisma @prisma/client
 
 # Initialize Prisma
 bun x prisma init

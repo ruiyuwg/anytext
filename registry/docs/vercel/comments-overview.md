@@ -29,5 +29,5 @@ To leave a comment:
 
 title: "Using Comments with Preview Deployments"
 description: "This guide will help you get started with using Comments with your Vercel Preview Deployments."
-last\_updated: "2026-03-08T05:03:12.533Z"
+last\_updated: "2026-03-23T09:40:07.324Z"
 source: "https://vercel.com/docs/comments/using-comments"

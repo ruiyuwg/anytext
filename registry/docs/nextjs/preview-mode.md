@@ -34,7 +34,7 @@ Examples
 - [WordPress Example](https://github.com/vercel/next.js/tree/canary/examples/cms-wordpress) ([Demo](https://next-blog-wordpress.vercel.app/))
 - [Blog Starter Example](https://github.com/vercel/next.js/tree/canary/examples/blog-starter) ([Demo](https://next-blog-starter.vercel.app/))
 
-In the [Pages documentation](/docs/pages/building-your-application/routing/pages-and-layouts) and the [Data Fetching documentation](/docs/pages/building-your-application/data-fetching), we talked about how to pre-render a page at build time (**Static Generation**) using `getStaticProps` and `getStaticPaths`.
+In the [Pages documentation](/docs/pages/building-your-application/routing/pages-and-layouts) and the [Data Fetching documentation](/docs/pages/building-your-application/data-fetching), we talked about how to prerender a page at build time (**Static Generation**) using `getStaticProps` and `getStaticPaths`.
 
 Static Generation is useful when your pages fetch data from a headless CMS. However, it’s not ideal when you’re writing a draft on your headless CMS and want to **preview** the draft immediately on your page. You’d want Next.js to render these pages at **request time** instead of build time and fetch the draft content instead of the published content. You’d want Next.js to bypass Static Generation only for this specific case.
 
@@ -51,7 +51,7 @@ In this API route, you need to call `setPreviewData` on the response object. The
 ```js
 export default function handler(req, res) {
   // ...
-  res.setPreviewData({});
+  res.setPreviewData({})
   // ...
 }
 ```
@@ -63,8 +63,8 @@ You can test this manually by creating an API route like below and accessing it 
 ```js filename="pages/api/preview.js"
 // simple example for testing it manually from your browser.
 export default function handler(req, res) {
-  res.setPreviewData({});
-  res.end("Preview mode enabled");
+  res.setPreviewData({})
+  res.end('Preview mode enabled')
 }
 ```
 
@@ -72,7 +72,7 @@ If you open your browser’s developer tools and visit `/api/preview`, you’ll 
 
 ### Securely accessing it from your Headless CMS
 
-In practice, you’d want to call this API route _securely_ from your headless CMS. The specific steps will vary depending on which headless CMS you’re using, but here are some common steps you could take.
+In practice, you’d want to call this API route *securely* from your headless CMS. The specific steps will vary depending on which headless CMS you’re using, but here are some common steps you could take.
 
 These steps assume that the headless CMS you’re using supports setting **custom preview URLs**. If it doesn’t, you can still use this method to secure your preview URLs, but you’ll need to construct and access the preview URL manually.
 
@@ -101,26 +101,26 @@ Your headless CMS might allow you to include a variable in the preview URL so th
 export default async (req, res) => {
   // Check the secret and next parameters
   // This secret should only be known to this API route and the CMS
-  if (req.query.secret !== "MY_SECRET_TOKEN" || !req.query.slug) {
-    return res.status(401).json({ message: "Invalid token" });
+  if (req.query.secret !== 'MY_SECRET_TOKEN' || !req.query.slug) {
+    return res.status(401).json({ message: 'Invalid token' })
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
   // getPostBySlug would implement the required fetching logic to the headless CMS
-  const post = await getPostBySlug(req.query.slug);
+  const post = await getPostBySlug(req.query.slug)
 
   // If the slug doesn't exist prevent preview mode from being enabled
   if (!post) {
-    return res.status(401).json({ message: "Invalid slug" });
+    return res.status(401).json({ message: 'Invalid slug' })
   }
 
   // Enable Preview Mode by setting the cookies
-  res.setPreviewData({});
+  res.setPreviewData({})
 
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  res.redirect(post.slug);
-};
+  res.redirect(post.slug)
+}
 ```
 
 If it succeeds, then the browser will be redirected to the path you want to preview with the preview mode cookies being set.
@@ -161,7 +161,7 @@ export async function getStaticProps(context) {
   // If context.preview is true, append "/preview" to the API endpoint
   // to request draft data instead of published data. This will vary
   // based on which headless CMS you're using.
-  const res = await fetch(`https://.../${context.preview ? "preview" : ""}`);
+  const res = await fetch(`https://.../${context.preview ? 'preview' : ''}`)
   // ...
 }
 ```
@@ -188,8 +188,8 @@ https://<your-site>/api/preview?secret=<token>&slug=<path>
 ```js
 setPreviewData(data, {
   maxAge: 60 * 60, // The preview mode cookies expire in 1 hour
-  path: "/about", // The preview mode cookies apply to paths with /about
-});
+  path: '/about', // The preview mode cookies apply to paths with /about
+})
 ```
 
 ### Clear the Preview Mode cookies
@@ -200,7 +200,7 @@ To clear the Preview Mode cookies manually, create an API route that calls `clea
 
 ```js filename="pages/api/clear-preview-mode-cookies.js"
 export default function handler(req, res) {
-  res.clearPreviewData({});
+  res.clearPreviewData({})
 }
 ```
 
@@ -210,9 +210,9 @@ If a path was specified in the `setPreviewData` call, you must pass the same pat
 
 ```js filename="pages/api/clear-preview-mode-cookies.js"
 export default function handler(req, res) {
-  const { path } = req.query;
+  const { path } = req.query
 
-  res.clearPreviewData({ path });
+  res.clearPreviewData({ path })
 }
 ```
 
@@ -232,8 +232,8 @@ API Routes will have access to `preview` and `previewData` under the request obj
 
 ```js
 export default function myApiRoute(req, res) {
-  const isPreview = req.preview;
-  const previewData = req.previewData;
+  const isPreview = req.preview
+  const previewData = req.previewData
   // ...
 }
 ```

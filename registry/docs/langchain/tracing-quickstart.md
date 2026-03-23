@@ -337,6 +337,8 @@ Here are some topics you might want to explore next:
 
 Source: https://docs.langchain.com/langsmith/observability-stack
 
+**Deprecated**: The LangSmith Observability Helm chart is deprecated. We no longer maintain or provide support for it. The documentation below is preserved for reference only.
+
 **This section is only applicable for Kubernetes deployments.**
 
 LangSmith applications expose telemetry data that can be sent to the backend of your choice. If you don’t already have an observability stack, or prefer to keep LangSmith telemetry separate from your main application, you can use the LangSmith Observability Helm chart to deploy a basic observability stack.

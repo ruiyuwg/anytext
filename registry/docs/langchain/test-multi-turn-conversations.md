@@ -2,11 +2,11 @@
 
 Source: https://docs.langchain.com/langsmith/multiple-messages
 
-This how-to guide walks you through the various ways you can set up the playground for multi-turn conversations, which will allow you to test different tool configurations and system prompts against longer threads of messages.
+This how-to guide walks you through the various ways you can set up the Playground for multi-turn conversations, which will allow you to test different tool configurations and system prompts against longer threads of messages.
 
 ## From an existing run
 
-First, ensure you have properly [traced](/langsmith/observability) a multi-turn conversation, and then navigate to your tracing project. Once you get to your tracing project simply open the run, select the LLM call, and open it in the playground as follows:
+First, ensure you have properly [traced](/langsmith/observability) a multi-turn conversation, and then navigate to your tracing project. Once you get to your tracing project simply open the run, select the LLM call, and open it in the Playground as follows:
 
 You can then edit the system prompt, tweak the tools and/or output schema and observe how the output of the multi-turn conversation changes.
 
@@ -14,7 +14,7 @@ You can then edit the system prompt, tweak the tools and/or output schema and ob
 
 Before starting, make sure you have [set up your dataset](/langsmith/manage-datasets-in-application). Since you want to evaluate multi-turn conversations, make sure there is a key in your inputs that contains a list of messages.
 
-Once you have created your dataset, head to the playground and [load your dataset](/langsmith/manage-datasets-in-application#from-the-prompt-playground) to evaluate.
+Once you have created your dataset, head to the Playground and [load your dataset](/langsmith/manage-datasets-in-application#from-the-playground) to evaluate.
 
 Then, add a messages list variable to your prompt, making sure to name it the same as the key in your inputs that contains the list of messages:
 
@@ -30,9 +30,9 @@ This allows you to just tweak the system prompt or the tools, while allowing any
 
 ## Next steps
 
-Now that you know how to set up the playground for multi-turn interactions, you can either manually inspect and judge the outputs, or you can [add evaluators](/langsmith/code-evaluator-ui) to classify results.
+Now that you know how to set up the Playground for multi-turn interactions, you can either manually inspect and judge the outputs, or you can [add evaluators](/langsmith/code-evaluator-ui) to classify results.
 
-You can also read [these how-to guides](/langsmith/create-a-prompt) to learn more about how to use the playground to run evaluations.
+You can also read [these how-to guides](/langsmith/create-a-prompt) to learn more about how to use the Playground to run evaluations.
 
 ***
 

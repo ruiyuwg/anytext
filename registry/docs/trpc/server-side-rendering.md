@@ -7,28 +7,34 @@ When you enable SSR, tRPC will use `getInitialProps` to prefetch all queries on 
  \
 Alternatively, you can leave SSR disabled (the default) and use [Server-Side Helpers](server-side-helpers) to prefetch queries in `getStaticProps` or `getServerSideProps`.
 
-In order to execute queries properly during the server-side render step we need to add extra logic inside our `config`:
+In order to execute queries properly during the server-side render step, we need to add extra logic inside our `config`. Additionally, consider [`Response Caching`](../../../server/caching.md).
 
-Additionally, consider [`Response Caching`](../../server/caching.md).
+```tsx twoslash title='utils/trpc.ts'
+// @filename: utils/api/trpc/[trpc].ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
 
-```tsx title='utils/trpc.ts'
-import { httpBatchLink } from "@trpc/client";
-import { createTRPCNext } from "@trpc/next";
-import { ssrPrepass } from "@trpc/next/ssrPrepass";
-import superjson from "superjson";
-import type { AppRouter } from "./api/trpc/[trpc]";
+// @filename: utils/trpc.ts
+declare function getBaseUrl(): string;
+// ---cut---
+import { httpBatchLink } from '@trpc/client';
+import { createTRPCNext } from '@trpc/next';
+import { ssrPrepass } from '@trpc/next/ssrPrepass';
+import type { AppRouter } from './api/trpc/[trpc]';
 
 export const trpc = createTRPCNext<AppRouter>({
   ssr: true,
   ssrPrepass,
-  config(config) {
-    const { ctx } = opts;
-    if (typeof window !== "undefined") {
+  config(info) {
+    const { ctx } = info;
+    if (typeof window !== 'undefined') {
       // during client requests
       return {
         links: [
           httpBatchLink({
-            url: "/api/trpc",
+            url: '/api/trpc',
           }),
         ],
       };
@@ -41,7 +47,7 @@ export const trpc = createTRPCNext<AppRouter>({
           url: `${getBaseUrl()}/api/trpc`,
           /**
            * Set custom request headers on every request from tRPC
-           * @see https://trpc.io/docs/v10/header
+           * @see https://trpc.io/docs/client/headers
            */
           headers() {
             if (!ctx?.req?.headers) {
@@ -62,21 +68,31 @@ export const trpc = createTRPCNext<AppRouter>({
 
 or, if you want to SSR conditional on a given request, you can pass a callback to `ssr`. This callback can return a boolean, or a Promise resolving to a boolean:
 
-```tsx title='utils/trpc.ts'
-import { httpBatchLink } from "@trpc/client";
-import { createTRPCNext } from "@trpc/next";
-import superjson from "superjson";
-import type { AppRouter } from "./api/trpc/[trpc]";
+```tsx twoslash title='utils/trpc.ts'
+// @filename: utils/api/trpc/[trpc].ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.ts
+declare function getBaseUrl(): string;
+// ---cut---
+import { httpBatchLink } from '@trpc/client';
+import { createTRPCNext } from '@trpc/next';
+import { ssrPrepass } from '@trpc/next/ssrPrepass';
+import type { AppRouter } from './api/trpc/[trpc]';
 
 export const trpc = createTRPCNext<AppRouter>({
-  config(config) {
-    const { ctx } = opts;
-    if (typeof window !== "undefined") {
+  ssrPrepass,
+  config(info) {
+    const { ctx } = info;
+    if (typeof window !== 'undefined') {
       // during client requests
       return {
         links: [
           httpBatchLink({
-            url: "/api/trpc",
+            url: '/api/trpc',
           }),
         ],
       };
@@ -89,7 +105,7 @@ export const trpc = createTRPCNext<AppRouter>({
           url: `${getBaseUrl()}/api/trpc`,
           /**
            * Set custom request headers on every request from tRPC
-           * @see https://trpc.io/docs/v10/header
+           * @see https://trpc.io/docs/client/headers
            */
           headers() {
             if (!ctx?.req?.headers) {
@@ -107,21 +123,176 @@ export const trpc = createTRPCNext<AppRouter>({
   },
   ssr(opts) {
     // only SSR if the request is coming from a bot
-    return opts.ctx?.req?.headers["user-agent"]?.includes("bot");
+    return opts.ctx?.req?.headers['user-agent']?.includes('bot') ?? false;
   },
 });
 ```
 
-```tsx title='pages/_app.tsx'
-import { trpc } from "~/utils/trpc";
-import type { AppProps } from "next/app";
-import React from "react";
+```tsx twoslash title='pages/_app.tsx'
+// @jsx: react-jsx
+// @filename: server/routers/_app.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.tsx
+import { createTRPCNext } from '@trpc/next';
+import { httpBatchLink } from '@trpc/client';
+import type { AppRouter } from '../server/routers/_app';
+export const trpc = createTRPCNext<AppRouter>({
+  config() {
+    return { links: [httpBatchLink({ url: '/api/trpc' })] };
+  },
+});
+
+// @filename: pages/_app.tsx
+import React from 'react';
+// ---cut---
+import { trpc } from '../utils/trpc';
+import type { AppProps } from 'next/app';
+import type { AppType } from 'next/app';
 
 const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
   return <Component {...pageProps} />;
 };
 
 export default trpc.withTRPC(MyApp);
+```
+
+## Response Caching with SSR
+
+If you turn on SSR in your app, you might discover that your app loads slowly on, for instance, Vercel, but you can actually statically render your whole app without using SSG; [read this Twitter thread](https://twitter.com/alexdotjs/status/1386274093041950722) for more insights.
+
+You can use the `responseMeta` callback on `createTRPCNext` to set cache headers for SSR responses. See also the general [Response Caching](../../../server/caching.md) docs for framework-agnostic caching with `responseMeta`.
+
+```tsx twoslash title='utils/trpc.tsx'
+// @filename: server/routers/_app.ts
+import { initTRPC } from '@trpc/server';
+const t = initTRPC.create();
+export const appRouter = t.router({});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.tsx
+// ---cut---
+import { httpBatchLink } from '@trpc/client';
+import { createTRPCNext } from '@trpc/next';
+import { ssrPrepass } from '@trpc/next/ssrPrepass';
+import type { AppRouter } from '../server/routers/_app';
+
+export const trpc = createTRPCNext<AppRouter>({
+  config() {
+    if (typeof window !== 'undefined') {
+      return {
+        links: [
+          httpBatchLink({
+            url: '/api/trpc',
+          }),
+        ],
+      };
+    }
+
+    const url = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}/api/trpc`
+      : 'http://localhost:3000/api/trpc';
+
+    return {
+      links: [
+        httpBatchLink({
+          url,
+        }),
+      ],
+    };
+  },
+  ssr: true,
+  ssrPrepass,
+  responseMeta(opts) {
+    const { clientErrors } = opts;
+
+    if (clientErrors.length) {
+      // propagate http first error from API calls
+      return {
+        status: clientErrors[0].data?.httpStatus ?? 500,
+      };
+    }
+
+    // cache request for 1 day + revalidate once every second
+    const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+    return {
+      headers: new Headers([
+        [
+          'cache-control',
+          `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
+        ],
+      ]),
+    };
+  },
+});
+```
+
+### API Response Caching with Next.js Adapter
+
+You can also use `responseMeta` on the Next.js API handler to cache API responses directly:
+
+```tsx twoslash title='pages/api/trpc/[trpc].ts'
+import { initTRPC } from '@trpc/server';
+import * as trpcNext from '@trpc/server/adapters/next';
+
+export const createContext = async ({
+  req,
+  res,
+}: trpcNext.CreateNextContextOptions) => {
+  return {
+    req,
+    res,
+  };
+};
+
+type Context = Awaited<ReturnType<typeof createContext>>;
+
+export const t = initTRPC.context<Context>().create();
+
+export const appRouter = t.router({
+  public: t.router({
+    slowQueryCached: t.procedure.query(async (opts) => {
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+
+      return {
+        lastUpdated: new Date().toJSON(),
+      };
+    }),
+  }),
+});
+
+export type AppRouter = typeof appRouter;
+
+export default trpcNext.createNextApiHandler({
+  router: appRouter,
+  createContext,
+  responseMeta(opts) {
+    const { ctx, paths, errors, type } = opts;
+    // assuming you have all your public routes with the keyword `public` in them
+    const allPublic = paths && paths.every((path) => path.includes('public'));
+    // checking that no procedures errored
+    const allOk = errors.length === 0;
+    // checking we're doing a query request
+    const isQuery = type === 'query';
+
+    if (ctx?.res && allPublic && allOk && isQuery) {
+      // cache request for 1 day + revalidate once every second
+      const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+      return {
+        headers: new Headers([
+          [
+            'cache-control',
+            `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
+          ],
+        ]),
+      };
+    }
+    return {};
+  },
+});
 ```
 
 ## FAQ
@@ -140,7 +311,35 @@ By default, `@tanstack/react-query` (which we use for the data fetching hooks) r
 
 # Starter Projects
 
-Get started quickly with one of the sample projects! Copy the snippet from _Quick start with `create-next-app`_ in the below list to clone the project.
+Get started quickly with one of the example projects! Copy the snippet from *Quick start with `create-next-app`* in the below list to clone the project.
+
+## App Router
+
+```
+  Description
+  Links
+
+
+
+
+  
+    Next.js App Router with SSE-based subscriptions and chat.
+    
+    Uses @trpc/react-query with the fetch adapter.
+    
+    
+      Quick start with create-next-app
+      npx create-next-app --example https://github.com/trpc/trpc/tree/main/examples/next-sse-chat trpc-sse-chat
+    
+  
+  
+    
+      Source
+    
+  
+```
+
+## Pages Router
 
 ```
   Description
@@ -150,137 +349,54 @@ Get started quickly with one of the sample projects! Copy the snippet from _Quic
 
 
 
-
+  
     Next.js starter with Prisma, E2E testing, &amp; ESLint.
-
-
+    
+    
       Quick start with create-next-app
       yarn create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
-
-
+    
+  
   nextjs.trpc.io
-
-
+  
+    
       CodeSandbox
       Source
+    
+  
 
 
-
-
-
+  
     zART-stack example (zero-API, TypeScript, React).
-
+    
     Monorepo setup with React Native, Next.js, &amp; Prisma
-
-
+    
+    
       Quick start with git clone
       git clone git@github.com:KATT/zart.git
-
-
+    
+  
   n/a
-
-
+  
+    
       Source
+    
+  
 
 
-
-
-
+  
     Next.js TodoMVC-example with SSG & Prisma.
-
-
+    
+    
       Quick start with create-next-app
       yarn create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-todomvc trpc-todo
-
-
+    
+  
   todomvc.trpc.io
-
-
+  
+    
       CodeSandbox
       Source
-
-
-```
-
-# Client Overview
-
-While a tRPC API can be called using normal HTTP requests like any other REST API, you will need a **client** to benefit from tRPC's typesafety.
-
-A client knows the procedures that are available in your API, and their inputs and outputs. It uses this information to give you autocomplete on your queries and mutations, correctly type the returned data, and show errors if you are writing requests that don't match the shape of your backend.
-
-If you are using React, the best way to call a tRPC API is by using our [React Query Integration](./react/introduction.mdx), which in addition to typesafe API calls also offers caching, invalidation, and management of loading and error state. If you are using Next.js with the `/pages` directory, you can use our [Next.js integration](./nextjs/introduction.mdx), which adds helpers for Serverside Rendering and Static Generation in addition to the React Query Integration.
-
-If you want to call a tRPC API from another server or from a frontend framework for which we don't have an integration, you can use the [Vanilla Client](./vanilla/introduction.md).
-
-In addition to the React and Next.js integrations and the Vanilla Client, there are a variety of [community-built integrations for a variety of other frameworks](/docs/community/awesome-trpc#frontend-frameworks). Please note that these are not maintained by the tRPC team.
-
-# Aborting Procedure Calls
-
-By default, tRPC does not cancel requests via React Query. If you want to opt into this behaviour, you can provide `abortOnUnmount` in your configuration.
-
-@tanstack/react-query only supports aborting queries.
-
-```twoslash include router
-import { initTRPC } from '@trpc/server';
-import { z } from "zod";
-const t = initTRPC.create();
-
-const appRouter = t.router({
-  post: t.router({
-    byId: t.procedure
-      .input(z.object({ id: z.string() }))
-      .query(async ({input}) => {
-        return { id: input.id, title: 'Hello' };
-      }),
-  })
-});
-export type AppRouter = typeof appRouter;
-```
-
-### Globally
-
-```ts twoslash title="client.ts"
-// @target: esnext
-// ---cut---
-// @filename: utils.ts
-// @noErrors
-import { createTRPCReact } from "@trpc/react-query";
-
-export const trpc = createTRPCReact<AppRouter>({
-  abortOnUnmount: true,
-});
-
-trpc.createClient({
-  // ...
-});
-```
-
-### Per-request
-
-You may also override this behaviour at the query level.
-
-```tsx twoslash title="pages/post/[id].tsx"
-// @filename: server/router.ts
-// @include: router
-// @filename: utils/trpc.ts
-// ---cut---
-import { createTRPCReact } from "@trpc/react-query";
-import type { AppRouter } from "../server/router";
-
-export const trpc = createTRPCReact<AppRouter>();
-
-// @filename: pages/posts.tsx
-declare const useRouter: any;
-// ---cut---
-import { trpc } from "../utils/trpc";
-
-function PostViewPage() {
-  const { query } = useRouter();
-  const postQuery = trpc.post.byId.useQuery(
-    { id: query.id },
-    { trpc: { abortOnUnmount: true } },
-  );
-
-  // ...
-}
+    
+  
 ```

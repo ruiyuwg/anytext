@@ -55,7 +55,7 @@ all possible API errors.
 
 ## Rate limit
 
-The default maximum rate limit is **2 requests per second per team**. This limit applies across all API keys associated with your team. This number can be increased for trusted senders by request. You can view your team's current rate limit on the [Settings Usage page](https://resend.com/settings/usage). After that, you'll hit the rate limit and receive a `429` response error code.
+The default maximum rate limit is **5 requests per second per team**. This limit applies across all API keys associated with your team. This number can be increased for trusted senders by request. You can view your team's current rate limit on the [Settings Usage page](https://resend.com/settings/usage). After that, you'll hit the rate limit and receive a `429` response error code.
 
 Learn more about our [rate limits](/api-reference/rate-limit).
 

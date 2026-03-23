@@ -117,7 +117,7 @@ Markdoc files can only be used within content collections. Add entries to any co
       - why-markdoc.mdoc
       - quick-start.mdoc
 
-Then, query your collection using the [Content Collection APIs](/en/guides/content-collections/#querying-collections):
+Then, [query and display your posts and collections](/en/guides/content-collections/#querying-build-time-collections):
 
 src/pages/why-markdoc.astro
 

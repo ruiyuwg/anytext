@@ -336,15 +336,11 @@
     - `custom_text.after_submit.message` (string)
       Text can be up to 1200 characters in length.
 
-      The maximum length is 500 characters.
-
   - `custom_text.shipping_address` (object, nullable)
     Custom text that should be displayed alongside shipping address collection.
 
     - `custom_text.shipping_address.message` (string)
       Text can be up to 1200 characters in length.
-
-      The maximum length is 500 characters.
 
   - `custom_text.submit` (object, nullable)
     Custom text that should be displayed alongside the payment confirmation button.
@@ -352,15 +348,11 @@
     - `custom_text.submit.message` (string)
       Text can be up to 1200 characters in length.
 
-      The maximum length is 500 characters.
-
   - `custom_text.terms_of_service_acceptance` (object, nullable)
     Custom text that should be displayed in place of the default terms of service agreement text.
 
     - `custom_text.terms_of_service_acceptance.message` (string)
       Text can be up to 1200 characters in length.
-
-      The maximum length is 500 characters.
 
 - `customer` (string, nullable, expandable (can be expanded into an object with the `expand` request parameter))
   The ID of the customer for this Session. For Checkout Sessions in `subscription` mode or Checkout Sessions with `customer_creation` set as `always` in `payment` mode, Checkout will create a new customer object based on information provided during the payment flow unless an existing customer was provided when the Session was created.

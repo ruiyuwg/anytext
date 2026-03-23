@@ -6,7 +6,7 @@ You signed in with another tab or window. Reload to refresh your session. You si
 
 - [Notifications](/login?return_to=%2Fmoby%2Fbuildkit) You must be signed in to change notification settings
 - [Fork 1.4k](/login?return_to=%2Fmoby%2Fbuildkit)
-- [Star 9.8k](/login?return_to=%2Fmoby%2Fbuildkit)
+- [Star 9.9k](/login?return_to=%2Fmoby%2Fbuildkit)
 
 # Releases: moby/buildkit
 
@@ -367,13 +367,14 @@ Loading
 
 There was an error while loading. Please reload this page.
 
-👍 1 Marukome0743 reacted with thumbs up emoji
+👍 2 Marukome0743 and jonasgeiler reacted with thumbs up emoji 🎉 1 jonasgeiler reacted with hooray emoji
 
 All reactions
 
-- 👍 1 reaction
+- 👍 2 reactions
+- 🎉 1 reaction
 
-1 person reacted
+2 people reacted
 
 ## v0.28.0-rc2
 

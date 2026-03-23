@@ -14,7 +14,6 @@
 'astro:build:setup'?: (options: {
   vite: vite.InlineConfig;
   pages: Map<string, PageBuildData>;
-  target: 'client' | 'server';
   updateConfig: (newConfig: vite.InlineConfig) => void;
   logger: AstroIntegrationLogger;
 }) => void | Promise<void>;
@@ -115,29 +114,6 @@ Defines a string that can be resolved into a file path for the module.
 **Added in:** `astro@2.4.0`
 
 A list of styles to render on the page. Each style contains its `depth` in the components tree and its display `order` on the page, as well as an indication of whether this should be applied as an inline or external style.
-
-#### `target` option
-
-[Section titled “target option”](#target-option)
-
-**Type:** `'client' | 'server'`
-
-Builds are separated in two distinct phases: `client` and `server`. This option allow you to determine the current build phase.
-
-This can be used to perform an action only in a specific phase:
-
-```js
-export default {
-  name: 'my-integration',
-  hooks: {
-    'astro:build:setup': ({ target }) => {
-      if (target === "server") {
-        // do something in server build phase
-      }
-    },
-  }
-}
-```
 
 #### `updateConfig()` option
 

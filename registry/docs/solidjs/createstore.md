@@ -11,7 +11,7 @@ Stores were intentionally designed to manage data structures like objects and ar
 ## [Types Signature](/reference/store-utilities/create-store#types-signature)
 
 ```
-import { createStore } from "solid-js/store"import type { StoreNode, Store, SetStoreFunction } from "solid-js/store"
+import { createStore } from "solid-js/store";import type { StoreNode, Store, SetStoreFunction } from "solid-js/store";
 function createStore<T extends StoreNode>(  state: T | Store<T>): [get: Store<T>, set: SetStoreFunction<T>];
 type Store<T> = T; // conceptually readonly, but not typed as such
 ```

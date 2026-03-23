@@ -11,17 +11,17 @@ The Black Forest Labs provider is available via the `@ai-sdk/black-forest-labs` 
 You can import the default provider instance `blackForestLabs` from `@ai-sdk/black-forest-labs`:
 
 ```ts
-import { blackForestLabs } from "@ai-sdk/black-forest-labs";
+import { blackForestLabs } from '@ai-sdk/black-forest-labs';
 ```
 
 If you need a customized setup, you can import `createBlackForestLabs` and create a provider instance with your settings:
 
 ```ts
-import { createBlackForestLabs } from "@ai-sdk/black-forest-labs";
+import { createBlackForestLabs } from '@ai-sdk/black-forest-labs';
 
 const blackForestLabs = createBlackForestLabs({
-  apiKey: "your-api-key", // optional, defaults to BFL_API_KEY environment variable
-  baseURL: "custom-url", // optional
+  apiKey: 'your-api-key', // optional, defaults to BFL_API_KEY environment variable
+  baseURL: 'custom-url', // optional
   headers: {
     /* custom headers */
   }, // optional
@@ -30,35 +30,25 @@ const blackForestLabs = createBlackForestLabs({
 
 You can use the following optional settings to customize the Black Forest Labs provider instance:
 
-- **baseURL** _string_
+- **baseURL** *string*
 
   Use a different URL prefix for API calls, e.g. to use a regional endpoint.
   The default prefix is `https://api.bfl.ai/v1`.
 
-- **apiKey** _string_
+- **apiKey** *string*
 
   API key that is being sent using the `x-key` header.
   It defaults to the `BFL_API_KEY` environment variable.
 
-- **headers** _Record\<string,string>_
+- **headers** *Record\<string,string>*
 
   Custom headers to include in the requests.
 
-- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
+- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   You can use it as a middleware to intercept requests,
   or to provide a custom fetch implementation for e.g. testing.
-
-- **pollIntervalMillis** _number_
-
-  Interval in milliseconds between polling attempts when waiting for image generation to complete.
-  Defaults to 500ms.
-
-- **pollTimeoutMillis** _number_
-
-  Overall timeout in milliseconds for polling before giving up.
-  Defaults to 60000ms (60 seconds).
 
 ## Image Models
 
@@ -68,13 +58,13 @@ For more on image generation with the AI SDK see [generateImage()](/docs/referen
 ### Basic Usage
 
 ```ts
-import { writeFileSync } from "node:fs";
-import { blackForestLabs } from "@ai-sdk/black-forest-labs";
-import { generateImage } from "ai";
+import { writeFileSync } from 'node:fs';
+import { blackForestLabs } from '@ai-sdk/black-forest-labs';
+import { experimental_generateImage as generateImage } from 'ai';
 
 const { image, providerMetadata } = await generateImage({
-  model: blackForestLabs.image("flux-pro-1.1"),
-  prompt: "A serene mountain landscape at sunset",
+  model: blackForestLabs.image('flux-pro-1.1'),
+  prompt: 'A serene mountain landscape at sunset',
 });
 
 const filename = `image-${Date.now()}.png`;
@@ -86,150 +76,68 @@ console.log(`Image saved to ${filename}`);
 
 Black Forest Labs offers many models optimized for different use cases. Here are a few popular examples. For a full list of models, see the [Black Forest Labs Models Page](https://bfl.ai/models).
 
-| Model                | Description                                                                                                                 |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Model                | Description                                                                                                                |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `flux-kontext-pro`   | FLUX.1 Kontext \[pro] handles both text and reference images as inputs, enabling targeted edits and complex transformations |
 | `flux-kontext-max`   | FLUX.1 Kontext \[max] with improved prompt adherence and typography generation                                              |
-| `flux-pro-1.1-ultra` | Ultra-fast, ultra high-resolution image creation                                                                            |
-| `flux-pro-1.1`       | Fast, high-quality image generation from text.                                                                              |
-| `flux-pro-1.0-fill`  | Inpainting model for filling masked regions of images with new content                                                      |
+| `flux-pro-1.1-ultra` | Ultra-fast, ultra high-resolution image creation                                                                           |
+| `flux-pro-1.1`       | Fast, high-quality image generation from text.                                                                             |
 
 Black Forest Labs models support aspect ratios from 3:7 (portrait) to 7:3 (landscape).
 
-### Image Editing
+#### Modify Image
 
-Black Forest Labs Kontext models support powerful image editing capabilities using reference images. Pass input images via `prompt.images` to transform, combine, or edit existing images.
-
-#### Single Image Editing
-
-Transform an existing image using text prompts:
+Transform existing images using text prompts.
 
 ```ts
 import {
   blackForestLabs,
-  BlackForestLabsImageModelOptions,
-} from "@ai-sdk/black-forest-labs";
-import { generateImage } from "ai";
+  BlackForestLabsImageProviderOptions,
+} from '@ai-sdk/black-forest-labs';
+import { experimental_generateImage as generateImage } from 'ai';
 
-const { images } = await generateImage({
-  model: blackForestLabs.image("flux-kontext-pro"),
-  prompt: {
-    text: "A baby elephant with a shirt that has the logo from the input image.",
-    images: [
-      "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
-    ],
-  },
+// Example: Modify existing image
+await generateImage({
+  model: blackForestLabs.image('flux-kontext-pro'),
+  prompt: 'Put a donut next to the flour.',
   providerOptions: {
     blackForestLabs: {
-      width: 1024,
-      height: 768,
-    } satisfies BlackForestLabsImageModelOptions,
+      inputImage: '<base64 converted image>',
+    } satisfies BlackForestLabsImageProviderOptions,
   },
 });
 ```
-
-#### Multi-Reference Editing
-
-Combine multiple reference images for complex transformations. Black Forest Labs supports up to 10 input images:
-
-```ts
-import { blackForestLabs } from "@ai-sdk/black-forest-labs";
-import { generateImage } from "ai";
-
-const { images } = await generateImage({
-  model: blackForestLabs.image("flux-kontext-pro"),
-  prompt: {
-    text: "Combine the style of image 1 with the subject of image 2",
-    images: [
-      "https://example.com/style-reference.jpg",
-      "https://example.com/subject-reference.jpg",
-    ],
-  },
-});
-```
-
-Input images can be provided as URLs or base64-encoded strings. They support
-up to 20MB or 20 megapixels per image.
-
-#### Inpainting
-
-The `flux-pro-1.0-fill` model supports inpainting, which allows you to fill masked regions of an image with new content. Pass the source image via `prompt.images` and a mask image via `prompt.mask`:
-
-```ts
-import { blackForestLabs } from "@ai-sdk/black-forest-labs";
-import { generateImage } from "ai";
-
-const { images } = await generateImage({
-  model: blackForestLabs.image("flux-pro-1.0-fill"),
-  prompt: {
-    text: "A beautiful garden with flowers",
-    images: ["https://example.com/source-image.jpg"],
-    mask: "https://example.com/mask-image.png",
-  },
-});
-```
-
-The mask image should be a grayscale image where white areas indicate regions to be filled and black areas indicate regions to preserve.
 
 ### Provider Options
 
-Black Forest Labs image models support flexible provider options through the `providerOptions.blackForestLabs` object. The supported parameters depend on the used model ID:
+Black Forest Labs image models support flexible provider options through the `providerOptions.blackForestLabs` object. You can pass any parameters supported by the specific endpoint's API. The supported parameters depend on the used model ID:
 
-- **width** _number_ - Output width in pixels (256–1920). When set, this overrides any width derived from `size`.
-- **height** _number_ - Output height in pixels (256–1920). When set, this overrides any height derived from `size`.
-- **outputFormat** _string_ - Desired format of the output image (`"jpeg"` or `"png"`).
-- **steps** _number_ - Number of inference steps. Higher values may improve quality but increase generation time.
-- **guidance** _number_ - Guidance scale for generation. Higher values follow the prompt more closely.
-- **imagePrompt** _string_ - Base64-encoded image to use as additional visual context for generation.
-- **imagePromptStrength** _number_ - Strength of the image prompt influence on generation (0.0 to 1.0).
-- **promptUpsampling** _boolean_ - If true, performs upsampling on the prompt.
-- **raw** _boolean_ - Enable raw mode for more natural, authentic aesthetics.
-- **safetyTolerance** _number_ - Moderation level for inputs and outputs (0 = most strict, 6 = more permissive).
-- **pollIntervalMillis** _number_ - Interval in milliseconds between polling attempts (default 500ms).
-- **pollTimeoutMillis** _number_ - Overall timeout in milliseconds for polling before timing out (default 60s).
-- **webhookUrl** _string_ - URL for asynchronous completion notification. Must be a valid HTTP/HTTPS URL.
-- **webhookSecret** _string_ - Secret for webhook signature verification, sent in the `X-Webhook-Secret` header.
-
-  To pass reference images for editing, use `prompt.images` instead of provider
-  options. This supports up to 10 images as URLs or base64-encoded strings.
-
-### Provider Metadata
-
-The `generateImage` response includes provider-specific metadata in `providerMetadata.blackForestLabs.images[]`. Each image object may contain the following properties:
-
-- **seed** _number_ - The seed used for generation. Useful for reproducing results.
-- **start_time** _number_ - Unix timestamp when generation started.
-- **end_time** _number_ - Unix timestamp when generation completed.
-- **duration** _number_ - Generation duration in seconds.
-- **cost** _number_ - Cost of the generation request.
-- **inputMegapixels** _number_ - Input image size in megapixels.
-- **outputMegapixels** _number_ - Output image size in megapixels.
-
-```ts
-import { blackForestLabs } from "@ai-sdk/black-forest-labs";
-import { generateImage } from "ai";
-
-const { image, providerMetadata } = await generateImage({
-  model: blackForestLabs.image("flux-pro-1.1"),
-  prompt: "A serene mountain landscape at sunset",
-});
-
-// Access provider metadata
-const metadata = providerMetadata?.blackForestLabs?.images?.[0];
-console.log("Seed:", metadata?.seed);
-console.log("Cost:", metadata?.cost);
-console.log("Duration:", metadata?.duration);
-```
+- **imagePrompt** - Base64-encoded image to use as additional visual context for generation
+- **imagePromptStrength** - Strength of the image prompt influence on generation (0.0 to 1.0)
+- **inputImage** - Base64 encoded image or URL of image to use as reference. Supports up to 20MB or 20 megapixels.
+- **outputFormat** - Desired format of the output image. Can be “jpeg” or “png”.
+- **promptUpsampling** - If true, performs upsampling on the prompt
+- **raw** - Enable raw mode for more natural, authentic aesthetics
+- **safetyTolerance** - Moderation level for inputs and outputs. Value ranges from 0 (most strict) to 6 (more permissive).
+- **webhookSecret** - Secret for webhook signature verification, sent in the `X-Webhook-Secret` header.
+- **webhookUrl** - URL for asynchronous completion notification. Must be a valid HTTP/HTTPS URL.
+- **pollIntervalMillis** - Interval in milliseconds between polling attempts (default 500ms)
+- **pollTimeoutMillis** - Overall timeout in milliseconds for polling before timing out (default 60s)
+- **width** - Output width in pixels for models that support explicit dimensions. Range 256–1920, default 1024. When set, this overrides any width derived from `size`.
+- **height** - Output height in pixels for models that support explicit dimensions. Range 256–1920, default 768. When set, this overrides any height derived from `size`.
+- **steps** - Number of inference steps. Higher values may improve quality but increase generation time
+- **guidance** - Guidance scale for generation. Higher values follow the prompt more closely
+- **inputImage2 … inputImage10** - Additional reference images (base64 string or URL) for models that support multiple inputs, used alongside `inputImage`.
 
 ### Regional Endpoints
 
 By default, requests are sent to `https://api.bfl.ai/v1`. You can select a [regional endpoint](https://docs.bfl.ai/api_integration/integration_guidelines#regional-endpoints) by setting `baseURL` when creating the provider instance:
 
 ```ts
-import { createBlackForestLabs } from "@ai-sdk/black-forest-labs";
+import { createBlackForestLabs } from '@ai-sdk/black-forest-labs';
 
 const blackForestLabs = createBlackForestLabs({
-  baseURL: "https://api.eu.bfl.ai/v1", // or https://api.us.bfl.ai/v1
+  baseURL: 'https://api.eu.bfl.ai/v1', // or https://api.us.bfl.ai/v1
 });
 ```
 

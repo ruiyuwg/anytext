@@ -6,19 +6,20 @@ Forward Received emails to another email address.
 
 Received emails can also be forwarded to another email address.
 
-Webhooks do not include the actual HTML or Plain Text body of the email. You
-must call the [received emails
-API](/api-reference/emails/retrieve-received-email) to retrieve them. This
-design choice supports large payloads in serverless environments that have
-limited request body sizes.
+Webhooks do not include the email body, headers, or attachments, only their
+metadata. You must call the [Received emails
+API](/api-reference/emails/retrieve-received-email) or the [Attachments
+API](/api-reference/emails/list-received-email-attachments) to retrieve them.
+This design choice supports large attachments in serverless environments that
+have limited request body sizes.
 
 ## Using the `forward` helper method
 
 The Node.js SDK provides a `forward()` helper method that simplifies forwarding received emails. This method automatically handles fetching the email content and attachments.
 
-Here's an example of forwarding an email in a Next.js application:
+Here's how you can implement this:
 
-```js app/api/events/route.ts theme={"theme":{"light":"github-light","dark":"vesper"}}
+```ts Next.js theme={"theme":{"light":"github-light","dark":"vesper"}}
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
@@ -46,19 +47,56 @@ export const POST = async (request: NextRequest) => {
 };
 ```
 
+```rust Rust theme={"theme":{"light":"github-light","dark":"vesper"}}
+async fn example(
+    State(state): State<Arc>,
+    Json(event): Json<resend_rs::events::EmailEvent>,
+) -> Result<Response, Response> {
+    if matches!(
+        event.r#type,
+        resend_rs::events::EmailEventType::EmailReceived
+    ) {
+        let opts = ForwardReceivingEmail::new(
+            InboundEmailId::new(&event.data.email_id),
+            "onboarding@resend.dev",
+            vec!["delivered@resend.dev"],
+        );
+        let data = state.resend.receiving.forward(opts).await.map_err(|e| {
+            (StatusCode::INTERNAL_SERVER_ERROR, format!("Error: {}", e)).into_response()
+        })?;
+        Ok(Json(data).into_response())
+    } else {
+        Ok(Json(Empty {}).into_response())
+    }
+}
+```
+
 By default, the `forward` method forwards the email in a way that preserves the original email content and attachments exactly as received.
 
 Alternatively, you can forward emails as if they had been forwarded through an email client, with the `forwarded message` footer. For that, use `passthrough: false` and provide custom text or HTML content. The original email will be shown after the `forwarded message` footer:
 
-```js app/api/events/route.ts theme={"theme":{"light":"github-light","dark":"vesper"}}
+```ts Next.js theme={"theme":{"light":"github-light","dark":"vesper"}}
 const { data, error } = await resend.emails.receiving.forward({
   emailId: event.data.email_id,
   to: 'delivered@resend.dev',
   from: 'onboarding@resend.dev',
   passthrough: false,
   text: 'See attached forwarded message.',
-  html: '<p>See attached forwarded message.</p>',
+  html: 'See attached forwarded message.',
 });
+```
+
+```rust Rust theme={"theme":{"light":"github-light","dark":"vesper"}}
+let opts = ForwardReceivingEmail::new(
+    InboundEmailId::new(&event.data.email_id),
+    "onboarding@resend.dev",
+    vec!["delivered@resend.dev"],
+)
+.with_passthrough(false)
+.with_text("See attached forwarded message.")
+.with_html("See attached forwarded message.");
+
+let data = state.resend.receiving.forward(opts).await;
 ```
 
 ## Manual forwarding

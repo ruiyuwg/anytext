@@ -233,8 +233,9 @@ You can migrate subscriptions with flat-rate pricing, such as a basic plan at 10
 
 **Example 1 (Basic)**: Migrate a basic 100 USD monthly subscription with a quantity of 2, starting on January 1. The subscription is charged automatically using the default payment method.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------ | --------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1       | 2        | subscription\_1              |               |                      |        |           | none               | charge\_automatically |                  |                     |                |                      |                            |                             |                              |
 
 **Example 2 (Multi-price items)**: Migrate the following subscriptions starting on January 1, to be charged automatically using the default payment method:
@@ -242,8 +243,9 @@ You can migrate subscriptions with flat-rate pricing, such as a basic plan at 10
 - A basic 100 USD monthly subscription with a quantity of 2
 - An advanced 200 USD monthly subscription with a quantity of 1
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | items.0.price (required) | items.0.quantity | items.1.price | items.1.quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ------------------------ | ---------------- | ------------- | ---------------- | --------------------------- | ------------- | -------------------- | ------ | --------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1               | 1                | price\_xxx2    | subscription\_1   |                             |               |                      |        |           | none               | charge\_automatically |                  |                     |                |                      |                            |                             |                              |  |
 
 **Example 3 (Basic)**: Migrate the following subscription starting on January 1, to be charged automatically using the default payment method:
@@ -251,8 +253,9 @@ You can migrate subscriptions with flat-rate pricing, such as a basic plan at 10
 - A basic 100 USD monthly subscription with a quantity of 2
 - An ad-hoc invoice add-on fee of 20 USD
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------ | --------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1       | 2        | subscription\_1              |               |                      |        |           | none               | charge\_automatically |                  |                     |                |                      | 50                         | prod\_xxx1                   | usd                          |
 
 You can also migrate subscriptions with ad-hoc pricing, in cases where you don’t have fixed pricing amounts.
@@ -261,8 +264,9 @@ You can also migrate subscriptions with ad-hoc pricing, in cases where you don�
 
 - A 153 USD ad-hoc monthly subscription with a quantity of 1
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | adhoc\_items.0.amount (required) | adhoc\_items.0.product | adhoc\_items.0.interval | adhoc\_items.0.currency | adhoc\_items.0.quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior   | collection\_method | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ------------------------------- | --------------------- | ---------------------- | ---------------------- | ---------------------- | --------------------------- | ------------- | -------------------- | ------ | --------- | -------------------- | ----------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1                      | prod\_xxx1             | 1                      | subscription\_1         |                        |                             |               |                      |        | none      | charge\_automatically |                   |                  |                     |                |                      |                            |                             |                              |
 
 ### Migrate subscriptions with different types of payment collection methods
@@ -271,14 +275,16 @@ You can collect payment for the migrated subscriptions either automatically with
 
 **Example 1 (Basic)**: Migrate a yearly 500 USD subscription with a quantity of 1, starting on January 1, to be charged automatically using the default payment method.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------ | --------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1       | 1        | subscription\_1              |               |                      |        |           | none               | charge\_automatically |                  |                     |                |                      |                            |                             |                              |
 
 **Example 2 (Basic)**: Migrate a yearly 500 USD subscription with a quantity of 1, starting on January 1. This subscription is billed using an invoice sent to the customer, with a 30-day due date.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior | collection\_method | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------ | --------- | ------------------ | ----------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1       | 1        | subscription\_1              |               |                      |        |           | none               | send\_invoice      |                  |                     | 30             |                      |                            |                             |                              |
 
 ### Migrate subscriptions at different stages of subscription service period
@@ -289,8 +295,9 @@ You can collect payment for the migrated subscriptions either automatically with
 - Set the `billing_cycle_anchor` to the next renewal cycle date.
 - Set `proration_behavior` to `none`.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------ | --------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1       |          | subscription\_1              |               | 1706745600           |        |           | none               | charge\_automatically |                  |                     |                |                      |                            |                             |                              |
 
 **Example 2 (Basic): Migrate a paid subscription that’s in the middle of a billing period**. For example, migrate a 100 USD monthly subscription with an original start date of December 25. The migration date is January 1, and the subscription renews on the 25th of every month.
@@ -300,30 +307,34 @@ You can collect payment for the migrated subscriptions either automatically with
 - Set `start_date` to the migration date.
 - Set `proration_behavior` to `none` to avoid charging the customer again and keep the subscription in a scheduled state until the next billing period.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------ | --------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1       |          | subscription\_1              |               | 1706140800           |        |           | none               | charge\_automatically |                  | 1703462400          |                |                      |                            |                             |                              |
 
 **Example 3 (Basic): Migrate subscriptions with trials**. For example, migrate a basic 100 USD monthly subscription starting on January 1. The subscription is under a trial until January 31. After the trial ends, the subscription is charged automatically using the default payment method.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end  | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------ | ---------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1       | 1        | subscription\_1              |               |                      |        | 1706659200 | none               | charge\_automatically |                  | 1703462400          |                |                      |                            |                             |                              |
 
 **Example 4 (Basic): Migrate past-due subscriptions**. For example, migrate a 100 USD monthly subscription with a last cycle start date of December 25, which hasn’t been paid. Migrate this mid-cycle starting January 1, with a renewal date on the 25th of each month. This creates a prorated invoice from January 1 to January 25 that Stripe can attempt to collect payment for.
 
 To migrate subscriptions that are in an active cycle but haven’t been paid in the previous system, set `proration_behavior` to `create_prorations` to immediately create an invoice and collect payment. This also enters the subscription into Stripe’s dunning flow, if the payment is still unpaid.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------ | --------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1       | 1        | subscription\_1              |               | 1706140800           |        |           | create\_prorations  | charge\_automatically |                  | 1703462400          |                |                      |                            |                             |                              |
 
 **Example 5: Migrate subscriptions that need to be canceled at the end of the cycle**. After migration, you can choose whether or not to charge these subscriptions, based on the migration timing (mid-cycle or at renewal).
 
 They’re canceled at the end of that period. For example, migrate a basic 100 USD monthly subscription starting on January 1. This subscription is automatically canceled on January 31.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------ | --------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1       | 1        | subscription\_1              |               | 1706140800           |        |           | none               | charge\_automatically |                  | 1703462400          |                |                      | TRUE                       |                             |                              |
 
 ### Migrate subscriptions with taxes
@@ -332,8 +343,9 @@ They’re canceled at the end of that period. For example, migrate a basic 100 U
 
 The migration toolkit validates if you enabled Stripe Tax in advance, and if customers provided the required fields to calculate tax automatically. Make sure your customers provide the necessary information before migration.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------ | --------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1       | 1        | subscription\_1              | TRUE          |                      |        |           | none               | charge\_automatically |                  |                     |                |                      |                            |                             |                              |
 
 **Example 2 (Basic)**: Migrate subscriptions and calculate tax using [manual tax rates](https://dashboard.stripe.com/test/tax-rates). For example, to migrate a basic 100 USD monthly subscription starting on January 1, with 10% tax created using manual tax rates:
@@ -341,8 +353,9 @@ The migration toolkit validates if you enabled Stripe Tax in advance, and if cus
 - Create a 10% manual tax rate in the [Dashboard](https://dashboard.stripe.com/test/tax-rates) (**Product catalog** > **Coupons**).
 - Use the tax rate ID in the migration CSV template.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon | trial\_end | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------ | --------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxx1            | 1704067200            | price\_xxx1       | 1        | subscription\_1              | FALSE         | 1706140800           |        |           | none               | charge\_automatically | txr\_xxx1         |                     |                |                      |                            |                             |                              |
 
 **Example 3 (Basic)**: If you use an external tax provider, such as Avalara or Vertex:
@@ -360,8 +373,9 @@ You can migrate subscriptions with discounts that are applied after migration. F
 - Create a 10% coupon in the [Dashboard](https://dashboard.stripe.com/test/tax-rates) (**Product catalog** > **Coupons**).
 - Use the coupon name in the migration CSV file.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required) | start\_date (required) | price (required) | quantity | metadata.third\_party\_sub\_id | automatic\_tax | billing\_cycle\_anchor | coupon        | trial\_end | proration\_behavior | collection\_method    | default\_tax\_rate | backdate\_start\_date | days\_until\_due | cancel\_at\_period\_end | add\_invoice\_items.0.amount | add\_invoice\_items.0.product | add\_invoice\_items.0.currency |
-| ------------- | ------------------- | --------------------- | ---------------- | -------- | --------------------------- | ------------- | -------------------- | ------------- | --------- | ------------------ | -------------------- | ---------------- | ------------------- | -------------- | -------------------- | -------------------------- | --------------------------- | ---------------------------- |
 | **FIELD**     | cus\_xxxx1           | 1704067200            | price\_xxx1       | 1        | subscription\_1              |               |                      | sample\_coupon |           | none               | charge\_automatically |                  |                     |                |                      |                            |                             |                              |
 
 ### Migrate subscriptions within Stripe accounts
@@ -373,8 +387,9 @@ To create a migration CSV for a Stripe-to-Stripe migration:
 1. Export the subscriptions from the old Stripe account using the Dashboard.
 2. Use the following CSV example as a reference to map fields between the old and new Stripe accounts.
 
+|  |
+|  |
 | **ATTRIBUTE** | customer (required)                                      | start\_date (required)                                               | price (required)                       | quantity                                              | metadata.old\_Stripe\_sub\_id                      | automatic\_tax                                       | billing\_cycle\_anchor               | coupon                                       | trial\_end                                   | proration\_behavior                                           | collection\_method                        | default\_tax\_rate                               | backdate\_start\_date                                         | days\_until\_due                                       | cancel\_at\_period\_end                                          |
-| ------------- | -------------------------------------------------------- | ------------------------------------------------------------------- | -------------------------------------- | ----------------------------------------------------- | ----------------------------------------------- | --------------------------------------------------- | ---------------------------------- | -------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------- |
 | **FIELD**     | Export field: Customer ID (from previous account export) | Export field: Current Period End UTC (from previous account export) | Respective price id in the new account | Export field: Quantity (from previous account export) | Export field: id (from previous account export) | TRUE if using Stripe tax in new account, else FALSE | Future billing date in new account | Respective coupon in the new account, if any | Respective trial in the new account, if any | `create_prorations` in case of prorated invoice, else `none` | `charge_automatically` or `send_invoice` | Respective tax rate in the new account, if any | Export field: Start Date UTC (from previous account export) | Specify if using `send_invoice` as collection method | Specify if a subscription is due to be canceled at period end |
 
 ### Migrate subscriptions with multiple phases
@@ -393,11 +408,12 @@ The migration tookit requires you to upload a CSV that has specific information 
 
 Before you create or download a CSV file, make sure you have access to the following information:
 
+|  |
+|  |
 | **Customer object**                                                                                            | All customers must have a default [payment method attached to them](https://docs.stripe.com/api/payment_methods/attach.md). Without a default payment method, future subscription payments will fail. If you don’t have a default payment method set for your customers after migrating their data, you have two options:
 
 - Obtain the user’s consent or rely on their past payment behavior to determine the default payment method on a per-customer basis.
 - Use this [provided script](https://gist.github.com/bsears90/c3f36bfe379dfd13cae749824c5b45ae) to attach the latest payment method to your customers and make it the default method.                                                                   |
-  | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
   | **Automatic tax**                                                                                              | If you use Stripe Tax (where you set automatic tax to true), all customers must have either [addresses or postal codes](https://docs.stripe.com/tax/customer-locations.md) (or both) per country. Stripe needs this information to calculate taxes for the given subscriptions.                                                                                                                                                                                                                                                                                                                                                                                                                                           |
   | [collection\_method](https://docs.stripe.com/api/subscriptions/create.md#create_subscription-collection_method) | If you’re using the `send_invoice` payment method for your subscriptions:
 - Add email addresses to the required customers.

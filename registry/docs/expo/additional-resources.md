@@ -125,6 +125,8 @@ The following resources are useful for learning about Expo tooling and services.
 
 ## Video tutorials
 
+[Introducing Expo Agent (beta): build real, production-quality native apps from your browser](https://www.youtube.com/watch?v=3yyy32R0s2k) — Expo Tutorials
+
 [What's new in Expo SDK 55](https://www.youtube.com/watch?v=q72aeXsbF9c) — Expo Tutorials
 
 [AI mobile app development with Replit and Expo](https://www.youtube.com/watch?v=Zm4z-8i7PgA) — Expo Tutorials
@@ -146,8 +148,6 @@ The following resources are useful for learning about Expo tooling and services.
 [Introducing Expo MCP Server](https://www.youtube.com/watch?v=dp9dpIgDxZQ) — Expo Tutorials
 
 [How to adopt Liquid Glass in an Expo app](https://www.youtube.com/watch?v=NMCQOBIwW2M) — Expo Tutorials
-
-[Liquid Glass Tabs with Expo Router v6 | Native Tabs](https://www.youtube.com/watch?v=QqNZXdGFl44) — Expo Tutorials
 
 ***
 

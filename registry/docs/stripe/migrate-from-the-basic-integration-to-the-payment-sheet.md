@@ -11,7 +11,7 @@ Upgrading to the Payment Sheet gives you access to:
 
 - Over 100 global payment methods including [Link](https://docs.stripe.com/payments/link/mobile-payment-element-link.md), Stripe’s accelerated checkout
 - The ability to display saved payment methods to buyers for future purchases
-- The [Appearance API](https://docs.stripe.com/elements/appearance-api.md?platform=ios), which allows you to customize the look and feel to match your app
+- The [Appearance API](https://docs.stripe.com/elements/appearance-api/mobile.md?platform=ios), which allows you to customize the look and feel to match your app
   ![Example of benefits gained when migrating from Basic Integration to Payment Sheet](https://b.stripecdn.com/docs-statics-srv/assets/mobile-bi-migration-to-mpe.df130554a0f82a3a3c84a6602944f823.png)
 
 In iOS, Basic Integration includes:

@@ -120,30 +120,3 @@ npx nuxt module add eslint
 Start your Nuxt app, a `eslint.config.mjs` file will be generated under your project root. You can customize it as needed.
 
 You can learn more about the module and customizations in [Nuxt ESLint's documentation](https://eslint.nuxt.com/packages/module){rel=""nofollow""}.
-
-# Nuxt and hydration
-
-When developing, you may face hydration issues. Don't ignore those warnings.
-
-# Why is it important to fix them?
-
-Hydration mismatches are not just warnings - they are indicators of serious problems that can break your application:
-
-## Performance Impact
-
-- **Increased time to interactive**: Hydration errors force Vue to re-render the entire component tree, which will increase the time for your Nuxt app to become interactive
-- **Poor user experience**: Users may see content flashing or unexpected layout shifts
-
-## Functionality Issues
-
-- **Broken interactivity**: Event listeners may not attach properly, leaving buttons and forms non-functional
-- **State inconsistencies**: Application state can become out of sync between what the user sees and what the application thinks is rendered
-- **SEO problems**: Search engines may index different content than what users actually see
-
-# How to detect them
-
-## Development Console Warnings
-
-Vue will log hydration mismatch warnings in the browser console during development:
-
-![Screenshot of Vue hydration mismatch warning in the browser console](https://nuxt.com/assets/docs/best-practices/vue-console-hydration.png)

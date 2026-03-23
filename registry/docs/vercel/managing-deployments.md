@@ -105,5 +105,5 @@ Other than your custom needs to redeploy, it's always recommended to redeploy yo
 
 title: "Inspecting your Open Graph metadata"
 description: "Learn how to inspect and validate your Open Graph metadata through the Open Graph deployment tab."
-last\_updated: "2026-03-08T05:03:13.335Z"
+last\_updated: "2026-03-23T09:40:08.403Z"
 source: "https://vercel.com/docs/deployments/og-preview"

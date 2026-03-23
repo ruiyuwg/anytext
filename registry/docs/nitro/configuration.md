@@ -4,33 +4,117 @@
 See [config reference](https://nitro.build/config) for available options.
 ::
 
+## Config file
+
 You can customize your Nitro builder with a configuration file.
 
-::code-group
+::CodeGroup
 
 ```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
 export default defineNitroConfig({
   // Nitro options
 })
 ```
 
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
+```ts [vite.config.ts]
+import { defineConfig } from 'vite'
+import { nitro } from 'nitro/vite'
+
+export default defineConfig({
+  plugins: [
+    nitro()
+  ],
   nitro: {
     // Nitro options
   }
 })
+
 ```
 
-::
-
-::important
-If you are using [Nuxt](https://nuxt.com){rel=""nofollow""}, use the `nitro` option in your Nuxt config instead.
 ::
 
 ::tip
 Nitro loads the configuration using [c12](https://github.com/unjs/c12){rel=""nofollow""}, giving more possibilities such as using `.nitrorc` file in current working directory or in the user's home directory.
 ::
+
+### Environment-specific config
+
+Using [c12](https://github.com/unjs/c12){rel=""nofollow""} conventions, you can provide environment-specific overrides using `$development` and `$production` keys:
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
+  logLevel: 3,
+  $development: {
+    // Options applied only in development mode
+    debug: true,
+  },
+  $production: {
+    // Options applied only in production builds
+    minify: true,
+  },
+})
+```
+
+The environment name is `"development"` during `nitro dev` and `"production"` during `nitro build`.
+
+### Extending configs
+
+You can extend from other configs or presets using the `extends` key:
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
+  extends: "./base.config",
+})
+```
+
+### Config from `package.json`
+
+You can also provide Nitro configuration under the `nitro` key in your `package.json` file.
+
+## Directory options
+
+Nitro provides several options for controlling directory structure:
+
+| Option             | Default                 | Description                                                      |
+| ------------------ | ----------------------- | ---------------------------------------------------------------- |
+| `rootDir`          | `.` (current directory) | The root directory of the project.                               |
+| `serverDir`        | `false`                 | Server source directory (set to `"server"` or `"./"` to enable). |
+| `buildDir`         | `node_modules/.nitro`   | Directory for build artifacts.                                   |
+| `output.dir`       | `.output`               | Production output directory.                                     |
+| `output.serverDir` | `.output/server`        | Server output directory.                                         |
+| `output.publicDir` | `.output/public`        | Public assets output directory.                                  |
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
+  serverDir: "server",
+  buildDir: "node_modules/.nitro",
+  output: {
+    dir: ".output",
+  },
+})
+```
+
+::note
+The `srcDir` option is deprecated. Use `serverDir` instead.
+::
+
+## Environment variables
+
+Certain Nitro behaviors can be configured using environment variables:
+
+| Variable                   | Description                           |
+| -------------------------- | ------------------------------------- |
+| `NITRO_PRESET`             | Override the deployment preset.       |
+| `NITRO_COMPATIBILITY_DATE` | Set the compatibility date.           |
+| `NITRO_APP_BASE_URL`       | Override the base URL (default: `/`). |
 
 ## Runtime configuration
 
@@ -38,37 +122,66 @@ Nitro provides a runtime config API to expose configuration within your applicat
 
 First, you need to define the runtime config in your configuration file.
 
-::code-group
-
 ```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
 export default defineNitroConfig({
   runtimeConfig: {
     apiToken: "dev_token", // `dev_token` is the default value
   }
-})
+});
 ```
 
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
+You can now access the runtime config using `useRuntimeConfig()`.
+
+```ts [api/example.get.ts]
+import { defineHandler } from "nitro";
+import { useRuntimeConfig } from "nitro/runtime-config";
+
+export default defineHandler((event) => {
+  return useRuntimeConfig().apiToken; // Returns `dev_token`
+});
+```
+
+### Nested objects
+
+Runtime config supports nested objects. Keys at any depth are mapped to environment variables using the `NITRO_` prefix and `UPPER_SNAKE_CASE` conversion:
+
+::CodeGroup
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
   runtimeConfig: {
-    apiToken: "dev_token", // `dev_token` is the default value
-  }
-})
+    database: {
+      host: "localhost",
+      port: 5432,
+    },
+  },
+});
+```
+
+```bash [.env]
+NITRO_DATABASE_HOST="db.example.com"
+NITRO_DATABASE_PORT="5433"
 ```
 
 ::
 
-You can now access the runtime config using `useRuntimeConfig(event)`. Use `useRuntimeConfig(event)` within event handlers and utilities and **avoid** calling it in ambient global contexts. This could lead to unexpected behavior such as sharing the same runtime config across different requests.
+::note
+Only keys defined in `runtimeConfig` in your config file will be considered. You cannot introduce new keys using environment variables alone.
+::
 
-```ts [server/api/example.get.ts]
-export default defineEventHandler((event) => {
-  return useRuntimeConfig(event).apiToken // Returns `dev_token`
-});
-```
+### Serialization
+
+Runtime config values must be serializable (strings, numbers, booleans, plain objects, and arrays). Non-serializable values (class instances, functions, etc.) will trigger a warning at build time.
+
+Values that are `undefined` or `null` in the config are replaced with empty strings (`""`) as a fallback.
 
 ### Local development
 
-Finally, you can update the runtime config using environment variables. You can use a `.env` file in development and use platform variables in production (see below).
+You can update the runtime config using environment variables. You can use a `.env` or `.env.local` file in development and use platform variables in production (see below).
 
 Create an `.env` file in your project root:
 
@@ -78,23 +191,23 @@ NITRO_API_TOKEN="123"
 
 Re-start the development server, fetch the `/api/example` endpoint and you should see `123` as the response instead of `dev_token`.
 
-Do not forget that you can still universally access environment variables using `import.meta.env` or `process.env` but avoid using them in ambiant global contexts to prevent unexpected behavior.
+::note
+The `.env` and `.env.local` files are only loaded during development (`nitro dev`). In production, use your platform's native environment variable mechanism.
+::
+
+Do not forget that you can still universally access environment variables using `import.meta.env` or `process.env` but avoid using them in ambient global contexts to prevent unexpected behavior.
 
 ### Production
 
-You can define variables in your production environment to update the runtime config. All variables must be prefixed with `NITRO_` to be applied to the runtime config. They will override the runtime config variables defined within your `nitro.config.ts` file.
+You can define variables in your production environment to update the runtime config.
 
-::code-group
+::warning
+All variables must be prefixed with `NITRO_` to be applied to the runtime config. They will override the runtime config variables defined within your `nitro.config.ts` file.
+::
 
-```bash [.env (nitro)]
+```bash [.env]
 NITRO_API_TOKEN="123"
 ```
-
-```bash [.env (nuxt)]
-NUXT_API_TOKEN="123"
-```
-
-::
 
 In runtime config, define key using camelCase. In environment variables, define key using snake\_case and uppercase.
 
@@ -108,75 +221,44 @@ In runtime config, define key using camelCase. In environment variables, define 
 NITRO_HELLO_WORLD="foo"
 ```
 
-# TypeScript
+### Custom env prefix
 
-## `tsconfig.json`
+You can configure a secondary environment variable prefix using the `nitro.envPrefix` runtime config key. This prefix is checked in addition to the default `NITRO_` prefix:
 
-To leverage type hints within your project, create a `tsconfig.json` file that extends auto-generated types.
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
 
-::code-group
-
-```json [tsconfig.json (nitro)]
-{
-  "extends": "./.nitro/types/tsconfig.json"
-}
+export default defineNitroConfig({
+  runtimeConfig: {
+    nitro: {
+      envPrefix: "APP_",
+    },
+    apiToken: "",
+  },
+});
 ```
 
-```json [server/tsconfig.json (nuxt)]
-{
-  "extends": "../.nuxt/tsconfig.server.json"
-}
+With this configuration, both `NITRO_API_TOKEN` and `APP_API_TOKEN` will be checked as overrides.
+
+### Env expansion
+
+When enabled, environment variable references using `{{VAR_NAME}}` syntax in runtime config string values are expanded at runtime:
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
+  experimental: {
+    envExpansion: true,
+  },
+  runtimeConfig: {
+    url: "https://{{APP_DOMAIN}}/api",
+  },
+});
 ```
 
-::
-
-::tip
-Starter templates have this file by default and usually you don't need to do anything. If this file does not exists, you can manually create it.
-::
-
-## Prepare types
-
-You can use `prepare` command to auto generate the types.
-This can be useful in a CI environment or as a `postinstall` command in your `package.json`.
-
-:pm-x{command="nitro prepare"}
-
-::tip
-When using `nitro dev` command, types are also auto-generated!
-::
-
-::note
-For [Nuxt](https://nuxt.com){rel=""nofollow""} you should use `nuxi generate`
-::
-
-# Nightly Channel
-
-You can opt-in to the nightly release channel by updating your `package.json`:
-
-::code-group
-
-```diff [Nitro]
-{
-  "devDependencies": {
---    "nitropack": "^2.0.0"
-++    "nitropack": "npm:nitropack-nightly@latest"
-  }
-}
+```bash
+APP_DOMAIN="example.com"
 ```
 
-```diff [Nuxt]
-{
-  "devDependencies": {
---    "nuxt": "^3.0.0"
-++    "nuxt": "npm:nuxt-nightly@latest"
-  }
-}
-```
-
-::
-
-::note
-If you are using Nuxt, [use the Nuxt nightly channel](https://nuxt.com/docs/guide/going-further/nightly-release-channel#opting-in){rel=""nofollow""} as it already includes `nitropack-nightly`.
-::
-
-Remove the lockfile (`package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, or `bun.lockb`) and reinstall the dependencies.
+At runtime, `useRuntimeConfig().url` will resolve to `"https://example.com/api"`.

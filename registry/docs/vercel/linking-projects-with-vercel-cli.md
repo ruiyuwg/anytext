@@ -38,7 +38,7 @@ Auto-detected project settings (Next.js):
 ? Want to override the settings? [y/N]
 ```
 
-*Creating a new Vercel Project with the vercel
+*Creating a new Vercel Project with the \`vercel\`
 command.*
 
 You will be provided with default **Build Command**, **Output Directory**, and **Development Command** options.
@@ -52,5 +52,5 @@ You can continue with the default Project Settings or overwrite them. You can al
 
 title: "vercel promote"
 description: "Learn how to promote an existing deployment using the vercel promote CLI command."
-last\_updated: "2026-03-08T05:03:12.317Z"
+last\_updated: "2026-03-23T09:40:06.988Z"
 source: "https://vercel.com/docs/cli/promote"

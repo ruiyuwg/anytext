@@ -151,7 +151,7 @@ Nuxt uses `unhead` under the hood, and you can refer to [its full documentation]
 
 If you need more advanced control, you can intercept the rendered html with a hook and modify the head programmatically.
 
-Create a plugin in `~/server/plugins/my-plugin.ts` like this:
+Create a plugin in `~~/server/plugins/my-plugin.ts` like this:
 
 ```ts [server/plugins/my-plugin.ts]
 export default defineNitroPlugin((nitro) => {

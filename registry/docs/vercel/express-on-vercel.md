@@ -155,5 +155,5 @@ Learn more about deploying Express projects on Vercel with the following resourc
 
 title: "FastAPI on Vercel"
 description: "Deploy FastAPI applications to Vercel with zero configuration. Learn about the Python runtime, ASGI, static assets, and Vercel Functions."
-last\_updated: "2026-03-08T05:03:14.754Z"
+last\_updated: "2026-03-23T09:40:10.423Z"
 source: "https://vercel.com/docs/frameworks/backend/fastapi"

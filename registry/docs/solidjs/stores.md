@@ -15,8 +15,8 @@ Stores can manage many data types, including: objects, arrays, strings, and numb
 Using JavaScript's [proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) mechanism, reactivity extends beyond just the top-level objects or arrays. With stores, you can now target nested properties and elements within these structures to create a dynamic tree of reactive data.
 
 ```
-import { createStore } from "solid-js/store"
-// Initialize storeconst [store, setStore] = createStore({  userCount: 3,  users: [    {      id: 0,      username: "felix909",      location: "England",      loggedIn: false,    },    {      id: 1,      username: "tracy634",      location: "Canada",      loggedIn: true,    },    {      id: 2,      username: "johny123",      location: "India",      loggedIn: true,    },  ],})
+import { createStore } from "solid-js/store";
+// Initialize storeconst [store, setStore] = createStore({  userCount: 3,  users: [    {      id: 0,      username: "felix909",      location: "England",      loggedIn: false,    },    {      id: 1,      username: "tracy634",      location: "Canada",      loggedIn: true,    },    {      id: 2,      username: "johny123",      location: "India",      loggedIn: true,    },  ],});
 ```
 
 ***
@@ -26,13 +26,13 @@ import { createStore } from "solid-js/store"
 Store properties can be accessed directly from the state proxy through directly referencing the targeted property:
 
 ```
-console.log(store.userCount) // Outputs: 3
+console.log(store.userCount); // Outputs: 3
 ```
 
 Accessing stores within a tracking scope follows a similar pattern to signals. While signals are created using the [`createSignal`](/reference/basic-reactivity/create-signal) function and require calling the signal function to access their values, store values can be directly accessed without a function call. This provides access to the store's value directly within a tracking scope:
 
 ```
-const App = () => {  const [mySignal, setMySignal] = createSignal("This is a signal.")  const [store, setStore] = createStore({    userCount: 3,    users: [      {        id: 0,        username: "felix909",        location: "England",        loggedIn: false,      },      {        id: 1,        username: "tracy634",        location: "Canada",        loggedIn: true,      },      {        id: 2,        username: "johny123",        location: "India",        loggedIn: true,      },    ],  })  return (    <div>      <h1>Hello, {store.users[0].username}</h1> {/* Accessing a store value */}      <span>{mySignal()}</span> {/* Accessing a signal */}    </div>  )}
+const App = () => {  const [mySignal, setMySignal] = createSignal("This is a signal.");  const [store, setStore] = createStore({    userCount: 3,    users: [      {        id: 0,        username: "felix909",        location: "England",        loggedIn: false,      },      {        id: 1,        username: "tracy634",        location: "Canada",        loggedIn: true,      },      {        id: 2,        username: "johny123",        location: "India",        loggedIn: true,      },    ],  });  return (    <div>      <h1>Hello, {store.users[0].username}</h1> {/* Accessing a store value */}      <span>{mySignal()}</span> {/* Accessing a signal */}    </div>  );};
 ```
 
 When a store is created, it starts with the initial state but does *not* immediately set up signals to track changes. These signals are created **lazily**, meaning they are only formed when accessed within a tracking scope.
@@ -124,13 +124,13 @@ To append values to an array in a store, use the setter function with the spread
 The spread operator creates a new array by copying the existing elements and adding the new one, effectively replacing the entire `store.users` array. This replacement triggers reactivity for all effects that depend on the array or its properties.
 
 ```
-setStore("users", (otherUsers) => [  ...otherUsers,  {    id: 3,    username: "michael584",    location: "Nigeria",    loggedIn: false,  },])
+setStore("users", (otherUsers) => [  ...otherUsers,  {    id: 3,    username: "michael584",    location: "Nigeria",    loggedIn: false,  },]);
 ```
 
 The path syntax adds the new element by assigning it to the index equal to `store.users.length`, directly modifying the existing array. This triggers reactivity only for effects that depend on the new index or properties like `store.users.length`, making updates more efficient and targeted.
 
 ```
-setStore("users", store.users.length, {  id: 3,  username: "michael584",  location: "Nigeria",  loggedIn: false,})
+setStore("users", store.users.length, {  id: 3,  username: "michael584",  location: "Nigeria",  loggedIn: false,});
 ```
 
 ### [Modifying multiple elements](/concepts/stores#modifying-multiple-elements)
@@ -140,25 +140,25 @@ With path syntax, you can target a subset of elements of an array, or properties
 The most general form is to specify an array of values. For example, if `store.users` is an array of objects, you can set the `loggedIn` property of several indices at once like so:
 
 ```
-setStore("users", [2, 7, 10], "loggedIn", false)// equivalent to (but more efficient than):setStore("users", 2, "loggedIn", false)setStore("users", 7, "loggedIn", false)setStore("users", 10, "loggedIn", false)
+setStore("users", [2, 7, 10], "loggedIn", false);// equivalent to (but more efficient than):setStore("users", 2, "loggedIn", false);setStore("users", 7, "loggedIn", false);setStore("users", 10, "loggedIn", false);
 ```
 
 This array syntax also works for object property names. For example, if `store.users` is an object mapping usernames to objects, you can set the `loggedIn` property of several users at once like so:
 
 ```
-setStore("users", ["me", "you"], "loggedIn", false)// equivalent to (but more efficient than):setStore("users", ["me"], "loggedIn", false)setStore("users", ["you"], "loggedIn", false)
+setStore("users", ["me", "you"], "loggedIn", false);// equivalent to (but more efficient than):setStore("users", ["me"], "loggedIn", false);setStore("users", ["you"], "loggedIn", false);
 ```
 
 For arrays specifically, you can specify a range of indices via an object with `from` and `to` keys (both of which are inclusive). For example, assuming `store.users` is an array again, you can set the `loggedIn` state for all users except index 0 as follows:
 
 ```
-setStore("users", { from: 1, to: store.users.length - 1 }, "loggedIn", false)// equivalent to (but more efficient than):for (let i = 1; i <= store.users.length - 1; i++) {  setStore("users", i, "loggedIn", false)}
+setStore("users", { from: 1, to: store.users.length - 1 }, "loggedIn", false);// equivalent to (but more efficient than):for (let i = 1; i <= store.users.length - 1; i++) {  setStore("users", i, "loggedIn", false);}
 ```
 
 You can also include a `by` key in a range object to specify a step size, and thereby update a regular subset of elements. For example, you can set the `loggedIn` state for even-indexed users like so:
 
 ```
-setStore("users", { from: 0, to: store.users.length - 1, by: 2 }, "loggedIn", false)// equivalent to (but more efficient than):for (let i = 1; i <= store.users.length - 1; i += 2) {  setStore("users", i, "loggedIn", false)}
+setStore(  "users",  { from: 0, to: store.users.length - 1, by: 2 },  "loggedIn",  false);// equivalent to (but more efficient than):for (let i = 1; i <= store.users.length - 1; i += 2) {  setStore("users", i, "loggedIn", false);}
 ```
 
 Multi-setter syntax differs from the "equivalent" code in one key way: a single store setter call automatically gets wrapped in a [`batch`](/reference/reactive-utilities/batch), so all the elements update at once before any downstream effects are triggered.
@@ -168,7 +168,7 @@ Multi-setter syntax differs from the "equivalent" code in one key way: a single 
 Path syntax also provides a way to set values within an array using functions instead of static values. These functions receive the old value as an argument, allowing you to compute the new value based on the existing one. This dynamic approach is particularly useful for complex transformations.
 
 ```
-setStore("users", 3, "loggedIn" , (loggedIn) => !loggedIn)
+setStore("users", 3, "loggedIn", (loggedIn) => !loggedIn);
 ```
 
 ### [Filtering values](/concepts/stores#filtering-values)
@@ -176,9 +176,9 @@ setStore("users", 3, "loggedIn" , (loggedIn) => !loggedIn)
 To update elements in an array based on specific conditions, you can pass a function as an argument. This function acts as a filter, receiving the old value and index, and gives you the flexibility to apply logic that targets specific cases. This might include using methods like `.startsWith()`, `includes()`, or other comparison techniques to determine which elements should be updated.
 
 ```
-// update users with username that starts with "t"setStore("users", (user) => user.username.startsWith("t"), "loggedIn", false)
-// update users with location "Canada"setStore("users", (user) => user.location == "Canada" , "loggedIn", false)
-// update users with id 1, 2 or 3let ids = [1,2,3]setStore("users", (user) => ids.includes(user.id) , "loggedIn", false)
+// update users with username that starts with "t"setStore("users", (user) => user.username.startsWith("t"), "loggedIn", false);
+// update users with location "Canada"setStore("users", (user) => user.location == "Canada", "loggedIn", false);
+// update users with id 1, 2 or 3let ids = [1, 2, 3];setStore("users", (user) => ids.includes(user.id), "loggedIn", false);
 ```
 
 ***
@@ -190,9 +190,9 @@ When using store setters to modify objects, if a new value is an object, it will
 What this means, is that you can directly make the change to the store *without* spreading out properties of the existing user object.
 
 ```
-setStore("users", 0, {  id: 109,})
+setStore("users", 0, {  id: 109,});
 // is equivalent to
-setStore("users", 0, (user) => ({  ...user,  id: 109,}))
+setStore("users", 0, (user) => ({  ...user,  id: 109,}));
 ```
 
 ***
@@ -204,9 +204,9 @@ setStore("users", 0, (user) => ({  ...user,  id: 109,}))
 Rather than directly modifying a store with setters, Solid has the `produce` utility. This utility provides a way to work with data as if it were a [mutable](https://developer.mozilla.org/en-US/docs/Glossary/Mutable) JavaScript object. `produce` also provides a way to make changes to multiple properties at the same time which eliminates the need for multiple setter calls.
 
 ```
-import { produce } from "solid-js/store"
-// without producesetStore("users", 0, "username", "newUsername")setStore("users", 0, "location", "newLocation")
-// with producesetStore(  "users",  0,  produce((user) => {    user.username = "newUsername"    user.location = "newLocation"  }))
+import { produce } from "solid-js/store";
+// without producesetStore("users", 0, "username", "newUsername");setStore("users", 0, "location", "newLocation");
+// with producesetStore(  "users",  0,  produce((user) => {    user.username = "newUsername";    user.location = "newLocation";  }));
 ```
 
 `produce` and `setStore` do have distinct functionalities. While both can be used to modify the state, the key distinction lies in how they handle data. `produce` allows you to work with a temporary draft of the state, apply the changes, then produce a new [immutable](https://developer.mozilla.org/en-US/docs/Glossary/Immutable) version of the store. Comparatively, `setStore` provides a more straightforward way to update the store directly, without creating a new version.
@@ -218,9 +218,9 @@ It's important to note, however, `produce` is specifically designed to work with
 When new information needs to be merged into an existing store `reconcile` can be useful. `reconcile` will determine the differences between new and existing data and initiate updates only when there are *changed* values, thereby avoiding unnecessary updates.
 
 ```
-import { createStore, reconcile } from "solid-js/store"
-const [data, setData] = createStore({  animals: ['cat', 'dog', 'bird', 'gorilla']})
-const newData = getNewData() // eg. contains ['cat', 'dog', 'bird', 'gorilla', 'koala']setData('animals', reconcile(newData))
+import { createStore, reconcile } from "solid-js/store";
+const [data, setData] = createStore({  animals: ["cat", "dog", "bird", "gorilla"],});
+const newData = getNewData(); // eg. contains ['cat', 'dog', 'bird', 'gorilla', 'koala']setData("animals", reconcile(newData));
 ```
 
 In this example, the store will look for the differences between the existing and incoming data sets. Consequently, only `'koala'` - the new edition - will cause an update.
@@ -232,9 +232,9 @@ When there is a need for dealing with data outside of a tracking scope, the `unw
 Firstly, it provides a snapshot of the current state without the processing overhead associated with reactivity. This can be useful in situations where an unaltered, non-reactive view of the data is needed. Additionally, `unwrap` provides a means to interface with third-party libraries or tools that anticipate regular JavaScript objects. This utility acts as a bridge to facilitate smooth integrations with external components and simplifies the incorporation of stores into various applications and workflows.
 
 ```
-import { createStore, unwrap } from "solid-js/store"
-const [data, setData] = createStore({  animals: ["cat", "dog", "bird", "gorilla"],})
-const rawData = unwrap(data)
+import { createStore, unwrap } from "solid-js/store";
+const [data, setData] = createStore({  animals: ["cat", "dog", "bird", "gorilla"],});
+const rawData = unwrap(data);
 ```
 
 To learn more about how to use Stores in practice, visit the [guide on complex state management](/guides/complex-state-management).

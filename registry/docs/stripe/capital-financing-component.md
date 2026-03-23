@@ -96,6 +96,10 @@ container.appendChild(capitalFinancing);
 | `supportUrl`            | `string`                    | Absolute URL of your support site.                                                                                                                                                                | `https://support.stripe.com/`                              | optional             |
 | `howCapitalWorksUrl`    | `string`                    | Absolute URL of a page with information about the Capital program.                                                                                                                                | `https://docs.stripe.com/capital/how-stripe-capital-works` | optional             |
 
+## Style and customize the component
+
+[Customize embedded components](https://docs.stripe.com/connect/customize-connect-embedded-components.md) to align the component’s fonts, colors, and UI style with your platform’s branding.
+
 ## Set the display state
 
 Place the financing component on a page your connected accounts currently use to view payments and payouts reporting information, or a dedicated **Financing** page.
@@ -105,6 +109,10 @@ The financing component displays content dynamically based on the connected acco
 - **No financing history**: If a connected account has an offer, but hasn’t accepted or applied for it yet, the financing component displays nothing. Listen to the `onFinancingsLoaded` event to display a custom message in the financing component for this state or hide the financing component until financing data becomes available.
 
 - **Offer in review**: After an eligible connected account accepts and applies for a financing offer, use this state to render the component to display an application status tracker while they wait for offer approval.
+
+## Handle load errors
+
+After rendering the component, review how to [handle load errors](https://docs.stripe.com/connect/get-started-connect-embedded-components.md?platform=web#reacting-to-load-errors) to make sure your integration can gracefully manage cases when components fail to load.
 
 ## Submit the component for review
 

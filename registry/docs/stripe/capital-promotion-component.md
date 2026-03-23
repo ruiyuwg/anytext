@@ -101,6 +101,10 @@ container.appendChild(capitalFinancingPromotion);
 | `howCapitalWorksUrl`             | `string`                                                  | Absolute URL of a page with information about the Capital program.                                                                                                                                                                                             | `https://docs.stripe.com/capital/how-stripe-capital-works` | optional             |
 | `eligibilityCriteriaUrl`         | `string`                                                  | Absolute URL of a page with information about eligibility criteria for the Capital program.                                                                                                                                                                    | `https://docs.stripe.com/capital/how-stripe-capital-works` | optional             |
 
+## Style and customize the component
+
+[Customize embedded components](https://docs.stripe.com/connect/customize-connect-embedded-components.md) to align the component’s fonts, colors, and UI style with your platform’s branding.
+
 ## Set the display state
 
 Add the promotion component on your platform’s home page, or a dedicated **Financing** page in your platform’s website or app. The application component displays content dynamically based on the connected account’s financing status:
@@ -157,6 +161,10 @@ Each page in an onboarding flow has one of the following step names.
 - The StepChange object is only for analytics.
 - Steps can appear in any order and can repeat.
 - The list of valid step names can change at any time, without notice.
+
+## Handle load errors
+
+After rendering the component, review how to [handle load errors](https://docs.stripe.com/connect/get-started-connect-embedded-components.md?platform=web#reacting-to-load-errors) to make sure your integration can gracefully manage cases when components fail to load.
 
 ## Submit the component for review
 

@@ -2,9 +2,9 @@
 
 Learn how to save payment details in a Checkout session and charge your customers later.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/save-and-reuse?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/save-and-reuse?payment-ui=stripe-hosted.
 
 To collect customer payment details that you can reuse later, use Checkout’s setup mode. Setup mode uses the [Setup Intents API](https://docs.stripe.com/api/setup_intents.md) to create [Payment Methods](https://docs.stripe.com/api/payment_methods.md).
 
@@ -163,9 +163,9 @@ curl https://api.stripe.com/v1/checkout/sessions \
   --data-urlencode success_url="https://example.com/success?session_id={CHECKOUT_SESSION_ID}"
 ```
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/save-and-reuse?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/save-and-reuse?payment-ui=embedded-form.
 
 To collect customer payment details that you can reuse later, use Checkout’s setup mode. Setup mode uses the [Setup Intents API](https://docs.stripe.com/api/setup_intents.md) to create [Payment Methods](https://docs.stripe.com/api/payment_methods.md).
 
@@ -207,8 +207,8 @@ require 'json'
 require 'sinatra'
 require 'stripe'
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 post '/create-checkout-session' do

@@ -51,5 +51,5 @@ BYOK credentials are configured at the team level and work across all projects. 
 
 title: "Image Generation with AI SDK"
 description: "Generate and edit images using AI models through Vercel AI Gateway with the AI SDK."
-last\_updated: "2026-03-08T05:03:10.141Z"
+last\_updated: "2026-03-23T09:40:03.828Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/image-generation/ai-sdk"

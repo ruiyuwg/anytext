@@ -56,5 +56,5 @@ If access is lost due to removal of team owners, use the following group names t
 
 title: "Uploading Custom SSL Certificates"
 description: "By default, Vercel provides all domains with a custom SSL certificates. However, Enterprise teams can upload their own custom SSL certificate."
-last\_updated: "2026-03-08T05:03:13.446Z"
+last\_updated: "2026-03-23T09:40:08.595Z"
 source: "https://vercel.com/docs/domains/custom-SSL-certificate"

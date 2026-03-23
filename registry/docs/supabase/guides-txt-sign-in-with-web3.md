@@ -227,7 +227,3 @@ function App() {
 Web3 wallets don't expose any identifying information about the user other than their wallet address (public key). This is why accounts that were created using Sign in with Web3 don't have any email address or phone number associated.
 
 To associate an email address, phone number or other social login with their account you can use the `supabase.auth.updateUser()` or `supabase.auth.linkIdentity()` APIs.
-
-# Enterprise Single Sign-On
-
-Supabase Auth supports building enterprise applications that require Single Sign-On (SSO) authentication [with SAML 2.0](/docs/guides/auth/sso/auth-sso-saml).

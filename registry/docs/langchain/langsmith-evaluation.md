@@ -52,7 +52,7 @@ Evaluate real user interactions in real-time to detect issues and measure qualit
   
 
   
-    Evaluators run automatically on [runs](/langsmith/evaluation-concepts#runs) or [threads](/langsmith/online-evaluations-llm-as-judge#configure-multi-turn-online-evaluators), providing real-time monitoring, anomaly detection, and alerting.
+    Evaluators run automatically on [runs](/langsmith/evaluation-concepts#runs) or [threads](/langsmith/online-evaluations-multi-turn), providing real-time monitoring, anomaly detection, and alerting.
   
 
   

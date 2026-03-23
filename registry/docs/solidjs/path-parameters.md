@@ -28,7 +28,7 @@ You can retrieve the values captured by parameters using [`useParams`](/solid-ro
 
 ```
 import { useParams } from "@solidjs/router";
-function User() {    const params = useParams();    return <div>User ID: {params.id}</div>; {/* Output: User ID: 123 */}}
+function User() {  const params = useParams();  return <div>User ID: {params.id}</div>;  {    /* Output: User ID: 123 */  }}
 ```
 
 ***

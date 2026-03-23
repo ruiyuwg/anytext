@@ -41,7 +41,7 @@ deno add npm:tailwindcss @tailwindcss/postcss postcss -D
 2. Add `@tailwind/postcss` to the `plugins` in your PostCSS configuration. If you do not have a PostCSS configuration file, create a new one called `postcss.config.mjs`.
 
 ```
-export default {  plugins: {    "@tailwindcss/postcss": {},  }}
+export default {  plugins: {    "@tailwindcss/postcss": {},  },};
 ```
 
 For a deeper dive into configuration, you can check out the [Tailwind Official Documentation](https://tailwindcss.com/docs/configuration).
@@ -80,7 +80,7 @@ With Tailwind CSS set up, you can now utilize its utility classes. For instance,
 Update your components to use Tailwind's utility classes:
 
 ```
-/* src/components/Card.jsx */function Card() {  return (    <div class="grid place-items-center min-h-screen">      <div class="h-[160px] aspect aspect-[2] rounded-[16px] shadow-[0_0_0_4px_hsl(0_0%_0%_/_15%)]">        Hello, world!      </div>    </div>  );}
+/* src/components/Card.jsx */function Card() {  return (    <div class="grid min-h-screen place-items-center">      <div class="aspect aspect-[2] h-[160px] rounded-[16px] shadow-[0_0_0_4px_hsl(0_0%_0%_/_15%)]">        Hello, world!      </div>    </div>  );}
 ```
 
 ***

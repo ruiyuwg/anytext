@@ -656,6 +656,7 @@ $stripe = new \Stripe\StripeClient(\[
 ]);
 $YOUR\_DOMAIN = 'http://localhost:4242';
 $YOUR\_DOMAIN = 'http://localhost:3000';
+
 $checkout\_session = $stripe->checkout->sessions->create(\[
 'ui\_mode' => 'custom',
 'customer\_email' => 'customer@example.com',
@@ -718,88 +719,91 @@ $stripeSecretKey = '<\<YOUR\_SECRET\_KEY>>';
 // This test secret API key is a placeholder. Don't include personal details in requests with this key.
 // To see your test secret API key embedded in code samples, sign in to your Stripe account.
 // You can also find your test secret API key at https://dashboard.stripe.com/test/apikeys.
+services.AddSingleton(new StripeClient("<\<YOUR\_SECRET\_KEY>>"));
+var domain = "http://localhost:4242";
+var domain = "http://localhost:3000";
+UiMode = "custom",
+CustomerEmail = "customer@example.com",
+BillingAddressCollection = "auto",
+ShippingAddressCollection = new SessionShippingAddressCollectionOptions
+{
+AllowedCountries = new List
+{
+"US",
+"CA",
+},
+},
+LineItems = new List
+{
+new SessionLineItemOptions
+{
+// Provide the exact Price ID (for example, price\_1234) of the product you want to sell
+Price = "{{PRICE\_ID}}",
+Quantity = 1,
+},
+},
+LineItems = new List
+{
+new SessionLineItemOptions
+{
+PriceData = new SessionLineItemPriceDataOptions
+{
+ProductData = new SessionLineItemPriceDataProductDataOptions
+{
+Name = "{{PRICE\_DATA\_NAME}}",
+},
+Currency = "{{PRICE\_DATA\_CURRENCY}}",
+UnitAmount = {{PRICE\_DATA\_UNIT\_AMOUNT}},
+},
+Quantity = 1,
+},
+},
+LineItems = new List
+{
+new SessionLineItemOptions
+{
+PriceData = new SessionLineItemPriceDataOptions
+{
+ProductData = new SessionLineItemPriceDataProductDataOptions
+{
+Name = "{{PRICE\_DATA\_NAME}}",
+},
+Currency = "{{PRICE\_DATA\_CURRENCY}}",
+UnitAmount = {{PRICE\_DATA\_UNIT\_AMOUNT}},
+Recurring = new SessionLineItemPriceDataRecurringOptions
+{
+Interval = "{{PRICE\_DATA\_INTERVAL}}",
+IntervalCount = {{PRICE\_DATA\_INTERVAL\_COUNT}},
+},
+},
+Quantity = 1,
+},
+},
+Mode = {{CHECKOUT\_MODE}},
+ReturnUrl = domain + "/complete.html?session\_id={CHECKOUT\_SESSION\_ID}",
+ReturnUrl = domain + "/complete?session\_id={CHECKOUT\_SESSION\_ID}",
+AutomaticTax = new SessionAutomaticTaxOptions { Enabled = true },
+Session session = \_client.V1.Checkout.Sessions.Create(options);
 
 ```
-        StripeConfiguration.ApiKey = "<<YOUR_SECRET_KEY>>";
-
-        var domain = "http://localhost:4242";
-        var domain = "http://localhost:3000";
-            UiMode = "custom",
-            CustomerEmail = "customer@example.com",
-            BillingAddressCollection = "auto",
-            ShippingAddressCollection = new SessionShippingAddressCollectionOptions
-            {
-              AllowedCountries = new List
-              {
-                "US",
-                "CA",
-              },
-            },
-            LineItems = new List
-            {
-              new SessionLineItemOptions
-              {
-                // Provide the exact Price ID (for example, price_1234) of the product you want to sell
-                Price = "{{PRICE_ID}}",
-                Quantity = 1,
-              },
-            },
-            LineItems = new List
-            {
-              new SessionLineItemOptions
-              {
-                PriceData = new SessionLineItemPriceDataOptions
-                {
-                  ProductData = new SessionLineItemPriceDataProductDataOptions
-                  {
-                    Name = "{{PRICE_DATA_NAME}}",
-                  },
-                  Currency = "{{PRICE_DATA_CURRENCY}}",
-                  UnitAmount = {{PRICE_DATA_UNIT_AMOUNT}},
-                },
-                Quantity = 1,
-              },
-            },
-            LineItems = new List
-            {
-              new SessionLineItemOptions
-              {
-                PriceData = new SessionLineItemPriceDataOptions
-                {
-                  ProductData = new SessionLineItemPriceDataProductDataOptions
-                  {
-                    Name = "{{PRICE_DATA_NAME}}",
-                  },
-                  Currency = "{{PRICE_DATA_CURRENCY}}",
-                  UnitAmount = {{PRICE_DATA_UNIT_AMOUNT}},
-                  Recurring = new SessionLineItemPriceDataRecurringOptions
-                  {
-                    Interval = "{{PRICE_DATA_INTERVAL}}",
-                    IntervalCount = {{PRICE_DATA_INTERVAL_COUNT}},
-                  },
-                },
-                Quantity = 1,
-              },
-            },
-            Mode = {{CHECKOUT_MODE}},
-            ReturnUrl = domain + "/complete.html?session_id={CHECKOUT_SESSION_ID}",
-            ReturnUrl = domain + "/complete?session_id={CHECKOUT_SESSION_ID}",
-            AutomaticTax = new SessionAutomaticTaxOptions { Enabled = true },
-        var service = new SessionService();
-        Session session = service.Create(options);
-
         return Json(new {clientSecret = session.ClientSecret});
 [Route("session-status")]
 [ApiController]
 public class SessionStatusController : Controller
 {
+    private readonly StripeClient _client;
+
+    public SessionStatusController(StripeClient client)
+    {
+        _client = client;
+    }
+
     [HttpGet]
     public ActionResult SessionStatus([FromQuery] string session_id)
     {
-        var sessionService = new SessionService();
         var options = new SessionGetOptions();
         options.AddExpand("payment_intent");
-        Session session = sessionService.Get(session_id, options);
+        Session session = _client.V1.Checkout.Sessions.Get(session_id, options);
 
         return Json(new {status = session.Status, payment_status = session.PaymentStatus, payment_intent_id = session.PaymentIntent.Id, payment_intent_status = session.PaymentIntent.Status});
     }
@@ -1036,6 +1040,7 @@ adaptivePricing: { allowed: true },
 });
 checkout.on('change', (session) => {
 // Handle changes to the checkout session
+document.getElementById('submit').disabled = !session.canConfirm;
 document.querySelector("#button-text").textContent = `Pay ${
       session.total.total.amount
     } now`;
@@ -1203,7 +1208,7 @@ CheckoutProvider
 // recreating the `Stripe` object on every render.
 // This is a public sample test API key.
 // Don’t submit any personally identifiable information in requests made with this key.
-// Sign in to see your own test API key embedded in code samples.
+// Sign in to see your own test publishable API key embedded in code samples.
 const stripePromise = loadStripe("<\<YOUR\_PUBLISHABLE\_KEY>>");
 const clientSecret = useMemo(() => {
 return fetch('/create-checkout-session', {
@@ -1436,10 +1441,10 @@ return (
       
     
   
-  View details
+  View details 
                 
   
-  Test another
+  Test another payment
 
 )
 ```

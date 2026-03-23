@@ -1,47 +1,52 @@
 # Plugins
 
-Nitro plugins will be **executed once** during server startup in order to allow extending Nitro's runtime behavior.
-They receive `nitroApp` context, which can be used to hook into Nitro lifecycle events.
+Nitro plugins are **executed once** during server startup in order to allow extending Nitro's runtime behavior.
+They receive `nitroApp` context, which can be used to hook into lifecycle events.
 
-Plugins are auto-registered from `plugins/` directory and run synchronously (by order of file name) on the first Nitro initialization.
+Plugins are auto-registered from the `plugins/` directory and run synchronously by file name order on the first Nitro initialization. Plugin functions themselves must be synchronous (return `void`), but the hooks they register can be async.
 
 **Example:**
 
-```ts [server/plugins/test.ts]
-export default defineNitroPlugin((nitroApp) => {
+```ts [plugins/test.ts]
+import { definePlugin } from "nitro";
+
+export default definePlugin((nitroApp) => {
   console.log('Nitro plugin', nitroApp)
 })
 ```
 
 If you have plugins in another directory, you can use the `plugins` option:
 
-::code-group
-
 ```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
 export default defineNitroConfig({
   plugins: ['my-plugins/hello.ts']
 })
 ```
 
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  nitro: {
-    plugins: ['my-plugins/hello.ts']
-  }
-})
-```
+## The `nitroApp` context
 
-::
+The plugin function receives a `nitroApp` object with the following properties:
+
+| Property       | Type                                                                           | Description                                                                                       |
+| -------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| `hooks`        | [`HookableCore`](https://github.com/unjs/hookable){rel=""nofollow""} | Hook system for registering lifecycle callbacks.                                                  |
+| `h3`           | `H3Core`                                                                       | The underlying [H3](https://github.com/h3js/h3){rel=""nofollow""} application instance. |
+| `fetch`        | `(req: Request) => Response | Promise<Response>`                               | The app's internal fetch handler.                                                                 |
+| `captureError` | `(error: Error, context) => void`                                              | Programmatically capture errors into the error hook pipeline.                                     |
 
 ## Nitro runtime hooks
 
-You can use Nitro [hooks](https://github.com/unjs/hookable){rel=""nofollow""} to extend the default runtime behaviour of Nitro by registering custom (async or sync) functions to the lifecycle events within plugins.
+You can use Nitro [hooks](https://github.com/unjs/hookable){rel=""nofollow""} to extend the default runtime behaviour of Nitro by registering custom functions to the lifecycle events within plugins.
 
 **Example:**
 
 ```ts
-export default defineNitroPlugin((nitro) => {
-  nitro.hooks.hook("close", async () => {
+import { definePlugin } from "nitro";
+
+export default definePlugin((nitroApp) => {
+  nitroApp.hooks.hook("close", async () => {
     // Will run when nitro is being closed
   });
 })
@@ -49,14 +54,33 @@ export default defineNitroPlugin((nitro) => {
 
 ### Available hooks
 
-See the [source code](https://github.com/nitrojs/nitro/blob/v2/src/core/index.ts#L75){rel=""nofollow""} for list of all available runtime hooks.
+| Hook       | Signature                                                                 | Description                                    |
+| ---------- | ------------------------------------------------------------------------- | ---------------------------------------------- |
+| `request`  | `(event: HTTPEvent) => void | Promise<void>`                              | Called at the start of each request.           |
+| `response` | `(res: Response, event: HTTPEvent) => void | Promise<void>`               | Called after the response is created.          |
+| `error`    | `(error: Error, context: { event?: HTTPEvent, tags?: string[] }) => void` | Called when an error is captured.              |
+| `close`    | `() => void`                                                              | Called when the Nitro server is shutting down. |
 
-- `"close", () => {}`
-- `"error", (error, { event? }) => {}`
-- `"render:response", (response, { event }) => {}`
-- `"request", (event) => {}`
-- `"beforeResponse", (event, { body }) => {}`
-- `"afterResponse", (event, { body }) => {}`
+::note
+The `NitroRuntimeHooks` interface is augmentable. Deployment presets (such as Cloudflare) can extend it with platform-specific hooks like `cloudflare:scheduled` and `cloudflare:email`.
+::
+
+### Unregistering hooks
+
+The `hook()` method returns an unregister function that can be called to remove the hook:
+
+```ts
+import { definePlugin } from "nitro";
+
+export default definePlugin((nitroApp) => {
+  const unregister = nitroApp.hooks.hook("request", (event) => {
+    // ...
+  });
+
+  // Later, remove the hook
+  unregister();
+});
+```
 
 ## Examples
 
@@ -65,63 +89,75 @@ See the [source code](https://github.com/nitrojs/nitro/blob/v2/src/core/index.ts
 You can use plugins to capture all application errors.
 
 ```ts
-export default defineNitroPlugin((nitro) => {
-  nitro.hooks.hook("error", async (error, { event }) => {
-    console.error(`${event.path} Application error:`, error)
+import { definePlugin } from "nitro";
+
+export default definePlugin((nitroApp) => {
+  nitroApp.hooks.hook("error", async (error, { event }) => {
+    console.error(`${event?.path} Application error:`, error)
   });
 })
 ```
 
-### Graceful shutdown
+The `context` object includes an optional `tags` array that identifies the error source (e.g., `"request"`, `"response"`, `"cache"`, `"plugin"`, `"unhandledRejection"`, `"uncaughtException"`).
 
-You can use plugins to register a hook that resolves when Nitro is closed.
+### Programmatic error capture
 
-```ts
-export default defineNitroPlugin((nitro) => {
-  nitro.hooks.hookOnce("close", async () => {
-    // Will run when nitro is closed
-    console.log("Closing nitro server...")
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    console.log("Task is done!");
-  });
-})
-```
-
-### Request and response lifecycle
-
-You can use plugins to register a hook that can run on request lifecycle:
+You can use `captureError` to manually feed errors into the error hook pipeline:
 
 ```ts
-export default defineNitroPlugin((nitroApp) => {
-  nitroApp.hooks.hook("request", (event) => {
-    console.log("on request", event.path);
-  });
+import { definePlugin } from "nitro";
 
-  nitroApp.hooks.hook("beforeResponse", (event, { body }) => {
-    console.log("on response", event.path, { body });
-  });
-
-  nitroApp.hooks.hook("afterResponse", (event, { body }) => {
-    console.log("on after response", event.path, { body });
+export default definePlugin((nitroApp) => {
+  nitroApp.captureError(new Error("something went wrong"), {
+    tags: ["startup"],
   });
 });
 ```
 
-### Renderer response
+### Graceful shutdown
 
-You can use plugins to register a hook that modifies the [`renderer`](https://nitro.build/config#renderer){rel=""nofollow""} response.
-
-::note
-This **only works** for render handler defined with [`renderer`](https://nitro.build/config#renderer){rel=""nofollow""} and won't be called for other api/server routes.
-In [Nuxt](https://nuxt.com/){rel=""nofollow""} this hook will be called for Server-side rendered pages
-::
+Server will gracefully shutdown and wait for any background pending tasks initiated by `event.waitUntil`.
 
 ```ts
-export default defineNitroPlugin((nitro) => {
+import { definePlugin } from "nitro";
 
-  nitro.hooks.hook('render:response', (response, { event }) => {
-    // Inspect or Modify the renderer response here
-    console.log(response)
-  })
-})
+export default definePlugin((nitroApp) => {
+  nitroApp.hooks.hook("close", async () => {
+    // Clean up resources, close connections, etc.
+  });
+});
+```
+
+### Request and response lifecycle
+
+You can use plugins to register hooks that run on the request lifecycle:
+
+```ts
+import { definePlugin } from "nitro";
+
+export default definePlugin((nitroApp) => {
+  nitroApp.hooks.hook("request", (event) => {
+    console.log("on request", event.path);
+  });
+
+  nitroApp.hooks.hook("response", (res, event) => {
+    // Modify or inspect the response
+    console.log("on response", res.status);
+  });
+});
+```
+
+### Modifying response headers
+
+```ts
+import { definePlugin } from "nitro";
+
+export default definePlugin((nitroApp) => {
+  nitroApp.hooks.hook("response", (res, event) => {
+    const { pathname } = new URL(event.req.url);
+    if (pathname.endsWith(".css") || pathname.endsWith(".js")) {
+      res.headers.append("Vary", "Origin");
+    }
+  });
+});
 ```

@@ -600,12 +600,12 @@ The return value of a remote `command` function. See [Remote functions](/docs/ki
 type RemoteCommand<Input, Output> = {
 	(
 		arg: undefined extends Input ? Input | void : Input
-	): Promise<Awaited<Output>> & {
+	): Promise<Output> & {
 		updates(
 			...queries: Array<
 				RemoteQuery<any> | RemoteQueryOverride
 			>
-		): Promise<Awaited<Output>>;
+		): Promise<Output>;
 	};
 	/** The number of pending command executions */
 	get pending(): number;

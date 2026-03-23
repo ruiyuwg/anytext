@@ -333,7 +333,7 @@ const prompt =
   "Draw a gorgeous image of a river made of white owl feathers, snaking its way through a serene winter landscape";
 const stream = await openai.images.generate({
   prompt: prompt,
-  model: "gpt-image-1",
+  model: "gpt-image-1.5",
   stream: true,
   partial_images: 2,
 });
@@ -356,7 +356,7 @@ client = OpenAI()
 
 stream = client.images.generate(
     prompt="Draw a gorgeous image of a river made of white owl feathers, snaking its way through a serene winter landscape",
-    model="gpt-image-1",
+    model="gpt-image-1.5",
     stream=True,
     partial_images=2,
 )
@@ -381,6 +381,8 @@ The image generation tool is supported for the following models:
 - `gpt-4.1-nano`
 - `o3`
 - `gpt-5`
+- `gpt-5.4-mini`
+- `gpt-5.4-nano`
 - `gpt-5-nano`
 - `gpt-5.4`
 - `gpt-5.2`

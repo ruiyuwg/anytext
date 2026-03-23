@@ -859,27 +859,14 @@ $invoice->sendInvoice();
 $CLIENT->v1->invoices->sendInvoice();
 }
 $stripeSecretKey = '<\<YOUR\_SECRET\_KEY>>';
-public static void Main(string\[] args)
-{
 // This is a public sample test API key.
 // Don’t submit any personally identifiable information in requests made with this key.
 // Sign in to see your own test API key embedded in code samples.
-StripeConfiguration.ApiKey = "<\<YOUR\_SECRET\_KEY>>";
+private static StripeClient Client { get; set; } = new StripeClient("<\<YOUR\_SECRET\_KEY>>");
 
 ```
-  // Add a Customer
-  Customers.Add(new MyCustomer()
-  {
-    StripeId = "cus_123456789",
-    Email = "jenny.rosen@example.com"
-  });
-// This is a public sample test API key.
-// Don’t submit any personally identifiable information in requests made with this key.
-// Sign in to see your own test API key embedded in code samples.
-private static StripeClient Client { get; set; } = new StripeClient("<<YOUR_SECRET_KEY>>");
-
 public static void Main(string[] args)
-{  
+{
   // Add a Customer
   Customers.Add(new MyCustomer()
   {
@@ -898,8 +885,7 @@ public static void sendInvoice(String email)
       Email = email,
       Description = "Customer to invoice",
     };
-    var customerService = new CustomerService();
-    var stripeCustomer = customerService.Create(customerOptions);
+    var stripeCustomer = Client.V1.Customers.Create(customerOptions);
     customerId = stripeCustomer.Id;
 
     // Store the Customer ID in your database to use for future purchases
@@ -963,8 +949,7 @@ public static void sendInvoice(String email)
       Enabled = true,
     },
   };
-  var invoiceService = new InvoiceService();
-  var invoice = invoiceService.Create(invoiceOptions);
+  var invoice = Client.V1.Invoices.Create(invoiceOptions);
   // Create an Invoice
   var invoiceOptions = new InvoiceCreateOptions
   {
@@ -987,8 +972,7 @@ public static void sendInvoice(String email)
     },
     Invoice = invoice.Id
   };
-  var invoiceItemService = new InvoiceItemService();
-  invoiceItemService.Create(invoiceItemOptions);
+  Client.V1.InvoiceItems.Create(invoiceItemOptions);
   // Create an Invoice Item with the Price and the customer-configured Account you want to charge
   var invoiceItemOptions = new InvoiceItemCreateOptions
   {
@@ -1002,22 +986,13 @@ public static void sendInvoice(String email)
   Client.V1.InvoiceItems.Create(invoiceItemOptions);
 
   // Send the Invoice
-  invoiceService.SendInvoice(invoice.Id);
-}
-```
-
-}
-}
-
-```
-  // Send the Invoice
   Client.V1.Invoices.SendInvoice(invoice.Id);
 }
 ```
 
 }
 }
-StripeConfiguration.ApiKey = "<\<YOUR\_SECRET\_KEY>>";
+services.AddSingleton(new StripeClient("<\<YOUR\_SECRET\_KEY>>"));
 "github.com/stripe/stripe-go/v84"
 "github.com/stripe/stripe-go/v84/customer"
 "github.com/stripe/stripe-go/v84/invoice"

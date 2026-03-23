@@ -29,12 +29,18 @@ Sessions require a storage driver to store the session data. The [Node](/en/guid
 astro.config.mjs
 
 ```diff
-  {
-    adapter: vercel(),
-    session: {
-+      driver: "redis",
-    },
+import { defineConfig, sessionDrivers } from 'astro/config'
+import vercel from '@astrojs/vercel'
+
+
+export default defineConfig({
+  adapter: vercel()
+  session: {
++    driver: sessionDrivers.redis({
++      url: process.env.REDIS_URL
++    }),
   }
+})
 ```
 
 See [the `session` configuration option](/en/reference/configuration-reference/#session-options) for more details on setting a storage driver, and other configurable options.
@@ -45,9 +51,9 @@ See [the `session` configuration option](/en/reference/configuration-reference/#
 
 The [`session` object](/en/reference/api-reference/#session) allows you to interact with the stored user state (e.g. adding items to a shopping cart) and the session ID (e.g. deleting the session ID cookie when logging out). The object is accessible as `Astro.session` in your Astro components and pages and as `context.session` object in API endpoints, middleware, and actions.
 
-The session is generated automatically when it is first used and can be regenerated at any time with [`session.regenerate()`](/en/reference/api-reference/#regenerate) or destroyed with [`session.destroy()`](/en/reference/api-reference/#destroy).
+The session is generated automatically when it is first used and can be regenerated at any time with [`session.regenerate()`](/en/reference/api-reference/#sessionregenerate) or destroyed with [`session.destroy()`](/en/reference/api-reference/#sessiondestroy).
 
-For many use cases, you will only need to use [`session.get()`](/en/reference/api-reference/#get) and [`session.set()`](/en/reference/api-reference/#set).
+For many use cases, you will only need to use [`session.get()`](/en/reference/api-reference/#sessionget) and [`session.set()`](/en/reference/api-reference/#sessionset).
 
 See [the Sessions API reference](/en/reference/api-reference/#session) for more details.
 

@@ -78,5 +78,5 @@ export default Home;
 
 title: "NEXTJS\_NO\_PRODUCTION\_SOURCE\_MAPS"
 description: "Applications using Next.js should not enable production source maps so that they don"
-last\_updated: "2026-03-08T05:03:12.713Z"
+last\_updated: "2026-03-23T09:40:07.602Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_NO\_PRODUCTION\_SOURCE\_MAPS"

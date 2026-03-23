@@ -184,5 +184,5 @@ vercel env rm DATABASE_URL production --yes
 
 title: "Managing environment variables"
 description: "Learn how to create and manage environment variables for Vercel."
-last\_updated: "2026-03-08T05:03:13.974Z"
+last\_updated: "2026-03-23T09:40:09.381Z"
 source: "https://vercel.com/docs/environment-variables/managing-environment-variables"

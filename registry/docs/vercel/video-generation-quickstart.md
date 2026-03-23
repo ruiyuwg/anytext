@@ -251,5 +251,5 @@ For more details, see the [Video Generation Capabilities docs](/docs/ai-gateway/
 
 title: "Automatic Caching"
 description: "Enable automatic prompt caching across providers with AI Gateway to reduce costs and latency."
-last\_updated: "2026-03-08T05:03:10.499Z"
+last\_updated: "2026-03-23T09:40:04.469Z"
 source: "https://vercel.com/docs/ai-gateway/models-and-providers/automatic-caching"

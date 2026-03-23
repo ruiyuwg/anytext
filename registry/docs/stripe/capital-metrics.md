@@ -76,8 +76,9 @@ To improve navigation, use the connected account’s account ID and financing of
 
 The status of the offer is either:
 
+|  |
+|  |
 | Undelivered     | The financing offer has been created but hasn’t been delivered to the connected account.                                                            |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Delivered       | The financing offer has been delivered to the connected account, either by you or by Stripe.                                                        |
 | Accepted        | An application for the offer has been submitted and is pending review by Stripe Servicing.                                                          |
 | Paid out        | The application has passed review and the accepted financing has been disbursed.                                                                    |
@@ -102,8 +103,9 @@ From the financing offer table, you can export the table’s data as a CSV file:
 
 Sigma provides Capital data in three tables:
 
-| [financing\_offers](https://dashboard.stripe.com/stripe-schema?tableName=financing_offers)                                                 | This table contains all information about the financing offers we have created for merchants on your platform, such as an offered principal or premium, and the terms for offers that have been accepted.                                                                                  |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|  |
+|  |
+| [financing\_offers](https://dashboard.stripe.com/stripe-schema?tableName=financing_offers)                                                 | This table contains all information about the financing offers we’ve created for merchants on your platform, such as an offered principal or premium, and the terms for offers that have been accepted.                                                                                    |
 | [financing\_balances](https://dashboard.stripe.com/stripe-schema?tableName=financing_balances)                                             | This table contains daily balance snapshots for each paid out financing for connected accounts on your platform. Starting from payout to being fully paid, each financing has a daily balance snapshot in the table. You can see these broken down by the remaining principal and premium. |
 | [connected\_account\_financing\_transactions](https://dashboard.stripe.com/stripe-schema?tableName=connected_account_financing_transactions) | This table contains all financing transactions, such as payouts, paydowns, and reversals, for all Capital financing for connected accounts on your platform. This information mirrors what’s available in the Financing Transactions API.                                                  |
 
@@ -111,10 +113,32 @@ For detailed documentation on how to use Sigma for Capital data, refer to [Finan
 
 ## Platform earnings
 
-Platform earnings are calculated per financing and paid out on a monthly cadence at the start of the month. It’s categorized as a Stripe fee. You can check your platform earnings in two places in the Dashboard:
+Platform earnings are calculated per financing and paid out on a monthly cadence at the start of the month.
 
-- [Balances](https://dashboard.stripe.com/balance/all-activity) page: Navigate to the **All activity** section, and use the Dashboard filter **Type: Stripe fees** to identify the line item with a description that matches **Revenue Share: Capital**.
-- [Balance Report](https://dashboard.stripe.com/reports/balance): Navigate to the **Balance change from activity** section, and download the file for **Additional Stripe fees** to identify transactions with a description that matches **Revenue Share: Capital**.
+### Previous behavior
+
+Previously, platform earnings from Capital were categorized as Stripe fees. To improve reconciliation and distinguish fee types, we have updated the labeling for all platform earnings with a new type of `revenue_share`.
+
+Platform earnings before February 25, 2026 remain unchanged. They continue to use the old labels:
+
+- `type = stripe_fee`
+- `reporting_category = fee`
+
+Platform earnings starting February 25, 2026 use the following labels:
+
+- `type = revenue_share`
+- `reporting_category = revenue_share`
+
+### Check your platform earnings
+
+You can monitor your platform earnings in the Dashboard:
+
+- To see line items related to revenue share:
+  - Go to the [Balances](https://dashboard.stripe.com/balance/all-activity) > **All activity** section.
+  - Select **Type: Revenue share** from the filter. You should see line items that match **Capital Revshare**.
+- To see transactions related to revenue share:
+  - Go to the [Balance Report](https://dashboard.stripe.com/reports/balance) >  **Balance change from activity** section.
+  - Download the **Revenue share** file.
 
 ## See also
 

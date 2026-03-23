@@ -6,6 +6,8 @@ This feature is in **Private Alpha**. API stability and backward compatibility a
 
 Analytics buckets use [Apache Iceberg](https://iceberg.apache.org/), an open-table format for efficient management of large analytical datasets. You can interact with analytics buckets using tools such as [PyIceberg](https://py.iceberg.apache.org/), [Apache Spark](https://spark.apache.org/), or any client supporting the [Iceberg REST Catalog API](https://editor-next.swagger.io/?url=https://raw.githubusercontent.com/apache/iceberg/main/open-api/rest-catalog-open-api.yaml).
 
+Analytics Buckets are still available, but managed replication into Analytics Buckets through Supabase ETL is no longer supported. If you need managed replication today, use [Database Replication](/docs/guides/database/replication/replication-setup) with **BigQuery**. If you want to use Analytics Buckets, bring your own ingestion pipeline.
+
 ## Creating an Analytics bucket
 
 You can create an analytics bucket using either the Supabase SDK or the Supabase Dashboard.
@@ -53,7 +55,6 @@ print('Analytics bucket created:', response)
 Once you've created your analytics bucket, you can:
 
 - [Connect with Iceberg clients](/docs/guides/storage/analytics/connecting-to-analytics-bucket) like PyIceberg or Apache Spark
-- [Set up real-time replication](/docs/guides/storage/analytics/replication) from your Postgres database
 - [Query data with Postgres](/docs/guides/storage/analytics/query-with-postgres) using the Iceberg Foreign Data Wrapper
 
 # Analytics Buckets
@@ -103,68 +104,3 @@ The following default limits are applied when this feature is in the alpha stage
 Expect rapid changes, limited features, and possible breaking updates. [share feedback](https://github.com/orgs/supabase/discussions/40116) as we refine the experience and expand access.
 
 Analytics buckets are **free** to use during the alpha phase. You will still be charged for the underlying egress.
-
-# Query with PostgreSQL
-
-Query analytics bucket data directly from PostgreSQL using SQL.
-
-Once your data flows into an analytics bucket—either via the [Replication Pipeline](/docs/guides/storage/analytics/replication) or custom pipelines—you can query it directly from Postgres using standard SQL.
-
-This is made possible by the [Iceberg Foreign Data Wrapper](/docs/guides/database/extensions/wrappers/iceberg), which creates a bridge between your Postgres database and Iceberg tables.
-
-## Setup overview
-
-You have two options to enable querying:
-
-1. **Dashboard UI** (recommended) - Streamlined setup through the Supabase Dashboard
-2. **Manual installation** - Install the wrapper using SQL and configuration
-
-## Installing via Dashboard UI
-
-The dashboard provides the easiest setup experience:
-
-1. Navigate to your **Analytics Bucket** page in the Supabase Dashboard.
-
-2. Locate the namespace you want to query and click **Query with Postgres**.
-
-3. Enter the **Postgres schema** where you want to create the foreign tables.
-
-4. Click **Connect**. The wrapper is now configured.
-
-## Querying your data
-
-Once the foreign data wrapper is installed, you can query your Iceberg tables using standard SQL:
-
-```sql
-select *
-from schema_name.table_name
-limit 100;
-```
-
-### Common query examples
-
-Get the latest events:
-
-```sql
-select event_id, event_name, event_timestamp
-from analytics.events
-order by event_timestamp desc
-limit 1000;
-```
-
-Join with transactional data:
-
-```sql
-SELECT
-  e.event_id,
-  e.event_name,
-  u.user_email
-FROM analytics.events e
-JOIN public.users u ON e.user_id = u.id
-WHERE e.event_timestamp > NOW() - INTERVAL '7 days'
-LIMIT 100;
-```
-
-## Manual installation
-
-For advanced use cases, you can manually install and configure the Iceberg Foreign Data Wrapper. See the [Iceberg Foreign Data Wrapper documentation](/docs/guides/database/extensions/wrappers/iceberg) for detailed instructions.

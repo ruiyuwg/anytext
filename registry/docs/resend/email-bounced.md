@@ -576,6 +576,13 @@ Received when an inbound email is received.
 
 Event triggered whenever Resend **successfully receives an email**.
 
+Webhooks do not include the email body, headers, or attachments, only their
+metadata. You must call the [Received emails
+API](/api-reference/emails/retrieve-received-email) or the [Attachments
+API](/api-reference/emails/list-received-email-attachments) to retrieve them.
+This design choice supports large attachments in serverless environments that
+have limited request body sizes.
+
 ```
 Unique identifier for the broadcast campaign (if applicable)
 

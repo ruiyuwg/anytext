@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -41,7 +39,7 @@ To configure Gordon's tools:
 
 1. Open Docker Desktop.
 
-2. Select **Ask Gordon** in the sidebar.
+2. Select **Gordon** in the sidebar.
 
 3. Select the settings icon at the bottom of the text input area.
 

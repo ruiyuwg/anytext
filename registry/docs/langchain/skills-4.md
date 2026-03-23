@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/oss/python/langchain/multi-agent/skills
 
-In the **skills** architecture, specialized capabilities are packaged as invokable "skills" that augment an [agent's](/oss/python/langchain/agents) behavior. Skills are primarily prompt-driven specializations that an agent can invoke on-demand.
+In the **skills** architecture, specialized capabilities are packaged as invocable "skills" that augment an [agent's](/oss/python/langchain/agents) behavior. Skills are primarily prompt-driven specializations that an agent can invoke on-demand.
 For built-in skill support, see [Deep Agents](/oss/python/deepagents/skills).
 
 This pattern is conceptually identical to [Agent Skills](https://agentskills.io/) and [llms.txt](https://llmstxt.org/) (introduced by Jeremy Howard), which uses tool calling for progressive disclosure of documentation. The skills pattern applies progressive disclosure to specialized prompts and domain knowledge rather than just documentation pages.

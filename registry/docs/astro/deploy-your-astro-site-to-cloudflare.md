@@ -2,12 +2,7 @@
 
 > How to deploy your Astro site to the web using Cloudflare
 
-You can deploy full-stack applications, including front-end static assets and back-end APIs, as well as on-demand rendered sites, to both [Cloudflare Workers](https://developers.cloudflare.com/workers/static-assets/) and [Cloudflare Pages](https://pages.cloudflare.com/).
-
-This guide includes:
-
-- [How to deploy to Cloudflare Workers](#cloudflare-workers)
-- [How to deploy to Cloudflare Pages](#cloudflare-pages)
+You can deploy full-stack applications, including front-end static assets and back-end APIs, as well as on-demand rendered sites, to [Cloudflare Workers](https://developers.cloudflare.com/workers/static-assets/).
 
 Note
 
@@ -122,13 +117,13 @@ Read more about using [Cloudflare runtime APIs](/en/guides/integrations-guide/cl
 
 [Section titled “How to deploy with CI/CD”](#how-to-deploy-with-cicd)
 
-You can also use a CI/CD system such as [Workers Builds (BETA)](https://developers.cloudflare.com/workers/ci-cd/builds/) to automatically build and deploy your site on push.
+You can also use a CI/CD system such as [Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/) to automatically build and deploy your site on push.
 
 If you’re using Workers Builds:
 
 1. Follow Steps 1-3 from the Wrangler section above.
 
-2. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/) and navigate to `Workers & Pages`. Select `Create`.
+2. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/) and navigate to `Compute > Workers & Pages`. Select `Create application`.
 
 3. Under `Import a repository`, select a Git account and then the repository containing your Astro project.
 
@@ -138,150 +133,6 @@ If you’re using Workers Builds:
    - Deploy command: `npx wrangler deploy`
 
 5. Click `Save and Deploy`. You can now preview your Worker at its provided `workers.dev` subdomain.
-
-## Cloudflare Pages
-
-[Section titled “Cloudflare Pages”](#cloudflare-pages)
-
-### How to deploy with Wrangler
-
-[Section titled “How to deploy with Wrangler”](#how-to-deploy-with-wrangler-1)
-
-1. Install [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/).
-
-   - npm
-
-     ```sh
-     npm install wrangler@latest --save-dev
-     ```
-
-   - pnpm
-
-     ```sh
-     pnpm add wrangler@latest --save-dev
-     ```
-
-   - Yarn
-
-     ```sh
-     yarn add wrangler@latest --dev
-     ```
-
-2. If your site uses on-demand rendering, install the [`@astrojs/cloudflare` adapter](/en/guides/integrations-guide/cloudflare/).
-
-   This will install the adapter and make the appropriate changes to your `astro.config.mjs` file in one step.
-
-   - npm
-
-     ```sh
-     npx astro add cloudflare
-     ```
-
-   - pnpm
-
-     ```sh
-     pnpm astro add cloudflare
-     ```
-
-   - Yarn
-
-     ```sh
-     yarn astro add cloudflare
-     ```
-
-3. Create a [Wrangler configuration file](https://developers.cloudflare.com/workers/wrangler/configuration/).
-
-   Because Cloudflare recommends new projects use Workers instead of Pages, the `astro add cloudflare` command creates a `wrangler.jsonc` and `public/.assetsignore` file, which are specific to Workers projects. You will need to delete the `public/.assetsignore` file and change your `wrangler.jsonc` file. If you are not using the adapter you’ll need to create it yourself.
-
-   Ensure your `wrangler.jsonc` file is structured like this:
-
-   - Static
-
-     wrangler.jsonc
-
-     ```jsonc
-     {
-       "name": "my-astro-app",
-       "compatibility_date": "YYYY-MM-DD", // Update to the day you deploy
-       "pages_build_output_dir": "./dist"
-     }
-     ```
-
-   - On demand
-
-     wrangler.jsonc
-
-     ```jsonc
-     {
-       "name": "my-astro-app",
-       "compatibility_date": "YYYY-MM-DD", // Update to the day you deploy
-       "compatibility_flags": [
-         "nodejs_compat",
-         "disable_nodejs_process_v2"
-       ],
-       "pages_build_output_dir": "./dist"
-     }
-     ```
-
-   Read more about [on-demand rendering in Astro](/en/guides/on-demand-rendering/).
-
-4. Preview your project locally with Wrangler.
-
-   - npm
-
-     ```sh
-     npx astro build && wrangler pages dev ./dist
-     ```
-
-   - pnpm
-
-     ```sh
-     pnpm astro build && wrangler pages dev ./dist
-     ```
-
-   - Yarn
-
-     ```sh
-     yarn astro build && wrangler pages dev ./dist
-     ```
-
-5. Deploy using `npx wrangler deploy`.
-
-   - npm
-
-     ```sh
-     npx astro build && wrangler pages deploy ./dist
-     ```
-
-   - pnpm
-
-     ```sh
-     pnpm astro build && wrangler pages deploy ./dist
-     ```
-
-   - Yarn
-
-     ```sh
-     yarn astro build && wrangler pages deploy ./dist
-     ```
-
-After your assets are uploaded, Wrangler will give you a preview URL to inspect your site.
-
-### How to deploy a site with CI/CD
-
-[Section titled “How to deploy a site with CI/CD”](#how-to-deploy-a-site-with-cicd)
-
-1. Push your code to your git repository (e.g. GitHub, GitLab).
-
-2. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/) and navigate to **Compute (Workers) > Workers & Pages**. Select **Create** and then select the **Pages** tab. Connect your git repository.
-
-3. Configure your project with:
-
-   - **Framework preset**: `Astro`
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-
-4. Click the **Save and Deploy** button.
 
 ## Troubleshooting
 
@@ -303,8 +154,6 @@ wrangler.jsonc
   }
 }
 ```
-
-For Pages projects, if you include a custom 404 page, it will be served by default. Otherwise, Pages will default to [Cloudflare’s single-page application rendering behavior](https://developers.cloudflare.com/pages/configuration/serving-pages/#single-page-application-spa-rendering) and redirect to the home page instead of showing a 404 page.
 
 ### Client-side hydration
 

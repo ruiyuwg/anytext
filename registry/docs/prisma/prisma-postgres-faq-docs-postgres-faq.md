@@ -6,7 +6,14 @@ General \[#general]
 
 Can I use Prisma Postgres without Prisma ORM? \[#can-i-use-prisma-postgres-without-prisma-orm]
 
-Yes, you can use Prisma Postgres with any database library or tool via a [direct connection](/postgres/database/direct-connections).
+Yes, you can use Prisma Postgres with any database library or tool via a [direct connection](/postgres/database/connection-pooling).
+
+You can find examples of using Prisma Postgres with various ORMs below:
+
+- [Prisma ORM](https://github.com/prisma/prisma-examples/tree/latest/databases/prisma-postgres)
+- [Drizzle](https://github.com/prisma/prisma-examples/tree/latest/databases/drizzle-prisma-postgres)
+- [Kysely](https://github.com/prisma/prisma-examples/tree/latest/databases/kysely-prisma-postgres)
+- [TypeORM](https://github.com/prisma/prisma-examples/tree/latest/databases/typeorm-prisma-postgres)
 
 How do I switch from GitHub login to email and password login? \[#how-do-i-switch-from-github-login-to-email-and-password-login]
 
@@ -60,7 +67,7 @@ An operation is counted each time you interact with your database. Read, write, 
 An operation can be:
 
 - a Prisma ORM query (when using Prisma ORM)
-- a SQL query (when using a [direct TCP connection](/postgres/database/direct-connections))
+- a SQL query (when using a [direct connection](/postgres/database/connecting-to-your-database))
 
 Does query execution time affect pricing in Prisma Postgres? \[#does-query-execution-time-affect-pricing-in-prisma-postgres]
 
@@ -70,7 +77,7 @@ Whether a query takes 10ms or 10sec to execute, its pricing impact remains the s
 
 How does pricing differ between using Prisma ORM and direct TCP connections? \[#how-does-pricing-differ-between-using-prisma-orm-and-direct-tcp-connections]
 
-The fundamental principle of operations-based pricing remains the same for Prisma ORM and [direct TCP connection](/postgres/database/direct-connections). However, depending on whether you use Prisma ORM or direct SQL to interact with your database, an operation is something different:
+The fundamental principle of operations-based pricing remains the same for Prisma ORM and [direct connections](/postgres/database/connecting-to-your-database). However, depending on whether you use Prisma ORM or direct SQL to interact with your database, an operation is something different:
 
 - when using Prisma ORM: a query sent with Prisma Client (e.g. `prisma.user.findMany()`)
 - when using another tool: a SQL query sent via the direct connection (e.g. `SELECT * from "User"`)
@@ -246,14 +253,6 @@ How can I invalidate a cache for Prisma Postgres? \[#how-can-i-invalidate-a-cach
 
 You can invalidate the cache on-demand via the [`$accelerate.invalidate` API](/accelerate/reference/api-reference#accelerateinvalidate) if you're on a [paid plan](https://www.prisma.io/pricing#accelerate), or you can invalidate your entire cache, on a project level, a maximum of five times a day. This limit is set based on [your plan](https://www.prisma.io/pricing). You can manage this via the Accelerate configuration page.
 
-What is Prisma Postgres's caching layer's consistency model? \[#what-is-prisma-postgress-caching-layers-consistency-model]
-
-The caching layer in Prisma Postgres does not have a consistency model. It is not a distributed system where nodes need to reach a consensus (because data is only stored in the cache node(s) closest to the user). However, the data cached in Prisma Postgres's cache nodes doesn't propagate to other nodes, so the cache layer by design doesn't need a consistency model.
-
-Prisma Postgres implements a [read-through caching strategy](https://www.prisma.io/dataguide/managing-databases/introduction-database-caching#read-through) particularly suitable for read-heavy workloads.
-
-The freshness of the data served by the cache depends on the cache strategy defined in your query. Refer to [this section](/postgres/database/caching#selecting-a-cache-strategy) for more information on selecting the right cache strategy for your query.
-
 How is Prisma Postgres's caching layer different from other caching tools, such as Redis? \[#how-is-prisma-postgress-caching-layer-different-from-other-caching-tools-such-as-redis]
 
 The caching layer of Prisma Postgres:
@@ -274,7 +273,7 @@ This global cache feature may not be a good fit for your app if:
 
 What is the maximum allowed value for the ttl parameter when configuring cacheStrategy? \[#what-is-the-maximum-allowed-value-for-the-ttl-parameter-when-configuring-cachestrategy]
 
-The [Time-to-live](/postgres/database/caching#time-to-live-ttl) (`ttl`) parameter can be set for up to a *year*. However, it's important to note that items within the cache may be evicted if they are not frequently accessed.
+The [Time-to-live](/accelerate/caching) (`ttl`) parameter can be set for up to a *year*. However, it's important to note that items within the cache may be evicted if they are not frequently accessed.
 
 Based on our experimentation, we’ve seen cache items persist for around 18 hours. While items may remain in the cache for an extended period if they are actively accessed, there is no guarantee.
 
@@ -306,11 +305,11 @@ What is the difference between Invalidate and Revalidate? \[#what-is-the-differe
 
 What is on-demand cache invalidation? \[#what-is-on-demand-cache-invalidation]
 
-[On-demand cache invalidation](/postgres/database/caching#on-demand-cache-invalidation) lets applications instantly update specific cached data when it changes, instead of waiting for regular cache refresh cycles. This keeps information accurate and up-to-date for users.
+[On-demand cache invalidation](/accelerate/caching) lets applications instantly update specific cached data when it changes, instead of waiting for regular cache refresh cycles. This keeps information accurate and up-to-date for users.
 
 When should I use the cache invalidate API? \[#when-should-i-use-the-cache-invalidate-api]
 
-The [cache invalidate API](/postgres/database/caching#on-demand-cache-invalidation) is essential when data consistency cannot wait for the cache’s standard expiration or revalidation. Key use cases include:
+The [cache invalidate API](/accelerate/caching) is essential when data consistency cannot wait for the cache’s standard expiration or revalidation. Key use cases include:
 
 - **Content updates**: When critical changes occur, such as edits to a published article, product updates, or profile modifications, that need to be visible immediately.
 - **Inventory management**: In real-time applications, like inventory or booking systems, where stock levels, availability, or reservation statuses must reflect the latest information.
@@ -336,50 +335,45 @@ Check the [pricing page](https://www.prisma.io/pricing) for more details on the 
 While you can increase these limits based on your subscription plan, it's *still* recommended to optimize your database operations. [Learn more in our troubleshooting guide.](/postgres/error-reference)
 ```
 
-Query optimization \[#query-optimization]
+Query Insights \[#query-insights]
 
-Prisma Postgres allows query optimization via [Prisma Optimize](/optimize) and provides performance recommendations to help improve your database queries during development. You can enable it with Prisma Postgres or [also use it with your own database](/optimize/getting-started), but setup and integration steps differ.
+[Query Insights](/query-insights) is built into Prisma Postgres and helps you identify slow queries, understand their cost, and decide what to fix.
 
-Can you automatically implement optimizations? \[#can-you-automatically-implement-optimizations]
+I only see raw SQL — how do I see my Prisma ORM queries? \[#i-only-see-raw-sql--how-do-i-see-my-prisma-orm-queries]
 
-Prisma Postgres's query optimization feature offers insights and recommendations on how to improve your database queries. It does not alter any existing queries or your Prisma schema.
+By default, Query Insights shows raw SQL. To also see the Prisma ORM operation that generated each query (model name, action, and query shape), install the `@prisma/sqlcommenter-query-insights` package:
 
-How long is a recording session retained? \[#how-long-is-a-recording-session-retained]
-
-There are no limits on the storage retention period. A query performance recording session will be stored until you explicitly delete it.
-
-Do recommendation limits reset monthly? \[#do-recommendation-limits-reset-monthly]
-
-Yes, the recommendation usage resets at the beginning of each calendar month. For example, if you use `5` recommendations by the end of the month, your usage will reset to `0` at the start of the next month.
-
-Can I get charged for exceeding the recommendation limit on the starter plan? \[#can-i-get-charged-for-exceeding-the-recommendation-limit-on-the-starter-plan]
-
-Yes, if you’re on the starter plan, exceeding `5` recommendations in a billing cycle will result in a `$5` charge at the end of that cycle. For more information, visit [our pricing page](https://www.prisma.io/pricing#optimize).
-
-How are viewed Prisma AI recommendations tracked for billing? Are they counted based on generated or viewed recommendations? \[#how-are-viewed-prisma-ai-recommendations-tracked-for-billing-are-they-counted-based-on-generated-or-viewed-recommendations]
-
-They are counted based on viewed recommendations. Once you click on a recommendation from the recommendations table and view the recommendation's detail page, it counts as being seen.
-
-Can I enable query optimizations for Prisma Postgres in production? \[#can-i-enable-query-optimizations-for-prisma-postgres-in-production]
-
-No, query optimizations for Prisma Postgres is not meant to be enabled for production use. It is specifically designed for local development, providing valuable insights and optimizations during that phase. While it's technically possible to run it in a production environment, doing so could result in performance problems or unexpected behaviors, as this is not built to handle the complexity and scale of production workloads. For the best experience, we recommend testing query optimization solely in your development environment.
-
-You can use the `enable` property in the client extension to run it [only in development environment](https://www.npmjs.com/package/@prisma/extension-optimize). By default, the `enable` property is set to `true`.
-
-```ts title="script.ts" copy showLineNumbers
-import { PrismaClient } from "@prisma/client";
-import { withOptimize } from "@prisma/extension-optimize";
-
-const prisma = new PrismaClient().$extends(
-  withOptimize({
-    apiKey: process.env.OPTIMIZE_API_KEY,
-    enable: process.env.ENVIRONMENT === "development",
-  }),
-);
+```bash
+npm install @prisma/sqlcommenter-query-insights
 ```
 
-Why do I see "\[optimize] HTTP 409 Conflict: There is no active recording to write queries to" warning? \[#why-do-i-see-optimize-http-409-conflict-there-is-no-active-recording-to-write-queries-to-warning]
+Then pass it to the `comments` option in your `PrismaClient` constructor:
 
-This warning may occur when Prisma Optimize receives queries but no recording session is active. Typically, this can happen if Prisma Optimize is unintentionally enabled in your production environment. Prisma Optimize is specifically designed for use in local development environments and should not be enabled in production. To avoid this warning, ensure that Prisma Optimize is configured to run only during development.
+```ts
+import { prismaQueryInsights } from "@prisma/sqlcommenter-query-insights";
+import { PrismaClient } from "@prisma/client";
 
-If you are seeing this warning in your development environment, ensure that you have started a recording session in the Prisma Optimize Dashboard.
+const prisma = new PrismaClient({
+  adapter: myAdapter,
+  comments: [prismaQueryInsights()],
+});
+```
+
+This annotates every query with a SQL comment containing the model, action, and parameterized query shape. Query Insights uses these annotations to map SQL back to the Prisma call that generated it.
+
+Let your AI agent handle setup \[#let-your-ai-agent-handle-setup]
+
+Copy this prompt into your AI coding assistant:
+
+```
+Install and configure @prisma/sqlcommenter-query-insights in my project so I can
+see Prisma ORM queries in Query Insights. Docs: https://www.prisma.io/docs/query-insights
+```
+
+Does Query Insights alter my queries or schema? \[#does-query-insights-alter-my-queries-or-schema]
+
+No. Query Insights is read-only — it observes query behavior but does not rewrite queries or modify your Prisma schema.
+
+Can I use Query Insights in production? \[#can-i-use-query-insights-in-production]
+
+Query Insights is designed primarily for development and debugging. Running it in production is possible but not recommended, as the SQL comment annotations add a small overhead to every query.

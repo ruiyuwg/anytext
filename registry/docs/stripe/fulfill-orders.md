@@ -2,9 +2,9 @@
 
 Learn how to fulfill payments received with the Checkout Sessions API.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/checkout/fulfillment?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/checkout/fulfillment?payment-ui=stripe-hosted.
 
 When you receive a payment with the Checkout Sessions API (including Payment Links), you might need to take action to provide your customer with what they paid for. For example, you might need to grant them access to a service, or you might need to ship them physical goods. This process is known as fulfillment, and you have two ways to handle this process:
 
@@ -42,8 +42,8 @@ Use the code below as a starting point for your `fulfill_checkout` function. The
 
 ```ruby
 def fulfill_checkout(session_id)
-  # Set your secret key. Remember to switch to your live secret key in production.
-  # See your keys here: https://dashboard.stripe.com/apikeys
+  # Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+  # Find your keys at https://dashboard.stripe.com/apikeys.
   Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
   puts "Fullfilling Checkout Session #{session_id}"
@@ -223,9 +223,9 @@ When you render your landing page you can display the following:
 >
 > [Set up a webhook event handler](https://docs.stripe.com/checkout/fulfillment.md#create-payment-event-handler) so Stripe can send payment events directly to your server, bypassing the client entirely. Webhooks provide the most reliable way to confirm when you get paid. If webhook event delivery fails, Stripe [retries multiple times](https://docs.stripe.com/webhooks.md#automatic-retries).
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/checkout/fulfillment?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/checkout/fulfillment?payment-ui=embedded-form.
 
 When you receive a payment with the Checkout Sessions API (including Payment Links), you might need to take action to provide your customer with what they paid for. For example, you might need to grant them access to a service, or you might need to ship them physical goods. This process is known as fulfillment, and you have two ways to handle this process:
 
@@ -261,8 +261,8 @@ Use the code below as a starting point for your `fulfill_checkout` function. The
 
 ```ruby
 def fulfill_checkout(session_id)
-  # Set your secret key. Remember to switch to your live secret key in production.
-  # See your keys here: https://dashboard.stripe.com/apikeys
+  # Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+  # Find your keys at https://dashboard.stripe.com/apikeys.
   Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
   puts "Fullfilling Checkout Session #{session_id}"

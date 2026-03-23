@@ -7,7 +7,7 @@ Store utilities
 `produce` is an [Immer](https://immerjs.github.io/immer/) inspired API for Solid's Store objects that allows the store to be mutated inside the `produce` function.
 
 ```
-import { produce } from "solid-js/store"import type { NotWrappable, Store } from "solid-js/store"
+import { produce } from "solid-js/store";import type { NotWrappable, Store } from "solid-js/store";
 function produce<T>(  fn: (state: T) => void): (  state: T extends NotWrappable ? T : Store<T>) => T extends NotWrappable ? T : Store<T>;
 ```
 

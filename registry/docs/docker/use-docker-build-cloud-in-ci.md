@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -98,19 +96,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           username: ${{ vars.DOCKER_ACCOUNT }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
       
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         with:
           driver: cloud
           endpoint: "${{ vars.DOCKER_ACCOUNT }}/${{ vars.CLOUD_BUILDER_NAME }}" # for example, "acme/default"
       
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           tags: "<IMAGE>" # for example, "acme/my-image:latest"
           # For pull requests, export results to the build cache.
@@ -127,7 +125,7 @@ The example above uses `docker/build-push-action`, which automatically uses the 
   ```yaml
   - name: Set up Docker Buildx
     id: builder
-    uses: docker/setup-buildx-action@v3
+    uses: docker/setup-buildx-action@v4
     with:
       driver: cloud
       endpoint: "${{ vars.DOCKER_ACCOUNT }}/${{ vars.CLOUD_BUILDER_NAME }}"

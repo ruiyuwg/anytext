@@ -449,5 +449,5 @@ When an error occurs, the API returns a JSON object with details about what went
 
 title: "AI SDK"
 description: "TypeScript toolkit for building AI-powered applications with React, Next.js, Vue, Svelte and Node.js"
-last\_updated: "2026-03-08T05:03:10.939Z"
+last\_updated: "2026-03-23T09:40:04.983Z"
 source: "https://vercel.com/docs/ai-sdk"

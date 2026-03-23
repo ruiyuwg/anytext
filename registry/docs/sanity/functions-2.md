@@ -8,151 +8,217 @@ The `functions` CLI command enables managing and testing functions. It's used al
 
 **CLI output**
 
-```text
-usage: npx sanity functions [--default] [-v|--version] [-d|--debug] [-h|--help] <command> [<args>]
-
-Commands:
-   dev   Start the Sanity Function emulator
-   env   Add or remove an environment variable or list environment variables for a Sanity function
-   logs  Retrieve or delete logs for a Sanity Function
-   test  Invoke a local Sanity Function
-
-See 'npx sanity help functions <command>' for specific information on a subcommand.
+```sh
+npx sanity functions --help
 ```
 
 ## Commands
 
-### dev
+### `add`
 
 **CLI output**
 
-```text
-usage: npx sanity functions dev [--port <port> --open]
+```sh
+USAGE
+  $ sanity functions add [--install] [-n <value>] [--example <value>] [--helpers] [--installer <value>] [--javascript] [--language <value>] [--type <value>]
 
-   Start the Sanity Function emulator
+FLAGS
+  -i, --install            Shortcut for --fn-installer npm
+  -n, --name=<value>       Name of the Function to add
+      --example=<value>    Example to use for the Function
+      --helpers            Add helpers to the new Function
+      --installer=<value>  How to install the @sanity/functions helpers
+      --javascript         Use JavaScript instead of TypeScript
+      --language=<value>   Language of the new Function
+      --type=<value>       Document change event(s) that should trigger the function; you can specify multiple events by specifying this flag multiple times
 
-Options
-  --port <port> Port to start emulator on
-  --open Open dev server in a new browser tab
+DESCRIPTION
+  Scaffolds a new Function in the functions/ folder and templates a resource for your Blueprint manifest.
+  
+  Functions are serverless handlers triggered by document events (create, update, delete, publish) or media library events.
+  
+  After adding, use 'functions dev' to test locally, then 'blueprints deploy' to publish.
 
-Examples
-  # Start dev server on default port
-  sanity functions dev
+EXAMPLES
+    $ sanity functions add
 
-  # Start dev server on specific port
-  sanity functions dev --port 3333
+    $ sanity functions add --helpers
 
-  # Start dev server and open a new browser tab
-  sanity functions dev --open
+    $ sanity functions add --name my-function
+
+    $ sanity functions add --name my-function --type document-create
+
+    $ sanity functions add --name my-function --type document-create --type document-update --lang js
 ```
 
-### env
+### `dev`
 
 **CLI output**
 
-```text
-usage: npx sanity functions env <add|list|remove> <name> [key] [value]
+```sh
+USAGE
+  $ sanity functions dev [-h <value>] [-p <value>] [-t <value>]
 
-   Add or remove an environment variable or list environment variables for a Sanity function
+FLAGS
+  -h, --host=<value>     The local network interface at which to listen. [default: "localhost"]
+  -p, --port=<value>     TCP port to start emulator on. [default: 8080]
+  -t, --timeout=<value>  Maximum execution time for all functions, in seconds. Takes precedence over function-specific `timeout`
 
-Commands
-  add    Add or update an environment variable
-  list   List the environment variables
-  remove Remove an environment variable
+DESCRIPTION
+  Runs a local, web-based development server to test your functions before deploying.
+  
+  Open the emulator in your browser to interactively test your functions with the payload editor.
+  
+  Optionally, set the host and port with the --host and --port flags. Function timeout can be configured with the --timeout flag.
+  
+  To invoke a function with the CLI, use 'functions test'.
 
-Arguments
-  <name> The name of the function
-  <key> The name of the environment variable
-  <value> The value of the environment variable
+EXAMPLES
+    $ sanity functions dev --host 127.0.0.1 --port 8974
 
-Examples
-  # Add or update an environment variable
-  sanity functions env add echo API_URL https://api.example.com/
-
-  # Remove an environment variable
-  sanity functions env remove echo API_URL
-
-  # List environment variables
-  sanity functions env list echo
+    $ sanity functions dev --timeout 60
 ```
 
-### logs
+### `env`
+
+#### `add`
 
 **CLI output**
 
-```text
-usage: npx sanity functions logs <name> [--limit <number>] [--json] [--utc] [--delete [--force]] [--watch]
+```sh
+USAGE
+  $ sanity functions env add NAME KEY VALUE
 
-   Retrieve or delete logs for a Sanity Function
+ARGUMENTS
+  NAME   The name of the Sanity Function
+  KEY    The name of the environment variable
+  VALUE  The value of the environment variable
 
-Arguments
-  <name> The name of the Function to retrieve logs for
+DESCRIPTION
+  Sets an environment variable in a deployed Sanity Function. If the variable already exists, its value is updated.
+  
+  Environment variables are useful for API keys, configuration values, and other secrets that shouldn't be hardcoded. Changes take effect on the next function invocation.
 
-Options
-  --limit <limit> The number of log entries to retrieve [default 50]
-  --json          If set return json
-  --utc           Use UTC dates in logs
-  --delete        Delete all logs for the Function
-  --force         Force delete all logs for the Function
-  --watch         Watch for new logs (streaming mode)
-
-Examples
-  # Retrieve logs for Sanity Function
-  sanity functions logs echo
-
-  # Retrieve the last two log entries for Sanity Function
-  sanity functions logs echo --limit 2
-
-  # Retrieve logs for Sanity Function in json format
-  sanity functions logs echo --json
-
-  # Delete all logs for Sanity Function
-  sanity functions logs echo --delete
-
-  # Watch for new logs (streaming mode)
-  sanity functions logs echo --watch
+EXAMPLES
+    $ sanity functions env add MyFunction API_URL https://api.example.com/
 ```
 
-### test
+#### `list`
 
 **CLI output**
 
-```text
-usage: npx sanity functions test <name> [--event create|update|delete] [--data <json>] [--data-before <json>] [--data-after <json>] [--file <filename>] [--file-before <filename>] [--file-after <filename>] [--document-id <id>] [--document-id-before <id>] [--document-id-before <id>] [--timeout <seconds>] [--api <version>] [--dataset <name>] [--project-id] <id>] [--with-user-token]
+```sh
+USAGE
+  $ sanity functions env list NAME
 
-   Invoke a local Sanity Function
+ARGUMENTS
+  NAME  The name of the Sanity Function
 
-Arguments
-  <name> The name of the Sanity Function
+DESCRIPTION
+  Displays all environment variables (keys only) configured in a deployed Sanity Function.
+  
+  Use 'functions env add' to set variables or 'functions env remove' to delete them.
 
-Options
-  --event <create|update|delete> The type of event to simulate (default: 'create')
-  --data <data> Data to send to the function
-  --data-before <data> Data to send to the function when event is update
-  --data-after <data> Data to send to the function when event is update
-  --file <file> Read data from file and send to the function
-  --file-before <file> Read data from file and send to the function when event is update
-  --file-after <file> Read data from file and send to the function when event is update
-  --document-id <id> Document to fetch and send to function
-  --document-id-before <id> Document to fetch and send to function when event is update
-  --document-id-after <id> Document to fetch and send to function when event is update
-  --timeout <timeout> Execution timeout value in seconds
-  --api <version> Sanity API Version to use
-  --dataset <dataset> The Sanity dataset to use
-  --project-id <id> Sanity Project ID to use
-  --with-user-token Prime access token from CLI config into context.clientOptions
+EXAMPLES
+    $ sanity functions env list MyFunction
+```
 
+#### `remove`
 
-Examples
-  # Test function passing event data on command line
-  sanity functions test echo --data '{ "id": 1 }'
+**CLI output**
 
-  # Test function passing event data via a file
-  sanity functions test echo --file 'payload.json'
+```sh
+USAGE
+  $ sanity functions env remove NAME KEY
 
-  # Test function passing event data on command line and cap execution time to 60 seconds
-  sanity functions test echo --data '{ "id": 1 }' --timeout 60
+ARGUMENTS
+  NAME  The name of the Sanity Function
+  KEY   The name of the environment variable
 
-  # Test function simulating an update event
-  sanity functions test echo --event update --data-before '{ "title": "before" }' --data-after '{ "title": "after" }'
+DESCRIPTION
+  Deletes an environment variable from a deployed Sanity Function. The change takes effect on the next function invocation.
+  
+  Use 'functions env list' to see current variables before removing.
+
+EXAMPLES
+    $ sanity functions env remove MyFunction API_URL
+```
+
+### `logs`
+
+**CLI output**
+
+```sh
+USAGE
+  $ sanity functions logs [NAME] [--delete] [--force] [--json] [-l <value>] [--utc] [--watch] [--stack <value>]
+
+ARGUMENTS
+  [NAME]  The name of the Sanity Function
+
+FLAGS
+  -d, --delete         Delete all logs for the function
+  -f, --force          Skip confirmation for deleting logs
+  -j, --json           Return logs in JSON format
+  -l, --limit=<value>  Total number of log entries to retrieve
+  -u, --utc            Show dates in UTC time zone
+  -w, --watch          Watch for new logs (streaming mode)
+      --stack=<value>  Stack name or ID to use instead of the locally configured Stack
+
+DESCRIPTION
+  Fetches execution logs from a deployed function, useful for debugging production issues or monitoring activity.
+  
+  Use --watch (-w) to stream logs in real-time. Use --delete to clear all logs for a function (requires confirmation unless --force is specified).
+
+EXAMPLES
+    $ sanity functions logs <name>
+
+    $ sanity functions logs <name> --json
+
+    $ sanity functions logs <name> --limit 100
+
+    $ sanity functions logs <name> --delete
+```
+
+### `test`
+
+**CLI output**
+
+```sh
+USAGE
+  $ sanity functions test [NAME] [-a <value>] [-d <value>] [-e <value>] [-f <value>] [-t <value>] [--data-after <value>] [--data-before <value>] [--dataset <value>] [--document-id <value>] [--document-id-after <value>] [--document-id-before <value>] [--file-after <value>] [--file-before <value>] [--media-library-id <value>] [--project-id <value>] [--with-user-token]
+
+ARGUMENTS
+  [NAME]  The name of the Sanity Function
+
+FLAGS
+  -a, --api=<value>                 Sanity API Version to use
+  -d, --data=<value>                Data to send to the function
+  -e, --event=<value>               Type of event (create, update, delete)
+  -f, --file=<value>                Read data from file and send to the function
+  -t, --timeout=<value>             Execution timeout value in seconds
+      --data-after=<value>          Current document
+      --data-before=<value>         Original document
+      --dataset=<value>             The Sanity dataset to use
+      --document-id=<value>         Document to fetch and send to function
+      --document-id-after=<value>   Current document
+      --document-id-before=<value>  Original document
+      --file-after=<value>          Current document
+      --file-before=<value>         Original document
+      --media-library-id=<value>    Sanity Media Library ID to use
+      --project-id=<value>          Sanity Project ID to use
+      --with-user-token             Prime access token from CLI config
+
+DESCRIPTION
+  Executes a function locally with the provided payload, simulating how it would run when deployed. Use this to test your function logic before deploying.
+  
+  Provide test data via --data (inline JSON), --file (JSON file), or --document-id (fetch from Sanity). For update events, use the before/after flag pairs to simulate document changes.
+
+EXAMPLES
+    $ sanity functions test <name> --data '{ "id": 1 }'
+
+    $ sanity functions test <name> --file 'payload.json'
+
+    $ sanity functions test <name> --data '{ "id": 1 }' --timeout 60
+
+    $ sanity functions test <name> --event update --data-before '{ "title": "before" }' --data-after '{ "title": "after" }'
 ```

@@ -385,5 +385,5 @@ console.log(result);
 
 title: "Structured Outputs"
 description: "Generate structured JSON responses that conform to a specific schema using the Chat Completions API."
-last\_updated: "2026-03-08T05:03:10.782Z"
+last\_updated: "2026-03-23T09:40:04.856Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-chat-completions/structured-outputs"

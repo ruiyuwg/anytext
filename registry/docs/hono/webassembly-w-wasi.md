@@ -4,13 +4,13 @@
 
 In practice:
 
-- Languages (like Javascript) _compile to_ WebAssembly (`.wasm` files)
-- WebAssembly runtimes (like [`wasmtime`][wasmtime] or [`jco`][jco]) enable _running_ WebAssembly binaries
+- Languages (like JavaScript) *compile to* WebAssembly (`.wasm` files)
+- WebAssembly runtimes (like [`wasmtime`][wasmtime] or [`jco`][jco]) enable *running* WebAssembly binaries
 
-While core WebAssembly has _no_ access to things like the local filesystem or sockets, the [WebAssembly System Interface][wasi]
+While core WebAssembly has *no* access to things like the local filesystem or sockets, the [WebAssembly System Interface][wasi]
 steps in to enable defining a platform under WebAssebly workloads.
 
-This means that _with_ WASI, WebAssembly can operate on files, sockets, and much more.
+This means that *with* WASI, WebAssembly can operate on files, sockets, and much more.
 
 Want to peek at the WASI interface yourself? check out [`wasi:http`][wasi-http]
 
@@ -18,9 +18,13 @@ Support for WebAssembly w/ WASI in JS is powered by [StarlingMonkey][sm], and th
 both StarlingMonkey and Hono, **Hono works \*out of the box with WASI-enabled WebAssembly ecosystems.**
 
 [sm]: https://github.com/bytecodealliance/StarlingMonkey
+
 [wasm-core]: https://webassembly.org/
+
 [wasi]: https://wasi.dev/
+
 [bca]: https://bytecodealliance.org/
+
 [wasi-http]: https://github.com/WebAssembly/wasi-http
 
 ## 1. Setup
@@ -28,15 +32,14 @@ both StarlingMonkey and Hono, **Hono works \*out of the box with WASI-enabled We
 The WebAssembly JS ecosystem provides tooling to make it easy to get started building WASI-enabled WebAssembly components:
 
 - [StarlingMonkey][sm] is a fork of [SpiderMonkey][spidermonkey] that compiles to WebAssembly and enables components
-- [`componentize-js`][componentize-js] turns Javascript ES modules into WebAssembly components
-- [`jco`][jco] is a multi-tool that builds components, generates types, and runs components in environments like NodeJS or the browser
+- [`componentize-js`][componentize-js] turns JavaScript ES modules into WebAssembly components
+- [`jco`][jco] is a multi-tool that builds components, generates types, and runs components in environments like Node.js or the browser
 
-Webassembly has an open ecosystem and is open source, with core projects stewarded primarily by the [Bytecode Alliance][bca] and it's members.
+WebAssembly has an open ecosystem and is open source, with core projects stewarded primarily by the [Bytecode Alliance][bca] and its members.
 
 New features, issues, pull requests and other types of contributions are always welcome.
 
-While a starter for Hono on WebAssembly is not yet available, you can start a WebAssembly Hono project just
-like any other:
+While a starter for Hono on WebAssembly is not yet available, you can start a WebAssembly Hono project just like any other:
 
 ```sh [npm]
 mkdir my-app
@@ -79,7 +82,7 @@ bun add -D @bytecodealliance/jco @bytecodealliance/componentize-js @bytecodealli
 To ensure your project uses ES modules, ensure `type` is set to `"module"` in `package.json`
 :::
 
-After entering the `my-app` folder, install dependencies, and initialize Typescript:
+After entering the `my-app` folder, install dependencies, and initialize TypeScript:
 
 ::: code-group
 
@@ -104,7 +107,7 @@ bun i
 
 :::
 
-Once you have a basic typescript configuration file (`tsconfig.json`), please ensure it has the following configuration:
+Once you have a basic TypeScript configuration file (`tsconfig.json`), please ensure it has the following configuration:
 
 - `compilerOptions.module` set to `"nodenext"`
 
@@ -114,16 +117,16 @@ bundling is necessary, so [`rolldown`][rolldown] can be used to create a single 
 A Rolldown configuration (`rolldown.config.mjs`) like the following can be used:
 
 ```js
-import { defineConfig } from "rolldown";
+import { defineConfig } from 'rolldown'
 
 export default defineConfig({
-  input: "src/component.ts",
+  input: 'src/component.ts',
   external: /wasi:.*/,
   output: {
-    file: "dist/component.js",
-    format: "esm",
+    file: 'dist/component.js',
+    format: 'esm',
   },
-});
+})
 ```
 
 ::: info
@@ -131,18 +134,18 @@ Feel free to use any other bundlers that you're more comfortable with (`rolldown
 :::
 
 [jco]: https://github.com/bytecodealliance/jco
+
 [componentize-js]: https://github.com/bytecodealliance/componentize-js
+
 [rolldown]: https://rolldown.rs
+
 [spidermonkey]: https://spidermonkey.dev/
 
 ## 2. Set up WIT interface & dependencies
 
-[WebAssembly Inteface Types (WIT)][wit] is an Interface Definition Language ("IDL") that governs what functionality
-a WebAssembly component uses ("imports"), and what it provides ("exports").
+[WebAssembly Inteface Types (WIT)][wit] is an Interface Definition Language ("IDL") that governs what functionality a WebAssembly component uses ("imports"), and what it provides ("exports").
 
-Amongst the standardized WIT interfaces, [`wasi:http`][wasi-http] is for dealing with HTTP requests (whether it's
-receiving them or sending them out), and since we intend to make a web server, our component must declare the use
-of `wasi:http/incoming-handler` in it's [WIT world][wit-world]:
+Amongst the standardized WIT interfaces, [`wasi:http`][wasi-http] is for dealing with HTTP requests (whether it's receiving them or sending them out), and since we intend to make a web server, our component must declare the use of `wasi:http/incoming-handler` in it's [WIT world][wit-world]:
 
 First, let's set up the component's WIT world in a file called `wit/component.wit`:
 
@@ -154,11 +157,9 @@ world component {
 }
 ```
 
-Put simply, the WIT file above means that our component "providers" the functionality of "receiving"/"handling incoming"
-HTTP requests.
+Put simply, the WIT file above means that our component "providers" the functionality of "receiving"/"handling incoming" HTTP requests.
 
-The `wasi:http/incoming-handler` interface relies on upstream standardized WIT interfaces (specifications
-on how requests are structured, etc).
+The `wasi:http/incoming-handler` interface relies on upstream standardized WIT interfaces (specifications on how requests are structured, etc).
 
 To pull those third party (Bytecode Alliance maintained) WIT interaces, one tool we can use is [`wkg`][wkg]:
 
@@ -185,38 +186,38 @@ wit
 ```
 
 [wkg]: https://github.com/bytecodealliance/wasm-pkg-tools
+
 [wit-world]: https://github.com/WebAssembly/component-model/blob/main/design/mvp/WIT.md#wit-worlds
+
 [wit]: https://github.com/WebAssembly/component-model/blob/main/design/mvp/WIT.md
 
 ## 3. Hello Wasm
 
-To build a HTTP server in WebAssembly, we can make use of the \[`jco-std`]\[jco-std] project, which
-contains helpers that make the experience very similar to the standard Hono experience.
+To build a HTTP server in WebAssembly, we can make use of the \[`jco-std`]\[jco-std] project, which contains helpers that make the experience very similar to the standard Hono experience.
 
-Let's fulfill our `component` world with a basic Hono application as a WebAssembly component in
-a file called `src/component.ts`:
+Let's fulfill our `component` world with a basic Hono application as a WebAssembly component in a file called `src/component.ts`:
 
 ```ts
-import { Hono } from "hono";
-import { fire } from "@bytecodealliance/jco-std/wasi/0.2.6/http/adapters/hono/server";
+import { Hono } from 'hono'
+import { fire } from '@bytecodealliance/jco-std/wasi/0.2.6/http/adapters/hono/server'
 
-const app = new Hono();
+const app = new Hono()
 
-app.get("/hello", (c) => {
-  return c.json({ message: "Hello from WebAssembly!" });
-});
+app.get('/hello', (c) => {
+  return c.json({ message: 'Hello from WebAssembly!' })
+})
 
-fire(app);
+fire(app)
 
 // Although we've called `fire()` with wasi HTTP configured for use above,
 // we still need to actually export the `wasi:http/incoming-handler` interface object,
 // as jco and componentize-js will be looking for the ES module export that matches the WASI interface.
-export { incomingHandler } from "@bytecodealliance/jco-std/wasi/0.2.6/http/adapters/hono/server";
+export { incomingHandler } from '@bytecodealliance/jco-std/wasi/0.2.6/http/adapters/hono/server'
 ```
 
 ## 4. Build
 
-Since we're using Rolldown (and it's configured to handle Typescript compilation), we can use it to build and bundle:
+Since we're using Rolldown (and it's configured to handle TypeScript compilation), we can use it to build and bundle:
 
 ::: code-group
 
@@ -239,8 +240,7 @@ bun build --target=bun --outfile=dist/component.js ./src/component.ts
 :::
 
 ::: info
-The bundling step is necessary because WebAssembly JS ecosystem tooling only currently supports a single JS file,
-and we'd like to include Hono along with related libraries.
+The bundling step is necessary because WebAssembly JS ecosystem tooling only currently supports a single JS file, and we'd like to include Hono along with related libraries.
 
 For components with simpler requirements, bundlers are not necessary.
 :::
@@ -272,7 +272,7 @@ bun run jco componentize -w wit -o dist/component.wasm dist/component.js
 To run your Hono WebAssembly HTTP server, you can use any WASI-enabled WebAssembly runtime:
 
 - [`wasmtime`][wasmtime]
-- `jco` (runs in NodeJS)
+- `jco` (runs in Node.js)
 
 In this guide, we'll use `jco serve` since it's already installed.
 
@@ -318,11 +318,9 @@ You should see output like the following:
 ```
 
 ::: info
-`jco serve` works by converting the WebAssembly component into a basic WebAssembly coremodule,
-so that it can be run in runtimes like NodeJS and the browser.
+`jco serve` works by converting the WebAssembly component into a basic WebAssembly coremodule, so that it can be run in runtimes like Node.js and the browser.
 
-This process is normally run via `jco transpile`, and is the way we can use JS engines like NodeJS
-and the browser (which may use V8 or other Javascript engines) as WebAssembly Component runtimes.
+This process is normally run via `jco transpile`, and is the way we can use JS engines like Node.js and the browser (which may use V8 or other Javascript engines) as WebAssembly Component runtimes.
 
 How `jco transpile` is outside the scope of this guide, you can read more about it in [the Jco book][jco-book]
 :::
@@ -345,6 +343,9 @@ To reach out to the WebAssembly community with questions, comments, contribution
 - [componentize-js repository](https://github.com/bytecodealliance/componentize-js)
 
 [cm-book]: https://component-model.bytecodealliance.org/
+
 [jco-book]: https://bytecodealliance.github.io/jco/
+
 [jco-example-components]: https://github.com/bytecodealliance/jco/tree/main/examples/components
+
 [jco-example-component-hono]: https://github.com/bytecodealliance/jco/tree/main/examples/components/http-server-hono

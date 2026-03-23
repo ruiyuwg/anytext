@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/langsmith/use-threads
 
-This guide shows you how to create, view, and inspect *threads*. Threads work with [assistants](/langsmith/assistants) to enable [stateful](/oss/python/langgraph/persistence) execution of your [deployed graphs](/langsmith/deployments).
+This guide shows you how to create, view, and inspect *threads*. Threads work with [assistants](/langsmith/assistants) to enable [stateful](/oss/python/langgraph/persistence) execution of your [deployed graphs](/langsmith/deployment).
 
 ## Understand threads
 
@@ -16,7 +16,7 @@ Threads enable stateful interactions by preserving conversation history and cont
 
 The diagram illustrates how a thread maintains state across two runs. The second run has access to the messages from the first run, allowing the assistant to understand that the context of "What about tomorrow?" refers to the weather query from the first run:
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 sequenceDiagram
     participant User
     participant Thread
@@ -309,7 +309,7 @@ Output:
 
 You can also create threads directly from the [LangSmith UI](https://smith.langchain.com):
 
-1. Navigate to your [deployment](/langsmith/deployments).
+1. Navigate to your [deployment](/langsmith/deployment).
 2. Select the **Threads** tab.
 3. Click **+ New thread**.
 4. Optionally provide metadata or initial state for the thread.
@@ -421,7 +421,7 @@ The SDK also supports sorting threads by `thread_id`, `status`, `created_at`, an
 
 You can also view and manage threads in a deployment via the [LangSmith UI](https://smith.langchain.com):
 
-1. Navigate to your [deployment](/langsmith/deployments).
+1. Navigate to your [deployment](/langsmith/deployment).
 2. Select the **Threads** tab.
 
 This will load a table of all threads in your deployment.
@@ -674,7 +674,7 @@ For more information, refer to the [Python](https://reference.langchain.com/pyth
 
 You can also view and inspect threads in the [LangSmith UI](https://smith.langchain.com):
 
-1. Navigate to your [deployment](/langsmith/deployments).
+1. Navigate to your [deployment](/langsmith/deployment).
 2. Select the **Threads** tab to view all threads.
 3. Click on a thread to inspect its current state.
 

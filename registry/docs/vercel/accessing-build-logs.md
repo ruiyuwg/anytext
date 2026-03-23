@@ -39,5 +39,5 @@ You can use [Drains](/docs/drains) to export, store, and analyze your build logs
 
 title: "Managing Deployments"
 description: "Learn how to manage your current and previously deployed projects to Vercel through the dashboard. You can redeploy at any time and even delete a deployment."
-last\_updated: "2026-03-08T05:03:13.319Z"
+last\_updated: "2026-03-23T09:40:08.395Z"
 source: "https://vercel.com/docs/deployments/managing-deployments"

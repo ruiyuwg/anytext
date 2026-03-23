@@ -9,7 +9,7 @@ Functions create the ability for countless content-driven opportunities. This gu
 Prerequisites:
 
 - Complete the [Functions quick start](https://www.sanity.io/docs/functions/function-quickstart), or be comfortable writing and deploying a Sanity Function.
-- `sanity` CLI v4.12.0 or higher is recommended to interact with Blueprints and Functions. You can always run the latest CLI commands with `npx sanity@latest`.
+- The latest version of `sanity` CLI (`sanity@latest`) is recommended to interact with Blueprints and Functions as shown in this guide. You can always run the latest CLI commands with `npx sanity@latest`.
 
 The examples below assume you've created a new function, and configured it to trigger based on your own schema requirements.
 

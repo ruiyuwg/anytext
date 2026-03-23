@@ -5,8 +5,8 @@ Rendering
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/render.mdx)
 
 ```
-import { render } from "solid-js/web"import type { JSX } from "solid-js"import type { MountableElement } from "solid-js/web"
-function render(  code: () => JSX.Element,  element: MountableElement): () => void
+import { render } from "solid-js/web";import type { JSX } from "solid-js";import type { MountableElement } from "solid-js/web";
+function render(code: () => JSX.Element, element: MountableElement): () => void;
 ```
 
 This is the browser app entry point. Provide a top-level component function and an element to mount to. It is recommended this element be empty: while `render` will just append children, the returned dispose function will remove all children.

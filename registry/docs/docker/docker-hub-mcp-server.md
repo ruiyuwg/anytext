@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -42,7 +40,7 @@ For more information about MCP concepts and how MCP servers work, see the [Docke
 
 3. In the **Clients** tab in MCP Toolkit, ensure Gordon is connected.
 
-4. From the **Ask Gordon** menu, you can now send requests related to your Docker Hub account, in accordance to the tools provided by the Docker Hub MCP server. To test it, ask Gordon:
+4. From the **Gordon** menu, you can now send requests related to your Docker Hub account, in accordance to the tools provided by the Docker Hub MCP server. To test it, ask Gordon:
 
    ```text
    What repositories are in my namespace?

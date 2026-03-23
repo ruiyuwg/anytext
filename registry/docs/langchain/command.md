@@ -55,7 +55,7 @@ builder.addNode("myNode", myNode, {
 });
 ```
 
-[`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) only adds dynamic edges — static edges defined with `add_edge` / `addEdge` still execute. For example, if `node_a` returns `Command(goto="my_other_node")` and you also have `graph.add_edge("node_a", "node_b")`, both `node_b` and `my_other_node` will run.
+[`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) only adds dynamic edges—static edges defined with `add_edge` / `addEdge` still execute. For example, if `node_a` returns `Command(goto="my_other_node")` and you also have `graph.add_edge("node_a", "node_b")`, both `node_b` and `my_other_node` will run.
 
 Check out this [how-to guide](/oss/javascript/langgraph/use-graph-api#combine-control-flow-and-state-updates-with-command) for an end-to-end example of how to use [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command).
 
@@ -79,18 +79,18 @@ Setting `graph` to `Command.PARENT` will navigate to the closest parent graph.
 
 When you send updates from a subgraph node to a parent graph node for a key that's shared by both parent and subgraph [state schemas](#schema), you **must** define a [reducer](#reducers) for the key you're updating in the parent graph state.
 
-This is particularly useful when implementing [multi-agent handoffs](/oss/javascript/langchain/multi-agent/handoffs). Check out [this guide](/oss/javascript/langgraph/use-graph-api#navigate-to-a-node-in-a-parent-graph) for detail.
+This is particularly useful when implementing [multi-agent handoffs](/oss/javascript/langchain/multi-agent/handoffs). Check out [Navigate to a node in a parent graph](/oss/javascript/langgraph/use-graph-api#navigate-to-a-node-in-a-parent-graph) for detail.
 
 ### Input to `invoke`/`stream`
 
-`new Command({ resume: ... })` is the **only** `Command` pattern intended as input to `invoke()`/`stream()`. Do not use `new Command({ update: ... })` as input to continue multi-turn conversations — because passing any `Command` as input resumes from the latest checkpoint (i.e. the last step that ran, not `__start__`), the graph will appear stuck if it already finished. To continue a conversation on an existing thread, pass a plain input object:
+`new Command({ resume: ... })` is the **only** `Command` pattern intended as input to `invoke()`/`stream()`. Do not use `new Command({ update: ... })` as input to continue multi-turn conversations—because passing any `Command` as input resumes from the latest checkpoint (i.e. the last step that ran, not `__start__`), the graph will appear stuck if it already finished. To continue a conversation on an existing thread, pass a plain input object:
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-// WRONG — graph resumes from the latest checkpoint
+// WRONG - graph resumes from the latest checkpoint
 // (last step that ran), appears stuck
 await graph.invoke(new Command({ update: { messages: [{ role: "user", content: "follow up" }] } }), config);  // [!code --]
 
-// CORRECT — plain object restarts from __start__
+// CORRECT - plain object restarts from __start__
 await graph.invoke({ messages: [{ role: "user", content: "follow up" }] }, config);  // [!code ++]
 ```
 
@@ -107,10 +107,10 @@ const humanReview = async (state: typeof StateAnnotation.State) => {
   return { messages: [{ role: "user", content: answer }] };
 };
 
-// First invocation — hits the interrupt and pauses
+// First invocation - hits the interrupt and pauses
 const result = await graph.invoke({ messages: [...] }, config);
 
-// Resume with a value — the interrupt() call returns "yes"
+// Resume with a value - the interrupt() call returns "yes"
 const resumed = await graph.invoke(new Command({ resume: "yes" }), config);
 ```
 
@@ -120,9 +120,9 @@ Check out the [interrupts conceptual guide](/oss/javascript/langgraph/interrupts
 
 You can return [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) from tools to update graph state and control flow. Use `update` to modify state (e.g., saving customer information looked up during a conversation) and `goto` to route to a specific node after the tool completes.
 
-When used inside tools, `goto` adds a dynamic edge — any static edges already defined on the node that called the tool will still execute.
+When used inside tools, `goto` adds a dynamic edge—any static edges already defined on the node that called the tool will still execute.
 
-Refer to [this guide](/oss/javascript/langgraph/use-graph-api#use-inside-tools) for detail.
+Refer to [Use inside tools](/oss/javascript/langgraph/use-graph-api#use-inside-tools) for detail.
 
 ## Graph migrations
 

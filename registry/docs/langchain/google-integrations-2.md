@@ -78,7 +78,7 @@ Anthropic on Vertex AI Model Garden
 
 
 
-**Deprecated** — Use [`ChatGoogleGenerativeAI`](/oss/python/integrations/chat/google_generative_ai) for Gemini models instead.
+**Deprecated**—Use [`ChatGoogleGenerativeAI`](/oss/python/integrations/chat/google_generative_ai) for Gemini models instead.
 
 ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_google_vertexai import ChatVertexAI
@@ -168,7 +168,7 @@ Hundreds of OSS models via Vertex AI Model Garden.
 
 
 
-**Deprecated** — Use [`GoogleGenerativeAI`](/oss/python/integrations/llms/google_generative_ai) for Gemini models instead.
+**Deprecated**—Use [`GoogleGenerativeAI`](/oss/python/integrations/llms/google_generative_ai) for Gemini models instead.
 
 ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_google_vertexai import VertexAI
@@ -208,7 +208,7 @@ from langchain_google_vertexai.vision_models import VertexAIImageCaptioning
 ### Embedding models
 
 ````
-**Deprecated** — Use [`GoogleGenerativeAIEmbeddings`](/oss/python/integrations/text_embedding/google_generative_ai) instead.
+**Deprecated**—Use [`GoogleGenerativeAIEmbeddings`](/oss/python/integrations/embeddings/google_generative_ai) instead.
 
 ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_google_vertexai import VertexAIEmbeddings

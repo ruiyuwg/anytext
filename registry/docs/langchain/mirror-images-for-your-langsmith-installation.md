@@ -98,9 +98,9 @@ images:
 _REGISTRY=your-registry # Set this to your registry URL if you mirrored all images to the same registry using our script. Otherwise you will need to manually set the repository for each image in the compose file.
 ```
 
-## Additional images for Agent Builder and Insights
+## Additional images for Fleet and Insights
 
-If you are using Agent Builder or Insights, the LangGraph operator dynamically creates Redis and PostgreSQL (pgvector) pods for each deployment. These pods use images defined in operator templates that require separate configuration.
+If you are using Fleet or Insights, the LangGraph operator dynamically creates Redis and PostgreSQL (pgvector) pods for each deployment. These pods use images defined in operator templates that require separate configuration.
 
 You must mirror these additional images:
 

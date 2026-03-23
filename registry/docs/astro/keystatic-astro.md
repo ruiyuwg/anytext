@@ -196,7 +196,7 @@ Visit `http://127.0.0.1:4321/keystatic` in the browser to see the Keystatic Admi
 
 [Section titled “Rendering Keystatic content”](#rendering-keystatic-content)
 
-Use Astro’s Content Collections API to [query and display your posts and collections](/en/guides/content-collections/#querying-collections), just as you would in any Astro project.
+[Query and display your posts and collections](/en/guides/content-collections/#querying-build-time-collections), just as you would in any Astro project.
 
 ### Displaying a collection list
 
@@ -214,7 +214,7 @@ const posts = await getCollection('posts')
 <ul>
   {posts.map(post => (
     <li>
-      <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+      <a href={`/posts/${post.id}`}>{post.data.title}</a>
     </li>
   ))}
 </ul>

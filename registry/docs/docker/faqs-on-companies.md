@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -37,7 +35,7 @@ To access and manage child organizations, the organization must have a Docker Bu
 Company owners do not occupy a seat unless one of the following is true:
 
 - They are added as a member of an organization under your company
-- SSO is enabled
+- SSO is enabled and the company owner signs in via SSO, which automatically adds them as an organization member
 
 Although company owners have the same access as organization owners across all organizations in the company, it's not necessary to add them to any organization. Doing so will cause them to occupy a seat.
 

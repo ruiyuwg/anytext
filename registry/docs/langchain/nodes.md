@@ -2,8 +2,8 @@
 
 In LangGraph, nodes are typically functions (sync or async) that accept the following arguments:
 
-1. `state` – The [state](#state) of the graph
-2. `config` – A [`RunnableConfig`](https://reference.langchain.com/javascript/langchain-core/runnables/RunnableConfig) object that contains configuration information like `thread_id` and tracing information like `tags`
+1. `state`—The [state](#state) of the graph
+2. `config`—A [`RunnableConfig`](https://reference.langchain.com/javascript/langchain-core/runnables/RunnableConfig) object that contains configuration information like `thread_id` and tracing information like `tags`
 
 You can add nodes to a graph using the `addNode` method. For better type safety, use the `GraphNode` type utility or `State.Node` to type your node functions:
 
@@ -33,7 +33,7 @@ const builder = new StateGraph(State)
   ...
 ```
 
-Behind the scenes, functions are converted to @\[`RunnableLambda`], which add batch and async support to your function, along with [native tracing and debugging](/langsmith/home).
+Behind the scenes, functions are converted to [`RunnableLambda`](https://reference.langchain.com/javascript/langchain-core/runnables/RunnableLambda), which add batch and async support to your function, along with [native tracing and debugging](/langsmith/home).
 
 If you add a node to a graph without specifying a name, it will be given a default name equivalent to the function name.
 

@@ -1,30 +1,32 @@
 # Tool Calling
 
 As covered under Foundations, [tools](/docs/foundations/tools) are objects that can be called by the model to perform a specific task.
-AI SDK Core tools contain several core elements:
+AI SDK Core tools contain three elements:
 
 - **`description`**: An optional description of the tool that can influence when the tool is picked.
-- **`inputSchema`**: A [Zod schema](/docs/foundations/tools#schemas) or a [JSON schema](/docs/reference/ai-sdk-core/json-schema) that defines the input parameters. The schema is consumed by the LLM, and also used to validate the LLM tool calls.
-- **`execute`**: An optional async function that is called with the inputs from the tool call. It produces a value of type `RESULT` (generic type). It is optional because you might want to forward tool calls to the client or to a queue instead of executing them in the same process.
-- **`strict`**: _(optional, boolean)_ Enables strict tool calling when supported by the provider
+- **`parameters`**: A [Zod schema](/docs/foundations/tools#schemas) or a [JSON schema](/docs/reference/ai-sdk-core/json-schema) that defines the parameters. The schema is consumed by the LLM, and also used to validate the LLM tool calls.
+- **`execute`**: An optional async function that is called with the arguments from the tool call. It produces a value of type `RESULT` (generic type). It is optional because you might want to forward tool calls to the client or to a queue instead of executing them in the same process.
 
   You can use the [`tool`](/docs/reference/ai-sdk-core/tool) helper function to
   infer the types of the `execute` parameters.
 
+  **Zod v4 Compatibility**: AI SDK v4 requires Zod v3. If you're using Zod v4,
+  you'll encounter schema validation errors. [See troubleshooting
+  guide](/docs/troubleshooting/zod-v4-json-schema-type-error).
+
 The `tools` parameter of `generateText` and `streamText` is an object that has the tool names as keys and the tools as values:
 
 ```ts highlight="6-17"
-import { z } from "zod";
-import { generateText, tool, stepCountIs } from "ai";
-__PROVIDER_IMPORT__;
+import { z } from 'zod';
+import { generateText, tool } from 'ai';
 
 const result = await generateText({
-  model: __MODEL__,
+  model: yourModel,
   tools: {
     weather: tool({
-      description: "Get the weather in a location",
-      inputSchema: z.object({
-        location: z.string().describe("The location to get the weather for"),
+      description: 'Get the weather in a location',
+      parameters: z.object({
+        location: z.string().describe('The location to get the weather for'),
       }),
       execute: async ({ location }) => ({
         location,
@@ -32,8 +34,7 @@ const result = await generateText({
       }),
     }),
   },
-  stopWhen: stepCountIs(5),
-  prompt: "What is the weather in San Francisco?",
+  prompt: 'What is the weather in San Francisco?',
 });
 ```
 
@@ -43,178 +44,16 @@ tool is called a "tool result".
 Tool calling is not restricted to only text generation.
 You can also use it to render user interfaces (Generative UI).
 
-## Strict Mode
+## Multi-Step Calls (using maxSteps)
 
-When enabled, language model providers that support strict tool calling will only generate tool calls that are valid according to your defined `inputSchema`.
-This increases the reliability of tool calling.
-However, not all schemas may be supported in strict mode, and what is supported depends on the specific provider.
+With the `maxSteps` setting, you can enable multi-step calls in `generateText` and `streamText`. When `maxSteps` is set to a number greater than 1 and the model generates a tool call, the AI SDK will trigger a new generation passing in the tool result until there
+are no further tool calls or the maximum number of tool steps is reached.
 
-By default, strict mode is disabled. You can enable it per-tool by setting `strict: true`:
+To decide what value to set for `maxSteps`, consider the most complex task the
+call might handle and the number of sequential steps required for completion,
+rather than just the number of available tools.
 
-```ts
-tool({
-  description: "Get the weather in a location",
-  inputSchema: z.object({
-    location: z.string(),
-  }),
-  strict: true, // Enable strict validation for this tool
-  execute: async ({ location }) => ({
-    // ...
-  }),
-});
-```
-
-Not all providers or models support strict mode. For those that do not, this
-option is ignored.
-
-## Input Examples
-
-You can specify example inputs for your tools to help guide the model on how input data should be structured.
-When supported by providers, input examples can help when JSON schema itself does not fully specify the intended
-usage or when there are optional values.
-
-```ts
-tool({
-  description: "Get the weather in a location",
-  inputSchema: z.object({
-    location: z.string().describe("The location to get the weather for"),
-  }),
-  inputExamples: [
-    { input: { location: "San Francisco" } },
-    { input: { location: "London" } },
-  ],
-  execute: async ({ location }) => {
-    // ...
-  },
-});
-```
-
-Only the Anthropic providers supports tool input examples natively. Other
-providers ignore the setting.
-
-## Tool Execution Approval
-
-By default, tools with an `execute` function run automatically as the model calls them. You can require approval before execution by setting `needsApproval`:
-
-```ts highlight="13"
-import { tool } from "ai";
-import { z } from "zod";
-
-const runCommand = tool({
-  description: "Run a shell command",
-  inputSchema: z.object({
-    command: z.string().describe("The shell command to execute"),
-  }),
-  needsApproval: true,
-  execute: async ({ command }) => {
-    // your command execution logic here
-  },
-});
-```
-
-This is useful for tools that perform sensitive operations like executing commands, processing payments, modifying data, and more potentially dangerous actions.
-
-### How It Works
-
-When a tool requires approval, `generateText` and `streamText` don't pause execution. Instead, they complete and return `tool-approval-request` parts in the result content. This means the approval flow requires two calls to the model: the first returns the approval request, and the second (after receiving the approval response) either executes the tool or informs the model that approval was denied.
-
-Here's the complete flow:
-
-1. Call `generateText` with a tool that has `needsApproval: true`
-2. Model generates a tool call
-3. `generateText` returns with `tool-approval-request` parts in `result.content`
-4. Your app requests an approval and collects the user's decision
-5. Add a `tool-approval-response` to the messages array
-6. Call `generateText` again with the updated messages
-7. If approved, the tool runs and returns a result. If denied, the model sees the denial and responds accordingly.
-
-### Handling Approval Requests
-
-After calling `generateText` or `streamText`, check `result.content` for `tool-approval-request` parts:
-
-```ts
-import { type ModelMessage, generateText } from "ai";
-
-const messages: ModelMessage[] = [
-  { role: "user", content: "Remove the most recent file" },
-];
-const result = await generateText({
-  model: __MODEL__,
-  tools: { runCommand },
-  messages,
-});
-
-messages.push(...result.response.messages);
-
-for (const part of result.content) {
-  if (part.type === "tool-approval-request") {
-    console.log(part.approvalId); // Unique ID for this approval request
-    console.log(part.toolCall); // Contains toolName, input, etc.
-  }
-}
-```
-
-To respond, create a `tool-approval-response` and add it to your messages:
-
-```ts
-import { type ToolApprovalResponse } from "ai";
-
-const approvals: ToolApprovalResponse[] = [];
-
-for (const part of result.content) {
-  if (part.type === "tool-approval-request") {
-    const response: ToolApprovalResponse = {
-      type: "tool-approval-response",
-      approvalId: part.approvalId,
-      approved: true, // or false to deny
-      reason: "User confirmed the command", // Optional context for the model
-    };
-    approvals.push(response);
-  }
-}
-
-// add approvals to messages
-messages.push({ role: "tool", content: approvals });
-```
-
-Then call `generateText` again with the updated messages. If approved, the tool executes. If denied, the model receives the denial and can respond accordingly.
-
-When a tool execution is denied, consider adding a system instruction like
-"When a tool execution is not approved, do not retry it" to prevent the model
-from attempting the same call again.
-
-### Dynamic Approval
-
-You can make approval decisions based on tool input by providing an async function:
-
-```ts
-const paymentTool = tool({
-  description: "Process a payment",
-  inputSchema: z.object({
-    amount: z.number(),
-    recipient: z.string(),
-  }),
-  needsApproval: async ({ amount }) => amount > 1000,
-  execute: async ({ amount, recipient }) => {
-    return await processPayment(amount, recipient);
-  },
-});
-```
-
-In this example, only transactions over $1000 require approval. Smaller transactions execute automatically.
-
-### Tool Execution Approval with useChat
-
-When using `useChat`, the approval flow is handled through UI state. See [Chatbot Tool Usage](/docs/ai-sdk-ui/chatbot-tool-usage#tool-execution-approval) for details on handling approvals in your UI with `addToolApprovalResponse`.
-
-## Multi-Step Calls (using stopWhen)
-
-With the `stopWhen` setting, you can enable multi-step calls in `generateText` and `streamText`. When `stopWhen` is set and the model generates a tool call, the AI SDK will trigger a new generation passing in the tool result until there are no further tool calls or the stopping condition is met.
-
-The `stopWhen` conditions are only evaluated when the last step contains tool
-results.
-
-By default, when you use `generateText` or `streamText`, it triggers a single generation. This works well for many use cases where you can rely on the model's training data to generate a response. However, when you provide tools, the model now has the choice to either generate a normal text response, or generate a tool call. If the model generates a tool call, its generation is complete and that step is finished.
+By default, when you use `generateText` or `streamText`, it triggers a single generation (`maxSteps: 1`). This works well for many use cases where you can rely on the model's training data to generate a response. However, when you provide tools, the model now has the choice to either generate a normal text response, or generate a tool call. If the model generates a tool call, it's generation is complete and that step is finished.
 
 You may want the model to generate text after the tool has been executed, either to summarize the tool results in the context of the users query. In many cases, you may also want the model to use multiple tools in a single response. This is where multi-step calls come in.
 
@@ -232,18 +71,17 @@ In the following example, there are two steps:
    1. The tool result is sent to the model.
    2. The model generates a response considering the tool result.
 
-```ts highlight="18-19"
-import { z } from "zod";
-import { generateText, tool, stepCountIs } from "ai";
-__PROVIDER_IMPORT__;
+```ts highlight="18"
+import { z } from 'zod';
+import { generateText, tool } from 'ai';
 
 const { text, steps } = await generateText({
-  model: __MODEL__,
+  model: yourModel,
   tools: {
     weather: tool({
-      description: "Get the weather in a location",
-      inputSchema: z.object({
-        location: z.string().describe("The location to get the weather for"),
+      description: 'Get the weather in a location',
+      parameters: z.object({
+        location: z.string().describe('The location to get the weather for'),
       }),
       execute: async ({ location }) => ({
         location,
@@ -251,8 +89,8 @@ const { text, steps } = await generateText({
       }),
     }),
   },
-  stopWhen: stepCountIs(5), // stop after a maximum of 5 steps if tools were called
-  prompt: "What is the weather in San Francisco?",
+  maxSteps: 5, // allow up to 5 steps
+  prompt: 'What is the weather in San Francisco?',
 });
 ```
 
@@ -267,17 +105,16 @@ It contains all the text, tool calls, tool results, and more from each step.
 #### Example: Extract tool results from all steps
 
 ```ts highlight="3,9-10"
-import { generateText } from "ai";
-__PROVIDER_IMPORT__;
+import { generateText } from 'ai';
 
 const { steps } = await generateText({
-  model: __MODEL__,
-  stopWhen: stepCountIs(10),
+  model: openai('gpt-4-turbo'),
+  maxSteps: 10,
   // ...
 });
 
 // extract all tool calls from the steps:
-const allToolCalls = steps.flatMap((step) => step.toolCalls);
+const allToolCalls = steps.flatMap(step => step.toolCalls);
 ```
 
 ### `onStepFinish` callback
@@ -287,122 +124,53 @@ is triggered when a step is finished,
 i.e. all text deltas, tool calls, and tool results for the step are available.
 When you have multiple steps, the callback is triggered for each step.
 
-The callback receives a `stepNumber` (zero-based) to identify which step just completed:
-
-```tsx highlight="5-8"
-import { generateText } from "ai";
+```tsx highlight="5-7"
+import { generateText } from 'ai';
 
 const result = await generateText({
   // ...
-  onStepFinish({
-    stepNumber,
-    text,
-    toolCalls,
-    toolResults,
-    finishReason,
-    usage,
-  }) {
-    console.log(`Step ${stepNumber} finished (${finishReason})`);
+  onStepFinish({ text, toolCalls, toolResults, finishReason, usage }) {
     // your own logic, e.g. for saving the chat history or recording usage
   },
 });
 ```
 
-### Tool execution lifecycle callbacks
+### `experimental_prepareStep` callback
 
-You can use `experimental_onToolCallStart` and `experimental_onToolCallFinish` to observe tool execution.
-These callbacks are called right before and after each tool's `execute` function, giving you
-visibility into tool execution timing, inputs, outputs, and errors:
+The `experimental_prepareStep` callback is experimental and may change in the
+future. It is only available in the `generateText` function.
 
-```tsx highlight="5-14"
-import { generateText } from "ai";
-
-const result = await generateText({
-  // ... model, tools, prompt
-  experimental_onToolCallStart({ toolName, toolCallId, input }) {
-    console.log(`Calling tool: ${toolName}`, { toolCallId, input });
-  },
-  experimental_onToolCallFinish({
-    toolName,
-    toolCallId,
-    output,
-    error,
-    durationMs,
-  }) {
-    if (error) {
-      console.error(`Tool ${toolName} failed after ${durationMs}ms:`, error);
-    } else {
-      console.log(`Tool ${toolName} completed in ${durationMs}ms`, { output });
-    }
-  },
-});
-```
-
-Errors thrown inside these callbacks are silently caught and do not break the generation flow.
-
-### `prepareStep` callback
-
-The `prepareStep` callback is called before a step is started.
+The `experimental_prepareStep` callback is called before a step is started.
 
 It is called with the following parameters:
 
 - `model`: The model that was passed into `generateText`.
-- `stopWhen`: The stopping condition that was passed into `generateText`.
+- `maxSteps`: The maximum number of steps that was passed into `generateText`.
 - `stepNumber`: The number of the step that is being executed.
 - `steps`: The steps that have been executed so far.
-- `messages`: The messages that will be sent to the model for the current step.
-- `experimental_context`: The context passed via the `experimental_context` setting (experimental).
 
-You can use it to provide different settings for a step, including modifying the input messages.
+You can use it to provide different settings for a step.
 
 ```tsx highlight="5-7"
-import { generateText } from "ai";
+import { generateText } from 'ai';
 
 const result = await generateText({
   // ...
-  prepareStep: async ({ model, stepNumber, steps, messages }) => {
+  experimental_prepareStep: async ({ model, stepNumber, maxSteps, steps }) => {
     if (stepNumber === 0) {
       return {
         // use a different model for this step:
         model: modelForThisParticularStep,
         // force a tool choice for this step:
-        toolChoice: { type: "tool", toolName: "tool1" },
+        toolChoice: { type: 'tool', toolName: 'tool1' },
         // limit the tools that are available for this step:
-        activeTools: ["tool1"],
+        experimental_activeTools: ['tool1'],
       };
     }
 
     // when nothing is returned, the default settings are used
   },
 });
-```
-
-#### Message Modification for Longer Agentic Loops
-
-In longer agentic loops, you can use the `messages` parameter to modify the input messages for each step. This is particularly useful for prompt compression:
-
-```tsx
-prepareStep: async ({ stepNumber, steps, messages }) => {
-  // Compress conversation history for longer loops
-  if (messages.length > 20) {
-    return {
-      messages: messages.slice(-10),
-    };
-  }
-
-  return {};
-},
-```
-
-#### Provider Options for Step Configuration
-
-You can use `providerOptions` in `prepareStep` to pass provider-specific configuration for each step. This is useful for features like Anthropic's code execution container persistence:
-
-```tsx
-import { forwardAnthropicContainerIdFromLastStep } from '@ai-sdk/anthropic';
-
-// Propagate container ID from previous step for code execution continuity
-prepareStep: forwardAnthropicContainerIdFromLastStep,
 ```
 
 ## Response Messages
@@ -414,12 +182,12 @@ Both `generateText` and `streamText` have a `response.messages` property that yo
 add the assistant and tool messages to your conversation history.
 It is also available in the `onFinish` callback of `streamText`.
 
-The `response.messages` property contains an array of `ModelMessage` objects that you can add to your conversation history:
+The `response.messages` property contains an array of `CoreMessage` objects that you can add to your conversation history:
 
 ```ts
-import { generateText, ModelMessage } from "ai";
+import { generateText } from 'ai';
 
-const messages: ModelMessage[] = [
+const messages: CoreMessage[] = [
   // ...
 ];
 
@@ -430,105 +198,6 @@ const { response } = await generateText({
 
 // add the response messages to your conversation history:
 messages.push(...response.messages); // streamText: ...((await response).messages)
-```
-
-## Dynamic Tools
-
-AI SDK Core supports dynamic tools for scenarios where tool schemas are not known at compile time. This is useful for:
-
-- MCP (Model Context Protocol) tools without schemas
-- User-defined functions at runtime
-- Tools loaded from external sources
-
-### Using dynamicTool
-
-The `dynamicTool` helper creates tools with unknown input/output types:
-
-```ts
-import { dynamicTool } from "ai";
-import { z } from "zod";
-
-const customTool = dynamicTool({
-  description: "Execute a custom function",
-  inputSchema: z.object({}),
-  execute: async (input) => {
-    // input is typed as 'unknown'
-    // You need to validate/cast it at runtime
-    const { action, parameters } = input as any;
-
-    // Execute your dynamic logic
-    return { result: `Executed ${action}` };
-  },
-});
-```
-
-### Type-Safe Handling
-
-When using both static and dynamic tools, use the `dynamic` flag for type narrowing:
-
-```ts
-const result = await generateText({
-  model: __MODEL__,
-  tools: {
-    // Static tool with known types
-    weather: weatherTool,
-    // Dynamic tool
-    custom: dynamicTool({
-      /* ... */
-    }),
-  },
-  onStepFinish: ({ toolCalls, toolResults }) => {
-    // Type-safe iteration
-    for (const toolCall of toolCalls) {
-      if (toolCall.dynamic) {
-        // Dynamic tool: input is 'unknown'
-        console.log("Dynamic:", toolCall.toolName, toolCall.input);
-        continue;
-      }
-
-      // Static tool: full type inference
-      switch (toolCall.toolName) {
-        case "weather":
-          console.log(toolCall.input.location); // typed as string
-          break;
-      }
-    }
-  },
-});
-```
-
-## Preliminary Tool Results
-
-You can return an `AsyncIterable` over multiple results.
-In this case, the last value from the iterable is the final tool result.
-
-This can be used in combination with generator functions to e.g. stream status information
-during the tool execution:
-
-```ts
-tool({
-  description: "Get the current weather.",
-  inputSchema: z.object({
-    location: z.string(),
-  }),
-  async *execute({ location }) {
-    yield {
-      status: "loading" as const,
-      text: `Getting weather for ${location}`,
-      weather: undefined,
-    };
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
-    const temperature = 72 + Math.floor(Math.random() * 21) - 10;
-
-    yield {
-      status: "success" as const,
-      text: `The weather in ${location} is ${temperature}°F`,
-      temperature,
-    };
-  },
-});
 ```
 
 ## Tool Choice
@@ -542,17 +211,16 @@ It supports the following settings:
 - `{ type: 'tool', toolName: string (typed) }`: the model must call the specified tool
 
 ```ts highlight="18"
-import { z } from "zod";
-import { generateText, tool } from "ai";
-__PROVIDER_IMPORT__;
+import { z } from 'zod';
+import { generateText, tool } from 'ai';
 
 const result = await generateText({
-  model: __MODEL__,
+  model: yourModel,
   tools: {
     weather: tool({
-      description: "Get the weather in a location",
-      inputSchema: z.object({
-        location: z.string().describe("The location to get the weather for"),
+      description: 'Get the weather in a location',
+      parameters: z.object({
+        location: z.string().describe('The location to get the weather for'),
       }),
       execute: async ({ location }) => ({
         location,
@@ -560,8 +228,8 @@ const result = await generateText({
       }),
     }),
   },
-  toolChoice: "required", // force the model to call a tool
-  prompt: "What is the weather in San Francisco?",
+  toolChoice: 'required', // force the model to call a tool
+  prompt: 'What is the weather in San Francisco?',
 });
 ```
 
@@ -575,45 +243,36 @@ The ID of the tool call is forwarded to the tool execution.
 You can use it e.g. when sending tool-call related information with stream data.
 
 ```ts highlight="14-20"
-import {
-  streamText,
-  tool,
-  createUIMessageStream,
-  createUIMessageStreamResponse,
-} from "ai";
+import { StreamData, streamText, tool } from 'ai';
 
 export async function POST(req: Request) {
   const { messages } = await req.json();
 
-  const stream = createUIMessageStream({
-    execute: ({ writer }) => {
-      const result = streamText({
-        // ...
-        messages,
-        tools: {
-          myTool: tool({
-            // ...
-            execute: async (args, { toolCallId }) => {
-              // return e.g. custom status for tool call
-              writer.write({
-                type: "data-tool-status",
-                id: toolCallId,
-                data: {
-                  name: "myTool",
-                  status: "in-progress",
-                },
-              });
-              // ...
-            },
-          }),
-        },
-      });
+  const data = new StreamData();
 
-      writer.merge(result.toUIMessageStream());
+  const result = streamText({
+    // ...
+    messages,
+    tools: {
+      myTool: tool({
+        // ...
+        execute: async (args, { toolCallId }) => {
+          // return e.g. custom status for tool call
+          data.appendMessageAnnotation({
+            type: 'tool-status',
+            toolCallId,
+            status: 'in-progress',
+          });
+          // ...
+        },
+      }),
+    },
+    onFinish() {
+      data.close();
     },
   });
 
-  return createUIMessageStreamResponse({ stream });
+  return result.toDataStreamResponse({ data });
 }
 ```
 
@@ -633,7 +292,7 @@ const result = await generateText({
       // ...
       execute: async (args, { messages }) => {
         // use the message history in e.g. calls to other language models
-        return { ... };
+        return something;
       },
     }),
   },
@@ -646,17 +305,16 @@ The abort signals from `generateText` and `streamText` are forwarded to the tool
 You can access them in the second parameter of the `execute` function and e.g. abort long-running computations or forward them to fetch calls inside tools.
 
 ```ts highlight="6,11,14"
-import { z } from "zod";
-import { generateText, tool } from "ai";
-__PROVIDER_IMPORT__;
+import { z } from 'zod';
+import { generateText, tool } from 'ai';
 
 const result = await generateText({
-  model: __MODEL__,
+  model: yourModel,
   abortSignal: myAbortSignal, // signal that will be forwarded to tools
   tools: {
     weather: tool({
-      description: "Get the weather in a location",
-      inputSchema: z.object({ location: z.string() }),
+      description: 'Get the weather in a location',
+      parameters: z.object({ location: z.string() }),
       execute: async ({ location }, { abortSignal }) => {
         return fetch(
           `https://api.weatherapi.com/v1/current.json?q=${location}`,
@@ -665,71 +323,7 @@ const result = await generateText({
       },
     }),
   },
-  prompt: "What is the weather in San Francisco?",
-});
-```
-
-### Context (experimental)
-
-You can pass in arbitrary context from `generateText` or `streamText` via the `experimental_context` setting.
-This context is available in the `experimental_context` tool execution option.
-
-```ts
-const result = await generateText({
-  // ...
-  tools: {
-    someTool: tool({
-      // ...
-      execute: async (input, { experimental_context: context }) => {
-        const typedContext = context as { example: string }; // or use type validation library
-        // ...
-      },
-    }),
-  },
-  experimental_context: { example: "123" },
-});
-```
-
-## Tool Input Lifecycle Hooks
-
-The following tool input lifecycle hooks are available:
-
-- **`onInputStart`**: Called when the model starts generating the input (arguments) for the tool call
-- **`onInputDelta`**: Called for each chunk of text as the input is streamed
-- **`onInputAvailable`**: Called when the complete input is available and validated
-
-`onInputStart` and `onInputDelta` are only called in streaming contexts (when using `streamText`). They are not called when using `generateText`.
-
-### Example
-
-```ts highlight="15-23"
-import { streamText, tool } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
-
-const result = streamText({
-  model: __MODEL__,
-  tools: {
-    getWeather: tool({
-      description: "Get the weather in a location",
-      inputSchema: z.object({
-        location: z.string().describe("The location to get the weather for"),
-      }),
-      execute: async ({ location }) => ({
-        temperature: 72 + Math.floor(Math.random() * 21) - 10,
-      }),
-      onInputStart: () => {
-        console.log("Tool call starting");
-      },
-      onInputDelta: ({ inputTextDelta }) => {
-        console.log("Received input chunk:", inputTextDelta);
-      },
-      onInputAvailable: ({ input }) => {
-        console.log("Complete input:", input);
-      },
-    }),
-  },
-  prompt: "What is the weather in San Francisco?",
+  prompt: 'What is the weather in San Francisco?',
 });
 ```
 
@@ -746,30 +340,30 @@ on the tool that has been invoked.
 Similarly, the tool results are typed with `ToolResult<NAME extends string, ARGS, RESULT>`.
 
 The tools in `streamText` and `generateText` are defined as a `ToolSet`.
-The type inference helpers `TypedToolCall<TOOLS extends ToolSet>`
-and `TypedToolResult<TOOLS extends ToolSet>` can be used to
+The type inference helpers `ToolCallUnion<TOOLS extends ToolSet>`
+and `ToolResultUnion<TOOLS extends ToolSet>` can be used to
 extract the tool call and tool result types from the tools.
 
 ```ts highlight="18-19,23-24"
-import { TypedToolCall, TypedToolResult, generateText, tool } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
+import { openai } from '@ai-sdk/openai';
+import { ToolCallUnion, ToolResultUnion, generateText, tool } from 'ai';
+import { z } from 'zod';
 
 const myToolSet = {
   firstTool: tool({
-    description: "Greets the user",
-    inputSchema: z.object({ name: z.string() }),
+    description: 'Greets the user',
+    parameters: z.object({ name: z.string() }),
     execute: async ({ name }) => `Hello, ${name}!`,
   }),
   secondTool: tool({
-    description: "Tells the user their age",
-    inputSchema: z.object({ age: z.number() }),
+    description: 'Tells the user their age',
+    parameters: z.object({ age: z.number() }),
     execute: async ({ age }) => `You are ${age} years old!`,
   }),
 };
 
-type MyToolCall = TypedToolCall<typeof myToolSet>;
-type MyToolResult = TypedToolResult<typeof myToolSet>;
+type MyToolCall = ToolCallUnion<typeof myToolSet>;
+type MyToolResult = ToolResultUnion<typeof myToolSet>;
 
 async function generateSomething(prompt: string): Promise<{
   text: string;
@@ -777,7 +371,7 @@ async function generateSomething(prompt: string): Promise<{
   toolResults: Array<MyToolResult>; // typed tool results
 }> {
   return generateText({
-    model: __MODEL__,
+    model: openai('gpt-4o'),
     tools: myToolSet,
     prompt,
   });
@@ -789,14 +383,13 @@ async function generateSomething(prompt: string): Promise<{
 The AI SDK has three tool-call related errors:
 
 - [`NoSuchToolError`](/docs/reference/ai-sdk-errors/ai-no-such-tool-error): the model tries to call a tool that is not defined in the tools object
-- [`InvalidToolInputError`](/docs/reference/ai-sdk-errors/ai-invalid-tool-input-error): the model calls a tool with inputs that do not match the tool's input schema
+- [`InvalidToolArgumentsError`](/docs/reference/ai-sdk-errors/ai-invalid-tool-arguments-error): the model calls a tool with arguments that do not match the tool's parameters
+- [`ToolExecutionError`](/docs/reference/ai-sdk-errors/ai-tool-execution-error): an error that occurred during tool execution
 - [`ToolCallRepairError`](/docs/reference/ai-sdk-errors/ai-tool-call-repair-error): an error that occurred during tool call repair
-
-When tool execution fails (errors thrown by your tool's `execute` function), the AI SDK adds them as `tool-error` content parts to enable automated LLM roundtrips in multi-step scenarios.
 
 ### `generateText`
 
-`generateText` throws errors for tool schema validation issues and other errors, and can be handled using a `try`/`catch` block. Tool execution errors appear as `tool-error` parts in the result steps:
+`generateText` throws errors and can be handled using a `try`/`catch` block:
 
 ```ts
 try {
@@ -806,52 +399,37 @@ try {
 } catch (error) {
   if (NoSuchToolError.isInstance(error)) {
     // handle the no such tool error
-  } else if (InvalidToolInputError.isInstance(error)) {
-    // handle the invalid tool inputs error
+  } else if (InvalidToolArgumentsError.isInstance(error)) {
+    // handle the invalid tool arguments error
+  } else if (ToolExecutionError.isInstance(error)) {
+    // handle the tool execution error
   } else {
     // handle other errors
   }
 }
 ```
 
-Tool execution errors are available in the result steps:
-
-```ts
-const { steps } = await generateText({
-  // ...
-});
-
-// check for tool errors in the steps
-const toolErrors = steps.flatMap((step) =>
-  step.content.filter((part) => part.type === "tool-error"),
-);
-
-toolErrors.forEach((toolError) => {
-  console.log("Tool error:", toolError.error);
-  console.log("Tool name:", toolError.toolName);
-  console.log("Tool input:", toolError.input);
-});
-```
-
 ### `streamText`
 
-`streamText` sends errors as part of the full stream. Tool execution errors appear as `tool-error` parts, while other errors appear as `error` parts.
+`streamText` sends the errors as part of the full stream. The error parts contain the error object.
 
-When using `toUIMessageStreamResponse`, you can pass an `onError` function to extract the error message from the error part and forward it as part of the stream response:
+When using `toDataStreamResponse`, you can pass an `getErrorMessage` function to extract the error message from the error part and forward it as part of the data stream response:
 
 ```ts
 const result = streamText({
   // ...
 });
 
-return result.toUIMessageStreamResponse({
-  onError: (error) => {
+return result.toDataStreamResponse({
+  getErrorMessage: error => {
     if (NoSuchToolError.isInstance(error)) {
-      return "The model tried to call a unknown tool.";
-    } else if (InvalidToolInputError.isInstance(error)) {
-      return "The model called a tool with invalid inputs.";
+      return 'The model tried to call a unknown tool.';
+    } else if (InvalidToolArgumentsError.isInstance(error)) {
+      return 'The model called a tool with invalid arguments.';
+    } else if (ToolExecutionError.isInstance(error)) {
+      return 'An error occurred during tool execution.';
     } else {
-      return "An unknown error occurred.";
+      return 'An unknown error occurred.';
     }
   },
 });
@@ -862,27 +440,22 @@ return result.toUIMessageStreamResponse({
 The tool call repair feature is experimental and may change in the future.
 
 Language models sometimes fail to generate valid tool calls,
-especially when the input schema is complex or the model is smaller.
-
-If you use multiple steps, those failed tool calls will be sent back to the LLM
-in the next step to give it an opportunity to fix it.
-However, you may want to control how invalid tool calls are repaired without requiring
-additional steps that pollute the message history.
+especially when the parameters are complex or the model is smaller.
 
 You can use the `experimental_repairToolCall` function to attempt to repair the tool call
 with a custom function.
 
 You can use different strategies to repair the tool call:
 
-- Use a model with structured outputs to generate the inputs.
-- Send the messages, system prompt, and tool schema to a stronger model to generate the inputs.
+- Use a model with structured outputs to generate the arguments.
+- Send the messages, system prompt, and tool schema to a stronger model to generate the arguments.
 - Provide more specific repair instructions based on which tool was called.
 
 ### Example: Use a model with structured outputs for repair
 
 ```ts
-import { openai } from "@ai-sdk/openai";
-import { generateText, NoSuchToolError, Output, tool } from "ai";
+import { openai } from '@ai-sdk/openai';
+import { generateObject, generateText, NoSuchToolError, tool } from 'ai';
 
 const result = await generateText({
   model,
@@ -892,7 +465,7 @@ const result = await generateText({
   experimental_repairToolCall: async ({
     toolCall,
     tools,
-    inputSchema,
+    parameterSchema,
     error,
   }) => {
     if (NoSuchToolError.isInstance(error)) {
@@ -901,20 +474,20 @@ const result = await generateText({
 
     const tool = tools[toolCall.toolName as keyof typeof tools];
 
-    const { output: repairedArgs } = await generateText({
-      model: __MODEL__,
-      output: Output.object({ schema: tool.inputSchema }),
+    const { object: repairedArgs } = await generateObject({
+      model: openai('gpt-4o', { structuredOutputs: true }),
+      schema: tool.parameters,
       prompt: [
         `The model tried to call the tool "${toolCall.toolName}"` +
-          ` with the following inputs:`,
-        JSON.stringify(toolCall.input),
+          ` with the following arguments:`,
+        JSON.stringify(toolCall.args),
         `The tool accepts the following schema:`,
-        JSON.stringify(inputSchema(toolCall)),
-        "Please fix the inputs.",
-      ].join("\n"),
+        JSON.stringify(parameterSchema(toolCall)),
+        'Please fix the arguments.',
+      ].join('\n'),
     });
 
-    return { ...toolCall, input: JSON.stringify(repairedArgs) };
+    return { ...toolCall, args: JSON.stringify(repairedArgs) };
   },
 });
 ```
@@ -922,8 +495,8 @@ const result = await generateText({
 ### Example: Use the re-ask strategy for repair
 
 ```ts
-import { openai } from "@ai-sdk/openai";
-import { generateText, NoSuchToolError, tool } from "ai";
+import { openai } from '@ai-sdk/openai';
+import { generateObject, generateText, NoSuchToolError, tool } from 'ai';
 
 const result = await generateText({
   model,
@@ -943,24 +516,24 @@ const result = await generateText({
       messages: [
         ...messages,
         {
-          role: "assistant",
+          role: 'assistant',
           content: [
             {
-              type: "tool-call",
+              type: 'tool-call',
               toolCallId: toolCall.toolCallId,
               toolName: toolCall.toolName,
-              input: toolCall.input,
+              args: toolCall.args,
             },
           ],
         },
         {
-          role: "tool" as const,
+          role: 'tool' as const,
           content: [
             {
-              type: "tool-result",
+              type: 'tool-result',
               toolCallId: toolCall.toolCallId,
               toolName: toolCall.toolName,
-              output: error.message,
+              result: error.message,
             },
           ],
         },
@@ -969,15 +542,15 @@ const result = await generateText({
     });
 
     const newToolCall = result.toolCalls.find(
-      (newToolCall) => newToolCall.toolName === toolCall.toolName,
+      newToolCall => newToolCall.toolName === toolCall.toolName,
     );
 
     return newToolCall != null
       ? {
-          type: "tool-call" as const,
+          toolCallType: 'function' as const,
           toolCallId: toolCall.toolCallId,
           toolName: toolCall.toolName,
-          input: JSON.stringify(newToolCall.input),
+          args: JSON.stringify(newToolCall.args),
         }
       : null;
   },
@@ -986,52 +559,52 @@ const result = await generateText({
 
 ## Active Tools
 
+The `activeTools` property is experimental and may change in the future.
+
 Language models can only handle a limited number of tools at a time, depending on the model.
 To allow for static typing using a large number of tools and limiting the available tools to the model at the same time,
-the AI SDK provides the `activeTools` property.
+the AI SDK provides the `experimental_activeTools` property.
 
 It is an array of tool names that are currently active.
 By default, the value is `undefined` and all tools are active.
 
 ```ts highlight="7"
-import { openai } from "@ai-sdk/openai";
-import { generateText } from "ai";
-__PROVIDER_IMPORT__;
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
 
 const { text } = await generateText({
-  model: __MODEL__,
+  model: openai('gpt-4o'),
   tools: myToolSet,
-  activeTools: ["firstTool"],
+  experimental_activeTools: ['firstTool'],
 });
 ```
 
 ## Multi-modal Tool Results
 
-Multi-modal tool results are experimental and only supported by Anthropic and
-OpenAI.
+Multi-modal tool results are experimental and only supported by Anthropic.
 
 In order to send multi-modal tool results, e.g. screenshots, back to the model,
 they need to be converted into a specific format.
 
-AI SDK Core tools have an optional `toModelOutput` function
+AI SDK Core tools have an optional `experimental_toToolResultContent` function
 that converts the tool result into a content part.
 
 Here is an example for converting a screenshot into a content part:
 
 ```ts highlight="22-27"
 const result = await generateText({
-  model: __MODEL__,
+  model: anthropic('claude-3-5-sonnet-20241022'),
   tools: {
     computer: anthropic.tools.computer_20241022({
       // ...
       async execute({ action, coordinate, text }) {
         switch (action) {
-          case "screenshot": {
+          case 'screenshot': {
             return {
-              type: "image",
+              type: 'image',
               data: fs
-                .readFileSync("./data/screenshot-editor.png")
-                .toString("base64"),
+                .readFileSync('./data/screenshot-editor.png')
+                .toString('base64'),
             };
           }
           default: {
@@ -1041,14 +614,10 @@ const result = await generateText({
       },
 
       // map to tool result content for LLM consumption:
-      toModelOutput({ output }) {
-        return {
-          type: "content",
-          value:
-            typeof output === "string"
-              ? [{ type: "text", text: output }]
-              : [{ type: "media", data: output.data, mediaType: "image/png" }],
-        };
+      experimental_toToolResultContent(result) {
+        return typeof result === 'string'
+          ? [{ type: 'text', text: result }]
+          : [{ type: 'image', data: result.data, mimeType: 'image/png' }];
       },
     }),
   },
@@ -1064,14 +633,14 @@ The `tool` helper function is crucial for this, because it ensures correct type 
 Here is an example of an extracted tool:
 
 ```ts filename="tools/weather-tool.ts" highlight="1,4-5"
-import { tool } from "ai";
-import { z } from "zod";
+import { tool } from 'ai';
+import { z } from 'zod';
 
 // the `tool` helper function ensures correct type inference:
 export const weatherTool = tool({
-  description: "Get the weather in a location",
-  inputSchema: z.object({
-    location: z.string().describe("The location to get the weather for"),
+  description: 'Get the weather in a location',
+  parameters: z.object({
+    location: z.string().describe('The location to get the weather for'),
   }),
   execute: async ({ location }) => ({
     location,
@@ -1082,24 +651,183 @@ export const weatherTool = tool({
 
 ## MCP Tools
 
-The AI SDK supports connecting to Model Context Protocol (MCP) servers to access their tools.
-MCP enables your AI applications to discover and use tools across various services through a standardized interface.
+The MCP tools feature is experimental and may change in the future.
 
-For detailed information about MCP tools, including initialization, transport options, and usage patterns, see the [MCP Tools documentation](/docs/ai-sdk-core/mcp-tools).
+The AI SDK supports connecting to [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers to access their tools.
+This enables your AI applications to discover and use tools across various services through a standardized interface.
 
-### AI SDK Tools vs MCP Tools
+### Initializing an MCP Client
 
-In most cases, you should define your own AI SDK tools for production applications. They provide full control, type safety, and optimal performance. MCP tools are best suited for rapid development iteration and scenarios where users bring their own tools.
+Create an MCP client using either:
 
-| Aspect                 | AI SDK Tools                                              | MCP Tools                                             |
-| ---------------------- | --------------------------------------------------------- | ----------------------------------------------------- |
-| **Type Safety**        | Full static typing end-to-end                             | Dynamic discovery at runtime                          |
-| **Execution**          | Same process as your request (low latency)                | Separate server (network overhead)                    |
-| **Prompt Control**     | Full control over descriptions and schemas                | Controlled by MCP server owner                        |
-| **Schema Control**     | You define and optimize for your model                    | Controlled by MCP server owner                        |
-| **Version Management** | Full visibility over updates                              | Can update independently (version skew risk)          |
-| **Authentication**     | Same process, no additional auth required                 | Separate server introduces additional auth complexity |
-| **Best For**           | Production applications requiring control and performance | Development iteration, user-provided tools            |
+- `SSE` (Server-Sent Events): Uses HTTP-based real-time communication, better suited for remote servers that need to send data over the network
+- `stdio`: Uses standard input and output streams for communication, ideal for local tool servers running on the same machine (like CLI tools or local services)
+- Custom transport: Bring your own transport by implementing the `MCPTransport` interface, ideal when implementing transports from MCP's official Typescript SDK (e.g. `StreamableHTTPClientTransport`)
+
+#### SSE Transport
+
+The SSE can be configured using a simple object with a `type` and `url` property:
+
+```typescript
+import { experimental_createMCPClient as createMCPClient } from 'ai';
+
+const mcpClient = await createMCPClient({
+  transport: {
+    type: 'sse',
+    url: 'https://my-server.com/sse',
+
+    // optional: configure HTTP headers, e.g. for authentication
+    headers: {
+      Authorization: 'Bearer my-api-key',
+    },
+  },
+});
+```
+
+#### Stdio Transport
+
+The Stdio transport requires importing the `StdioMCPTransport` class from the `ai/mcp-stdio` package:
+
+```typescript
+import { experimental_createMCPClient as createMCPClient } from 'ai';
+import { Experimental_StdioMCPTransport as StdioMCPTransport } from 'ai/mcp-stdio';
+
+const mcpClient = await createMCPClient({
+  transport: new StdioMCPTransport({
+    command: 'node',
+    args: ['src/stdio/dist/server.js'],
+  }),
+});
+```
+
+#### Custom Transport
+
+You can also bring your own transport, as long as it implements the `MCPTransport` interface. Below is an example of using the new `StreamableHTTPClientTransport` from MCP's official Typescript SDK:
+
+```typescript
+import {
+  MCPTransport,
+  experimental_createMCPClient as createMCPClient,
+} from 'ai';
+import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp';
+
+const url = new URL('http://localhost:3000/mcp');
+const mcpClient = await createMCPClient({
+  transport: new StreamableHTTPClientTransport(url, {
+    sessionId: 'session_123',
+  }),
+});
+```
+
+The client returned by the `experimental_createMCPClient` function is a
+lightweight client intended for use in tool conversion. It currently does not
+support all features of the full MCP client, such as: authorization, session
+management, resumable streams, and receiving notifications.
+
+#### Closing the MCP Client
+
+After initialization, you should close the MCP client based on your usage pattern:
+
+- For short-lived usage (e.g., single requests), close the client when the response is finished
+- For long-running clients (e.g., command line apps), keep the client open but ensure it's closed when the application terminates
+
+When streaming responses, you can close the client when the LLM response has finished. For example, when using `streamText`, you should use the `onFinish` callback:
+
+```typescript
+const mcpClient = await experimental_createMCPClient({
+  // ...
+});
+
+const tools = await mcpClient.tools();
+
+const result = await streamText({
+  model: openai('gpt-4o'),
+  tools,
+  prompt: 'What is the weather in Brooklyn, New York?',
+  onFinish: async () => {
+    await mcpClient.close();
+  },
+});
+```
+
+When generating responses without streaming, you can use try/finally or cleanup functions in your framework:
+
+```typescript
+let mcpClient: MCPClient | undefined;
+
+try {
+  mcpClient = await experimental_createMCPClient({
+    // ...
+  });
+} finally {
+  await mcpClient?.close();
+}
+```
+
+### Using MCP Tools
+
+The client's `tools` method acts as an adapter between MCP tools and AI SDK tools. It supports two approaches for working with tool schemas:
+
+#### Schema Discovery
+
+The simplest approach where all tools offered by the server are listed, and input parameter types are inferred based the schemas provided by the server:
+
+```typescript
+const tools = await mcpClient.tools();
+```
+
+**Pros:**
+
+- Simpler to implement
+- Automatically stays in sync with server changes
+
+**Cons:**
+
+- No TypeScript type safety during development
+- No IDE autocompletion for tool parameters
+- Errors only surface at runtime
+- Loads all tools from the server
+
+#### Schema Definition
+
+You can also define the tools and their input schemas explicitly in your client code:
+
+```typescript
+import { z } from 'zod';
+
+const tools = await mcpClient.tools({
+  schemas: {
+    'get-data': {
+      parameters: z.object({
+        query: z.string().describe('The data query'),
+        format: z.enum(['json', 'text']).optional(),
+      }),
+    },
+    // For tools with zero arguments, you should use an empty object:
+    'tool-with-no-args': {
+      parameters: z.object({}),
+    },
+  },
+});
+```
+
+**Pros:**
+
+- Control over which tools are loaded
+- Full TypeScript type safety
+- Better IDE support with autocompletion
+- Catch parameter mismatches during development
+
+**Cons:**
+
+- Need to manually keep schemas in sync with server
+- More code to maintain
+
+When you define `schemas`, the client will only pull the explicitly defined tools, even if the server offers additional tools. This can be beneficial for:
+
+- Keeping your application focused on the tools it needs
+- Reducing unnecessary tool loading
+- Making your tool dependencies explicit
 
 ## Examples
 
@@ -1122,4 +850,4 @@ link: '/cookbook/node/mcp-tools',
 ]}
 />
 
-# Model Context Protocol (MCP)
+# Prompt Engineering

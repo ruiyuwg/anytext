@@ -41,56 +41,56 @@ The AI SDK abstracts away the differences between model providers, eliminates bo
 At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call DeepSeek R1 with the AI SDK:
 
 ```ts
-import { deepseek } from "@ai-sdk/deepseek";
-import { generateText } from "ai";
+import { deepseek } from '@ai-sdk/deepseek';
+import { generateText } from 'ai';
 
-const { reasoningText, text } = await generateText({
-  model: deepseek("deepseek-reasoner"),
-  prompt: "Explain quantum entanglement.",
+const { reasoning, text } = await generateText({
+  model: deepseek('deepseek-reasoner'),
+  prompt: 'Explain quantum entanglement.',
 });
 ```
 
 The unified interface also means that you can easily switch between providers by changing just two lines of code. For example, to use DeepSeek R1 via Fireworks:
 
 ```ts
-import { fireworks } from "@ai-sdk/fireworks";
+import { fireworks } from '@ai-sdk/fireworks';
 import {
   generateText,
   wrapLanguageModel,
   extractReasoningMiddleware,
-} from "ai";
+} from 'ai';
 
 // middleware to extract reasoning tokens
 const enhancedModel = wrapLanguageModel({
-  model: fireworks("accounts/fireworks/models/deepseek-r1"),
-  middleware: extractReasoningMiddleware({ tagName: "think" }),
+  model: fireworks('accounts/fireworks/models/deepseek-r1'),
+  middleware: extractReasoningMiddleware({ tagName: 'think' }),
 });
 
-const { reasoningText, text } = await generateText({
+const { reasoning, text } = await generateText({
   model: enhancedModel,
-  prompt: "Explain quantum entanglement.",
+  prompt: 'Explain quantum entanglement.',
 });
 ```
 
 Or to use Groq's `deepseek-r1-distill-llama-70b` model:
 
 ```ts
-import { groq } from "@ai-sdk/groq";
+import { groq } from '@ai-sdk/groq';
 import {
   generateText,
   wrapLanguageModel,
   extractReasoningMiddleware,
-} from "ai";
+} from 'ai';
 
 // middleware to extract reasoning tokens
 const enhancedModel = wrapLanguageModel({
-  model: groq("deepseek-r1-distill-llama-70b"),
-  middleware: extractReasoningMiddleware({ tagName: "think" }),
+  model: groq('deepseek-r1-distill-llama-70b'),
+  middleware: extractReasoningMiddleware({ tagName: 'think' }),
 });
 
-const { reasoningText, text } = await generateText({
+const { reasoning, text } = await generateText({
   model: enhancedModel,
-  prompt: "Explain quantum entanglement.",
+  prompt: 'Explain quantum entanglement.',
 });
 ```
 
@@ -107,7 +107,7 @@ You can use DeepSeek R1 with the AI SDK through various providers. Here's a comp
 
 | Provider                                                | Model ID                                                                                                          | Reasoning Tokens    |
 | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------- |
-| [DeepSeek](/providers/ai-sdk-providers/deepseek)        | [`deepseek-reasoner`](https://api-docs.deepseek.com/guides/reasoning_model)                                       |                     |
+| [DeepSeek](/providers/ai-sdk-providers/deepseek)        | [`deepseek-reasoner`](https://api-docs.deepseek.com/guides/reasoning_model)                                       |  |
 | [Fireworks](/providers/ai-sdk-providers/fireworks)      | [`accounts/fireworks/models/deepseek-r1`](https://fireworks.ai/models/fireworks/deepseek-r1)                      | Requires Middleware |
 | [Groq](/providers/ai-sdk-providers/groq)                | [`deepseek-r1-distill-llama-70b`](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B)               | Requires Middleware |
 | [Azure](/providers/ai-sdk-providers/azure)              | [`DeepSeek-R1`](https://ai.azure.com/explore/models/DeepSeek-R1/version/1/registry/azureml-deepseek#code-samples) | Requires Middleware |
@@ -130,15 +130,15 @@ In a new Next.js application, first install the AI SDK and the DeepSeek provider
 Then, create a route handler for the chat endpoint:
 
 ```tsx filename="app/api/chat/route.ts"
-import { deepseek } from "@ai-sdk/deepseek";
-import { convertToModelMessages, streamText, UIMessage } from "ai";
+import { deepseek } from '@ai-sdk/deepseek';
+import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: deepseek("deepseek-reasoner"),
-    messages: await convertToModelMessages(messages),
+    model: deepseek('deepseek-reasoner'),
+    messages: convertToModelMessages(messages),
   });
 
   return result.toUIMessageStreamResponse({
@@ -148,50 +148,29 @@ export async function POST(req: Request) {
 ```
 
 You can forward the model's reasoning tokens to the client with
-`sendReasoning: true` in the `toUIMessageStreamResponse` method.
+`sendReasoning: true` in the `toDataStreamResponse` method.
 
 Finally, update the root page (`app/page.tsx`) to use the `useChat` hook:
 
 ```tsx filename="app/page.tsx"
-"use client";
+'use client';
 
-import { useChat } from "@ai-sdk/react";
-import { useState } from "react";
+import { useChat } from '@ai-sdk/react';
 
 export default function Page() {
-  const [input, setInput] = useState("");
-  const { messages, sendMessage } = useChat();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (input.trim()) {
-      sendMessage({ text: input });
-      setInput("");
-    }
-  };
+  const { messages, input, handleInputChange, handleSubmit, error } = useChat();
 
   return (
     <>
-      {messages.map((message) => (
+      {messages.map(message => (
         <div key={message.id}>
-          {message.role === "user" ? "User: " : "AI: "}
-          {message.parts.map((part, index) => {
-            if (part.type === "reasoning") {
-              return <pre key={index}>{part.text}</pre>;
-            }
-            if (part.type === "text") {
-              return <span key={index}>{part.text}</span>;
-            }
-            return null;
-          })}
+          {message.role === 'user' ? 'User: ' : 'AI: '}
+          {message.reasoning && <pre>{message.reasoning}</pre>}
+          {message.content}
         </div>
       ))}
       <form onSubmit={handleSubmit}>
-        <input
-          name="prompt"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
+        <input name="prompt" value={input} onChange={handleInputChange} />
         <button type="submit">Submit</button>
       </form>
     </>
@@ -199,8 +178,8 @@ export default function Page() {
 }
 ```
 
-You can access the model's reasoning tokens through the `parts` array on the
-`message` object, where reasoning parts have `type: 'reasoning'`.
+You can access the model's reasoning tokens with the `reasoning` property on
+the `message` object.
 
 The useChat hook on your root page (`app/page.tsx`) will make a request to your AI provider endpoint (`app/api/chat/route.ts`) whenever the user submits a message. The messages are then displayed in the chat UI.
 
@@ -217,9 +196,41 @@ Ready to dive in? Here's how you can begin:
 
 1. Explore the documentation at [ai-sdk.dev/docs](/docs) to understand the capabilities of the AI SDK.
 2. Check out practical examples at [ai-sdk.dev/examples](/examples) to see the SDK in action.
-3. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) at [ai-sdk.dev/docs/guides](/cookbook/guides).
+3. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) at [ai-sdk.dev/docs/guides](/docs/guides).
 4. Use ready-to-deploy AI templates at [vercel.com/templates?type=ai](https://vercel.com/templates?type=ai).
 
 DeepSeek R1 opens new opportunities for reasoning-intensive AI applications. Start building today and leverage the power of advanced reasoning in your AI projects.
 
-# Get started with DeepSeek V3.2
+# Guides
+
+# Guides
+
+These use-case specific guides are intended to help you build real applications with the AI SDK.
+
+\<IndexCards
+cards={\[
+{
+title: 'RAG Chatbot',
+description:
+'Learn how to build a retrieval-augmented generation chatbot with the AI SDK.',
+href: '/docs/guides/rag-chatbot',
+},
+{
+title: 'Multimodal Chatbot',
+description: 'Learn how to build a multimodal chatbot with the AI SDK.',
+href: '/docs/guides/multi-modal-chatbot',
+},
+{
+title: 'Get started with Llama 3.1',
+description: 'Get started with Llama 3.1 using the AI SDK.',
+href: '/docs/guides/llama-3\_1',
+},
+{
+title: 'Get started with OpenAI o1',
+description: 'Get started with OpenAI o1 using the AI SDK.',
+href: '/docs/guides/o1',
+},
+]}
+/>
+
+# Node.js HTTP Server

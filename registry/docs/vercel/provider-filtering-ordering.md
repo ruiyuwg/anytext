@@ -233,5 +233,5 @@ Both options are set under `providerOptions.gateway` in the AI SDK or `providerO
 
 title: "Provider Options"
 description: "Configure provider routing, ordering, and fallback behavior in Vercel AI Gateway"
-last\_updated: "2026-03-08T05:03:10.547Z"
+last\_updated: "2026-03-23T09:40:04.586Z"
 source: "https://vercel.com/docs/ai-gateway/models-and-providers/provider-options"

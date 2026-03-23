@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/firebase
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 Firebase is a platform developed by Google for creating mobile and web
 applications. Its features include authentication primitives for log in and a
@@ -176,9 +176,9 @@ different configuration options, read [here](how-to-deploy).
 
 URL: https://docs.deno.com/deploy/classic/how-to-deploy
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 The simplest way to deploy more complex projects is via our Github integration.
 This allows you to link a Deno Deploy Classic project to a GitHub repository.

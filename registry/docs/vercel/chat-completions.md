@@ -456,5 +456,5 @@ Messages support different content types:
 
 title: "Embeddings"
 description: "Generate vector embeddings from input text for semantic search, similarity matching, and RAG applications."
-last\_updated: "2026-03-08T05:03:10.729Z"
+last\_updated: "2026-03-23T09:40:04.803Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-chat-completions/embeddings"

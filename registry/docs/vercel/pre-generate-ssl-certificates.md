@@ -78,5 +78,5 @@ For more details on performing a migration, see [this guide](/docs/domains/manag
 
 title: "Programmatic Domain Management"
 description: "Programmatically search, price, purchase, renew, and manage domains with Vercel"
-last\_updated: "2026-03-08T05:03:13.477Z"
+last\_updated: "2026-03-23T09:40:08.675Z"
 source: "https://vercel.com/docs/domains/registrar-api"

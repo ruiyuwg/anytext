@@ -193,5 +193,5 @@ field:
 
 title: "Getting Started with Conformance"
 description: "Learn how to set up Conformance for your codebase."
-last\_updated: "2026-03-08T05:03:12.616Z"
+last\_updated: "2026-03-23T09:40:07.477Z"
 source: "https://vercel.com/docs/conformance/getting-started"

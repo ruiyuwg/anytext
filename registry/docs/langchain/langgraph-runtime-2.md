@@ -28,7 +28,7 @@ An **actor** is a `PregelNode`. It subscribes to channels, reads data from them,
 
 ## Channels
 
-Channels are used to communicate between actors (PregelNodes). Each channel has a value type, an update type, and an update function – which takes a sequence of updates and modifies the stored value. Channels can be used to send data from one chain to another, or to send data from a chain to itself in a future step. LangGraph provides a number of built-in channels:
+Channels are used to communicate between actors (PregelNodes). Each channel has a value type, an update type, and an update function—which takes a sequence of updates and modifies the stored value. Channels can be used to send data from one chain to another, or to send data from a chain to itself in a future step. LangGraph provides a number of built-in channels:
 
 - [`LastValue`](https://reference.langchain.com/python/langgraph/channels/last_value/LastValue): The default channel, stores the last value sent to the channel, useful for input and output values, or for sending data from one step to the next.
 - [`Topic`](https://reference.langchain.com/python/langgraph/channels/topic/Topic): A configurable PubSub Topic, useful for sending multiple values between **actors**, or for accumulating output. Can be configured to deduplicate values or to accumulate values over the course of multiple steps.

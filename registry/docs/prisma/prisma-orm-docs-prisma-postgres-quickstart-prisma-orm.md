@@ -431,4 +431,3 @@ More info \[#more-info]
 - [Prisma Postgres documentation](/postgres)
 - [Prisma Config reference](/orm/reference/prisma-config-reference)
 - [Database connection management](/orm/prisma-client/setup-and-configuration/databases-connections)
-- [Cache your queries](/postgres/database/caching#setting-up-caching-in-prisma-postgres)

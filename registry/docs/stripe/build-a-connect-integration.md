@@ -1794,63 +1794,24 @@ try {
 // Don’t submit any personally identifiable information in requests made with this key.
 $stripeSecretKey = 'sk\_INSERT\_YOUR\_SECRET\_KEY';
 using Stripe;
-public void ConfigureServices(IServiceCollection services)
+// This is a public sample test API key.
+// Don’t submit any personally identifiable information in requests made with this key.
+// Sign in to see your own test API key embedded in code samples.
+services.AddSingleton(new StripeClient("<\<YOUR\_SECRET\_KEY>>"));
+\[HttpPost("{connectedAccountId}")]
+public ActionResult Update(string connectedAccountId)
 {
-services.AddMvc().AddNewtonsoftJson();
+try
+{
+Account account = \_client.V1.Accounts.Update(
+connectedAccountId,
+new AccountUpdateOptions
+{
+BusinessType = "individual",
 }
-public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-{
+);
 
 ```
-        // This is a placeholder - it should be replaced with your secret API key.
-        // Sign in to see your own test API key embedded in code samples.
-        // Don’t submit any personally identifiable information in requests made with this key.
-        StripeConfiguration.ApiKey = "sk_INSERT_YOUR_SECRET_KEY";
-
-        if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-        app.UseRouting();
-        app.UseDefaultFiles();
-        app.UseStaticFiles();
-        app.UseEndpoints(endpoints => endpoints.MapControllers());
-    }
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddMvc().AddNewtonsoftJson();
-        // This is a public sample test API key.
-        // Don’t submit any personally identifiable information in requests made with this key.
-        // Sign in to see your own test API key embedded in code samples.
-        services.AddSingleton(new StripeClient("<<YOUR_SECRET_KEY>>"));            
-    }
-
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-        app.UseRouting();
-        app.UseDefaultFiles();
-        app.UseStaticFiles();
-        app.UseEndpoints(endpoints => endpoints.MapControllers());
-    }        
-    private StripeClient _client;
-
-    public AccountApiController(StripeClient client)
-    {
-      _client = client;
-    }
-    [HttpPost("{connectedAccountId}")]
-    public ActionResult Update(string connectedAccountId)
-    {
-        try
-        {
-            var service = new AccountService();
-
-            Account account = service.Update(
-                connectedAccountId,
-                new AccountUpdateOptions
-                {
-                  BusinessType = "individual",
-                }
-            );
-
             return Json(new { account = account.Id });
         } catch(Exception ex) {
             Console.Write("An error occurred when calling the Stripe API to update an account:  " + ex.Message);
@@ -1887,8 +1848,6 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         try
         {
-            var service = new AccountService();
-
             var options = new AccountCreateOptions();
             var options = new AccountCreateOptions
             {
@@ -1937,7 +1896,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
                 Country = "US",
             };
 
-            Account account = service.Create(options);
+            Account account = _client.V1.Accounts.Create(options);
 
             return Json(new { account = account.Id });
         } catch(Exception ex) {
@@ -1993,7 +1952,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
                                 }
                             },
                         },
-                    },                        
+                    },
                 },
                 Identity = new Stripe.V2.Core.AccountCreateIdentityOptions
                 {
@@ -2026,6 +1985,13 @@ public class AccountSessionPostBody
 [ApiController]
 public class AccountSessionApiController : Controller
 {
+    private readonly StripeClient _client;
+
+    public AccountSessionApiController(StripeClient client)
+    {
+      _client = client;
+    }
+
     [HttpPost]
     public ActionResult Create([FromBody] AccountSessionPostBody accountSessionPostBody)
     {
@@ -2033,8 +1999,7 @@ public class AccountSessionApiController : Controller
         {
             var connectedAccountId = accountSessionPostBody.Account;
 
-            var service = new AccountSessionService();
-            AccountSession accountSession = service.Create(
+            AccountSession accountSession = _client.V1.AccountSessions.Create(
                 new AccountSessionCreateOptions
                 {
                     Account = connectedAccountId,
@@ -2106,15 +2071,21 @@ public class AccountSessionApiController : Controller
 [ApiController]
 public class AccountLinkApiController : Controller
 {
+    private readonly StripeClient _client;
+
+    public AccountLinkApiController(StripeClient client)
+    {
+      _client = client;
+    }
+
     [HttpPost]
     public ActionResult Create([FromBody] AccountLinkPostBody accountLinkPostBody)
     {
         try
         {
             var connectedAccountId = accountLinkPostBody.Account;
-            var service = new AccountLinkService();
 
-            AccountLink accountLink = service.Create(
+            AccountLink accountLink = _client.V1.AccountLinks.Create(
                 new AccountLinkCreateOptions
                 {
                     Account = connectedAccountId,
@@ -2157,7 +2128,7 @@ public class AccountLinkApiController : Controller
                     Type = "account_onboarding",
                     AccountOnboarding = new Stripe.V2.Core.AccountLinkCreateUseCaseAccountOnboardingOptions
                     {
-                        Configurations = new List { "recipient" },                            
+                        Configurations = new List { "recipient" },
                         Configurations = new List { "merchant" },
                         ReturnUrl = $"http://localhost/return/{connectedAccountId}",
                         RefreshUrl = $"http://localhost/refresh/{connectedAccountId}",

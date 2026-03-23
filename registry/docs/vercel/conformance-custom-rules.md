@@ -144,5 +144,5 @@ version of that package.
 
 title: "Customizing Conformance"
 description: "Learn how to manage and configure your Conformance rules."
-last\_updated: "2026-03-08T05:03:12.607Z"
+last\_updated: "2026-03-23T09:40:07.459Z"
 source: "https://vercel.com/docs/conformance/customize"

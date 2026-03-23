@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/api/compression
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 Compressing the response body to save bandwidth is a common practice. To take
 some work off your shoulder, we built the capabilities directly into Deploy.

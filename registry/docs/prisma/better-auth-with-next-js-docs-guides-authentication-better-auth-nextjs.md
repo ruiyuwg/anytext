@@ -452,34 +452,34 @@ Next, generate a secure secret that Better Auth will use to sign authentication 
 
 
 ```bash
-npx @better-auth/cli@latest secret
+npx auth@latest secret
 ```
 
 
 
 ```bash
-pnpm dlx @better-auth/cli@latest secret
+pnpm dlx auth@latest secret
 ```
 
 
 
 ```bash
-yarn dlx @better-auth/cli@latest secret
+yarn dlx auth@latest secret
 ```
 
 
 
 ```bash
-bunx --bun @better-auth/cli@latest secret
+bunx --bun auth@latest secret
 ```
 ````
 
 Copy the generated secret and add it, along with your application's URL, to your `.env` file:
 
-```dotenv title=".env" showLineNumbers
+```bash title=".env"
 # Better Auth
-BETTER_AUTH_SECRET=your-generated-secret // [!code ++]
-BETTER_AUTH_URL=http://localhost:3000 // [!code ++]
+BETTER_AUTH_SECRET=your-generated-secret # [!code ++]
+BETTER_AUTH_URL=http://localhost:3000 # [!code ++]
 
 # Prisma
 DATABASE_URL="your-database-url"
@@ -568,25 +568,25 @@ Run the following command:
 
 
 ```bash
-npx @better-auth/cli generate
+npx auth generate
 ```
 
 
 
 ```bash
-pnpm dlx @better-auth/cli generate
+pnpm dlx auth generate
 ```
 
 
 
 ```bash
-yarn dlx @better-auth/cli generate
+yarn dlx auth generate
 ```
 
 
 
 ```bash
-bunx --bun @better-auth/cli generate
+bunx --bun auth generate
 ```
 
 

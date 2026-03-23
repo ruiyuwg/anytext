@@ -596,5 +596,5 @@ export async function POST(request: Request) {
 
 title: "Zero Data Retention"
 description: "Learn about zero data retention policies and how to enforce ZDR on a per-request basis with AI Gateway."
-last\_updated: "2026-03-08T05:03:10.316Z"
+last\_updated: "2026-03-23T09:40:04.199Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/zdr"

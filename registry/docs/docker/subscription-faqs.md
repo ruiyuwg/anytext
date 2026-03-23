@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -49,7 +47,7 @@ You can also join the [Developer Preview Program](https://www.docker.com/communi
 
 > Tip
 >
-> Need to upgrade? [Compare Docker Team and Docker Business](https://www.docker.com/pricing/) to choose the plan that best fits your team's needs.
+> Need to upgrade? [Compare Docker Team and Docker Business](https://www.docker.com/pricing?ref=Docs\&refAction=DocsSubscriptionFaq) to choose the plan that best fits your team's needs.
 
 [Edit this page](https://github.com/docker/docs/edit/main/content/manuals/subscription/faq.md)
 

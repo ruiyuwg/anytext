@@ -71,5 +71,5 @@ When your balance drops below the threshold, Vercel will automatically charge yo
 
 title: "Blackbox AI"
 description: "Use the Blackbox AI CLI with the AI Gateway."
-last\_updated: "2026-03-08T05:03:09.696Z"
+last\_updated: "2026-03-23T09:40:03.098Z"
 source: "https://vercel.com/docs/agent-resources/coding-agents/blackbox"

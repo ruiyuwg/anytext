@@ -66,5 +66,5 @@ All variant IDs referenced in rules must exist in the flag's variants array. Seg
 
 title: "Vercel Flags"
 description: "Use Vercel as your feature flag provider to create and manage flags, define targeting rules, and run experiments directly from the dashboard."
-last\_updated: "2026-03-08T05:03:14.614Z"
+last\_updated: "2026-03-23T09:40:10.209Z"
 source: "https://vercel.com/docs/flags/vercel-flags"

@@ -128,7 +128,7 @@ Integrating with AI Gateway provides unified model management and routing capabi
 
 title: "Framework Integrations"
 description: "Explore available community framework integrations with Vercel AI Gateway"
-last\_updated: "2026-03-08T05:03:10.423Z"
+last\_updated: "2026-03-23T09:40:04.329Z"
 source: "https://vercel.com/docs/ai-gateway/ecosystem/framework-integrations"
 
 # Framework Integrations
@@ -158,5 +158,5 @@ The following below list is a non-exhaustive list of frameworks that currently s
 
 title: "Pydantic AI"
 description: "Learn how to integrate Vercel AI Gateway with Pydantic AI to access multiple AI models through a unified interface"
-last\_updated: "2026-03-08T05:03:10.430Z"
+last\_updated: "2026-03-23T09:40:04.341Z"
 source: "https://vercel.com/docs/ai-gateway/ecosystem/framework-integrations/pydantic-ai"

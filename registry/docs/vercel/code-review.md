@@ -116,9 +116,9 @@ Pro teams can redeem a $100 USD promotional credit when enabling Agent. You can 
 
 ## Privacy
 
-Code Review doesn't store or train on your data. It only uses LLMs from providers on our [subprocessor list](https://security.vercel.com/?itemUid=e3fae2ca-94a9-416b-b577-5c90e382df57\&source=click), and we have agreements in place that don't allow them to train on your data.
+Code Review never trains on customer code if your Vercel team's [data preferences setting](https://vercel.fyi/team-data-preferences) is "off" or you are on an [Enterprise plan](/docs/plans/enterprise).
 
 title: "Managing Code Reviews"
 description: "Customize which repositories get reviewed and track your review metrics and spending."
-last\_updated: "2026-03-08T05:03:09.673Z"
+last\_updated: "2026-03-23T09:40:03.073Z"
 source: "https://vercel.com/docs/agent/pr-review/usage"

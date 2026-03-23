@@ -10,7 +10,7 @@ Outbound transfers typically arrive at the receiving bank between the same day a
 
 For more information, see the [Money movement timelines](https://docs.stripe.com/financial-accounts/connect/money-movement/timelines.md#outboundpayment-and-outboundtransfer-transactions) guide.
 
-`OutboundTransfers` support the `us_bank_account` type of payment method. Alternatively, you can use an existing [BankAccount](https://docs.stripe.com/payments/ach-direct-debit/migrating-from-charges.md) that belongs to the merchant as an [ExternalAccount](https://docs.stripe.com/api/external_accounts.md).
+`OutboundTransfers` support the `us_bank_account` type of payment method. Alternatively, you can use an existing [BankAccount](https://docs.stripe.com/payments/ach-direct-debit/migrating-from-charges.md) that belongs to the business as an [ExternalAccount](https://docs.stripe.com/api/external_accounts.md).
 
 ## Create an OutboundTransfer
 

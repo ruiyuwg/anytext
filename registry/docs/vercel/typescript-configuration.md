@@ -94,5 +94,5 @@ The dependency on the repository's shared TypeScript must also exist:
 
 title: "TYPESCRIPT\_ONLY"
 description: "Requires that a workspace package may only contain TypeScript files and no JavaScript or JSX files."
-last\_updated: "2026-03-08T05:03:12.903Z"
+last\_updated: "2026-03-23T09:40:07.878Z"
 source: "https://vercel.com/docs/conformance/rules/TYPESCRIPT\_ONLY"

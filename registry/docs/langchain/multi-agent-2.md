@@ -2,13 +2,13 @@
 
 Source: https://docs.langchain.com/oss/python/langchain/multi-agent/index
 
-Multi-agent systems coordinate specialized components to tackle complex workflows. However, not every complex task requires this approach — a single agent with the right (sometimes dynamic) tools and prompt can often achieve similar results.
+Multi-agent systems coordinate specialized components to tackle complex workflows. However, not every complex task requires this approach—a single agent with the right (sometimes dynamic) tools and prompt can often achieve similar results.
 
 ## Why multi-agent?
 
 When developers say they need "multi-agent," they're usually looking for one or more of these capabilities:
 
-- **Context management**: Provide specialized knowledge without overwhelming the model's context window. If context were infinite and latency zero, you could dump all knowledge into a single prompt — but since it's not, you need patterns to selectively surface relevant information.
+- **Context management**: Provide specialized knowledge without overwhelming the model's context window. If context were infinite and latency zero, you could dump all knowledge into a single prompt—but since it's not, you need patterns to selectively surface relevant information.
 - **Distributed development**: Allow different teams to develop and maintain capabilities independently, composing them into a larger system with clear boundaries.
 - **Parallelization**: Spawn specialized workers for subtasks and execute them concurrently for faster results.
 
@@ -35,9 +35,9 @@ Use this table to match your requirements to the right pattern:
 | Pattern                                                      | Distributed development | Parallelization | Multi-hop | Direct user interaction |
 | ------------------------------------------------------------ | :---------------------: | :-------------: | :-------: | :---------------------: |
 | [**Subagents**](/oss/python/langchain/multi-agent/subagents) |          ⭐⭐⭐⭐⭐          |      ⭐⭐⭐⭐⭐      |   ⭐⭐⭐⭐⭐   |            ⭐            |
-| [**Handoffs**](/oss/python/langchain/multi-agent/handoffs)   |            —            |        —        |   ⭐⭐⭐⭐⭐   |          ⭐⭐⭐⭐⭐          |
+| [**Handoffs**](/oss/python/langchain/multi-agent/handoffs)   |            -            |        -        |   ⭐⭐⭐⭐⭐   |          ⭐⭐⭐⭐⭐          |
 | [**Skills**](/oss/python/langchain/multi-agent/skills)       |          ⭐⭐⭐⭐⭐          |       ⭐⭐⭐       |   ⭐⭐⭐⭐⭐   |          ⭐⭐⭐⭐⭐          |
-| [**Router**](/oss/python/langchain/multi-agent/router)       |           ⭐⭐⭐           |      ⭐⭐⭐⭐⭐      |     —     |           ⭐⭐⭐           |
+| [**Router**](/oss/python/langchain/multi-agent/router)       |           ⭐⭐⭐           |      ⭐⭐⭐⭐⭐      |     -     |           ⭐⭐⭐           |
 
 - **Distributed development**: Can different teams maintain components independently?
 - **Parallelization**: Can multiple agents execute concurrently?

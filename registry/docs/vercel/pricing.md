@@ -61,5 +61,5 @@ When your balance drops below the threshold, AI Gateway automatically charges yo
 
 title: "AI SDK"
 description: "Build AI-powered TypeScript applications using the AI SDK with AI Gateway for unified access to 200+ models."
-last\_updated: "2026-03-08T05:03:10.611Z"
+last\_updated: "2026-03-23T09:40:04.644Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/ai-sdk"

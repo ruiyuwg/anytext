@@ -359,12 +359,12 @@ The options object accepts `@testing-library/vue` render options and the followi
 
 #### `mockNuxtImport`
 
-`mockNuxtImport` allows you to mock Nuxt's auto import functionality. For example, to mock `useStorage`, you can do so like this:
+`mockNuxtImport` allows you to mock Nuxt's auto import functionality. For example, to mock `useState`, you can do so like this:
 
 ```ts twoslash
 import { mockNuxtImport } from '@nuxt/test-utils/runtime'
 
-mockNuxtImport('useStorage', () => {
+mockNuxtImport('useState', () => {
   return () => {
     return { value: 'mocked storage' }
   }
@@ -375,19 +375,19 @@ mockNuxtImport('useStorage', () => {
 
 You can explicitly type the mock for type safety, and use the original implementation passed to the factory function when mocking complex functionality.
 
-```ts twoslash
+```ts [test/nuxt/import.test.ts] twoslash
 import { mockNuxtImport } from '@nuxt/test-utils/runtime'
 
-mockNuxtImport<typeof useStorage>('useStorage', (original) => {
+mockNuxtImport<typeof useState>('useState', (original) => {
   return (...args) => {
-    return { ...original(...args), value: 'mocked storage' }
+    return { ...original('some-key'), value: 'mocked state' }
   }
 })
 
 // or specify the target to mock
-mockNuxtImport(useStorage, (original) => {
+mockNuxtImport(useState, (original) => {
   return (...args) => {
-    return { ...original(...args), value: 'mocked storage' }
+    return { ...original('some-key'), value: 'mocked state' }
   }
 })
 
@@ -404,20 +404,20 @@ If you need to mock a Nuxt import and provide different implementations between 
 import { vi } from 'vitest'
 import { mockNuxtImport } from '@nuxt/test-utils/runtime'
 
-const { useStorageMock } = vi.hoisted(() => {
+const { useStateMock } = vi.hoisted(() => {
   return {
-    useStorageMock: vi.fn(() => {
+    useStateMock: vi.fn(() => {
       return { value: 'mocked storage' }
     }),
   }
 })
 
-mockNuxtImport('useStorage', () => {
-  return useStorageMock
+mockNuxtImport('useState', () => {
+  return useStateMock
 })
 
 // Then, inside a test
-useStorageMock.mockImplementation(() => {
+useStateMock.mockImplementation(() => {
   return { value: 'something else' }
 })
 ```
@@ -541,7 +541,7 @@ If you would like to use both the end-to-end and unit testing functionality of `
 ```ts twoslash
 import { mockNuxtImport } from '@nuxt/test-utils/runtime'
 
-mockNuxtImport('useStorage', () => {
+mockNuxtImport('useState', () => {
   return () => {
     return { value: 'mocked storage' }
   }
@@ -846,39 +846,3 @@ test('test', async ({ page, goto }) => {
   await expect(page.getByRole('heading')).toHaveText('Welcome to Playwright!')
 })
 ```
-
-# Upgrade Guide
-
-## Upgrading Nuxt
-
-### Latest release
-
-To upgrade Nuxt to the [latest release](https://github.com/nuxt/nuxt/releases){rel=""nofollow""}, use the `nuxt upgrade` command.
-
-::code-group{sync="pm"}
-
-```bash [npm]
-npx nuxt upgrade
-```
-
-```bash [yarn]
-yarn nuxt upgrade
-```
-
-```bash [pnpm]
-pnpm nuxt upgrade
-```
-
-```bash [bun]
-bun x nuxt upgrade
-```
-
-```bash [deno]
-deno x nuxt upgrade
-```
-
-::
-
-### Nightly Release Channel
-
-To use the latest Nuxt build and test features before their release, read about the [nightly release channel](https://nuxt.com/docs/4.x/guide/going-further/nightly-release-channel) guide.

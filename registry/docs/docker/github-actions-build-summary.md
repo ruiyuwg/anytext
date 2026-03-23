@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -34,8 +32,8 @@ Docker's GitHub Actions for building and pushing images generate a job summary f
 
 Job summaries for Docker builds appear automatically if you use the following versions of the [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images) or [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake) GitHub Actions:
 
-- `docker/build-push-action@v6`
-- `docker/bake-action@v6`
+- `docker/build-push-action@v7`
+- `docker/bake-action@v7`
 
 To view the job summary, open the details page for the job in GitHub after the job has finished. The summary is available for both failed and successful builds. In the case of a failed build, the summary also displays the error message that caused the build to fail:
 
@@ -69,7 +67,7 @@ To disable job summaries, set the `DOCKER_BUILD_SUMMARY` environment variable in
 
 ```yaml
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         env:
           DOCKER_BUILD_SUMMARY: false
         with:
@@ -83,7 +81,7 @@ To disable the upload of the build record archive to GitHub, set the `DOCKER_BUI
 
 ```yaml
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         env:
           DOCKER_BUILD_RECORD_UPLOAD: false
         with:

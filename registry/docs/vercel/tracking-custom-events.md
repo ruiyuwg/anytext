@@ -30,17 +30,17 @@ To track an event:
 
 1. Add the following snippet before the script tag in your HTML file:
 
-   ```html filename="index.html"
-
-     window.va =
-       window.va ||
-       function () {
-         (window.vaq = window.vaq || []).push(arguments);
-       };
-
-   {/* Place it above this script tag when already added */}
-
-   ```
+```html filename="index.html"
+<script>
+  window.va =
+    window.va ||
+    function () {
+      (window.vaq = window.vaq || []).push(arguments);
+    };
+</script>
+{/* Place it above this script tag when already added */}
+<script defer src="/<unique-path>/script.js"></script>
+```
 
 2. In most cases you will want to track an event when a user performs an action, such as clicking a button or submitting a form, so you should use this on the button handler. Send an event with the name of the event you want to track as the first argument. You can also send [custom data](#tracking-an-event-with-custom-data) by using the `data` property with key-value pairs as the second argument:
    ```html filename="index.html"
@@ -456,5 +456,5 @@ Once you have tracked an event, you can view and filter for it in the dashboard.
 
 title: "Filtering Analytics"
 description: "Learn how filters allow you to explore insights about your website"
-last\_updated: "2026-03-08T05:03:10.907Z"
+last\_updated: "2026-03-23T09:40:05.059Z"
 source: "https://vercel.com/docs/analytics/filtering"

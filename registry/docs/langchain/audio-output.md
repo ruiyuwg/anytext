@@ -87,13 +87,13 @@ const userInput = new HumanMessage({
   content: [{
     type: "input_audio",
     input_audio: {
-      data: castAudioContent.data, // Re-use the base64 data from the first example
+      data: castAudioContent.data, // Reuse the base64 data from the first example
       format: "wav",
     },
   }]
 })
 
-// Re-use the same model instance
+// Reuse the same model instance
 const userInputAudioRes = await modelWithAudioOutput.invoke([userInput]);
 
 console.log((userInputAudioRes.additional_kwargs.audio as Record<string, any>).transcript);

@@ -58,6 +58,7 @@ Here are some typical queries in GROQ. You can also check out [our introduction 
 *[sanity::dataset() == 'production'] // compare dataset where query is run. Useful in webhooks or functions
 *[sanity::dataset() in ['prod', 'staging', 'next']] // compare dataset name with list
 *[string::startsWith(sanity::dataset(), 'prod_')] // check for prefixed dataset names, such as prod_marketing, prod_cs, etc.
+*[_type == "movie" && genre == user::attributes().genre] // All movie documents that have a genre that matches the genre attribute on the current user (premium feature)
 ```
 
 ## Text matching
@@ -87,7 +88,7 @@ Here are some typical queries in GROQ. You can also check out [our introduction 
 "my-pretty-pony-123.jpg" match "my*.jpg"  // -> false
 ```
 
-## Slice Operations
+## Slice operations
 
 > \[!TIP]
 > Protip
@@ -150,6 +151,8 @@ Here are some typical queries in GROQ. You can also check out [our introduction 
 *[_type == "movie"] | order(lower(title) asc)
 ```
 
+GROQ doesn't include a built-in function for random ordering. To display results in a random order, fetch your results with a standard query and randomize them in your application code.
+
 ## Joins
 
 ```groq
@@ -175,7 +178,7 @@ Here are some typical queries in GROQ. You can also check out [our introduction 
 
 ```
 
-## Objects and Arrays
+## Objects and arrays
 
 ```groq
 // Create your own objects
@@ -206,7 +209,7 @@ array::intersects(firstList, secondList)   // firstList = [1, 2, 3], secondList 
 array::intersects(tags, keywords)          // tags = ["tech", "science"], keywords = ["art", "design"] => false
 ```
 
-## Object Projections
+## Object projections
 
 ```groq
 // return only title
@@ -452,7 +455,7 @@ round(3.14, 1) // 3.1
 }
 ```
 
-## Arithmetic and Concatenation
+## Arithmetic and concatenation
 
 ```groq
 // Standard arithmetic operations are supported
@@ -477,3 +480,13 @@ round(3.14, 1) // 3.1
 3 + " p.m."         // null
 string(3) + " p.m." // "3 p.m."
 ```
+
+#### Related articles
+
+[Custom GROQ functions](https://www.sanity.io/docs/content-lake/custom-groq-functions)
+
+[How Queries Work – GROQ](https://www.sanity.io/docs/content-lake/how-queries-work)
+
+[GROQ feature support across Sanity](https://www.sanity.io/docs/content-lake/groq-feature-support-by-context)
+
+[Querying content with @sanity/client](https://www.sanity.io/docs/apis-and-sdks/js-client-querying)

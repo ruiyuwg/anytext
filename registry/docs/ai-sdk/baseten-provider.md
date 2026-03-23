@@ -11,43 +11,43 @@ The Baseten provider is available via the `@ai-sdk/baseten` module. You can inst
 You can import the default provider instance `baseten` from `@ai-sdk/baseten`:
 
 ```ts
-import { baseten } from "@ai-sdk/baseten";
+import { baseten } from '@ai-sdk/baseten';
 ```
 
 If you need a customized setup, you can import `createBaseten` from `@ai-sdk/baseten`
 and create a provider instance with your settings:
 
 ```ts
-import { createBaseten } from "@ai-sdk/baseten";
+import { createBaseten } from '@ai-sdk/baseten';
 
 const baseten = createBaseten({
-  apiKey: process.env.BASETEN_API_KEY ?? "",
+  apiKey: process.env.BASETEN_API_KEY ?? '',
 });
 ```
 
 You can use the following optional settings to customize the Baseten provider instance:
 
-- **baseURL** _string_
+- **baseURL** *string*
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://inference.baseten.co/v1`.
 
-- **apiKey** _string_
+- **apiKey** *string*
 
   API key that is being sent using the `Authorization` header. It defaults to
-  the `BASETEN_API_KEY` environment variable. It is recommended you set the environment variable using `export` so you do not need to include the field every time.
+  the `BASETEN_API_KEY` environment variable. It is recommended you set the environment variable using `export` so you do not need to include the field everytime.
   You can grab your Baseten API Key [here](https://app.baseten.co/settings/api_keys)
 
-- **modelURL** _string_
+- **modelURL** *string*
 
   Custom model URL for specific models (chat or embeddings). If not provided,
   the default Model APIs will be used.
 
-- **headers** _Record\<string,string>_
+- **headers** *Record\<string,string>*
 
   Custom headers to include in the requests.
 
-- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
+- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
 
@@ -57,7 +57,7 @@ You can select [Baseten models](https://www.baseten.co/products/model-apis/) usi
 The first argument is the model id, e.g. `'moonshotai/Kimi-K2-Instruct-0905'`: The complete supported models under Model APIs can be found [here](https://docs.baseten.co/development/model-apis/overview#supported-models).
 
 ```ts
-const model = baseten("moonshotai/Kimi-K2-Instruct-0905");
+const model = baseten('moonshotai/Kimi-K2-Instruct-0905');
 ```
 
 ### Example
@@ -65,12 +65,12 @@ const model = baseten("moonshotai/Kimi-K2-Instruct-0905");
 You can use Baseten language models to generate text with the `generateText` function:
 
 ```ts
-import { baseten } from "@ai-sdk/baseten";
-import { generateText } from "ai";
+import { baseten } from '@ai-sdk/baseten';
+import { generateText } from 'ai';
 
 const { text } = await generateText({
-  model: baseten("moonshotai/Kimi-K2-Instruct-0905"),
-  prompt: "What is the meaning of life? Answer in one sentence.",
+  model: baseten('moonshotai/Kimi-K2-Instruct-0905'),
+  prompt: 'What is the meaning of life? Answer in one sentence.',
 });
 ```
 
@@ -86,16 +86,16 @@ Baseten supports dedicated model URLs for both chat and embedding models. You ha
 For models deployed with Baseten's OpenAI-compatible endpoints:
 
 ```ts
-import { createBaseten } from "@ai-sdk/baseten";
+import { createBaseten } from '@ai-sdk/baseten';
 
 const baseten = createBaseten({
-  modelURL: "https://model-{MODEL_ID}.api.baseten.co/sync/v1",
+  modelURL: 'https://model-{MODEL_ID}.api.baseten.co/sync/v1',
 });
 // No modelId is needed because we specified modelURL
 const model = baseten();
 const { text } = await generateText({
   model: model,
-  prompt: "Say hello from a Baseten chat model!",
+  prompt: 'Say hello from a Baseten chat model!',
 });
 ```
 
@@ -105,35 +105,35 @@ const { text } = await generateText({
 
 ## Embedding Models
 
-You can create models that call the Baseten embeddings API using the `.embeddingModel()` factory method. The Baseten provider uses the high-performance `@basetenlabs/performance-client` for optimal embedding performance.
+You can create models that call the Baseten embeddings API using the `.textEmbeddingModel()` factory method. The Baseten provider uses the high-performance `@basetenlabs/performance-client` for optimal embedding performance.
 
 **Important:** Embedding models require a dedicated deployment with a custom
 `modelURL`. Unlike chat models, embeddings cannot use Baseten's default Model
 APIs and must specify a dedicated model endpoint.
 
 ```ts
-import { createBaseten } from "@ai-sdk/baseten";
-import { embed, embedMany } from "ai";
+import { createBaseten } from '@ai-sdk/baseten';
+import { embed, embedMany } from 'ai';
 
 const baseten = createBaseten({
-  modelURL: "https://model-{MODEL_ID}.api.baseten.co/sync",
+  modelURL: 'https://model-{MODEL_ID}.api.baseten.co/sync',
 });
 
-const embeddingModel = baseten.embeddingModel();
+const embeddingModel = baseten.textEmbeddingModel();
 
 // Single embedding
 const { embedding } = await embed({
   model: embeddingModel,
-  value: "sunny day at the beach",
+  value: 'sunny day at the beach',
 });
 
 // Batch embeddings
 const { embeddings } = await embedMany({
   model: embeddingModel,
   values: [
-    "sunny day at the beach",
-    "rainy afternoon in the city",
-    "snowy mountain peak",
+    'sunny day at the beach',
+    'rainy afternoon in the city',
+    'snowy mountain peak',
   ],
 });
 ```
@@ -163,16 +163,16 @@ The embedding implementation includes:
 The Baseten provider includes built-in error handling for common API errors:
 
 ```ts
-import { baseten } from "@ai-sdk/baseten";
-import { generateText } from "ai";
+import { baseten } from '@ai-sdk/baseten';
+import { generateText } from 'ai';
 
 try {
   const { text } = await generateText({
-    model: baseten("moonshotai/Kimi-K2-Instruct-0905"),
-    prompt: "Hello, world!",
+    model: baseten('moonshotai/Kimi-K2-Instruct-0905'),
+    prompt: 'Hello, world!',
   });
 } catch (error) {
-  console.error("Baseten API error:", error.message);
+  console.error('Baseten API error:', error.message);
 }
 ```
 
@@ -181,7 +181,7 @@ try {
 ```ts
 // Embeddings require a modelURL
 try {
-  baseten.embeddingModel();
+  baseten.textEmbeddingModel();
 } catch (error) {
   // Error: "No model URL provided for embeddings. Please set modelURL option for embeddings."
 }
@@ -190,7 +190,7 @@ try {
 try {
   const baseten = createBaseten({
     modelURL:
-      "https://model-{MODEL_ID}.api.baseten.co/environments/production/predict",
+      'https://model-{MODEL_ID}.api.baseten.co/environments/production/predict',
   });
   baseten(); // This will throw an error
 } catch (error) {
@@ -200,24 +200,24 @@ try {
 // /sync/v1 endpoints are now supported for embeddings
 const baseten = createBaseten({
   modelURL:
-    "https://model-{MODEL_ID}.api.baseten.co/environments/production/sync/v1",
+    'https://model-{MODEL_ID}.api.baseten.co/environments/production/sync/v1',
 });
-const embeddingModel = baseten.embeddingModel(); // This works fine!
+const embeddingModel = baseten.textEmbeddingModel(); // This works fine!
 
 // /predict endpoints are not supported for embeddings
 try {
   const baseten = createBaseten({
     modelURL:
-      "https://model-{MODEL_ID}.api.baseten.co/environments/production/predict",
+      'https://model-{MODEL_ID}.api.baseten.co/environments/production/predict',
   });
-  baseten.embeddingModel(); // This will throw an error
+  baseten.textEmbeddingModel(); // This will throw an error
 } catch (error) {
   // Error: "Not supported. You must use a /sync or /sync/v1 endpoint for embeddings."
 }
 
 // Image models are not supported
 try {
-  baseten.imageModel("test-model");
+  baseten.imageModel('test-model');
 } catch (error) {
   // Error: NoSuchModelError for imageModel
 }

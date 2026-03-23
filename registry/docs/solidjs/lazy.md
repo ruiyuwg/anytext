@@ -11,7 +11,7 @@ The `lazy` helper wraps a dynamic import and returns a component that loads on d
 ## [Import](/reference/component-apis/lazy#import)
 
 ```
-import { lazy } from "solid-js"
+import { lazy } from "solid-js";
 ```
 
 ***
@@ -19,7 +19,7 @@ import { lazy } from "solid-js"
 ## [Type](/reference/component-apis/lazy#type)
 
 ```
-function lazy<T extends Component<any>>(  fn: () => Promise<{ default: T }>): T & { preload: () => Promise<T> }
+function lazy<T extends Component<any>>(  fn: () => Promise<{ default: T }>): T & { preload: () => Promise<T> };
 ```
 
 ***
@@ -58,18 +58,18 @@ Loads the module without rendering and returns the resolved component.
 ### [Basic usage](/reference/component-apis/lazy#basic-usage)
 
 ```
-import { lazy } from "solid-js"
-const ComponentA = lazy(() => import("./ComponentA"))
-function App(props: { title: string }) {  return <ComponentA title={props.title} />}
+import { lazy } from "solid-js";
+const ComponentA = lazy(() => import("./ComponentA"));
+function App(props: { title: string }) {  return <ComponentA title={props.title} />;}
 ```
 
 ### [Preloading nested lazy components](/reference/component-apis/lazy#preloading-nested-lazy-components)
 
 ```
-import { lazy } from "solid-js"import type { Component } from "solid-js"
-const Nested = lazy(() => import("./Nested"))
-const ComponentWithPreload = () => {  const [showNested, setShowNested] = createSignal(false)
-  return (  <div>    <button        onMouseEnter={() => Nested.preload()}        onClick={() => setShowNested(true)}      >Preload Nested Component</button>      <Show when={showNested()}>      <Nested />      </Show>  </div>  )}
+import { lazy } from "solid-js";import type { Component } from "solid-js";
+const Nested = lazy(() => import("./Nested"));
+const ComponentWithPreload = () => {  const [showNested, setShowNested] = createSignal(false);
+  return (    <div>      <button        onMouseEnter={() => Nested.preload()}        onClick={() => setShowNested(true)}      >        Preload Nested Component      </button>      <Show when={showNested()}>        <Nested />      </Show>    </div>  );};
 ```
 
 ***

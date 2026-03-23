@@ -50,8 +50,8 @@ export default defineNuxtConfig({
   modules: ["@nuxt/ui", "@nuxtjs/sanity"],
   // 👇 Add these lines
   sanity: {
-    projectId: "YOUR-PROJECT-ID",
-    dataset: "production",
+    projectId: "<your-project-id>",
+    dataset: "<your-dataset>",
     apiVersion: "2025-10-01",
     typegen: {
       enabled: true,

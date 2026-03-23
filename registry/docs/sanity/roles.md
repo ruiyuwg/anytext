@@ -129,6 +129,81 @@ Your account should be able to view, create, update and publish any document of 
 
 ![Shows a notification stating that current user does not have permissions to update document](https://cdn.sanity.io/images/3do82whm/next/2cdd6060d774cc8654bd556f6ef2c79eab88d276-641x287.png)
 
+## User attributes
+
+*This is a paid feature, available on the Enterprise plan.*
+
+[User attributes](https://www.sanity.io/docs/http-reference/user-attributes) are key-value pairs that describe a user within your organization; things like `location="torrevieja"`, `department="front_desk"`, or `year_joined=2019`. You can reference these attributes in content resource filters to create **parameterized roles** that adapt to each user automatically, rather than creating separate roles for every location, department, or team.
+
+### Where attributes come from
+
+Attributes can come from two sources:
+
+- **SAML**: When users authenticate via SSO (Okta, Azure AD, Auth0, etc.), Sanity automatically captures all attributes included in the SAML assertion. These are refreshed on every login. No pre-configuration is needed. If the identity provider sends it, Sanity stores it.
+- **Sanity (manual)**: Administrators can define additional attributes and set values directly in Manage or through the API. You can also use manual attributes to override a SAML-provided value for a specific user.
+
+When both SAML and Sanity provide a value for the same attribute key, the Sanity value takes precedence. Removing the Sanity override reveals the SAML value again.
+
+### Defining attributes
+
+To define and manage attributes, navigate to the **Members** tab in your organization settings and find the **Attributes** section. Any attributes that have been captured from SAML logins will appear here automatically.
+
+To create a new attribute, click the button in the upper right corner. You'll be asked to provide an attribute key (the name) and a type. Supported types are `string`, `integer`, `number`, `boolean`, and array variants of each (except boolean).
+
+![The "Attributes" page of a web application, showing a table of custom member attributes including "brand," "department," and "email," with a search bar and "Create attribute" button.](https://cdn.sanity.io/images/3do82whm/next/ca3a656f935250d83701c20968da31f08ce05a84-1031x366.png)
+
+> \[!WARNING]
+> Gotcha
+> You cannot create a Sanity attribute definition when a SAML definition already exists for that key. If your identity provider sends an attribute like `location`, it will appear automatically—you don't need to define it again. You can set Sanity override values directly on individual users.
+
+### Setting attribute values on users
+
+To view and manage a user's attributes, navigate to that user within the Members section. You'll see all of their current attribute values, including which source each value comes from (SAML or Sanity) and which value is currently active.
+
+From here you can:
+
+- **Set a Sanity value** to override a SAML-provided attribute for this user.
+- **Add a value** for an attribute that the user doesn't have from SAML.
+- **Remove a Sanity override** to revert to the SAML value.
+
+![A user role inspection panel, showing editable attributes and an 'Add attribute' dropdown open with options like 'brand' and 'department'.](https://cdn.sanity.io/images/3do82whm/next/0c2af3fa87daf1e83ef00f0eaa03259be0a53e26-708x842.png)
+
+> \[!TIP]
+> Protip
+> Overriding attributes is useful for temporary changes, like reassigning a user to a different location for a project, without modifying your identity provider. When you're done, remove the override and the SAML value takes effect again on the user's next login.
+
+### Using attributes in content resources
+
+Attributes become powerful when referenced in GROQ filters for content resources. Instead of hardcoding a value like `_type == "post" && branch == "london"`, you can use the `user::attributes()` function to make the filter dynamic:
+
+```groq
+_type == "post" && branch == user::attributes().branch
+```
+
+When a user with `branch="london"` accesses content through a role using this resource, the filter resolves to `branch == "london"`. A user with `branch="tokyo"` sees only Tokyo content. One role covers both users.
+
+To create a parameterized content resource, follow the same steps as creating any content resource, but reference `user::attributes()` in your GROQ filter.
+
+![Create new content resource form for "Brand Documents" with a GROQ filter.](https://cdn.sanity.io/images/3do82whm/next/6563b66ea1791ce2da492cda529d3a3de5255914-708x573.png)
+
+> \[!WARNING]
+> Gotcha
+> If a user is missing an attribute that a content resource filter references, the filter **fails closed**. The user will have no access to content matched by that filter. Make sure users have the required attribute values before assigning them roles that depend on those attributes.
+
+### Example: genre-based editing
+
+Continuing with our *Movie Project* example, imagine your team has editors who specialize in different genres. One group handles horror films, another covers documentaries, and so on. Without user attributes, you'd need a separate role for each genre: "Editor - Horror", "Editor - Documentary", "Editor - Comedy", and so on.
+
+With user attributes, you define a single content resource with the filter:
+
+```groq
+_type == "movie" && genre == user::attributes().genre
+```
+
+Then create one role, such as "Genre Editor", that uses this content resource with read, create, update, and publish permissions. Assign the role to all editors. Each editor sees only the movies matching their genre, based on the `genre` attribute from their identity provider or set in Manage.
+
+If an editor needs to temporarily cover a different genre, an administrator can set a Sanity override for that user's `genre` attribute without changing anything in the identity provider.
+
 ## Tags
 
 Tags are a useful feature that lets you group datasets with similar characteristics together so that roles and permissions can be conveniently set on multiple datasets in a single operation. You might create tags for different environments, such as `production` and `staging`, or combine tags for different publications and locales, E.g. `elle` `us` or `vogue` `jp`.

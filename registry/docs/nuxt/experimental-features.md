@@ -67,24 +67,6 @@ export default defineNuxtConfig({
 })
 ```
 
-## externalVue
-
-Externalizes `vue`, `@vue/*` and `vue-router` when building.
-
-This flag is enabled by default, but you can disable this feature:
-
-```ts [nuxt.config.ts] twoslash
-export default defineNuxtConfig({
-  experimental: {
-    externalVue: false,
-  },
-})
-```
-
-::warning
-This feature will likely be removed in a near future.
-::
-
 ## extractAsyncDataHandlers
 
 Extracts handler functions from `useAsyncData` and `useLazyAsyncData` calls into separate chunks for improved code splitting and caching efficiency.
@@ -195,20 +177,6 @@ Read more in `defineRouteRules` utility.
 
 :read-more{icon="i-lucide-medal" to="https://nuxt.com/docs/4.x/guide/concepts/rendering#hybrid-rendering"}
 
-## renderJsonPayloads
-
-Allows rendering of JSON payloads with support for revivifying complex types.
-
-This flag is enabled by default, but you can disable this feature:
-
-```ts [nuxt.config.ts] twoslash
-export default defineNuxtConfig({
-  experimental: {
-    renderJsonPayloads: false,
-  },
-})
-```
-
 ## noVueServer
 
 Disables Vue server renderer endpoint within Nitro.
@@ -265,6 +233,26 @@ export default defineNuxtConfig({
     // Payload files will be generated for these cached routes
     '/products/**': { isr: 3600 },
     '/blog/**': { swr: true },
+  },
+})
+```
+
+## clientNodePlaceholder
+
+Uses comment nodes (\`\`) instead of `<div>` elements as placeholders for client-only components during server-side rendering.
+
+When enabled, `.client.vue` components and `createClientOnly()` wrappers render an HTML comment on the server instead of an empty `<div>`. This fixes a Vue hydration issue where scoped styles may not be applied when the placeholder `<div>` and the actual component root share the same tag name.
+
+::warning
+Enabling this means attributes (`class`, `style`, etc.) passed to `.client.vue` components will not appear in the SSR HTML. If you need styled placeholders to prevent layout shift, use `<ClientOnly>` with a `#fallback` slot instead.
+::
+
+This flag is enabled when `future.compatibilityVersion` is set to `5` or higher, but you can also enable it explicitly:
+
+```ts [nuxt.config.ts] twoslash
+export default defineNuxtConfig({
+  experimental: {
+    clientNodePlaceholder: true,
   },
 })
 ```
@@ -382,7 +370,7 @@ export default defineNuxtConfig({
 
 ## typedPages
 
-Enable the new experimental typed router using [`unplugin-vue-router`](https://github.com/posva/unplugin-vue-router){rel=""nofollow""}.
+Enable the new experimental typed router.
 
 ```ts [nuxt.config.ts] twoslash
 export default defineNuxtConfig({
@@ -395,16 +383,6 @@ export default defineNuxtConfig({
 Out of the box, this will enable typed usage of [`navigateTo`](https://nuxt.com/docs/4.x/api/utils/navigate-to), [`<NuxtLink>`](https://nuxt.com/docs/4.x/api/components/nuxt-link), [`router.push()`](https://nuxt.com/docs/4.x/api/composables/use-router) and more.
 
 You can even get typed params within a page by using `const route = useRoute('route-name')`.
-
-::important
-If you use `pnpm` without `shamefully-hoist=true`, you will need to add `unplugin-vue-router` as a hoist pattern in your `pnpm-workspace.yaml` in order for this feature to work.
-
-```yaml
-publicHoistPattern:
-  - "unplugin-vue-router"
-```
-
-::
 
 :video-accordion{title="Watch a video from Daniel Roe explaining type-safe routing in Nuxt" video-id="SXk-L19gTZk"}
 

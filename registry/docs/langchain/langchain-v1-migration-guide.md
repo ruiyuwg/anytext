@@ -101,7 +101,7 @@ const agent = createReactAgent({
 
 #### Dynamic prompts
 
-Dynamic prompts are a core context engineering pattern— they adapt what you tell the model based on the current conversation state. To do this, use `dynamicSystemPromptMiddleware`:
+Dynamic prompts are a core context engineering pattern—they adapt what you tell the model based on the current conversation state. To do this, use `dynamicSystemPromptMiddleware`:
 
 ```typescript v1 (new) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { createAgent, dynamicSystemPromptMiddleware } from "langchain";

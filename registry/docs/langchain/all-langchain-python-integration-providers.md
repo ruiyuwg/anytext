@@ -307,7 +307,7 @@ The scraper for SEO and AI SEO.
 
 
 
-React framework with pre-built UI components for AI copilots.
+React framework with prebuilt UI components for AI copilots.
 
 
 
@@ -988,6 +988,10 @@ AI cloud platform and infrastructure.
 
 
 Native graph database and analytics platform.
+
+
+
+Search and index API for giving agents reliable context.
 
 
 

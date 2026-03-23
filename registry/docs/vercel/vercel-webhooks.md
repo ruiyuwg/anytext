@@ -196,7 +196,7 @@ vercel webhooks rm <id> --yes
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -216,7 +216,7 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel whoami"
 description: "Learn how to display the username of the currently logged in user with the vercel whoami CLI command."
-last\_updated: "2026-03-08T05:03:12.448Z"
+last\_updated: "2026-03-23T09:40:07.186Z"
 source: "https://vercel.com/docs/cli/whoami"
 
 # vercel whoami
@@ -229,12 +229,12 @@ The `vercel whoami` command is used to show the username of the user currently l
 vercel whoami
 ```
 
-*Using the vercel whoami command to view the username
+*Using the \`vercel whoami\` command to view the username
 of the user currently logged into Vercel CLI.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -249,7 +249,7 @@ For more information on global options and their usage, refer to the [options se
 
 title: "Code Owners changelog"
 description: "Find out what"
-last\_updated: "2026-03-08T05:03:12.451Z"
+last\_updated: "2026-03-23T09:40:07.191Z"
 source: "https://vercel.com/docs/code-owners/changelog"
 
 # Code Owners changelog
@@ -318,7 +318,7 @@ Initial release of Code Owners.
 
 title: "vercel-code-owners"
 description: "Learn how to use Code Owners with the CLI."
-last\_updated: "2026-03-08T05:03:12.455Z"
+last\_updated: "2026-03-23T09:40:07.202Z"
 source: "https://vercel.com/docs/code-owners/cli"
 
 # vercel-code-owners
@@ -373,5 +373,5 @@ bun i
 
 title: "Code Approvers"
 description: "Use Code Owners to define users or teams that are responsible for directories and files in your codebase"
-last\_updated: "2026-03-08T05:03:12.478Z"
+last\_updated: "2026-03-23T09:40:07.219Z"
 source: "https://vercel.com/docs/code-owners/code-approvers"

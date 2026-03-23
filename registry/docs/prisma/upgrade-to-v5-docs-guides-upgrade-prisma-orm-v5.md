@@ -35,24 +35,24 @@ npx prisma generate
 
 
 ```bash
-npm install @prisma/client@5
-npm install -D prisma@5
+pnpm add @prisma/client@5
+pnpm add -D prisma@5
 pnpm dlx prisma generate
 ```
 
 
 
 ```bash
-npm install @prisma/client@5
-npm install -D prisma@5
+yarn add @prisma/client@5
+yarn add --dev prisma@5
 yarn dlx prisma generate
 ```
 
 
 
 ```bash
-npm install @prisma/client@5
-npm install -D prisma@5
+bun add @prisma/client@5
+bun add --dev prisma@5
 bun x prisma generate
 ```
 

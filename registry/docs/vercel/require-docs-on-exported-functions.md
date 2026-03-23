@@ -86,7 +86,7 @@ export function appendWorld(str) {
 
 title: "REQUIRE\_NODE\_VERSION\_FILE"
 description: "Requires that workspaces have a valid Node.js version file ("
-last\_updated: "2026-03-08T05:03:12.876Z"
+last\_updated: "2026-03-23T09:40:07.843Z"
 source: "https://vercel.com/docs/conformance/rules/REQUIRE\_NODE\_VERSION\_FILE"
 
 # REQUIRE\_NODE\_VERSION\_FILE
@@ -125,7 +125,7 @@ v20.9
 
 title: "REQUIRE\_ONE\_VERSION\_POLICY"
 description: "Requires all dependencies in a monorepo to have the same version policy."
-last\_updated: "2026-03-08T05:03:12.879Z"
+last\_updated: "2026-03-23T09:40:07.847Z"
 source: "https://vercel.com/docs/conformance/rules/REQUIRE\_ONE\_VERSION\_POLICY"
 
 # REQUIRE\_ONE\_VERSION\_POLICY
@@ -159,7 +159,7 @@ until all packages have been successfully migrated.
 
 title: "SET\_COOKIE\_VALIDATION"
 description: "Prevents usage of cookies that do not conform to the allowed cookie policy."
-last\_updated: "2026-03-08T05:03:12.889Z"
+last\_updated: "2026-03-23T09:40:07.850Z"
 source: "https://vercel.com/docs/conformance/rules/SET\_COOKIE\_VALIDATION"
 
 # SET\_COOKIE\_VALIDATION
@@ -184,5 +184,5 @@ file as follows:
 
 title: "TESTS\_NO\_CONDITIONAL\_ASSERTIONS"
 description: "Requires that assertions are not conditional, or that expect.assertions is used."
-last\_updated: "2026-03-08T05:03:12.886Z"
+last\_updated: "2026-03-23T09:40:07.856Z"
 source: "https://vercel.com/docs/conformance/rules/TESTS\_NO\_CONDITIONAL\_ASSERTIONS"

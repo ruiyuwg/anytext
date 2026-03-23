@@ -83,7 +83,7 @@ agent = create_react_agent(
 
 #### Dynamic prompts
 
-Dynamic prompts are a core context engineering pattern— they adapt what you tell the model based on the current conversation state. To do this, use the [`@dynamic_prompt`](https://reference.langchain.com/python/langchain/agents/middleware/types/dynamic_prompt) decorator:
+Dynamic prompts are a core context engineering pattern—they adapt what you tell the model based on the current conversation state. To do this, use the [`@dynamic_prompt`](https://reference.langchain.com/python/langchain/agents/middleware/types/dynamic_prompt) decorator:
 
 ```python v1 (new) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from dataclasses import dataclass

@@ -310,8 +310,8 @@ Be aware that Phone MFA is vulnerable to SIM swap attacks where an attacker will
 
 ## Pricing
 
-per hour ( per month) for the first project.  per
-hour ( per month) for every additional project.
+per hour ( per month) for the first project.
+per hour ( per month) for every additional project.
 
 | Plan       | Project 1 per month  | Project 2 per month  | Project 3 per month  |
 | ---------- | -------------------- | -------------------- | -------------------- |

@@ -74,7 +74,7 @@ listen to the heartbeat of a baby otter.
 \`;
 
 const result = await openai.images.generate({
-    model: "gpt-image-1",
+    model: "gpt-image-1.5",
     prompt,
 });
 
@@ -95,7 +95,7 @@ listen to the heartbeat of a baby otter.
 """
 
 result = client.images.generate(
-    model="gpt-image-1",
+    model="gpt-image-1.5",
     prompt=prompt
 )
 
@@ -112,7 +112,7 @@ curl -X POST "https://api.openai.com/v1/images/generations" \\
     -H "Authorization: Bearer $OPENAI_API_KEY" \\
     -H "Content-type: application/json" \\
     -d '{
-        "model": "gpt-image-1",
+        "model": "gpt-image-1.5",
         "prompt": "A childrens book drawing of a veterinarian using a stethoscope to listen to the heartbeat of a baby otter."
     }' | jq -r '.data[0].b64_json' | base64 --decode > otter.png
 ```
@@ -509,7 +509,7 @@ const prompt =
   "Draw a gorgeous image of a river made of white owl feathers, snaking its way through a serene winter landscape";
 const stream = await openai.images.generate({
   prompt: prompt,
-  model: "gpt-image-1",
+  model: "gpt-image-1.5",
   stream: true,
   partial_images: 2,
 });
@@ -532,7 +532,7 @@ client = OpenAI()
 
 stream = client.images.generate(
     prompt="Draw a gorgeous image of a river made of white owl feathers, snaking its way through a serene winter landscape",
-    model="gpt-image-1",
+    model="gpt-image-1.5",
     stream=True,
     partial_images=2,
 )

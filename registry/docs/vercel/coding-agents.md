@@ -27,6 +27,30 @@ Once configured, Claude Code works exactly as before, but requests route through
 
 See the [Claude Code documentation](/docs/agent-resources/coding-agents/claude-code) for advanced configuration.
 
+### OpenAI Codex
+
+[OpenAI Codex](https://github.com/openai/codex) is OpenAI's terminal-based coding agent. To connect it to AI Gateway, add the following to its configuration file:
+
+```toml filename="~/.codex/config.toml"
+[model_providers.vercel]
+name = "Vercel AI Gateway"
+base_url = "https://ai-gateway.vercel.sh/v1"
+env_key = "AI_GATEWAY_API_KEY"
+wire_api = "responses"
+
+[profiles.vercel]
+model_provider = "vercel"
+model = "openai/gpt-5.2-codex"
+```
+
+Then start Codex with the Vercel profile:
+
+```bash
+codex --profile vercel
+```
+
+For full configuration options, see [Configure OpenAI Codex](/docs/agent-resources/coding-agents/openai-codex).
+
 ### OpenCode
 
 [OpenCode](https://github.com/opencode-ai/opencode) is an open-source, terminal-based AI coding assistant with native support. Connect directly from within the tool:
@@ -118,7 +142,7 @@ See the [Superset documentation](/docs/agent-resources/coding-agents/superset) f
 ## Getting started
 
 1. **Get an API key**: Create one in the [AI Gateway page](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai-gateway\&title=AI+Gateway)
-2. **Choose your agent**: Pick from Claude Code, OpenCode, Blackbox AI, Cline, Roo Code, Conductor, Crush, or Superset
+2. **Choose your agent**: Pick from Claude Code, OpenAI Codex, OpenCode, Blackbox AI, Cline, Roo Code, Conductor, Crush, or Superset
 3. **Configure the connection**: Point the agent to `https://ai-gateway.vercel.sh`
 4. **Start coding**: Use the agent as normal - all requests route through the gateway
 
@@ -133,6 +157,7 @@ Once your coding agents are connected, view usage in the [Observability section 
 ## Next steps
 
 - [Set up Claude Code](/docs/agent-resources/coding-agents/claude-code)
+- [Configure OpenAI Codex](/docs/agent-resources/coding-agents/openai-codex) with custom profiles
 - [Try OpenCode](/docs/agent-resources/coding-agents/opencode) for native integration
 - [Set up Blackbox AI](/docs/agent-resources/coding-agents/blackbox) CLI for code generation
 - [Configure Cline](/docs/agent-resources/coding-agents/cline) for autonomous coding assistance
@@ -143,5 +168,5 @@ Once your coding agents are connected, view usage in the [Observability section 
 
 title: "Roo Code"
 description: "Use Roo Code with the AI Gateway."
-last\_updated: "2026-03-08T05:03:09.778Z"
+last\_updated: "2026-03-23T09:40:03.211Z"
 source: "https://vercel.com/docs/agent-resources/coding-agents/roo-code"

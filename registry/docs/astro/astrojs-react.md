@@ -131,7 +131,7 @@ These are used with [React’s useActionState() hook](https://react.dev/referenc
 
 **Type:** `(action: FormFn<T>) => (state: T, formData: FormData) => FormFn<T>`
 
-**Added in:** `@astrojs/react@4.4.0` New
+**Added in:** `@astrojs/react@4.4.0`
 
 You can pass `withState()` and the action you want to trigger to React’s `useActionState()` hook as the form action function. The example below passes a `like` action to increase a counter along with an initial state of `0` likes.
 
@@ -167,7 +167,7 @@ The `withState()` function will match the action’s types with React’s expect
 
 **Type:** `(context: ActionAPIContext) => Promise<T>`
 
-**Added in:** `@astrojs/react@4.4.0` New
+**Added in:** `@astrojs/react@4.4.0`
 
 You can access the state stored by `useActionState()` on the server in your action `handler` with `getActionState()`. It accepts the [Astro API context](/en/reference/api-reference/#the-context-object), and optionally, you can apply a type to the result.
 

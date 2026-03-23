@@ -14,9 +14,9 @@ o3-mini offers three reasoning effort levels:
 2. \[**Medium**]: Balanced approach matching o1's performance levels
 3. \[**High**]: Enhanced reasoning power exceeding o1 in many STEM domains
 
-| Model   | Streaming | Tool Calling | Structured Output | Reasoning Effort | Image Input |
-| ------- | --------- | ------------ | ----------------- | ---------------- | ----------- |
-| o3-mini |           |              |                   |                  |             |
+| Model   | Streaming           | Tool Calling        | Structured Output   | Reasoning Effort    | Image Input         |
+| ------- | ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| o3-mini |  |  |  |  |  |
 
 ### Benchmarks
 
@@ -48,12 +48,12 @@ The AI SDK abstracts away the differences between model providers, eliminates bo
 At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call OpenAI o3-mini with the AI SDK:
 
 ```ts
-import { generateText } from "ai";
-import { openai } from "@ai-sdk/openai";
+import { generateText } from 'ai';
+import { openai } from '@ai-sdk/openai';
 
 const { text } = await generateText({
-  model: openai("o3-mini"),
-  prompt: "Explain the concept of quantum entanglement.",
+  model: openai('o3-mini'),
+  prompt: 'Explain the concept of quantum entanglement.',
 });
 ```
 
@@ -67,42 +67,38 @@ You can control the amount of reasoning effort expended by o3-mini through the `
 This parameter can be set to `low`, `medium`, or `high` to adjust how much time and computation the model spends on internal reasoning before producing a response.
 
 ```ts highlight="9"
-import { generateText } from "ai";
-import { openai } from "@ai-sdk/openai";
+import { generateText } from 'ai';
+import { openai } from '@ai-sdk/openai';
 
 // Reduce reasoning effort for faster responses
 const { text } = await generateText({
-  model: openai("o3-mini"),
-  prompt: "Explain quantum entanglement briefly.",
+  model: openai('o3-mini'),
+  prompt: 'Explain quantum entanglement briefly.',
   providerOptions: {
-    openai: { reasoningEffort: "low" },
+    openai: { reasoningEffort: 'low' },
   },
 });
 ```
 
 ### Generating Structured Data
 
-While text generation can be useful, you might want to generate structured JSON data. For example, you might want to extract information from text, classify data, or generate synthetic data. AI SDK Core provides [`generateText`](/docs/reference/ai-sdk-core/generate-text) and [`streamText`](/docs/reference/ai-sdk-core/stream-text) with `Output` to generate structured data, allowing you to constrain model outputs to a specific schema.
+While text generation can be useful, you might want to generate structured JSON data. For example, you might want to extract information from text, classify data, or generate synthetic data. AI SDK Core provides two functions ([`generateObject`](/docs/reference/ai-sdk-core/generate-object) and [`streamObject`](/docs/reference/ai-sdk-core/stream-object)) to generate structured data, allowing you to constrain model outputs to a specific schema.
 
 ```ts
-import { generateText, Output } from "ai";
-import { openai } from "@ai-sdk/openai";
-import { z } from "zod";
+import { generateObject } from 'ai';
+import { openai } from '@ai-sdk/openai';
+import { z } from 'zod';
 
-const { output } = await generateText({
-  model: openai("o3-mini"),
-  output: Output.object({
-    schema: z.object({
-      recipe: z.object({
-        name: z.string(),
-        ingredients: z.array(
-          z.object({ name: z.string(), amount: z.string() }),
-        ),
-        steps: z.array(z.string()),
-      }),
+const { object } = await generateObject({
+  model: openai('o3-mini'),
+  schema: z.object({
+    recipe: z.object({
+      name: z.string(),
+      ingredients: z.array(z.object({ name: z.string(), amount: z.string() })),
+      steps: z.array(z.string()),
     }),
   }),
-  prompt: "Generate a lasagna recipe.",
+  prompt: 'Generate a lasagna recipe.',
 });
 ```
 
@@ -113,18 +109,18 @@ This code snippet will generate a type-safe recipe that conforms to the specifie
 o3-mini supports tool calling out of the box, allowing it to interact with external systems and perform discrete tasks. Here's an example of using tool calling with the AI SDK:
 
 ```ts
-import { generateText, tool } from "ai";
-import { openai } from "@ai-sdk/openai";
-import { z } from "zod";
+import { generateText, tool } from 'ai';
+import { openai } from '@ai-sdk/openai';
+import { z } from 'zod';
 
 const { text } = await generateText({
-  model: openai("o3-mini"),
-  prompt: "What is the weather like today in San Francisco?",
+  model: openai('o3-mini'),
+  prompt: 'What is the weather like today in San Francisco?',
   tools: {
     getWeather: tool({
-      description: "Get the weather in a location",
-      inputSchema: z.object({
-        location: z.string().describe("The location to get the weather for"),
+      description: 'Get the weather in a location',
+      parameters: z.object({
+        location: z.string().describe('The location to get the weather for'),
       }),
       execute: async ({ location }) => ({
         location,
@@ -147,13 +143,13 @@ With four main hooks — [`useChat`](/docs/reference/ai-sdk-ui/use-chat), [`useC
 
 Let's explore building a chatbot with [Next.js](https://nextjs.org), the AI SDK, and OpenAI o3-mini:
 
-In a new Next.js application, first install the AI SDK and the OpenAI provider:
+In a new Next.js application, first install the AI SDK and the DeepSeek provider:
 
 Then, create a route handler for the chat endpoint:
 
 ```tsx filename="app/api/chat/route.ts"
-import { openai } from "@ai-sdk/openai";
-import { convertToModelMessages, streamText, UIMessage } from "ai";
+import { openai } from '@ai-sdk/openai';
+import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
 // Allow responses up to 5 minutes
 export const maxDuration = 300;
@@ -162,8 +158,8 @@ export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: openai("o3-mini"),
-    messages: await convertToModelMessages(messages),
+    model: openai('o3-mini'),
+    messages: convertToModelMessages(messages),
   });
 
   return result.toUIMessageStreamResponse();
@@ -173,18 +169,18 @@ export async function POST(req: Request) {
 Finally, update the root page (`app/page.tsx`) to use the `useChat` hook:
 
 ```tsx filename="app/page.tsx"
-"use client";
+'use client';
 
-import { useChat } from "@ai-sdk/react";
+import { useChat } from '@ai-sdk/react';
 
 export default function Page() {
   const { messages, input, handleInputChange, handleSubmit, error } = useChat();
 
   return (
     <>
-      {messages.map((message) => (
+      {messages.map(message => (
         <div key={message.id}>
-          {message.role === "user" ? "User: " : "AI: "}
+          {message.role === 'user' ? 'User: ' : 'AI: '}
           {message.content}
         </div>
       ))}
@@ -206,7 +202,7 @@ Ready to get started? Here's how you can dive in:
 1. Explore the documentation at [ai-sdk.dev/docs](/docs) to understand the full capabilities of the AI SDK.
 2. Check out our support for o3-mini in the [OpenAI Provider](/providers/ai-sdk-providers/openai#reasoning-models).
 3. Check out practical examples at [ai-sdk.dev/examples](/examples) to see the SDK in action and get inspired for your own projects.
-4. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) and multi-modal chat at [ai-sdk.dev/docs/guides](/cookbook/guides).
+4. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) and multi-modal chat at [ai-sdk.dev/docs/guides](/docs/guides).
 5. Check out ready-to-deploy AI templates at [vercel.com/templates?type=ai](https://vercel.com/templates?type=ai).
 
 # Get started with DeepSeek R1

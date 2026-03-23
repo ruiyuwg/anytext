@@ -156,7 +156,7 @@ For disputes where payments were created on your platform using [destination cha
 
 If there’s a negative balance on the connected account, Stripe attempts to debit the external account on file for the connected account only if `debit_negative_balances` is set to `true`.
 
-For more details, see [Disputes and fraud](https://docs.stripe.com/disputes.md) and [Dispute categories](https://docs.stripe.com/disputes/categories.md). You can also use [Fraud Stripe Apps](https://marketplace.stripe.com/categories/fraud) to automate dispute management and handle chargebacks.
+If you’re using Express or Custom [legacy account types](https://docs.stripe.com/connect/accounts.md), your platform is responsible for disputes and fraud. For more details, see [Disputes and fraud](https://docs.stripe.com/disputes.md) and [Dispute categories](https://docs.stripe.com/disputes/categories.md), and follow [Best practices for risk management](https://docs.stripe.com/connect/risk-management/best-practices.md). You can also use [Fraud Stripe Apps](https://marketplace.stripe.com/categories/fraud) to automate dispute management and handle chargebacks.
 
 ## See also
 

@@ -282,25 +282,25 @@ export const onRequest = defineMiddleware(async (context, next) => {
 });
 ```
 
-##### `calledFrom`
+##### `action.calledFrom`
 
-[Section titled “calledFrom”](#calledfrom)
+[Section titled “action.calledFrom”](#actioncalledfrom)
 
 **Type:** `"rpc" | "form"`
 
 Whether an action was called using an RPC function or an HTML form action.
 
-##### `name`
+##### `action.name`
 
-[Section titled “name”](#name)
+[Section titled “action.name”](#actionname)
 
 **Type:** `string`
 
 The name of the action. Useful to track the source of an action result during a redirect.
 
-##### `handler()`
+##### `action.handler()`
 
-[Section titled “handler()”](#handler)
+[Section titled “action.handler()”](#actionhandler)
 
 **Type:** `() => Promise<SafeResult>`
 
@@ -511,9 +511,9 @@ button?.addEventListener('click', async () => {
 
 Alternatively, you can use it as an object giving you access to the `queryString` and an alternative `orThrow()` method.
 
-#### `queryString` property
+#### `ActionClient.queryString`
 
-[Section titled “queryString property”](#querystring-property)
+[Section titled “ActionClient.queryString”](#actionclientquerystring)
 
 **Type:** `string`
 
@@ -535,9 +535,9 @@ feedbackUrl.search = actions.myAction.queryString;
 <FeedbackForm sendTo={feedbackUrl.pathname} />
 ```
 
-#### `orThrow()` property
+#### `ActionClient.orThrow()`
 
-[Section titled “orThrow() property”](#orthrow-property)
+[Section titled “ActionClient.orThrow()”](#actionclientorthrow)
 
 **Type:** `(input?: any) => Promise<Awaited<TOutput>>`
 
@@ -636,9 +636,3 @@ Represents the result of an action call:
 
 - on success, `data` contains the output of the action and `error` is `undefined`.
 - on failure, `error` contains an [`ActionError`](#actionerror) with validation errors or runtime errors, and `data` is `undefined`.
-
-# Image and Assets API Reference
-
-**Added in:** `astro@3.0.0`
-
-Astro provides built-in components and helper functions for optimizing and displaying your images. For features and usage examples, [see our image guide](/en/guides/images/).

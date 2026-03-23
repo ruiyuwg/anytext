@@ -44,7 +44,7 @@ import { OpenAI } from "@langchain/openai";
 
 ## Text embedding model
 
-See a [usage example](/oss/javascript/integrations/text_embedding/openai)
+See a [usage example](/oss/javascript/integrations/embeddings/openai)
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { OpenAIEmbeddings } from "@langchain/openai";

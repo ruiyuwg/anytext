@@ -12,7 +12,7 @@ One-time payments and invoices that are paid immediately when they finalize donâ
 
 ## FX loss
 
-However, sometimes an invoice is finalized first, and paid later. In this case, the exchange rate may have changed between finalization and payment, creating a need to track gains and losses because of foreign exchange.
+However, sometimes an invoice is finalized first, and paid later. In this case, the exchange rate might have changed between finalization and payment, creating a need to track gains and losses because of foreign exchange.
 
 For revenue recognition purposes (for example, calculating accounts receivable), any activity that gets booked before an invoice is paid uses an estimated exchange rate at the time the invoice finalizes. The difference between the estimated exchange rate and the actual exchange rate, if any, is added to the FxLoss account.
 

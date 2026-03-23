@@ -11,7 +11,7 @@ The `vercel routes` command lets you manage routing rules for a project. These r
 vercel routes list
 ```
 
-*Using the vercel routes command to list all
+*Using the \`vercel routes\` command to list all
 routing rules for the current project.*
 
 ## Staging workflow
@@ -429,7 +429,7 @@ vercel routes discard-staging --yes
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -444,7 +444,7 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel switch"
 description: "Learn how to switch between different team scopes using the vercel switch CLI command."
-last\_updated: "2026-03-08T05:03:12.418Z"
+last\_updated: "2026-03-23T09:40:07.123Z"
 source: "https://vercel.com/docs/cli/switch"
 
 # vercel switch
@@ -457,7 +457,7 @@ The `vercel switch` command is used to switch to a different team scope when log
 vercel switch
 ```
 
-*Using the vercel switch command to change team scope
+*Using the \`vercel switch\` command to change team scope
 with Vercel CLI.*
 
 ## Extended Usage
@@ -466,12 +466,12 @@ with Vercel CLI.*
 vercel switch [team-name]
 ```
 
-*Using the vercel switch command to change to a
+*Using the \`vercel switch\` command to change to a
 specific team scope with Vercel CLI.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -486,5 +486,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel target"
 description: "Work with custom environments using the --target flag in Vercel CLI."
-last\_updated: "2026-03-08T05:03:12.423Z"
+last\_updated: "2026-03-23T09:40:07.130Z"
 source: "https://vercel.com/docs/cli/target"

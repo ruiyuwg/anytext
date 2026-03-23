@@ -1,6 +1,6 @@
 # Fluid compute
 
-Fluid compute offers a blend of serverless flexibility and server-like capabilities. Unlike traditional [serverless architectures](/docs/getting-started-with-vercel/fundamental-concepts/what-is-compute#serverless), which can face issues such as cold starts and [limited functionalities](/docs/getting-started-with-vercel/fundamental-concepts/what-is-compute#serverless-disadvantages), fluid compute provides a hybrid solution. It overcomes the limitations of both serverless and server-based approaches, delivering the advantages of both worlds, including:
+Fluid compute offers a blend of serverless flexibility and server-like capabilities. Unlike traditional [serverless architectures](/docs/fundamentals/what-is-compute#serverless), which can face issues such as cold starts and [limited functionalities](/docs/fundamentals/what-is-compute#serverless-disadvantages), fluid compute provides a hybrid solution. It overcomes the limitations of both serverless and server-based approaches, delivering the advantages of both worlds, including:
 
 - [**Zero configuration out of the box**](/docs/fluid-compute#default-settings-by-plan): Fluid compute comes with preset defaults that automatically optimize your functions for both performance and cost efficiency.
 - [**Optimized concurrency**](/docs/fluid-compute#optimized-concurrency): Optimize resource usage by handling multiple invocations within a single function instance. Can be used with the **Node.js** and **Python** runtimes.
@@ -10,7 +10,7 @@ Fluid compute offers a blend of serverless flexibility and server-like capabilit
 - **Cross-region and availability zone failover**: Ensure high availability by first failing over to [another availability zone (AZ)](/docs/functions/configuring-functions/region#automatic-failover) within the same region if one goes down. If all zones in that region are unavailable, Vercel automatically redirects traffic to the next closest region. Zone-level failover also applies to non-fluid deployments.
 - **Error isolation**: Unhandled errors won't crash other concurrent requests running on the same instance, maintaining reliability without sacrificing performance.
 
-See [What is compute?](/docs/getting-started-with-vercel/fundamental-concepts/what-is-compute) to learn more about fluid compute and how it compares to traditional serverless models.
+See [What is compute?](/docs/fundamentals/what-is-compute) to learn more about fluid compute and how it compares to traditional serverless models.
 
 ## Enabling fluid compute
 
@@ -115,5 +115,5 @@ See the [fluid compute pricing](/docs/functions/usage-and-pricing) documentation
 
 title: "Elysia on Vercel"
 description: "Build fast TypeScript backends with Elysia and deploy to Vercel. Learn the project structure, plugins, middleware, and how to run locally and in production."
-last\_updated: "2026-03-08T05:03:14.687Z"
+last\_updated: "2026-03-23T09:40:10.308Z"
 source: "https://vercel.com/docs/frameworks/backend/elysia"

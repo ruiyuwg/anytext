@@ -22,10 +22,10 @@ You’re responsible for your compliance with all applicable laws, regulations, 
   - How you determine the payment amount.
   - Your cancellation policy, if the payment method is for a subscription service.
 - Use a saved payment method for only the purpose stated in your terms.
-- Collect explicit consent from the customer for this specific use. For example, include a “Save my payment method for future checkbox.
+- Collect explicit consent from the customer for this specific use. For example, include a "Save my payment method for future checkbox.
 - Keep a record of your customer’s written agreement to your terms.
 
-> When using Elements with the Checkout Sessions API, only cards are supported for saved payment methods. You can’t save other payment methods, such as bank accounts.
+> When using Elements with the Checkout Sessions API, only cards and ACH Direct Debit are supported for saved payment methods. You can’t save other payment methods, such as bank accounts.
 
 ## Prerequisites
 
@@ -522,7 +522,7 @@ You’re responsible for your compliance with all applicable laws, regulations, 
   - How you determine the payment amount.
   - Your cancellation policy, if the payment method is for a subscription service.
 - Use a saved payment method for only the purpose stated in your terms.
-- Collect explicit consent from the customer for this specific use. For example, include a “Save my payment method for future checkbox.
+- Collect explicit consent from the customer for this specific use. For example, include a "Save my payment method for future checkbox.
 - Keep a record of your customer’s written agreement to your terms.
 
 ## Prerequisites
@@ -557,8 +557,8 @@ You can specify `setup_future_usage` on a PaymentIntent or Checkout Session to o
 
 ```ruby
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 post '/create-intent-and-customer-session' do

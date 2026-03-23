@@ -77,5 +77,5 @@ Learn more about deploying NestJS projects on Vercel with the following resource
 
 title: "Nitro on Vercel"
 description: "Deploy Nitro applications to Vercel with zero configuration. Learn about observability, ISR, and custom build configurations."
-last\_updated: "2026-03-08T05:03:14.821Z"
+last\_updated: "2026-03-23T09:40:10.466Z"
 source: "https://vercel.com/docs/frameworks/backend/nitro"

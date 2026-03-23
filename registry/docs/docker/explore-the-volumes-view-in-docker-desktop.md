@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -129,7 +127,7 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
    - **New image**: Specify a name for the new image.
    - **Registry**: Specify a Docker Hub repository.
 
-   You must have a [Docker Business subscription](https://www.docker.com/pricing/) to export to an external cloud provider.
+   You must have a [Docker Business subscription](https://www.docker.com/pricing?ref=Docs\&refAction=DocsDesktopVolumes) to export to an external cloud provider.
 
    Select your cloud provider and then specify the URL to upload to the storage. Refer to the following documentation for your cloud provider to learn how to obtain a URL.
 
@@ -141,7 +139,7 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
 
 ### [Schedule a volume export](#schedule-a-volume-export)
 
-1. Sign in to Docker Desktop. You must be signed in and have a paid [Docker subscription](https://www.docker.com/pricing/) to schedule a volume export.
+1. Sign in to Docker Desktop. You must be signed in and have a paid [Docker subscription](https://www.docker.com/pricing?ref=Docs\&refAction=DocsDesktopVolumes) to schedule a volume export.
 
 2. In the **Volumes** view, select the volume you want to export.
 
@@ -164,7 +162,7 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
    - **New image**: Specify a name for the new image.
    - **Registry**: Specify a Docker Hub repository.
 
-   You must have a [Docker Business subscription](https://www.docker.com/pricing/) to export to an external cloud provider.
+   You must have a [Docker Business subscription](https://www.docker.com/pricing?ref=Docs\&refAction=DocsDesktopVolumes) to export to an external cloud provider.
 
    Select your cloud provider and then specify the URL to upload to the storage. Refer to the following documentation for your cloud provider to learn how to obtain a URL.
 

@@ -73,7 +73,7 @@ export default function Page() {
 
 title: "NEXTJS\_SAFE\_NEXT\_PUBLIC\_ENV\_USAGE"
 description: "Usage process.env.NEXT\_PUBLIC\_\* environment variables must be allowlisted."
-last\_updated: "2026-03-08T05:03:12.725Z"
+last\_updated: "2026-03-23T09:40:07.635Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_SAFE\_NEXT\_PUBLIC\_ENV\_USAGE"
 
 # NEXTJS\_SAFE\_NEXT\_PUBLIC\_ENV\_USAGE
@@ -106,7 +106,7 @@ If you hit this issue, include the entry in the [Conformance allowlist file](htt
 
 title: "NEXTJS\_SAFE\_SVG\_IMAGES"
 description: "Prevent dangerouslyAllowSVG without Content Security Policy in Next.js applications."
-last\_updated: "2026-03-08T05:03:12.733Z"
+last\_updated: "2026-03-23T09:40:07.639Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_SAFE\_SVG\_IMAGES"
 
 # NEXTJS\_SAFE\_SVG\_IMAGES
@@ -137,7 +137,7 @@ prevent scripts embedded in the image from executing.
 
 title: "NEXTJS\_SAFE\_URL\_IMPORTS"
 description: "Prevent unsafe URL Imports from being added to Next.js applications."
-last\_updated: "2026-03-08T05:03:12.737Z"
+last\_updated: "2026-03-23T09:40:07.644Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_SAFE\_URL\_IMPORTS"
 
 # NEXTJS\_SAFE\_URL\_IMPORTS
@@ -178,5 +178,5 @@ If this URL is deemed safe for general use, it can be added to the list of appro
 
 title: "NEXTJS\_UNNEEDED\_GET\_SERVER\_SIDE\_PROPS"
 description: "Catches usages of getServerSideProps that could use static rendering instead, improving the performance of those pages."
-last\_updated: "2026-03-08T05:03:12.746Z"
+last\_updated: "2026-03-23T09:40:07.664Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_UNNEEDED\_GET\_SERVER\_SIDE\_PROPS"

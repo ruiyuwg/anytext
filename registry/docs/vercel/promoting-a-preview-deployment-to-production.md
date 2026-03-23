@@ -166,5 +166,5 @@ This instantly restores the previous production deployment. See [Rolling back a 
 
 title: "Promoting Deployments"
 description: "Learn how to promote deployments to production on Vercel."
-last\_updated: "2026-03-08T05:03:13.363Z"
+last\_updated: "2026-03-23T09:40:08.472Z"
 source: "https://vercel.com/docs/deployments/promoting-a-deployment"

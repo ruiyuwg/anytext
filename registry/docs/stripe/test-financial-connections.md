@@ -20,7 +20,7 @@ Sandbox *webhooks* (A webhook is a real-time push notification sent to your appl
 
 ## Testing different user authentication scenarios \[Client-side]
 
-Stripe provides a set of test institutions exercising different success and failure scenarios, each represented as a bank in the list of featured institutions.
+Stripe provides a set of test institutions exercising different success and failure scenarios, each available either in the list of featured institutions or in the authentication flow’s institution search results.
 
 #### Simulating successful authentication
 
@@ -46,6 +46,10 @@ Stripe provides a set of test institutions exercising different success and fail
 
 You can test different [tokenized account number](https://docs.stripe.com/financial-connections/tokenized-account-numbers.md) behavior by searching for the “Tokenized Account Number” institution in the search bar. Each account has different asynchronous behavior:
 
-- **Expired Tokenized Account Number**: The TAN returned by the session will have a `deactivated` status.
+- **Expired Tokenized Account Number**: The TAN returned by the session has a `deactivated` status.
 - **Eventually Expiring Tokenized Account Number**: The TAN will expire in 30 days and trigger the `financial_connections.account.upcoming_account_number_expiry` webhook event.
 - **Immediately Expiring Tokenized Account Number**: The TAN will immediately expire after the session and trigger the `financial_connections.account.account_numbers_updated` webhook event.
+
+#### Simulating account deactivation
+
+Search for the “Inactive accounts” institution and link any of the available accounts. Shortly after completing the authentication flow, accounts linked at this institution transition from `active` to `inactive`. [Relink](https://docs.stripe.com/financial-connections/relink.md) the account to transition it back to \`active.

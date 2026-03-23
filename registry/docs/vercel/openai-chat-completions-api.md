@@ -248,5 +248,5 @@ The API returns standard HTTP status codes and error responses:
 
 title: "Direct REST API Usage"
 description: "Use the AI Gateway API directly without client libraries using curl and fetch."
-last\_updated: "2026-03-08T05:03:10.769Z"
+last\_updated: "2026-03-23T09:40:04.842Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-chat-completions/rest-api"

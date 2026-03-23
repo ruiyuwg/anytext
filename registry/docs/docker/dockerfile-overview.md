@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -247,7 +245,7 @@ This publishes the container's port 8000 to `http://localhost:8000` on the Docke
 
 > Tip
 >
-> To improve linting, code navigation, and vulnerability scanning of your Dockerfiles in Visual Studio Code see [Docker VS Code Extension](https://marketplace.visualstudio.com/items?itemName=docker.docker).
+> To improve linting, code navigation, and vulnerability scanning of your Dockerfiles in Visual Studio Code see the [Docker DX](https://marketplace.visualstudio.com/items?itemName=docker.docker) extension.
 
 [Edit this page](https://github.com/docker/docs/edit/main/content/manuals/build/concepts/dockerfile.md)
 

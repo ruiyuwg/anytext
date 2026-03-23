@@ -5,8 +5,8 @@ Secondary primitives
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/secondary-primitives/create-selector.mdx)
 
 ```
-import { createSelector } from "solid-js"
-function createSelector<T, U>(  source: () => T,  fn?: (a: U, b: T) => boolean): (key: U) => boolean
+import { createSelector } from "solid-js";
+function createSelector<T, U>(  source: () => T,  fn?: (a: U, b: T) => boolean): (key: U) => boolean;
 ```
 
 Creates a parameterized derived boolean signal `selector(key)` that indicates whether `key` is equal to the current value of the `source` signal. These signals are optimized to notify each subscriber only when their `key` starts or stops matching the reactive `source` value (instead of every time `key` changes). If you have *n* different subscribers with different keys, and the `source` value changes from `a` to `b`, then instead of all *n* subscribers updating, at most two subscribers will update: the signal with key `a` will change to `false`, and the signal with key `b` will change to `true`. Thus it reduces from *n* updates to 2 updates.

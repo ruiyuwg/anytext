@@ -52,5 +52,5 @@ Verified bots are useful when you want to:
 
 title: "Build Output Configuration"
 description: "Learn about the Build Output Configuration file, which is used to configure the behavior of a Deployment."
-last\_updated: "2026-03-08T05:03:11.426Z"
+last\_updated: "2026-03-23T09:40:05.657Z"
 source: "https://vercel.com/docs/build-output-api/configuration"

@@ -6,23 +6,20 @@
 const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)
 ```
 
----
+***
 
-## Reference {/_reference_/}
+## Reference {/*reference*/}
 
-### `useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)` {/_usesyncexternalstore_/}
+### `useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)` {/*usesyncexternalstore*/}
 
 Call `useSyncExternalStore` at the top level of your component to read a value from an external data store.
 
 ```js
-import { useSyncExternalStore } from "react";
-import { todosStore } from "./todoStore.js";
+import { useSyncExternalStore } from 'react';
+import { todosStore } from './todoStore.js';
 
 function TodosApp() {
-  const todos = useSyncExternalStore(
-    todosStore.subscribe,
-    todosStore.getSnapshot,
-  );
+  const todos = useSyncExternalStore(todosStore.subscribe, todosStore.getSnapshot);
   // ...
 }
 ```
@@ -34,7 +31,7 @@ It returns the snapshot of the data in the store. You need to pass two functions
 
 [See more examples below.](#usage)
 
-#### Parameters {/_parameters_/}
+#### Parameters {/*parameters*/}
 
 - `subscribe`: A function that takes a single `callback` argument and subscribes it to the store. When the store changes, it should invoke the provided `callback`, which will cause React to re-call `getSnapshot` and (if needed) re-render the component. The `subscribe` function should return a function that cleans up the subscription.
 
@@ -42,11 +39,11 @@ It returns the snapshot of the data in the store. You need to pass two functions
 
 - **optional** `getServerSnapshot`: A function that returns the initial snapshot of the data in the store. It will be used only during server rendering and during hydration of server-rendered content on the client. The server snapshot must be the same between the client and the server, and is usually serialized and passed from the server to the client. If you omit this argument, rendering the component on the server will throw an error.
 
-#### Returns {/_returns_/}
+#### Returns {/*returns*/}
 
 The current snapshot of the store which you can use in your rendering logic.
 
-#### Caveats {/_caveats_/}
+#### Caveats {/*caveats*/}
 
 - The store snapshot returned by `getSnapshot` must be immutable. If the underlying store has mutable data, return a new immutable snapshot if the data has changed. Otherwise, return a cached last snapshot.
 
@@ -54,7 +51,7 @@ The current snapshot of the store which you can use in your rendering logic.
 
 - If the store is mutated during a [non-blocking Transition update](/reference/react/useTransition), React will fall back to performing that update as blocking. Specifically, for every Transition update, React will call `getSnapshot` a second time just before applying changes to the DOM. If it returns a different value than when it was called originally, React will restart the update from scratch, this time applying it as a blocking update, to ensure that every component on screen is reflecting the same version of the store.
 
-- It's not recommended to _suspend_ a render based on a store value returned by `useSyncExternalStore`. The reason is that mutations to the external store cannot be marked as [non-blocking Transition updates](/reference/react/useTransition), so they will trigger the nearest [`Suspense` fallback](/reference/react/Suspense), replacing already-rendered content on screen with a loading spinner, which typically makes a poor UX.
+- It's not recommended to *suspend* a render based on a store value returned by `useSyncExternalStore`. The reason is that mutations to the external store cannot be marked as [non-blocking Transition updates](/reference/react/useTransition), so they will trigger the nearest [`Suspense` fallback](/reference/react/Suspense), replacing already-rendered content on screen with a loading spinner, which typically makes a poor UX.
 
   For example, the following are discouraged:
 
@@ -72,11 +69,11 @@ The current snapshot of the store which you can use in your rendering logic.
   }
   ```
 
----
+***
 
-## Usage {/_usage_/}
+## Usage {/*usage*/}
 
-### Subscribing to an external store {/_subscribing-to-an-external-store_/}
+### Subscribing to an external store {/*subscribing-to-an-external-store*/}
 
 Most of your React components will only read data from their [props,](/learn/passing-props-to-a-component) [state,](/reference/react/useState) and [context.](/reference/react/useContext) However, sometimes a component needs to read some data from some store outside of React that changes over time. This includes:
 
@@ -86,14 +83,11 @@ Most of your React components will only read data from their [props,](/learn/pas
 Call `useSyncExternalStore` at the top level of your component to read a value from an external data store.
 
 ```js [[1, 5, "todosStore.subscribe"], [2, 5, "todosStore.getSnapshot"], [3, 5, "todos", 0]]
-import { useSyncExternalStore } from "react";
-import { todosStore } from "./todoStore.js";
+import { useSyncExternalStore } from 'react';
+import { todosStore } from './todoStore.js';
 
 function TodosApp() {
-  const todos = useSyncExternalStore(
-    todosStore.subscribe,
-    todosStore.getSnapshot,
-  );
+  const todos = useSyncExternalStore(todosStore.subscribe, todosStore.getSnapshot);
   // ...
 }
 ```
@@ -108,20 +102,17 @@ React will use these functions to keep your component subscribed to the store an
 For example, in the sandbox below, `todosStore` is implemented as an external store that stores data outside of React. The `TodosApp` component connects to that external store with the `useSyncExternalStore` Hook.
 
 ```js
-import { useSyncExternalStore } from "react";
-import { todosStore } from "./todoStore.js";
+import { useSyncExternalStore } from 'react';
+import { todosStore } from './todoStore.js';
 
 export default function TodosApp() {
-  const todos = useSyncExternalStore(
-    todosStore.subscribe,
-    todosStore.getSnapshot,
-  );
+  const todos = useSyncExternalStore(todosStore.subscribe, todosStore.getSnapshot);
   return (
     <>
       <button onClick={() => todosStore.addTodo()}>Add todo</button>
       <hr />
       <ul>
-        {todos.map((todo) => (
+        {todos.map(todo => (
           <li key={todo.id}>{todo.text}</li>
         ))}
       </ul>
@@ -138,23 +129,23 @@ export default function TodosApp() {
 // we recommend using React state instead.
 
 let nextId = 0;
-let todos = [{ id: nextId++, text: "Todo #1" }];
+let todos = [{ id: nextId++, text: 'Todo #1' }];
 let listeners = [];
 
 export const todosStore = {
   addTodo() {
-    todos = [...todos, { id: nextId++, text: "Todo #" + nextId }];
+    todos = [...todos, { id: nextId++, text: 'Todo #' + nextId }]
     emitChange();
   },
   subscribe(listener) {
     listeners = [...listeners, listener];
     return () => {
-      listeners = listeners.filter((l) => l !== listener);
+      listeners = listeners.filter(l => l !== listener);
     };
   },
   getSnapshot() {
     return todos;
-  },
+  }
 };
 
 function emitChange() {
@@ -166,16 +157,16 @@ function emitChange() {
 
 When possible, we recommend using built-in React state with [`useState`](/reference/react/useState) and [`useReducer`](/reference/react/useReducer) instead. The `useSyncExternalStore` API is mostly useful if you need to integrate with existing non-React code.
 
----
+***
 
-### Subscribing to a browser API {/_subscribing-to-a-browser-api_/}
+### Subscribing to a browser API {/*subscribing-to-a-browser-api*/}
 
 Another reason to add `useSyncExternalStore` is when you want to subscribe to some value exposed by the browser that changes over time. For example, suppose that you want your component to display whether the network connection is active. The browser exposes this information via a property called [`navigator.onLine`.](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine)
 
 This value can change without React's knowledge, so you should read it with `useSyncExternalStore`.
 
 ```js
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from 'react';
 
 function ChatIndicator() {
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
@@ -195,11 +186,11 @@ Next, you need to implement the `subscribe` function. For example, when `navigat
 
 ```js
 function subscribe(callback) {
-  window.addEventListener("online", callback);
-  window.addEventListener("offline", callback);
+  window.addEventListener('online', callback);
+  window.addEventListener('offline', callback);
   return () => {
-    window.removeEventListener("online", callback);
-    window.removeEventListener("offline", callback);
+    window.removeEventListener('online', callback);
+    window.removeEventListener('offline', callback);
   };
 }
 ```
@@ -207,11 +198,11 @@ function subscribe(callback) {
 Now React knows how to read the value from the external `navigator.onLine` API and how to subscribe to its changes. Disconnect your device from the network and notice that the component re-renders in response:
 
 ```js
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from 'react';
 
 export default function ChatIndicator() {
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
-  return <h1>{isOnline ? "✅ Online" : "❌ Disconnected"}</h1>;
+  return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
 }
 
 function getSnapshot() {
@@ -219,25 +210,25 @@ function getSnapshot() {
 }
 
 function subscribe(callback) {
-  window.addEventListener("online", callback);
-  window.addEventListener("offline", callback);
+  window.addEventListener('online', callback);
+  window.addEventListener('offline', callback);
   return () => {
-    window.removeEventListener("online", callback);
-    window.removeEventListener("offline", callback);
+    window.removeEventListener('online', callback);
+    window.removeEventListener('offline', callback);
   };
 }
 ```
 
----
+***
 
-### Extracting the logic to a custom Hook {/_extracting-the-logic-to-a-custom-hook_/}
+### Extracting the logic to a custom Hook {/*extracting-the-logic-to-a-custom-hook*/}
 
 Usually you won't write `useSyncExternalStore` directly in your components. Instead, you'll typically call it from your own custom Hook. This lets you use the same external store from different components.
 
 For example, this custom `useOnlineStatus` Hook tracks whether the network is online:
 
 ```js {3,6}
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from 'react';
 
 export function useOnlineStatus() {
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
@@ -256,23 +247,23 @@ function subscribe(callback) {
 Now different components can call `useOnlineStatus` without repeating the underlying implementation:
 
 ```js
-import { useOnlineStatus } from "./useOnlineStatus.js";
+import { useOnlineStatus } from './useOnlineStatus.js';
 
 function StatusBar() {
   const isOnline = useOnlineStatus();
-  return <h1>{isOnline ? "✅ Online" : "❌ Disconnected"}</h1>;
+  return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
 }
 
 function SaveButton() {
   const isOnline = useOnlineStatus();
 
   function handleSaveClick() {
-    console.log("✅ Progress saved");
+    console.log('✅ Progress saved');
   }
 
   return (
     <button disabled={!isOnline} onClick={handleSaveClick}>
-      {isOnline ? "Save progress" : "Reconnecting..."}
+      {isOnline ? 'Save progress' : 'Reconnecting...'}
     </button>
   );
 }
@@ -288,7 +279,7 @@ export default function App() {
 ```
 
 ```js src/useOnlineStatus.js
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from 'react';
 
 export function useOnlineStatus() {
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
@@ -300,18 +291,18 @@ function getSnapshot() {
 }
 
 function subscribe(callback) {
-  window.addEventListener("online", callback);
-  window.addEventListener("offline", callback);
+  window.addEventListener('online', callback);
+  window.addEventListener('offline', callback);
   return () => {
-    window.removeEventListener("online", callback);
-    window.removeEventListener("offline", callback);
+    window.removeEventListener('online', callback);
+    window.removeEventListener('offline', callback);
   };
 }
 ```
 
----
+***
 
-### Adding support for server rendering {/_adding-support-for-server-rendering_/}
+### Adding support for server rendering {/*adding-support-for-server-rendering*/}
 
 If your React app uses [server rendering,](/reference/react-dom/server) your React components will also run outside the browser environment to generate the initial HTML. This creates a few challenges when connecting to an external store:
 
@@ -321,14 +312,10 @@ If your React app uses [server rendering,](/reference/react-dom/server) your Rea
 To solve these issues, pass a `getServerSnapshot` function as the third argument to `useSyncExternalStore`:
 
 ```js {4,12-14}
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from 'react';
 
 export function useOnlineStatus() {
-  const isOnline = useSyncExternalStore(
-    subscribe,
-    getSnapshot,
-    getServerSnapshot,
-  );
+  const isOnline = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   return isOnline;
 }
 
@@ -354,11 +341,11 @@ This lets you provide the initial snapshot value which will be used before the a
 
 Make sure that `getServerSnapshot` returns the same exact data on the initial client render as it returned on the server. For example, if `getServerSnapshot` returned some prepopulated store content on the server, you need to transfer this content to the client. One way to do this is to emit a `<script>` tag during server rendering that sets a global like `window.MY_STORE_DATA`, and read from that global on the client in `getServerSnapshot`. Your external store should provide instructions on how to do that.
 
----
+***
 
-## Troubleshooting {/_troubleshooting_/}
+## Troubleshooting {/*troubleshooting*/}
 
-### I'm getting an error: "The result of `getSnapshot` should be cached" {/_im-getting-an-error-the-result-of-getsnapshot-should-be-cached_/}
+### I'm getting an error: "The result of `getSnapshot` should be cached" {/*im-getting-an-error-the-result-of-getsnapshot-should-be-cached*/}
 
 This error means your `getSnapshot` function returns a new object every time it's called, for example:
 
@@ -366,7 +353,7 @@ This error means your `getSnapshot` function returns a new object every time it'
 function getSnapshot() {
   // 🔴 Do not return always different objects from getSnapshot
   return {
-    todos: myStore.todos,
+    todos: myStore.todos
   };
 }
 ```
@@ -382,13 +369,13 @@ function getSnapshot() {
 }
 ```
 
-If your store data is mutable, your `getSnapshot` function should return an immutable snapshot of it. This means it _does_ need to create new objects, but it shouldn't do this for every single call. Instead, it should store the last calculated snapshot, and return the same snapshot as the last time if the data in the store has not changed. How you determine whether mutable data has changed depends on your mutable store.
+If your store data is mutable, your `getSnapshot` function should return an immutable snapshot of it. This means it *does* need to create new objects, but it shouldn't do this for every single call. Instead, it should store the last calculated snapshot, and return the same snapshot as the last time if the data in the store has not changed. How you determine whether mutable data has changed depends on your mutable store.
 
----
+***
 
-### My `subscribe` function gets called after every re-render {/_my-subscribe-function-gets-called-after-every-re-render_/}
+### My `subscribe` function gets called after every re-render {/*my-subscribe-function-gets-called-after-every-re-render*/}
 
-This `subscribe` function is defined _inside_ a component so it is different on every re-render:
+This `subscribe` function is defined *inside* a component so it is different on every re-render:
 
 ```js {2-5}
 function ChatIndicator() {
@@ -396,7 +383,7 @@ function ChatIndicator() {
   function subscribe() {
     // ...
   }
-
+  
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
 
   // ...
@@ -425,14 +412,14 @@ function ChatIndicator({ userId }) {
   const subscribe = useCallback(() => {
     // ...
   }, [userId]);
-
+  
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
 
   // ...
 }
 ```
 
----
+***
 
 ## Sitemap
 

@@ -7,17 +7,17 @@ Below is a list of our financial supporters and our collaborators' organizations
 ## Financial supporters[​](#financial-supporters "Direct link to Financial supporters")
 
 - [![Handsontable is using Fastify](/img/organizations/handsontable.svg)](https://handsontable.com/docs/react-data-grid/?utm_source=Fastify_homepage\&utm_medium=sponsorship\&utm_campaign=library_sponsorship_2024)
-- [![SerpApi is using Fastify](/img/organizations/serpapi.png)](https://serpapi.com/?utm_source=fastify)
 - [![kogiQA is using Fastify](/img/organizations/kogiQALogo.svg)](https://kogiqa.com/)
-- [![val town is using Fastify](/img/organizations/val-town.svg)](https://www.val.town/)
-- [![TestMu AI is using Fastify](/img/organizations/testmuai.svg)](https://www.testmuai.com/?utm_medium=sponsor\&utm_source=fastify)
+- [![SerpApi is using Fastify](/img/organizations/serpapi.png)](https://serpapi.com/?utm_source=fastify)
 - [![Mercedes-Benz Group is using Fastify](/img/organizations/mercedes-benz.svg)](https://github.com/mercedes-benz)
+- [![TestMu AI is using Fastify](/img/organizations/testmuai.svg)](https://www.testmuai.com/?utm_medium=sponsor\&utm_source=fastify)
+- [![val town is using Fastify](/img/organizations/val-town.svg)](https://www.val.town/)
 
 ## Collaborators' organizations[​](#collaborators-organizations "Direct link to Collaborators' organizations")
 
+- [![Platformatic is using Fastify](/img/organizations/platformatic.svg)](https://platformatic.dev)
 - [![HospitalRun is using Fastify](/img/organizations/hospitalrun.svg)](https://hospitalrun.io/)
 - [![Nearform is using Fastify](/img/organizations/nearform.svg)](https://nearform.com)
-- [![Platformatic is using Fastify](/img/organizations/platformatic.svg)](https://platformatic.dev)
 
 *The logos displayed in this page are property of the respective organizations and they are not distributed under the same license as Fastify (MIT).*
 

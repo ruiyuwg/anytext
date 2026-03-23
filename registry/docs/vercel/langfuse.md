@@ -115,5 +115,5 @@ with LangFuse to access various AI models and providers.
 
 title: "LiteLLM"
 description: "Learn how to integrate Vercel AI Gateway with LiteLLM to access multiple AI models through a unified interface"
-last\_updated: "2026-03-08T05:03:10.399Z"
+last\_updated: "2026-03-23T09:40:04.309Z"
 source: "https://vercel.com/docs/ai-gateway/ecosystem/framework-integrations/litellm"

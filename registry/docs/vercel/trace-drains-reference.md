@@ -64,5 +64,5 @@ For more information on Trace Drains and how to use them, check out the followin
 
 title: "Drains Security"
 description: "Learn how to secure your Drains endpoints with authentication and signature verification."
-last\_updated: "2026-03-08T05:03:13.676Z"
+last\_updated: "2026-03-23T09:40:09.027Z"
 source: "https://vercel.com/docs/drains/security"

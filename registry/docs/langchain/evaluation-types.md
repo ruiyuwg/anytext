@@ -5,7 +5,7 @@ Source: https://docs.langchain.com/langsmith/evaluation-types
 This page covers two aspects of evaluation in LangSmith:
 
 1. **[Evaluation types](#offline-evaluation-types)**: *When and why* to evaluate. Offline evaluation types (benchmarking, unit tests, regression tests) for pre-deployment testing, and online evaluation types (monitoring, anomaly detection) for production.
-2. **[Evaluator implementations](#implementing-evaluations)**: *How* to evaluate. The available evaluator approaches (LLM-as-judge, code, composite, summary, pairwise) and where to configure them (UI or SDK, offline or online).
+2. **[Evaluator implementations](#implement-evaluators)**: *How* to evaluate. The available evaluator approaches (LLM-as-judge, code, composite, summary, pairwise) and where to configure them (UI or SDK, offline or online).
 
 Understanding both aspects helps you build a comprehensive evaluation strategy that validates functionality before deployment and monitors quality in production.
 
@@ -13,7 +13,7 @@ Understanding both aspects helps you build a comprehensive evaluation strategy t
 
 Offline evaluation tests applications on curated datasets before deployment. By running evaluations on examples with reference outputs, teams can compare versions, validate functionality, and build confidence before exposing changes to users.
 
-Run offline evaluations client-side using the LangSmith SDK ([Python](https://reference.langchain.com/python/langsmith/observability/sdk/) or [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html)) or server-side via the [Prompt Playground](/langsmith/prompt-engineering-concepts#prompt-playground) or by [binding evaluators to a dataset](/langsmith/bind-evaluator-to-dataset).
+Run offline evaluations client-side using the LangSmith SDK ([Python](https://reference.langchain.com/python/langsmith/observability/sdk/) or [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html)) or server-side via the [Playground](/langsmith/prompt-engineering-concepts#playground) or by [binding evaluators to a dataset](/langsmith/bind-evaluator-to-dataset).
 
 ### Benchmarking
 

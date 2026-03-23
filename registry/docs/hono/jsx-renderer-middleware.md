@@ -5,8 +5,8 @@ JSX Renderer Middleware allows you to set up the layout when rendering JSX with 
 ## Import
 
 ```ts
-import { Hono } from "hono";
-import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
+import { Hono } from 'hono'
+import { jsxRenderer, useRequestContext } from 'hono/jsx-renderer'
 ```
 
 ## Usage
@@ -18,64 +18,72 @@ app.get(
   '/page/*',
   jsxRenderer(({ children }) => {
     return (
-
-
-          Menu
-          {children}
-
-
+      <html>
+        <body>
+          <header>Menu</header>
+          <div>{children}</div>
+        </body>
+      </html>
     )
   })
 )
 
 app.get('/page/about', (c) => {
-  return c.render(About me!)
+  return c.render(<h1>About me!</h1>)
 })
 ```
 
 ## Options
 
-### <Badge type="info" text="optional" /> docType: `boolean` | `string`
+### docType: `boolean` | `string`
 
 If you do not want to add a DOCTYPE at the beginning of the HTML, set the `docType` option to `false`.
 
 ```tsx
 app.use(
-  "*",
+  '*',
   jsxRenderer(
     ({ children }) => {
-      return { children };
+      return (
+        <html>
+          <body>{children}</body>
+        </html>
+      )
     },
-    { docType: false },
-  ),
-);
+    { docType: false }
+  )
+)
 ```
 
 And you can specify the DOCTYPE.
 
 ```tsx
 app.use(
-  "*",
+  '*',
   jsxRenderer(
     ({ children }) => {
-      return { children };
+      return (
+        <html>
+          <body>{children}</body>
+        </html>
+      )
     },
     {
       docType:
         '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">',
-    },
-  ),
-);
+    }
+  )
+)
 ```
 
-### <Badge type="info" text="optional" /> stream: `boolean` | `Record<string, string>`
+### stream: `boolean` | `Record<string, string>`
 
 If you set it to `true` or provide a Record value, it will be rendered as a streaming response.
 
 ```tsx
 const AsyncComponent = async () => {
   await new Promise((r) => setTimeout(r, 1000)) // sleep 1s
-  return Hi!
+  return <div>Hi!</div>
 }
 
 app.get(
@@ -83,12 +91,12 @@ app.get(
   jsxRenderer(
     ({ children }) => {
       return (
-
-
-            SSR Streaming
+        <html>
+          <body>
+            <h1>SSR Streaming</h1>
             {children}
-
-
+          </body>
+        </html>
       )
     },
     { stream: true }
@@ -97,9 +105,9 @@ app.get(
 
 app.get('/', (c) => {
   return c.render(
-    loading...}>
-
-
+    <Suspense fallback={<div>loading...</div>}>
+      <AsyncComponent />
+    </Suspense>
   )
 })
 ```
@@ -116,6 +124,28 @@ If `true` is set, the following headers are added:
 
 You can customize the header values by specifying the Record values.
 
+### Function-based Options
+
+You can pass a function that receives a `Context` object instead of a static options object. This allows you to dynamically set options based on the request context, such as environment variables or request parameters.
+
+```tsx
+app.use(
+  '*',
+  jsxRenderer(
+    ({ children }) => {
+      return (
+        <html>
+          <body>{children}</body>
+        </html>
+      )
+    },
+    (c) => ({
+      stream: c.req.header('X-Enable-Streaming') === 'true',
+    })
+  )
+)
+```
+
 ## Nested Layouts
 
 The `Layout` component enables nesting the layouts.
@@ -124,9 +154,9 @@ The `Layout` component enables nesting the layouts.
 app.use(
   jsxRenderer(({ children }) => {
     return (
-
-        {children}
-
+      <html>
+        <body>{children}</body>
+      </html>
     )
   })
 )
@@ -135,10 +165,10 @@ const blog = new Hono()
 blog.use(
   jsxRenderer(({ children, Layout }) => {
     return (
-
-        Blog Menu
-        {children}
-
+      <Layout>
+        <nav>Blog Menu</nav>
+        <div>{children}</div>
+      </Layout>
     )
   })
 )
@@ -158,19 +188,18 @@ app.use(jsxRenderer())
 
 const RequestUrlBadge: FC = () => {
   const c = useRequestContext()
-  return {c.req.url}
+  return <b>{c.req.url}</b>
 }
 
 app.get('/page/info', (c) => {
   return c.render(
-
-      You are accessing:
-
+    <div>
+      You are accessing: <RequestUrlBadge />
+    </div>
   )
 })
 ```
 
-::: warning
 You can't use `useRequestContext()` with the Deno's `precompile` JSX option. Use the `react-jsx`:
 
 ```json
@@ -182,8 +211,6 @@ You can't use `useRequestContext()` with the Deno's `precompile` JSX option. Use
  }
 ```
 
-:::
-
 ## Extending `ContextRenderer`
 
 By defining `ContextRenderer` as shown below, you can pass additional content to the renderer. This is handy, for instance, when you want to change the contents of the head tag depending on the page.
@@ -192,7 +219,7 @@ By defining `ContextRenderer` as shown below, you can pass additional content to
 declare module 'hono' {
   interface ContextRenderer {
     (
-      content: string | Promise,
+      content: string | Promise<string>,
       props: { title: string }
     ): Response
   }
@@ -204,27 +231,27 @@ app.get(
   '/page/*',
   jsxRenderer(({ children, title }) => {
     return (
-
-
-          {title}
-
-
-          Menu
-          {children}
-
-
+      <html>
+        <head>
+          <title>{title}</title>
+        </head>
+        <body>
+          <header>Menu</header>
+          <div>{children}</div>
+        </body>
+      </html>
     )
   })
 )
 
 app.get('/page/favorites', (c) => {
   return c.render(
-
-
-        Eating sushi
-        Watching baseball games
-
-    ,
+    <div>
+      <ul>
+        <li>Eating sushi</li>
+        <li>Watching baseball games</li>
+      </ul>
+    </div>,
     {
       title: 'My favorites',
     }

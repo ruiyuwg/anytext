@@ -98,5 +98,5 @@ Users with the [owner](/docs/rbac/access-roles#owner-role) role can set a team-w
 
 title: "Shared environment variables"
 description: "Learn how to use Shared environment variables, which are environment variables that you define at the Team level and can link to multiple projects."
-last\_updated: "2026-03-08T05:03:14.014Z"
+last\_updated: "2026-03-23T09:40:09.512Z"
 source: "https://vercel.com/docs/environment-variables/shared-environment-variables"

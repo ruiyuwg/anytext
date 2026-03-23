@@ -46,14 +46,14 @@ You can’t change the percentage, country, or state properties after you set th
 
 ## Inclusive versus exclusive tax
 
-Tax rates can either be exclusive or inclusive. An *exclusive* tax is not included in the invoice subtotal, whereas an *inclusive* tax is.
+Tax rates can either be exclusive or inclusive. An *exclusive* tax isn’t included in the invoice subtotal, whereas an *inclusive* tax is.
 
 The following table illustrates a 25% tax rate modifying the total amount due, depending on whether it’s exclusive or inclusive.
 
-| Tax           | Subtotal | Tax due                                  | Total                              |
-| ------------- | -------- | ---------------------------------------- | ---------------------------------- |
-| 25% Exclusive | 5.00 USD | 1.25 USD                                 | **6.25 USD** (5.00 USD + 1.25 USD) |
-| 25% Inclusive | 5.00 USD | 1.00 USD (already included in the total) | **5.00 USD** (4.00 USD + 1.00 USD) |
+| Tax           | Subtotal  | Tax due                                   | Total                               |
+| ------------- | --------- | ----------------------------------------- | ----------------------------------- |
+| 25% Exclusive | \5.00 USD | \1.25 USD                                 | **\6.25 USD** (5.00 USD + 1.25 USD) |
+| 25% Inclusive | \5.00 USD | \1.00 USD (already included in the total) | **\5.00 USD** (4.00 USD + 1.00 USD) |
 
 ## Tax exempt and reverse charge
 
@@ -94,12 +94,12 @@ When you apply tax rates to an invoice, they’re aggregated into the [total\_ta
 
 For example, here’s an invoice where two line items have two different rates:
 
-| Invoice              | Amount    | Tax Rate   | Tax Amount | Totals    |
-| -------------------- | --------- | ---------- | ---------- | --------- |
-| Line item 1          | 5.00 USD  | 5% (excl)  | 0.25 USD   | —         |
-| Line item 2          | 10.00 USD | 10% (excl) | 1.00 USD   | —         |
-| **Total Tax Amount** | —         | —          | 1.25 USD   | —         |
-| **Total**            | 15.00 USD | —          | —          | 16.25 USD |
+| Invoice              | Amount     | Tax Rate   | Tax Amount | Totals     |
+| -------------------- | ---------- | ---------- | ---------- | ---------- |
+| Line item 1          | \5.00 USD  | 5% (excl)  | \0.25 USD  | —          |
+| Line item 2          | \10.00 USD | 10% (excl) | \1.00 USD  | —          |
+| **Total Tax Amount** | —          | —          | \1.25 USD  | —          |
+| **Total**            | \15.00 USD | —          | —          | \16.25 USD |
 
 [Download example invoice PDF](https://d37ugbyn3rpeym.cloudfront.net/docs/files/billing/taxes/example-tax-amounts.pdf)
 
@@ -114,25 +114,25 @@ Select this configuration on the [invoice settings](https://dashboard.stripe.com
 
 #### Line item level
 
-| Name              | Amount       | Inclusive Tax Rate | Taxable Amount (before rounding) | Tax Amount (before rounding) | Tax Amount (after rounding) |
-| ----------------- | ------------ | ------------------ | -------------------------------- | ---------------------------- | --------------------------- |
-| Line Item 1       | 1000.00 USD  | 10%                | 909.0909 USD                     | 90.9091 USD                  | 90.91 USD                   |
-| Line Item 2       | 50.00 USD    | 10%                | 45.4545 USD                      | 4.5455 USD                   | 4.55 USD                    |
-| Subtotal          | 1,050.00 USD | —                  | —                                | —                            | —                           |
-| Total Tax Amounts | —            | —                  | —                                | —                            | 95.46 USD                   |
-| Total rounded     | 1,050.00 USD | —                  | 954.54 USD                       | —                            | 95.46 USD                   |
+| Name              | Amount        | Inclusive Tax Rate | Taxable Amount (before rounding) | Tax Amount (before rounding) | Tax Amount (after rounding) |
+| ----------------- | ------------- | ------------------ | -------------------------------- | ---------------------------- | --------------------------- |
+| Line Item 1       | \1000.00 USD  | 10%                | \909.0909 USD                    | \90.9091 USD                 | \90.91 USD                  |
+| Line Item 2       | \50.00 USD    | 10%                | \45.4545 USD                     | \4.5455 USD                  | \4.55 USD                   |
+| Subtotal          | \1,050.00 USD | —                  | —                                | —                            | —                           |
+| Total Tax Amounts | —             | —                  | —                                | —                            | \95.46 USD                  |
+| Total rounded     | \1,050.00 USD | —                  | \954.54 USD                      | —                            | \95.46 USD                  |
 
 [Download example line item level rounding invoice PDF](https://d37ugbyn3rpeym.cloudfront.net/docs/files/billing/taxes/example-line-item-level-rounding.pdf)
 
 #### Invoice level
 
-| Name              | Amount       | Inclusive Tax Rate | Taxable Amount (before rounding) | Tax Amount (before rounding) | Tax Amount (after rounding) |
-| ----------------- | ------------ | ------------------ | -------------------------------- | ---------------------------- | --------------------------- |
-| Line Item 1       | 1000.00 USD  | 10%                | 909.0909 USD                     | —                            | —                           |
-| Line Item 2       | 50.00 USD    | 10%                | 45.4545 USD                      | —                            | —                           |
-| Subtotal          | 1,050.00 USD | 10%                | 954.5455 USD                     | —                            | —                           |
-| Total Tax Amounts | 1,050.00 USD | 10%                | 954.5455 USD                     | 95.45 USD                    | 95.45 USD                   |
-| Total rounded     | 1,050.00 USD | —                  | 954.55 USD                       | —                            | 95.45 USD                   |
+| Name              | Amount        | Inclusive Tax Rate | Taxable Amount (before rounding) | Tax Amount (before rounding) | Tax Amount (after rounding) |
+| ----------------- | ------------- | ------------------ | -------------------------------- | ---------------------------- | --------------------------- |
+| Line Item 1       | \1000.00 USD  | 10%                | \909.0909 USD                    | —                            | —                           |
+| Line Item 2       | \50.00 USD    | 10%                | \45.4545 USD                     | —                            | —                           |
+| Subtotal          | \1,050.00 USD | 10%                | \954.5455 USD                    | —                            | —                           |
+| Total Tax Amounts | 1,050.00 USD  | 10%                | \954.5455 USD                    | \95.45 USD                   | \95.45 USD                  |
+| Total rounded     | \1,050.00 USD | —                  | \954.55 USD                      | —                            | \95.45 USD                  |
 
 [Download example invoice level rounding invoice PDF](https://d37ugbyn3rpeym.cloudfront.net/docs/files/billing/taxes/example-invoice-level-rounding.pdf)
 
@@ -148,12 +148,12 @@ Stripe always applies discounts before exclusive tax.
 
 This example shows how we apply discounts to an exclusive tax rate.
 
-| Invoice Item | Amount        | Discount % | Discount $          | Post Discount        | Tax Rate | Tax $                    | **Total**             |
-| ------------ | ------------- | ---------- | ------------------- | -------------------- | -------- | ------------------------ | --------------------- |
-| **Formula**  | —             | —          | `Amount * Discount` | `Amount - Discount$` | —        | `PostDiscount * TaxRate` | `PostDiscount + Tax$` |
-| Line item 1  | 5.00 USD      | 10%        | 0.50 USD            | 4.50 USD             | 5% exl.  | 0.23 USD                 | **4.73 USD**          |
-| Line item 2  | 10.00 USD     | 10%        | 1.00 USD            | 9.00 USD             | 5% exl.  | 0.45 USD                 | **9.45 USD**          |
-| **Total**    | **15.00 USD** |            | **1.50 USD**        | **13.50 USD**        |          | **0.68 USD (@ 5% exl.)** | **14.18 USD**         |
+| Invoice Item | Amount         | Discount % | Discount $          | Post Discount        | Tax Rate | Tax $                     | **Total**             |
+| ------------ | -------------- | ---------- | ------------------- | -------------------- | -------- | ------------------------- | --------------------- |
+| **Formula**  | —              | —          | `Amount * Discount` | `Amount - Discount$` | —        | `PostDiscount * TaxRate`  | `PostDiscount + Tax$` |
+| Line item 1  | \5.00 USD      | 10%        | \0.50 USD           | \4.50 USD            | 5% exl.  | \0.23 USD                 | **\4.73 USD**         |
+| Line item 2  | \10.00 USD     | 10%        | \1.00 USD           | \9.00 USD            | 5% exl.  | \0.45 USD                 | **\9.45 USD**         |
+| **Total**    | **\15.00 USD** |            | **\1.50 USD**       | **\13.50 USD**       |          | **\0.68 USD (@ 5% exl.)** | **\14.18 USD**        |
 
 [Download example discounts invoice PDF](https://d37ugbyn3rpeym.cloudfront.net/docs/files/billing/taxes/example-exclusive-tax-with-discount.pdf)
 
@@ -161,12 +161,12 @@ This example shows how we apply discounts to an exclusive tax rate.
 
 When tax rates are inclusive, Stripe Tax applies discounts to the original amount first. Then, we recalculate taxes based on the remaining amount. This reduction has the side effect of reducing the tax amount due.
 
-| Invoice Item | Amount        | Discount % | Discount $           | Post Discount        | Tax Rate | Tax $ (Included)                              | **Total**      |
-| ------------ | ------------- | ---------- | -------------------- | -------------------- | -------- | --------------------------------------------- | -------------- |
-| **Formula**  | —             | —          | `Amount * Discount%` | `Amount - Discount$` | —        | `PostDiscount - PostDiscount / (1 + TaxRate)` | `PostDiscount` |
-| Line item 1  | 5.00 USD      | 10%        | 0.50 USD             | 4.50 USD             | 5% incl. | 0.21 USD                                      | **4.50 USD**   |
-| Line item 2  | 10.00 USD     | 10%        | 1.00 USD             | 9.00 USD             | 5% incl. | 0.43 USD                                      | **9.00 USD**   |
-| **Total**    | **15.00 USD** | **—**      | **1.50 USD**         | **13.50 USD**        | **—**    | **0.64 USD (@ 5% incl.)**                     | **13.50 USD**  |
+| Invoice Item | Amount         | Discount % | Discount $           | Post Discount        | Tax Rate | Tax $ (Included)                              | **Total**      |
+| ------------ | -------------- | ---------- | -------------------- | -------------------- | -------- | --------------------------------------------- | -------------- |
+| **Formula**  | —              | —          | `Amount * Discount%` | `Amount - Discount$` | —        | `PostDiscount - PostDiscount / (1 + TaxRate)` | `PostDiscount` |
+| Line item 1  | \5.00 USD      | 10%        | \0.50 USD            | \4.50 USD            | 5% incl. | \0.21 USD                                     | **\4.50 USD**  |
+| Line item 2  | \10.00 USD     | 10%        | \1.00 USD            | \9.00 USD            | 5% incl. | \0.43 USD                                     | **\9.00 USD**  |
+| **Total**    | **\15.00 USD** | **—**      | **\1.50 USD**        | **\13.50 USD**       | **—**    | **\0.64 USD (@ 5% incl.)**                    | **\13.50 USD** |
 
 [Download example invoice PDF](https://d37ugbyn3rpeym.cloudfront.net/docs/files/billing/taxes/example-inclusive-tax-with-discount.pdf)
 
@@ -202,7 +202,7 @@ Stripe Billing provides two different levels of tax report export files:
 - **Invoice line item tax export** — A lower-level export, this includes details down to the line item level, including per-line-item tax rates, inclusive/exclusive, amounts, and so on.
 - **Invoice totals export** — Shows the aggregate tax collected on the invoice as a whole, including adjustments for any refunds.
 
-For remittance reporting, use the line-item tax export to sum all amounts paid for all tax rates used. To factor in any refunds you will also need to pivot against the Invoice totals export.
+For remittance reporting, use the line-item tax export to sum all amounts paid for all tax rates used. To factor in any refunds you’ll also need to pivot against the Invoice totals export.
 
 ## Migrate to tax rates
 

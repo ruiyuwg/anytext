@@ -51,7 +51,7 @@ openssl req -x509 -newkey rsa:4096 \
 
 This generates a `key.pem` file containing the private key and a `cert.pem` file containing the self-signed certificate. When uploading this certificate to Vercel, use `cert.pem` also for the Certificate Authority field.
 
-title: "Managing DNS Records"
-description: "Learn how to add, verify, and remove DNS records for your domains on Vercel with this guide."
-last\_updated: "2026-03-08T05:03:13.455Z"
-source: "https://vercel.com/docs/domains/managing-dns-records"
+title: "Domain Connect"
+description: "Learn how to integrate your service with Vercel DNS using the Domain Connect protocol to automatically configure DNS records for your users."
+last\_updated: "2026-03-23T09:40:08.616Z"
+source: "https://vercel.com/docs/domains/domain-connect"

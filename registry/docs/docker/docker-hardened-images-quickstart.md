@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -124,7 +122,7 @@ To dive deeper into comparing images see [Compare Docker Hardened Images](https:
 
 You've pulled and run your first Docker Hardened Image. Here are a few ways to keep going:
 
-- [Migrate existing applications to DHIs](https://docs.docker.com/dhi/migration/migrate-with-ai/): Use Docker's AI assistant to update your Dockerfiles to use Docker Hardened Images as the base.
+- [Migrate existing applications to DHIs](https://docs.docker.com/dhi/migration/migrate-with-ai/): Use Gordon to update your Dockerfiles to use Docker Hardened Images as the base.
 
 - [Start a trial](https://hub.docker.com/hardened-images/start-free-trial) to explore the benefits of a paid DHI subscription, such as access to FIPS and STIG variants, customized images, and SLA-backed updates.
 

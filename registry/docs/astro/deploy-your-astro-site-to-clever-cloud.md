@@ -2,7 +2,7 @@
 
 > How to deploy your Astro site to the web on Clever Cloud.
 
-[Clever Cloud](https://clever-cloud.com) is a European cloud platform that provides automated, scalable services.
+[Clever Cloud](https://clevercloud.com) is a European cloud platform that provides automated, scalable services.
 
 ## Project Configuration
 
@@ -46,7 +46,7 @@ To deploy your Astro project to Clever Cloud, you will need to **create a new ap
 
 5. Select a **region** to deploy your instance.
 
-6. Skip [connecting **Add-ons** to your Clever application](https://www.clever-cloud.com/developers/doc/addons/) unless you’re using a database or Keycloak.
+6. Skip [connecting **Add-ons** to your Clever application](https://www.clevercloud.com/developers/doc/addons/) unless you’re using a database or Keycloak.
 
 7. Inject **environment variables**:
 
@@ -112,5 +112,5 @@ For example, if you want to deploy your local `main` branch without renaming it,
 
 [Section titled “Official Resources”](#official-resources)
 
-- [Clever Cloud documentation for deploying a Node.js application](https://www.clever-cloud.com/developers/doc/applications/javascript/nodejs/)
-- [Clever Cloud documentation for deploying Astro as a static application](https://www.clever-cloud.com/developers/guides/astro/)
+- [Clever Cloud documentation for deploying a Node.js application](https://www.clevercloud.com/developers/doc/applications/nodejs/)
+- [Clever Cloud documentation for deploying Astro as a static application](https://www.clevercloud.com/developers/guides/astro/)

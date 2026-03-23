@@ -95,5 +95,5 @@ Error Anomaly detection compares current error rates against the last 24-hour ba
 
 title: "Tracking custom events"
 description: "Learn how to send custom analytics events from your application."
-last\_updated: "2026-03-08T05:03:11.036Z"
+last\_updated: "2026-03-23T09:40:05.130Z"
 source: "https://vercel.com/docs/analytics/custom-events"

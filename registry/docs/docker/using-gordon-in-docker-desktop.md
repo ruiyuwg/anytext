@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -35,7 +33,7 @@ Gordon is integrated into Docker Desktop. Access it from the sidebar to open the
 To access Gordon:
 
 1. Open Docker Desktop and sign in to your Docker account.
-2. Select **Ask Gordon** in the sidebar.
+2. Select **Gordon** in the sidebar.
 3. Type your question or request in the input field.
 4. Press Enter or select the send button.
 
@@ -54,7 +52,7 @@ To disable Gordon:
 
 1. Open Docker Desktop Settings.
 2. Navigate to the **Beta features** section.
-3. Clear the **Enable Docker AI** option.
+3. Clear the **Enable Gordon** option.
 4. Select **Apply**.
 
 ## [Configure tools](#configure-tools)

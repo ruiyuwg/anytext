@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -39,7 +37,7 @@ In this section, learn how to manage access and view usage of the Docker product
 
 ## [Manage product access for your organization](#manage-product-access-for-your-organization)
 
-Access to the Docker products included in your subscription is turned on by default for all users. For an overview of products included in your subscription, see [Docker subscriptions and features](https://www.docker.com/pricing/).
+Access to the Docker products included in your subscription is turned on by default for all users. For an overview of products included in your subscription, see [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs\&refAction=DocsAdminManageProducts).
 
 Docker Desktop Docker Hub Docker Build Cloud Docker Scout Testcontainers Cloud Docker Offload
 

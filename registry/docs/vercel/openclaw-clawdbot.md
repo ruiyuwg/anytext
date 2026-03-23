@@ -56,5 +56,5 @@
 
 title: "Chat Platforms"
 description: "Configure AI chat platforms to use the AI Gateway for unified model access and spend monitoring."
-last\_updated: "2026-03-08T05:03:10.361Z"
+last\_updated: "2026-03-23T09:40:04.264Z"
 source: "https://vercel.com/docs/ai-gateway/chat-platforms"

@@ -1,12 +1,9 @@
 # Model Context Protocol (MCP)
 
+The MCP tools feature is experimental and may change in the future.
+
 The AI SDK supports connecting to [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers to access their tools, resources, and prompts.
 This enables your AI applications to discover and use capabilities across various services through a standardized interface.
-
-If you're using OpenAI's Responses API, you can also use the built-in
-`openai.tools.mcp` tool, which provides direct MCP server integration without
-needing to convert tools. See the [OpenAI provider
-documentation](/providers/ai-sdk-providers/openai#mcp-tool) for details.
 
 ## Initializing an MCP Client
 
@@ -23,15 +20,15 @@ Create an MCP client using one of the following transport options:
 For production deployments, we recommend using the HTTP transport. You can configure it directly on the client:
 
 ```typescript
-import { createMCPClient } from "@ai-sdk/mcp";
+import { experimental_createMCPClient as createMCPClient } from '@ai-sdk/mcp';
 
 const mcpClient = await createMCPClient({
   transport: {
-    type: "http",
-    url: "https://your-server.com/mcp",
+    type: 'http',
+    url: 'https://your-server.com/mcp',
 
     // optional: configure HTTP headers
-    headers: { Authorization: "Bearer my-api-key" },
+    headers: { Authorization: 'Bearer my-api-key' },
 
     // optional: provide an OAuth client provider for automatic authorization
     authProvider: myOAuthClientProvider,
@@ -42,13 +39,13 @@ const mcpClient = await createMCPClient({
 Alternatively, you can use `StreamableHTTPClientTransport` from MCP's official TypeScript SDK:
 
 ```typescript
-import { createMCPClient } from "@ai-sdk/mcp";
-import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+import { experimental_createMCPClient as createMCPClient } from '@ai-sdk/mcp';
+import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 
-const url = new URL("https://your-server.com/mcp");
+const url = new URL('https://your-server.com/mcp');
 const mcpClient = await createMCPClient({
   transport: new StreamableHTTPClientTransport(url, {
-    sessionId: "session_123",
+    sessionId: 'session_123',
   }),
 });
 ```
@@ -58,15 +55,15 @@ const mcpClient = await createMCPClient({
 SSE provides an alternative HTTP-based transport option. Configure it with a `type` and `url` property. You can also provide an `authProvider` for OAuth:
 
 ```typescript
-import { createMCPClient } from "@ai-sdk/mcp";
+import { experimental_createMCPClient as createMCPClient } from '@ai-sdk/mcp';
 
 const mcpClient = await createMCPClient({
   transport: {
-    type: "sse",
-    url: "https://my-server.com/sse",
+    type: 'sse',
+    url: 'https://my-server.com/sse',
 
     // optional: configure HTTP headers
-    headers: { Authorization: "Bearer my-api-key" },
+    headers: { Authorization: 'Bearer my-api-key' },
 
     // optional: provide an OAuth client provider for automatic authorization
     authProvider: myOAuthClientProvider,
@@ -81,15 +78,15 @@ The stdio transport should only be used for local servers.
 The Stdio transport can be imported from either the MCP SDK or the AI SDK:
 
 ```typescript
-import { createMCPClient } from "@ai-sdk/mcp";
-import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import { experimental_createMCPClient as createMCPClient } from '@ai-sdk/mcp';
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 // Or use the AI SDK's stdio transport:
 // import { Experimental_StdioMCPTransport as StdioClientTransport } from '@ai-sdk/mcp/mcp-stdio';
 
 const mcpClient = await createMCPClient({
   transport: new StdioClientTransport({
-    command: "node",
-    args: ["src/stdio/dist/server.js"],
+    command: 'node',
+    args: ['src/stdio/dist/server.js'],
   }),
 });
 ```
@@ -98,7 +95,7 @@ const mcpClient = await createMCPClient({
 
 You can also bring your own transport by implementing the `MCPTransport` interface for specific requirements not covered by the standard transports.
 
-The client returned by the `createMCPClient` function is a
+The client returned by the `experimental_createMCPClient` function is a
 lightweight client intended for use in tool conversion. It currently does not
 support all features of the full MCP client, such as: session
 management, resumable streams, and receiving notifications.
@@ -116,7 +113,7 @@ After initialization, you should close the MCP client based on your usage patter
 When streaming responses, you can close the client when the LLM response has finished. For example, when using `streamText`, you should use the `onFinish` callback:
 
 ```typescript
-const mcpClient = await createMCPClient({
+const mcpClient = await experimental_createMCPClient({
   // ...
 });
 
@@ -125,7 +122,7 @@ const tools = await mcpClient.tools();
 const result = await streamText({
   model: __MODEL__,
   tools,
-  prompt: "What is the weather in Brooklyn, New York?",
+  prompt: 'What is the weather in Brooklyn, New York?',
   onFinish: async () => {
     await mcpClient.close();
   },
@@ -135,12 +132,10 @@ const result = await streamText({
 When generating responses without streaming, you can use try/finally or cleanup functions in your framework:
 
 ```typescript
-import { createMCPClient, type MCPClient } from "@ai-sdk/mcp";
-
 let mcpClient: MCPClient | undefined;
 
 try {
-  mcpClient = await createMCPClient({
+  mcpClient = await experimental_createMCPClient({
     // ...
   });
 } finally {
@@ -167,18 +162,18 @@ This approach is simpler to implement and automatically stays in sync with serve
 For better type safety and control, you can define the tools and their input schemas explicitly in your client code:
 
 ```typescript
-import { z } from "zod";
+import { z } from 'zod';
 
 const tools = await mcpClient.tools({
   schemas: {
-    "get-data": {
+    'get-data': {
       inputSchema: z.object({
-        query: z.string().describe("The data query"),
-        format: z.enum(["json", "text"]).optional(),
+        query: z.string().describe('The data query'),
+        format: z.enum(['json', 'text']).optional(),
       }),
     },
     // For tools with zero inputs, you should use an empty object:
-    "tool-with-no-args": {
+    'tool-with-no-args': {
       inputSchema: z.object({}),
     },
   },
@@ -186,48 +181,6 @@ const tools = await mcpClient.tools({
 ```
 
 This approach provides full TypeScript type safety and IDE autocompletion, letting you catch parameter mismatches during development. When you define `schemas`, the client only pulls the explicitly defined tools, keeping your application focused on the tools it needs
-
-### Typed Tool Outputs
-
-When MCP servers return `structuredContent` (per the [MCP specification](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#structured-content)), you can define an `outputSchema` to get typed tool results:
-
-```typescript
-import { z } from "zod";
-
-const tools = await mcpClient.tools({
-  schemas: {
-    "get-weather": {
-      inputSchema: z.object({
-        location: z.string(),
-      }),
-      // Define outputSchema for typed results
-      outputSchema: z.object({
-        temperature: z.number(),
-        conditions: z.string(),
-        humidity: z.number(),
-      }),
-    },
-  },
-});
-
-const result = await tools["get-weather"].execute(
-  { location: "New York" },
-  { messages: [], toolCallId: "weather-1" },
-);
-
-console.log(`Temperature: ${result.temperature}°C`);
-```
-
-When `outputSchema` is provided:
-
-- The client extracts `structuredContent` from the tool result
-- The output is validated against your schema at runtime
-- You get full TypeScript type safety for the result
-
-If the server doesn't return `structuredContent`, the client falls back to parsing JSON from the text content. If neither is available or validation fails, an error is thrown.
-
-Without `outputSchema`, the tool returns the raw `CallToolResult` object
-containing `content` and optional `isError` fields.
 
 ## Using MCP Resources
 
@@ -249,7 +202,7 @@ Read the contents of a specific resource by its URI:
 
 ```typescript
 const resourceData = await mcpClient.readResource({
-  uri: "file:///example/document.txt",
+  uri: 'file:///example/document.txt',
 });
 ```
 
@@ -263,14 +216,12 @@ const templates = await mcpClient.listResourceTemplates();
 
 ## Using MCP Prompts
 
-MCP Prompts is an experimental feature and may change in the future.
-
 According to the MCP specification, prompts are user-controlled templates that servers expose for clients to list and retrieve with optional arguments.
 
 ### Listing Prompts
 
 ```typescript
-const prompts = await mcpClient.experimental_listPrompts();
+const prompts = await mcpClient.listPrompts();
 ```
 
 ### Getting a Prompt
@@ -278,9 +229,9 @@ const prompts = await mcpClient.experimental_listPrompts();
 Retrieve prompt messages, optionally passing arguments defined by the server:
 
 ```typescript
-const prompt = await mcpClient.experimental_getPrompt({
-  name: "code_review",
-  arguments: { code: "function add(a, b) { return a + b; }" },
+const prompt = await mcpClient.getPrompt({
+  name: 'code_review',
+  arguments: { code: 'function add(a, b) { return a + b; }' },
 });
 ```
 
@@ -297,10 +248,10 @@ application code.
 To enable elicitation, you need to advertise the capability when creating the MCP client:
 
 ```typescript
-const mcpClient = await createMCPClient({
+const mcpClient = await experimental_createMCPClient({
   transport: {
-    type: "sse",
-    url: "https://your-server.com/sse",
+    type: 'sse',
+    url: 'https://your-server.com/sse',
   },
   capabilities: {
     elicitation: {},
@@ -313,9 +264,9 @@ const mcpClient = await createMCPClient({
 Use the `onElicitationRequest` method to register a handler that will be called when the server requests input:
 
 ```typescript
-import { ElicitationRequestSchema } from "@ai-sdk/mcp";
+import { ElicitationRequestSchema } from '@ai-sdk/mcp';
 
-mcpClient.onElicitationRequest(ElicitationRequestSchema, async (request) => {
+mcpClient.onElicitationRequest(ElicitationRequestSchema, async request => {
   // request.params.message: A message describing what input is needed
   // request.params.requestedSchema: JSON schema defining the expected input structure
 
@@ -327,7 +278,7 @@ mcpClient.onElicitationRequest(ElicitationRequestSchema, async (request) => {
 
   // Return the result with one of three actions:
   return {
-    action: "accept", // or 'decline' or 'cancel'
+    action: 'accept', // or 'decline' or 'cancel'
     content: userInput, // only required when action is 'accept'
   };
 });

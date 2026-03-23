@@ -175,7 +175,7 @@ const getAvailableTimeSlots = tool(
 // ============================================================================
 
 const llm = new ChatAnthropic({
-  model: "claude-haiku-4-5-20251001",
+  model: "gpt-5.4",
 });
 
 const calendarAgent = createAgent({
@@ -186,6 +186,7 @@ You are a calendar scheduling assistant.
 Parse natural language scheduling requests (e.g., 'next Tuesday at 2pm')
 into proper ISO datetime formats.
 Use get_available_time_slots to check availability when needed.
+If there is no suitable time slot, stop and confirm unavailability in your response.
 Use create_calendar_event to schedule events.
 Always confirm what was scheduled in your final response.
   `.trim(),

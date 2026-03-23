@@ -1,0 +1,116 @@
+Database Autonomy Service (DAS) provides the SQL Explorer and Audit feature. If you want to monitor and manage SQL statements that are executed in database instances, you can use the SQL Explorer and Audit feature to record and analyze the execution of SQL statements. After this feature is enabled, SQL statements from database kernels, the accounts that are used to execute the SQL statements, IP addresses, and execution details are automatically recorded. This does not affect the instance performance. You can also use the traffic playback and stress testing features to check whether you need to scale up your database instance to handle workloads during peak hours.
+
+## Supported databases and regions
+
+You must enable DAS Enterprise Edition for your database instance before you can use the SQL Explorer and Audit feature. Different versions of DAS Enterprise Edition support different databases and regions. For more information, see the [Supported databases and regions](/help/en/das/product-overview/editions#55233541b9ljq) section of the "DAS editions and supported features" topic.
+
+## Features
+
+-   **Search**: This feature is used to query and export SQL statements and related information, such as the databases on which the SQL statements are executed, the status of SQL requests, and the execution duration of each SQL statement. For more information, see [Search (Audit)](/help/en/das/user-guide/search#task-2025136).
+    
+-   **SQL Explorer**: This feature is used to diagnose the health status of SQL statements, troubleshoot performance issues, and analyze business traffic. For more information, see [SQL Explorer](/help/en/das/user-guide/sql-explorer#task-2043361).
+    
+-   **Security audit**: This feature is used to automatically identify risks, such as high-risk SQL statements, SQL injection attacks, and new access sources. For more information, see [Security audit](/help/en/das/user-guide/security-audit).
+    
+-   **Traffic playback and stress testing**: These features are used to check whether you need to scale up your database instances to handle workloads during peak hours. For more information, see [Traffic playback and stress testing](/help/en/das/traffic-playback-and-stress-testing#task-2108380).
+    
+-   **SQL Review**: This feature supports global workload analysis on SQL statements. It helps you quickly locate suspicious SQL statements, analyzes suspicious SQL statements, and provides the corresponding optimization suggestions. For more information, see [SQL Review](/help/en/das/user-guide/sql-review).
+    
+-   **Transaction analysis**: This feature is used to obtain the transaction type, number of transactions, and transaction details of a thread within the specified period. This allows you to understand, analyze, and optimize database performance at the transaction level. For more information, see [Transaction analysis](/help/en/das/user-guide/transaction-analysis).
+    
+-   **Quick transaction analysis**: This feature is used to check the start and end SQL statements of the transaction where the SQL statement to be analyzed is located. This way, you can obtain the commit or rollback status of the SQL statement. For more information, see [Quick transaction analysis](/help/en/das/user-guide/fast-transaction-analysis).
+    
+
+## Billing
+
+You must enable DAS Enterprise Edition for your database instance before you can use the SQL Explorer and Audit feature. For more information about the billing rules of DAS Enterprise Edition of different versions, see [Billing overview](/help/en/das/product-overview/billing-overview/).
+
+## Enable the SQL Explorer and Audit feature
+
+**Note**
+
+If you have enabled DAS Enterprise Edition for a database instance, the SQL Explorer and Audit feature is automatically enabled for the database instance. You do not need to manually enable this feature. For more information, see the [Enable DAS Enterprise Edition](/help/en/das/user-guide/purchase-das-professional-edition#09360cadb7zy8) section of the "Enable and manage DAS Economy Edition and DAS Enterprise Edition" topic.
+
+1.  Log on to the [DAS console](https://hdm.console.alibabacloud.com/).
+    
+2.  In the left-side navigation pane, click **Instance Monitoring**.
+    
+3.  On the page that appears, find the database instance that you want to manage and click the instance ID. The instance details page appears.
+    
+4.  In the left-side navigation pane, choose **Request Analysis** > **SQL Explorer and Audit**.
+    
+5.  On the **SQL Explorer and Audit** page, click Enable.
+    
+    If you have not enabled DAS Enterprise Edition for your Alibaba Cloud account, follow the on-screen instructions to enable DAS Enterprise Edition. For more information, see the [Enable DAS Enterprise Edition](/help/en/das/user-guide/purchase-das-professional-edition#09360cadb7zy8) section of the "Enable and manage DAS Economy Edition and DAS Enterprise Edition" topic.
+    
+
+## Modify the storage duration of data generated by SQL Explorer and Audit
+
+**Warning**
+
+If you reduce the storage duration of data generated by the SQL Explorer and Audit feature, DAS immediately clears the SQL audit logs that are stored for a period of time longer than the specified storage duration. We recommend that you export and save SQL audit logs to your computer before you reduce the storage duration.
+
+1.  Log on to the [DAS console](https://hdm.console.alibabacloud.com/).
+    
+2.  In the left-side navigation pane, click **Instance Monitoring**.
+    
+3.  On the page that appears, find the database instance that you want to manage and click the instance ID. The instance details page appears.
+    
+4.  In the left-side navigation pane, choose **Request Analysis** > **SQL Explorer and Audit**.
+    
+5.  On the **SQL Explorer and Audit** page, click **Service Settings**.
+    
+6.  In the panel that appears, modify the storage duration and click Submit.
+    
+    If you enable DAS Enterprise V3, you can change the storage duration of data generated by different subfeatures.
+    
+    **Note**
+    
+    -   You can also specify the **storage duration** of data generated by the SQL Explorer and Audit feature for your database instance on the **DAS Professional Edition Management** page. For more information, see [Enable and Manage DAS Economy Edition and DAS Enterprise Edition](/help/en/das/user-guide/purchase-das-professional-edition#1868b020dc602).
+        
+    -   The storage space that is occupied by the data generated by the SQL Explorer and Audit feature is provided by DAS and does not consume the storage of your database instance.
+        
+    
+
+## Disable the SQL Explorer and Audit feature
+
+**Warning**
+
+After you disable the SQL Explorer and Audit feature, your business is not affected. However, SQL audit logs are cleared. Before you disable the SQL Explorer and Audit feature, we recommend that you export the SQL audit logs as a file and download the file to your computer. If you enable the SQL Explorer and Audit feature again, SQL audit logs are generated from the point in time when the SQL Explorer and Audit feature is enabled.
+
+1.  Log on to the [DAS console](https://hdm.console.alibabacloud.com/).
+    
+2.  In the left-side navigation pane, click **Instance Monitoring**.
+    
+3.  On the page that appears, find the database instance that you want to manage and click the instance ID. The instance details page appears.
+    
+4.  In the left-side navigation pane, choose **Request Analysis** > **SQL Explorer and Audit**.
+    
+5.  On the **SQL Explorer and Audit** page, click the **Search** tab.
+    
+6.  In the **Search** section, click **Export**.
+    
+7.  In the dialog box that appears, specify the Exported Fields and Export Time Range parameters and click OK.
+    
+8.  Download and save the exported file.
+    
+    The page on which you can download the data of SQL Explorer and Audit varies based on the version of DAS Enterprise Edition. Download the exported log file based on the actual layout that is displayed.
+    
+    -   On the **Search** tab, click **View Exported Logs** to download the exported file.
+        
+    -   Download the exported file on the **Task list** tab.
+        
+9.  Click **Service Settings** to disable the SQL Explorer and Audit feature.
+    
+    If you have enabled DAS Enterprise V3, select all subfeatures of the SQL Explorer and Audit feature.
+    
+    **Note**
+    
+    The storage space that is occupied by the data generated by the SQL Explorer and Audit feature is released one hour after the SQL Explorer and Audit feature is disabled.
+    
+
+## **Migrate the data of SQL Explorer and Audit between different versions of DAS Enterprise Edition**
+
+Compared with DAS Enterprise Edition V1, the underlying storage architecture of DAS Enterprise Edition V2 is changed. The hybrid storage of hot and cold data increases performance at lower costs. Based on the hybrid storage of hot and cold data, the billable items for DAS Enterprise Edition V3 are divided by features. This makes billing more flexible and greatly reduces costs.
+
+If your database instance supports DAS Enterprise Edition V3, you can migrate data from DAS Enterprise Edition V1 or DAS Enterprise Edition V2 to DAS Enterprise Edition V3. This way, you benefit from more favorable pricing. For more information, see the [How do I migrate data between different versions of DAS Enterprise Edition?](/help/en/das/user-guide/faq#9fd034d40f87x) section of the "FAQ" topic.

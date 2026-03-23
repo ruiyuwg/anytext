@@ -283,7 +283,7 @@ To set up a webhook in Vercel:
 
 [Section titled “Themes”](#themes)
 
-- [![](/_astro/simple-astro-blog.Dl86rePH_ZijHC7.webp) Astro Headless CMS Blog](https://astro.build/themes/details/cosmic-cms-blog/)
+- [![](/_astro/simple-astro-blog.Dl86rePH_ZxKENW.webp) Astro Headless CMS Blog](https://astro.build/themes/details/cosmic-cms-blog/)
 
 # Craft CMS & Astro
 

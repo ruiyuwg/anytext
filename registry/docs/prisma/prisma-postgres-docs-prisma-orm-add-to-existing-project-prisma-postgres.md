@@ -535,4 +535,3 @@ More info \[#more-info]
 - [Prisma Config reference](/orm/reference/prisma-config-reference)
 - [Database introspection](/orm/prisma-schema/introspection)
 - [Prisma Migrate](/orm/prisma-migrate)
-- [Cache your queries](/postgres/database/caching#setting-up-caching-in-prisma-postgres)

@@ -69,7 +69,7 @@ export async function getStaticProps() {
 
 title: "NO\_UNNECESSARY\_PROP\_SPREADING"
 description: "Disallows the usage of object spreading in a JSX component."
-last\_updated: "2026-03-08T05:03:12.821Z"
+last\_updated: "2026-03-23T09:40:07.758Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_UNNECESSARY\_PROP\_SPREADING"
 
 # NO\_UNNECESSARY\_PROP\_SPREADING
@@ -114,7 +114,7 @@ In the example above, [TypeScript](https://www.typescriptlang.org/) will be able
 
 title: "NO\_VARIABLE\_IMPORT\_REFERENCES"
 description: "import and require statements must be passed string literals to avoid arbitrary user access to code."
-last\_updated: "2026-03-08T05:03:12.824Z"
+last\_updated: "2026-03-23T09:40:07.761Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_VARIABLE\_IMPORT\_REFERENCES"
 
 # NO\_VARIABLE\_IMPORT\_REFERENCES
@@ -151,7 +151,7 @@ to ensure that only the desired code can be loaded.
 
 title: "PACKAGE\_JSON\_DESCRIPTION\_REQUIRED"
 description: "Requires that every package.json file has the description field set."
-last\_updated: "2026-03-08T05:03:12.831Z"
+last\_updated: "2026-03-23T09:40:07.766Z"
 source: "https://vercel.com/docs/conformance/rules/PACKAGE\_JSON\_DESCRIPTION\_REQUIRED"
 
 # PACKAGE\_JSON\_DESCRIPTION\_REQUIRED
@@ -177,7 +177,7 @@ what the package does and when it should be used.
 
 title: "PACKAGE\_JSON\_DUPLICATE\_DEPENDENCIES"
 description: "Found duplicate dependencies between the list of dependencies and devDependencies or peerDependencies in a package.json file.."
-last\_updated: "2026-03-08T05:03:12.828Z"
+last\_updated: "2026-03-23T09:40:07.778Z"
 source: "https://vercel.com/docs/conformance/rules/PACKAGE\_JSON\_DUPLICATE\_DEPENDENCIES"
 
 # PACKAGE\_JSON\_DUPLICATE\_DEPENDENCIES
@@ -218,7 +218,7 @@ can be left in `devDependencies` or `peerDependencies` and be removed from
 
 title: "PACKAGE\_JSON\_NAME\_REQUIRED"
 description: "Requires that every package.json file has the name field set to ensure each workspace has a unique identifier."
-last\_updated: "2026-03-08T05:03:12.835Z"
+last\_updated: "2026-03-23T09:40:07.782Z"
 source: "https://vercel.com/docs/conformance/rules/PACKAGE\_JSON\_NAME\_REQUIRED"
 
 # PACKAGE\_JSON\_NAME\_REQUIRED
@@ -245,7 +245,7 @@ package as to what it does.
 
 title: "PACKAGE\_JSON\_PRIVATE\_REQUIRED"
 description: "Requires that every package.json file has the private field set to prevent accidental publishing to npm."
-last\_updated: "2026-03-08T05:03:12.839Z"
+last\_updated: "2026-03-23T09:40:07.787Z"
 source: "https://vercel.com/docs/conformance/rules/PACKAGE\_JSON\_PRIVATE\_REQUIRED"
 
 # PACKAGE\_JSON\_PRIVATE\_REQUIRED
@@ -271,7 +271,7 @@ intended to be published in which case it can be explicitly set to `false`.
 
 title: "PACKAGE\_JSON\_PRIVATE\_REQUIREDPACKAGE\_JSON\_SIDE\_EFFECTS\_REQUIRED"
 description: "Requires that every package.json file has the sideEffects field set to ensure tree-shaking works optimally."
-last\_updated: "2026-03-08T05:03:12.843Z"
+last\_updated: "2026-03-23T09:40:07.791Z"
 source: "https://vercel.com/docs/conformance/rules/PACKAGE\_JSON\_SIDE\_EFFECTS\_REQUIRED"
 
 # PACKAGE\_JSON\_PRIVATE\_REQUIREDPACKAGE\_JSON\_SIDE\_EFFECTS\_REQUIRED
@@ -300,7 +300,7 @@ patterns for files that do have side effects.
 
 title: "PACKAGE\_JSON\_TYPE\_REQUIRED"
 description: "Requires that every package.json file has the type field set to encourage using ES Modules since commonjs is the default."
-last\_updated: "2026-03-08T05:03:12.848Z"
+last\_updated: "2026-03-23T09:40:07.799Z"
 source: "https://vercel.com/docs/conformance/rules/PACKAGE\_JSON\_TYPE\_REQUIRED"
 
 # PACKAGE\_JSON\_TYPE\_REQUIRED
@@ -331,7 +331,7 @@ where `commonjs` has to be used.
 
 title: "PACKAGE\_MANAGEMENT\_NO\_CIRCULAR\_IMPORTS"
 description: "Circular imports between two files are not allowed."
-last\_updated: "2026-03-08T05:03:12.857Z"
+last\_updated: "2026-03-23T09:40:07.802Z"
 source: "https://vercel.com/docs/conformance/rules/PACKAGE\_MANAGEMENT\_NO\_CIRCULAR\_IMPORTS"
 
 # PACKAGE\_MANAGEMENT\_NO\_CIRCULAR\_IMPORTS
@@ -380,7 +380,7 @@ avoid the circular import.
 
 title: "PACKAGE\_MANAGEMENT\_NO\_UNRESOLVED\_IMPORTS"
 description: "Import statements that can not be resolved to a local file or a package from package.json dependencies are not allowed."
-last\_updated: "2026-03-08T05:03:12.860Z"
+last\_updated: "2026-03-23T09:40:07.806Z"
 source: "https://vercel.com/docs/conformance/rules/PACKAGE\_MANAGEMENT\_NO\_UNRESOLVED\_IMPORTS"
 
 # PACKAGE\_MANAGEMENT\_NO\_UNRESOLVED\_IMPORTS
@@ -418,7 +418,7 @@ on the `next` package should be added.
 
 title: "PACKAGE\_MANAGEMENT\_REQUIRED\_README"
 description: "Every workspace is required to have a README.md file in the root of the workspace."
-last\_updated: "2026-03-08T05:03:12.850Z"
+last\_updated: "2026-03-23T09:40:07.809Z"
 source: "https://vercel.com/docs/conformance/rules/PACKAGE\_MANAGEMENT\_REQUIRED\_README"
 
 # PACKAGE\_MANAGEMENT\_REQUIRED\_README
@@ -438,7 +438,7 @@ build or use the package.
 
 title: "REACT\_NO\_STATIC\_IMPORTS\_IN\_EVENT\_HANDLERS"
 description: "Prevent static imports that are referenced only in React event handlers from being eagerly loaded in React components."
-last\_updated: "2026-03-08T05:03:12.854Z"
+last\_updated: "2026-03-23T09:40:07.812Z"
 source: "https://vercel.com/docs/conformance/rules/REACT\_NO\_STATIC\_IMPORTS\_IN\_EVENT\_HANDLERS"
 
 # REACT\_NO\_STATIC\_IMPORTS\_IN\_EVENT\_HANDLERS
@@ -483,7 +483,7 @@ Additionally, you can [configure](/docs/conformance/customize) the rule for only
 
 title: "REACT\_STABLE\_CONTEXT\_PROVIDER\_VALUE"
 description: "Prevent non-stable values from being used in React Context providers that could cause unnecessary re-renders."
-last\_updated: "2026-03-08T05:03:12.863Z"
+last\_updated: "2026-03-23T09:40:07.829Z"
 source: "https://vercel.com/docs/conformance/rules/REACT\_STABLE\_CONTEXT\_PROVIDER\_VALUE"
 
 # REACT\_STABLE\_CONTEXT\_PROVIDER\_VALUE
@@ -519,7 +519,7 @@ fix this by wrapping with `useMemo`.
 
 title: "REQUIRE\_CARET\_DEPENDENCIES"
 description: "Prevent the use of dependencies without a caret ("
-last\_updated: "2026-03-08T05:03:12.867Z"
+last\_updated: "2026-03-23T09:40:07.834Z"
 source: "https://vercel.com/docs/conformance/rules/REQUIRE\_CARET\_DEPENDENCIES"
 
 # REQUIRE\_CARET\_DEPENDENCIES
@@ -564,5 +564,5 @@ If you hit this issue, you can resolve it by adding a `"^"` to the version of yo
 
 title: "REQUIRE\_DOCS\_ON\_EXPORTED\_FUNCTIONS"
 description: "Requires that all exported functions have JSDoc comments."
-last\_updated: "2026-03-08T05:03:12.871Z"
+last\_updated: "2026-03-23T09:40:07.838Z"
 source: "https://vercel.com/docs/conformance/rules/REQUIRE\_DOCS\_ON\_EXPORTED\_FUNCTIONS"

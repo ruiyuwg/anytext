@@ -12,11 +12,11 @@ a string constant, a blob constant, a signed-number, or any constant expression 
 import { sql } from "drizzle-orm";
 import { integer, pgTable, uuid } from "drizzle-orm/pg-core";
 
-const table = pgTable("table", {
-  integer1: integer().default(42),
-  integer2: integer().default(sql`'42'::integer`),
-  uuid1: uuid().defaultRandom(),
-  uuid2: uuid().default(sql`gen_random_uuid()`),
+const table = pgTable('table', {
+	integer1: integer().default(42),
+	integer2: integer().default(sql`'42'::integer`),
+	uuid1: uuid().defaultRandom(),
+	uuid2: uuid().default(sql`gen_random_uuid()`),
 });
 ```
 
@@ -40,10 +40,10 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 
 ```ts
 import { text, pgTable } from "drizzle-orm/pg-core";
-import { createId } from "@paralleldrive/cuid2";
+import { createId } from '@paralleldrive/cuid2';
 
-const table = pgTable("table", {
-  id: text().$defaultFn(() => createId()),
+const table = pgTable('table', {
+	id: text().$defaultFn(() => createId()),
 });
 ```
 
@@ -62,16 +62,10 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 ```ts
 import { integer, timestamp, text, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable("table", {
-  updateCounter: integer()
-    .default(sql`1`)
-    .$onUpdateFn((): SQL => sql`${table.update_counter} + 1`),
-  updatedAt: timestamp({ mode: "date", precision: 3 }).$onUpdate(
-    () => new Date(),
-  ),
-  alwaysNull: text()
-    .$type<string | null>()
-    .$onUpdate(() => null),
+const table = pgTable('table', {
+	updateCounter: integer().default(sql`1`).$onUpdateFn((): SQL => sql`${table.update_counter} + 1`),
+	updatedAt: timestamp({ mode: 'date', precision: 3 }).$onUpdate(() => new Date()),
+    	alwaysNull: text().$type<string | null>().$onUpdate(() => null),
 });
 ```
 
@@ -82,8 +76,8 @@ const table = pgTable("table", {
 ```typescript
 import { integer, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable("table", {
-  integer: integer().notNull(),
+const table = pgTable('table', {
+	integer: integer().notNull(),
 });
 ```
 
@@ -101,8 +95,8 @@ This requires that the values be both unique and not null.
 ```typescript
 import { serial, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable("table", {
-  id: serial().primaryKey(),
+const table = pgTable('table', {
+	id: serial().primaryKey(),
 });
 ```
 
@@ -132,8 +126,8 @@ A signed integer, stored in `0`, `1`, `2`, `3`, `4`, `6`, or `8` bytes depending
 ```typescript
 import { int, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  int: int(),
+const table = singlestoreTable('table', {
+	int: int()
 });
 ```
 
@@ -148,8 +142,8 @@ CREATE TABLE `table` (
 ```typescript
 import { tinyint, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  tinyint: tinyint(),
+const table = singlestoreTable('table', {
+	tinyint: tinyint()
 });
 ```
 
@@ -164,8 +158,8 @@ CREATE TABLE `table` (
 ```typescript
 import { smallint, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  smallint: smallint(),
+const table = singlestoreTable('table', {
+	smallint: smallint()
 });
 ```
 
@@ -180,8 +174,8 @@ CREATE TABLE `table` (
 ```typescript
 import { mediumint, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  mediumint: mediumint(),
+const table = singlestoreTable('table', {
+	mediumint: mediumint()
 });
 ```
 
@@ -221,8 +215,8 @@ We've omitted config of `M` in `bigint(M)`, since it indicates the display width
 ```typescript
 import { real, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  real: real(),
+const table = singlestoreTable('table', {
+	real: real()
 });
 ```
 
@@ -235,9 +229,9 @@ CREATE TABLE `table` (
 ```typescript
 import { real, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  realPrecision: real({ precision: 1 }),
-  realPrecisionScale: real({ precision: 1, scale: 1 }),
+const table = singlestoreTable('table', {
+	realPrecision: real({ precision: 1,}),
+	realPrecisionScale: real({ precision: 1, scale: 1,}),
 });
 ```
 
@@ -253,10 +247,10 @@ CREATE TABLE `table` (
 ```typescript
 import { decimal, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  decimal: decimal(),
-  decimalNum: decimal({ scale: 30, mode: "number" }),
-  decimalBig: decimal({ scale: 30, mode: "bigint" }),
+const table = singlestoreTable('table', {
+	decimal: decimal(),
+	decimalNum: decimal({ scale: 30, mode: 'number' }),
+	decimalBig: decimal({ scale: 30, mode: 'bigint' }),
 });
 ```
 
@@ -271,9 +265,9 @@ CREATE TABLE `table` (
 ```typescript
 import { decimal, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  decimalPrecision: decimal({ precision: 1 }),
-  decimalPrecisionScale: decimal({ precision: 1, scale: 1 }),
+const table = singlestoreTable('table', {
+	decimalPrecision: decimal({ precision: 1,}),
+	decimalPrecisionScale: decimal({ precision: 1, scale: 1,}),
 });
 ```
 
@@ -289,8 +283,8 @@ CREATE TABLE `table` (
 ```typescript
 import { double, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  double: double("double"),
+const table = singlestoreTable('table', {
+	double: double('double')
 });
 ```
 
@@ -303,9 +297,9 @@ CREATE TABLE `table` (
 ```typescript
 import { double, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  doublePrecision: double({ precision: 1 }),
-  doublePrecisionScale: double({ precision: 1, scale: 1 }),
+const table = singlestoreTable('table', {
+	doublePrecision: double({ precision: 1,}),
+	doublePrecisionScale: double({ precision: 1, scale: 1,}),
 });
 ```
 
@@ -321,8 +315,8 @@ CREATE TABLE `table` (
 ```typescript
 import { float, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  float: float(),
+const table = singlestoreTable('table', {
+	float: float()
 });
 ```
 
@@ -339,8 +333,8 @@ CREATE TABLE `table` (
 ```typescript
 import { serial, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  serial: serial(),
+const table = singlestoreTable('table', {
+	serial: serial()
 });
 ```
 
@@ -355,8 +349,8 @@ CREATE TABLE `table` (
 ```typescript
 import { binary, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  binary: binary(),
+const table = singlestoreTable('table', {
+	binary: binary()
 });
 ```
 
@@ -371,8 +365,8 @@ CREATE TABLE `table` (
 ```typescript
 import { varbinary, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  varbinary: varbinary({ length: 2 }),
+const table = singlestoreTable('table', {
+	varbinary: varbinary({ length: 2}),
 });
 ```
 
@@ -387,8 +381,8 @@ CREATE TABLE `table` (
 ```typescript
 import { char, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  char: char(),
+const table = singlestoreTable('table', {
+	char: char(),
 });
 ```
 
@@ -405,12 +399,12 @@ You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `se
 ```typescript
 import { varchar, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  varchar: varchar({ length: 2 }),
+const table = singlestoreTable('table', {
+	varchar: varchar({ length: 2 }),
 });
 
 // will be inferred as text: "value1" | "value2" | null
-varchar: varchar({ length: 6, enum: ["value1", "value2"] });
+varchar: varchar({ length: 6, enum: ["value1", "value2"] })
 ```
 
 ```sql
@@ -426,8 +420,8 @@ You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `se
 ```typescript
 import { text, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  text: text(),
+const table = singlestoreTable('table', {
+	text: text(),
 });
 
 // will be inferred as text: "value1" | "value2" | null
@@ -445,8 +439,8 @@ CREATE TABLE `table` (
 ```typescript
 import { boolean, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  boolean: boolean(),
+const table = singlestoreTable('table', {
+	boolean: boolean(),
 });
 ```
 
@@ -461,8 +455,8 @@ CREATE TABLE `table` (
 ```typescript
 import { boolean, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  date: date(),
+const table = singlestoreTable('table', {
+	date: date(),
 });
 ```
 
@@ -495,8 +489,8 @@ CREATE TABLE `table` (
 ```typescript
 import { time, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  time: time(),
+const table = singlestoreTable('table', {
+	time: time(),
 });
 ```
 
@@ -511,8 +505,8 @@ CREATE TABLE `table` (
 ```typescript
 import { year, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  year: year(),
+const table = singlestoreTable('table', {
+	year: year(),
 });
 ```
 
@@ -543,8 +537,8 @@ CREATE TABLE `table` (
 ```typescript
 import { timestamp, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  timestamp: timestamp().defaultNow(),
+const table = singlestoreTable('table', {
+	timestamp: timestamp().defaultNow(),
 });
 ```
 
@@ -559,9 +553,10 @@ CREATE TABLE `table` (
 ```typescript
 import { json, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  json: json(),
+const table = singlestoreTable('table', {
+	json: json(),
 });
+
 ```
 
 ```sql
@@ -587,13 +582,10 @@ json: json().$type<string[]>().default({});
 ### enum
 
 ```typescript
-import {
-  singlestoreEnum,
-  singlestoreTable,
-} from "drizzle-orm/singlestore-core";
+import { singlestoreEnum, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  popularity: singlestoreEnum(["unknown", "known", "popular"]),
+const table = singlestoreTable('table', {
+	popularity: singlestoreEnum(['unknown', 'known', 'popular']),
 });
 ```
 
@@ -608,13 +600,13 @@ CREATE TABLE `table` (
 Every column builder has a `.$type()` method, which allows you to customize the data type of the column. This is useful, for example, with unknown or branded types.
 
 ```ts
-type UserId = number & { __brand: "user_id" };
+type UserId = number & { __brand: 'user_id' };
 type Data = {
-  foo: string;
-  bar: number;
+	foo: string;
+	bar: number;
 };
 
-const users = singlestoreTable("users", {
+const users = singlestoreTable('users', {
   id: int().$type<UserId>().primaryKey(),
   jsonField: json().$type<Data>(),
 });
@@ -627,8 +619,8 @@ const users = singlestoreTable("users", {
 ```typescript
 import { int, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable("table", {
-  int: int().notNull(),
+const table = singlestoreTable('table', {
+	int: int().notNull(),
 });
 ```
 

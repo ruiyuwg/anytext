@@ -11,9 +11,9 @@ Terminal’s smart readers are compatible with the JavaScript, iOS, Android, and
 | [Stripe Reader S700](https://docs.stripe.com/terminal/readers/stripe-reader-s700-s710.md) | Available in: US, CA, GB, IE, SG, AU, NZ, FR, DE, NL, BE, AT, ES, DK, SE, NO, CH, IT, LU, PT, FI, MY, CZ, PL, JP |
 | [Stripe Reader S710](https://docs.stripe.com/terminal/readers/stripe-reader-s700-s710.md) | Available in: US, CA, GB, IE, SG, AU, NZ, FR, BE, MY                                                             |
 | [BBPOS WisePOS E](https://docs.stripe.com/terminal/readers/bbpos-wisepos-e.md)            | Available in: US, CA, GB, IE, SG, AU, NZ, NL, BE, AT, ES, DK, SE, NO, CH, IT, LU, PT, FI, MY, CZ, PL             |
-| [Verifone V660p](https://docs.stripe.com/terminal/payments/setup-reader/v660p.md)         | Available in: US, CA                                                                                             |
-| [Verifone UX700](https://docs.stripe.com/terminal/payments/setup-reader/ux700.md)         | Available in: US, CA                                                                                             |
-| [Verifone P630](https://docs.stripe.com/terminal/payments/setup-reader/p630.md)           | Available in: US, CA                                                                                             |
+| [Verifone V660p](https://docs.stripe.com/terminal/payments/setup-reader/v660p.md)         | Available in: US, CA, GB, IE, SG                                                                                 |
+| [Verifone UX700](https://docs.stripe.com/terminal/payments/setup-reader/ux700.md)         | Available in: US, CA, GB, IE                                                                                     |
+| [Verifone P630](https://docs.stripe.com/terminal/payments/setup-reader/p630.md)           | Available in: US, CA, GB, IE, SG                                                                                 |
 | [Verifone M425](https://docs.stripe.com/terminal/payments/setup-reader/m425.md)           | Available in: US, CA                                                                                             |
 
 ## Reader software updates

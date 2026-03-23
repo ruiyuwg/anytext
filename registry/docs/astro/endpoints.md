@@ -52,6 +52,8 @@ import type { APIRoute } from "astro";
 export const GET = (async ({ params, request }) => { /* ... */ }) satisfies APIRoute;
 ```
 
+Note that endpoints whose URLs include a file extension (e.g. `src/pages/sitemap.xml.ts`) can only be accessed without a trailing slash (e.g. `/sitemap.xml`), regardless of your [`build.trailingSlash`](/en/reference/configuration-reference/#trailingslash) configuration.
+
 ### `params` and Dynamic routing
 
 [Section titled “params and Dynamic routing”](#params-and-dynamic-routing)

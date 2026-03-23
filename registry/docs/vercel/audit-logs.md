@@ -82,6 +82,7 @@ The CSV file can be opened using any spreadsheet-compatible software, and includ
 | **actor\_email**     | Email address of the team member responsible for a specific event                                                                                                                                                |
 | **location**        | IP address from where the action was performed                                                                                                                                                                   |
 | **user\_agent**      | Details about the application, operating system, vendor, and/or browser version used by the team member                                                                                                          |
+| **request\_id**      | Unique identifier for the API request that triggered the event                                                                                                                                                   |
 | **previous**        | Custom metadata (JSON object) showing the object's previous state                                                                                                                                                |
 | **next**            | Custom metadata (JSON object) showing the object's updated state                                                                                                                                                 |
 
@@ -303,5 +304,5 @@ Refers to actions performed by any [team member](/docs/accounts/team-members-and
 
 title: "Bot Management"
 description: "Learn how to manage bot traffic to your site."
-last\_updated: "2026-03-08T05:03:11.119Z"
+last\_updated: "2026-03-23T09:40:05.263Z"
 source: "https://vercel.com/docs/bot-management"

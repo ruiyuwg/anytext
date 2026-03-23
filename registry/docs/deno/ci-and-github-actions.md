@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/ci\_github
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 Deno Deploy's Git integration enables deployment of code changes that are pushed
 

@@ -616,8 +616,6 @@ Update your adapter to change the type of `entryPoints` from `RouteData` to `Int
 }
 ```
 
-See the [API reference for `IntegrationRouteData`](/en/reference/integrations-reference/#integrationroutedata).
-
 ### Changed: `distURL` is now an array (Integrations API)
 
 [Section titled “Changed: distURL is now an array (Integrations API)”](#changed-disturl-is-now-an-array-integrations-api)
@@ -647,7 +645,7 @@ if (route.distURL) {
 }
 ```
 
-See the [API reference for `IntegrationRouteData`](/en/reference/integrations-reference/#integrationroutedata).
+See the [API reference for `distURL`](/en/reference/integrations-reference/#routedatadisturl).
 
 ### Changed: Arguments passed to `app.render()` (Adapter API)
 
@@ -670,7 +668,7 @@ Pass an object as the second argument to `app.render()`, which can include `rout
 +const response = await app.render(request, {routeData, locals});
 ```
 
-See the [Adapter API reference for `renderOptions`](/en/reference/adapter-reference/#renderoptions).
+See the [Adapter API reference for `renderOptions`](/en/reference/modules/astro-app/#renderoptions).
 
 ### Changed: Properties on `supportedAstroFeatures` (Adapter API)
 
@@ -809,3 +807,54 @@ Know a good resource for Astro v5.0? [Edit this page](https://github.com/withast
 [Section titled “Known Issues”](#known-issues)
 
 Please check [Astro’s issues on GitHub](https://github.com/withastro/astro/issues/) for any reported issues, or to file an issue yourself.
+
+# Upgrade to Astro v6
+
+> How to upgrade your project to Astro v6.0.
+
+This guide will help you migrate from Astro v5 to Astro v6.
+
+Need to upgrade an older project to v5 first? See our [older migration guide](/en/guides/upgrade-to/v5/).
+
+Need to see the v5 docs? Visit this [older version of the docs site (unmaintained v5.18.0 snapshot)](https://v5.docs.astro.build/).
+
+## Upgrade Astro
+
+[Section titled “Upgrade Astro”](#upgrade-astro)
+
+Update your project’s version of Astro to the latest version using your package manager:
+
+- npm
+
+  ```shell
+  # Upgrade Astro and official integrations together
+  npx @astrojs/upgrade
+  ```
+
+- pnpm
+
+  ```shell
+  # Upgrade Astro and official integrations together
+  pnpm dlx @astrojs/upgrade
+  ```
+
+- Yarn
+
+  ```shell
+  # Upgrade Astro and official integrations together
+  yarn dlx @astrojs/upgrade
+  ```
+
+You can also [upgrade your Astro integrations manually](/en/guides/integrations-guide/#manual-upgrading) if needed, and you may also need to upgrade other dependencies in your project.
+
+Need to continue?
+
+After upgrading Astro, you may not need to make any changes to your project at all!
+
+But, if you notice errors or unexpected behavior, please check below for what has changed that might need updating in your project.
+
+Astro v6.0 includes [potentially breaking changes](#breaking-changes), as well as the removal and deprecation of some features.
+
+If your project doesn’t work as expected after upgrading to v6.0, check this guide for an overview of all breaking changes and instructions on how to update your codebase.
+
+See [the Astro changelog](https://github.com/withastro/astro/blob/main/packages/astro/CHANGELOG.md) for full release notes.

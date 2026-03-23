@@ -4,7 +4,7 @@ A tutorial on creating a native module that persists settings with Expo Modules 
 
 In this tutorial, you build a module that stores the user's preferred app theme: dark, light, or system. On Android, use [`SharedPreferences`](https://developer.android.com/reference/android/content/SharedPreferences), and on iOS, use [`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults). You can implement web support with [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage), but this tutorial does not cover that.
 
-[Watch: How to create a native module with the Expo Modules API](https://www.youtube.com/watch?v=CdaQSlyGik8)
+[Watch: How to create a native module with the Expo Modules API](https://www.youtube.com/watch?v=CdaQSlyGik8) — Build a native module that persists user settings using SharedPreferences on Android and UserDefaults on iOS.
 
 ## Initialize a new module
 

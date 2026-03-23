@@ -154,5 +154,5 @@ However, your deployment will fail if the `conclusion` updates to one of the fol
 
 title: "Working with Checks"
 description: "Vercel automatically keeps an eye on various aspects of your web application using the Checks API. Learn how to use Checks in your Vercel workflow here."
-last\_updated: "2026-03-08T05:03:11.946Z"
+last\_updated: "2026-03-23T09:40:06.395Z"
 source: "https://vercel.com/docs/checks"

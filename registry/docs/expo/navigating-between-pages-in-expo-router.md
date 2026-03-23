@@ -56,7 +56,7 @@ export default function Page() {
 }
 ```
 
-By default, Links can only wrap `Text` components. You can use `Pressable` or other components that support `onPress` and `onClick` props inside a link with the `asChild` prop:
+By default, the `Link` component renders its children inside a `<Text>` element. This means non-text children (such as `View`) may have unexpected layout behavior. To have full control over the layout, use the `asChild` prop with a `Pressable` or another component that accepts `onPress`/`onClick` props:
 
 ```tsx
 import { Pressable, Text } from 'react-native';
@@ -73,7 +73,7 @@ export default function Page() {
 }
 ```
 
-[Link API reference](/versions/latest/sdk/router#link) — Learn the options available when using Links for navigation.
+[Link API reference](/versions/latest/sdk/router/link#link) — Learn the options available when using Links for navigation.
 
 [Link preview](/router/reference/link-preview) — Learn how to add a preview to your link on iOS when using Expo Router.
 

@@ -6,11 +6,11 @@ Interrupts allow you to pause graph execution at specific points and wait for ex
 
 Interrupts work by calling the `interrupt()` function at any point in your graph nodes. The function accepts any JSON-serializable value which is surfaced to the caller. When you're ready to continue, you resume execution by re-invoking the graph using `Command`, which then becomes the return value of the `interrupt()` call from inside the node.
 
-Unlike static breakpoints (which pause before or after specific nodes), interrupts are **dynamic**—they can be placed anywhere in your code and can be conditional based on your application logic.
+Unlike static breakpoints (which pause before or after specific nodes), interrupts are **dynamic**: they can be placed anywhere in your code and can be conditional based on your application logic.
 
 - **Checkpointing keeps your place:** the checkpointer writes the exact graph state so you can resume later, even when in an error state.
 - **`thread_id` is your pointer:** set `config={"configurable": {"thread_id": ...}}` to tell the checkpointer which state to load.
-- **Interrupt payloads surface as `__interrupt__`:** the values you pass to `interrupt()` return to the caller in the `__interrupt__` field so you know what the graph is waiting on.
+- **Interrupt payloads surface via `chunk["interrupts"]`:** when streaming with `version="v2"`, the values you pass to `interrupt()` appear in the `interrupts` field of `values` stream parts so you know what the graph is waiting on.
 
 The `thread_id` you choose is effectively your persistent cursor. Reusing it resumes the same checkpoint; using a new value starts a brand-new thread with an empty state.
 
@@ -47,23 +47,42 @@ When you call [`interrupt`](https://reference.langchain.com/python/langgraph/typ
 
 After an interrupt pauses execution, you resume the graph by invoking it again with a `Command` that contains the resume value. The resume value is passed back to the `interrupt` call, allowing the node to continue execution with the external input.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+\= 1.1)">
+\`\`\`python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langgraph.types import Command
 
+````
 # Initial run - hits the interrupt and pauses
 # thread_id is the persistent pointer (stores a stable ID in production)
 config = {"configurable": {"thread_id": "thread-1"}}
+result = graph.invoke({"input": "data"}, config=config, version="v2")
+
+# result is a GraphOutput with .value and .interrupts
+# .interrupts contains the payloads passed to interrupt()
+print(result.interrupts)
+# > (Interrupt(value='Do you approve this action?'),)
+
+# Resume with the human's response
+# The resume payload becomes the return value of interrupt() inside the node
+graph.invoke(Command(resume=True), config=config, version="v2")
+```
+
+
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langgraph.types import Command
+
+config = {"configurable": {"thread_id": "thread-1"}}
 result = graph.invoke({"input": "data"}, config=config)
 
-# Check what was interrupted
 # __interrupt__ contains the payload that was passed to interrupt()
 print(result["__interrupt__"])
 # > [Interrupt(value='Do you approve this action?')]
 
 # Resume with the human's response
-# The resume payload becomes the return value of interrupt() inside the node
 graph.invoke(Command(resume=True), config=config)
 ```
+````
 
 **Key points about resuming:**
 
@@ -72,7 +91,7 @@ graph.invoke(Command(resume=True), config=config)
 - The node restarts from the beginning of the node where the [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) was called when resumed, so any code before the [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) runs again
 - You can pass any JSON-serializable value as the resume value
 
-  `Command(resume=...)` is the **only** `Command` pattern intended as input to `invoke()`/`stream()`. The other `Command` parameters (`update`, `goto`, `graph`) are designed for [returning from node functions](/oss/python/langgraph/graph-api#command). Do not pass `Command(update=...)` as input to continue multi-turn conversations — pass a plain input dict instead.
+  `Command(resume=...)` is the **only** `Command` pattern intended as input to `invoke()`/`stream()`. The other `Command` parameters (`update`, `goto`, `graph`) are designed for [returning from node functions](/oss/python/langgraph/graph-api#command). Do not pass `Command(update=...)` as input to continue multi-turn conversations—pass a plain input dict instead.
 
 ## Common patterns
 
@@ -95,40 +114,38 @@ Use multiple stream modes (`"messages"` and `"updates"`) with `subgraphs=True` (
 - Handle user input and resume execution seamlessly
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-async for metadata, mode, chunk in graph.astream(
+async for chunk in graph.astream(
     initial_input,
     stream_mode=["messages", "updates"],
     subgraphs=True,
-    config=config
+    config=config,
+    version="v2",
 ):
-    if mode == "messages":
+    if chunk["type"] == "messages":
         # Handle streaming message content
-        msg, _ = chunk
+        msg, _ = chunk["data"]
         if isinstance(msg, AIMessageChunk) and msg.content:
-            # Display content in real-time
             display_streaming_content(msg.content)
 
-    elif mode == "updates":
-        # Check for interrupts
-        if "__interrupt__" in chunk:
-            # Stop streaming display
-            interrupt_info = chunk["__interrupt__"][0].value
-
-            # Handle user input
+    elif chunk["type"] == "updates":
+        # Check for interrupts in the updates data
+        if "__interrupt__" in chunk["data"]:
+            interrupt_info = chunk["data"]["__interrupt__"][0].value
             user_response = get_user_input(interrupt_info)
-
-            # Resume graph with updated input
             initial_input = Command(resume=user_response)
             break
-
         else:
-            # Track node transitions
-            current_node = list(chunk.keys())[0]
+            current_node = list(chunk["data"].keys())[0]
 ```
 
-- **`stream_mode=["messages", "updates"]`**: Enables dual streaming of both message chunks and graph state updates
+- **`version="v2"`**: All chunks are `StreamPart` dicts with `type`, `ns`, and `data` keys
+
+- **`chunk["type"]`**: Narrow on the stream mode (`"messages"`, `"updates"`, etc.) for type inference
+
+- **`chunk["ns"]`**: Identifies the source graph (empty tuple for root, populated for subgraphs)
+
 - **`subgraphs=True`**: Required for interrupt detection in nested graphs
-- **`"__interrupt__"` detection**: Signals when human input is needed
+
 - **`Command(resume=...)`**: Resumes graph execution with user-provided data
 
 ### Handling multiple interrupts
@@ -173,7 +190,7 @@ graph = (
 
 config = {"configurable": {"thread_id": "1"}}
 
-# Step 1: invoke — both parallel nodes hit interrupt() and pause
+# Step 1: invoke - both parallel nodes hit interrupt() and pause
 interrupted_result = graph.invoke({"vals": []}, config)
 print(interrupted_result)
 """
@@ -219,7 +236,7 @@ def approval_node(state: State) -> Command[Literal["proceed", "cancel"]]:
         return Command(goto="cancel")
 ```
 
-When you resume the graph, pass `true` to approve or `false` to reject:
+When you resume the graph, pass `True` to approve or `False` to reject:
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 # To approve

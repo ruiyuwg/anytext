@@ -28,21 +28,21 @@ Make sure to **not** include the HTTP protocol (e.g. `https://`) for the `[custo
 vercel alias set [deployment-url] [custom-domain]
 ```
 
-*Using the vercel alias command to assign a custom
+*Using the \`vercel alias\` command to assign a custom
 domain to a deployment.*
 
 ```bash filename="terminal"
 vercel alias rm [custom-domain]
 ```
 
-*Using the vercel alias command to remove a custom
+*Using the \`vercel alias\` command to remove a custom
 domain from a deployment.*
 
 ```bash filename="terminal"
 vercel alias ls
 ```
 
-*Using the vercel alias command to list custom domains
+*Using the \`vercel alias\` command to list custom domains
 that were assigned to deployments.*
 
 ## Unique options
@@ -57,8 +57,8 @@ The `--yes` option can be used to bypass the confirmation prompt when removing a
 vercel alias rm [custom-domain] --yes
 ```
 
-*Using the vercel alias rm command with the
-\--yes option.*
+*Using the \`vercel alias rm\` command with the
+\`--yes\` option.*
 
 ### Limit
 
@@ -68,12 +68,12 @@ The `--limit` option can be used to specify the maximum number of aliases return
 vercel alias ls --limit 100
 ```
 
-*Using the vercel alias ls command with the
-\--limit option.*
+*Using the \`vercel alias ls\` command with the
+\`--limit\` option.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -90,7 +90,7 @@ For more information on global options and their usage, refer to the [options se
 
 - [How do I resolve alias related errors on Vercel?](/kb/guide/how-to-resolve-alias-errors-on-vercel)
 
-title: "vercel bisect"
-description: "Learn how to perform a binary search on your deployments to help surface issues using the vercel bisect CLI command."
-last\_updated: "2026-03-08T05:03:11.993Z"
-source: "https://vercel.com/docs/cli/bisect"
+title: "vercel api"
+description: "Learn how to make authenticated HTTP requests to the Vercel API using the vercel api CLI command."
+last\_updated: "2026-03-23T09:40:06.537Z"
+source: "https://vercel.com/docs/cli/api"

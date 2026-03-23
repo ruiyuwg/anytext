@@ -8,7 +8,7 @@ The `vercel init` command is used to initialize [Vercel supported framework](/do
 vercel init
 ```
 
-*Using the vercel init command to initialize a Vercel
+*Using the \`vercel init\` command to initialize a Vercel
 supported framework example locally. You will be prompted with a list of
 supported frameworks to choose from.*
 
@@ -18,7 +18,7 @@ supported frameworks to choose from.*
 vercel init [framework-name]
 ```
 
-*Using the vercel init command to initialize a
+*Using the \`vercel init\` command to initialize a
 specific framework example from the Vercel examples
 repository locally.*
 
@@ -26,7 +26,7 @@ repository locally.*
 vercel init [framework-name] [new-local-directory-name]
 ```
 
-*Using the vercel init command to initialize a
+*Using the \`vercel init\` command to initialize a
 specific Vercel framework example locally and rename the directory.*
 
 ## Unique Options
@@ -41,19 +41,19 @@ The `--force` option, shorthand `-f`, is used to forcibly replace an existing lo
 vercel init --force
 ```
 
-*Using the vercel init command with the
-\--force option.*
+*Using the \`vercel init\` command with the
+\`--force\` option.*
 
 ```bash filename="terminal"
 vercel init gatsby my-project-directory --force
 ```
 
-*Using the vercel init command with the
-\--force option.*
+*Using the \`vercel init\` command with the
+\`--force\` option.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -68,5 +68,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel inspect"
 description: "Learn how to retrieve information about your Vercel deployments using the vercel inspect CLI command."
-last\_updated: "2026-03-08T05:03:12.214Z"
+last\_updated: "2026-03-23T09:40:06.813Z"
 source: "https://vercel.com/docs/cli/inspect"

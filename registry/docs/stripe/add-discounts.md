@@ -2,9 +2,9 @@
 
 Reduce the amount charged to a customer by discounting their subtotal with coupons and promotion codes.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/discounts?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/discounts?payment-ui=stripe-hosted.
 
 You can use discounts to reduce the amount charged to a customer. Coupons and promotion codes allow you to:
 
@@ -28,7 +28,7 @@ curl https://api.stripe.com/v1/coupons \
 
 ## Use a coupon
 
-To create a session with an applied discount, pass the [coupon ID](https://docs.stripe.com/api/coupons/object.md#coupon_object-id) in the `coupon` parameter of the [discounts](https://docs.stripe.com/api/checkout/sessions/create.md#create_checkout_session-discounts) array. Checkout currently supports up to one coupon or promotion code.
+To create a session with an applied discount, pass the [coupon ID](https://docs.stripe.com/api/coupons/object.md#coupon_object-id) in the `coupon` parameter of the [discounts](https://docs.stripe.com/api/checkout/sessions/create.md#create_checkout_session-discounts) array. Checkout Sessions currently support up to one coupon or promotion code.
 
 ```curl
 curl https://api.stripe.com/v1/checkout/sessions \
@@ -139,9 +139,9 @@ You can set whether a promotion code is currently redeemable by using the [activ
 
 You can delete promotions in the Dashboard or the API. Deleting a promotion prevents it from being applied to future transactions or customers.
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/discounts?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/discounts?payment-ui=embedded-form.
 
 You can use discounts to reduce the amount charged to a customer. Coupons and promotion codes allow you to:
 
@@ -165,7 +165,7 @@ curl https://api.stripe.com/v1/coupons \
 
 ## Use a coupon
 
-To create a session with an applied discount, pass the [coupon ID](https://docs.stripe.com/api/coupons/object.md#coupon_object-id) in the `coupon` parameter of the [discounts](https://docs.stripe.com/api/checkout/sessions/create.md#create_checkout_session-discounts) array. Checkout currently supports up to one coupon or promotion code.
+To create a session with an applied discount, pass the [coupon ID](https://docs.stripe.com/api/coupons/object.md#coupon_object-id) in the `coupon` parameter of the [discounts](https://docs.stripe.com/api/checkout/sessions/create.md#create_checkout_session-discounts) array. Checkout Sessions currently support up to one coupon or promotion code.
 
 ```curl
 curl https://api.stripe.com/v1/checkout/sessions \

@@ -308,7 +308,7 @@ To deploy your Prepr blog, visit our [deployment guides](/en/guides/deploy/) and
 
 [Section titled “Themes”](#themes)
 
-- [![](/_astro/astro-chef-project.CkjCJgM-_ZI34Cs.webp) The Balanced Chef](https://astro.build/themes/details/the-balanced-chef/)
+- [![](/_astro/astro-chef-project.CkjCJgM-_ZXu1Oi.webp) The Balanced Chef](https://astro.build/themes/details/the-balanced-chef/)
 
 # Sitecore Experience Manager & Astro
 

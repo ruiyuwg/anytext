@@ -2,7 +2,7 @@
 
 Learn how to report the annual payments for your US-based connected accounts.
 
-Stripe [Connect](https://stripe.com/connect) allows platforms to provide a seamless, end-to-end payment service for their connected accounts. This service may come with certain responsibilities, including tax information reporting.
+Stripe [Connect](https://stripe.com/connect) allows platforms to provide a seamless, end-to-end payment service for their connected accounts. This service might come with certain responsibilities, including tax information reporting.
 
 > #### Getting your 1099 Forms
 >

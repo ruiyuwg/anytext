@@ -16,8 +16,8 @@ Refs are a way of getting access to underlying DOM elements in our JSX. While it
 Refs can also be used on Components. They still need to be attached on the other side.
 
 ```
-function MyComp(props) {  return <div ref={props.ref} />}
-function App() {  let myDiv  onMount(() => console.log(myDiv.clientWidth))  return <MyComp ref={myDiv} />}
+function MyComp(props) {  return <div ref={props.ref} />;}
+function App() {  let myDiv;  onMount(() => console.log(myDiv.clientWidth));  return <MyComp ref={myDiv} />;}
 ```
 
 [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/reference/jsx-attributes/ref.mdx\&page=https://docs.solidjs.com/reference/jsx-attributes/ref)

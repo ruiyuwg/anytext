@@ -92,5 +92,5 @@ If a segment is referenced by a flag or segment:
 
 title: "Limits and Pricing for Vercel Flags"
 description: "Learn about limits and pricing for Vercel Flags."
-last\_updated: "2026-03-08T05:03:14.602Z"
+last\_updated: "2026-03-23T09:40:10.191Z"
 source: "https://vercel.com/docs/flags/vercel-flags/limits-and-pricing"

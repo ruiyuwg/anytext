@@ -2,7 +2,7 @@
 
 Context engineering is a main challenge in building effective agents. This is particularly difficult when using tools that return variable-length results (for example, `web_search` and RAG), as long tool results can quickly fill your context window.
 
-`FilesystemMiddleware` from [deep agents](/oss/javascript/deepagents/overview) provides four tools for interacting with both short-term and long-term memory:
+`FilesystemMiddleware` from [Deep Agents](/oss/javascript/deepagents/overview) provides four tools for interacting with both short-term and long-term memory:
 
 - `ls`: List the files in the filesystem
 - `read_file`: Read an entire file or a certain number of lines from a file

@@ -1866,6 +1866,8 @@ Filter by Identifier type
 
 - [FcreateRequestHandler](/api/ssr/createRequestHandler)
 
+- [KIS\_DISCOVERING\_ROUTES](/api/ssr/IS_DISCOVERING_ROUTES)
+
 - [EPrerenderFallback](/api/ssr/PrerenderFallback)
 
 - [FprovideServerRendering](/api/ssr/provideServerRendering)

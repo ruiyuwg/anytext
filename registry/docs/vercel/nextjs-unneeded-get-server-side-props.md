@@ -95,7 +95,7 @@ export default Home;
 
 title: "NEXTJS\_USE\_NATIVE\_FETCH"
 description: "Requires using native "
-last\_updated: "2026-03-08T05:03:12.741Z"
+last\_updated: "2026-03-23T09:40:07.669Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_USE\_NATIVE\_FETCH"
 
 # NEXTJS\_USE\_NATIVE\_FETCH
@@ -144,7 +144,7 @@ Replace the third-party fetch library with the native `fetch` API Next.js provid
 
 title: "NEXTJS\_USE\_NEXT\_FONT"
 description: "Requires using next/font to load local fonts and fonts from supported CDNs."
-last\_updated: "2026-03-08T05:03:12.750Z"
+last\_updated: "2026-03-23T09:40:07.683Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_USE\_NEXT\_FONT"
 
 # NEXTJS\_USE\_NEXT\_FONT
@@ -202,5 +202,5 @@ rule with [`next/font`](https://nextjs.org/docs/api-reference/next/font).
 
 title: "NEXTJS\_USE\_NEXT\_IMAGE"
 description: "Requires that next/image is used for all images."
-last\_updated: "2026-03-08T05:03:12.759Z"
+last\_updated: "2026-03-23T09:40:07.690Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_USE\_NEXT\_IMAGE"

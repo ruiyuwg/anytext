@@ -226,3 +226,7 @@ function useCreatePost(postData: Record<string, unknown>) {
   return {result, error}
 }
 ```
+
+## Reference documentation
+
+For the complete set of mutation options, error types, and client configuration, see the reference documentation for [SanityClient](https://reference.sanity.io/_sanity/client/index/SanityClient/) and [ClientConfig](https://reference.sanity.io/_sanity/client/index/ClientConfig/).

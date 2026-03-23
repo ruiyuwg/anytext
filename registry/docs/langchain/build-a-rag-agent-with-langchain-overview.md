@@ -1,6 +1,6 @@
 ## Overview
 
-One of the most powerful applications enabled by LLMs is sophisticated question-answering (Q\&A) chatbots. These are applications that can answer questions about specific source information. These applications use a technique known as Retrieval Augmented Generation, or [RAG](/oss/python/langchain/retrieval/).
+One of the most powerful applications enabled by LLMs is sophisticated question-answering (Q\&A) chatbots. These are applications that can answer questions about specific source information. These applications use a technique known as Retrieval Augmented Generation, or [RAG](/oss/javascript/langchain/retrieval/).
 
 This tutorial will show how to build a simple Q\&A application over an unstructured text data source. We will demonstrate:
 
@@ -15,9 +15,9 @@ We will cover the following concepts:
 
 - **Retrieval and generation**: the actual RAG process, which takes the user query at run time and retrieves the relevant data from the index, then passes that to the model.
 
-Once we've indexed our data, we will use an [agent](/oss/python/langchain/agents) as our orchestration framework to implement the retrieval and generation steps.
+Once we've indexed our data, we will use an [agent](/oss/javascript/langchain/agents) as our orchestration framework to implement the retrieval and generation steps.
 
-The indexing portion of this tutorial will largely follow the [semantic search tutorial](/oss/python/langchain/knowledge-base).
+The indexing portion of this tutorial will largely follow the [semantic search tutorial](/oss/javascript/langchain/knowledge-base).
 
 If your data is already available for search (i.e., you have a function to execute a search), or you're comfortable with the content from that tutorial, feel free to skip to the section on [retrieval and generation](#2-retrieval-and-generation)
 
@@ -27,80 +27,69 @@ In this guide we'll build an app that answers questions about the website's cont
 
 We can create a simple indexing pipeline and RAG chain to do this in ~40 lines of code. See below for the full code snippet:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import bs4
-from langchain.agents import AgentState, create_agent
-from langchain_community.document_loaders import WebBaseLoader
-from langchain.messages import MessageLikeRepresentation
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import "cheerio";
+import { createAgent, tool } from "langchain";
+import { CheerioWebBaseLoader } from "@langchain/community/document_loaders/web/cheerio";
+import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
+import * as z from "zod";
 
-# Load and chunk contents of the blog
-loader = WebBaseLoader(
-    web_paths=("https://lilianweng.github.io/posts/2023-06-23-agent/",),
-    bs_kwargs=dict(
-        parse_only=bs4.SoupStrainer(
-            class_=("post-content", "post-title", "post-header")
-        )
-    ),
-)
-docs = loader.load()
+// Load and chunk contents of blog
+const pTagSelector = "p";
+const cheerioLoader = new CheerioWebBaseLoader(
+  "https://lilianweng.github.io/posts/2023-06-23-agent/",
+  {
+    selector: pTagSelector
+  }
+);
 
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-all_splits = text_splitter.split_documents(docs)
+const docs = await cheerioLoader.load();
 
-# Index chunks
-_ = vector_store.add_documents(documents=all_splits)
+const splitter = new RecursiveCharacterTextSplitter({
+  chunkSize: 1000,
+  chunkOverlap: 200
+});
+const allSplits = await splitter.splitDocuments(docs);
 
-# Construct a tool for retrieving context
-@tool(response_format="content_and_artifact")
-def retrieve_context(query: str):
-    """Retrieve information to help answer a query."""
-    retrieved_docs = vector_store.similarity_search(query, k=2)
-    serialized = "\n\n".join(
-        (f"Source: {doc.metadata}\nContent: {doc.page_content}")
-        for doc in retrieved_docs
-    )
-    return serialized, retrieved_docs
+// Index chunks
+await vectorStore.addDocuments(allSplits)
 
-tools = [retrieve_context]
-# If desired, specify custom instructions
-prompt = (
-    "You have access to a tool that retrieves context from a blog post. "
-    "Use the tool to help answer user queries."
-)
-agent = create_agent(model, tools, system_prompt=prompt)
+// Construct a tool for retrieving context
+const retrieveSchema = z.object({ query: z.string() });
+
+const retrieve = tool(
+  async ({ query }) => {
+    const retrievedDocs = await vectorStore.similaritySearch(query, 2);
+    const serialized = retrievedDocs
+      .map(
+        (doc) => `Source: ${doc.metadata.source}\nContent: ${doc.pageContent}`
+      )
+      .join("\n");
+    return [serialized, retrievedDocs];
+  },
+  {
+    name: "retrieve",
+    description: "Retrieve information related to a query.",
+    schema: retrieveSchema,
+    responseFormat: "content_and_artifact",
+  }
+);
+
+const agent = createAgent({ model: "gpt-5", tools: [retrieve] });
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-query = "What is task decomposition?"
-for step in agent.stream(
-    {"messages": [{"role": "user", "content": query}]},
-    stream_mode="values",
-):
-    step["messages"][-1].pretty_print()
-```
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+let inputMessage = `What is Task Decomposition?`;
 
-```
-================================ Human Message =================================
+let agentInputs = { messages: [{ role: "user", content: inputMessage }] };
 
-What is task decomposition?
-================================== Ai Message ==================================
-Tool Calls:
-  retrieve_context (call_xTkJr8njRY0geNz43ZvGkX0R)
- Call ID: call_xTkJr8njRY0geNz43ZvGkX0R
-  Args:
-    query: task decomposition
-================================= Tool Message =================================
-Name: retrieve_context
-
-Source: {'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}
-Content: Task decomposition can be done by...
-
-Source: {'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}
-Content: Component One: Planning...
-================================== Ai Message ==================================
-
-Task decomposition refers to...
+for await (const step of await agent.stream(agentInputs, {
+  streamMode: "values",
+})) {
+  const lastMessage = step.messages[step.messages.length - 1];
+  prettyPrint(lastMessage);
+  console.log("-----\n");
+}
 ```
 
 Check out the [LangSmith trace](https://smith.langchain.com/public/a117a1f8-c96c-4c16-a285-00b85646118e/r).

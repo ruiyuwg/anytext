@@ -144,5 +144,5 @@ and without workspace restrictions.
 
 title: "forbidden-dependencies"
 description: "Learn how to set custom rules to disallow one or more files from depending on one or more predefined module"
-last\_updated: "2026-03-08T05:03:12.580Z"
+last\_updated: "2026-03-23T09:40:07.402Z"
 source: "https://vercel.com/docs/conformance/custom-rules/forbidden-dependencies"

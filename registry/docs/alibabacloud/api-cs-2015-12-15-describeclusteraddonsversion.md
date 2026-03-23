@@ -1,0 +1,240 @@
+This API is deprecated. You are advised to use [CS(2015-12-15) - ListClusterAddonInstances](https://api.alibabacloud.com/document/CS/2015-12-15/ListClusterAddonInstances), [CS(2015-12-15) - GetClusterAddonInstance](https://api.alibabacloud.com/document/CS/2015-12-15/GetClusterAddonInstance).
+
+You can call the DescribeClusterAddonsVersion operation to query the details about all components in a cluster by cluster ID.
+
+## Debugging
+
+[You can run this interface directly in OpenAPI Explorer, saving you the trouble of calculating signatures. After running successfully, OpenAPI Explorer can automatically generate SDK code samples.](https://api.alibabacloud.com/api/CS/2015-12-15/DescribeClusterAddonsVersion)
+
+[![](https://img.alicdn.com/tfs/TB16JcyXHr1gK0jSZR0XXbP8XXa-24-26.png)Debug](https://api.alibabacloud.com/api/CS/2015-12-15/DescribeClusterAddonsVersion)
+
+## Authorization information
+
+The following table shows the authorization information corresponding to the API. The authorization information can be used in the `Action` policy element to grant a RAM user or RAM role the permissions to call this API operation. Description:
+
+-   Operation: the value that you can use in the Action element to specify the operation on a resource.
+-   Access level: the access level of each operation. The levels are read, write, and list.
+-   Resource type: the type of the resource on which you can authorize the RAM user or the RAM role to perform the operation. Take note of the following items:
+    -   For mandatory resource types, indicate with a prefix of \* .
+    -   If the permissions cannot be granted at the resource level, `All Resources` is used in the Resource type column of the operation.
+-   Condition Key: the condition key that is defined by the cloud service.
+-   Associated operation: other operations that the RAM user or the RAM role must have permissions to perform to complete the operation. To complete the operation, the RAM user or the RAM role must have the permissions to perform the associated operations.
+
+Operation
+
+Access level
+
+Resource type
+
+Condition key
+
+Associated operation
+
+cs:Queryk8sComponentsUpdateVersion
+
+get
+
+\*Cluster
+
+`acs:cs:{#regionId}:{#accountId}:cluster/{#ClusterId}`
+
+none
+
+none
+
+## Request syntax
+
+```
+GET /clusters/{ClusterId}/components/version HTTP/1.1
+```
+
+## Request parameters
+
+Parameter
+
+Type
+
+Required
+
+Description
+
+Example
+
+ClusterId
+
+string
+
+Yes
+
+The cluster ID.
+
+c82e6987e2961451182edacd74faf\*\*\*\*
+
+## Response parameters
+
+Parameter
+
+Type
+
+Description
+
+Example
+
+object
+
+The response body.
+
+object
+
+The details of the component.
+
+component\_name
+
+string
+
+The component name.
+
+ack-node-problem-detector
+
+version
+
+string
+
+The current version of the component.
+
+**Note** If the value of `version` is not empty, it indicates that the component is installed.
+
+1.2.1
+
+next\_version
+
+string
+
+The version to which the component can be updated.
+
+1.2.1
+
+changed
+
+string
+
+Indicates whether the component is updated. Valid values:
+
+-   `true`: The component is updated.
+-   `false`: The component is not updated.
+
+false
+
+can\_upgrade
+
+boolean
+
+Indicates whether the component is updatable. Valid values:
+
+-   `true`: The component is updatable.
+-   `false`: The component is not updatable.
+
+false
+
+policy
+
+string
+
+The update policy of the component.
+
+-   `overwrite`: The component configurations of the later version overwrite those of the current version.
+
+Default value: `overwrite`.
+
+overwrite
+
+ready\_to\_upgrade
+
+string
+
+Indicates whether the component meets the update conditions. Valid values:
+
+-   `true`: The component meets the update conditions.
+-   `false`: The component does not meet the update conditions.
+
+false
+
+exist
+
+boolean
+
+Indicates whether the component can be installed in the specified ACK cluster. Valid values:
+
+-   `true`: The component can be installed in the cluster.
+-   `false`: The component cannot be installed in the cluster.
+
+true
+
+required
+
+boolean
+
+Indicates whether the component is required in the cluster. Valid values:
+
+-   `true`: The component is required in the cluster.
+-   `false`: The component is not required in the cluster.
+
+false
+
+message
+
+string
+
+Additional information about whether the component is updatable.
+
+Addons that detect node failures and report to event center.
+
+value
+
+string
+
+The custom parameters. When you install a component, you can customize parameters for the component.
+
+npd:\\n # Custom monitor definitions to add to Node Problem Detector \*\*\*\*
+
+## Examples
+
+Sample success responses
+
+`JSON`format
+
+```
+{
+  "key": {
+    "component_name": "ack-node-problem-detector",
+    "version": "1.2.1",
+    "next_version": "1.2.1",
+    "changed": false,
+    "can_upgrade": false,
+    "policy": "overwrite",
+    "ready_to_upgrade": false,
+    "exist": true,
+    "required": false,
+    "message": "Addons that detect node failures and report to event center.\n",
+    "value": "npd:\\n  # Custom monitor definitions to add to Node Problem Detector ****"
+  }
+}
+```
+
+## Error codes
+
+For a list of error codes, visit the [Service error codes]( https://api.alibabacloud.com/document/CS/2015-12-15/errorCode).
+
+## Change history
+
+Change time
+
+Summary of changes
+
+Operation
+
+2024-01-12
+
+The API operation is deprecated
+
+[View Change Details](https://api.alibabacloud.com/document/CS/2015-12-15/DescribeClusterAddonsVersion?updateTime=2024-01-12#workbench-doc-change-demo)

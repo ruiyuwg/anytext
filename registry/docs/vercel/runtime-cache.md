@@ -672,5 +672,5 @@ Usage of runtime cache is charged. Learn more about [pricing](/docs/pricing/regi
 
 title: "Vercel CDN overview"
 description: "Vercel"
-last\_updated: "2026-03-08T05:03:11.837Z"
+last\_updated: "2026-03-23T09:40:06.303Z"
 source: "https://vercel.com/docs/cdn"

@@ -43,7 +43,7 @@
 - ### (Optional) Monitor usage and spend
   View your usage, spend, and request activity in the [**AI Gateway**](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai-gateway\&title=Go+to+AI+Gateway) section in the Vercel dashboard sidebar. See the [observability documentation](/docs/ai-gateway/capabilities/observability) for more details.
 
-title: "OpenCode"
-description: "Use OpenCode with the AI Gateway."
-last\_updated: "2026-03-08T05:03:09.771Z"
-source: "https://vercel.com/docs/agent-resources/coding-agents/opencode"
+title: "OpenAI Codex"
+description: "Use OpenAI Codex CLI with the AI Gateway."
+last\_updated: "2026-03-23T09:40:03.163Z"
+source: "https://vercel.com/docs/agent-resources/coding-agents/openai-codex"

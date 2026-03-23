@@ -621,6 +621,12 @@ Additional resources \[#additional-resources]
 
 For questions or support with your integration, reach out through the [Prisma Community Discord](https://pris.ly/discord) or [Vercel Support](https://vercel.com/help).
 
-# FAQ (/docs/v6/optimize/faq)
+# ORM (/docs/v6/orm)
 
-To learn more about frequently asked questions around Prisma Optimize and query recommendations, [visit this page](/v6/postgres/faq#query-optimization).
+[Prisma ORM](https://github.com/prisma/prisma) is a Node.js and TypeScript ORM with an intuitive data model, automated migrations, type-safety, and auto-completion.
+
+Getting started \[#getting-started]
+
+- [Getting Started](/v6/orm/getting-started) - Set up Prisma ORM in your project
+- [Prisma Client](/v6/orm/prisma-client/setup-and-configuration/introduction) - Type-safe database client
+- [Prisma Schema](/v6/orm/prisma-schema/overview) - Define your data model

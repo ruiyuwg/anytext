@@ -114,5 +114,5 @@ See the [AI SDK Getting Started](https://sdk.vercel.ai/docs/getting-started) gui
 
 title: "Alerts"
 description: "Get notified when something"
-last\_updated: "2026-03-08T05:03:10.867Z"
+last\_updated: "2026-03-23T09:40:05.000Z"
 source: "https://vercel.com/docs/alerts"

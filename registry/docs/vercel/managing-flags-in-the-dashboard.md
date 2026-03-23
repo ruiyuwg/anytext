@@ -19,9 +19,9 @@ To create a flag in the dashboard:
 
 1. From the **Flags** tab, click the **Create Flag** button
 2. Enter a **Slug** for your flag (e.g., `show-new-feature`)
-3. Select the **Type** (Boolean, String, or Number)
+3. Select the **Type** (Boolean, String, Number, or JSON)
 
-For String and Number flags, you can define the variants your flag returns. Each variant has a **value** used in code and an optional **label** shown in the dashboard.
+For String, Number, and JSON flags, you can define the variants your flag returns. Each variant has a **value** used in code and an optional **label** shown in the dashboard. JSON flags use a code editor for entering structured values like objects and arrays.
 
 During creation, you can configure which variant each environment receives. Boolean flags default to `true` in Development and `false` in Preview and Production, so your feature is visible while you develop but hidden after merging. You can refine these rules at any time after creating the flag.
 
@@ -80,5 +80,5 @@ For more information on archiving flags, see [Archive](/docs/flags/vercel-flags/
 
 title: "SDK Keys"
 description: "Manage SDK Keys that connect your application to Vercel Flags."
-last\_updated: "2026-03-08T05:03:14.588Z"
+last\_updated: "2026-03-23T09:40:10.178Z"
 source: "https://vercel.com/docs/flags/vercel-flags/dashboard/sdk-keys"

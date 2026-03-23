@@ -53,7 +53,7 @@ When importing a directive `d` from another module and using it only as `use:d`,
 
    ```
    import solidPlugin from "vite-plugin-solid";
-   export default {  plugins: [    solidPlugin({      typescript: { onlyRemoveTypeImports: true }    })  ],};
+   export default {  plugins: [    solidPlugin({      typescript: { onlyRemoveTypeImports: true },    }),  ],};
    ```
 
    Note: This requires consistent use of `export type` and `import type` in your codebase to avoid issues.

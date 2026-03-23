@@ -63,8 +63,8 @@ For simplicity, let's assume a package size of 1,000 and a charge of  per packag
 
 Usage is shown as "Storage Image Transformations" on your invoice.
 
-per 1,000 origin images. You are only charged for usage exceeding your subscription
-plan's quota.
+per 1,000 origin images. You are only charged for usage exceeding your
+subscription plan's quota.
 
 The count resets at the start of each billing cycle.
 

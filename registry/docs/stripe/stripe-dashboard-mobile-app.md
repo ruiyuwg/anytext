@@ -20,6 +20,8 @@ Then, enable [two-factor authentication](https://support.stripe.com/questions/up
 
 The app is available in 14 languages, and automatically defaults to the device language set in your system preferences. If you manage a [Connect](https://docs.stripe.com/connect.md) business, the app is also available to connected accounts that have full access to the Stripe Dashboard.
 
+|  |
+|  |
 | [Monitor your business](https://docs.stripe.com/dashboard/mobile.md#monitor-business-metrics)                | - Dashboard charts
 
 - Payment and customer list, and detail screens
@@ -27,7 +29,6 @@ The app is available in 14 languages, and automatically defaults to the device l
 - Search across your entire business
 - iOS lock screen widgets
 - Android home screen widgets |
-  | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
   | [Accept online or in-person payments](https://docs.stripe.com/dashboard/mobile.md#accept-payments-on-mobile) | - Tap to pay
 - Payment links (iOS only)
 - Invoices (basic creation only)

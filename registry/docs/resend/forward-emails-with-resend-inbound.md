@@ -161,12 +161,12 @@ Once you verify the webhook, it returns the webhook payload as a JSON object. Yo
 4. Forward the email (remember to update the `from` and `to` addresses below)
 
 
-  You must call the [received emails
-  API](/api-reference/emails/retrieve-received-email) to retrieve the email
-  content and the [attachments
-  API](/api-reference/emails/list-received-email-attachments) to retrieve the
-  attachments. This design choice supports large payloads in serverless
-  environments that have limited request body sizes.
+  Webhooks do not include the email body, headers, or attachments, only their
+  metadata. You must call the [Received emails
+  API](/api-reference/emails/retrieve-received-email) or the [Attachments
+  API](/api-reference/emails/list-received-email-attachments) to retrieve them.
+  This design choice supports large attachments in serverless environments that
+  have limited request body sizes.
 
 
 ```ts app/api/inbound-webhook/route.ts {29, 34, 42, 67} theme={"theme":{"light":"github-light","dark":"vesper"}}

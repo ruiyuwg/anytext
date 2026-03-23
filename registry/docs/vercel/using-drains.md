@@ -163,5 +163,5 @@ For more information on Drains and how to use them, check out the following reso
 
 title: "Managing Edge Configs with the Dashboard"
 description: "Learn how to create, view and update your Edge Configs and the data inside them in your Vercel Dashboard at the Hobby team, team, and project levels."
-last\_updated: "2026-03-08T05:03:13.695Z"
+last\_updated: "2026-03-23T09:40:09.084Z"
 source: "https://vercel.com/docs/edge-config/edge-config-dashboard"

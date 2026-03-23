@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -135,7 +133,7 @@ Save conversations worth tracking. Build a collection of important workflows, in
 
 - Check the [CLI reference](https://docs.docker.com/ai/docker-agent/reference/cli/#eval) for all `docker agent eval` options
 - Learn [best practices](https://docs.docker.com/ai/docker-agent/best-practices/) for building effective agents
-- Review [example configurations](https://github.com/docker/cagent/tree/main/examples) for different agent types
+- Review [example configurations](https://github.com/docker/docker-agent/tree/main/examples) for different agent types
 
 [Edit this page](https://github.com/docker/docs/edit/main/content/manuals/ai/docker-agent/evals.md)
 

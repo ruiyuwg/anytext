@@ -57,7 +57,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
 title: "NO\_FETCH\_FROM\_MIDDLEWARE"
 description: "Requires that any fetch call that is depended on transitively by Next.js middleware be reviewed and approved before use."
-last\_updated: "2026-03-08T05:03:12.794Z"
+last\_updated: "2026-03-23T09:40:07.725Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_FETCH\_FROM\_MIDDLEWARE"
 
 # NO\_FETCH\_FROM\_MIDDLEWARE
@@ -110,7 +110,7 @@ making a request that would add latency to middleware.
 
 title: "NO\_INLINE\_SVG"
 description: "Prevent the use of "
-last\_updated: "2026-03-08T05:03:12.797Z"
+last\_updated: "2026-03-23T09:40:07.728Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_INLINE\_SVG"
 
 # NO\_INLINE\_SVG
@@ -148,5 +148,5 @@ export default function Page() {
 
 title: "NO\_INSTANCEOF\_ERROR"
 description: "Disallows using "
-last\_updated: "2026-03-08T05:03:12.806Z"
+last\_updated: "2026-03-23T09:40:07.734Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_INSTANCEOF\_ERROR"

@@ -157,7 +157,7 @@ Instead, use Name.com's **account transfer** feature to move the domain directly
 
 title: "Viewing & Searching Domains"
 description: "Learn how to view and search all registered domains that are assigned to Vercel Projects through the Vercel dashboard."
-last\_updated: "2026-03-08T05:03:13.582Z"
+last\_updated: "2026-03-23T09:40:08.886Z"
 source: "https://vercel.com/docs/domains/working-with-domains/view-and-search-domains"
 
 # Viewing & Searching Domains
@@ -182,5 +182,5 @@ It is not possible to search a multi-level wildcard subdomain. It is only possib
 
 title: "Working with nameservers"
 description: "Learn about nameservers and the benefits Vercel nameservers provide."
-last\_updated: "2026-03-08T05:03:13.594Z"
+last\_updated: "2026-03-23T09:40:08.908Z"
 source: "https://vercel.com/docs/domains/working-with-nameservers"

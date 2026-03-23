@@ -64,5 +64,5 @@ Your production deployments could be in one of three states:
 
 title: "Rolling back a production deployment"
 description: "Recover from a bad production deployment by rolling back, investigating the root cause, and redeploying a fix."
-last\_updated: "2026-03-08T05:03:13.373Z"
+last\_updated: "2026-03-23T09:40:08.482Z"
 source: "https://vercel.com/docs/deployments/rollback-production-deployment"

@@ -36,7 +36,7 @@ Ensure you have the following tools/items ready.
 
 5. The script to run a support query
 
-   - You can download the script from [here](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/scripts/run_support_query_pg.sh)
+   - Download the [PostgreSQL support query script](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/scripts/run_support_query_pg.sh)
 
 ## Running the query script
 
@@ -56,108 +56,68 @@ which will output the count of daily traces by workspace ID and organization ID.
 
 ## Export usage data
 
-Exporting usage data requires running Helm chart version 0.11.4 or later.
+All export methods produce the same data: LangSmith trace counts, LangSmith Deployments node usage, and Fleet run counts across all workspaces and organizations.
 
-### Get customer information
+The UI and API exports require both of the following:
 
-You need to retrieve your customer information from the LangSmith API before running the export scripts. This information is required as input for the export scripts.
+- The `organization:manage` permission.
+- The caller's email must be listed in `USAGE_EXPORT_ADMIN_EMAILS`, or `ORG_ADMINS_INSTALLATION_USAGE_EXPORT_ENABLED` must be set to `true`.
+
+```env theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+USAGE_EXPORT_ADMIN_EMAILS='["admin@example.com", "admin2@example.com"]'
+ORG_ADMINS_INSTALLATION_USAGE_EXPORT_ENABLED=true
+```
+
+### Export from the UI (recommended)
+
+1. Navigate to **Settings** > **Usage and billing** > **Usage export**.
+2. Click **Export usage data**.
+3. A ZIP file containing all usage data will download.
+
+### Export via API
+
+If you prefer to export usage data programmatically, you can call the export API endpoint directly.
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-curl https://<langsmith_url>/api/v1/info
-# if configured with a subdomain / path prefix:
-curl http://<langsmith_url/prefix/api/v1/info
+curl -OJ \
+  -H "X-API-Key: <your_api_key>" \
+  https://<langsmith_url>/api/v1/orgs/current/usage/backfill-export
 ```
 
-This will return a JSON response containing your customer information:
+### Export via SQL scripts
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-{
-  "version": "0.11.4",
-  "license_expiration_time": "2026-08-18T19:14:34Z",
-  "customer_info": {
-    "customer_id": "<id>",
-    "customer_name": "<name>"
-  }
-}
-```
+You can also run SQL scripts directly against your PostgreSQL database to export usage data. This requires database access credentials — no application-level permissions apply.
 
-Extract the `customer_id` and `customer_name` from this response to use as input for the export scripts.
-
-### Process the API response with jq
-
-You can use [jq](https://jqlang.org/download) to parse the JSON response and set bash variables for use in your scripts:
-
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-# Get the API response and extract customer information
-export LANGSMITH_URL="<your_langsmith_url>"
-response=$(curl -s $LANGSMITH_URL/api/v1/info)
-
-# Extract customer_id and customer_name using jq
-export CUSTOMER_ID=$(echo "$response" | jq -r '.customer_info.customer_id')
-export CUSTOMER_NAME=$(echo "$response" | jq -r '.customer_info.customer_name')
-
-# Verify the variables are set
-echo "Customer ID: $CUSTOMER_ID"
-echo "Customer Name: $CUSTOMER_NAME"
-```
-
-You can then use these environment variables in your export scripts or other commands.
-
-If you don't have `jq`, run these commands to set the environment variables based on the curl output:
-
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-curl -s $LANGSMITH_URL/api/v1/info
-export CUSTOMER_ID="<id>"
-export CUSTOMER_NAME="<name>"
-```
-
-### Initial export
-
-These scripts export usage data to a CSV for reporting to LangChain. They additionally track the export by assigning a backfill ID and timestamp.
-
-To export LangSmith trace usage:
-
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-# Get customer information from the API
-export LANGSMITH_URL="<your_langsmith_url>"
-export response=$(curl -s $LANGSMITH_URL/api/v1/info)
-export CUSTOMER_ID=$(echo "$response" | jq -r '.customer_info.customer_id') && echo "Customer ID: $CUSTOMER_ID"
-export CUSTOMER_NAME=$(echo "$response" | jq -r '.customer_info.customer_name') && echo "Customer name: $CUSTOMER_NAME"
-
-# Run the export script with customer information as variables
-sh run_support_query_pg.sh <postgres_url> \
-  --input support_queries/postgres/pg_usage_traces_backfill_export.sql \
-  --output ls_export.csv \
-  -v customer_id=$CUSTOMER_ID \
-  -v customer_name=$CUSTOMER_NAME
-```
-
-To export LangSmith usage:
+To export trace usage (requires Helm chart version 0.11.4 or later):
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 sh run_support_query_pg.sh <postgres_url> \
-  --input support_queries/postgres/pg_usage_nodes_backfill_export.sql \
-  --output lgp_export.csv \
-  -v customer_id=$CUSTOMER_ID \
-  -v customer_name=$CUSTOMER_NAME
+  --input support_queries/postgres/pg_usage_traces_full_export.sql \
+  --output ls_export.csv
 ```
 
-### Status update
-
-These scripts update the status of usage events in your installation to reflect that the events have been successfully processed by LangChain.
-
-The scripts require passing in the corresponding `backfill_id`, which will be confirmed by your LangChain rep.
-
-To update LangSmith trace usage:
+To export node usage (requires Helm chart version 0.11.4 or later):
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-sh run_support_query_pg.sh <postgres_url> --input support_queries/postgres/pg_usage_traces_backfill_update.sql --output export.csv -v backfill_id=<backfill_id>
+sh run_support_query_pg.sh <postgres_url> \
+  --input support_queries/postgres/pg_usage_nodes_full_export.sql \
+  --output lgp_export.csv
 ```
 
-To update LangSmith usage:
+To export Fleet run counts (requires Helm chart version 0.13.25 or later):
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-sh run_support_query_pg.sh <postgres_url> --input support_queries/postgres/pg_usage_nodes_backfill_update.sql --output export.csv -v backfill_id=<backfill_id>
+sh run_support_query_pg.sh <postgres_url> \
+  --input support_queries/postgres/pg_usage_agent_builder_full_export.sql \
+  --output ab_export.csv
+```
+
+To export usage snapshots (daily entity counts such as workspaces, projects, datasets, prompts, and active users):
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+sh run_support_query_pg.sh <postgres_url> \
+  --input support_queries/postgres/pg_usage_snapshots_full_export.sql \
+  --output usage_snapshots_export.csv
 ```
 
 ***

@@ -80,5 +80,5 @@ Now that you have created a cron job, you can learn more about how to manage and
 
 title: "Usage & Pricing for Cron Jobs"
 description: "Learn about cron jobs usage and pricing details."
-last\_updated: "2026-03-08T05:03:13.029Z"
+last\_updated: "2026-03-23T09:40:08.044Z"
 source: "https://vercel.com/docs/cron-jobs/usage-and-pricing"

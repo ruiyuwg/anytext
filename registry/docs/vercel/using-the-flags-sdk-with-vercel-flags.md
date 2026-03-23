@@ -113,5 +113,5 @@ See the [Flags SDK SvelteKit guide](https://flags-sdk.dev/docs/getting-started/s
 
 title: "Using OpenFeature with Vercel Flags"
 description: "Use the vendor-neutral OpenFeature API with Vercel Flags as your provider."
-last\_updated: "2026-03-08T05:03:14.659Z"
+last\_updated: "2026-03-23T09:40:10.263Z"
 source: "https://vercel.com/docs/flags/vercel-flags/sdks/openfeature"

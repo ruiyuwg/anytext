@@ -160,5 +160,5 @@ export async function GET(request: Request) {
 
 title: "SDKs"
 description: "Learn how to integrate Vercel Flags into your application using the Flags SDK, OpenFeature, or the core library."
-last\_updated: "2026-03-08T05:03:14.694Z"
+last\_updated: "2026-03-23T09:40:10.270Z"
 source: "https://vercel.com/docs/flags/vercel-flags/sdks"

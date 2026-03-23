@@ -51,5 +51,5 @@ Once you add a provider, the **AI** section in the sidebar will display a list o
 
 title: "Vercel Deep Infra Integration"
 description: "Learn how to add the Deep Infra native integration with Vercel."
-last\_updated: "2026-03-08T05:03:09.944Z"
+last\_updated: "2026-03-23T09:40:03.461Z"
 source: "https://vercel.com/docs/agent-resources/integrations-for-models/deepinfra"

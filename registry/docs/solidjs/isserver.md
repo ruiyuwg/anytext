@@ -5,8 +5,8 @@ Rendering
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/is-server.mdx)
 
 ```
-import { isServer } from "solid-js/web"
-const isServer: boolean
+import { isServer } from "solid-js/web";
+const isServer: boolean;
 ```
 
 This indicates that the code is being run as the server or browser bundle. As the underlying runtimes export this as a constant boolean it allows bundlers to eliminate the code and their used imports from the respective bundles.

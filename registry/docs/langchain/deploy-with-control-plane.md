@@ -2,6 +2,8 @@
 
 Source: https://docs.langchain.com/langsmith/deploy-with-control-plane
 
+Build Docker images and deploy applications to hybrid or self-hosted LangSmith instances using the control plane UI.
+
 This guide shows you how to deploy your applications to [hybrid](/langsmith/hybrid) or [self-hosted](/langsmith/self-hosted) instances with a [control plane](/langsmith/control-plane). With a control plane, you build Docker images locally, push them to a registry that your Kubernetes cluster has access to, and deploy them with the [LangSmith UI](https://smith.langchain.com).
 
 **This guide is for deploying applications, not setting up infrastructure.**
@@ -40,7 +42,7 @@ Before deploying, test your application locally. You can use the [LangGraph CLI]
 langgraph dev
 ```
 
-For a full guide local testing, refer to the [Local server quickstart](/langsmith/local-server).
+For a full guide local testing, refer to the [Local server quickstart](/langsmith/local-dev-testing).
 
 ## Step 2. Build Docker image
 

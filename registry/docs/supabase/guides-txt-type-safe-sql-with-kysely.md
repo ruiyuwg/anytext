@@ -285,6 +285,7 @@ Limits applied Edge Functions in Supabase's hosted platform.
   - Enterprise: Unlimited
 - Maximum log message length: 10,000 characters
 - Log event threshold: 100 events per 10 seconds
+- Recursive/Nested Function Calling: ~5000 requests per minute [more details](/docs/guides/functions/recursive-functions)
 
 ### Secrets
 

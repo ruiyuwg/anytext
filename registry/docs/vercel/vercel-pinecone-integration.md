@@ -75,5 +75,5 @@ You can deploy a template to Vercel that includes a pre-trained model and a samp
 
 title: "Vercel Replicate Integration"
 description: "Learn how to add Replicate connectable account integration with Vercel."
-last\_updated: "2026-03-08T05:03:09.924Z"
+last\_updated: "2026-03-23T09:40:03.502Z"
 source: "https://vercel.com/docs/agent-resources/integrations-for-models/replicate"

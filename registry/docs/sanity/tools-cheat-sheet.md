@@ -14,7 +14,7 @@ export default defineConfig({
   name: 'default',
   title: 'example',
   projectId: '<project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   studio: {
     components: {
       toolMenu: (props) => {
@@ -53,7 +53,7 @@ export default defineConfig({
   name: 'default',
   title: 'example',
   projectId: '<project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   //... other config
   tools: (prev, context) => {
     return prev.sort((a, b) => {
@@ -99,7 +99,7 @@ export default defineConfig({
   name: 'default',
   title: 'example',
   projectId: '<project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
 
   // This studio includes structure, vision, and any plan-specific tools
   plugins: [structureTool(), visionTool()],
@@ -126,7 +126,7 @@ export default defineConfig({
   name: 'default',
   title: 'example',
   projectId: '<project-id>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
 
   plugins: [structureTool(), visionTool()],
   tools: (prev, context)=>{

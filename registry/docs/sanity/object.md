@@ -231,6 +231,10 @@ Fieldsets takes the same collapsible options as described for objects above, as 
 }
 ```
 
+> \[!TIP]
+> Tip
+> For more advanced form layouts, you can build [custom form components](https://www.sanity.io/docs/studio/form-components).
+
 ## Render members
 
 Enables developers to inject decoration members (custom UI components) into document forms without persisting data.

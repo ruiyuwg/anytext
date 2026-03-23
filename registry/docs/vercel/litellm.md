@@ -67,5 +67,5 @@ with LiteLLM to access various AI models and providers.
 
 title: "LlamaIndex"
 description: "Learn how to integrate Vercel AI Gateway with LlamaIndex to access multiple AI models through a unified interface"
-last\_updated: "2026-03-08T05:03:10.410Z"
+last\_updated: "2026-03-23T09:40:04.316Z"
 source: "https://vercel.com/docs/ai-gateway/ecosystem/framework-integrations/llamaindex"

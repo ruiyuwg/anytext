@@ -10,7 +10,7 @@ Although it is normally not necessary, you can customise the output file names w
 
 [Section titled “Recipe”](#recipe)
 
-This recipe configures `vite.build.rollupOptions` to output built assets with the following structure and naming pattern:
+This recipe configures `vite.environments.client.build.rollupOptions` to output built assets with the following structure and naming pattern:
 
 - JavaScript entry files (e.g. scripts directly associated with your pages or layouts): `dist/js/[name]-[hash].js`
 - JavaScript code-split chunks (e.g. dynamically imported components or shared modules): `dist/js/chunks/[name]-[hash].js`
@@ -18,7 +18,7 @@ This recipe configures `vite.build.rollupOptions` to output built assets with th
 
 1. Add Vite Rollup Output Options.
 
-   Modify your `astro.config.mjs` to include the following `vite.build.rollupOptions.output` configuration. This is where you can define the custom naming patterns for your assets using Rollup’s [`entryFileNames`](https://rollupjs.org/configuration-options/#output-entryfilenames), [`chunkFileNames`](https://rollupjs.org/configuration-options/#output-chunkfilenames), and [`assetFileNames`](https://rollupjs.org/configuration-options/#output-assetfilenames):
+   Modify your `astro.config.mjs` to include the following `vite.environments.client.build.rollupOptions.output` configuration. This is where you can define the custom naming patterns for your assets using Rollup’s [`entryFileNames`](https://rollupjs.org/configuration-options/#output-entryfilenames), [`chunkFileNames`](https://rollupjs.org/configuration-options/#output-chunkfilenames), and [`assetFileNames`](https://rollupjs.org/configuration-options/#output-assetfilenames):
 
    astro.config.mjs
 
@@ -29,13 +29,17 @@ This recipe configures `vite.build.rollupOptions` to output built assets with th
    export default defineConfig({
      // ...
      vite: {
-       build: {
-         rollupOptions: {
-           output: {
-             // path names relative to `outDir`
-             entryFileNames: 'js/[name]-[hash].js',
-             chunkFileNames: 'js/chunks/[name]-[hash].js',
-             assetFileNames: 'static/[name]-[hash][extname]',
+       environments: {
+         client: {
+           build: {
+             rollupOptions: {
+               output: {
+                 // path names relative to `outDir`
+                 entryFileNames: 'js/[name]-[hash].js',
+                 chunkFileNames: 'js/chunks/[name]-[hash].js',
+                 assetFileNames: 'static/[name]-[hash][extname]',
+               },
+             },
            },
          },
        },

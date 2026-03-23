@@ -238,129 +238,24 @@ To learn more about configuring studio workspaces, visit[ this article](https://
 
 [App SDK](https://www.sanity.io/docs/app-sdk)
 
-# Setting up your studio
+# Integrate Sanity with your Next.js app
 
-## Create a new Studio with Sanity CLI
+#### The basics
 
-![Video](https://stream.mux.com/wIMs3CS7T4pP7hRArpQZsBZ01Be02vCjbK)
+[Start here](https://www.sanity.io/docs/nextjs/introduction)
 
-Run the command in your Terminal to initialize your project on your local computer.
+[Next.js Quick start](https://www.sanity.io/docs/next-js-quickstart)
 
-See the documentation if you are [having issues with the CLI](https://www.sanity.io/docs/help/cli-errors).
+[Work-ready Next.js](https://www.sanity.io/learn/track/work-ready-next-js)
 
-**Terminal**
+[Visual Editing with Next.js App Router](https://www.sanity.io/docs/visual-editing/visual-editing-with-next-js-app-router)
 
-```sh
-npm create sanity@latest -- --dataset production --template clean --typescript --output-path studio-hello-world
-cd studio-hello-world
-```
+#### Configuration
 
-## Run Sanity Studio locally
+[Configure the next-sanity client](https://www.sanity.io/docs/nextjs/configure-sanity-client-nextjs)
 
-Inside the directory of the Studio, start the development server by running the following command.
+[Embedding Sanity Studio in Next.js](https://www.sanity.io/docs/nextjs/embedding-sanity-studio-in-nextjs)
 
-**Terminal**
+#### Query content
 
-```sh
-# in studio-hello-world 
-npm run dev
-```
-
-## Log in to the Studio
-
-**Open** the Studio running locally in your browser from <http://localhost:3333>.
-
-You should now see a screen prompting you to log in to the Studio. Use the same service (Google, GitHub, or email) that you used when you logged in to the CLI.
-
-# Defining a schema
-
-## Create a new document type
-
-![Video](https://stream.mux.com/IfVfAwxfwOKN2khdGCQ3cs5IuF1rYte1)
-
-Create a new file in your Studio’s `schemaTypes` folder called `postType.ts` with the code below which contains a set of fields for a new `post` document type.
-
-**/studio-hello-world/schemaTypes/postType.ts**
-
-```
-import {defineField, defineType} from 'sanity'
-
-export const postType = defineType({
-  name: 'post',
-  title: 'Post',
-  type: 'document',
-  fields: [
-    defineField({
-      name: 'title',
-      type: 'string',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {source: 'title'},
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'image',
-      type: 'image',
-    }),
-    defineField({
-      name: 'body',
-      type: 'array',
-      of: [{type: 'block'}],
-    }),
-  ],
-})
-```
-
-## Register the `post` schema type to the Studio schema
-
-Now you can import this document type into the `schemaTypes` array in the `index.ts` file in the same folder.
-
-**/studio-hello-world/schemaTypes/index.ts**
-
-```
-import {postType} from './postType'
-
-export const schemaTypes = [postType]
-```
-
-## Publish your first document
-
-When you save these two files, your Studio should automatically reload and show your first document type. Click the `+` symbol at the top left to create and publish a new `post` document.
-
-# Querying content with GROQ
-
-## Write your first GROQ query
-
-![Video](https://stream.mux.com/Mc12Sdeu00ugrGuQyz00Du1G4AQZmT36UV)
-
-Open **Vision** in your Studio's top nav bar and paste this query into the **Query** code block field.
-
-**Vision**
-
-```groq
-*[_type == "post"]{
-  _id,
-  title,
-  slug,
-  publishedAt
-}
-```
-
-- `*` represents all documents in a dataset as an array
-- `[_type == "post"]` represents a **filter** to only return matching documents
-- `{ _id, title, slug, publishedAt }` represents a **projection** which defines the attributes from those documents that you wish to include in the response.
-
-## Run the query
-
-Click **Fetch** to see the JSON output in **Results**. You should see the document you previously published in the results.
-
-Queries run in Vision use your authenticated session, so you will see private documents – which have a `.` in the `_id` key, like `drafts.`. You will not see when queried from your front end in the next step.
+[Querying content in Next.js](https://www.sanity.io/docs/nextjs/query-content-nextjs)

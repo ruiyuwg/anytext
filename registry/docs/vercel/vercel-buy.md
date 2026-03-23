@@ -11,7 +11,7 @@ The `vercel buy` command allows you to purchase Vercel products for your team di
 vercel buy [subcommand]
 ```
 
-*Running vercel buy without a subcommand displays
+*Running \`vercel buy\` without a subcommand displays
 the help menu.*
 
 ## Subcommands
@@ -26,7 +26,7 @@ The `amount` argument is specified in whole US dollars. The maximum amount per p
 vercel buy credits [credit-type] [amount]
 ```
 
-*Using the vercel buy credits command to purchase
+*Using the \`vercel buy credits\` command to purchase
 credits for the current team.*
 
 | Argument      | Required | Description                                           |
@@ -62,7 +62,7 @@ Purchase a Vercel addon for your team. Your team must be on the Flex plan to pur
 vercel buy addon [addon-name] [quantity]
 ```
 
-*Using the vercel buy addon command to purchase an
+*Using the \`vercel buy addon\` command to purchase an
 addon for the current team.*
 
 | Argument     | Required | Description                           |
@@ -86,7 +86,7 @@ Purchase a Vercel Pro subscription for your team.
 vercel buy pro
 ```
 
-*Using the vercel buy pro command to upgrade the
+*Using the \`vercel buy pro\` command to upgrade the
 current team to Vercel Pro.*
 
 ### `v0`
@@ -97,7 +97,7 @@ Purchase a v0 subscription for your team.
 vercel buy v0
 ```
 
-*Using the vercel buy v0 command to purchase a v0
+*Using the \`vercel buy v0\` command to purchase a v0
 subscription for the current team.*
 
 > **💡 Note:** v0 subscription purchase is not yet available via the CLI.
@@ -110,7 +110,7 @@ Purchase a domain name. This delegates to the [`vercel domains buy`](/docs/cli/d
 vercel buy domain [domain]
 ```
 
-*Using the vercel buy domain command to purchase a
+*Using the \`vercel buy domain\` command to purchase a
 domain.*
 
 | Argument | Required | Description                 |
@@ -123,7 +123,7 @@ domain.*
 vercel buy domain example.com
 ```
 
-*Purchase the domain example.com.*
+*Purchase the domain \`example.com\`.*
 
 ## Unique options
 
@@ -137,8 +137,8 @@ The `--yes` option skips the confirmation prompt. This is required when running 
 vercel buy credits v0 100 --yes
 ```
 
-*Using the vercel buy credits command with the
-\--yes option to skip confirmation.*
+*Using the \`vercel buy credits\` command with the
+\`--yes\` option to skip confirmation.*
 
 ### JSON output
 
@@ -148,12 +148,12 @@ The `--json` flag returns the purchase result as JSON instead of plain text.
 vercel buy credits gateway 250 --json
 ```
 
-*Using the vercel buy credits command with the
-\--json option for structured output.*
+*Using the \`vercel buy credits\` command with the
+\`--json\` option for structured output.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -168,5 +168,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel cache"
 description: "Learn how to manage cache for your project using the vercel cache CLI command."
-last\_updated: "2026-03-08T05:03:12.030Z"
+last\_updated: "2026-03-23T09:40:06.592Z"
 source: "https://vercel.com/docs/cli/cache"

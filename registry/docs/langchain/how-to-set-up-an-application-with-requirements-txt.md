@@ -23,7 +23,7 @@ my-app/
 └── langgraph.json # configuration file for LangGraph
 ```
 
-LangSmith Deployment supports deploying a [LangGraph](/oss/python/langgraph/overview) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](/langsmith/deployments), scaling, and [observability](/langsmith/observability). For more details, refer to [Use any framework with LangSmith Deployment](/langsmith/application-structure#use-any-framework-with-langsmith-deployment).
+LangSmith Deployment supports deploying a [LangGraph](/oss/python/langgraph/overview) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](/langsmith/deployment), scaling, and [observability](/langsmith/observability). For more details, refer to [Use any framework with LangSmith Deployment](/langsmith/application-structure#use-any-framework-with-langsmith-deployment).
 
 You can also set up with:
 
@@ -48,7 +48,7 @@ orjson>=3.9.7
 httpx>=0.25.0
 tenacity>=8.0.0
 uvicorn>=0.26.0
-sse-starlette>=2.1.0,<2.2.0
+sse-starlette>=2.1.0,<3.4.0
 uvloop>=0.18.0
 httptools>=0.5.0
 jsonschema-rs>=0.20.0

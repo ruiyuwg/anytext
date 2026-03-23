@@ -7,9 +7,9 @@ Advanced
 Server functions can be used to protect sensitive resources like user data.
 
 ```
-"use server"
-async function getPrivatePosts() {  const user = await getUser()  if(!user) {    return null  // or throw an error  }
-  return db.getPosts({ userId: user.id, private: true })}
+"use server";
+async function getPrivatePosts() {  const user = await getUser();  if (!user) {    return null; // or throw an error  }
+  return db.getPosts({ userId: user.id, private: true });}
 ```
 
 The `getUser` function can be [implemented using sessions](/solid-start/advanced/session).
@@ -21,8 +21,8 @@ The `getUser` function can be [implemented using sessions](/solid-start/advanced
 Routes can be protected by checking the user or session object during data fetching. This example uses [Solid Router](/solid-router).
 
 ```
-const getPrivatePosts = query(async function() {  "use server"  const user = await getUser()  if(!user) {    throw redirect("/login");  }
-  return db.getPosts({ userId: user.id, private: true })})
+const getPrivatePosts = query(async function () {  "use server";  const user = await getUser();  if (!user) {    throw redirect("/login");  }
+  return db.getPosts({ userId: user.id, private: true });});
 export default function Page() {  const posts = createAsync(() => getPrivatePosts(), { deferStream: true });}
 ```
 

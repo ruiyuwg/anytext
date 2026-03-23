@@ -10,8 +10,7 @@ To define a single route, a route definition object can be passed to the [`<Rout
 
 ```
 import { lazy } from "solid-js";import { render } from "solid-js/web";import { Router } from "@solidjs/router";
-const routes = {    path: "/",    component: lazy(() => import("/routes/index.js")),}
-
+const routes = {  path: "/",  component: lazy(() => import("/routes/index.js")),};
 render(() => <Router>{routes}</Router>, document.getElementById("app"));
 ```
 
@@ -21,8 +20,7 @@ To define multiple routes, an array of route definition objects can be passed to
 
 ```
 import { lazy } from "solid-js";import { render } from "solid-js/web";import { Router } from "@solidjs/router";
-const routes = [    {        path: "/",        component: lazy(() => import("/routes/index.js")),    },    {        path: "/hello-world",        component: () => <h1>Hello, World!</h1>    },    {        path: "/about",        component: lazy(() => import("/routes/about.js")),    }]
-
+const routes = [  {    path: "/",    component: lazy(() => import("/routes/index.js")),  },  {    path: "/hello-world",    component: () => <h1>Hello, World!</h1>,  },  {    path: "/about",    component: lazy(() => import("/routes/about.js")),  },];
 render(() => <Router>{routes}</Router>, document.getElementById("app"));
 ```
 
@@ -34,8 +32,7 @@ When using configuration-based routing, it is best practice to use the [`lazy`](
 
 ```
 import { lazy } from "solid-js";import { render } from "solid-js/web";import { Router } from "@solidjs/router";
-const routes = [    {        path: "/",        component: lazy(() => import("/routes/index.js")),    },    {        path: "/hello-world",        component: () => <h1>Hello, World!</h1>    },    {        path: "/about",        component: lazy(() => import("/routes/about.js")),    }]
-
+const routes = [  {    path: "/",    component: lazy(() => import("/routes/index.js")),  },  {    path: "/hello-world",    component: () => <h1>Hello, World!</h1>,  },  {    path: "/about",    component: lazy(() => import("/routes/about.js")),  },];
 render(() => <Router>{routes}</Router>, document.getElementById("app"));
 ```
 

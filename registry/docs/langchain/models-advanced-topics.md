@@ -4,7 +4,7 @@
 
 Model profiles require `langchain>=1.1`.
 
-LangChain chat models can expose a dictionary of supported features and capabilities through a `.profile` attribute:
+LangChain chat models can expose a dictionary of supported features and capabilities through a `profile` attribute:
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 model.profile
@@ -17,7 +17,7 @@ model.profile
 # }
 ```
 
-Refer to the full set of fields in the [API reference](https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.BaseChatModel.profile).
+Refer to the full set of fields in the [API reference](https://reference.langchain.com/python/langchain-core/language_models/model_profile/ModelProfile).
 
 Much of the model profile data is powered by the [models.dev](https://github.com/sst/models.dev) project, an open source initiative that provides model capability data. These data are augmented with additional fields for purposes of use with LangChain. These augmentations are kept aligned with the upstream project as it evolves.
 
@@ -26,6 +26,7 @@ Model profile data allow applications to work around model capabilities dynamica
 1. [Summarization middleware](/oss/python/langchain/middleware/built-in#summarization) can trigger summarization based on a model's context window size.
 2. [Structured output](/oss/python/langchain/structured-output) strategies in `create_agent` can be inferred automatically (e.g., by checking support for native structured output features).
 3. Model inputs can be gated based on supported [modalities](#multimodal) and maximum input tokens.
+4. The [Deep Agents CLI](/oss/python/deepagents/cli) filters the [interactive model switcher](/oss/python/deepagents/cli/providers#which-models-appear-in-the-switcher) to models whose profiles report `tool_calling` support and text I/O, and displays context window sizes and capability flags in the selector detail view.
 
 Model profile data can be changed if it is missing, stale, or incorrect.
 
@@ -457,13 +458,13 @@ from pydantic import BaseModel, Field
 class GetWeather(BaseModel):
     """Get the current weather in a given location"""
 
-        location: str = Field(..., description="The city and state, e.g. San Francisco, CA")
+        location: str = Field(description="The city and state, e.g. San Francisco, CA")
 
 
 class GetPopulation(BaseModel):
     """Get the current population in a given location"""
 
-        location: str = Field(..., description="The city and state, e.g. San Francisco, CA")
+        location: str = Field(description="The city and state, e.g. San Francisco, CA")
 
 
 model = init_chat_model(temperature=0)

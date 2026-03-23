@@ -163,5 +163,5 @@ After deletion, the old key will no longer work, so make sure to redeploy your a
 
 title: "Segments"
 description: "Create reusable user segments for targeting feature flags."
-last\_updated: "2026-03-08T05:03:14.598Z"
+last\_updated: "2026-03-23T09:40:10.187Z"
 source: "https://vercel.com/docs/flags/vercel-flags/dashboard/segments"

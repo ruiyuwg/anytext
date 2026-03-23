@@ -81,7 +81,7 @@ Then, copy your existing Nuxt project files over to your new Astro project in a 
 
 Tip
 
-Visit <https://astro.new> for the full list of official starter templates, and links for opening a new project in IDX, StackBlitz, CodeSandbox, or Gitpod.
+Visit <https://astro.new> for the full list of official starter templates, and links for opening a new project in StackBlitz or CodeSandbox.
 
 ### Install integrations (optional)
 
@@ -197,10 +197,10 @@ Compare the following Nuxt component and a corresponding Astro component:
   {message === "Not Found" ?
         The repository you're looking up doesn't exist :
         <>
-              
-              Astro has {stars} 🧑‍🚀
-              
-          </>
+            
+            Astro has {stars} 🧑‍🚀
+            
+        </>
   }
 
 

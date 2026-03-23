@@ -1,0 +1,261 @@
+-   [Home](https://docs.cloud.google.com/)
+-   [Documentation](https://docs.cloud.google.com/docs)
+-   [Compute](https://docs.cloud.google.com/docs/compute-area)
+-   [Compute Engine](https://docs.cloud.google.com/compute/docs)
+-   [APIs & Reference](https://docs.cloud.google.com/compute/docs/apis)
+
+Send feedback
+
+# Method: regionInstantSnapshots.get Stay organized with collections Save and categorize content based on your preferences.
+
+ 
+
+Returns the specified InstantSnapshot resource in the specified region.
+
+### HTTP request
+
+`GET https://compute.googleapis.com/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{instantSnapshot}`
+
+The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax. To know more about valid error responses that can be thrown by this HTTP request, please refer to the [service error catalog](/compute/docs/reference/rest/v1/errors)
+
+### Path parameters
+
+ 
+
+Parameters
+
+`project`
+
+`string`
+
+Project ID for this request.
+
+`region`
+
+`string`
+
+The name of the region for this request.
+
+`instantSnapshot`
+
+`string`
+
+Name of the InstantSnapshot resource to return.
+
+### Request body
+
+The request body must be empty.
+
+### Response body
+
+Represents a InstantSnapshot resource.
+
+You can use instant snapshots to create disk rollback points quickly..
+
+If successful, the response body contains data with the following structure:
+
+JSON representation
+
+{
+  "kind": string,
+  "id": string,
+  "creationTimestamp": string,
+  "name": string,
+  "description": string,
+  "status": enum,
+  "sourceDisk": string,
+  "sourceDiskId": string,
+  "diskSizeGb": string,
+  "selfLink": string,
+  "selfLinkWithId": string,
+  "labels": {
+    string: string,
+    ...
+  },
+  "labelFingerprint": string,
+  "zone": string,
+  "region": string,
+  "satisfiesPzs": boolean,
+  "architecture": enum,
+  "resourceStatus": {
+    "storageSizeBytes": string
+  },
+  "satisfiesPzi": boolean,
+  "params": {
+    "resourceManagerTags": {
+      string: string,
+      ...
+    }
+  }
+}
+
+ 
+
+Fields
+
+`kind`
+
+`string`
+
+Output only. Type of the resource. Always `compute#instantSnapshot` for InstantSnapshot resources.
+
+`id`
+
+`string ([uint64](https://developers.google.com/discovery/v1/type-format) format)`
+
+Output only. The unique identifier for the resource. This identifier is defined by the server.
+
+`creationTimestamp`
+
+`string`
+
+Output only. Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+
+`name`
+
+`string`
+
+Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with [RFC1035](https://www.ietf.org/rfc/rfc1035.txt). Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+
+`description`
+
+`string`
+
+An optional description of this resource. Provide this property when you create the resource.
+
+`status`
+
+`enum`
+
+Output only. The status of the instantSnapshot. This can be `CREATING`, `DELETING`, `FAILED`, or `READY`.
+
+`sourceDisk`
+
+`string`
+
+URL of the source disk used to create this instant snapshot. Note that the source disk must be in the same zone/region as the instant snapshot to be created. This can be a full or valid partial URL. For example, the following are valid values:
+
+-   `[https://www.googleapis.com/compute/v1/projects/](https://www.googleapis.com/compute/v1/projects/)project/zones/zone/disks/disk`
+-   `[https://www.googleapis.com/compute/v1/projects/](https://www.googleapis.com/compute/v1/projects/)project/regions/region/disks/disk`
+-   `projects/project/zones/zone/disks/disk`
+-   `projects/project/regions/region/disks/disk`
+-   `zones/zone/disks/disk`
+-   `regions/region/disks/disk`
+
+`sourceDiskId`
+
+`string`
+
+Output only. The ID value of the disk used to create this InstantSnapshot. This value may be used to determine whether the InstantSnapshot was taken from the current or a previous instance of a given disk name.
+
+`diskSizeGb`
+
+`string ([int64](https://developers.google.com/discovery/v1/type-format) format)`
+
+Output only. Size of the source disk, specified in GB.
+
+`selfLink`
+
+`string`
+
+Output only. Server-defined URL for the resource.
+
+`selfLinkWithId`
+
+`string`
+
+Output only. Server-defined URL for this resource's resource id.
+
+`labels`
+
+`map (key: string, value: string)`
+
+Labels to apply to this InstantSnapshot. These can be later modified by the `setLabels` method. Label values may be empty.
+
+`labelFingerprint`
+
+`string ([bytes](https://developers.google.com/discovery/v1/type-format) format)`
+
+A fingerprint for the labels being applied to this InstantSnapshot, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error `412 conditionNotMet`.
+
+To see the latest fingerprint, make a `get()` request to retrieve a InstantSnapshot.
+
+A base64-encoded string.
+
+`zone`
+
+`string`
+
+Output only. URL of the zone where the instant snapshot resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
+
+`region`
+
+`string`
+
+Output only. URL of the region where the instant snapshot resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
+
+`satisfiesPzs`
+
+`boolean`
+
+Output only. Reserved for future use.
+
+`architecture`
+
+`enum`
+
+Output only. The architecture of the instant snapshot. Valid values are ARM64 or X86\_64.
+
+`resourceStatus`
+
+`object`
+
+Output only. Status information for the instant snapshot resource.
+
+`resourceStatus.storageSizeBytes`
+
+`string ([int64](https://developers.google.com/discovery/v1/type-format) format)`
+
+Output only. The storage size of this instant snapshot.
+
+`satisfiesPzi`
+
+`boolean`
+
+Output only. Reserved for future use.
+
+`params`
+
+`object`
+
+Input only. Additional params passed with the request, but not persisted as part of resource payload.
+
+`params.resourceManagerTags`
+
+`map (key: string, value: string)`
+
+Input only. Resource manager tags to be bound to the instant snapshot. Tag keys and values have the same definition as [resource manager tags](https://cloud.google.com/resource-manager/docs/tags/tags-overview). Keys and values can be either in numeric format, such as `tagKeys/{tag_key_id}` and `tagValues/{tag_value_id}` or in namespaced format such as `{org_id|projectId}/{tag_key_short_name}` and `{tag_value_short_name}`. The field is ignored (both PUT & PATCH) when empty.
+
+### Authorization scopes
+
+Requires one of the following OAuth scopes:
+
+-   `https://www.googleapis.com/auth/compute.readonly`
+-   `https://www.googleapis.com/auth/compute`
+-   `https://www.googleapis.com/auth/cloud-platform`
+
+For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp).
+
+### IAM Permissions
+
+In addition to any permissions specified on the fields above, authorization requires one or more of the following [IAM](https://cloud.google.com/iam/docs/) permissions:
+
+-   `compute.instantSnapshots.get`
+
+To find predefined roles that contain those permissions, see [Compute Engine IAM Roles](/compute/docs/access/iam).
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-02-24 UTC.

@@ -300,7 +300,7 @@ const handleSubmit = async (event) => {
 
 ## Optional: Recollect a CVC
 
-When creating subsequent payments on a saved card, you may want to re-collect the CVC of the card as an additional fraud measure to verify the user.
+When creating subsequent payments on a saved card, you might want to re-collect the CVC of the card as an additional fraud measure to verify the user.
 
 Start by creating a PaymentIntent on your server with the amount, currency, your [Customer](https://docs.stripe.com/api/payment_intents/create.md#create_payment_intent-customer) ID, and [require\_cvc\_recollection](https://docs.stripe.com/api/payment_intents/create.md#create_payment_intent-payment_method_options-card-require_cvc_recollection). [List](https://docs.stripe.com/api/payment_methods/list.md) the *PaymentMethods* (PaymentMethods represent your customer's payment instruments, used with the Payment Intents or Setup Intents APIs) associated with your *Customer* (Customer objects represent customers of your business. They let you reuse payment methods and give you the ability to track multiple payments) to determine which PaymentMethods to show for CVC re-collection.
 
@@ -330,7 +330,7 @@ if (result.error) {
 }
 ```
 
-A payment may succeed even with a failed CVC check. To prevent this, configure your [Radar rules](https://docs.stripe.com/radar/rules.md#traditional-bank-checks) to block payments when CVC verification fails.
+A payment might succeed even with a failed CVC check. To prevent this, configure your [Radar rules](https://docs.stripe.com/radar/rules.md#traditional-bank-checks) to block payments when CVC verification fails.
 
 ## Handle post-payment events \[Server-side]
 

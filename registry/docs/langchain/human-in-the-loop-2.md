@@ -1,317 +1,447 @@
-# Human-in-the-loop
+# Human-in-the-Loop
 
-Source: https://docs.langchain.com/oss/javascript/langchain/human-in-the-loop
+Source: https://docs.langchain.com/oss/javascript/langchain/frontend/human-in-the-loop
 
-The Human-in-the-Loop (HITL) [middleware](/oss/javascript/langchain/middleware/built-in#human-in-the-loop) lets you add human oversight to agent tool calls.
-When a model proposes an action that might require review — for example, writing to a file or executing SQL — the middleware can pause execution and wait for a decision.
+Add approval workflows with interrupt-based human review
 
-It does this by checking each tool call against a configurable policy. If intervention is needed, the middleware issues an [interrupt](https://reference.langchain.com/javascript/langchain-langgraph/index/interrupt) that halts execution. The graph state is saved using LangGraph's [persistence layer](/oss/javascript/langgraph/persistence), so execution can pause safely and resume later.
+Not every agent action should run unsupervised. When an agent is about to send
+an email, delete a record, execute a financial transaction, or perform any
+irreversible operation, you need a human to review and approve the action first.
+The Human-in-the-Loop (HITL) pattern lets your agent pause execution, present
+the pending action to the user, and resume only after explicit approval.
 
-A human decision then determines what happens next: the action can be approved as-is (`approve`), modified before running (`edit`), or rejected with feedback (`reject`).
+## How interrupts work
 
-## Interrupt decision types
+LangGraph agents support **interrupts**, explicit pause points where the agent
+yields control back to the client. When the agent hits an interrupt:
 
-The [middleware](/oss/javascript/langchain/middleware/built-in#human-in-the-loop) defines three built-in ways a human can respond to an interrupt:
+1. The agent stops executing and emits an interrupt payload
+2. The `useStream` hook surfaces the interrupt via `stream.interrupt`
+3. Your UI renders a review card with approve/reject/edit options
+4. The user makes a decision
+5. Your code calls `stream.submit()` with a resume command
+6. The agent picks up where it left off
 
-| Decision Type | Description                                                               | Example Use Case                                    |
-| ------------- | ------------------------------------------------------------------------- | --------------------------------------------------- |
-| ✅ `approve`   | The action is approved as-is and executed without changes.                | Send an email draft exactly as written              |
-| ✏️ `edit`     | The tool call is executed with modifications.                             | Change the recipient before sending an email        |
-| ❌ `reject`    | The tool call is rejected, with an explanation added to the conversation. | Reject an email draft and explain how to rewrite it |
+## Setting up useStream for HITL
 
-The available decision types for each tool depend on the policy you configure in `interrupt_on`.
-When multiple tool calls are paused at the same time, each action requires a separate decision.
-Decisions must be provided in the same order as the actions appear in the interrupt request.
-
-When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
-
-## Configuring interrupts
-
-To use HITL, add the [middleware](/oss/javascript/langchain/middleware/built-in#human-in-the-loop) to the agent's `middleware` list when creating the agent.
-
-You configure it with a mapping of tool actions to the decision types that are allowed for each action. The middleware will interrupt execution when a tool call matches an action in the mapping.
+Import your agent and pass `typeof myAgent` as a type parameter to `useStream` for type-safe access to state values:
 
 ```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { createAgent, humanInTheLoopMiddleware } from "langchain"; // [!code highlight]
-import { MemorySaver } from "@langchain/langgraph"; // [!code highlight]
+import type { myAgent } from "./agent";
+```
 
-const agent = createAgent({
-    model: "gpt-4.1",
-    tools: [writeFileTool, executeSQLTool, readDataTool],
-    middleware: [
-        humanInTheLoopMiddleware({
-            interruptOn: {
-                write_file: true, // All decisions (approve, edit, reject) allowed
-                execute_sql: {
-                    allowedDecisions: ["approve", "reject"],
-                    // No editing allowed
-                    description: "🚨 SQL execution requires DBA approval",
-                },
-                // Safe operation, no approval needed
-                read_data: false,
-            },
-            // Prefix for interrupt messages - combined with tool name and args to form the full message
-            // e.g., "Tool execution pending approval: execute_sql with query='DELETE FROM...'"
-            // Individual tools can override this by specifying a "description" in their interrupt config
-            descriptionPrefix: "Tool execution pending approval",
-        }),
-    ],
-    // Human-in-the-loop requires checkpointing to handle interrupts.
-    // In production, use a persistent checkpointer like AsyncPostgresSaver.
-    checkpointer: new MemorySaver(), // [!code highlight]
+```tsx React theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { useStream } from "@langchain/react";
+
+const AGENT_URL = "http://localhost:2024";
+
+export function Chat() {
+  const stream = useStream({
+    apiUrl: AGENT_URL,
+    assistantId: "human_in_the_loop",
+  });
+
+  const interrupt = stream.interrupt;
+
+  return (
+    
+      {stream.messages.map((msg) => (
+        
+      ))}
+      {interrupt && (
+        <ApprovalCard
+          interrupt={interrupt}
+          onRespond={(response) =>
+            stream.submit(null, { command: { resume: response } })
+          }
+        />
+      )}
+    
+  );
+}
+```
+
+```vue Vue theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+
+import { useStream } from "@langchain/vue";
+
+const AGENT_URL = "http://localhost:2024";
+
+const stream = useStream({
+  apiUrl: AGENT_URL,
+  assistantId: "human_in_the_loop",
 });
+
+function handleRespond(response: HITLResponse) {
+  stream.submit(null, { command: { resume: response } });
+}
+
+
+
+  
+    <Message
+      v-for="msg in stream.messages.value"
+      :key="msg.id"
+      :message="msg"
+    />
+    <ApprovalCard
+      v-if="stream.interrupt.value"
+      :interrupt="stream.interrupt.value"
+      @respond="handleRespond"
+    />
+  
+
 ```
 
-You must configure a checkpointer to persist the graph state across interrupts.
-In production, use a persistent checkpointer like [`AsyncPostgresSaver`](https://reference.langchain.com/javascript/classes/_langchain_langgraph-checkpoint-postgres.AsyncPostgresSaver.html). For testing or prototyping, use [`InMemorySaver`](https://reference.langchain.com/javascript/classes/_langchain_langgraph-checkpoint.MemorySaver.html).
+```svelte Svelte theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 
-When invoking the agent, pass a `config` that includes the **thread ID** to associate execution with a conversation thread.
-See the [LangGraph interrupts documentation](/oss/javascript/langgraph/interrupts) for details.
+  import { useStream } from "@langchain/svelte";
+
+  const AGENT_URL = "http://localhost:2024";
+
+  const { messages, interrupt, submit } = useStream({
+    apiUrl: AGENT_URL,
+    assistantId: "human_in_the_loop",
+  });
+
+  function handleRespond(response: HITLResponse) {
+    submit(null, { command: { resume: response } });
+  }
+
+
+
+
+    
+  {/each}
+
+
+    
+  {/if}
 
 ```
-Mapping of tool names to approval configs
+
+```ts Angular theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { Component } from "@angular/core";
+import { useStream } from "@langchain/angular";
+import type { HITLResponse } from "langchain";
+
+const AGENT_URL = "http://localhost:2024";
+
+@Component({
+  selector: "app-chat",
+  template: `
+    @for (msg of stream.messages(); track msg.id) {
+      
+    }
+    @if (stream.interrupt()) {
+      <app-approval-card
+        [interrupt]="stream.interrupt()"
+        (respond)="handleRespond($event)"
+      />
+    }
+  `,
+})
+export class ChatComponent {
+  stream = useStream({
+    apiUrl: AGENT_URL,
+    assistantId: "human_in_the_loop",
+  });
+
+  handleRespond(response: HITLResponse) {
+    this.stream.submit(null, { command: { resume: response } });
+  }
+}
 ```
 
-**Tool approval config options:**
+## The interrupt payload
 
-```
-Whether approval is allowed
+When the agent pauses, `stream.interrupt` contains a `HITLRequest` with the
+following structure:
 
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+interface HITLRequest {
+  actionRequests: ActionRequest[];
+  reviewConfigs: ReviewConfig[];
+}
 
+interface ActionRequest {
+  action: string;
+  args: Record<string, unknown>;
+  description?: string;
+}
 
-Whether editing is allowed
-
-
-
-Whether responding/rejection is allowed
-```
-
-## Responding to interrupts
-
-When you invoke the agent, it runs until it either completes or an interrupt is raised. An interrupt is triggered when a tool call matches the policy you configured in `interrupt_on`. In that case, the invocation result will include an `__interrupt__` field with the actions that require review. You can then present those actions to a reviewer and resume execution once decisions are provided.
-
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { HumanMessage } from "@langchain/core/messages";
-import { Command } from "@langchain/langgraph";
-
-// You must provide a thread ID to associate the execution with a conversation thread,
-// so the conversation can be paused and resumed (as is needed for human review).
-const config = { configurable: { thread_id: "some_id" } }; // [!code highlight]
-
-// Run the graph until the interrupt is hit.
-const result = await agent.invoke(
-    {
-        messages: [new HumanMessage("Delete old records from the database")],
-    },
-    config // [!code highlight]
-);
-
-
-// The interrupt contains the full HITL request with action_requests and review_configs
-console.log(result.__interrupt__);
-// > [
-// >    Interrupt(
-// >       value: {
-// >          action_requests: [
-// >             {
-// >                name: 'execute_sql',
-// >                arguments: { query: 'DELETE FROM records WHERE created_at < NOW() - INTERVAL \'30 days\';' },
-// >                description: 'Tool execution pending approval\n\nTool: execute_sql\nArgs: {...}'
-// >             }
-// >          ],
-// >          review_configs: [
-// >             {
-// >                action_name: 'execute_sql',
-// >                allowed_decisions: ['approve', 'reject']
-// >             }
-// >          ]
-// >       }
-// >    )
-// > ]
-
-// Resume with approval decision
-await agent.invoke(
-    new Command({ // [!code highlight]
-        resume: { decisions: [{ type: "approve" }] }, // or "reject" [!code highlight]
-    }), // [!code highlight]
-    config // Same thread ID to resume the paused conversation
-);
+interface ReviewConfig {
+  allowedDecisions: ("approve" | "reject" | "edit")[];
+}
 ```
 
-### Decision types
+| Property                           | Description                                                      |
+| ---------------------------------- | ---------------------------------------------------------------- |
+| `actionRequests`                   | Array of pending actions the agent wants to perform              |
+| `actionRequests[].action`          | The action name (e.g. `"send_email"`, `"delete_record"`)         |
+| `actionRequests[].args`            | Structured arguments for the action                              |
+| `actionRequests[].description`     | Optional human-readable description of what the action does      |
+| `reviewConfigs`                    | Per-action configuration controlling which decisions are allowed |
+| `reviewConfigs[].allowedDecisions` | Which buttons to show: `"approve"`, `"reject"`, `"edit"`         |
 
-````
-Use `approve` to approve the tool call as-is and execute it without changes.
+## Decision types
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-await agent.invoke(
-    new Command({
-        // Decisions are provided as a list, one per action under review.
-        // The order of decisions must match the order of actions
-        // listed in the `__interrupt__` request.
-        resume: {
-            decisions: [
-                {
-                    type: "approve",
-                }
-            ]
-        }
-    }),
-    config  // Same thread ID to resume the paused conversation
-);
+The HITL pattern supports three decision types:
+
+### Approve
+
+The user confirms the action should proceed as-is:
+
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+const response: HITLResponse = {
+  decision: "approve",
+};
+
+stream.submit(null, { command: { resume: response } });
 ```
 
+### Reject
 
+The user denies the action with an optional reason:
 
-Use `edit` to modify the tool call before execution.
-Provide the edited action with the new tool name and arguments.
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+const response: HITLResponse = {
+  decision: "reject",
+  reason: "The email tone is too aggressive. Please revise.",
+};
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-await agent.invoke(
-    new Command({
-        // Decisions are provided as a list, one per action under review.
-        // The order of decisions must match the order of actions
-        // listed in the `__interrupt__` request.
-        resume: {
-            decisions: [
-                {
-                    type: "edit",
-                    // Edited action with tool name and args
-                    editedAction: {
-                        // Tool name to call.
-                        // Will usually be the same as the original action.
-                        name: "new_tool_name",
-                        // Arguments to pass to the tool.
-                        args: { key1: "new_value", key2: "original_value" },
-                    }
-                }
-            ]
-        }
-    }),
-    config  // Same thread ID to resume the paused conversation
-);
+stream.submit(null, { command: { resume: response } });
 ```
 
+When an action is rejected, the agent receives the rejection reason and can
+decide how to proceed. It may rephrase, ask clarifying questions, or abandon
+the action entirely.
 
-  When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
+### Edit
 
+The user modifies the action's arguments before approving:
 
+```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+const response: HITLResponse = {
+  decision: "edit",
+  args: {
+    ...originalArgs,
+    subject: "Updated subject line",
+    body: "Revised email body with softer language.",
+  },
+};
 
-
-Use `reject` to reject the tool call and provide feedback instead of execution.
-
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-await agent.invoke(
-    new Command({
-        // Decisions are provided as a list, one per action under review.
-        // The order of decisions must match the order of actions
-        // listed in the `__interrupt__` request.
-        resume: {
-            decisions: [
-                {
-                    type: "reject",
-                    // An explanation about why the action was rejected
-                    message: "No, this is wrong because ..., instead do this ...",
-                }
-            ]
-        }
-    }),
-    config  // Same thread ID to resume the paused conversation
-);
+stream.submit(null, { command: { resume: response } });
 ```
 
-The `message` is added to the conversation as feedback to help the agent understand why the action was rejected and what it should do instead.
+## Building the ApprovalCard
 
-***
+Here is a full approval card component that handles all three decision types:
 
-### Multiple decisions
+```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+function ApprovalCard({
+  interrupt,
+  onRespond,
+}: {
+  interrupt: { value: HITLRequest };
+  onRespond: (response: HITLResponse) => void;
+}) {
+  const request = interrupt.value;
+  const [editedArgs, setEditedArgs] = useState(
+    request.actionRequests[0]?.args ?? {}
+  );
+  const [rejectReason, setRejectReason] = useState("");
+  const [mode, setMode] = useState<"review" | "edit" | "reject">("review");
 
-When multiple actions are under review, provide a decision for each action in the same order as they appear in the interrupt:
+  const action = request.actionRequests[0];
+  const config = request.reviewConfigs[0];
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-{
-    decisions: [
-        { type: "approve" },
-        {
-            type: "edit",
-            editedAction: {
-                name: "tool_name",
-                args: { param: "new_value" }
+  if (!action || !config) return null;
+
+  return (
+    <div className="rounded-lg border-2 border-amber-300 bg-amber-50 p-4">
+      <h3 className="font-semibold text-amber-800">Action Review Required</h3>
+      <p className="mt-1 text-sm text-amber-700">
+        {action.description ?? `The agent wants to perform: ${action.action}`}
+      </p>
+
+      <div className="mt-3 rounded bg-white p-3 font-mono text-sm">
+        <pre>{JSON.stringify(action.args, null, 2)}</pre>
+      </div>
+
+      {mode === "review" && (
+        <div className="mt-4 flex gap-2">
+          {config.allowedDecisions.includes("approve") && (
+            <button
+              className="rounded bg-green-600 px-4 py-2 text-white"
+              onClick={() => onRespond({ decision: "approve" })}
+            >
+              Approve
+            </button>
+          )}
+          {config.allowedDecisions.includes("reject") && (
+            <button
+              className="rounded bg-red-600 px-4 py-2 text-white"
+              onClick={() => setMode("reject")}
+            >
+              Reject
+            </button>
+          )}
+          {config.allowedDecisions.includes("edit") && (
+            <button
+              className="rounded bg-blue-600 px-4 py-2 text-white"
+              onClick={() => setMode("edit")}
+            >
+              Edit
+            </button>
+          )}
+        </div>
+      )}
+
+      {mode === "reject" && (
+        <div className="mt-4 space-y-2">
+          <textarea
+            className="w-full rounded border p-2"
+            placeholder="Reason for rejection..."
+            value={rejectReason}
+            onChange={(e) => setRejectReason(e.target.value)}
+          />
+          <button
+            className="rounded bg-red-600 px-4 py-2 text-white"
+            onClick={() =>
+              onRespond({ decision: "reject", reason: rejectReason })
             }
-        },
-        {
-            type: "reject",
-            message: "This action is not allowed"
-        }
-    ]
-}
-```
-````
+          >
+            Confirm Rejection
+          </button>
+        </div>
+      )}
 
-## Streaming with human-in-the-loop
-
-You can use `stream()` instead of `invoke()` to get real-time updates while the agent runs and handles interrupts. Use `stream_mode=['updates', 'messages']` to stream both agent progress and LLM tokens.
-
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import { Command } from "@langchain/langgraph";
-
-const config = { configurable: { thread_id: "some_id" } };
-
-// Stream agent progress and LLM tokens until interrupt
-for await (const [mode, chunk] of await agent.stream(
-    { messages: [{ role: "user", content: "Delete old records from the database" }] },
-    { ...config, streamMode: ["updates", "messages"] }  // [!code highlight]
-)) {
-    if (mode === "messages") {
-        // LLM token
-        const [token, metadata] = chunk;
-        if (token.content) {
-            process.stdout.write(token.content);
-        }
-    } else if (mode === "updates") {
-        // Check for interrupt
-        if ("__interrupt__" in chunk) {
-            console.log(`\n\nInterrupt: ${JSON.stringify(chunk.__interrupt__)}`);
-        }
-    }
-}
-
-// Resume with streaming after human decision
-for await (const [mode, chunk] of await agent.stream(
-    new Command({ resume: { decisions: [{ type: "approve" }] } }),
-    { ...config, streamMode: ["updates", "messages"] }
-)) {
-    if (mode === "messages") {
-        const [token, metadata] = chunk;
-        if (token.content) {
-            process.stdout.write(token.content);
-        }
-    }
+      {mode === "edit" && (
+        <div className="mt-4 space-y-2">
+          <textarea
+            className="w-full rounded border p-2 font-mono text-sm"
+            value={JSON.stringify(editedArgs, null, 2)}
+            onChange={(e) => {
+              try {
+                setEditedArgs(JSON.parse(e.target.value));
+              } catch {
+                // allow invalid JSON while editing
+              }
+            }}
+          />
+          <button
+            className="rounded bg-blue-600 px-4 py-2 text-white"
+            onClick={() =>
+              onRespond({ decision: "edit", args: editedArgs })
+            }
+          >
+            Submit Edits
+          </button>
+        </div>
+      )}
+    </div>
+  );
 }
 ```
 
-See the [Streaming](/oss/javascript/langchain/streaming) guide for more details on stream modes.
+## The resume flow
 
-## Execution lifecycle
+After the user makes a decision, the full cycle looks like this:
 
-The middleware defines an `after_model` hook that runs after the model generates a response but before any tool calls are executed:
+1. Call `stream.submit(null, { command: { resume: hitlResponse } })`
+2. The `useStream` hook sends the resume command to the LangGraph backend
+3. The agent receives the `HITLResponse` and continues execution
+4. If approved, the tool runs with the original (or edited) arguments
+5. If rejected, the agent receives the reason and decides its next step
+6. The `interrupt` property resets to `null` as the agent resumes streaming
 
-1. The agent invokes the model to generate a response.
-2. The middleware inspects the response for tool calls.
-3. If any calls require human input, the middleware builds a `HITLRequest` with `action_requests` and `review_configs` and calls [interrupt](https://reference.langchain.com/javascript/langchain-langgraph/index/interrupt).
-4. The agent waits for human decisions.
-5. Based on the `HITLResponse` decisions, the middleware executes approved or edited calls, synthesizes [ToolMessage](https://reference.langchain.com/javascript/langchain-core/messages/ToolMessage)'s for rejected calls, and resumes execution.
+You can chain multiple HITL checkpoints in a single agent run. For example, an
+agent might ask for approval to search, then ask again before sending an email
+with the results. Each interrupt is handled independently.
 
-## Custom HITL logic
+## Common use cases
 
-For more specialized workflows, you can build custom HITL logic directly using the [interrupt](https://reference.langchain.com/javascript/langchain-langgraph/index/interrupt) primitive and [middleware](/oss/javascript/langchain/middleware) abstraction.
+| Use Case                       | Action           | Review Config                   |
+| ------------------------------ | ---------------- | ------------------------------- |
+| Email sending                  | `send_email`     | `["approve", "reject", "edit"]` |
+| Database writes                | `update_record`  | `["approve", "reject"]`         |
+| Financial transactions         | `transfer_funds` | `["approve", "reject"]`         |
+| File deletion                  | `delete_files`   | `["approve", "reject"]`         |
+| API calls to external services | `call_api`       | `["approve", "reject", "edit"]` |
 
-Review the [execution lifecycle](#execution-lifecycle) above to understand how to integrate interrupts into the agent's operation.
+## Handling multiple pending actions
+
+An interrupt can contain multiple `actionRequests` when the agent wants to
+perform several actions at once. Render a card for each and collect all
+decisions before resuming:
+
+```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+function MultiActionReview({
+  interrupt,
+  onRespond,
+}: {
+  interrupt: { value: HITLRequest };
+  onRespond: (responses: HITLResponse[]) => void;
+}) {
+  const [decisions, setDecisions] = useState<Record<number, HITLResponse>>({});
+  const request = interrupt.value;
+
+  const allDecided =
+    Object.keys(decisions).length === request.actionRequests.length;
+
+  return (
+    <div className="space-y-4">
+      {request.actionRequests.map((action, i) => (
+        <SingleActionCard
+          key={i}
+          action={action}
+          config={request.reviewConfigs[i]}
+          onDecide={(response) =>
+            setDecisions((prev) => ({ ...prev, [i]: response }))
+          }
+        />
+      ))}
+      {allDecided && (
+        <button
+          className="rounded bg-green-600 px-4 py-2 text-white"
+          onClick={() =>
+            onRespond(
+              request.actionRequests.map((_, i) => decisions[i])
+            )
+          }
+        >
+          Submit All Decisions
+        </button>
+      )}
+    </div>
+  );
+}
+```
+
+## Best practices
+
+Keep these guidelines in mind when implementing HITL workflows:
+
+- **Show clear context**. Always display *what* the agent wants to do and
+  *why*. Include the action description and the full arguments.
+- **Make approve the easiest path**. If the action looks correct, approving
+  should be a single click. Reserve multi-step flows for reject/edit.
+- **Validate edited args**. When users edit action arguments, validate the
+  JSON structure before sending. Show inline errors for malformed input.
+- **Persist the interrupt state**. If the user refreshes the page, the
+  interrupt should still be visible. `useStream` handles this via the thread's
+  checkpoint.
+- **Log all decisions**. For audit trails, log every approve/reject/edit
+  decision with timestamps and the user who made the decision.
+- **Set timeouts thoughtfully**. Long-running agents should not block
+  indefinitely on human review. Consider showing how long the agent has been
+  waiting.
 
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

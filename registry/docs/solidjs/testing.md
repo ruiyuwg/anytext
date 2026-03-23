@@ -69,8 +69,8 @@ If using TypeScript, add `@testing-library/jest-dom` to `tsconfig.json#compilerO
 When using [SolidStart](/solid-start), create a `vitest.config.ts` file:
 
 ```
-import solid from "vite-plugin-solid"import { defineConfig } from "vitest/config"
-export default defineConfig({  plugins: [solid()],  resolve: {    conditions: ["development", "browser"],  },})
+import solid from "vite-plugin-solid";import { defineConfig } from "vitest/config";
+export default defineConfig({  plugins: [solid()],  resolve: {    conditions: ["development", "browser"],  },});
 ```
 
 ***
@@ -90,13 +90,13 @@ To write tests for your components, create a `[name].test.tsx` file. The purpose
 Counter.test.jsxCounter.jsx
 
 ```
-import { test, expect } from "vitest"import { render } from "@solidjs/testing-library"import userEvent from "@testing-library/user-event"import { Counter } from "./Counter"
-const user = userEvent.setup()
-test("increments value", async () => {  const { getByRole } = render(() => <Counter />)  const counter = getByRole('button')  expect(counter).toHaveTextContent("1")  await user.click(counter)  expect(counter).toHaveTextContent("2")})
+import { test, expect } from "vitest";import { render } from "@solidjs/testing-library";import userEvent from "@testing-library/user-event";import { Counter } from "./Counter";
+const user = userEvent.setup();
+test("increments value", async () => {  const { getByRole } = render(() => <Counter />);  const counter = getByRole("button");  expect(counter).toHaveTextContent("1");  await user.click(counter);  expect(counter).toHaveTextContent("2");});
 ```
 
 ```
-export const Counter = () => {  const [count, setCount] = createSignal(1);  return (    <button onClick={() => setCount(count() + 1)}>      {count()}    </button>  );}
+export const Counter = () => {  const [count, setCount] = createSignal(1);  return <button onClick={() => setCount(count() + 1)}>{count()}</button>;};
 ```
 
 In the `test.jsx` file, [the `render` call from `@solidjs/testing-library`](https://testing-library.com/docs/solid-testing-library/api#render) is used to render the component and supply the props and context. To mimic a user interaction, `@testing-library/user-event` is used. The [`expect` function provided by `vitest`](https://vitest.dev/api/expect.html) is extended with a [`.ToHaveTextContent("content")` matcher from `@testing-library/jest-dom`](https://github.com/testing-library/jest-dom?tab=readme-ov-file#tohavetextcontent) to supply what the expected behavior is for this component.
@@ -138,7 +138,7 @@ If running the command is successful, you will get the following result showing 
 The `render` function from `@solidjs/testing-library` creates the testing environment within the `test.tsx` file. It sets up the container, rendering the component within it, and automatically registers it for clean-up after a successful test. Additionally, it manages wrapping the component in contexts as well as setting up a router.
 
 ```
-const renderResult = render(  () => <MyComponent />, // @solidjs/testing-library requires a function  { // all options are optional    container, // manually set up your own container, will not be handled    baseElement, // parent of container in case it is not supplied    queries, // manually set up custom queries    hydrate, // set to `true` to use hydration    wrapper, // reusable wrapper component to supply context    location, // sets up a router pointed to the location if provided  })const {  asFragment, // function returning the contents of the container  baseElement, // the parent of the container  container, // the container in which the component is rendered  debug, // a function giving some helpful debugging output  unmount, // manually removing the component from the container  ...queries, // functions to select elements from the container} = renderResult
+const renderResult = render(  () => <MyComponent />, // @solidjs/testing-library requires a function  {    // all options are optional    container, // manually set up your own container, will not be handled    baseElement, // parent of container in case it is not supplied    queries, // manually set up custom queries    hydrate, // set to `true` to use hydration    wrapper, // reusable wrapper component to supply context    location, // sets up a router pointed to the location if provided  });const {  asFragment, // function returning the contents of the container  baseElement, // the parent of the container  container, // the container in which the component is rendered  debug, // a function giving some helpful debugging output  unmount, // manually removing the component from the container  ...queries // functions to select elements from the container} = renderResult;
 ```
 
 ##### [Using the right queries](/guides/testing#using-the-right-queries)
@@ -185,13 +185,13 @@ Solid allows components to break through the DOM tree structure using [`<Portal>
 Toast.test.jsxToast.jsx
 
 ```
-import { test, expect } from "vitest"import { render, screen } from "@solidjs/testing-library"import { Toast } from "./Toast"
-test("increments value", async () => {  render(() => <Toast><p>This is a toast</p></Toast>)  const toast = screen.getByRole("log")  expect(toast).toHaveTextContent("This is a toast")})
+import { test, expect } from "vitest";import { render, screen } from "@solidjs/testing-library";import { Toast } from "./Toast";
+test("increments value", async () => {  render(() => (    <Toast>      <p>This is a toast</p>    </Toast>  ));  const toast = screen.getByRole("log");  expect(toast).toHaveTextContent("This is a toast");});
 ```
 
 ```
 import { Portal } from "solid-js/web";
-export const Toast = (props) => {  return (    <Portal>      <div class="toast" role={props.role ?? "log"}>        {props.children}      </div>    </Portal>  );}
+export const Toast = (props) => {  return (    <Portal>      <div class="toast" role={props.role ?? "log"}>        {props.children}      </div>    </Portal>  );};
 ```
 
 #### [Testing in context](/guides/testing#testing-in-context)
@@ -199,15 +199,15 @@ export const Toast = (props) => {  return (    <Portal>      <div class="toast" 
 If a component relies on some context, to wrap it use the `wrapper` option:
 
 ```
-import { test, expect } from "vitest"import { render } from "@solidjs/testing-library"import { DataContext, DataConsumer } from "./Data"
-const wrapper = (props) => <DataContext value="test" {...props} />
-test("receives data from context", () => {  const { getByText } = render(() => <DataConsumer />, { wrapper })  expect(getByText("test")).toBeInTheDocument()});
+import { test, expect } from "vitest";import { render } from "@solidjs/testing-library";import { DataContext, DataConsumer } from "./Data";
+const wrapper = (props) => <DataContext value="test" {...props} />;
+test("receives data from context", () => {  const { getByText } = render(() => <DataConsumer />, { wrapper });  expect(getByText("test")).toBeInTheDocument();});
 ```
 
 Wrappers can be re-used if they are created externally. For wrappers with different values, a higher-order component creating the required wrappers can make the tests more concise:
 
 ```
-const createWrapper = (value) => (props) =>  <DataContext value={value} {...props}/>
+const createWrapper = (value) => (props) => (  <DataContext value={value} {...props} />);
 ```
 
 Using multiple providers
@@ -219,7 +219,7 @@ If using multiple providers, [solid-primitives has `<MultiProvider>`](https://pr
 For convenience, the `render` function supports the `location` option that wraps the rendered component in a router pointing at the given location. Since the `<Router>` component is lazily loaded, the first query after rendering needs to be asynchronous, i.e. `findBy...`:
 
 ```
-const { findByText } = render(  () => <Route path="/article/:id" component={Article} />,  { location: "/article/12345" });expect(await findByText("Article 12345")).toBeInTheDocument()
+const { findByText } = render(  () => <Route path="/article/:id" component={Article} />,  { location: "/article/12345" });expect(await findByText("Article 12345")).toBeInTheDocument();
 ```
 
 #### [Interacting with components](/guides/testing#interacting-with-components)
@@ -244,7 +244,7 @@ describe("pre-login: sign-in", () => {  const { getByRole, getByLabelText } = re
 `vitest` comes with the `expect` function to facilitate assertions that works like:
 
 ```
-expect(subject)[assertion](value)
+expect(subject)[assertion](value);
 ```
 
 The command supports assertions like `toBe` (reference comparison) and `toEqual` (value comparison) out of the box. For testing inside the DOM, the package `@testing-library/jest-dom` augments it with some helpful additional assertions:
@@ -261,7 +261,7 @@ The command supports assertions like `toBe` (reference comparison) and `toEqual`
 [Directives](/reference/jsx-attributes/use) are reusable behaviors for elements. They receive the HTML element they are bound to as their first and an accessor of the directive prop as their second argument. To make testing them more concise, [`@solidjs/testing-library` has a `renderDirective`](https://testing-library.com/docs/solid-testing-library/api#renderdirective) function:
 
 ```
-const renderResult = renderDirective(directive, {  initialValue, // value initially added to the argument signal  targetElement, // opt. node name or element used as target for the directive  ...renderOptions, // see render options})const {  arg, // getter for the directive's argument  setArg, // setter for the directive's argument  ...renderResults, // see render results} = renderResult
+const renderResult = renderDirective(directive, {  initialValue, // value initially added to the argument signal  targetElement, // opt. node name or element used as target for the directive  ...renderOptions, // see render options});const {  arg, // getter for the directive's argument  setArg, // setter for the directive's argument  ...renderResults // see render results} = renderResult;
 ```
 
 In `...renderResults`, the container will contain the `targetElement`, which defaults to a `<div>`. This, along with the ability to modify the `arg` signal, are helpful when testing directives.
@@ -271,13 +271,13 @@ If, for example, you have a directive that handles the [Fullscreen API](https://
 fullscreen.test.tsfullscreen.ts
 
 ```
-import { test, expect, vi } from "vitest"import { renderDirective } from "@solidjs/testing-library"import { createFullScreen } from "./fullscreen"
-test("toggles fullscreen", () => {  const targetElement = document.createElement("div")  const fs = vi.spyOn(targetElement, "fullscreen")  const [setArg, container] = renderDirective(createFullScreen, false)  setArg(true)  expect(fs).toHaveBeenCalled()})
+import { test, expect, vi } from "vitest";import { renderDirective } from "@solidjs/testing-library";import { createFullScreen } from "./fullscreen";
+test("toggles fullscreen", () => {  const targetElement = document.createElement("div");  const fs = vi.spyOn(targetElement, "fullscreen");  const [setArg, container] = renderDirective(createFullScreen, false);  setArg(true);  expect(fs).toHaveBeenCalled();});
 ```
 
 ```
-import { Accessor } from "solid-js"
-export const fullscreen = (ref: HTMLElement, active: Accessor<boolean>) =>  createEffect(() => {    const isActive = document.fullscreenElement === ref    if (active() && !isActive) {      ref.requestFullScreen().catch(() => {})    } else if (!active() && isActive) {      document.exitFullScreen()    }  })
+import { Accessor } from "solid-js";
+export const fullscreen = (ref: HTMLElement, active: Accessor<boolean>) =>  createEffect(() => {    const isActive = document.fullscreenElement === ref;    if (active() && !isActive) {      ref.requestFullScreen().catch(() => {});    } else if (!active() && isActive) {      document.exitFullScreen();    }  });
 ```
 
 ### [Primitive testing](/guides/testing#primitive-testing)
@@ -285,14 +285,14 @@ export const fullscreen = (ref: HTMLElement, active: Accessor<boolean>) =>  crea
 When the reference to an element is not needed, parts of state and logic can be put into reusable hooks or primitives. Since these do not require elements, there is no need for `render` to test them since it would require a component that has no other use. To avoid this, there is a [`renderHook` utility](https://testing-library.com/docs/solid-testing-library/api#renderhook) that simulates a component without actually rendering anything.
 
 ```
-const renderResult = renderHook(hook, {  initialProps, // an array with arguments being supplied to the hook  wrapper, // same as the wrapper optionss for `render`})const {  result, // return value of the hook (mutable, destructuring fixes it)  cleanup, // manually remove the traces of the test from the DOM  owner, // the owner running the hook to use with `runWithOwner()`} = renderResult
+const renderResult = renderHook(hook, {  initialProps, // an array with arguments being supplied to the hook  wrapper, // same as the wrapper optionss for `render`});const {  result, // return value of the hook (mutable, destructuring fixes it)  cleanup, // manually remove the traces of the test from the DOM  owner, // the owner running the hook to use with `runWithOwner()`} = renderResult;
 ```
 
 A primitive that manages the state of a counter could be tested like this:
 
 ```
-import { test, expect } from "vitest"import { renderHook } from "@solidjs/testing-library"import { createCounter } from "./counter"
-test("increments count", () => {  const { result } = renderHook(createCounter)  expect(result.count).toBe(0)  result.increment()  expect(result.count).toBe(1)})
+import { test, expect } from "vitest";import { renderHook } from "@solidjs/testing-library";import { createCounter } from "./counter";
+test("increments count", () => {  const { result } = renderHook(createCounter);  expect(result.count).toBe(0);  result.increment();  expect(result.count).toBe(1);});
 ```
 
 ### [Testing effects](/guides/testing#testing-effects)
@@ -302,7 +302,7 @@ Since effects may happen asynchronously, it can be difficult to test them. [`@so
 An example test using `testEffect` may look like this:
 
 ```
-const [value, setValue] = createSignal(0)return testEffect(done =>  createEffect((run: number = 0) => {    if (run === 0) {      expect(value()).toBe(0)      setValue(1)    } else if (run === 1) {      expect(value()).toBe(1)      done()    }    return run + 1  }))
+const [value, setValue] = createSignal(0);return testEffect((done) =>  createEffect((run: number = 0) => {    if (run === 0) {      expect(value()).toBe(0);      setValue(1);    } else if (run === 1) {      expect(value()).toBe(1);      done();    }    return run + 1;  }));
 ```
 
 ### [Benchmarks](/guides/testing#benchmarks)
@@ -310,8 +310,8 @@ const [value, setValue] = createSignal(0)return testEffect(done =>  createEffect
 While Solid offers performance simplified, it is good to validate if that promise can be kept. Vitest offers an experimental `bench` function to run benchmarks and compare the results inside the same `describe` block; for example if you had a `<List>` flow component similar to `<For>`, you could benchmark it like this:
 
 ```
-describe('list rendering', () => {  const ITEMS = 1000  const renderedFor = new Set()  const listFor = Array.from({ length: ITEMS }, (_, i) => i)  bench('For', () => new Promise((resolve) => {    const ItemFor = (props) => {      onMount(() => {        renderedFor.add(props.number)        if (renderedFor.size === ITEMS) { resolve() }      })      return <span>{props.number}</span>    }    render(() => <For each={listFor}>      {(item) => <ItemFor number={item} />}    </For>)  }))
-  const renderedList = new Set()  const listList = Array.from({ length: ITEMS }, (_, i) => i)  bench('List', () => new Promise((resolve) => {    const ItemList = (props) => {      onMount(() => {        renderedList.add(props.number)        if (renderedList.size === ITEMS) { resolve() }      })      return <span>{props.number}</span>    }    render(() => <List each={listList}>      {(item) => <ItemList number={item} />}    </List>)  }))})
+describe("list rendering", () => {  const ITEMS = 1000;  const renderedFor = new Set();  const listFor = Array.from({ length: ITEMS }, (_, i) => i);  bench(    "For",    () =>      new Promise((resolve) => {        const ItemFor = (props) => {          onMount(() => {            renderedFor.add(props.number);            if (renderedFor.size === ITEMS) {              resolve();            }          });          return <span>{props.number}</span>;        };        render(() => (          <For each={listFor}>{(item) => <ItemFor number={item} />}</For>        ));      })  );
+  const renderedList = new Set();  const listList = Array.from({ length: ITEMS }, (_, i) => i);  bench(    "List",    () =>      new Promise((resolve) => {        const ItemList = (props) => {          onMount(() => {            renderedList.add(props.number);            if (renderedList.size === ITEMS) {              resolve();            }          });          return <span>{props.number}</span>;        };        render(() => (          <List each={listList}>{(item) => <ItemList number={item} />}</List>        ));      })  );});
 ```
 
 Running `[npm|pnpm|yarn] test bench` will then execute the benchmark function:

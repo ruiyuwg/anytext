@@ -165,7 +165,7 @@ You can only simulate a payout to a platform financial account using the Dashboa
 
 As the owner of a *Connect* (Connect is Stripe's solution for multi-party businesses, such as marketplace or software platforms, to route payments between sellers, customers, and other recipients) platform, you can use an eligible financial account balance to top-up your platform account balance instead of using an external bank account. Your financial account must have the [financial\_addresses.aba](https://docs.stripe.com/financial-accounts/connect/account-management/financial-account-features.md#available-features) feature active to be eligible. To top-up a platform account balance, you must set the platform’s financial account as the platform’s default external `BankAccount` using the Stripe Dashboard as described in the [Adding funds to your platform balance](https://docs.stripe.com/connect/top-ups.md) guide.
 
-Unlike true external bank accounts, new `BankAccount` objects with financial account details owned by the merchant with the BankAccount object are automatically verified upon creation so they don’t require verification with microdeposits.
+Unlike true external bank accounts, new `BankAccount` objects with financial account details owned by the business with the BankAccount object are automatically verified upon creation so they don’t require verification with microdeposits.
 
 After you set the financial account as your platform’s default external bank account, use `POST /v1/topups` to create the top-up.
 

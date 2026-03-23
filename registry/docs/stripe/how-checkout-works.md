@@ -8,9 +8,9 @@ Checkout’s built-in features allow you to reduce your development time. It sup
 
 You can also customize Checkout and access additional functionality with [Checkout Sessions](https://docs.stripe.com/api/checkout/sessions.md) and the Stripe Dashboard. For a complete list of features, see its [built-in and customizable features](https://docs.stripe.com/payments/checkout/how-checkout-works.md#features).
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/how-checkout-works?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/how-checkout-works?payment-ui=stripe-hosted.
 
 ## Checkout lifecycle
 
@@ -20,7 +20,7 @@ You can also customize Checkout and access additional functionality with [Checko
 2. The `Checkout Session` provides a URL that redirects customers to a Stripe-hosted payment page.
 3. Customers enter their payment details on the payment page and complete the transaction.
 4. After the transaction, a *webhook* (A webhook is a real-time push notification sent to your application as a JSON payload through HTTPS requests) [fulfills the order](https://docs.stripe.com/checkout/fulfillment.md) using the [checkout.session.completed](https://docs.stripe.com/api/events/types.md#event_types-checkout.session.completed) event.
-   A diagram of a Stripe-hosted page integration's lifecycle (See full diagram at https://docs.stripe.com/payments/checkout/how-checkout-works)
+   A diagram of a hosted page integration's lifecycle (See full diagram at https://docs.stripe.com/payments/checkout/how-checkout-works)
 
 ## Low-code integration
 
@@ -48,7 +48,7 @@ Checkout requires minimal coding and is the best choice for most integrations be
 | [Optional items](https://docs.stripe.com/payments/checkout/optional-items.md)                                | Customizable |
 | [Global payment methods](https://docs.stripe.com/payments/dashboard-payment-methods.md)                      | Customizable |
 | [Subscription upsells](https://docs.stripe.com/payments/checkout/upsells.md)                                 | Customizable |
-| [Custom domains](https://docs.stripe.com/payments/checkout/custom-domains.md) (Stripe-hosted page only)      | Customizable |
+| [Custom domains](https://docs.stripe.com/payments/checkout/custom-domains.md) (Hosted page only)             | Customizable |
 | [Email receipts](https://docs.stripe.com/receipts.md)                                                        | Customizable |
 | [Apply discounts](https://docs.stripe.com/payments/checkout/discounts.md)                                    | Customizable |
 | [Custom success page](https://docs.stripe.com/payments/checkout/custom-success-page.md)                      | Customizable |
@@ -141,9 +141,9 @@ To automate business flows after a transaction occurs, register an [event destin
 - Process the [checkout.session.completed](https://docs.stripe.com/api/events/types.md#event_types-checkout.session.completed) event to fulfill orders when a customer completes their purchase.
 - Process the [checkout.session.expired](https://docs.stripe.com/api/events/types.md#event_types-checkout.session.expired) event to return items to your inventory or send users a cart [abandonment](https://docs.stripe.com/payments/checkout/abandoned-carts.md) email when they don’t make a purchase and their cart expires.
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/how-checkout-works?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/how-checkout-works?payment-ui=embedded-form.
 
 ## Checkout lifecycle
 
@@ -153,7 +153,7 @@ To automate business flows after a transaction occurs, register an [event destin
 2. You embed Checkout on your website to show a payment form.
 3. Customers enter their payment details and complete the transaction.
 4. After the transaction, the [checkout.session.completed](https://docs.stripe.com/api/events/types.md#event_types-checkout.session.completed) webhook event triggers the [order fulfillment process](https://docs.stripe.com/checkout/fulfillment.md).
-   A diagram of an embedded form integration's lifecycle (See full diagram at https://docs.stripe.com/payments/checkout/how-checkout-works)
+   A diagram of an embedded page integration's lifecycle (See full diagram at https://docs.stripe.com/payments/checkout/how-checkout-works)
 
 ## Low-code integration
 
@@ -179,7 +179,7 @@ Checkout requires minimal coding and is the best choice for most integrations be
 | [Optional items](https://docs.stripe.com/payments/checkout/optional-items.md)                                | Customizable |
 | [Global payment methods](https://docs.stripe.com/payments/dashboard-payment-methods.md)                      | Customizable |
 | [Subscription upsells](https://docs.stripe.com/payments/checkout/upsells.md)                                 | Customizable |
-| [Custom domains](https://docs.stripe.com/payments/checkout/custom-domains.md) (Stripe-hosted page only)      | Customizable |
+| [Custom domains](https://docs.stripe.com/payments/checkout/custom-domains.md) (Hosted page only)             | Customizable |
 | [Email receipts](https://docs.stripe.com/receipts.md)                                                        | Customizable |
 | [Apply discounts](https://docs.stripe.com/payments/checkout/discounts.md)                                    | Customizable |
 | [Custom success page](https://docs.stripe.com/payments/checkout/custom-success-page.md)                      | Customizable |

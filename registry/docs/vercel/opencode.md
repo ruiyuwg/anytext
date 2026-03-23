@@ -52,5 +52,5 @@
 
 title: "Coding Agents"
 description: "Configure popular AI coding agents to use the AI Gateway for unified model access and spend monitoring."
-last\_updated: "2026-03-08T05:03:09.752Z"
+last\_updated: "2026-03-23T09:40:03.204Z"
 source: "https://vercel.com/docs/agent-resources/coding-agents"

@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/langsmith/online-evaluations-multi-turn
 
-Multi-turn online evaluators allow you to evaluate entire conversations between a human and an agent — not just individual exchanges. They measure end-to-end interaction quality across all turns in a thread.
+Multi-turn online evaluators allow you to evaluate entire conversations between a human and an agent—not just individual exchanges. They measure end-to-end interaction quality across all turns in a thread.
 
 You can use multi-turn evaluations to measure:
 
@@ -32,7 +32,7 @@ Running multi-turn online evals will auto-upgrade each trace within a thread to 
 4. **Apply filters or a sampling rate**.
    Use filters or sampling to control evaluator cost. For example, evaluate only threads under *N* turns or sample 10% of all threads.
 5. **Configure an idle time**.
-   The first time you configure a thread level evaluator, you'll define the idle time — the amount of time after the last trace in a thread before it's considered complete and ready for evaluation. This value should reflect the expected length of user interactions in your app. It applies across all evaluators in the project.
+   The first time you configure a thread level evaluator, you'll define the idle time—the amount of time after the last trace in a thread before it's considered complete and ready for evaluation. This value should reflect the expected length of user interactions in your app. It applies across all evaluators in the project.
 
 When first testing your evaluator, use a short idle time so you can see results quickly. Once validated, increase it to match the expected length of user interactions.
 

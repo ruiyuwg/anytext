@@ -67,5 +67,5 @@ export default async function RootLayout() {
 
 title: "NEXTJS\_NO\_ASYNC\_PAGE"
 description: "Ensures that the exported Next.js page component and its transitive dependencies are not asynchronous, as that blocks the rendering of the page."
-last\_updated: "2026-03-08T05:03:12.684Z"
+last\_updated: "2026-03-23T09:40:07.551Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_NO\_ASYNC\_PAGE"

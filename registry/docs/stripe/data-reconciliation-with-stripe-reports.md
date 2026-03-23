@@ -41,7 +41,7 @@ For reports on or after March 2025, the cash amount displayed in the Revenue Rec
 
 The journal entries in the **Debits and credits** report don’t consider fees, network costs, contributions, and financing paydowns. However, you can use Stripe fees in your revenue recognition reporting to create journal entries for these items.
 
-As of March 1, 2025, journal entries in the **Debits and credits** report automatically incorporate fees, network costs, and contributions. Stripe fees for charges paid before March are not displayed to prevent showing only a portion of the total fee. As a result, discrepancies might arise when these fees are associated with charges in later periods, such as during disputes. To enable Stripe fees support in Stripe Revenue Recognition for all accounting periods and avoid the discrepancies, [contact support](https://support.stripe.com/contact/email?topic=financial_reports).
+As of March 1, 2025, journal entries in the **Debits and credits** report automatically incorporate fees, network costs, and contributions. Stripe fees for charges paid before March aren’t displayed to prevent showing only a portion of the total fee. As a result, discrepancies might arise when these fees are associated with charges in later periods, such as during disputes. To enable Stripe fees support in Stripe Revenue Recognition for all accounting periods and avoid the discrepancies, [contact support](https://support.stripe.com/contact/email?topic=financial_reports).
 
 With Stripe fees enabled, you can do the following to reconcile revenue recognition fees with the [Balance Summary](https://docs.stripe.com/reports/balance.md) report’s balance change from the activity section:
 

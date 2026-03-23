@@ -71,5 +71,5 @@ dig TXT _vercel.example.com
 
 title: "Deploying & Redirecting Domains"
 description: "Learn how to deploy your domains and set up domain redirects with this guide."
-last\_updated: "2026-03-08T05:03:13.537Z"
+last\_updated: "2026-03-23T09:40:08.830Z"
 source: "https://vercel.com/docs/domains/working-with-domains/deploying-and-redirecting"

@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/langsmith/prompt-template-format
 
-This page describes the [prompt template](/langsmith/prompt-engineering-concepts#prompts-vs-prompt-templates) formats supported in the [prompt playground](/langsmith/prompt-engineering-concepts#prompt-playground), [prompt hub](/langsmith/manage-prompts#public-prompt-hub), and [evaluators](/langsmith/evaluation-concepts#evaluators). Prompt templates allow you to create reusable prompts with dynamic placeholders that get filled in at runtime.
+This page describes the [prompt template](/langsmith/prompt-engineering-concepts#prompts-vs-prompt-templates) formats supported in the [Playground](/langsmith/prompt-engineering-concepts#playground), [prompt hub](/langsmith/manage-prompts#public-prompt-hub), and [evaluators](/langsmith/evaluation-concepts#evaluators). Prompt templates allow you to create reusable prompts with dynamic placeholders that get filled in at runtime.
 
 For a general overview of prompt engineering and prompt templates, refer to the [Concepts](/langsmith/prompt-engineering-concepts#prompts-vs-prompt-templates) page.
 
@@ -17,11 +17,11 @@ LangSmith supports two prompt template formats, which work for different levels 
 
 You can switch between formats in the [UI](https://smith.langchain.com). LangSmith will automatically [convert your template](#conversion-between-formats) when possible, though some mustache features (like loops and conditionals) cannot be converted to f-string format.
 
-Use the [prompt playground](https://smith.langchain.com/playground) to test out the examples on this page. Switch the **Prompt format** under the prompt settings  menu in the Playground.
+Use the [Playground](https://smith.langchain.com/playground) to test out the examples on this page. Switch the **Prompt format** under the prompt settings  menu in the Playground.
 
 ## F-string syntax
 
-F-string templates use Python-style formatting with single curly braces `{variable}`. LangSmith uses a [simplified subset](#limitations) of Python's [f-string syntax](https://realpython.com/python-f-strings/)—it only supports basic variable substitution, not the full range of Python expressions and formatting options. When you have a flat data structure and only need to insert values into your prompt, f-strings are ideal.
+F-string templates use Python-style formatting with single curly braces `{variable}`. LangSmith uses a [simplified subset](#limitations) of Python's [f-string syntax](https://realpython.com/python-f-strings/): it only supports basic variable substitution, not the full range of Python expressions and formatting options. When you have a flat data structure and only need to insert values into your prompt, f-strings are ideal.
 
 ### Basic variables
 
@@ -465,7 +465,7 @@ Use comments to explain complex sections, document expected data structures, or 
 
 ## Special variables for evaluators and threads
 
-When building [evaluators](/langsmith/evaluation-concepts#evaluators) or working with conversational AI, LangSmith automatically provides special variables that structure conversation data in useful ways. These variables are **only available in evaluator contexts**, not in regular playground prompts.
+When building [evaluators](/langsmith/evaluation-concepts#evaluators) or working with conversational AI, LangSmith automatically provides special variables that structure conversation data in useful ways. These variables are **only available in evaluator contexts**, not in regular Playground prompts.
 
 Evaluators need to analyze conversations holistically—looking at patterns across multiple messages, comparing the first question to the final answer, or examining how well the AI responds to follow-up questions. These variables make it easy to access conversation structure without manual data manipulation.
 

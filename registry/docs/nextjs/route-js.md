@@ -4,13 +4,13 @@ Route Handlers allow you to create custom request handlers for a given route usi
 
 ```ts filename="route.ts" switcher
 export async function GET() {
-  return Response.json({ message: "Hello World" });
+  return Response.json({ message: 'Hello World' })
 }
 ```
 
 ```js filename="route.js" switcher
 export async function GET() {
-  return Response.json({ message: "Hello World" });
+  return Response.json({ message: 'Hello World' })
 }
 ```
 
@@ -61,16 +61,16 @@ export async function OPTIONS(request) {}
 The `request` object is a [NextRequest](/docs/app/api-reference/functions/next-request) object, which is an extension of the Web [Request](https://developer.mozilla.org/docs/Web/API/Request) API. `NextRequest` gives you further control over the incoming request, including easily accessing `cookies` and an extended, parsed, URL object `nextUrl`.
 
 ```ts filename="route.ts" switcher
-import type { NextRequest } from "next/server";
+import type { NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {
-  const url = request.nextUrl;
+  const url = request.nextUrl
 }
 ```
 
 ```js filename="route.js" switcher
 export async function GET(request) {
-  const url = request.nextUrl;
+  const url = request.nextUrl
 }
 ```
 
@@ -81,15 +81,15 @@ export async function GET(request) {
 ```ts filename="app/dashboard/[team]/route.ts" switcher
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ team: string }> },
+  { params }: { params: Promise<{ team: string }> }
 ) {
-  const { team } = await params;
+  const { team } = await params
 }
 ```
 
 ```js filename="app/dashboard/[team]/route.js" switcher
 export async function GET(request, { params }) {
-  const { team } = await params;
+  const { team } = await params
 }
 ```
 
@@ -104,11 +104,11 @@ export async function GET(request, { params }) {
 You can type the Route Handler context using `RouteContext` to get strongly typed `params` from a route literal. `RouteContext` is a globally available helper.
 
 ```ts filename="app/users/[id]/route.ts"
-import type { NextRequest } from "next/server";
+import type { NextRequest } from 'next/server'
 
-export async function GET(_req: NextRequest, ctx: RouteContext<"/users/[id]">) {
-  const { id } = await ctx.params;
-  return Response.json({ id });
+export async function GET(_req: NextRequest, ctx: RouteContext<'/users/[id]'>) {
+  const { id } = await ctx.params
+  return Response.json({ id })
 }
 ```
 
@@ -124,72 +124,72 @@ export async function GET(_req: NextRequest, ctx: RouteContext<"/users/[id]">) {
 You can read or set cookies with [`cookies`](/docs/app/api-reference/functions/cookies) from `next/headers`.
 
 ```ts filename="route.ts" switcher
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers'
 
 export async function GET(request: NextRequest) {
-  const cookieStore = await cookies();
+  const cookieStore = await cookies()
 
-  const a = cookieStore.get("a");
-  const b = cookieStore.set("b", "1");
-  const c = cookieStore.delete("c");
+  const a = cookieStore.get('a')
+  const b = cookieStore.set('b', '1')
+  const c = cookieStore.delete('c')
 }
 ```
 
 ```js filename="route.js" switcher
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers'
 
 export async function GET(request) {
-  const cookieStore = await cookies();
+  const cookieStore = await cookies()
 
-  const a = cookieStore.get("a");
-  const b = cookieStore.set("b", "1");
-  const c = cookieStore.delete("c");
+  const a = cookieStore.get('a')
+  const b = cookieStore.set('b', '1')
+  const c = cookieStore.delete('c')
 }
 ```
 
 Alternatively, you can return a new `Response` using the [`Set-Cookie`](https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie) header.
 
 ```ts filename="app/api/route.ts" switcher
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers'
 
 export async function GET(request: Request) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token");
+  const cookieStore = await cookies()
+  const token = cookieStore.get('token')
 
-  return new Response("Hello, Next.js!", {
+  return new Response('Hello, Next.js!', {
     status: 200,
-    headers: { "Set-Cookie": `token=${token.value}` },
-  });
+    headers: { 'Set-Cookie': `token=${token.value}` },
+  })
 }
 ```
 
 ```js filename="app/api/route.js" switcher
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers'
 
 export async function GET(request) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token");
+  const cookieStore = await cookies()
+  const token = cookieStore.get('token')
 
-  return new Response("Hello, Next.js!", {
+  return new Response('Hello, Next.js!', {
     status: 200,
-    headers: { "Set-Cookie": `token=${token.value}` },
-  });
+    headers: { 'Set-Cookie': `token=${token.value}` },
+  })
 }
 ```
 
 You can also use the underlying Web APIs to read cookies from the request ([`NextRequest`](/docs/app/api-reference/functions/next-request)):
 
 ```ts filename="app/api/route.ts" switcher
-import { type NextRequest } from "next/server";
+import { type NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {
-  const token = request.cookies.get("token");
+  const token = request.cookies.get('token')
 }
 ```
 
 ```js filename="app/api/route.js" switcher
 export async function GET(request) {
-  const token = request.cookies.get("token");
+  const token = request.cookies.get('token')
 }
 ```
 
@@ -198,67 +198,67 @@ export async function GET(request) {
 You can read headers with [`headers`](/docs/app/api-reference/functions/headers) from `next/headers`.
 
 ```ts filename="route.ts" switcher
-import { headers } from "next/headers";
-import type { NextRequest } from "next/server";
+import { headers } from 'next/headers'
+import type { NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {
-  const headersList = await headers();
-  const referer = headersList.get("referer");
+  const headersList = await headers()
+  const referer = headersList.get('referer')
 }
 ```
 
 ```js filename="route.js" switcher
-import { headers } from "next/headers";
+import { headers } from 'next/headers'
 
 export async function GET(request) {
-  const headersList = await headers();
-  const referer = headersList.get("referer");
+  const headersList = await headers()
+  const referer = headersList.get('referer')
 }
 ```
 
 This `headers` instance is read-only. To set headers, you need to return a new `Response` with new `headers`.
 
 ```ts filename="app/api/route.ts" switcher
-import { headers } from "next/headers";
+import { headers } from 'next/headers'
 
 export async function GET(request: Request) {
-  const headersList = await headers();
-  const referer = headersList.get("referer");
+  const headersList = await headers()
+  const referer = headersList.get('referer')
 
-  return new Response("Hello, Next.js!", {
+  return new Response('Hello, Next.js!', {
     status: 200,
     headers: { referer: referer },
-  });
+  })
 }
 ```
 
 ```js filename="app/api/route.js" switcher
-import { headers } from "next/headers";
+import { headers } from 'next/headers'
 
 export async function GET(request) {
-  const headersList = await headers();
-  const referer = headersList.get("referer");
+  const headersList = await headers()
+  const referer = headersList.get('referer')
 
-  return new Response("Hello, Next.js!", {
+  return new Response('Hello, Next.js!', {
     status: 200,
     headers: { referer: referer },
-  });
+  })
 }
 ```
 
 You can also use the underlying Web APIs to read headers from the request ([`NextRequest`](/docs/app/api-reference/functions/next-request)):
 
 ```ts filename="app/api/route.ts" switcher
-import { type NextRequest } from "next/server";
+import { type NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {
-  const requestHeaders = new Headers(request.headers);
+  const requestHeaders = new Headers(request.headers)
 }
 ```
 
 ```js filename="app/api/route.js" switcher
 export async function GET(request) {
-  const requestHeaders = new Headers(request.headers);
+  const requestHeaders = new Headers(request.headers)
 }
 ```
 
@@ -267,42 +267,42 @@ export async function GET(request) {
 You can [revalidate cached data](/docs/app/guides/incremental-static-regeneration) using the `revalidate` route segment config option.
 
 ```ts filename="app/posts/route.ts" switcher
-export const revalidate = 60;
+export const revalidate = 60
 
 export async function GET() {
-  const data = await fetch("https://api.vercel.app/blog");
-  const posts = await data.json();
+  const data = await fetch('https://api.vercel.app/blog')
+  const posts = await data.json()
 
-  return Response.json(posts);
+  return Response.json(posts)
 }
 ```
 
 ```js filename="app/posts/route.js" switcher
-export const revalidate = 60;
+export const revalidate = 60
 
 export async function GET() {
-  const data = await fetch("https://api.vercel.app/blog");
-  const posts = await data.json();
+  const data = await fetch('https://api.vercel.app/blog')
+  const posts = await data.json()
 
-  return Response.json(posts);
+  return Response.json(posts)
 }
 ```
 
 ### Redirects
 
 ```ts filename="app/api/route.ts" switcher
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation'
 
 export async function GET(request: Request) {
-  redirect("https://nextjs.org/");
+  redirect('https://nextjs.org/')
 }
 ```
 
 ```js filename="app/api/route.js" switcher
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation'
 
 export async function GET(request) {
-  redirect("https://nextjs.org/");
+  redirect('https://nextjs.org/')
 }
 ```
 
@@ -313,15 +313,15 @@ Route Handlers can use [Dynamic Segments](/docs/app/api-reference/file-conventio
 ```ts filename="app/items/[slug]/route.ts" switcher
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ slug: string }> },
+  { params }: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = await params; // 'a', 'b', or 'c'
+  const { slug } = await params // 'a', 'b', or 'c'
 }
 ```
 
 ```js filename="app/items/[slug]/route.js" switcher
 export async function GET(request, { params }) {
-  const { slug } = await params; // 'a', 'b', or 'c'
+  const { slug } = await params // 'a', 'b', or 'c'
 }
 ```
 
@@ -335,7 +335,7 @@ export async function GET(request, { params }) {
 
 You can use [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params) with dynamic Route Handlers to statically generate responses at build time for specified params, while handling other params dynamically at request time.
 
-When using [Cache Components](/docs/app/getting-started/cache-components), you can combine `generateStaticParams` with `use cache` to enable data caching for both prerendered and runtime params.
+When using [Cache Components](/docs/app/getting-started/caching), you can combine `generateStaticParams` with `use cache` to enable data caching for both prerendered and runtime params.
 
 See the [generateStaticParams with Route Handlers](/docs/app/api-reference/functions/generate-static-params#with-route-handlers) documentation for examples and details.
 
@@ -344,19 +344,19 @@ See the [generateStaticParams with Route Handlers](/docs/app/api-reference/funct
 The request object passed to the Route Handler is a `NextRequest` instance, which includes [some additional convenience methods](/docs/app/api-reference/functions/next-request#nexturl), such as those for more easily handling query parameters.
 
 ```ts filename="app/api/search/route.ts" switcher
-import { type NextRequest } from "next/server";
+import { type NextRequest } from 'next/server'
 
 export function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const query = searchParams.get("query");
+  const searchParams = request.nextUrl.searchParams
+  const query = searchParams.get('query')
   // query is "hello" for /api/search?query=hello
 }
 ```
 
 ```js filename="app/api/search/route.js" switcher
 export function GET(request) {
-  const searchParams = request.nextUrl.searchParams;
-  const query = searchParams.get("query");
+  const searchParams = request.nextUrl.searchParams
+  const query = searchParams.get('query')
   // query is "hello" for /api/search?query=hello
 }
 ```
@@ -366,32 +366,32 @@ export function GET(request) {
 Streaming is commonly used in combination with Large Language Models (LLMs), such as OpenAI, for AI-generated content. Learn more about the [AI SDK](https://sdk.vercel.ai/docs/introduction).
 
 ```ts filename="app/api/chat/route.ts" switcher
-import { openai } from "@ai-sdk/openai";
-import { StreamingTextResponse, streamText } from "ai";
+import { openai } from '@ai-sdk/openai'
+import { StreamingTextResponse, streamText } from 'ai'
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages } = await req.json()
   const result = await streamText({
-    model: openai("gpt-4-turbo"),
+    model: openai('gpt-4-turbo'),
     messages,
-  });
+  })
 
-  return new StreamingTextResponse(result.toAIStream());
+  return new StreamingTextResponse(result.toAIStream())
 }
 ```
 
 ```js filename="app/api/chat/route.js" switcher
-import { openai } from "@ai-sdk/openai";
-import { StreamingTextResponse, streamText } from "ai";
+import { openai } from '@ai-sdk/openai'
+import { StreamingTextResponse, streamText } from 'ai'
 
 export async function POST(req) {
-  const { messages } = await req.json();
+  const { messages } = await req.json()
   const result = await streamText({
-    model: openai("gpt-4-turbo"),
+    model: openai('gpt-4-turbo'),
     messages,
-  });
+  })
 
-  return new StreamingTextResponse(result.toAIStream());
+  return new StreamingTextResponse(result.toAIStream())
 }
 ```
 
@@ -402,38 +402,38 @@ These abstractions use the Web APIs to create a stream. You can also use the und
 function iteratorToStream(iterator: any) {
   return new ReadableStream({
     async pull(controller) {
-      const { value, done } = await iterator.next();
+      const { value, done } = await iterator.next()
 
       if (done) {
-        controller.close();
+        controller.close()
       } else {
-        controller.enqueue(value);
+        controller.enqueue(value)
       }
     },
-  });
+  })
 }
 
 function sleep(time: number) {
   return new Promise((resolve) => {
-    setTimeout(resolve, time);
-  });
+    setTimeout(resolve, time)
+  })
 }
 
-const encoder = new TextEncoder();
+const encoder = new TextEncoder()
 
 async function* makeIterator() {
-  yield encoder.encode("<p>One</p>");
-  await sleep(200);
-  yield encoder.encode("<p>Two</p>");
-  await sleep(200);
-  yield encoder.encode("<p>Three</p>");
+  yield encoder.encode('<p>One</p>')
+  await sleep(200)
+  yield encoder.encode('<p>Two</p>')
+  await sleep(200)
+  yield encoder.encode('<p>Three</p>')
 }
 
 export async function GET() {
-  const iterator = makeIterator();
-  const stream = iteratorToStream(iterator);
+  const iterator = makeIterator()
+  const stream = iteratorToStream(iterator)
 
-  return new Response(stream);
+  return new Response(stream)
 }
 ```
 
@@ -442,38 +442,38 @@ export async function GET() {
 function iteratorToStream(iterator) {
   return new ReadableStream({
     async pull(controller) {
-      const { value, done } = await iterator.next();
+      const { value, done } = await iterator.next()
 
       if (done) {
-        controller.close();
+        controller.close()
       } else {
-        controller.enqueue(value);
+        controller.enqueue(value)
       }
     },
-  });
+  })
 }
 
 function sleep(time) {
   return new Promise((resolve) => {
-    setTimeout(resolve, time);
-  });
+    setTimeout(resolve, time)
+  })
 }
 
-const encoder = new TextEncoder();
+const encoder = new TextEncoder()
 
 async function* makeIterator() {
-  yield encoder.encode("<p>One</p>");
-  await sleep(200);
-  yield encoder.encode("<p>Two</p>");
-  await sleep(200);
-  yield encoder.encode("<p>Three</p>");
+  yield encoder.encode('<p>One</p>')
+  await sleep(200)
+  yield encoder.encode('<p>Two</p>')
+  await sleep(200)
+  yield encoder.encode('<p>Three</p>')
 }
 
 export async function GET() {
-  const iterator = makeIterator();
-  const stream = iteratorToStream(iterator);
+  const iterator = makeIterator()
+  const stream = iteratorToStream(iterator)
 
-  return new Response(stream);
+  return new Response(stream)
 }
 ```
 
@@ -483,15 +483,15 @@ You can read the `Request` body using the standard Web API methods:
 
 ```ts filename="app/items/route.ts" switcher
 export async function POST(request: Request) {
-  const res = await request.json();
-  return Response.json({ res });
+  const res = await request.json()
+  return Response.json({ res })
 }
 ```
 
 ```js filename="app/items/route.js" switcher
 export async function POST(request) {
-  const res = await request.json();
-  return Response.json({ res });
+  const res = await request.json()
+  return Response.json({ res })
 }
 ```
 
@@ -501,19 +501,19 @@ You can read the `FormData` using the `request.formData()` function:
 
 ```ts filename="app/items/route.ts" switcher
 export async function POST(request: Request) {
-  const formData = await request.formData();
-  const name = formData.get("name");
-  const email = formData.get("email");
-  return Response.json({ name, email });
+  const formData = await request.formData()
+  const name = formData.get('name')
+  const email = formData.get('email')
+  return Response.json({ name, email })
 }
 ```
 
 ```js filename="app/items/route.js" switcher
 export async function POST(request) {
-  const formData = await request.formData();
-  const name = formData.get("name");
-  const email = formData.get("email");
-  return Response.json({ name, email });
+  const formData = await request.formData()
+  const name = formData.get('name')
+  const email = formData.get('email')
+  return Response.json({ name, email })
 }
 ```
 
@@ -525,27 +525,27 @@ You can set CORS headers for a specific Route Handler using the standard Web API
 
 ```ts filename="app/api/route.ts" switcher
 export async function GET(request: Request) {
-  return new Response("Hello, Next.js!", {
+  return new Response('Hello, Next.js!', {
     status: 200,
     headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     },
-  });
+  })
 }
 ```
 
 ```js filename="app/api/route.js" switcher
 export async function GET(request) {
-  return new Response("Hello, Next.js!", {
+  return new Response('Hello, Next.js!', {
     status: 200,
     headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     },
-  });
+  })
 }
 ```
 
@@ -560,34 +560,34 @@ You can use a Route Handler to receive webhooks from third-party services:
 ```ts filename="app/api/route.ts" switcher
 export async function POST(request: Request) {
   try {
-    const text = await request.text();
+    const text = await request.text()
     // Process the webhook payload
   } catch (error) {
     return new Response(`Webhook error: ${error.message}`, {
       status: 400,
-    });
+    })
   }
 
-  return new Response("Success!", {
+  return new Response('Success!', {
     status: 200,
-  });
+  })
 }
 ```
 
 ```js filename="app/api/route.js" switcher
 export async function POST(request) {
   try {
-    const text = await request.text();
+    const text = await request.text()
     // Process the webhook payload
   } catch (error) {
     return new Response(`Webhook error: ${error.message}`, {
       status: 400,
-    });
+    })
   }
 
-  return new Response("Success!", {
+  return new Response('Success!', {
     status: 200,
-  });
+  })
 }
 ```
 
@@ -612,10 +612,10 @@ export async function GET() {
 </rss>`,
     {
       headers: {
-        "Content-Type": "text/xml",
+        'Content-Type': 'text/xml',
       },
-    },
-  );
+    }
+  )
 }
 ```
 
@@ -630,7 +630,7 @@ export async function GET() {
   <description>The React Framework for the Web</description>
 </channel>
 
-</rss>`);
+</rss>`)
 }
 ```
 
@@ -639,21 +639,21 @@ export async function GET() {
 Route Handlers use the same [route segment configuration](/docs/app/api-reference/file-conventions/route-segment-config) as pages and layouts.
 
 ```ts filename="app/items/route.ts" switcher
-export const dynamic = "auto";
-export const dynamicParams = true;
-export const revalidate = false;
-export const fetchCache = "auto";
-export const runtime = "nodejs";
-export const preferredRegion = "auto";
+export const dynamic = 'auto'
+export const dynamicParams = true
+export const revalidate = false
+export const fetchCache = 'auto'
+export const runtime = 'nodejs'
+export const preferredRegion = 'auto'
 ```
 
 ```js filename="app/items/route.js" switcher
-export const dynamic = "auto";
-export const dynamicParams = true;
-export const revalidate = false;
-export const fetchCache = "auto";
-export const runtime = "nodejs";
-export const preferredRegion = "auto";
+export const dynamic = 'auto'
+export const dynamicParams = true
+export const revalidate = false
+export const fetchCache = 'auto'
+export const runtime = 'nodejs'
+export const preferredRegion = 'auto'
 ```
 
 See the [API reference](/docs/app/api-reference/file-conventions/route-segment-config) for more details.
@@ -665,6 +665,109 @@ See the [API reference](/docs/app/api-reference/file-conventions/route-segment-c
 | `v15.0.0-RC` | `context.params` is now a promise. A [codemod](/docs/app/guides/upgrading/codemods#150) is available |
 | `v15.0.0-RC` | The default caching for `GET` handlers was changed from static to dynamic                            |
 | `v13.2.0`    | Route Handlers are introduced.                                                                       |
+
+# dynamicParams
+
+# dynamicParams
+
+The `dynamicParams` option allows you to control what happens when a dynamic segment is visited that was not generated with [generateStaticParams](/docs/app/api-reference/functions/generate-static-params).
+
+```tsx filename="layout.tsx | page.tsx" switcher
+export const dynamicParams = true // true | false
+```
+
+```js filename="layout.js | page.js | route.js" switcher
+export const dynamicParams = true // true | false
+```
+
+- **`true`** (default): Dynamic route segments not included in `generateStaticParams` are generated at request time.
+- **`false`**: Dynamic route segments not included in `generateStaticParams` will return a 404.
+
+> **Good to know**:
+>
+> - This option replaces the `fallback: true | false | blocking` option of `getStaticPaths` in the `pages` directory.
+> - `dynamicParams` is not available when [Cache Components](/docs/app/api-reference/config/next-config-js/cacheComponents) is enabled.
+
+# maxDuration
+
+# maxDuration
+
+The `maxDuration` option allows you to set the maximum execution time (in seconds) for server-side logic in a route segment. Deployment platforms can use `maxDuration` from the Next.js build output to add specific execution limits.
+
+```tsx filename="layout.tsx | page.tsx | route.ts" switcher
+export const maxDuration = 5
+```
+
+```js filename="layout.js | page.js | route.js" switcher
+export const maxDuration = 5
+```
+
+## Server Actions
+
+If using [Server Actions](/docs/app/getting-started/mutating-data), set the `maxDuration` at the page level to change the default timeout of all Server Actions used on the page.
+
+## Version History
+
+| Version    | Changes                   |
+| ---------- | ------------------------- |
+| `v13.4.10` | `maxDuration` introduced. |
+
+# preferredRegion
+
+# preferredRegion
+
+The `preferredRegion` option allows you to specify the preferred deployment region for a route segment. This value is passed to your deployment platform.
+
+```tsx filename="layout.tsx | page.tsx | route.ts" switcher
+export const preferredRegion = // string || string[]
+```
+
+```js filename="layout.js | page.js | route.js" switcher
+export const preferredRegion = // string || string[]
+```
+
+- **`string`**: Deploy the route to a specific region. Available region codes are platform-specific. For example, `'iad1'`.
+- **`string[]`**: Deploy the route to multiple specific regions. The route is deployed to **all** listed regions, not a single one chosen from the list. For example, `['iad1', 'sfo1']`.
+
+> **Good to know**:
+>
+> - If a `preferredRegion` is not specified, it will inherit the option of the nearest parent layout. The root layout defaults to `'auto'`.
+> - A child segment's value overrides the parent, values are not merged.
+> - Next.js passes the region values through to the deployment platform. The exact behavior and available region codes are platform-specific. Refer to your deployment platform's documentation for supported values.
+
+## Vercel
+
+If deploying Next.js on Vercel, regions are only supported if `export const runtime = 'edge'` is set. The following options can be passed:
+
+- **`'auto'`** (default): Uses the default region.
+- **`'global'`**: Prefer deploying the route to all availableregions.
+- **`'home'`**: Prefer deploying the route to the home region.
+
+If an unsupported value is passed, an error will be thrown.
+
+# runtime
+
+# runtime
+
+The `runtime` option allows you to select the JavaScript runtime used for rendering your route.
+
+```tsx filename="layout.tsx | page.tsx | route.ts" switcher
+export const runtime = 'nodejs'
+// 'nodejs' | 'edge'
+```
+
+```js filename="layout.js | page.js | route.js" switcher
+export const runtime = 'nodejs'
+// 'nodejs' | 'edge'
+```
+
+- **`'nodejs'`** (default)
+- **`'edge'`**
+
+> **Good to know**:
+>
+> - Using `runtime: 'edge'` is **not supported** for Cache Components.
+> - This option cannot be used in [Proxy](/docs/app/api-reference/file-conventions/proxy).
 
 # Route Groups
 
@@ -692,4 +795,30 @@ This convention indicates the folder is for organizational purposes and should *
 - **Conflicting paths**: Routes in different groups should not resolve to the same URL path. For example, `(marketing)/about/page.js` and `(shop)/about/page.js` would both resolve to `/about` and cause an error.
 - **Top-level root layout**: If you use multiple root layouts without a top-level `layout.js` file, make sure your home route (/) is defined within one of the route groups, e.g. app/(marketing)/page.js.
 
-# Route Segment Config
+# src
+
+# src
+
+As an alternative to having the special Next.js `app` or `pages` directories in the root of your project, Next.js also supports the common pattern of placing application code under the `src` folder.
+
+This separates application code from project configuration files which mostly live in the root of a project, which is preferred by some individuals and teams.
+
+To use the `src` folder, move the `app` Router folder or `pages` Router folder to `src/app` or `src/pages` respectively.
+
+![An example folder structure with the src folder](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/project-organization-src-directory.png)
+
+> **Good to know**:
+>
+> - The `/public` directory should remain in the root of your project.
+> - Config files like `package.json`, `next.config.js` and `tsconfig.json` should remain in the root of your project.
+> - `.env.*` files should remain in the root of your project.
+> - `src/app` or `src/pages` will be ignored if `app` or `pages` are present in the root directory.
+> - If you're using `src`, you'll probably also move other application folders such as `/components` or `/lib`.
+> - If you're using Proxy, ensure it is placed inside the `src` folder.
+> - If you're using Tailwind CSS, you'll need to add the `/src` prefix to the `tailwind.config.js` file in the [content section](https://tailwindcss.com/docs/content-configuration).
+> - If you are using TypeScript paths for imports such as `@/*`, you should update the `paths` object in `tsconfig.json` to include `src/`.
+
+- [Project Structure](/docs/app/getting-started/project-structure)
+  - Learn the folder and file conventions in Next.js, and how to organize your project.
+
+# template.js

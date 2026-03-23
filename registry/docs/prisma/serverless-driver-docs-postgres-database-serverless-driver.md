@@ -23,13 +23,13 @@ For standard Node.js environments, use the [`node-postgres` driver](/orm/core-co
 
 Prerequisite: Get your connection string \[#prerequisite-get-your-connection-string]
 
-The serverless driver requires a Prisma Postgres Direct TCP connection URL:
+The serverless driver requires a Prisma Postgres TCP connection string:
 
 ```
 postgres://identifier:key@db.prisma.io:5432/postgres?sslmode=require
 ```
 
-Find this in the API Keys section of your [Prisma Postgres dashboard](https://console.prisma.io). The connection string is used only to extract authentication credentials. No direct TCP connection is made from the client.
+Find and manage your connection string from your [Prisma Postgres dashboard](https://console.prisma.io)
 
 If you don't have a Prisma Postgres database, create one using the [`create-db` CLI](/postgres/npx-create-db) tool:
 
@@ -52,25 +52,25 @@ If you don't have a Prisma Postgres database, create one using the [`create-db` 
 
 
 ```bash
-npx prisma create-db
+npx create-db@latest
 ```
 
 
 
 ```bash
-pnpm dlx prisma create-db
+pnpm dlx create-db@latest
 ```
 
 
 
 ```bash
-yarn dlx prisma create-db
+yarn dlx create-db@latest
 ```
 
 
 
 ```bash
-bunx --bun prisma create-db
+bunx --bun create-db@latest
 ```
 ````
 

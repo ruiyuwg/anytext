@@ -1,0 +1,545 @@
+Before you use MaxCompute, we recommend that you learn about the limits on the use of MaxCompute. This topic describes the limits on the use of MaxCompute.
+
+## Limits on subscription computing resources
+
+By default, you can purchase a maximum of **2,000 compute units (CUs)** as subscription computing resources of MaxCompute. If you want to purchase more than 2,000 CUs, use your Alibaba Cloud account to fill in a ticket and submit the ticket for application. Then, MaxCompute product engineers review your quota increase application within three business days. The review result is notified to you by text message.
+
+## Limits on computing resources of the pay-as-you-go MaxCompute service
+
+The following table describes the maximum numbers of CUs of the pay-as-you-go MaxCompute service that a single user can use in a single region. This prevents users from failing to initiate jobs when a single user occupies an excessive amount of cluster resources.
+
+**Country or area**
+
+**Region**
+
+**Maximum number of CUs of the pay-as-you-go MaxCompute service**
+
+Regions in China
+
+China (Hangzhou), China (Shanghai), China (Beijing), China (Zhangjiakou), China (Ulanqab), China (Shenzhen), China East 2 Finance, China North 2 Ali Gov, and China South 1 Finance
+
+2,000
+
+China (Chengdu) and China (Hong Kong)
+
+500
+
+Other countries or areas
+
+Singapore, Malaysia (Kuala Lumpur), Indonesia (Jakarta), Japan (Tokyo), Germany (Frankfurt), US (Silicon Valley), US (Virginia), UK (London) and UAE (Dubai)
+
+500
+
+**Important**
+
+The preceding upper limits represent the maximum numbers of CUs that you can obtain and do not represent the minimum numbers of CUs that you can use. In some cases, more CUs may be used in MaxCompute to accelerate queries.
+
+## Limits on subscription Tunnel slots
+
+By default, you can purchase a maximum of **500** slots for subscription Tunnel services in MaxCompute. If you want to purchase more than 500 slots, you can submit a ticket for application.
+
+## Limits on SQL
+
+The following table describes the limits on the development of SQL jobs in MaxCompute.
+
+**Item**
+
+**Maximum value/Limit**
+
+**Category**
+
+**Description**
+
+Table name length
+
+128 bytes
+
+Length
+
+A table or column name can contain only letters, digits, and underscores (\_). It must start with a letter. Special characters are not supported.
+
+Comment length
+
+1,024 bytes
+
+Length
+
+A comment is a valid string that cannot exceed 1,024 bytes in length.
+
+Column definitions in a table
+
+1,200
+
+Quantity
+
+A table can contain a maximum of 1,200 column definitions.
+
+Partitions in a table
+
+60,000
+
+Quantity
+
+A table can contain a maximum of 60,000 partitions.
+
+Partition levels of a table
+
+6
+
+Quantity
+
+A table can contain a maximum of six levels of partitions.
+
+Output display
+
+10,000 rows
+
+Quantity
+
+A SELECT statement can return a maximum of 10,000 rows.
+
+Number of destination tables for `INSERT` operations
+
+256
+
+Quantity
+
+A `MULTI-INSERT` statement allows you to insert data into a maximum of 256 tables at the same time.
+
+`UNION ALL`
+
+256
+
+Quantity
+
+The `UNION ALL` statement allows you to combine a maximum of 256 tables.
+
+`MAPJOIN`
+
+128
+
+Quantity
+
+A `MAPJOIN` hint allows you to join a maximum of 128 small tables.
+
+`MAPJOIN` memory
+
+512 MB
+
+Quantity
+
+The memory size for all small tables cannot exceed 512 MB when you specify a `MAPJOIN` hint in SQL statements.
+
+`ptinsubq`(partition in subquery)
+
+1,000 rows
+
+Quantity
+
+A PT IN SUBQUERY statement can generate a maximum of 1,000 rows.
+
+Length of an SQL statement
+
+2 MB
+
+Length
+
+An SQL statement cannot exceed 2 MB in length. This limit is suitable for the scenarios in which you use an SDK to execute SQL statements.
+
+Length of a column record
+
+8 MB
+
+Quantity
+
+The maximum length of a column record in a table is 8 MB.
+
+Parameters in an IN clause
+
+1,024
+
+Quantity
+
+This item specifies the maximum number of parameters in an IN clause, such as `in (1,2,3....,1024)`. If the number of parameters in an `IN` clause is excessively large, the compilation performance is adversely affected. We recommend that you use a maximum of 1,024 parameters, but this is not a fixed upper limit.
+
+`jobconf.json`
+
+1 MB
+
+Length
+
+The maximum size of the `jobconf.json` file is 1 MB. If a table contains a large number of partitions, the size of the `jobconf.json` file may exceed 1 MB.
+
+View
+
+Not writable
+
+Operation
+
+A view is not writable and does not support the `INSERT` statements.
+
+Data type and position of a column
+
+Unmodifiable
+
+Operation
+
+The data type and position of a column cannot be modified.
+
+Java user-defined functions (UDFs)
+
+Not allowed to be `abstract` or `static`
+
+Operation
+
+Java UDFs cannot be `abstract` or `static`.
+
+Partitions that can be queried
+
+10,000
+
+Quantity
+
+A maximum of 10,000 partitions can be queried.
+
+SQL execution plans
+
+1 MB
+
+Length
+
+The size of an execution plan that is generated by using MaxCompute SQL statements cannot exceed 1 MB. Otherwise, the error message `FAILED: ODPS-0010000:System internal error - The Size of Plan is too large` is reported.
+
+Maximum execution duration of a single job
+
+72 hours
+
+Execution duration
+
+The default maximum execution duration of a single SQL job is 24 hours. You can use the following parameter setting to run a single SQL job for up to 72 hours. An SQL job cannot run for more than 72 hours. If an SQL job runs for 72 hours, the job is automatically stopped.
+
+```
+set odps.sql.job.max.time.hours=72;
+```
+
+For more information about SQL, see [SQL](/help/en/maxcompute/user-guide/overview-of-maxcompute-sql#concept-awk-jmb-5db).
+
+## Limits on MapReduce
+
+The following table describes the limits on the development of MapReduce jobs in MaxCompute.
+
+**Item**
+
+**Value range**
+
+**Classification**
+
+**Configuration item**
+
+**Default value**
+
+**Configurable**
+
+**Description**
+
+Memory occupied by an instance
+
+\[256 MB,12 GB\]
+
+Memory
+
+`odps.stage.mapper(reducer).mem` and `odps.stage.mapper(reducer).jvm.mem`
+
+2,048 MB and 1,024 MB
+
+Yes
+
+The memory occupied by a single map or reduce instance. The memory consists of two parts: the framework memory, which is 2,048 MB by default, and Java Virtual Machine (JVM) heap memory, which is 1,024 MB by default.
+
+Number of resources
+
+256
+
+Quantity
+
+\-
+
+N/A
+
+No
+
+Each job can reference up to 256 resources. Each table or archive is considered as one resource.
+
+Numbers of inputs and outputs
+
+1,024 and 256
+
+Quantity
+
+\-
+
+N/A
+
+No
+
+The number of the inputs of a job cannot exceed 1,024, and that of the outputs of a job cannot exceed 256. A partition of a table is regarded as one input. The number of tables cannot exceed 64.
+
+Number of counters
+
+64
+
+Quantity
+
+\-
+
+N/A
+
+No
+
+The number of custom counters in a job cannot exceed 64. The counter group name and counter name cannot contain number signs (#). The total length of the two names cannot exceed 100 characters.
+
+Number of map instances
+
+\[1,100000\]
+
+Quantity
+
+odps.stage.mapper.num
+
+N/A
+
+Yes
+
+The number of map instances in a job is calculated by the framework based on the split size. If no input table is specified, you can set the odps.stage.mapper.num parameter to specify the number of map instances. The value ranges from 1 to 100,000.
+
+Number of reduce instances
+
+\[0,2000\]
+
+Quantity
+
+odps.stage.reducer.num
+
+N/A
+
+Yes
+
+By default, the number of reduce instances in a job is 25% of the number of map instances. You can set the number to a value that ranges from 0 to 2,000. Reduce instances process much more data than map instances, which may result in long processing time in the reduce stage. A job can have 2,000 reduce instances at most.
+
+Number of retries
+
+3
+
+Quantity
+
+\-
+
+N/A
+
+No
+
+The maximum number of retries that are allowed for a map or reduce instance is 3. Exceptions that do not allow retries may cause jobs to fail.
+
+Local debug mode
+
+A maximum of 100 instances
+
+Quantity
+
+\-
+
+N/A
+
+No
+
+In local debug mode:
+
+-   The number of map instances is 2 by default and cannot exceed 100.
+-   The number of reduce instances is 1 by default and cannot exceed 100.
+-   The number of download records for one input is 100 by default and cannot exceed 10,000.
+
+Number of times a resource is read repeatedly
+
+64
+
+Quantity
+
+\-
+
+N/A
+
+No
+
+The number of times that a map or reduce instance repeatedly reads a resource cannot exceed 64.
+
+Resource bytes
+
+2 GB
+
+Length
+
+\-
+
+N/A
+
+No
+
+The total bytes of resources that are referenced by a job cannot exceed 2 GB.
+
+Split size
+
+Greater than or equal to 1
+
+Length
+
+odps.stage.mapper.split.size
+
+256 MB
+
+Yes
+
+The framework determines the number of map instances based on the split size.
+
+Length of a string in a column
+
+8 MB
+
+Length
+
+\-
+
+N/A
+
+No
+
+A string in a column cannot exceed 8 MB in length.
+
+Worker timeout period
+
+\[1,3600\]
+
+Time
+
+odps.function.timeout
+
+600
+
+Yes
+
+The timeout period of a map or reduce worker when the worker does not read or write data, or stops sending heartbeats by using `context.progress()`. The default value is 600 seconds.
+
+Field types supported by tables that are referenced by MapReduce
+
+BIGINT, DOUBLE, STRING, DATETIME, and BOOLEAN
+
+Data type
+
+\-
+
+N/A
+
+No
+
+When a MapReduce task references a table, an error is returned if the table has field types that are not supported.
+
+Object Storage Service (OSS) data read
+
+\-
+
+Feature
+
+\-
+
+N/A
+
+No
+
+MapReduce cannot read OSS data.
+
+New data types in MaxCompute V2.0
+
+\-
+
+Feature
+
+\-
+
+N/A
+
+No
+
+MapReduce does not support the new data types in MaxCompute V2.0.
+
+For more information about MapReduce, see [MapReduce](/help/en/maxcompute/overview-24#concept-fml-smf-vdb).
+
+## Limits on PyODPS
+
+Before you use DataWorks to develop PyODPS jobs in MaxCompute, take note of the following limits:
+
+-   Each PyODPS node can process a maximum of 50 MB of data and can occupy a maximum of 1 GB memory. Otherwise, DataWorks terminates the PyODPS node. Do not write unnecessary Python data processing code in PyODPS jobs.
+    
+-   The efficiency of writing and debugging code in DataWorks is low. We recommend that you install an integrated development environment (IDE) on your on-premises machine to write code.
+    
+-   To prevent excess pressure on the gateway of DataWorks, DataWorks limits the CPU utilization and memory usage. If the system displays Got killed, the memory usage exceeds the upper limit and the system terminates the related processes. We recommend that you do not perform local data operations. However, the limits on the memory usage and CPU utilization do not apply to SQL or DataFrame tasks, except to\_pandas, that are initiated by PyODPS.
+    
+-   Functions may be limited in the following aspects due to the lack of packages such as matplotlib:
+    
+    -   The use of the plot function of DataFrame is affected.
+        
+    -   DataFrame user-defined functions (UDFs) can be used only after the DataFrame UDFs are committed to MaxCompute. You can use only pure Python libraries and the NumPy library to run UDFs based on the requirements of the Python sandbox. You cannot use other third-party libraries, such as pandas.
+        
+    -   You can use the NumPy and pandas libraries that are pre-installed in DataWorks to run the code of functions except UDFs. Third-party packages that contain binary code are not supported.
+        
+-   For compatibility reasons, options.tunnel.use\_instance\_tunnel is set to False in DataWorks by default. If you want to enable InstanceTunnel globally, you must set this parameter to True.
+    
+-   For implementation reasons, the Python **atexit** package is not supported. You must use the **try-finally** structure to implement related features.
+    
+
+For more information about PyODPS, see [PyODPS](/help/en/maxcompute/user-guide/getting-started-2#task-610562).
+
+## Limits on Graph
+
+Before you develop Graph jobs in MaxCompute, take note of the following limits:
+
+-   Each job can reference up to 256 resources. Each table or archive is considered as one unit.
+    
+-   The total bytes of resources referenced by a job cannot exceed 512 MB.
+    
+-   The number of the inputs of a job cannot exceed 1,024, and that of the outputs of a job cannot exceed 256. The number of input tables cannot exceed 64.
+    
+-   Labels that are specified for multiple outputs cannot be null or empty strings. A label cannot exceed 256 strings in length and can contain only letters, digits, underscores (\_), number signs (#), periods (.), and hyphens (-).
+    
+-   The number of custom counters in a job cannot exceed 64. The counter `group name` and `counter name` cannot contain number signs (#). The total length of the two names cannot exceed 100 characters.
+    
+-   The number of workers for a job is calculated by the framework. The maximum number of workers is 1,000. An error is reported if the number of workers exceeds this value.
+    
+-   A worker consumes 200 units of CPU resources by default. The range of resources consumed is 50 to 800.
+    
+-   A worker consumes 4,096 MB memory by default. The range of memory consumed is 256 MB to 12 GB.
+    
+-   A worker can repeatedly read a resource up to 64 times.
+    
+-   The default value of `split_size` is 64 MB. You can configure the parameter based on your business requirements. The value of `split_size` must be greater than 0 and smaller than or equal to the result of the 9223372036854775807>>20 operation.
+    
+-   GraphLoader, Vertex, and Aggregator in MaxCompute Graph are restricted by the Java sandbox when they are run in a cluster. However, the main program of Graph jobs is not restricted by the Java sandbox. For more information, see [Java Sandbox](/help/en/maxcompute/user-guide/java-sandbox#concept-aln-lrf-vdb).
+    
+
+For more information about Graph, see [Graph](/help/en/maxcompute/user-guide/overview-14#concept-xtj-fwl-vdb).
+
+## Other limits
+
+The following table describes the maximum number of concurrent jobs that you can submit in a MaxCompute project in different regions.
+
+**Region**
+
+**Maximum number of concurrent jobs in a single MaxCompute project**
+
+China (Hangzhou), China (Shanghai), China (Beijing), China (Zhangjiakou), China (Ulanqab), China (Shenzhen), and China (Chengdu)
+
+2,500
+
+China (Hong Kong), Singapore, Malaysia (Kuala Lumpur), Indonesia (Jakarta), Japan (Tokyo), Germany (Frankfurt), US (Silicon Valley), US (Virginia), UK (London) and UAE (Dubai)
+
+1000
+
+If you continue to submit jobs when the number of concurrent jobs that you submit in a MaxCompute project reaches the upper limit, an error message appears. Sample error message: `com.aliyun.odps.OdpsException: Request rejected by flow control. You have exceeded the limit for the number of tasks you can run concurrently in this project. Please try later`.

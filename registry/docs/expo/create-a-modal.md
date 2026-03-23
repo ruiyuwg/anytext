@@ -6,7 +6,7 @@ React Native provides a [`<Modal>` component](https://reactnative.dev/docs/modal
 
 In this chapter, we'll create a modal that shows an emoji picker list.
 
-[Watch: Creating a modal in your universal Expo app](https://www.youtube.com/watch?v=HRAMzrBwVeo)
+[Watch: Creating a modal in your universal Expo app](https://www.youtube.com/watch?v=HRAMzrBwVeo) — Build a modal component using React Native's Modal API to display an emoji picker and handle user interactions.
 
 ## Declare a state variable to show buttons
 

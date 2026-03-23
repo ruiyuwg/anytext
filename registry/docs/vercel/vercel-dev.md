@@ -19,7 +19,7 @@ For example, [Next.js](/docs/frameworks/nextjs)'s Development Command (`next dev
 vercel dev
 ```
 
-*Using the vercel dev command from the root of a
+*Using the \`vercel dev\` command from the root of a
 Vercel Project directory.*
 
 ## Unique Options
@@ -34,8 +34,8 @@ The `--listen` option, shorthand `-l`, can be used to specify which port `vercel
 vercel dev --listen 5005
 ```
 
-*Using the vercel dev command with the
-\--listen option.*
+*Using the \`vercel dev\` command with the
+\`--listen\` option.*
 
 ### Yes
 
@@ -46,12 +46,12 @@ The questions will be answered with the default scope and current directory for 
 vercel dev --yes
 ```
 
-*Using the vercel dev command with the
-\--yes option.*
+*Using the \`vercel dev\` command with the
+\`--yes\` option.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -66,5 +66,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel dns"
 description: "Learn how to manage your DNS records for your domains using the vercel dns CLI command."
-last\_updated: "2026-03-08T05:03:12.126Z"
+last\_updated: "2026-03-23T09:40:06.682Z"
 source: "https://vercel.com/docs/cli/dns"

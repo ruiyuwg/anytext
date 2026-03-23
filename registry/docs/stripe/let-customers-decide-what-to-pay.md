@@ -2,9 +2,9 @@
 
 Accept tips and donations, or sell pay-what-you-want products and services.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/pay-what-you-want?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/pay-what-you-want?payment-ui=stripe-hosted.
 
 If you maintain your product catalog outside of Stripe, you might want to use [inline pricing](https://docs.stripe.com/products-prices/how-products-and-prices-work.md#inline-pricing). With inline pricing, you set inline prices for products or services when you create a Checkout Session.
 
@@ -36,7 +36,7 @@ To create a pay-what-you-want model on Stripe through the Dashboard, complete th
 
 2. Create the price for the `Fundraising dinner` product:
 
-   1. Click on **More pricing options** at the bottom.
+   1. Click **More pricing options** at the bottom.
    2. Select **One-off**.
    3. Select **Customer chooses price** in the **Choose your pricing model** dropdown.
    4. (Optional) Add a suggested price.
@@ -78,9 +78,9 @@ curl https://api.stripe.com/v1/checkout/sessions \
   --data-urlencode success_url="https://example.com/success"
 ```
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/pay-what-you-want?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/pay-what-you-want?payment-ui=embedded-form.
 
 If you maintain your product catalog outside of Stripe, you might want to use [inline pricing](https://docs.stripe.com/products-prices/how-products-and-prices-work.md#inline-pricing). With inline pricing, you set inline prices for products or services when you create a Checkout Session.
 
@@ -112,7 +112,7 @@ To create a pay-what-you-want model on Stripe through the Dashboard, complete th
 
 2. Create the price for the `Fundraising dinner` product:
 
-   1. Click on **More pricing options** at the bottom.
+   1. Click **More pricing options** at the bottom.
    2. Select **One-off**.
    3. Select **Customer chooses price** in the **Choose your pricing model** dropdown.
    4. (Optional) Add a suggested price.

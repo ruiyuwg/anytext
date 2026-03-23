@@ -237,12 +237,19 @@ export default defineNuxtConfig({
 
 ## payloadExtraction
 
-Enables extraction of payloads of pages generated with `nuxt generate`.
+Controls how payload data is delivered for prerendered and cached (ISR/SWR) pages.
+
+- `'client'` - Payload is inlined in HTML for the initial server render, and extracted to `_payload.json` files for client-side navigation. This avoids a separate network request on initial load while still enabling efficient client-side navigation.
+- `true` - Payload is extracted to a separate `_payload.json` file for both the initial server render and client-side navigation.
+- `false` - Payload extraction is disabled entirely. Payload is always inlined in HTML and no `_payload.json` files are generated.
+
+The default is `true`, or `'client'` when `compatibilityVersion: 5` is set.
 
 ```ts [nuxt.config.ts] twoslash
 export default defineNuxtConfig({
   experimental: {
-    payloadExtraction: true,
+    // Inline payload in HTML, extract for client-side navigation only
+    payloadExtraction: 'client',
   },
 })
 ```
@@ -252,7 +259,7 @@ Payload extraction also works for routes using ISR (Incremental Static Regenerat
 ```ts [nuxt.config.ts] twoslash
 export default defineNuxtConfig({
   experimental: {
-    payloadExtraction: true,
+    payloadExtraction: 'client',
   },
   routeRules: {
     // Payload files will be generated for these cached routes
@@ -779,7 +786,9 @@ export default defineNuxtConfig({
 
 ## decorators
 
-This option enables enabling decorator syntax across your entire Nuxt/Nitro app, powered by [esbuild](https://github.com/evanw/esbuild/releases/tag/v0.21.3){rel=""nofollow""}.
+This option enables decorator syntax across your entire Nuxt/Nitro app.
+
+When using the Vite builder (default), decorators are lowered via [Babel](https://babeljs.io/){rel=""nofollow""} using [`@babel/plugin-proposal-decorators`](https://babeljs.io/docs/babel-plugin-proposal-decorators){rel=""nofollow""}. When using the webpack or rspack builders, decorators are lowered via [esbuild](https://github.com/evanw/esbuild/releases/tag/v0.21.3){rel=""nofollow""}.
 
 For a long time, TypeScript has had support for decorators via `compilerOptions.experimentalDecorators`. This implementation predated the TC39 standardization process. Now, decorators are a [Stage 3 Proposal](https://github.com/tc39/proposal-decorators){rel=""nofollow""}, and supported without special configuration in TS 5.0+ (see <https://github.com/microsoft/TypeScript/pull/52582>{rel=""nofollow""} and <https://devblogs.microsoft.com/typescript/announcing-typescript-5-0-beta/#decorators>{rel=""nofollow""}).
 
@@ -798,6 +807,28 @@ export default defineNuxtConfig({
   },
 })
 ```
+
+When using the Vite builder or the Nitro server build, you will need to install additional Babel packages as dev dependencies:
+
+::code-group
+
+```bash [npm]
+npm install -D @babel/plugin-proposal-decorators @babel/plugin-syntax-jsx
+```
+
+```bash [pnpm]
+pnpm add -D @babel/plugin-proposal-decorators @babel/plugin-syntax-jsx
+```
+
+```bash [yarn]
+yarn add -D @babel/plugin-proposal-decorators @babel/plugin-syntax-jsx
+```
+
+::
+
+::tip
+Nuxt will prompt you to install these automatically if they are not already present.
+::
 
 ```ts [app/app.vue]
 function something (_method: () => unknown) {

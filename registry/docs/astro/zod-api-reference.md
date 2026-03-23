@@ -2,9 +2,9 @@
 
 [Zod](https://github.com/colinhacks/zod) is a TypeScript-based schema declaration and validation library. This allows you to define schemas you can use to validate data and transform data, from a simple type (e.g. `string`, `number`) to complex data structures (e.g. nested objects).
 
-The `astro/zod` module exposes a re-export of Zod that gives you access to all the features of Zod v3. By using this module, you do not need to install Zod yourself. This also ensures that your project uses the same API versions as Astro when using features such as [Content Collections](/en/guides/content-collections/) or [Actions](/en/guides/actions/).
+The `astro/zod` module exposes a re-export of Zod that gives you access to all the features of Zod v4. By using this module, you do not need to install Zod yourself. This also ensures that your project uses the same API versions as Astro when using features such as [Content Collections](/en/guides/content-collections/) or [Actions](/en/guides/actions/).
 
-See [Zod v3 website](https://v3.zod.dev/) for complete documentation on how Zod works and what features are available.
+See the [Zod website](https://zod.dev/) for complete documentation on how Zod works and what features are available.
 
 ## Imports from `astro/zod`
 
@@ -22,13 +22,13 @@ import { z } from 'astro/zod';
 
 The `z` utility gives you access to validators for a wide range of data types, methods and types for working with your data.
 
-Learn more about the `z` utility in [Zod documentation](https://v3.zod.dev/?id=basic-usage)
+Learn more about the `z` utility in [Zod documentation](https://zod.dev/basics)
 
 #### Common data type validators
 
 [Section titled “Common data type validators”](#common-data-type-validators)
 
-With Zod, you can validate any type of data, such as [primitives](https://v3.zod.dev/?id=primitives), [objects](https://v3.zod.dev/?id=objects), [arrays](https://v3.zod.dev/?id=arrays) and more.
+With Zod, you can validate any type of data, such as [primitives](https://zod.dev/api#primitives), [objects](https://zod.dev/api#objects), [arrays](https://zod.dev/api#arrays) and more.
 
 The following example shows a cheatsheet of many common Zod data types to create a `user` schema:
 
@@ -39,14 +39,14 @@ import { z } from 'astro/zod';
 const user = z.object({
   username: z.string(),
   name: z.string().min(2),
-  email: z.string().email(),
+  email: z.email(),
   role: z.enum(["admin", "editor"]),
   language: z.enum(["en", "fr", "es"]).default("en"),
   hobbies: z.array(z.string()),
   age: z.number(),
   isEmailConfirmed: z.boolean(),
   inscriptionDate: z.date(),
-  website: z.string().url().optional(),
+  website: z.url().optional(),
 });
 ```
 
@@ -54,7 +54,7 @@ const user = z.object({
 
 [Section titled “Extracting a Typescript type”](#extracting-a-typescript-type)
 
-Zod allows you to create a Typescript type from any schema [using Zod type inference](https://v3.zod.dev/?id=type-inference). This can be useful for describing an expected data structure when [defining component props](/en/guides/typescript/#component-props).
+Zod allows you to create a Typescript type from any schema [using Zod type inference](https://zod.dev/basics#inferring-types). This can be useful for describing an expected data structure when [defining component props](/en/guides/typescript/#component-props).
 
 The following example create a `User` type based on the previous schema:
 
@@ -82,13 +82,11 @@ type User = z.infer<typeof user>;
 
 [Section titled “Using Zod methods”](#using-zod-methods)
 
-Zod provides various [schema methods](https://v3.zod.dev/?id=schema-methods) to customize error messages, transform data, or create custom validation logics.
+Zod provides various schema methods to [customize error messages](https://zod.dev/error-customization), [transform data](https://zod.dev/api#transforms), or create [custom validation logics](https://zod.dev/api#refinements).
 
 ```ts
 // Customize the error message
-const nonEmptyStrings = z.string().array().nonempty({
-  message: "Can't be empty!",
-});
+const nonEmptyStrings = z.array(z.string()).nonempty("Can't be empty!");
 
 
 // Validate a data from a schema
@@ -105,7 +103,7 @@ const decorativeImg = z.string().transform((value) => {
 const constrainedString = z
   .string()
   .refine((val) => val.length > 0 && val.length <= 255, {
-    message: "Must be between 1 and 255 characters.",
+    error: "Must be between 1 and 255 characters.",
   });
 ```
 

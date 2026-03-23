@@ -1,0 +1,175 @@
+-   [Home](https://docs.cloud.google.com/)
+-   [Documentation](https://docs.cloud.google.com/docs)
+-   [Developer tools](https://docs.cloud.google.com/docs/costs-usage)
+-   [PHP](https://docs.cloud.google.com/php/docs)
+-   [Client libraries](https://docs.cloud.google.com/php/docs/reference)
+
+Send feedback
+
+# Google Cloud Document Ai V1 Client - Class Line (2.0.0) Stay organized with collections Save and categorize content based on your preferences.
+
+2.6.1 (latest) 2.6.0 2.5.1 2.4.1 2.3.0 2.2.2 2.1.3 2.0.0 1.14.0 1.13.1 1.12.2 1.9.0 1.8.2 1.7.0 1.6.0 1.5.0 1.4.0 1.3.0 1.2.2 1.1.1 1.0.1
+
+Reference documentation and code samples for the Google Cloud Document Ai V1 Client class Line.
+
+A collection of tokens that a human would perceive as a line.
+
+Does not cross column boundaries, can be horizontal, vertical, etc.
+
+Generated from protobuf message `google.cloud.documentai.v1.Document.Page.Line`
+
+## Namespace
+
+Google \\ Cloud \\ DocumentAI \\ V1 \\ Document \\ Page
+
+## Methods
+
+### \_\_construct
+
+Constructor.
+
+**Parameters**
+
+**Name**
+
+**Description**
+
+`data`
+
+`array`  
+
+Optional. Data for populating the Message object.
+
+`↳ layout`
+
+`[Google\Cloud\DocumentAI\V1\Document\Page\Layout](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Page.Layout)`  
+
+[Layout](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Page.Layout) for [Line](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Page.Line).
+
+`↳ detected_languages`
+
+`array<[Google\Cloud\DocumentAI\V1\Document\Page\DetectedLanguage](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Page.DetectedLanguage)>`  
+
+A list of detected languages together with confidence.
+
+`↳ provenance`
+
+`[Google\Cloud\DocumentAI\V1\Document\Provenance](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Provenance)`  
+
+The history of this annotation.
+
+### getLayout
+
+[Layout](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Page.Layout) for [Line](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Page.Line).
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Google\Cloud\DocumentAI\V1\Document\Page\Layout](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Page.Layout)|null`
+
+### hasLayout
+
+### clearLayout
+
+### setLayout
+
+[Layout](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Page.Layout) for [Line](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Page.Line).
+
+**Parameter**
+
+**Name**
+
+**Description**
+
+`var`
+
+`[Google\Cloud\DocumentAI\V1\Document\Page\Layout](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Page.Layout)`  
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`$this`
+
+### getDetectedLanguages
+
+A list of detected languages together with confidence.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Google\Protobuf\Internal\RepeatedField](https://protobuf.dev/reference/php/api-docs/Google/Protobuf/Internal/RepeatedField)`
+
+### setDetectedLanguages
+
+A list of detected languages together with confidence.
+
+**Parameter**
+
+**Name**
+
+**Description**
+
+`var`
+
+`array<[Google\Cloud\DocumentAI\V1\Document\Page\DetectedLanguage](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Page.DetectedLanguage)>`  
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`$this`
+
+### getProvenance
+
+The history of this annotation.
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`[Google\Cloud\DocumentAI\V1\Document\Provenance](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Provenance)|null`
+
+### hasProvenance
+
+### clearProvenance
+
+### setProvenance
+
+The history of this annotation.
+
+**Parameter**
+
+**Name**
+
+**Description**
+
+`var`
+
+`[Google\Cloud\DocumentAI\V1\Document\Provenance](/php/docs/reference/cloud-document-ai/2.0.0/V1.Document.Provenance)`  
+
+**Returns**
+
+**Type**
+
+**Description**
+
+`$this`
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-03-18 UTC.

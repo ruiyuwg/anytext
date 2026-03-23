@@ -4,26 +4,22 @@
 
 Sending users from one URL to another. In Next.js, redirects can be configured in [`next.config.js`](/docs/app/api-reference/config/next-config-js/redirects), returned from [Proxy](/docs/app/api-reference/file-conventions/proxy), or triggered programmatically with the [`redirect()` function](/docs/app/api-reference/functions/redirect). Learn more in [Redirecting](/docs/app/guides/redirecting).
 
-## Request time
-
-The time when a user makes a request to your application. At request time, dynamic routes are rendered, cookies and headers are accessible, and request-specific data can be used.
-
 ## Request-time APIs
 
-Functions that access request-specific data, causing a component to opt into [request-time rendering](#request-time-rendering). These include:
+Functions that access request-specific data, causing a component to opt into [dynamic rendering](#dynamic-rendering). These include:
 
 - [`cookies()`](/docs/app/api-reference/functions/cookies) - Access request cookies
 - [`headers()`](/docs/app/api-reference/functions/headers) - Access request headers
 - [`searchParams`](/docs/app/api-reference/file-conventions/page#searchparams-optional) - Access URL query parameters
 - [`draftMode()`](/docs/app/api-reference/functions/draft-mode) - Enable or check draft mode
 
-## Request-time rendering
+## Runtime rendering
 
-When a component is rendered at [request time](#request-time) rather than [build time](#build-time). A component becomes dynamic when it uses [Request-time APIs](#request-time-apis).
+See [Dynamic rendering](#dynamic-rendering).
 
 ## Revalidation
 
-The process of updating cached data. Can be time-based (using [`cacheLife()`](/docs/app/api-reference/functions/cacheLife) to set cache duration) or on-demand (using [`cacheTag()`](/docs/app/api-reference/functions/cacheTag) to tag data, then [`updateTag()`](/docs/app/api-reference/functions/updateTag) to invalidate). Learn more in [Caching and Revalidating](/docs/app/getting-started/caching-and-revalidating).
+The process of updating cached data. Can be time-based (using [`cacheLife()`](/docs/app/api-reference/functions/cacheLife) to set cache duration) or on-demand (using [`cacheTag()`](/docs/app/api-reference/functions/cacheTag) to tag data, then [`updateTag()`](/docs/app/api-reference/functions/updateTag) to invalidate). Learn more in [Caching and Revalidating](/docs/app/getting-started/caching).
 
 ## Rewrite
 

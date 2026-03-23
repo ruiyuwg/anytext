@@ -2,24 +2,67 @@
 
 These are the docs for our 'Classic' React Query integration, which (while still supported) is not the recommended way to start new tRPC projects with TanStack React Query. We recommend using the new [TanStack React Query Integration](/docs/client/tanstack-react-query/setup) instead.
 
-tRPC offers a first class integration with React. Under the hood this is simply a wrapper around the very popular [@tanstack/react-query](https://tanstack.com/query/latest), so we recommend that you familiarise yourself with React Query, as their docs go in to much greater depth on its usage.
+tRPC offers a first class integration with React. Under the hood this is simply a wrapper around the very popular [@tanstack/react-query](https://tanstack.com/query/latest), so we recommend that you familiarize yourself with React Query, as their docs go into much greater depth on its usage.
 
-If you are using Next.js we recommend using [our integration with that](../nextjs/introduction.mdx) instead.
+If you are using Next.js we recommend using [our integration with that](../nextjs/overview.mdx) instead.
 
 ❓ Do I have to use an integration?
 
 No! The integration is fully optional. You can use `@tanstack/react-query` using just a [vanilla tRPC client](/docs/client/vanilla), although then you'll have to manually manage query keys and do not get the same level of DX as when using the integration package.
 
-```ts title='utils/trpc.ts'
+```ts twoslash title='utils/trpc.ts'
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  post: t.router({
+    list: t.procedure.query(() => {
+      return [{ id: 1, title: 'everlong' }];
+    }),
+  }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.ts
+// ---cut---
+import { createTRPCClient, httpBatchLink } from '@trpc/client';
+import type { AppRouter } from '../server';
+
 export const trpc = createTRPCClient<AppRouter>({
-  links: [httpBatchLink({ url: "YOUR_API_URL" })],
+  links: [httpBatchLink({ url: 'YOUR_API_URL' })],
 });
 ```
 
-```tsx title='components/PostList.tsx'
+```tsx twoslash title='components/PostList.tsx'
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  post: t.router({
+    list: t.procedure.query(() => {
+      return [{ id: 1, title: 'everlong' }];
+    }),
+  }),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.ts
+import { createTRPCClient, httpBatchLink } from '@trpc/client';
+import type { AppRouter } from '../server';
+export const trpc = createTRPCClient<AppRouter>({
+  links: [httpBatchLink({ url: 'YOUR_API_URL' })],
+});
+
+// @filename: components/PostList.tsx
+// ---cut---
+import { useQuery } from '@tanstack/react-query';
+import { trpc } from '../utils/trpc';
+
 function PostList() {
   const { data } = useQuery({
-    queryKey: ["posts"],
+    queryKey: ['posts'],
     queryFn: () => trpc.post.list.query(),
   });
   data; // Post[]
@@ -30,13 +73,33 @@ function PostList() {
 
 ### The tRPC React Query Integration
 
-This library enables usage directly within React components
+This library enables usage directly within React components.
 
-```tsx title='pages/IndexPage.tsx'
-import { trpc } from "../utils/trpc";
+```tsx twoslash title='pages/IndexPage.tsx'
+// @filename: server.ts
+import { initTRPC } from '@trpc/server';
+import { z } from 'zod';
+const t = initTRPC.create();
+const appRouter = t.router({
+  hello: t.procedure
+    .input(z.object({ name: z.string() }))
+    .query(({ input }) => ({ greeting: `Hello ${input.name}` })),
+  goodbye: t.procedure.mutation(() => 'goodbye'),
+});
+export type AppRouter = typeof appRouter;
+
+// @filename: utils/trpc.tsx
+import { createTRPCReact } from '@trpc/react-query';
+import type { AppRouter } from '../server';
+export const trpc = createTRPCReact<AppRouter>();
+
+// @filename: pages/IndexPage.tsx
+import React from 'react';
+// ---cut---
+import { trpc } from '../utils/trpc';
 
 export default function IndexPage() {
-  const helloQuery = trpc.hello.useQuery({ name: "Bob" });
+  const helloQuery = trpc.hello.useQuery({ name: 'Bob' });
   const goodbyeMutation = trpc.goodbye.useMutation();
 
   return (

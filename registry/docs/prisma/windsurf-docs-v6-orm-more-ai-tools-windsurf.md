@@ -48,7 +48,7 @@ To implement these rules, create a `.windsurfrules` file in the root of your pro
 
   </summary>
 
-```text title=".windsurfrules" showLineNumbers
+```text title=".windsurfrules"
 You are a senior TypeScript/JavaScript programmer with expertise in Prisma, clean code principles, and modern backend development.
 Generate code, corrections, and refactorings that comply with the following guidelines:
 TypeScript General Guidelines

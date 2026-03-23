@@ -11,10 +11,10 @@ For now, specifying `arraySize` along with `isUnique` in generators that support
 <rem025 />
 Generates the same given value each time the generator is called.
 
-|     | param          | default | type     |
-| :-- | :------------- | :------ | :------- |
-|     | `defaultValue` | --      | `any`    |
-|     | `arraySize`    | --      | `number` |
+|  | param          | default     | type
+|:-| :--------      | :--------   | :--------
+|  |`defaultValue`  |--           |`any`
+|  |`arraySize`     |--           |`number`
 
 <rem025 />
 
@@ -28,13 +28,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
         // value you want to generate
         defaultValue: "post content",
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `valuesFromArray`
@@ -42,11 +43,11 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates values from given array
 
-|     | param       | default                      | type      |
-| :-- | :---------- | :--------------------------- | :-------- | ------------------------------------- |
-|     | `values`    | --                           | `any[]`   | `{ weight: number; values: any[] }[]` |
-|     | `isUnique`  | `database column uniqueness` | `boolean` |
-|     | `arraySize` | --                           | `number`  |
+|  | param      | default                     | type
+|:-| :--------  | :--------                   | :--------
+|  |`values`    |--                           |`any[]` | `{ weight: number; values: any[] }[]`
+|  |`isUnique`  |`database column uniqueness` |`boolean`
+|  |`arraySize` |--                           |`number`
 
 <rem025 />
 ```ts 
@@ -62,8 +63,8 @@ values: \["Title1", "Title2", "Title3", "Title4", "Title5"],
 ```
     // Property that controls whether the generated values will be unique or not
     isUnique: true,
-
-    // number of elements in each one-dimensional array.
+    
+    // number of elements in each one-dimensional array. 
     // (If specified, arrays will be generated.)
     arraySize: 3
   }),
@@ -86,7 +87,7 @@ Generates sequential integers starting from 1.
 
 <rem025 />
 
-```ts
+```ts 
 import { seed } from "drizzle-seed";
 
 await seed(db, schema, { count: 1000 }).refine((funcs) => ({
@@ -104,13 +105,13 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates numbers with a floating point within the given range
 
-|     | param       | default                                                                                           | type      |
-| :-- | :---------- | :------------------------------------------------------------------------------------------------ | :-------- |
-|     | `isUnique`  | `database column uniqueness`                                                                      | `boolean` |
-|     | `precision` | `100`                                                                                             | `number`  |
-|     | `maxValue`  | `` `precision * 1000` if isUnique equals false`` `` `precision * count` if isUnique equals true`` | `number`  |
-|     | `minValue`  | `-maxValue`                                                                                       | `number`  |
-|     | `arraySize` | --                                                                                                | `number`  |
+|  | param      | default                                                                                               | type
+|:-| :--------  | :--------                                                                                             | :--------
+|  |`isUnique`  |`database column uniqueness`                                                                           |`boolean`
+|  |`precision` |`100`                                                                                                  |`number`
+|  |`maxValue`  |`` `precision * 1000` if isUnique equals false`` `` `precision * count` if isUnique equals true``  |`number`
+|  |`minValue`  |`-maxValue`                                                                                            |`number`
+|  |`arraySize` |--                                                                                                     |`number`
 
 <rem025 />
 ```ts 
@@ -126,7 +127,7 @@ minValue: 10,
 ```
     // upper border of range.
     maxValue: 120,
-
+    
     // precision of generated number:
     // precision equals 10 means that values will be accurate to one tenth (1.2, 34.6);
     // precision equals 100 means that values will be accurate to one hundredth (1.23, 34.67).
@@ -135,7 +136,7 @@ minValue: 10,
     // property that controls if generated values gonna be unique or not.
     isUnique: false,
 
-    // number of elements in each one-dimensional array.
+    // number of elements in each one-dimensional array. 
     // (If specified, arrays will be generated.)
     arraySize: 3
   }),
@@ -160,7 +161,7 @@ Generates integers within the given range
 |  |`arraySize` |--                                                                                  |`number`
 
 <rem025 />
-```ts
+```ts 
 import { seed } from "drizzle-seed";
 
 await seed(db, schema, { count: 1000 }).refine((funcs) => ({
@@ -176,7 +177,7 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
         // property that controls if generated values gonna be unique or not.
         isUnique: false,
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
         arraySize: 3
       }),
@@ -191,9 +192,9 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates boolean values (true or false)
 
-|     | param       | default | type     |
-| :-- | :---------- | :------ | :------- |
-|     | `arraySize` | --      | `number` |
+|  | param      | default    | type
+|:-| :--------  | :--------  | :--------
+|  |`arraySize` |--          |`number`
 
 <rem025 />
 ```ts 
@@ -229,7 +230,7 @@ If only one of the parameters (`minDate` or `maxDate`) is provided, the unspecif
 </Callout>
 
 <rem025 />
-```ts
+```ts 
 import { seed } from "drizzle-seed";
 
 await seed(db, schema, { count: 1000 }).refine((funcs) => ({
@@ -242,7 +243,7 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
         // upper border of range.
         maxDate: "2010-12-31",
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
         arraySize: 3
       }),
@@ -257,9 +258,9 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates time in 24-hour format
 
-|     | param       | default | type     |
-| :-- | :---------- | :------ | :------- |
-|     | `arraySize` | --      | `number` |
+|  | param      | default    | type
+|:-| :--------  | :--------  | :--------
+|  |`arraySize` |--          |`number`
 
 <rem025 />
 ```ts 
@@ -289,14 +290,14 @@ Generates timestamps
 |  |`arraySize` |--          |`number`
 
 <rem025 />
-```ts
+```ts 
 import { seed } from "drizzle-seed";
 
 await seed(db, schema, { count: 1000 }).refine((funcs) => ({
   orders: {
     columns: {
       shippedDate: funcs.timestamp({
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
         arraySize: 3
       }),
@@ -311,9 +312,9 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates datetime objects
 
-|     | param       | default | type                |
-| :-- | :---------- | :------ | :------------------ |
-|     | `arraySize` | --      | `number` <rem025 /> |
+|  | param      | default    | type
+|:-| :--------  | :--------  | :--------
+|  |`arraySize` |--          |`number` <rem025 />
 
 ```ts
 import { seed } from "drizzle-seed";
@@ -322,13 +323,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
   orders: {
     columns: {
       shippedDate: funcs.datetime({
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `year`
@@ -336,9 +338,9 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates years in `YYYY` format
 
-|     | param       | default | type     |
-| :-- | :---------- | :------ | :------- |
-|     | `arraySize` | --      | `number` |
+|  | param      | default    | type
+|:-| :--------  | :--------  | :--------
+|  |`arraySize` |--          |`number`
 
 <rem025 />
 ```ts 
@@ -373,9 +375,9 @@ Generates JSON objects with a fixed structure
 
 > The JSON structure will be picked randomly
 
-|     | param       | default | type     |
-| :-- | :---------- | :------ | :------- |
-|     | `arraySize` | --      | `number` |
+|  | param      | default    | type
+|:-| :--------  | :--------  | :--------
+|  |`arraySize` |--          |`number`
 
 <rem025 />
 ```ts 
@@ -408,7 +410,7 @@ Example of a generated value: `1 year 12 days 5 minutes`
 |  |`arraySize` |--                           |`number`
 
 <rem025 />
-```ts
+```ts 
 import { seed } from "drizzle-seed";
 
 await seed(db, schema, { count: 1000 }).refine((funcs) => ({
@@ -418,7 +420,7 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
         // `isUnique` - property that controls whether the generated values will be unique or not
         isUnique: true,
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
         arraySize: 3
       }),
@@ -433,10 +435,10 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates random strings
 
-|     | param       | default                      | type      |
-| :-- | :---------- | :--------------------------- | :-------- |
-|     | `isUnique`  | `database column uniqueness` | `boolean` |
-|     | `arraySize` | --                           | `number`  |
+|  | param      | default                     | type
+|:-| :--------  | :--------                   | :--------
+|  |`isUnique`  |`database column uniqueness` |`boolean`
+|  |`arraySize` |--                           |`number`
 
 <rem025 />
 ```ts 
@@ -450,7 +452,7 @@ hashedPassword: funcs.string({
 isUnique: false,
 
 ```
-    // number of elements in each one-dimensional array.
+    // number of elements in each one-dimensional array. 
     // (If specified, arrays will be generated.)
     arraySize: 3
   }),
@@ -472,13 +474,13 @@ Generates v4 UUID strings
 |  |`arraySize` |--          |`number`
 
 <rem025 />
-```ts
+```ts 
 import { seed } from "drizzle-seed";
 await seed(db, schema, { count: 1000 }).refine((funcs) => ({
   products: {
     columns: {
       id: funcs.uuid({
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
         arraySize: 3
       }),
@@ -492,10 +494,10 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates a person's first name
 
-|     | param       | default                      | type      |
-| :-- | :---------- | :--------------------------- | :-------- |
-|     | `isUnique`  | `database column uniqueness` | `boolean` |
-|     | `arraySize` | --                           | `number`  |
+|  | param      | default                     | type
+|:-| :--------  | :--------                   | :--------
+|  |`isUnique`  |`database column uniqueness` |`boolean`
+|  |`arraySize` |--                           |`number`
 
 <rem025 />
 ```ts 
@@ -509,7 +511,7 @@ firstName: funcs.firstName({
 isUnique: true,
 
 ```
-    // number of elements in each one-dimensional array.
+    // number of elements in each one-dimensional array. 
     // (If specified, arrays will be generated.)
     arraySize: 3
   }),
@@ -532,7 +534,7 @@ Generates a person's last name
 |  |`arraySize` |--                           |`number`
 
 <rem025 />
-```ts
+```ts 
 import { seed } from "drizzle-seed";
 
 await seed(db, schema, { count: 1000 }).refine((funcs) => ({
@@ -541,8 +543,8 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
       lastName: funcs.lastName({
         // `isUnique` - property that controls whether the generated values will be unique or not
         isUnique: false,
-
-        // number of elements in each one-dimensional array.
+        
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
         arraySize: 3
       }),
@@ -557,10 +559,10 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates a person's full name
 
-|     | param       | default                      | type      |
-| :-- | :---------- | :--------------------------- | :-------- |
-|     | `isUnique`  | `database column uniqueness` | `boolean` |
-|     | `arraySize` | --                           | `number`  |
+|  | param      | default                     | type
+|:-| :--------  | :--------                   | :--------
+|  |`isUnique`  |`database column uniqueness` |`boolean`
+|  |`arraySize` |--                           |`number`
 
 <rem025 />
 ```ts 
@@ -574,7 +576,7 @@ fullName: funcs.fullName({
 isUnique: true,
 
 ```
-    // number of elements in each one-dimensional array.
+    // number of elements in each one-dimensional array. 
     // (If specified, arrays will be generated.)
     arraySize: 3
   }),
@@ -596,14 +598,14 @@ Generates unique email addresses
 |  |`arraySize` |--          |`number`
 
 <rem025 />
-```ts
+```ts 
 import { seed } from "drizzle-seed";
 
 await seed(db, schema, { count: 1000 }).refine((funcs) => ({
   users: {
     columns: {
       email: funcs.email({
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
         arraySize: 3
       }),
@@ -618,12 +620,12 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates unique phone numbers
 
-|     | param                    | default                                                                                                                     | type                 |
-| :-- | :----------------------- | :-------------------------------------------------------------------------------------------------------------------------- | :------------------- |
-|     | `template`               | --                                                                                                                          | `string`             |
-|     | `prefixes`               | [Used dataset for prefixes](https://github.com/OleksiiKH0240/drizzle-orm/blob/main/drizzle-seed/src/datasets/phonesInfo.ts) | `string[]`           |
-|     | `generatedDigitsNumbers` | `7` - `if prefixes was defined`                                                                                             | `number \| number[]` |
-|     | `arraySize`              | --                                                                                                                          | `number`             |
+|  | param                    | default                                         | type
+|:-| :--------                | :--------                                       | :--------
+|  |`template`                |--                                               |`string`
+|  |`prefixes`                |[Used dataset for prefixes](https://github.com/OleksiiKH0240/drizzle-orm/blob/main/drizzle-seed/src/datasets/phonesInfo.ts)   |`string[]`
+|  |`generatedDigitsNumbers`  | `7` - `if prefixes was defined`                 |`number \| number[]`
+|  |`arraySize`               |--                                               |`number`
 
 <rem025 />
 ```ts 
@@ -638,7 +640,7 @@ phoneNumber: funcs.phoneNumber({
 template: "+(380) ###-####",
 
 ```
-    // number of elements in each one-dimensional array.
+    // number of elements in each one-dimensional array. 
     // (If specified, arrays will be generated.)
     arraySize: 3
   }),
@@ -649,7 +651,7 @@ template: "+(380) ###-####",
 }));
 
 ````
-```ts
+```ts 
 import { seed } from "drizzle-seed";
 
 //generate phone number using prefixes and generatedDigitsNumbers properties
@@ -663,7 +665,7 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
         // `generatedDigitsNumbers` - number of digits that will be added at the end of prefixes.(not compatible with `template` property)
         generatedDigitsNumbers: 7,
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
         arraySize: 3
       }),
@@ -687,13 +689,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
         // `generatedDigitsNumbers` - number of digits that will be added at the end of prefixes.(not compatible with `template` property)
         generatedDigitsNumbers: [7, 7, 10],
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `country`
@@ -701,10 +704,10 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates country's names
 
-|     | param       | default                      | type      |
-| :-- | :---------- | :--------------------------- | :-------- |
-|     | `isUnique`  | `database column uniqueness` | `boolean` |
-|     | `arraySize` | --                           | `number`  |
+|  | param      | default                     | type
+|:-| :--------  | :--------                   | :--------
+|  |`isUnique`  |`database column uniqueness` |`boolean`
+|  |`arraySize` |--                           |`number`
 
 <rem025 />
 
@@ -717,14 +720,15 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
       country: funcs.country({
         // `isUnique` - property that controls whether the generated values will be unique or not
         isUnique: false,
-
-        // number of elements in each one-dimensional array.
+        
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `city`
@@ -732,10 +736,10 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates city's names
 
-|     | param       | default                      | type      |
-| :-- | :---------- | :--------------------------- | :-------- |
-|     | `isUnique`  | `database column uniqueness` | `boolean` |
-|     | `arraySize` | --                           | `number`  |
+|  | param      | default                     | type
+|:-| :--------  | :--------                   | :--------
+|  |`isUnique`  |`database column uniqueness` |`boolean`
+|  |`arraySize` |--                           |`number`
 
 <rem025 />
 
@@ -749,13 +753,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
         // `isUnique` - property that controls whether the generated values will be unique or not
         isUnique: false,
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `streetAddress`
@@ -763,10 +768,10 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates street address
 
-|     | param       | default                      | type      |
-| :-- | :---------- | :--------------------------- | :-------- |
-|     | `isUnique`  | `database column uniqueness` | `boolean` |
-|     | `arraySize` | --                           | `number`  |
+|  | param      | default                     | type
+|:-| :--------  | :--------                   | :--------
+|  |`isUnique`  |`database column uniqueness` |`boolean`
+|  |`arraySize` |--                           |`number`
 
 <rem025 />
 
@@ -779,14 +784,15 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
       streetAddress: funcs.streetAddress({
         // `isUnique` - property that controls whether the generated values will be unique or not
         isUnique: false,
-
-        // number of elements in each one-dimensional array.
+        
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3 
       }),
     },
   },
 }));
+
 ```
 
 ### `jobTitle`
@@ -794,9 +800,9 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates job titles
 
-|     | param       | default | type     |
-| :-- | :---------- | :------ | :------- |
-|     | `arraySize` | --      | `number` |
+|  | param      | default    | type
+|:-| :--------  | :--------  | :--------
+|  |`arraySize` |--          |`number`
 
 <rem025 />
 
@@ -807,13 +813,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
   users: {
     columns: {
       jobTitle: funcs.jobTitle({
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `postcode`
@@ -821,10 +828,10 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates postal codes
 
-|     | param       | default                      | type      |
-| :-- | :---------- | :--------------------------- | :-------- |
-|     | `isUnique`  | `database column uniqueness` | `boolean` |
-|     | `arraySize` | --                           | `number`  |
+|  | param      | default                     | type
+|:-| :--------  | :--------                   | :--------
+|  |`isUnique`  |`database column uniqueness` |`boolean`
+|  |`arraySize` |--                           |`number`
 
 <rem025 />
 
@@ -838,13 +845,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
         // `isUnique` - property that controls whether the generated values will be unique or not
         isUnique: true,
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `state`
@@ -852,9 +860,9 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates US states
 
-|     | param       | default | type     |
-| :-- | :---------- | :------ | :------- |
-|     | `arraySize` | --      | `number` |
+|  | param      | default    | type
+|:-| :--------  | :--------  | :--------
+|  |`arraySize` |--          |`number`
 
 <rem025 />
 
@@ -865,13 +873,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
   users: {
     columns: {
       state: funcs.state({
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `companyName`
@@ -879,10 +888,10 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates random company's names
 
-|     | param       | default                      | type      |
-| :-- | :---------- | :--------------------------- | :-------- |
-|     | `isUnique`  | `database column uniqueness` | `boolean` |
-|     | `arraySize` | --                           | `number`  |
+|  | param      | default                     | type
+|:-| :--------  | :--------                   | :--------
+|  |`isUnique`  |`database column uniqueness` |`boolean`
+|  |`arraySize` |--                           |`number`
 
 <rem025 />
 
@@ -892,17 +901,18 @@ import { seed } from "drizzle-seed";
 await seed(db, schema, { count: 1000 }).refine((funcs) => ({
   users: {
     columns: {
-      company: funcs.companyName({
+      company: funcs.companyName({ 
         // `isUnique` - property that controls whether the generated values will be unique or not
         isUnique: true,
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `loremIpsum`
@@ -910,10 +920,10 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates `lorem ipsum` text sentences.
 
-|     | param            | default | type     |
-| :-- | :--------------- | :------ | :------- |
-|     | `sentencesCount` | 1       | `number` |
-|     | `arraySize`      | --      | `number` |
+|  | param            | default    | type
+|:-| :--------        | :--------  | :--------
+|  |`sentencesCount`  | 1          |`number`
+|  |`arraySize`       |--          |`number`
 
 <rem025 />
 
@@ -927,13 +937,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
         // `sentencesCount` - number of sentences you want to generate as one generated value(string).
         sentencesCount: 2,
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `point`
@@ -941,14 +952,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates 2D points within specified ranges for x and y coordinates.
 
-|     | param       | default                                                                             | type      |
-| :-- | :---------- | :---------------------------------------------------------------------------------- | :-------- |
-|     | `isUnique`  | `database column uniqueness`                                                        | `boolean` |
-|     | `maxXValue` | `` `10 * 1000` if isUnique equals false`` `` `10 * count` if isUnique equals true`` | `number`  |
-|     | `minXValue` | `-maxXValue`                                                                        | `number`  |
-|     | `maxYValue` | `` `10 * 1000` if isUnique equals false`` `` `10 * count` if isUnique equals true`` | `number`  |
-|     | `minYValue` | `-maxYValue`                                                                        | `number`  |
-|     | `arraySize` | --                                                                                  | `number`  |
+|  | param       | default                                                                                 | type
+|:-| :--------   | :--------                                                                               | :--------
+|  |`isUnique`   |`database column uniqueness`                                                             |`boolean`
+|  |`maxXValue`  |`` `10 * 1000` if isUnique equals false`` `` `10 * count` if isUnique equals true``  |`number`
+|  |`minXValue`  |`-maxXValue`                                                                             |`number`
+|  |`maxYValue`  |`` `10 * 1000` if isUnique equals false`` `` `10 * count` if isUnique equals true``  |`number`
+|  |`minYValue`  |`-maxYValue`                                                                             |`number`
+|  |`arraySize`  |--                                                                                       |`number`
 
 <rem025 />
 
@@ -974,13 +985,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
         // `maxYValue` - upper bound of range for y coordinate.
         maxYValue: 30,
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `line`
@@ -992,16 +1004,16 @@ Generates 2D lines within specified ranges for a, b and c parameters of line.
 line equation: a*x + b*y + c = 0
 ```
 
-|     | param       | default                                                                             | type                |
-| :-- | :---------- | :---------------------------------------------------------------------------------- | :------------------ |
-|     | `isUnique`  | `database column uniqueness`                                                        | `boolean`           |
-|     | `maxAValue` | `` `10 * 1000` if isUnique equals false`` `` `10 * count` if isUnique equals true`` | `number`            |
-|     | `minAValue` | `-maxAValue`                                                                        | `number`            |
-|     | `maxBValue` | `` `10 * 1000` if isUnique equals false`` `` `10 * count` if isUnique equals true`` | `number`            |
-|     | `minBValue` | `-maxBValue`                                                                        | `number`            |
-|     | `maxCValue` | `` `10 * 1000` if isUnique equals false`` `` `10 * count` if isUnique equals true`` | `number`            |
-|     | `minCValue` | `-maxCValue`                                                                        | `number`            |
-|     | `arraySize` | --                                                                                  | `number` <rem025 /> |
+|  | param       | default                                                                                 | type
+|:-| :--------   | :--------                                                                               | :--------
+|  |`isUnique`   |`database column uniqueness`                                                             |`boolean`
+|  |`maxAValue`  |`` `10 * 1000` if isUnique equals false`` `` `10 * count` if isUnique equals true``  |`number`
+|  |`minAValue`  |`-maxAValue`                                                                             |`number`
+|  |`maxBValue`  |`` `10 * 1000` if isUnique equals false`` `` `10 * count` if isUnique equals true``  |`number`
+|  |`minBValue`  |`-maxBValue`                                                                             |`number`
+|  |`maxCValue`  |`` `10 * 1000` if isUnique equals false`` `` `10 * count` if isUnique equals true``  |`number`
+|  |`minCValue`  |`-maxCValue`                                                                             |`number`
+|  |`arraySize`  |--                                                                                       |`number` <rem025 />
 
 ```ts
 import { seed } from "drizzle-seed";
@@ -1031,13 +1043,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
         // `maxCValue` - upper bound of range for y parameter.
         maxCValue: 10,
 
-        // number of elements in each one-dimensional array.
+        // number of elements in each one-dimensional array. 
         // (If specified, arrays will be generated.)
-        arraySize: 3,
+        arraySize: 3
       }),
     },
   },
 }));
+
 ```
 
 ### `bitString`
@@ -1045,11 +1058,11 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates bit strings based on specified parameters.
 
-|     | param        | default                      | type                |
-| :-- | :----------- | :--------------------------- | :------------------ |
-|     | `isUnique`   | `database column uniqueness` | `boolean`           |
-|     | `dimensions` | `database column bit-length` | `number`            |
-|     | `arraySize`  | --                           | `number` <rem025 /> |
+|  | param       | default                                                                                 | type
+|:-| :--------   | :--------                                                                               | :--------
+|  |`isUnique`   |`database column uniqueness`                                                             |`boolean`
+|  |`dimensions` |`database column bit-length`                                                             |`number`
+|  |`arraySize`  |--                                                                                       |`number` <rem025 />
 
 ```ts
 import { seed } from "drizzle-seed";
@@ -1070,6 +1083,7 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
     },
   },
 }));
+
 ```
 
 ### `inet`
@@ -1077,12 +1091,12 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates ip addresses based on specified parameters.
 
-|     | param         | default                      | type                 |
-| :-- | :------------ | :--------------------------- | :------------------- |
-|     | `isUnique`    | `database column uniqueness` | `boolean`            |
-|     | `arraySize`   | --                           | `number`             |
-|     | `ipAddress`   | `'ipv4'`                     | `'ipv4' \| 'ipv6'`   |
-|     | `includeCidr` | `true`                       | `boolean` <rem025 /> |
+|  | param       | default                                                                                 | type
+|:-| :--------   | :--------                                                                               | :--------
+|  |`isUnique`   |`database column uniqueness`                                                             |`boolean`
+|  |`arraySize`  |--                                                                                       |`number`
+|  |`ipAddress`  |`'ipv4'`                                                                                 |`'ipv4' \| 'ipv6'`
+|  |`includeCidr`|`true`                                                                                   |`boolean` <rem025 />
 
 ```ts
 import { seed } from "drizzle-seed";
@@ -1127,8 +1141,8 @@ This bug is already in the backlog.
 import { seed } from "drizzle-seed";
 import { geometry, pgTable } from 'drizzle-orm/pg-core';
 
-const geometryTable = pgTable('geometry_table', {
-geometryArray: geometry('geometry_array', { type: 'point', srid: 0 }).array(3),
+const geometryTable = pgTable('geometry\_table', {
+geometryArray: geometry('geometry\_array', { type: 'point', srid: 0 }).array(3),
 });
 
 await seed(db, { geometryTable }, { count: 1000 }).refine((funcs) => ({
@@ -1180,8 +1194,8 @@ This bug is already in the backlog.
 import { seed } from "drizzle-seed";
 import { geometry, pgTable } from 'drizzle-orm/pg-core';
 
-const geometryTable = pgTable('geometry_table', {
-geometryColumn: geometry('geometry_column', { type: 'point', srid: 4326 }),
+const geometryTable = pgTable('geometry\_table', {
+geometryColumn: geometry('geometry\_column', { type: 'point', srid: 4326 }),
 });
 
 await seed(db, { geometryTable }, { count: 1000 }).refine((funcs) => ({
@@ -1222,13 +1236,13 @@ await seed(db, { geometryTable }, { count: 1000 }).refine((funcs) => ({
 </Tabs>
 </Callout>
 
-|     | param           | default                      | type                                         |
-| :-- | :-------------- | :--------------------------- | :------------------------------------------- |
-|     | `isUnique`      | `database column uniqueness` | `boolean`                                    |
-|     | `arraySize`     | --                           | `number`                                     |
-|     | `type`          | `'point'`                    | `'point'`                                    |
-|     | `srid`          | `4326`                       | `4326 \| 3857`                               |
-|     | `decimalPlaces` | `6`                          | `1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7` <rem025 /> |
+|  | param          | default                                                                                 | type
+|:-| :--------      | :--------                                                                               | :--------
+|  |`isUnique`      |`database column uniqueness`                                                             |`boolean`
+|  |`arraySize`     |--                                                                                       |`number`
+|  |`type`          |`'point'`                                                                                |`'point'`
+|  |`srid`          |`4326`                                                                                   |`4326 \| 3857`
+|  |`decimalPlaces` |`6`                                                                                      |`1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7` <rem025 />
 
 ```ts
 import { seed } from "drizzle-seed";
@@ -1255,6 +1269,7 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
     },
   },
 }));
+
 ```
 
 ### `vector`
@@ -1262,14 +1277,14 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
 <rem025 />
 Generates vectors based on the provided parameters.
 
-|     | param           | default                        | type                |
-| :-- | :-------------- | :----------------------------- | :------------------ |
-|     | `isUnique`      | `database column uniqueness`   | `boolean`           |
-|     | `arraySize`     | --                             | `number`            |
-|     | `decimalPlaces` | `2`                            | `number`            |
-|     | `dimensions`    | `database column’s dimensions` | `number`            |
-|     | `minValue`      | `-1000`                        | `number`            |
-|     | `maxValue`      | `1000`                         | `number` <rem025 /> |
+|  | param          | default                                                      | type
+|:-| :--------      | :--------                                                    | :--------
+|  |`isUnique`      |`database column uniqueness`                                  |`boolean`
+|  |`arraySize`     |--                                                            |`number`
+|  |`decimalPlaces` |`2`                                                           |`number`
+|  |`dimensions`    |`database column’s dimensions`                                |`number`
+|  |`minValue`      |`-1000`                                                       |`number`
+|  |`maxValue`      |`1000`                                                        |`number` <rem025 />
 
 ```ts
 import { seed } from "drizzle-seed";
@@ -1299,6 +1314,7 @@ await seed(db, schema, { count: 1000 }).refine((funcs) => ({
     },
   },
 }));
+
 ```
 
 Source: https://orm.drizzle.team/docs/seed-limitations

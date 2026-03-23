@@ -27,8 +27,8 @@ A zone is a normal Next.js application where you also configure an [assetPrefix]
 ```js filename="next.config.js"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  assetPrefix: "/blog-static",
-};
+  assetPrefix: '/blog-static',
+}
 ```
 
 Next.js assets, such as JavaScript and CSS, will be prefixed with `assetPrefix` to make sure that they don't conflict with assets from other zones. These assets will be served under `/assetPrefix/_next/...` for each of the zones.
@@ -40,18 +40,18 @@ In versions older than Next.js 15, you may also need an additional rewrite to ha
 ```js filename="next.config.js"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  assetPrefix: "/blog-static",
+  assetPrefix: '/blog-static',
   async rewrites() {
     return {
       beforeFiles: [
         {
-          source: "/blog-static/_next/:path+",
-          destination: "/_next/:path+",
+          source: '/blog-static/_next/:path+',
+          destination: '/_next/:path+',
         },
       ],
-    };
+    }
   },
-};
+}
 ```
 
 ## How to route requests to the right zone
@@ -89,9 +89,9 @@ Routing requests through [`rewrites`](/docs/app/api-reference/config/next-config
 
 ```js filename="proxy.js"
 export async function proxy(request) {
-  const { pathname, search } = request.nextUrl;
-  if (pathname === "/your-path" && myFeatureFlag.isEnabled()) {
-    return NextResponse.rewrite(`${rewriteDomain}${pathname}${search}`);
+  const { pathname, search } = request.nextUrl
+  if (pathname === '/your-path' && myFeatureFlag.isEnabled()) {
+    return NextResponse.rewrite(`${rewriteDomain}${pathname}${search}`)
   }
 }
 ```
@@ -108,16 +108,16 @@ Since the pages in different zones may be released at different times, feature f
 
 ## Server Actions
 
-When using [Server Actions](/docs/app/getting-started/updating-data) with Multi-Zones, you must explicitly allow the user-facing origin since your user facing domain may serve multiple applications. In your `next.config.js` file, add the following lines:
+When using [Server Actions](/docs/app/getting-started/mutating-data) with Multi-Zones, you must explicitly allow the user-facing origin since your user facing domain may serve multiple applications. In your `next.config.js` file, add the following lines:
 
 ```js filename="next.config.js"
 const nextConfig = {
   experimental: {
     serverActions: {
-      allowedOrigins: ["your-production-domain.com"],
+      allowedOrigins: ['your-production-domain.com'],
     },
   },
-};
+}
 ```
 
 See [`serverActions.allowedOrigins`](/docs/app/api-reference/config/next-config-js/serverActions#allowedorigins) for more information.

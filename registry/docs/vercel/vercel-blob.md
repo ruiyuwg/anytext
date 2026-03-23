@@ -25,7 +25,7 @@ For authentication, the CLI reads the `BLOB_READ_WRITE_TOKEN` value from your en
 vercel blob list
 ```
 
-*Using the vercel blob list command to list all files
+*Using the \`vercel blob list\` command to list all files
 in the Blob store.*
 
 ### put
@@ -34,7 +34,7 @@ in the Blob store.*
 vercel blob put [path-to-file]
 ```
 
-*Using the vercel blob put command to upload a file to
+*Using the \`vercel blob put\` command to upload a file to
 the Blob store.*
 
 ### del
@@ -43,7 +43,7 @@ the Blob store.*
 vercel blob del [url-or-pathname]
 ```
 
-*Using the vercel blob del command to delete a file
+*Using the \`vercel blob del\` command to delete a file
 from the Blob store.*
 
 ### copy (cp)
@@ -52,7 +52,7 @@ from the Blob store.*
 vercel blob copy [from-url-or-pathname] [to-pathname]
 ```
 
-*Using the vercel blob copy command to copy a file in
+*Using the \`vercel blob copy\` command to copy a file in
 the Blob store.*
 
 ### get
@@ -61,11 +61,11 @@ the Blob store.*
 vercel blob get [url-or-pathname]
 ```
 
-*Using the vercel blob get command to download a blob.
+*Using the \`vercel blob get\` command to download a blob.
 Works with both public and
 private stores.
 Content is printed to stdout by default, or saved to a file with
-\--output.*
+\`--output\`.*
 
 ### create-store
 
@@ -73,7 +73,7 @@ Content is printed to stdout by default, or saved to a file with
 vercel blob create-store [name] [--access <access>] [--region <region>]
 ```
 
-*Using the vercel blob create-store command to create a new
+*Using the \`vercel blob create-store\` command to create a new
 Blob store. The default region is set to \`iad1\` when not specified.*
 
 ### delete-store
@@ -82,7 +82,7 @@ Blob store. The default region is set to \`iad1\` when not specified.*
 vercel blob delete-store [store-id]
 ```
 
-*Using the vercel blob delete-store command to delete
+*Using the \`vercel blob delete-store\` command to delete
 a Blob store.*
 
 ### get-store
@@ -91,7 +91,7 @@ a Blob store.*
 vercel blob get-store [store-id]
 ```
 
-*Using the vercel blob get-store command to get a Blob
+*Using the \`vercel blob get-store\` command to get a Blob
 store.*
 
 ## Unique Options
@@ -106,8 +106,8 @@ You can use the `--rw-token` option to specify your Blob read-write token.
 vercel blob put image.jpg --rw-token [rw-token]
 ```
 
-*Using the vercel blob put command with the
-\--rw-token option.*
+*Using the \`vercel blob put\` command with the
+\`--rw-token\` option.*
 
 ### Limit
 
@@ -117,8 +117,8 @@ You can use the `--limit` option to specify the number of results to return per 
 vercel blob list --limit 100
 ```
 
-*Using the vercel blob list command with the
-\--limit option.*
+*Using the \`vercel blob list\` command with the
+\`--limit\` option.*
 
 ### Cursor
 
@@ -128,8 +128,8 @@ You can use the `--cursor` option to specify the cursor from a previous page to 
 vercel blob list --cursor [cursor-value]
 ```
 
-*Using the vercel blob list command with the
-\--cursor option.*
+*Using the \`vercel blob list\` command with the
+\`--cursor\` option.*
 
 ### Prefix
 
@@ -139,8 +139,8 @@ You can use the `--prefix` option to filter Blobs by a specific prefix.
 vercel blob list --prefix images/
 ```
 
-*Using the vercel blob list command with the
-\--prefix option.*
+*Using the \`vercel blob list\` command with the
+\`--prefix\` option.*
 
 ### Mode
 
@@ -150,8 +150,8 @@ You can use the `--mode` option to filter Blobs by either folded or expanded mod
 vercel blob list --mode folded
 ```
 
-*Using the vercel blob list command with the
-\--mode option.*
+*Using the \`vercel blob list\` command with the
+\`--mode\` option.*
 
 ### Add Random Suffix
 
@@ -161,8 +161,8 @@ You can use the `--add-random-suffix` option to add a random suffix to the file 
 vercel blob put image.jpg --add-random-suffix
 ```
 
-*Using the vercel blob put command with the
-\--add-random-suffix option.*
+*Using the \`vercel blob put\` command with the
+\`--add-random-suffix\` option.*
 
 ### Pathname
 
@@ -172,8 +172,8 @@ You can use the `--pathname` option to specify the pathname to upload the file t
 vercel blob put image.jpg --pathname assets/images/hero.jpg
 ```
 
-*Using the vercel blob put command with the
-\--pathname option.*
+*Using the \`vercel blob put\` command with the
+\`--pathname\` option.*
 
 ### Content Type
 
@@ -183,8 +183,8 @@ You can use the `--content-type` option to overwrite the content-type when using
 vercel blob put data.txt --content-type application/json
 ```
 
-*Using the vercel blob put command with the
-\--content-type option.*
+*Using the \`vercel blob put\` command with the
+\`--content-type\` option.*
 
 ### Cache Control Max Age
 
@@ -194,8 +194,8 @@ You can use the `--cache-control-max-age` option to set the `max-age` of the cac
 vercel blob put image.jpg --cache-control-max-age 86400
 ```
 
-*Using the vercel blob put command with the
-\--cache-control-max-age option.*
+*Using the \`vercel blob put\` command with the
+\`--cache-control-max-age\` option.*
 
 ### Allow Overwrite
 
@@ -205,8 +205,8 @@ You can use the `--allow-overwrite` option to overwrite the file if it already e
 vercel blob put image.jpg --allow-overwrite
 ```
 
-*Using the vercel blob put command with the
-\--allow-overwrite option.*
+*Using the \`vercel blob put\` command with the
+\`--allow-overwrite\` option.*
 
 ### Multipart
 
@@ -216,8 +216,8 @@ You can use the `--multipart` option to upload the file in multiple small chunks
 vercel blob put large-file.zip --multipart false
 ```
 
-*Using the vercel blob put command with the
-\--multipart option.*
+*Using the \`vercel blob put\` command with the
+\`--multipart\` option.*
 
 ### Region
 
@@ -237,8 +237,8 @@ You can use the `--access` option to specify whether the store or blob should us
 vercel blob put image.jpg --access private
 ```
 
-*Using the vercel blob put command with the
-\--access option.*
+*Using the \`vercel blob put\` command with the
+\`--access\` option.*
 
 ### Output
 
@@ -248,8 +248,8 @@ You can use the `--output` option to save the blob content to a file instead of 
 vercel blob get image.jpg --output ./local-image.jpg
 ```
 
-*Using the vercel blob get command with the
-\--output option.*
+*Using the \`vercel blob get\` command with the
+\`--output\` option.*
 
 ### If Match
 
@@ -259,8 +259,8 @@ You can use the `--if-match` option to only perform the operation if the blob's 
 vercel blob put image.jpg --if-match "etag-value"
 ```
 
-*Using the vercel blob put command with the
-\--if-match option.*
+*Using the \`vercel blob put\` command with the
+\`--if-match\` option.*
 
 ### If None Match
 
@@ -270,12 +270,12 @@ You can use the `--if-none-match` option to only return content if the blob's ET
 vercel blob get image.jpg --if-none-match "etag-value"
 ```
 
-*Using the vercel blob get command with the
-\--if-none-match option.*
+*Using the \`vercel blob get\` command with the
+\`--if-none-match\` option.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -290,5 +290,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel build"
 description: "Learn how to build a Vercel Project locally or in your own CI environment using the vercel build CLI command."
-last\_updated: "2026-03-08T05:03:12.039Z"
+last\_updated: "2026-03-23T09:40:06.576Z"
 source: "https://vercel.com/docs/cli/build"

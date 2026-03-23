@@ -5,8 +5,8 @@ Reactive utilities
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/reactive-utilities/on-util.mdx)
 
 ```
-import { on } from "solid-js"
-function on<T extends Array<() => any> | (() => any), U>(  deps: T,  fn: (input: T, prevInput: T, prevValue?: U) => U,  options: { defer?: boolean } = {}): (prevValue?: U) => U | undefined
+import { on } from "solid-js";
+function on<T extends Array<() => any> | (() => any), U>(  deps: T,  fn: (input: T, prevInput: T, prevValue?: U) => U,  options: { defer?: boolean } = {}): (prevValue?: U) => U | undefined;
 ```
 
 `on` is designed to be passed into a computation to make its dependencies explicit. If an array of dependencies is passed, `input` and `prevInput` are arrays.

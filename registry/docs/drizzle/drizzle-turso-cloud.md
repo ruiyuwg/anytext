@@ -1,4 +1,4 @@
-# Drizzle + Turso Cloud
+# Drizzle  +  Turso Cloud
 
 - Database [connection basics](/docs/connect-overview) with Drizzle
 - Turso Cloud - [website](https://docs.turso.tech/turso-cloud)
@@ -23,50 +23,48 @@ Drizzle has native support for all `@libsql/client` driver variations:
 If you need to provide your existing driver:
 
 ```typescript copy
-import { drizzle } from "drizzle-orm/libsql";
-import { createClient } from "@libsql/client";
+import { drizzle } from 'drizzle-orm/libsql';
+import { createClient } from '@libsql/client';
 
-const client = createClient({
+const client = createClient({ 
   url: process.env.DATABASE_URL,
-  authToken: process.env.DATABASE_AUTH_TOKEN,
+  authToken: process.env.DATABASE_AUTH_TOKEN
 });
 
 const db = drizzle({ client });
 
-const result = await db.select().from(users).all();
+const result = await db.select().from(users).all()
 ```
 
 ```typescript copy
-import { drizzle } from "drizzle-orm/libsql/web";
-import { createClient } from "@libsql/client/web";
+import { drizzle } from 'drizzle-orm/libsql/web';
+import { createClient } from '@libsql/client/web';
 
-const client = createClient({
+const client = createClient({ 
   url: process.env.DATABASE_URL,
-  authToken: process.env.DATABASE_AUTH_TOKEN,
+  authToken: process.env.DATABASE_AUTH_TOKEN
 });
 
 const db = drizzle({ client });
 
-const result = await db.select().from(users).all();
+const result = await db.select().from(users).all()
 ```
 
 #### Step 3 - make a query
 
 ```ts
-import { drizzle } from "drizzle-orm/libsql";
-import * as s from "drizzle-orm/sqlite-core";
+import { drizzle } from 'drizzle-orm/libsql';
+import * as s from 'drizzle-orm/sqlite-core';
 
-const db = drizzle({
-  connection: {
-    url: process.env.DATABASE_URL,
-    authToken: process.env.DATABASE_AUTH_TOKEN,
-  },
-});
+const db = drizzle({ connection: {
+  url: process.env.DATABASE_URL, 
+  authToken: process.env.DATABASE_AUTH_TOKEN 
+}});
 
 const users = s.sqliteTable("users", {
   id: s.integer(),
   name: s.text(),
-});
+})
 
 const result = await db.select().from(users);
 ```

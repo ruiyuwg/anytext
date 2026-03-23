@@ -78,5 +78,5 @@ If you are currently using the Vercel CLI for domain purchases, pricing, or avai
 
 title: "Setting up a custom domain"
 description: "Add and configure a custom domain for your Vercel project using the CLI."
-last\_updated: "2026-03-08T05:03:13.503Z"
+last\_updated: "2026-03-23T09:40:08.694Z"
 source: "https://vercel.com/docs/domains/set-up-custom-domain"

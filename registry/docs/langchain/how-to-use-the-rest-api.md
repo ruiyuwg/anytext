@@ -274,7 +274,7 @@ You can add multiple feedback scores with different keys to track various metric
 
 Next, we'll demonstrate how to run a pairwise experiment. In a pairwise experiment, you compare two examples against each other.
 
-For more information, check out [this guide](/langsmith/evaluate-pairwise).
+For more information, check out [How to run a pairwise evaluation](/langsmith/evaluate-pairwise).
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 #  A comparative experiment allows you to provide a preferential ranking on the outputs of two or more experiments

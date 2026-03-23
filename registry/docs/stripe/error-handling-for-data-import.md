@@ -82,7 +82,7 @@ If you want to resplit the transaction, delete the existing transactions and rei
 | -------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Currency mismatch    | The currency doesn’t match the actual currency of the transaction. | The currency of a Stripe transaction can’t be overridden. The field must be empty.                                                                   |
 | Missing currency     | Currency is missing from a third-party transaction.                | Check and see if there’s currency for the transaction. Make sure to use the currency’s three-letter ISO format.                                      |
-| Unsupported currency | The currency you provided is not supported for your account.       | Convert it to one of the currencies listed in the error message. See [Supported currencies](https://docs.stripe.com/currencies.md) for more details. |
+| Unsupported currency | The currency you provided isn’t supported for your account.        | Convert it to one of the currencies listed in the error message. See [Supported currencies](https://docs.stripe.com/currencies.md) for more details. |
 
 ## Exclusion imports
 
@@ -136,10 +136,10 @@ See [Importing data](https://docs.stripe.com/revenue-recognition/data-import.md#
 
 ### Currency errors
 
-| Error                | Description                                                  | Recommendation                                                                                                                                       |
-| -------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Missing currency     | Currency is missing.                                         | - Find the transaction that’s missing a currency and add its three-letter ISO code.                                                                  |
-| Unsupported currency | The currency you provided is not supported for your account. | Convert it to one of the currencies listed in the error message. See [Supported currencies](https://docs.stripe.com/currencies.md) for more details. |
+| Error                | Description                                                 | Recommendation                                                                                                                                       |
+| -------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Missing currency     | Currency is missing.                                        | - Find the transaction that’s missing a currency and add its three-letter ISO code.                                                                  |
+| Unsupported currency | The currency you provided isn’t supported for your account. | Convert it to one of the currencies listed in the error message. See [Supported currencies](https://docs.stripe.com/currencies.md) for more details. |
 
 ### Debit or credit account errors
 
@@ -157,9 +157,9 @@ See [Importing data](https://docs.stripe.com/revenue-recognition/data-import.md#
 
 ### GL errors
 
-| Error                               | Description                                                                                   | Recommendation                                                                                                                                 |
-| ----------------------------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| Invalid GL name                     | The GL name provided isn’t valid.                                                             | Make sure that the GL name is correct and matches a configured GL account name in your account mappings. If it doesn’t, leave the field empty. |
-| Invalid GL code                     | The GL code specified isn’t valid.                                                            | Make sure that the GL code is correct and matches a configured GL account code in your account mappings. If it doesn’t, leave the field empty. |
-| The GL name and code don’t match    | The GL name and GL code provided do not correspond with any mappings in the account mappings. | Make sure that the GL name and code match an existing account mapping, and adjust your entries accordingly.                                    |
-| The GL code and account don’t match | The provided GL code doesn’t match the provided debit or credit account.                      | Make sure that the account type matches the type linked to that GL account mapping.                                                            |
+| Error                               | Description                                                                                  | Recommendation                                                                                                                                 |
+| ----------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Invalid GL name                     | The GL name provided isn’t valid.                                                            | Make sure that the GL name is correct and matches a configured GL account name in your account mappings. If it doesn’t, leave the field empty. |
+| Invalid GL code                     | The GL code specified isn’t valid.                                                           | Make sure that the GL code is correct and matches a configured GL account code in your account mappings. If it doesn’t, leave the field empty. |
+| The GL name and code don’t match    | The GL name and GL code provided don’t correspond with any mappings in the account mappings. | Make sure that the GL name and code match an existing account mapping, and adjust your entries accordingly.                                    |
+| The GL code and account don’t match | The provided GL code doesn’t match the provided debit or credit account.                     | Make sure that the account type matches the type linked to that GL account mapping.                                                            |

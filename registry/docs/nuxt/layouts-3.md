@@ -119,7 +119,7 @@ For clarity, we recommend that the layout's filename matches its name:
 
 You can also use the [`setPageLayout`](https://nuxt.com/docs/3.x/api/utils/set-page-layout) helper to change the layout dynamically:
 
-```vue twoslash
+```vue [app/pages/index.vue] twoslash
 <script setup lang="ts">
 declare module 'nuxt/app' {
   interface NuxtLayouts {

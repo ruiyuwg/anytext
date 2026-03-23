@@ -29,6 +29,8 @@ Supabase Auth works with many popular Auth methods, including Social and Phone A
 
 ### Social Auth
 
+You can also add any OAuth2 or OIDC-compatible identity provider using [Custom OAuth/OIDC Providers](/docs/guides/auth/custom-oauth-providers).
+
 ### Phone Auth
 
 ## Pricing

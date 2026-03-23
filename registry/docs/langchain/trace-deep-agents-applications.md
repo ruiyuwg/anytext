@@ -2,9 +2,9 @@
 
 Source: https://docs.langchain.com/langsmith/trace-deep-agents
 
-[`deepagents`](/oss/python/deepagents/overview) is an open-source agent framework built on top of LangGraph, designed for complex, multi-step tasks that require planning, tool usage, and sub-agent delegation. Deep agents supports native LangSmith tracing.
+[`deepagents`](/oss/python/deepagents/overview) is an open-source agent framework built on top of LangGraph, designed for complex, multi-step tasks that require planning, tool usage, and sub-agent delegation. Deep Agents supports native LangSmith tracing.
 
-This guide shows you how to enable LangSmith tracing for deep agents, view traces in the LangSmith UI, and (optionally) customize trace configuration for more advanced use cases.
+This guide shows you how to enable LangSmith tracing for Deep Agents, view traces in the LangSmith UI, and (optionally) customize trace configuration for more advanced use cases.
 
 ## Installation
 
@@ -24,7 +24,7 @@ uv add deepagents
 - An LLM that supports tool calling (for example, OpenAI or Anthropic models).
 - For tracing, a [LangSmith account and API key](/langsmith/create-account-api-key) (free to sign up).
 
-  You do not need to install the `langsmith` Python package to trace deep agents. `deepagents` is built on LangGraph, which includes native LangSmith tracing support. As long as the LangSmith environment variables are set, traces are sent automatically.
+  You do not need to install the `langsmith` Python package to trace Deep Agents. `deepagents` is built on LangGraph, which includes native LangSmith tracing support. As long as the LangSmith environment variables are set, traces are sent automatically.
 
   The `langsmith` package is only required if you want [programmatic control over tracing](#customize-langsmith-tracing) (for example, using `tracing_context`, adding custom metadata, or querying runs from Python).
 

@@ -547,5 +547,5 @@ const videoModels = models.filter((m) => m.type === 'video');
 
 title: "Provider Filtering & Ordering"
 description: "Control which providers handle your requests and in what order using the order and only options."
-last\_updated: "2026-03-08T05:03:10.521Z"
+last\_updated: "2026-03-23T09:40:04.555Z"
 source: "https://vercel.com/docs/ai-gateway/models-and-providers/provider-filtering-and-ordering"

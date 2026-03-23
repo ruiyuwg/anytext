@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -34,7 +32,7 @@ Now that you've built an image, you can share it. To share Docker images, you ha
 
 To push an image, you first need to create a repository on Docker Hub.
 
-1. [Sign up](https://www.docker.com/pricing?utm_source=docker\&utm_medium=webreferral\&utm_campaign=docs_driven_upgrade) or Sign in to [Docker Hub](https://hub.docker.com).
+1. [Sign up](https://www.docker.com/pricing?ref=Docs\&refAction=DocsSharingApp) or Sign in to [Docker Hub](https://hub.docker.com).
 
 2. Select the **Create Repository** button.
 

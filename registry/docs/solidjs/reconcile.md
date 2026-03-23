@@ -7,8 +7,8 @@ Store utilities
 `reconcile` is designed for diffing data changes in situations where granular updates cannot be applied. This is useful when dealing with immutable data from stores or handling large API responses.
 
 ```
-import { reconcile } from "solid-js/store"import type { NotWrappable, Store } from "solid-js/store"
-function reconcile<T>(  value: T | Store<T>,  options?: {    key?: string | null;    merge?: boolean;  } = { key: "id" }): (  state: T extends NotWrappable ? T : Store<T>) => T extends NotWrappable ? T : Store<T>
+import { reconcile } from "solid-js/store";import type { NotWrappable, Store } from "solid-js/store";
+function reconcile<T>(  value: T | Store<T>,  options?: {    key?: string | null;    merge?: boolean;  } = { key: "id" }): (  state: T extends NotWrappable ? T : Store<T>) => T extends NotWrappable ? T : Store<T>;
 ```
 
 `reconcile` has a `key` option that can be used when available to match items. The `value` accepts either a value of type `T` or a Store containing values of type `T`. This represents the data to be reconciled.

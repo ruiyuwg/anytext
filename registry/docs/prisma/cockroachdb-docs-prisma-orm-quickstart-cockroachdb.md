@@ -45,24 +45,24 @@ npx tsc --init
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+pnpm init -y
+pnpm add typescript tsx @types/node --save-dev
 pnpm dlx tsc --init
 ```
 
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+yarn init -y
+yarn add typescript tsx @types/node --dev
 yarn dlx tsc --init
 ```
 
 
 
 ```bash
-npm init -y
-npm install typescript tsx @types/node --save-dev
+bun init -y
+bun add typescript tsx @types/node --dev
 bun x tsc --init
 ```
 ````

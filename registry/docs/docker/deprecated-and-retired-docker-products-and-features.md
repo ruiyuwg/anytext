@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -52,9 +50,9 @@ You can still view the relevant documentation for these integrations in the [Com
 
 Docker Enterprise Edition (EE) was Docker's commercial platform for deploying and managing large-scale container environments. It was acquired by Mirantis in 2019, and users looking for enterprise-level functionality can now explore Mirantis Kubernetes Engine or other products offered by Mirantis. Much of the technology and features found in Docker EE have been absorbed into the Mirantis product line.
 
-> Note
+> Tip
 >
-> For information about enterprise-level features offered by Docker today, see the [Docker Business subscription](https://www.docker.com/pricing/).
+> For information about enterprise-level features offered by Docker today, see the [Docker Business subscription](https://www.docker.com/pricing?ref=Docs\&refAction=DocsRetired).
 
 ### [Docker Data Center and Docker Trusted Registry](#docker-data-center-and-docker-trusted-registry)
 
@@ -66,7 +64,7 @@ Dev Environments was a feature introduced in Docker Desktop that allowed develop
 
 ### [GitHub Copilot extension](#github-copilot-extension)
 
-The Docker for GitHub Copilot extension integrated Docker capabilities with GitHub Copilot Chat, helping developers containerize applications, generate Docker assets, and analyze vulnerabilities through conversational prompts. The extension was available in early access on the GitHub Marketplace. GitHub [deprecated Copilot Extensions](https://github.blog/changelog/2025-09-24-deprecate-github-copilot-extensions-github-apps/) which led to the retirement of the Docker for GitHub Copilot extension. If you're looking for AI-assisted Docker workflows, explore the Docker MCP Toolkit and MCP Catalog, or use Ask Gordon in Docker Desktop and the Docker CLI.
+The Docker for GitHub Copilot extension integrated Docker capabilities with GitHub Copilot Chat, helping developers containerize applications, generate Docker assets, and analyze vulnerabilities through conversational prompts. The extension was available in early access on the GitHub Marketplace. GitHub [deprecated Copilot Extensions](https://github.blog/changelog/2025-09-24-deprecate-github-copilot-extensions-github-apps/) which led to the retirement of the Docker for GitHub Copilot extension. If you're looking for AI-assisted Docker workflows, explore the Docker MCP Toolkit and MCP Catalog, or use Gordon in Docker Desktop and the Docker CLI.
 
 ### [Enhanced Service Account add-ons](#enhanced-service-account-add-ons)
 

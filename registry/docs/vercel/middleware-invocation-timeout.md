@@ -21,7 +21,7 @@ To troubleshoot this error, follow these steps:
 
 title: "MIDDLEWARE\_RUNTIME\_DEPRECATED"
 description: "A middleware is using a deprecated runtime."
-last\_updated: "2026-03-08T05:03:14.235Z"
+last\_updated: "2026-03-23T09:40:09.768Z"
 source: "https://vercel.com/docs/errors/MIDDLEWARE\_RUNTIME\_DEPRECATED"
 
 # MIDDLEWARE\_RUNTIME\_DEPRECATED
@@ -44,7 +44,7 @@ To troubleshoot this error, follow these steps:
 
 title: "NOT\_FOUND"
 description: "The requested resource was not found. This is a deployment error."
-last\_updated: "2026-03-08T05:03:14.245Z"
+last\_updated: "2026-03-23T09:40:09.775Z"
 source: "https://vercel.com/docs/errors/NOT\_FOUND"
 
 # NOT\_FOUND
@@ -67,7 +67,7 @@ To troubleshoot this error, follow these steps:
 
 title: "NO\_RESPONSE\_FROM\_FUNCTION"
 description: "The application did not respond correctly, this is likely due to an exception being thrown from the function handler."
-last\_updated: "2026-03-08T05:03:14.249Z"
+last\_updated: "2026-03-23T09:40:09.780Z"
 source: "https://vercel.com/docs/errors/NO\_RESPONSE\_FROM\_FUNCTION"
 
 # NO\_RESPONSE\_FROM\_FUNCTION
@@ -97,7 +97,7 @@ To troubleshoot this error, follow these steps:
 
 title: "OPTIMIZED\_EXTERNAL\_IMAGE\_REQUEST\_FAILED"
 description: "The request for an optimized external image failed. This is a server error."
-last\_updated: "2026-03-08T05:03:14.264Z"
+last\_updated: "2026-03-23T09:40:09.789Z"
 source: "https://vercel.com/docs/errors/OPTIMIZED\_EXTERNAL\_IMAGE\_REQUEST\_FAILED"
 
 # OPTIMIZED\_EXTERNAL\_IMAGE\_REQUEST\_FAILED
@@ -117,7 +117,7 @@ To troubleshoot this error, follow these steps:
 
 title: "OPTIMIZED\_EXTERNAL\_IMAGE\_REQUEST\_INVALID"
 description: "The external image request is invalid. This is a request error."
-last\_updated: "2026-03-08T05:03:14.258Z"
+last\_updated: "2026-03-23T09:40:09.792Z"
 source: "https://vercel.com/docs/errors/OPTIMIZED\_EXTERNAL\_IMAGE\_REQUEST\_INVALID"
 
 # OPTIMIZED\_EXTERNAL\_IMAGE\_REQUEST\_INVALID
@@ -138,7 +138,7 @@ To troubleshoot this error, follow these steps:
 
 title: "OPTIMIZED\_EXTERNAL\_IMAGE\_REQUEST\_UNAUTHORIZED"
 description: "The external image request is unauthorized. This is a request error."
-last\_updated: "2026-03-08T05:03:14.261Z"
+last\_updated: "2026-03-23T09:40:09.796Z"
 source: "https://vercel.com/docs/errors/OPTIMIZED\_EXTERNAL\_IMAGE\_REQUEST\_UNAUTHORIZED"
 
 # OPTIMIZED\_EXTERNAL\_IMAGE\_REQUEST\_UNAUTHORIZED
@@ -160,7 +160,7 @@ To troubleshoot this error, follow these steps:
 
 title: "OPTIMIZED\_EXTERNAL\_IMAGE\_TOO\_MANY\_REDIRECTS"
 description: "The external image request encountered too many redirects. This is a request error."
-last\_updated: "2026-03-08T05:03:14.267Z"
+last\_updated: "2026-03-23T09:40:09.804Z"
 source: "https://vercel.com/docs/errors/OPTIMIZED\_EXTERNAL\_IMAGE\_TOO\_MANY\_REDIRECTS"
 
 # OPTIMIZED\_EXTERNAL\_IMAGE\_TOO\_MANY\_REDIRECTS
@@ -179,7 +179,7 @@ To troubleshoot this error, follow these steps:
 
 title: "RANGE\_END\_NOT\_VALID"
 description: "The end value of the Range header in the request is invalid. This is a request error."
-last\_updated: "2026-03-08T05:03:14.270Z"
+last\_updated: "2026-03-23T09:40:09.808Z"
 source: "https://vercel.com/docs/errors/RANGE\_END\_NOT\_VALID"
 
 # RANGE\_END\_NOT\_VALID
@@ -202,7 +202,7 @@ To troubleshoot this error, follow these steps:
 
 title: "RANGE\_GROUP\_NOT\_VALID"
 description: "The group value of the Range header in the request is invalid. This is a request error."
-last\_updated: "2026-03-08T05:03:14.274Z"
+last\_updated: "2026-03-23T09:40:09.812Z"
 source: "https://vercel.com/docs/errors/RANGE\_GROUP\_NOT\_VALID"
 
 # RANGE\_GROUP\_NOT\_VALID
@@ -224,7 +224,7 @@ To troubleshoot this error, follow these steps:
 
 title: "RANGE\_MISSING\_UNIT"
 description: "The unit identifier of the Range header in the request is missing. This is a request error."
-last\_updated: "2026-03-08T05:03:14.277Z"
+last\_updated: "2026-03-23T09:40:09.816Z"
 source: "https://vercel.com/docs/errors/RANGE\_MISSING\_UNIT"
 
 # RANGE\_MISSING\_UNIT
@@ -246,7 +246,7 @@ To troubleshoot this error, follow these steps:
 
 title: "RANGE\_START\_NOT\_VALID"
 description: "The start value of the Range header in the request is invalid. This is a request error."
-last\_updated: "2026-03-08T05:03:14.281Z"
+last\_updated: "2026-03-23T09:40:09.820Z"
 source: "https://vercel.com/docs/errors/RANGE\_START\_NOT\_VALID"
 
 # RANGE\_START\_NOT\_VALID
@@ -268,7 +268,7 @@ To troubleshoot this error, follow these steps:
 
 title: "RANGE\_UNIT\_NOT\_SUPPORTED"
 description: "The unit identifier of the Range header in the request is not supported. This is a request error."
-last\_updated: "2026-03-08T05:03:14.284Z"
+last\_updated: "2026-03-23T09:40:09.823Z"
 source: "https://vercel.com/docs/errors/RANGE\_UNIT\_NOT\_SUPPORTED"
 
 # RANGE\_UNIT\_NOT\_SUPPORTED
@@ -290,7 +290,7 @@ To troubleshoot this error, follow these steps:
 
 title: "REQUEST\_HEADER\_TOO\_LARGE"
 description: "Request header size exceeds the permissible limit."
-last\_updated: "2026-03-08T05:03:14.288Z"
+last\_updated: "2026-03-23T09:40:09.826Z"
 source: "https://vercel.com/docs/errors/REQUEST\_HEADER\_TOO\_LARGE"
 
 # REQUEST\_HEADER\_TOO\_LARGE
@@ -309,7 +309,7 @@ To troubleshoot this error, follow these steps:
 
 title: "RESOURCE\_NOT\_FOUND"
 description: "This error signifies that a specified resource could not be located."
-last\_updated: "2026-03-08T05:03:14.293Z"
+last\_updated: "2026-03-23T09:40:09.831Z"
 source: "https://vercel.com/docs/errors/RESOURCE\_NOT\_FOUND"
 
 # RESOURCE\_NOT\_FOUND
@@ -334,7 +334,7 @@ Additionally, the error can also occur in the context of the [Vercel REST API](/
 
 title: "ROUTER\_CANNOT\_MATCH"
 description: "The router cannot match the route to any of the known patterns. This is a routing error."
-last\_updated: "2026-03-08T05:03:14.296Z"
+last\_updated: "2026-03-23T09:40:09.836Z"
 source: "https://vercel.com/docs/errors/ROUTER\_CANNOT\_MATCH"
 
 # ROUTER\_CANNOT\_MATCH
@@ -356,7 +356,7 @@ To troubleshoot this error, follow these steps:
 
 title: "ROUTER\_EXTERNAL\_TARGET\_CONNECTION\_ERROR"
 description: "Connection error occurred while routing to an external target. This is a routing error."
-last\_updated: "2026-03-08T05:03:14.300Z"
+last\_updated: "2026-03-23T09:40:09.840Z"
 source: "https://vercel.com/docs/errors/ROUTER\_EXTERNAL\_TARGET\_CONNECTION\_ERROR"
 
 # ROUTER\_EXTERNAL\_TARGET\_CONNECTION\_ERROR
@@ -379,7 +379,7 @@ To troubleshoot this error, follow these steps:
 
 title: "ROUTER\_EXTERNAL\_TARGET\_ERROR"
 description: "Error occurred while routing to an external target. This is a routing error."
-last\_updated: "2026-03-08T05:03:14.304Z"
+last\_updated: "2026-03-23T09:40:09.845Z"
 source: "https://vercel.com/docs/errors/ROUTER\_EXTERNAL\_TARGET\_ERROR"
 
 # ROUTER\_EXTERNAL\_TARGET\_ERROR
@@ -402,7 +402,7 @@ To troubleshoot this error, follow these steps:
 
 title: "ROUTER\_EXTERNAL\_TARGET\_HANDSHAKE\_ERROR"
 description: "Error in establishing a connection with an external target."
-last\_updated: "2026-03-08T05:03:14.308Z"
+last\_updated: "2026-03-23T09:40:09.849Z"
 source: "https://vercel.com/docs/errors/ROUTER\_EXTERNAL\_TARGET\_HANDSHAKE\_ERROR"
 
 # ROUTER\_EXTERNAL\_TARGET\_HANDSHAKE\_ERROR
@@ -426,7 +426,7 @@ To troubleshoot this error, follow these steps:
 
 title: "ROUTER\_TOO\_MANY\_HAS\_SELECTIONS"
 description: "The router has too many selections. This is a routing error."
-last\_updated: "2026-03-08T05:03:14.311Z"
+last\_updated: "2026-03-23T09:40:09.853Z"
 source: "https://vercel.com/docs/errors/ROUTER\_TOO\_MANY\_HAS\_SELECTIONS"
 
 # ROUTER\_TOO\_MANY\_HAS\_SELECTIONS
@@ -448,7 +448,7 @@ To troubleshoot this error, follow these steps:
 
 title: "SANBDOX\_NOT\_FOUND"
 description: "The Sandbox could not be found on Vercel. This is a platform error."
-last\_updated: "2026-03-08T05:03:14.314Z"
+last\_updated: "2026-03-23T09:40:09.856Z"
 source: "https://vercel.com/docs/errors/SANDBOX\_NOT\_FOUND"
 
 # SANBDOX\_NOT\_FOUND
@@ -468,7 +468,7 @@ To troubleshoot this error, follow these steps:
 
 title: "SANBDOX\_NOT\_LISTENING"
 description: "The Sandbox is not listening on the requested port. This is an application error."
-last\_updated: "2026-03-08T05:03:14.317Z"
+last\_updated: "2026-03-23T09:40:09.860Z"
 source: "https://vercel.com/docs/errors/SANDBOX\_NOT\_LISTENING"
 
 # SANBDOX\_NOT\_LISTENING
@@ -488,7 +488,7 @@ To troubleshoot this error, follow these steps:
 
 title: "SANBDOX\_STOPPED"
 description: "The Sandbox was stopped and is no longer reachable. This is a platform error."
-last\_updated: "2026-03-08T05:03:14.321Z"
+last\_updated: "2026-03-23T09:40:09.863Z"
 source: "https://vercel.com/docs/errors/SANDBOX\_STOPPED"
 
 # SANBDOX\_STOPPED
@@ -508,7 +508,7 @@ To troubleshoot this error, follow these steps:
 
 title: "TOO\_MANY\_FILESYSTEM\_CHECKS"
 description: "Too many filesystem checks occurred while processing the request. This is a routing error."
-last\_updated: "2026-03-08T05:03:14.324Z"
+last\_updated: "2026-03-23T09:40:09.867Z"
 source: "https://vercel.com/docs/errors/TOO\_MANY\_FILESYSTEM\_CHECKS"
 
 # TOO\_MANY\_FILESYSTEM\_CHECKS
@@ -530,7 +530,7 @@ To troubleshoot this error, follow these steps:
 
 title: "TOO\_MANY\_FORKS"
 description: "An error occurred in the application when matching too many conditional routes. You cannot have more than 5 "
-last\_updated: "2026-03-08T05:03:14.329Z"
+last\_updated: "2026-03-23T09:40:09.871Z"
 source: "https://vercel.com/docs/errors/TOO\_MANY\_FORKS"
 
 # TOO\_MANY\_FORKS
@@ -553,7 +553,7 @@ To troubleshoot this error, follow these steps:
 
 title: "TOO\_MANY\_RANGES"
 description: "Too many ranges have been specified in the Range header of the request. This is a request error."
-last\_updated: "2026-03-08T05:03:14.333Z"
+last\_updated: "2026-03-23T09:40:09.875Z"
 source: "https://vercel.com/docs/errors/TOO\_MANY\_RANGES"
 
 # TOO\_MANY\_RANGES
@@ -577,7 +577,7 @@ To troubleshoot this error, follow these steps:
 
 title: "URL\_TOO\_LONG"
 description: "The URL of the request is too long. This is a request error."
-last\_updated: "2026-03-08T05:03:14.336Z"
+last\_updated: "2026-03-23T09:40:09.880Z"
 source: "https://vercel.com/docs/errors/URL\_TOO\_LONG"
 
 # URL\_TOO\_LONG
@@ -599,5 +599,5 @@ To troubleshoot this error, follow these steps:
 
 title: "Error List"
 description: "You may encounter a variety of errors when you interact with the Vercel platform. This section focuses on errors that can happen when you interact with the Vercel Dashboard."
-last\_updated: "2026-03-08T05:03:14.374Z"
+last\_updated: "2026-03-23T09:40:09.920Z"
 source: "https://vercel.com/docs/errors/error-list"

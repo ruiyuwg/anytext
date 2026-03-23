@@ -4,7 +4,7 @@ Source: https://docs.langchain.com/oss/javascript/deepagents/subagents
 
 Learn how to use subagents to delegate work and keep context clean
 
-Deep agents can create subagents to delegate work. You can specify custom subagents in the `subagents` parameter. Subagents are useful for [context quarantine](https://www.dbreunig.com/2025/06/26/how-to-fix-your-context.html#context-quarantine) (keeping the main agent's context clean) and for providing specialized instructions.
+Deep Agents can create subagents to delegate work. You can specify custom subagents in the `subagents` parameter. Subagents are useful for [context quarantine](https://www.dbreunig.com/2025/06/26/how-to-fix-your-context.html#context-quarantine) (keeping the main agent's context clean) and for providing specialized instructions.
 
 ```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 graph TB
@@ -46,20 +46,22 @@ Subagents solve the **context bloat problem**. When agents use tools with large 
 
 For most use cases, define subagents as dictionaries with the following fields:
 
-| Field           | Type                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| --------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`          | `str`                    | Required. Unique identifier for the subagent. The main agent uses this name when calling the `task()` tool. The subagent name becomes metadata for `AIMessage`s and for streaming, which helps to differentiate between agents.                                                                                                                                                                                                                                                                                                                                                    |
-| `description`   | `str`                    | Required. Description of what this subagent does. Be specific and action-oriented. The main agent uses this to decide when to delegate.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `system_prompt` | `str`                    | Required. Instructions for the subagent. Custom subagents must define their own. Include tool usage guidance and output format requirements.Does not inherit from main agent.                                                                                                                                                                                                                                                                                                                                                                                                |
-| `tools`         | `list[Callable]`         | Required. Tools the subagent can use. Custom subagents specify their own. Keep this minimal and include only what's needed.Does not inherit from main agent.                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `model`         | `str` | `BaseChatModel` | Optional. Overrides the main agent's model. Omit to use the main agent's model.Inherits from main agent by default. You can pass either a model identifier string like `'openai:gpt-5'` (using the `'provider:model'` format) or a LangChain chat model object (`await initChatModel("gpt-5")` or `new ChatOpenAI({ model: "gpt-5" })`).                                                                                                                                                                                                                                     |
-| `middleware`    | `list[Middleware]`       | Optional. Additional middleware for custom behavior, logging, or rate limiting.Does not inherit from main agent.                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `interrupt_on`  | `dict[str, bool]`        | Optional. Configure [human-in-the-loop](/oss/javascript/deepagents/human-in-the-loop) for specific tools. Subagent value overrides main agent. Requires checkpointer.Inherits from main agent by default. Subagent value overrides the default.                                                                                                                                                                                                                                                                                                                              |
-| `skills`        | `list[str]`              | Optional. [Skills](/oss/javascript/deepagents/skills) source paths. When specified, the subagent will load skills from these directories (e.g., `["/skills/research/", "/skills/web-search/"]`). This allows subagents to have different skill sets than the main agent.Does not inherit from main agent. Only the general-purpose subagent inherits the main agent's skills. When a subagent has skills, it runs its own independent `SkillsMiddleware` instance. Skill state is fully isolated — a subagent's loaded skills are not visible to the parent, and vice versa. |
+| Field           | Type                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| --------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`          | `str`                    | Required. Unique identifier for the subagent. The main agent uses this name when calling the `task()` tool. The subagent name becomes metadata for `AIMessage`s and for streaming, which helps to differentiate between agents.                                                                                                                                                                                                                                                                                                                                                  |
+| `description`   | `str`                    | Required. Description of what this subagent does. Be specific and action-oriented. The main agent uses this to decide when to delegate.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `system_prompt` | `str`                    | Required. Instructions for the subagent. Custom subagents must define their own. Include tool usage guidance and output format requirements.Does not inherit from main agent.                                                                                                                                                                                                                                                                                                                                                                                              |
+| `tools`         | `list[Callable]`         | Required. Tools the subagent can use. Custom subagents specify their own. Keep this minimal and include only what's needed.Does not inherit from main agent.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `model`         | `str` | `BaseChatModel` | Optional. Overrides the main agent's model. Omit to use the main agent's model.Inherits from main agent by default. You can pass either a model identifier string like `'openai:gpt-5'` (using the `'provider:model'` format) or a LangChain chat model object (`await initChatModel("gpt-5")` or `new ChatOpenAI({ model: "gpt-5" })`).                                                                                                                                                                                                                                   |
+| `middleware`    | `list[Middleware]`       | Optional. Additional middleware for custom behavior, logging, or rate limiting.Does not inherit from main agent.                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `interrupt_on`  | `dict[str, bool]`        | Optional. Configure [human-in-the-loop](/oss/javascript/deepagents/human-in-the-loop) for specific tools. Subagent value overrides main agent. Requires checkpointer.Inherits from main agent by default. Subagent value overrides the default.                                                                                                                                                                                                                                                                                                                            |
+| `skills`        | `list[str]`              | Optional. [Skills](/oss/javascript/deepagents/skills) source paths. When specified, the subagent will load skills from these directories (e.g., `["/skills/research/", "/skills/web-search/"]`). This allows subagents to have different skill sets than the main agent.Does not inherit from main agent. Only the general-purpose subagent inherits the main agent's skills. When a subagent has skills, it runs its own independent `SkillsMiddleware` instance. Skill state is fully isolated—a subagent's loaded skills are not visible to the parent, and vice versa. |
+
+**CLI users:** You can also define subagents as `AGENTS.md` files on disk instead of in code. The `name`, `description`, and `model` fields map to YAML frontmatter, and the markdown body becomes the `system_prompt`. See [Custom subagents](/oss/javascript/deepagents/cli/overview#custom-subagents) for the file format.
 
 ### CompiledSubAgent
 
-For complex workflows, use a pre-built LangGraph graph:
+For complex workflows, use a prebuilt LangGraph graph:
 
 | Field         | Type       | Description                                                                                                                                                       |
 | ------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -191,7 +193,7 @@ In this case the subagent with the name `"research-agent"`, will have `{'lc_agen
 
 ## Structured output
 
-All subagents support [structured ouput](/oss/javascript/langchain/structured-output) which you can use to validate the subagent's output.
+All subagents support [structured output](/oss/javascript/langchain/structured-output) which you can use to validate the subagent's output.
 
 You can set a desired structured output schema by passing it as the `responseFormat` argument to the call to `createAgent()`.
 When the model generates the structured data, it’s captured and validated. The structured object itself is not returned to the parent agent.
@@ -201,7 +203,7 @@ For more information, see [response format](/oss/javascript/langchain/structured
 
 ## The general-purpose subagent
 
-In addition to any user-defined subagents, deep agents have access to a `general-purpose` subagent at all times. This subagent:
+In addition to any user-defined subagents, Deep Agents have access to a `general-purpose` subagent at all times. This subagent:
 
 - Has the same system prompt as the main agent
 - Has access to all the same tools
@@ -246,7 +248,7 @@ When configuring [skills](/oss/javascript/deepagents/skills) with `create_deep_a
 - **General-purpose subagent**: Automatically inherits skills from the main agent
 - **Custom subagents**: Do NOT inherit skills by default—use the `skills` parameter to give them their own skills
 
-  Only subagents configured with skills get a `SkillsMiddleware` instance — custom subagents without a `skills` parameter do not. When present, skill state is fully isolated in both directions: the parent's skills are not visible to the child, and the child's skills are not propagated back to the parent.
+  Only subagents configured with skills get a `SkillsMiddleware` instance—custom subagents without a `skills` parameter do not. When present, skill state is fully isolated in both directions: the parent's skills are not visible to the child, and the child's skills are not propagated back to the parent.
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { createDeepAgent, SubAgent } from "deepagents";
@@ -412,7 +414,7 @@ Each subagent works with clean context focused only on its task.
 
 ## Context management
 
-When you invoke a parent agent with [runtime context](/oss/javascript/langchain/runtime), that context automatically propagates to all subagents. The parent's full `config` — including `context` — is passed through to each subagent invocation internally.
+When you invoke a parent agent with [runtime context](/oss/javascript/langchain/runtime), that context automatically propagates to all subagents. The parent's full `config` (including `context`) is passed through to each subagent invocation internally.
 
 This means tools running inside any subagent can access the same context values you provided to the parent:
 
@@ -460,7 +462,7 @@ const result = await agent.invoke(
 
 ### Per-subagent context
 
-All subagents receive the same parent context. To pass configuration that is specific to a particular subagent, use **namespaced keys** — prefix context keys with the subagent's name:
+All subagents receive the same parent context. To pass configuration that is specific to a particular subagent, use **namespaced keys**: prefix context keys with the subagent's name:
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 const result = await agent.invoke(
@@ -515,7 +517,7 @@ const sharedLookup = tool(
 );
 ```
 
-You can combine both patterns — use namespaced context for agent-specific configuration and `lc_agent_name` metadata for branching tool behavior:
+You can combine both patterns—use namespaced context for agent-specific configuration and `lc_agent_name` metadata for branching tool behavior:
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 const flexibleSearch = tool(

@@ -39,7 +39,7 @@ See the [CMS integration documentation](/docs/integrations/cms) for information 
 
 title: "Framework environment variables"
 description: "Framework environment variables are automatically populated by the Vercel, based on your project"
-last\_updated: "2026-03-08T05:03:13.949Z"
+last\_updated: "2026-03-23T09:40:09.346Z"
 source: "https://vercel.com/docs/environment-variables/framework-environment-variables"
 
 # Framework environment variables
@@ -2344,5 +2344,5 @@ SANITY_STUDIO_VERCEL_GIT_PULL_REQUEST_ID=23
 
 title: "Managing environment variables across environments"
 description: "Add, sync, and verify environment variables across development, preview, production, and custom environments using the CLI."
-last\_updated: "2026-03-08T05:03:13.965Z"
+last\_updated: "2026-03-23T09:40:09.372Z"
 source: "https://vercel.com/docs/environment-variables/manage-across-environments"

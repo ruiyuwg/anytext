@@ -65,7 +65,7 @@ export default async function Page() {
 
 title: "NEXTJS\_NO\_BEFORE\_INTERACTIVE"
 description: "Requires review of usage of the beforeInteractive strategy in Script (next/script) elements."
-last\_updated: "2026-03-08T05:03:12.694Z"
+last\_updated: "2026-03-23T09:40:07.569Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_NO\_BEFORE\_INTERACTIVE"
 
 # NEXTJS\_NO\_BEFORE\_INTERACTIVE
@@ -107,7 +107,7 @@ exception should be added to the allowlist.
 
 title: "NEXTJS\_NO\_CLIENT\_DEPS\_IN\_MIDDLEWARE"
 description: "Disallows dependency on client libraries inside of middleware to improve performance of middleware."
-last\_updated: "2026-03-08T05:03:12.698Z"
+last\_updated: "2026-03-23T09:40:07.584Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_NO\_CLIENT\_DEPS\_IN\_MIDDLEWARE"
 
 # NEXTJS\_NO\_CLIENT\_DEPS\_IN\_MIDDLEWARE
@@ -168,7 +168,7 @@ separate file from the code that provides the React functionality.
 
 title: "NEXTJS\_NO\_DYNAMIC\_AUTO"
 description: "Prevent usage of force-dynamic as a dynamic page rendering strategy."
-last\_updated: "2026-03-08T05:03:12.701Z"
+last\_updated: "2026-03-23T09:40:07.588Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_NO\_DYNAMIC\_AUTO"
 
 # NEXTJS\_NO\_DYNAMIC\_AUTO
@@ -198,7 +198,7 @@ const data = fetch(someURL, { cache: 'no-store' });
 
 title: "NEXTJS\_NO\_FETCH\_IN\_SERVER\_PROPS"
 description: "Prevent relative fetch calls in getServerSideProps from being added to Next.js applications."
-last\_updated: "2026-03-08T05:03:12.704Z"
+last\_updated: "2026-03-23T09:40:07.591Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_NO\_FETCH\_IN\_SERVER\_PROPS"
 
 # NEXTJS\_NO\_FETCH\_IN\_SERVER\_PROPS
@@ -216,5 +216,5 @@ within your `getServerSideProps` function, avoiding additional network requests 
 
 title: "NEXTJS\_NO\_GET\_INITIAL\_PROPS"
 description: "Requires any use of getInitialProps in Next.js pages be reviewed and approved, and encourages using getServerSideProps or getStaticProps instead."
-last\_updated: "2026-03-08T05:03:12.708Z"
+last\_updated: "2026-03-23T09:40:07.596Z"
 source: "https://vercel.com/docs/conformance/rules/NEXTJS\_NO\_GET\_INITIAL\_PROPS"

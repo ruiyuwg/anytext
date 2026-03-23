@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -141,8 +139,6 @@ $ docker scout vex get dhi.io/<image>:<tag> --output vex.json
 ```
 
 > Note
->
-> The `docker scout vex get` command requires [Docker Scout CLI](https://github.com/docker/scout-cli/) version 1.18.3 or later.
 >
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use `registry://dhi.io/python:3.13` instead of `dhi.io/python:3.13`.
 

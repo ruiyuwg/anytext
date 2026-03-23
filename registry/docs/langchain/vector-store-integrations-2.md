@@ -6,7 +6,7 @@ Integrate with vector stores using LangChain Python.
 
 ## Overview
 
-A vector stores [embedded](/oss/python/integrations/text_embedding) data and performs similarity search.
+A vector stores [embedded](/oss/python/integrations/embeddings) data and performs similarity search.
 
 ```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 flowchart LR
@@ -821,6 +821,28 @@ ns = tpuf.namespace("langchain-test")
 
 vector_store = TurbopufferVectorStore(embedding=embeddings, namespace=ns)
 ```
+
+
+
+
+  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+  pip install -qU "langchain-aws[valkey]"
+  ```
+
+  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+  uv add langchain-aws --extra valkey
+  ```
+
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langchain_aws.vectorstores import ValkeyVectorStore
+
+vector_store = ValkeyVectorStore(
+    embedding=embeddings,
+    valkey_url="valkey://localhost:6379",
+    index_name="my_index"
+)
+```
 ````
 
 | Vectorstore                                                                                                                                          | Delete by ID | Filtering | Search by Vector | Search with score | Async | Passes Standard Tests | Multi Tenancy | IDs in add Documents |
@@ -830,7 +852,7 @@ vector_store = TurbopufferVectorStore(embedding=embeddings, namespace=ns)
 | [`AzureCosmosDBMongoVCoreVectorStore`](/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore)                                            | ✅            | ✅         | ✅                | ✅                 | ❌     | ✅                     | ✅             | ✅                    |
 | [`Chroma`](/oss/python/integrations/vectorstores/chroma)                                                                                             | ✅            | ✅         | ✅                | ✅                 | ✅     | ✅                     | ✅             | ✅                    |
 | [`Clickhouse`](/oss/python/integrations/vectorstores/clickhouse)                                                                                     | ✅            | ✅         | ❌                | ✅                 | ❌     | ❌                     | ❌             | ✅                    |
-| [`AsyncCockroachDBVectorStore`](/oss/python/integrations/vectorstores/cockroachdb)                                                                   | ✅            | ✅         | ✅                | ✅                 | ✅     | ✅                     | ❌             | ✅                    |
+| [`AsyncCockroachDBVectorStore`](/oss/python/integrations/vectorstores/cockroachdb)                                                                   | ✅            | ✅         | ✅                | ✅                 | ✅     | ✅                     | ✅             | ✅                    |
 | [`CouchbaseSearchVectorStore`](/oss/python/integrations/vectorstores/couchbase)                                                                      | ✅            | ✅         | ✅                | ✅                 | ✅     | ❌                     | ✅             | ✅                    |
 | [`DatabricksVectorSearch`](/oss/python/integrations/vectorstores/databricks_vector_search)                                                           | ✅            | ✅         | ✅                | ✅                 | ✅     | ❌                     | ❌             | ✅                    |
 | [`ElasticsearchStore`](/oss/python/integrations/vectorstores/elasticsearch)                                                                          | ✅            | ✅         | ✅                | ✅                 | ✅     | ❌                     | ❌             | ✅                    |
@@ -848,6 +870,7 @@ vector_store = TurbopufferVectorStore(embedding=embeddings, namespace=ns)
 | [`Weaviate`](/oss/python/integrations/vectorstores/weaviate)                                                                                         | ✅            | ✅         | ✅                | ✅                 | ✅     | ❌                     | ✅             | ✅                    |
 | [`SQLServer`](/oss/python/integrations/vectorstores/sqlserver)                                                                                       | ✅            | ✅         | ✅                | ✅                 | ❌     | ❌                     | ❌             | ✅                    |
 | [`TurbopufferVectorStore`](/oss/python/integrations/vectorstores/turbopuffer)                                                                        | ✅            | ✅         | ✅                | ✅                 | ❌     | ✅                     | ✅             | ✅                    |
+| [`ValkeyVectorStore`](/oss/python/integrations/vectorstores/valkey)                                                                                  | ✅            | ✅         | ✅                | ✅                 | ❌     | ❌                     | ❌             | ✅                    |
 | [`ZeusDB`](/oss/python/integrations/vectorstores/zeusdb)                                                                                             | ✅            | ✅         | ✅                | ✅                 | ✅     | ✅                     | ❌             | ✅                    |
 | [`Oracle AI Database`](/oss/python/integrations/vectorstores/oracle)                                                                                 | ✅            | ✅         | ✅                | ✅                 | ✅     | ✅                     | ❌             | ✅                    |
 

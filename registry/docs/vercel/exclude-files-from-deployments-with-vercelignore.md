@@ -39,7 +39,7 @@ If you have a monorepo, a `.vercelignore` in the project root directory always t
 
 title: "Using the Directory Listing"
 description: "The Directory Listing is served when a particular path is a directory and does not contain an index file. Learn how to toggle and disable it in this guide."
-last\_updated: "2026-03-08T05:03:13.428Z"
+last\_updated: "2026-03-23T09:40:08.574Z"
 source: "https://vercel.com/docs/directory-listing"
 
 # Using the Directory Listing
@@ -67,5 +67,5 @@ To prevent Directory Listing for a specific path, you can either:
 
 title: "Directory Sync"
 description: "Learn how to configure Directory Sync for your Vercel Team."
-last\_updated: "2026-03-08T05:03:13.438Z"
+last\_updated: "2026-03-23T09:40:08.588Z"
 source: "https://vercel.com/docs/directory-sync"

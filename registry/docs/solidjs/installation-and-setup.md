@@ -48,7 +48,7 @@ To configure your routes, import the `Router` component and then start the appli
 import { render } from "solid-js/web";import { Router } from "@solidjs/router";
 const wrapper = document.getElementById("app");
 if (!wrapper) {  throw new Error("Wrapper div not found");}
-render(() => <Router />, wrapper)
+render(() => <Router />, wrapper);
 ```
 
 This sets up the router that will match on the url and render the appropriate route.

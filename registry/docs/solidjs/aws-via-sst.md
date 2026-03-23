@@ -39,7 +39,7 @@ dpx sst@latest init
 3. This will detect your SolidStart app and ask you to update your `app.config.ts`.
 
 ```
-server: {   preset: "aws-lambda-streaming"}
+server: {  preset: "aws-lambda-streaming";}
 ```
 
 4. When you are ready, you can deploy your app using:

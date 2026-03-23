@@ -58,5 +58,5 @@ This means that commits in between the current build and most recent commit will
 
 title: "Configuring a Build"
 description: "Vercel automatically configures the build settings for many front-end frameworks, but you can also customize the build according to your requirements."
-last\_updated: "2026-03-08T05:03:11.657Z"
+last\_updated: "2026-03-23T09:40:06.211Z"
 source: "https://vercel.com/docs/builds/configure-a-build"

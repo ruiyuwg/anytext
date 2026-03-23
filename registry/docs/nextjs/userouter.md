@@ -5,42 +5,42 @@ The `useRouter` hook allows you to programmatically change routes inside [Client
 > **Recommendation:** Use the [`<Link>` component](/docs/app/api-reference/components/link) for navigation unless you have a specific requirement for using `useRouter`.
 
 ```tsx filename="app/example-client-component.tsx" switcher
-"use client";
+'use client'
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
-    <button type="button" onClick={() => router.push("/dashboard")}>
+    <button type="button" onClick={() => router.push('/dashboard')}>
       Dashboard
     </button>
-  );
+  )
 }
 ```
 
 ```jsx filename="app/example-client-component.js" switcher
-"use client";
+'use client'
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
-    <button type="button" onClick={() => router.push("/dashboard")}>
+    <button type="button" onClick={() => router.push('/dashboard')}>
       Dashboard
     </button>
-  );
+  )
 }
 ```
 
 ## `useRouter()`
 
-- `router.push(href: string, { scroll: boolean })`: Perform a client-side navigation to the provided route. Adds a new entry into the [browser's history stack](https://developer.mozilla.org/docs/Web/API/History_API).
-- `router.replace(href: string, { scroll: boolean })`: Perform a client-side navigation to the provided route without adding a new entry into the browser’s history stack.
-- `router.refresh()`: Refresh the current route. Making a new request to the server, re-fetching data requests, and re-rendering Server Components. The client will merge the updated React Server Component payload without losing unaffected client-side React (e.g. `useState`) or browser state (e.g. scroll position).
+- `router.push(href: string, { scroll: boolean, transitionTypes: string[] })`: Perform a client-side navigation to the provided route. Adds a new entry into the [browser's history stack](https://developer.mozilla.org/docs/Web/API/History_API). The optional `transitionTypes` are passed to [`React.addTransitionType`](https://react.dev/reference/react/addTransitionType) inside the navigation Transition.
+- `router.replace(href: string, { scroll: boolean, transitionTypes: string[] })`: Perform a client-side navigation to the provided route without adding a new entry into the browser’s history stack. The optional `transitionTypes` are passed to [`React.addTransitionType`](https://react.dev/reference/react/addTransitionType) inside the navigation Transition.
+- `router.refresh()`: Refresh the current route. Making a new request to the server, re-fetching data requests, and re-rendering Server Components. The client will merge the updated React Server Component payload without losing unaffected client-side React (e.g. `useState`) or browser state (e.g. scroll position). This clears the [Client Cache](/docs/app/glossary#client-cache) for the current route, but does **not** invalidate the server-side cache. Use [`revalidatePath`](/docs/app/api-reference/functions/revalidatePath) or [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) to invalidate server-side cached data.
 - `router.prefetch(href: string, options?: { onInvalidate?: () => void })`: [Prefetch](/docs/app/getting-started/linking-and-navigating#prefetching) the provided route for faster client-side transitions. The optional `onInvalidate` callback is called when the [prefetched data becomes stale](/docs/app/guides/prefetching#extending-or-ejecting-link).
 - `router.back()`: Navigate back to the previous route in the browser’s history stack.
 - `router.forward()`: Navigate forwards to the next page in the browser’s history stack.
@@ -49,7 +49,7 @@ export default function Page() {
 >
 > - You must not send untrusted or unsanitized URLs to `router.push` or `router.replace`, as this can open your site to cross-site scripting (XSS) vulnerabilities. For example, `javascript:` URLs sent to `router.push` or `router.replace` will be executed in the context of your page.
 > - The `<Link>` component automatically prefetch routes as they become visible in the viewport.
-> - `refresh()` could re-produce the same result if fetch requests are cached. Other Dynamic APIs like `cookies` and `headers` could also change the response.
+> - `refresh()` could re-produce the same result if fetch requests are cached. Other Request-time APIs like `cookies` and `headers` could also change the response.
 > - The `onInvalidate` callback is called at most once per prefetch request. It signals when you may want to trigger a new prefetch for updated route data.
 
 ### Migrating from `next/router`
@@ -68,31 +68,31 @@ export default function Page() {
 You can listen for page changes by composing other Client Component hooks like `usePathname` and `useSearchParams`.
 
 ```jsx filename="app/components/navigation-events.js"
-"use client";
+'use client'
 
-import { useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 export function NavigationEvents() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   useEffect(() => {
-    const url = `${pathname}?${searchParams}`;
-    console.log(url);
+    const url = `${pathname}?${searchParams}`
+    console.log(url)
     // You can now use the current URL
     // ...
-  }, [pathname, searchParams]);
+  }, [pathname, searchParams])
 
-  return "...";
+  return '...'
 }
 ```
 
 Which can be imported into a layout.
 
 ```jsx filename="app/layout.js" highlight={2,10-12}
-import { Suspense } from "react";
-import { NavigationEvents } from "./components/navigation-events";
+import { Suspense } from 'react'
+import { NavigationEvents } from './components/navigation-events'
 
 export default function Layout({ children }) {
   return (
@@ -105,51 +105,51 @@ export default function Layout({ children }) {
         </Suspense>
       </body>
     </html>
-  );
+  )
 }
 ```
 
-> **Good to know**: `<NavigationEvents>` is wrapped in a [`Suspense` boundary](/docs/app/api-reference/file-conventions/loading#examples) because[`useSearchParams()`](/docs/app/api-reference/functions/use-search-params) causes client-side rendering up to the closest `Suspense` boundary during [static rendering](/docs/app/guides/caching#static-rendering). [Learn more](/docs/app/api-reference/functions/use-search-params#behavior).
+> **Good to know**: `<NavigationEvents>` is wrapped in a [`Suspense` boundary](/docs/app/api-reference/file-conventions/loading#examples) because[`useSearchParams()`](/docs/app/api-reference/functions/use-search-params) causes client-side rendering up to the closest `Suspense` boundary during [prerendering](/docs/app/glossary#prerendering). [Learn more](/docs/app/api-reference/functions/use-search-params#behavior).
 
 ### Disabling scroll to top
 
 By default, Next.js will scroll to the top of the page when navigating to a new route. You can disable this behavior by passing `scroll: false` to `router.push()` or `router.replace()`.
 
 ```tsx filename="app/example-client-component.tsx" switcher
-"use client";
+'use client'
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <button
       type="button"
-      onClick={() => router.push("/dashboard", { scroll: false })}
+      onClick={() => router.push('/dashboard', { scroll: false })}
     >
       Dashboard
     </button>
-  );
+  )
 }
 ```
 
 ```jsx filename="app/example-client-component.jsx" switcher
-"use client";
+'use client'
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <button
       type="button"
-      onClick={() => router.push("/dashboard", { scroll: false })}
+      onClick={() => router.push('/dashboard', { scroll: false })}
     >
       Dashboard
     </button>
-  );
+  )
 }
 ```
 

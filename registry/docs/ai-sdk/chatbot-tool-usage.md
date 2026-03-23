@@ -15,21 +15,22 @@ The flow is as follows:
 4. All tool calls are forwarded to the client.
 5. Server-side tools are executed using their `execute` method and their results are forwarded to the client.
 6. Client-side tools that should be automatically executed are handled with the `onToolCall` callback.
-   You must call `addToolOutput` to provide the tool result.
+   You can return the tool result from the callback.
 7. Client-side tool that require user interactions can be displayed in the UI.
    The tool calls and results are available as tool invocation parts in the `parts` property of the last assistant message.
-8. When the user interaction is done, `addToolOutput` can be used to add the tool result to the chat.
-9. The chat can be configured to automatically submit when all tool results are available using `sendAutomaticallyWhen`.
+8. When the user interaction is done, `addToolResult` can be used to add the tool result to the chat.
+9. When there are tool calls in the last assistant message and all tool results are available, the client sends the updated messages back to the server.
    This triggers another iteration of this flow.
 
-The tool calls and tool executions are integrated into the assistant message as typed tool parts.
-A tool part is at first a tool call, and then it becomes a tool result when the tool is executed.
+The tool call and tool executions are integrated into the assistant message as tool invocation parts.
+A tool invocation is at first a tool call, and then it becomes a tool result when the tool is executed.
 The tool result contains all information about the tool call as well as the result of the tool execution.
 
-Tool result submission can be configured using the `sendAutomaticallyWhen`
-option. You can use the `lastAssistantMessageIsCompleteWithToolCalls` helper
-to automatically submit when all tool results are available. This simplifies
-the client-side code while still allowing full control when needed.
+In order to automatically send another request to the server when all tool
+calls are server-side, you need to set
+[`maxSteps`](/docs/reference/ai-sdk-ui/use-chat#max-steps) to a value greater
+than 1 in the `useChat` options. It is disabled by default for backward
+compatibility.
 
 ## Example
 
@@ -42,26 +43,26 @@ In this example, we'll use three tools:
 ### API route
 
 ```tsx filename='app/api/chat/route.ts'
-import { convertToModelMessages, streamText, UIMessage } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
+import { z } from 'zod';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
+  const { messages } = await req.json();
 
   const result = streamText({
-    model: __MODEL__,
-    messages: await convertToModelMessages(messages),
+    model: openai('gpt-4o'),
+    messages,
     tools: {
       // server-side tool with execute function:
       getWeatherInformation: {
-        description: "show the weather in a given city to the user",
-        inputSchema: z.object({ city: z.string() }),
+        description: 'show the weather in a given city to the user',
+        parameters: z.object({ city: z.string() }),
         execute: async ({}: { city: string }) => {
-          const weatherOptions = ["sunny", "cloudy", "rainy", "snowy", "windy"];
+          const weatherOptions = ['sunny', 'cloudy', 'rainy', 'snowy', 'windy'];
           return weatherOptions[
             Math.floor(Math.random() * weatherOptions.length)
           ];
@@ -69,201 +70,166 @@ export async function POST(req: Request) {
       },
       // client-side tool that starts user interaction:
       askForConfirmation: {
-        description: "Ask the user for confirmation.",
-        inputSchema: z.object({
-          message: z.string().describe("The message to ask for confirmation."),
+        description: 'Ask the user for confirmation.',
+        parameters: z.object({
+          message: z.string().describe('The message to ask for confirmation.'),
         }),
       },
       // client-side tool that is automatically executed on the client:
       getLocation: {
         description:
-          "Get the user location. Always ask for confirmation before using this tool.",
-        inputSchema: z.object({}),
+          'Get the user location. Always ask for confirmation before using this tool.',
+        parameters: z.object({}),
       },
     },
   });
 
-  return result.toUIMessageStreamResponse();
+  return result.toDataStreamResponse();
 }
 ```
 
 ### Client-side page
 
 The client-side page uses the `useChat` hook to create a chatbot application with real-time message streaming.
-Tool calls are displayed in the chat UI as typed tool parts.
+Tool invocations are displayed in the chat UI as tool invocation parts.
 Please make sure to render the messages using the `parts` property of the message.
 
 There are three things worth mentioning:
 
 1. The [`onToolCall`](/docs/reference/ai-sdk-ui/use-chat#on-tool-call) callback is used to handle client-side tools that should be automatically executed.
    In this example, the `getLocation` tool is a client-side tool that returns a random city.
-   You call `addToolOutput` to provide the result (without `await` to avoid potential deadlocks).
 
-   Always check `if (toolCall.dynamic)` first in your `onToolCall` handler.
-   Without this check, TypeScript will throw an error like: `Type 'string' is
-  not assignable to type '"toolName1" | "toolName2"'` when you try to use
-   `toolCall.toolName` in `addToolOutput`.
-
-2. The [`sendAutomaticallyWhen`](/docs/reference/ai-sdk-ui/use-chat#send-automatically-when) option with `lastAssistantMessageIsCompleteWithToolCalls` helper automatically submits when all tool results are available.
-
-3. The `parts` array of assistant messages contains tool parts with typed names like `tool-askForConfirmation`.
+2. The `toolInvocations` property of the last assistant message contains all tool calls and results.
    The client-side tool `askForConfirmation` is displayed in the UI.
    It asks the user for confirmation and displays the result once the user confirms or denies the execution.
-   The result is added to the chat using `addToolOutput` with the `tool` parameter for type safety.
+   The result is added to the chat using `addToolResult`.
 
-```tsx filename='app/page.tsx' highlight="2,6,10,14-20"
-"use client";
+3. The [`maxSteps`](/docs/reference/ai-sdk-ui/use-chat#max-steps) option is set to 5.
+   This enables several tool use iterations between the client and the server.
 
-import { useChat } from "@ai-sdk/react";
-import {
-  DefaultChatTransport,
-  lastAssistantMessageIsCompleteWithToolCalls,
-} from "ai";
-import { useState } from "react";
+```tsx filename='app/page.tsx' highlight="9,12,31"
+'use client';
+
+import { ToolInvocation } from 'ai';
+import { useChat } from '@ai-sdk/react';
 
 export default function Chat() {
-  const { messages, sendMessage, addToolOutput } = useChat({
-    transport: new DefaultChatTransport({
-      api: "/api/chat",
-    }),
+  const { messages, input, handleInputChange, handleSubmit, addToolResult } =
+    useChat({
+      maxSteps: 5,
 
-    sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithToolCalls,
-
-    // run client-side tools that are automatically executed:
-    async onToolCall({ toolCall }) {
-      // Check if it's a dynamic tool first for proper type narrowing
-      if (toolCall.dynamic) {
-        return;
-      }
-
-      if (toolCall.toolName === "getLocation") {
-        const cities = ["New York", "Los Angeles", "Chicago", "San Francisco"];
-
-        // No await - avoids potential deadlocks
-        addToolOutput({
-          tool: "getLocation",
-          toolCallId: toolCall.toolCallId,
-          output: cities[Math.floor(Math.random() * cities.length)],
-        });
-      }
-    },
-  });
-  const [input, setInput] = useState("");
+      // run client-side tools that are automatically executed:
+      async onToolCall({ toolCall }) {
+        if (toolCall.toolName === 'getLocation') {
+          const cities = [
+            'New York',
+            'Los Angeles',
+            'Chicago',
+            'San Francisco',
+          ];
+          return cities[Math.floor(Math.random() * cities.length)];
+        }
+      },
+    });
 
   return (
     <>
-      {messages?.map((message) => (
+      {messages?.map(message => (
         <div key={message.id}>
           <strong>{`${message.role}: `}</strong>
-          {message.parts.map((part) => {
+          {message.parts.map(part => {
             switch (part.type) {
               // render text parts as simple text:
-              case "text":
+              case 'text':
                 return part.text;
 
-              // for tool parts, use the typed tool part names:
-              case "tool-askForConfirmation": {
-                const callId = part.toolCallId;
+              // for tool invocations, distinguish between the tools and the state:
+              case 'tool-invocation': {
+                const callId = part.toolInvocation.toolCallId;
 
-                switch (part.state) {
-                  case "input-streaming":
-                    return (
-                      <div key={callId}>Loading confirmation request...</div>
-                    );
-                  case "input-available":
-                    return (
-                      <div key={callId}>
-                        {part.input.message}
-                        <div>
-                          <button
-                            onClick={() =>
-                              addToolOutput({
-                                tool: "askForConfirmation",
-                                toolCallId: callId,
-                                output: "Yes, confirmed.",
-                              })
-                            }
-                          >
-                            Yes
-                          </button>
-                          <button
-                            onClick={() =>
-                              addToolOutput({
-                                tool: "askForConfirmation",
-                                toolCallId: callId,
-                                output: "No, denied",
-                              })
-                            }
-                          >
-                            No
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  case "output-available":
-                    return (
-                      <div key={callId}>
-                        Location access allowed: {part.output}
-                      </div>
-                    );
-                  case "output-error":
-                    return <div key={callId}>Error: {part.errorText}</div>;
+                switch (part.toolInvocation.toolName) {
+                  case 'askForConfirmation': {
+                    switch (part.toolInvocation.state) {
+                      case 'call':
+                        return (
+                          <div key={callId}>
+                            {part.toolInvocation.args.message}
+                            <div>
+                              <button
+                                onClick={() =>
+                                  addToolResult({
+                                    toolCallId: callId,
+                                    result: 'Yes, confirmed.',
+                                  })
+                                }
+                              >
+                                Yes
+                              </button>
+                              <button
+                                onClick={() =>
+                                  addToolResult({
+                                    toolCallId: callId,
+                                    result: 'No, denied',
+                                  })
+                                }
+                              >
+                                No
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      case 'result':
+                        return (
+                          <div key={callId}>
+                            Location access allowed:{' '}
+                            {part.toolInvocation.result}
+                          </div>
+                        );
+                    }
+                    break;
+                  }
+
+                  case 'getLocation': {
+                    switch (part.toolInvocation.state) {
+                      case 'call':
+                        return <div key={callId}>Getting location...</div>;
+                      case 'result':
+                        return (
+                          <div key={callId}>
+                            Location: {part.toolInvocation.result}
+                          </div>
+                        );
+                    }
+                    break;
+                  }
+
+                  case 'getWeatherInformation': {
+                    switch (part.toolInvocation.state) {
+                      // example of pre-rendering streaming tool calls:
+                      case 'partial-call':
+                        return (
+                          <pre key={callId}>
+                            {JSON.stringify(part.toolInvocation, null, 2)}
+                          </pre>
+                        );
+                      case 'call':
+                        return (
+                          <div key={callId}>
+                            Getting weather information for{' '}
+                            {part.toolInvocation.args.city}...
+                          </div>
+                        );
+                      case 'result':
+                        return (
+                          <div key={callId}>
+                            Weather in {part.toolInvocation.args.city}:{' '}
+                            {part.toolInvocation.result}
+                          </div>
+                        );
+                    }
+                    break;
+                  }
                 }
-                break;
-              }
-
-              case "tool-getLocation": {
-                const callId = part.toolCallId;
-
-                switch (part.state) {
-                  case "input-streaming":
-                    return (
-                      <div key={callId}>Preparing location request...</div>
-                    );
-                  case "input-available":
-                    return <div key={callId}>Getting location...</div>;
-                  case "output-available":
-                    return <div key={callId}>Location: {part.output}</div>;
-                  case "output-error":
-                    return (
-                      <div key={callId}>
-                        Error getting location: {part.errorText}
-                      </div>
-                    );
-                }
-                break;
-              }
-
-              case "tool-getWeatherInformation": {
-                const callId = part.toolCallId;
-
-                switch (part.state) {
-                  // example of pre-rendering streaming tool inputs:
-                  case "input-streaming":
-                    return (
-                      <pre key={callId}>{JSON.stringify(part, null, 2)}</pre>
-                    );
-                  case "input-available":
-                    return (
-                      <div key={callId}>
-                        Getting weather information for {part.input.city}...
-                      </div>
-                    );
-                  case "output-available":
-                    return (
-                      <div key={callId}>
-                        Weather in {part.input.city}: {part.output}
-                      </div>
-                    );
-                  case "output-error":
-                    return (
-                      <div key={callId}>
-                        Error getting weather for {part.input.city}:{" "}
-                        {part.errorText}
-                      </div>
-                    );
-                }
-                break;
               }
             }
           })}
@@ -271,285 +237,54 @@ export default function Chat() {
         </div>
       ))}
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (input.trim()) {
-            sendMessage({ text: input });
-            setInput("");
-          }
-        }}
-      >
-        <input value={input} onChange={(e) => setInput(e.target.value)} />
+      <form onSubmit={handleSubmit}>
+        <input value={input} onChange={handleInputChange} />
       </form>
     </>
   );
 }
 ```
 
-### Error handling
-
-Sometimes an error may occur during client-side tool execution. Use the `addToolOutput` method with a `state` of `output-error` and `errorText` value instead of `output` record the error.
-
-```tsx filename='app/page.tsx' highlight="19,36-41"
-"use client";
-
-import { useChat } from "@ai-sdk/react";
-import {
-  DefaultChatTransport,
-  lastAssistantMessageIsCompleteWithToolCalls,
-} from "ai";
-import { useState } from "react";
-
-export default function Chat() {
-  const { messages, sendMessage, addToolOutput } = useChat({
-    transport: new DefaultChatTransport({
-      api: "/api/chat",
-    }),
-
-    sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithToolCalls,
-
-    // run client-side tools that are automatically executed:
-    async onToolCall({ toolCall }) {
-      // Check if it's a dynamic tool first for proper type narrowing
-      if (toolCall.dynamic) {
-        return;
-      }
-
-      if (toolCall.toolName === "getWeatherInformation") {
-        try {
-          const weather = await getWeatherInformation(toolCall.input);
-
-          // No await - avoids potential deadlocks
-          addToolOutput({
-            tool: "getWeatherInformation",
-            toolCallId: toolCall.toolCallId,
-            output: weather,
-          });
-        } catch (err) {
-          addToolOutput({
-            tool: "getWeatherInformation",
-            toolCallId: toolCall.toolCallId,
-            state: "output-error",
-            errorText: "Unable to get the weather information",
-          });
-        }
-      }
-    },
-  });
-}
-```
-
-## Tool Execution Approval
-
-Tool execution approval lets you require user confirmation before a server-side tool runs. Unlike [client-side tools](#example) that execute in the browser, tools with approval still execute on the server—but only after the user approves.
-
-Use tool execution approval when you want to:
-
-- Confirm sensitive operations (payments, deletions, external API calls)
-- Let users review tool inputs before execution
-- Add human oversight to automated workflows
-
-For tools that need to run in the browser (updating UI state, accessing browser APIs), use client-side tools instead.
-
-### Server Setup
-
-Enable approval by setting `needsApproval` on your tool. See [Tool Execution Approval](/docs/ai-sdk-core/tools-and-tool-calling#tool-execution-approval) for configuration options including dynamic approval based on input.
-
-```tsx filename='app/api/chat/route.ts'
-import { streamText, tool } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
-
-export async function POST(req: Request) {
-  const { messages } = await req.json();
-
-  const result = streamText({
-    model: __MODEL__,
-    messages,
-    tools: {
-      getWeather: tool({
-        description: "Get the weather in a location",
-        inputSchema: z.object({
-          city: z.string(),
-        }),
-        needsApproval: true,
-        execute: async ({ city }) => {
-          const weather = await fetchWeather(city);
-          return weather;
-        },
-      }),
-    },
-  });
-
-  return result.toUIMessageStreamResponse();
-}
-```
-
-### Client-Side Approval UI
-
-When a tool requires approval, the tool part state is `approval-requested`. Use `addToolApprovalResponse` to approve or deny:
-
-```tsx filename='app/page.tsx'
-"use client";
-
-import { useChat } from "@ai-sdk/react";
-
-export default function Chat() {
-  const { messages, addToolApprovalResponse } = useChat();
-
-  return (
-    <>
-      {messages.map((message) => (
-        <div key={message.id}>
-          {message.parts.map((part) => {
-            if (part.type === "tool-getWeather") {
-              switch (part.state) {
-                case "approval-requested":
-                  return (
-                    <div key={part.toolCallId}>
-                      <p>Get weather for {part.input.city}?</p>
-                      <button
-                        onClick={() =>
-                          addToolApprovalResponse({
-                            id: part.approval.id,
-                            approved: true,
-                          })
-                        }
-                      >
-                        Approve
-                      </button>
-                      <button
-                        onClick={() =>
-                          addToolApprovalResponse({
-                            id: part.approval.id,
-                            approved: false,
-                          })
-                        }
-                      >
-                        Deny
-                      </button>
-                    </div>
-                  );
-                case "output-available":
-                  return (
-                    <div key={part.toolCallId}>
-                      Weather in {part.input.city}: {part.output}
-                    </div>
-                  );
-              }
-            }
-            // Handle other part types...
-          })}
-        </div>
-      ))}
-    </>
-  );
-}
-```
-
-### Auto-Submit After Approval
-
-If nothing happens after you approve a tool execution, make sure you either
-call `sendMessage` manually or configure `sendAutomaticallyWhen` on the
-`useChat` hook.
-
-Use `lastAssistantMessageIsCompleteWithApprovalResponses` to automatically continue the conversation after approvals:
-
-```tsx
-import { useChat } from "@ai-sdk/react";
-import { lastAssistantMessageIsCompleteWithApprovalResponses } from "ai";
-
-const { messages, addToolApprovalResponse } = useChat({
-  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
-});
-```
-
-## Dynamic Tools
-
-When using dynamic tools (tools with unknown types at compile time), the UI parts use a generic `dynamic-tool` type instead of specific tool types:
-
-```tsx filename='app/page.tsx'
-{
-  message.parts.map((part, index) => {
-    switch (part.type) {
-      // Static tools with specific (`tool-${toolName}`) types
-      case "tool-getWeatherInformation":
-        return <WeatherDisplay part={part} />;
-
-      // Dynamic tools use generic `dynamic-tool` type
-      case "dynamic-tool":
-        return (
-          <div key={index}>
-            <h4>Tool: {part.toolName}</h4>
-            {part.state === "input-streaming" && (
-              <pre>{JSON.stringify(part.input, null, 2)}</pre>
-            )}
-            {part.state === "output-available" && (
-              <pre>{JSON.stringify(part.output, null, 2)}</pre>
-            )}
-            {part.state === "output-error" && (
-              <div>Error: {part.errorText}</div>
-            )}
-          </div>
-        );
-    }
-  });
-}
-```
-
-Dynamic tools are useful when integrating with:
-
-- MCP (Model Context Protocol) tools without schemas
-- User-defined functions loaded at runtime
-- External tool providers
-
 ## Tool call streaming
 
-Tool call streaming is **enabled by default** in AI SDK 5.0, allowing you to stream tool calls while they are being generated. This provides a better user experience by showing tool inputs as they are generated in real-time.
+You can stream tool calls while they are being generated by enabling the
+`toolCallStreaming` option in `streamText`.
 
-```tsx filename='app/api/chat/route.ts'
+```tsx filename='app/api/chat/route.ts' highlight="5"
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
+  // ...
 
   const result = streamText({
-    model: __MODEL__,
-    messages: await convertToModelMessages(messages),
-    // toolCallStreaming is enabled by default in v5
+    toolCallStreaming: true,
     // ...
   });
 
-  return result.toUIMessageStreamResponse();
+  return result.toDataStreamResponse();
 }
 ```
 
-With tool call streaming enabled, partial tool calls are streamed as part of the data stream.
+When the flag is enabled, partial tool calls will be streamed as part of the data stream.
 They are available through the `useChat` hook.
-The typed tool parts of assistant messages will also contain partial tool calls.
-You can use the `state` property of the tool part to render the correct UI.
+The tool invocation parts of assistant messages will also contain partial tool calls.
+You can use the `state` property of the tool invocation to render the correct UI.
 
 ```tsx filename='app/page.tsx' highlight="9,10"
 export default function Chat() {
   // ...
   return (
     <>
-      {messages?.map((message) => (
+      {messages?.map(message => (
         <div key={message.id}>
-          {message.parts.map((part) => {
-            switch (part.type) {
-              case "tool-askForConfirmation":
-              case "tool-getLocation":
-              case "tool-getWeatherInformation":
-                switch (part.state) {
-                  case "input-streaming":
-                    return <pre>{JSON.stringify(part.input, null, 2)}</pre>;
-                  case "input-available":
-                    return <pre>{JSON.stringify(part.input, null, 2)}</pre>;
-                  case "output-available":
-                    return <pre>{JSON.stringify(part.output, null, 2)}</pre>;
-                  case "output-error":
-                    return <div>Error: {part.errorText}</div>;
-                }
+          {message.parts.map(part => {
+            if (part.type === 'tool-invocation') {
+              switch (part.toolInvocation.state) {
+                case 'partial-call':
+                  return <>render partial tool call</>;
+                case 'call':
+                  return <>render full tool call</>;
+                case 'result':
+                  return <>render tool result</>;
+              }
             }
           })}
         </div>
@@ -562,25 +297,23 @@ export default function Chat() {
 ## Step start parts
 
 When you are using multi-step tool calls, the AI SDK will add step start parts to the assistant messages.
-If you want to display boundaries between tool calls, you can use the `step-start` parts as follows:
+If you want to display boundaries between tool invocations, you can use the `step-start` parts as follows:
 
 ```tsx filename='app/page.tsx'
 // ...
 // where you render the message parts:
 message.parts.map((part, index) => {
   switch (part.type) {
-    case "step-start":
+    case 'step-start':
       // show step boundaries as horizontal lines:
       return index > 0 ? (
         <div key={index} className="text-gray-500">
           <hr className="my-2 border-gray-300" />
         </div>
       ) : null;
-    case "text":
+    case 'text':
     // ...
-    case "tool-askForConfirmation":
-    case "tool-getLocation":
-    case "tool-getWeatherInformation":
+    case 'tool-invocation':
     // ...
   }
 });
@@ -593,33 +326,33 @@ You can also use multi-step calls on the server-side with `streamText`.
 This works when all invoked tools have an `execute` function on the server side.
 
 ```tsx filename='app/api/chat/route.ts' highlight="15-21,24"
-import { convertToModelMessages, streamText, UIMessage, stepCountIs } from "ai";
-__PROVIDER_IMPORT__;
-import { z } from "zod";
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
+import { z } from 'zod';
 
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
+  const { messages } = await req.json();
 
   const result = streamText({
-    model: __MODEL__,
-    messages: await convertToModelMessages(messages),
+    model: openai('gpt-4o'),
+    messages,
     tools: {
       getWeatherInformation: {
-        description: "show the weather in a given city to the user",
-        inputSchema: z.object({ city: z.string() }),
+        description: 'show the weather in a given city to the user',
+        parameters: z.object({ city: z.string() }),
         // tool has execute function:
         execute: async ({}: { city: string }) => {
-          const weatherOptions = ["sunny", "cloudy", "rainy", "snowy", "windy"];
+          const weatherOptions = ['sunny', 'cloudy', 'rainy', 'snowy', 'windy'];
           return weatherOptions[
             Math.floor(Math.random() * weatherOptions.length)
           ];
         },
       },
     },
-    stopWhen: stepCountIs(5),
+    maxSteps: 5,
   });
 
-  return result.toUIMessageStreamResponse();
+  return result.toDataStreamResponse();
 }
 ```
 
@@ -628,15 +361,15 @@ export async function POST(req: Request) {
 Language models can make errors when calling tools.
 By default, these errors are masked for security reasons, and show up as "An error occurred" in the UI.
 
-To surface the errors, you can use the `onError` function when calling `toUIMessageResponse`.
+To surface the errors, you can use the `getErrorMessage` function when calling `toDataStreamResponse`.
 
 ```tsx
 export function errorHandler(error: unknown) {
   if (error == null) {
-    return "unknown error";
+    return 'unknown error';
   }
 
-  if (typeof error === "string") {
+  if (typeof error === 'string') {
     return error;
   }
 
@@ -653,20 +386,20 @@ const result = streamText({
   // ...
 });
 
-return result.toUIMessageStreamResponse({
-  onError: errorHandler,
+return result.toDataStreamResponse({
+  getErrorMessage: errorHandler,
 });
 ```
 
-In case you are using `createUIMessageResponse`, you can use the `onError` function when calling `toUIMessageResponse`:
+In case you are using `createDataStreamResponse`, you can use the `onError` function when calling `toDataStreamResponse`:
 
 ```tsx
-const response = createUIMessageResponse({
+const response = createDataStreamResponse({
   // ...
   async execute(dataStream) {
     // ...
   },
-  onError: (error) => `Custom error: ${error.message}`,
+  onError: error => `Custom error: ${error.message}`,
 });
 ```
 

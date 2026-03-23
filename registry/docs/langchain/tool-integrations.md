@@ -1,12 +1,12 @@
 # Tool integrations
 
-Source: https://docs.langchain.com/langsmith/agent-builder-tools
+Source: https://docs.langchain.com/langsmith/fleet/tools
 
 Give your agents access to a wide range of tools and services.
 
-You can access a variety of tools in Agent Builder. Use tool integrations and [MCP servers](/langsmith/agent-builder-remote-mcp-servers) to give your agents access to email, calendars, chat, project management, code hosting, spreadsheets/BI, search, social, and general web utilities.
+You can access a variety of tools in LangSmith Fleet. Use tool integrations and [MCP servers](/langsmith/fleet/remote-mcp-servers) to give your agents access to email, calendars, chat, project management, code hosting, spreadsheets/BI, search, social, and general web utilities.
 
-To view a comprehensive list of all tool integrations, navigate to the [Agent Builder > Integrations tab](https://smith.langchain.com/agents/tools).
+To view a comprehensive list of all tool integrations, navigate to the [Fleet > Integrations tab](https://smith.langchain.com/agents/tools).
 
 ```
 Math and logic
@@ -210,7 +210,7 @@ Manage payments
   Notify user (for confirmations/updates)
 ```
 
-You can also connect to remote MCP servers to give your agents access to additional tools. See [Remote MCP servers](/langsmith/agent-builder-remote-mcp-servers) for more information.
+You can also connect to remote MCP servers to give your agents access to additional tools. See [Remote MCP servers](/langsmith/fleet/remote-mcp-servers) for more information.
 
 ## Disconnect a tool
 
@@ -231,7 +231,7 @@ Click **Disconnect** for that integration.
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-builder-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

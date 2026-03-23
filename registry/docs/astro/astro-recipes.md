@@ -22,6 +22,10 @@ Astro’s official recipes are short, focused how-to guides that walk a reader t
 
   Learn how to build a custom image component that supports media queries using the getImage function.
 
+- ### [Build HTML forms in Astro pages](/en/recipes/build-forms/)
+
+  Learn how to build HTML forms and handle submissions in your frontmatter.
+
 - ### [Build forms with API routes](/en/recipes/build-forms-api/)
 
   Learn how to use JavaScript to send form submissions to an API Route.
@@ -29,10 +33,6 @@ Astro’s official recipes are short, focused how-to guides that walk a reader t
 - ### [Use Bun with Astro](/en/recipes/bun/)
 
   Learn how to use Bun with your Astro site.
-
-- ### [Build HTML forms in Astro pages](/en/recipes/build-forms/)
-
-  Learn how to build HTML forms and handle submissions in your frontmatter.
 
 - ### [Call endpoints from the server](/en/recipes/call-endpoints/)
 
@@ -78,13 +78,13 @@ Astro’s official recipes are short, focused how-to guides that walk a reader t
 
   Add an RSS feed to your Astro site to let users subscribe to your content.
 
-- ### [Share state between islands](/en/recipes/sharing-state-islands/)
-
-  Learn how to share state across framework components with Nano Stores.
-
 - ### [Share state between Astro components](/en/recipes/sharing-state/)
 
   Learn how to share state across Astro components with Nano Stores.
+
+- ### [Share state between islands](/en/recipes/sharing-state-islands/)
+
+  Learn how to share state across framework components with Nano Stores.
 
 - ### [Using streaming to improve page performance](/en/recipes/streaming-improve-page-performance/)
 

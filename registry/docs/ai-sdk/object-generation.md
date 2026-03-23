@@ -1,7 +1,6 @@
 # Object Generation
 
-`useObject` is an experimental feature and only available in React, Svelte,
-and Vue.
+`useObject` is an experimental feature and only available in React.
 
 The [`useObject`](/docs/reference/ai-sdk-ui/use-object) hook allows you to create interfaces that represent a structured JSON object that is being streamed.
 
@@ -16,14 +15,14 @@ The example shows a small notifications demo app that generates fake notificatio
 It is helpful to set up the schema in a separate file that is imported on both the client and server.
 
 ```ts filename='app/api/notifications/schema.ts'
-import { z } from "zod";
+import { z } from 'zod';
 
 // define a schema for the notifications
 export const notificationSchema = z.object({
   notifications: z.array(
     z.object({
-      name: z.string().describe("Name of a fictional person."),
-      message: z.string().describe("Message. Do not use emojis or links."),
+      name: z.string().describe('Name of a fictional person.'),
+      message: z.string().describe('Message. Do not use emojis or links.'),
     }),
   ),
 });
@@ -37,20 +36,20 @@ The results are partial and are displayed as they are received.
 Please note the code for handling `undefined` values in the JSX.
 
 ```tsx filename='app/page.tsx'
-"use client";
+'use client';
 
-import { experimental_useObject as useObject } from "@ai-sdk/react";
-import { notificationSchema } from "./api/notifications/schema";
+import { experimental_useObject as useObject } from '@ai-sdk/react';
+import { notificationSchema } from './api/notifications/schema';
 
 export default function Page() {
   const { object, submit } = useObject({
-    api: "/api/notifications",
+    api: '/api/notifications',
     schema: notificationSchema,
   });
 
   return (
     <>
-      <button onClick={() => submit("Messages during finals week.")}>
+      <button onClick={() => submit('Messages during finals week.')}>
         Generate notifications
       </button>
 
@@ -67,12 +66,12 @@ export default function Page() {
 
 ### Server
 
-On the server, we use [`streamText`](/docs/reference/ai-sdk-core/stream-text) with [`Output.object()`](/docs/reference/ai-sdk-core/output#output-object) to stream the object generation process.
+On the server, we use [`streamObject`](/docs/reference/ai-sdk-core/stream-object) to stream the object generation process.
 
 ```typescript filename='app/api/notifications/route.ts'
-import { streamText, Output } from "ai";
-__PROVIDER_IMPORT__;
-import { notificationSchema } from "./schema";
+import { openai } from '@ai-sdk/openai';
+import { streamObject } from 'ai';
+import { notificationSchema } from './schema';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -80,68 +79,11 @@ export const maxDuration = 30;
 export async function POST(req: Request) {
   const context = await req.json();
 
-  const result = streamText({
-    model: __MODEL__,
-    output: Output.object({ schema: notificationSchema }),
+  const result = streamObject({
+    model: openai('gpt-4-turbo'),
+    schema: notificationSchema,
     prompt:
       `Generate 3 notifications for a messages app in this context:` + context,
-  });
-
-  return result.toTextStreamResponse();
-}
-```
-
-## Enum Output Mode
-
-When you need to classify or categorize input into predefined options, you can use the `enum` output mode with `useObject`. This requires a specific schema structure where the object has `enum` as a key with `z.enum` containing your possible values.
-
-### Example: Text Classification
-
-This example shows how to build a simple text classifier that categorizes statements as true or false.
-
-#### Client
-
-When using `useObject` with enum output mode, your schema must be an object with `enum` as the key:
-
-```tsx filename='app/classify/page.tsx'
-"use client";
-
-import { experimental_useObject as useObject } from "@ai-sdk/react";
-import { z } from "zod";
-
-export default function ClassifyPage() {
-  const { object, submit, isLoading } = useObject({
-    api: "/api/classify",
-    schema: z.object({ enum: z.enum(["true", "false"]) }),
-  });
-
-  return (
-    <>
-      <button onClick={() => submit("The earth is flat")} disabled={isLoading}>
-        Classify statement
-      </button>
-
-      {object && <div>Classification: {object.enum}</div>}
-    </>
-  );
-}
-```
-
-#### Server
-
-On the server, use `streamText` with `Output.choice()` to stream the classification result:
-
-```typescript filename='app/api/classify/route.ts'
-import { streamText, Output } from "ai";
-__PROVIDER_IMPORT__;
-
-export async function POST(req: Request) {
-  const context = await req.json();
-
-  const result = streamText({
-    model: __MODEL__,
-    output: Output.choice({ options: ["true", "false"] }),
-    prompt: `Classify this statement as true or false: ${context}`,
   });
 
   return result.toTextStreamResponse();
@@ -161,13 +103,13 @@ purposes:
 - To disable the submit button.
 
 ```tsx filename='app/page.tsx' highlight="6,13-20,24"
-"use client";
+'use client';
 
-import { experimental_useObject as useObject } from "@ai-sdk/react";
+import { useObject } from '@ai-sdk/react';
 
 export default function Page() {
   const { isLoading, object, submit } = useObject({
-    api: "/api/notifications",
+    api: '/api/notifications',
     schema: notificationSchema,
   });
 
@@ -176,7 +118,7 @@ export default function Page() {
       {isLoading && <Spinner />}
 
       <button
-        onClick={() => submit("Messages during finals week.")}
+        onClick={() => submit('Messages during finals week.')}
         disabled={isLoading}
       >
         Generate notifications
@@ -198,13 +140,13 @@ export default function Page() {
 The `stop` function can be used to stop the object generation process. This can be useful if the user wants to cancel the request or if the server is taking too long to respond.
 
 ```tsx filename='app/page.tsx' highlight="6,14-16"
-"use client";
+'use client';
 
-import { experimental_useObject as useObject } from "@ai-sdk/react";
+import { useObject } from '@ai-sdk/react';
 
 export default function Page() {
   const { isLoading, stop, object, submit } = useObject({
-    api: "/api/notifications",
+    api: '/api/notifications',
     schema: notificationSchema,
   });
 
@@ -216,7 +158,7 @@ export default function Page() {
         </button>
       )}
 
-      <button onClick={() => submit("Messages during finals week.")}>
+      <button onClick={() => submit('Messages during finals week.')}>
         Generate notifications
       </button>
 
@@ -241,13 +183,13 @@ went wrong." This is a good practice to avoid leaking information from the
 server.
 
 ```tsx file="app/page.tsx" highlight="6,13"
-"use client";
+'use client';
 
-import { experimental_useObject as useObject } from "@ai-sdk/react";
+import { useObject } from '@ai-sdk/react';
 
 export default function Page() {
   const { error, object, submit } = useObject({
-    api: "/api/notifications",
+    api: '/api/notifications',
     schema: notificationSchema,
   });
 
@@ -255,7 +197,7 @@ export default function Page() {
     <>
       {error && <div>An error occurred.</div>}
 
-      <button onClick={() => submit("Messages during finals week.")}>
+      <button onClick={() => submit('Messages during finals week.')}>
         Generate notifications
       </button>
 
@@ -280,31 +222,31 @@ export default function Page() {
 These callbacks can be used to trigger additional actions, such as logging, analytics, or custom UI updates.
 
 ```tsx filename='app/page.tsx' highlight="10-20"
-"use client";
+'use client';
 
-import { experimental_useObject as useObject } from "@ai-sdk/react";
-import { notificationSchema } from "./api/notifications/schema";
+import { experimental_useObject as useObject } from '@ai-sdk/react';
+import { notificationSchema } from './api/notifications/schema';
 
 export default function Page() {
   const { object, submit } = useObject({
-    api: "/api/notifications",
+    api: '/api/notifications',
     schema: notificationSchema,
     onFinish({ object, error }) {
       // typed object, undefined if schema validation fails:
-      console.log("Object generation completed:", object);
+      console.log('Object generation completed:', object);
 
       // error, undefined if schema validation succeeds:
-      console.log("Schema validation error:", error);
+      console.log('Schema validation error:', error);
     },
     onError(error) {
       // error during fetch request:
-      console.error("An error occurred:", error);
+      console.error('An error occurred:', error);
     },
   });
 
   return (
     <div>
-      <button onClick={() => submit("Messages during finals week.")}>
+      <button onClick={() => submit('Messages during finals week.')}>
         Generate notifications
       </button>
 
@@ -325,13 +267,13 @@ You can configure the API endpoint, optional headers and credentials using the `
 
 ```tsx highlight="2-5"
 const { submit, object } = useObject({
-  api: "/api/use-object",
+  api: '/api/use-object',
   headers: {
-    "X-Custom-Header": "CustomValue",
+    'X-Custom-Header': 'CustomValue',
   },
-  credentials: "include",
+  credentials: 'include',
   schema: yourSchema,
 });
 ```
 
-# Streaming Custom Data
+# OpenAI Assistants

@@ -8,7 +8,7 @@ The `vercel rolling-release` command (also available as `vercel rr`) is used to 
 vercel rolling-release [command]
 ```
 
-*Using vercel rolling-release with a specific command
+*Using \`vercel rolling-release\` with a specific command
 to manage rolling releases.*
 
 ## Commands
@@ -21,7 +21,7 @@ Configure rolling release settings for a project.
 vercel rolling-release configure --cfg='{"enabled":true, "advancementType":"manual-approval", "stages":[{"targetPercentage":10},{"targetPercentage":50},{"targetPercentage":100}]}'
 ```
 
-*Using the vercel rolling-release configure command to
+*Using the \`vercel rolling-release configure\` command to
 set up a rolling release with manual approval stages.*
 
 ### start
@@ -32,7 +32,7 @@ Start a rolling release for a specific deployment.
 vercel rolling-release start --dpl=dpl_abc
 ```
 
-*Using the vercel rolling-release start command to
+*Using the \`vercel rolling-release start\` command to
 begin a rolling release for a deployment (where "dpl\_abc" is the deployment ID or URL).*
 
 **Options:**
@@ -58,7 +58,7 @@ Approve the current stage of an active rolling release.
 vercel rolling-release approve --dpl=dpl_abc --currentStageIndex=0
 ```
 
-*Using the vercel rolling-release approve command to
+*Using the \`vercel rolling-release approve\` command to
 approve the current stage and advance to the next stage.*
 
 ### abort
@@ -69,7 +69,7 @@ Abort an active rolling release.
 vercel rolling-release abort --dpl=dpl_abc
 ```
 
-*Using the vercel rolling-release abort command to
+*Using the \`vercel rolling-release abort\` command to
 stop an active rolling release.*
 
 ### complete
@@ -80,7 +80,7 @@ Complete an active rolling release, promoting the deployment to 100% of traffic.
 vercel rolling-release complete --dpl=dpl_abc
 ```
 
-*Using the vercel rolling-release complete command to
+*Using the \`vercel rolling-release complete\` command to
 finish a rolling release and fully promote the deployment.*
 
 ### fetch
@@ -91,7 +91,7 @@ Fetch details about a rolling release.
 vercel rolling-release fetch
 ```
 
-*Using the vercel rolling-release fetch command to get
+*Using the \`vercel rolling-release fetch\` command to get
 information about the current rolling release.*
 
 ## Unique Options
@@ -106,7 +106,7 @@ The `--cfg` option is used to configure rolling release settings. It accepts a J
 vercel rolling-release configure --cfg='{"enabled":true, "advancementType":"automatic", "stages":[{"targetPercentage":10,"duration":5},{"targetPercentage":100}]}'
 ```
 
-*Using the vercel rolling-release configure command
+*Using the \`vercel rolling-release configure\` command
 with automatic advancement.*
 
 ### Deployment
@@ -117,7 +117,7 @@ The `--dpl` option specifies the deployment ID or URL for rolling release operat
 vercel rolling-release start --dpl=https://example.vercel.app
 ```
 
-*Using the vercel rolling-release start command with a
+*Using the \`vercel rolling-release start\` command with a
 deployment URL.*
 
 ### Current Stage Index
@@ -128,7 +128,7 @@ The `--currentStageIndex` option specifies the current stage index when approvin
 vercel rolling-release approve --currentStageIndex=0 --dpl=dpl_123
 ```
 
-*Using the vercel rolling-release approve command with
+*Using the \`vercel rolling-release approve\` command with
 a specific stage index.*
 
 ## Examples
@@ -167,7 +167,7 @@ This disables rolling releases for the project.
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -182,5 +182,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel routes"
 description: "Learn how to manage project-level routing rules using the vercel routes CLI command."
-last\_updated: "2026-03-08T05:03:12.413Z"
+last\_updated: "2026-03-23T09:40:07.114Z"
 source: "https://vercel.com/docs/cli/routes"

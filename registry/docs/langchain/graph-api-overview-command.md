@@ -41,7 +41,7 @@ Use [`Command`](https://reference.langchain.com/python/langgraph/types/Command) 
 
 When returning [`Command`](https://reference.langchain.com/python/langgraph/types/Command) in your node functions, you must add return type annotations with the list of node names the node is routing to, e.g. `Command[Literal["my_other_node"]]`. This is necessary for the graph rendering and tells LangGraph that `my_node` can navigate to `my_other_node`.
 
-[`Command`](https://reference.langchain.com/python/langgraph/types/Command) only adds dynamic edges — static edges defined with `add_edge` / `addEdge` still execute. For example, if `node_a` returns `Command(goto="my_other_node")` and you also have `graph.add_edge("node_a", "node_b")`, both `node_b` and `my_other_node` will run.
+[`Command`](https://reference.langchain.com/python/langgraph/types/Command) only adds dynamic edges—static edges defined with `add_edge` / `addEdge` still execute. For example, if `node_a` returns `Command(goto="my_other_node")` and you also have `graph.add_edge("node_a", "node_b")`, both `node_b` and `my_other_node` will run.
 
 Check out this [how-to guide](/oss/python/langgraph/use-graph-api#combine-control-flow-and-state-updates-with-command) for an end-to-end example of how to use [`Command`](https://reference.langchain.com/python/langgraph/types/Command).
 
@@ -62,20 +62,20 @@ Setting `graph` to `Command.PARENT` will navigate to the closest parent graph.
 
 When you send updates from a subgraph node to a parent graph node for a key that's shared by both parent and subgraph [state schemas](#schema), you **must** define a [reducer](#reducers) for the key you're updating in the parent graph state. See this [example](/oss/python/langgraph/use-graph-api#navigate-to-a-node-in-a-parent-graph).
 
-This is particularly useful when implementing [multi-agent handoffs](/oss/python/langchain/multi-agent/handoffs). Check out [this guide](/oss/python/langgraph/use-graph-api#navigate-to-a-node-in-a-parent-graph) for detail.
+This is particularly useful when implementing [multi-agent handoffs](/oss/python/langchain/multi-agent/handoffs). Check out [Navigate to a node in a parent graph](/oss/python/langgraph/use-graph-api#navigate-to-a-node-in-a-parent-graph) for detail.
 
 ### Input to `invoke`/`stream`
 
-`Command(resume=...)` is the **only** `Command` pattern intended as input to `invoke()`/`stream()`. Do not use `Command(update=...)` as input to continue multi-turn conversations — because passing any `Command` as input resumes from the latest checkpoint (i.e. the last step that ran, not `__start__`), the graph will appear stuck if it already finished. To continue a conversation on an existing thread, pass a plain input dict:
+`Command(resume=...)` is the **only** `Command` pattern intended as input to `invoke()`/`stream()`. Do not use `Command(update=...)` as input to continue multi-turn conversations—because passing any `Command` as input resumes from the latest checkpoint (i.e. the last step that ran, not `__start__`), the graph will appear stuck if it already finished. To continue a conversation on an existing thread, pass a plain input dict:
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-# WRONG — graph resumes from the latest checkpoint
+# WRONG - graph resumes from the latest checkpoint
 # (last step that ran), appears stuck
 graph.invoke(Command(update={  # [!code --]
     "messages": [{"role": "user", "content": "follow up"}]  # [!code --]
 }), config)  # [!code --]
 
-# CORRECT — plain dict restarts from __start__
+# CORRECT - plain dict restarts from __start__
 graph.invoke( {  # [!code ++]
     "messages": [{"role": "user", "content": "follow up"}]  # [!code ++]
 }, config)  # [!code ++]
@@ -93,10 +93,10 @@ def human_review(state: State):
     answer = interrupt("Do you approve?")
     return {"messages": [{"role": "user", "content": answer}]}
 
-# First invocation — hits the interrupt and pauses
+# First invocation - hits the interrupt and pauses
 result = graph.invoke({"messages": [...]}, config)
 
-# Resume with a value — the interrupt() call returns "yes"
+# Resume with a value - the interrupt() call returns "yes"
 result = graph.invoke(Command(resume="yes"), config)
 ```
 
@@ -106,9 +106,9 @@ Check out the [interrupts conceptual guide](/oss/python/langgraph/interrupts) fo
 
 You can return [`Command`](https://reference.langchain.com/python/langgraph/types/Command) from tools to update graph state and control flow. Use `update` to modify state (e.g., saving customer information looked up during a conversation) and `goto` to route to a specific node after the tool completes.
 
-When used inside tools, `goto` adds a dynamic edge — any static edges already defined on the node that called the tool will still execute.
+When used inside tools, `goto` adds a dynamic edge—any static edges already defined on the node that called the tool will still execute.
 
-Refer to [this guide](/oss/python/langgraph/use-graph-api#use-inside-tools) for detail.
+Refer to [Use inside tools](/oss/python/langgraph/use-graph-api#use-inside-tools) for detail.
 
 ## Graph migrations
 

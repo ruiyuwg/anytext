@@ -460,15 +460,48 @@ export default defineConfig({
 });
 ```
 
+### `staticHeaders`
+
+[Section titled “staticHeaders”](#staticheaders)
+
+**Type:** `boolean`\
+**Default:** `false`\
+**Available for:** Serverless
+
+**Added in:** `@astrojs/vercel@10.0.0` New
+
+Enables specifying custom headers for prerendered pages in Vercel’s configuration.
+
+If enabled, the adapter will save [static headers in the Vercel `vercel.json` file](https://vercel.com/docs/project-configuration#headers) when provided by Astro features, such as Content Security Policy.
+
+For example, when [Content Security Policy](/en/reference/configuration-reference/#securitycsp) is enabled, `staticHeaders` can be used to add the CSP `headers` to your Vercel configuration, instead of creating a `<meta>` element:
+
+astro.config.mjs
+
+```js
+import { defineConfig } from 'astro/config';
+import vercel from '@astrojs/vercel';
+
+
+export default defineConfig({
+  security: {
+    csp: true
+  },
+  adapter: vercel({
+    staticHeaders: true
+  })
+});
+```
+
 ### Running Astro middleware on Vercel Edge Functions
 
 [Section titled “Running Astro middleware on Vercel Edge Functions”](#running-astro-middleware-on-vercel-edge-functions)
 
-The `@astrojs/vercel` adapter can create an [edge function](https://vercel.com/docs/functions/edge-functions) from an Astro middleware in your code base. When `edgeMiddleware` is enabled, an edge function will execute your middleware code for all requests including static assets, prerendered pages, and on-demand rendered pages.
+The `@astrojs/vercel` adapter can create an [edge function](https://vercel.com/docs/functions/edge-functions) from an Astro middleware in your code base. When [`middlewareMode`](/en/reference/adapter-reference/#middlewaremode) is set to `'edge'`, an edge function will execute your middleware code for all requests, including static assets, prerendered pages, and on-demand rendered pages.
 
 For on-demand rendered pages, the `context.locals` object is serialized using JSON and sent in a header for the serverless function, which performs the rendering. As a security measure, the serverless function will refuse to serve requests with a `403 Forbidden` response unless they come from the generated edge function.
 
-This is an opt-in feature. To enable it, set `edgeMiddleware` to `true`:
+This is an opt-in feature. To enable it, set `middlewareMode` to `'edge'`:
 
 astro.config.mjs
 
@@ -480,7 +513,7 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   // ...
   adapter: vercel({
-    edgeMiddleware: true,
+    middlewareMode: 'edge',
   }),
 });
 ```
@@ -563,42 +596,3 @@ For example, if you have installed [a Redis integration](https://vercel.com/mark
 The `@astrojs/vercel` adapter supports specific Node.js versions for deploying your Astro project on Vercel. To view the supported Node.js versions on Vercel, click on the settings tab for a project and scroll down to “Node.js Version” section.
 
 Check out the [Vercel documentation](https://vercel.com/docs/functions/serverless-functions/runtimes/node-js#default-and-available-versions) to learn more.
-
-## Experimental features
-
-[Section titled “Experimental features”](#experimental-features)
-
-The following features are also available for use, but may be subject to breaking changes in future updates. Please follow the [`@astrojs/vercel` CHANGELOG](https://github.com/withastro/astro/tree/main/packages/integrations/vercel/CHANGELOG.md) carefully for updates if you are using these features in your project.
-
-### `experimentalStaticHeaders`
-
-[Section titled “experimentalStaticHeaders”](#experimentalstaticheaders)
-
-**Type:** `boolean`\
-**Default:** `false`\
-**Available for:** Serverless
-
-**Added in:** `@astrojs/vercel@8.2.0`
-
-Enables specifying custom headers for prerendered pages in Vercel’s configuration.
-
-If enabled, the adapter will save [static headers in the Vercel `vercel.json` file](https://vercel.com/docs/project-configuration#headers) when provided by Astro features, such as Content Security Policy.
-
-For example, when [experimental Content Security Policy](/en/reference/experimental-flags/csp/) is enabled, `experimentalStaticHeaders` can be used to add the CSP `headers` to your Vercel configuration, instead of creating a `<meta>` element:
-
-astro.config.mjs
-
-```js
-import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel';
-
-
-export default defineConfig({
-  experimental: {
-    csp: true
-  },
-  adapter: vercel({
-    experimentalStaticHeaders: true
-  })
-});
-```

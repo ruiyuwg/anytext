@@ -664,5 +664,5 @@ Vercel doesn't currently support using `proxy-revalidate` and `stale-if-error` f
 
 title: "Purging Vercel CDN Cache"
 description: "Learn how to invalidate and delete cached content on Vercel"
-last\_updated: "2026-03-08T05:03:11.765Z"
+last\_updated: "2026-03-23T09:40:05.825Z"
 source: "https://vercel.com/docs/caching/cdn-cache/purge"

@@ -2,29 +2,17 @@
 
 Expo is an open-source React Native framework for apps that run natively on Android, iOS, and the web. Expo brings together the best of mobile and the web and enables many important features for building and scaling an app such as live updates, instantly sharing your app, and web support. The company behind Expo also offers Expo Application Services (EAS), which are deeply integrated cloud services for Expo and React Native apps.
 
-# Introduction
-
-# Introduction
-
-Get started creating apps with Expo.
-
-Expo is a framework that makes developing Android and iOS apps easier. Our framework provides file-based routing, a standard library of native modules, and much more. Expo is open source with an active community on [GitHub](https://github.com/expo/expo) and [Discord](https://chat.expo.dev).
-
-We also make [Expo Application Services (EAS)](https://expo.dev/eas), a set of services that complement the Expo framework in each step of the development process.
-
-To get started visit:
-
-[Quick start docs](/get-started/create-a-project) — Create a project, set up your development environment, and start developing.
-
-***
-
 # Create a project
 
 # Create a project
 
 Learn how to create a new Expo project.
 
-System requirements:
+Expo is a React Native framework that makes developing Android and iOS apps easier. Our framework provides file-based routing, a standard library of native modules, and much more. Expo is open source with an active community on [GitHub](https://github.com/expo/expo) and [Discord](https://chat.expo.dev).
+
+We also make [Expo Application Services (EAS)](https://expo.dev/eas), a set of services that complement the Expo framework in each step of the development process.
+
+## System requirements
 
 - [Node.js (LTS)](https://nodejs.org/en/).
 - macOS, Windows (Powershell and [WSL 2](https://expo.fyi/wsl)), and Linux are supported.

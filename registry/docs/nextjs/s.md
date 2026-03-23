@@ -6,7 +6,7 @@ The default component type in the App Router. Server Components render on the se
 
 ## Server Action
 
-A [Server Function](#server-function) that is passed to a Client Component as a prop or bound to a form action. Server Actions are commonly used for form submissions and data mutations. Learn more in [Server Actions and Mutations](/docs/app/getting-started/updating-data).
+A [Server Function](#server-function) that is passed to a Client Component as a prop or bound to a form action. Server Actions are commonly used for form submissions and data mutations. Learn more in [Server Actions and Mutations](/docs/app/getting-started/mutating-data).
 
 ## Server Function
 
@@ -30,7 +30,7 @@ The prerendered HTML structure of a page that's served immediately to the browse
 
 ## Streaming
 
-A technique that allows the server to send parts of a page to the client as they become ready, rather than waiting for the entire page to render. Enabled automatically with [`loading.js`](/docs/app/api-reference/file-conventions/loading) or manual `<Suspense>` boundaries. Learn more in [Linking and Navigating - Streaming](/docs/app/getting-started/linking-and-navigating#streaming).
+A technique that allows the server to send parts of a page to the client as they become ready, rather than waiting for the entire page to render. Enabled automatically with [`loading.js`](/docs/app/api-reference/file-conventions/loading) or manual `<Suspense>` boundaries. Learn more in the [Streaming guide](/docs/app/guides/streaming).
 
 ## Suspense boundary
 

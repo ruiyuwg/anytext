@@ -42,7 +42,7 @@ You will need to provide a connection string to your PostgreSQL database. This c
 - Port
 - Database
 - Username
-- Password (Make sure to url encode this if there are any special characters) - **Note:** When using IAM authentication, the password is not required in the connection string. More below.
+- Password (Make sure to URL encode this if there are any special characters) - **Note:** When using IAM authentication, the password is not required in the connection string. More below.
 - URL params
 
 This will take the form of:
@@ -57,7 +57,7 @@ An example connection string might look like:
 myuser:mypassword@myhost:5432/mydatabase?sslmode=disable
 ```
 
-Without url parameters, the connection string would look like:
+Without URL parameters, the connection string would look like:
 
 ```
 myuser:mypassword@myhost:5432/mydatabase
@@ -275,6 +275,8 @@ See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/c
 
 
 
+
+
 ### Cloud SQL IAM authentication
 
 Cloud SQL supports [IAM authentication](https://cloud.google.com/sql/docs/postgres/iam-authentication), which allows you to authenticate using GCP service accounts instead of database passwords.
@@ -357,6 +359,8 @@ ingestQueue:
 ```
 
 See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
+
+
 
 
 

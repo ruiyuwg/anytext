@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -44,24 +42,16 @@ When you push a multi-platform image to a registry, the registry stores the mani
 
 ## [Prerequisites](#prerequisites)
 
-To build multi-platform images, you first need to make sure that your Docker environment is set up to support it. There are two ways you can do that:
+Multi-platform images require an image store that supports manifest lists. Docker Desktop and Docker Engine 29.0+ use the [containerd image store](https://docs.docker.com/desktop/features/containerd/) by default, which supports multi-platform images out of the box. If you're using one of these versions, no additional setup is needed.
 
-- You can switch from the "classic" image store to the containerd image store.
-- You can create and use a custom builder.
+If you're using an older version of Docker Engine, or if you upgraded from an older version that still uses classic storage drivers, you have two options:
 
-The "classic" image store of the Docker Engine does not support multi-platform images. Switching to the containerd image store ensures that your Docker Engine can push, pull, and build multi-platform images.
+- Enable the containerd image store using the [daemon configuration file](https://docs.docker.com/engine/storage/containerd/).
+- Create a custom builder using the `docker-container` driver (see the following section).
 
-Creating a custom builder that uses a driver with multi-platform support, such as the `docker-container` driver, will let you build multi-platform images without switching to a different image store. However, you still won't be able to load the multi-platform images you build into your Docker Engine image store. But you can push them to a container registry directly with `docker build --push`.
+### [Custom builder](#custom-builder)
 
-containerd image store Custom builder
-
-The steps for enabling the containerd image store depends on whether you're using Docker Desktop or Docker Engine standalone:
-
-- If you're using Docker Desktop, enable the containerd image store in the [Docker Desktop settings](https://docs.docker.com/desktop/features/containerd/).
-
-- If you're using Docker Engine standalone, enable the containerd image store using the [daemon configuration file](https://docs.docker.com/engine/storage/containerd/).
-
-To create a custom builder, use the `docker buildx create` command to create a builder that uses the `docker-container` driver.
+As an alternative to using the containerd image store, you can create a custom builder that uses the `docker-container` driver. This driver supports multi-platform builds, but the resulting images aren't loaded into your Docker Engine image store. You can push them to a container registry directly with `docker build --push`.
 
 ```console
 $ docker buildx create \
@@ -184,7 +174,6 @@ This example demonstrates how to build a simple multi-platform image using emula
 Prerequisites:
 
 - Docker Desktop, or Docker Engine with [QEMU installed](#install-qemu-manually)
-- containerd image store enabled
 
 Steps:
 

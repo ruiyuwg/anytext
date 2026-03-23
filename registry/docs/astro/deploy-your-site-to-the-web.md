@@ -12,7 +12,7 @@ Here, you will connect your GitHub repository to Netlify. Netlify will use that 
 
 We’ll use…
 
-This tutorial will use **Netlify**, but you are welcome to use your preferred hosting service for deploying your site to the internet.
+This tutorial will use **Netlify**, but you are welcome to use your preferred hosting service for [deploying your Astro site to the internet](/en/guides/deploy/).
 
 ## Create a new Netlify site
 

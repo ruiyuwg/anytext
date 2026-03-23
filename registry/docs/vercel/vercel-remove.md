@@ -11,7 +11,7 @@ The `vercel remove` command, which can be shortened to `vercel rm`, is used to r
 vercel remove [deployment-url]
 ```
 
-*Using the vercel remove command to remove a
+*Using the \`vercel remove\` command to remove a
 deployment from the Vercel platform.*
 
 ## Extended Usage
@@ -20,14 +20,14 @@ deployment from the Vercel platform.*
 vercel remove [deployment-url-1 deployment-url-2]
 ```
 
-*Using the vercel remove command to remove multiple
+*Using the \`vercel remove\` command to remove multiple
 deployments from the Vercel platform.*
 
 ```bash filename="terminal"
 vercel remove [project-name]
 ```
 
-*Using the vercel remove command to remove all
+*Using the \`vercel remove\` command to remove all
 deployments for a Vercel Project from the Vercel platform.*
 
 > **💡 Note:** By using the [project name](/docs/projects/overview/), the entire Vercel
@@ -46,8 +46,8 @@ The `--safe` option, shorthand `-s`, can be used to skip the removal of deployme
 vercel remove my-project --safe
 ```
 
-*Using the vercel remove command with the
-\--safe option.*
+*Using the \`vercel remove\` command with the
+\`--safe\` option.*
 
 ### Yes
 
@@ -57,12 +57,12 @@ The `--yes` option, shorthand `-y`, can be used to skip the confirmation step fo
 vercel remove my-deployment.com --yes
 ```
 
-*Using the vercel remove command with the
-\--yes option.*
+*Using the \`vercel remove\` command with the
+\`--yes\` option.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -77,5 +77,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel rollback"
 description: "Learn how to roll back your production deployments to previous deployments using the vercel rollback CLI command."
-last\_updated: "2026-03-08T05:03:12.387Z"
+last\_updated: "2026-03-23T09:40:07.037Z"
 source: "https://vercel.com/docs/cli/rollback"

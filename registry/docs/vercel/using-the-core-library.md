@@ -205,15 +205,14 @@ This is useful when auto-detection doesn't match your environment. If you pass c
 
 ## Embedded definitions
 
-When you deploy to Vercel, the SDK fetches your latest flag definitions once at build time and bundles them into the deployment. This serves two purposes:
+When you deploy to Vercel, the build process fetches your latest flag definitions once at build time and bundles them into the deployment. This happens automatically when your project has at least one environment variable containing an SDK Key for Vercel Flags. This serves two purposes:
 
 - **Build consistency**: Every function in the build uses the same snapshot of flag definitions, fetched once at the start of the build. Without embedding, each function may fetch definitions independently, which could lead to inconsistent behavior if definitions change mid-build.
 - **Runtime resilience**: If the Vercel Flags service is temporarily unreachable at runtime, the SDK falls back to the embedded snapshot instead of returning hardcoded default values. Because the snapshot preserves your full configuration — targeting rules, segments, and percentages — your flags continue to evaluate accurately. Since the snapshot is from build time, users may see slightly outdated values until the service recovers.
 
-> **💡 Note:** Embedding is experimental. Enable it by adding a
-> `VERCEL_EXPERIMENTAL_EMBED_FLAG_DEFINITIONS=1` environment variable to your
-> project. This is recommended to avoid downtime during service outages, and
-> will become the default in a future release.
+> **💡 Note:** You can opt out of embedding by setting
+> `VERCEL_FLAGS_DISABLE_DEFINITION_EMBEDDING=1` in your project's environment
+> variables.
 
 Because the flag definitions are bundled into your deployment, they count toward the [function bundle size limit](/docs/functions/limitations#bundle-size-limits).
 
@@ -235,5 +234,5 @@ This outputs detailed information about the client's data source connections, fa
 
 title: "Using the Flags SDK with Vercel Flags"
 description: "Integrate Vercel Flags into your Next.js or SvelteKit application using the Flags SDK."
-last\_updated: "2026-03-08T05:03:14.651Z"
+last\_updated: "2026-03-23T09:40:10.255Z"
 source: "https://vercel.com/docs/flags/vercel-flags/sdks/flags-sdk"

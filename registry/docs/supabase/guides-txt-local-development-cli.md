@@ -187,10 +187,12 @@ Queues couples the reliability of Postgres with the simplicity Supabase's platfo
   A Message is delivered exactly once to a consumer within a customizable visibility window.
 - **Message Durability and Archival**
 
-  Messages are stored in Postgres and you can choose to archive them for analytical or auditing purposes.
+  Messages are stored in Postgres and you can choose to archive them for analytical or auditing
+  purposes.
 - **Granular Authorization**
 
-  Control client-side consumer access to Queues with API permissions and Row Level Security (RLS) policies.
+  Control client-side consumer access to Queues with API permissions and Row Level Security (RLS)
+  policies.
 - **Queue Management and Monitoring**
 
   Create, manage, and monitor Queues and Messages in the Supabase Dashboard.

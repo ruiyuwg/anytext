@@ -114,12 +114,12 @@ When payment is unsuccessful, you can find more details by inspecting the Paymen
 
 The following list describes how to handle webhook events:
 
-| Event                       | Description                                                                                                                                                                               | Next steps                                                                                                      |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `processing`                | The customer’s payment was submitted to Stripe successfully. Only applicable to payment methods with [delayed success confirmation](https://docs.stripe.com/payments/payment-methods.md). | Wait for the initiated payment to succeed or fail.                                                              |
-| `succeeded`                 | The customer’s payment succeeded                                                                                                                                                          | Fulfill the purchased goods or services                                                                         |
-| `amount_capturable_updated` | The customer’s payment is authorized and ready for capture                                                                                                                                | Capture the funds that are available for payment                                                                |
-| `payment_failed`            | The customer’s payment was declined by a card network or otherwise expired                                                                                                                | Reach out to your customer through email or push notification and prompt them to provide another payment method |
+| Event                       | Description                                                                                                                                                                                                    | Next steps                                                                                                       |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `processing`                | The customer’s payment was submitted to Stripe successfully. Only applicable to payment methods with [delayed success confirmation](https://docs.stripe.com/payments/payment-methods.md#payment-notification). | Wait for the initiated payment to succeed or fail.                                                               |
+| `succeeded`                 | The customer’s payment succeeded.                                                                                                                                                                              | Fulfill the purchased goods or services.                                                                         |
+| `amount_capturable_updated` | The customer’s payment is authorized and ready for capture.                                                                                                                                                    | Capture the funds that are available for payment.                                                                |
+| `payment_failed`            | The customer’s payment was declined by a card network or otherwise expired.                                                                                                                                    | Reach out to your customer through email or push notification and prompt them to provide another payment method. |
 
 To test webhooks locally, you can use [Stripe CLI](https://docs.stripe.com/stripe-cli.md). After you install it, you can forward events to your server:
 
@@ -138,8 +138,8 @@ When you attempt to collect payment from a customer, the PaymentIntent creates a
 
 ```ruby
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 intent = Stripe::PaymentIntent.retrieve('{{PAYMENT_INTENT_ID}}')

@@ -91,11 +91,11 @@ receives an object with the following properties:
 
 - `root: string`
 
-  Absolute path to the project's [`root`](/config/#root).
+  Absolute path to the project's [`root`](/config/root).
 
 - `testFileDirectory: string`
 
-  Path to the test file, relative to the project's [`root`](/config/#root).
+  Path to the test file, relative to the project's [`root`](/config/root).
 
 - `testFileName: string`
 
@@ -103,12 +103,12 @@ receives an object with the following properties:
 
 - `testName: string`
 
-  The [`test`](/api/#test)'s name, including parent
-  [`describe`](/api/#describe), sanitized.
+  The [`test`](/api/test)'s name, including parent
+  [`describe`](/api/describe), sanitized.
 
 - `attachmentsDir: string`
 
-  The value provided to [`attachmentsDir`](/config/#attachmentsdir), if none is
+  The value provided to [`attachmentsDir`](/config/attachmentsdir), if none is
   provided, its default value.
 
 For example, to group screenshots by browser:
@@ -306,12 +306,12 @@ Under the hood, Vitest transforms these instances into separate [test projects](
 # browser.isolate&#x20;
 
 - **Type:** `boolean`
-- **Default:** the same as [`--isolate`](/config/#isolate)
+- **Default:** the same as [`--isolate`](/config/isolate)
 - **CLI:** `--browser.isolate`, `--browser.isolate=false`
 
 Run every test in a separate iframe.
 
-This option is deprecated. Use [`isolate`](/config/#isolate) instead.
+This option is deprecated. Use [`isolate`](/config/isolate) instead.
 
 ***
 

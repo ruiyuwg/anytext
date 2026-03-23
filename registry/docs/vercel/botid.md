@@ -80,5 +80,5 @@ Metrics are also available in [Observability Plus](/docs/observability/observabi
 
 title: "Handling Verified Bots"
 description: "Information about verified bots and their handling in BotID"
-last\_updated: "2026-03-08T05:03:11.234Z"
+last\_updated: "2026-03-23T09:40:05.469Z"
 source: "https://vercel.com/docs/botid/verified-bots"

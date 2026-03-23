@@ -279,5 +279,5 @@ Now that you have set up the Statsig Edge Config integration, you can explore th
 
 title: "Edge Config Limits and pricing"
 description: "Learn about the Edge Configs limits and pricing based on account plans."
-last\_updated: "2026-03-08T05:03:13.832Z"
+last\_updated: "2026-03-23T09:40:09.198Z"
 source: "https://vercel.com/docs/edge-config/edge-config-limits"

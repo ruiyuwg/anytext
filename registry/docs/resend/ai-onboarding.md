@@ -7,10 +7,12 @@ Everything you need to onboard your AI agent to Resend.
 If you're developing with AI, Resend offers several resources to improve your experience.
 
 - [Resend MCP Server](#resend-mcp-server)
+- [Resend CLI](#resend-cli)
 - [Resend Docs for Agents](#resend-docs-for-agents)
 - [Email Skills for Agents](#email-skills-for-agents)
 - [Quick Start Guides](#quick-start-guides)
 - [OpenClaw Guide](#openclaw-guide)
+- [Chat SDK](#chat-sdk)
 - [AI Builder Integrations](#ai-builder-integrations)
 
 ## Prerequisite: Create an API Key
@@ -39,7 +41,28 @@ The Resend MCP server is available on NPM and can be added to any supported MCP 
 }
 ```
 
-View installation instructions for Cursor, Codex, Claude Desktop, and more.
+View installation instructions for Cursor, Codex, Claude Desktop, Windsurf,
+and more.
+
+## Resend CLI
+
+The Resend CLI lets you send emails, manage your account, and develop locally — from the terminal. It's built for humans, AI agents, and CI/CD pipelines.
+
+```bash theme={"theme":{"light":"github-light","dark":"vesper"}}
+# Authenticate
+resend login
+
+# Send an email
+resend emails send \
+  --from "you@yourdomain.com" \
+  --to recipient@example.com \
+  --subject "Hello" \
+  --text "Sent from my terminal."
+```
+
+The CLI also includes a full local webhook setup for developing with inbound email events without deploying anything.
+
+Install the CLI and set up a local webhook development environment.
 
 ## Resend Docs for Agents
 
@@ -260,9 +283,15 @@ console.log(
 
 ## OpenClaw Guide
 
-OpenClaw is a tool that allows you to build and deploy AI agents. Agents can interact with APIs like Resend. Equipping your agent with its own email inbox can be a powerful tool to unlock new workflows. Alternatively, give it access to your Resend account to support agentic flows for sending and receiving emails.
+Equipping your agent with its own email inbox can be a powerful tool to unlock new workflows. Alternatively, give it access to your Resend account to support agentic flows for sending and receiving emails.
 
 View the OpenClaw guide.
+
+## Chat SDK
+
+The `@resend/chat-sdk-adapter` package is a Vercel Chat SDK adapter that turns email into a two-way communication channel. Receive inbound emails through webhooks, reply through the Resend API, and let the adapter handle threading automatically. It also supports card emails, attachments, and proactive outreach.
+
+Build conversational email experiences with the Chat SDK adapter.
 
 ## AI Builder Integrations
 

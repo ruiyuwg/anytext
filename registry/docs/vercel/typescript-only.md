@@ -98,7 +98,7 @@ The default configuration is:
 
 title: "WORKSPACE\_MISSING\_CONFORMANCE\_SCRIPT"
 description: "All packages must define a conformance script that invokes the Conformance package."
-last\_updated: "2026-03-08T05:03:12.906Z"
+last\_updated: "2026-03-23T09:40:07.893Z"
 source: "https://vercel.com/docs/conformance/rules/WORKSPACE\_MISSING\_CONFORMANCE\_SCRIPT"
 
 # WORKSPACE\_MISSING\_CONFORMANCE\_SCRIPT
@@ -145,7 +145,7 @@ a `conformance` script in the `package.json` file.
 
 title: "WORKSPACE\_MISSING\_PACKAGE\_JSON"
 description: "All directories that match a workspace glob must include a package.json file."
-last\_updated: "2026-03-08T05:03:12.909Z"
+last\_updated: "2026-03-23T09:40:07.905Z"
 source: "https://vercel.com/docs/conformance/rules/WORKSPACE\_MISSING\_PACKAGE\_JSON"
 
 # WORKSPACE\_MISSING\_PACKAGE\_JSON
@@ -179,5 +179,5 @@ be excluded in the workspaces configuration.
 
 title: "Conformance Rules"
 description: "Learn how Conformance improves collaboration, productivity, and software quality at scale."
-last\_updated: "2026-03-08T05:03:12.937Z"
+last\_updated: "2026-03-23T09:40:07.927Z"
 source: "https://vercel.com/docs/conformance/rules"

@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -50,7 +48,7 @@ agents:
         ref: docker:duckduckgo # Uses Docker MCP Gateway
 ```
 
-The `docker:` prefix tells Docker Agent to use the MCP Gateway for this server. See the [MCP Gateway documentation](/ai/mcp-catalog-and-toolkit/mcp-gateway/) for available servers and configuration options.
+The `docker:` prefix tells Docker Agent to use the MCP Gateway for this server. See the [MCP Catalog](/ai/mcp-catalog-and-toolkit/catalog/) for available servers and the [MCP Gateway documentation](/ai/mcp-catalog-and-toolkit/mcp-gateway/) for configuration options.
 
 You can also use the [MCP Toolkit](/ai/mcp-catalog-and-toolkit/) to explore and manage MCP servers interactively.
 
@@ -59,7 +57,7 @@ You can also use the [MCP Toolkit](/ai/mcp-catalog-and-toolkit/) to explore and 
 Before configuring MCP integration, you need:
 
 - **Docker Agent installed** - See the [installation guide](https://docs.docker.com/ai/docker-agent/#installation)
-- **Agent configuration** - A YAML file defining your agent. See the [tutorial](https://docs.docker.com/ai/docker-agent/tutorial/) or [example configurations](https://github.com/docker/cagent/tree/main/examples)
+- **Agent configuration** - A YAML file defining your agent. See the [tutorial](https://docs.docker.com/ai/docker-agent/tutorial/) or [example configurations](https://github.com/docker/docker-agent/tree/main/examples)
 - **MCP client** - Claude Desktop, Claude Code, or another MCP-compatible application
 - **API keys** - Environment variables for any model providers your agents use (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, etc.)
 
@@ -82,7 +80,7 @@ Example configuration:
     "myagent": {
       "command": "docker",
       "args": [
-        "agent", 
+        "agent",
         "serve",
         "mcp",
         "/path/to/agent.yml",
@@ -258,7 +256,7 @@ Your team keeps agents in an OCI registry. Everyone adds `agentcatalog/security-
 - Explore the [toolsets reference](https://docs.docker.com/ai/docker-agent/reference/toolsets/) to learn what tools agents can use
 - Add [RAG for codebase search](https://docs.docker.com/ai/docker-agent/rag/) to your agent
 - Check the [CLI reference](https://docs.docker.com/ai/docker-agent/reference/cli/) for all `docker agent serve mcp` options
-- Browse [example configurations](https://github.com/docker/cagent/tree/main/examples) for different agent types
+- Browse [example configurations](https://github.com/docker/docker-agent/tree/main/examples) for different agent types
 
 [Edit this page](https://github.com/docker/docs/edit/main/content/manuals/ai/docker-agent/integrations/mcp.md)
 

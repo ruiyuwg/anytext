@@ -68,12 +68,12 @@ Code examples \[#code-examples]
 - Include complete, runnable code examples
 - Use syntax highlighting with language specification
 - Include file paths in code block metadata using `title=`
-- Use `// [!code ++]` to highlight added lines
-- Use `// [!code --]` to highlight removed lines
+- Use ` ```bash title=".env" ` for `.env` files so inline `# [!code ++]`, `# [!code --]`, and `# [!code highlight]` annotations render correctly
+- Reserve ` ```text ` for other plain-text files that do not need Fumadocs code annotations
 - Use comments sparingly - only when needed to explain complex logic
 - Use ` ```npm ` for package manager commands (auto-converts to pnpm/yarn/bun)
-- Use ` ```bash ` for shell commands
-- Use ` ```text ` for plain text files like `.env`
+- Use ` ```bash ` for shell commands and `.env` files
+- Use ` ```text ` for other plain text files
 - Use ` ```typescript `, ` ```prisma `, ` ```json ` for respective languages
 
 Example with file path:
@@ -200,10 +200,18 @@ bun add prisma --dev
 
 Environment variables \[#environment-variables]
 
-Show `.env` file examples using ` ```text ` blocks:
+Show `.env` file examples using ` ```bash title=".env" ` blocks:
 
-```text title=".env"
+```bash title=".env"
 DATABASE_URL="postgresql://user:password@localhost:5432/mydb"
+```
+
+If you need to show changes in an `.env` file, use bash comments for the Fumadocs annotations:
+
+```bash title=".env"
+DATABASE_URL="postgresql://user:password@localhost:5432/mydb" # [!code --]
+
+DATABASE_URL="postgresql://user:password@db.example.com:5432/mydb" # [!code ++]
 ```
 
 Database provider compatibility \[#database-provider-compatibility]

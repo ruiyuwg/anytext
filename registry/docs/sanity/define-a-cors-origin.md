@@ -87,4 +87,4 @@ This launches an editing interface that lets you reconfigure the blueprint, if n
 
 [Browser security & CORS](https://www.sanity.io/docs/content-lake/browser-security-and-cors)
 
-[CORS](https://www.sanity.io/docs/cli-reference/cors-in-cli)
+[CORS CLI command reference](https://www.sanity.io/docs/cli-reference/cors-in-cli)

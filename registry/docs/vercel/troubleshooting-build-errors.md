@@ -153,5 +153,5 @@ Sometimes, you may not want to use the Build cache for a specific deployment. Yo
 
 title: "Troubleshoot project collaboration"
 description: "Learn about common reasons for deployment issues related to team member requirements and how to resolve them."
-last\_updated: "2026-03-08T05:03:13.419Z"
+last\_updated: "2026-03-23T09:40:08.564Z"
 source: "https://vercel.com/docs/deployments/troubleshoot-project-collaboration"

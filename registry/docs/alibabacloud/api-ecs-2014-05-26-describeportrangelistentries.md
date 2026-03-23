@@ -1,0 +1,169 @@
+Queries the entries of a specified port list.
+
+## Debugging
+
+[You can run this interface directly in OpenAPI Explorer, saving you the trouble of calculating signatures. After running successfully, OpenAPI Explorer can automatically generate SDK code samples.](https://api.alibabacloud.com/api/Ecs/2014-05-26/DescribePortRangeListEntries)
+
+[![](https://img.alicdn.com/tfs/TB16JcyXHr1gK0jSZR0XXbP8XXa-24-26.png)Debug](https://api.alibabacloud.com/api/Ecs/2014-05-26/DescribePortRangeListEntries)
+
+## Authorization information
+
+The following table shows the authorization information corresponding to the API. The authorization information can be used in the `Action` policy element to grant a RAM user or RAM role the permissions to call this API operation. Description:
+
+-   Operation: the value that you can use in the Action element to specify the operation on a resource.
+-   Access level: the access level of each operation. The levels are read, write, and list.
+-   Resource type: the type of the resource on which you can authorize the RAM user or the RAM role to perform the operation. Take note of the following items:
+    -   For mandatory resource types, indicate with a prefix of \* .
+    -   If the permissions cannot be granted at the resource level, `All Resources` is used in the Resource type column of the operation.
+-   Condition Key: the condition key that is defined by the cloud service.
+-   Associated operation: other operations that the RAM user or the RAM role must have permissions to perform to complete the operation. To complete the operation, the RAM user or the RAM role must have the permissions to perform the associated operations.
+
+Operation
+
+Access level
+
+Resource type
+
+Condition key
+
+Associated operation
+
+ecs:DescribePortRangeListEntries
+
+list
+
+\*PortRangeList
+
+`acs:ecs:{#regionId}:{#accountId}:portrangelist/{#portRangeListId}`
+
+none
+
+none
+
+## Request parameters
+
+Parameter
+
+Type
+
+Required
+
+Description
+
+Example
+
+RegionId
+
+string
+
+Yes
+
+The region ID of the port list. You can call the [DescribeRegions](/help/en/ecs/developer-reference/api-ecs-2014-05-26-describeregions) operation to query the most recent region list.
+
+cn-hangzhou
+
+PortRangeListId
+
+string
+
+Yes
+
+The ID of the port list.
+
+prl-2ze9743\*\*\*\*
+
+## Response parameters
+
+Parameter
+
+Type
+
+Description
+
+Example
+
+object
+
+The data returned.
+
+RequestId
+
+string
+
+The request ID.
+
+882304EC-5CE2-5860-98ED-3FA1D8D74A0C
+
+Entries
+
+array<object>
+
+Port list entries.
+
+Entry
+
+object
+
+Port list entry.
+
+PortRange
+
+string
+
+The port range.
+
+80/80
+
+Description
+
+string
+
+The description of the port range.
+
+Description information of PortRangeList
+
+## Examples
+
+Sample success responses
+
+`JSON`format
+
+```
+{
+  "RequestId": "882304EC-5CE2-5860-98ED-3FA1D8D74A0C",
+  "Entries": [
+    {
+      "PortRange": "80/80",
+      "Description": "Description information of PortRangeList\n"
+    }
+  ]
+}
+```
+
+## Error codes
+
+HTTP status code
+
+Error code
+
+Error message
+
+Description
+
+400
+
+InvalidPortRangeListId.NotFound
+
+The specified port range list was not found.
+
+The specified port list was not found.
+
+404
+
+InvalidRegionId.NotFound
+
+The specified parameter RegionId is not valid.
+
+The specified RegionId parameter does not exist. Check whether the service is available in the specified region.
+
+For a list of error codes, visit the [Service error codes]( https://api.alibabacloud.com/document/Ecs/2014-05-26/errorCode).

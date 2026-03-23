@@ -5,17 +5,17 @@ It's a simple logger.
 ## Import
 
 ```ts
-import { Hono } from "hono";
-import { logger } from "hono/logger";
+import { Hono } from 'hono'
+import { logger } from 'hono/logger'
 ```
 
 ## Usage
 
 ```ts
-const app = new Hono();
+const app = new Hono()
 
-app.use(logger());
-app.get("/", (c) => c.text("Hello Hono!"));
+app.use(logger())
+app.get('/', (c) => c.text('Hello Hono!'))
 ```
 
 ## Logging Details
@@ -31,13 +31,15 @@ By using the Logger Middleware, you can easily monitor the flow of requests and 
 
 You can also extend the middleware further by providing your own `PrintFunc` function for tailored logging behavior.
 
+To disable *status code coloring*, you can set a `NO_COLOR` environment variable. This is a common way to disable ANSI color escape codes in logging libraries, and is described at . Note that Cloudflare Workers do not have a `process.env` object, so will default to plaintext log output.
+
 ## PrintFunc
 
 The Logger Middleware accepts an optional `PrintFunc` function as a parameter. This function allows you to customize the logger and add additional logs.
 
 ## Options
 
-### <Badge type="info" text="optional" /> fn: `PrintFunc(str: string, ...rest: string[])`
+### fn: `PrintFunc(str: string, ...rest: string[])`
 
 - `str`: Passed by the logger.
 - `...rest`: Additional string props to be printed to console.
@@ -48,24 +50,24 @@ Setting up a custom `PrintFunc` function to the Logger Middleware:
 
 ```ts
 export const customLogger = (message: string, ...rest: string[]) => {
-  console.log(message, ...rest);
-};
+  console.log(message, ...rest)
+}
 
-app.use(logger(customLogger));
+app.use(logger(customLogger))
 ```
 
 Setting up the custom logger in a route:
 
 ```ts
-app.post("/blog", (c) => {
+app.post('/blog', (c) => {
   // Routing logic
 
-  customLogger("Blog saved:", `Path: ${blog.url},`, `ID: ${blog.id}`);
+  customLogger('Blog saved:', `Path: ${blog.url},`, `ID: ${blog.id}`)
   // Output
   // <-- POST /blog
   // Blog saved: Path: /blog/example, ID: 1
   // --> POST /blog 201 93ms
 
   // Return Context
-});
+})
 ```

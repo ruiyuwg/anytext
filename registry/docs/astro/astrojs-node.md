@@ -111,6 +111,37 @@ export default defineConfig({
 });
 ```
 
+### `staticHeaders`
+
+[Section titled “staticHeaders”](#staticheaders)
+
+**Type:** `boolean`\
+**Default:** `false`
+
+**Added in:** `@astrojs/node@10.0.0` New
+
+If enabled, the adapter will serve the headers of prerendered pages using the `Response` object when provided by Astro features, such as Content Security Policy.
+
+For example, when [Content Security Policy](/en/reference/configuration-reference/#securitycsp) is enabled, `staticHeaders` can be used to add the CSP headers to the `Response` object instead of creating a `<meta>` element:
+
+astro.config.mjs
+
+```js
+import { defineConfig } from 'astro/config';
+import node from '@astrojs/node';
+
+
+export default defineConfig({
+  security: {
+    csp: true
+  },
+  adapter: node({
+    mode: 'standalone',
+    staticHeaders: true,
+  })
+});
+```
+
 ### `experimentalDisableStreaming`
 
 [Section titled “experimentalDisableStreaming”](#experimentaldisablestreaming)
@@ -141,18 +172,18 @@ export default defineConfig({
 });
 ```
 
-### `experimentalStaticHeaders`
+### `bodySizeLimit`
 
-[Section titled “experimentalStaticHeaders”](#experimentalstaticheaders)
+[Section titled “bodySizeLimit”](#bodysizelimit)
 
-**Type:** `boolean`\
-**Default:** `false`
+**Type:** `number`\
+**Default:** `1073741824` (1 GB)
 
-**Added in:** `@astrojs/node@9.3.0`
+**Added in:** `@astrojs/node@10.0.0` New
 
-If enabled, the adapter will serve the headers of prerendered pages using the `Response` object when provided by Astro features, such as Content Security Policy.
+Sets the maximum allowed request body size in bytes. When the body of an incoming request exceeds this limit, an error will be thrown when the body is consumed.
 
-For example, when [experimental Content Security Policy](/en/reference/experimental-flags/csp/) is enabled, `experimentalStaticHeaders` can be used to add the CSP headers to the `Response` object instead of creating a `<meta>` element:
+Set to `Infinity` or `0` to disable the limit entirely. This may be useful if you need to accept very large request bodies, such as for video uploads.
 
 astro.config.mjs
 
@@ -162,43 +193,10 @@ import node from '@astrojs/node';
 
 
 export default defineConfig({
-  experimental: {
-    csp: true
-  },
   adapter: node({
     mode: 'standalone',
-    experimentalStaticHeaders: true,
-  })
-});
-```
-
-### `experimentalErrorPageHost`
-
-[Section titled “experimentalErrorPageHost”](#experimentalerrorpagehost)
-
-**Type:** `string | URL`\
-**Default:** `undefined`
-
-**Added in:** `@astrojs/node@9.4.0`
-
-Specifies an alternate host for loading prerendered [custom error pages](/en/basics/astro-pages/#custom-404-error-page).
-
-Astro needs to be able to load your 404 page in order to return it in a response. By default, Astro will load prerendered custom error pages from the same host as the one that the request is made to. For example, if a request is made to `https://example.com/nonexistent-page`, Astro will attempt to load the prerendered error page from `https://example.com/404.html`.
-
-Use `experimentalErrorPageHost` when your custom error page must be loaded from a different host, such as when the server is running behind a reverse proxy or in a container that may not have access to the external host URL. You can also use this when it is more efficient to load the prerendered error page from localhost rather than via the public internet.
-
-The value can be a string or a URL object. It must be a fully-qualified URL, including the protocol (e.g., `http://localhost:4321`). Astro will always load the prerendered error page from the root path, and any path or query parameters will be ignored.
-
-```js
-import { defineConfig } from 'astro/config';
-import node from '@astrojs/node';
-
-
-export default defineConfig({
-  adapter: node({
-    // Load pages from localhost, not the public URL.
-    experimentalErrorPageHost: 'http://localhost:4321',
-  })
+    bodySizeLimit: 5 * 1024 * 1024 * 1024, // 5 GB
+  }),
 });
 ```
 

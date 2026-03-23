@@ -842,7 +842,7 @@ This time, you're seeing two `User` objects being printed. Both of them have a `
 
 Next steps \[#next-steps]
 
-You just got your feet wet with a basic Prisma Postgres setup. If you want to explore more complex queries, such as [adding caching functionality](/postgres/database/caching#setting-up-caching-in-prisma-postgres), check out the official [Quickstart](/prisma-orm/quickstart/prisma-postgres).
+You just got your feet wet with a basic Prisma Postgres setup. Check out the official [Quickstart](/prisma-orm/quickstart/prisma-postgres).
 
 View and edit data in Prisma Studio \[#view-and-edit-data-in-prisma-studio]
 

@@ -10,8 +10,8 @@ Localization in Sanity is performed by storing language data as a value of a fie
 
 We recommend using these two optional plugins to simplify creating and maintaining localized documents and fields in Sanity Studio.
 
-- For **translated documents**, we recommend the [@sanity/document-internationalization](https://github.com/sanity-io/document-internationalization) plugin, which will relate translations as references and handle setting a “language” field value on documents.
-- For **translated fields**, the [internationalized-array plugin](https://github.com/sanity-io/sanity-plugin-internationalized-array) can be used with any field type and scales to as many languages as you may need to author.
+- For **translated documents**, we recommend the [@sanity/document-internationalization](https://github.com/sanity-io/plugins/tree/main/plugins/%40sanity/document-internationalization) plugin, which will relate translations as references and handle setting a “language” field value on documents.
+- For **translated fields**, the [internationalized-array plugin](https://github.com/sanity-io/plugins/tree/main/plugins/sanity-plugin-internationalized-array) can be used with any field type and scales to as many languages as you may need to author.
 
 ## Methods of localization
 
@@ -241,13 +241,13 @@ The built-in array component is not best suited to authoring like this – as ev
 
 ### Plugin for localized arrays
 
-The [internationalized-array plugin](https://github.com/sanity-io/sanity-plugin-internationalized-array) has a custom UI that can be used for any field type and renders each field input without a popup dialog.
+The [internationalized-array plugin](https://github.com/sanity-io/plugins/tree/main/plugins/sanity-plugin-internationalized-array) has a custom UI that can be used for any field type and renders each field input without a popup dialog.
 
-It also saves an extra attribute by writing the language value to the `_key` field – something you cannot customize in the Studio with a regular schema.
+It stores the language in a `language` field.
 
-### Querying localized arrays with GROQ
+#### Querying localized arrays with GROQ
 
-Now performing the same query for name and title but with the title stored in an array, using the [internationalized-array plugin](https://github.com/sanity-io/sanity-plugin-internationalized-array).
+Now performing the same query for name and title but with the title stored in an array, using the [internationalized-array plugin](https://github.com/sanity-io/plugins/tree/main/plugins/sanity-plugin-internationalized-array).
 
 ```groq
 *[_type == "presenter"][0]{
@@ -264,17 +264,20 @@ You will receive this data:
   "title": [
     {
       "_type": "internationalizedArrayStringValue",
-      "_key": "en",
+      "_key": "IW92vi98KcGFhIzeUDasfasxu",
+      "language": "en",
       "value": "Rune is a solution architect at Sanity.io"
     },
     {
       "_type": "internationalizedArrayStringValue",
-      "_key": "es",
+      "_key": "IW92vi98KcGFhIzeUDagasxu",
+      "language": "es",
       "value": "Rune trabaja como arquitecto de soluciones en Sanity.io"
     },
     {
       "_type": "internationalizedArrayStringValue",
-      "_key": "no",
+      "_key": "Edafwevi98KcGFhIzeUDkxxu",
+      "language": "no",
       "value": "Rune jobber som løsningsarkitekt hos Sanity.io"
     }
   ]
@@ -283,13 +286,13 @@ You will receive this data:
 
 To avoid over-fetching, update the query to:
 
-1. Filter this array to just the language field `_key` you need
+1. Filter this array to just the language field `language` you need
 2. Only return the `value` field
 
 ```groq
 *[_type == "presenter"][0]{
   name,
-  "title": title[_key == "en"][0].value
+  "title": title[language == "en"][0].value
 }
 ```
 
@@ -308,8 +311,8 @@ You can use the `coalesce()` [GROQ function](https://www.sanity.io/docs/specific
 *[_type == "presenter"][0]{
   name,
   "title": coalesce(
-    title[_key == "en"][0].value,
-    title[_key == "nl"][0].value,
+    title[language == "en"][0].value,
+    title[language == "nl"][0].value,
     "Missing translation"
   )
 }
@@ -321,8 +324,8 @@ For the most flexibility, use variables so that your query remains the same but 
 *[_type == "presenter"][0]{
   name,
   "title": coalesce(
-    title[_key == $language][0].value,
-    title[_key == $baseLanguage][0].value,
+    title[language == $language][0].value,
+    title[language == $baseLanguage][0].value,
     "Missing translation"
   )
 }
@@ -381,7 +384,7 @@ You can also use the [Structure Builder API](https://www.sanity.io/docs/studio/
 
 ### Plugin for document-level translations
 
-An integrated solution is to install the [@sanity/document-internationalization](https://github.com/sanity-io/document-internationalization) plugin, which provides most of the above in-Studio features with minimal setup. It handles setting a language field on documents and automatically creates a linked document that stores the translations together so they are more easily queried.
+An integrated solution is to install the [@sanity/document-internationalization](https://github.com/sanity-io/plugins/tree/main/plugins/%40sanity/document-internationalization) plugin, which provides most of the above in-Studio features with minimal setup. It handles setting a language field on documents and automatically creates a linked document that stores the translations together so they are more easily queried.
 
 ### Querying for localized documents with GROQ
 
@@ -404,7 +407,7 @@ In this query, you are looking for a `lesson` type document of a specific langua
 }
 ```
 
-The plugin’s page contains more details on [how to query for translations in both GROQ and GraphQL](https://www.sanity.io/plugins/document-internationalization#querying-with-groq).
+The plugin’s page contains more details on [how to query for translations in both GROQ and GraphQL](https://github.com/sanity-io/plugins/tree/main/plugins/%40sanity/document-internationalization#querying-with-groq).
 
 ## Translating content with the AI Assist plugin
 

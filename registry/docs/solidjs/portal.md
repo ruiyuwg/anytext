@@ -7,8 +7,8 @@ Control flow
 When an element requires rendering outside of the usual document flow, challenges related to stacking contents and z-index can interfere with the desired intention or look of an application. `<Portal>` helps with this by putting elements in a different place in the document, bringing an element into the document flow so they can render as expected.
 
 ```
-import { Portal } from "solid-js/web"
-<Portal>  <div class="popup">...</div></Portal>
+import { Portal } from "solid-js/web";
+<Portal>  <div class="popup">...</div></Portal>;
 ```
 
 The content nested within `<Portal>` is rendered and positioned by default at the end of the document body.
@@ -18,8 +18,8 @@ The content nested within `<Portal>` is rendered and positioned by default at th
 This can be changed by passing a `mount` prop to `<Portal>`. The `mount` prop accepts a [DOM node](https://developer.mozilla.org/en-US/docs/Web/API/Node), which will be used as the mount point for the portal content.
 
 ```
-import { Portal } from "solid-js/web"
-<Portal mount={document.querySelector("main")}>  <div class="popup">...</div></Portal>
+import { Portal } from "solid-js/web";
+<Portal mount={document.querySelector("main")}>  <div class="popup">...</div></Portal>;
 ```
 
 Using `<Portal>` can be particularly useful in cases where elements, like information popups, might be clipped or obscured due to the overflow settings of their parent elements. By putting the element outside of the parent element, it is no longer bound by the overflow settings of its parent. This creates a more accessible experience for users, as the content is no longer obscured.
@@ -33,7 +33,7 @@ This is so events propagate through the Portal according to the component hierar
 By default, children will wrap in a `<div>`. If you portal into an SVG, then the `isSVG` prop must be used to avoid wrapping the children in a `<div>` and wrap in a `<g>` instead.
 
 ```
-import { Portal } from "solid-js/web"
+import { Portal } from "solid-js/web";
 function Rect() {  return (    <Portal mount={document.querySelector("svg")} isSVG={true}>      <rect fill="red" x="25" y="25" height="50" width="50" />    </Portal>  );}
 function SVG() {  return <svg xmlns="http://www.w3.org/2000/svg" />;}
 ```

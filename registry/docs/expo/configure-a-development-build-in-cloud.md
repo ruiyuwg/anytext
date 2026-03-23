@@ -4,7 +4,7 @@ Learn how to configure a development build for a project using EAS Build.
 
 In this chapter, we'll set up and configure a development build with EAS for our example app.
 
-[Watch: How to configure a development build](https://www.youtube.com/watch?v=uQCE9zl3dXU)
+[Watch: How to configure a development build](https://www.youtube.com/watch?v=uQCE9zl3dXU) — Learn how to install expo-dev-client, configure build profiles in eas.json, and create your first development build with EAS Build.
 
 ## Understanding development builds
 

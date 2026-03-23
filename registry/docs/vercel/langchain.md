@@ -120,5 +120,5 @@ with LangChain to access various AI models and providers.
 
 title: "LangFuse"
 description: "Learn how to integrate Vercel AI Gateway with LangFuse to access multiple AI models through a unified interface"
-last\_updated: "2026-03-08T05:03:10.392Z"
+last\_updated: "2026-03-23T09:40:04.302Z"
 source: "https://vercel.com/docs/ai-gateway/ecosystem/framework-integrations/langfuse"

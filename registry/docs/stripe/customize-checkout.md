@@ -2,11 +2,9 @@
 
 Customize the appearance and behavior of Checkout.
 
-Customize Checkout, including branding, legal policies, return policies, customer payment autofill, and custom domains.
+Customize Checkout, including branding, customer payment autofill, and custom domains.
 
 [Appearance](https://docs.stripe.com/payments/checkout/customization/appearance.md): Customize the look and feel of Checkout, including the branding.
-
-[Text and policies](https://docs.stripe.com/payments/checkout/customization/policies.md): Customize the support contact information, policies, and other text that your customers see.
 
 [Card brands](https://docs.stripe.com/payments/checkout/customization/card-brands.md): Customize the card brands that your customers see.
 

@@ -8,6 +8,27 @@ The `sanity` Command Line Interface (CLI) is a handy tool for managing your Sani
 
 Sanity CLI can read configuration from a `sanity.cli.js` (`.ts`) file in the same folder that the command is run in. It will fall back on the configuration in the `sanity.config.ts` file.
 
+Use `defineCliConfig` from `sanity/cli` to configure the CLI with TypeScript type-checking:
+
+**sanity.cli.ts**
+
+```typescript
+import {defineCliConfig} from 'sanity/cli'
+
+export default defineCliConfig({
+  api: {
+    projectId: '<YOUR_PROJECT_ID>',
+    dataset: '<YOUR_DATASET>',
+  },
+  server: {
+    hostname: 'localhost',
+    port: 3333,
+  },
+})
+```
+
+See the properties table below for all available options.
+
 #### Properties
 
 | Property | Description |
@@ -23,6 +44,9 @@ autoUpdates: Enable auto-updates for studios. |
 | reactStrictMode | Wraps the Studio in \<React.StrictMode> root to aid in flagging potential problems related to concurrent features (startTransition, useTransition, useDeferredValue, Suspense). Can also be enabled by setting SANITY\_STUDIO\_REACT\_STRICT\_MODE="true"|"false".  It only applies to sanity dev in development mode and is ignored in sanity build and in production. Defaults to false. |
 | server | Defines the hostname and port that the development server should run on. hostname defaults to localhost, and port to 3333. |
 | vite | Exposes the default Vite configuration for the Studio so it can be changed and extended. |
+| typegen | Configures automatic TypeScript type generation during sanity dev and sanity build. Properties include enabled, path, generates, and overloadClientMethods. See Sanity TypeGen for details. |
+| schemaExtraction | Configures automatic schema extraction during sanity dev and sanity build. Properties: enabled, path, enforceRequiredFields, watchPatterns, workspace. |
+| app | Configuration for App SDK applications. Properties: organizationId (required), entry (default: './src/App'). |
 
 > \[!WARNING]
 > Gotcha

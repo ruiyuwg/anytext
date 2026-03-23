@@ -11,7 +11,7 @@ The `vercel domains` command is used to manage domains under the current scope, 
 vercel domains ls
 ```
 
-*Using the vercel domains command to list all domains
+*Using the \`vercel domains\` command to list all domains
 under the current scope.*
 
 ## Extended Usage
@@ -20,42 +20,42 @@ under the current scope.*
 vercel domains inspect [domain]
 ```
 
-*Using the vercel domains command to retrieve
+*Using the \`vercel domains\` command to retrieve
 information about a specific domain.*
 
 ```bash filename="terminal"
 vercel domains add [domain] [project]
 ```
 
-*Using the vercel domains command to add a domain to
+*Using the \`vercel domains\` command to add a domain to
 the current scope or a Vercel Project.*
 
 ```bash filename="terminal"
 vercel domains rm [domain]
 ```
 
-*Using the vercel domains command to remove a domain
+*Using the \`vercel domains\` command to remove a domain
 from the current scope.*
 
 ```bash filename="terminal"
 vercel domains buy [domain]
 ```
 
-*Using the vercel domains command to buy a domain for
+*Using the \`vercel domains\` command to buy a domain for
 the current scope.*
 
 ```bash filename="terminal"
 vercel domains move [domain] [scope-name]
 ```
 
-*Using the vercel domains command to move a domain to
+*Using the \`vercel domains\` command to move a domain to
 another scope.*
 
 ```bash filename="terminal"
 vercel domains transfer-in [domain]
 ```
 
-*Using the vercel domains command to transfer in a
+*Using the \`vercel domains\` command to transfer in a
 domain to the current scope.*
 
 ## Unique Options
@@ -70,8 +70,8 @@ The `--yes` option can be used to bypass the confirmation prompt when removing a
 vercel domains rm [domain] --yes
 ```
 
-*Using the vercel domains rm command with the
-\--yes option.*
+*Using the \`vercel domains rm\` command with the
+\`--yes\` option.*
 
 ### Limit
 
@@ -81,8 +81,8 @@ The `--limit` option can be used to specify the maximum number of domains return
 vercel domains ls --limit 100
 ```
 
-*Using the vercel domains ls command with the
-\--limit option.*
+*Using the \`vercel domains ls\` command with the
+\`--limit\` option.*
 
 ### Next
 
@@ -92,8 +92,8 @@ The `--next` option enables pagination when listing domains. Pass the timestamp 
 vercel domains ls --next 1584722256178
 ```
 
-*Using the vercel domains ls command with the
-\--next option for pagination.*
+*Using the \`vercel domains ls\` command with the
+\`--next\` option for pagination.*
 
 ### Force
 
@@ -103,12 +103,12 @@ The `--force` option forces a domain on a project, removing it from an existing 
 vercel domains add my-domain.com my-project --force
 ```
 
-*Using the vercel domains add command with the
-\--force option.*
+*Using the \`vercel domains add\` command with the
+\`--force\` option.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -123,5 +123,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel env"
 description: "Learn how to manage your environment variables in your Vercel Projects using the vercel env CLI command."
-last\_updated: "2026-03-08T05:03:12.146Z"
+last\_updated: "2026-03-23T09:40:06.716Z"
 source: "https://vercel.com/docs/cli/env"

@@ -7,15 +7,15 @@ The `turbopack` option lets you customize [Turbopack](/docs/app/api-reference/tu
 > If you are using an older version of Next.js, run `npx @next/codemod@latest next-experimental-turbo-to-turbopack .` to automatically migrate your configuration.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   turbopack: {
     // ...
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig
 ```
 
 ```js filename="next.config.js" switcher
@@ -24,9 +24,9 @@ const nextConfig = {
   turbopack: {
     // ...
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
 ```
 
 > **Good to know**:
@@ -51,13 +51,13 @@ The following options are available for the `turbopack` configuration:
 
 The following loaders have been tested to work with Turbopack's webpack loader implementation, but many other webpack loaders should work as well even if not listed here:
 
-- [`babel-loader`](https://www.npmjs.com/package/babel-loader) [_(Configured automatically if a Babel configuration file is found)_](/docs/app/api-reference/turbopack#language-features)
+- [`babel-loader`](https://www.npmjs.com/package/babel-loader) [*(Configured automatically if a Babel configuration file is found)*](/docs/app/api-reference/turbopack#language-features)
 - [`@svgr/webpack`](https://www.npmjs.com/package/@svgr/webpack)
 - [`svg-inline-loader`](https://www.npmjs.com/package/svg-inline-loader)
 - [`yaml-loader`](https://www.npmjs.com/package/yaml-loader)
 - [`string-replace-loader`](https://www.npmjs.com/package/string-replace-loader)
 - [`raw-loader`](https://www.npmjs.com/package/raw-loader)
-- [`sass-loader`](https://www.npmjs.com/package/sass-loader) [_(Configured automatically)_](/docs/app/api-reference/turbopack#css-and-styling)
+- [`sass-loader`](https://www.npmjs.com/package/sass-loader) [*(Configured automatically)*](/docs/app/api-reference/turbopack#css-and-styling)
 - [`graphql-tag/loader`](https://www.npmjs.com/package/graphql-tag)
 
 #### Missing Webpack loader features
@@ -106,12 +106,12 @@ Next.js automatically detects the root directory of your project. It does so by 
 If you have a different project structure, for example if you don't use workspaces, you can manually set the `root` option:
 
 ```js filename="next.config.js"
-const path = require("path");
+const path = require('path')
 module.exports = {
   turbopack: {
-    root: path.join(__dirname, ".."),
+    root: path.join(__dirname, '..'),
   },
-};
+}
 ```
 
 To resolve files from linked dependencies outside the project root (via `npm link`, `yarn link`, `pnpm link`, etc.), you must configure the `turbopack.root` to the parent directory of both the project and the linked dependencies.
@@ -134,13 +134,13 @@ Here is an example below using the [`@svgr/webpack`](https://www.npmjs.com/packa
 module.exports = {
   turbopack: {
     rules: {
-      "*.svg": {
-        loaders: ["@svgr/webpack"],
-        as: "*.js",
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
-};
+}
 ```
 
 > **Good to know**: Globs used in the `rules` object match based on file name, unless the glob contains a `/` character, which will cause it to match based on the full project-relative file path. Windows file paths are normalized to use unix-style `/` path separators.
@@ -153,20 +153,20 @@ For loaders that require configuration options, you can use an object format ins
 module.exports = {
   turbopack: {
     rules: {
-      "*.svg": {
+      '*.svg': {
         loaders: [
           {
-            loader: "@svgr/webpack",
+            loader: '@svgr/webpack',
             options: {
               icon: true,
             },
           },
         ],
-        as: "*.js",
+        as: '*.js',
       },
     },
   },
-};
+}
 ```
 
 > **Good to know**: Prior to Next.js version 13.4.4, `turbopack.rules` was named `turbo.loaders` and only accepted file extensions like `.mdx` instead of `*.mdx`.
@@ -181,17 +181,20 @@ module.exports = {
     rules: {
       // '*' will match all file paths, but we restrict where our
       // rule runs with a condition.
-      "*": {
+      '*': {
         condition: {
           all: [
             // 'foreign' is a built-in condition.
-            { not: "foreign" },
+            { not: 'foreign' },
             // 'path' can be a RegExp or a glob string. A RegExp matches
             // anywhere in the full project-relative file path.
             { path: /^img\/[0-9]{3}\// },
             {
               any: [
-                { path: "*.svg" },
+                { path: '*.svg' },
+                // 'query' matches anywhere in the full query string,
+                // which can be empty, or start with `?`.
+                { query: /[?&]svgr(?=&|$)/ },
                 // 'content' is always a RegExp, and can match
                 // anywhere in the file.
                 { content: /\<svg\W/ },
@@ -199,16 +202,20 @@ module.exports = {
             },
           ],
         },
-        loaders: ["@svgr/webpack"],
-        as: "*.js",
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
-};
+}
 ```
 
 - Supported boolean operators are `{all: [...]}`, `{any: [...]}` and `{not: ...}`.
-- Supported customizable operators are `{path: string | RegExp}` and `{content: RegExp}`. If `path` and `content` are specified in the same object, it acts as an implicit `and`.
+- Supported customizable operators are `{path: string | RegExp}`, `{content: RegExp}`, `{query: string | RegExp}`, and `{contentType: string | RegExp}`. If multiple operators are specified in the same object, it acts as an implicit `and`.
+  - `path` matches against the project-relative file path. A string is treated as a glob pattern, while a RegExp can be used to match the path partially.
+  - `content` matches anywhere in the file content.
+  - `query` matches the import's query string (e.g., `?foo` in `import './file?foo'`). A string must match exactly, while a RegExp can be used to match the query string partially.
+  - `contentType` matches the MIME content type of the resource (e.g., from data URLs like `data:text/plain,...`). A string is treated as a glob pattern (e.g., `text/*`, `image/*`), while a RegExp can be used to match the content type partially.
 
 In addition, a number of built-in conditions are supported:
 
@@ -225,24 +232,97 @@ Rules can be an object or an array of objects. An array is often useful for mode
 module.exports = {
   turbopack: {
     rules: {
-      "*.svg": [
+      '*.svg': [
         {
-          condition: "browser",
-          loaders: ["@svgr/webpack"],
-          as: "*.js",
+          condition: 'browser',
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
         },
         {
-          condition: { not: "browser" },
-          loaders: [require.resolve("./custom-svg-loader.js")],
-          as: "*.js",
+          condition: { not: 'browser' },
+          loaders: [require.resolve('./custom-svg-loader.js')],
+          as: '*.js',
         },
       ],
     },
   },
-};
+}
 ```
 
 > **Good to know**: All matching rules are executed in order.
+
+### Module types
+
+You can set the module type directly without using a loader. This is useful for changing how files are processed, similar to webpack's [`type`](https://webpack.js.org/configuration/module/#ruletype) option.
+
+```js filename="next.config.js"
+module.exports = {
+  turbopack: {
+    rules: {
+      '*.svg': {
+        type: 'asset',
+      },
+    },
+  },
+}
+```
+
+When using `type: 'asset'`, importing the file returns its URL:
+
+```tsx filename="app/page.tsx"
+import svgUrl from './icon.svg'
+
+export default function Page() {
+  return <img src={svgUrl} alt="Icon" />
+}
+```
+
+The `type` option can be combined with `loaders` - loaders run first, then the result is processed according to the specified type.
+
+Available module types:
+
+| Type         | Description                                              |
+| ------------ | -------------------------------------------------------- |
+| `asset`      | Emit file and return URL (like webpack `asset/resource`) |
+| `ecmascript` | Process as JavaScript                                    |
+| `typescript` | Process as TypeScript                                    |
+| `css`        | Process as CSS                                           |
+| `css-module` | Process as CSS module                                    |
+| `wasm`       | Process as WebAssembly                                   |
+| `raw`        | Return raw contents as string                            |
+| `bytes`      | Inline contents as bytes                                 |
+
+### Inline loader configuration with import attributes
+
+You can apply a Turbopack loader to an individual import using the `with` clause (import attributes). This is specified per-import rather than globally via `turbopack.rules`.
+
+This is useful when you want to apply a loader to a specific import without affecting all files of that type.
+
+```tsx filename="app/page.tsx"
+// Apply a raw loader to import a .txt file as a JavaScript module
+import rawText from '../data.txt' with { turbopackLoader: 'raw-loader', turbopackAs: '*.js' }
+
+export default function Page() {
+  return <p>{rawText}</p>
+}
+```
+
+The following import attributes are supported:
+
+| Attribute                | Description                                                                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `turbopackLoader`        | The loader to apply (e.g. `'raw-loader'`).                                                                                    |
+| `turbopackLoaderOptions` | JSON string of loader options (e.g. `'{"search":"X","replace":"Y"}'`).                                                        |
+| `turbopackAs`            | Rename pattern for the output (same as `turbopack.rules[].as`). For example, `'*.js'` treats the loader output as JavaScript. |
+| `turbopackModuleType`    | Set the module type for the output (same as `turbopack.rules[].type`).                                                        |
+
+Loaders with options pass a JSON-encoded string via `turbopackLoaderOptions`:
+
+```tsx filename="app/page.tsx"
+import value from '../data.js' with { turbopackLoader: 'string-replace-loader', turbopackLoaderOptions: '{"search":"PLACEHOLDER","replace":"replaced value"}' }
+```
+
+> **Good to know**: Import attributes with `turbopackLoader` are Turbopack-specific and are not supported by webpack. This feature requires the `with` keyword (not `assert`) in your import statements.
 
 ### Resolving aliases
 
@@ -254,11 +334,11 @@ To configure resolve aliases, map imported patterns to their new destination in 
 module.exports = {
   turbopack: {
     resolveAlias: {
-      underscore: "lodash",
-      mocha: { browser: "mocha/browser-entry.js" },
+      underscore: 'lodash',
+      mocha: { browser: 'mocha/browser-entry.js' },
     },
   },
-};
+}
 ```
 
 This aliases imports of the `underscore` package to the `lodash` package. In other words, `import underscore from 'underscore'` will load the `lodash` module instead of `underscore`.
@@ -274,9 +354,9 @@ To configure resolve extensions, use the `resolveExtensions` field in `next.conf
 ```js filename="next.config.js"
 module.exports = {
   turbopack: {
-    resolveExtensions: [".mdx", ".tsx", ".ts", ".jsx", ".js", ".mjs", ".json"],
+    resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
   },
-};
+}
 ```
 
 This overwrites the original resolve extensions with the provided list. Make sure to include the default extensions.
@@ -294,19 +374,23 @@ module.exports = {
   turbopack: {
     debugIds: true,
   },
-};
+}
 ```
 
 The option automatically adds a polyfill for debug IDs to the JavaScript bundle to ensure compatibility. The debug IDs are available in the `globalThis._debugIds` global variable.
 
 ## Version History
 
-| Version  | Changes                                         |
-| -------- | ----------------------------------------------- |
-| `16.0.0` | `turbopack.debugIds` was added.                 |
-| `16.0.0` | `turbopack.rules.*.condition` was added.        |
-| `15.3.0` | `experimental.turbo` is changed to `turbopack`. |
-| `13.0.0` | `experimental.turbo` introduced.                |
+| Version  | Changes                                              |
+| -------- | ---------------------------------------------------- |
+| `16.2.0` | `turbopackLoader` import attributes were added.      |
+| `16.2.0` | `turbopack.rules.*.type` was added.                  |
+| `16.2.0` | `turbopack.rules.*.condition.contentType` was added. |
+| `16.2.0` | `turbopack.rules.*.condition.query` was added.       |
+| `16.0.0` | `turbopack.debugIds` was added.                      |
+| `16.0.0` | `turbopack.rules.*.condition` was added.             |
+| `15.3.0` | `experimental.turbo` is changed to `turbopack`.      |
+| `13.0.0` | `experimental.turbo` introduced.                     |
 
 # turbopackFileSystemCache
 
@@ -319,7 +403,7 @@ Turbopack FileSystem Cache enables Turbopack to reduce work across `next dev` or
 > **Good to know:** The FileSystem Cache feature is considered stable for development and experimental for production builds
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -328,9 +412,9 @@ const nextConfig: NextConfig = {
     // Enable filesystem caching for `next build`
     turbopackFileSystemCacheForBuild: true,
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig
 ```
 
 ```js filename="next.config.js" switcher
@@ -342,9 +426,9 @@ const nextConfig = {
     // Enable filesystem caching for `next build`
     turbopackFileSystemCacheForBuild: true,
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
 ```
 
 ## Version Changes
@@ -355,77 +439,4 @@ module.exports = nextConfig;
 | `v16.0.0` | Beta release with separate flags for build and dev             |
 | `v15.5.0` | Persistent caching released as experimental on canary releases |
 
-# typedRoutes
-
-# typedRoutes
-
-> **Note**: This option has been marked as stable, so you should use `typedRoutes` instead of `experimental.typedRoutes`.
-
-Support for [statically typed links](/docs/app/api-reference/config/typescript#statically-typed-links). This feature requires using TypeScript in your project.
-
-```js filename="next.config.js"
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  typedRoutes: true,
-};
-
-module.exports = nextConfig;
-```
-
-# typescript
-
-# typescript
-
-Configure TypeScript behavior with the `typescript` option in `next.config.js`:
-
-```js filename="next.config.js"
-module.exports = {
-  typescript: {
-    ignoreBuildErrors: false,
-    tsconfigPath: "tsconfig.json",
-  },
-};
-```
-
-## Options
-
-| Option              | Type      | Default           | Description                                                      |
-| ------------------- | --------- | ----------------- | ---------------------------------------------------------------- |
-| `ignoreBuildErrors` | `boolean` | `false`           | Allow production builds to complete even with TypeScript errors. |
-| `tsconfigPath`      | `string`  | `'tsconfig.json'` | Path to a custom `tsconfig.json` file.                           |
-
-## `ignoreBuildErrors`
-
-Next.js fails your **production build** (`next build`) when TypeScript errors are present in your project.
-
-If you'd like Next.js to dangerously produce production code even when your application has errors, you can disable the built-in type checking step.
-
-If disabled, be sure you are running type checks as part of your build or deploy process, otherwise this can be very dangerous.
-
-```js filename="next.config.js"
-module.exports = {
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
-  },
-};
-```
-
-## `tsconfigPath`
-
-Use a different TypeScript configuration file for builds or tooling:
-
-```js filename="next.config.js"
-module.exports = {
-  typescript: {
-    tsconfigPath: "tsconfig.build.json",
-  },
-};
-```
-
-See the [TypeScript configuration](/docs/app/api-reference/config/typescript#custom-tsconfig-path) page for more details.
-
-# urlImports
+# turbopack.ignoreIssue

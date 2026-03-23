@@ -165,5 +165,5 @@ To get started, you’ll need an existing Astro project.
 
 [Section titled “Themes”](#themes)
 
-- [![](/_astro/resume01.CAukhX1f_183P41.webp) Resume01](https://astro.build/themes/details/resume01/)
-- [![](/_astro/qurno.Dxy77_Dt_vzmNt.webp) Qurno Blog](https://astro.build/themes/details/qurno-astro/)
+- [![](/_astro/resume01.CAukhX1f_17VSJx.webp) Resume01](https://astro.build/themes/details/resume01/)
+- [![](/_astro/qurno.Dxy77_Dt_Zooq2x.webp) Qurno Blog](https://astro.build/themes/details/qurno-astro/)

@@ -138,5 +138,5 @@ files, and without workspace restrictions.
 
 title: "forbidden-imports"
 description: "Learn how to set custom rules to disallow one or more files from importing one or more predefined modules"
-last\_updated: "2026-03-08T05:03:12.587Z"
+last\_updated: "2026-03-23T09:40:07.415Z"
 source: "https://vercel.com/docs/conformance/custom-rules/forbidden-imports"

@@ -67,5 +67,5 @@ You should also add `"eslint-config-custom": "workspace:*"` to your
 
 title: "ESLINT\_RULES\_REQUIRED"
 description: "Requires that a workspace package is configured with required ESLint plugins and rules"
-last\_updated: "2026-03-08T05:03:12.644Z"
+last\_updated: "2026-03-23T09:40:07.516Z"
 source: "https://vercel.com/docs/conformance/rules/ESLINT\_RULES\_REQUIRED"

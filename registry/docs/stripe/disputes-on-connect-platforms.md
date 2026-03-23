@@ -11,11 +11,23 @@ This guide describes how Stripe processes disputes for each charge type and how 
 
 ## Direct charges
 
-For connected accounts that use [direct charges](https://docs.stripe.com/connect/direct-charges.md) and where your platform isn’t liable for negative balances (including Standard accounts), those accounts handle their own disputes. The disputed funds and dispute fees are taken from their balance, not the platform’s.
+For connected accounts that use [direct charges](https://docs.stripe.com/connect/direct-charges.md), Stripe debits the disputed amount from the connected account’s balance. However, dispute fee responsibilities depend on the `controller.losses.payments` and `controller.fees.payer properties`.
 
-For connected accounts where your platform is *liable for negative balances* (The responsibility for managing risk and recovering negative balances on connected accounts. Stripe or the Connect platform can be liable for negative balances on connected accounts) (including Custom and Express accounts), you’re ultimately responsible for any disputes involving those accounts.
+| Controller property                                                                      | Dispute fee responsibility                                                                                                         |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `controller.losses.payments = "Stripe"` and `controller.fees.payer = "account"`          | Dispute fees are charged to connected accounts, and Stripe covers the loss if the amount can’t be debited.                         |
+| `controller.losses.payments = "Stripe"` and `controller.fees.payer = "application"`      | Dispute fees are charged to the connected account, and Stripe is responsible for covering the loss if the amount can’t be debited. |
+| `controller.losses.payments = "application"` and `controller.fees.payer = "application"` | The platform is charged dispute fees and is responsible for covering the loss if the amount can’t be debited.                      |
 
-For direct payments on connected accounts where your platform is liable for negative balances, Stripe debits disputed amounts and fees from the connected account’s balance. However, your platform is ultimately liable. If Stripe can’t debit the disputed amount and fee from the connected account, Stripe debits it from your platform account.
+### Accounts that handle their own disputes
+
+For connected accounts where your platform isn’t liable for negative balances (including Standard accounts), these accounts act as the *merchant of record* (The legal entity responsible for facilitating the sale of products to a customer that handles any applicable regulations and liabilities, including sales taxes. In a Connect integration, it can be the platform or a connected account). This means disputes and chargebacks are filed against them, and we deduct the total amount for disputes and fees directly from their balance. Learn how to [comply with payment network merchant rules](https://docs.stripe.com/connect/merchant-of-record.md).
+
+### Accounts where the platform is liable
+
+For connected accounts where your platform is *liable for negative balances* (The responsibility for managing risk and recovering negative balances on connected accounts. Stripe or the Connect platform can be liable for negative balances on connected accounts) (including Custom and Express accounts), your platform is responsible for any disputes related to those accounts. In this case, Stripe debits the disputed amount from the connected account’s balance and the dispute fee from your platform balance. However, your platform is ultimately liable. If Stripe can’t debit the disputed amount from the connected account, Stripe debits it from your platform account.
+
+For additional details, refer to the [fee behaviors for payer values](https://docs.stripe.com/connect/direct-charges-fee-payer-behavior.md#fee-payer-behaviors) and learn how to set [account controller properties](https://docs.stripe.com/connect/migrate-to-controller-properties.md?migrate-to-controller-properties-samples=specifying-all-properties#account-controller-properties) using the Accounts API.
 
 ## Destination and separate charges and transfers
 

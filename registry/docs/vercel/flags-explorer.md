@@ -55,5 +55,5 @@ You can send this link to team members. When they visit the link they will get a
 
 title: "Reference"
 description: "In-depth reference for configuring the Flags Explorer"
-last\_updated: "2026-03-08T05:03:14.471Z"
+last\_updated: "2026-03-23T09:40:10.052Z"
 source: "https://vercel.com/docs/flags/flags-explorer/reference"

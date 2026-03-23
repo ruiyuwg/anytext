@@ -9,39 +9,29 @@ This unit shows you how to set up your development environment and deploy to Net
 
 Take the tutorial in an online code editor
 
-Want to complete this tutorial in an online code editor instead? Follow the instructions below for getting started on Google IDX.
+Want to complete this tutorial in an online code editor instead? Follow the instructions below for getting started on StackBlitz.
 
-Using Google IDX: Follow these instructions, then go directly to Unit 2!
+Using StackBlitz: Follow these instructions, then go directly to Unit 2!
 
-**Set up IDX**
+**Set up StackBlitz**
 
-1. Follow the external link to [open the “Empty Project” template in a new workspace on IDX](https://astro.new/minimal?on=idx).
+1. Follow the external link to [open the “Empty Project” template on StackBlitz](https://astro.new/minimal?on=stackblitz).
 
-2. Follow the prompt to log into your Google account if you are not already logged in.
+2. Click “Sign in” on the top right to log in using your GitHub credentials.
 
-3. Enter a name for your project if you want to change it from the default “Empty Project”. Click **Create**.
+3. In the upper left of the StackBlitz editor window, click to “fork” the template (save to your own account dashboard).
 
-4. Wait for the workspace to be created. This may take 30 - 60 seconds. If all goes well, you will see the Astro project loaded in an online code editor.
-
-5. Wait for IDX to run two scripts: one to install Astro and another to start the development server. Note that you may briefly see a message that your workspace “couldn’t find Astro” if your workspace loads before Astro has finished installing. This message can be ignored and cancelled if it does not clear itself.
+4. Wait for the project to load, and you will see a live preview of the “Empty Project” starter.
 
 **Make a Change**
 
-If all goes well, you should see the code for the file `src/pages/index.astro` opened in split screen with a live preview of the website. Follow the instruction to [“Write your first line of Astro”](/en/tutorial/1-setup/3/) to make a change to this file.
+In the file pane, you should see `src/pages/index.astro`. Click to open it, and follow [Write your first line of Astro](/en/tutorial/1-setup/3/) to make a change to this file.
 
 **Create a GitHub Repository**
 
-1. Navigate to the “Source Control” navigation item in the vertical menu bar, or open with `CTRL + SHIFT + G`.
+1. Press the `Connect Repository` button at the top of your list of files, enter a new name for your repository, and click `Create repo & push`.
 
-2. Select the option to Publish to GitHub. This will create a new repository in your GitHub account.
-
-3. Follow the prompts to sign in to your GitHub account.
-
-4. Once you are signed in, return to the IDX tab and you will be given the choice to name your new repository, and whether you want to create a private or public repository. You can choose any name and either kind of repository for this tutorial.
-
-5. IDX will make an initial commit and publish to your new GitHub repo.
-
-6. Going forward, whenever you have changes to be committed back to GitHub, the Source Control navigation icon will show a number. This is the number of files that have changed since your last commit. Navigating to this tab and performing two steps (commit and publish) will allow you to enter a commit message, and update your repository.
+2. When you have changes to be committed back to GitHub, a “Commit” button will appear at the top left of your workspace. Clicking on this will allow you to enter a commit message, and update your repository.
 
 **Deploy your Site**
 

@@ -6,7 +6,7 @@
 
 ## Dashboard at a glance
 
-The Sanity Dashboard is the central hub for your organization's content operations. Here you'll find your deployed [studios](https://www.sanity.io/docs/studio), [custom apps](https://www.sanity.io/docs/app-sdk), and official Sanity apps like Canvas and Media Library.
+The Sanity Dashboard is the central hub for your organization's content operations. Here you'll find your deployed [studios](https://www.sanity.io/docs/studio), [custom apps](https://www.sanity.io/docs/app-sdk), and official Sanity apps like [Canvas](https://www.sanity.io/docs/canvas) and [Media Library](https://www.sanity.io/docs/media-library).
 
 ![A Sanity.io dashboard displaying an AI content agent prompt for creating an FAQ page, recent studios, and an activity log.](https://cdn.sanity.io/images/3do82whm/next/adc7e803466a5632c74be52f81268b55599cb802-2524x1790.png)
 

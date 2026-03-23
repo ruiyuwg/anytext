@@ -2,9 +2,9 @@
 
 Learn how to collect VAT and other customer tax IDs with Checkout.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/tax/checkout/tax-ids?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/tax/checkout/tax-ids?payment-ui=stripe-hosted.
 
 Displaying a customer’s tax ID and legal business name on *invoices* (Invoices are statements of amounts owed by a customer. They track the status of payments from draft through paid or otherwise finalized. Subscriptions automatically generate invoices, or you can manually create a one-off invoice) and processing VAT refunds are common requirements that you can satisfy by enabling tax ID collection in Checkout. This guide assumes that you’ve already integrated Checkout. If you haven’t, see the [Accept a payment guide](https://docs.stripe.com/payments/accept-a-payment.md).
 
@@ -145,7 +145,7 @@ In testing environments, you can enter any alphanumeric string that is in the co
 
 ## Validation
 
-During the Checkout Session, Stripe verifies that the provided tax IDs are formatted correctly, but not that they’re valid. You’re responsible for ensuring the validity of customer information collected during checkout. To help, Stripe automatically performs asynchronous validation against government databases for [Australian Business Numbers (ABNs)](https://docs.stripe.com/tax/invoicing/tax-ids.md#australian-business-numbers-\(abn\)), [European Value Added Tax (EU VAT)](https://docs.stripe.com/tax/invoicing/tax-ids.md#european-value-added-tax-\(eu-vat\)-numbers), and [United Kingdom Value Added Tax (GB VAT)](https://docs.stripe.com/tax/invoicing/tax-ids.md#united-kingdom-value-added-tax-\(gb-vat\)-numbers) numbers. Learn more about the [validation we perform](https://docs.stripe.com/tax/invoicing/tax-ids.md#validation), and how to consume the status of those checks.
+During the Checkout Session, Stripe verifies that the provided tax IDs are formatted correctly, but not that they’re valid. You’re responsible for ensuring the validity of customer information collected during checkout. To help, Stripe automatically performs asynchronous validation against government databases for [Australian Business Numbers (ABNs)](https://docs.stripe.com/tax/invoicing/tax-ids.md#australian-business-numbers-abn), [European Value Added Tax (EU VAT)](https://docs.stripe.com/tax/invoicing/tax-ids.md#european-value-added-tax-eu-vat-numbers), and [United Kingdom Value Added Tax (GB VAT)](https://docs.stripe.com/tax/invoicing/tax-ids.md#united-kingdom-value-added-tax-gb-vat-numbers) numbers. Learn more about the [validation we perform](https://docs.stripe.com/tax/invoicing/tax-ids.md#validation), and how to consume the status of those checks.
 
 If you use Stripe Tax and your customer provides a tax ID, Stripe Tax applies the reverse charge or zero rate according to applicable laws, as long as the tax ID conforms to the necessary number format, regardless of its validity.
 
@@ -265,9 +265,9 @@ Checkout collects the following tax ID types in the given regions:
 
 \*Stripe Tax won't apply tax if this tax ID is provided, in line with the relevant laws.
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/tax/checkout/tax-ids?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/tax/checkout/tax-ids?payment-ui=embedded-form.
 
 Displaying a customer’s tax ID and legal business name on *invoices* (Invoices are statements of amounts owed by a customer. They track the status of payments from draft through paid or otherwise finalized. Subscriptions automatically generate invoices, or you can manually create a one-off invoice) is a common requirement that you can satisfy by enabling tax ID collection in Checkout. This guide assumes that you’ve already integrated Checkout. If you haven’t, see the [Accept a payment guide](https://docs.stripe.com/payments/accept-a-payment.md).
 
@@ -413,7 +413,7 @@ In testing environments, you can enter any alphanumeric string that is in the co
 
 ## Validation
 
-During the Checkout Session, Stripe verifies that the provided tax IDs are formatted correctly, but not that they’re valid. You’re responsible for ensuring the validity of customer information collected during checkout. To help, Stripe automatically performs asynchronous validation against government databases for [Australian Business Numbers (ABNs)](https://docs.stripe.com/tax/invoicing/tax-ids.md#australian-business-numbers-\(abn\)), [European Value Added Tax (EU VAT)](https://docs.stripe.com/tax/invoicing/tax-ids.md#european-value-added-tax-\(eu-vat\)-numbers), and [United Kingdom Value Added Tax (GB VAT)](https://docs.stripe.com/tax/invoicing/tax-ids.md#united-kingdom-value-added-tax-\(gb-vat\)-numbers) numbers. Learn more about the [validation we perform](https://docs.stripe.com/tax/invoicing/tax-ids.md#validation), and how to consume the status of those checks.
+During the Checkout Session, Stripe verifies that the provided tax IDs are formatted correctly, but not that they’re valid. You’re responsible for ensuring the validity of customer information collected during checkout. To help, Stripe automatically performs asynchronous validation against government databases for [Australian Business Numbers (ABNs)](https://docs.stripe.com/tax/invoicing/tax-ids.md#australian-business-numbers-abn), [European Value Added Tax (EU VAT)](https://docs.stripe.com/tax/invoicing/tax-ids.md#european-value-added-tax-eu-vat-numbers), and [United Kingdom Value Added Tax (GB VAT)](https://docs.stripe.com/tax/invoicing/tax-ids.md#united-kingdom-value-added-tax-gb-vat-numbers) numbers. Learn more about the [validation we perform](https://docs.stripe.com/tax/invoicing/tax-ids.md#validation), and how to consume the status of those checks.
 
 If you use Stripe Tax and your customer provides a tax ID, Stripe Tax applies the reverse charge or zero rate according to applicable laws, as long as the tax ID conforms to the necessary number format, regardless of its validity.
 

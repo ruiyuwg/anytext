@@ -8,12 +8,39 @@ ABAC complements [Role-Based Access Control (RBAC)](/langsmith/rbac) by adding t
 
 ABAC (Attribute-Based Access Control) is an Enterprise feature in private beta. If you are interested in upgrading to Enterprise, [contact our sales team](https://www.langchain.com/contact-sales).
 
-Roles and resource tags can be managed via the UI or API. ABAC policies are currently only configurable via the [API](https://api.smith.langchain.com/docs#/access_policies).
+Roles and resource tags can be managed via the UI or API. ABAC policies are configurable via the [API](https://api.smith.langchain.com/docs#/access_policies). Once configured, policies are automatically enforced in both the API and the UI.
 
 ## Before you begin
 
 - [Set up resource tags](/langsmith/set-up-resource-tags) in your workspace.
 - ABAC currently only supports `resource_tag_key` as an `attribute_name` in policies, for evaluating against resource tags. No other attributes are supported yet.
+
+## Enable ABAC for self-hosted deployments
+
+1. ABAC requires a [self-hosted](/langsmith/self-hosted) LangSmith deployment running Helm chart 0.11.28 or later (application version 0.12.1). Once you've upgraded, use one of the following options to enable ABAC:
+
+   - **Enable for a specific organization:** Run the following against your LangSmith PostgreSQL database, replacing `<organization_id>` with the ID copied from the organization settings page in the UI:
+
+     ```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+     UPDATE organizations SET config = config || '{"can_use_abac": true}' WHERE id = '<organization_id>' AND NOT is_personal;
+     ```
+
+   - **Enable for all organizations:** Add the following environment variable to `commonEnv` in your `values.yaml`:
+
+     ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+     DEFAULT_ORG_FEATURE_CAN_USE_ABAC: "true"
+     ```
+
+     This environment variable has no effect on personal organizations, because [RBAC](/langsmith/rbac) is not enabled for personal organizations.
+
+2. Set up authentication. To manage access policies via the API, you need an [Organization Admin](/langsmith/rbac#organization-admin) API key (Personal Access Token or Service Key). Set the following environment variables before running any scripts:
+
+   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   export LANGSMITH_API_KEY="your_admin_api_key"
+   # Required for self-hosted or EU deployments:
+   # export LANGCHAIN_ENDPOINT="https://eu.api.smith.langchain.com"
+   # export LANGCHAIN_ENDPOINT="https://langsmith.yourdomain.com/api"
+   ```
 
 ## Access policy structure
 
@@ -63,13 +90,14 @@ Each condition group specifies:
 
 #### Resource types and permissions
 
-| Resource type | Supported permissions                                                   |
-| ------------- | ----------------------------------------------------------------------- |
-| `project`     | `projects:read`, `runs:read`                                            |
-| `prompt`      | `prompts:read`, `prompts:update`, `prompts:delete`                      |
-| `dataset`     | `datasets:read`, `datasets:update`, `datasets:delete`, `datasets:share` |
+| Resource type | Supported permissions                                                                           |
+| ------------- | ----------------------------------------------------------------------------------------------- |
+| `project`     | `projects:read`, `projects:update`, `projects:delete`, `runs:read`, `runs:share`, `runs:delete` |
+| `prompt`      | `prompts:read`, `prompts:update`, `prompts:delete`, `prompts:share`, `prompts:tag`              |
+| `dataset`     | `datasets:read`, `datasets:update`, `datasets:delete`, `datasets:share`                         |
+| `deployment`  | `deployments:read`, `deployments:update`, `deployments:delete`                                  |
 
-Runs don't have their own tags. Run permissions (`runs:read`) are evaluated against the parent project's tags.
+Runs don't have their own tags. Run permissions (`runs:read`, `runs:create`, `runs:share`, `runs:delete`) are evaluated against the parent project's tags.
 
 #### Conditions
 

@@ -75,7 +75,7 @@ return (
 | `onTaxSettingsUpdated`       | `({id: string}) => void` | Callback executed with the newly updated tax settings ID                                                                                                | undefined (not a required method)              | optional             |
 | `hideProductTaxCodeSelector` | Boolean                  | Include this Boolean prop to hide the tab where users select a default Product Tax Code                                                                 | false (users can by default set a default PTC) | optional             |
 
-To give your connected accounts full control over their tax compliance, you need to integrate the tax registrations component as well. Please follow the guide for [tax compliance for software platforms](https://docs.stripe.com/tax/tax-for-platforms.md). The guide also covers how to calculate and collect the taxes and help your connected accounts to report their taxes.
+To give your connected accounts full control over their tax compliance, you need to integrate the tax registrations component as well. Follow the guide for [tax compliance for software platforms](https://docs.stripe.com/tax/tax-for-platforms.md). The guide also covers how to calculate and collect the taxes and help your connected accounts to report their taxes.
 
 ## See also
 

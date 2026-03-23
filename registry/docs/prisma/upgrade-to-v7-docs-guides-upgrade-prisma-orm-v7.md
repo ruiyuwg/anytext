@@ -210,7 +210,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
 });
-const prisma = new PrismaClient({ adapter });
+export const prisma = new PrismaClient({ adapter });
 ```
 
 If you are using SQLite, you can use the `@prisma/adapter-better-sqlite3`:
@@ -606,37 +606,3 @@ We've removed a small selection of Prisma-specific environment variables.
 - `PRISMA_CLIENT_NO_RETRY`
 - `PRISMA_MIGRATE_SKIP_GENERATE`
 - `PRISMA_MIGRATE_SKIP_SEED`
-
-# FAQ (/docs/optimize/more/faq)
-
-Can I use Optimize in production? \[#can-i-use-optimize-in-production]
-
-Prisma Optimize is intended for use in local development environments. It helps you analyze and optimize queries during development before deploying to production.
-
-What databases does Optimize support? \[#what-databases-does-optimize-support]
-
-Optimize supports:
-
-- PostgreSQL
-- MySQL
-- MariaDB
-- CockroachDB
-- MS SQL Server
-
-How many queries can I record? \[#how-many-queries-can-i-record]
-
-Each recording session can contain up to 10,000 queries. Each workspace can have up to 100 recordings.
-
-Does Optimize work with Prisma Accelerate? \[#does-optimize-work-with-prisma-accelerate]
-
-Yes, but you must apply the Accelerate extension after the Optimize extension:
-
-```ts
-const prisma = new PrismaClient()
-  .$extends(withOptimize())
-  .$extends(withAccelerate());
-```
-
-Need help? \[#need-help]
-
-If you need assistance, reach out in the `#help-and-questions` channel on our [Discord](https://pris.ly/discord?utm_source=docs\&utm_medium=generated_text_cta), or connect with [our community](https://www.prisma.io/community) to see how others are using Optimize.

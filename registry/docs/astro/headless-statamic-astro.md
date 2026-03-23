@@ -134,4 +134,4 @@ To deploy your Astro site visit our [deployment guides](/en/guides/deploy/) and 
 
 [Section titled “Themes”](#themes)
 
-- [![](/_astro/creek.CgpBUanV_Z1gsxon.webp) Creek](https://astro.build/themes/details/creek/)
+- [![](/_astro/creek.CgpBUanV_Mku4I.webp) Creek](https://astro.build/themes/details/creek/)

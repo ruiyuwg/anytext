@@ -194,7 +194,7 @@ Now that you have set up the LaunchDarkly Edge Config integration, you can explo
 
 title: "Using Edge Config with an integration"
 description: "Learn how to use Edge Config with popular A/B testing and feature flag service integrations."
-last\_updated: "2026-03-08T05:03:13.726Z"
+last\_updated: "2026-03-23T09:40:09.134Z"
 source: "https://vercel.com/docs/edge-config/edge-config-integrations"
 
 # Using Edge Config with an integration
@@ -223,5 +223,5 @@ You can get started with any of these Edge Config integrations by following the 
 
 title: "Using Edge Config with Split"
 description: "Learn how to use Edge Config with Vercel"
-last\_updated: "2026-03-08T05:03:13.776Z"
+last\_updated: "2026-03-23T09:40:09.163Z"
 source: "https://vercel.com/docs/edge-config/edge-config-integrations/split-edge-config"

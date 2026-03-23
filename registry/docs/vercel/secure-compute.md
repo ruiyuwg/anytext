@@ -185,7 +185,7 @@ The maximum number of VPC peering connections that can be established per networ
 
 title: "Getting Started with Static IPs"
 description: "Learn how to set up Static IPs for your Vercel projects to connect to IP-restricted backend services."
-last\_updated: "2026-03-08T05:03:12.980Z"
+last\_updated: "2026-03-23T09:40:07.964Z"
 source: "https://vercel.com/docs/connectivity/static-ips/getting-started"
 
 # Getting Started with Static IPs
@@ -229,5 +229,5 @@ Before you dive in, make sure you have:
 
 title: "Static IPs"
 description: "Access IP-restricted backend services through shared static egress IPs for Pro and Enterprise teams."
-last\_updated: "2026-03-08T05:03:12.990Z"
+last\_updated: "2026-03-23T09:40:07.973Z"
 source: "https://vercel.com/docs/connectivity/static-ips"

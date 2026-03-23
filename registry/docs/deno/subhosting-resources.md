@@ -2,6 +2,13 @@
 
 URL: https://docs.deno.com/subhosting/api/
 
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the <a href="https://api.deno.com/v2/docs">v2 API</a>. See the <a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for
+details.
+
+:::
+
 To build Subhosting with Deno Deploy, it helps to understand some key resources
 within the system. These resources are also represented in the
 [REST API](../api/index.md).
@@ -141,6 +148,13 @@ URL: https://docs.deno.com/subhosting/
 # Acceptable use policy
 
 URL: https://docs.deno.com/subhosting/manual/acceptable\_use\_policy
+
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the <a href="https://api.deno.com/v2/docs">v2 API</a>. See the <a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for
+details.
+
+:::
 
 The Deno Subhosting service includes resources (CPU time, request counts) that
 are subject to this Acceptable Use policy. This document can give a rough

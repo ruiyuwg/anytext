@@ -149,7 +149,7 @@ configuration.shippingDetails = { [weak self] in
 
 ## Optional: Customize the appearance
 
-Now that you’ve added the Address Element to your app, you can customize the appearance to fit with the design of the rest of your app. You can configure the appearance with the [Appearance API](https://docs.stripe.com/elements/appearance-api.md?platform=ios) using [AddressViewController.Configuration.appearance](https://github.com/stripe/stripe-ios/blob/address-element-private-beta-2/Stripe/AddressViewController%2BConfiguration.swift#L149).
+Now that you’ve added the Address Element to your app, you can customize the appearance to fit with the design of the rest of your app. You can configure the appearance with the [Appearance API](https://docs.stripe.com/elements/appearance-api/mobile.md?platform=ios) using [AddressViewController.Configuration.appearance](https://github.com/stripe/stripe-ios/blob/address-element-private-beta-2/Stripe/AddressViewController%2BConfiguration.swift#L149).
 
 ## Optional: Set default billing details
 
@@ -423,9 +423,9 @@ dependencies {
   // ...
 
   // Stripe Android SDK
-  implementation("com.stripe:stripe-android:22.8.1")
+  implementation("com.stripe:stripe-android:23.0.2")
   // Include the financial connections SDK to support US bank account as a payment method
-  implementation("com.stripe:financial-connections:22.8.1")
+  implementation("com.stripe:financial-connections:23.0.2")
 }
 ```
 
@@ -533,7 +533,7 @@ val configuration = PaymentSheet.Configuration.Builder("Example, Inc.")
 
 ## Optional: Customize the appearance
 
-Now that you’ve added the Address Element to your app, you can customize the appearance to fit with the design of the rest of your app. You can configure the appearance with the [Appearance API](https://docs.stripe.com/elements/appearance-api.md?platform=android) using [AddressLauncher.Configuration.appearance](https://stripe.dev/stripe-android/paymentsheet/com.stripe.android.paymentsheet.addresselement/-address-launcher/-configuration/index.html).
+Now that you’ve added the Address Element to your app, you can customize the appearance to fit with the design of the rest of your app. You can configure the appearance with the [Appearance API](https://docs.stripe.com/elements/appearance-api/mobile.md?platform=android) using [AddressLauncher.Configuration.appearance](https://stripe.dev/stripe-android/paymentsheet/com.stripe.android.paymentsheet.addresselement/-address-launcher/-configuration/index.html).
 
 ## Optional: Set default billing details
 
@@ -720,7 +720,7 @@ const { error } = await initPaymentSheet({
 
 ## Optional: Customize the appearance
 
-Now that you’ve added the Address Element to your app, you can customize the appearance to fit with the design of the rest of your app. You can configure the appearance with the [Appearance API](https://docs.stripe.com/elements/appearance-api.md?platform=react-native), using the `appearance` property on the `<AddressSheet/>` component.
+Now that you’ve added the Address Element to your app, you can customize the appearance to fit with the design of the rest of your app. You can configure the appearance with the [Appearance API](https://docs.stripe.com/elements/appearance-api/mobile.md?platform=react-native), using the `appearance` property on the `<AddressSheet/>` component.
 
 ## Optional: Set default billing details
 
@@ -754,7 +754,7 @@ await initPaymentSheet({
   // ...
   defaultBillingDetails: {
     email: 'foo@bar.com',
-  }
+  },
   billingDetailsCollectionConfiguration: {
     name: PaymentSheet.CollectionMode.ALWAYS,
     email: PaymentSheet.CollectionMode.NEVER,

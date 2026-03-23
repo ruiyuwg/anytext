@@ -1,362 +1,444 @@
 # Human-in-the-loop
 
-Source: https://docs.langchain.com/oss/python/langchain/human-in-the-loop
+Source: https://docs.langchain.com/oss/python/deepagents/human-in-the-loop
 
-The Human-in-the-Loop (HITL) [middleware](/oss/python/langchain/middleware/built-in#human-in-the-loop) lets you add human oversight to agent tool calls.
-When a model proposes an action that might require review — for example, writing to a file or executing SQL — the middleware can pause execution and wait for a decision.
+Learn how to configure human approval for sensitive tool operations
 
-It does this by checking each tool call against a configurable policy. If intervention is needed, the middleware issues an [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt) that halts execution. The graph state is saved using LangGraph's [persistence layer](/oss/python/langgraph/persistence), so execution can pause safely and resume later.
+Some tool operations may be sensitive and require human approval before execution. Deep Agents support human-in-the-loop workflows through LangGraph's interrupt capabilities. You can configure which tools require approval using the `interrupt_on` parameter.
 
-A human decision then determines what happens next: the action can be approved as-is (`approve`), modified before running (`edit`), or rejected with feedback (`reject`).
+```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+graph LR
+    Agent[Agent] --> Check{Interrupt?}
+    Check --> |no| Execute[Execute]
+    Check --> |yes| Human{Human}
 
-## Interrupt decision types
+    Human --> |approve| Execute
+    Human --> |edit| Execute
+    Human --> |reject| Cancel[Cancel]
 
-The [middleware](/oss/python/langchain/middleware/built-in#human-in-the-loop) defines three built-in ways a human can respond to an interrupt:
+    Execute --> Agent
+    Cancel --> Agent
 
-| Decision Type | Description                                                               | Example Use Case                                    |
-| ------------- | ------------------------------------------------------------------------- | --------------------------------------------------- |
-| ✅ `approve`   | The action is approved as-is and executed without changes.                | Send an email draft exactly as written              |
-| ✏️ `edit`     | The tool call is executed with modifications.                             | Change the recipient before sending an email        |
-| ❌ `reject`    | The tool call is rejected, with an explanation added to the conversation. | Reject an email draft and explain how to rewrite it |
+    classDef trigger fill:#DCFCE7,stroke:#16A34A,stroke-width:2px,color:#14532D
+    classDef process fill:#DBEAFE,stroke:#2563EB,stroke-width:2px,color:#1E3A8A
+    classDef decision fill:#FEF3C7,stroke:#F59E0B,stroke-width:2px,color:#78350F
+    classDef alert fill:#FEE2E2,stroke:#DC2626,stroke-width:2px,color:#7F1D1D
 
-The available decision types for each tool depend on the policy you configure in `interrupt_on`.
-When multiple tool calls are paused at the same time, each action requires a separate decision.
-Decisions must be provided in the same order as the actions appear in the interrupt request.
+    class Agent trigger
+    class Check,Human decision
+    class Execute process
+    class Cancel alert
+```
 
-When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
+## Basic configuration
 
-## Configuring interrupts
+The `interrupt_on` parameter accepts a dictionary mapping tool names to interrupt configurations. Each tool can be configured with:
 
-To use HITL, add the [middleware](/oss/python/langchain/middleware/built-in#human-in-the-loop) to the agent's `middleware` list when creating the agent.
+- **`True`**: Enable interrupts with default behavior (approve, edit, reject allowed)
+- **`False`**: Disable interrupts for this tool
+- **`{"allowed_decisions": [...]}`**: Custom configuration with specific allowed decisions
 
-You configure it with a mapping of tool actions to the decision types that are allowed for each action. The middleware will interrupt execution when a tool call matches an action in the mapping.
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langchain.tools import tool
+from deepagents import create_deep_agent
+from langgraph.checkpoint.memory import MemorySaver
+
+@tool
+def delete_file(path: str) -> str:
+    """Delete a file from the filesystem."""
+    return f"Deleted {path}"
+
+@tool
+def read_file(path: str) -> str:
+    """Read a file from the filesystem."""
+    return f"Contents of {path}"
+
+@tool
+def send_email(to: str, subject: str, body: str) -> str:
+    """Send an email."""
+    return f"Sent email to {to}"
+
+# Checkpointer is REQUIRED for human-in-the-loop
+checkpointer = MemorySaver()
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-6",
+    tools=[delete_file, read_file, send_email],
+    interrupt_on={
+        "delete_file": True,  # Default: approve, edit, reject
+        "read_file": False,   # No interrupts needed
+        "send_email": {"allowed_decisions": ["approve", "reject"]},  # No editing
+    },
+    checkpointer=checkpointer  # Required!
+)
+```
+
+## Decision types
+
+The `allowed_decisions` list controls what actions a human can take when reviewing a tool call:
+
+- **`"approve"`**: Execute the tool with the original arguments as proposed by the agent
+- **`"edit"`**: Modify the tool arguments before execution
+- **`"reject"`**: Skip executing this tool call entirely
+
+You can customize which decisions are available for each tool:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+interrupt_on = {
+    # Sensitive operations: allow all options
+    "delete_file": {"allowed_decisions": ["approve", "edit", "reject"]},
+
+    # Moderate risk: approval or rejection only
+    "write_file": {"allowed_decisions": ["approve", "reject"]},
+
+    # Must approve (no rejection allowed)
+    "critical_operation": {"allowed_decisions": ["approve"]},
+}
+```
+
+## Handle interrupts
+
+When an interrupt is triggered, the agent pauses execution and returns control. Check for interrupts in the result and handle them accordingly.
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import uuid
+from langgraph.types import Command
+
+# Create config with thread_id for state persistence
+config = {"configurable": {"thread_id": str(uuid.uuid4())}}
+
+# Invoke the agent
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "Delete the file temp.txt"}]},
+    config=config,
+    version="v2",  # [!code highlight]
+)
+
+# Check if execution was interrupted
+if result.interrupts:  # [!code highlight]
+    # Extract interrupt information
+    interrupt_value = result.interrupts[0].value  # [!code highlight]
+    action_requests = interrupt_value["action_requests"]
+    review_configs = interrupt_value["review_configs"]
+
+    # Create a lookup map from tool name to review config
+    config_map = {cfg["action_name"]: cfg for cfg in review_configs}
+
+    # Display the pending actions to the user
+    for action in action_requests:
+        review_config = config_map[action["name"]]
+        print(f"Tool: {action['name']}")
+        print(f"Arguments: {action['args']}")
+        print(f"Allowed decisions: {review_config['allowed_decisions']}")
+
+    # Get user decisions (one per action_request, in order)
+    decisions = [
+        {"type": "approve"}  # User approved the deletion
+    ]
+
+    # Resume execution with decisions
+    result = agent.invoke(
+        Command(resume={"decisions": decisions}),
+        config=config,  # Must use the same config!
+        version="v2",
+    )
+
+# Process final result
+print(result.value["messages"][-1].content)  # [!code highlight]
+```
+
+## Multiple tool calls
+
+When the agent calls multiple tools that require approval, all interrupts are batched together in a single interrupt. You must provide decisions for each one in order.
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+config = {"configurable": {"thread_id": str(uuid.uuid4())}}
+
+result = agent.invoke(
+    {"messages": [{
+        "role": "user",
+        "content": "Delete temp.txt and send an email to admin@example.com"
+    }]},
+    config=config,
+    version="v2",  # [!code highlight]
+)
+
+if result.interrupts:  # [!code highlight]
+    interrupt_value = result.interrupts[0].value  # [!code highlight]
+    action_requests = interrupt_value["action_requests"]
+
+    # Two tools need approval
+    assert len(action_requests) == 2
+
+    # Provide decisions in the same order as action_requests
+    decisions = [
+        {"type": "approve"},  # First tool: delete_file
+        {"type": "reject"}    # Second tool: send_email
+    ]
+
+    result = agent.invoke(
+        Command(resume={"decisions": decisions}),
+        config=config,
+        version="v2",
+    )
+```
+
+## Edit tool arguments
+
+When `"edit"` is in the allowed decisions, you can modify the tool arguments before execution:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+if result.interrupts:  # [!code highlight]
+    interrupt_value = result.interrupts[0].value  # [!code highlight]
+    action_request = interrupt_value["action_requests"][0]
+
+    # Original args from the agent
+    print(action_request["args"])  # {"to": "everyone@company.com", ...}
+
+    # User decides to edit the recipient
+    decisions = [{
+        "type": "edit",
+        "edited_action": {
+            "name": action_request["name"],  # Must include the tool name
+            "args": {"to": "team@company.com", "subject": "...", "body": "..."}
+        }
+    }]
+
+    result = agent.invoke(
+        Command(resume={"decisions": decisions}),
+        config=config,
+        version="v2",
+    )
+```
+
+## Subagent interrupts
+
+When using subagents, you can use interrupts [on tool calls](#interrupts-on-tool-calls) and [within tool calls](#interrupts-within-tool-calls).
+
+### Interrupts on tool calls
+
+Each subagent can have its own `interrupt_on` configuration that overrides the main agent's settings:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+agent = create_deep_agent(
+    tools=[delete_file, read_file],
+    interrupt_on={
+        "delete_file": True,
+        "read_file": False,
+    },
+    subagents=[{
+        "name": "file-manager",
+        "description": "Manages file operations",
+        "system_prompt": "You are a file management assistant.",
+        "tools": [delete_file, read_file],
+        "interrupt_on": {
+            # Override: require approval for reads in this subagent
+            "delete_file": True,
+            "read_file": True,  # Different from main agent!
+        }
+    }],
+    checkpointer=checkpointer
+)
+```
+
+When a subagent triggers an interrupt, the handling is the same—check for `interrupts` on the result and resume with `Command`.
+
+### Interrupts within tool calls
+
+Subagent tools can call `interrupt()` directly to pause execution and await approval:
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain.agents import create_agent
-from langchain.agents.middleware import HumanInTheLoopMiddleware # [!code highlight]
-from langgraph.checkpoint.memory import InMemorySaver # [!code highlight]
+from langchain_anthropic import ChatAnthropic
+from langchain.messages import HumanMessage
+from langchain.tools import tool
+from langgraph.checkpoint.memory import InMemorySaver
+from langgraph.types import Command, interrupt
+
+from deepagents.graph import create_deep_agent
+from deepagents.middleware.subagents import CompiledSubAgent
 
 
-agent = create_agent(
-    model="gpt-4.1",
-    tools=[write_file_tool, execute_sql_tool, read_data_tool],
-    middleware=[
-        HumanInTheLoopMiddleware( # [!code highlight]
-            interrupt_on={
-                "write_file": True,  # All decisions (approve, edit, reject) allowed
-                "execute_sql": {"allowed_decisions": ["approve", "reject"]},  # No editing allowed
-                # Safe operation, no approval needed
-                "read_data": False,
-            },
-            # Prefix for interrupt messages - combined with tool name and args to form the full message
-            # e.g., "Tool execution pending approval: execute_sql with query='DELETE FROM...'"
-            # Individual tools can override this by specifying a "description" in their interrupt config
-            description_prefix="Tool execution pending approval",
-        ),
-    ],
-    # Human-in-the-loop requires checkpointing to handle interrupts.
-    # In production, use a persistent checkpointer like AsyncPostgresSaver.
-    checkpointer=InMemorySaver(),  # [!code highlight]
-)
-```
+@tool(description="Request human approval before proceeding with an action.")
+def request_approval(action_description: str) -> str:
+    """Request human approval using the interrupt() primitive."""
+    # interrupt() pauses execution and returns the value passed to Command(resume=...)
+    approval = interrupt({
+        "type": "approval_request",
+        "action": action_description,
+        "message": f"Please approve or reject: {action_description}",
+    })
 
-You must configure a checkpointer to persist the graph state across interrupts.
-In production, use a persistent checkpointer like [`AsyncPostgresSaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.postgres.aio.AsyncPostgresSaver). For testing or prototyping, use [`InMemorySaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.memory.InMemorySaver).
-
-When invoking the agent, pass a `config` that includes the **thread ID** to associate execution with a conversation thread.
-See the [LangGraph interrupts documentation](/oss/python/langgraph/interrupts) for details.
-
-```
-Mapping of tool names to approval configs. Values can be `True` (interrupt with default config), `False` (auto-approve), or an `InterruptOnConfig` object.
+    if approval.get("approved"):
+        return f"Action '{action_description}' was APPROVED. Proceeding..."
+    else:
+        return f"Action '{action_description}' was REJECTED. Reason: {approval.get('reason', 'No reason provided')}"
 
 
+def main():
+    checkpointer = InMemorySaver()
+    model = ChatAnthropic(
+        model_name="claude-sonnet-4-6",
+        max_tokens=4096,
+    )
 
-Prefix for action request descriptions
-```
+    compiled_subagent = create_agent(
+        model=model,
+        tools=[request_approval],
+        name="approval-agent",
+    )
 
-**`InterruptOnConfig` options:**
+    parent_agent = create_deep_agent(
+        checkpointer=checkpointer,
+        subagents=[
+            CompiledSubAgent(
+                name="approval-agent",
+                description="An agent that can request approvals",
+                runnable=compiled_subagent,
+            )
+        ],
+    )
 
-```
-List of allowed decisions: `'approve'`, `'edit'`, or `'reject'`
+    thread_id = "test_interrupt_directly"
+    config = {"configurable": {"thread_id": thread_id}}
 
+    print("Invoking agent - sub-agent will use request_approval tool...")
 
-
-Static string or callable function for custom description
-```
-
-## Responding to interrupts
-
-When you invoke the agent, it runs until it either completes or an interrupt is raised. An interrupt is triggered when a tool call matches the policy you configured in `interrupt_on`. In that case, the invocation result will include an `__interrupt__` field with the actions that require review. You can then present those actions to a reviewer and resume execution once decisions are provided.
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-from langgraph.types import Command
-
-# Human-in-the-loop leverages LangGraph's persistence layer.
-# You must provide a thread ID to associate the execution with a conversation thread,
-# so the conversation can be paused and resumed (as is needed for human review).
-config = {"configurable": {"thread_id": "some_id"}} # [!code highlight]
-# Run the graph until the interrupt is hit.
-result = agent.invoke(
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": "Delete old records from the database",
-            }
-        ]
-    },
-    config=config # [!code highlight]
-)
-
-# The interrupt contains the full HITL request with action_requests and review_configs
-print(result['__interrupt__'])
-# > [
-# >    Interrupt(
-# >       value={
-# >          'action_requests': [
-# >             {
-# >                'name': 'execute_sql',
-# >                'arguments': {'query': 'DELETE FROM records WHERE created_at < NOW() - INTERVAL \'30 days\';'},
-# >                'description': 'Tool execution pending approval\n\nTool: execute_sql\nArgs: {...}'
-# >             }
-# >          ],
-# >          'review_configs': [
-# >             {
-# >                'action_name': 'execute_sql',
-# >                'allowed_decisions': ['approve', 'reject']
-# >             }
-# >          ]
-# >       }
-# >    )
-# > ]
-
-
-# Resume with approval decision
-agent.invoke(
-    Command( # [!code highlight]
-        resume={"decisions": [{"type": "approve"}]}  # or "reject" [!code highlight]
-    ), # [!code highlight]
-    config=config # Same thread ID to resume the paused conversation
-)
-```
-
-### Decision types
-
-````
-Use `approve` to approve the tool call as-is and execute it without changes.
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-agent.invoke(
-    Command(
-        # Decisions are provided as a list, one per action under review.
-        # The order of decisions must match the order of actions
-        # listed in the `__interrupt__` request.
-        resume={
-            "decisions": [
-                {
-                    "type": "approve",
-                }
-            ]
-        }
-    ),
-    config=config  # Same thread ID to resume the paused conversation
-)
-```
-
-
-
-Use `edit` to modify the tool call before execution.
-Provide the edited action with the new tool name and arguments.
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-agent.invoke(
-    Command(
-        # Decisions are provided as a list, one per action under review.
-        # The order of decisions must match the order of actions
-        # listed in the `__interrupt__` request.
-        resume={
-            "decisions": [
-                {
-                    "type": "edit",
-                    # Edited action with tool name and args
-                    "edited_action": {
-                        # Tool name to call.
-                        # Will usually be the same as the original action.
-                        "name": "new_tool_name",
-                        # Arguments to pass to the tool.
-                        "args": {"key1": "new_value", "key2": "original_value"},
-                    }
-                }
-            ]
-        }
-    ),
-    config=config  # Same thread ID to resume the paused conversation
-)
-```
-
-
-  When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
-
-
-
-
-Use `reject` to reject the tool call and provide feedback instead of execution.
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-agent.invoke(
-    Command(
-        # Decisions are provided as a list, one per action under review.
-        # The order of decisions must match the order of actions
-        # listed in the `__interrupt__` request.
-        resume={
-            "decisions": [
-                {
-                    "type": "reject",
-                    # An explanation about why the action was rejected
-                    "message": "No, this is wrong because ..., instead do this ...",
-                }
-            ]
-        }
-    ),
-    config=config  # Same thread ID to resume the paused conversation
-)
-```
-
-The `message` is added to the conversation as feedback to help the agent understand why the action was rejected and what it should do instead.
-
-***
-
-### Multiple decisions
-
-When multiple actions are under review, provide a decision for each action in the same order as they appear in the interrupt:
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-{
-    "decisions": [
-        {"type": "approve"},
+    result = parent_agent.invoke(
         {
-            "type": "edit",
-            "edited_action": {
-                "name": "tool_name",
-                "args": {"param": "new_value"}
-            }
+            "messages": [
+                HumanMessage(
+                    content="Use the task tool to launch the approval-agent sub-agent. "
+                    "Tell it to use the request_approval tool to request approval for 'deploying to production'."
+                )
+            ]
         },
-        {
-            "type": "reject",
-            "message": "This action is not allowed"
-        }
-    ]
+        config=config,
+        version="v2",  # [!code highlight]
+    )
+
+    # Check for interrupt
+    if result.interrupts:  # [!code highlight]
+        interrupt_value = result.interrupts[0].value  # [!code highlight]
+        print(f"\nInterrupt received!")
+        print(f"  Type: {interrupt_value.get('type')}")
+        print(f"  Action: {interrupt_value.get('action')}")
+        print(f"  Message: {interrupt_value.get('message')}")
+
+        print("\nResuming with Command(resume={'approved': True})...")
+        result2 = parent_agent.invoke(
+            Command(resume={"approved": True}),
+            config=config,
+            version="v2",  # [!code highlight]
+        )
+
+        if not result2.interrupts:  # [!code highlight]
+            print("\nExecution completed!")
+            # Find the tool response
+            tool_msgs = [m for m in result2.value.get("messages", []) if m.type == "tool"]  # [!code highlight]
+            if tool_msgs:
+                print(f"  Tool result: {tool_msgs[-1].content}")
+        else:
+            print("\nAnother interrupt occurred")
+    else:
+        print("\n  No interrupt - the model may not have called request_approval")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+When run, this produces the following output:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+Invoking agent - sub-agent will use request_approval tool...
+
+Interrupt received!
+  Type: approval_request
+  Action: deploying to production
+  Message: Please approve or reject: deploying to production
+
+Resuming with Command(resume={'approved': True})...
+
+Execution completed!
+  Tool result: Great! The approval request has been processed. The action **"deploying to production"** was **APPROVED**. You can now proceed with the production deployment.
+```
+
+## Best practices
+
+### Always use a checkpointer
+
+Human-in-the-loop requires a checkpointer to persist agent state between the interrupt and resume:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langgraph.checkpoint.memory import MemorySaver
+
+checkpointer = MemorySaver()
+agent = create_deep_agent(
+    tools=[...],
+    interrupt_on={...},
+    checkpointer=checkpointer  # Required for HITL
+)
+```
+
+### Use the same thread ID
+
+When resuming, you must use the same config with the same `thread_id`:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# First call
+config = {"configurable": {"thread_id": "my-thread"}}
+result = agent.invoke(input, config=config, version="v2")
+
+# Resume (use same config)
+result = agent.invoke(Command(resume={...}), config=config, version="v2")
+```
+
+### Match decision order to actions
+
+The decisions list must match the order of `action_requests`:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+if result.interrupts:  # [!code highlight]
+    interrupt_value = result.interrupts[0].value  # [!code highlight]
+    action_requests = interrupt_value["action_requests"]
+
+    # Create one decision per action, in order
+    decisions = []
+    for action in action_requests:
+        decision = get_user_decision(action)  # Your logic
+        decisions.append(decision)
+
+    result = agent.invoke(
+        Command(resume={"decisions": decisions}),
+        config=config,
+        version="v2",
+    )
+```
+
+### Tailor configurations by risk
+
+Configure different tools based on their risk level:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+interrupt_on = {
+    # High risk: full control (approve, edit, reject)
+    "delete_file": {"allowed_decisions": ["approve", "edit", "reject"]},
+    "send_email": {"allowed_decisions": ["approve", "edit", "reject"]},
+
+    # Medium risk: no editing allowed
+    "write_file": {"allowed_decisions": ["approve", "reject"]},
+
+    # Low risk: no interrupts
+    "read_file": False,
+    "list_files": False,
 }
 ```
-````
-
-## Streaming with human-in-the-loop
-
-You can use `stream()` instead of `invoke()` to get real-time updates while the agent runs and handles interrupts. Use `stream_mode=['updates', 'messages']` to stream both agent progress and LLM tokens.
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-from langgraph.types import Command
-
-config = {"configurable": {"thread_id": "some_id"}}
-
-# Stream agent progress and LLM tokens until interrupt
-for mode, chunk in agent.stream(
-    {"messages": [{"role": "user", "content": "Delete old records from the database"}]},
-    config=config,
-    stream_mode=["updates", "messages"],  # [!code highlight]
-):
-    if mode == "messages":
-        # LLM token
-        token, metadata = chunk
-        if token.content:
-            print(token.content, end="", flush=True)
-    elif mode == "updates":
-        # Check for interrupt
-        if "__interrupt__" in chunk:
-            print(f"\n\nInterrupt: {chunk['__interrupt__']}")
-
-# Resume with streaming after human decision
-for mode, chunk in agent.stream(
-    Command(resume={"decisions": [{"type": "approve"}]}),
-    config=config,
-    stream_mode=["updates", "messages"],
-):
-    if mode == "messages":
-        token, metadata = chunk
-        if token.content:
-            print(token.content, end="", flush=True)
-```
-
-See the [Streaming](/oss/python/langchain/streaming) guide for more details on stream modes.
-
-## Execution lifecycle
-
-The middleware defines an `after_model` hook that runs after the model generates a response but before any tool calls are executed:
-
-1. The agent invokes the model to generate a response.
-2. The middleware inspects the response for tool calls.
-3. If any calls require human input, the middleware builds a `HITLRequest` with `action_requests` and `review_configs` and calls [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt).
-4. The agent waits for human decisions.
-5. Based on the `HITLResponse` decisions, the middleware executes approved or edited calls, synthesizes [ToolMessage](https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage)'s for rejected calls, and resumes execution.
-
-## Custom HITL logic
-
-For more specialized workflows, you can build custom HITL logic directly using the [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt) primitive and [middleware](/oss/python/langchain/middleware) abstraction.
-
-Review the [execution lifecycle](#execution-lifecycle) above to understand how to integrate interrupts into the agent's operation.
 
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-
-
-
-[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-```
-
-# Install LangChain
-
-Source: https://docs.langchain.com/oss/python/langchain/install
-
-To install the LangChain package:
-
-```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-pip install -U langchain
-# Requires Python 3.10+
-```
-
-```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-uv add langchain
-# Requires Python 3.10+
-```
-
-LangChain provides integrations to hundreds of LLMs and thousands of other integrations. These live in independent provider packages.
-
-```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-# Installing the OpenAI integration
-pip install -U langchain-openai
-
-# Installing the Anthropic integration
-pip install -U langchain-anthropic
-```
-
-```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-# Installing the OpenAI integration
-uv add langchain-openai
-
-# Installing the Anthropic integration
-uv add langchain-anthropic
-```
-
-See the [Integrations tab](/oss/python/integrations/providers/overview) for a full list of available integrations.
-
-Now that you have LangChain installed, you can get started by following the [Quickstart guide](/oss/python/langchain/quickstart).
-
-***
-
-```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/install.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

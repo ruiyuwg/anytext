@@ -83,7 +83,7 @@ The following table lists the MIUs for additional usage based products in Manage
 | [Image Optimization Cache Writes](/docs/image-optimization) | Regional | 200K/month |
 | [WAF Rate Limiting](/docs/vercel-firewall/vercel-waf/rate-limiting) | Regional | First 1,000,000 Allowed Requests |
 | [Monitoring Events](/docs/monitoring/limits-and-pricing#how-are-events-counted) | $1.20 per 1,000,000 Events | 250,000 Included |
-| [Observability Plus Events](/docs/observability#tracked-events) | $1.20 per 1,000,000 Data Events | 1,000,000 Included |
+| [Observability Plus Events](/docs/observability#tracked-events) | $1.20 | 1,000,000 Included |
 | [OWASP CRS per request number](/docs/vercel-firewall/vercel-waf/managed-rulesets) | Regional | N/A |
 | [OWASP CRS per request size](/docs/vercel-firewall/vercel-waf/managed-rulesets) | Regional | 4KB of each inspected request |
 | [Blob Storage Size](/docs/vercel-blob/usage-and-pricing#pricing) | Regional | 5GB/month |
@@ -100,5 +100,5 @@ The following table lists the MIUs for additional usage based products in Manage
 
 title: "Managing Cron Jobs"
 description: "Learn how to manage Cron Jobs effectively in Vercel. Explore cron job duration, error handling, deployments, concurrency control, local execution, and more to optimize your serverless workflows."
-last\_updated: "2026-03-08T05:03:13.004Z"
+last\_updated: "2026-03-23T09:40:08.009Z"
 source: "https://vercel.com/docs/cron-jobs/manage-cron-jobs"

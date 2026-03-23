@@ -1,147 +1,167 @@
-# Deploy your app to Cloud
+# Deploy your app to cloud
 
 Source: https://docs.langchain.com/langsmith/deployment-quickstart
 
-This is a quickstart guide for deploying your first application to LangSmith Cloud.
+Deploy your first application to LangSmith Cloud using the LangGraph CLI.
 
-For a comprehensive Cloud deployment guide with all configuration options, refer to the [Cloud deployment setup guide](/langsmith/deploy-to-cloud).
+This quickstart shows you how to deploy an application to LangSmith Cloud using the [`langgraph deploy`](/langsmith/cli#deploy) command.
+
+For a comprehensive Cloud deployment guide including GitHub-based deployments and all configuration options, refer to the [Cloud deployment setup guide](/langsmith/deploy-to-cloud).
+
+The `langgraph deploy` command is in **beta**.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following:
+Before you begin, ensure you have:
 
-- A [GitHub account](https://github.com/)
-- A [LangSmith account](https://smith.langchain.com/) (free to sign up)
+- A [LangSmith account](https://smith.langchain.com/) on the [Plus plan or above](https://www.langchain.com/pricing) and an [API key](/langsmith/create-account-api-key).
+- [Docker](https://docs.docker.com/get-docker/) installed and running. Verify with `docker ps`.
+- On Apple Silicon (M1/M2/M3): [Docker Buildx](https://docs.docker.com/build/install-buildx/) for cross-compiling to `linux/amd64`.
+- The [LangGraph CLI](/langsmith/cli):
 
-## 1. Create a repository on GitHub
+  ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+  uv tool install langgraph-cli
+  ```
 
-To deploy an application to **LangSmith**, your application code must reside in a GitHub repository. Both public and private repositories are supported. For this quickstart, use the [`new-langgraph-project` template](https://github.com/langchain-ai/react-agent) for your application:
+## 1. Create a LangGraph app
 
-1. Go to the [`new-langgraph-project` repository](https://github.com/langchain-ai/new-langgraph-project) or [`new-langgraphjs-project` template](https://github.com/langchain-ai/new-langgraphjs-project).
-2. Click the `Fork` button in the top right corner to fork the repository to your GitHub account.
-3. Click **Create fork**.
+Create a new app from the [`new-langgraph-project-python` template](https://github.com/langchain-ai/new-langgraph-project):
 
-## 2. Deploy to LangSmith
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph new path/to/your/app --template new-langgraph-project-python
+cd path/to/your/app
+```
 
-1. Log in to [LangSmith](https://smith.langchain.com/).
-2. In the left sidebar, select **Deployments**.
-3. Click the **+ New Deployment** button. A pane will open where you can fill in the required fields.
-4. If you are a first time user or adding a private repository that has not been previously connected, click the **Import from GitHub** button and follow the instructions to connect your GitHub account.
-5. Select your New LangGraph Project repository.
-6. Click **Submit** to deploy.
-   This may take about 15 minutes to complete. You can check the status in the **Deployment details** view.
+Run `langgraph new` without `--template` for an interactive menu of available templates.
 
-## 3. Test your application in Studio
+## 2. Set your API key
 
-Once your application is deployed:
+Add your LangSmith API key to a `.env` file in your project root:
 
-1. Select the deployment you just created to view more details.
-2. Click the **Studio** button in the top right corner. [Studio](/langsmith/studio) will open to display your graph.
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+LANGSMITH_API_KEY=lsv2_...
+```
 
-## 4. Get the API URL for your deployment
+The `langgraph deploy` command reads this automatically. Alternatively, pass it inline:
 
-1. In the **Deployment details** view, click the **API URL** to copy it to your clipboard.
-2. Click the `URL` to copy it to the clipboard.
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+LANGSMITH_API_KEY=lsv2_... langgraph deploy
+```
+
+## 3. Deploy
+
+Run the deploy command from your project directory:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy
+```
+
+This creates a `dev` deployment named after your project directory by default. Use `--name` or `--deployment-type prod` to override.
+
+To update an existing deployment after making code changes, re-run `langgraph deploy`. It finds the existing deployment by name and updates it in place.
+
+You can also use `langgraph deploy list` to see all deployments, `langgraph deploy logs` to tail runtime logs, and `langgraph deploy delete <ID>` to remove a deployment. For details, refer to the [CLI reference](/langsmith/cli#deploy).
+
+## 4. Test in Studio
+
+[Studio](/langsmith/studio) is an interactive agent IDE connected directly to your deployment. Use it to send messages, inspect intermediate state at each node, edit state mid-run, and replay from any prior checkpoint without writing code.
+
+Once the deployment is ready:
+
+1. Go to [LangSmith](https://smith.langchain.com/) and select **Deployments** in the left sidebar.
+2. Select your deployment to view its details.
+3. Click **Studio** in the top right corner to open [Studio](/langsmith/studio).
 
 ## 5. Test the API
 
-You can now test the API:
+Copy the **API URL** from the deployment details view, then use it to call your application:
 
 ````
 1. Install the LangGraph Python SDK:
+   ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   pip install langgraph-sdk
+   ```
+2. Send a message to the assistant (stateless run):
+   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   from langgraph_sdk import get_client
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-pip install langgraph-sdk
-```
+   client = get_client(url="your-deployment-url", api_key="your-langsmith-api-key")
 
-2. Send a message to the assistant (threadless run):
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-from langgraph_sdk import get_client
-
-client = get_client(url="your-deployment-url", api_key="your-langsmith-api-key")
-
-async for chunk in client.runs.stream(
-    None,  # Threadless run
-    "agent", # Name of assistant. Defined in langgraph.json.
-    input={
-        "messages": [{
-            "role": "human",
-            "content": "What is LangGraph?",
-        }],
-    },
-    stream_mode="updates",
-):
-    print(f"Receiving new event of type: {chunk.event}...")
-    print(chunk.data)
-    print("\n\n")
-```
+   async for chunk in client.runs.stream(
+       None,  # Threadless run
+       "agent", # Name of assistant. Defined in langgraph.json.
+       input={
+           "messages": [{
+               "role": "human",
+               "content": "What is LangGraph?",
+           }],
+       },
+       stream_mode="updates",
+   ):
+       print(f"Receiving new event of type: {chunk.event}...")
+       print(chunk.data)
+       print("\n\n")
+   ```
 
 
 
 1. Install the LangGraph Python SDK:
-
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-pip install langgraph-sdk
-```
-
+   ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   pip install langgraph-sdk
+   ```
 2. Send a message to the assistant (threadless run):
+   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   from langgraph_sdk import get_sync_client
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-from langgraph_sdk import get_sync_client
+   client = get_sync_client(url="your-deployment-url", api_key="your-langsmith-api-key")
 
-client = get_sync_client(url="your-deployment-url", api_key="your-langsmith-api-key")
-
-for chunk in client.runs.stream(
-    None,  # Threadless run
-    "agent", # Name of assistant. Defined in langgraph.json.
-    input={
-        "messages": [{
-            "role": "human",
-            "content": "What is LangGraph?",
-        }],
-    },
-    stream_mode="updates",
-):
-    print(f"Receiving new event of type: {chunk.event}...")
-    print(chunk.data)
-    print("\n\n")
-```
-
+   for chunk in client.runs.stream(
+       None,  # Threadless run
+       "agent", # Name of assistant. Defined in langgraph.json.
+       input={
+           "messages": [{
+               "role": "human",
+               "content": "What is LangGraph?",
+           }],
+       },
+       stream_mode="updates",
+   ):
+       print(f"Receiving new event of type: {chunk.event}...")
+       print(chunk.data)
+       print("\n\n")
+   ```
 
 
-1. Install the LangGraph JS SDK
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-npm install @langchain/langgraph-sdk
-```
-
+1. Install the LangGraph JS SDK:
+   ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   npm install @langchain/langgraph-sdk
+   ```
 2. Send a message to the assistant (threadless run):
+   ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   const { Client } = await import("@langchain/langgraph-sdk");
 
-```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-const { Client } = await import("@langchain/langgraph-sdk");
+   const client = new Client({ apiUrl: "your-deployment-url", apiKey: "your-langsmith-api-key" });
 
-const client = new Client({ apiUrl: "your-deployment-url", apiKey: "your-langsmith-api-key" });
+   const streamResponse = client.runs.stream(
+       null, // Threadless run
+       "agent", // Assistant ID
+       {
+           input: {
+               "messages": [
+                   { "role": "user", "content": "What is LangGraph?"}
+               ]
+           },
+           streamMode: "messages",
+       }
+   );
 
-const streamResponse = client.runs.stream(
-    null, // Threadless run
-    "agent", // Assistant ID
-    {
-        input: {
-            "messages": [
-                { "role": "user", "content": "What is LangGraph?"}
-            ]
-        },
-        streamMode: "messages",
-    }
-);
-
-for await (const chunk of streamResponse) {
-    console.log(`Receiving new event of type: ${chunk.event}...`);
-    console.log(JSON.stringify(chunk.data));
-    console.log("\n\n");
-}
-```
+   for await (const chunk of streamResponse) {
+       console.log(`Receiving new event of type: ${chunk.event}...`);
+       console.log(JSON.stringify(chunk.data));
+       console.log("\n\n");
+   }
+   ```
 
 
 
@@ -149,7 +169,7 @@ for await (const chunk of streamResponse) {
 curl -s --request POST \
     --url <DEPLOYMENT_URL>/runs/stream \
     --header 'Content-Type: application/json' \
-    --header "X-Api-Key:  \
+    --header "X-Api-Key: " \
     --data "{
         \"assistant_id\": \"agent\",
         \"input\": {
@@ -167,11 +187,17 @@ curl -s --request POST \
 
 ## Next steps
 
-You've successfully deployed your application to LangSmith Cloud. Here are some next steps:
+```
+Deploy the same graph with different models, prompts, or tools per assistant.
 
-- **Explore Studio**: Use [Studio](/langsmith/studio) to visualize and debug your graph interactively.
-- **Monitor your app**: Set up [observability](/langsmith/observability) with traces, dashboards, and alerts.
-- **Learn more about Cloud**: See the [complete Cloud setup guide](/langsmith/deploy-to-cloud) for all configuration options.
+
+
+Persist state across multiple runs so your agent remembers context between interactions.
+
+
+
+Kick off background runs for long-running jobs and stream results back to your client.
+```
 
 ***
 

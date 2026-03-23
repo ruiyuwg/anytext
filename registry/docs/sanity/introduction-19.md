@@ -1,73 +1,104 @@
 # Introduction
 
-Media Library is a Sanity app for managing your organization's assets.
+Studio plugins provide a way to reuse pieces of Studio configurations across multiple studios and workspaces, while also helping you organize your studio features and reduce clutter in your configuration.
 
-*This is a paid feature, available as an addon on the Enterprise plan.*
+You can even use plugins from the community to add new schema types, input components, tools, and other features to enhance your content editing experience without having to build everything from scratch.
 
-Media Library allows you to:
+Here are some ways you can use Studio plugins:
 
-- Centrally store assets for use across multiple applications and datasets.
-- Create custom groupings, called aspects, to make managing assets easier.
+- Add specialized input components like color pickers, map interfaces, multi-select arrays, and more.
+- Create custom tools that appear in the Studio navigation.
+- Add internationalization support for multiple languages.
+- Share complex schema types.
 
-[Configure your library](https://www.sanity.io/docs/media-library/configure-library)
-
-[Configure Studio](https://www.sanity.io/docs/media-library/configure-studio)
+You can find a collection of official and community plugins on the [Sanity Exchange](https://www.sanity.io/plugins)., and in the [official plugins repo](https://github.com/sanity-io/plugins).
 
 ## Requirements
 
-- Dashboard
-- Studio v3.82.0 or later is required to incorporate Media Library assets in the Studio.
-- API v2024-06-24 or later is required for any Media Library API requests.
+- Most plugins require Sanity Studio v3 or later. We suggest updating to v4+.
 
-## Core Concepts
+## Core concepts
 
-The Media Library introduces a few new concepts in addition to the image and asset workflows in the rest of the Sanity ecosystem.
+Understanding how plugins work in Sanity Studio will help you both use existing plugins and develop your own. If you're using any official plugins like Vision or Presentation, you may have already seen these concepts in action.
 
-### Assets
+### Installation and configuration
 
-An asset is a digital file that your apps and Studio can use, like an image, video, or document.
+Plugins for Sanity Studio are installed like any other dependency using your package manager. After installation, import the plugin and add it to the `plugins` array in your studio configuration.
 
-Common examples include product photos, marketing videos, and downloadable PDFs. Beyond standard image previews, Media Library supports specialized previews for multimedia and document formats.
+**sanity.config.ts**
 
-Video files display in a preview player, PDF documents open in a full-screen viewer where you can browse pages, audio files include playback controls, and animation formats like Lottie and Rive render their animations.
+```typescript
+import {defineConfig} from 'sanity'
+import {colorInput} from '@sanity/color-input'
 
-Files without specialized preview support display as standard file types.
+export default defineConfig({
+  // ...
+  plugins: [colorInput()],
+})
+```
 
-Outside of Media Library, these assets live alongside your dataset. In Media Library, they live in a special dataset your organization shares.
+Many plugins accept configuration options that can be passed when initializing the plugin:
 
-You can set assets as public or private. Private assets are only accessible inside Media Library to logged-in users. Learn more about changing asset visibility in [the interface guide](https://www.sanity.io/docs/media-library/interface).
+**sanity.config.ts**
 
-> \[!TIP]
-> Your Sanity project still supplies the assets to your applications
-> With Media Library, you can treat it as the source of truth for your assets, but your project is still the access point for rendering images and creating download links. All requests for Media Library assets should go through your project datasets.
-> [Enable library access](https://www.sanity.io/docs/media-library/configure-studio) in your studios, then continue [presenting images](https://www.sanity.io/docs/apis-and-sdks/presenting-images) as if they were coming straight from the same dataset as the rest of your content. This could be by passing `asset` into a URL builder, or expanding the asset reference with `asset -> {...}` and building the URL yourself.
+```typescript
+export default defineConfig({
+  // ...
+  plugins: [
+    customPlugin({ 
+      customOption: true
+    }
+  ]
+})
+```
 
-### The library
+#### Learn more
 
-The library is the interface that your content teams use to manage assets. Users can upload, search, manage, and assign aspects to assets.
+[Installing and configuring plugins](https://www.sanity.io/docs/studio/installing-and-configuring-plugins)
 
-[Meet the library](https://www.sanity.io/docs/media-library/interface)
+[Explore available plugins](https://www.sanity.io/plugins)
 
-### Aspects
+### Plugin development
 
-Aspects are schema-style fields that apply to assets. They include additional, identifying information that helps asset managers search and organize assets. Some examples are usage licenses, references to products in your organization, and copyright details. This extra level of information is specific to the Media Library. For local metadata, you should create schemas in your Studio projects.
+Plugins are created using the `definePlugin` function, which accepts most of the same properties as the `defineConfig` API. This allows you to encapsulate specific functionality and configuration in a portable way.
 
-Developers define aspects that users can then apply to an asset. Depending on your plan, there are limits to the number of aspects each asset can have.
+**myPlugin.ts**
 
-[Create an aspect](https://www.sanity.io/docs/media-library/create-aspect)
+```typescript
+import { definePlugin } from 'sanity'
 
-[Aspect patterns](https://www.sanity.io/docs/media-library/aspect-patterns)
+export const myPlugin = definePlugin({
+  name: 'my-custom-plugin',
+  // Add schema types, tools, components, etc.
+})
+```
 
-### Collections
+Plugins can also include other plugins, allowing you to build features on top of each other in a modular way.
 
-Collections allow teams to group assets for better organization and sharing.
+#### Learn more
 
-### Global document references
+[Developing plugins](https://www.sanity.io/docs/studio/developing-plugins)
 
-Media Library assets exist outside your projects and datasets, so you need a way to connect them. Global document references are a new reference type that allows you to target a reference in a different resource. Resources are currently limited to datasets and media libraries, and at this time you can only reference dataset documents from Media Library aspects. See the [common aspect patterns guide](https://www.sanity.io/docs/media-library/aspect-patterns) for details on referencing documents from within aspects.
+[Plugins API](https://www.sanity.io/docs/studio/plugins-api-reference)
+
+### Publishing plugins
+
+When you've developed a plugin that you want to share with others, you can publish it as an npm package. The recommended approach is to use [@sanity/plugin-kit](https://github.com/sanity-io/plugin-kit), which handles bundling and other package preparation tasks.
+
+#### Learn more
+
+[Publishing plugins](https://www.sanity.io/docs/studio/publishing-plugins)
+
+### Internationalization
+
+Plugins can support multiple languages through Sanity's internationalization API. This allows plugin UI elements to be displayed in the user's preferred language, enhancing the user experience for international teams.
+
+#### Learn more
+
+[Internationalizing plugins](https://www.sanity.io/docs/studio/internationalizing-plugins-ui)
 
 ## Limitations
 
-- Media Library is only available within [Dashboard](https://www.sanity.io/docs/dashboard).
-- For additional usage limits, see the [limits and usage document](https://www.sanity.io/docs/media-library/limits-and-usage).
-- Original video files are not retained; videos are transcoded and the source file cannot be downloaded later.
+- Some areas of the Studio UI may not fully support plugin customization.
+- Plugins must be compatible with the version of Sanity Studio you're using.
+- Plugins with complex dependencies may increase your Studio bundle size.

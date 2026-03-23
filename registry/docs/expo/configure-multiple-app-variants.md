@@ -4,7 +4,7 @@ Learn how to configure dynamic app config to install multiple app variants on a 
 
 In this chapter, we'll configure our project to run multiple build types (development, preview, production) on a single device simultaneously. This setup will allow us to test various stages of our app development without the need to uninstall and reinstall different versions.
 
-[Watch: How to configure multiple app variants](https://www.youtube.com/watch?v=UtJJCAfrjIg)
+[Watch: How to configure multiple app variants](https://www.youtube.com/watch?v=UtJJCAfrjIg) — Configure development, preview, and production app variants with unique bundle identifiers to run them side by side on one device.
 
 Each variant requires a unique Android Application ID and iOS Bundle Identifier to enable simultaneous installations on one device. Here's how the IDs are set up in our **app.json** file:
 

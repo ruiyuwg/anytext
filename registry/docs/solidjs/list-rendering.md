@@ -31,7 +31,7 @@ The function receives two arguments:
 You can access the current `item` and `index` to dynamically set attributes or content of the JSX elements. Index is a [*signal*](/concepts/signals) and must be called as a function to retrieve its value.
 
 ```
-<For each={data()}>  {(item, index) => (    <li      style={{        color: index() % 2 === 0 ? "red" : "blue"      }}    >      {item.name}    </li>  )}</For>
+<For each={data()}>  {(item, index) => (    <li      style={{        color: index() % 2 === 0 ? "red" : "blue",      }}    >      {item.name}    </li>  )}</For>
 ```
 
 ***
@@ -50,8 +50,8 @@ Similar to the `<For>` component, `<Index>` accepts a single property named `eac
 Where the `index` is a signal with `<For>`, it remains fixed with `<Index>`. This is because `<Index>` is more concerned with the **index** of the elements in the array. Because of this, the `item` is a signal, allowing the *content* at each index to change without a re-render while the index remains fixed.
 
 ```
-import { Index } from "solid-js"
-<Index each={data()}>  {(item, index) => (    <li>      {item().name} - {item().completed}    </li>  )}</Index>
+import { Index } from "solid-js";
+<Index each={data()}>  {(item, index) => (    <li>      {item().name} - {item().completed}    </li>  )}</Index>;
 ```
 
 ***
@@ -67,16 +67,16 @@ import { Index } from "solid-js"
 In cases where signals, nested loops, or dynamic lists are not required, `<For>` is the best option. For example, when creating a list of static elements, such as a list of links, `<For>` is the best option to use. This is because it will only modify the indexes of the elements in the list, rather than re-rendering the entire list.
 
 ```
-import { createSignal, For } from "solid-js"
-function StringList() {  const [items, setItems] = createSignal(["Item 1", "Item 2", "Item 3"])
-  return (    <ul>      <input        type="text"        onInput={(e) => {          // add the new item to the list        }}      />      <For each={items()}>        {(item, index) => (          <li>            {item} - {index()}          </li>        )}      </For>    </ul>  )}
+import { createSignal, For } from "solid-js";
+function StringList() {  const [items, setItems] = createSignal(["Item 1", "Item 2", "Item 3"]);
+  return (    <ul>      <input        type="text"        onInput={(e) => {          // add the new item to the list        }}      />      <For each={items()}>        {(item, index) => (          <li>            {item} - {index()}          </li>        )}      </For>    </ul>  );}
 ```
 
 If you are working with signals, [JavaScript primitives like strings and numbers](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) or input fields, `<Index>` is the better option to use. If you were using `<For>`, the entire list would be re-rendered when a value changes, even if the length of the list remains unchanged. `<Index>`, instead, will update the content at the specified index, while the rest of the list remains unchanged.
 
 ```
-import { createSignal, Index } from "solid-js"
-function FormList() {  const [inputs, setInputs] = createSignal(['input1','input2','input3'])  return(    <form>      <Index each={inputs()}>        {(input, index) => (          <input            type="text"            value={input()}            onInput={(e) => {              // update the input value            }}          />        )}      </Index>    </form>  )}
+import { createSignal, Index } from "solid-js";
+function FormList() {  const [inputs, setInputs] = createSignal(["input1", "input2", "input3"]);  return (    <form>      <Index each={inputs()}>        {(input, index) => (          <input            type="text"            value={input()}            onInput={(e) => {              // update the input value            }}          />        )}      </Index>    </form>  );}
 ```
 
 [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/concepts/control-flow/list-rendering.mdx\&page=https://docs.solidjs.com/concepts/control-flow/list-rendering)

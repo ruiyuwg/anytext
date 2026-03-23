@@ -91,5 +91,5 @@ See the [LibreChat custom endpoints documentation](https://www.librechat.ai/docs
 
 title: "Open WebUI"
 description: "Use Open WebUI with the AI Gateway."
-last\_updated: "2026-03-08T05:03:10.342Z"
+last\_updated: "2026-03-23T09:40:04.244Z"
 source: "https://vercel.com/docs/ai-gateway/chat-platforms/open-webui"

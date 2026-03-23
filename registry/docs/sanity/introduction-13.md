@@ -1,116 +1,106 @@
 # Introduction
 
-The Sanity Application Software Development Kit, or **App SDK** for short, is a robust set of tooling that will let you create fully custom apps that interface and interact with your Sanity content. It brings the powerful real-time capabilities and content management features you know from Sanity Studio to your own custom React applications. With a comprehensive set of React hooks and data stores, you can easily build applications that work seamlessly with your Sanity content across multiple projects and datasets.
+The [Sanity Connect application for Shopify](https://apps.shopify.com/sanity-connect) is used to synchronize content between a Sanity dataset and your Shopify store. This gives you flexibility to use the tools that are right for your needs. You can take a headless approach using Shopify's Hydrogen framework and Next.js, or you can sync data into Shopify's platform and use Liquid or the Storefront API.
 
-In this introduction to the App SDK we will explore how to build applications that interact with your Sanity content in real-time. We'll cover the core concepts and patterns that make the App SDK powerful, demonstrate how to efficiently retrieve and manipulate documents, and show you how to create responsive user interfaces that stay in sync with your content.
+## Requirements
 
-By the end of this guide, you'll understand:
+To take advantage of Sanity Connect you will need:
 
-- How Document Handles enable efficient document operations.
-- When to use different hooks for retrieving and updating content.
-- Best practices for building performant real-time applications.
-- How to work with content across multiple projects and datasets.
+1. A Shopify store
+2. A Sanity project and dataset
 
-## What is the App SDK?
-
-The App SDK is a toolkit for building custom React applications that interact with your Sanity content. It provides a set of React hooks and data stores that enable real-time content operations, seamlessly handling content from multiple projects and datasets, and with complete freedom to create your own interfaces and experiences.
-
-### Purpose and Key Features
-
-- Build fully custom applications that work with Sanity content.
-- Enable real-time content operations and live updates.
-- Work across multiple projects and datasets.
-- Create tailored user experiences beyond what Studio offers.
-
-### SDK apps and Sanity Studio
-
-![An SDK app and a studio showing different ways to interact with the same content](https://cdn.sanity.io/images/3do82whm/next/34ec1da769de3803cffabb9eb01b0fe5c6dd70a0-600x306.png)
-
-It's worthwhile to pause briefly to take a comparative look at Sanity Studio, and how it relates to the App SDK. Sanity Studio is a content management powerhouse, and for many Sanity users, Studio *is* Sanity. Or, in other words, their studio is the main interface through which they interact with the Sanity platform. The ambition of the App SDK is to enable you to build apps that work beyond the scope of a single studio, project, and dataset, unlocking opportunities for new content workflows and operations — all while allowing you complete freedom over your application’s UI and UX.
-
-### Similarities
-
-- Real-time content operations
-- Live updates and collaboration features
-- Access to Sanity's content platform
-- Authentication and permissions handling
-
-### Key Differences
-
-- \*\*Multiple Projects and Datasets: \*\*While Studios can work with a single project and dataset at a time, SDK apps can be configured to work with as many of your organization’s projects and datasets as you like.
-- **Complete UI Freedom**: Unlike Studio's structured interface, you control every aspect of the UI.
-- **Custom Workflows**: Build exactly the workflow your users need.
-- **Focused Feature Set**: No built-in validation or form building - bring your favourite UI components with you, and shape the functionality just as you want it.
-
-## Technical Implementation
-
-### Technology Stack
-
-- [TypeScript](https://www.typescriptlang.org/) for type safety and developer experience
-- [React](https://react.dev/) for application framework and hooks
-- Built on modern React patterns including [Suspense](https://react.dev/reference/react/Suspense)
-
-### Requirements
-
-- React v19 or higher
-- Node.js environment v20 or higher
-
-## What's Included
-
-- React hook based interface, taking advantage of modern React patterns like [Suspense](https://react.dev/reference/react/Suspense) and [Transitions](https://react.dev/reference/react/useTransition)
-- Document retrieval and content rendering, all live by default
-- Optimistic, local-first document editing, ready for collaborative interfaces
-- Batchable document actions
-- Permissions checking with detailed outputs
-- Support for [Sanity Typegen](https://www.sanity.io/docs/apis-and-sdks/sanity-typegen)
-
-### Not Included
-
-- UI components or design system- However, the App SDK pairs nicely with [Sanity UI](https://sanity.io/ui) for building applications that are visually consistent with other Sanity apps
-
-- Router
-
-- Form validation
-
-- Schema validation
-
-These aspects are left to your implementation, giving you complete control over the user experience while the SDK handles the complex data operations underneath.
-
-### Limitations
-
-During development, SDK apps may experience connection issues in the Safari browser. This is caused by the way Safari handles mixed content, and how Sanity loads your local app in the Dashboard. To get around this limitation, we suggest using another browser during development. **This does not affect deployed SDK applications.**
-
-# Installation
-
-The Sanity App Software Development Kit (App SDK) is distributed as two separate npm packages – the core TypeScript SDK, and a ready-to-go React implementation.
-
-- [@sanity/sdk](https://reference.sanity.io/_sanity/sdk/)
-- [@sanity/sdk-react](https://reference.sanity.io/_sanity/sdk-react/)
-
-While the core SDK can be used on its own, its primary purpose is to enable the React SDK’s functionality, as well as to leave the door open for other framework-specific implementations in the future. For now, our React SDK is our primary focus, and it’s what we’ll be installing via the bootstrapping process described below.
-
-## Prerequisites
-
-- Some familiarity with JavaScript and/or TypeScript development
-- A terminal
-- Node.js v20
-- An available project dataset. Many of our examples use the "Movies" template and data, which is selectable when initializing a new Studio. See the [Studio installation guide](https://www.sanity.io/docs/studio/installation).
-
-## Bootstrapping a new app using the `sanity` CLI
-
-Use the [sanity Command Line Interface (CLI)](https://www.sanity.io/docs/cli-reference/cli-config) to initialize a new application. A new React app with all the necessary dependencies and boilerplate will be created.
-
-**CLI**
+If you are starting with a new Sanity dataset, you can create the dataset and a pre-configured Studio instance using:
 
 ```sh
-npx sanity@latest init --template app-quickstart
+npm create sanity@latest -- --template shopify --create-project "Shopify Store" --dataset production --typescript --output-path shopify-store
 ```
 
-Your app will be bootstrapped and preconfigured with your organization ID. If you have ever worked on a Sanity Studio project locally, this should feel familiar.
+## Installation
 
-Before running your app locally, you’ll need to add a small bit of configuration, which we’ll walk through in the next article.
+To install Sanity Connect in your Shopify store and connect it to a project:
 
-#### Further reading
+- Find [Sanity Connect on the Shopify app store](https://apps.shopify.com/sanity-connect) and push the Add App button
+- If you have multiple Shopify accounts, you need to choose the one that contains the store you want to add the app to
+- After choosing the store, Shopify will show you the permissions Sanity Connect needs to work and its data policies. You can push the Install app button to continue.
+- The app will ask you to connect to your Sanity account. If you don't have one, you can choose to **Create new account**.
+- When you're logged in, you will need to connect your shop with a project on Sanity. You can choose between existing projects or create a new one (for free).
+- Select organization to list out projects under it, and then the project and dataset you want to sync to.
+- You are now ready to configure the app.
 
-- Read the [App SDK Quickstart Guide](https://www.sanity.io/docs/app-sdk/sdk-quickstart) to get up and running quickly
-- Read about the [Sanity CLI](https://www.sanity.io/docs/apis-and-sdks/cli)
+> \[!WARNING]
+> Gotcha
+> Once you chose Start synchronizing now, the app will add product documents to your content lake. It can be wise to test it against a non-production dataset if you haven't tried it before.
+
+You might also want to consider using our [Shopify asset plugin](https://github.com/sanity-io/sanity-plugin-shopify-assets), which allows you to select assets from your Shopify store in the context of your Sanity Studio, allowing you to serve assets from the Shopify CDN in your front ends.
+
+## **Settings**
+
+You can configure how and when Sanity Connect should synchronize products to your content lake, and whether content should be synchronized back to your Shopify store. You can change these options at any time.
+
+![Settings panel with synchronization settings](https://cdn.sanity.io/images/3do82whm/next/8c633519b6b003dd7a95026d8e8c13df9df5b809-1274x1346.png)
+
+![Settings panel with synchronization settings](https://cdn.sanity.io/images/3do82whm/next/f8a87a923c694905c6c8293814534ea436df29fc-1282x1438.png)
+
+### Sync content from Sanity to Shopify
+
+This setting allows you to sync any custom fields and document types you've created in Sanity back into Shopify. Your custom content will sync as Shopify metafields and metaobjects.
+
+For a deeper dive, review our documentation on [displaying Sanity content within Shopify](https://www.sanity.io/docs/developer-guides/displaying-sanity-content-in-shopify).
+
+### How to synchronize
+
+Sanity Connect offers two ways to synchronize content from Shopify into your content lake - direct sync and custom sync.
+
+**Direct Sync**
+
+This will synchronize all products, product variants and collections as documents to your content lake. You can check the [reference](https://www.sanity.io/docs/apis-and-sdks/sanity-connect-for-shopify-reference) to preview the data model for these documents.
+
+> \[!TIP]
+> Protip
+> Synced documents created by Sanity Connect will count towards your Sanity document usage limit. One document will be created for every product, product variant and collection in your storefront.
+
+**Custom Sync**
+
+This option will let you enter an endpoint that receives updates from Shopify and syncs data to your content lake. Typically that will be a serverless function handler where you can reshape the data and do other business logic as part of the sync.
+
+You may, for example, want to reduce document usage by syncing products but not variants, or sync variants as objects on a product document rather than individual variant documents.
+
+We have further documentation on [custom sync handlers](https://www.sanity.io/docs/developer-guides/custom-sync-handlers-for-sanity-connect) including an example serverless function.
+
+### When to synchronize
+
+**Sync data automatically:** Automatically sync whenever you save products. Note: The sync will update the Shopify information for both published and draft documents. An update is typically available in your content lake after a couple of seconds.
+
+**Sync manually:** There will no automatic sync, and you'll have to go into the Sanity Connect settings to trigger a synchronization manually.
+
+Sanity Connect will do an initial synchronization once you choose one of these options.
+
+> \[!WARNING]
+> Shopify Connect will not sync versions
+> Content Release document versions are not supported at this time. Shopify Connect will only sync published and draft documents.
+
+### Sync collections
+
+The Sanity Connect app can optionally sync collections data. This will sync data and properties about your collection, but it will not sync the product membership of your collections.
+
+## **Set up your Studio**
+
+You can install a production-ready reference studio that's set up with a great editor experience by running this command in your local shell. Replace the `PROJECT_ID` and `DATASET_NAME` placeholders with the actual values from the project your Shopify store is connected to:
+
+```sh
+npx @sanity/cli init --template shopify --project PROJECT_ID --dataset DATASET_NAME
+```
+
+You'll find comprehensive documentation for this studio in its `README.md`.
+
+![Screenshot of Shopify reference studio](https://cdn.sanity.io/images/3do82whm/next/58ebc2e9801b90061c4184d22ff0d267f534a25e-720x427.png)
+
+### Integrate with an existing studio
+
+If you've already set up a studio instance, you can follow the patterns exposed in this [example studio setup](https://github.com/sanity-io/sanity/tree/main/packages/%40sanity/cli/templates/shopify). This repository showcases the same studio customizations that are implemented when creating a new studio with the `shopify` template.
+
+## Further reading
+
+[Sanity Studio for Shopify](https://github.com/sanity-io/sanity-shopify-studio)
+
+[Shopify asset selection for Sanity Studio](https://github.com/sanity-io/sanity-plugin-shopify-assets)

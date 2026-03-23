@@ -60,7 +60,7 @@ const paymentElement = elements.create('payment', {
 
 Save your customers from re-entering details to sign up for or log into Link when they’ve already provided them elsewhere on your checkout page. Link includes a prefill tool that detects customer information such as email or phone number in your checkout, then automatically populates corresponding Link fields. This convenience encourages your customers to use Link, which has been shown to increase the likelihood that a customer successfully completes checkout. Prefilled values are never stored unless the customer completes a Link sign-up.
 
-When a customer enters information such as their email, phone number, or name on the same checkout page as the Element where Link is enabled, Link’s prefill tool can:
+When a customer enters information such as their email, phone number, or name on the same checkout page as the Element where Link is enabled, Link's prefill tool can:
 
 - Populate the Link sign-up form with the customer email, phone, or name. The customer must proceed with Link sign-up to create an account.
 - Populate the Link login with the customer’s email when they already have a Link account, so they can just enter the one time password.

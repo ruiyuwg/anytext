@@ -54,7 +54,7 @@ response = agent.invoke({
 })
 ```
 
-By default, the trace will be logged to the project with the name `default`. To configure a custom project name, see [Log to a project](#log-to-a-project).
+By default, the trace will be logged to the project with the name `default`. To configure a custom project name, see [Log to a project](/langsmith/log-traces-to-project).
 
 ## Trace selectively
 

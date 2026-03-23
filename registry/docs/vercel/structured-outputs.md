@@ -438,5 +438,5 @@ When structured outputs are enabled, the model returns valid JSON in a `text` co
 
 title: "Tool Calls"
 description: "Use function calling with the Anthropic Messages API to allow models to call tools and functions."
-last\_updated: "2026-03-08T05:03:10.658Z"
+last\_updated: "2026-03-23T09:40:04.720Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/anthropic-messages-api/tool-calls"

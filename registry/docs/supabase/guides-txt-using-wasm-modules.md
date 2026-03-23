@@ -113,15 +113,14 @@ Build the package by running:
 Update your Edge Function to call the add function from the Wasm module:
 
 ```typescript index.ts
-import { add } from "./add-wasm/pkg/add_wasm.js";
+import { add } from './add-wasm/pkg/add_wasm.js'
 
 Deno.serve(async (req) => {
-  const { a, b } = await req.json();
-  return new Response(
-    JSON.stringify({ result: add(a, b) }),
-    { headers: { "Content-Type": "application/json" } },
-  );
-});
+  const { a, b } = await req.json()
+  return new Response(JSON.stringify({ result: add(a, b) }), {
+    headers: { 'Content-Type': 'application/json' },
+  })
+})
 ```
 
 Supabase Edge Functions currently use Deno 1.46. From [Deno 2.1, importing Wasm modules](https://deno.com/blog/v2.1) will require even less boilerplate code.

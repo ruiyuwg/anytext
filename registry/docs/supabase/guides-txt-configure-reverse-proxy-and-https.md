@@ -25,21 +25,7 @@ If you already run [HAProxy](https://www.haproxy.com/), [Traefik](https://traefi
 - Comment out Kong's host port bindings in `docker-compose.yml` if the proxy runs in the same Docker network
 - Update `SUPABASE_PUBLIC_URL`, `API_EXTERNAL_URL`, and `SITE_URL` in `.env` to your HTTPS URL
 
-### Step 1: Remove public port bindings for API gateway
-
-Comment out Kong's host port mappings in `docker-compose.yml` so that it's not exposed to the Internet:
-
-```yaml
-kong:
-  # ...
-  ports:
-    # - ${KONG_HTTP_PORT}:8000/tcp
-    # - ${KONG_HTTPS_PORT}:8443/tcp
-```
-
-Kong remains accessible to other containers on the internal Docker network.
-
-### Step 2: Update environment variables
+### Step 1: Update environment variables
 
 Update the URL configuration in your `.env` file to use your HTTPS domain:
 
@@ -56,7 +42,7 @@ PROXY_DOMAIN=your-domain.example.com
 CERTBOT_EMAIL=admin@your-domain.example.com
 ```
 
-### Step 3: Start the reverse proxy
+### Step 2: Start the reverse proxy
 
 Pick one of the options below and use the corresponding Docker Compose overlay.
 
@@ -86,7 +72,7 @@ Nginx configuration template is in `volumes/proxy/nginx/supabase-nginx.conf.tpl`
 HTTP-to-HTTPS redirects are handled automatically by the `jonasal/nginx-certbot` image.
 ````
 
-### Step 4: Verify HTTPS connection
+### Step 3: Verify HTTPS connection
 
 ```sh
 curl -I https://<your-domain>/auth/v1/
@@ -117,13 +103,13 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 
 ### Step 2: Configure Kong for SSL
 
-Comment out Kong's HTTP port mapping in `docker-compose.yml`:
+Comment out Kong's **HTTP** port mapping in `docker-compose.yml`:
 
 ```yaml
 kong:
   # ...
   ports:
-    # - ${KONG_HTTP_PORT}:8000/tcp
+    #- ${KONG_HTTP_PORT}:8000/tcp
 ```
 
 Uncomment the certificate volume mounts and SSL environment variables in `docker-compose.yml`:

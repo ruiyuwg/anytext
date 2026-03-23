@@ -137,7 +137,7 @@ const response = await llmWithTools.invoke(
 );
 ```
 
-Note that the above command creates a new [container](https://platform.openai.com/docs/guides/tools-code-interpreter#containers). We can re-use containers across calls by specifying an existing container ID.
+Note that the above command creates a new [container](https://platform.openai.com/docs/guides/tools-code-interpreter#containers). We can reuse containers across calls by specifying an existing container ID.
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 const tool_outputs: Record<string, any>[] = response.additional_kwargs.tool_outputs
@@ -146,7 +146,7 @@ const container_id = tool_outputs[0].container_id
 const llmWithTools = llm.bindTools([
   {
     type: "code_interpreter",
-    // Re-uses container from the last call
+    // Reuses container from the last call
     container: container_id,
   },
 ]);

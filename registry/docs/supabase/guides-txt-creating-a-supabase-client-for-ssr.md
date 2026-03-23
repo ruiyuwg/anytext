@@ -199,7 +199,9 @@ Create a `lib/supabase` folder at the root of your project, or inside the `./src
                 },
                 setAll(cookiesToSet) {
                   try {
-                    cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
+                    cookiesToSet.forEach(({ name, value, options }) =>
+                      cookieStore.set(name, value, options)
+                    )
                   } catch {
                     // The `setAll` method was called from a Server Component.
                     // This can be ignored if you have middleware refreshing
@@ -235,8 +237,8 @@ The code adds a [matcher](https://nextjs.org/docs/app/api-reference/file-convent
     
       
         ```typescript name=proxy.ts
-        import { type NextRequest } from "next/server"
-        import { updateSession } from "@/lib/supabase/proxy"
+        import { type NextRequest } from 'next/server'
+        import { updateSession } from '@/lib/supabase/proxy'
 
         export async function proxy(request: NextRequest) {
           return await updateSession(request)
@@ -251,7 +253,7 @@ The code adds a [matcher](https://nextjs.org/docs/app/api-reference/file-convent
              * - favicon.ico (favicon file)
              * Feel free to modify this pattern to include more paths.
              */
-            "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+            '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
           ],
         }
         ```
@@ -284,7 +286,9 @@ The code adds a [matcher](https://nextjs.org/docs/app/api-reference/file-convent
                   supabaseResponse = NextResponse.next({
                     request,
                   })
-                  cookiesToSet.forEach(({ name, value, options }) => supabaseResponse.cookies.set(name, value, options))
+                  cookiesToSet.forEach(({ name, value, options }) =>
+                    supabaseResponse.cookies.set(name, value, options)
+                  )
                 },
               },
             }
@@ -979,6 +983,12 @@ You can now use any Supabase features from your client or server code!
     
   
 ````
+
+## Caching considerations
+
+If your app uses ISR (Incremental Static Regeneration) or is deployed behind a CDN, caching of HTTP responses can cause users to receive another user's session. When a session is refreshed, the new token is written to the response via `Set-Cookie`. If that response is cached and served to a different user, that user will be signed in as the wrong person.
+
+See the [advanced Auth server-side rendering guide](/docs/guides/auth/server-side/advanced-guide#can-i-use-server-side-rendering-with-a-cdn-or-cache) for details and framework-specific examples.
 
 ## Next steps
 

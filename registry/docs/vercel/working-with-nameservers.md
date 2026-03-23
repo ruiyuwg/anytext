@@ -28,5 +28,5 @@ To learn more about common nameserver issues, see the [troubleshooting](/docs/do
 
 title: "Working with SSL Certificates"
 description: "Learn how Vercel uses SSL certification to keep your site secure."
-last\_updated: "2026-03-08T05:03:13.626Z"
+last\_updated: "2026-03-23T09:40:08.972Z"
 source: "https://vercel.com/docs/domains/working-with-ssl"

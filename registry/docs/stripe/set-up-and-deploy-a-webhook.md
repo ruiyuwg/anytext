@@ -653,7 +653,7 @@ $stripeSecretKey = '<\<YOUR\_SECRET\_KEY>>';
 // This is a public sample test API key.
 // Don’t submit any personally identifiable information in requests made with this key.
 // Sign in to see your own test API key embedded in code samples.
-StripeConfiguration.ApiKey = "<\<YOUR\_SECRET\_KEY>>";
+services.AddSingleton(new StripeClient("<\<YOUR\_SECRET\_KEY>>"));
 \[Route("webhook")]
 \[ApiController]
 public class WebhookController : Controller

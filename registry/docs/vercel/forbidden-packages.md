@@ -101,5 +101,5 @@ workspaces, which is optional.
 title: "forbidden-properties"
 description: "Learn how to set custom rules to disallow reading from,
 writing to, and/or calling one or more properties"
-last\_updated: "2026-03-08T05:03:12.596Z"
+last\_updated: "2026-03-23T09:40:07.433Z"
 source: "https://vercel.com/docs/conformance/custom-rules/forbidden-properties"

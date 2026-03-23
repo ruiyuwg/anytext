@@ -8,7 +8,7 @@ The most commonly familiar tool is the Structure tool (formerly called "Desk too
 
 The `tools` config property accepts an array of appropriately shaped objects (Tool) or a callback function returning the same. The callback function receives an array of existing tools and a context object as arguments.
 
-### Tool Properties
+## Tool Properties
 
 #### Properties
 
@@ -65,7 +65,7 @@ import { devTool } from './dev-tool'
 
 export default defineConfig({
   projectId: '<projectId>',
-  dataset: 'production',
+  dataset: '<your-dataset>',
   tools: [
     myTool(
        // overrides the default tool title
@@ -89,7 +89,7 @@ template(config): function
 
 Creates a new initial value template with the given configuration. Returns a template builder function which can be used to customize the template.
 
-### Parameters
+## Parameters
 
 #### Properties
 

@@ -81,5 +81,5 @@ To learn more, see the [Preview Deployment Suffix](/docs/deployments/preview-dep
 
 title: "Accessing Build Logs"
 description: "Learn how to use Vercel"
-last\_updated: "2026-03-08T05:03:13.327Z"
+last\_updated: "2026-03-23T09:40:08.369Z"
 source: "https://vercel.com/docs/deployments/logs"

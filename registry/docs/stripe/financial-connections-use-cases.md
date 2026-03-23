@@ -2,7 +2,7 @@
 
 View options for integrating Financial Connections and common use cases.
 
-Financial Connections allows your users to link their financial accounts to collect *ACH* (Automated Clearing House (ACH) is a US financial network used for electronic payments and money transfers that doesn’t rely on paper checks, credit card networks, wire transfers, or cash) payments, facilitate Connect *payouts* (A payout is the transfer of funds to an external account, usually a bank account, in the form of a deposit), and build financial data products. It also enables your users to connect their accounts in fewer steps with [Link](https://docs.stripe.com/payments/link.md), allowing them to save and quickly reuse their bank account details across Stripe merchants. View the following integration paths based on your requirements, and some common use cases for Financial Connections data below.
+Financial Connections allows your users to link their financial accounts to collect *ACH* (Automated Clearing House (ACH) is a US financial network used for electronic payments and money transfers that doesn’t rely on paper checks, credit card networks, wire transfers, or cash) payments, facilitate Connect *payouts* (A payout is the transfer of funds to an external account, usually a bank account, in the form of a deposit), and build financial data products. It also enables your users to connect their accounts in fewer steps with [Link](https://docs.stripe.com/payments/link.md), allowing them to save and quickly reuse their bank account details across Stripe businesses. View the following integration paths based on your requirements, and some common use cases for Financial Connections data below.
 
 How you integrate Financial Connections depends on your desired use cases.
 

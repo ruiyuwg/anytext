@@ -4,7 +4,12 @@ This article describes limits in the media library and discusses techniques for 
 
 ## Media Library limits
 
-The Media Library APIs share the same [technical limits defined here](https://www.sanity.io/docs/content-lake/technical-limits) for rate limiting, HTTP requests, and asset details.
+The Media Library APIs share the same [technical limits defined here](https://www.sanity.io/docs/content-lake/technical-limits) for rate limiting, HTTP requests, and asset details. Key limits for Media Library uploads are:
+
+- Maximum file size: up to 5 TB
+- Maximum upload duration: 1 hour
+- Maximum image size: 256 megapixels (images only)
+- Maximum request body size: 100 MB
 
 ## Library and project usage
 
@@ -20,7 +25,7 @@ When you use an image or file asset within a studio, the asset becomes available
 
 ## Video usage
 
-Video assets count against your Media Library quota, but are handled differently from images and files. Videos are served through Mux rather than the standard Sanity CDN.
+Video assets count against your Media Library quota, but are handled differently from images and files. Videos are served through an optimized video CDN rather than the standard Sanity CDN.
 
 Presenting video differs from presenting other media types like images and files. See [Working with video](https://www.sanity.io/docs/media-library/working-with-video) for details.
 

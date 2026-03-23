@@ -2,7 +2,7 @@
 
 Use Stripe to provide your customers with receipts that meet card network rules.
 
-Receipts for payments created using your [test API keys](https://docs.stripe.com/keys.md#test-live-modes) are not sent automatically. Instead, you can view or manually send a receipt using the [Dashboard](https://dashboard.stripe.com/payments).
+Receipts for payments created using your [test API keys](https://docs.stripe.com/keys.md#test-live-modes) aren’t sent automatically. Instead, you can view or manually send a receipt using the [Dashboard](https://dashboard.stripe.com/payments).
 
 Card network rules and local regulatory requirements are different for in-person payments. If you accept payments using Stripe Terminal, you must provide customers with the option to receive a physical or email receipt. Stripe provides everything you need to start offering receipts with your first transaction.
 

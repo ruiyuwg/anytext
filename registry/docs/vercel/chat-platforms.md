@@ -85,5 +85,5 @@ Once your chat platforms are connected, view usage in the [Observability section
 
 title: "App Attribution"
 description: "Attribute your requests so Vercel can identify and feature your app on AI Gateway pages"
-last\_updated: "2026-03-08T05:03:10.376Z"
+last\_updated: "2026-03-23T09:40:04.280Z"
 source: "https://vercel.com/docs/ai-gateway/ecosystem/app-attribution"

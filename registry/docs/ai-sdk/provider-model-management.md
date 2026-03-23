@@ -22,44 +22,20 @@ You might want to override the default model settings for a provider or provide 
 with pre-configured settings.
 
 ```ts
-import {
-  gateway,
-  customProvider,
-  defaultSettingsMiddleware,
-  wrapLanguageModel,
-} from "ai";
+import { openai as originalOpenAI } from '@ai-sdk/openai';
+import { customProvider } from 'ai';
 
-// custom provider with different provider options:
+// custom provider with different model settings:
 export const openai = customProvider({
   languageModels: {
-    // replacement model with custom provider options:
-    "gpt-5.1": wrapLanguageModel({
-      model: gateway("openai/gpt-5.1"),
-      middleware: defaultSettingsMiddleware({
-        settings: {
-          providerOptions: {
-            openai: {
-              reasoningEffort: "high",
-            },
-          },
-        },
-      }),
-    }),
-    // alias model with custom provider options:
-    "gpt-5.1-high-reasoning": wrapLanguageModel({
-      model: gateway("openai/gpt-5.1"),
-      middleware: defaultSettingsMiddleware({
-        settings: {
-          providerOptions: {
-            openai: {
-              reasoningEffort: "high",
-            },
-          },
-        },
-      }),
+    // replacement model with custom settings:
+    'gpt-4o': originalOpenAI('gpt-4o', { structuredOutputs: true }),
+    // alias model with custom settings:
+    'gpt-4o-mini-structured': originalOpenAI('gpt-4o-mini', {
+      structuredOutputs: true,
     }),
   },
-  fallbackProvider: gateway,
+  fallbackProvider: originalOpenAI,
 });
 ```
 
@@ -68,16 +44,17 @@ export const openai = customProvider({
 You can also provide model name aliases, so you can update the model version in one place in the future:
 
 ```ts
-import { customProvider, gateway } from "ai";
+import { anthropic as originalAnthropic } from '@ai-sdk/anthropic';
+import { customProvider } from 'ai';
 
 // custom provider with alias names:
 export const anthropic = customProvider({
   languageModels: {
-    opus: gateway("anthropic/claude-opus-4.1"),
-    sonnet: gateway("anthropic/claude-sonnet-4.5"),
-    haiku: gateway("anthropic/claude-haiku-4.5"),
+    opus: originalAnthropic('claude-3-opus-20240229'),
+    sonnet: originalAnthropic('claude-3-5-sonnet-20240620'),
+    haiku: originalAnthropic('claude-3-haiku-20240307'),
   },
-  fallbackProvider: gateway,
+  fallbackProvider: originalAnthropic,
 });
 ```
 
@@ -86,44 +63,19 @@ export const anthropic = customProvider({
 You can limit the available models in the system, even if you have multiple providers.
 
 ```ts
-import {
-  customProvider,
-  defaultSettingsMiddleware,
-  wrapLanguageModel,
-  gateway,
-} from "ai";
+import { anthropic } from '@ai-sdk/anthropic';
+import { openai } from '@ai-sdk/openai';
+import { customProvider } from 'ai';
 
 export const myProvider = customProvider({
   languageModels: {
-    "text-medium": gateway("anthropic/claude-3-5-sonnet-20240620"),
-    "text-small": gateway("openai/gpt-5-mini"),
-    "reasoning-medium": wrapLanguageModel({
-      model: gateway("openai/gpt-5.1"),
-      middleware: defaultSettingsMiddleware({
-        settings: {
-          providerOptions: {
-            openai: {
-              reasoningEffort: "high",
-            },
-          },
-        },
-      }),
-    }),
-    "reasoning-fast": wrapLanguageModel({
-      model: gateway("openai/gpt-5.1"),
-      middleware: defaultSettingsMiddleware({
-        settings: {
-          providerOptions: {
-            openai: {
-              reasoningEffort: "low",
-            },
-          },
-        },
-      }),
-    }),
+    'text-medium': anthropic('claude-3-5-sonnet-20240620'),
+    'text-small': openai('gpt-4o-mini'),
+    'structure-medium': openai('gpt-4o', { structuredOutputs: true }),
+    'structure-fast': openai('gpt-4o-mini', { structuredOutputs: true }),
   },
   embeddingModels: {
-    embedding: gateway.embeddingModel("openai/text-embedding-3-small"),
+    emdedding: openai.textEmbeddingModel('text-embedding-3-small'),
   },
   // no fallback provider
 });
@@ -136,17 +88,18 @@ You can create a [provider registry](/docs/reference/ai-sdk-core/provider-regist
 ### Setup
 
 ```ts filename={"registry.ts"}
-import { anthropic } from "@ai-sdk/anthropic";
-import { openai } from "@ai-sdk/openai";
-import { createProviderRegistry, gateway } from "ai";
+import { anthropic } from '@ai-sdk/anthropic';
+import { createOpenAI } from '@ai-sdk/openai';
+import { createProviderRegistry } from 'ai';
 
 export const registry = createProviderRegistry({
-  // register provider with prefix and default setup using gateway:
-  gateway,
-
-  // register provider with prefix and direct provider import:
+  // register provider with prefix and default setup:
   anthropic,
-  openai,
+
+  // register provider with prefix and custom setup:
+  openai: createOpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  }),
 });
 ```
 
@@ -155,17 +108,15 @@ export const registry = createProviderRegistry({
 By default, the registry uses `:` as the separator between provider and model IDs. You can customize this separator:
 
 ```ts filename={"registry.ts"}
-import { anthropic } from "@ai-sdk/anthropic";
-import { openai } from "@ai-sdk/openai";
-import { createProviderRegistry, gateway } from "ai";
+import { anthropic } from '@ai-sdk/anthropic';
+import { openai } from '@ai-sdk/openai';
 
 export const customSeparatorRegistry = createProviderRegistry(
   {
-    gateway,
     anthropic,
     openai,
   },
-  { separator: " > " },
+  { separator: ' > ' },
 );
 ```
 
@@ -175,29 +126,29 @@ You can access language models by using the `languageModel` method on the regist
 The provider id will become the prefix of the model id: `providerId:modelId`.
 
 ```ts highlight={"5"}
-import { generateText } from "ai";
-import { registry } from "./registry";
+import { generateText } from 'ai';
+import { registry } from './registry';
 
 const { text } = await generateText({
-  model: registry.languageModel("openai:gpt-5.1"), // default separator
+  model: registry.languageModel('openai:gpt-4-turbo'), // default separator
   // or with custom separator:
-  // model: customSeparatorRegistry.languageModel('openai > gpt-5.1'),
-  prompt: "Invent a new holiday and describe its traditions.",
+  // model: customSeparatorRegistry.languageModel('openai > gpt-4-turbo'),
+  prompt: 'Invent a new holiday and describe its traditions.',
 });
 ```
 
 ### Example: Use text embedding models
 
-You can access text embedding models by using the `.embeddingModel` method on the registry.
+You can access text embedding models by using the `textEmbeddingModel` method on the registry.
 The provider id will become the prefix of the model id: `providerId:modelId`.
 
 ```ts highlight={"5"}
-import { embed } from "ai";
-import { registry } from "./registry";
+import { embed } from 'ai';
+import { registry } from './registry';
 
 const { embedding } = await embed({
-  model: registry.embeddingModel("openai:text-embedding-3-small"),
-  value: "sunny day at the beach",
+  model: registry.textEmbeddingModel('openai:text-embedding-3-small'),
+  value: 'sunny day at the beach',
 });
 ```
 
@@ -207,12 +158,12 @@ You can access image models by using the `imageModel` method on the registry.
 The provider id will become the prefix of the model id: `providerId:modelId`.
 
 ```ts highlight={"5"}
-import { generateImage } from "ai";
-import { registry } from "./registry";
+import { generateImage } from 'ai';
+import { registry } from './registry';
 
 const { image } = await generateImage({
-  model: registry.imageModel("openai:dall-e-3"),
-  prompt: "A beautiful sunset over a calm ocean",
+  model: registry.imageModel('openai:dall-e-3'),
+  prompt: 'A beautiful sunset over a calm ocean',
 });
 ```
 
@@ -223,65 +174,60 @@ You may want to pre-configure model settings, provide model name aliases, limit 
 
 Here is an example that implements the following concepts:
 
-- pass through gateway with a namespace prefix (here: `gateway > *`)
 - pass through a full provider with a namespace prefix (here: `xai > *`)
 - setup an OpenAI-compatible provider with custom api key and base URL (here: `custom > *`)
 - setup model name aliases (here: `anthropic > fast`, `anthropic > writing`, `anthropic > reasoning`)
 - pre-configure model settings (here: `anthropic > reasoning`)
-- validate the provider-specific options (here: `AnthropicLanguageModelOptions`)
+- validate the provider-specific options (here: `AnthropicProviderOptions`)
 - use a fallback provider (here: `anthropic > *`)
 - limit a provider to certain models without a fallback (here: `groq > gemma2-9b-it`, `groq > qwen-qwq-32b`)
 - define a custom separator for the provider registry (here: `>`)
 
 ```ts
-import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
-import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-import { xai } from "@ai-sdk/xai";
-import { groq } from "@ai-sdk/groq";
+import { anthropic, AnthropicProviderOptions } from '@ai-sdk/anthropic';
+import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
+import { xai } from '@ai-sdk/xai';
+import { groq } from '@ai-sdk/groq';
 import {
   createProviderRegistry,
   customProvider,
   defaultSettingsMiddleware,
-  gateway,
   wrapLanguageModel,
-} from "ai";
+} from 'ai';
 
 export const registry = createProviderRegistry(
   {
-    // pass through gateway with a namespace prefix
-    gateway,
-
-    // pass through full providers with namespace prefixes
+    // pass through a full provider with a namespace prefix
     xai,
 
     // access an OpenAI-compatible provider with custom setup
     custom: createOpenAICompatible({
-      name: "provider-name",
+      name: 'provider-name',
       apiKey: process.env.CUSTOM_API_KEY,
-      baseURL: "https://api.custom.com/v1",
+      baseURL: 'https://api.custom.com/v1',
     }),
 
     // setup model name aliases
     anthropic: customProvider({
       languageModels: {
-        fast: anthropic("claude-haiku-4-5"),
+        fast: anthropic('claude-3-haiku-20240307'),
 
         // simple model
-        writing: anthropic("claude-sonnet-4-5"),
+        writing: anthropic('claude-3-7-sonnet-20250219'),
 
         // extended reasoning model configuration:
         reasoning: wrapLanguageModel({
-          model: anthropic("claude-sonnet-4-5"),
+          model: anthropic('claude-3-7-sonnet-20250219'),
           middleware: defaultSettingsMiddleware({
             settings: {
-              maxOutputTokens: 100000, // example default setting
-              providerOptions: {
+              maxTokens: 100000, // example default setting
+              providerMetadata: {
                 anthropic: {
                   thinking: {
-                    type: "enabled",
+                    type: 'enabled',
                     budgetTokens: 32000,
                   },
-                } satisfies AnthropicLanguageModelOptions,
+                } satisfies AnthropicProviderOptions,
               },
             },
           }),
@@ -293,54 +239,94 @@ export const registry = createProviderRegistry(
     // limit a provider to certain models without a fallback
     groq: customProvider({
       languageModels: {
-        "gemma2-9b-it": groq("gemma2-9b-it"),
-        "qwen-qwq-32b": groq("qwen-qwq-32b"),
+        'gemma2-9b-it': groq('gemma2-9b-it'),
+        'qwen-qwq-32b': groq('qwen-qwq-32b'),
       },
     }),
   },
-  { separator: " > " },
+  { separator: ' > ' },
 );
 
 // usage:
-const model = registry.languageModel("anthropic > reasoning");
+const model = registry.languageModel('anthropic > reasoning');
 ```
-
-## Global Provider Configuration
-
-The AI SDK 5 includes a global provider feature that allows you to specify a model using just a plain model ID string:
-
-```ts
-import { streamText } from "ai";
-__PROVIDER_IMPORT__;
-
-const result = await streamText({
-  model: __MODEL__, // Uses the global provider (defaults to gateway)
-  prompt: "Invent a new holiday and describe its traditions.",
-});
-```
-
-By default, the global provider is set to the Vercel AI Gateway.
-
-### Customizing the Global Provider
-
-You can set your own preferred global provider:
-
-```ts filename="setup.ts"
-import { openai } from "@ai-sdk/openai";
-
-// Initialize once during startup:
-globalThis.AI_SDK_DEFAULT_PROVIDER = openai;
-```
-
-```ts filename="app.ts"
-import { streamText } from "ai";
-
-const result = await streamText({
-  model: "gpt-5.1", // Uses OpenAI provider without prefix
-  prompt: "Invent a new holiday and describe its traditions.",
-});
-```
-
-This simplifies provider usage and makes it easier to switch between providers without changing your model references throughout your codebase.
 
 # Error Handling
+
+# Error Handling
+
+## Handling regular errors
+
+Regular errors are thrown and can be handled using the `try/catch` block.
+
+```ts highlight="3,8-10"
+import { generateText } from 'ai';
+
+try {
+  const { text } = await generateText({
+    model: yourModel,
+    prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  });
+} catch (error) {
+  // handle error
+}
+```
+
+See [Error Types](/docs/reference/ai-sdk-errors) for more information on the different types of errors that may be thrown.
+
+## Handling streaming errors (simple streams)
+
+When errors occur during streams that do not support error chunks,
+the error is thrown as a regular error.
+You can handle these errors using the `try/catch` block.
+
+```ts highlight="3,12-14"
+import { generateText } from 'ai';
+
+try {
+  const { textStream } = streamText({
+    model: yourModel,
+    prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  });
+
+  for await (const textPart of textStream) {
+    process.stdout.write(textPart);
+  }
+} catch (error) {
+  // handle error
+}
+```
+
+## Handling streaming errors (streaming with `error` support)
+
+Full streams support error parts.
+You can handle those parts similar to other parts.
+It is recommended to also add a try-catch block for errors that
+happen outside of the streaming.
+
+```ts highlight="13-17"
+import { generateText } from 'ai';
+
+try {
+  const { fullStream } = streamText({
+    model: yourModel,
+    prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  });
+
+  for await (const part of fullStream) {
+    switch (part.type) {
+      // ... handle other part types
+
+      case 'error': {
+        const error = part.error;
+        // handle error
+        break;
+      }
+    }
+  }
+} catch (error) {
+  // handle error
+}
+```
+
+# Testing

@@ -67,7 +67,7 @@ added to the allowlists.
 
 title: "NO\_DANGEROUS\_HTML"
 description: "Prevent the unsafe creation of DOM via HTML methods in your application."
-last\_updated: "2026-03-08T05:03:12.777Z"
+last\_updated: "2026-03-23T09:40:07.708Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_DANGEROUS\_HTML"
 
 # NO\_DANGEROUS\_HTML
@@ -91,7 +91,7 @@ It is recommended to instead use alternative approaches for HTML construction - 
 
 title: "NO\_DOCUMENT\_WRITE"
 description: "Prevent unsafe usage of document.write() in your application."
-last\_updated: "2026-03-08T05:03:12.780Z"
+last\_updated: "2026-03-23T09:40:07.711Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_DOCUMENT\_WRITE"
 
 # NO\_DOCUMENT\_WRITE
@@ -109,7 +109,7 @@ or use safer DOM APIs, such as `document.createElement()` instead.
 
 title: "NO\_EVAL"
 description: "Prevent unsafe usage of eval() in your application."
-last\_updated: "2026-03-08T05:03:12.784Z"
+last\_updated: "2026-03-23T09:40:07.717Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_EVAL"
 
 # NO\_EVAL
@@ -176,5 +176,5 @@ setTimeout(() => {
 
 title: "NO\_EXTERNAL\_CSS\_AT\_IMPORTS"
 description: "Disallows @import at-rules that import from URLs."
-last\_updated: "2026-03-08T05:03:12.790Z"
+last\_updated: "2026-03-23T09:40:07.721Z"
 source: "https://vercel.com/docs/conformance/rules/NO\_EXTERNAL\_CSS\_AT\_IMPORTS"

@@ -5,8 +5,8 @@ Reactive utilities
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/reactive-utilities/use-transition.mdx)
 
 ```
-import { useTransition } from "solid-js"
-function useTransition(): [  pending: () => boolean,  startTransition: (fn: () => void) => Promise<void>]
+import { useTransition } from "solid-js";
+function useTransition(): [  pending: () => boolean,  startTransition: (fn: () => void) => Promise<void>,];
 ```
 
 Used to batch async updates in a transaction deferring commit until all async processes are complete. This is tied into Suspense and only tracks resources read under Suspense boundaries.

@@ -21,8 +21,8 @@ For example:
 ```
 import { createContext } from "solid-js";
 export const INITIAL_COUNT = 0;
-const INITIAL_STORE_SETTER = {  increment: () => {},  decrement: () => {}};
-export const CounterContext = createContext([  { count: INITIAL_COUNT },  INITIAL_STORE_SETTER]);
+const INITIAL_STORE_SETTER = {  increment: () => {},  decrement: () => {},};
+export const CounterContext = createContext([  { count: INITIAL_COUNT },  INITIAL_STORE_SETTER,]);
 ```
 
 With the context created in its own module, you can use to instantiate the context provider.
@@ -59,8 +59,8 @@ Another (used in the example in the previous section) is provide a default value
 ## [Type signature](/reference/component-apis/create-context#type-signature)
 
 ```
-interface Context<T> {  id: symbol  Provider: (props: { value: T; children: any }) => any  defaultValue: T}
-function createContext<T>(defaultValue?: T): Context<T | undefined>
+interface Context<T> {  id: symbol;  Provider: (props: { value: T; children: any }) => any;  defaultValue: T;}
+function createContext<T>(defaultValue?: T): Context<T | undefined>;
 ```
 
 [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/reference/component-apis/create-context.mdx\&page=https://docs.solidjs.com/reference/component-apis/create-context)

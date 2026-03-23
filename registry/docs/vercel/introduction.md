@@ -1,6 +1,6 @@
 title: "Account Management"
 description: "Learn how to manage your Vercel account and team members."
-last\_updated: "2026-03-08T05:03:09.593Z"
+last\_updated: "2026-03-23T09:40:02.874Z"
 source: "https://vercel.com/docs/accounts"
 
 # Account Management
@@ -139,7 +139,7 @@ After [creating a new trial](/docs/plans/pro-plan/trials), you'll have 14 days o
 
 ### Team membership
 
-You can join a Vercel team through an invitation from a [team owner](/docs/rbac/access-roles#owner-role), automatic addition by a team's [identity provider](/docs/saml), or by requesting access yourself. To request access, you can push a commit to a private Git repository owned by the team.
+You can join a Vercel team through an invitation from a [team owner](/docs/rbac/access-roles#owner-role), automatic addition by a team's [identity provider](/docs/saml), or by pushing a commit to a private Git repository owned by the team. If you have a Vercel account linked to your Git provider, and the team has enabled **Auto Approval**, you'll be automatically added to the team. If the team has enabled **Manual Approval**, a [team Owner](/docs/rbac/access-roles/team-level-roles) must approve your membership first.
 
 ### Leaving a team
 
@@ -192,6 +192,43 @@ There are a couple of methods you can use to locate your Team ID:
   - Choose **General** from the left-hand navigation
   - Scroll down to the Team ID section and your Team ID will be there ready for you to copy
 
+## Collaboration settings
+
+When someone pushes a commit to a private Git repository connected to your team's project, Vercel determines how the commit author is added to your team based on the [collaboration settings](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fsettings%2Fmembers%23collaboration-settings\&title=Collaboration+Settings). You can configure this behavior in your team's **Settings** > **Members** > **Collaboration**.
+
+There are two approval modes: **Auto Approval** and **Manual Approval**.
+
+### Auto approval
+
+When a commit author has a Vercel account linked to their Git provider, Vercel automatically adds them to your team with the [Developer role](/docs/rbac/access-roles#developer-role). Their deployment then continues immediately.
+
+Team owners receive a notification when a new member is added through auto approval.
+
+### Manual approval
+
+When you enable manual approval, Vercel does not automatically add commit authors with a Vercel account to the team when they commit to your repository. Instead, Vercel blocks the deployment and team owners receive a notification to approve or decline the pending membership.
+
+After approval, Vercel adds the new member to your team with the [Developer role](/docs/rbac/access-roles#developer-role).
+
+### Shared responsibility
+
+Only grant write access to trusted contributors. In either approval mode, commit authors who are added to your Vercel team receive the [Developer role](/docs/rbac/access-roles#developer-role), which gives them visibility into team members, team projects, and other permissions assigned to that role.
+
+### Committers without a Vercel account
+
+If a commit author does not have a linked Vercel account, the deployment fails regardless of which approval mode is enabled. The commit author must create a Vercel account and link their Git provider before they can deploy.
+
+### Notifications
+
+Team owners are notified in both approval modes:
+
+- **Auto approval**: Vercel sends a notification when a new member is automatically added to the team.
+- **Manual approval**: Vercel sends a notification when a new commit author's deployment is blocked and their membership is pending review. You can follow the link in the notification to approve or decline the request.
+
+### Billing
+
+Billing for members added through collaboration settings follows the same team seat pricing as members added through invitations or identity provider sync. See [Pro plan pricing](/docs/plans/pro-plan#additional-team-seats) for seat costs.
+
 ## Managing emails
 
 To access your email settings from the dashboard:
@@ -229,7 +266,7 @@ If you wish to remove your primary email address, you will need to set a new pri
 
 title: "Using the Activity Log"
 description: "Learn how to use the Activity Log, which provides a list of all events on a team, chronologically organized since its creation."
-last\_updated: "2026-03-08T05:03:09.605Z"
+last\_updated: "2026-03-23T09:40:02.916Z"
 source: "https://vercel.com/docs/activity-log"
 
 # Using the Activity Log
@@ -258,13 +295,17 @@ Common use cases for viewing the Activity log include:
 - A domain can be disconnected from your deployment. Use the list to see if a domain related event was recently triggered
 - Check if a specific user was removed from a team
 
+## CLI access
+
+You can also view and filter activity events from the command line. See the [`vercel activity`](/docs/cli/activity) CLI reference for available options.
+
 ## Events logged
 
 The table below shows a list of events logged on the Activity page.
 
 title: "Installation"
 description: "Let AI automatically install Web Analytics and Speed Insights in your app"
-last\_updated: "2026-03-08T05:03:09.616Z"
+last\_updated: "2026-03-23T09:40:02.930Z"
 source: "https://vercel.com/docs/agent/installation"
 
 # Installation
@@ -300,5 +341,5 @@ Billing is based on usage of the underlying features. For example, after the age
 
 title: "Investigation"
 description: "Let AI investigate your error alerts to help you debug faster"
-last\_updated: "2026-03-08T05:03:09.629Z"
+last\_updated: "2026-03-23T09:40:02.955Z"
 source: "https://vercel.com/docs/agent/investigation"

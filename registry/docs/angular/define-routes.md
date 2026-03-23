@@ -224,7 +224,7 @@ You can associate a **title** with each route. Angular automatically updates the
 import {Routes} from '@angular/router';import {Home} from './home';import {About} from './about';import {Products} from './products';const routes: Routes = [  {    path: '',    component: Home,    title: 'Home Page',  },  {    path: 'about',    component: About,    title: 'About Us',  },];
 ```
 
-The page `title` property can be set dynamincally to a resolver function using [](/api/router/ResolveFn)[`ResolveFn`](/api/router/ResolveFn).
+The page `title` property can be set dynamically to a resolver function using [](/api/router/ResolveFn)[`ResolveFn`](/api/router/ResolveFn).
 
 ```
 const titleResolver: ResolveFn<string> = (route) => route.queryParams['id'];const routes: Routes = [  ...{    path: 'products',    component: Products,    title: titleResolver,  },];

@@ -64,7 +64,13 @@ Before we can provision a Dedicated IP, **we require** that:
 
 ## How to request a Dedicated IP
 
-You can request a Dedicated IP by [chatting with support](https://resend.com/help).
+If you're on a Scale plan or higher, you can request a Dedicated IP directly from your dashboard:
+
+1. Navigate to **Settings** > **Usage**
+2. Click **Request dedicated IP** in the Dedicated IPs section
+3. Fill out the request form with information about your sending patterns
+
+Alternatively, you can request a Dedicated IP by [chatting with support](https://resend.com/help).
 
 **We will request the following information**:
 

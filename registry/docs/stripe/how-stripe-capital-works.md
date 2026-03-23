@@ -24,8 +24,9 @@ Stripe, with our financial partner, uses a combination of eligibility criteria (
 
 Each offer specifies the type of financing being offered, which might be a loan or merchant cash advance. You can’t request a particular financing type under the Stripe Capital program.
 
+|  |
+|  |
 | **Merchant cash advance** | A merchant cash advance is YouLend’s purchase of your business’s future receivables; it isn’t a loan or a credit transaction. Stripe withholds the purchased receivables from your payment processing volume at the percentage stated in your YouLend Advance Agreement. Unlike a loan, you don’t have a fixed payment schedule or periodic debits. Your payments vary with your payment processing volume.                                                                                                                                                                                                                                                                                                                                                                            |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Loans**                 | Celtic Bank issues business-purpose term loans to eligible businesses. These loans have a maximum term and periodic payments. If withholdings from your payment processing receivables don’t meet the minimum amount (typically on a 30- or 60-day basis), Stripe debits the shortfall from your linked bank account or account balance.
 
 - **Line of credit**: You might be given a choice to borrow (up to a prequalified credit limit) through a line of credit. Apply to draw the exact amount you need within your available limit and access the remaining capital for 90 days. As you make repayments, your available credit replenishes, so you can request more capital. After 90 days, we reevaluate your credit limit. We review and approve each draw as a separate loan. |
@@ -91,7 +92,7 @@ Applying for financing through Stripe Capital might require a personal credit ch
 
 ## Build your business credit history
 
-When you apply for financing through Stripe Capital, Stripe might obtain your business’s credit history through the Small Business Financial Exchange. Additionally, Stripe Capital may report performance or payment history to the Small Business Financial Exchange, who uses this information to build a financial profile for your business, which can help your business get access to financing from other providers.
+When you apply for financing through Stripe Capital, Stripe might obtain your business’s credit history through the Small Business Financial Exchange. Additionally, Stripe Capital might report performance or payment history to the Small Business Financial Exchange, who uses this information to build a financial profile for your business, which can help your business get access to financing from other providers.
 
 ## Linked accounts
 
@@ -107,7 +108,7 @@ Stripe automatically evaluates you for a new offer as you pay down your financin
 
 ## Financing payments
 
-Stripe Capital financing is generally paid through withholding from payment processing receivables at a rate specified in your financing agreement. Depending on your financing type, there may be periodic minimum payment requirements and a finite term.
+Stripe Capital financing is generally paid through withholding from payment processing receivables at a rate specified in your financing agreement. Depending on your financing type, there might be periodic minimum payment requirements and a finite term.
 
 Specifically, if you took out a loan, you must repay a minimum amount toward your loan every payment period. Amounts withheld as a percentage of your sales at the payment rate count toward your minimum. However, if the total amount you repay through sales doesn’t meet the minimum, you must pay the remaining amount at the end of the period. If you haven’t met the minimum by the end of each payment period, Stripe automatically debits the balance needed to meet your minimum from your bank account or account balance. You can also make manual payments toward your minimum through your Dashboard. You can view your minimum in the [Capital tab](https://dashboard.stripe.com/capital) of your Dashboard or in your loan agreement.
 
@@ -135,7 +136,7 @@ The following example scenarios demonstrate how the minimum payment process work
 
 ## Security interests
 
-Stripe Capital loan agreements typically include security interests taken as collateral for your loan. A *UCC-1* (A publicly available notice filed by a creditor that secures the creditor's interest in certain assets of a debtor. Creditors file UCC-1 statements with the secretary of state where a business debtor is incorporated at the time a loan first originates) financing statement might be filed in connection with your loan based on several factors, including the size of your loan, facts and circumstances about your business, and so on. After you finish paying off your loan, you can [contact us](mailto:capital@stripe.com) with a request to terminate a UCC-1 filing. For merchant cash advances, a security interest may be taken under certain circumstances, as specified in the Stripe Capital advance agreement.
+Stripe Capital loan agreements typically include security interests taken as collateral for your loan. A *UCC-1* (A publicly available notice filed by a creditor that secures the creditor's interest in certain assets of a debtor. Creditors file UCC-1 statements with the secretary of state where a business debtor is incorporated at the time a loan first originates) financing statement might be filed in connection with your loan based on several factors, including the size of your loan, facts and circumstances about your business, and so on. After you finish paying off your loan, you can [contact us](mailto:capital@stripe.com) with a request to terminate a UCC-1 filing. For merchant cash advances, a security interest might be taken under certain circumstances, as specified in the Stripe Capital advance agreement.
 
 > #### Unknown secured party
 >
@@ -220,11 +221,11 @@ The total amount you owe is your financing amount plus a fixed fee, which is pai
 
 After you pay your financing, we automatically evaluate your business for a new offer. Paying your financing early doesn’t automatically qualify you for a new offer. When you’re eligible for a new offer, it appears automatically in your Dashboard.
 
-If you’re approved for additional financing offers before you pay off your current financing offer, you’ll receive a standardized payment percentage rate across your active financing offers to match your most recently accepted financing offer. Payment of your newly accepted offer begins once your active financing offer is paid off so you will only pay off one financing offer at a time.
+If you’re approved for additional financing offers before you pay off your current financing offer, you’ll receive a standardized payment percentage rate across your active financing offers to match your most recently accepted financing offer. Payment of your newly accepted offer begins once your active financing offer is paid off so you’ll only pay off one financing offer at a time.
 
 **Example: You’re currently paying Financing Offer 1 at a 20% payment percentage rate and received additional financing.**
 
-If you apply, we approve you for *financing offer 2* with a 15% payment percentage rate, we will update the rate for *financing offer 1* to 15%. Payment for *financing offer 2* begins when you’ve paid off *financing offer 1*. As a result, your overall payment percentage rate will be 15%.
+If you apply, we approve you for *financing offer 2* with a 15% payment percentage rate, we’ll update the rate for *financing offer 1* to 15%. Payment for *financing offer 2* begins when you’ve paid off *financing offer 1*. As a result, your overall payment percentage rate will be 15%.
 
 ## Taxes
 
@@ -306,7 +307,7 @@ The total amount you owe is your financing amount plus a fixed fee, which is pai
 
 As you pay your financing, we automatically evaluate your business for a new offer. Paying your financing early doesn’t automatically qualify you for a new offer. When you’re eligible for a new offer, it appears automatically in your Dashboard.
 
-If you’re approved for additional financing offers before you pay off your current financing offer, you’ll receive a standardized payment percentage rate across your active financing offers to match your most recently accepted financing offer. Payment of your newly accepted offer begins once your active financing offer is paid off so you will only pay off one financing offer at a time.
+If you’re approved for additional financing offers before you pay off your current financing offer, you’ll receive a standardized payment percentage rate across your active financing offers to match your most recently accepted financing offer. Payment of your newly accepted offer begins once your active financing offer is paid off so you’ll only pay off one financing offer at a time.
 
 For example, assume that you’re currently paying the first financing offer at a 20% payment percentage rate and have received an offer for additional financing.
 

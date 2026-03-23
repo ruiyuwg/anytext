@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -47,7 +45,7 @@ Resources:
 - [Settings Management](/security/for-admins/hardened-desktop/settings-management/)
 - [Registry Access Management](/security/for-admins/hardened-desktop/registry-access-management/)
 - [Image Access Management](/security/for-admins/hardened-desktop/image-access-management/)
-- [Docker subscription information](https://www.docker.com/pricing/)
+- [Docker subscription information](https://www.docker.com/pricing?ref=Docs\&refAction=DocsGuidesAdminSetup)
 
 [« Back to all guides](/guides/)
 

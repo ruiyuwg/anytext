@@ -134,5 +134,5 @@ Nameserver changes can take up to 48 hours to propagate. If you bought the domai
 
 title: "Managing Nameservers"
 description: "Learn how to add custom nameservers and restore original nameservers for your domains on Vercel with this guide."
-last\_updated: "2026-03-08T05:03:13.460Z"
+last\_updated: "2026-03-23T09:40:08.643Z"
 source: "https://vercel.com/docs/domains/managing-nameservers"

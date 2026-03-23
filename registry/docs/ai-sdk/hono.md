@@ -10,50 +10,35 @@ The examples start a simple HTTP server that listens on port 8080. You can e.g. 
 curl -X POST http://localhost:8080
 ```
 
-The examples use the Vercel AI Gateway. Ensure that your AI Gateway API key is
-set in the `AI_GATEWAY_API_KEY` environment variable.
+The examples use the OpenAI `gpt-4o` model. Ensure that the OpenAI API key is
+set in the `OPENAI_API_KEY` environment variable.
 
 **Full example**: [github.com/vercel/ai/examples/hono](https://github.com/vercel/ai/tree/main/examples/hono)
 
-### UI Message Stream
+### Data Stream
 
-You can use the `toUIMessageStreamResponse` method to create a properly formatted streaming response.
+You can use the `toDataStream` method to get a data stream from the result and then pipe it to the response.
 
 ```ts filename='index.ts'
-import { serve } from "@hono/node-server";
-import { streamText } from "ai";
-import { Hono } from "hono";
+import { openai } from '@ai-sdk/openai';
+import { serve } from '@hono/node-server';
+import { streamText } from 'ai';
+import { Hono } from 'hono';
+import { stream } from 'hono/streaming';
 
 const app = new Hono();
 
-app.post("/", async (c) => {
+app.post('/', async c => {
   const result = streamText({
-    model: "openai/gpt-4o",
-    prompt: "Invent a new holiday and describe its traditions.",
+    model: openai('gpt-4o'),
+    prompt: 'Invent a new holiday and describe its traditions.',
   });
-  return result.toUIMessageStreamResponse();
-});
 
-serve({ fetch: app.fetch, port: 8080 });
-```
+  // Mark the response as a v1 data stream:
+  c.header('X-Vercel-AI-Data-Stream', 'v1');
+  c.header('Content-Type', 'text/plain; charset=utf-8');
 
-### Text Stream
-
-You can use the `toTextStreamResponse` method to return a text stream response.
-
-```ts filename='index.ts'
-import { serve } from "@hono/node-server";
-import { streamText } from "ai";
-import { Hono } from "hono";
-
-const app = new Hono();
-
-app.post("/text", async (c) => {
-  const result = streamText({
-    model: "openai/gpt-4o",
-    prompt: "Write a short poem about coding.",
-  });
-  return result.toTextStreamResponse();
+  return stream(c, stream => stream.pipe(result.toDataStream()));
 });
 
 serve({ fetch: app.fetch, port: 8080 });
@@ -61,50 +46,71 @@ serve({ fetch: app.fetch, port: 8080 });
 
 ### Sending Custom Data
 
-You can use `createUIMessageStream` and `createUIMessageStreamResponse` to send custom data to the client.
+`createDataStream` can be used to send custom data to the client.
 
-```ts filename='index.ts'
-import { serve } from "@hono/node-server";
-import {
-  createUIMessageStream,
-  createUIMessageStreamResponse,
-  streamText,
-} from "ai";
-import { Hono } from "hono";
+```ts filename='index.ts' highlight="10-13,20"
+import { openai } from '@ai-sdk/openai';
+import { serve } from '@hono/node-server';
+import { createDataStream, streamText } from 'ai';
+import { Hono } from 'hono';
+import { stream } from 'hono/streaming';
 
 const app = new Hono();
 
-app.post("/stream-data", async (c) => {
+app.post('/stream-data', async c => {
   // immediately start streaming the response
-  const stream = createUIMessageStream({
-    execute: ({ writer }) => {
-      writer.write({ type: "start" });
-
-      writer.write({
-        type: "data-custom",
-        data: {
-          custom: "Hello, world!",
-        },
-      });
+  const dataStream = createDataStream({
+    execute: async dataStreamWriter => {
+      dataStreamWriter.writeData('initialized call');
 
       const result = streamText({
-        model: "openai/gpt-4o",
-        prompt: "Invent a new holiday and describe its traditions.",
+        model: openai('gpt-4o'),
+        prompt: 'Invent a new holiday and describe its traditions.',
       });
 
-      writer.merge(
-        result.toUIMessageStream({
-          sendStart: false,
-          onError: (error) => {
-            // Error messages are masked by default for security reasons.
-            // If you want to expose the error message to the client, you can do so here:
-            return error instanceof Error ? error.message : String(error);
-          },
-        }),
-      );
+      result.mergeIntoDataStream(dataStreamWriter);
+    },
+    onError: error => {
+      // Error messages are masked by default for security reasons.
+      // If you want to expose the error message to the client, you can do so here:
+      return error instanceof Error ? error.message : String(error);
     },
   });
-  return createUIMessageStreamResponse({ stream });
+
+  // Mark the response as a v1 data stream:
+  c.header('X-Vercel-AI-Data-Stream', 'v1');
+  c.header('Content-Type', 'text/plain; charset=utf-8');
+
+  return stream(c, stream =>
+    stream.pipe(dataStream.pipeThrough(new TextEncoderStream())),
+  );
+});
+
+serve({ fetch: app.fetch, port: 8080 });
+```
+
+### Text Stream
+
+You can use the `textStream` property to get a text stream from the result and then pipe it to the response.
+
+```ts filename='index.ts' highlight="17"
+import { openai } from '@ai-sdk/openai';
+import { serve } from '@hono/node-server';
+import { streamText } from 'ai';
+import { Hono } from 'hono';
+import { stream } from 'hono/streaming';
+
+const app = new Hono();
+
+app.post('/', async c => {
+  const result = streamText({
+    model: openai('gpt-4o'),
+    prompt: 'Invent a new holiday and describe its traditions.',
+  });
+
+  c.header('Content-Type', 'text/plain; charset=utf-8');
+
+  return stream(c, stream => stream.pipe(result.textStream));
 });
 
 serve({ fetch: app.fetch, port: 8080 });

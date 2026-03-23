@@ -11,7 +11,7 @@ Global middlewares can be classified into different types depending on their ori
 | Internal          | Built-in middlewares (i.e. included with Strapi), automatically loaded                                                                                                                                                                  | `strapi::middleware-name`                                                                                            |
 | Application-level | Loaded from the `./src/middlewares` folder                                                                                                                                                                                              | `global::middleware-name`                                                                                            |
 | API-level         | Loaded from the `./src/api/[api-name]/middlewares` folder                                                                                                                                                                               | `api::api-name.middleware-name`                                                                                      |
-| Plugin            | Exported from `strapi-server.js` in the [`middlewares` property of the plugin interface](/cms/plugins-development/server-api#middlewares)                                                                                               | `plugin::plugin-name.middleware-name`                                                                                |
+| Plugin            | Exported from `strapi-server.js` in the [`middlewares` property of the plugin interface](/cms/plugins-development/server-policies-middlewares)                                                                                               | `plugin::plugin-name.middleware-name`                                                                                |
 | External          | Can be:either node modules installed with
 
 ### `compression`
@@ -79,6 +79,10 @@ details Example: Custom configuration for the poweredBy middleware
 ### `query`
 
 The `query` middleware is a query parser based on
+
+Example: Raise arrayLimit for long REST query lists
+
+Use a value that fits your longest bracket-encoded lists (for example many `populate[n]` entries). Adjust the number based on your needs and acceptable parsing cost.
 
 ### `response-time`
 

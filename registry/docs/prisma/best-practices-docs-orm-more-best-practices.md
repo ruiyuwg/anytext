@@ -454,6 +454,6 @@ Creating a new client inside the handler on every invocation risks exhausting da
 
 Next steps \[#next-steps]
 
-- [Query optimization](/optimize/recommendations)
+- [Query optimization](/query-insights)
 - [Raw queries](/orm/prisma-client/using-raw-sql/raw-queries)
 - [Prisma Migrate workflows](/orm/prisma-migrate/workflows/development-and-production)

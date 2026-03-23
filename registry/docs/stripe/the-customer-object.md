@@ -1174,6 +1174,32 @@
         - `subscriptions.data.payment_settings.payment_method_options.sepa_debit` (object, nullable)
           This sub-hash contains details about the SEPA Direct Debit payment method options to pass to invoices created by the subscription.
 
+        - `subscriptions.data.payment_settings.payment_method_options.upi` (object, nullable)
+          This sub-hash contains details about the UPI payment method options to pass to invoices created by the subscription.
+
+          - `subscriptions.data.payment_settings.payment_method_options.upi.mandate_options` (object, nullable)
+            Configuration options for setting up an eMandate
+
+            - `subscriptions.data.payment_settings.payment_method_options.upi.mandate_options.amount` (integer, nullable)
+              Amount to be charged for future payments.
+
+            - `subscriptions.data.payment_settings.payment_method_options.upi.mandate_options.amount_type` (enum, nullable)
+              One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
+              Possible enum values:
+              - `fixed`
+                If `fixed`, the `amount` param refers to the exact amount to be charged in future payments.
+
+              - `maximum`
+                If `maximum`, the amount charged can be up to the value passed for the `amount` param.
+
+            - `subscriptions.data.payment_settings.payment_method_options.upi.mandate_options.description` (string, nullable)
+              A description of the mandate or subscription that is meant to be displayed to the customer.
+
+              The maximum length is 20 characters.
+
+            - `subscriptions.data.payment_settings.payment_method_options.upi.mandate_options.end_date` (timestamp, nullable)
+              End date of the mandate or subscription.
+
         - `subscriptions.data.payment_settings.payment_method_options.us_bank_account` (object, nullable)
           This sub-hash contains details about the ACH direct debit payment method options to pass to invoices created by the subscription.
 
@@ -1377,6 +1403,9 @@
           SOFORT
 
           If set, the Subscription `collection_method` must be `send_invoice`.
+
+        - `upi`
+          UPI
 
         - `us_bank_account`
           ACH direct debit

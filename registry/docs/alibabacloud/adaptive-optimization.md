@@ -1,0 +1,3 @@
+The traditional query optimizer determines the optimal execution plans for SQL statements based on static statistical information. However, actual statistical information varies with data changes. The overall load of the database system also changes in real time. PolarDB for MySQL provides the adaptive optimization feature in the query optimizer. This feature can dynamically detect the environment and execution factors to adjust execution plans and ensure that the optimal execution plans are used.
+
+-   [Adaptive switching of execution plans](/help/en/polardb/polardb-for-mysql/user-guide/adaptive-execution-capability)

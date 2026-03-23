@@ -71,3 +71,62 @@ If the issue only happens on your network, try the following:
   - On your point of sale device, try resolving `10-42-42-42.test.device.stripe-terminal-local-reader.net` to an IP address. That hostname should resolve to the IP `10.42.42.42`. If it resolves to a different IP, or if DNS resolution fails, configure your point of sale device to use [Cloudflare DNS servers](https://1.1.1.1/dns/) (`1.1.1.1` and `1.0.0.1`) or [Google DNS servers](https://developers.google.com/speed/public-dns) (`8.8.8.8` and `8.8.4.4`) and try again.
   - Check your router’s configuration to see if connections between wireless (WiFi) clients and wired (Ethernet) clients are being blocked.
   - Make sure you can ping the Terminal reader’s IP address from your point of sale device.
+
+### Browser local network access
+
+When using the Terminal JavaScript SDK, newer browser versions require explicit permission before a website can connect to devices on the local network. If your point of sale runs in a browser and can connect to the reader in one browser but not another (for example, works in Safari but not Chrome or Firefox), the issue is likely a browser local network access (LNA) permission.
+
+To verify and fix LNA permissions in your browser:
+
+**Chrome**
+
+Chrome version 142 and later prompts you to allow local network access for each site. If you dismissed or blocked this prompt, do the following:
+
+1. Open your point of sale website in Chrome.
+2. Click the site settings icon in the address bar (the “tune” icon next to the URL).
+3. Select **Site settings**.
+4. Find **Local network** and set it to **Allow**.
+5. Refresh the page.
+
+You can also go to `chrome://settings/content/localNetworkAccess` to review and update all site permissions.
+
+If Chrome still can’t connect after granting permission, there might be a macOS bug where local network requests are blocked even though the permission appears granted. To fix this, clear the macOS local network permissions database:
+
+1. Start your Mac in [Recovery mode](https://support.apple.com/guide/mac-help/macos-recovery-a-mac-apple-silicon-mchl82829c17/mac).
+
+2. Open **Disk Utilities**.
+
+3. Click the **Data** volume in the left pane, then click **Mount**.
+
+4. Quit Disk Utilities.
+
+5. Open a Terminal window by clicking **Utilities** > **Terminal**.
+
+6. Run the following command to remove the local network permission database files:
+
+   ```
+   rm /Volumes/Data/Library/Preferences/com.apple.networkextension.plist /Volumes/Data/Library/Preferences/com.apple.networkextension.uuidcache.plist
+   ```
+
+7. Reboot your Mac by running `reboot`.
+
+8. After logging in, open **System Settings** > **Privacy & Security** > **Local Network** and confirm there are no entries.
+
+9. Open Chrome and attempt to retry the operation that was previously failing.
+
+**Firefox**
+
+Firefox also implements local network access restrictions. To manage these permissions, see [Control personal device and local network permissions in Firefox](https://support.mozilla.org/en-US/kb/control-personal-device-local-network-permissions-firefox#w_manage-access-permissions-to-your-device-and-local-network).
+
+**macOS**
+
+On macOS, you must grant apps explicit permission to access the local network. To confirm that your browser has this permission:
+
+1. Open **System Settings**.
+2. Click **Privacy & Security**.
+3. Click **Local Network**.
+4. Confirm that your browser is listed with the toggle enabled.
+
+**Browser extensions**
+
+Browser extensions can interfere with local network requests. To rule out extensions as a cause, try connecting to your reader in a private or incognito window, which disables most extensions by default.

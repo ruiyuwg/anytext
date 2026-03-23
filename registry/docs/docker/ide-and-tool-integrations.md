@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -44,6 +42,17 @@ Before configuring any tool:
    ```console
    $ docker model pull ai/qwen2.5-coder
    ```
+
+> Tip
+>
+> The default context size for many models (such as `gpt-oss`) is 4,096 tokens, which is limiting for coding tasks. You can repackage it with a larger context window:
+>
+> ```console
+> $ docker model pull gpt-oss
+> $ docker model package --from ai/gpt-oss --context-size 32000 gpt-oss:32k
+> ```
+>
+> Alternatively, models like ai/glm-4.7-flash, ai/qwen2.5-coder, and ai/devstral-small-2 come with 128K context by default and work without repackaging.
 
 ## [Cline (VS Code)](#cline-vs-code)
 
@@ -303,6 +312,40 @@ print(response.text)
 3. Select the model you want in OpenCode
 
 You can find more details in [this Docker Blog post](https://www.docker.com/blog/opencode-docker-model-runner-private-ai-coding/)
+
+## [Claude Code](#claude-code)
+
+[Claude Code](https://claude.com/product/claude-code) is [Anthropic's](https://www.anthropic.com/) command-line tool for agentic coding. It lives in your terminal, understands your codebase, and executes routine tasks, explains complex code, and handles Git workflows through natural language commands.
+
+### [Configuration](#configuration-6)
+
+1. Install Claude Code (see [docs](https://code.claude.com/docs/en/quickstart#step-1-install-claude-code))
+2. Use the `ANTHROPIC_BASE_URL` environment variable to point Claude Code at DMR. On Mac or Linux, you can do this, for example if you want to use the `gpt-oss:32k` model:
+
+   ```bash
+   ANTHROPIC_BASE_URL=http://localhost:12434 claude --model qwen2.5-coder
+   ```
+
+   On Windows (PowerShell) you can do it like this:
+
+   ```powershell
+   $env:ANTHROPIC_BASE_URL="http://localhost:12434"
+   claude --model gpt-oss:32k
+   ```
+
+> Tip
+>
+> To avoid setting the variable each time, add it to your shell profile (`~/.bashrc`, `~/.zshrc`, or equivalent):
+>
+> ```shell
+> export ANTHROPIC_BASE_URL=http://localhost:12434
+> ```
+
+You can find more details in [this Docker Blog post](https://www.docker.com/blog/run-claude-code-locally-docker-model-runner/)
+
+> Note
+>
+> While the other integrations on this page use the [OpenAI-compatible API](/ai/model-runner/api-reference/#openai-compatible-api), DMR also exposes a [Anthropic-compatible API](/ai/model-runner/api-reference/#anthropic-compatible-api) used here.
 
 ## [Common issues](#common-issues)
 

@@ -59,8 +59,16 @@ Sanity currently has CDNs for the API in these locations:
 
 - Northern Virginia, United States
 
-In addition, we utilize a short-lived global CDN in front of our own CDN. This extra CDN has points of presence in multiple locations on all continents. The short-lived global CDN does not cache private datasets or queries using the POST method.
+In addition, we utilize a short-lived global CDN in front of our own CDN. This extra CDN has points of presence in multiple locations on all continents. The short-lived global CDN does not cache private datasets or queries using the POST method. Note that we still recommend using the CDN when requesting data from both public and private datasets.
 
 ## IP addresses in use
 
 We maintain a unified list of all IPs that may be useful to permit in instances where you have egress filtering enabled. See the [IP addresses used by Sanity document](https://www.sanity.io/docs/content-lake/ip-addresses) for details.
+
+#### Related articles
+
+[Add live content to your application](https://www.sanity.io/docs/developer-guides/live-content-guide)
+
+[Technical limits](https://www.sanity.io/docs/content-lake/technical-limits)
+
+[Getting started with @sanity/client](https://www.sanity.io/docs/apis-and-sdks/js-client-getting-started)

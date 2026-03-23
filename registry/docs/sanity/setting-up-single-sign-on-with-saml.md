@@ -25,7 +25,7 @@ A new dialog will appear informing you that SAML SSO has not yet been configured
 
 ![Dialog informing the user that SAML SSO has not yet been configured](https://cdn.sanity.io/images/3do82whm/next/af796cdb46bca2202072958c9e08f1d7c2cd7000-4020x2259.png)
 
-### **2. Use the details presented to configure the external identity provider**
+### 2. Use the details presented to configure the external identity provider
 
 The process of configuring SAML SSO starts with Sanity providing you with the necessary details for setting up your external identity provider. You can use the copy buttons to put the correct strings on the clipboard. It's also possible to download the settings as a SAML XML file.
 
@@ -35,7 +35,7 @@ Be aware that different providers may use different terminology. Shown here is t
 
 ![Shows the Okta SAML settings screen with 4 fields highlighted with sequential integers from 1 to 4. These are labeled "Single sign-on URL", "Audience URI (SP Entity ID", "Name ID Format" and "Attribute statements"](https://cdn.sanity.io/images/3do82whm/next/3121993fea41db265f77342257c3c47e213c0bf6-4020x3090.png)
 
-Note the mapping of attributes for user accounts. Sanity requires `email`, `firstName`, and `lastName` to be mapped to corresponding values from the identity provider. `id` and `displayName` are optional.
+Note the mapping of attributes for user accounts. Sanity requires `email`, `firstName`, and `lastName` to be mapped to corresponding values from the identity provider. Additional attributes will sync as [user attributes](https://www.sanity.io/docs/http-reference/user-attributes).
 
 > \[!WARNING]
 > Gotcha

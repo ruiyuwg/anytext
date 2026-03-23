@@ -90,8 +90,8 @@ require 'json'
 require 'sinatra'
 require 'stripe'
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 post '/create-checkout-session' dosession = Stripe::Checkout::Session.create({
@@ -370,7 +370,7 @@ curl https://api.stripe.com/v1/checkout/sessions \
   -d "payment_intent_data[setup_future_usage]"=off_session
 ```
 
-If you use Checkout in `subscription` mode, Stripe automatically saves the payment method to charge it for subsequent payments. Card payment methods saved to customers using either `setup_future_usage` or `subscription` mode don’t appear for return purchases in Checkout (more on this below). We recommend using [custom text](https://docs.stripe.com/payments/checkout/customization/policies.md) to link out to any relevant terms regarding the usage of saved payment information.
+If you use Checkout in `subscription` mode, Stripe automatically saves the payment method to charge it for subsequent payments. Card payment methods saved to customers using either `setup_future_usage` or `subscription` mode don’t appear for return purchases in Checkout (more on this below). We recommend using [custom text](https://docs.stripe.com/payments/checkout/custom-components.md#customize-text) to link out to any relevant terms regarding the usage of saved payment information.
 
 > Global privacy laws are complicated and nuanced. We recommend contacting your legal and privacy team prior to implementing [setup\_future\_usage](https://docs.stripe.com/api/checkout/sessions/create.md#create_checkout_session-payment_intent_data-setup_future_usage) because it might implicate your existing privacy compliance framework. Refer to [the guidance issued by the European Protection Board](https://edpb.europa.eu/system/files/2021-05/recommendations022021_on_storage_of_credit_card_data_en_1.pdf) to learn more about saving payment details.
 
@@ -422,9 +422,9 @@ The customer can’t remove a payment method if it’s tied to an active subscri
 
 ## Optional: Separate authorization and capture \[Server-side]
 
-Stripe supports two-step card payments so you can first authorize a card, then capture funds later. When Stripe authorizes a payment, the card issuer guarantees the funds and places a hold for the payment amount on the customer’s card. You then have a certain amount of time to capture the funds, [depending on the card](https://docs.stripe.com/payments/place-a-hold-on-a-payment-method.md#auth-capture-limitations)). If you don’t capture the payment before the authorization expires, the payment is cancelled and the issuer releases the held funds.
+Stripe supports two-step card payments so you can first authorize a card, then capture funds later. When Stripe authorizes a payment, the card issuer guarantees the funds and places a hold for the payment amount on the customer’s card. You then have a certain amount of time to capture the funds, [depending on the card](https://docs.stripe.com/payments/place-a-hold-on-a-payment-method.md#auth-capture-limitations)). If you don’t capture the payment before the authorization expires, the payment is canceled and the issuer releases the held funds.
 
-Separating authorization and capture is useful if you need to take additional actions between confirming that a customer is able to pay and collecting their payment. For example, if you’re selling stock-limited items, you may need to confirm that an item purchased by your customer using Checkout is still available before capturing their payment and fulfilling the purchase. Accomplish this using the following workflow:
+Separating authorization and capture is useful if you need to take additional actions between confirming that a customer is able to pay and collecting their payment. For example, if you’re selling stock-limited items, you might need to confirm that an item purchased by your customer using Checkout is still available before capturing their payment and fulfilling the purchase. Accomplish this using the following workflow:
 
 1. Confirm that Stripe authorized the customer’s payment method.
 2. Consult your inventory management system to confirm that the item is still available.
@@ -519,8 +519,8 @@ require 'json'
 require 'sinatra'
 require 'stripe'
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 post '/create-checkout-session' do
@@ -535,8 +535,7 @@ post '/create-checkout-session' do
       },
       quantity: 1,
     }],
-    mode: 'payment',ui_mode: 'embedded',
-    return_url: 'https://example.com/checkout/return?session_id={CHECKOUT_SESSION_ID}'
+    mode: 'payment',ui_mode: 'embedded',return_url: 'https://example.com/checkout/return?session_id={CHECKOUT_SESSION_ID}'
   })
 
   {clientSecret: session.client_secret}.to_json
@@ -876,7 +875,7 @@ curl https://api.stripe.com/v1/checkout/sessions \
   -d "payment_intent_data[setup_future_usage]"=off_session
 ```
 
-If you use Checkout in `subscription` mode, Stripe automatically saves the payment method to charge it for subsequent payments. Card payment methods saved to customers using either `setup_future_usage` or `subscription` mode don’t appear for return purchases in Checkout (more on this below). We recommend using [custom text](https://docs.stripe.com/payments/checkout/customization/policies.md) to link out to any relevant terms regarding the usage of saved payment information.
+If you use Checkout in `subscription` mode, Stripe automatically saves the payment method to charge it for subsequent payments. Card payment methods saved to customers using either `setup_future_usage` or `subscription` mode don’t appear for return purchases in Checkout (more on this below). We recommend using [custom text](https://docs.stripe.com/payments/checkout/custom-components.md#customize-text) to link out to any relevant terms regarding the usage of saved payment information.
 
 > Global privacy laws are complicated and nuanced. We recommend contacting your legal and privacy team prior to implementing [setup\_future\_usage](https://docs.stripe.com/api/checkout/sessions/create.md#create_checkout_session-payment_intent_data-setup_future_usage) because it might implicate your existing privacy compliance framework. Refer to [the guidance issued by the European Protection Board](https://edpb.europa.eu/system/files/2021-05/recommendations022021_on_storage_of_credit_card_data_en_1.pdf) to learn more about saving payment details.
 
@@ -934,9 +933,9 @@ Let your customers [manage](https://docs.stripe.com/customer-management.md) thei
 
 ## Optional: Separate authorization and capture \[Server-side]
 
-Stripe supports two-step card payments so you can first authorize a card, then capture funds later. When Stripe authorizes a payment, the card issuer guarantees the funds and places a hold for the payment amount on the customer’s card. You then have a certain amount of time to capture the funds, [depending on the card](https://docs.stripe.com/payments/place-a-hold-on-a-payment-method.md#auth-capture-limitations)). If you don’t capture the payment before the authorization expires, the payment is cancelled and the issuer releases the held funds.
+Stripe supports two-step card payments so you can first authorize a card, then capture funds later. When Stripe authorizes a payment, the card issuer guarantees the funds and places a hold for the payment amount on the customer’s card. You then have a certain amount of time to capture the funds, [depending on the card](https://docs.stripe.com/payments/place-a-hold-on-a-payment-method.md#auth-capture-limitations)). If you don’t capture the payment before the authorization expires, the payment is canceled and the issuer releases the held funds.
 
-Separating authorization and capture is useful if you need to take additional actions between confirming that a customer is able to pay and collecting their payment. For example, if you’re selling stock-limited items, you may need to confirm that an item purchased by your customer using Checkout is still available before capturing their payment and fulfilling the purchase. Accomplish this using the following workflow:
+Separating authorization and capture is useful if you need to take additional actions between confirming that a customer is able to pay and collecting their payment. For example, if you’re selling stock-limited items, you might need to confirm that an item purchased by your customer using Checkout is still available before capturing their payment and fulfilling the purchase. Accomplish this using the following workflow:
 
 1. Confirm that Stripe authorized the customer’s payment method.
 2. Consult your inventory management system to confirm that the item is still available.
@@ -1340,6 +1339,11 @@ Render a **Pay** button that calls [confirm](https://docs.stripe.com/js/custom_c
 
 ```js
 const checkout = stripe.initCheckout({clientSecret});
+
+checkout.on('change', (session) => {
+  document.getElementById('pay-button').disabled = !session.canConfirm;
+});
+
 const loadActionsResult = await checkout.loadActions();
 
 if (loadActionsResult.type === 'success') {
@@ -1387,7 +1391,7 @@ const PayButton = () => {
 
   return (
     <div>
-      <button disabled={loading} onClick={handleClick}>
+      <button disabled={!checkoutState.checkout.canConfirm || loading} onClick={handleClick}>
         Pay
       </button>
       {error && <div>{error.message}</div>}
@@ -1791,9 +1795,9 @@ You can build your own form to collect shipping addresses.
 
 ## Optional: Separate authorization and capture \[Server-side]
 
-Stripe supports two-step card payments so you can first authorize a card, then capture funds later. When Stripe authorizes a payment, the card issuer guarantees the funds and places a hold for the payment amount on the customer’s card. You then have a certain amount of time to capture the funds, [depending on the card](https://docs.stripe.com/payments/place-a-hold-on-a-payment-method.md#auth-capture-limitations)). If you don’t capture the payment before the authorization expires, the payment is cancelled and the issuer releases the held funds.
+Stripe supports two-step card payments so you can first authorize a card, then capture funds later. When Stripe authorizes a payment, the card issuer guarantees the funds and places a hold for the payment amount on the customer’s card. You then have a certain amount of time to capture the funds, [depending on the card](https://docs.stripe.com/payments/place-a-hold-on-a-payment-method.md#auth-capture-limitations)). If you don’t capture the payment before the authorization expires, the payment is canceled and the issuer releases the held funds.
 
-Separating authorization and capture is useful if you need to take additional actions between confirming that a customer is able to pay and collecting their payment. For example, if you’re selling stock-limited items, you may need to confirm that an item purchased by your customer using Checkout is still available before capturing their payment and fulfilling the purchase. Accomplish this using the following workflow:
+Separating authorization and capture is useful if you need to take additional actions between confirming that a customer is able to pay and collecting their payment. For example, if you’re selling stock-limited items, you might need to confirm that an item purchased by your customer using Checkout is still available before capturing their payment and fulfilling the purchase. Accomplish this using the following workflow:
 
 1. Confirm that Stripe authorized the customer’s payment method.
 2. Consult your inventory management system to confirm that the item is still available.
@@ -1886,7 +1890,7 @@ A high-level overview of the payments integration this document describes. (See 
 
 Create a PaymentIntent on your server with an [amount](https://docs.stripe.com/api/payment_intents/create.md#create_payment_intent-amount) and [currency](https://docs.stripe.com/api/payment_intents/create.md#create_payment_intent-currency). In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default. You can manage payment methods from the [Dashboard](https://dashboard.stripe.com/settings/payment_methods). Stripe handles the return of eligible payment methods based on factors such as the transaction’s amount, currency, and payment flow.
 
-Stripe uses your [payment methods settings](https://dashboard.stripe.com/settings/payment_methods) to display the payment methods you have enabled. To see how your payment methods appear to customers, enter a transaction ID or set an order amount and currency in the [Dashboard](https://dashboard.stripe.com/settings/payment_methods/review). To override payment methods, manually list any that you want to enable using the [payment\_method\_types](https://docs.stripe.com/api/payment_intents/object.md#payment_intent_object-payment_method_types) attribute.
+Stripe uses your [payment methods settings](https://dashboard.stripe.com/settings/payment_methods) to display the payment methods you’ve enabled. To see how your payment methods appear to customers, enter a transaction ID or set an order amount and currency in the [Dashboard](https://dashboard.stripe.com/settings/payment_methods/review). To override payment methods, manually list any that you want to enable using the [payment\_method\_types](https://docs.stripe.com/api/payment_intents/object.md#payment_intent_object-payment_method_types) attribute.
 
 ```curl
 curl https://api.stripe.com/v1/payment_intents \
@@ -2125,8 +2129,8 @@ You can specify `setup_future_usage` on a PaymentIntent or Checkout Session to o
 
 ```ruby
 
-# Set your secret key. Remember to switch to your live secret key in production.
-# See your keys here: https://dashboard.stripe.com/apikeys
+# Don't put any keys in code. See https://docs.stripe.com/keys-best-practices.
+# Find your keys at https://dashboard.stripe.com/apikeys.
 Stripe.api_key = '<<YOUR_SECRET_KEY>>'
 
 post '/create-intent-and-customer-session' do
@@ -2357,7 +2361,7 @@ const {error} = await stripe.confirmPayment({
       {/* Show error message to your customers */}
       {errorMessage && <div>{errorMessage}</div>}
     </form>
-  )
+  );
 };
 
 export default CheckoutForm;
@@ -2754,7 +2758,7 @@ Learn more about using [ACH Direct Debit](https://docs.stripe.com/payments/ach-d
 | Scenario                                                                           | How to test                                                                                                                                                                                                                                                                                                                                    |
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Your customer successfully pays with a US bank account using instant verification. | Select **US bank account** and fill out the form. Click the test institution. Follow the instructions on the modal to link your bank account. Click your payment button.                                                                                                                                                                       |
-| Your customer successfully pays with a US bank account using microdeposits.        | Select **US bank account** and fill out the form. Click **Enter bank details manually instead**. Follow the instructions on the modal to link your bank account. You may use these [test account numbers](https://docs.stripe.com/payments/ach-direct-debit/accept-a-payment.md?platform=web#test-account-numbers). Click your payment button. |
+| Your customer successfully pays with a US bank account using microdeposits.        | Select **US bank account** and fill out the form. Click **Enter bank details manually instead**. Follow the instructions on the modal to link your bank account. You can use these [test account numbers](https://docs.stripe.com/payments/ach-direct-debit/accept-a-payment.md?platform=web#test-account-numbers). Click your payment button. |
 | Your customer fails to complete the bank account linking process.                  | Select **US bank account** and click the test institution or **Enter bank details manually instead**. Close the modal without completing it.                                                                                                                                                                                                   |
 
 ### BLIK
@@ -3548,7 +3552,7 @@ All customization is configured through the [PaymentSheet.Configuration](https:/
 
 ### Appearance
 
-Customize colors, fonts, and so on to match the look and feel of your app by using the [appearance API](https://docs.stripe.com/elements/appearance-api.md?platform=ios).
+Customize colors, fonts, and so on to match the look and feel of your app by using the [appearance API](https://docs.stripe.com/elements/appearance-api/mobile.md?platform=ios).
 
 ### Payment method layout
 
@@ -3585,37 +3589,6 @@ configuration.merchantDisplayName = "My app, Inc."
 var configuration = PaymentSheet.Configuration()
 configuration.style = .alwaysLight
 ```
-
-### Default billing details
-
-To set default values for billing details collected in the payment sheet, configure the `defaultBillingDetails` property. The `PaymentSheet` pre-populates its fields with the values that you provide.
-
-```swift
-var configuration = PaymentSheet.Configuration()
-configuration.defaultBillingDetails.address.country = "US"
-configuration.defaultBillingDetails.email = "foo@bar.com"
-```
-
-### Billing details collection
-
-Use `billingDetailsCollectionConfiguration` to specify how you want to collect billing details in the payment sheet.
-
-You can collect your customer’s name, email, phone number, and address.
-
-If you only want to billing details required by the payment method, set `billingDetailsCollectionConfiguration.attachDefaultsToPaymentMethod` to true. In that case, the `PaymentSheet.Configuration.defaultBillingDetails` are set as the payment method’s [billing details](https://docs.stripe.com/api/payment_methods/object.md?lang=node#payment_method_object-billing_details).
-
-If you want to collect additional billing details that aren’t necessarily required by the payment method, set `billingDetailsCollectionConfiguration.attachDefaultsToPaymentMethod` to false. In that case, the billing details collected through the `PaymentSheet` are set as the payment method’s billing details.
-
-```swift
-var configuration = PaymentSheet.Configuration()
-configuration.defaultBillingDetails.email = "foo@bar.com"
-configuration.billingDetailsCollectionConfiguration.name = .always
-configuration.billingDetailsCollectionConfiguration.email = .never
-configuration.billingDetailsCollectionConfiguration.address = .full
-configuration.billingDetailsCollectionConfiguration.attachDefaultsToPaymentMethod = true
-```
-
-> Consult with your legal counsel regarding laws that apply to collecting information. Only collect phone numbers if you need them for the transaction.
 
 ## Optional: Handle user logout
 
@@ -3834,9 +3807,9 @@ dependencies {
   // ...
 
   // Stripe Android SDK
-  implementation("com.stripe:stripe-android:22.8.1")
+  implementation("com.stripe:stripe-android:23.0.2")
   // Include the financial connections SDK to support US bank account as a payment method
-  implementation("com.stripe:financial-connections:22.8.1")
+  implementation("com.stripe:financial-connections:23.0.2")
 }
 ```
 
@@ -4315,7 +4288,7 @@ dependencies {
   // ...
 
   // Financial Connections Android SDK
-  implementation("com.stripe:financial-connections:22.8.1")
+  implementation("com.stripe:financial-connections:23.0.2")
 }
 ```
 
@@ -4327,7 +4300,7 @@ All customization is configured using the [PaymentSheet.Configuration](https://s
 
 ### Appearance
 
-Customize colors, fonts, and more to match the look and feel of your app by using the [appearance API](https://docs.stripe.com/elements/appearance-api.md?platform=android).
+Customize colors, fonts, and more to match the look and feel of your app by using the [appearance API](https://docs.stripe.com/elements/appearance-api/mobile.md?platform=android).
 
 ### Payment method layout
 
@@ -4370,51 +4343,6 @@ AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 // force light
 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 ```
-
-### Default billing details
-
-To set default values for billing details collected in the payment sheet, configure the `defaultBillingDetails` property. The `PaymentSheet` pre-populates its fields with the values that you provide.
-
-#### Kotlin
-
-```kotlin
-val address = PaymentSheet.Address(country = "US")
-val billingDetails = PaymentSheet.BillingDetails(
-  address = address,
-  email = "foo@bar.com"
-)
-val configuration = PaymentSheet.Configuration.Builder(merchantDisplayName = "Merchant, Inc.")
-  .defaultBillingDetails(billingDetails)
-  .build()
-```
-
-### Configure collection of billing details
-
-Use `BillingDetailsCollectionConfiguration` to specify how you want to collect billing details in the PaymentSheet.
-
-You can collect your customer’s name, email, phone number, and address.
-
-If you want to attach default billing details to the PaymentMethod object even when those fields aren’t collected in the UI, set `billingDetailsCollectionConfiguration.attachDefaultsToPaymentMethod` to `true`.
-
-#### Kotlin
-
-```kotlin
-val billingDetails = PaymentSheet.BillingDetails(
-  email = "foo@bar.com"
-)
-val billingDetailsCollectionConfiguration = BillingDetailsCollectionConfiguration(
-  attachDefaultsToPaymentMethod = true,
-  name = BillingDetailsCollectionConfiguration.CollectionMode.Always,
-  email = BillingDetailsCollectionConfiguration.CollectionMode.Never,
-  address = BillingDetailsCollectionConfiguration.AddressCollectionMode.Full,
-)
-val configuration = PaymentSheet.Configuration.Builder(merchantDisplayName = "Merchant, Inc.")
-  .defaultBillingDetails(billingDetails)
-  .billingDetailsCollectionConfiguration(billingDetailsCollectionConfiguration)
-  .build()
-```
-
-> Consult with your legal counsel regarding laws that apply to collecting information. Only collect phone numbers if you need them for the transaction.
 
 ## Optional: Handle user logout
 
@@ -5071,7 +4999,7 @@ function App() {
       publishableKey="<<YOUR_PUBLISHABLE_KEY>>"
       merchantIdentifier="MERCHANT_ID"
     >
-      // Your app code here
+      {/* Your app code here */}
     </StripeProvider>
   );
 }
@@ -5092,7 +5020,7 @@ await initPaymentSheet({
 
 When you call `initPaymentSheet`, pass in an [ApplePayParams](https://stripe.dev/stripe-react-native/api-reference/modules/PaymentSheet.html#ApplePayParams) with `merchantCountryCode` set to the country code of your business.
 
-In accordance with [Apple’s guidelines](https://developer.apple.com/design/human-interface-guidelines/apple-pay#Supporting-subscriptions) for recurring payments, you must also set a `cardItems` that includes a [RecurringCartSummaryItem](https://stripe.dev/stripe-react-native/api-reference/modules/ApplePay.html#RecurringCartSummaryItem) with the amount you intend to charge (for example, “$59.95 a month”).
+In accordance with [Apple’s guidelines](https://developer.apple.com/design/human-interface-guidelines/apple-pay#Supporting-subscriptions) for recurring payments, you must also set a `cardItems` that includes a [RecurringCartSummaryItem](https://stripe.dev/stripe-react-native/api-reference/modules/ApplePay.html#RecurringCartSummaryItem) with the amount you intend to charge (for example, “59.95 USD a month”).
 
 You can also adopt [merchant tokens](https://developer.apple.com/apple-pay/merchant-tokens/) by setting the `request` with its `type` set to `PaymentRequestType.Recurring`
 
@@ -5212,7 +5140,7 @@ All customization is configured using `initPaymentSheet`.
 
 ### Appearance
 
-Customize colors, fonts, and so on to match the look and feel of your app by using the [appearance API](https://docs.stripe.com/elements/appearance-api.md?platform=react-native).
+Customize colors, fonts, and so on to match the look and feel of your app by using the [appearance API](https://docs.stripe.com/elements/appearance-api/mobile.md?platform=react-native).
 
 ### Merchant display name
 
@@ -5244,50 +5172,6 @@ AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 // force light
 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 ```
-
-### Default billing details
-
-To set default values for billing details collected in the PaymentSheet, configure the `defaultBillingDetails` property. The `PaymentSheet` pre-populates its fields with the values that you provide.
-
-```javascript
-await initPaymentSheet({
-  // ...
-  defaultBillingDetails: {
-      email: 'foo@bar.com',
-      address: {
-        country: 'US',
-      },
-  },
-});
-```
-
-### Collect billing details
-
-Use `billingDetailsCollectionConfiguration` to specify how you want to collect billing details in the PaymentSheet.
-
-You can collect your customer’s name, email, phone number, and address.
-
-If you don’t intend to collect the values that the payment method requires, you must do the following:
-
-1. Attach the values that aren’t collected by `PaymentSheet` to the `defaultBillingDetails` property.
-2. Set `billingDetailsCollectionConfiguration.attachDefaultsToPaymentMethod` to `true`.
-
-```javascript
-await initPaymentSheet({
-  // ...
-  defaultBillingDetails: {
-    email: 'foo@bar.com',
-  }
-  billingDetailsCollectionConfiguration: {
-    name: PaymentSheet.CollectionMode.ALWAYS,
-    email: PaymentSheet.CollectionMode.NEVER,
-    address: PaymentSheet.AddressCollectionMode.FULL,
-    attachDefaultsToPaymentMethod: true
-  },
-});
-```
-
-> Consult with your legal counsel regarding laws that apply to collecting information. Only collect phone numbers if you need them for the transaction.
 
 ## Optional: Handle user logout
 

@@ -2,11 +2,11 @@
 
 Source: https://docs.langchain.com/langsmith/platform-setup
 
-This section covers how to host and manage LangSmith infrastructure. You can set up LangSmith for [observability](/langsmith/observability), [evaluation](/langsmith/evaluation), and [prompt engineering](/langsmith/prompt-engineering), or use the full platform experience with [LangSmith Deployment](/langsmith/deployments) to also deploy and manage your applications through the UI.
+This section covers how to host and manage LangSmith infrastructure. You can set up LangSmith for [observability](/langsmith/observability), [evaluation](/langsmith/evaluation), and [prompt engineering](/langsmith/prompt-engineering), or use the full platform experience with [LangSmith Deployment](/langsmith/deployment) to also deploy and manage your applications through the UI.
 
 **Start here if you're setting up or maintaining LangSmith infrastructure.**
 
-If you want to deploy an agent application, the [Deployment section](/langsmith/deployments) covers application structure and deployment configuration.
+If you want to deploy an agent application, the [Deployment section](/langsmith/deployment) covers application structure and deployment configuration.
 
 ## Choose how to set up LangSmith
 
@@ -36,7 +36,7 @@ Refer to the following table for a comparison:
 | **[Pricing](https://www.langchain.com/plans)** | Plus tier                           | Enterprise                                                        | Enterprise                                |
 | **Best for**                                   | Quick setup, managed infrastructure | Data residency requirements + managed control plane               | Full control, data isolation              |
 
-You can [run an Agent Server locally for free](/langsmith/local-server) for testing and development.
+You can [run an Agent Server locally for free](/langsmith/local-dev-testing) for testing and development.
 
 ### Related
 

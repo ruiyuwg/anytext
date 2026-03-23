@@ -8,7 +8,7 @@ The `vercel certs` command is used to manage certificates for domains, providing
 vercel certs ls
 ```
 
-*Using the vercel certs command to list all
+*Using the \`vercel certs\` command to list all
 certificates under the current scope.*
 
 ## Extended Usage
@@ -17,14 +17,14 @@ certificates under the current scope.*
 vercel certs issue [domain1, domain2, domain3]
 ```
 
-*Using the vercel certs command to issue certificates
+*Using the \`vercel certs\` command to issue certificates
 for multiple domains.*
 
 ```bash filename="terminal"
 vercel certs rm [certificate-id]
 ```
 
-*Using the vercel certs command to remove a
+*Using the \`vercel certs\` command to remove a
 certificate by ID.*
 
 ## Unique Options
@@ -39,8 +39,8 @@ The `--challenge-only` option can be used to only show the challenges needed to 
 vercel certs issue foo.com --challenge-only
 ```
 
-*Using the vercel certs command with the
-\--challenge-only option.*
+*Using the \`vercel certs\` command with the
+\`--challenge-only\` option.*
 
 ### Limit
 
@@ -50,12 +50,12 @@ The `--limit` option can be used to specify the maximum number of certs returned
 vercel certs ls --limit 100
 ```
 
-*Using the vercel certs ls command with the
-\--limit option.*
+*Using the \`vercel certs ls\` command with the
+\`--limit\` option.*
 
 ## Global Options
 
-The following [global options](/docs/cli/global-options) can be passed when using the \`\` command:
+The following [global options](/docs/cli/global-options) can be passed when using the  command:
 
 - [`--cwd`](/docs/cli/global-options#current-working-directory)
 - [`--debug`](/docs/cli/global-options#debug)
@@ -70,5 +70,5 @@ For more information on global options and their usage, refer to the [options se
 
 title: "vercel contract"
 description: "Learn how to view contract commitment information for your Vercel account using the vercel contract CLI command."
-last\_updated: "2026-03-08T05:03:12.045Z"
+last\_updated: "2026-03-23T09:40:06.604Z"
 source: "https://vercel.com/docs/cli/contract"

@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -34,7 +32,7 @@ To pin to a specific version of Buildx, use the `version` input. For example, to
 
 ```yaml
 - name: Set up Docker Buildx
-  uses: docker/setup-buildx-action@v3
+  uses: docker/setup-buildx-action@v4
   with:
     version: v0.10.0
 ```
@@ -43,7 +41,7 @@ To pin to a specific version of BuildKit, use the `image` option in the `driver-
 
 ```yaml
 - name: Set up Docker Buildx
-  uses: docker/setup-buildx-action@v3
+  uses: docker/setup-buildx-action@v4
   with:
     driver-opts: image=moby/buildkit:v0.11.0
 ```
@@ -63,12 +61,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         with:
           buildkitd-flags: --debug
       
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
 ```
 
 Logs will be available at the end of a job:
@@ -94,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         with:
           buildkitd-config-inline: |
             [registry."docker.io"]
@@ -126,7 +124,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         with:
           config: .github/buildkitd.toml
 ```
@@ -186,7 +184,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         with:
           driver: remote
           endpoint: tcp://oneprovider:1234
@@ -233,7 +231,7 @@ jobs:
           private-key-name: aws_graviton2
       
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         with:
           endpoint: ssh://me@graviton2
 ```
@@ -259,7 +257,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         with:
           driver: remote
           endpoint: tcp://graviton2:1234
@@ -284,10 +282,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         with:
           driver: kubernetes
       
@@ -315,21 +313,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up builder1
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         id: builder1
       
       - name: Set up builder2
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
         id: builder2
       
       - name: Build against builder1
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           builder: ${{ steps.builder1.outputs.name }}
           target: mytarget1
       
       - name: Build against builder2
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           builder: ${{ steps.builder2.outputs.name }}
           target: mytarget2

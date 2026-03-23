@@ -1,0 +1,202 @@
+# Together.ai Provider
+
+The [Together.ai](https://together.ai) provider contains support for 200+ open-source models through the [Together.ai API](https://docs.together.ai/reference).
+
+## Setup
+
+The Together.ai provider is available via the `@ai-sdk/togetherai` module. You can
+install it with
+
+## Provider Instance
+
+You can import the default provider instance `togetherai` from `@ai-sdk/togetherai`:
+
+```ts
+import { togetherai } from '@ai-sdk/togetherai';
+```
+
+If you need a customized setup, you can import `createTogetherAI` from `@ai-sdk/togetherai`
+and create a provider instance with your settings:
+
+```ts
+import { createTogetherAI } from '@ai-sdk/togetherai';
+
+const togetherai = createTogetherAI({
+  apiKey: process.env.TOGETHER_API_KEY ?? '',
+});
+```
+
+You can use the following optional settings to customize the Together.ai provider instance:
+
+- **baseURL** *string*
+
+  Use a different URL prefix for API calls, e.g. to use proxy servers.
+  The default prefix is `https://api.together.xyz/v1`.
+
+- **apiKey** *string*
+
+  API key that is being sent using the `Authorization` header. It defaults to
+  the `TOGETHER_API_KEY` environment variable.
+
+- **headers** *Record\<string,string>*
+
+  Custom headers to include in the requests.
+
+- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+
+  Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
+  Defaults to the global `fetch` function.
+  You can use it as a middleware to intercept requests,
+  or to provide a custom fetch implementation for e.g. testing.
+
+## Language Models
+
+You can create [Together.ai models](https://docs.together.ai/docs/serverless-models) using a provider instance. The first argument is the model id, e.g. `google/gemma-2-9b-it`.
+
+```ts
+const model = togetherai('google/gemma-2-9b-it');
+```
+
+### Reasoning Models
+
+Together.ai exposes the thinking of `deepseek-ai/DeepSeek-R1` in the generated text using the `<think>` tag.
+You can use the `extractReasoningMiddleware` to extract this reasoning and expose it as a `reasoning` property on the result:
+
+```ts
+import { togetherai } from '@ai-sdk/togetherai';
+import { wrapLanguageModel, extractReasoningMiddleware } from 'ai';
+
+const enhancedModel = wrapLanguageModel({
+  model: togetherai('deepseek-ai/DeepSeek-R1'),
+  middleware: extractReasoningMiddleware({ tagName: 'think' }),
+});
+```
+
+You can then use that enhanced model in functions like `generateText` and `streamText`.
+
+### Example
+
+You can use Together.ai language models to generate text with the `generateText` function:
+
+```ts
+import { togetherai } from '@ai-sdk/togetherai';
+import { generateText } from 'ai';
+
+const { text } = await generateText({
+  model: togetherai('meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo'),
+  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+});
+```
+
+Together.ai language models can also be used in the `streamText` function
+(see [AI SDK Core](/docs/ai-sdk-core)).
+
+The Together.ai provider also supports [completion models](https://docs.together.ai/docs/serverless-models#language-models) via (following the above example code) `togetherai.completion()` and [embedding models](https://docs.together.ai/docs/serverless-models#embedding-models) via `togetherai.textEmbedding()`.
+
+## Model Capabilities
+
+| Model                                          | Image Input         | Object Generation   | Tool Usage          | Tool Streaming      |
+| ---------------------------------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| `meta-llama/Meta-Llama-3.3-70B-Instruct-Turbo` |  |  |  |  |
+| `meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo`  |  |  |  |  |
+| `mistralai/Mixtral-8x22B-Instruct-v0.1`        |  |  |  |  |
+| `mistralai/Mistral-7B-Instruct-v0.3`           |  |  |  |  |
+| `deepseek-ai/DeepSeek-V3`                      |  |  |  |  |
+| `google/gemma-2b-it`                           |  |  |  |  |
+| `Qwen/Qwen2.5-72B-Instruct-Turbo`              |  |  |  |  |
+| `databricks/dbrx-instruct`                     |  |  |  |  |
+
+The table above lists popular models. Please see the [Together.ai
+docs](https://docs.together.ai/docs/serverless-models) for a full list of
+available models. You can also pass any available provider model ID as a
+string if needed.
+
+## Image Models
+
+You can create Together.ai image models using the `.image()` factory method.
+For more on image generation with the AI SDK see [generateImage()](/docs/reference/ai-sdk-core/generate-image).
+
+```ts
+import { togetherai } from '@ai-sdk/togetherai';
+import { experimental_generateImage as generateImage } from 'ai';
+
+const { images } = await generateImage({
+  model: togetherai.image('black-forest-labs/FLUX.1-dev'),
+  prompt: 'A delighted resplendent quetzal mid flight amidst raindrops',
+});
+```
+
+You can pass optional provider-specific request parameters using the `providerOptions` argument.
+
+```ts
+import { togetherai } from '@ai-sdk/togetherai';
+import { experimental_generateImage as generateImage } from 'ai';
+
+const { images } = await generateImage({
+  model: togetherai.image('black-forest-labs/FLUX.1-dev'),
+  prompt: 'A delighted resplendent quetzal mid flight amidst raindrops',
+  size: '512x512',
+  // Optional additional provider-specific request parameters
+  providerOptions: {
+    togetherai: {
+      steps: 40,
+    },
+  },
+});
+```
+
+For a complete list of available provider-specific options, see the [Together.ai Image Generation API Reference](https://docs.together.ai/reference/post_images-generations).
+
+### Model Capabilities
+
+Together.ai image models support various image dimensions that vary by model. Common sizes include 512x512, 768x768, and 1024x1024, with some models supporting up to 1792x1792. The default size is 1024x1024.
+
+| Available Models                           |
+| ------------------------------------------ |
+| `stabilityai/stable-diffusion-xl-base-1.0` |
+| `black-forest-labs/FLUX.1-dev`             |
+| `black-forest-labs/FLUX.1-dev-lora`        |
+| `black-forest-labs/FLUX.1-schnell`         |
+| `black-forest-labs/FLUX.1-canny`           |
+| `black-forest-labs/FLUX.1-depth`           |
+| `black-forest-labs/FLUX.1-redux`           |
+| `black-forest-labs/FLUX.1.1-pro`           |
+| `black-forest-labs/FLUX.1-pro`             |
+| `black-forest-labs/FLUX.1-schnell-Free`    |
+
+Please see the [Together.ai models
+page](https://docs.together.ai/docs/serverless-models#image-models) for a full
+list of available image models and their capabilities.
+
+## Embedding Models
+
+You can create Together.ai embedding models using the `.textEmbedding()` factory method.
+For more on embedding models with the AI SDK see [embed()](/docs/reference/ai-sdk-core/embed).
+
+```ts
+import { togetherai } from '@ai-sdk/togetherai';
+import { embed } from 'ai';
+
+const { embedding } = await embed({
+  model: togetherai.textEmbedding('togethercomputer/m2-bert-80M-2k-retrieval'),
+  value: 'sunny day at the beach',
+});
+```
+
+### Model Capabilities
+
+| Model                                            | Dimensions | Max Tokens |
+| ------------------------------------------------ | ---------- | ---------- |
+| `togethercomputer/m2-bert-80M-2k-retrieval`      | 768        | 2048       |
+| `togethercomputer/m2-bert-80M-8k-retrieval`      | 768        | 8192       |
+| `togethercomputer/m2-bert-80M-32k-retrieval`     | 768        | 32768      |
+| `WhereIsAI/UAE-Large-V1`                         | 1024       | 512        |
+| `BAAI/bge-large-en-v1.5`                         | 1024       | 512        |
+| `BAAI/bge-base-en-v1.5`                          | 768        | 512        |
+| `sentence-transformers/msmarco-bert-base-dot-v5` | 768        | 512        |
+| `bert-base-uncased`                              | 768        | 512        |
+
+For a complete list of available embedding models, see the [Together.ai models
+page](https://docs.together.ai/docs/serverless-models#embedding-models).
+
+# Cohere

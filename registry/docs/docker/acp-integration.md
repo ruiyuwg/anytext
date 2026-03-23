@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -41,7 +39,7 @@ The difference from running Docker Agent in a terminal: file operations go throu
 Before configuring your editor, you need:
 
 - **Docker Agent installed** - See the [installation guide](https://docs.docker.com/ai/docker-agent/#installation)
-- **Agent configuration** - A YAML file defining your agent. See the [tutorial](https://docs.docker.com/ai/docker-agent/tutorial/) or [example configurations](https://github.com/docker/cagent/tree/main/examples)
+- **Agent configuration** - A YAML file defining your agent. See the [tutorial](https://docs.docker.com/ai/docker-agent/tutorial/) or [example configurations](https://github.com/docker/docker-agent/tree/main/examples)
 - **Editor with ACP support** - Neovim, Intellij, Zed, etc.
 
 Your agents will use model provider API keys from your shell environment (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, etc.). Make sure these are set before launching your editor.
@@ -167,7 +165,7 @@ If the agent starts but can't access files or perform other actions, check:
 - Explore the [toolsets reference](https://docs.docker.com/ai/docker-agent/reference/toolsets/) to learn what tools are available
 - Add [RAG for codebase search](https://docs.docker.com/ai/docker-agent/rag/) to your agent
 - Check the [CLI reference](https://docs.docker.com/ai/docker-agent/reference/cli/) for all `docker agent serve acp` options
-- Browse [example configurations](https://github.com/docker/cagent/tree/main/examples) for inspiration
+- Browse [example configurations](https://github.com/docker/docker-agent/tree/main/examples) for inspiration
 
 [Edit this page](https://github.com/docker/docs/edit/main/content/manuals/ai/docker-agent/integrations/acp.md)
 

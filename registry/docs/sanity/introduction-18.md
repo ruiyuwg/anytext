@@ -1,104 +1,139 @@
 # Introduction
 
-Studio plugins provide a way to reuse pieces of Studio configurations across multiple studios and workspaces, while also helping you organize your studio features and reduce clutter in your configuration.
+By combining the tool with the builder API, Studio provides a way to organize your content and create intuitive workflows for your content editors. With the Structure Builder API, you can customize how lists, documents, views, and menus are organized within Studio.
 
-You can even use plugins from the community to add new schema types, input components, tools, and other features to enhance your content editing experience without having to build everything from scratch.
+Here are some ways you can use the Structure tool with the Structure Builder API:
 
-Here are some ways you can use Studio plugins:
+- **Customize document browsing** by organizing content into logical groups, making it easier for editors to find what they need.
+- **Create specialized document views** that provide contextual information or alternative ways to interact with your content.
+- **Build custom editing workflows** that guide editors through complex content creation processes.
+- **Design intuitive navigation** that reflects the structure of your content model.
 
-- Add specialized input components like color pickers, map interfaces, multi-select arrays, and more.
-- Create custom tools that appear in the Studio navigation.
-- Add internationalization support for multiple languages.
-- Share complex schema types.
-
-You can find a collection of official and community plugins on the [Sanity Exchange](https://www.sanity.io/plugins)., and in the [official plugins repo](https://github.com/sanity-io/plugins).
+> \[!TIP]
+> Where's the desk?
+> In earlier versions of Sanity, Structure was called the "Desk" tool. You may still see reference to this in filenames or tutorials around the web.
 
 ## Requirements
 
-- Most plugins require Sanity Studio v3 or later. We suggest updating to v4+.
+- New projects come pre-configured with the Structure tool. For existing projects, you'll need to [install it by updating your project's configuration file](https://www.sanity.io/docs/studio/structure-tool).
 
 ## Core concepts
 
-Understanding how plugins work in Sanity Studio will help you both use existing plugins and develop your own. If you're using any official plugins like Vision or Presentation, you may have already seen these concepts in action.
+### Structure Builder API
 
-### Installation and configuration
-
-Plugins for Sanity Studio are installed like any other dependency using your package manager. After installation, import the plugin and add it to the `plugins` array in your studio configuration.
-
-**sanity.config.ts**
+Customizing the structure tool centers around using the Structure Builder API. It uses a structure builder object (often displayed as `S`) to chain builder methods. For example:
 
 ```typescript
-import {defineConfig} from 'sanity'
-import {colorInput} from '@sanity/color-input'
-
-export default defineConfig({
-  // ...
-  plugins: [colorInput()],
-})
-```
-
-Many plugins accept configuration options that can be passed when initializing the plugin:
-
-**sanity.config.ts**
-
-```typescript
-export default defineConfig({
+ export default defineConfig({
   // ...
   plugins: [
-    customPlugin({ 
-      customOption: true
-    }
-  ]
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title('Document Types')
+          .items([...S.documentTypeListItems()]),
+    }),
+  ],
 })
 ```
 
-#### Learn more
+The most common builder methods are:
 
-[Installing and configuring plugins](https://www.sanity.io/docs/studio/installing-and-configuring-plugins)
+- `S.list()`: creates a list (a container of items).
+- `S.listItem()`: creates an item in a list.
+- `S.documentTypeList()`: list of documents of a given schema type.
+- `S.document()`: a single document editor node.
+- `S.divider()`: adds a visual divider.
 
-[Explore available plugins](https://www.sanity.io/plugins)
+### Collapsable panes
 
-### Plugin development
+Collapsable panes are the building blocks of the Structure tool's interface. These panes have a title and contain a list of document types, a list of documents, a form, or a custom component. They can be collapsed to make more space within the window, providing a flexible way to navigate complex content structures.
 
-Plugins are created using the `definePlugin` function, which accepts most of the same properties as the `defineConfig` API. This allows you to encapsulate specific functionality and configuration in a portable way.
+Panes can be nested, with child panes opening to the right of their parent. This creates a visual hierarchy that helps editors understand where they are in the content structure.
 
-**myPlugin.ts**
+### Pane types
 
-```typescript
-import { definePlugin } from 'sanity'
+There are four main types of panes you can work with:
 
-export const myPlugin = definePlugin({
-  name: 'my-custom-plugin',
-  // Add schema types, tools, components, etc.
-})
-```
+#### List
 
-Plugins can also include other plugins, allowing you to build features on top of each other in a modular way.
+A list contains one or more list items and is generally considered to be static. It's useful for displaying a fixed set of options, such as document types within your schema.
 
-#### Learn more
+#### Document list
 
-[Developing plugins](https://www.sanity.io/docs/studio/developing-plugins)
+Optimized for displaying a collection of documents, a document list keeps itself updated in real-time as documents are created, modified, or deleted. It uses GROQ filters to determine which documents to display and supports infinite scrolling for large collections.
 
-[Plugins API](https://www.sanity.io/docs/studio/plugins-api-reference)
+#### Document (and views)
 
-### Publishing plugins
+A document pane displays a single document and can include multiple views, such as the default form view and custom views you create. Each view can show different aspects of the document or provide specialized interfaces for working with the content.
 
-When you've developed a plugin that you want to share with others, you can publish it as an npm package. The recommended approach is to use [@sanity/plugin-kit](https://github.com/sanity-io/plugin-kit), which handles bundling and other package preparation tasks.
+### Child resolvers
 
-#### Learn more
+Child resolvers are functions that determine what should be displayed when a user navigates to a specific item. They allow you to create dynamic, nested structures that respond to user actions and content changes.
 
-[Publishing plugins](https://www.sanity.io/docs/studio/publishing-plugins)
+#### Get started with structure builder
 
-### Internationalization
-
-Plugins can support multiple languages through Sanity's internationalization API. This allows plugin UI elements to be displayed in the user's preferred language, enhancing the user experience for international teams.
-
-#### Learn more
-
-[Internationalizing plugins](https://www.sanity.io/docs/studio/internationalizing-plugins-ui)
+[Structure Builder tutorial](https://www.sanity.io/docs/studio/structure-builder-introduction)
 
 ## Limitations
 
-- Some areas of the Studio UI may not fully support plugin customization.
-- Plugins must be compatible with the version of Sanity Studio you're using.
-- Plugins with complex dependencies may increase your Studio bundle size.
+- The Structure tool's document list has a limited view of 2000 documents. If you find yourself running into this limitation, consider customizing your Structure configuration to organize documents into narrower categories.
+- Custom views cannot directly modify document content outside of the standard form fields without additional configuration. For highly complex custom views, consider using the App SDK instead.
+- Complex custom structures may impact performance, especially in projects with large numbers of documents.
+
+## Handling intents
+
+Intents are Studio's internal routing mechanism. When a user clicks a search result, follows an **Open in Studio** link from Visual Editing, or uses a **Create new** button, Studio fires an intent (like `edit` or `create`) with parameters such as the document ID and type. The Structure Tool resolves that intent by finding the right pane in your structure.
+
+`documentTypeList` handles intent routing automatically. When you add a custom `.child()` resolver, Studio can no longer determine which pane should handle the intent. Add `canHandleIntent` to tell Studio where to route.
+
+### Common symptoms of missing intent handling
+
+If you're using a custom `.child()` resolver and notice any of these, missing `canHandleIntent` could be the cause:
+
+- **Documents open in the wrong pane.** The document opens as a bare editor instead of navigating to the correct location in your structure.
+- **Open in Studio links from Visual Editing don't route correctly.**
+- **Search results land in the wrong place.** Global search can bypass your custom structure entirely.
+- **Create new buttons may not work as expected.** Custom structures that replace `documentTypeList` can lose the built-in create intent handling.
+
+### Adding intent handling
+
+Add `canHandleIntent` to any list that uses a custom `.child()` resolver. The function receives the intent name and parameters, and returns `true` if the pane should handle the intent:
+
+**structure.ts**
+
+```typescript
+// structure.ts
+import {StructureResolver} from 'sanity/structure'
+
+export const structure: StructureResolver = (S) =>
+  S.list()
+    .title('Content')
+    .items([
+      // Built-in documentTypeList: intent handling works automatically
+      S.documentTypeListItem('author').title('Authors'),
+
+      // Custom child resolver: needs canHandleIntent
+      S.listItem()
+        .title('Blog Posts')
+        .schemaType('post')
+        .child(
+          S.documentTypeList('post')
+            .title('Blog Posts')
+            .child((documentId) =>
+              S.document()
+                .documentId(documentId)
+                .schemaType('post')
+            )
+            .canHandleIntent((intentName, params) =>
+              ['create', 'edit'].includes(intentName) && params.type === 'post'
+            )
+        ),
+    ])
+```
+
+> \[!WARNING]
+> Custom .child() resolvers need intent handling
+> If you use `.child()` on a `documentTypeList`, add `canHandleIntent`. Without it, intents like search, Visual Editing links, and **Create new** buttons may not route to your custom structure.
+
+For the full `canHandleIntent` signature and parameters, see the [Structure Builder reference](https://www.sanity.io/docs/studio/structure-builder-reference).

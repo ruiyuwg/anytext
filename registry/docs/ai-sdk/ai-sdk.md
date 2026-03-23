@@ -35,7 +35,7 @@ We've built some [templates](https://vercel.com/templates?type=ai) that include 
 
 ## Join our Community
 
-If you have questions about anything related to the AI SDK, you're always welcome to ask our community on [the Vercel Community](https://community.vercel.com/c/ai-sdk/62).
+If you have questions about anything related to the AI SDK, you're always welcome to ask our community on [GitHub Discussions](https://github.com/vercel/ai/discussions).
 
 ## `llms.txt` (for Cursor, Windsurf, Copilot, Claude etc.)
 
@@ -56,4 +56,4 @@ Based on the above documentation, answer the following:
 {your question}
 ```
 
-# Overview
+# AI SDK 5 Beta

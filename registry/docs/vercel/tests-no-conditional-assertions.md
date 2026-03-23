@@ -92,7 +92,7 @@ The default configuration is:
 
 title: "TESTS\_NO\_ONLY"
 description: "Requires that focused tests (i.e. it.only()) are unfocused."
-last\_updated: "2026-03-08T05:03:12.893Z"
+last\_updated: "2026-03-23T09:40:07.863Z"
 source: "https://vercel.com/docs/conformance/rules/TESTS\_NO\_ONLY"
 
 # TESTS\_NO\_ONLY
@@ -158,5 +158,5 @@ The default configuration is:
 
 title: "TYPESCRIPT\_CONFIGURATION"
 description: "Requires that a workspace package that uses TypeScript files has configured TypeScript correctly for that workspace."
-last\_updated: "2026-03-08T05:03:12.898Z"
+last\_updated: "2026-03-23T09:40:07.868Z"
 source: "https://vercel.com/docs/conformance/rules/TYPESCRIPT\_CONFIGURATION"

@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/langsmith/playground-model-providers
 
-The LangSmith [prompt playground](/langsmith/prompt-engineering-concepts#prompt-playground) supports a wide range of model providers. You can select a provider, configure your preferred settings, and save these configurations to reuse across multiple prompts.
+The [Playground](/langsmith/prompt-engineering-concepts#playground) supports a wide range of model providers. You can select a provider, configure your preferred settings, and save these configurations to reuse across multiple prompts.
 
 Use this page for a list of the available providers and their configuration options:
 
@@ -585,7 +585,7 @@ Set this when running experiments or evaluations to avoid hitting rate limits.
 ## Next steps
 
 ```
-Learn how to create and manage model configurations in the playground.
+Learn how to create and manage model configurations in the Playground.
 
 
 

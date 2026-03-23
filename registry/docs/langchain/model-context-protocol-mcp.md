@@ -284,7 +284,7 @@ const client = new MultiServerMCPClient({
 
 Client launches server as a subprocess and communicates via standard input/output. Best for local tools and simple setups.
 
-Unlike HTTP transports, `stdio` connections are inherently **stateful**—the subprocess persists for the lifetime of the client connection. However, when using `MultiServerMCPClient` without explicit session management, each tool call still creates a new session. See [stateful sessions](#stateful-sessions) for managing persistent connections.
+Unlike HTTP transports, `stdio` connections are inherently **stateful**: the subprocess persists for the lifetime of the client connection. However, when using `MultiServerMCPClient` without explicit session management, each tool call still creates a new session. See [stateful sessions](#stateful-sessions) for managing persistent connections.
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 const client = new MultiServerMCPClient({

@@ -1,6 +1,6 @@
 # revalidatePath
 
-`revalidatePath` allows you to invalidate [cached data](/docs/app/guides/caching) on-demand for a specific path.
+`revalidatePath` allows you to invalidate [cached data](/docs/app/getting-started/caching) on-demand for a specific path.
 
 ## Usage
 
@@ -19,10 +19,10 @@
 revalidatePath(path: string, type?: 'page' | 'layout'): void;
 ```
 
-- `path`: Either a route pattern corresponding to the data you want to revalidate, for example `/product/[slug]`, or a specific URL, `/product/123`. Do not append `/page` or `/layout`, use the `type` parameter instead. Must not exceed 1024 characters. This value is case-sensitive.
-- `type`: (optional) `'page'` or `'layout'` string to change the type of path to revalidate. If `path` contains a dynamic segment, for example `/product/[slug]`, this parameter is required. If `path` is a specific URL, `/product/1`, omit `type`.
+- `path`: Either a string that represents your route file structure. This can be a literal path like `/product/123`, or a route pattern with dynamic segments like `/product/[slug]`. Do not append `/page` or `/layout`, use the `type` parameter instead. Must not exceed 1024 characters. This value is case-sensitive. You do not need to include a trailing slash, regardless of your [`trailingSlash`](/docs/app/api-reference/config/next-config-js/trailingSlash) config.
+- `type`: (optional) `'page'` or `'layout'` string to change the type of path to revalidate. If `path` contains a dynamic segment, for example `/product/[slug]`, this parameter is required. If `path` is a literal path like `/product/1`, omit `type`.
 
-Use a specific URL when you want to refresh a [single page](#revalidating-a-specific-url). Use a route pattern plus `type` to refresh [multiple URLs](#revalidating-a-page-path).
+Use a literal path when you want to refresh a [single page](#revalidating-a-specific-path). Use a route pattern plus `type` to refresh [all matching pages](#revalidating-a-page-path).
 
 ## Returns
 
@@ -34,17 +34,48 @@ The path parameter can point to pages, layouts, or route handlers:
 
 - **Pages**: Invalidates the specific page
 - **Layouts**: Invalidates the layout (the `layout.tsx` at that segment), all nested layouts beneath it, and all pages beneath them
-- **Route Handlers**: Invalidates Data Cache entries accessed within route handlers. For example `revalidatePath("/api/data")` invalidates this GET handler:
+- **Route Handlers**: Invalidates cached data accessed within route handlers. For example `revalidatePath("/api/data")` invalidates this GET handler:
 
 ```ts filename="app/api/data/route.ts"
 export async function GET() {
-  const data = await fetch("https://api.vercel.app/blog", {
-    cache: "force-cache",
-  });
+  const data = await fetch('https://api.vercel.app/blog', {
+    cache: 'force-cache',
+  })
 
-  return Response.json(await data.json());
+  return Response.json(await data.json())
 }
 ```
+
+## Using `revalidatePath` with rewrites
+
+When using [rewrites](/docs/app/api-reference/config/next-config-js/rewrites), you must pass the **destination** path (the actual route file location), not the source path that appears in the browser's address bar.
+
+For example, if you have a rewrite from `/blog` to `/news`:
+
+```js filename="next.config.js"
+module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/blog',
+        destination: '/news',
+      },
+    ]
+  },
+}
+```
+
+To revalidate this page, use the destination path:
+
+```ts
+// Correct: use the destination path
+revalidatePath('/news')
+
+// Incorrect: the source path won't match the cache entry
+revalidatePath('/blog')
+```
+
+This is because `revalidatePath` operates on the route file structure, not the URL visible to users. Cache entries are tagged based on which route file renders them.
 
 ## Relationship with `revalidateTag` and `updateTag`
 
@@ -58,14 +89,14 @@ When you call `revalidatePath`, only the specified path gets fresh data on the n
 
 ```tsx
 // Page A: /blog
-const posts = await fetch("https://api.vercel.app/blog", {
-  next: { tags: ["posts"] },
-});
+const posts = await fetch('https://api.vercel.app/blog', {
+  next: { tags: ['posts'] },
+})
 
 // Page B: /dashboard
-const recentPosts = await fetch("https://api.vercel.app/blog?limit=5", {
-  next: { tags: ["posts"] },
-});
+const recentPosts = await fetch('https://api.vercel.app/blog?limit=5', {
+  next: { tags: ['posts'] },
+})
 ```
 
 After calling `revalidatePath('/blog')`:
@@ -80,15 +111,15 @@ Learn about the difference between [`revalidateTag` and `updateTag`](/docs/app/a
 `revalidatePath` and `updateTag` are complementary primitives that are often used together in utility functions to ensure comprehensive data consistency across your application:
 
 ```ts
-"use server";
+'use server'
 
-import { revalidatePath, updateTag } from "next/cache";
+import { revalidatePath, updateTag } from 'next/cache'
 
 export async function updatePost() {
-  await updatePostInDatabase();
+  await updatePostInDatabase()
 
-  revalidatePath("/blog"); // Refresh the blog page
-  updateTag("posts"); // Refresh all pages using 'posts' tag
+  revalidatePath('/blog') // Refresh the blog page
+  updateTag('posts') // Refresh all pages using 'posts' tag
 }
 ```
 
@@ -96,98 +127,98 @@ This pattern ensures that both the specific page and any other pages using the s
 
 ## Examples
 
-### Revalidating a specific URL
+### Revalidating a specific path
 
 ```ts
-import { revalidatePath } from "next/cache";
-revalidatePath("/blog/post-1");
+import { revalidatePath } from 'next/cache'
+revalidatePath('/blog/post-1')
 ```
 
-This will invalidate one specific URL for revalidation on the next page visit.
+This will invalidate one specific path for revalidation on the next page visit.
 
 ### Revalidating a Page path
 
 ```ts
-import { revalidatePath } from "next/cache";
-revalidatePath("/blog/[slug]", "page");
+import { revalidatePath } from 'next/cache'
+revalidatePath('/blog/[slug]', 'page')
 // or with route groups
-revalidatePath("/(main)/blog/[slug]", "page");
+revalidatePath('/(main)/blog/[slug]', 'page')
 ```
 
-This will invalidate any URL that matches the provided `page` file for revalidation on the next page visit. This will _not_ invalidate pages beneath the specific page. For example, `/blog/[slug]` won't invalidate `/blog/[slug]/[author]`.
+This will invalidate any path that matches the provided `page` file for revalidation on the next page visit. This will *not* invalidate pages beneath the specific page. For example, `/blog/[slug]` won't invalidate `/blog/[slug]/[author]`.
 
 ### Revalidating a Layout path
 
 ```ts
-import { revalidatePath } from "next/cache";
-revalidatePath("/blog/[slug]", "layout");
+import { revalidatePath } from 'next/cache'
+revalidatePath('/blog/[slug]', 'layout')
 // or with route groups
-revalidatePath("/(main)/post/[slug]", "layout");
+revalidatePath('/(main)/post/[slug]', 'layout')
 ```
 
-This will invalidate any URL that matches the provided `layout` file for revalidation on the next page visit. This will cause pages beneath with the same layout to be invalidated and revalidated on the next visit. For example, in the above case, `/blog/[slug]/[another]` would also be invalidated and revalidated on the next visit.
+This will invalidate any path that matches the provided `layout` file for revalidation on the next page visit. This will cause pages beneath with the same layout to be invalidated and revalidated on the next visit. For example, in the above case, `/blog/[slug]/[another]` would also be invalidated and revalidated on the next visit.
 
 ### Revalidating all data
 
 ```ts
-import { revalidatePath } from "next/cache";
+import { revalidatePath } from 'next/cache'
 
-revalidatePath("/", "layout");
+revalidatePath('/', 'layout')
 ```
 
-This will purge the Client-side Router Cache, and invalidate the Data Cache for revalidation on the next page visit.
+This will purge the [Client Cache](/docs/app/glossary#client-cache), and invalidate all cached data for revalidation on the next page visit.
 
 ### Server Function
 
 ```ts filename="app/actions.ts" switcher
-"use server";
+'use server'
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath } from 'next/cache'
 
 export default async function submit() {
-  await submitForm();
-  revalidatePath("/");
+  await submitForm()
+  revalidatePath('/')
 }
 ```
 
 ### Route Handler
 
 ```ts filename="app/api/revalidate/route.ts" switcher
-import { revalidatePath } from "next/cache";
-import type { NextRequest } from "next/server";
+import { revalidatePath } from 'next/cache'
+import type { NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {
-  const path = request.nextUrl.searchParams.get("path");
+  const path = request.nextUrl.searchParams.get('path')
 
   if (path) {
-    revalidatePath(path);
-    return Response.json({ revalidated: true, now: Date.now() });
+    revalidatePath(path)
+    return Response.json({ revalidated: true, now: Date.now() })
   }
 
   return Response.json({
     revalidated: false,
     now: Date.now(),
-    message: "Missing path to revalidate",
-  });
+    message: 'Missing path to revalidate',
+  })
 }
 ```
 
 ```js filename="app/api/revalidate/route.js" switcher
-import { revalidatePath } from "next/cache";
+import { revalidatePath } from 'next/cache'
 
 export async function GET(request) {
-  const path = request.nextUrl.searchParams.get("path");
+  const path = request.nextUrl.searchParams.get('path')
 
   if (path) {
-    revalidatePath(path);
-    return Response.json({ revalidated: true, now: Date.now() });
+    revalidatePath(path)
+    return Response.json({ revalidated: true, now: Date.now() })
   }
 
   return Response.json({
     revalidated: false,
     now: Date.now(),
-    message: "Missing path to revalidate",
-  });
+    message: 'Missing path to revalidate',
+  })
 }
 ```
 

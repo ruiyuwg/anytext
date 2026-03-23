@@ -17,67 +17,67 @@ Here's a minimal example:
 
 ```tsx filename="app/blog/[id]/page.tsx" switcher
 interface Post {
-  id: string;
-  title: string;
-  content: string;
+  id: string
+  title: string
+  content: string
 }
 
 // Next.js will invalidate the cache when a
 // request comes in, at most once every 60 seconds.
-export const revalidate = 60;
+export const revalidate = 60
 
 export async function generateStaticParams() {
-  const posts: Post[] = await fetch("https://api.vercel.app/blog").then((res) =>
-    res.json(),
-  );
+  const posts: Post[] = await fetch('https://api.vercel.app/blog').then((res) =>
+    res.json()
+  )
   return posts.map((post) => ({
     id: String(post.id),
-  }));
+  }))
 }
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>
 }) {
-  const { id } = await params;
+  const { id } = await params
   const post: Post = await fetch(`https://api.vercel.app/blog/${id}`).then(
-    (res) => res.json(),
-  );
+    (res) => res.json()
+  )
   return (
     <main>
       <h1>{post.title}</h1>
       <p>{post.content}</p>
     </main>
-  );
+  )
 }
 ```
 
 ```jsx filename="app/blog/[id]/page.jsx" switcher
 // Next.js will invalidate the cache when a
 // request comes in, at most once every 60 seconds.
-export const revalidate = 60;
+export const revalidate = 60
 
 export async function generateStaticParams() {
-  const posts = await fetch("https://api.vercel.app/blog").then((res) =>
-    res.json(),
-  );
+  const posts = await fetch('https://api.vercel.app/blog').then((res) =>
+    res.json()
+  )
   return posts.map((post) => ({
     id: String(post.id),
-  }));
+  }))
 }
 
 export default async function Page({ params }) {
-  const { id } = await params;
+  const { id } = await params
   const post = await fetch(`https://api.vercel.app/blog/${id}`).then((res) =>
-    res.json(),
-  );
+    res.json()
+  )
   return (
     <main>
       <h1>{post.title}</h1>
       <p>{post.content}</p>
     </main>
-  );
+  )
 }
 ```
 
@@ -88,14 +88,14 @@ Here's how this example works:
 3. After 60 seconds has passed, the next request will still return the cached (now stale) page
 4. The cache is invalidated and a new version of the page begins generating in the background
 5. Once generated successfully, the next request will return the updated page and cache it for subsequent requests
-6. If `/blog/26` is requested, and it exists, the page will be generated on-demand. This behavior can be changed by using a different [dynamicParams](/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams) value. However, if the post does not exist, then 404 is returned.
+6. If `/blog/26` is requested, and it exists, the page will be generated on-demand. This behavior can be changed by using a different [dynamicParams](/docs/app/api-reference/file-conventions/route-segment-config/dynamicParams) value. However, if the post does not exist, then 404 is returned.
 
 ## Reference
 
 ### Route segment config
 
-- [`revalidate`](/docs/app/api-reference/file-conventions/route-segment-config#revalidate)
-- [`dynamicParams`](/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams)
+- [`revalidate`](/docs/app/guides/caching-without-cache-components#route-segment-config-revalidate)
+- [`dynamicParams`](/docs/app/api-reference/file-conventions/route-segment-config/dynamicParams)
 
 ### Functions
 
@@ -110,16 +110,16 @@ This fetches and displays a list of blog posts on /blog. After an hour has passe
 
 ```tsx filename="app/blog/page.tsx" switcher
 interface Post {
-  id: string;
-  title: string;
-  content: string;
+  id: string
+  title: string
+  content: string
 }
 
-export const revalidate = 3600; // invalidate every hour
+export const revalidate = 3600 // invalidate every hour
 
 export default async function Page() {
-  const data = await fetch("https://api.vercel.app/blog");
-  const posts: Post[] = await data.json();
+  const data = await fetch('https://api.vercel.app/blog')
+  const posts: Post[] = await data.json()
   return (
     <main>
       <h1>Blog Posts</h1>
@@ -129,16 +129,16 @@ export default async function Page() {
         ))}
       </ul>
     </main>
-  );
+  )
 }
 ```
 
 ```jsx filename="app/blog/page.js" switcher
-export const revalidate = 3600; // invalidate every hour
+export const revalidate = 3600 // invalidate every hour
 
 export default async function Page() {
-  const data = await fetch("https://api.vercel.app/blog");
-  const posts = await data.json();
+  const data = await fetch('https://api.vercel.app/blog')
+  const posts = await data.json()
   return (
     <main>
       <h1>Blog Posts</h1>
@@ -148,11 +148,11 @@ export default async function Page() {
         ))}
       </ul>
     </main>
-  );
+  )
 }
 ```
 
-We recommend setting a high revalidation time. For instance, 1 hour instead of 1 second. If you need more precision, consider using on-demand revalidation. If you need real-time data, consider switching to [dynamic rendering](/docs/app/guides/caching#dynamic-rendering).
+We recommend setting a high revalidation time. For instance, 1 hour instead of 1 second. If you need more precision, consider using on-demand revalidation. If you need real-time data, consider switching to [dynamic rendering](/docs/app/glossary#dynamic-rendering).
 
 ### On-demand revalidation with `revalidatePath`
 
@@ -163,24 +163,24 @@ For example, this Server Action would get called after adding a new post. Regard
 > **Note:** `revalidatePath` invalidates the cache entries but regeneration happens on the next request. If you want to eagerly regenerate the cache entry immediately instead of waiting for the next request, you can use the Pages router [`res.revalidate`](/docs/pages/guides/incremental-static-regeneration#on-demand-validation-with-resrevalidate) method. We're working on adding new methods to provide eager regeneration capabilities for the App Router.
 
 ```ts filename="app/actions.ts" switcher
-"use server";
+'use server'
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath } from 'next/cache'
 
 export async function createPost() {
   // Invalidate the cache for the /posts route
-  revalidatePath("/posts");
+  revalidatePath('/posts')
 }
 ```
 
 ```js filename="app/actions.js" switcher
-"use server";
+'use server'
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath } from 'next/cache'
 
 export async function createPost() {
   // Invalidate the cache for the /posts route
-  revalidatePath("/posts");
+  revalidatePath('/posts')
 }
 ```
 
@@ -192,20 +192,20 @@ For most use cases, prefer revalidating entire paths. If you need more granular 
 
 ```tsx filename="app/blog/page.tsx" switcher
 export default async function Page() {
-  const data = await fetch("https://api.vercel.app/blog", {
-    next: { tags: ["posts"] },
-  });
-  const posts = await data.json();
+  const data = await fetch('https://api.vercel.app/blog', {
+    next: { tags: ['posts'] },
+  })
+  const posts = await data.json()
   // ...
 }
 ```
 
 ```jsx filename="app/blog/page.js" switcher
 export default async function Page() {
-  const data = await fetch("https://api.vercel.app/blog", {
-    next: { tags: ["posts"] },
-  });
-  const posts = await data.json();
+  const data = await fetch('https://api.vercel.app/blog', {
+    next: { tags: ['posts'] },
+  })
+  const posts = await data.json()
   // ...
 }
 ```
@@ -213,62 +213,62 @@ export default async function Page() {
 If you are using an ORM or connecting to a database, you can use `unstable_cache`:
 
 ```tsx filename="app/blog/page.tsx" switcher
-import { unstable_cache } from "next/cache";
-import { db, posts } from "@/lib/db";
+import { unstable_cache } from 'next/cache'
+import { db, posts } from '@/lib/db'
 
 const getCachedPosts = unstable_cache(
   async () => {
-    return await db.select().from(posts);
+    return await db.select().from(posts)
   },
-  ["posts"],
-  { revalidate: 3600, tags: ["posts"] },
-);
+  ['posts'],
+  { revalidate: 3600, tags: ['posts'] }
+)
 
 export default async function Page() {
-  const posts = getCachedPosts();
+  const posts = getCachedPosts()
   // ...
 }
 ```
 
 ```jsx filename="app/blog/page.js" switcher
-import { unstable_cache } from "next/cache";
-import { db, posts } from "@/lib/db";
+import { unstable_cache } from 'next/cache'
+import { db, posts } from '@/lib/db'
 
 const getCachedPosts = unstable_cache(
   async () => {
-    return await db.select().from(posts);
+    return await db.select().from(posts)
   },
-  ["posts"],
-  { revalidate: 3600, tags: ["posts"] },
-);
+  ['posts'],
+  { revalidate: 3600, tags: ['posts'] }
+)
 
 export default async function Page() {
-  const posts = getCachedPosts();
+  const posts = getCachedPosts()
   // ...
 }
 ```
 
-You can then use `revalidateTag` in a [Server Actions](/docs/app/getting-started/updating-data) or [Route Handler](/docs/app/api-reference/file-conventions/route):
+You can then use `revalidateTag` in a [Server Actions](/docs/app/getting-started/mutating-data) or [Route Handler](/docs/app/api-reference/file-conventions/route):
 
 ```ts filename="app/actions.ts" switcher
-"use server";
+'use server'
 
-import { revalidateTag } from "next/cache";
+import { revalidateTag } from 'next/cache'
 
 export async function createPost() {
   // Invalidate all data tagged with 'posts'
-  revalidateTag("posts");
+  revalidateTag('posts')
 }
 ```
 
 ```js filename="app/actions.js" switcher
-"use server";
+'use server'
 
-import { revalidateTag } from "next/cache";
+import { revalidateTag } from 'next/cache'
 
 export async function createPost() {
   // Invalidate all data tagged with 'posts'
-  revalidateTag("posts");
+  revalidateTag('posts')
 }
 ```
 
@@ -293,7 +293,7 @@ module.exports = {
       fullUrl: true,
     },
   },
-};
+}
 ```
 
 ### Verifying correct production behavior
@@ -312,8 +312,8 @@ This will make the Next.js server console log ISR cache hits and misses. You can
 
 - ISR is only supported when using the Node.js runtime (default).
 - ISR is not supported when creating a [Static Export](/docs/app/guides/static-exports).
-- If you have multiple `fetch` requests in a statically rendered route, and each has a different `revalidate` frequency, the lowest time will be used for ISR. However, those revalidate frequencies will still be respected by the [Data Cache](/docs/app/guides/caching#data-cache).
-- If any of the `fetch` requests used on a route have a `revalidate` time of `0`, or an explicit `no-store`, the route will be [dynamically rendered](/docs/app/guides/caching#dynamic-rendering).
+- If you have multiple `fetch` requests in a prerendered route, and each has a different `revalidate` frequency, the lowest time will be used for ISR. However, those revalidate frequencies will still be respected by the [cache](/docs/app/getting-started/caching).
+- If any of the `fetch` requests used on a route have a `revalidate` time of `0`, or an explicit `no-store`, the route will be dynamically rendered.
 - Proxy won't be executed for on-demand ISR requests, meaning any path rewrites or logic in Proxy will not be applied. Ensure you are revalidating the exact path. For example, `/post/1` instead of a rewritten `/post-1`.
 
 ## Platform Support

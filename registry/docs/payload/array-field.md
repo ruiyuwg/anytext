@@ -56,7 +56,7 @@ export const MyArrayField: Field = {
 | **`interfaceName`**    | Create a top level, reusable [Typescript interface](../typescript/generating-types#custom-field-interfaces) & [GraphQL type](../graphql/graphql-schema#custom-field-schemas).                                                                                                                     |
 | **`dbName`**           | Custom table name for the field when using SQL Database Adapter ([Postgres](../database/postgres)). Auto-generated from name if not defined.                                                                                                                                                         |
 | **`typescriptSchema`** | Override field type generation with providing a JSON schema                                                                                                                                                                                                                                             |
-| **`virtual`**          | Provide `true` to disable field in the database, or provide a string path to [link the field with a relationship](../fields/relationship#linking-virtual-fields-with-relationships). See [Virtual Fields](https://payloadcms.com/blog/learn-how-virtual-fields-can-help-solve-common-cms-challenges) |
+| **`virtual`**          | Provide `true` to disable field in the database, or provide a string path to [link the field with a relationship](../fields/overview#string-path-virtual-fields). See [Virtual Fields](https://payloadcms.com/blog/learn-how-virtual-fields-can-help-solve-common-cms-challenges) |
 
 *\* An asterisk denotes that a property is required.*
 

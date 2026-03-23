@@ -34,5 +34,5 @@ You use a function to invoke a cron job, and therefore [usage](/docs/limits) and
 
 title: "Custom error pages"
 description: "Learn how to configure custom error pages for 5xx server errors on Vercel."
-last\_updated: "2026-03-08T05:03:13.036Z"
+last\_updated: "2026-03-23T09:40:08.052Z"
 source: "https://vercel.com/docs/custom-error-pages"

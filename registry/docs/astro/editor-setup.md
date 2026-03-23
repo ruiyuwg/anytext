@@ -57,7 +57,6 @@ In addition to local editors, Astro also runs well on in-browser hosted editors,
 
 - [StackBlitz](https://stackblitz.com/) and [CodeSandbox](https://codesandbox.io/) - online editors that run in your browser, with built-in syntax highlighting support for `.astro` files. No installation or configuration required!
 - [GitHub.dev](https://github.dev/) - allows you to install the Astro VS Code extension as a [web extension](https://code.visualstudio.com/api/extension-guides/web-extensions), which gives you access to only some of the full extension features. Currently, only syntax highlighting is supported.
-- [Firebase Studio](https://firebase.studio/) - a full dev environment in the cloud that can install the official Astro VS Code Extension from Open VSX.
 
 ## Other tools
 
@@ -219,4 +218,4 @@ Extend
 
 ## Have a question or want to get involved?
 
-![](/_astro/houston_love.BttrNCcZ_Ok6Ar.webp) [Join our Discord](https://astro.build/chat)
+![](/_astro/houston_love.BttrNCcZ_ZWYTdq.webp) [Join our Discord](https://astro.build/chat)

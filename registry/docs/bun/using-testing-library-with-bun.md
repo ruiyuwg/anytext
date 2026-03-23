@@ -24,7 +24,7 @@ bun add -D @testing-library/react @testing-library/dom @testing-library/jest-dom
 
 Next you will need to create a preload script for Happy DOM and for Testing Library. For more details about the Happy DOM setup script see [Bun's Happy DOM guide](/guides/test/happy-dom).
 
-```ts happydom.ts icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts happydom.ts icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 import { GlobalRegistrator } from "@happy-dom/global-registrator";
 
 GlobalRegistrator.register();
@@ -34,7 +34,7 @@ GlobalRegistrator.register();
 
 For Testing Library, you will want to extend Bun's `expect` function with Testing Library's matchers. Optionally, to better match the behavior of test-runners like Jest, you may want to run cleanup after each test.
 
-```ts testing-library.ts icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts testing-library.ts icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 import { afterEach, expect } from "bun:test";
 import { cleanup } from "@testing-library/react";
 import * as matchers from "@testing-library/jest-dom/matchers";
@@ -60,7 +60,7 @@ preload = ["./happydom.ts", "./testing-library.ts"]
 
 If you are using TypeScript you will also need to make use of declaration merging in order to get the new matcher types to show up in your editor. To do this, create a type declaration file that extends `Matchers` like this.
 
-```ts matchers.d.ts icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts matchers.d.ts icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 import { TestingLibraryMatchers } from "@testing-library/jest-dom/matchers";
 import { Matchers, AsymmetricMatchers } from "bun:test";
 
@@ -74,7 +74,7 @@ declare module "bun:test" {
 
 You should now be able to use Testing Library in your tests
 
-```tsx myComponent.test.tsx icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```tsx myComponent.test.tsx icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 import { test, expect } from "bun:test";
 import { screen, render } from "@testing-library/react";
 import { MyComponent } from "./myComponent";

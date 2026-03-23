@@ -23,6 +23,7 @@ The following table shows tools that execute online searches in some shape or fo
 | [Google Serper](/oss/python/integrations/tools/google_serper)     | Free                                     | URL, Snippet, Title, Search Rank, Site Links          |
 | [Jina Search](/oss/python/integrations/tools/jina_search)         | 1M Response Tokens Free                  | URL, Snippet, Title, Page Content                     |
 | [Mojeek Search](/oss/python/integrations/tools/mojeek_search)     | Paid                                     | URL, Snippet, Title                                   |
+| [Nia Toolkit](/oss/python/integrations/tools/nia)                 | Free tier available                      | Code, Docs, Metadata, Sources                         |
 | [Nimble Search](/oss/python/integrations/tools/nimble_search)     | Free trial available                     | URL, Content, Title                                   |
 | [Parallel Search](/oss/python/integrations/tools/parallel_search) | Paid                                     | URL, Title, Excerpts                                  |
 | [SearchApi](/oss/python/integrations/tools/searchapi)             | 100 Free Searches on Sign Up             | URL, Snippet, Title, Search Rank, Site Links, Authors |

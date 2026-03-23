@@ -2,9 +2,9 @@
 
 Direct customers to manage their subscription when they already have one.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/limit-subscriptions?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/limit-subscriptions?payment-ui=stripe-hosted.
 
 You can redirect customers that already have an active subscription to the *customer portal* (The customer portal is a secure, Stripe-hosted page that lets your customers manage their subscriptions and billing details) or your website to manage their subscription. This redirection works with *Checkout* (A low-code payment integration that creates a customizable form for collecting payments. You can embed Checkout directly in your website, redirect customers to a Stripe-hosted payment page, or create a customized checkout page with Stripe Elements) (including the [pricing table](https://docs.stripe.com/payments/checkout/pricing-table.md)) and Payment Links.
 
@@ -38,9 +38,9 @@ Active subscriptions have the following [four statuses](https://docs.stripe.com/
 - `Unpaid`
 - `Paused`
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/limit-subscriptions?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/limit-subscriptions?payment-ui=embedded-form.
 
 You can redirect customers that already have an active subscription to the *customer portal* (The customer portal is a secure, Stripe-hosted page that lets your customers manage their subscriptions and billing details) or your website to manage their subscription. This redirection works with *Checkout* (A low-code payment integration that creates a customizable form for collecting payments. You can embed Checkout directly in your website, redirect customers to a Stripe-hosted payment page, or create a customized checkout page with Stripe Elements) (including the [pricing table](https://docs.stripe.com/payments/checkout/pricing-table.md)) and Payment Links.
 

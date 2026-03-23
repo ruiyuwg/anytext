@@ -146,7 +146,7 @@ Define custom aliases when running inside tests. They will be merged with aliase
 
 Vitest uses Vite SSR primitives to run tests which has [certain pitfalls](https://vitejs.dev/guide/ssr.html#ssr-externals).
 
-1. Aliases affect only modules imported directly with an `import` keyword by an [inlined](#server-deps-inline) module (all source code is inlined by default).
+1. Aliases affect only modules imported directly with an `import` keyword by an [inlined](/config/server#server-deps-inline) module (all source code is inlined by default).
 2. Vitest does not support aliasing `require` calls.
 3. If you are aliasing an external dependency (e.g., `react` -> `preact`), you may want to alias the actual `node_modules` packages instead to make it work for externalized dependencies. Both [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) and [pnpm](https://pnpm.io/aliases/) support aliasing via the `npm:` prefix.
    :::
@@ -159,9 +159,9 @@ Vitest uses Vite SSR primitives to run tests which has [certain pitfalls](https:
 - **Default**: `!process.env.CI`
 - **CLI:** `--allowOnly`, `--allowOnly=false`
 
-By default, Vitest does not permit tests marked with the [`only`](/api/#test-only) flag in Continuous Integration (CI) environments. Conversely, in local development environments, Vitest allows these tests to run.
+By default, Vitest does not permit tests marked with the [`only`](/api/test#test-only) flag in Continuous Integration (CI) environments. Conversely, in local development environments, Vitest allows these tests to run.
 
-Vitest uses [`std-env`](https://www.npmjs.com/package/std-env) package to detect the environment.
+Vitest uses [`std-env`](https://npmx.dev/package/std-env) package to detect the environment.
 
 You can customize this behavior by explicitly setting the `allowOnly` option to either `true` or `false`.
 
@@ -179,19 +179,37 @@ export default defineConfig({
 vitest --allowOnly
 ```
 
-When enabled, Vitest will not fail the test suite if tests marked with [`only`](/api/#test-only) are detected, including in CI environments.
+When enabled, Vitest will not fail the test suite if tests marked with [`only`](/api/test#test-only) are detected, including in CI environments.
 
-When disabled, Vitest will fail the test suite if tests marked with [`only`](/api/#test-only) are detected, including in local development environments.
+When disabled, Vitest will fail the test suite if tests marked with [`only`](/api/test#test-only) are detected, including in local development environments.
 
 ***
 
 # api
 
-- **Type:** `boolean | number`
+- **Type:** `boolean | number | object`
 - **Default:** `false`
 - **CLI:** `--api`, `--api.port`, `--api.host`, `--api.strictPort`
 
 Listen to port and serve API for [the UI](/guide/ui) or [browser server](/guide/browser/). When set to `true`, the default port is `51204`.
+
+## api.allowWrite 4.1.0
+
+- **Type:** `boolean`
+- **Default:** `true` if not exposed to the network, `false` otherwise
+
+Vitest server can save test files or snapshot files via the API. This allows anyone who can connect to the API the ability to run any arbitrary code on your machine.
+
+Vitest does not expose the API to the internet by default and only listens on `localhost`. However if `host` is manually exposed to the network, anyone who connects to it can run arbitrary code on your machine, unless `api.allowWrite` and `api.allowExec` are set to `false`.
+
+If the host is set to anything other than `localhost` or `127.0.0.1`, Vitest will set `api.allowWrite` and `api.allowExec` to `false` by default. This means that any write operations (like changing the code in the UI) will not work. However, if you understand the security implications, you can override them.
+
+## api.allowExec 4.1.0
+
+- **Type:** `boolean`
+- **Default:** `true` if not exposed to the network, `false` otherwise
+
+Allows running any test file via the API. See the security advice in [`api.allowWrite`](#api-allowwrite).
 
 ***
 

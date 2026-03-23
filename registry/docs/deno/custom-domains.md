@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/custom-domains
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 By default a project can be reached at its preview URL, which is
 `$PROJECT_ID.deno.dev`, e.g. `dead-clam-55.deno.dev`. You can also add a custom

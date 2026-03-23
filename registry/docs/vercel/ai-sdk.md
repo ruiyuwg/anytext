@@ -149,5 +149,5 @@ See [Authentication](/docs/ai-gateway/authentication-and-byok/authentication) fo
 
 title: "Advanced Features"
 description: "Advanced Anthropic API features including extended thinking, web search, and automatic caching."
-last\_updated: "2026-03-08T05:03:10.620Z"
+last\_updated: "2026-03-23T09:40:04.653Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/anthropic-messages-api/advanced"

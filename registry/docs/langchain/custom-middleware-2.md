@@ -869,7 +869,7 @@ class CachedContextMiddleware(AgentMiddleware):
 
 - [Middleware API reference](https://reference.langchain.com/python/langchain/middleware/)
 - [Built-in middleware](/oss/python/langchain/middleware/built-in)
-- [Testing agents](/oss/python/langchain/test)
+- [Testing agents](/oss/python/langchain/test/)
 
 ***
 

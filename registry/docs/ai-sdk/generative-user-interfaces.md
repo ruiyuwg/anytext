@@ -22,41 +22,26 @@ Let's create a chat interface that handles text-based conversations and incorpor
 Start with a basic chat implementation using the `useChat` hook:
 
 ```tsx filename="app/page.tsx"
-"use client";
+'use client';
 
-import { useChat } from "@ai-sdk/react";
-import { useState } from "react";
+import { useChat } from '@ai-sdk/react';
 
 export default function Page() {
-  const [input, setInput] = useState("");
-  const { messages, sendMessage } = useChat();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    sendMessage({ text: input });
-    setInput("");
-  };
+  const { messages, input, handleInputChange, handleSubmit } = useChat();
 
   return (
     <div>
-      {messages.map((message) => (
+      {messages.map(message => (
         <div key={message.id}>
-          <div>{message.role === "user" ? "User: " : "AI: "}</div>
-          <div>
-            {message.parts.map((part, index) => {
-              if (part.type === "text") {
-                return <span key={index}>{part.text}</span>;
-              }
-              return null;
-            })}
-          </div>
+          <div>{message.role === 'user' ? 'User: ' : 'AI: '}</div>
+          <div>{message.content}</div>
         </div>
       ))}
 
       <form onSubmit={handleSubmit}>
         <input
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           placeholder="Type a message..."
         />
         <button type="submit">Send</button>
@@ -69,20 +54,20 @@ export default function Page() {
 To handle the chat requests and model responses, set up an API route:
 
 ```ts filename="app/api/chat/route.ts"
-import { streamText, convertToModelMessages, UIMessage, stepCountIs } from "ai";
-__PROVIDER_IMPORT__;
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
 
 export async function POST(request: Request) {
-  const { messages }: { messages: UIMessage[] } = await request.json();
+  const { messages } = await request.json();
 
   const result = streamText({
-    model: __MODEL__,
-    system: "You are a friendly assistant!",
-    messages: await convertToModelMessages(messages),
-    stopWhen: stepCountIs(5),
+    model: openai('gpt-4o'),
+    system: 'You are a friendly assistant!',
+    messages,
+    maxSteps: 5,
   });
 
-  return result.toUIMessageStreamResponse();
+  return result.toDataStreamResponse();
 }
 ```
 
@@ -95,17 +80,17 @@ Before enhancing your chat interface with dynamic UI elements, you need to creat
 Create a new file called `ai/tools.ts` with the following content:
 
 ```ts filename="ai/tools.ts"
-import { tool as createTool } from "ai";
-import { z } from "zod";
+import { tool as createTool } from 'ai';
+import { z } from 'zod';
 
 export const weatherTool = createTool({
-  description: "Display the weather for a location",
-  inputSchema: z.object({
-    location: z.string().describe("The location to get the weather for"),
+  description: 'Display the weather for a location',
+  parameters: z.object({
+    location: z.string().describe('The location to get the weather for'),
   }),
   execute: async function ({ location }) {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    return { weather: "Sunny", temperature: 75, location };
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    return { weather: 'Sunny', temperature: 75, location };
   },
 });
 
@@ -120,23 +105,23 @@ In this file, you've created a tool called `weatherTool`. This tool simulates fe
 
 Update the API route to include the tool you've defined:
 
-```ts filename="app/api/chat/route.ts" highlight="3,8,14"
-import { streamText, convertToModelMessages, UIMessage, stepCountIs } from "ai";
-__PROVIDER_IMPORT__;
-import { tools } from "@/ai/tools";
+```ts filename="app/api/chat/route.ts" highlight="3,13"
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
+import { tools } from '@/ai/tools';
 
 export async function POST(request: Request) {
-  const { messages }: { messages: UIMessage[] } = await request.json();
+  const { messages } = await request.json();
 
   const result = streamText({
-    model: __MODEL__,
-    system: "You are a friendly assistant!",
-    messages: await convertToModelMessages(messages),
-    stopWhen: stepCountIs(5),
+    model: openai('gpt-4o'),
+    system: 'You are a friendly assistant!',
+    messages,
+    maxSteps: 5,
     tools,
   });
 
-  return result.toUIMessageStreamResponse();
+  return result.toDataStreamResponse();
 }
 ```
 
@@ -170,56 +155,48 @@ This component will display the weather information for a given location. It tak
 
 Now that you have your tool and corresponding React component, let's integrate them into your chat interface. You'll render the Weather component when the model calls the weather tool.
 
-To check if the model has called a tool, you can check the `parts` array of the UIMessage object for tool-specific parts. In AI SDK 5.0, tool parts use typed naming: `tool-${toolName}` instead of generic types.
+To check if the model has called a tool, you can use the `toolInvocations` property of the message object. This property contains information about any tools that were invoked in that generation including `toolCallId`, `toolName`, `args`, `toolState`, and `result`.
 
 Update your `page.tsx` file:
 
-```tsx filename="app/page.tsx" highlight="4,9,14-15,19-46"
-"use client";
+```tsx filename="app/page.tsx" highlight="4,16-39"
+'use client';
 
-import { useChat } from "@ai-sdk/react";
-import { useState } from "react";
-import { Weather } from "@/components/weather";
+import { useChat } from '@ai-sdk/react';
+import { Weather } from '@/components/weather';
 
 export default function Page() {
-  const [input, setInput] = useState("");
-  const { messages, sendMessage } = useChat();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    sendMessage({ text: input });
-    setInput("");
-  };
+  const { messages, input, handleInputChange, handleSubmit } = useChat();
 
   return (
     <div>
-      {messages.map((message) => (
+      {messages.map(message => (
         <div key={message.id}>
-          <div>{message.role === "user" ? "User: " : "AI: "}</div>
+          <div>{message.role === 'user' ? 'User: ' : 'AI: '}</div>
+          <div>{message.content}</div>
+
           <div>
-            {message.parts.map((part, index) => {
-              if (part.type === "text") {
-                return <span key={index}>{part.text}</span>;
-              }
+            {message.toolInvocations?.map(toolInvocation => {
+              const { toolName, toolCallId, state } = toolInvocation;
 
-              if (part.type === "tool-displayWeather") {
-                switch (part.state) {
-                  case "input-available":
-                    return <div key={index}>Loading weather...</div>;
-                  case "output-available":
-                    return (
-                      <div key={index}>
-                        <Weather {...part.output} />
-                      </div>
-                    );
-                  case "output-error":
-                    return <div key={index}>Error: {part.errorText}</div>;
-                  default:
-                    return null;
+              if (state === 'result') {
+                if (toolName === 'displayWeather') {
+                  const { result } = toolInvocation;
+                  return (
+                    <div key={toolCallId}>
+                      <Weather {...result} />
+                    </div>
+                  );
                 }
+              } else {
+                return (
+                  <div key={toolCallId}>
+                    {toolName === 'displayWeather' ? (
+                      <div>Loading weather...</div>
+                    ) : null}
+                  </div>
+                );
               }
-
-              return null;
             })}
           </div>
         </div>
@@ -228,7 +205,7 @@ export default function Page() {
       <form onSubmit={handleSubmit}>
         <input
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           placeholder="Type a message..."
         />
         <button type="submit">Send</button>
@@ -240,10 +217,10 @@ export default function Page() {
 
 In this updated code snippet, you:
 
-1. Use manual input state management with `useState` instead of the built-in `input` and `handleInputChange`.
-2. Use `sendMessage` instead of `handleSubmit` to send messages.
-3. Check the `parts` array of each message for different content types.
-4. Handle tool parts with type `tool-displayWeather` and their different states (`input-available`, `output-available`, `output-error`).
+1. Check if the message has `toolInvocations`.
+2. Check if the tool invocation state is 'result'.
+3. If it's a result and the tool name is 'displayWeather', render the Weather component.
+4. If the tool invocation state is not 'result', show a loading message.
 
 This approach allows you to dynamically render UI components based on the model's responses, creating a more interactive and context-aware chat experience.
 
@@ -258,13 +235,13 @@ To add more tools, simply define them in your `ai/tools.ts` file:
 ```ts
 // Add a new stock tool
 export const stockTool = createTool({
-  description: "Get price for a stock",
-  inputSchema: z.object({
-    symbol: z.string().describe("The stock symbol to get the price for"),
+  description: 'Get price for a stock',
+  parameters: z.object({
+    symbol: z.string().describe('The stock symbol to get the price for'),
   }),
   execute: async function ({ symbol }) {
     // Simulated API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 2000));
     return { symbol, price: 100 };
   },
 });
@@ -298,69 +275,51 @@ export const Stock = ({ price, symbol }: StockProps) => {
 Finally, update your `page.tsx` file to include the new Stock component:
 
 ```tsx
-"use client";
+'use client';
 
-import { useChat } from "@ai-sdk/react";
-import { useState } from "react";
-import { Weather } from "@/components/weather";
-import { Stock } from "@/components/stock";
+import { useChat } from '@ai-sdk/react';
+import { Weather } from '@/components/weather';
+import { Stock } from '@/components/stock';
 
 export default function Page() {
-  const [input, setInput] = useState("");
-  const { messages, sendMessage } = useChat();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    sendMessage({ text: input });
-    setInput("");
-  };
+  const { messages, input, setInput, handleSubmit } = useChat();
 
   return (
     <div>
-      {messages.map((message) => (
+      {messages.map(message => (
         <div key={message.id}>
           <div>{message.role}</div>
+          <div>{message.content}</div>
+
           <div>
-            {message.parts.map((part, index) => {
-              if (part.type === "text") {
-                return <span key={index}>{part.text}</span>;
-              }
+            {message.toolInvocations?.map(toolInvocation => {
+              const { toolName, toolCallId, state } = toolInvocation;
 
-              if (part.type === "tool-displayWeather") {
-                switch (part.state) {
-                  case "input-available":
-                    return <div key={index}>Loading weather...</div>;
-                  case "output-available":
-                    return (
-                      <div key={index}>
-                        <Weather {...part.output} />
-                      </div>
-                    );
-                  case "output-error":
-                    return <div key={index}>Error: {part.errorText}</div>;
-                  default:
-                    return null;
+              if (state === 'result') {
+                if (toolName === 'displayWeather') {
+                  const { result } = toolInvocation;
+                  return (
+                    <div key={toolCallId}>
+                      <Weather {...result} />
+                    </div>
+                  );
+                } else if (toolName === 'getStockPrice') {
+                  const { result } = toolInvocation;
+                  return <Stock key={toolCallId} {...result} />;
                 }
+              } else {
+                return (
+                  <div key={toolCallId}>
+                    {toolName === 'displayWeather' ? (
+                      <div>Loading weather...</div>
+                    ) : toolName === 'getStockPrice' ? (
+                      <div>Loading stock price...</div>
+                    ) : (
+                      <div>Loading...</div>
+                    )}
+                  </div>
+                );
               }
-
-              if (part.type === "tool-getStockPrice") {
-                switch (part.state) {
-                  case "input-available":
-                    return <div key={index}>Loading stock price...</div>;
-                  case "output-available":
-                    return (
-                      <div key={index}>
-                        <Stock {...part.output} />
-                      </div>
-                    );
-                  case "output-error":
-                    return <div key={index}>Error: {part.errorText}</div>;
-                  default:
-                    return null;
-                }
-              }
-
-              return null;
             })}
           </div>
         </div>
@@ -370,7 +329,9 @@ export default function Page() {
         <input
           type="text"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={event => {
+            setInput(event.target.value);
+          }}
         />
         <button type="submit">Send</button>
       </form>

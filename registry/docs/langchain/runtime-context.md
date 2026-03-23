@@ -40,7 +40,7 @@ const nodeA: GraphNode<typeof State> = (state, config) => {
 };
 ```
 
-See [this guide](/oss/javascript/langgraph/use-graph-api#add-runtime-configuration) for a full breakdown on configuration.
+See [Add runtime configuration](/oss/javascript/langgraph/use-graph-api#add-runtime-configuration) for a full breakdown on configuration.
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 graph.addNode("myNode", (state, config) => {
@@ -224,7 +224,7 @@ const inspectMetadata: GraphNode<typeof State> = async (state, config) => {
 
 ## Visualization
 
-It's often nice to be able to visualize graphs, especially as they get more complex. LangGraph comes with several built-in ways to visualize graphs. See [this how-to guide](/oss/javascript/langgraph/use-graph-api#visualize-your-graph) for more info.
+It's often nice to be able to visualize graphs, especially as they get more complex. LangGraph comes with several built-in ways to visualize graphs. See [Visualize your graph](/oss/javascript/langgraph/use-graph-api#visualize-your-graph) for more info.
 
 ## Observability and Tracing
 

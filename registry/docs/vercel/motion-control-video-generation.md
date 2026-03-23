@@ -134,5 +134,5 @@ fs.writeFileSync('output.mp4', result.videos[0].uint8Array);
 
 title: "Video Generation"
 description: "Generate videos from text prompts, images, or video input using AI models through Vercel AI Gateway."
-last\_updated: "2026-03-08T05:03:10.237Z"
+last\_updated: "2026-03-23T09:40:04.083Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/video-generation"

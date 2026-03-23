@@ -519,5 +519,5 @@ try {
 
 title: "Edge Middleware"
 description: "Learn how you can use Edge Middleware, code that executes before a request is processed on a site, to provide speed and personalization to your users."
-last\_updated: "2026-03-08T05:03:13.873Z"
+last\_updated: "2026-03-23T09:40:09.303Z"
 source: "https://vercel.com/docs/edge-middleware"

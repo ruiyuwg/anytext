@@ -254,9 +254,43 @@ Visiting the page in your browser should show:
 
 # deno add
 
-> Add and manage project dependencies with Deno.
+> Add and manage project dependencies with Deno
 
 URL: https://docs.deno.com/runtime/reference/cli/add
+
+The `deno add` command adds dependencies to your project's configuration file.
+It is an alias for
+[`deno install [PACKAGES]`](/runtime/reference/cli/install/#deno-install-packages).
+
+## Examples
+
+Add packages from JSR and npm:
+
+```sh
+deno add @std/path npm:express
+```
+
+By default, dependencies are added with a caret (`^`) version range. Use
+`--save-exact` to pin to an exact version:
+
+```sh
+deno add --save-exact @std/path
+```
+
+This saves the dependency without the `^` prefix (e.g., `1.0.0` instead of
+`^1.0.0`).
+
+Treat unprefixed package names as npm packages:
+
+```sh
+deno add --npm express
+```
+
+## Where dependencies are stored
+
+If your project has a `package.json`, npm packages will be added to
+`dependencies` in `package.json`. Otherwise, all packages are added to the
+`imports` field in `deno.json`.
 
 ***
 
@@ -270,8 +304,50 @@ URL: https://docs.deno.com/runtime/reference/cli/approve\_scripts
 
 # deno audit
 
-> Audit project dependencies with Deno.
+> Audit project dependencies for known security vulnerabilities
 
 URL: https://docs.deno.com/runtime/reference/cli/audit
+
+The `deno audit` command checks your project's dependencies for known security
+vulnerabilities. It reads your lock file and reports any advisories found in
+vulnerability databases.
+
+## Examples
+
+Audit all dependencies:
+
+```sh
+deno audit
+```
+
+Show only high and critical severity vulnerabilities:
+
+```sh
+deno audit --level=high
+```
+
+Check against the [socket.dev](https://socket.dev/) vulnerability database:
+
+```sh
+deno audit --socket
+```
+
+Ignore specific CVEs (useful for suppressing false positives or accepted risks):
+
+```sh
+deno audit --ignore=CVE-2024-12345,CVE-2024-67890
+```
+
+Ignore advisories that have no available fix:
+
+```sh
+deno audit --ignore-unfixable
+```
+
+Don't error if the audit data can't be retrieved from the registry:
+
+```sh
+deno audit --ignore-registry-errors
+```
 
 ***

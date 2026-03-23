@@ -64,7 +64,7 @@ These workflows are designed as composition patterns. Each one shows a complete 
 - Compose commands into multi-step sessions for novel situations
 - Follow the same debugging methodology that experienced Vercel users follow
 
-title: "Getting started with AI Gateway using a coding agent"
-description: "Set up AI Gateway with a coding agent like Claude Code, Cursor, or Cline using skills, prompts, and cURL verification."
-last\_updated: "2026-03-08T05:03:10.095Z"
-source: "https://vercel.com/docs/ai-gateway/agent-quickstart"
+title: "Authentication"
+description: "Learn how to authenticate with the AI Gateway using API keys and OIDC tokens."
+last\_updated: "2026-03-23T09:40:03.766Z"
+source: "https://vercel.com/docs/ai-gateway/authentication-and-byok/authentication"

@@ -123,31 +123,31 @@ import type {
 
 [Section titled “CreateContext”](#createcontext-1)
 
-**Type:** `{ request: Request; params?: Params; userDefinedLocales?: string[]; defaultLocale: string; locals: App.Locals; }`
+**Type:** `{ request: Request; params?: Params; userDefinedLocales?: string[]; defaultLocale: string; locals: App.Locals; clientAddress?: string }`
 
 **Added in:** `astro@2.8.0`
 
 An object to [create a context](#createcontext) to be passed to an Astro middleware. This contains the following properties:
 
-#### `request`
+#### `CreateContext.request`
 
-[Section titled “request”](#request)
+[Section titled “CreateContext.request”](#createcontextrequest)
 
 **Type:** `Request`
 
 The incoming [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) object.
 
-#### `params`
+#### `CreateContext.params`
 
-[Section titled “params”](#params)
+[Section titled “CreateContext.params”](#createcontextparams)
 
 **Type:** `Params`
 
 An object containing the optional parameters to be passed to [`Astro.params`](/en/reference/api-reference/#params).
 
-#### `userDefinedLocales`
+#### `CreateContext.userDefinedLocales`
 
-[Section titled “userDefinedLocales”](#userdefinedlocales)
+[Section titled “CreateContext.userDefinedLocales”](#createcontextuserdefinedlocales)
 
 **Type:** `string[]`
 
@@ -155,9 +155,9 @@ An object containing the optional parameters to be passed to [`Astro.params`](/e
 
 A list of supported locales defined in the [user’s `i18n` configuration](/en/reference/configuration-reference/#i18nlocales).
 
-#### `defaultLocale`
+#### `CreateContext.defaultLocale`
 
-[Section titled “defaultLocale”](#defaultlocale)
+[Section titled “CreateContext.defaultLocale”](#createcontextdefaultlocale)
 
 **Type:** `string`
 
@@ -165,9 +165,9 @@ A list of supported locales defined in the [user’s `i18n` configuration](/en/r
 
 The default locale defined in the [user’s `i18n` configuration](/en/reference/configuration-reference/#i18ndefaultlocale).
 
-#### `locals`
+#### `CreateContext.locals`
 
-[Section titled “locals”](#locals)
+[Section titled “CreateContext.locals”](#createcontextlocals)
 
 **Type:** `App.Locals`
 
@@ -176,6 +176,20 @@ The default locale defined in the [user’s `i18n` configuration](/en/reference/
 An object for storing arbitrary information from a middleware, accessible to the user via [`Astro.locals`](/en/reference/api-reference/#locals).
 
 Learn more about [storing data in `locals`](/en/guides/middleware/#storing-data-in-contextlocals) with example usage.
+
+#### `CreateContext.clientAddress`
+
+[Section titled “CreateContext.clientAddress”](#createcontextclientaddress)
+
+**Type:** `string`
+
+**Added in:** `astro@6.0.0` New
+
+The [IP address](https://en.wikipedia.org/wiki/IP_address) of the request.
+
+This must be provided by the adapter or platform from a trusted source (e.g. socket address, platform-provided header).
+
+If not provided, accessing `clientAddress` will throw an error.
 
 ## `astro` types
 

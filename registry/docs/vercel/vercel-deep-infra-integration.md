@@ -84,5 +84,5 @@ To follow this guide, you'll need the following:
 
 title: "Vercel ElevenLabs Integration"
 description: "Learn how to add the ElevenLabs connectable account integration with Vercel."
-last\_updated: "2026-03-08T05:03:09.878Z"
+last\_updated: "2026-03-23T09:40:03.388Z"
 source: "https://vercel.com/docs/agent-resources/integrations-for-models/elevenlabs"

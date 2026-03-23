@@ -2,11 +2,11 @@
 
 All built-in browser components, such as [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div), support some common props and events.
 
----
+***
 
-## Reference {/_reference_/}
+## Reference {/*reference*/}
 
-### Common components (e.g. `<div>`) {/_common_/}
+### Common components (e.g. `<div>`) {/*common*/}
 
 ```js
 <div className="wrapper">Some content</div>
@@ -14,7 +14,7 @@ All built-in browser components, such as [`<div>`](https://developer.mozilla.org
 
 [See more examples below.](#usage)
 
-#### Props {/_common-props_/}
+#### Props {/*common-props*/}
 
 These special React props are supported for all built-in components:
 
@@ -56,7 +56,7 @@ These standard DOM props are also supported for all built-in components:
 - `onAnimationStartCapture`: `onAnimationStart`, but fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
 - [`onAuxClick`](https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event): A [`MouseEvent` handler](#mouseevent-handler) function. Fires when a non-primary pointer button was clicked.
 - `onAuxClickCapture`: A version of `onAuxClick` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-- `onBeforeInput`: An [`InputEvent` handler](#inputevent-handler) function. Fires before the value of an editable element is modified. React does _not_ yet use the native [`beforeinput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforeinput_event) event, and instead attempts to polyfill it using other events.
+- `onBeforeInput`: An [`InputEvent` handler](#inputevent-handler) function. Fires before the value of an editable element is modified. React does *not* yet use the native [`beforeinput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforeinput_event) event, and instead attempts to polyfill it using other events.
 - `onBeforeInputCapture`: A version of `onBeforeInput` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
 - `onBlur`: A [`FocusEvent` handler](#focusevent-handler) function. Fires when an element lost focus. Unlike the built-in browser [`blur`](https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event) event, in React the `onBlur` event bubbles.
 - `onBlurCapture`: A version of `onBlur` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
@@ -226,14 +226,14 @@ These events fire for resources like [`<audio>`](https://developer.mozilla.org/e
 - [`onWaiting`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/waiting_event): An [`Event` handler](#event-handler) function. Fires when the playback stopped due to temporary lack of data.
 - `onWaitingCapture`: A version of `onWaiting` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
 
-#### Caveats {/_common-caveats_/}
+#### Caveats {/*common-caveats*/}
 
 - You cannot pass both `children` and `dangerouslySetInnerHTML` at the same time.
 - Some events (like `onAbort` and `onLoad`) don't bubble in the browser, but bubble in React.
 
----
+***
 
-### `ref` callback function {/_ref-callback_/}
+### `ref` callback function {/*ref-callback*/}
 
 Instead of a ref object (like the one returned by [`useRef`](/reference/react/useRef#manipulating-the-dom-with-a-ref)), you may pass a function to the `ref` attribute.
 
@@ -251,44 +251,42 @@ Instead of a ref object (like the one returned by [`useRef`](/reference/react/us
 
 When the `<div>` DOM node is added to the screen, React will call your `ref` callback with the DOM `node` as the argument. When that `<div>` DOM node is removed, React will call your the cleanup function returned from the callback.
 
-React will also call your `ref` callback whenever you pass a _different_ `ref` callback. In the above example, `(node) => { ... }` is a different function on every render. When your component re-renders, the _previous_ function will be called with `null` as the argument, and the _next_ function will be called with the DOM node.
+React will also call your `ref` callback whenever you pass a *different* `ref` callback. In the above example, `(node) => { ... }` is a different function on every render. When your component re-renders, the *previous* function will be called with `null` as the argument, and the *next* function will be called with the DOM node.
 
-#### Parameters {/_ref-callback-parameters_/}
+#### Parameters {/*ref-callback-parameters*/}
 
 - `node`: A DOM node. React will pass you the DOM node when the ref gets attached. Unless you pass the same function reference for the `ref` callback on every render, the callback will get temporarily cleanup and re-create during every re-render of the component.
 
-#### React 19 added cleanup functions for `ref` callbacks. {/_react-19-added-cleanup-functions-for-ref-callbacks_/}
+#### React 19 added cleanup functions for `ref` callbacks. {/*react-19-added-cleanup-functions-for-ref-callbacks*/}
 
 To support backwards compatibility, if a cleanup function is not returned from the `ref` callback, `node` will be called with `null` when the `ref` is detached. This behavior will be removed in a future version.
 
-#### Returns {/_returns_/}
+#### Returns {/*returns*/}
 
 - **optional** `cleanup function`: When the `ref` is detached, React will call the cleanup function. If a function is not returned by the `ref` callback, React will call the callback again with `null` as the argument when the `ref` gets detached. This behavior will be removed in a future version.
 
-#### Caveats {/_caveats_/}
+#### Caveats {/*caveats*/}
 
 - When Strict Mode is on, React will **run one extra development-only setup+cleanup cycle** before the first real setup. This is a stress-test that ensures that your cleanup logic "mirrors" your setup logic and that it stops or undoes whatever the setup is doing. If this causes a problem, implement the cleanup function.
-- When you pass a _different_ `ref` callback, React will call the _previous_ callback's cleanup function if provided. If no cleanup function is defined, the `ref` callback will be called with `null` as the argument. The _next_ function will be called with the DOM node.
+- When you pass a *different* `ref` callback, React will call the *previous* callback's cleanup function if provided. If no cleanup function is defined, the `ref` callback will be called with `null` as the argument. The *next* function will be called with the DOM node.
 
----
+***
 
-### React event object {/_react-event-object_/}
+### React event object {/*react-event-object*/}
 
-Your event handlers will receive a _React event object._ It is also sometimes known as a "synthetic event".
+Your event handlers will receive a *React event object.* It is also sometimes known as a "synthetic event".
 
 ```js
-<button
-  onClick={(e) => {
-    console.log(e); // React event object
-  }}
-/>
+<button onClick={e => {
+  console.log(e); // React event object
+}} />
 ```
 
 It conforms to the same standard as the underlying DOM events, but fixes some browser inconsistencies.
 
 Some React events do not map directly to the browser's native events. For example in `onMouseLeave`, `e.nativeEvent` will point to a `mouseout` event. The specific mapping is not part of the public API and may change in the future. If you need the underlying browser event for some reason, read it from `e.nativeEvent`.
 
-#### Properties {/_react-event-object-properties_/}
+#### Properties {/*react-event-object-properties*/}
 
 React event objects implement some of the standard [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event) properties:
 
@@ -305,7 +303,7 @@ Additionally, React event objects provide these properties:
 
 - `nativeEvent`: A DOM [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event). The original browser event object.
 
-#### Methods {/_react-event-object-methods_/}
+#### Methods {/*react-event-object-methods*/}
 
 React event objects implement some of the standard [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event) methods:
 
@@ -319,72 +317,73 @@ Additionally, React event objects provide these methods:
 - `persist()`: Not used with React DOM. With React Native, call this to read event's properties after the event.
 - `isPersistent()`: Not used with React DOM. With React Native, returns whether `persist` has been called.
 
-#### Caveats {/_react-event-object-caveats_/}
+#### Caveats {/*react-event-object-caveats*/}
 
 - The values of `currentTarget`, `eventPhase`, `target`, and `type` reflect the values your React code expects. Under the hood, React attaches event handlers at the root, but this is not reflected in React event objects. For example, `e.currentTarget` may not be the same as the underlying `e.nativeEvent.currentTarget`. For polyfilled events, `e.type` (React event type) may differ from `e.nativeEvent.type` (underlying type).
 
----
+***
 
-### `AnimationEvent` handler function {/_animationevent-handler_/}
+### `AnimationEvent` handler function {/*animationevent-handler*/}
 
 An event handler type for the [CSS animation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations) events.
 
 ```js
 <div
-  onAnimationStart={(e) => console.log("onAnimationStart")}
-  onAnimationIteration={(e) => console.log("onAnimationIteration")}
-  onAnimationEnd={(e) => console.log("onAnimationEnd")}
+  onAnimationStart={e => console.log('onAnimationStart')}
+  onAnimationIteration={e => console.log('onAnimationIteration')}
+  onAnimationEnd={e => console.log('onAnimationEnd')}
 />
 ```
 
-#### Parameters {/_animationevent-handler-parameters_/}
+#### Parameters {/*animationevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`AnimationEvent`](https://developer.mozilla.org/en-US/docs/Web/API/AnimationEvent) properties:
   - [`animationName`](https://developer.mozilla.org/en-US/docs/Web/API/AnimationEvent/animationName)
   - [`elapsedTime`](https://developer.mozilla.org/en-US/docs/Web/API/AnimationEvent/elapsedTime)
   - [`pseudoElement`](https://developer.mozilla.org/en-US/docs/Web/API/AnimationEvent/pseudoElement)
 
----
+***
 
-### `ClipboardEvent` handler function {/_clipboadevent-handler_/}
+### `ClipboardEvent` handler function {/*clipboadevent-handler*/}
 
 An event handler type for the [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API) events.
 
 ```js
 <input
-  onCopy={(e) => console.log("onCopy")}
-  onCut={(e) => console.log("onCut")}
-  onPaste={(e) => console.log("onPaste")}
+  onCopy={e => console.log('onCopy')}
+  onCut={e => console.log('onCut')}
+  onPaste={e => console.log('onPaste')}
 />
 ```
 
-#### Parameters {/_clipboadevent-handler-parameters_/}
+#### Parameters {/*clipboadevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`ClipboardEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ClipboardEvent) properties:
+
   - [`clipboardData`](https://developer.mozilla.org/en-US/docs/Web/API/ClipboardEvent/clipboardData)
 
----
+***
 
-### `CompositionEvent` handler function {/_compositionevent-handler_/}
+### `CompositionEvent` handler function {/*compositionevent-handler*/}
 
 An event handler type for the [input method editor (IME)](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor) events.
 
 ```js
 <input
-  onCompositionStart={(e) => console.log("onCompositionStart")}
-  onCompositionUpdate={(e) => console.log("onCompositionUpdate")}
-  onCompositionEnd={(e) => console.log("onCompositionEnd")}
+  onCompositionStart={e => console.log('onCompositionStart')}
+  onCompositionUpdate={e => console.log('onCompositionUpdate')}
+  onCompositionEnd={e => console.log('onCompositionEnd')}
 />
 ```
 
-#### Parameters {/_compositionevent-handler-parameters_/}
+#### Parameters {/*compositionevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`CompositionEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent) properties:
   - [`data`](https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data)
 
----
+***
 
-### `DragEvent` handler function {/_dragevent-handler_/}
+### `DragEvent` handler function {/*dragevent-handler*/}
 
 An event handler type for the [HTML Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API) events.
 
@@ -392,32 +391,31 @@ An event handler type for the [HTML Drag and Drop API](https://developer.mozilla
 <>
   <div
     draggable={true}
-    onDragStart={(e) => console.log("onDragStart")}
-    onDragEnd={(e) => console.log("onDragEnd")}
+    onDragStart={e => console.log('onDragStart')}
+    onDragEnd={e => console.log('onDragEnd')}
   >
     Drag source
   </div>
 
   <div
-    onDragEnter={(e) => console.log("onDragEnter")}
-    onDragLeave={(e) => console.log("onDragLeave")}
-    onDragOver={(e) => {
-      e.preventDefault();
-      console.log("onDragOver");
-    }}
-    onDrop={(e) => console.log("onDrop")}
+    onDragEnter={e => console.log('onDragEnter')}
+    onDragLeave={e => console.log('onDragLeave')}
+    onDragOver={e => { e.preventDefault(); console.log('onDragOver'); }}
+    onDrop={e => console.log('onDrop')}
   >
     Drop target
   </div>
 </>
 ```
 
-#### Parameters {/_dragevent-handler-parameters_/}
+#### Parameters {/*dragevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`DragEvent`](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent) properties:
+
   - [`dataTransfer`](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer)
 
   It also includes the inherited [`MouseEvent`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) properties:
+
   - [`altKey`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey)
   - [`button`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button)
   - [`buttons`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons)
@@ -436,76 +434,80 @@ An event handler type for the [HTML Drag and Drop API](https://developer.mozilla
   - [`shiftKey`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey)
 
   It also includes the inherited [`UIEvent`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) properties:
+
   - [`detail`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail)
   - [`view`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view)
 
----
+***
 
-### `FocusEvent` handler function {/_focusevent-handler_/}
+### `FocusEvent` handler function {/*focusevent-handler*/}
 
 An event handler type for the focus events.
 
 ```js
 <input
-  onFocus={(e) => console.log("onFocus")}
-  onBlur={(e) => console.log("onBlur")}
+  onFocus={e => console.log('onFocus')}
+  onBlur={e => console.log('onBlur')}
 />
 ```
 
 [See an example.](#handling-focus-events)
 
-#### Parameters {/_focusevent-handler-parameters_/}
+#### Parameters {/*focusevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`FocusEvent`](https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent) properties:
+
   - [`relatedTarget`](https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget)
 
   It also includes the inherited [`UIEvent`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) properties:
+
   - [`detail`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail)
   - [`view`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view)
 
----
+***
 
-### `Event` handler function {/_event-handler_/}
+### `Event` handler function {/*event-handler*/}
 
 An event handler type for generic events.
 
-#### Parameters {/_event-handler-parameters_/}
+#### Parameters {/*event-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with no additional properties.
 
----
+***
 
-### `InputEvent` handler function {/_inputevent-handler_/}
+### `InputEvent` handler function {/*inputevent-handler*/}
 
 An event handler type for the `onBeforeInput` event.
 
 ```js
-<input onBeforeInput={(e) => console.log("onBeforeInput")} />
+<input onBeforeInput={e => console.log('onBeforeInput')} />
 ```
 
-#### Parameters {/_inputevent-handler-parameters_/}
+#### Parameters {/*inputevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`InputEvent`](https://developer.mozilla.org/en-US/docs/Web/API/InputEvent) properties:
   - [`data`](https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data)
 
----
+***
 
-### `KeyboardEvent` handler function {/_keyboardevent-handler_/}
+### `KeyboardEvent` handler function {/*keyboardevent-handler*/}
 
 An event handler type for keyboard events.
 
 ```js
 <input
-  onKeyDown={(e) => console.log("onKeyDown")}
-  onKeyUp={(e) => console.log("onKeyUp")}
+  onKeyDown={e => console.log('onKeyDown')}
+  onKeyUp={e => console.log('onKeyUp')}
 />
 ```
 
 [See an example.](#handling-keyboard-events)
 
-#### Parameters {/_keyboardevent-handler-parameters_/}
+#### Parameters {/*keyboardevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`KeyboardEvent`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent) properties:
+
   - [`altKey`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/altKey)
   - [`charCode`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode)
   - [`code`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code)
@@ -521,31 +523,33 @@ An event handler type for keyboard events.
   - [`which`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/which)
 
   It also includes the inherited [`UIEvent`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) properties:
+
   - [`detail`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail)
   - [`view`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view)
 
----
+***
 
-### `MouseEvent` handler function {/_mouseevent-handler_/}
+### `MouseEvent` handler function {/*mouseevent-handler*/}
 
 An event handler type for mouse events.
 
 ```js
 <div
-  onClick={(e) => console.log("onClick")}
-  onMouseEnter={(e) => console.log("onMouseEnter")}
-  onMouseOver={(e) => console.log("onMouseOver")}
-  onMouseDown={(e) => console.log("onMouseDown")}
-  onMouseUp={(e) => console.log("onMouseUp")}
-  onMouseLeave={(e) => console.log("onMouseLeave")}
+  onClick={e => console.log('onClick')}
+  onMouseEnter={e => console.log('onMouseEnter')}
+  onMouseOver={e => console.log('onMouseOver')}
+  onMouseDown={e => console.log('onMouseDown')}
+  onMouseUp={e => console.log('onMouseUp')}
+  onMouseLeave={e => console.log('onMouseLeave')}
 />
 ```
 
 [See an example.](#handling-mouse-events)
 
-#### Parameters {/_mouseevent-handler-parameters_/}
+#### Parameters {/*mouseevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`MouseEvent`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) properties:
+
   - [`altKey`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey)
   - [`button`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button)
   - [`buttons`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons)
@@ -564,30 +568,32 @@ An event handler type for mouse events.
   - [`shiftKey`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey)
 
   It also includes the inherited [`UIEvent`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) properties:
+
   - [`detail`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail)
   - [`view`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view)
 
----
+***
 
-### `PointerEvent` handler function {/_pointerevent-handler_/}
+### `PointerEvent` handler function {/*pointerevent-handler*/}
 
 An event handler type for [pointer events.](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events)
 
 ```js
 <div
-  onPointerEnter={(e) => console.log("onPointerEnter")}
-  onPointerMove={(e) => console.log("onPointerMove")}
-  onPointerDown={(e) => console.log("onPointerDown")}
-  onPointerUp={(e) => console.log("onPointerUp")}
-  onPointerLeave={(e) => console.log("onPointerLeave")}
+  onPointerEnter={e => console.log('onPointerEnter')}
+  onPointerMove={e => console.log('onPointerMove')}
+  onPointerDown={e => console.log('onPointerDown')}
+  onPointerUp={e => console.log('onPointerUp')}
+  onPointerLeave={e => console.log('onPointerLeave')}
 />
 ```
 
 [See an example.](#handling-pointer-events)
 
-#### Parameters {/_pointerevent-handler-parameters_/}
+#### Parameters {/*pointerevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`PointerEvent`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent) properties:
+
   - [`height`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/height)
   - [`isPrimary`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/isPrimary)
   - [`pointerId`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerId)
@@ -600,6 +606,7 @@ An event handler type for [pointer events.](https://developer.mozilla.org/en-US/
   - [`width`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/width)
 
   It also includes the inherited [`MouseEvent`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) properties:
+
   - [`altKey`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey)
   - [`button`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button)
   - [`buttons`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons)
@@ -618,27 +625,29 @@ An event handler type for [pointer events.](https://developer.mozilla.org/en-US/
   - [`shiftKey`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey)
 
   It also includes the inherited [`UIEvent`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) properties:
+
   - [`detail`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail)
   - [`view`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view)
 
----
+***
 
-### `TouchEvent` handler function {/_touchevent-handler_/}
+### `TouchEvent` handler function {/*touchevent-handler*/}
 
 An event handler type for [touch events.](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events)
 
 ```js
 <div
-  onTouchStart={(e) => console.log("onTouchStart")}
-  onTouchMove={(e) => console.log("onTouchMove")}
-  onTouchEnd={(e) => console.log("onTouchEnd")}
-  onTouchCancel={(e) => console.log("onTouchCancel")}
+  onTouchStart={e => console.log('onTouchStart')}
+  onTouchMove={e => console.log('onTouchMove')}
+  onTouchEnd={e => console.log('onTouchEnd')}
+  onTouchCancel={e => console.log('onTouchCancel')}
 />
 ```
 
-#### Parameters {/_touchevent-handler-parameters_/}
+#### Parameters {/*touchevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`TouchEvent`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent) properties:
+
   - [`altKey`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/altKey)
   - [`ctrlKey`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/ctrlKey)
   - [`changedTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/changedTouches)
@@ -649,61 +658,70 @@ An event handler type for [touch events.](https://developer.mozilla.org/en-US/do
   - [`targetTouches`](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/targetTouches)
 
   It also includes the inherited [`UIEvent`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) properties:
+
   - [`detail`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail)
   - [`view`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view)
 
----
+***
 
-### `TransitionEvent` handler function {/_transitionevent-handler_/}
+### `TransitionEvent` handler function {/*transitionevent-handler*/}
 
 An event handler type for the CSS transition events.
 
 ```js
-<div onTransitionEnd={(e) => console.log("onTransitionEnd")} />
+<div
+  onTransitionEnd={e => console.log('onTransitionEnd')}
+/>
 ```
 
-#### Parameters {/_transitionevent-handler-parameters_/}
+#### Parameters {/*transitionevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`TransitionEvent`](https://developer.mozilla.org/en-US/docs/Web/API/TransitionEvent) properties:
   - [`elapsedTime`](https://developer.mozilla.org/en-US/docs/Web/API/TransitionEvent/elapsedTime)
   - [`propertyName`](https://developer.mozilla.org/en-US/docs/Web/API/TransitionEvent/propertyName)
   - [`pseudoElement`](https://developer.mozilla.org/en-US/docs/Web/API/TransitionEvent/pseudoElement)
 
----
+***
 
-### `UIEvent` handler function {/_uievent-handler_/}
+### `UIEvent` handler function {/*uievent-handler*/}
 
 An event handler type for generic UI events.
 
 ```js
-<div onScroll={(e) => console.log("onScroll")} />
+<div
+  onScroll={e => console.log('onScroll')}
+/>
 ```
 
-#### Parameters {/_uievent-handler-parameters_/}
+#### Parameters {/*uievent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`UIEvent`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) properties:
   - [`detail`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail)
   - [`view`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view)
 
----
+***
 
-### `WheelEvent` handler function {/_wheelevent-handler_/}
+### `WheelEvent` handler function {/*wheelevent-handler*/}
 
 An event handler type for the `onWheel` event.
 
 ```js
-<div onWheel={(e) => console.log("onWheel")} />
+<div
+  onWheel={e => console.log('onWheel')}
+/>
 ```
 
-#### Parameters {/_wheelevent-handler-parameters_/}
+#### Parameters {/*wheelevent-handler-parameters*/}
 
 - `e`: A [React event object](#react-event-object) with these extra [`WheelEvent`](https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent) properties:
+
   - [`deltaMode`](https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaMode)
   - [`deltaX`](https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaX)
   - [`deltaY`](https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaY)
   - [`deltaZ`](https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaZ)
 
   It also includes the inherited [`MouseEvent`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) properties:
+
   - [`altKey`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey)
   - [`button`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button)
   - [`buttons`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons)
@@ -722,14 +740,15 @@ An event handler type for the `onWheel` event.
   - [`shiftKey`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey)
 
   It also includes the inherited [`UIEvent`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) properties:
+
   - [`detail`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail)
   - [`view`](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view)
 
----
+***
 
-## Usage {/_usage_/}
+## Usage {/*usage*/}
 
-### Applying CSS styles {/_applying-css-styles_/}
+### Applying CSS styles {/*applying-css-styles*/}
 
 In React, you specify a CSS class with [`className`.](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) It works like the `class` attribute in HTML:
 
@@ -755,7 +774,7 @@ Sometimes, the style values depend on data. Use the `style` attribute to pass so
   className="avatar"
   style={{
     width: user.imageSize,
-    height: user.imageSize,
+    height: user.imageSize
   }}
 />
 ```
@@ -763,11 +782,11 @@ Sometimes, the style values depend on data. Use the `style` attribute to pass so
 In the above example, `style={{}}` is not a special syntax, but a regular `{}` object inside the `style={ }` [JSX curly braces.](/learn/javascript-in-jsx-with-curly-braces) We recommend only using the `style` attribute when your styles depend on JavaScript variables.
 
 ```js src/App.js
-import Avatar from "./Avatar.js";
+import Avatar from './Avatar.js';
 
 const user = {
-  name: "Hedy Lamarr",
-  imageUrl: "https://i.imgur.com/yXOvdOSs.jpg",
+  name: 'Hedy Lamarr',
+  imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
   imageSize: 90,
 };
 
@@ -781,11 +800,11 @@ export default function Avatar({ user }) {
   return (
     <img
       src={user.imageUrl}
-      alt={"Photo of " + user.name}
+      alt={'Photo of ' + user.name}
       className="avatar"
       style={{
         width: user.imageSize,
-        height: user.imageSize,
+        height: user.imageSize
       }}
     />
   );
@@ -798,7 +817,7 @@ export default function Avatar({ user }) {
 }
 ```
 
-#### How to apply multiple CSS classes conditionally? {/_how-to-apply-multiple-css-classes-conditionally_/}
+#### How to apply multiple CSS classes conditionally? {/*how-to-apply-multiple-css-classes-conditionally*/}
 
 To apply CSS classes conditionally, you need to produce the `className` string yourself using JavaScript.
 
@@ -807,36 +826,38 @@ For example, `className={'row ' + (isSelected ? 'selected': '')}` will produce e
 To make this more readable, you can use a tiny helper library like [`classnames`:](https://github.com/JedWatson/classnames)
 
 ```js
-import cn from "classnames";
+import cn from 'classnames';
 
 function Row({ isSelected }) {
-  return <div className={cn("row", isSelected && "selected")}>...</div>;
-}
-```
-
-It is especially convenient if you have multiple conditional classes:
-
-```js
-import cn from "classnames";
-
-function Row({ isSelected, size }) {
   return (
-    <div
-      className={cn("row", {
-        selected: isSelected,
-        large: size === "large",
-        small: size === "small",
-      })}
-    >
+    <div className={cn('row', isSelected && 'selected')}>
       ...
     </div>
   );
 }
 ```
 
----
+It is especially convenient if you have multiple conditional classes:
 
-### Manipulating a DOM node with a ref {/_manipulating-a-dom-node-with-a-ref_/}
+```js
+import cn from 'classnames';
+
+function Row({ isSelected, size }) {
+  return (
+    <div className={cn('row', {
+      selected: isSelected,
+      large: size === 'large',
+      small: size === 'small',
+    })}>
+      ...
+    </div>
+  );
+}
+```
+
+***
+
+### Manipulating a DOM node with a ref {/*manipulating-a-dom-node-with-a-ref*/}
 
 Sometimes, you'll need to get the browser DOM node associated with a tag in JSX. For example, if you want to focus an `<input>` when a button is clicked, you need to call [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) on the browser `<input>` DOM node.
 
@@ -856,7 +877,7 @@ export default function Form() {
 React will put the DOM node into `inputRef.current` after it's been rendered to the screen.
 
 ```js
-import { useRef } from "react";
+import { useRef } from 'react';
 
 export default function Form() {
   const inputRef = useRef(null);
@@ -868,7 +889,9 @@ export default function Form() {
   return (
     <>
       <input ref={inputRef} />
-      <button onClick={handleClick}>Focus the input</button>
+      <button onClick={handleClick}>
+        Focus the input
+      </button>
     </>
   );
 }
@@ -878,14 +901,14 @@ Read more about [manipulating DOM with refs](/learn/manipulating-the-dom-with-re
 
 For more advanced use cases, the `ref` attribute also accepts a [callback function.](#ref-callback)
 
----
+***
 
-### Dangerously setting the inner HTML {/_dangerously-setting-the-inner-html_/}
+### Dangerously setting the inner HTML {/*dangerously-setting-the-inner-html*/}
 
 You can pass a raw HTML string to an element like so:
 
 ```js
-const markup = { __html: "<p>some raw html</p>" };
+const markup = { __html: '<p>some raw html</p>' };
 return <div dangerouslySetInnerHTML={markup} />;
 ```
 
@@ -894,18 +917,18 @@ return <div dangerouslySetInnerHTML={markup} />;
 For example, if you use a Markdown library that converts Markdown to HTML, you trust that its parser doesn't contain bugs, and the user only sees their own input, you can display the resulting HTML like this:
 
 ```js
-import { useState } from "react";
-import MarkdownPreview from "./MarkdownPreview.js";
+import { useState } from 'react';
+import MarkdownPreview from './MarkdownPreview.js';
 
 export default function MarkdownEditor() {
-  const [postContent, setPostContent] = useState("_Hello,_ **Markdown**!");
+  const [postContent, setPostContent] = useState('_Hello,_ **Markdown**!');
   return (
     <>
       <label>
         Enter some markdown:
         <textarea
           value={postContent}
-          onChange={(e) => setPostContent(e.target.value)}
+          onChange={e => setPostContent(e.target.value)}
         />
       </label>
       <hr />
@@ -916,7 +939,7 @@ export default function MarkdownEditor() {
 ```
 
 ```js src/MarkdownPreview.js active
-import { Remarkable } from "remarkable";
+import { Remarkable } from 'remarkable';
 
 const md = new Remarkable();
 
@@ -925,7 +948,7 @@ function renderMarkdownToHTML(markdown) {
   // is shown to the same user, and because you
   // trust this Markdown parser to not have bugs.
   const renderedHTML = md.render(markdown);
-  return { __html: renderedHTML };
+  return {__html: renderedHTML};
 }
 
 export default function MarkdownPreview({ markdown }) {
@@ -952,11 +975,7 @@ export default function MarkdownPreview({ markdown }) {
 ```
 
 ```css
-textarea {
-  display: block;
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
+textarea { display: block; margin-top: 5px; margin-bottom: 10px; }
 ```
 
 The `{__html}` object should be created as close to where the HTML is generated as possible, like the above example does in the `renderMarkdownToHTML` function. This ensures that all raw HTML being used in your code is explicitly marked as such, and that only variables that you expect to contain HTML are passed to `dangerouslySetInnerHTML`. It is not recommended to create the object inline like `<div dangerouslySetInnerHTML={{__html: markup}} />`.
@@ -966,7 +985,7 @@ To see why rendering arbitrary HTML is dangerous, replace the code above with th
 ```js {1-4,7,8}
 const post = {
   // Imagine this content is stored in the database.
-  content: `<img src="" onerror='alert("you were hacked")'>`,
+  content: `<img src="" onerror='alert("you were hacked")'>`
 };
 
 export default function MarkdownPreview() {
@@ -978,9 +997,9 @@ export default function MarkdownPreview() {
 
 The code embedded in the HTML will run. A hacker could use this security hole to steal user information or to perform actions on their behalf. **Only use `dangerouslySetInnerHTML` with trusted and sanitized data.**
 
----
+***
 
-### Handling mouse events {/_handling-mouse-events_/}
+### Handling mouse events {/*handling-mouse-events*/}
 
 This example shows some common [mouse events](#mouseevent-handler) and when they fire.
 
@@ -988,26 +1007,26 @@ This example shows some common [mouse events](#mouseevent-handler) and when they
 export default function MouseExample() {
   return (
     <div
-      onMouseEnter={(e) => console.log("onMouseEnter (parent)")}
-      onMouseLeave={(e) => console.log("onMouseLeave (parent)")}
+      onMouseEnter={e => console.log('onMouseEnter (parent)')}
+      onMouseLeave={e => console.log('onMouseLeave (parent)')}
     >
       <button
-        onClick={(e) => console.log("onClick (first button)")}
-        onMouseDown={(e) => console.log("onMouseDown (first button)")}
-        onMouseEnter={(e) => console.log("onMouseEnter (first button)")}
-        onMouseLeave={(e) => console.log("onMouseLeave (first button)")}
-        onMouseOver={(e) => console.log("onMouseOver (first button)")}
-        onMouseUp={(e) => console.log("onMouseUp (first button)")}
+        onClick={e => console.log('onClick (first button)')}
+        onMouseDown={e => console.log('onMouseDown (first button)')}
+        onMouseEnter={e => console.log('onMouseEnter (first button)')}
+        onMouseLeave={e => console.log('onMouseLeave (first button)')}
+        onMouseOver={e => console.log('onMouseOver (first button)')}
+        onMouseUp={e => console.log('onMouseUp (first button)')}
       >
         First button
       </button>
       <button
-        onClick={(e) => console.log("onClick (second button)")}
-        onMouseDown={(e) => console.log("onMouseDown (second button)")}
-        onMouseEnter={(e) => console.log("onMouseEnter (second button)")}
-        onMouseLeave={(e) => console.log("onMouseLeave (second button)")}
-        onMouseOver={(e) => console.log("onMouseOver (second button)")}
-        onMouseUp={(e) => console.log("onMouseUp (second button)")}
+        onClick={e => console.log('onClick (second button)')}
+        onMouseDown={e => console.log('onMouseDown (second button)')}
+        onMouseEnter={e => console.log('onMouseEnter (second button)')}
+        onMouseLeave={e => console.log('onMouseLeave (second button)')}
+        onMouseOver={e => console.log('onMouseOver (second button)')}
+        onMouseUp={e => console.log('onMouseUp (second button)')}
       >
         Second button
       </button>
@@ -1017,17 +1036,13 @@ export default function MouseExample() {
 ```
 
 ```css
-label {
-  display: block;
-}
-input {
-  margin-left: 10px;
-}
+label { display: block; }
+input { margin-left: 10px; }
 ```
 
----
+***
 
-### Handling pointer events {/_handling-pointer-events_/}
+### Handling pointer events {/*handling-pointer-events*/}
 
 This example shows some common [pointer events](#pointerevent-handler) and when they fire.
 
@@ -1035,27 +1050,27 @@ This example shows some common [pointer events](#pointerevent-handler) and when 
 export default function PointerExample() {
   return (
     <div
-      onPointerEnter={(e) => console.log("onPointerEnter (parent)")}
-      onPointerLeave={(e) => console.log("onPointerLeave (parent)")}
-      style={{ padding: 20, backgroundColor: "#ddd" }}
+      onPointerEnter={e => console.log('onPointerEnter (parent)')}
+      onPointerLeave={e => console.log('onPointerLeave (parent)')}
+      style={{ padding: 20, backgroundColor: '#ddd' }}
     >
       <div
-        onPointerDown={(e) => console.log("onPointerDown (first child)")}
-        onPointerEnter={(e) => console.log("onPointerEnter (first child)")}
-        onPointerLeave={(e) => console.log("onPointerLeave (first child)")}
-        onPointerMove={(e) => console.log("onPointerMove (first child)")}
-        onPointerUp={(e) => console.log("onPointerUp (first child)")}
-        style={{ padding: 20, backgroundColor: "lightyellow" }}
+        onPointerDown={e => console.log('onPointerDown (first child)')}
+        onPointerEnter={e => console.log('onPointerEnter (first child)')}
+        onPointerLeave={e => console.log('onPointerLeave (first child)')}
+        onPointerMove={e => console.log('onPointerMove (first child)')}
+        onPointerUp={e => console.log('onPointerUp (first child)')}
+        style={{ padding: 20, backgroundColor: 'lightyellow' }}
       >
         First child
       </div>
       <div
-        onPointerDown={(e) => console.log("onPointerDown (second child)")}
-        onPointerEnter={(e) => console.log("onPointerEnter (second child)")}
-        onPointerLeave={(e) => console.log("onPointerLeave (second child)")}
-        onPointerMove={(e) => console.log("onPointerMove (second child)")}
-        onPointerUp={(e) => console.log("onPointerUp (second child)")}
-        style={{ padding: 20, backgroundColor: "lightblue" }}
+        onPointerDown={e => console.log('onPointerDown (second child)')}
+        onPointerEnter={e => console.log('onPointerEnter (second child)')}
+        onPointerLeave={e => console.log('onPointerLeave (second child)')}
+        onPointerMove={e => console.log('onPointerMove (second child)')}
+        onPointerUp={e => console.log('onPointerUp (second child)')}
+        style={{ padding: 20, backgroundColor: 'lightblue' }}
       >
         Second child
       </div>
@@ -1065,17 +1080,13 @@ export default function PointerExample() {
 ```
 
 ```css
-label {
-  display: block;
-}
-input {
-  margin-left: 10px;
-}
+label { display: block; }
+input { margin-left: 10px; }
 ```
 
----
+***
 
-### Handling focus events {/_handling-focus-events_/}
+### Handling focus events {/*handling-focus-events*/}
 
 In React, [focus events](#focusevent-handler) bubble. You can use the `currentTarget` and `relatedTarget` to differentiate if the focusing or blurring events originated from outside of the parent element. The example shows how to detect focusing a child, focusing the parent element, and how to detect focus entering or leaving the whole subtree.
 
@@ -1086,24 +1097,24 @@ export default function FocusExample() {
       tabIndex={1}
       onFocus={(e) => {
         if (e.currentTarget === e.target) {
-          console.log("focused parent");
+          console.log('focused parent');
         } else {
-          console.log("focused child", e.target.name);
+          console.log('focused child', e.target.name);
         }
         if (!e.currentTarget.contains(e.relatedTarget)) {
           // Not triggered when swapping focus between children
-          console.log("focus entered parent");
+          console.log('focus entered parent');
         }
       }}
       onBlur={(e) => {
         if (e.currentTarget === e.target) {
-          console.log("unfocused parent");
+          console.log('unfocused parent');
         } else {
-          console.log("unfocused child", e.target.name);
+          console.log('unfocused child', e.target.name);
         }
         if (!e.currentTarget.contains(e.relatedTarget)) {
           // Not triggered when swapping focus between children
-          console.log("focus left parent");
+          console.log('focus left parent');
         }
       }}
     >
@@ -1121,17 +1132,13 @@ export default function FocusExample() {
 ```
 
 ```css
-label {
-  display: block;
-}
-input {
-  margin-left: 10px;
-}
+label { display: block; }
+input { margin-left: 10px; }
 ```
 
----
+***
 
-### Handling keyboard events {/_handling-keyboard-events_/}
+### Handling keyboard events {/*handling-keyboard-events*/}
 
 This example shows some common [keyboard events](#keyboardevent-handler) and when they fire.
 
@@ -1142,8 +1149,8 @@ export default function KeyboardExample() {
       First name:
       <input
         name="firstName"
-        onKeyDown={(e) => console.log("onKeyDown:", e.key, e.code)}
-        onKeyUp={(e) => console.log("onKeyUp:", e.key, e.code)}
+        onKeyDown={e => console.log('onKeyDown:', e.key, e.code)}
+        onKeyUp={e => console.log('onKeyUp:', e.key, e.code)}
       />
     </label>
   );
@@ -1151,15 +1158,11 @@ export default function KeyboardExample() {
 ```
 
 ```css
-label {
-  display: block;
-}
-input {
-  margin-left: 10px;
-}
+label { display: block; }
+input { margin-left: 10px; }
 ```
 
----
+***
 
 ## Sitemap
 

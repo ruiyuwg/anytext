@@ -33,7 +33,7 @@ When you are done, run `exit` to return.
 
 ## Installing additional packages
 
-You can install additional packages into the build container by configuring the [Install Command](/docs/deployments/configure-a-build#install-command) within the dashboard or the `"installCommand"` in your `vercel.json` to use any of the following commands.
+You can install additional packages into the build container by configuring the [Install Command](/docs/deployments/configure-a-build#install-command) within the dashboard or the [`"installCommand"`](/docs/project-configuration#installcommand) in your `vercel.json` to use any of the following commands.
 
 The build image includes access to repositories with stable versions of popular packages. You can list all packages with the following command:
 
@@ -55,5 +55,5 @@ dnf install -y my-package-here
 
 title: "Build Queues"
 description: "Understand how concurrency and same branch build queues manage multiple simultaneous deployments."
-last\_updated: "2026-03-08T05:03:11.313Z"
+last\_updated: "2026-03-23T09:40:05.675Z"
 source: "https://vercel.com/docs/builds/build-queues"

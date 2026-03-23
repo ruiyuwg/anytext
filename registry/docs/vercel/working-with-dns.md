@@ -51,5 +51,5 @@ To learn more about common DNS issues, see the [troubleshooting](/docs/domains/t
 
 title: "Adding & Configuring a Custom Domain"
 description: "Learn how to add a custom domain to your Vercel project, verify it, and correctly set the DNS or Nameserver values."
-last\_updated: "2026-03-08T05:03:13.522Z"
+last\_updated: "2026-03-23T09:40:08.784Z"
 source: "https://vercel.com/docs/domains/working-with-domains/add-a-domain"

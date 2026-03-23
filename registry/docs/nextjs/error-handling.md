@@ -13,39 +13,39 @@ You can use the [`useActionState`](https://react.dev/reference/react/useActionSt
 For these errors, avoid using `try`/`catch` blocks and throw errors. Instead, model expected errors as return values.
 
 ```ts filename="app/actions.ts" switcher
-"use server";
+'use server'
 
 export async function createPost(prevState: any, formData: FormData) {
-  const title = formData.get("title");
-  const content = formData.get("content");
+  const title = formData.get('title')
+  const content = formData.get('content')
 
-  const res = await fetch("https://api.vercel.app/posts", {
-    method: "POST",
+  const res = await fetch('https://api.vercel.app/posts', {
+    method: 'POST',
     body: { title, content },
-  });
-  const json = await res.json();
+  })
+  const json = await res.json()
 
   if (!res.ok) {
-    return { message: "Failed to create post" };
+    return { message: 'Failed to create post' }
   }
 }
 ```
 
 ```js filename="app/actions.js" switcher
-"use server";
+'use server'
 
 export async function createPost(prevState, formData) {
-  const title = formData.get("title");
-  const content = formData.get("content");
+  const title = formData.get('title')
+  const content = formData.get('content')
 
-  const res = await fetch("https://api.vercel.app/posts", {
-    method: "POST",
+  const res = await fetch('https://api.vercel.app/posts', {
+    method: 'POST',
     body: { title, content },
-  });
-  const json = await res.json();
+  })
+  const json = await res.json()
 
   if (!res.ok) {
-    return { message: "Failed to create post" };
+    return { message: 'Failed to create post' }
   }
 }
 ```
@@ -53,17 +53,17 @@ export async function createPost(prevState, formData) {
 You can pass your action to the `useActionState` hook and use the returned `state` to display an error message.
 
 ```tsx filename="app/ui/form.tsx" highlight={11,19} switcher
-"use client";
+'use client'
 
-import { useActionState } from "react";
-import { createPost } from "@/app/actions";
+import { useActionState } from 'react'
+import { createPost } from '@/app/actions'
 
 const initialState = {
-  message: "",
-};
+  message: '',
+}
 
 export function Form() {
-  const [state, formAction, pending] = useActionState(createPost, initialState);
+  const [state, formAction, pending] = useActionState(createPost, initialState)
 
   return (
     <form action={formAction}>
@@ -74,22 +74,22 @@ export function Form() {
       {state?.message && <p aria-live="polite">{state.message}</p>}
       <button disabled={pending}>Create Post</button>
     </form>
-  );
+  )
 }
 ```
 
 ```jsx filename="app/ui/form.js" highlight={11,19} switcher
-"use client";
+'use client'
 
-import { useActionState } from "react";
-import { createPost } from "@/app/actions";
+import { useActionState } from 'react'
+import { createPost } from '@/app/actions'
 
 const initialState = {
-  message: "",
-};
+  message: '',
+}
 
 export function Form() {
-  const [state, formAction, pending] = useActionState(createPost, initialState);
+  const [state, formAction, pending] = useActionState(createPost, initialState)
 
   return (
     <form action={formAction}>
@@ -100,7 +100,7 @@ export function Form() {
       {state?.message && <p aria-live="polite">{state.message}</p>}
       <button disabled={pending}>Create Post</button>
     </form>
-  );
+  )
 }
 ```
 
@@ -110,27 +110,27 @@ When fetching data inside of a Server Component, you can use the response to con
 
 ```tsx filename="app/page.tsx" switcher
 export default async function Page() {
-  const res = await fetch(`https://...`);
-  const data = await res.json();
+  const res = await fetch(`https://...`)
+  const data = await res.json()
 
   if (!res.ok) {
-    return "There was an error.";
+    return 'There was an error.'
   }
 
-  return "...";
+  return '...'
 }
 ```
 
 ```jsx filename="app/page.js" switcher
 export default async function Page() {
-  const res = await fetch(`https://...`);
-  const data = await res.json();
+  const res = await fetch(`https://...`)
+  const data = await res.json()
 
   if (!res.ok) {
-    return "There was an error.";
+    return 'There was an error.'
   }
 
-  return "...";
+  return '...'
 }
 ```
 
@@ -139,44 +139,50 @@ export default async function Page() {
 You can call the [`notFound`](/docs/app/api-reference/functions/not-found) function within a route segment and use the [`not-found.js`](/docs/app/api-reference/file-conventions/not-found) file to show a 404 UI.
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
-import { getPostBySlug } from "@/lib/posts";
+import { notFound } from 'next/navigation'
+import { getPostBySlug } from '@/lib/posts'
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const post = getPostBySlug(slug)
 
   if (!post) {
-    notFound();
+    notFound()
   }
 
-  return <div>{post.title}</div>;
+  return <div>{post.title}</div>
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
-import { getPostBySlug } from "@/lib/posts";
+import { notFound } from 'next/navigation'
+import { getPostBySlug } from '@/lib/posts'
 
 export default async function Page({ params }) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const { slug } = await params
+  const post = getPostBySlug(slug)
 
   if (!post) {
-    notFound();
+    notFound()
   }
 
-  return <div>{post.title}</div>;
+  return <div>{post.title}</div>
 }
 ```
 
 ```tsx filename="app/blog/[slug]/not-found.tsx" switcher
 export default function NotFound() {
-  return <div>404 - Page Not Found</div>;
+  return <div>404 - Page Not Found</div>
 }
 ```
 
 ```jsx filename="app/blog/[slug]/not-found.js" switcher
 export default function NotFound() {
-  return <div>404 - Page Not Found</div>;
+  return <div>404 - Page Not Found</div>
 }
 ```
 
@@ -191,62 +197,62 @@ Next.js uses error boundaries to handle uncaught exceptions. Error boundaries ca
 Create an error boundary by adding an [`error.js`](/docs/app/api-reference/file-conventions/error) file inside a route segment and exporting a React component:
 
 ```tsx filename="app/dashboard/error.tsx" switcher
-"use client"; // Error boundaries must be Client Components
+'use client' // Error boundaries must be Client Components
 
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
 export default function ErrorPage({
   error,
-  reset,
+  unstable_retry,
 }: {
-  error: Error & { digest?: string };
-  reset: () => void;
+  error: Error & { digest?: string }
+  unstable_retry: () => void
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+    console.error(error)
+  }, [error])
 
   return (
     <div>
       <h2>Something went wrong!</h2>
       <button
         onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
+          // Attempt to recover by re-fetching and re-rendering the segment
+          () => unstable_retry()
         }
       >
         Try again
       </button>
     </div>
-  );
+  )
 }
 ```
 
 ```jsx filename="app/dashboard/error.js" switcher
-"use client"; // Error boundaries must be Client Components
+'use client' // Error boundaries must be Client Components
 
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
-export default function ErrorPage({ error, reset }) {
+export default function ErrorPage({ error, unstable_retry }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+    console.error(error)
+  }, [error])
 
   return (
     <div>
       <h2>Something went wrong!</h2>
       <button
         onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
+          // Attempt to recover by re-fetching and re-rendering the segment
+          () => unstable_retry()
         }
       >
         Try again
       </button>
     </div>
-  );
+  )
 }
 ```
 
@@ -254,28 +260,87 @@ Errors will bubble up to the nearest parent error boundary. This allows for gran
 
 ![Nested Error Component Hierarchy](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/nested-error-component-hierarchy.png)
 
-Error boundaries don’t catch errors inside event handlers. They’re designed to catch errors [during rendering](https://react.dev/reference/react/Component#static-getderivedstatefromerror) to show a **fallback UI** instead of crashing the whole app.
+For component-level error recovery, the [`unstable_catchError`](/docs/app/api-reference/functions/catchError) function lets you create error boundaries that can wrap any part of your component tree:
+
+```tsx filename="app/custom-error-boundary.tsx" switcher
+'use client'
+
+import { unstable_catchError as catchError, type ErrorInfo } from 'next/error'
+
+function ErrorFallback(
+  props: { title: string },
+  { error, unstable_retry: retry }: ErrorInfo
+) {
+  return (
+    <div>
+      <h2>{props.title}</h2>
+      <p>{error.message}</p>
+      <button onClick={() => retry()}>Try again</button>
+    </div>
+  )
+}
+
+export default catchError(ErrorFallback)
+```
+
+```jsx filename="app/custom-error-boundary.js" switcher
+'use client'
+
+import { unstable_catchError as catchError } from 'next/error'
+
+function ErrorFallback(props, { error, unstable_retry: retry }) {
+  return (
+    <div>
+      <h2>{props.title}</h2>
+      <p>{error.message}</p>
+      <button onClick={() => retry()}>Try again</button>
+    </div>
+  )
+}
+
+export default catchError(ErrorFallback)
+```
+
+Then use the returned component as a wrapper in any layout or page:
+
+```tsx filename="app/some-component.tsx" switcher
+import ErrorBoundary from './custom-error-boundary'
+
+export default function Component({ children }: { children: React.ReactNode }) {
+  return <ErrorBoundary title="Dashboard Error">{children}</ErrorBoundary>
+}
+```
+
+```jsx filename="app/some-component.js" switcher
+import ErrorBoundary from './custom-error-boundary'
+
+export default function Component({ children }) {
+  return <ErrorBoundary title="Dashboard Error">{children}</ErrorBoundary>
+}
+```
+
+Error boundaries don't catch errors inside event handlers. They're designed to catch errors [during rendering](https://react.dev/reference/react/Component#static-getderivedstatefromerror) to show a **fallback UI** instead of crashing the whole app.
 
 In general, errors in event handlers or async code aren’t handled by error boundaries because they run after rendering.
 
 To handle these cases, catch the error manually and store it using `useState` or `useReducer`, then update the UI to inform the user.
 
 ```tsx
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useState } from 'react'
 
 export function Button() {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null)
 
   const handleClick = () => {
     try {
       // do some work that might fail
-      throw new Error("Exception");
+      throw new Error('Exception')
     } catch (reason) {
-      setError(reason);
+      setError(reason)
     }
-  };
+  }
 
   if (error) {
     /* render fallback UI */
@@ -285,30 +350,30 @@ export function Button() {
     <button type="button" onClick={handleClick}>
       Click me
     </button>
-  );
+  )
 }
 ```
 
 Note that unhandled errors inside `startTransition` from `useTransition`, will bubble up to the nearest error boundary.
 
 ```tsx
-"use client";
+'use client'
 
-import { useTransition } from "react";
+import { useTransition } from 'react'
 
 export function Button() {
-  const [pending, startTransition] = useTransition();
+  const [pending, startTransition] = useTransition()
 
   const handleClick = () =>
     startTransition(() => {
-      throw new Error("Exception");
-    });
+      throw new Error('Exception')
+    })
 
   return (
     <button type="button" onClick={handleClick}>
       Click me
     </button>
-  );
+  )
 }
 ```
 
@@ -317,40 +382,40 @@ export function Button() {
 While less common, you can handle errors in the root layout using the [`global-error.js`](/docs/app/api-reference/file-conventions/error#global-error) file, located in the root app directory, even when leveraging [internationalization](/docs/app/guides/internationalization). Global error UI must define its own `<html>` and `<body>` tags, since it is replacing the root layout or template when active.
 
 ```tsx filename="app/global-error.tsx" switcher
-"use client"; // Error boundaries must be Client Components
+'use client' // Error boundaries must be Client Components
 
 export default function GlobalError({
   error,
-  reset,
+  unstable_retry,
 }: {
-  error: Error & { digest?: string };
-  reset: () => void;
+  error: Error & { digest?: string }
+  unstable_retry: () => void
 }) {
   return (
     // global-error must include html and body tags
     <html>
       <body>
         <h2>Something went wrong!</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <button onClick={() => unstable_retry()}>Try again</button>
       </body>
     </html>
-  );
+  )
 }
 ```
 
 ```jsx filename="app/global-error.js" switcher
-"use client"; // Error boundaries must be Client Components
+'use client' // Error boundaries must be Client Components
 
-export default function GlobalError({ error, reset }) {
+export default function GlobalError({ error, unstable_retry }) {
   return (
     // global-error must include html and body tags
     <html>
       <body>
         <h2>Something went wrong!</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <button onClick={() => unstable_retry()}>Try again</button>
       </body>
     </html>
-  );
+  )
 }
 ```
 
@@ -362,6 +427,8 @@ Learn more about the features mentioned in this page by reading the API Referenc
   - API Reference for the redirect function.
 - [error.js](/docs/app/api-reference/file-conventions/error)
   - API reference for the error.js special file.
+- [unstable\_catchError](/docs/app/api-reference/functions/catchError)
+  - API Reference for the unstable\_catchError function.
 - [notFound](/docs/app/api-reference/functions/not-found)
   - API Reference for the notFound function.
 - [not-found.js](/docs/app/api-reference/file-conventions/not-found)

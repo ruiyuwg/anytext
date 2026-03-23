@@ -6,7 +6,7 @@ import { InstallSnippet } from '@site/src/components/InstallSnippet';
 
 For most users, the migration should be quick & straight-forward.
 
-If the below three steps aren't enough, look through the below document for _"rarely breaking"_.
+If the below three steps aren't enough, look through the below document for *"rarely breaking"*.
 
 ### 1. Install new versions
 
@@ -22,7 +22,7 @@ See [react-query-v5](#react-query-v5) for more information.
 
 ### New TanStack React Query integration! (non-breaking)
 
-We are excited to announce the new TanStack React Query integration for tRPC is now available on tRPC's `next`-release!
+We are excited to announce the new TanStack React Query integration for tRPC is now available in tRPC v11!
 
 {/\* Uses a `<a>`-link to prevent Docusaurus' build from failing \*/}
 
@@ -33,10 +33,20 @@ more information.
 
 We now support stopping subscriptions from the server, this means that you can now do things like this:
 
-```ts
+```ts twoslash
+// @types: node
+import EventEmitter, { on } from 'events';
+import { initTRPC } from '@trpc/server';
+
+const t = initTRPC.create();
+const router = t.router;
+const publicProcedure = t.procedure;
+
+const ee = new EventEmitter();
+// ---cut---
 const myRouter = router({
   sub: publicProcedure.subscription(async function* (opts) {
-    for await (const data of on(ee, "data", {
+    for await (const data of on(ee, 'data', {
       signal: opts.signal,
     })) {
       const num = data[0] as number | undefined;
@@ -58,7 +68,7 @@ See the [lazy-loading routers docs](../server/merging-routers.md#lazy-load) for 
 
 > As part of this, we've changed the argument of the internal method `callProcedure()` to receive a `{ router: AnyRouter }`-param instead of a `{ _def: AnyRouter['_def'] }`-param.
 
-### Custom `basePath` to handle requests under in the standalone adapter (non-breaking)
+### Custom `basePath` to handle requests in the standalone adapter (non-breaking)
 
 The standalone adapter now supports a `basePath` option, which will slice the basePath from the beginning of the request path.
 
@@ -66,7 +76,7 @@ See the [standalone adapter docs](../server/adapters/standalone.md#custom-basePa
 
 ### Added support for HTTP/2 servers (non-breaking)
 
-We now support HTTP/2 servers, this means that you can now use the `createHTTP2Handler` and `createHTTPServer` functions to create HTTP/2 servers.
+We now support HTTP/2 servers, this means that you can now use the `createHTTP2Handler` to create HTTP/2 servers and `createHTTPServer` to create HTTP/1 servers.
 
 See the [standalone adapter docs](../server/adapters/standalone.md#http2) for more information.
 
@@ -78,15 +88,20 @@ If you previously used `ProcedureOptions` from `@trpc/server`, you now need to u
 
 We now allow promises to be embedded in nested data when using the [`httpBatchStreamLink`](../client/links/httpBatchStreamLink.md), this means that you can now do things like this:
 
-```ts
-const router = router({
+```ts twoslash
+import { initTRPC } from '@trpc/server';
+
+const t = initTRPC.create();
+const publicProcedure = t.procedure;
+// ---cut---
+const appRouter = t.router({
   embedPromise: publicProcedure.query(() => {
     async function slowThing() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      return "slow";
+      return 'slow';
     }
     return {
-      instant: "instant",
+      instant: 'instant',
       slow: slowThing(),
     };
   }),
@@ -124,9 +139,10 @@ Added support for detecting and recovering from stale connections:
 
 On the server, you can configure a ping interval to keep the connection alive:
 
-```ts
+```ts twoslash
+import { initTRPC } from '@trpc/server';
+
 export const t = initTRPC.create({
-  // ...
   sse: {
     ping: {
       enabled: true,
@@ -179,18 +195,19 @@ SubscriptionProcedure<{
 
 If you need to infer the value you can use a helper like the below:
 
-```ts
+```ts twoslash
+// @target: esnext
 type inferAsyncIterableYield<TOutput> =
   TOutput extends AsyncGenerator<infer $Yield> ? $Yield : never;
 ```
 
 This change has been made to ensure the library remains compatible with future updates and allows for the use of the `return` type in subscriptions' `AsyncGenerator`s.
 
-See [subscriptions docs](../server/subscriptions.md#output-validators) for more information.
+See [subscriptions docs](../server/subscriptions.md#output-validation) for more information.
 
 ### Added support for output validators in subscriptions (non-breaking)
 
-See [subscriptions docs](../server/subscriptions.md#output-validators) for more information.
+See [subscriptions docs](../server/subscriptions.md#output-validation) for more information.
 
 ### Deprecation of subscriptions returning `Observable`s (non-breaking)
 
@@ -236,13 +253,13 @@ You can still access the input by calling `info.calls[index].getRawInput()`.
 
 > This only affects you if you used the experimental formdata features
 
-- experimental_formDataLink - use httpLink
-- experimental_parseMultipartFormData - not needed anymore
-- experimental_isMultipartFormDataRequest - not needed anymore
-- experimental_composeUploadHandlers - not needed anymore
-- experimental_createMemoryUploadHandler - not needed anymore
-- experimental_NodeOnDiskFile and experimental_createFileUploadHandler - not supported in this first release, open an issue if you need to hold data on disk
-- experimental_contentTypeHandlers - not needed anymore, but could come back if needed by the community for novel data types
+- experimental\_formDataLink - use httpLink
+- experimental\_parseMultipartFormData - not needed anymore
+- experimental\_isMultipartFormDataRequest - not needed anymore
+- experimental\_composeUploadHandlers - not needed anymore
+- experimental\_createMemoryUploadHandler - not needed anymore
+- experimental\_NodeOnDiskFile and experimental\_createFileUploadHandler - not supported in this first release, open an issue if you need to hold data on disk
+- experimental\_contentTypeHandlers - not needed anymore, but could come back if needed by the community for novel data types
 
 You can see the new approach in `examples/next-formdata`
 
@@ -280,18 +297,25 @@ See test [here](https://github.com/trpc/trpc/blob/743fa6aed8ac889d9c60f321c4b4ad
 >
 > Only applies if you use data transformers.
 
-You now setup data transformers in the `links`-array instead of when you initialize the tRPC-client;
+You now set up data transformers in the `links`-array instead of when you initialize the tRPC-client;
 
 Wherever you have a HTTP Link you have to add `transformer: superjson` if you use transformers:
 
-```ts
+```ts twoslash
+import { httpBatchLink } from '@trpc/client';
+import superjson from 'superjson';
+// ---cut---
 httpBatchLink({
-  url: "/api/trpc",
+  url: '/api/trpc',
   transformer: superjson, // <-- add this
 });
 ```
 
 ```ts
+import { createTRPCNext } from '@trpc/next';
+import superjson from 'superjson';
+import { AppRouter } from './appRouter'
+
 createTRPCNext<AppRouter>({
   // [..]
   transformer: superjson, // <-- add this
@@ -302,21 +326,27 @@ createTRPCNext<AppRouter>({
 
 This is to fix https://github.com/trpc/trpc/issues/5378 where `react-dom` was imported regardless if you were using this functionality or not.
 
-See [SSR docs](../client/nextjs/ssr.md)
+See [SSR docs](../client/nextjs/pages-router/ssr.md)
 
 ### Added support for short-hand router definitions (non-breaking)
 
-See [Merging routers](../server/merging-routers.md#inline-sub-router)
+See [Routers](../server/routers.md#inline-sub-router)
 
-```ts
+```ts twoslash
+import { initTRPC } from '@trpc/server';
+
+const t = initTRPC.create();
+const router = t.router;
+const publicProcedure = t.procedure;
+// ---cut---
 const appRouter = router({
   // Shorthand plain object for creating a sub-router
   nested1: {
-    proc: publicProcedure.query(() => "..."),
+    proc: publicProcedure.query(() => '...'),
   },
   // Equivalent of:
   nested2: router({
-    proc: publicProcedure.query(() => "..."),
+    proc: publicProcedure.query(() => '...'),
   }),
 });
 ```
@@ -335,7 +365,7 @@ https://github.com/trpc/trpc/pull/5226
 
 ### Refactor internal generics (rarely breaking)
 
-We have refactored our internal generics and made them more readable (TODO: link procedure builder sauce)
+We have refactored our internal generics and made them more readable.
 
 ### React is now >=18.2.0 (rarely breaking)
 
@@ -352,7 +382,7 @@ We have added usage of FormData, File, Blob, and ReadableStream. NodeJS 18 is no
 
 ### `rawInput` in middleware is now a `getRawInput` (rarely breaking)
 
-While we're not doing anything differently internally (just yet) this is help support a much requested feature in tRPC: content types other than JSON.
+While we're not doing anything differently internally (just yet) this is to help support a much requested feature in tRPC: content types other than JSON.
 
 ### Simplified types and `.d.ts` outputs
 
@@ -384,6 +414,7 @@ Import your `AppRouter` type into the client application. This type holds the sh
 
 ```twoslash include router
 // @filename: server/router.ts
+// ---cut---
 import { initTRPC } from '@trpc/server';
 import { z } from "zod";
 const t = initTRPC.create();
@@ -404,7 +435,7 @@ export type AppRouter = typeof appRouter;
 // @include: router
 // @filename: utils/trpc.ts
 // ---cut---
-import type { AppRouter } from "../server/router";
+import type { AppRouter } from '../server/router';
 ```
 
 By using `import type` you ensure that the reference will be stripped at compile-time, meaning you don't inadvertently import server-side code into your client. For more information, [see the Typescript docs](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export).

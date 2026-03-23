@@ -10,14 +10,14 @@ Configure prerendering for specific routes using the `routes` option
 
 ```
 import { defineConfig } from "@solidjs/start/config";
-export default defineConfig({  server: {    prerender: {      routes: ["/", "/about"]    }  }});
+export default defineConfig({  server: {    prerender: {      routes: ["/", "/about"],    },  },});
 ```
 
 Or to pre-render all routes, you can pass `true` to the `crawlLinks` option
 
 ```
 import { defineConfig } from "@solidjs/start/config";
-export default defineConfig({  server: {    prerender: {      crawlLinks: true    }  }});
+export default defineConfig({  server: {    prerender: {      crawlLinks: true,    },  },});
 ```
 
 For advanced pre-rendering options, refer to [Nitro's documentation](https://nitro.build/config#prerender).

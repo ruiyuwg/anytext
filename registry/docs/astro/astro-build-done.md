@@ -12,8 +12,6 @@
 'astro:build:done'?: (options: {
   pages: { pathname: string }[];
   dir: URL;
-  /** @deprecated Use the `assets` map and the new `astro:routes:resolved` hook */
-  routes: IntegrationRouteData[];
   assets: Map<string, URL[]>;
   logger: AstroIntegrationLogger;
 }) => void | Promise<void>;
@@ -47,23 +45,6 @@ export default function myIntegration() {
   }
 }
 ```
-
-#### `routes` option
-
-[Section titled “routes option”](#routes-option-1)
-
-Caution
-
-This property is deprecated since v5.0. Check the [migration guide](/en/guides/upgrade-to/v5/#deprecated-routes-on-astrobuilddone-hook-integration-api).
-
-**Type:** [`IntegrationRouteData[]`](#integrationroutedata)
-
-A list of all generated routes alongside their associated metadata.
-
-You can reference the full `IntegrationRouteData` type below, but the most common properties are:
-
-- `component` - the input file path relative to the project root
-- `pathname` - the output file URL (undefined for routes using `[dynamic]` and `[...spread]` params)
 
 #### `assets` option
 
@@ -102,3 +83,27 @@ declare global {
 ```
 
 Astro reserves the `astro:` prefix for future built-in hooks. Please choose a different prefix when naming your custom hook.
+
+## Astro vite environments
+
+[Section titled “Astro vite environments”](#astro-vite-environments)
+
+Astro inherits the environments Vite provides by default, `ssr` and `client`.
+
+Additionally there are two other environments that Astro creates:
+
+- `prerender` is an environment used during the `build` and it’s used to build static pages.
+- `astro` is an environment used during the development, and it’s used as a “secondary” SSR environment when the Vite `ssr` environment [isn’t a runnable dev environment](https://vite.dev/guide/api-environment-frameworks#runnabledevenvironment).
+
+Astro’s [Vite environments](https://vite.dev/guide/api-environment) allow you to optimize your integration’s Vite plugins for different environments. One of the main uses of Vite environments is the ability to run and configure your integration’s Vite plugins conditionally:
+
+```js
+resolveId(id) {
+  if (id === '\0virtual:foo') {
+    if (this.environment.name === 'client') {
+      throw new Error('This is a server-only module');
+    }
+    return 'export const foo = "bar"';
+  }
+}
+```

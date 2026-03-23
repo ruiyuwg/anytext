@@ -18,7 +18,7 @@ Starting from an **existing** LangSmith application, create a file that defines 
 langgraph new --template=new-langgraph-project-python my_new_project
 ```
 
-The async context manager pattern lets the server open and close the store connection at the right points in the application lifecycle. The following example uses @\[AsyncSqliteStore] with semantic search:
+The async context manager pattern lets the server open and close the store connection at the right points in the application lifecycle. The following example uses `AsyncSqliteStore` with semantic search:
 
 SQLite is not recommended for use in production deployments.
 

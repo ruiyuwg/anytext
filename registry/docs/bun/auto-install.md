@@ -8,7 +8,7 @@ If no `node_modules` directory is found in the working directory or higher, Bun 
 
 Under Bun-style module resolution, all imported packages are auto-installed on the fly into a [global module cache](/pm/global-cache) during execution (the same cache used by [`bun install`](/pm/cli/install)).
 
-```ts index.ts icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts index.ts icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 import { foo } from "foo"; // install `latest` version
 
 foo();
@@ -48,7 +48,7 @@ Packages are installed and cached into `<cache>/<pkg>@<version>`, so multiple ve
 
 This entire resolution algorithm can be short-circuited by specifying a version or version range directly in your import statement.
 
-```ts index.ts icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts index.ts icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 import { z } from "zod@3.0.0"; // specific version
 import { z } from "zod@next"; // npm tag
 import { z } from "zod@^3.20.0"; // semver range

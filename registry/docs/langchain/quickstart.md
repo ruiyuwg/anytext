@@ -1,10 +1,10 @@
 # Quickstart
 
-Source: https://docs.langchain.com/langsmith/agent-builder-quickstart
+Source: https://docs.langchain.com/langsmith/fleet/quickstart
 
 Build an agent from a template
 
-In this quickstart, you'll use the pre-defined **Email Assistant** [template](/langsmith/agent-builder-templates) that organizes and manages your inbox for you.
+In this quickstart, you'll use the pre-defined **Email Assistant** [template](/langsmith/fleet/templates) that organizes and manages your inbox for you.
 
 - Select a different template.
 
@@ -26,7 +26,7 @@ Your agent needs an API key to connect to an AI model. The AI model is what allo
 ```
 1. Go to [platform.openai.com/api-keys](https://platform.openai.com/api-keys).
 2. Click **Create new secret key**.
-3. Give it a name like "Agent Builder".
+3. Give it a name like "Fleet".
 4. Copy the key (it starts with `sk-`).
 5. Save it somewhere safe, you'll need it in Step 2.
 
@@ -34,7 +34,7 @@ Your agent needs an API key to connect to an AI model. The AI model is what allo
 
 1. Go to [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys).
 2. Click **Create Key**.
-3. Give it a name like "Agent Builder".
+3. Give it a name like "Fleet".
 4. Copy the key (it starts with `sk-ant-`).
 5. Save it somewhere safe, you'll need it in Step 2.
 ```
@@ -68,7 +68,7 @@ Your agent now has access to an AI model to understand and respond to your reque
 ## 3. Create your agent
 
 ```
-1. In the [LangSmith UI](https://smith.langchain.com), click  **Switch to Agent Builder** at the top of the left-hand navigation.
+1. In the [LangSmith UI](https://smith.langchain.com), click  **Switch to Fleet** at the top of the left-hand navigation.
 
 
 
@@ -133,18 +133,18 @@ From the agent's edit page, you can:
 - Add further helpers with **+ Add sub-agent** to break complex tasks into specialized sub-tasks.
 - Request pauses for reviews on existing tools.
 - Modify existing tools.
-- Explore features that can trigger your agent to start a task.
+- Explore channels that can start your agent automatically.
 
 ## Next steps
 
 Now that you've created your first agent, here's what to explore:
 
 ```
-Explore pre-built agents for common tasks
+Explore prebuilt agents for common tasks
 
 
 
-Run your agent automatically with triggers (Slack, email, schedules)
+Run your agent automatically with channels (Slack, email, schedules)
 
 
 
@@ -158,7 +158,7 @@ Use sub-agents to break down big tasks
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-builder-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

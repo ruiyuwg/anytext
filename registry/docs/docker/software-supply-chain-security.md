@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -30,7 +28,7 @@ SSCS encompasses practices and strategies designed to safeguard the entire lifec
 
 ## [Why is SSCS important?](#why-is-sscs-important)
 
-The significance of SSCS has escalated due to the rise in sophisticated cyberattacks targeting software supply chains. Recent incidents and the exploitation of vulnerabilities in open-source components have underscored the critical need for robust supply chain security measures. Compromises at any stage of the software lifecycle can lead to widespread vulnerabilities, data breaches, and significant financial losses.
+The significance of SSCS has escalated due to sophisticated cyberattacks targeting software supply chains. High-profile supply chain attacks and the exploitation of vulnerabilities in open-source components underscore the critical need for robust supply chain security measures. Compromises at any stage of the software lifecycle can lead to widespread vulnerabilities, data breaches, and significant financial losses.
 
 ## [How Docker Hardened Images contribute to SSCS](#how-docker-hardened-images-contribute-to-sscs)
 

@@ -64,7 +64,7 @@ Typically, all graph nodes communicate with a single schema. This means that the
 
 It is possible to have nodes write to private state channels inside the graph for internal node communication. We can simply define a private schema, `PrivateState`.
 
-It is also possible to define explicit input and output schemas for a graph. In these cases, we define an "internal" schema that contains *all* keys relevant to graph operations. But, we also define `input` and `output` schemas that are sub-sets of the "internal" schema to constrain the input and output of the graph. See [this guide](/oss/javascript/langgraph/graph-api#define-input-and-output-schemas) for more detail.
+It is also possible to define explicit input and output schemas for a graph. In these cases, we define an "internal" schema that contains *all* keys relevant to graph operations. But, we also define `input` and `output` schemas that are sub-sets of the "internal" schema to constrain the input and output of the graph. See [Define input and output schemas](/oss/javascript/langgraph/use-graph-api#define-input-and-output-schemas) for more detail.
 
 Let's look at an example:
 
@@ -125,7 +125,7 @@ There are two subtle and important points to note here:
 
 1. We pass `state` as the input schema to `node1`. But, we write out to `foo`, a channel in `OverallState`. How can we write out to a state channel that is not included in the input schema? This is because a node *can write to any state channel in the graph state.* The graph state is the union of the state channels defined at initialization, which includes `OverallState` and the filters `InputState` and `OutputState`.
 
-2. We initialize the graph with `StateGraph({ state: OverallState, input: InputState, output: OutputState })`. So, how can we write to `PrivateState` in `node2`? How does the graph gain access to this schema if it was not passed in the `StateGraph` initialization? We can do this because *nodes can also declare additional state channels* as long as the state schema definition exists. In this case, the `PrivateState` schema is defined, so we can add `bar` as a new state channel in the graph and write to it.
+2. We initialize the graph with `StateGraph({ state: OverallState, input: InputState, output: OutputState })`. How can we write to `PrivateState` in `node2`? How does the graph gain access to this schema if it was not passed in the `StateGraph` initialization? We can do this because *nodes can also declare additional state channels* as long as the state schema definition exists. In this case, the `PrivateState` schema is defined, so we can add `bar` as a new state channel in the graph and write to it.
 
 ### Reducers
 

@@ -77,5 +77,5 @@ The [Vercel OIDC token](/docs/oidc) is a way to authenticate your requests to th
 
 title: "Bring Your Own Key (BYOK)"
 description: "Learn how to configure your own provider keys with the AI Gateway."
-last\_updated: "2026-03-08T05:03:10.116Z"
+last\_updated: "2026-03-23T09:40:03.790Z"
 source: "https://vercel.com/docs/ai-gateway/authentication-and-byok/byok"

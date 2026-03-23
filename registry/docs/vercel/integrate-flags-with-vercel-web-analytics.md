@@ -63,7 +63,7 @@ To track feature flags in server-side events:
 
 title: "Flags"
 description: "Control feature visibility, run experiments, and ship with confidence using Vercel"
-last\_updated: "2026-03-08T05:03:14.504Z"
+last\_updated: "2026-03-23T09:40:10.060Z"
 source: "https://vercel.com/docs/flags"
 
 # Flags
@@ -100,7 +100,7 @@ Track flag evaluations in Runtime Logs and analyze their impact on user behavior
 
 title: "Cleaning up after a full rollout"
 description: "Audit active flags, remove a fully rolled-out flag from your codebase, and archive it using the Vercel CLI."
-last\_updated: "2026-03-08T05:03:14.508Z"
+last\_updated: "2026-03-23T09:40:10.064Z"
 source: "https://vercel.com/docs/flags/vercel-flags/cli/clean-up-after-rollout"
 
 # Cleaning up after a full rollout
@@ -175,5 +175,5 @@ vercel deploy --prod
 
 title: "Rolling out a new feature"
 description: "Create a feature flag, wire it into your application with the Flags SDK, and progressively enable it across environments using the Vercel CLI."
-last\_updated: "2026-03-08T05:03:14.513Z"
+last\_updated: "2026-03-23T09:40:10.071Z"
 source: "https://vercel.com/docs/flags/vercel-flags/cli/roll-out-feature"

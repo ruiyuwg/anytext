@@ -44,7 +44,7 @@ For this tutorial, we'll use:
 pip install slack-sdk
 ```
 
-These services are optional, though a sandboxed environment is highly recommended for any production use. You can alternatively use the local shell backend (with important [security considerations](/oss/python/deepagents/backends#local-shell)) or download artifacts directly from the backend.
+These services are optional, though a sandboxed environment is highly recommended for any production use. You can alternatively use the local shell backend (with important [security considerations](/oss/python/deepagents/backends#localshellbackend-local-shell)) or download artifacts directly from the backend.
 
 ### LangSmith
 
@@ -69,7 +69,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 
 ## Set up the backend
 
-Deep agents use [backends](/oss/python/deepagents/backends) to execute code in sandboxed environments.
+Deep Agents use [backends](/oss/python/deepagents/backends) to execute code in sandboxed environments.
 
 See [available providers](/oss/python/deepagents/sandboxes#available-providers) for setup details.
 
@@ -139,7 +139,7 @@ backend = RunloopSandbox(devbox=devbox)
 
 
 
-  This backend provides unrestricted filesystem and shell access. Use only in controlled environments for development and testing. See the [security considerations](/oss/python/deepagents/backends#local-shell) for more details.
+  This backend provides unrestricted filesystem and shell access. Use only in controlled environments for development and testing. See the [security considerations](/oss/python/deepagents/backends#localshellbackend-local-shell) for more details.
 
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}

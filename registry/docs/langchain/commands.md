@@ -136,6 +136,167 @@ npx @langchain/langgraph-cli build [OPTIONS]
 | `--help`            |                  | Display command documentation.                                                                                  |
 ````
 
+### `deploy`
+
+````
+This command is in beta and under active development. Expect frequent updates and improvements.
+
+Build and deploy a LangGraph image directly to [LangSmith Deployments](/langsmith/deployment). This command builds a Docker image locally, pushes it to a managed registry, and creates or updates a deployment—all in a single step.
+
+**Prerequisites**
+
+* **Docker** must be installed and the Docker daemon must be running. [Install Docker Desktop](https://docs.docker.com/get-docker/).
+* **Docker Buildx** is required on non-x86\_64 machines (e.g., Apple Silicon) to cross-compile for linux/amd64. [Learn more about Buildx](https://docs.docker.com/build/install-buildx/).
+* A [**LangSmith API key**](/langsmith/create-account-api-key) with access to Deployments.
+
+Remote builds (no Docker required) are coming in a future update.
+
+**Usage**
+
+```
+langgraph deploy [OPTIONS] [DOCKER_BUILD_ARGS]
+```
+
+This command also accepts all [`langgraph build`](#build) flags (`--platform`, `-t`, `--pull`, `--no-pull`, `-c`). For details, refer to `langgraph build --help`.
+
+**Options**
+
+| Option                   | Default                | Description                                                                                                                                                       |
+| ------------------------ | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--api-key TEXT`         |                        | API key for LangSmith Deployments. Can also be set via `LANGGRAPH_HOST_API_KEY`, `LANGSMITH_API_KEY`, or `LANGCHAIN_API_KEY` environment variable or `.env` file. |
+| `--name TEXT`            | Current directory name | Deployment name. Can also be set via `LANGSMITH_DEPLOYMENT_NAME` environment variable or `.env` file.                                                             |
+| `--deployment-id TEXT`   |                        | ID of an existing deployment to update. If omitted, `--name` is used to find or create the deployment.                                                            |
+| `--deployment-type TEXT` | `dev`                  | Deployment type (`dev` or `prod`). Used when creating a new deployment.                                                                                           |
+| `--no-wait`              | `False`                | Skip waiting for deployment status after pushing.                                                                                                                 |
+| `--verbose`              | `False`                | Show detailed output including Docker build and push logs.                                                                                                        |
+| `--help`                 |                        | Display command documentation.                                                                                                                                    |
+
+**Example**
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Deploy with API key from .env file
+langgraph deploy
+
+# Deploy with inline API key
+LANGSMITH_API_KEY=lsv2_... langgraph deploy
+
+# Update an existing deployment
+langgraph deploy --deployment-id abc123
+
+# Deploy with inline deployment name
+LANGSMITH_DEPLOYMENT_NAME=my-agent langgraph deploy
+```
+
+The `langgraph deploy` command can only update deployments that were originally created by `langgraph deploy`. Deployments created through other methods (e.g., the LangSmith UI or GitHub integration) cannot be updated with this command.
+
+#### `deploy list`
+
+List LangSmith Deployments.
+
+**Usage**
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy list [OPTIONS]
+```
+
+**Options**
+
+| Option                 | Default | Description                                                                                                                             |
+| ---------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `--name-contains TEXT` |         | Only show deployments whose names contain this value.                                                                                   |
+| `--api-key TEXT`       |         | API key. Can also be set via `LANGGRAPH_HOST_API_KEY`, `LANGSMITH_API_KEY`, or `LANGCHAIN_API_KEY` environment variable or `.env` file. |
+| `--help`               |         | Show this message and exit.                                                                                                             |
+
+#### `deploy revisions`
+
+\[Beta] Manage deployment revisions.
+
+**Usage**
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy revisions [OPTIONS] COMMAND [ARGS]...
+```
+
+**Options**
+
+| Option   | Default | Description                 |
+| -------- | ------- | --------------------------- |
+| `--help` |         | Show this message and exit. |
+
+**Commands**
+
+| Command | Description                                        |
+| ------- | -------------------------------------------------- |
+| `list`  | \[Beta] List revisions for a LangSmith Deployment. |
+
+#### `deploy revisions list`
+
+\[Beta] List revisions for a LangSmith Deployment.
+
+Use [`deploy list`](#deploy-list) to list deployment IDs.
+
+**Usage**
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy revisions list [OPTIONS] DEPLOYMENT_ID
+```
+
+**Options**
+
+| Option            | Default | Description                                                                                                                             |
+| ----------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `--limit INTEGER` | `10`    | Maximum number of revisions to return.                                                                                                  |
+| `--api-key TEXT`  |         | API key. Can also be set via `LANGGRAPH_HOST_API_KEY`, `LANGSMITH_API_KEY`, or `LANGCHAIN_API_KEY` environment variable or `.env` file. |
+| `--help`          |         | Show this message and exit.                                                                                                             |
+
+#### `deploy delete`
+
+Delete a LangSmith Deployment.
+
+Use [`deploy list`](#deploy-list) to find the deployment ID to delete.
+
+**Usage**
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy delete [OPTIONS] DEPLOYMENT_ID
+```
+
+**Options**
+
+| Option           | Default | Description                                                                                                                             |
+| ---------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `--force`        |         | Delete without prompting for confirmation.                                                                                              |
+| `--api-key TEXT` |         | API key. Can also be set via `LANGGRAPH_HOST_API_KEY`, `LANGSMITH_API_KEY`, or `LANGCHAIN_API_KEY` environment variable or `.env` file. |
+| `--help`         |         | Show this message and exit.                                                                                                             |
+
+#### `deploy logs`
+
+Fetch LangSmith Deployment logs. Use `deploy` for agent runtime logs, or `build` for remote build logs.
+
+**Usage**
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph deploy logs [OPTIONS]
+```
+
+**Options**
+
+| Option                                            | Default                | Description                                                                                                                                        |
+| ------------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-f, --follow`                                    | `False`                | Continuously poll for new logs.                                                                                                                    |
+| `--end-time TEXT`                                 |                        | ISO8601 end time. Example: `2026-03-08T00:00:00Z`.                                                                                                 |
+| `--start-time TEXT`                               |                        | ISO8601 start time. Example: `2026-03-08T00:00:00Z`.                                                                                               |
+| `-q, --query TEXT`                                |                        | Search string filter.                                                                                                                              |
+| `--limit INTEGER`                                 | `100`                  | Max log entries to fetch.                                                                                                                          |
+| `--level [DEBUG\|INFO\|WARNING\|ERROR\|CRITICAL]` |                        | Filter by log level.                                                                                                                               |
+| `--revision-id TEXT`                              |                        | Specific revision ID. For build logs, defaults to the latest revision.                                                                             |
+| `--type [deploy\|build]`                          | `deploy`               | Log stream to fetch. `deploy` shows agent server runtime logs. `build` shows remote build logs.                                                    |
+| `--deployment-id TEXT`                            |                        | Deployment ID. If omitted, `--name` is used to find the deployment.                                                                                |
+| `--name TEXT`                                     | Current directory name | Deployment name. Can also be set via `LANGSMITH_DEPLOYMENT_NAME` environment variable or `.env` file. Used when `--deployment-id` is not provided. |
+| `--api-key TEXT`                                  |                        | API key. Can also be set via `LANGGRAPH_HOST_API_KEY`, `LANGSMITH_API_KEY`, or `LANGCHAIN_API_KEY` environment variable or `.env` file.            |
+| `--help`                                          |                        | Show this message and exit.                                                                                                                        |
+````
+
 ### `up`
 
 ````

@@ -111,160 +111,163 @@ Rename `.env.example` to `.env.local` and populate with your Supabase connection
   
     
       ```jsx name=src/App.jsx
-      import "./index.css";
-      import { useState, useEffect } from "react";
-      import { createClient } from "@supabase/supabase-js";
+      import './index.css'
+      import { useState, useEffect } from 'react'
+      import { createClient } from '@supabase/supabase-js'
 
-      const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY);
+      const supabase = createClient(
+        import.meta.env.VITE_SUPABASE_URL,
+        import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY
+      )
 
       export default function App() {
-          const [loading, setLoading] = useState(false);
-          const [email, setEmail] = useState("");
-          const [claims, setClaims] = useState(null);
+        const [loading, setLoading] = useState(false)
+        const [email, setEmail] = useState('')
+        const [claims, setClaims] = useState(null)
 
-          // Check URL params on initial render
-          const params = new URLSearchParams(window.location.search);
-          const hasTokenHash = params.get("token_hash");
+        // Check URL params on initial render
+        const params = new URLSearchParams(window.location.search)
+        const hasTokenHash = params.get('token_hash')
 
-          const [verifying, setVerifying] = useState(!!hasTokenHash);
-          const [authError, setAuthError] = useState(null);
-          const [authSuccess, setAuthSuccess] = useState(false);
+        const [verifying, setVerifying] = useState(!!hasTokenHash)
+        const [authError, setAuthError] = useState(null)
+        const [authSuccess, setAuthSuccess] = useState(false)
 
-          useEffect(() => {
-              // Check if we have token_hash in URL (magic link callback)
-              const params = new URLSearchParams(window.location.search);
-              const token_hash = params.get("token_hash");
-              const type = params.get("type");
+        useEffect(() => {
+          // Check if we have token_hash in URL (magic link callback)
+          const params = new URLSearchParams(window.location.search)
+          const token_hash = params.get('token_hash')
+          const type = params.get('type')
 
-              if (token_hash) {
-                  // Verify the OTP token
-                  supabase.auth.verifyOtp({
-                      token_hash,
-                      type: type || "email",
-                  }).then(({ error }) => {
-                      if (error) {
-                          setAuthError(error.message);
-                      } else {
-                          setAuthSuccess(true);
-                          // Clear URL params
-                          window.history.replaceState({}, document.title, "/");
-                      }
-                      setVerifying(false);
-                  });
-              }
-
-              // Check for existing session using getClaims
-              supabase.auth.getClaims().then(({ data: { claims } }) => {
-                  setClaims(claims);
-              });
-
-              // Listen for auth changes
-              const {
-                  data: { subscription },
-              } = supabase.auth.onAuthStateChange(() => {
-                  supabase.auth.getClaims().then(({ data: { claims } }) => {
-                      setClaims(claims);
-                  });
-              });
-
-              return () => subscription.unsubscribe();
-          }, []);
-
-          const handleLogin = async (event) => {
-              event.preventDefault();
-              setLoading(true);
-              const { error } = await supabase.auth.signInWithOtp({
-                  email,
-                  options: {
-                      emailRedirectTo: window.location.origin,
-                  }
-              });
-              if (error) {
-                  alert(error.error_description || error.message);
-              } else {
-                  alert("Check your email for the login link!");
-              }
-              setLoading(false);
-          };
-
-          const handleLogout = async () => {
-              await supabase.auth.signOut();
-              setClaims(null);
-          };
-
-          // Show verification state
-          if (verifying) {
-              return (
-                  
-                      Authentication
-                      Confirming your magic link...
-                      Loading...
-                  
-              );
+          if (token_hash) {
+            // Verify the OTP token
+            supabase.auth
+              .verifyOtp({
+                token_hash,
+                type: type || 'email',
+              })
+              .then(({ error }) => {
+                if (error) {
+                  setAuthError(error.message)
+                } else {
+                  setAuthSuccess(true)
+                  // Clear URL params
+                  window.history.replaceState({}, document.title, '/')
+                }
+                setVerifying(false)
+              })
           }
 
-          // Show auth error
-          if (authError) {
-              return (
-                  
-                      Authentication
-                      ✗ Authentication failed
-                      {authError}
-                      <button
-                          onClick={() => {
-                              setAuthError(null);
-                              window.history.replaceState({}, document.title, "/");
-                          }}
-                      >
-                          Return to login
-                      
-                  
-              );
-          }
+          // Check for existing session using getClaims
+          supabase.auth.getClaims().then(({ data: { claims } }) => {
+            setClaims(claims)
+          })
 
-          // Show auth success (briefly before claims load)
-          if (authSuccess && !claims) {
-              return (
-                  
-                      Authentication
-                      ✓ Authentication successful!
-                      Loading your account...
-                  
-              );
-          }
+          // Listen for auth changes
+          const {
+            data: { subscription },
+          } = supabase.auth.onAuthStateChange(() => {
+            supabase.auth.getClaims().then(({ data: { claims } }) => {
+              setClaims(claims)
+            })
+          })
 
-          // If user is logged in, show welcome screen
-          if (claims) {
-              return (
-                  
-                      Welcome!
-                      You are logged in as: {claims.email}
-                      
-                          Sign Out
-                      
-                  
-              );
-          }
+          return () => subscription.unsubscribe()
+        }, [])
 
-          // Show login form
+        const handleLogin = async (event) => {
+          event.preventDefault()
+          setLoading(true)
+          const { error } = await supabase.auth.signInWithOtp({
+            email,
+            options: {
+              emailRedirectTo: window.location.origin,
+            },
+          })
+          if (error) {
+            alert(error.error_description || error.message)
+          } else {
+            alert('Check your email for the login link!')
+          }
+          setLoading(false)
+        }
+
+        const handleLogout = async () => {
+          await supabase.auth.signOut()
+          setClaims(null)
+        }
+
+        // Show verification state
+        if (verifying) {
           return (
+            
+              Authentication
+              Confirming your magic link...
+              Loading...
+            
+          )
+        }
+
+        // Show auth error
+        if (authError) {
+          return (
+            
+              Authentication
+              ✗ Authentication failed
+              {authError}
+              <button
+                onClick={() => {
+                  setAuthError(null)
+                  window.history.replaceState({}, document.title, '/')
+                }}
+              >
+                Return to login
               
-                  Supabase + React
-                  Sign in via magic link with your email below
-                  
-                      <input
-                          type="email"
-                          placeholder="Your email"
-                          value={email}
-                          required={true}
-                          onChange={(e) => setEmail(e.target.value)}
-                      />
-                      
-                          {loading ? Loading : Send magic link}
-                      
-                  
+            
+          )
+        }
+
+        // Show auth success (briefly before claims load)
+        if (authSuccess && !claims) {
+          return (
+            
+              Authentication
+              ✓ Authentication successful!
+              Loading your account...
+            
+          )
+        }
+
+        // If user is logged in, show welcome screen
+        if (claims) {
+          return (
+            
+              Welcome!
+              You are logged in as: {claims.email}
+              Sign Out
+            
+          )
+        }
+
+        // Show login form
+        return (
+          
+            Supabase + React
+            Sign in via magic link with your email below
+            
+              <input
+                type="email"
+                placeholder="Your email"
+                value={email}
+                required={true}
+                onChange={(e) => setEmail(e.target.value)}
+              />
               
-          );
+                {loading ? Loading : Send magic link}
+              
+            
+          
+        )
       }
       ```
     

@@ -242,7 +242,7 @@ npx prisma studio --url="postgresql://user:password@localhost:5432/dbname"
 pnpm dlx prisma studio
 
 # With direct database connection
-npx prisma studio --url="postgresql://user:password@localhost:5432/dbname"
+pnpm dlx prisma studio --url="postgresql://user:password@localhost:5432/dbname"
 ```
 
 
@@ -252,7 +252,7 @@ npx prisma studio --url="postgresql://user:password@localhost:5432/dbname"
 yarn dlx prisma studio
 
 # With direct database connection
-npx prisma studio --url="postgresql://user:password@localhost:5432/dbname"
+yarn dlx prisma studio --url="postgresql://user:password@localhost:5432/dbname"
 ```
 
 
@@ -262,7 +262,7 @@ npx prisma studio --url="postgresql://user:password@localhost:5432/dbname"
 bun x prisma studio
 
 # With direct database connection
-npx prisma studio --url="postgresql://user:password@localhost:5432/dbname"
+bun x prisma studio --url="postgresql://user:password@localhost:5432/dbname"
 ```
 ````
 

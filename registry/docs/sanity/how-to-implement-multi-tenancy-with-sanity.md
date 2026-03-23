@@ -112,7 +112,7 @@ By default, a new Studio contains just one workspace. Update your configuration 
 // ./sanity.config.ts
 
 import {defineConfig} from 'sanity'
-import {deskTool} from 'sanity/desk'
+import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemas'
 
@@ -122,13 +122,13 @@ export const config = defineConfig([
   {
     name: 'hotels-us',
     title: 'Hotels USA',
-    basePath: '/us'
+    basePath: '/us',
     projectId: 'your-project-id',
     dataset: isProduction
       ? 'hotels_us_production' 
-      : 'hotels_us_development'
+      : 'hotels_us_development',
 
-    plugins: [deskTool(), visionTool()],
+    plugins: [structureTool(), visionTool()],
     schema: {
       types: schemaTypes,
     },
@@ -136,13 +136,13 @@ export const config = defineConfig([
   {
     name: 'hotels-no',
     title: 'Hotels Norway',
-    basePath: '/no'
+    basePath: '/no',
     projectId: 'your-project-id',
     dataset: isProduction
       ? 'hotels_no_production' 
-      : 'hotels_no_development'
+      : 'hotels_no_development',
 
-    plugins: [deskTool(), visionTool()],
+    plugins: [structureTool(), visionTool()],
     schema: {
       types: schemaTypes,
     },
@@ -198,7 +198,7 @@ The `plugins` key does not have the same `context` parameter but may still be lo
 ```typescript
 // ./sanity.config.ts
 
-const pluginsGlobal = [deskTool(), visionTool()]
+const pluginsGlobal = [structureTool(), visionTool()]
 const pluginsNo = [dashboardTool()]
 
 export default defineConfig([
@@ -345,7 +345,7 @@ export default defineConfig([
     basePath: '/global',
     projectId: 'your-project-id',
     dataset: process.env.NODE_ENV === 'production' ? 'global_production' : 'global_development',
-    plugins: [deskTool(), visionTool()],
+    plugins: [structureTool(), visionTool()],
     schema: {
       types: globalSchemaTypes,
     },
@@ -365,7 +365,7 @@ defineField({
   description: 'The closest airport to the hotel',
   type: 'crossDatasetReference',
   dataset: process.env.NODE_ENV === 'production' ? 'global_production' : 'global_development',
-  studioUrl: ({type, id}) => `/global/desk/intent/edit/id=${id};type=${type}/`,
+  studioUrl: ({type, id}) => `/global/structure/intent/edit/id=${id};type=${type}/`,
   to: [
     {
       type: 'airport',
@@ -396,7 +396,7 @@ Another example is to author multiple markets of content within the same Dataset
 
 This approach requires a more explicit configuration of member roles, Studio schema, and how you query content with GROQ.
 
-To make this work, every document must have a field like `market`, and your Studio should contain a workspace for each unique market. Within each workspace, desk lists and reference fields must be filtered down to just this document’s markets.
+To make this work, every document must have a field like `market`, and your Studio should contain a workspace for each unique market. Within each workspace, document lists and reference fields must be filtered down to just this document's markets.
 
 Using [initial values and initial value templates](https://www.sanity.io/docs/studio/initial-value-templates), you can ensure every new document begins with the correct market field value. It’s also helpful to add filters to reference fields so that authors do not accidentally create references between markets.
 

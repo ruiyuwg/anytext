@@ -2,10 +2,12 @@
 
 Source: https://docs.langchain.com/langsmith/deploy-hybrid
 
+Connect a self-hosted data plane to the managed LangSmith control plane for hybrid agent deployment.
+
 **Important**
 The Hybrid deployment option requires an [Enterprise](https://langchain.com/pricing) plan.
 
-The [**hybrid**](/langsmith/hybrid) model lets you run the [data plane](/langsmith/data-plane)—your Agent Server deployments and agent workloads—in your own cloud, while LangChain hosts and manages the [control plane](/langsmith/control-plane) (the LangSmith UI and orchestration). This setup gives you the flexibility of self-hosting your runtime environments with the convenience of a managed LangSmith instance.
+The [**hybrid**](/langsmith/hybrid) model lets you run the [data plane](/langsmith/data-plane) (your Agent Server deployments and agent workloads) in your own cloud, while LangChain hosts and manages the [control plane](/langsmith/control-plane) (the LangSmith UI and orchestration). This setup gives you the flexibility of self-hosting your runtime environments with the convenience of a managed LangSmith instance.
 
 The following steps describe how to connect your self-hosted data plane to the managed LangSmith control plane.
 
@@ -36,7 +38,7 @@ The following steps describe how to connect your self-hosted data plane to the m
 
 1. Provide your LangSmith organization ID to us. Your LangSmith organization will be configured to deploy the data plane in your cloud.
 
-2. Create a listener from the LangSmith UI. The `Listener` data model is configured for the actual ["listener" application](/langsmith/data-plane#”listener”-application).
+2. Create a listener from the LangSmith UI. The `Listener` data model is configured for the actual ["listener" application](/langsmith/data-plane#listener-application).
 
    1. In the left-hand navigation, select `Deployments` > `Listeners`.
    2. In the top-right of the page, select `+ Create Listener`.
@@ -49,7 +51,7 @@ The following steps describe how to connect your self-hosted data plane to the m
    Creating a listener from the LangSmith UI does not install the "listener" application in the Kubernetes cluster.
 
 3. A [Helm chart](https://github.com/langchain-ai/helm/tree/main/charts/langgraph-dataplane) is provided to install the necessary components in your Kubernetes cluster.
-   - `langgraph-dataplane-listener`: This is a service that listens to LangChain's [control plane](/langsmith/control-plane) for changes to your deployments and creates/updates downstream CRDs. This is the ["listener" application](/langsmith/data-plane#”listener”-application).
+   - `langgraph-dataplane-listener`: This is a service that listens to LangChain's [control plane](/langsmith/control-plane) for changes to your deployments and creates/updates downstream CRDs. This is the ["listener" application](/langsmith/data-plane#listener-application).
    - `LangGraphPlatform CRD`: A CRD for LangSmith Deployment. This contains the spec for managing an instance of a LangSmith Deployment.
    - `langgraph-dataplane-operator`: This operator handles changes to your LangSmith CRDs.
    - `langgraph-dataplane-redis`: A Redis instance is used by the `langgraph-dataplane-listener` to manage various tasks (mainly creating and deleting deployments).
@@ -109,7 +111,7 @@ To create a data plane in a different namespace in the same cluster, repeat the 
 
 ## Next steps
 
-Once your infrastructure is set up, you're ready to deploy applications. See the deployment guides in the [Deployment tab](/langsmith/deployments) for instructions on building and deploying your applications.
+Once your infrastructure is set up, you're ready to deploy applications. See the deployment guides in the [Deployment tab](/langsmith/deployment) for instructions on building and deploying your applications.
 
 ***
 

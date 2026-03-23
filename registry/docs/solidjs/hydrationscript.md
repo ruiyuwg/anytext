@@ -5,9 +5,9 @@ Rendering
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/hydration-script.mdx)
 
 ```
-import { generateHydrationScript, HydrationScript } from "solid-js/web"import type { JSX } from "solid-js"
-function generateHydrationScript(options: {  nonce?: string  eventNames?: string[]}): string
-function HydrationScript(props: {  nonce?: string  eventNames?: string[]}): JSX.Element
+import { generateHydrationScript, HydrationScript } from "solid-js/web";import type { JSX } from "solid-js";
+function generateHydrationScript(options: {  nonce?: string;  eventNames?: string[];}): string;
+function HydrationScript(props: {  nonce?: string;  eventNames?: string[];}): JSX.Element;
 ```
 
 Hydration Script is a special script that should be placed once on the page to bootstrap hydration before Solid's runtime has loaded. It comes both as a function that can be called and inserted in an HTML string, or as a Component if you are rendering JSX from the `<html>` tag.

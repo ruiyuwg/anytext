@@ -27,7 +27,7 @@ If a returning Link customer clicks the **Link** button and needs to authenticat
 
 Link authenticating a customer
 
-We’re continuously optimizing Link to improve checkout conversion, and may selectively show Link when it’s most beneficial to customers at checkout. You can expect to see changes over time, including how and when Link appears.
+We’re continuously optimizing Link to improve checkout conversion, and might selectively show Link when it’s most beneficial to customers at checkout. You can expect to see changes over time, including how and when Link appears.
 
 #### Split Elements
 

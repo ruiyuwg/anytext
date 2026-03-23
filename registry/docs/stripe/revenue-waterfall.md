@@ -22,8 +22,9 @@ This example is based on the following assumptions:
 
 The revenue waterfall would look like this:
 
+|  |
+|  |
 | **Booked** | **Recognized** | **As of Sep 2020** |
-| ---------- | -------------- | ------------------ |
 | **Month**  | **Total**      | **Jun 2020**       | **Jul 2020** | **Aug 2020** | **Sep 2020** | **Recognized** | **Remaining** |
 | Jul 2020   | 31 USD         |                    | 11 USD       | 20 USD       |              | 31 USD         | 0 USD         |
 
@@ -39,8 +40,9 @@ This example is based on the following assumptions:
 
 The booked revenue for July 2020 would net at 31 USD, and the booked revenue for Sep 2020 would be net -31 USD, as shown in the following revenue waterfall:
 
+|  |
+|  |
 | **Booked** | **Recognized** | **As of Sep 2020** |
-| ---------- | -------------- | ------------------ |
 | **Month**  | **Total**      | **Jun 2020**       | **Jul 2020** | **Aug 2020** | **Sep 2020** | **Recognized** | **Remaining** |
 | Jul 2020   | 31 USD         |                    | 11 USD       | 20 USD       |              | 0 USD          | 0 USD         |
 | Aug 2020   | 0 USD          |                    |              |              |              | 0 USD          | 0 USD         |
@@ -58,12 +60,13 @@ This example is based on the following assumptions:
 
 Even though the invoice’s total amount is 35 USD, the billed revenue would be 31 USD because the tax is 4 USD, as shown in the following revenue waterfall:
 
+|  |
+|  |
 | **Booked** | **Recognized** | **As of Sep 2020** |
-| ---------- | -------------- | ------------------ |
 | **Month**  | **Total**      | **June 2020**      | **July 2020** | **Aug 2020** | **Sep 2020** | **Recognized** | **Remaining** |
 | Jul 2020   | 31 USD         |                    | 11 USD        | 20 USD       |              | 31 USD         | 0 USD         |
 
-### The invoice’s due amount is not revenue
+### The invoice’s due amount isn’t revenue
 
 The amount due for the invoice doesn’t necessarily equal the revenue because an invoice can be paid with the customer balance.
 
@@ -75,8 +78,9 @@ This example is based on the following assumptions:
 
 Even though the amount due for the invoice is 21 USD, the revenue would still be 31 USD, as shown in the following revenue waterfall:
 
+|  |
+|  |
 | **Booked** | **Recognized** | **As of Sep 2020** |
-| ---------- | -------------- | ------------------ |
 | **Month**  | **Total**      | **Jun 2020**       | **Jul 2020** | **Aug 2020** | **Sep 2020** | **Recognized** | **Remaining** |
 | Jul 2020   | 31 USD         |                    | 11 USD       | 20 USD       |              | 31 USD         | 0 USD         |
 
@@ -91,8 +95,9 @@ This example is based on the following assumptions:
 - The invoice item is created on May 14, 2020.
 - The amount of the invoice item is 31 USD, and its service period is from May 14, 2020 to June 13, 2020.
 
+|  |
+|  |
 | **Booked** | **Recognized** | **As of Sep 2020** |
-| ---------- | -------------- | ------------------ |
 | **Month**  | **Total**      | **Apr 2020**       | **May 2020** | **Jun 2020** | **Jul 2020** | **Recognized** | **Remaining** |
 | May 2020   | 31 USD         |                    | 18 USD       | 13 USD       |              | 31 USD         | 0 USD         |
 
@@ -105,8 +110,9 @@ The invoice contains two invoice line items. One is the invoice item created in 
 
 The revenue waterfall would look like this:
 
+|  |
+|  |
 | **Booked** | **Recognized** | **As of Sep 2020** |
-| ---------- | -------------- | ------------------ |
 | **Month**  | **Total**      | **Apr 2020**       | **May 2020** | **Jun 2020** | **Jul 2020** | **Recognized** | **Remaining** |
 | May 2020   | 31 USD         |                    | 18 USD       | 13 USD       |              | 31 USD         | 0 USD         |
 | Jun 2020   | 62 USD         |                    |              | 22 USD       | 40 USD       | 62 USD         | 0 USD         |
@@ -122,8 +128,9 @@ This example uses the following assumptions:
 
 The revenue waterfall would look like this:
 
+|  |
+|  |
 | **Booked** | **Recognized** | **As of Sep 2020** |
-| ---------- | -------------- | ------------------ |
 | **Month**  | **Total**      | **Jun 2020**       | **Jul 2020** | **Recognized** | **Remaining** |
 | Jun 2020   | 30 USD         | 30 USD             |              | 30 USD         | 0 USD         |
 | Jul 2020   | 20 USD         |                    | 20 USD       | 20 USD         | 0 USD         |

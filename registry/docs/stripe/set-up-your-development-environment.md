@@ -57,20 +57,7 @@ brew install stripe-cli
 
 #### apt
 
-> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
-
-> On April 5th, 2024, we changed Stripe CLI’s GPG key to install the Stripe CLI through apt. If you configured the public key before April 5th, you’ll encounter this error:
->
-> ```
-> ```
-
-W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://packages.stripe.dev/stripe-cli-debian-local stable InRelease: The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Failed to fetch https://packages.stripe.dev/stripe-cli-debian-local/dists/stable/InRelease  The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Some index files failed to download. They have been ignored, or old ones used instead
-
-````
-> 
-> To resolve this error, refresh Stripe’s GPG key by following [step 1](https://docs.stripe.com/get-started/development-environment.md#step_one).
+> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
@@ -78,7 +65,7 @@ To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
 ```bash
 curl -s https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | gpg --dearmor | sudo tee /usr/share/keyrings/stripe.gpg
-````
+```
 
 1. Add CLI’s apt repository to the apt sources list:
 
@@ -100,7 +87,7 @@ sudo apt install stripe
 
 #### yum
 
-> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
+> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on RPM-based distributions:
 
@@ -423,20 +410,7 @@ brew install stripe-cli
 
 #### apt
 
-> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
-
-> On April 5th, 2024, we changed Stripe CLI’s GPG key to install the Stripe CLI through apt. If you configured the public key before April 5th, you’ll encounter this error:
->
-> ```
-> ```
-
-W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://packages.stripe.dev/stripe-cli-debian-local stable InRelease: The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Failed to fetch https://packages.stripe.dev/stripe-cli-debian-local/dists/stable/InRelease  The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Some index files failed to download. They have been ignored, or old ones used instead
-
-````
-> 
-> To resolve this error, refresh Stripe’s GPG key by following [step 1](https://docs.stripe.com/get-started/development-environment.md#step_one).
+> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
@@ -444,7 +418,7 @@ To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
 ```bash
 curl -s https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | gpg --dearmor | sudo tee /usr/share/keyrings/stripe.gpg
-````
+```
 
 1. Add CLI’s apt repository to the apt sources list:
 
@@ -466,7 +440,7 @@ sudo apt install stripe
 
 #### yum
 
-> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
+> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on RPM-based distributions:
 
@@ -780,20 +754,7 @@ brew install stripe-cli
 
 #### apt
 
-> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
-
-> On April 5th, 2024, we changed Stripe CLI’s GPG key to install the Stripe CLI through apt. If you configured the public key before April 5th, you’ll encounter this error:
->
-> ```
-> ```
-
-W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://packages.stripe.dev/stripe-cli-debian-local stable InRelease: The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Failed to fetch https://packages.stripe.dev/stripe-cli-debian-local/dists/stable/InRelease  The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Some index files failed to download. They have been ignored, or old ones used instead
-
-````
-> 
-> To resolve this error, refresh Stripe’s GPG key by following [step 1](https://docs.stripe.com/get-started/development-environment.md#step_one).
+> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
@@ -801,7 +762,7 @@ To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
 ```bash
 curl -s https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | gpg --dearmor | sudo tee /usr/share/keyrings/stripe.gpg
-````
+```
 
 1. Add CLI’s apt repository to the apt sources list:
 
@@ -823,7 +784,7 @@ sudo apt install stripe
 
 #### yum
 
-> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
+> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on RPM-based distributions:
 
@@ -1140,20 +1101,7 @@ brew install stripe-cli
 
 #### apt
 
-> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
-
-> On April 5th, 2024, we changed Stripe CLI’s GPG key to install the Stripe CLI through apt. If you configured the public key before April 5th, you’ll encounter this error:
->
-> ```
-> ```
-
-W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://packages.stripe.dev/stripe-cli-debian-local stable InRelease: The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Failed to fetch https://packages.stripe.dev/stripe-cli-debian-local/dists/stable/InRelease  The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Some index files failed to download. They have been ignored, or old ones used instead
-
-````
-> 
-> To resolve this error, refresh Stripe’s GPG key by following [step 1](https://docs.stripe.com/get-started/development-environment.md#step_one).
+> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
@@ -1161,7 +1109,7 @@ To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
 ```bash
 curl -s https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | gpg --dearmor | sudo tee /usr/share/keyrings/stripe.gpg
-````
+```
 
 1. Add CLI’s apt repository to the apt sources list:
 
@@ -1183,7 +1131,7 @@ sudo apt install stripe
 
 #### yum
 
-> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
+> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on RPM-based distributions:
 
@@ -1506,20 +1454,7 @@ brew install stripe-cli
 
 #### apt
 
-> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
-
-> On April 5th, 2024, we changed Stripe CLI’s GPG key to install the Stripe CLI through apt. If you configured the public key before April 5th, you’ll encounter this error:
->
-> ```
-> ```
-
-W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://packages.stripe.dev/stripe-cli-debian-local stable InRelease: The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Failed to fetch https://packages.stripe.dev/stripe-cli-debian-local/dists/stable/InRelease  The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Some index files failed to download. They have been ignored, or old ones used instead
-
-````
-> 
-> To resolve this error, refresh Stripe’s GPG key by following [step 1](https://docs.stripe.com/get-started/development-environment.md#step_one).
+> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
@@ -1527,7 +1462,7 @@ To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
 ```bash
 curl -s https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | gpg --dearmor | sudo tee /usr/share/keyrings/stripe.gpg
-````
+```
 
 1. Add CLI’s apt repository to the apt sources list:
 
@@ -1549,7 +1484,7 @@ sudo apt install stripe
 
 #### yum
 
-> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
+> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on RPM-based distributions:
 
@@ -1863,20 +1798,7 @@ brew install stripe-cli
 
 #### apt
 
-> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
-
-> On April 5th, 2024, we changed Stripe CLI’s GPG key to install the Stripe CLI through apt. If you configured the public key before April 5th, you’ll encounter this error:
->
-> ```
-> ```
-
-W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://packages.stripe.dev/stripe-cli-debian-local stable InRelease: The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Failed to fetch https://packages.stripe.dev/stripe-cli-debian-local/dists/stable/InRelease  The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Some index files failed to download. They have been ignored, or old ones used instead
-
-````
-> 
-> To resolve this error, refresh Stripe’s GPG key by following [step 1](https://docs.stripe.com/get-started/development-environment.md#step_one).
+> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
@@ -1884,7 +1806,7 @@ To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
 ```bash
 curl -s https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | gpg --dearmor | sudo tee /usr/share/keyrings/stripe.gpg
-````
+```
 
 1. Add CLI’s apt repository to the apt sources list:
 
@@ -1906,7 +1828,7 @@ sudo apt install stripe
 
 #### yum
 
-> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
+> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on RPM-based distributions:
 
@@ -2223,20 +2145,7 @@ brew install stripe-cli
 
 #### apt
 
-> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
-
-> On April 5th, 2024, we changed Stripe CLI’s GPG key to install the Stripe CLI through apt. If you configured the public key before April 5th, you’ll encounter this error:
->
-> ```
-> ```
-
-W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://packages.stripe.dev/stripe-cli-debian-local stable InRelease: The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Failed to fetch https://packages.stripe.dev/stripe-cli-debian-local/dists/stable/InRelease  The following signatures were invalid: EXPKEYSIG DEEBD57F917C83E3 Stripe <security@stripe.com>
-W: Some index files failed to download. They have been ignored, or old ones used instead
-
-````
-> 
-> To resolve this error, refresh Stripe’s GPG key by following [step 1](https://docs.stripe.com/get-started/development-environment.md#step_one).
+> The Debian build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
@@ -2244,7 +2153,7 @@ To install the Stripe CLI on Debian and Ubuntu-based distributions:
 
 ```bash
 curl -s https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | gpg --dearmor | sudo tee /usr/share/keyrings/stripe.gpg
-````
+```
 
 1. Add CLI’s apt repository to the apt sources list:
 
@@ -2266,7 +2175,7 @@ sudo apt install stripe
 
 #### yum
 
-> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which is not a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
+> The RPM build for the CLI is available on JFrog at https://packages.stripe.dev, which isn’t a domain owned by Stripe. When you visit this URL, it redirects you to the Jfrog artifactory list.
 
 To install the Stripe CLI on RPM-based distributions:
 
@@ -2458,20 +2367,20 @@ dotnet add package Stripe.net
 After you install the library with the CLI, the library is automatically added as a dependency in your project file (`.csproj`). For example:
 
 ```xml
+<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-  
-    Exe
-    net6.0
-    enable
-    enable
-  
+  <ItemGroup>
+    <PackageReference Include="Stripe.net" Version="50.4.0" />
+  </ItemGroup>
 
-  
-    
-  
-
-
+</Project>
 ```
 
 ### Installation alternatives
@@ -2506,15 +2415,14 @@ class Program
 {
   static void Main(string[] args)
   {
-    StripeConfiguration.ApiKey = "sk_test_BQokikJOvBiI2HlWgH4olfQ2";
+    var client = new StripeClient("sk_test_BQokikJOvBiI2HlWgH4olfQ2");
 
     var optionsProduct = new ProductCreateOptions
     {
       Name = "Starter Subscription",
       Description = "$12/Month subscription",
     };
-    var serviceProduct = new ProductService();
-    Product product = serviceProduct.Create(optionsProduct);
+    Product product = client.V1.Products.Create(optionsProduct);
     Console.Write("Success! Here is your starter subscription product id: {0}\n", product.Id);
 
     var optionsPrice = new PriceCreateOptions
@@ -2527,8 +2435,7 @@ class Program
       },
       Product = product.Id
     };
-    var servicePrice = new PriceService();
-    Price price = servicePrice.Create(optionsPrice);
+    Price price = client.V1.Prices.Create(optionsPrice);
     Console.Write("Success! Here is your starter subscription price id: {0}\n", price.Id);
   }
 }

@@ -77,5 +77,5 @@ Third-Party Domains (ones not purchased with or transferred into Vercel) are not
 
 title: "Transferring Domains to Another Team or Project"
 description: "Domains can be transferred to another team or project within Vercel, or to and from a third-party registrar. Learn how to transfer domains with this guide."
-last\_updated: "2026-03-08T05:03:13.573Z"
+last\_updated: "2026-03-23T09:40:08.882Z"
 source: "https://vercel.com/docs/domains/working-with-domains/transfer-your-domain"

@@ -5,8 +5,8 @@ Reactive utilities
 [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/reactive-utilities/map-array.mdx)
 
 ```
-import { mapArray } from "solid-js"
-function mapArray<T, U>(  list: () => readonly T[],  mapFn: (v: T, i: () => number) => U): () => U[]
+import { mapArray } from "solid-js";
+function mapArray<T, U>(  list: () => readonly T[],  mapFn: (v: T, i: () => number) => U): () => U[];
 ```
 
 Reactive map helper that caches each item by reference to reduce unnecessary mapping on updates. It only runs the mapping function once per value and then moves or removes it as needed. The index argument is a signal. The map function itself is not tracking.
@@ -14,8 +14,8 @@ Reactive map helper that caches each item by reference to reduce unnecessary map
 Underlying helper for the `<For>` control flow.
 
 ```
-const mapped = mapArray(source, (model) => {  const [name, setName] = createSignal(model.name)  const [description, setDescription] = createSignal(model.description)
-  return {    id: model.id,    get name() {      return name()    },    get description() {      return description()    },    setName,    setDescription,  }})
+const mapped = mapArray(source, (model) => {  const [name, setName] = createSignal(model.name);  const [description, setDescription] = createSignal(model.description);
+  return {    id: model.id,    get name() {      return name();    },    get description() {      return description();    },    setName,    setDescription,  };});
 ```
 
 ***

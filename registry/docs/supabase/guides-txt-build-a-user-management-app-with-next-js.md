@@ -185,14 +185,14 @@ Create a `client.ts` and a `server.ts` with the following functionalities for cl
 
 ````
   ```typescript name=lib/supabase/client.ts
-  import { createBrowserClient } from "@supabase/ssr";
+  import { createBrowserClient } from '@supabase/ssr'
 
   export function createClient() {
     // Create a supabase client on the browser with project's credentials
     return createBrowserClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
-    );
+    )
   }
   ```
 
@@ -201,11 +201,11 @@ Create a `client.ts` and a `server.ts` with the following functionalities for cl
 
 
   ```typescript name=lib/supabase/server.ts
-  import { createServerClient } from "@supabase/ssr";
-  import { cookies } from "next/headers";
+  import { createServerClient } from '@supabase/ssr'
+  import { cookies } from 'next/headers'
 
   export async function createClient() {
-    const cookieStore = await cookies();
+    const cookieStore = await cookies()
 
     // Create a server's supabase client with newly configured cookie,
     // which could be used to maintain user's session
@@ -215,13 +215,13 @@ Create a `client.ts` and a `server.ts` with the following functionalities for cl
       {
         cookies: {
           getAll() {
-            return cookieStore.getAll();
+            return cookieStore.getAll()
           },
           setAll(cookiesToSet) {
             try {
               cookiesToSet.forEach(({ name, value, options }) =>
                 cookieStore.set(name, value, options)
-              );
+              )
             } catch {
               // The `setAll` method was called from a Server Component.
               // This can be ignored if you have proxy refreshing
@@ -230,7 +230,7 @@ Create a `client.ts` and a `server.ts` with the following functionalities for cl
           },
         },
       }
-    );
+    )
   }
   ```
 ````
@@ -416,7 +416,7 @@ Create the `action.ts` file in the `app/login` folder, which contains the login 
 
   ```tsx name=app/error/page.tsx
   export default function ErrorPage() {
-      return Sorry, something went wrong
+    return Sorry, something went wrong
   }
   ```
 ````
@@ -648,26 +648,26 @@ Create a route handler to handle the sign out from the server side, making sure 
 
 ````
 ```typescript name=app/auth/signout/route.ts
-import { createClient } from "@/lib/supabase/server";
-import { revalidatePath } from "next/cache";
-import { type NextRequest, NextResponse } from "next/server";
+import { createClient } from '@/lib/supabase/server'
+import { revalidatePath } from 'next/cache'
+import { type NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
-  const supabase = await createClient();
+  const supabase = await createClient()
 
   // Check if a user's logged in
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser()
 
   if (user) {
-    await supabase.auth.signOut();
+    await supabase.auth.signOut()
   }
 
-  revalidatePath("/", "layout");
-  return NextResponse.redirect(new URL("/login", req.url), {
+  revalidatePath('/', 'layout')
+  return NextResponse.redirect(new URL('/login', req.url), {
     status: 302,
-  });
+  })
 }
 ```
 ````

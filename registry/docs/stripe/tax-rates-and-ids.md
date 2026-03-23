@@ -1,6 +1,6 @@
 # Tax rates and IDs
 
-Assign tax rates to draft invoices for automatic tax calculation.
+Assign tax rates to draft invoices for tax calculation.
 
 If you’re looking for automated tax calculation where you don’t need to define the rates, use [Stripe Tax](https://docs.stripe.com/tax.md).
 

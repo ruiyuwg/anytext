@@ -4,7 +4,7 @@ Source: https://docs.langchain.com/langsmith/observability-studio
 
 LangSmith [Studio](/langsmith/studio) provides tools to inspect, debug, and improve your app beyond execution. By working with traces, datasets, and prompts, you can see how your application behaves in detail, measure its performance, and refine its outputs:
 
-- [Iterate on prompts](#iterate-on-prompts): Modify prompts inside graph nodes directly or with the LangSmith playground.
+- [Iterate on prompts](#iterate-on-prompts): Modify prompts inside graph nodes directly or with the Playground.
 - [Run experiments over a dataset](#run-experiments-over-a-dataset): Execute your assistant over a LangSmith dataset to score and compare results.
 - [Debug LangSmith traces](#debug-langsmith-traces): Import traced runs into Studio and optionally clone them into your local agent.
 - [Add a node to a dataset](#add-node-to-dataset): Turn parts of thread history into dataset examples for evaluation or further analysis.
@@ -127,11 +127,11 @@ Define your [configuration](/oss/python/langgraph/use-graph-api#add-runtime-conf
 
 ### Playground
 
-The [playground](/langsmith/create-a-prompt) interface allows testing individual LLM calls without running the full graph:
+The [Playground](/langsmith/create-a-prompt) interface allows testing individual LLM calls without running the full graph:
 
 1. Select a thread.
 2. Click **View LLM Runs** on a node. This lists all the LLM calls (if any) made inside the node.
-3. Select an LLM run to open in the playground.
+3. Select an LLM run to open in the Playground.
 4. Modify prompts and test different model and tool settings.
 5. Copy updated prompts back to your graph.
 
@@ -145,12 +145,12 @@ This guide shows you how to run a full end-to-end experiment directly from Studi
 
 Before running an experiment, ensure you have the following:
 
-- **A LangSmith dataset**: Your dataset should contain the inputs you want to test and optionally, reference outputs for comparison. The schema for the inputs must match the required input schema for the assistant. For more information on schemas, see the [graph API schema documentation](/oss/python/langgraph/use-graph-api#schema). For more on creating datasets, refer to [How to Manage Datasets](/langsmith/manage-datasets-in-application#set-up-your-dataset).
+- **A LangSmith dataset**: Your dataset should contain the inputs you want to test and optionally, reference outputs for comparison. The schema for the inputs must match the required input schema for the assistant. For more information on schemas, see the [graph API schema documentation](/oss/python/langgraph/graph-api#schema). For more on creating datasets, refer to [How to Manage Datasets](/langsmith/manage-datasets-in-application#create-a-dataset-and-add-examples).
 - **(Optional) Evaluators**: You can attach evaluators (e.g., LLM-as-a-Judge, heuristics, or custom functions) to your dataset in LangSmith. These will run automatically after the graph has processed all inputs.
 - **A running application**: The experiment can be run against:
 
-  - An application deployed on [LangSmith](/langsmith/deployments).
-  - A locally running application started via the [langgraph-cli](/langsmith/local-server).
+  - An application deployed on [LangSmith](/langsmith/deployment).
+  - A locally running application started via the [langgraph-cli](/langsmith/local-dev-testing).
 
   Studio experiments follow the same [data retention](/langsmith/administration-overview#data-retention) rules as other experiments. By default, traces have base tier retention (14 days). However, traces will automatically upgrade to extended tier retention (400 days) if feedback is added to them. Feedback can be added in one of two ways:
 
@@ -184,7 +184,7 @@ This section explains how to test a local agent against remote traces from LangS
 #### Prerequisites
 
 - A LangSmith traced thread
-- A [locally running agent](/langsmith/local-server#local-development-server).
+- A [locally running agent](/langsmith/local-dev-testing).
 
   **Local agent requirements**
 

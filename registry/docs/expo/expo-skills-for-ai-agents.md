@@ -6,37 +6,30 @@ Expo Skills are structured instruction files that teach AI agents how to build, 
 
 ## Install Expo Skills
 
-Run the following command to add Expo Skills from the plugin marketplace:
+Run the following commands to add and install Expo Skills from the plugin marketplace:
 
 ```sh
 /plugin marketplace add expo/skills
-```
-
-Then install a specific plugin:
-
-```sh
-/plugin install expo-app-design
-/plugin install upgrading-expo
-/plugin install expo-deployment
+/plugin install expo
 ```
 
 ## Available Expo Skills
 
-The following skills are available, organized by plugin:
+The following skills are available in the `expo` plugin:
 
-| Skill | Description | Plugin |
-| --- | --- | --- |
-| [`building-native-ui`](https://github.com/expo/skills/tree/main/plugins/expo-app-design/skills/building-native-ui) | Use for building beautiful apps with [Expo Router](/router/introduction). Covers fundamentals, styling, components, navigation, animations, patterns, and native tabs. | `expo-app-design` |
-| [`native-data-fetching`](https://github.com/expo/skills/tree/main/plugins/expo-app-design/skills/native-data-fetching) | Use to implement or debug a network request, API call, or data fetching. Covers fetch API, React Query, SWR, error handling, caching, offline support, and Expo Router data loaders. | `expo-app-design` |
-| [`expo-api-routes`](https://github.com/expo/skills/tree/main/plugins/expo-app-design/skills/expo-api-routes) | Use to create [API routes](/router/web/api-routes) in Expo Router with EAS Hosting. | `expo-app-design` |
-| [`expo-dev-client`](https://github.com/expo/skills/tree/main/plugins/expo-app-design/skills/expo-dev-client) | Use to build and distribute [development clients](/develop/development-builds/use-development-builds) locally or via TestFlight. | `expo-app-design` |
-| [`expo-tailwind-setup`](https://github.com/expo/skills/tree/main/plugins/expo-app-design/skills/expo-tailwind-setup) | Use to set up [Tailwind CSS](/guides/tailwind) with `react-native-css` and NativeWind for universal styling. | `expo-app-design` |
-| [`use-dom`](https://github.com/expo/skills/tree/main/plugins/expo-app-design/skills/use-dom) | Use Expo [DOM components](/guides/dom-components) to run web code in a webview on native or web. | `expo-app-design` |
-| [`expo-ui-jetpack-compose`](https://github.com/expo/skills/tree/main/plugins/expo-app-design/skills/expo-ui-jetpack-compose) | Use for [Jetpack Compose](/versions/latest/sdk/ui/jetpack-compose) Views and modifiers in Expo apps. | `expo-app-design` |
-| [`expo-ui-swift-ui`](https://github.com/expo/skills/tree/main/plugins/expo-app-design/skills/expo-ui-swift-ui) | Use for [SwiftUI](/versions/latest/sdk/ui/swift-ui) Views and modifiers in Expo apps. | `expo-app-design` |
-| [`expo-deployment`](https://github.com/expo/skills/tree/main/plugins/expo-deployment/skills/expo-deployment) | Use to deploy to Google Play Store, Apple App Store, web hosting, and API routes via [EAS](/eas). | `expo-deployment` |
-| [`expo-cicd-workflows`](https://github.com/expo/skills/tree/main/plugins/expo-deployment/skills/expo-cicd-workflows) | Use to create [EAS Workflows](/eas/workflows/introduction) YAML files for CI/CD automation. | `expo-deployment` |
-| [`upgrading-expo`](https://github.com/expo/skills/tree/main/plugins/upgrading-expo/skills/upgrading-expo) | Use to [upgrade Expo SDK versions](/workflow/upgrading-expo-sdk-walkthrough), fix dependency issues, or handle breaking changes. | `upgrading-expo` |
+| Skill | Description |
+| --- | --- |
+| [`building-native-ui`](https://github.com/expo/skills/blob/main/plugins/expo/skills/building-native-ui/SKILL.md) | Complete guide for building beautiful apps with Expo Router. Covers fundamentals, styling, components, navigation, animations, patterns, and native tabs. |
+| [`expo-api-routes`](https://github.com/expo/skills/blob/main/plugins/expo/skills/expo-api-routes/SKILL.md) | Guidelines for creating API routes in Expo Router with EAS Hosting. |
+| [`expo-cicd-workflows`](https://github.com/expo/skills/blob/main/plugins/expo/skills/expo-cicd-workflows/SKILL.md) | Helps understand and write EAS workflow YAML files for Expo projects. Use this skill when the user asks about CI/CD or workflows in an Expo or EAS context, mentions .eas/workflows/, or wants help with EAS build pipelines or deployment automation. |
+| [`expo-deployment`](https://github.com/expo/skills/blob/main/plugins/expo/skills/expo-deployment/SKILL.md) | Deploying Expo apps to iOS App Store, Android Play Store, web hosting, and API routes. |
+| [`expo-dev-client`](https://github.com/expo/skills/blob/main/plugins/expo/skills/expo-dev-client/SKILL.md) | Build and distribute Expo development clients locally or via TestFlight. |
+| [`expo-tailwind-setup`](https://github.com/expo/skills/blob/main/plugins/expo/skills/expo-tailwind-setup/SKILL.md) | Set up Tailwind CSS v4 in Expo with react-native-css and NativeWind v5 for universal styling. |
+| [`expo-ui-jetpack-compose`](https://github.com/expo/skills/blob/main/plugins/expo/skills/expo-ui-jetpack-compose/SKILL.md) | `@expo/ui/jetpack-compose` package lets you use Jetpack Compose Views and modifiers in your app. |
+| [`expo-ui-swift-ui`](https://github.com/expo/skills/blob/main/plugins/expo/skills/expo-ui-swift-ui/SKILL.md) | `@expo/ui/swift-ui` package lets you use SwiftUI Views and modifiers in your app. |
+| [`native-data-fetching`](https://github.com/expo/skills/blob/main/plugins/expo/skills/native-data-fetching/SKILL.md) | Use when implementing or debugging ANY network request, API call, or data fetching. Covers fetch API, React Query, SWR, error handling, caching, offline support, and Expo Router data loaders (useLoaderData). |
+| [`upgrading-expo`](https://github.com/expo/skills/blob/main/plugins/expo/skills/upgrading-expo/SKILL.md) | Guidelines for upgrading Expo SDK versions and fixing dependency issues. |
+| [`use-dom`](https://github.com/expo/skills/blob/main/plugins/expo/skills/use-dom/SKILL.md) | Use Expo DOM components to run web code in a webview on native and as-is on web. Migrate web code to native incrementally. |
 
 ## Example prompts
 

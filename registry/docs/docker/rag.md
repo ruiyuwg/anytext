@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -360,7 +358,7 @@ If results lack context:
 ## [Further reading](#further-reading)
 
 - [Configuration reference](https://docs.docker.com/ai/docker-agent/reference/config/#rag) - Complete RAG options and parameters
-- [RAG examples](https://github.com/docker/cagent/tree/main/examples/rag) - Working configurations for different scenarios
+- [RAG examples](https://github.com/docker/docker-agent/tree/main/examples/rag) - Working configurations for different scenarios
 - [Tools reference](https://docs.docker.com/ai/docker-agent/reference/toolsets/) - How RAG search tools work in agent workflows
 
 [Edit this page](https://github.com/docker/docs/edit/main/content/manuals/ai/docker-agent/rag.md)

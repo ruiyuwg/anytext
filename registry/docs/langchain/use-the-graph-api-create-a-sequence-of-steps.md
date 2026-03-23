@@ -48,7 +48,7 @@ Let's demonstrate an end-to-end example. We will create a sequence of three step
 2. Update the same value
 3. Populate a different value
 
-Let's first define our [state](/oss/python/langgraph/graph-api#state). This governs the [schema of the graph](/oss/python/langgraph/graph-api#schema), and can also specify how to apply updates. See [this section](#process-state-updates-with-reducers) for more detail.
+Let's first define our [state](/oss/python/langgraph/graph-api#state). This governs the [schema of the graph](/oss/python/langgraph/graph-api#schema), and can also specify how to apply updates. See [Process state updates with reducers](#process-state-updates-with-reducers) for more detail.
 
 In our case, we will just keep track of two values:
 
@@ -77,7 +77,7 @@ def step_3(state: State):
 ```
 Note that when issuing updates to the state, each node can just specify the value of the key it wishes to update.
 
-By default, this will **overwrite** the value of the corresponding key. You can also use [reducers](/oss/python/langgraph/graph-api#reducers) to control how updates are processed— for example, you can append successive updates to a key instead. See [this section](#process-state-updates-with-reducers) for more detail.
+By default, this will **overwrite** the value of the corresponding key. You can also use [reducers](/oss/python/langgraph/graph-api#reducers) to control how updates are processed—for example, you can append successive updates to a key instead. See [Process state updates with reducers](#process-state-updates-with-reducers) for more detail.
 ```
 
 Finally, we define the graph. We use [StateGraph](/oss/python/langgraph/graph-api#stategraph) to define a graph that operates on this state.
@@ -121,7 +121,7 @@ We next [compile](/oss/python/langgraph/graph-api#compiling-your-graph) our grap
 graph = builder.compile()
 ```
 
-LangGraph provides built-in utilities for visualizing your graph. Let's inspect our sequence. See [this guide](#visualize-your-graph) for detail on visualization.
+LangGraph provides built-in utilities for visualizing your graph. Let's inspect our sequence. See [Visualize your graph](#visualize-your-graph) for detail on visualization.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from IPython.display import Image, display

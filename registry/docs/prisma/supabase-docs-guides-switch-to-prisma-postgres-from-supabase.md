@@ -71,7 +71,7 @@ pg_dump \
 
 3. Import data into Prisma Postgres \[#3-import-data-into-prisma-postgres]
 
-Export your [direct connection string](/postgres/database/direct-connections) from step 1 as an environment variable:
+Export your [direct connection string](/postgres/database/connecting-to-your-database) from step 1 as an environment variable:
 
 ```bash
 export PRISMA_POSTGRES_DATABASE_URL='postgres://...'

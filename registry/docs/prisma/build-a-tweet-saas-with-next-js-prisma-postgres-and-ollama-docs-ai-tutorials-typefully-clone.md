@@ -852,24 +852,24 @@ npm run db:test
 
 ```bash
 pnpm dlx prisma db push
-npx prisma generate
-npm run db:test
+pnpm dlx prisma generate
+pnpm run db:test
 ```
 
 
 
 ```bash
 yarn dlx prisma db push
-npx prisma generate
-npm run db:test
+yarn dlx prisma generate
+yarn db:test
 ```
 
 
 
 ```bash
 bunx --bun prisma db push
-npx prisma generate
-npm run db:test
+bun x prisma generate
+bun run db:test
 ```
 ````
 

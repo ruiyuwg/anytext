@@ -10,30 +10,33 @@ The examples start a simple HTTP server that listens on port 8080. You can e.g. 
 curl -X POST http://localhost:8080
 ```
 
-The examples use the Vercel AI Gateway. Ensure that your AI Gateway API key is
-set in the `AI_GATEWAY_API_KEY` environment variable.
+The examples use the OpenAI `gpt-4o` model. Ensure that the OpenAI API key is
+set in the `OPENAI_API_KEY` environment variable.
 
 **Full example**: [github.com/vercel/ai/examples/fastify](https://github.com/vercel/ai/tree/main/examples/fastify)
 
-### UI Message Stream
+### Data Stream
 
-You can use the `toUIMessageStream` method to get a UI message stream from the result and then pipe it to the response.
+You can use the `toDataStream` method to get a data stream from the result and then pipe it to the response.
 
 ```ts filename='index.ts'
-import { streamText } from "ai";
-import Fastify from "fastify";
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
+import Fastify from 'fastify';
 
 const fastify = Fastify({ logger: true });
 
-fastify.post("/", async function (request, reply) {
+fastify.post('/', async function (request, reply) {
   const result = streamText({
-    model: "openai/gpt-4o",
-    prompt: "Invent a new holiday and describe its traditions.",
+    model: openai('gpt-4o'),
+    prompt: 'Invent a new holiday and describe its traditions.',
   });
 
-  reply.header("Content-Type", "text/plain; charset=utf-8");
+  // Mark the response as a v1 data stream:
+  reply.header('X-Vercel-AI-Data-Stream', 'v1');
+  reply.header('Content-Type', 'text/plain; charset=utf-8');
 
-  return reply.send(result.toUIMessageStream());
+  return reply.send(result.toDataStream({ data }));
 });
 
 fastify.listen({ port: 8080 });
@@ -41,44 +44,40 @@ fastify.listen({ port: 8080 });
 
 ### Sending Custom Data
 
-`createUIMessageStream` can be used to send custom data to the client.
+`createDataStream` can be used to send custom data to the client.
 
 ```ts filename='index.ts' highlight="8-11,18"
-import { createUIMessageStream, streamText } from "ai";
-import Fastify from "fastify";
+import { openai } from '@ai-sdk/openai';
+import { createDataStream, streamText } from 'ai';
+import Fastify from 'fastify';
 
 const fastify = Fastify({ logger: true });
 
-fastify.post("/stream-data", async function (request, reply) {
+fastify.post('/stream-data', async function (request, reply) {
   // immediately start streaming the response
-  const stream = createUIMessageStream({
-    execute: async ({ writer }) => {
-      writer.write({ type: "start" });
-
-      writer.write({
-        type: "data-custom",
-        data: {
-          custom: "initialized call",
-        },
-      });
+  const dataStream = createDataStream({
+    execute: async dataStreamWriter => {
+      dataStreamWriter.writeData('initialized call');
 
       const result = streamText({
-        model: "openai/gpt-4o",
-        prompt: "Invent a new holiday and describe its traditions.",
+        model: openai('gpt-4o'),
+        prompt: 'Invent a new holiday and describe its traditions.',
       });
 
-      writer.merge(result.toUIMessageStream({ sendStart: false }));
+      result.mergeIntoDataStream(dataStreamWriter);
     },
-    onError: (error) => {
+    onError: error => {
       // Error messages are masked by default for security reasons.
       // If you want to expose the error message to the client, you can do so here:
       return error instanceof Error ? error.message : String(error);
     },
   });
 
-  reply.header("Content-Type", "text/plain; charset=utf-8");
+  // Mark the response as a v1 data stream:
+  reply.header('X-Vercel-AI-Data-Stream', 'v1');
+  reply.header('Content-Type', 'text/plain; charset=utf-8');
 
-  return reply.send(stream);
+  return reply.send(dataStream);
 });
 
 fastify.listen({ port: 8080 });
@@ -89,18 +88,19 @@ fastify.listen({ port: 8080 });
 You can use the `textStream` property to get a text stream from the result and then pipe it to the response.
 
 ```ts filename='index.ts' highlight="15"
-import { streamText } from "ai";
-import Fastify from "fastify";
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
+import Fastify from 'fastify';
 
 const fastify = Fastify({ logger: true });
 
-fastify.post("/", async function (request, reply) {
+fastify.post('/', async function (request, reply) {
   const result = streamText({
-    model: "openai/gpt-4o",
-    prompt: "Invent a new holiday and describe its traditions.",
+    model: openai('gpt-4o'),
+    prompt: 'Invent a new holiday and describe its traditions.',
   });
 
-  reply.header("Content-Type", "text/plain; charset=utf-8");
+  reply.header('Content-Type', 'text/plain; charset=utf-8');
 
   return reply.send(result.textStream);
 });

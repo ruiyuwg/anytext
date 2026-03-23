@@ -1,0 +1,62 @@
+---
+title: Configure Cloud Metrics and Logs for Azure API Management Self-Hosted Gateway | Microsoft Docs
+description: Learn how to configure cloud metrics and logs for Azure API Management self-hosted gateway
+services: api-management
+author: dlepow
+manager: gwallace
+ms.service: azure-api-management
+ms.topic: how-to
+ms.date: 10/06/2025
+ms.author: danlep
+---
+
+# Configure cloud metrics and logs for Azure API Management self-hosted gateway
+
+[!INCLUDE [api-management-availability-premium-dev](../../includes/api-management-availability-premium-dev.md)]
+
+This article provides details for configuring cloud metrics and logs for the [self-hosted gateway](./self-hosted-gateway-overview.md).
+
+You must associate the self-hosted gateway with an Azure API Management service and provide outbound TCP/IP connectivity to Azure on port 443. The gateway uses the outbound connection to send telemetry to Azure, if you configure it to do so.
+
+## Metrics
+
+By default, the self-hosted gateway emits several metrics through [Azure Monitor](https://azure.microsoft.com/services/monitor/), just like the managed gateway [in the cloud](api-management-howto-use-azure-monitor.md).
+
+You can enable or disable this feature by using the `telemetry.metrics.cloud` key in the ConfigMap of the gateway Deployment. The following table describes the available configurations:
+
+| Field  | Default | Description |
+| ------------- | ------------- | ------------- |
+| telemetry.metrics.cloud  | `true` | Enables logging through Azure Monitor. Value can be `true`, `false`. |
+
+Here's a sample configuration:
+
+```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+        name: contoso-gateway-environment
+    data:
+        config.service.endpoint: "<contoso-gateway-management-endpoint>"
+        telemetry.metrics.cloud: "true"
+```
+
+The self-hosted gateway currently emits the following metrics through Azure Monitor:
+
+| Metric  | Description |
+| ------------- | ------------- |
+| Requests  | Number of API requests in the period |
+| Duration of gateway requests | Number of milliseconds from the moment gateway received request until the moment response sent in full |
+| Duration of backend requests | Number of milliseconds spent on overall backend IO (connecting, sending, and receiving bytes)  |
+
+## Logs
+
+The self-hosted gateway currently doesn't send [diagnostic logs](./api-management-howto-use-azure-monitor.md#activity-logs) to the cloud. However, you can [configure and persist logs locally](how-to-configure-local-metrics-logs.md) where the self-hosted gateway is deployed.
+
+If a gateway is deployed in [Azure Kubernetes Service](https://azure.microsoft.com/services/kubernetes-service/), you can enable [Azure Monitor for containers](/azure/azure-monitor/containers/container-insights-overview) to collect logs from your containers and view them in Log Analytics.
+
+## Related content
+
+* Learn more about the [observability capabilities of the Azure API Management gateways](observability.md).
+* To learn more about the self-hosted gateway, see [Azure API Management self-hosted gateway overview](self-hosted-gateway-overview.md)
+* Learn about [configuring and persisting logs locally](how-to-configure-local-metrics-logs.md)
+

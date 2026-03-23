@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -34,7 +32,6 @@ To install Docker Engine, you need a maintained version of one of the following 
 
 - Fedora 43
 - Fedora 42
-- Fedora 41
 
 ### [Uninstall old versions](#uninstall-old-versions)
 

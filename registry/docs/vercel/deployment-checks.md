@@ -75,7 +75,7 @@ GitHub and GitHub Actions have edge cases with status reporting. These behaviors
   - Each run of a GitHub Workflow should result in only one commit status. For example, when using [`repository_dispatch`](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#repository_dispatch), ensure the commit status includes the environment name to avoid writing to the same status for each of the triggered workflow runs.
 - Avoid using the same name for actions across multiple workflows. Due to GitHub's implementation of Check Runs, these will collide and introduce race conditions when used with GitHub branch protection rules, GitHub rulesets, and Vercel Deployment Checks.
 
-title: "Deployment Protection Exception"
-description: "Learn how to disable Deployment Protection for a list of preview domains."
-last\_updated: "2026-03-08T05:03:13.134Z"
-source: "https://vercel.com/docs/deployment-protection/methods-to-bypass-deployment-protection/deployment-protection-exceptions"
+title: "Automated & Agent Access"
+description: "Grant AI agents, CI/CD pipelines, MCP servers, and testing tools access to Vercel deployments that have Deployment Protection enabled."
+last\_updated: "2026-03-23T09:40:08.161Z"
+source: "https://vercel.com/docs/deployment-protection/automated-agent-access"

@@ -134,5 +134,5 @@ For step-by-step workflows using the Vercel CLI to manage deployments, see:
 
 title: "Preview Deployment Suffix"
 description: "When you create a new deployment, Vercel will automatically generate a unique URL which you can use to access that particular deployment."
-last\_updated: "2026-03-08T05:03:13.343Z"
+last\_updated: "2026-03-23T09:40:08.445Z"
 source: "https://vercel.com/docs/deployments/preview-deployment-suffix"

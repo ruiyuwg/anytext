@@ -87,9 +87,9 @@ By default, Stripe automatically sends invoices when you set [collection\_method
 
 For more details on using the *Payment Intents API* (The Payment Intents API tracks the lifecycle of a customer checkout flow and triggers additional authentication steps when required by regulatory mandates, custom Radar fraud rules, or redirect-based payment methods) to complete *3D Secure* (3D Secure (3DS) provides an additional layer of authentication for credit card transactions that protects businesses from liability for fraudulent card payments) authentication, refer to the [3D Secure guide](https://docs.stripe.com/payments/3d-secure/authentication-flow.md#when-to-use-3d-secure).
 
-Some payment methods require customer interaction to complete the payment—for example, a European card or bank transfer may require *Strong Customer Authentication* (Strong Customer Authentication (SCA) is a regulatory requirement in effect as of September 14, 2019, that impacts many European online payments. It requires customers to use two-factor authentication like 3D Secure to verify their purchase) (SCA).
+Some payment methods require customer interaction to complete the payment—for example, a European card or bank transfer might require *Strong Customer Authentication* (Strong Customer Authentication (SCA) is a regulatory requirement in effect as of September 14, 2019, that impacts many European online payments. It requires customers to use two-factor authentication like 3D Secure to verify their purchase) (SCA).
 
-Use the invoice’s [payment\_intent](https://docs.stripe.com/api/invoices/object.md#invoice_object-payment_intent) parameter to choose how to handle the response from the payment attempt, which may be either `success` or `requires_action`.
+Use the invoice’s [payment\_intent](https://docs.stripe.com/api/invoices/object.md#invoice_object-payment_intent) parameter to choose how to handle the response from the payment attempt, which might be either `success` or `requires_action`.
 
 When the PaymentIntent status is `requires_action`, your user must complete a [3D Secure authentication](https://docs.stripe.com/strong-customer-authentication.md) to complete the payment.
 

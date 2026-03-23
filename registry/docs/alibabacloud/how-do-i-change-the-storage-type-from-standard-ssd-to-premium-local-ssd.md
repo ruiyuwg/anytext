@@ -1,0 +1,5 @@
+This topic describes how to change the storage type of an ApsaraDB RDS instance from cloud disk to Premium Local SSD.
+
+-   If your RDS instance runs MySQL 5.7 on RDS Basic Edition and uses standard SSDs, you can change the storage type of the RDS instance to Premium Local SSD when you upgrade the RDS instance to RDS High-availability Edition by changing the instance specifications. For more information, see [Change the specifications of an ApsaraDB RDS for SQL Server instance](/help/en/rds/apsaradb-rds-for-mysql/change-the-specifications-of-an-apsaradb-rds-for-mysql-instance#concept-efl-pln-wdb).
+    
+-   If your RDS instance does not run MySQL 5.7 on RDS Basic Edition or does not use standard SSDs, you cannot directly change the storage type of your RDS instance to Premium Local SSD. In this case, you must [create](/help/en/rds/create-an-apsaradb-rds-for-mysql-instance#concept-wzp-ncf-vdb) an RDS instance that uses Premium Local SSDs and [migrate](/help/en/rds/apsaradb-rds-for-mysql/migrate-data-between-apsaradb-rds-for-mysql-instances#concept-fxm-bhp-ydb) the data of your RDS instance to the created RDS instance.

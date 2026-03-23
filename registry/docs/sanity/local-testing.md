@@ -5,7 +5,7 @@ Developing functions require a different mindset than developing your studio or 
 Prerequisites:
 
 - Complete the [Functions quick start](https://www.sanity.io/docs/functions/function-quickstart), or be comfortable writing and deploying a Sanity Function.
-- Sanity CLI v4.9.0 or later is recommended for following the concepts in this guide. In general, we suggest running the latest CLI version with `npx/pnpx sanity@latest`.
+- The latest version of `sanity` CLI (`sanity@latest`) is recommended to interact with Blueprints and Functions as shown in this guide. You can always run the latest CLI commands with `npx sanity@latest`.
 - Run the commands in this guide from the directory containing your blueprints configuration. If you're not already logged in, the CLI will prompt you to do so.
 
 > \[!NOTE]

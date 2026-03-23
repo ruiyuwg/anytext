@@ -2,211 +2,281 @@
 
 Source: https://docs.langchain.com/oss/python/langgraph/use-time-travel
 
-When working with non-deterministic systems that make model-based decisions (e.g., agents powered by LLMs), it can be useful to examine their decision-making process in detail:
+Replay past executions and fork to explore alternative paths in LangGraph
 
-1. **Understand reasoning**: Analyze the steps that led to a successful result.
-2. **Debug mistakes**: Identify where and why errors occurred.
-3. **Explore alternatives**: Test different paths to uncover better solutions.
+## Overview
 
-LangGraph provides time-travel functionality to support these use cases. Specifically, you can resume execution from a prior checkpoint — either replaying the same state or modifying it to explore alternatives. In all cases, resuming past execution produces a new fork in the history.
+LangGraph supports time travel through [checkpoints](/oss/python/langgraph/persistence#checkpoints):
 
-To use time-travel in LangGraph:
+- **[Replay](#replay)**: Retry from a prior checkpoint.
+- **[Fork](#fork)**: Branch from a prior checkpoint with modified state to explore an alternative path.
 
-1. [Run the graph](#1-run-the-graph) with initial inputs using [`invoke`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.invoke) or [`stream`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.stream) methods.
-2. [Identify a checkpoint in an existing thread](#2-identify-a-checkpoint): Use the [`get_state_history`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.get_state_history) method to retrieve the execution history for a specific `thread_id` and locate the desired `checkpoint_id`.
-   Alternatively, set an [interrupt](/oss/python/langgraph/interrupts) before the node(s) where you want execution to pause. You can then find the most recent checkpoint recorded up to that interrupt.
-3. [Update the graph state (optional)](#3-update-the-state-optional): Use the [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state) method to modify the graph's state at the checkpoint and resume execution from alternative state.
-4. [Resume execution from the checkpoint](#4-resume-execution-from-the-checkpoint): Use the `invoke` or `stream` methods with an input of `None` and a configuration containing the appropriate `thread_id` and `checkpoint_id`.
+Both work by resuming from a prior checkpoint. Nodes before the checkpoint are not re-executed (results are already saved). Nodes after the checkpoint re-execute, including any LLM calls, API requests, and [interrupts](/oss/python/langgraph/interrupts) (which may produce different results).
 
-## In a workflow
+## Replay
 
-This example builds a simple LangGraph workflow that generates a joke topic and writes a joke using an LLM. It demonstrates how to run the graph, retrieve past execution checkpoints, optionally modify the state, and resume execution from a chosen checkpoint to explore alternate outcomes.
+Invoke the graph with a prior checkpoint's config to replay from that point.
 
-### Setup
+Replay re-executes nodes—it doesn't just read from cache. LLM calls, API requests, and [interrupts](/oss/python/langgraph/interrupts) fire again and may return different results. Replaying from the final checkpoint (no `next` nodes) is a no-op.
 
-To build this workflow in this example you need to set up the Anthropic LLM and install the required dependencies:
-
-1. Install dependencies:
-
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-pip install langchain_core langchain-anthropic langgraph
-```
-
-2. Initialize the LLM:
+Use [`get_state_history`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.get_state_history) to find the checkpoint you want to replay from, then call [`invoke`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.invoke) with that checkpoint's config:
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import os
-import getpass
-
-from langchain_anthropic import ChatAnthropic
-
-def _set_env(var: str):
-    if not os.environ.get(var):
-        os.environ[var] = getpass.getpass(f"{var}: ")
-
-
-_set_env("ANTHROPIC_API_KEY")
-
-llm = ChatAnthropic(model="claude-sonnet-4-6")
-```
-
-Sign up for [LangSmith](https://smith.langchain.com) to quickly spot issues and improve the performance of your LangGraph projects. LangSmith lets you use trace data to debug, test, and monitor your LLM apps built with LangGraph. You can also [fetch traces from LangSmith](/langsmith/export-traces#fetch-a-single-run-by-id) to replay and debug production issues locally.
-
-3. Implement the workflow
-   The implementation of the workflow is a simple graph with two nodes, one for generating a joke topic, another for writing the joke itself and a state to storing the intermediate values.
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-import uuid
-
-from typing_extensions import TypedDict, NotRequired
-from langgraph.graph import StateGraph, START, END
-from langchain.chat_models import init_chat_model
+from langgraph.graph import StateGraph, START
 from langgraph.checkpoint.memory import InMemorySaver
-
+from typing_extensions import TypedDict, NotRequired
+import uuid
 
 class State(TypedDict):
     topic: NotRequired[str]
     joke: NotRequired[str]
 
 
-model = init_chat_model(
-    "claude-sonnet-4-6",
-    temperature=0,
-)
-
-
 def generate_topic(state: State):
-    """LLM call to generate a topic for the joke"""
-    msg = model.invoke("Give me a funny topic for a joke")
-    return {"topic": msg.content}
+    return {"topic": "socks in the dryer"}
 
 
 def write_joke(state: State):
-    """LLM call to write a joke based on the topic"""
-    msg = model.invoke(f"Write a short joke about {state['topic']}")
-    return {"joke": msg.content}
+    return {"joke": f"Why do {state['topic']} disappear? They elope!"}
 
 
-# Build workflow
-workflow = StateGraph(State)
-
-# Add nodes
-workflow.add_node("generate_topic", generate_topic)
-workflow.add_node("write_joke", write_joke)
-
-# Add edges to connect nodes
-workflow.add_edge(START, "generate_topic")
-workflow.add_edge("generate_topic", "write_joke")
-workflow.add_edge("write_joke", END)
-
-# Compile
 checkpointer = InMemorySaver()
-graph = workflow.compile(checkpointer=checkpointer)
-graph
+graph = (
+    StateGraph(State)
+    .add_node("generate_topic", generate_topic)
+    .add_node("write_joke", write_joke)
+    .add_edge(START, "generate_topic")
+    .add_edge("generate_topic", "write_joke")
+    .compile(checkpointer=checkpointer)
+)
+
+# Step 1: Run the graph
+config = {"configurable": {"thread_id": str(uuid.uuid4())}}
+result = graph.invoke({}, config)
+
+# Step 2: Find a checkpoint to replay from
+history = list(graph.get_state_history(config))
+# History is in reverse chronological order
+for state in history:
+    print(f"next={state.next}, checkpoint_id={state.config['configurable']['checkpoint_id']}")
+
+# Step 3: Replay from a specific checkpoint
+# Find the checkpoint before write_joke
+before_joke = next(s for s in history if s.next == ("write_joke",))
+replay_result = graph.invoke(None, before_joke.config)
+# write_joke re-executes (runs again), generate_topic does not
 ```
 
-### 1. Run the graph
+## Fork
 
-To start the workflow, [`invoke`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.invoke) is called without any inputs. Note the `thread_id` to track this execution and retrieve its checkpoints later.
+Fork creates a new branch from a past checkpoint with modified state. Call [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state) on a prior checkpoint to create the fork, then [`invoke`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.invoke) with `None` to continue execution.
+
+`update_state` does **not** roll back a thread. It creates a new checkpoint that branches from the specified point. The original execution history remains intact.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-config = {
-    "configurable": {
-        "thread_id": uuid.uuid4(),
-    }
-}
-state = graph.invoke({}, config)
+# Find checkpoint before write_joke
+history = list(graph.get_state_history(config))
+before_joke = next(s for s in history if s.next == ("write_joke",))
 
-print(state["topic"])
-print()
-print(state["joke"])
+# Fork: update state to change the topic
+fork_config = graph.update_state(
+    before_joke.config,
+    values={"topic": "chickens"},
+)
+
+# Resume from the fork — write_joke re-executes with the new topic
+fork_result = graph.invoke(None, fork_config)
+print(fork_result["joke"])  # A joke about chickens, not socks
 ```
 
-**Output:**
+### From a specific node
 
-```
-How about "The Secret Life of Socks in the Dryer"? You know, exploring the mysterious phenomenon of how socks go into the laundry as pairs but come out as singles. Where do they go? Are they starting new lives elsewhere? Is there a sock paradise we don't know about? There's a lot of comedic potential in the everyday mystery that unites us all!
+When you call [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state), values are applied using the specified node's writers (including [reducers](/oss/python/langgraph/graph-api#reducers)). The checkpoint records that node as having produced the update, and execution resumes from that node's successors.
 
-# The Secret Life of Socks in the Dryer
+By default, LangGraph infers `as_node` from the checkpoint's version history. When forking from a specific checkpoint, this inference is almost always correct.
 
-I finally discovered where all my missing socks go after the dryer. Turns out they're not missing at all—they've just eloped with someone else's socks from the laundromat to start new lives together.
+Specify `as_node` explicitly when:
 
-My blue argyle is now living in Bermuda with a red polka dot, posting vacation photos on Sockstagram and sending me lint as alimony.
-```
-
-### 2. Identify a checkpoint
-
-To continue from a previous point in the graphs run, use [`get_state_history`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.get_state_history) to retrieve all the states and select the one where you want to resume execution.
+- **Parallel branches**: Multiple nodes updated state in the same step, and LangGraph can't determine which was last (`InvalidUpdateError`).
+- **No execution history**: Setting up state on a fresh thread (common in [testing](/oss/python/langgraph/test)).
+- **Skipping nodes**: Set `as_node` to a later node to make the graph think that node already ran.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-# The states are returned in reverse chronological order.
-states = list(graph.get_state_history(config))
+# graph: generate_topic -> write_joke
 
-for state in states:
-    print(state.next)
-    print(state.config["configurable"]["checkpoint_id"])
-    print()
+# Treat this update as if generate_topic produced it.
+# Execution resumes at write_joke (the successor of generate_topic).
+fork_config = graph.update_state(
+    before_joke.config,
+    values={"topic": "chickens"},
+    as_node="generate_topic",
+)
 ```
 
-**Output:**
+## Interrupts
 
-```
-()
-1f02ac4a-ec9f-6524-8002-8f7b0bbeed0e
-
-('write_joke',)
-1f02ac4a-ce2a-6494-8001-cb2e2d651227
-
-('generate_topic',)
-1f02ac4a-a4e0-630d-8000-b73c254ba748
-
-('__start__',)
-1f02ac4a-a4dd-665e-bfff-e6c8c44315d9
-```
+If your graph uses [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) for [human-in-the-loop](/oss/python/langgraph/interrupts) workflows, interrupts are always re-triggered during time travel. The node containing the interrupt re-executes, and `interrupt()` pauses for a new `Command(resume=...)`.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-# This is the state before last (states are listed in chronological order)
-selected_state = states[1]
-print(selected_state.next)
-print(selected_state.values)
+from langgraph.types import interrupt, Command
+
+class State(TypedDict):
+    value: list[str]
+
+def ask_human(state: State):
+    answer = interrupt("What is your name?")
+    return {"value": [f"Hello, {answer}!"]}
+
+def final_step(state: State):
+    return {"value": ["Done"]}
+
+graph = (
+    StateGraph(State)
+    .add_node("ask_human", ask_human)
+    .add_node("final_step", final_step)
+    .add_edge(START, "ask_human")
+    .add_edge("ask_human", "final_step")
+    .compile(checkpointer=InMemorySaver())
+)
+
+config = {"configurable": {"thread_id": "1"}}
+
+# First run: hits interrupt
+graph.invoke({"value": []}, config)
+# Resume with answer
+graph.invoke(Command(resume="Alice"), config)
+
+# Replay from before ask_human
+history = list(graph.get_state_history(config))
+before_ask = [s for s in history if s.next == ("ask_human",)][-1]
+
+replay_result = graph.invoke(None, before_ask.config)
+# Pauses at interrupt — waiting for new Command(resume=...)
+
+# Fork from before ask_human
+fork_config = graph.update_state(before_ask.config, {"value": ["forked"]})
+fork_result = graph.invoke(None, fork_config)
+# Pauses at interrupt — waiting for new Command(resume=...)
+
+# Resume the forked interrupt with a different answer
+graph.invoke(Command(resume="Bob"), fork_config)
+# Result: {"value": ["forked", "Hello, Bob!", "Done"]}
 ```
 
-**Output:**
+### Multiple interrupts
 
-```
-('write_joke',)
-{'topic': 'How about "The Secret Life of Socks in the Dryer"? You know, exploring the mysterious phenomenon of how socks go into the laundry as pairs but come out as singles. Where do they go? Are they starting new lives elsewhere? Is there a sock paradise we don\\'t know about? There\\'s a lot of comedic potential in the everyday mystery that unites us all!'}
-```
-
-### 3. Update the state (optional)
-
-[`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state) will create a new checkpoint. The new checkpoint will be associated with the same thread, but a new checkpoint ID.
+If your graph collects input at several points (for example, a multi-step form), you can fork from between the interrupts to change a later answer without re-asking earlier questions.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-new_config = graph.update_state(selected_state.config, values={"topic": "chickens"})
-print(new_config)
+def ask_name(state):
+    name = interrupt("What is your name?")
+    return {"value": [f"name:{name}"]}
+
+def ask_age(state):
+    age = interrupt("How old are you?")
+    return {"value": [f"age:{age}"]}
+
+# Graph: ask_name -> ask_age -> final
+# After completing both interrupts:
+
+# Fork from BETWEEN the two interrupts (after ask_name, before ask_age)
+history = list(graph.get_state_history(config))
+between = [s for s in history if s.next == ("ask_age",)][-1]
+
+fork_config = graph.update_state(between.config, {"value": ["modified"]})
+result = graph.invoke(None, fork_config)
+# ask_name result preserved ("name:Alice")
+# ask_age pauses at interrupt — waiting for new answer
 ```
 
-**Output:**
+## Subgraphs
 
-```
-{'configurable': {'thread_id': 'c62e2e03-c27b-4cb6-8cea-ea9bfedae006', 'checkpoint_ns': '', 'checkpoint_id': '1f02ac4a-ecee-600b-8002-a1d21df32e4c'}}
-```
+Time travel with [subgraphs](/oss/python/langgraph/use-subgraphs) depends on whether the subgraph has its own checkpointer. This determines the granularity of checkpoints you can time travel from.
 
-### 4. Resume execution from the checkpoint
+````
+By default, a subgraph inherits the parent's checkpointer. The parent treats the entire subgraph as a **single super-step** — there is only one parent-level checkpoint for the whole subgraph execution. Time traveling from before the subgraph re-executes it from scratch.
 
-For resumings execution from the selected checkpoint, call [`invoke`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.invoke) with the config that points to the new checkpoint.
+You cannot time travel to a point *between* nodes in a default subgraph — you can only time travel from the parent level.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-graph.invoke(None, new_config)
+# Subgraph without its own checkpointer (default)
+subgraph = (
+    StateGraph(State)
+    .add_node("step_a", step_a)       # Has interrupt()
+    .add_node("step_b", step_b)       # Has interrupt()
+    .add_edge(START, "step_a")
+    .add_edge("step_a", "step_b")
+    .compile()  # No checkpointer — inherits from parent
+)
+
+graph = (
+    StateGraph(State)
+    .add_node("subgraph_node", subgraph)
+    .add_edge(START, "subgraph_node")
+    .compile(checkpointer=InMemorySaver())
+)
+
+config = {"configurable": {"thread_id": "1"}}
+
+# Complete both interrupts
+graph.invoke({"value": []}, config)            # Hits step_a interrupt
+graph.invoke(Command(resume="Alice"), config)  # Hits step_b interrupt
+graph.invoke(Command(resume="30"), config)     # Completes
+
+# Time travel from before the subgraph
+history = list(graph.get_state_history(config))
+before_sub = [s for s in history if s.next == ("subgraph_node",)][-1]
+
+fork_config = graph.update_state(before_sub.config, {"value": ["forked"]})
+result = graph.invoke(None, fork_config)
+# The entire subgraph re-executes from scratch
+# You cannot time travel to a point between step_a and step_b
 ```
 
-**Output:**
+
+
+Set `checkpointer=True` on the subgraph to give it its own checkpoint history. This creates checkpoints at each step **within** the subgraph, allowing you to time travel from a specific point inside it — for example, between two interrupts.
+
+Use [`get_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.get_state) with `subgraphs=True` to access the subgraph's own checkpoint config, then fork from it:
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-{'topic': 'chickens',
- 'joke': 'Why did the chicken join a band?\n\nBecause it had excellent drumsticks!'}
+# Subgraph with its own checkpointer
+subgraph = (
+    StateGraph(State)
+    .add_node("step_a", step_a)       # Has interrupt()
+    .add_node("step_b", step_b)       # Has interrupt()
+    .add_edge(START, "step_a")
+    .add_edge("step_a", "step_b")
+    .compile(checkpointer=True)  # Own checkpoint history
+)
+
+graph = (
+    StateGraph(State)
+    .add_node("subgraph_node", subgraph)
+    .add_edge(START, "subgraph_node")
+    .compile(checkpointer=InMemorySaver())
+)
+
+config = {"configurable": {"thread_id": "1"}}
+
+# Run until step_a interrupt
+graph.invoke({"value": []}, config)
+
+# Resume step_a -> hits step_b interrupt
+graph.invoke(Command(resume="Alice"), config)
+
+# Get the subgraph's own checkpoint (between step_a and step_b)
+parent_state = graph.get_state(config, subgraphs=True)
+sub_config = parent_state.tasks[0].state.config
+
+# Fork from the subgraph checkpoint
+fork_config = graph.update_state(sub_config, {"value": ["forked"]})
+result = graph.invoke(None, fork_config)
+# step_b re-executes, step_a's result is preserved
 ```
+````
+
+See [subgraph persistence](/oss/python/langgraph/use-subgraphs#subgraph-persistence) for more on configuring subgraph checkpointers.
 
 ***
 

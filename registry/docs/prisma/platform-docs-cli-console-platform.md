@@ -1,6 +1,6 @@
 # platform (/docs/cli/console/platform)
 
-The `prisma platform` command provides access to Prisma Console functionality for managing workspaces, projects, environments, and API keys.
+The `prisma platform` command provides access to Prisma Console functionality for managing workspaces, projects, environments, and connection strings.
 
 Usage \[#usage]
 
@@ -16,7 +16,7 @@ Subcommands \[#subcommands]
 | `workspace`   | Manage workspaces             |
 | `project`     | Manage projects               |
 | `environment` | Manage environments           |
-| `apikey`      | Manage API keys               |
+| `apikey`      | Manage connection strings     |
 
 Examples \[#examples]
 
@@ -458,9 +458,9 @@ bunx --bun prisma platform environment delete --environment $ENVIRONMENT_ID --ea
 ```
 ````
 
-Manage API keys \[#manage-api-keys]
+Manage connection strings \[#manage-connection-strings]
 
-List all API keys for an environment:
+List all connection strings for an environment:
 
 ````
   npm
@@ -503,7 +503,7 @@ bunx --bun prisma platform apikey show --environment $ENVIRONMENT_ID --early-acc
 ```
 ````
 
-Create a new API key for an environment:
+Create a new connection string for an environment:
 
 ````
   npm
@@ -546,7 +546,7 @@ bunx --bun prisma platform apikey create --environment $ENVIRONMENT_ID --name "p
 ```
 ````
 
-Delete an API key:
+Delete a connection string:
 
 ````
   npm
@@ -621,14 +621,14 @@ Environment commands \[#environment-commands]
 | `-e`, `--environment` | The environment ID (required for `delete` command)               |
 | `-n`, `--name`        | Display name for the environment (optional for `create` command) |
 
-API key commands \[#api-key-commands]
+Connection string commands \[#connection-string-commands]
 
-| Option                | Description                                                    |
-| --------------------- | -------------------------------------------------------------- |
-| `-h`, `--help`        | Display help message                                           |
-| `-e`, `--environment` | The environment ID (required for `show` and `create` commands) |
-| `-a`, `--apikey`      | The API key ID (required for `delete` command)                 |
-| `-n`, `--name`        | Display name for the API key (optional for `create` command)   |
+| Option                | Description                                                            |
+| --------------------- | ---------------------------------------------------------------------- |
+| `-h`, `--help`        | Display help message                                                   |
+| `-e`, `--environment` | The environment ID (required for `show` and `create` commands)         |
+| `-a`, `--apikey`      | The connection string ID (required for `delete` command)               |
+| `-n`, `--name`        | Display name for the connection string (optional for `create` command) |
 
 Global options \[#global-options]
 

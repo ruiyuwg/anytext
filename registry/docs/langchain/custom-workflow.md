@@ -42,7 +42,7 @@ The [router pattern](/oss/javascript/langchain/multi-agent/router) is an example
 
 ## Basic implementation
 
-The core insight is that you can call a LangChain agent directly inside any LangGraph node, combining the flexibility of custom workflows with the convenience of pre-built agents:
+The core insight is that you can call a LangChain agent directly inside any LangGraph node, combining the flexibility of custom workflows with the convenience of prebuilt agents:
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { z } from "zod";

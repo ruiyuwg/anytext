@@ -295,7 +295,7 @@ Stripe supports displaying the tax ID types below on invoices. You can’t use S
 
 ## Validation
 
-It’s your responsibility to make sure customer information is accurate (including their tax ID). Stripe displays a customer tax ID on an invoice, whether or not it is valid.
+It’s your responsibility to make sure customer information is accurate (including their tax ID). Stripe displays a customer tax ID on an invoice, whether or not it’s valid.
 
 Stripe checks the format of the tax ID against the expected format, and asynchronously validates the tax ID against the external tax authority system for the tax ID types below.
 

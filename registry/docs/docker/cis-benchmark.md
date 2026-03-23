@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -39,7 +37,7 @@ Following the CIS Docker Benchmark helps organizations:
 
 ## [How Docker Hardened Images comply with the CIS Benchmark](#how-docker-hardened-images-comply-with-the-cis-benchmark)
 
-Docker Hardened Images (DHIs) are designed with security in mind and are verified to be compliant with the relevant controls from the latest CIS Docker Benchmark (v1.8.0) for the scope that applies to container images and Dockerfile configuration.
+Docker Hardened Images (DHIs) are designed with security in mind and are verified to be compliant with the relevant controls from the CIS Docker Benchmark for the scope that applies to container images and Dockerfile configuration.
 
 CIS-compliant DHIs are compliant with all controls in Section 4, with the sole exception of the control requiring Docker Content Trust (DCT), which [Docker officially retired](https://www.docker.com/blog/retiring-docker-content-trust/). Instead, DHIs are [signed](https://docs.docker.com/dhi/core-concepts/signatures/) using Cosign, providing an even higher level of authenticity and integrity. By starting from a CIS-compliant DHI, teams can adopt image-level best practices from the benchmark more quickly and confidently.
 

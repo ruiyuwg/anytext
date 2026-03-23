@@ -2,9 +2,9 @@
 
 Enable your customers to adjust the quantity of items during checkout.
 
-# Stripe-hosted page
+# Hosted page
 
-> This is a Stripe-hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/adjustable-quantity?payment-ui=stripe-hosted.
+> This is a Hosted page for when payment-ui is stripe-hosted. View the full page at https://docs.stripe.com/payments/checkout/adjustable-quantity?payment-ui=stripe-hosted.
 
 The line items for each [Checkout Session](https://docs.stripe.com/api/checkout/sessions.md) keep track of what your customer is purchasing. You can configure the Checkout Session so customers can adjust line item quantities during checkout.
 
@@ -96,9 +96,9 @@ def fulfill_order(checkout_session, line_items)
 end
 ```
 
-# Embedded form
+# Embedded page
 
-> This is a Embedded form for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/adjustable-quantity?payment-ui=embedded-form.
+> This is a Embedded page for when payment-ui is embedded-form. View the full page at https://docs.stripe.com/payments/checkout/adjustable-quantity?payment-ui=embedded-form.
 
 The line items for each [Checkout Session](https://docs.stripe.com/api/checkout/sessions.md) keep track of what your customer is purchasing. You can configure the Checkout Session so customers can adjust line item quantities during checkout.
 

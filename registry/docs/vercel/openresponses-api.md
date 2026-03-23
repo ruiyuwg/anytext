@@ -167,5 +167,5 @@ When an error occurs, the API returns a JSON object with details about what went
 
 title: "Provider Options"
 description: "Configure provider routing, fallbacks, and restrictions using the OpenResponses API."
-last\_updated: "2026-03-08T05:03:10.806Z"
+last\_updated: "2026-03-23T09:40:04.897Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/openresponses/provider-options"

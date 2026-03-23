@@ -23,7 +23,7 @@ The below retrievers allow you to index and search a custom corpus of documents.
 | [`AmazonKnowledgeBasesRetriever`](/oss/python/integrations/retrievers/bedrock)           | ❌         | ✅              | [`langchain-aws`](https://python.langchain.com/api_reference/aws/retrievers/langchain_aws.retrievers.bedrock.AmazonKnowledgeBasesRetriever.html)                                      |
 | [`AzureAISearchRetriever`](/oss/python/integrations/retrievers/azure_ai_search)          | ❌         | ✅              | [`langchain-community`](https://python.langchain.com/api_reference/community/retrievers/langchain_community.retrievers.azure_ai_search.AzureAISearchRetriever.html)                   |
 | [`ElasticsearchRetriever`](/oss/python/integrations/retrievers/elasticsearch_retriever)  | ✅         | ✅              | [`langchain-elasticsearch`](https://python.langchain.com/api_reference/elasticsearch/retrievers/langchain_elasticsearch.retrievers.ElasticsearchRetriever.html)                       |
-| [`NVIDIARetriever`](/oss/python/integrations/retrievers/nvidia)                          | ✅         | ❌              | [`langchain-nvidia-ai-endpoints`](https://python.langchain.com/api_reference/nvidia_ai_endpoints/retrievers/langchain_nvidia_ai_endpoints.retrievers.NVIDIARetriever.html)            |
+| [`NVIDIARAGRetriever`](/oss/python/integrations/retrievers/nvidia)                       | ✅         | ❌              | [`langchain-nvidia-ai-endpoints`](https://python.langchain.com/api_reference/nvidia_ai_endpoints/retrievers/langchain_nvidia_ai_endpoints.retrievers.NVIDIARAGRetriever.html)         |
 | [`VertexAISearchRetriever`](/oss/python/integrations/retrievers/google_vertex_ai_search) | ❌         | ✅              | [`langchain-google-community`](https://python.langchain.com/api_reference/google_community/vertex_ai_search/langchain_google_community.vertex_ai_search.VertexAISearchRetriever.html) |
 
 ## External index
@@ -42,6 +42,30 @@ The below retrievers will search over an external index (e.g., constructed from 
 
 ```
 [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# Sandbox integrations
+
+Source: https://docs.langchain.com/oss/python/integrations/sandboxes/index
+
+Integrate with sandbox providers using LangChain Python.
+
+Sandboxes provide isolated execution environments for running agent-generated code safely. Learn more about [sandboxes](/oss/python/deepagents/sandboxes).
+
+| Provider                                              | Package                                                            |
+| ----------------------------------------------------- | ------------------------------------------------------------------ |
+| [Daytona](/oss/python/integrations/providers/daytona) | [`langchain-daytona`](https://pypi.org/project/langchain-daytona/) |
+| [Modal](/oss/python/integrations/providers/modal)     | [`langchain-modal`](https://pypi.org/project/langchain-modal/)     |
+| [Runloop](/oss/python/integrations/providers/runloop) | [`langchain-runloop`](https://pypi.org/project/langchain-runloop/) |
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/sandboxes/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

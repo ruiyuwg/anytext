@@ -45,7 +45,7 @@ from langchain_openai import AzureChatOpenAI
 
 ### Azure AI
 
-> [Azure AI Foundry](https://learn.microsoft.com/en-us/azure/developer/python/get-started) provides access to a wide range of models from various providers including Azure OpenAI, DeepSeek R1, Cohere, Phi and Mistral through the `AzureAIChatCompletionsModel` class.
+> [Azure AI Foundry](https://learn.microsoft.com/en-us/azure/developer/python/get-started) provides access to a wide range of models from various providers including Azure OpenAI, DeepSeek R1, Cohere, Phi and Mistral through the `AzureAIOpenAIApiChatModel` class.
 
 ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 pip install -U langchain-azure-ai
@@ -55,19 +55,19 @@ pip install -U langchain-azure-ai
 uv add langchain-azure-ai
 ```
 
-Configure your API key and Endpoint.
+Configure your endpoint. You can use a project endpoint with `DefaultAzureCredential`, or set an API key directly.
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-export AZURE_AI_CREDENTIAL=your-api-key
-export AZURE_AI_ENDPOINT=your-endpoint
+export AZURE_AI_PROJECT_ENDPOINT=your-project-endpoint
 ```
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-from langchain_azure_ai.chat_models import AzureAIChatCompletionsModel
+from langchain_azure_ai.chat_models import AzureAIOpenAIApiChatModel
+from azure.identity import DefaultAzureCredential
 
-llm = AzureAIChatCompletionsModel(
-    model_name="gpt-4.1",
-    api_version="2024-05-01-preview",
+llm = AzureAIOpenAIApiChatModel(
+    model="gpt-4.1",
+    credential=DefaultAzureCredential(),
 )
 ```
 
@@ -75,7 +75,7 @@ See a [usage example](/oss/python/integrations/chat/azure_ai)
 
 ### Azure ML chat online endpoint
 
-See the documentation [here](/oss/python/integrations/chat/azureml_chat_endpoint) for accessing chat
+See the [Azure ML chat endpoint documentation](/oss/python/integrations/chat/azureml_chat_endpoint) for accessing chat
 models hosted with [Azure Machine Learning](https://azure.microsoft.com/en-us/products/machine-learning/).
 
 ## LLMs
@@ -102,7 +102,7 @@ Microsoft offers two main options for accessing embedding models through Azure:
 
 ### Azure OpenAI
 
-See a [usage example](/oss/python/integrations/text_embedding/azure_openai)
+See a [usage example](/oss/python/integrations/embeddings/azure_openai)
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_openai import AzureOpenAIEmbeddings
@@ -118,18 +118,19 @@ pip install -U langchain-azure-ai
 uv add langchain-azure-ai
 ```
 
-Configure your API key and Endpoint.
+Configure your endpoint. You can use a project endpoint with `DefaultAzureCredential`, or set an API key directly.
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-export AZURE_AI_CREDENTIAL=your-api-key
-export AZURE_AI_ENDPOINT=your-endpoint
+export AZURE_AI_PROJECT_ENDPOINT=your-project-endpoint
 ```
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-from langchain_azure_ai.embeddings import AzureAIEmbeddingsModel
+from langchain_azure_ai.embeddings import AzureAIOpenAIApiEmbeddingsModel
+from azure.identity import DefaultAzureCredential
 
-embed_model = AzureAIEmbeddingsModel(
-    model_name="text-embedding-ada-002"
+embed_model = AzureAIOpenAIApiEmbeddingsModel(
+    model="text-embedding-ada-002",
+    credential=DefaultAzureCredential(),
 )
 ```
 
@@ -488,7 +489,7 @@ from langchain_sqlserver import SQLServer_VectorStore
 
 [Azure AI Search](https://learn.microsoft.com/azure/search/search-what-is-azure-search) is a cloud search service
 that gives developers infrastructure, APIs, and tools for information retrieval of vector, keyword, and hybrid
-queries at scale. See [here](/oss/python/integrations/vectorstores/azuresearch) for usage examples.
+queries at scale. See the [Azure AI Search usage examples](/oss/python/integrations/vectorstores/azuresearch) for usage examples.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_community.vectorstores.azuresearch import AzureSearch
@@ -533,7 +534,7 @@ See a [usage example](/oss/python/integrations/vectorstores/pgvector/). Simply u
 ### Azure Container apps dynamic sessions
 
 We need to get the `POOL_MANAGEMENT_ENDPOINT` environment variable from the Azure Container Apps service.
-See the instructions [here](/oss/python/integrations/tools/azure_dynamic_sessions/#setup).
+See the [Azure dynamic sessions setup instructions](/oss/python/integrations/tools/azure_dynamic_sessions/#setup).
 
 We need to install a python package.
 
@@ -553,7 +554,7 @@ from langchain_azure_dynamic_sessions import SessionsPythonREPLTool
 
 ### Bing search
 
-Follow the documentation [here](/oss/python/integrations/tools/bing_search) to get a detail explanations and instructions of this tool.
+Follow the [Bing search tool documentation](/oss/python/integrations/tools/bing_search) to get a detailed explanations and instructions for this tool.
 
 The environment variable `BING_SUBSCRIPTION_KEY` and `BING_SEARCH_URL` are required from Bing Search resource.
 

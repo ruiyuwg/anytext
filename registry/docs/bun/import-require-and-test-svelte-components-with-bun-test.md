@@ -12,7 +12,7 @@ bun add @testing-library/svelte svelte@4 @happy-dom/global-registrator
 
 Then, save this plugin in your project.
 
-```ts svelte-loader.ts icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts svelte-loader.ts icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 import { plugin } from "bun";
 import { compile } from "svelte/compiler";
 import { readFileSync } from "fs";
@@ -82,7 +82,7 @@ Add an example `.svelte` file in your project.
 
 Now you can `import` or `require` `*.svelte` files in your tests, and it will load the Svelte component as a JavaScript module.
 
-```ts hello-svelte.test.ts icon="https://mintcdn.com/bun-1dd33a4e/nIz6GtMH5K-dfXeV/icons/typescript.svg?fit=max&auto=format&n=nIz6GtMH5K-dfXeV&q=85&s=5d73d76daf7eb7b158469d8c30d349b0" theme={"theme":{"light":"github-light","dark":"dracula"}}
+```ts hello-svelte.test.ts icon="https://mintcdn.com/bun-1dd33a4e/JUhaF6Mf68z_zHyy/icons/typescript.svg?fit=max&auto=format&n=JUhaF6Mf68z_zHyy&q=85&s=7ac549adaea8d5487d8fbd58cc3ea35b" theme={"theme":{"light":"github-light","dark":"dracula"}}
 import { test, expect } from "bun:test";
 import { render, fireEvent } from "@testing-library/svelte";
 import Counter from "./Counter.svelte";

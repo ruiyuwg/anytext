@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/langsmith/use-remote-graph
 
-[`RemoteGraph`](https://reference.langchain.com/python/langgraph/pregel/remote/RemoteGraph) is a client-side interface that allows you to interact with your [deployment](/langsmith/deployments) as if it were a local graph. It provides API parity with [`CompiledGraph`](/oss/python/langgraph/graph-api#compiling-your-graph), which means that you can use the same methods (`invoke()`, `stream()`, `get_state()`, etc.) in your development and production environments. This page describes how to initialize a `RemoteGraph` and interact with it.
+[`RemoteGraph`](https://reference.langchain.com/python/langgraph/pregel/remote/RemoteGraph) is a client-side interface that allows you to interact with your [deployment](/langsmith/deployment) as if it were a local graph. It provides API parity with [`CompiledGraph`](/oss/python/langgraph/graph-api#compiling-your-graph), which means that you can use the same methods (`invoke()`, `stream()`, `get_state()`, etc.) in your development and production environments. This page describes how to initialize a `RemoteGraph` and interact with it.
 
 `RemoteGraph` is useful for the following:
 

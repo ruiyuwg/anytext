@@ -2,11 +2,13 @@
 
 Source: https://docs.langchain.com/langsmith/deploy-other-frameworks
 
-This guide shows you how to use [Functional API](/oss/python/langgraph/functional-api) to deploy a [Strands Agent](https://strandsagents.com/latest/documentation/docs/) on [LangSmith Deployment](/langsmith/deployments) and set up tracing for [LangSmith Observability](/langsmith/observability). You can follow the same approach with other frameworks like CrewAI, AutoGen, Google ADK.
+Deploy agents built with Strands, CrewAI, or other frameworks to LangSmith using the LangGraph Functional API.
+
+This guide shows you how to use [Functional API](/oss/python/langgraph/functional-api) to deploy a [Strands Agent](https://strandsagents.com/latest/documentation/docs/) on [LangSmith Deployment](/langsmith/deployment) and set up tracing for [LangSmith Observability](/langsmith/observability). You can follow the same approach with other frameworks like CrewAI, AutoGen, Google ADK.
 
 Using Functional API and deploying to LangSmith Deployment provides several benefits:
 
-- Production deployment: Deploy your integrated solution to [LangSmith Deployment](/langsmith/deployments) for scalable production use.
+- Production deployment: Deploy your integrated solution to [LangSmith Deployment](/langsmith/deployment) for scalable production use.
 - Enhanced features: With Functional API, you can integrate your existing agents with [persistence](/oss/python/langgraph/persistence), [streaming](/langsmith/streaming), [short and long-term memory](/oss/python/concepts/memory) and more, with minimal changes to your existing code.
 - Multi-agent systems: Build [multi-agent systems](/oss/python/langchain/multi-agent) where individual agents are built with different frameworks.
 
@@ -18,7 +20,7 @@ Using Functional API and deploying to LangSmith Deployment provides several bene
 
 ## 1. Define strands agent
 
-Create a Strands Agent with pre-built tools.
+Create a Strands Agent with prebuilt tools.
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from strands import Agent
@@ -33,7 +35,7 @@ agent = Agent(
 
 ## 2. Use Functional API to deploy on LangSmith Deployment
 
-[Functional API](/oss/python/langgraph/functional-api) allows you to integrate and deploy with frameworks other than LangChain. Functional API also provides the additional benefit to leverage other key features — persistence, memory, human-in-the-loop, and streaming — coupled with your existing agent, with minimal changes to your existing code.
+[Functional API](/oss/python/langgraph/functional-api) allows you to integrate and deploy with frameworks other than LangChain. Functional API also provides the additional benefit to leverage other key features—persistence, memory, human-in-the-loop, and streaming—coupled with your existing agent, with minimal changes to your existing code.
 
 It uses two key building blocks:
 

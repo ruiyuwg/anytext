@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/langsmith/managing-model-configurations
 
-The LangSmith [playground](/langsmith/prompt-engineering-concepts#prompt-playground) enables you to control various settings for your prompts. The **Prompt Settings** window contains:
+The [Playground](/langsmith/prompt-engineering-concepts#playground) enables you to control various settings for your prompts. The **Prompt Settings** window contains:
 
 - [Model configuration](#model-configurations)
 - [Tool settings](#tool-settings)
@@ -15,7 +15,7 @@ To access **Prompt Settings**:
 
 ## Model configurations
 
-Model configurations define the parameters your prompt runs against. In the LangSmith Playground, you can save and manage these configurations, which allows you to reuse your preferred settings across prompts and sessions. For details on specific settings, refer to your model provider’s documentation (for example, [Anthropic](https://platform.claude.com/docs/en/api/messages), [OpenAI](https://platform.openai.com/docs/api-reference/responses/create)).
+[Model configurations](/langsmith/model-configurations) define the parameters your prompt runs against. Configurations are shared across your workspace—any configuration saved here is available in other LangSmith features and visible to admins in **Settings** > **Model configurations**. For details on specific settings, refer to your model provider’s documentation (for example, [Anthropic](https://platform.claude.com/docs/en/api/messages) or [OpenAI](https://platform.openai.com/docs/api-reference/responses/create)).
 
 ### Create saved configurations
 
@@ -47,7 +47,7 @@ The **Extra Parameters** field allows you to pass additional model parameters th
    }
    ```
 
-2. When troubleshooting parameter-related errors in the playground, such as:
+2. When troubleshooting parameter-related errors in the Playground, such as:
 
    ```
    TypeError: AsyncCompletions.create() got an unexpected keyword argument 'max_concurrency'
@@ -68,8 +68,8 @@ The **Extra Parameters** field allows you to pass additional model parameters th
 
 The **Prompt Format** tab allows you to specify:
 
-- The **Prompt type**. For details on chat and completion prompts, refer to [Prompt engineering](/langsmith/prompt-engineering-concepts#chat-vs-completion) concepts.
-- The **Template format**. For details on prompt templating and using variables, refer to [F-string vs. mustache](/langsmith/prompt-engineering-concepts##f-string-vs-mustache).
+- The **Prompt type**. For details on chat and completion prompts, refer to [Prompt engineering](/langsmith/prompt-engineering-concepts#prompt-types) concepts.
+- The **Template format**. For details on prompt templating and using variables, refer to [F-string vs. mustache](/langsmith/prompt-engineering-concepts#f-string-vs-mustache).
 
 ***
 

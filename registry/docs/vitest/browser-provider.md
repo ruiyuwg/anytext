@@ -58,7 +58,7 @@ export default defineConfig({
 
 ## Custom Provider advanced
 
-The custom provider API is highly experimental and can change between patches. If you just need to run tests in a browser, use the [`browser.instances`](#browser-instances) option instead.
+The custom provider API is highly experimental and can change between patches. If you just need to run tests in a browser, use the [`browser.instances`](/config/browser/instances) option instead.
 
 ```ts
 export interface BrowserProvider {
@@ -155,7 +155,7 @@ This option is supported only by the [**playwright**](/config/browser/playwright
 
 Enables tracking uncaught errors and exceptions so they can be reported by Vitest.
 
-If you need to hide certain errors, it is recommended to use [`onUnhandledError`](/config/#onunhandlederror) option instead.
+If you need to hide certain errors, it is recommended to use [`onUnhandledError`](/config/onunhandlederror) option instead.
 
 Disabling this will completely remove all Vitest error handlers, which can help debugging with the "Pause on exceptions" checkbox turned on.
 
@@ -259,5 +259,7 @@ export default defineConfig({
   },
 })
 ```
+
+Be aware that this option may cause problems with async [concurrent tests](/api/test#test-concurrent). If enabled, the completion of one test will clear the mock history for all mocks, including those currently being used by other tests in progress.
 
 ***

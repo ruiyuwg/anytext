@@ -5,25 +5,27 @@ Using `cloneElement` is uncommon and can lead to fragile code. [See common alter
 `cloneElement` lets you create a new React element using another element as a starting point.
 
 ```js
-const clonedElement = cloneElement(element, props, ...children);
+const clonedElement = cloneElement(element, props, ...children)
 ```
 
----
+***
 
-## Reference {/_reference_/}
+## Reference {/*reference*/}
 
-### `cloneElement(element, props, ...children)` {/_cloneelement_/}
+### `cloneElement(element, props, ...children)` {/*cloneelement*/}
 
 Call `cloneElement` to create a React element based on the `element`, but with different `props` and `children`:
 
 ```js
-import { cloneElement } from "react";
+import { cloneElement } from 'react';
 
 // ...
 const clonedElement = cloneElement(
-  <Row title="Cabbage">Hello</Row>,
+  <Row title="Cabbage">
+    Hello
+  </Row>,
   { isHighlighted: true },
-  "Goodbye",
+  'Goodbye'
 );
 
 console.log(clonedElement); // <Row title="Cabbage" isHighlighted={true}>Goodbye</Row>
@@ -31,7 +33,7 @@ console.log(clonedElement); // <Row title="Cabbage" isHighlighted={true}>Goodbye
 
 [See more examples below.](#usage)
 
-#### Parameters {/_parameters_/}
+#### Parameters {/*parameters*/}
 
 - `element`: The `element` argument must be a valid React element. For example, it could be a JSX node like `<Something />`, the result of calling [`createElement`](/reference/react/createElement), or the result of another `cloneElement` call.
 
@@ -39,7 +41,7 @@ console.log(clonedElement); // <Row title="Cabbage" isHighlighted={true}>Goodbye
 
 - **optional** `...children`: Zero or more child nodes. They can be any React nodes, including React elements, strings, numbers, [portals](/reference/react-dom/createPortal), empty nodes (`null`, `undefined`, `true`, and `false`), and arrays of React nodes. If you don't pass any `...children` arguments, the original `element.props.children` will be preserved.
 
-#### Returns {/_returns_/}
+#### Returns {/*returns*/}
 
 `cloneElement` returns a React element object with a few properties:
 
@@ -50,7 +52,7 @@ console.log(clonedElement); // <Row title="Cabbage" isHighlighted={true}>Goodbye
 
 Usually, you'll return the element from your component or make it a child of another element. Although you may read the element's properties, it's best to treat every element as opaque after it's created, and only render it.
 
-#### Caveats {/_caveats_/}
+#### Caveats {/*caveats*/}
 
 - Cloning an element **does not modify the original element.**
 
@@ -58,21 +60,22 @@ Usually, you'll return the element from your component or make it a child of ano
 
 - `cloneElement` makes it harder to trace the data flow, so **try the [alternatives](#alternatives) instead.**
 
----
+***
 
-## Usage {/_usage_/}
+## Usage {/*usage*/}
 
-### Overriding props of an element {/_overriding-props-of-an-element_/}
+### Overriding props of an element {/*overriding-props-of-an-element*/}
 
 To override the props of some React element, pass it to `cloneElement` with the props you want to override:
 
-```js [[1, 5, "<Row title=\"Cabbage\" />"], [2, 6, "{ isHighlighted: true }"], [3, 4, "clonedElement"]]
-import { cloneElement } from "react";
+```js [[1, 5, "<Row title=\\"Cabbage\\" />"], [2, 6, "{ isHighlighted: true }"], [3, 4, "clonedElement"]]
+import { cloneElement } from 'react';
 
 // ...
-const clonedElement = cloneElement(<Row title="Cabbage" />, {
-  isHighlighted: true,
-});
+const clonedElement = cloneElement(
+  <Row title="Cabbage" />,
+  { isHighlighted: true }
+);
 ```
 
 Here, the resulting cloned element will be `<Row title="Cabbage" isHighlighted={true} />`.
@@ -88,7 +91,7 @@ export default function List({ children }) {
     <div className="List">
       {Children.map(children, (child, index) =>
         cloneElement(child, {
-          isHighlighted: index === selectedIndex
+          isHighlighted: index === selectedIndex 
         })
       )}
 ```
@@ -107,32 +110,44 @@ By cloning its children, the `List` can pass extra information to every `Row` in
 
 ```js {4,8,12}
 <List>
-  <Row title="Cabbage" isHighlighted={true} />
-  <Row title="Garlic" isHighlighted={false} />
-  <Row title="Apple" isHighlighted={false} />
+  <Row
+    title="Cabbage"
+    isHighlighted={true} 
+  />
+  <Row
+    title="Garlic"
+    isHighlighted={false} 
+  />
+  <Row
+    title="Apple"
+    isHighlighted={false} 
+  />
 </List>
 ```
 
 Notice how pressing "Next" updates the state of the `List`, and highlights a different row:
 
 ```js
-import List from "./List.js";
-import Row from "./Row.js";
-import { products } from "./data.js";
+import List from './List.js';
+import Row from './Row.js';
+import { products } from './data.js';
 
 export default function App() {
   return (
     <List>
-      {products.map((product) => (
-        <Row key={product.id} title={product.title} />
-      ))}
+      {products.map(product =>
+        <Row
+          key={product.id}
+          title={product.title} 
+        />
+      )}
     </List>
   );
 }
 ```
 
 ```js src/List.js active
-import { Children, cloneElement, useState } from "react";
+import { Children, cloneElement, useState } from 'react';
 
 export default function List({ children }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -140,15 +155,15 @@ export default function List({ children }) {
     <div className="List">
       {Children.map(children, (child, index) =>
         cloneElement(child, {
-          isHighlighted: index === selectedIndex,
-        }),
+          isHighlighted: index === selectedIndex 
+        })
       )}
       <hr />
-      <button
-        onClick={() => {
-          setSelectedIndex((i) => (i + 1) % Children.count(children));
-        }}
-      >
+      <button onClick={() => {
+        setSelectedIndex(i =>
+          (i + 1) % Children.count(children)
+        );
+      }}>
         Next
       </button>
     </div>
@@ -159,7 +174,10 @@ export default function List({ children }) {
 ```js src/Row.js
 export default function Row({ title, isHighlighted }) {
   return (
-    <div className={["Row", isHighlighted ? "RowHighlighted" : ""].join(" ")}>
+    <div className={[
+      'Row',
+      isHighlighted ? 'RowHighlighted' : ''
+    ].join(' ')}>
       {title}
     </div>
   );
@@ -168,9 +186,9 @@ export default function Row({ title, isHighlighted }) {
 
 ```js src/data.js
 export const products = [
-  { title: "Cabbage", id: 1 },
-  { title: "Garlic", id: 2 },
-  { title: "Apple", id: 3 },
+  { title: 'Cabbage', id: 1 },
+  { title: 'Garlic', id: 2 },
+  { title: 'Apple', id: 3 },
 ];
 ```
 
@@ -202,13 +220,13 @@ To summarize, the `List` cloned the `<Row />` elements it received and added an 
 
 Cloning children makes it hard to tell how the data flows through your app. Try one of the [alternatives.](#alternatives)
 
----
+***
 
-## Alternatives {/_alternatives_/}
+## Alternatives {/*alternatives*/}
 
-### Passing data with a render prop {/_passing-data-with-a-render-prop_/}
+### Passing data with a render prop {/*passing-data-with-a-render-prop*/}
 
-Instead of using `cloneElement`, consider accepting a _render prop_ like `renderItem`. Here, `List` receives `renderItem` as a prop. `List` calls `renderItem` for every item and passes `isHighlighted` as an argument:
+Instead of using `cloneElement`, consider accepting a *render prop* like `renderItem`. Here, `List` receives `renderItem` as a prop. `List` calls `renderItem` for every item and passes `isHighlighted` as an argument:
 
 ```js {1,7}
 export default function List({ items, renderItem }) {
@@ -226,9 +244,13 @@ The `renderItem` prop is called a "render prop" because it's a prop that specifi
 ```js {3,7}
 <List
   items={products}
-  renderItem={(product, isHighlighted) => (
-    <Row key={product.id} title={product.title} isHighlighted={isHighlighted} />
-  )}
+  renderItem={(product, isHighlighted) =>
+    <Row
+      key={product.id}
+      title={product.title}
+      isHighlighted={isHighlighted}
+    />
+  }
 />
 ```
 
@@ -236,37 +258,46 @@ The end result is the same as with `cloneElement`:
 
 ```js {4,8,12}
 <List>
-  <Row title="Cabbage" isHighlighted={true} />
-  <Row title="Garlic" isHighlighted={false} />
-  <Row title="Apple" isHighlighted={false} />
+  <Row
+    title="Cabbage"
+    isHighlighted={true} 
+  />
+  <Row
+    title="Garlic"
+    isHighlighted={false} 
+  />
+  <Row
+    title="Apple"
+    isHighlighted={false} 
+  />
 </List>
 ```
 
 However, you can clearly trace where the `isHighlighted` value is coming from.
 
 ```js
-import List from "./List.js";
-import Row from "./Row.js";
-import { products } from "./data.js";
+import List from './List.js';
+import Row from './Row.js';
+import { products } from './data.js';
 
 export default function App() {
   return (
     <List
       items={products}
-      renderItem={(product, isHighlighted) => (
+      renderItem={(product, isHighlighted) =>
         <Row
           key={product.id}
           title={product.title}
           isHighlighted={isHighlighted}
         />
-      )}
+      }
     />
   );
 }
 ```
 
 ```js src/List.js active
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function List({ items, renderItem }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -277,11 +308,11 @@ export default function List({ items, renderItem }) {
         return renderItem(item, isHighlighted);
       })}
       <hr />
-      <button
-        onClick={() => {
-          setSelectedIndex((i) => (i + 1) % items.length);
-        }}
-      >
+      <button onClick={() => {
+        setSelectedIndex(i =>
+          (i + 1) % items.length
+        );
+      }}>
         Next
       </button>
     </div>
@@ -292,7 +323,10 @@ export default function List({ items, renderItem }) {
 ```js src/Row.js
 export default function Row({ title, isHighlighted }) {
   return (
-    <div className={["Row", isHighlighted ? "RowHighlighted" : ""].join(" ")}>
+    <div className={[
+      'Row',
+      isHighlighted ? 'RowHighlighted' : ''
+    ].join(' ')}>
       {title}
     </div>
   );
@@ -301,9 +335,9 @@ export default function Row({ title, isHighlighted }) {
 
 ```js src/data.js
 export const products = [
-  { title: "Cabbage", id: 1 },
-  { title: "Garlic", id: 2 },
-  { title: "Apple", id: 3 },
+  { title: 'Cabbage', id: 1 },
+  { title: 'Garlic', id: 2 },
+  { title: 'Apple', id: 3 },
 ];
 ```
 
@@ -333,9 +367,9 @@ button {
 
 This pattern is preferred to `cloneElement` because it is more explicit.
 
----
+***
 
-### Passing data through context {/_passing-data-through-context_/}
+### Passing data through context {/*passing-data-through-context*/}
 
 Another alternative to `cloneElement` is to [pass data through context.](/learn/passing-data-deeply-with-context)
 
@@ -375,30 +409,34 @@ This allows the calling component to not know or worry about passing `isHighligh
 ```js {4}
 <List
   items={products}
-  renderItem={(product) => <Row title={product.title} />}
+  renderItem={product =>
+    <Row title={product.title} />
+  }
 />
 ```
 
 Instead, `List` and `Row` coordinate the highlighting logic through context.
 
 ```js
-import List from "./List.js";
-import Row from "./Row.js";
-import { products } from "./data.js";
+import List from './List.js';
+import Row from './Row.js';
+import { products } from './data.js';
 
 export default function App() {
   return (
     <List
       items={products}
-      renderItem={(product) => <Row title={product.title} />}
+      renderItem={(product) =>
+        <Row title={product.title} />
+      }
     />
   );
 }
 ```
 
 ```js src/List.js active
-import { useState } from "react";
-import { HighlightContext } from "./HighlightContext.js";
+import { useState } from 'react';
+import { HighlightContext } from './HighlightContext.js';
 
 export default function List({ items, renderItem }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -407,17 +445,20 @@ export default function List({ items, renderItem }) {
       {items.map((item, index) => {
         const isHighlighted = index === selectedIndex;
         return (
-          <HighlightContext key={item.id} value={isHighlighted}>
+          <HighlightContext
+            key={item.id}
+            value={isHighlighted}
+          >
             {renderItem(item)}
           </HighlightContext>
         );
       })}
       <hr />
-      <button
-        onClick={() => {
-          setSelectedIndex((i) => (i + 1) % items.length);
-        }}
-      >
+      <button onClick={() => {
+        setSelectedIndex(i =>
+          (i + 1) % items.length
+        );
+      }}>
         Next
       </button>
     </div>
@@ -426,13 +467,16 @@ export default function List({ items, renderItem }) {
 ```
 
 ```js src/Row.js
-import { useContext } from "react";
-import { HighlightContext } from "./HighlightContext.js";
+import { useContext } from 'react';
+import { HighlightContext } from './HighlightContext.js';
 
 export default function Row({ title }) {
   const isHighlighted = useContext(HighlightContext);
   return (
-    <div className={["Row", isHighlighted ? "RowHighlighted" : ""].join(" ")}>
+    <div className={[
+      'Row',
+      isHighlighted ? 'RowHighlighted' : ''
+    ].join(' ')}>
       {title}
     </div>
   );
@@ -440,16 +484,16 @@ export default function Row({ title }) {
 ```
 
 ```js src/HighlightContext.js
-import { createContext } from "react";
+import { createContext } from 'react';
 
 export const HighlightContext = createContext(false);
 ```
 
 ```js src/data.js
 export const products = [
-  { title: "Cabbage", id: 1 },
-  { title: "Garlic", id: 2 },
-  { title: "Apple", id: 3 },
+  { title: 'Cabbage', id: 1 },
+  { title: 'Garlic', id: 2 },
+  { title: 'Apple', id: 3 },
 ];
 ```
 
@@ -479,20 +523,22 @@ button {
 
 [Learn more about passing data through context.](/reference/react/useContext#passing-data-deeply-into-the-tree)
 
----
+***
 
-### Extracting logic into a custom Hook {/_extracting-logic-into-a-custom-hook_/}
+### Extracting logic into a custom Hook {/*extracting-logic-into-a-custom-hook*/}
 
 Another approach you can try is to extract the "non-visual" logic into your own Hook, and use the information returned by your Hook to decide what to render. For example, you could write a `useList` custom Hook like this:
 
 ```js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function useList(items) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   function onNext() {
-    setSelectedIndex((i) => (i + 1) % items.length);
+    setSelectedIndex(i =>
+      (i + 1) % items.length
+    );
   }
 
   const selected = items[selectedIndex];
@@ -507,15 +553,17 @@ export default function App() {
   const [selected, onNext] = useList(products);
   return (
     <div className="List">
-      {products.map((product) => (
+      {products.map(product =>
         <Row
           key={product.id}
           title={product.title}
           isHighlighted={selected === product}
         />
-      ))}
+      )}
       <hr />
-      <button onClick={onNext}>Next</button>
+      <button onClick={onNext}>
+        Next
+      </button>
     </div>
   );
 }
@@ -524,36 +572,40 @@ export default function App() {
 The data flow is explicit, but the state is inside the `useList` custom Hook that you can use from any component:
 
 ```js
-import Row from "./Row.js";
-import useList from "./useList.js";
-import { products } from "./data.js";
+import Row from './Row.js';
+import useList from './useList.js';
+import { products } from './data.js';
 
 export default function App() {
   const [selected, onNext] = useList(products);
   return (
     <div className="List">
-      {products.map((product) => (
+      {products.map(product =>
         <Row
           key={product.id}
           title={product.title}
           isHighlighted={selected === product}
         />
-      ))}
+      )}
       <hr />
-      <button onClick={onNext}>Next</button>
+      <button onClick={onNext}>
+        Next
+      </button>
     </div>
   );
 }
 ```
 
 ```js src/useList.js
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function useList(items) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   function onNext() {
-    setSelectedIndex((i) => (i + 1) % items.length);
+    setSelectedIndex(i =>
+      (i + 1) % items.length
+    );
   }
 
   const selected = items[selectedIndex];
@@ -564,7 +616,10 @@ export default function useList(items) {
 ```js src/Row.js
 export default function Row({ title, isHighlighted }) {
   return (
-    <div className={["Row", isHighlighted ? "RowHighlighted" : ""].join(" ")}>
+    <div className={[
+      'Row',
+      isHighlighted ? 'RowHighlighted' : ''
+    ].join(' ')}>
       {title}
     </div>
   );
@@ -573,9 +628,9 @@ export default function Row({ title, isHighlighted }) {
 
 ```js src/data.js
 export const products = [
-  { title: "Cabbage", id: 1 },
-  { title: "Garlic", id: 2 },
-  { title: "Apple", id: 3 },
+  { title: 'Cabbage', id: 1 },
+  { title: 'Garlic', id: 2 },
+  { title: 'Apple', id: 3 },
 ];
 ```
 
@@ -605,7 +660,7 @@ button {
 
 This approach is particularly useful if you want to reuse this logic between different components.
 
----
+***
 
 ## Sitemap
 

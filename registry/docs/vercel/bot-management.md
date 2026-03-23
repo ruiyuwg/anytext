@@ -91,5 +91,5 @@ To prove that bots are legitimate and verify their claimed identity, several met
 
 title: "Advanced BotID Configuration"
 description: "Fine-grained control over BotID detection levels and backend domain configuration"
-last\_updated: "2026-03-08T05:03:11.127Z"
+last\_updated: "2026-03-23T09:40:05.276Z"
 source: "https://vercel.com/docs/botid/advanced-configuration"

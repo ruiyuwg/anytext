@@ -208,6 +208,15 @@ Runs `pg_dump` in a container with additional flags to exclude Supabase managed 
 
 The default dump does not contain any data or custom roles. To dump those contents explicitly, specify either the `--data-only` and `--role-only` flag.
 
+### Note on Privilege Migration
+
+When restoring to a new project, tables inherit ALL privileges from default privileges in the target database. To preserve specific privileges from your dump, revoke defaults before restoring:
+
+```sql
+-- Run BEFORE restoring your schema
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON TABLES FROM anon, authenticated;
+```
+
 supabase db dump \[flags]
 
 # CLI Reference

@@ -34,11 +34,11 @@ class Spring<T> {/*…*/}
 ```
 
 ```dts
-constructor(value: T, options?: SpringOpts);
+constructor(value: T, options?: SpringOptions);
 ```
 
 ```dts
-static of<U>(fn: () => U, options?: SpringOpts): Spring<U>;
+static of<U>(fn: () => U, options?: SpringOptions): Spring<U>;
 ```
 
 Create a spring whose value is bound to the return value of `fn`. This must be called
@@ -55,7 +55,7 @@ inside an effect root (for example, during component initialisation).
 ```
 
 ```dts
-set(value: T, options?: SpringUpdateOpts): Promise<void>;
+set(value: T, options?: SpringUpdateOptions): Promise<void>;
 ```
 
 Sets `spring.target` to `value` and returns a `Promise` that resolves if and when `spring.current` catches up to it.
@@ -114,7 +114,7 @@ class Tween<T> {/*…*/}
 ```
 
 ```dts
-static of<U>(fn: () => U, options?: TweenedOptions<U> | undefined): Tween<U>;
+static of<U>(fn: () => U, options?: TweenOptions<U> | undefined): Tween<U>;
 ```
 
 Create a tween whose value is bound to the return value of `fn`. This must be called
@@ -131,11 +131,11 @@ inside an effect root (for example, during component initialisation).
 ```
 
 ```dts
-constructor(value: T, options?: TweenedOptions<T>);
+constructor(value: T, options?: TweenOptions<T>);
 ```
 
 ```dts
-set(value: T, options?: TweenedOptions<T> | undefined): Promise<void>;
+set(value: T, options?: TweenOptions<T> | undefined): Promise<void>;
 ```
 
 Sets `tween.target` to `value` and returns a `Promise` that resolves if and when `tween.current` catches up to it.
@@ -192,7 +192,7 @@ The spring function in Svelte creates a store whose value is animated, with a mo
 ```dts
 function spring<T = any>(
 	value?: T | undefined,
-	opts?: SpringOpts | undefined
+	opts?: SpringOptions | undefined
 ): Spring<T>;
 ```
 
@@ -205,7 +205,7 @@ A tweened store in Svelte is a special type of store that provides smooth transi
 ```dts
 function tweened<T>(
 	value?: T | undefined,
-	defaults?: TweenedOptions<T> | undefined
+	defaults?: TweenOptions<T> | undefined
 ): Tweened<T>;
 ```
 
@@ -216,11 +216,11 @@ interface Spring<T> extends Readable<T> {/*…*/}
 ```
 
 ```dts
-set(new_value: T, opts?: SpringUpdateOpts): Promise<void>;
+set(new_value: T, opts?: SpringUpdateOptions): Promise<void>;
 ```
 
 ```dts
-update: (fn: Updater<T>, opts?: SpringUpdateOpts) => Promise<void>;
+update: (fn: Updater<T>, opts?: SpringUpdateOptions) => Promise<void>;
 ```
 
 - deprecated Only exists on the legacy `spring` store, not the `Spring` class
@@ -243,6 +243,76 @@ damping: number;
 stiffness: number;
 ```
 
+## SpringOptions
+
+```dts
+interface SpringOptions {/*…*/}
+```
+
+```dts
+stiffness?: number;
+```
+
+```dts
+damping?: number;
+```
+
+```dts
+precision?: number;
+```
+
+## SpringUpdateOptions
+
+```dts
+interface SpringUpdateOptions {/*…*/}
+```
+
+```dts
+hard?: any;
+```
+
+- deprecated Only use this for the spring store; does nothing when set on the Spring class
+
+```dts
+soft?: string | number | boolean;
+```
+
+- deprecated Only use this for the spring store; does nothing when set on the Spring class
+
+```dts
+instant?: boolean;
+```
+
+Only use this for the Spring class; does nothing when set on the spring store
+
+```dts
+preserveMomentum?: number;
+```
+
+Only use this for the Spring class; does nothing when set on the spring store
+
+## TweenOptions
+
+```dts
+interface TweenOptions<T> {/*…*/}
+```
+
+```dts
+delay?: number;
+```
+
+```dts
+duration?: number | ((from: T, to: T) => number);
+```
+
+```dts
+easing?: (t: number) => number;
+```
+
+```dts
+interpolate?: (a: T, b: T) => (t: number) => T;
+```
+
 ## Tweened
 
 ```dts
@@ -250,9 +320,15 @@ interface Tweened<T> extends Readable<T> {/*…*/}
 ```
 
 ```dts
-set(value: T, opts?: TweenedOptions<T>): Promise<void>;
+set(value: T, opts?: TweenOptions<T>): Promise<void>;
 ```
 
 ```dts
-update(updater: Updater<T>, opts?: TweenedOptions<T>): Promise<void>;
+update(updater: Updater<T>, opts?: TweenOptions<T>): Promise<void>;
+```
+
+## Updater
+
+```dts
+type Updater<T> = (target_value: T, value: T) => T;
 ```

@@ -257,5 +257,5 @@ Now that you have the DevCycle Edge Config integration set up, you can explore t
 
 title: "Using Edge Config with Hypertune"
 description: "Learn how to use Hypertune"
-last\_updated: "2026-03-08T05:03:13.712Z"
+last\_updated: "2026-03-23T09:40:09.110Z"
 source: "https://vercel.com/docs/edge-config/edge-config-integrations/hypertune-edge-config"

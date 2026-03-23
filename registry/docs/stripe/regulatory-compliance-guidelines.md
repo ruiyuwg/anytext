@@ -112,7 +112,7 @@ If you use a testimonial or endorsement to advertise Stripe products to your cus
 The CAN-SPAM Act regulates marketing activity conducted by email.
 
 - An email is deemed a commercial message, subject to the CAN-SPAM act, if the primary purpose of the email is to convey a commercial advertisement, or to promote a product or service.
-- A transactional email is an email sent to a customer that has a primary purpose relating to a particular transaction or relationship between you and the customer (for example, financing terms and conditions). The CAN-SPAM Act imposes more rigorous requirements on commercial email messages, as compared with transactional messages. Transactional messages are not subject to most of the requirements of the CAN-SPAM Act. If a message contains both transactional content and commercial content, the CAN-SPAM Act’s commercial email requirements might apply, if the message’s primary purpose might be considered to be commercial.
+- A transactional email is an email sent to a customer that has a primary purpose relating to a particular transaction or relationship between you and the customer (for example, financing terms and conditions). The CAN-SPAM Act imposes more rigorous requirements on commercial email messages, as compared with transactional messages. Transactional messages aren’t subject to most of the requirements of the CAN-SPAM Act. If a message contains both transactional content and commercial content, the CAN-SPAM Act’s commercial email requirements might apply, if the message’s primary purpose might be considered to be commercial.
 
 To facilitate compliance with the CAN-SPAM Act, any employee or staff utilizing or having access to your email systems and resources for marketing must adhere to the following requirements:
 
@@ -168,7 +168,7 @@ Businesses or body corporates are classed as “corporate subscribers” under P
 Sole traders and partnerships are classed as “individual subscribers” (even if acting in a commercial or business context) and PECR treats them the same as individuals. You can’t send electronic mail marketing to individuals, unless you have one of the following forms of consent:
 
 - They specifically and actively consented to electronic mail and communications from you, such as by ticking an opt-in box.
-- They are an existing customer who bought (or negotiated to buy) a similar product or service from you in the past, and has never opted out of marketing messages. You must show you continuously provide a simple way to opt out in every message from the first collection of their details. This doesn’t apply to new contacts or prospective customers.
+- They’re an existing customer who bought (or negotiated to buy) a similar product or service from you in the past, and has never opted out of marketing messages. You must show you continuously provide a simple way to opt out in every message from the first collection of their details. This doesn’t apply to new contacts or prospective customers.
 
 When marketing to either corporate or individual subscribers:
 
@@ -177,8 +177,8 @@ When marketing to either corporate or individual subscribers:
 - Don’t disguise or conceal your identity.
 - Provide a valid contact address so they can opt out or unsubscribe easily, offer an opt-out of messaging in every message. For example, opt out by reply, an unsubscribe link in emails, an ability to update communication preferences in the dashboard, or an **X** dismissal option in the embedded component.
 - Act on opt-outs promptly.
-- Maintain and keep up-to-date a “do not contact” list of any users who opt out of messaging.
-- Screen any communications against the current “do not contact” list and don’t send any communications to anyone who has opted out.
+- Maintain and keep up-to-date a “don’t contact” list of any users who opt out of messaging.
+- Screen any communications against the current “don’t contact” list and don’t send any communications to anyone who has opted out.
 - Avoid unsolicited communications.
 - Consider data protection law implications if you email employees at a corporate body who have personal corporate email addresses (firstname.lastname@org.co.uk). If you process personal data for marketing purposes, even in a business context, UK GDPR applies.
 - Consider the Advertising Standards Authority code.

@@ -2,6 +2,9 @@
 
 > **🔒 Permissions Required**: Web Analytics
 
+- To set up Web Analytics for your project, see the [Quickstart](/docs/analytics/quickstart).
+- To monitor your site's performance, use [Speed Insights](/docs/speed-insights).
+
 ![Image](https://vercel.com/front/docs/analytics/visitor-chart-light.png)
 
 Web Analytics provides comprehensive insights into your website's visitors, allowing you to track the top visited pages, referrers for a specific page, and demographics like location, operating systems, and browser information. Vercel's Web Analytics offers:
@@ -9,10 +12,6 @@ Web Analytics provides comprehensive insights into your website's visitors, allo
 - **Privacy**: Web Analytics only stores anonymized data and [does not use cookies](#how-visitors-are-determined), providing data for you while respecting your visitors' privacy and web experience.
 - **Integrated Infrastructure**: Web Analytics is built into the Vercel platform and accessible from your project's dashboard so there's no need for third-party services for detailed visitor insights.
 - **Customizable**: You can configure Web Analytics to track custom events and feature flag usage to get a better understanding of how your visitors are using your website.
-
-To set up Web Analytics for your project, see the [Quickstart](/docs/analytics/quickstart).
-
-If you're interested in learning more about how your site is performing, use [Speed Insights](/docs/speed-insights).
 
 ## Visitors
 
@@ -68,5 +67,5 @@ Web Analytics doesn't count traffic that comes from automated processes or accou
 
 title: "Privacy and Compliance"
 description: "Learn how Vercel supports privacy and data compliance standards with Vercel Web Analytics."
-last\_updated: "2026-03-08T05:03:10.946Z"
+last\_updated: "2026-03-23T09:40:05.169Z"
 source: "https://vercel.com/docs/analytics/privacy-policy"

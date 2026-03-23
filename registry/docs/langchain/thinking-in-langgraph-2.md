@@ -184,7 +184,7 @@ This separation means:
 
 - Different nodes can format the same data differently for their needs
 - You can change prompt templates without modifying your state schema
-- Debugging is clearer – you see exactly what data each node received
+- Debugging is clearer—you see exactly what data each node received
 - Your agent can evolve without breaking existing state
 
 Let's define our state:
@@ -217,7 +217,7 @@ class EmailAgentState(TypedDict):
     messages: list[str] | None
 ```
 
-Notice that the state contains only raw data – no prompt templates, no formatted strings, no instructions. The classification output is stored as a single dictionary, straight from the LLM.
+Notice that the state contains only raw data—no prompt templates, no formatted strings, no instructions. The classification output is stored as a single dictionary, straight from the LLM.
 
 ## Step 4: Build your nodes
 

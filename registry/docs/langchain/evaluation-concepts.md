@@ -29,7 +29,7 @@ Use offline evaluations for **pre-deployment testing**:
 - **Unit testing**: Verify correctness of individual components.
 - **Backtesting**: Test new versions against historical data.
 
-Offline evaluations target [*examples*](#examples) from [*datasets*](#datasets)—curated test cases with reference outputs that define what "good" looks like.
+Offline evaluations target [*examples*](#examples) from [*datasets*](#datasets): curated test cases with reference outputs that define what "good" looks like.
 
 ### Online evaluations
 
@@ -39,13 +39,13 @@ Use online evaluations for **production monitoring**:
 - **Anomaly detection**: Flag unusual patterns or edge cases.
 - **Production feedback**: Identify issues to add to offline datasets.
 
-Online evaluations target [*runs*](#runs) and [*threads*](#threads) from [tracing](/langsmith/observability-quickstart)—real production traces without reference outputs.
+Online evaluations target [*runs*](#runs) and [*threads*](#threads) from [tracing](/langsmith/observability-quickstart): real production traces without reference outputs.
 
 This difference in targets determines what you can evaluate: offline evaluations can check correctness against expected answers, while online evaluations focus on quality patterns, safety, and real-world behavior.
 
 ## Evaluation lifecycle
 
-As you develop and [deploy your application](/langsmith/deployments), your evaluation strategy evolves from pre-deployment testing to production monitoring. During development and testing, offline evaluations validate functionality against curated datasets. After deployment, online evaluations monitor production behavior on live traffic. As applications mature, both evaluation types work together in an iterative feedback loop to improve quality continuously.
+As you develop and [deploy your application](/langsmith/deployment), your evaluation strategy evolves from pre-deployment testing to production monitoring. During development and testing, offline evaluations validate functionality against curated datasets. After deployment, online evaluations monitor production behavior on live traffic. As applications mature, both evaluation types work together in an iterative feedback loop to improve quality continuously.
 
 ```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 graph LR
@@ -121,7 +121,7 @@ Online evaluations run on runs and threads from production traffic. Without refe
 
 #### Runs
 
-A *run* is a single execution trace from your [deployed application](/langsmith/deployments). Each run contains:
+A *run* is a single execution trace from your [deployed application](/langsmith/deployment). Each run contains:
 
 - **Inputs**: The actual user inputs your application received.
 - **Outputs**: What your application actually returned.
@@ -140,7 +140,7 @@ Learn more about [runs and traces in the Observability concepts](/langsmith/obse
 
 *Evaluators* are functions that score application performance. They provide the measurement layer for both offline and online evaluation, adapting their inputs based on what data is available.
 
-Run evaluators using the LangSmith SDK ([Python](https://docs.smith.langchain.com/reference/python/reference) and [TypeScript](https://docs.smith.langchain.com/reference/js)), via the [Prompt Playground](/langsmith/observability-concepts#prompt-playground), or by configuring [rules](/langsmith/rules) to run them automatically on tracing projects or datasets.
+Run evaluators using the LangSmith SDK ([Python](https://docs.smith.langchain.com/reference/python/reference) and [TypeScript](https://docs.smith.langchain.com/reference/js)), via the [Playground](/langsmith/prompt-engineering-concepts#playground), or by configuring [rules](/langsmith/rules) to run them automatically on tracing projects or datasets.
 
 ### Evaluator inputs
 
@@ -267,7 +267,15 @@ Generate additional examples from existing ones. Works best when starting with s
 
 **Splits**
 
-Partition datasets into subsets for targeted evaluation. Use splits for performance optimization (smaller splits for rapid iteration) and interpretability (evaluate different input types separately).
+Splits are named subsets of a dataset used to segment examples into separate groups. Common patterns include:
+
+- **ML-style splits**: divide examples into training, validation, and test sets to avoid overfitting, where a model performs well on training data but poorly on unseen data.
+- **Category-based splits**: evaluate different input types separately when a dataset spans multiple task categories.
+- **Staged rollout**: keep exploratory examples isolated until you're ready to include them in the main evaluation set.
+
+Splits differ from metadata: use splits for high-level organizational grouping for evaluation, and metadata for per-example information such as tags and provenance.
+
+In machine learning, best practice is for each example to belong to exactly one split. LangSmith allows examples to belong to multiple splits, which is useful when an example fits several evaluation categories.
 
 Learn how to [create and manage dataset splits](/langsmith/manage-datasets-in-application#create-and-manage-dataset-splits).
 
@@ -308,7 +316,7 @@ The following table summarizes the key differences between offline and online ev
 | **When to use**       | Pre-deployment, during development                          | Production, post-deployment                                                       |
 | **Primary use cases** | Benchmarking, unit testing, regression testing, backtesting | Real-time monitoring, production feedback, anomaly detection                      |
 | **Evaluation timing** | Batch processing on curated test sets                       | Real-time or near real-time on live traffic                                       |
-| **Setup location**    | Evaluation tab (SDK, UI, Prompt Playground)                 | [Observability tab](/langsmith/online-evaluations-llm-as-judge) (automated rules) |
+| **Setup location**    | Evaluation tab (SDK, UI, Playground)                        | [Observability tab](/langsmith/online-evaluations-llm-as-judge) (automated rules) |
 | **Data requirements** | Requires dataset curation                                   | No dataset needed, evaluates live traces                                          |
 
 ***

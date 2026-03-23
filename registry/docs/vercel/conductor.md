@@ -33,5 +33,5 @@ Conductor also supports running Claude Code on OpenRouter, AWS Bedrock, Google V
 
 title: "Crush"
 description: "Use Crush with the AI Gateway."
-last\_updated: "2026-03-08T05:03:09.727Z"
+last\_updated: "2026-03-23T09:40:03.149Z"
 source: "https://vercel.com/docs/agent-resources/coding-agents/crush"

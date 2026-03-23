@@ -4,7 +4,7 @@ Source: https://docs.langchain.com/langsmith/langsmith-cli
 
 Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, and threads from the terminal
 
-The LangSmith CLI is a fast, agent-friendly command-line tool for working with your LangSmith data and workflows directly from the terminal. It’s designed for both humans and AI coding agents to list, filter, retrieve, and export data — with predictable JSON output by default and a pretty table mode for humans.
+The LangSmith CLI is a fast, agent-friendly command-line tool for working with your LangSmith data and workflows directly from the terminal. It’s designed for both humans and AI coding agents to list, filter, retrieve, and export data—with predictable JSON output by default and a pretty table mode for humans.
 
 Built for agents and scripts: defaults to JSON, supports clean stdout/stderr separation, and offers `--yes` flags for non-interactive use.
 
@@ -53,7 +53,7 @@ langsmith --api-key lsv2_... trace list --project my-app
 
 ## Quickstart
 
-The following commands cover the core resource types — projects, traces, runs, datasets, experiments, and threads:
+The following commands cover the core resource types—projects, traces, runs, datasets, experiments, and threads:
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 # List tracing projects (sessions)
@@ -92,7 +92,7 @@ langsmith trace list --project my-app -o traces.json   # write JSON to file
 
 The CLI groups functionality by resource. Each command supports filters like `--limit`, `--last-n-minutes`, and more.
 
-### project — list tracing projects
+### project—list tracing projects
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 langsmith project list                    # default limit: 20
@@ -100,7 +100,7 @@ langsmith project list --name-contains chatbot
 langsmith --format pretty project list
 ```
 
-### trace — query and export traces
+### trace—query and export traces
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 langsmith trace list --project my-app --limit 50 --last-n-minutes 60
@@ -109,7 +109,7 @@ langsmith trace get <trace-id> --project my-app --full
 langsmith trace export ./traces --project my-app --limit 20 --full
 ```
 
-### run — query individual runs
+### run—query individual runs
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 langsmith run list --project my-app --run-type llm
@@ -118,14 +118,14 @@ langsmith run get <run-id> --full
 langsmith run export llm_calls.jsonl --project my-app --run-type llm --full
 ```
 
-### thread — query conversation threads
+### thread—query conversation threads
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 langsmith thread list --project my-chatbot --last-n-minutes 120
 langsmith thread get <thread-id> --project my-chatbot --full
 ```
 
-### dataset — manage evaluation datasets
+### dataset—manage evaluation datasets
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 langsmith dataset list --name-contains eval
@@ -134,7 +134,7 @@ langsmith dataset create --name my-eval-set --description "QA pairs for v2"
 langsmith dataset export my-dataset ./data.json --limit 500
 ```
 
-### evaluator — manage evaluators
+### evaluator—manage evaluators
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 langsmith evaluator list
@@ -142,7 +142,7 @@ langsmith evaluator upload evals.py --name accuracy --function check_accuracy --
 langsmith evaluator delete accuracy --yes
 ```
 
-### experiment — results and summaries
+### experiment—results and summaries
 
 ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 langsmith experiment list --dataset my-eval-set

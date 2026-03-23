@@ -10,6 +10,8 @@ All available config values can be accessed from `astro:config/server`. However,
 
 [Section titled “Imports from astro:config/client”](#imports-from-astroconfigclient)
 
+The following helpers are imported from the `client` directory of the virtual config module.
+
 ```js
 import {
   i18n,
@@ -50,6 +52,8 @@ See more about the configuration imports available from `astro:config/client`:
 ## Imports from `astro:config/server`
 
 [Section titled “Imports from astro:config/server”](#imports-from-astroconfigserver)
+
+The following helpers are imported from the `server` directory of the virtual config module.
 
 ```js
 import {
@@ -122,3 +126,266 @@ See more about the configuration imports available from `astro:config/server`:
 - [`publicDir`](/en/reference/configuration-reference/#publicdir)
 - [`root`](/en/reference/configuration-reference/#root)
 - [`compressHTML`](/en/reference/configuration-reference/#compresshtml)
+
+## Imports from `astro/config`
+
+[Section titled “Imports from astro/config”](#imports-from-astroconfig)
+
+The following helpers are imported from the regular config module:
+
+```js
+import {
+  defineConfig,
+  envField,
+  fontProviders,
+  getViteConfig,
+  mergeConfig,
+  passthroughImageService,
+  sessionDrivers,
+  sharpImageService,
+  validateConfig,
+} from "astro/config";
+```
+
+### `defineConfig()`
+
+[Section titled “defineConfig()”](#defineconfig)
+
+**Type:** `(config: AstroUserConfig) => AstroUserConfig`
+
+Configures your project with type safety [in a supported Astro configuration file](/en/guides/configuring-astro/#the-astro-config-file).
+
+### `envField`
+
+[Section titled “envField”](#envfield)
+
+**Type:** `object`
+
+**Added in:** `astro@5.0.0`
+
+Describes the supported data types when [defining environment variables](/en/reference/configuration-reference/#envschema).
+
+Each data type must define the [variable type](/en/guides/environment-variables/#variable-types) with `context` (`"client"` or `"server"`) and `access` (`"secret"` or `"public"`). In addition, you can define a `default` value, specify whether the variable is `optional` (default `false`), and some data types provide optional validation methods.
+
+Learn more about [using type safe environment variables](/en/guides/environment-variables/#type-safe-environment-variables) in your Astro project.
+
+#### `envField.string()`
+
+[Section titled “envField.string()”](#envfieldstring)
+
+**Type:** `(options: StringFieldInput) => StringField`
+
+Defines an environment variable of string type. You can perform [string validation with Zod](https://zod.dev/api#strings) using the following properties: `max`, `min`, `length`, `url`, `includes`, `startsWith`, and `endsWith`.
+
+The following example defines the expected shape for an environment variable storing an API URL:
+
+astro.config.mjs
+
+```js
+import { defineConfig, envField } from "astro/config";
+
+
+export default defineConfig({
+  env: {
+    schema: {
+      API_URL: envField.string({
+        context: "client",
+        access: "public",
+        optional: false,
+        default: "",
+        min: 12,
+        url: true,
+        includes: "astro",
+        startsWith: "https",
+      }),
+    }
+  }
+})
+```
+
+#### `envField.number()`
+
+[Section titled “envField.number()”](#envfieldnumber)
+
+**Type:** `(options: NumberFieldInput) => NumberField`
+
+Defines an environment variable of number type. You can perform [number validation with Zod](https://zod.dev/api#numbers) using the following properties: `gt`, `lt`, `min`, `max`, and `int`.
+
+The following example defines the expected shape for an environment variable storing an API port:
+
+astro.config.mjs
+
+```js
+import { defineConfig, envField } from "astro/config";
+
+
+export default defineConfig({
+  env: {
+    schema: {
+      API_PORT: envField.number({
+        context: "server",
+        access: "public",
+        optional: true,
+        default: 4321,
+        min: 2,
+        int: true,
+      }),
+    }
+  }
+})
+```
+
+#### `envField.boolean()`
+
+[Section titled “envField.boolean()”](#envfieldboolean)
+
+**Type:** `(options: BooleanFieldInput) => BooleanField`
+
+Defines an environment variable of boolean type.
+
+The following example defines the expected shape for an environment variable storing whether analytics are enabled:
+
+astro.config.mjs
+
+```js
+import { defineConfig, envField } from "astro/config";
+
+
+export default defineConfig({
+  env: {
+    schema: {
+      ANALYTICS_ENABLED: envField.boolean({
+        context: "client",
+        access: "public",
+        optional: true,
+        default: true,
+      }),
+    }
+  }
+})
+```
+
+#### `envField.enum()`
+
+[Section titled “envField.enum()”](#envfieldenum)
+
+**Type:** `(options: EnumFieldInput<T>) => EnumField`
+
+Defines an environment variable of enum type by providing the allowed `values` as an array.
+
+The following example defines the expected shape for an environment variable storing the configured debug mode:
+
+astro.config.mjs
+
+```js
+import { defineConfig, envField } from "astro/config";
+
+
+export default defineConfig({
+  env: {
+    schema: {
+      DEBUG_MODE: envField.enum({
+        context: "server",
+        access: "public",
+        values: ['info', 'warnings', 'errors'], // required
+        optional: true,
+        default: 'errors',
+      }),
+    }
+  }
+})
+```
+
+### `fontProviders`
+
+[Section titled “fontProviders”](#fontproviders)
+
+**Type:** `object`
+
+**Added in:** `astro@6.0.0` New
+
+Describes the [built-in provider](/en/reference/font-provider-reference/#built-in-providers) used [to retrieve the configured font](/en/reference/configuration-reference/#fontprovider).
+
+### `getViteConfig()`
+
+[Section titled “getViteConfig()”](#getviteconfig)
+
+**Type:** `(userViteConfig: ViteUserConfig, inlineAstroConfig?: AstroInlineConfig) => ViteUserConfigFn`
+
+Retrieves the Vite configuration to use by merging a custom Vite configuration object and an optional Astro configuration object. This is useful [to set up Vitest for testing](/en/guides/testing/#vitest).
+
+### `mergeConfig()`
+
+[Section titled “mergeConfig()”](#mergeconfig)
+
+See [`mergeConfig()` in the Programmatic API reference](/en/reference/programmatic-reference/#mergeconfig).
+
+### `passthroughImageService()`
+
+[Section titled “passthroughImageService()”](#passthroughimageservice)
+
+**Type:** `() => ImageServiceConfig`
+
+Retrieves a no-op image service. This is useful when your adapter does not support Astro’s built-in Sharp image optimization and you want to [use the `<Image />` and `<Picture />` components](/en/guides/images/#astro-components-for-images).
+
+The following example defines `passthroughImageService()` as image service in the Astro configuration file to avoid Sharp image processing:
+
+astro.config.mjs
+
+```js
+import { defineConfig, passthroughImageService } from "astro/config";
+
+
+export default defineConfig({
+  image: {
+    service: passthroughImageService()
+  }
+});
+```
+
+Learn more about [configuring a no-op passthrough service](/en/guides/images/#configure-no-op-passthrough-service).
+
+### `sessionDrivers`
+
+[Section titled “sessionDrivers”](#sessiondrivers)
+
+**Type:** `object`
+
+**Added in:** `astro@5.7.0`
+
+Describes the [built-in driver](/en/reference/session-driver-reference/#built-in-drivers) used [for session storage](/en/reference/configuration-reference/#session-options).
+
+The following example configures the Redis driver to enable sessions:
+
+astro.config.mjs
+
+```js
+import { defineConfig, sessionDrivers } from "astro/config";
+
+
+export default defineConfig({
+  session: {
+    driver: sessionDrivers.redis({
+      url: process.env.REDIS_URL
+    }),
+  }
+})
+```
+
+Learn more about [using sessions](/en/guides/sessions/) in your Astro project.
+
+### `sharpImageService()`
+
+[Section titled “sharpImageService()”](#sharpimageservice)
+
+**Type:** `(config?: SharpImageServiceConfig) => ImageServiceConfig`
+
+**Added in:** `astro@2.4.1`
+
+Retrieves the Sharp service used to process Astro’s image assets. This takes an optional object describing the [configuration options for Sharp](/en/reference/configuration-reference/#imageservice).
+
+### `validateConfig()`
+
+[Section titled “validateConfig()”](#validateconfig)
+
+See [`validateConfig()` in the Programmatic API reference](/en/reference/programmatic-reference/#validateconfig).

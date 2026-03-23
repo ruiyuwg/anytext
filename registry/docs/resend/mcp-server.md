@@ -144,6 +144,22 @@ Add to your `opencode.json` config:
   }
 }
 ```
+
+
+
+```json theme={"theme":{"light":"github-light","dark":"vesper"}}
+{
+  "mcpServers": {
+    "resend": {
+      "command": "npx",
+      "args": ["-y", "resend-mcp"],
+      "env": {
+        "RESEND_API_KEY": "re_xxxxxxxxx"
+      }
+    }
+  }
+}
+```
 ````
 
 ### HTTP Transport
@@ -337,161 +353,3 @@ In the Inspector UI:
 * Add a custom header: `Authorization: Bearer re_your_key_here` and activate the toggle
 * Click **Connect**, then use "List tools" to verify the server is working
 ````
-
-# React Email Skill
-
-Source: https://resend.com/docs/react-email-skill
-
-Build HTML emails using React components with AI agents.
-
-The React Email skill enables AI agents to build production-ready HTML emails using React components. It provides a modern development experience for creating responsive, cross-client compatible emails.
-
-## Installation
-
-Install the skill using the following command:
-
-```bash theme={"theme":{"light":"github-light","dark":"vesper"}}
-npx skills add resend/react-email
-```
-
-## Advantages
-
-- **Component-based email development**: Build emails using reusable React components for consistent, maintainable templates.
-- **Brand-consistent styling with Tailwind**: Use Tailwind CSS to style emails with your brand's design system.
-- **Multi-format rendering**: Automatically generate both HTML and plain text versions of your emails.
-- **Email client compatibility handling**: Built-in support for rendering emails correctly across all major email clients.
-- **Built-in preview server**: Preview your emails in real-time during development with hot reloading.
-
-## Learn More
-
-See the full source code and documentation.
-
-# Send emails with Replit and Resend
-
-Source: https://resend.com/docs/replit-integration
-
-Learn how to add the Resend integration to your Replit project.
-
-[Replit](https://replit.com/) is a platform for building sites and apps with AI. You can add Resend in a Replit project by asking the chat to add email sending with Resend.
-
-**Example prompt**
-
-```
-When someone fills out the contact form, send an email using Resend.
-```
-
-Prefer watching a video? Check out our video walkthrough below.
-
-## 1. Add a custom domain to your Resend account
-
-By default, you can only send emails to your own email address.
-
-To send emails to other email addresses:
-
-1. Add a [custom domain to your Resend account](https://resend.com/domains).
-2. Add the custom domain to the `from` field in the `resend` function in Replit (or ask the chat to update these fields).
-
-Get more help adding a custom domain in [Resend's documentation](/dashboard/domains/introduction).
-
-## 2. Add your Resend API key and from address
-
-To use Resend with Replit, you'll need to add a Resend API key, which you can create in the [Resend Dashboard](https://resend.com/api-keys). Do not share your API key with others or expose it in the browser or other client-side code.
-
-The from address is the email address that will be used to send emails. Use your custom domain you added in step 1 here (e.g., `hello@yourdomain.com`).
-
-Replit tracks the details of your Resend integration in the [Integrations
-page](https://replit.com/integrations).
-
-# Resend Skill
-
-Source: https://resend.com/docs/resend-skill
-
-Send emails through the Resend API with AI agents.
-
-The Resend skill enables AI agents to send emails through the Resend API using our official recommendations. It provides a streamlined interface for sending single and batch emails with built-in error handling and retry logic.
-
-## Installation
-
-Install the skill using the following command:
-
-```bash theme={"theme":{"light":"github-light","dark":"vesper"}}
-npx skills add resend/resend-skills
-```
-
-## Advantages
-
-Build with our official recommendations for sending emails with Resend.
-
-- **Single and batch email sending**: Send individual emails or batch up to 100 emails per request.
-- **Built-in error handling and retry logic**: Automatic retries with exponential backoff for transient failures.
-- **Idempotency key support**: Prevent duplicate sends with idempotency keys for safe retries.
-- **Multi-language SDK support**: Works with Node.js, Python, Ruby, Go, and other supported SDKs.
-- **Automatic activation for email tasks**: AI agents automatically use this skill when email sending is needed.
-
-## Learn More
-
-See the full source code and documentation.
-
-# Official SDKs
-
-Source: https://resend.com/docs/sdks
-
-Open source client libraries for your favorite platforms.
-
-## Official SDKs
-
-```
-github.com/resend/resend-node
-
-
-
-github.com/resend/resend-php
-
-
-
-github.com/resend/resend-laravel
-
-
-
-github.com/resend/resend-python
-
-
-
-github.com/resend/resend-ruby
-
-
-
-github.com/resend/resend-go
-
-
-
-github.com/resend/resend-java
-
-
-
-github.com/resend/resend-rust
-
-
-
-github.com/resend/resend-dotnet
-```
-
-## Community SDKs
-
-```
-github.com/elixir-saas/resend-elixir
-
-
-
-github.com/jiangtaste/nestjs-resend
-
-
-
-github.com/coderaveHQ/dart\_resend
-```
-
-## OpenAPI
-
-```
-github.com/resend/resend-openapi
-```

@@ -362,7 +362,7 @@ Import both the StripeJS and the OnrampJS bundles:
     <script src="onramp.js" defer></script>
   </head>
   <body>
-    <div id="onramp-element" />
+    <div id="onramp-element"></div>
   </body>
 </html>
 ```
@@ -464,7 +464,7 @@ export const OnrampElement = ({
             clientSecret,
             appearance,
           })
-          .mount(containerRef)
+          .mount(containerRef);
       }
     }
   }, [clientSecret, stripeOnramp]);
@@ -516,7 +516,7 @@ Create a frontend route (*for example, www.my-web3-wallet.com/onramp/\<client\_s
     <script src="onramp.js" defer></script>
   </head>
   <body>
-    <div id="onramp-element" />
+    <div id="onramp-element"></div>
   </body>
 </html>
 ```

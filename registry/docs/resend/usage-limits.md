@@ -19,7 +19,7 @@ The response headers describe your current rate limit following every request in
 | `ratelimit-reset`     | How many seconds until the limits are reset.                        |
 | `retry-after`         | How many seconds you should wait before making a follow-up request. |
 
-The default maximum rate limit is **2 requests per second per team**. This limit applies across all API keys associated with your team. This number can be increased for trusted senders upon request. You can view your team's current rate limit on the [Settings Usage page](https://resend.com/settings/usage).
+The default maximum rate limit is **5 requests per second per team**. This limit applies across all API keys associated with your team. This number can be increased for trusted senders upon request. You can view your team's current rate limit on the [Settings Usage page](https://resend.com/settings/usage).
 
 After that, you'll hit the rate limit and receive a `429` response error code. You can find all 429 responses by filtering for 429 at the [Resend Logs page](https://resend.com/logs?status=429).
 

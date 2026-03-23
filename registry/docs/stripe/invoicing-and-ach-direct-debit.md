@@ -2,7 +2,7 @@
 
 Configure, create, and process invoices using ACH Direct Debit.
 
-To reduce costs, many merchants make card payment methods unavailable above a certain *invoice* (Invoices are statements of amounts owed by a customer. They track the status of payments from draft through paid or otherwise finalized. Subscriptions automatically generate invoices, or you can manually create a one-off invoice) total amount, and prefer payment from bank methods like ACH Direct Debit.
+To reduce costs, many businesses make card payment methods unavailable above a certain *invoice* (Invoices are statements of amounts owed by a customer. They track the status of payments from draft through paid or otherwise finalized. Subscriptions automatically generate invoices, or you can manually create a one-off invoice) total amount, and prefer payment from bank methods like ACH Direct Debit.
 
 This guide provides step-by-step instructions on how to configure, create, and process invoices to use the [ACH Direct Debit](https://docs.stripe.com/payments/ach-direct-debit.md) payment method. Stripe users in the United States can accept **ACH Direct Debit** from end customers with US bank accounts using the Automated Clearing House (ACH) payments system operated by [Nacha](https://www.nacha.org/content/ach-network). A *Connect* (Connect is Stripe's solution for multi-party businesses, such as marketplace or software platforms, to route payments between sellers, customers, and other recipients) platform that integrates ACH Direct Debit has more [advanced options available](https://docs.stripe.com/invoicing/ach-direct-debit.md#fee-splitting). To begin, determine whether:
 

@@ -9,14 +9,14 @@ Lifecycle
 When used in a Component, it runs when the component is unmounted. When used in tracking scope, such [`createEffect`](/reference/basic-reactivity/create-effect), [`createMemo`](/reference/basic-reactivity/create-memo) or a [`createRoot`](/reference/reactive-utilities/create-root), it runs when the tracking scope is disposed or refreshed.
 
 ```
-import { onCleanup } from "solid-js"
+import { onCleanup } from "solid-js";
 function onCleanup(fn: () => void): void;
 ```
 
 Without the `onCleanup` function, the event listener would remain attached to the `document` even after the component is removed from the page. This can cause memory leaks and other issues.
 
 ```
-import { createSignal, onCleanup } from "solid-js"
+import { createSignal, onCleanup } from "solid-js";
 const Component = () => {  const [count, setCount] = createSignal(0);
   const handleClick = () => setCount((value) => value + 1);
   document.addEventListener("click", handleClick);

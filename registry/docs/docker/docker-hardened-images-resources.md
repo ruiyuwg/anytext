@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -35,6 +33,10 @@ The following blog posts provide insights into Docker Hardened Images, security 
 Date published
 
 Title
+
+March 3, 2026
+
+[Announcing Docker Hardened System Packages](https://www.docker.com/blog/announcing-docker-hardened-system-packages/)
 
 January 25, 2026
 

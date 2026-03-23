@@ -75,5 +75,5 @@ See the [observability documentation](/docs/ai-gateway/capabilities/observabilit
 
 title: "Build with AI agents on Vercel"
 description: "Install AI agents and services through the Vercel Marketplace to automate workflows and build custom AI systems."
-last\_updated: "2026-03-08T05:03:09.796Z"
+last\_updated: "2026-03-23T09:40:03.236Z"
 source: "https://vercel.com/docs/agent-resources/integrations-for-agents"

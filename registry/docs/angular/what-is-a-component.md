@@ -144,7 +144,7 @@ import {ProfilePhoto} from './profile-photo';@Component({  // Import the `Profil
 
 By default, Angular components are *standalone*, meaning that you can directly add them to the `imports` array of other components. Components created with an earlier version of Angular may instead specify `standalone: false` in their [`@Component`](/api/core/Component) decorator. For these components, you instead import the [`NgModule`](/api/core/NgModule) in which the component is defined. See the full [](guide/ngmodules/overview)[`NgModule`](/api/core/NgModule) guide for details.
 
-Important: In Angular versions before 19.0.0, the `standalone` option defaults to `false`.
+**IMPORTANT:** In Angular versions before 19.0.0, the `standalone` option defaults to `false`.
 
 ### [Showing components in a template](#showing-components-in-a-template)
 

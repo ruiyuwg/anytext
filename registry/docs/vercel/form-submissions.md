@@ -77,5 +77,5 @@ export default function ContactForm() {
 
 title: "Get Started with BotID"
 description: "Step-by-step guide to setting up BotID protection in your Vercel project"
-last\_updated: "2026-03-08T05:03:11.161Z"
+last\_updated: "2026-03-23T09:40:05.448Z"
 source: "https://vercel.com/docs/botid/get-started"

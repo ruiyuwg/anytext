@@ -199,5 +199,5 @@ Any member of your team can covert comments to an issue in Linear, Jira, or GitH
 
 title: "Managing Comments on Preview Deployments"
 description: "Learn how to manage Comments on your Preview Deployments from Team members and invited collaborators."
-last\_updated: "2026-03-08T05:03:12.518Z"
+last\_updated: "2026-03-23T09:40:07.306Z"
 source: "https://vercel.com/docs/comments/managing-comments"

@@ -2,7 +2,7 @@
 
 Learn how to configure and use Tailwind CSS in your Expo project.
 
-> Standard Tailwind CSS supports only web platform. For universal support, use a library such as [NativeWind](https://www.nativewind.dev/), which allows creating styled React Native components with Tailwind CSS.
+> Standard Tailwind CSS supports only web platform. For universal support, use a library such as [NativeWind](https://www.nativewind.dev/) or [Uniwind](https://uniwind.dev/), which allow creating styled React Native components with Tailwind CSS.
 
 [Tailwind CSS](https://tailwindcss.com/) is a utility-first CSS framework and can be used with Metro for web projects. This guide explains how to configure your Expo project to use the framework.
 
@@ -83,6 +83,8 @@ import './global.css';
 
 > If you are using [DOM components](/guides/dom-components), add this file import to each module using the `"use dom"` directive since they don't share globals.
 
+> Always import global CSS in your root **\_layout.tsx**, not in a nested layout. Expo Router traverses the dependency graph starting from the root layout. Importing CSS in a nested layout (for example, **app/blog/\_layout.tsx**) causes **node\_modules** CSS to load before your custom styles, which can break your intended style order.
+
 You now start your project and use Tailwind CSS classes in your components.
 
 ```sh
@@ -119,7 +121,7 @@ export default function Index() {
 
 ## Tailwind for Android and iOS
 
-Tailwind does not support Android and iOS platforms. You can use a compatibility library such as [NativeWind](https://www.nativewind.dev/) for universal support.
+Tailwind does not support Android and iOS platforms. You can use a compatibility library such as [NativeWind](https://www.nativewind.dev/) or [Uniwind](https://uniwind.dev/) for universal support.
 
 ## Alternative for Android and iOS
 

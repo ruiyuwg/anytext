@@ -130,10 +130,10 @@ bun add @clerk/nextjs
 
 Copy your Clerk keys and paste them into **.env** in the root of your project:
 
-```dotenv title=".env" showLineNumbers
-# Clerk // [!code ++]
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-publishable-key> // [!code ++]
-CLERK_SECRET_KEY=<your-secret-key> // [!code ++]
+```bash title=".env"
+# Clerk # [!code ++]
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-publishable-key> # [!code ++]
+CLERK_SECRET_KEY=<your-secret-key> # [!code ++]
 ```
 
 2.2. Protect routes with Clerk middleware \[#22-protect-routes-with-clerk-middleware]
@@ -825,14 +825,14 @@ https://a60b-99-42-62-240.ngrok-free.app/api/webhooks/clerk
 
 Copy the ***Signing Secret*** and add it to your `.env` file:
 
-```dotenv title=".env" showLineNumbers
+```bash title=".env"
 # Prisma
 DATABASE_URL=<your-database-url>
 
 # Clerk
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-publishable-key>
 CLERK_SECRET_KEY=<your-secret-key>
-CLERK_WEBHOOK_SIGNING_SECRET=<your-signing-secret> {/* [!code ++] */}
+CLERK_WEBHOOK_SIGNING_SECRET=<your-signing-secret> # [!code ++]
 ```
 
 On the home page, press Sign Up and create an account using any of the sign-up options

@@ -4,7 +4,7 @@
 
 Model profiles require `langchain>=1.1`.
 
-LangChain chat models can expose a dictionary of supported features and capabilities through a `.profile` property:
+LangChain chat models can expose a dictionary of supported features and capabilities through a `profile` property:
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 model.profile;
@@ -17,7 +17,7 @@ model.profile;
 // }
 ```
 
-Refer to the full set of fields in the [API reference](https://reference.langchain.com/javascript/interfaces/_langchain_core.language_models_profile.ModelProfile.html).
+Refer to the full set of fields in the [API reference](https://reference.langchain.com/javascript/langchain-core/language_models/profile/ModelProfile).
 
 Much of the model profile data is powered by the [models.dev](https://github.com/sst/models.dev) project, an open source initiative that provides model capability data. This data is augmented with additional fields for purposes of use with LangChain. These augmentations are kept aligned with the upstream project as it evolves.
 
@@ -26,6 +26,7 @@ Model profile data allow applications to work around model capabilities dynamica
 1. [Summarization middleware](/oss/javascript/langchain/middleware/built-in#summarization) can trigger summarization based on a model's context window size.
 2. [Structured output](/oss/javascript/langchain/structured-output) strategies in `createAgent` can be inferred automatically (e.g., by checking support for native structured output features).
 3. Model inputs can be gated based on supported [modalities](#multimodal) and maximum input tokens.
+4. The [Deep Agents CLI](/oss/javascript/deepagents/cli) filters the [interactive model switcher](/oss/javascript/deepagents/cli/providers#which-models-appear-in-the-switcher) to models whose profiles report `tool_calling` support and text I/O, and displays context window sizes and capability flags in the selector detail view.
 
 Model profile data can be changed if it is missing, stale, or incorrect.
 

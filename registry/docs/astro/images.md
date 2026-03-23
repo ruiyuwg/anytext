@@ -349,7 +349,7 @@ See details about [the `<Picture />` component properties](/en/reference/modules
 
 Responsive images are images that adjust to improve performance across different devices. These images can resize to fit their container, and can be served in different sizes depending on your visitor’s screen size and resolution.
 
-With [responsive image properties](/en/reference/modules/astro-assets/#responsive-image-properties) applied to the `<Image />` or `<Picture />` components, Astro will automatically generate the required `srcset` and `sizes` values for your images, and apply the necessary [styles to ensure they resize correctly](#responsive-image-styles).
+With the [layout property](/en/reference/modules/astro-assets/#layout) applied to the `<Image />` or `<Picture />` components, Astro will automatically generate the required `srcset` and `sizes` values for your images, and apply the necessary [styles to ensure they resize correctly](#responsive-image-styles).
 
 When this responsive behavior is [configured globally with `image.layout`](/en/reference/configuration-reference/#imagelayout), it will apply to all image components and also to any local and remote images using [the Markdown `![]()` syntax](/en/guides/images/#images-in-markdown-files).
 
@@ -493,23 +493,23 @@ src/components/Logo.astro
 ```astro
 ---
 import type { SvgComponent } from "astro/types";
-import HomeIcon from './Home.svg'
+import HomeIcon from "./Home.svg";
 
 
 interface Link {
-  url: string
-  text: string
-  icon: SvgComponent
+  url: string;
+  text: string;
+  icon: SvgComponent;
 }
 
 
 const links: Link[] = [
   {
-    url: '/',
-    text: 'Home',
-    icon: HomeIcon
-  }
-]
+    url: "/",
+    text: "Home",
+    icon: HomeIcon,
+  },
+];
 ---
 ```
 
@@ -671,8 +671,8 @@ The `image` helper for the content collections schema lets you validate and impo
 src/content.config.ts
 
 ```ts
-import { defineCollection } from "astro:content";
-import { z } from "astro/zod";
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 
 
 const blogCollection = defineCollection({
@@ -708,7 +708,7 @@ const allBlogPosts = await getCollection("blog");
     <div>
       <Image src={post.data.cover} alt={post.data.coverAlt} />
       <h2>
-        <a href={"/blog/" + post.slug}>{post.data.title}</a>
+        <a href={"/blog/" + post.id}>{post.data.title}</a>
       </h2>
     </div>
   ))
@@ -720,6 +720,29 @@ const allBlogPosts = await getCollection("blog");
 [Section titled “Generating images with getImage()”](#generating-images-with-getimage)
 
 The `getImage()` function is intended for generating images destined to be used somewhere else than directly in HTML, for example in an [API Route](/en/guides/endpoints/#server-endpoints-api-routes). When you need options that the `<Picture>` and `<Image>` components do not currently support, you can use the `getImage()` function to create your own custom `<Image />` component.
+
+`getImage()` can only be used on the server. If you need to use the resulting image URL on the client (e.g. in a client-side script or framework component), call `getImage()` inside the frontmatter and pass the resulting `src` to the client:
+
+src/components/ClientImage.astro
+
+```astro
+---
+import { getImage } from "astro:assets";
+import myBackground from "../background.png";
+
+
+const optimizedBackground = await getImage({ src: myBackground, format: "avif" });
+---
+
+
+<div id="background" data-src={optimizedBackground.src}></div>
+
+
+<script>
+  const src = document.getElementById("background").dataset.src;
+  // use src client-side as needed
+</script>
+```
 
 See more in the [`getImage()` reference](/en/reference/modules/astro-assets/#getimage).
 
@@ -753,7 +776,7 @@ pnpm add sharp
 
 [Section titled “Configure no-op passthrough service”](#configure-no-op-passthrough-service)
 
-If your [adapter](https://astro.build/integrations/?search=\&categories%5B%5D=adapters) does not support Astro’s built-in Sharp image optimization (e.g. Deno, Cloudflare), you can configure a no-op image service to allow you to use the `<Image />` and `<Picture />` components. Note that Astro does not perform any image transformation and processing in these environments. However, you can still enjoy the other benefits of using `astro:assets`, including no Cumulative Layout Shift (CLS), the enforced `alt` attribute, and a consistent authoring experience.
+If your [adapter](https://astro.build/integrations/?search=\&categories%5B%5D=adapters) does not support Astro’s built-in Sharp image optimization (e.g. Cloudflare), you can configure a no-op image service to allow you to use the `<Image />` and `<Picture />` components. Note that Astro does not perform any image transformation and processing in these environments. However, you can still enjoy the other benefits of using `astro:assets`, including no Cumulative Layout Shift (CLS), the enforced `alt` attribute, and a consistent authoring experience.
 
 Configure the `passthroughImageService()` to avoid Sharp image processing:
 

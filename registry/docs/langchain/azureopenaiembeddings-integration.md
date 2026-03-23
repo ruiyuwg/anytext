@@ -1,6 +1,6 @@
 # AzureOpenAIEmbeddings integration
 
-Source: https://docs.langchain.com/oss/javascript/integrations/text\_embedding/azure\_openai
+Source: https://docs.langchain.com/oss/javascript/integrations/embeddings/azure\_openai
 
 Integrate with the AzureOpenAIEmbeddings embedding model using LangChain JavaScript.
 
@@ -10,7 +10,7 @@ LangChain.js supports integration with [Azure OpenAI](https://azure.microsoft.co
 
 You can learn more about Azure OpenAI and its difference with the OpenAI API on [this page](https://learn.microsoft.com/azure/ai-services/openai/overview). If you don't have an Azure account, you can [create a free account](https://azure.microsoft.com/free/) to get started.
 
-This will help you get started with AzureOpenAIEmbeddings [embedding models](/oss/javascript/integrations/text_embedding) using LangChain. For detailed documentation on `AzureOpenAIEmbeddings` features and configuration options, please refer to the [API reference](https://api.js.langchain.com/classes/langchain_openai.AzureOpenAIEmbeddings.html).
+This will help you get started with AzureOpenAIEmbeddings [embedding models](/oss/javascript/integrations/embeddings) using LangChain. For detailed documentation on `AzureOpenAIEmbeddings` features and configuration options, please refer to the [API reference](https://api.js.langchain.com/classes/langchain_openai.AzureOpenAIEmbeddings.html).
 
 **Previously, LangChain.js supported integration with Azure OpenAI using the dedicated [Azure OpenAI SDK](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/openai/openai). This SDK is now deprecated in favor of the new Azure integration in the OpenAI SDK, which allows to access the latest OpenAI models and features the same day they are released, and allows seamless transition between the OpenAI API and Azure OpenAI.**
 
@@ -20,9 +20,9 @@ If you are using Azure OpenAI with the deprecated SDK, see the [migration guide]
 
 ### Integration details
 
-| Class                                                                                                     | Package                                                                         | Local | [Py support](https://python.langchain.com/docs/integrations/text_embedding/azure_openai/) |                                             Downloads                                             |                                             Version                                            |
-| :-------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ | :---: | :---------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [AzureOpenAIEmbeddings](https://api.js.langchain.com/classes/langchain_openai.AzureOpenAIEmbeddings.html) | [@langchain/openai](https://api.js.langchain.com/modules/langchain_openai.html) |   ❌   |                                             ✅                                             | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
+| Class                                                                                                     | Package                                                                         | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/azure_openai/) |                                             Downloads                                             |                                             Version                                            |
+| :-------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ | :---: | :-----------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
+| [AzureOpenAIEmbeddings](https://api.js.langchain.com/classes/langchain_openai.AzureOpenAIEmbeddings.html) | [@langchain/openai](https://api.js.langchain.com/modules/langchain_openai.html) |   ❌   |                                           ✅                                           | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
 
 ## Setup
 
@@ -296,7 +296,7 @@ If you are using the deprecated Azure OpenAI SDK with the `@langchain/azure-open
    npm uninstall @langchain/azure-openai
    ```
 
-2. Update your imports to use the new `AzureOpenAIEmbeddings` classe from the `@langchain/openai` package:
+2. Update your imports to use the new `AzureOpenAIEmbeddings` class from the `@langchain/openai` package:
 
    ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
    import { AzureOpenAIEmbeddings } from "@langchain/openai";
@@ -329,7 +329,7 @@ For detailed documentation of all AzureOpenAIEmbeddings features and configurati
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/text_embedding/azure_openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/azure_openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

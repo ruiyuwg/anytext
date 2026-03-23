@@ -30,41 +30,41 @@ import type {
 
 Describes the result of the transformation after the call to [`getImage()`](/en/reference/modules/astro-assets/#getimage).
 
-#### `attributes`
+#### `GetImageResult.attributes`
 
-[Section titled “attributes”](#attributes)
+[Section titled “GetImageResult.attributes”](#getimageresultattributes)
 
 **Type:** `Record<string, any>`
 
 Defines the additional HTML attributes needed to render the image (e.g. width, height, style).
 
-#### `options`
+#### `GetImageResult.options`
 
-[Section titled “options”](#options)
+[Section titled “GetImageResult.options”](#getimageresultoptions)
 
 **Type:** [`ImageTransform`](#imagetransform)
 
 Describes the transformation settings after validation.
 
-#### `rawOptions`
+#### `GetImageResult.rawOptions`
 
-[Section titled “rawOptions”](#rawoptions)
+[Section titled “GetImageResult.rawOptions”](#getimageresultrawoptions)
 
 **Type:** [`ImageTransform`](#imagetransform)
 
 Describes the original transformation settings.
 
-#### `src`
+#### `GetImageResult.src`
 
-[Section titled “src”](#src)
+[Section titled “GetImageResult.src”](#getimageresultsrc)
 
 **Type:** `string`
 
 The path to the generated image.
 
-#### `srcSet`
+#### `GetImageResult.srcSet`
 
-[Section titled “srcSet”](#srcset)
+[Section titled “GetImageResult.srcSet”](#getimageresultsrcset)
 
 **Type:** `{ values: { transform: ImageTransform; descriptor?: string; attributes?: Record<string, any>; url: string; }[]; attribute: string; }`
 
@@ -72,17 +72,17 @@ The path to the generated image.
 
 An object describing how to render the [`srcset` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img#srcset).
 
-##### `values`
+##### `GetImageResult.srcSet.values`
 
-[Section titled “values”](#values)
+[Section titled “GetImageResult.srcSet.values”](#getimageresultsrcsetvalues)
 
 **Type:** `{ transform: ImageTransform; descriptor?: string; attributes?: Record<string, any>; url: string; }[]`
 
 An array of generated values where each entry includes a URL and a size descriptor. This can be used to manually generate the value of the `srcset` attribute.
 
-##### `attribute`
+##### `GetImageResult.srcSet.attribute`
 
-[Section titled “attribute”](#attribute)
+[Section titled “GetImageResult.srcSet.attribute”](#getimageresultsrcsetattribute)
 
 **Type:** `string`
 
@@ -96,33 +96,33 @@ A value ready to use in the `srcset` attribute.
 
 Defines the options accepted by the image transformation service. This contains a required `src` property, optional predefined properties, and any additional properties required by the image service:
 
-#### `src`
+#### `ImageTransform.src`
 
-[Section titled “src”](#src-1)
+[Section titled “ImageTransform.src”](#imagetransformsrc)
 
 **Type:** `ImageMetadata | string`
 
 Defines the path to a local image in the `public` directory, the URL of a remote image, or the data from an imported image.
 
-#### `width`
+#### `ImageTransform.width`
 
-[Section titled “width”](#width)
+[Section titled “ImageTransform.width”](#imagetransformwidth)
 
 **Type:** `number | undefined`
 
 The width of the image.
 
-#### `height`
+#### `ImageTransform.height`
 
-[Section titled “height”](#height)
+[Section titled “ImageTransform.height”](#imagetransformheight)
 
 **Type:** `number | undefined`
 
 The height of the image.
 
-#### `widths`
+#### `ImageTransform.widths`
 
-[Section titled “widths”](#widths-1)
+[Section titled “ImageTransform.widths”](#imagetransformwidths)
 
 **Type:** `number[] | undefined`
 
@@ -130,9 +130,9 @@ The height of the image.
 
 A list of widths to generate for the image.
 
-#### `densities`
+#### `ImageTransform.densities`
 
-[Section titled “densities”](#densities-1)
+[Section titled “ImageTransform.densities”](#imagetransformdensities)
 
 **Type:** ``(number | `${number}x`)[] | undefined``
 
@@ -140,25 +140,25 @@ A list of widths to generate for the image.
 
 A list of pixel densities to generate for the image.
 
-#### `quality`
+#### `ImageTransform.quality`
 
-[Section titled “quality”](#quality-1)
+[Section titled “ImageTransform.quality”](#imagetransformquality)
 
 **Type:** `ImageQuality | undefined`
 
 The desired quality for the output image.
 
-#### `format`
+#### `ImageTransform.format`
 
-[Section titled “format”](#format-1)
+[Section titled “ImageTransform.format”](#imagetransformformat)
 
 **Type:** `ImageOutputFormat | undefined`
 
 The desired format for the output image.
 
-#### `fit`
+#### `ImageTransform.fit`
 
-[Section titled “fit”](#fit-1)
+[Section titled “ImageTransform.fit”](#imagetransformfit)
 
 **Type:** `'fill' | 'contain' | 'cover' | 'none' | 'scale-down' | string | undefined`
 
@@ -166,9 +166,9 @@ The desired format for the output image.
 
 Defines a list of allowed values for the `object-fit` CSS property, extensible with any string.
 
-#### `position`
+#### `ImageTransform.position`
 
-[Section titled “position”](#position-1)
+[Section titled “ImageTransform.position”](#imagetransformposition)
 
 **Type:** `string | undefined`
 
@@ -184,17 +184,17 @@ Controls the value for the `object-position` CSS property.
 
 Represents an image with transformation options. This contains the same properties as the [`ImageTransform` type](#imagetransform) with a different `src` type and an additional `inferSize` property.
 
-#### `src`
+#### `UnresolvedImageTransform.src`
 
-[Section titled “src”](#src-2)
+[Section titled “UnresolvedImageTransform.src”](#unresolvedimagetransformsrc)
 
 **Type:** `ImageMetadata | string | Promise<{ default: ImageMetadata }>`
 
 The path to an image imported or located in the `public` directory, or the URL of a remote image.
 
-#### `inferSize`
+#### `UnresolvedImageTransform.inferSize`
 
-[Section titled “inferSize”](#infersize-1)
+[Section titled “UnresolvedImageTransform.inferSize”](#unresolvedimagetransforminfersize)
 
 **Type:** `boolean`
 
@@ -212,41 +212,41 @@ See also the [`inferSize` attribute](/en/reference/modules/astro-assets/#infersi
 
 Describes the data collected during image import. This contains the following properties:
 
-#### `src`
+#### `ImageMetadata.src`
 
-[Section titled “src”](#src-3)
+[Section titled “ImageMetadata.src”](#imagemetadatasrc)
 
 **Type:** `string`
 
 The absolute path of the image on the filesystem.
 
-#### `width`
+#### `ImageMetadata.width`
 
-[Section titled “width”](#width-1)
+[Section titled “ImageMetadata.width”](#imagemetadatawidth)
 
 **Type:** `number`
 
 The width of the image.
 
-#### `height`
+#### `ImageMetadata.height`
 
-[Section titled “height”](#height-1)
+[Section titled “ImageMetadata.height”](#imagemetadataheight)
 
 **Type:** `number`
 
 The height of the image.
 
-#### `format`
+#### `ImageMetadata.format`
 
-[Section titled “format”](#format-2)
+[Section titled “ImageMetadata.format”](#imagemetadataformat)
 
 **Type:** [`ImageInputFormat`](#imageinputformat)
 
 The format of the image.
 
-#### `orientation`
+#### `ImageMetadata.orientation`
 
-[Section titled “orientation”](#orientation)
+[Section titled “ImageMetadata.orientation”](#imagemetadataorientation)
 
 **Type:** `number`
 
@@ -342,17 +342,17 @@ Learn how to build [local services](/en/reference/image-service-reference/#local
 
 Describes the configuration object for an image service. This contains the following properties:
 
-#### `entrypoint`
+#### `ImageServiceConfig.entrypoint`
 
-[Section titled “entrypoint”](#entrypoint)
+[Section titled “ImageServiceConfig.entrypoint”](#imageserviceconfigentrypoint)
 
 **Type:** `'astro/assets/services/sharp' | string`
 
 A package or path to the image service module. This can be Astro’s built-in Sharp service or a third-party service.
 
-#### `config`
+#### `ImageServiceConfig.config`
 
-[Section titled “config”](#config)
+[Section titled “ImageServiceConfig.config”](#imageserviceconfigconfig)
 
 **Type:** `Record<string, any>`
 

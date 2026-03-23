@@ -64,5 +64,5 @@ You should also add `"eslint-config-custom": "workspace:*"` to your
 
 title: "ESLINT\_REACT\_RULES\_REQUIRED"
 description: "Requires that a workspace package is configured with required React plugins and rules"
-last\_updated: "2026-03-08T05:03:12.639Z"
+last\_updated: "2026-03-23T09:40:07.511Z"
 source: "https://vercel.com/docs/conformance/rules/ESLINT\_REACT\_RULES\_REQUIRED"

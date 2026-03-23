@@ -109,7 +109,7 @@ Components, much like other functions, will only run *once*. This means that if 
 function Counter() {  const [count, setCount] = createSignal(0);  const increment = () => setCount((prev) => prev + 1);
   console.log("Count:", count()); // ❌ not tracked - only runs once during initialization.
   createEffect(() => {    console.log(count()); // ✅ will update whenever `count()` changes.  });
-  return (    <div>      <span>Count: {count()}</span>{/* ✅ will update whenever `count()` changes. */}      <button type="button" onClick={increment}>        Increment      </button>    </div>  );}
+  return (    <div>      <span>Count: {count()}</span>      {/* ✅ will update whenever `count()` changes. */}      <button type="button" onClick={increment}>        Increment      </button>    </div>  );}
 ```
 
 To learn more about managing state in Solid, visit the [guide on state management](/guides/state-management).

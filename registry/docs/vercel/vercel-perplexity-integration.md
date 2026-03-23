@@ -80,5 +80,5 @@ To follow this guide, you'll need the following:
 
 title: "Vercel Pinecone Integration"
 description: "Learn how to add Pinecone connectable account integration with Vercel."
-last\_updated: "2026-03-08T05:03:09.908Z"
+last\_updated: "2026-03-23T09:40:03.443Z"
 source: "https://vercel.com/docs/agent-resources/integrations-for-models/pinecone"

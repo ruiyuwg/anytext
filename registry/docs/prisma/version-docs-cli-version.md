@@ -180,9 +180,3 @@ Output:
   "studio": "0.365.0"
 }
 ```
-
-# Caching queries (/docs/accelerate/caching)
-
-Prisma Accelerate provides global caching for read queries using TTL, Stale-While-Revalidate (SWR), or a combination of both. It's included as part of Prisma Postgres, but can also be used with your own database by enabling Accelerate in the [Prisma Data Platform](https://console.prisma.io?utm_source=docs) and [configuring it with your database](/accelerate/getting-started).
-
-This content has moved — learn more on the updated [Caching in Accelerate](/postgres/database/caching) page.

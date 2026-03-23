@@ -18,6 +18,37 @@ Safe parse result type.
   - `output`
   - `issues`
 
+### SchemaWithCache
+
+Schema with cache type.
+
+#### Generics
+
+- `TSchema`
+- `TCacheConfig`
+
+#### Definition
+
+- `SchemaWithCache`
+  - `cacheConfig`
+  - `cache`
+
+### SchemaWithCacheAsync
+
+Schema with cache async type.
+
+#### Generics
+
+- `TSchema`
+- `TCacheConfig`
+
+#### Definition
+
+- `SchemaWithCacheAsync`
+  - `async`
+  - `cacheConfig`
+  - `cache`
+
 ### SchemaWithFallback
 
 Schema with fallback type.

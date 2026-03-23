@@ -33,17 +33,11 @@ By mapping your schema to these real-world considerations, you create a more int
 
 Remember that schemas can evolve over time as your business needs change—start with the core concepts that matter most to your teams, then iterate and expand as you learn more about how your content model performs in practice.
 
-#### Learn more about content modeling
-
-[Content modeling Course](https://www.sanity.io/learn/course/hello-structured-content/intro-to-structured-content)
-
 ## Your schemas will change
 
 Schemas naturally evolve as your business requirements change, content strategies mature, and new channels emerge. Sanity embraces this reality by providing robust tooling to manage schema migrations and content transformations. The Content Lake's schema-less architecture gives you the flexibility to modify your content model without rebuilding your entire database.
 
 The schema migration tooling allow you to programmatically transform existing content to match new schema structures and run your validation rules against your whole dataset. Rather than treating schema changes as exceptional events, Sanity's approach acknowledges them as a normal part of the content lifecycle.
-
-[Migrating your schema and content](https://www.sanity.io/docs/content-lake/schema-and-content-migrations)
 
 ## Anatomy of schemas
 
@@ -61,6 +55,12 @@ Document types are collections of documents used to build standalone pieces of c
 - Can have indexed and queryable references between them
 
 **Note**: Document types can be whatever you need them to be and don't have to map directly to "a page" or "a post". It can also be "project," "person," "product," and "place."
+
+> \[!WARNING]
+> Don't use document types as field types
+> A document type should not be used directly as a field type. If you want to link to a document, use a [reference](https://www.sanity.io/docs/studio/reference-type) field. If you want to embed fields inline, use an [object](https://www.sanity.io/docs/studio/object-type) instead.
+> Document types carry system fields (`_id`, `_rev`, `_createdAt`, `_updatedAt`) that have no meaning when embedded inside another document. Using a document type as a field type can also cause issues with TypeGen.
+> Sanity Studio displays a warning in the console if it detects this pattern in your schema.
 
 ### Field types
 
@@ -139,8 +139,8 @@ export default defineConfig({
   name: 'default',
   title: 'My Sanity Project',
 
-  projectId: 'your-project-id',
-  dataset: 'production',
+  projectId: '<your-project-id>',
+  dataset: '<your-dataset>',
 
   plugins: [structureTool()],
 
@@ -172,10 +172,18 @@ This stores your schemas as system documents (of type `_system.schema`) in your 
 
 The Media Library uses schemas (called Aspects) to define metadata fields for assets. These aspects help organize and categorize assets across your organization.
 
-[Create an aspect](https://www.sanity.io/docs/media-library/create-aspect)
-
 ## Conclusion
 
 Schemas are a powerful tool in the Sanity ecosystem, providing structure and organization to your content while maintaining flexibility. Whether you're building a simple blog or a complex content platform, understanding how to effectively use schemas will help you create a tailored content management experience for your team.
 
 By designing schemas that reflect your organization's business reality and leveraging features like schema deployment, you can create a cohesive content experience across all Sanity tools and integrations.
+
+#### Related articles
+
+[How Queries Work – GROQ](https://www.sanity.io/docs/content-lake/how-queries-work)
+
+[Schema Deployment](https://www.sanity.io/docs/apis-and-sdks/schema-deployment)
+
+[Document](https://www.sanity.io/docs/studio/document-type)
+
+[Schema](https://www.sanity.io/docs/studio/schema-types)

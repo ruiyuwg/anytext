@@ -71,5 +71,5 @@ The flag returns to your active flags list with all its previous configuration i
 
 title: "Draft Flags"
 description: "Learn how draft flags work and how to promote them to Vercel Flags."
-last\_updated: "2026-03-08T05:03:14.548Z"
+last\_updated: "2026-03-23T09:40:10.116Z"
 source: "https://vercel.com/docs/flags/vercel-flags/dashboard/drafts"

@@ -55,23 +55,33 @@ A user is initially added to a resource via invitation or access request. A user
 
 As an organization owns multiple resources (e.g., projects), any users with roles on these resources are also returned when reading the users of an organization.
 
-If a user has roles in multiple projects, they are considered a single user and can be referenced by their sanityUserId. For example, inviting user A to project B and project C in the same organization will result in a single user with two memberships.
+If a user has roles in multiple projects, they are considered a single user and can be referenced by their `sanityUserId`. For example, inviting user A to project B and project C in the same organization will result in a single user with two memberships.
+
+### Attribute
+
+*This is a paid feature, available on the Enterprise plan.*
+
+An attribute is a named piece of identity data associated with a user within an organization, such as `location="torrevieja"` or `department="front_desk"`.
+
+Attributes can come from two sources: **SAML**, where they are automatically captured from assertions during SSO authentication, and **Sanity**, where they are set by administrators through the API or Manage interface.
+
+Attributes can be referenced in GROQ filters within role definitions using the `user::attributes()` function, enabling parameterized access control that adapts dynamically to each user.
 
 ## Administrator Rules
 
-### Changing Administrators
+### Changing administrators
 
 Only administrators can assign or remove roles with admin permissions. This prevents unauthorized permission elevation.
 
 This rule applies only to the default roles. Custom roles are fully managed by the organization and can be assigned to users without restriction.
 
-### Last Administrator
+### Last administrator
 
 Each resource must have at least one role assigned to at least one user that can read users, read roles, and assign roles to users. This prevents an organization from losing control over their resources.
 
 This is designed as a permission-level check and not a role-level check, so that the default roles can be removed from a resource. Customers with advanced roles management enabled can remove the default roles from a resource.
 
-## Breaking Changes from previous versions
+## Breaking changes from previous versions
 
 See the [details of the existing API for a better understanding of the changes](https://www.sanity.io/docs/content-lake/roles-concepts).
 
@@ -106,6 +116,18 @@ Use the Roles API to assign roles, grants, and permissions.
 
 - All requests must be [authenticated](https://www.sanity.io/docs/content-lake/http-auth).
 - Administrator or equal access is required to interact with this API.
+
+# User attributes
+
+## User Attribute
+
+*This is a paid feature, available on the Enterprise plan.*
+
+An [attribute](https://www.sanity.io/docs/user-guides/roles) is a named piece of identity data associated with a user within an organization, such as `location="torrevieja"` or `department="front_desk"`.
+
+Attributes can come from two sources: **SAML**, where they are automatically captured from assertions during SSO authentication, and **Sanity**, where they are set by administrators through the API or Manage interface.
+
+Attributes can be referenced in GROQ filters within role definitions using the `user::attributes()` function, [enabling parameterized access control](https://www.sanity.io/docs/user-guides/roles) that adapts dynamically to each user.
 
 # Libraries and tooling
 

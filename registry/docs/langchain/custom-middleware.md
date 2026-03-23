@@ -621,7 +621,7 @@ Use [`SystemMessage.concat`](https://reference.langchain.com/javascript/langchai
 
 - [Middleware API reference](https://reference.langchain.com/python/langchain/middleware/)
 - [Built-in middleware](/oss/javascript/langchain/middleware/built-in)
-- [Testing agents](/oss/javascript/langchain/test)
+- [Testing agents](/oss/javascript/langchain/test/)
 
 ***
 

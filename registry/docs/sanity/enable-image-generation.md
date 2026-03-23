@@ -319,7 +319,7 @@ import { createClient } from "@sanity/client";
 
 const client = createClient({
   projectId: "<project-id>",
-  dataset: "<dataset-name>", // such as 'production'
+  dataset: "<dataset-name>",
   apiVersion: "vX",
   token: "<editor-token>",
 });

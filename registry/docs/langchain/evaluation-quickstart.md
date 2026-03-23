@@ -25,7 +25,7 @@ Before you begin, make sure you have:
 ````
 ## 1. Set workspace secrets
 
-In the [LangSmith UI](https://smith.langchain.com), ensure that your API key is set as a [workspace secret](/langsmith/administration-overview#workspace-secrets).
+In the [LangSmith UI](https://smith.langchain.com), ensure that your API key is set as a [workspace secret](/langsmith/set-up-hierarchy#configure-workspace-settings).
 
 1. Navigate to  **Settings** and then move to the **Secrets** tab.
 2. Select **Add secret** and enter the key environment variable (e.g.,`OPENAI_API_KEY` or `ANTHROPIC_API_KEY`) and your API key as the **Value**.
@@ -35,9 +35,9 @@ In the [LangSmith UI](https://smith.langchain.com), ensure that your API key is 
 
 ## 2. Create a prompt
 
-LangSmith's [Prompt Playground](/langsmith/observability-concepts#prompt-playground) makes it possible to run evaluations over different prompts, new models, or test different model configurations.
+The [Playground](/langsmith/prompt-engineering-concepts#playground) makes it possible to run evaluations over different prompts, new models, or test different model configurations.
 
-1. In the [LangSmith UI](https://smith.langchain.com), navigate to the **Playground** under **Prompt Engineering**.
+1. In the [LangSmith UI](https://smith.langchain.com), click **Playground** in the sidebar.
 2. Under the **Prompts** panel, modify the **system** prompt to:
 
    ```
@@ -69,7 +69,7 @@ LangSmith's [Prompt Playground](/langsmith/observability-concepts#prompt-playgro
 
 ## 4. Add an evaluator
 
-1. Click **+ Evaluator** and select **Correctness** from the **Pre-built Evaluator** options.
+1. Click **+ Evaluator** and select **Correctness** from the **Prebuilt Evaluator** options.
 2. In the **Correctness** panel, click **Save**.
 
 ## 5. Run your evaluation
@@ -89,8 +89,8 @@ LangSmith's [Prompt Playground](/langsmith/observability-concepts#prompt-playgro
 
 
 * For more details on evaluations, refer to the [Evaluation documentation](/langsmith/evaluation).
-* Learn how to [create and manage datasets in the UI](/langsmith/manage-datasets-in-application#set-up-your-dataset).
-* Learn how to [run an evaluation from the prompt playground](/langsmith/run-evaluation-from-prompt-playground).
+* Learn how to [create and manage datasets in the UI](/langsmith/manage-datasets-in-application#create-a-dataset-and-add-examples).
+* Learn how to [run an evaluation from the Playground](/langsmith/run-evaluation-from-playground).
 
 
 
@@ -301,7 +301,7 @@ In this step, you’re telling LangSmith how to grade the answers your app produ
 Import a prebuilt evaluation prompt (`CORRECTNESS_PROMPT`) from [`openevals`](https://github.com/langchain-ai/openevals) and a helper that wraps it into an [*LLM-as-judge evaluator*](/langsmith/evaluation-concepts#llm-as-judge), which will score the application's output.
 
 
-  `CORRECTNESS_PROMPT` is just an f-string with variables for `"inputs"`, `"outputs"`, and `"reference_outputs"`. See [here](https://github.com/langchain-ai/openevals#customizing-prompts) for more information on customizing OpenEvals prompts.
+  `CORRECTNESS_PROMPT` is just an f-string with variables for `"inputs"`, `"outputs"`, and `"reference_outputs"`. See [customizing OpenEvals prompts](https://github.com/langchain-ai/openevals#customizing-prompts) for more information.
 
 
 The evaluator compares:

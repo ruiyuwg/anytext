@@ -475,7 +475,7 @@ astro --config config/astro.config.mjs dev
 
 **Added in:** `astro@5.0.0`
 
-Clear the [content layer cache](/en/guides/content-collections/#defining-the-collection-loader), forcing a full rebuild.
+Clear the content layer cache, forcing a full rebuild.
 
 ### `--mode <string>`
 
@@ -483,7 +483,7 @@ Clear the [content layer cache](/en/guides/content-collections/#defining-the-col
 
 **Added in:** `astro@5.0.0`
 
-Configures the [`mode`](/en/reference/programmatic-reference/#mode) inline config for your project.
+Configures the [`mode`](/en/reference/programmatic-reference/#astroinlineconfigmode) inline config for your project.
 
 ### `--outDir <path>`
 

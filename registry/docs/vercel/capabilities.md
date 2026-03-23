@@ -11,6 +11,7 @@ In addition to text generation, you can use AI Gateway to enable reasoning, gene
 - **Production dashboards**: Monitor costs, latency, and usage across all your AI requests with [Observability](/docs/ai-gateway/capabilities/observability)
 - **Compliant applications**: Meet data privacy requirements with [Zero Data Retention](/docs/ai-gateway/capabilities/zdr)
 - **Usage tracking**: Check credit balances and look up generation details with the [Usage API](/docs/ai-gateway/capabilities/usage)
+- **Flexible processing**: Get faster processing or optimize costs for OpenAI models with [Service Tiers](/docs/ai-gateway/capabilities/service-tiers)
 
 ## Capabilities overview
 
@@ -23,17 +24,17 @@ In addition to text generation, you can use AI Gateway to enable reasoning, gene
 | [Observability](/docs/ai-gateway/capabilities/observability)       | Monitor and debug AI requests             | Request traces, token counts, latency metrics, spend tracking                  |
 | [Zero Data Retention](/docs/ai-gateway/capabilities/zdr)           | Ensure data privacy compliance            | Default ZDR policy, per-request enforcement, provider agreements               |
 | [Usage & Billing](/docs/ai-gateway/capabilities/usage)             | Track credits and generations             | Credit balance API, generation lookup, cost tracking                           |
+| [Service Tiers](/docs/ai-gateway/capabilities/service-tiers)       | Control processing priority and cost      | Processing tiers for OpenAI models                                             |
 
 ## Reasoning
 
 Reasoning models can think through problems before responding, producing higher-quality answers for complex tasks. AI Gateway supports reasoning across OpenAI, Anthropic, Google, Vertex AI, and Amazon Bedrock, normalizing the different formats so you can switch providers without rewriting your code.
 
 ```typescript
-import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
 
 const { text, reasoning } = await generateText({
-  model: openai('openai/gpt-5'),
+  model: 'openai/gpt-5.4',
   prompt: 'Explain the Monty Hall problem step by step.',
   providerOptions: {
     openai: { reasoningSummary: 'detailed' },
@@ -123,5 +124,5 @@ When `zeroDataRetention` is enabled, requests only route to providers with verif
 
 title: "Amazon Bedrock Reasoning"
 description: "Configure reasoning for models hosted on Amazon Bedrock with the AI SDK and AI Gateway."
-last\_updated: "2026-03-08T05:03:10.188Z"
+last\_updated: "2026-03-23T09:40:03.903Z"
 source: "https://vercel.com/docs/ai-gateway/capabilities/reasoning/amazon-bedrock"

@@ -11,7 +11,7 @@ To use the methods on this page, you must upgrade your Resend SDK:
 
 ````
 ```bash Node.js theme={"theme":{"light":"github-light","dark":"vesper"}}
-npm install resend@6.10.0-preview-workflows.0
+npm install resend@6.10.0-preview-workflows.1
 ```
 
 ```php PHP theme={"theme":{"light":"github-light","dark":"vesper"}}
@@ -164,6 +164,9 @@ A trigger is the first step that will run when the Workflow is executed.
 
 On this example, we will receive an event called `user.created` as a trigger.
 
+Event names cannot start with the `resend:` prefix, which is reserved for
+system events.
+
 ## 3. Define Actions
 
 Now, we need to define the actions that will be executed.
@@ -265,31 +268,3 @@ curl -X POST 'https://api.resend.com/events/send' \
 ```
 
 View the [API reference](/api-reference/workflows/send-event) for more details.
-
-# Email Best Practices Skill
-
-Source: https://resend.com/docs/email-best-practices-skill
-
-Comprehensive guide for building production-ready email systems with AI agents.
-
-The Email Best Practices skill provides AI agents with comprehensive knowledge for building production-ready email integrations in your applications. It covers authentication, compliance, deliverability, and operational best practices.
-
-## Installation
-
-Install the skill using the following command:
-
-```bash theme={"theme":{"light":"github-light","dark":"vesper"}}
-npx skills add resend/email-best-practices
-```
-
-## Advantages
-
-- **DNS authentication guidance**: Step-by-step instructions for setting up SPF, DKIM, and DMARC records.
-- **Transactional and marketing email design**: Best practices for designing effective transactional and marketing emails.
-- **Regional compliance**: Guidelines for CAN-SPAM, GDPR, CASL, and other regional email regulations.
-- **Webhook event processing**: Patterns for handling delivery notifications, bounces, and complaints.
-- **Suppression list management**: Strategies for maintaining healthy suppression lists and improving deliverability.
-
-## Learn More
-
-See the full source code and documentation.

@@ -1,6 +1,6 @@
 # Embedding model integrations
 
-Source: https://docs.langchain.com/oss/javascript/integrations/text\_embedding/index
+Source: https://docs.langchain.com/oss/javascript/integrations/embeddings/index
 
 Integrate with embedding models using LangChain JavaScript.
 
@@ -356,7 +356,7 @@ In production, you would typically use a more robust persistent store, such as a
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/text_embedding/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

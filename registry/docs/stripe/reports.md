@@ -40,8 +40,10 @@ Use prebuilt reports to understand basic activity on your account or across [mul
 
 ## Features
 
-- [Prebuilt reports](https://docs.stripe.com/reports/select-a-report.md): Access a variety of ready-made reports covering key business metrics.
-- [Scheduled reports](https://docs.stripe.com/reports/options.md#scheduled-reports): Automate report generation and delivery on a daily, weekly, or monthly basis.
-- [Multiple export formats](https://docs.stripe.com/revenue-recognition/api.md): Use [Revenue Recognition](https://docs.stripe.com/revenue-recognition.md) to download reports in CSV, PDF, or Excel formats for easy analysis and sharing.
-- [Detailed transaction data](https://docs.stripe.com/revenue-recognition.md): Use Revenue Recognition to access comprehensive information on payments, refunds, and disputes.
-- [Revenue analytics](https://docs.stripe.com/revenue-recognition/reports.md): Use Revenue Recognition to track your revenue trends, including gross and net amounts.
+|  |
+|  |
+| [Prebuilt reports](https://docs.stripe.com/reports/select-a-report.md)            | Access a variety of ready-made reports covering key business metrics.                               |
+| [Scheduled reports](https://docs.stripe.com/reports/options.md#scheduled-reports) | Automate report generation and delivery on a daily, weekly, or monthly basis.                       |
+| [Multiple export formats](https://docs.stripe.com/revenue-recognition/api.md)     | Use Revenue Recognition to download reports in CSV, PDF, or Excel formats for analysis and sharing. |
+| [Detailed transaction data](https://docs.stripe.com/revenue-recognition.md)       | Use Revenue Recognition to access comprehensive information on payments, refunds, and disputes.     |
+| [Revenue analytics](https://docs.stripe.com/revenue-recognition/reports.md)       | Use Revenue Recognition to track your revenue trends, including gross and net amounts.              |

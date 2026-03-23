@@ -30,7 +30,7 @@ This connected account needs to be activated by a person, known as the company r
 
 #### VAT Information
 
-Stripe doesn’t charge UAE VAT on Stripe fees to customers located in the UAE, where a valid UAE VAT ID has been provided. Local UAE VAT self-assessment obligations may be triggered upon receipt of a monthly *invoice* (Invoices are statements of amounts owed by a customer. They track the status of payments from draft through paid or otherwise finalized. Subscriptions automatically generate invoices, or you can manually create a one-off invoice) from Stripe. Stripe does charge UAE VAT at 5% on Stripe fees to customers located in the UAE, where a valid UAE VAT ID hasn’t been provided.
+Stripe doesn’t charge UAE VAT on Stripe fees to customers located in the UAE, where a valid UAE VAT ID has been provided. Local UAE VAT self-assessment obligations might be triggered upon receipt of a monthly *invoice* (Invoices are statements of amounts owed by a customer. They track the status of payments from draft through paid or otherwise finalized. Subscriptions automatically generate invoices, or you can manually create a one-off invoice) from Stripe. Stripe does charge UAE VAT at 5% on Stripe fees to customers located in the UAE, where a valid UAE VAT ID hasn’t been provided.
 
 #### Power of Attorney
 
@@ -61,7 +61,7 @@ If Stripe is unable to verify the individual, you need to provide a scan of an [
 
 We’ll verify that the legal owner of each payout bank account [matches that of the Stripe account](https://support.stripe.com/questions/bank-account-ownership-verification).
 
-If Stripe can’t verify the owner of the bank account, we’ll transition the status of the ExternalAccount to `verification_failed`. You’ll need to collect a scan of a cancelled check or bank statement to prove the legal owner of the bank account. Collect this information with the [documents.bank\_account\_ownership\_verification.files](https://docs.stripe.com/api/accounts/update.md#update_account-external_account-documents-bank_account_ownership_verification) argument.
+If Stripe can’t verify the owner of the bank account, we’ll transition the status of the ExternalAccount to `verification_failed`. You’ll need to collect a scan of a canceled check or bank statement to prove the legal owner of the bank account. Collect this information with the [documents.bank\_account\_ownership\_verification.files](https://docs.stripe.com/api/accounts/update.md#update_account-external_account-documents-bank_account_ownership_verification) argument.
 
 #### Provide ID document for the representative
 
@@ -88,7 +88,7 @@ Collecting information for Japanese accounts is unique in that both *kana* and *
 - `address_kana`
 - `address_kanji`
 
-You need to submit information for these parameters instead of their counterparts (that is, instead of `first_name`, `last_name`, and so forth). It might seem counterintuitive to provide two arguments that represent the same onboarding requirement, but Stripe can’t verify a Japanese account until we’ve received information for both language variations. These variations may be composed of full- or half-width hiragana, katakana, or Latin characters, with kanji-specific API parameters also allowing for kanji characters.
+You need to submit information for these parameters instead of their counterparts (that is, instead of `first_name`, `last_name`, and so forth). It might seem counterintuitive to provide two arguments that represent the same onboarding requirement, but Stripe can’t verify a Japanese account until we’ve received information for both language variations. These variations might be composed of full- or half-width hiragana, katakana, or Latin characters, with kanji-specific API parameters also allowing for kanji characters.
 
 #### Japanese addresses
 
@@ -114,7 +114,7 @@ Here’s an example representation of a Japanese address, with explanations for 
       "city": "ｼﾌﾞﾔ", // City/Ward
       "town": "ｼﾞﾝｸﾞｳﾏｴ 1-", // Town/cho-me
       "line1": "5-8", // Block/Building number
-      "line2": "ｼﾞﾝｸﾞｳﾏｴﾀﾜｰﾋﾞﾙﾃﾞｨﾝｸﾞ22F", // Building details (optional)
+      "line2": "ｼﾞﾝｸﾞｳﾏｴﾀﾜｰﾋﾞﾙﾃﾞｨﾝｸﾞ22F" // Building details (optional)
     },
     "address_kanji": {
       "country": "JP", // 2-letter country code
@@ -123,7 +123,7 @@ Here’s an example representation of a Japanese address, with explanations for 
       "city": "渋谷区", // City/Ward
       "town": "神宮前　１丁目", // Town/cho-me (no kanji numerals)
       "line1": "５－８", // Block/Building number
-      "line2": "神宮前タワービルディング22F", // Building details (optional)
+      "line2": "神宮前タワービルディング22F" // Building details (optional)
     }
   }
 }
@@ -345,7 +345,7 @@ If Stripe can’t verify the registration status of the charity, you need to col
 
 ### Universal Beneficial Ownership Verification
 
-After supplying the beneficial owner information, it is checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
+After supplying the beneficial owner information, it’s checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
 
 - The business is found in the NRB, and the information matches. The account is fully onboarded, and no additional action is required.
 - The business is found in the NRB, but the information doesn’t match. The account is fully onboarded, and no additional action is required. A discrepancy report is sent to the NRB.
@@ -375,7 +375,7 @@ curl -X POST https://api.stripe.com/v2/core/accounts/{{CONNECTED_STRIPE_ACCOUNT_
 
 ### Universal Beneficial Ownership Verification
 
-After supplying the beneficial owner information, it is checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
+After supplying the beneficial owner information, it’s checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
 
 - The business is found in the NRB, and the information matches. The account is fully onboarded, and no additional action is required.
 - The business is found in the NRB, but the information doesn’t match. The account is fully onboarded, and no additional action is required. A discrepancy report is sent to the NRB.
@@ -421,7 +421,7 @@ Stripe initially verifies identity using the information the account provides: `
 | `documents.secondary_verification` | A scan of an [address document](https://docs.stripe.com/connect/handling-api-verification.md?accounts-namespace=v1#acceptable-verification-documents) (front and back). See how to [upload additional documents](https://support.stripe.com/questions/documents-for-identity-and-home-address-verification).                                                                                       |
 | `id_number`                        | A connected account can also provide the representative’s national ID number, in addition to their name, birthdate, address, and nationality. See a list of [supported national ID numbers](https://docs.stripe.com/connect/upcoming-requirements-updates.md#national-id-verification). If the person’s nationality is eligible, `alternatives.alternative_fields_due` contains their `id_number`. |
 
-To learn more, see [compliance requirements for Europe](https://docs.stripe.com/connect/upcoming-requirements-updates.md#know-your-customer-\(kyc\)-verification).
+To learn more, see [compliance requirements for Europe](https://docs.stripe.com/connect/upcoming-requirements-updates.md#know-your-customer-kyc-verification).
 
 For more information on uploading official documents, see [Additional information on the account](https://docs.stripe.com/connect/required-verification-information.md#EU--additional-information-on-the-account).
 
@@ -504,7 +504,7 @@ Additionally, for partnerships you need to provide a [relationship.percent\_owne
 
 ### Universal Beneficial Ownership Verification
 
-After supplying the beneficial owner information, it is checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
+After supplying the beneficial owner information, it’s checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
 
 - The business is found in the NRB, and the information matches. The account is fully onboarded, and no additional action is required.
 - The business is found in the NRB, but the information doesn’t match. The account is fully onboarded, and no additional action is required. A discrepancy report is sent to the NRB.
@@ -590,7 +590,7 @@ curl -X POST https://api.stripe.com/v2/core/accounts/{{CONNECTED_STRIPE_ACCOUNT_
 
 ### Universal Beneficial Ownership Verification
 
-After supplying the beneficial owner information, it is checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
+After supplying the beneficial owner information, it’s checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
 
 - The business is found in the NRB, and the information matches. The account is fully onboarded, and no additional action is required.
 - The business is found in the NRB, but the information doesn’t match. The account is fully onboarded, and no additional action is required. A discrepancy report is sent to the NRB.
@@ -771,7 +771,7 @@ Additional identity verification applies to the representatives and beneficial o
 
 #### Registered address requirement
 
-The registered address requirement refers to the Household Registration address. Please provide an address as per the ‘Tabien Bann’ or Household Registration book, also known as the Blue book for Thai nationals, or Yellow book for non-Thai nationals. To collect a Household Registration address, add an entry to the `Person`’s [additional\_addresses](https://docs.stripe.com/api/v2/core/persons/object.md#v2_person_object-additional_addresses) array, and set its `purpose` parameter to `registered`.
+The registered address requirement refers to the Household Registration address. Provide an address as per the ‘Tabien Bann’ or Household Registration book, also known as the Blue book for Thai nationals, or Yellow book for non-Thai nationals. To collect a Household Registration address, add an entry to the `Person`’s [additional\_addresses](https://docs.stripe.com/api/v2/core/persons/object.md#v2_person_object-additional_addresses) array, and set its `purpose` parameter to `registered`.
 
 If the user is neither a Thai national nor resident of Thailand, collect their current residential address with the same parameter instead.
 
@@ -791,7 +791,7 @@ If Stripe can’t verify the account representative, or if they’re not a Thai 
 
 #### Additional information on beneficial owners
 
-Accounts belonging to companies and registered partnerships are required to provide information on all beneficial owners. A beneficial owner is defined as any individual who owns 25% or more shares of the business. If there is no such person, then any individual who exercises significant control over the company is considered a beneficial owner. Otherwise, please provide information on any individual holding the position of senior management.
+Accounts belonging to companies and registered partnerships are required to provide information on all beneficial owners. A beneficial owner is defined as any individual who owns 25% or more shares of the business. If there is no such person, then any individual who exercises significant control over the company is considered a beneficial owner. Otherwise, provide information on any individual holding the position of senior management.
 
 If Stripe can’t verify a beneficial owner, or if they’re not a Thai national, you need to provide a scan of a [government-issued ID document](https://docs.stripe.com/connect/handling-api-verification.md#acceptable-verification-documents). To collect a government-issued ID document, add its front and back images to the `Person`’s [documents.primary\_verification](https://docs.stripe.com/api/v2/core/persons/update.md#v2_update_persons-documents-primary_verification) hash.
 
@@ -1025,7 +1025,7 @@ If Stripe can’t verify the registration status of the charity, you need to col
 
 ### Universal Beneficial Ownership Verification
 
-After supplying the beneficial owner information, it is checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
+After supplying the beneficial owner information, it’s checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
 
 - The business is found in the NRB, and the information matches. The account is fully onboarded, and no additional action is required.
 - The business is found in the NRB, but the information doesn’t match. The account is fully onboarded, and no additional action is required. A discrepancy report is sent to the NRB.
@@ -1043,7 +1043,7 @@ curl https://api.stripe.com/v1/accounts/{{CONNECTED_STRIPE_ACCOUNT_ID}} \
 
 ### Universal Beneficial Ownership Verification
 
-After supplying the beneficial owner information, it is checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
+After supplying the beneficial owner information, it’s checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
 
 - The business is found in the NRB, and the information matches. The account is fully onboarded, and no additional action is required.
 - The business is found in the NRB, but the information doesn’t match. The account is fully onboarded, and no additional action is required. A discrepancy report is sent to the NRB.
@@ -1078,7 +1078,7 @@ Stripe initially verifies identity using the information the account provides: `
 | `id_number`                        | If the person’s nationality is eligible, `alternatives.alternative_fields_due` contains their `id_number`. A connected account can also provide the representative’s national ID number, in addition to their name, birthdate, address, and nationality. See a list of [supported national ID numbers](https://docs.stripe.com/connect/upcoming-requirements-updates.md#national-id-verification) and implementation guidelines.                                                                                                                                                                                                                                                                                                 |
 | `proof_of_liveness`                | If initial verification fails,  you can use `proof_of_liveness` as an alternative verification path . Fulfill this requirement using [Stripe-hosted onboarding](https://docs.stripe.com/connect/handling-api-verification.md?accounts-namespace=v1\&liveness=hosted), [embedded onboarding](https://docs.stripe.com/connect/handling-api-verification.md?accounts-namespace=v1\&liveness=embedded), or the [Stripe Identity](https://docs.stripe.com/connect/handling-api-verification.md?accounts-namespace=v1\&liveness=identity) API. See [handling liveness requirements](https://docs.stripe.com/connect/handling-api-verification.md?accounts-namespace=v1#handle-liveness-requirements) for complete implementation details. |
 
-To learn more, see [compliance requirements for Europe](https://docs.stripe.com/connect/upcoming-requirements-updates.md#know-your-customer-\(kyc\)-verification).
+To learn more, see [compliance requirements for Europe](https://docs.stripe.com/connect/upcoming-requirements-updates.md#know-your-customer-kyc-verification).
 
 For more information on uploading official documents, see [Additional information on the account](https://docs.stripe.com/connect/required-verification-information.md#EU--additional-information-on-the-account).
 
@@ -1167,7 +1167,7 @@ Additionally, for partnerships you need to provide a [relationship.percent\_owne
 
 ### Universal Beneficial Ownership Verification
 
-After supplying the beneficial owner information, it is checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
+After supplying the beneficial owner information, it’s checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
 
 - The business is found in the NRB, and the information matches. The account is fully onboarded, and no additional action is required.
 - The business is found in the NRB, but the information doesn’t match. The account is fully onboarded, and no additional action is required. A discrepancy report is sent to the NRB.
@@ -1225,7 +1225,7 @@ curl https://api.stripe.com/v1/accounts/{{CONNECTED_STRIPE_ACCOUNT_ID}} \
 
 ### Universal Beneficial Ownership Verification
 
-After supplying the beneficial owner information, it is checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
+After supplying the beneficial owner information, it’s checked against the National Registry of Businesses (NRB). Depending on the results of this check, there are three outcomes:
 
 - The business is found in the NRB, and the information matches. The account is fully onboarded, and no additional action is required.
 - The business is found in the NRB, but the information doesn’t match. The account is fully onboarded, and no additional action is required. A discrepancy report is sent to the NRB.
@@ -1464,7 +1464,7 @@ Additional identity verification applies to the representatives and beneficial o
 
 #### Registered address requirement
 
-The registered address requirement refers to the Household Registration address. Please provide an address as per the ‘Tabien Bann’ or Household Registration book, also known as the Blue book for Thai nationals, or Yellow book for non-Thai nationals. To collect a Household Registration address, use the `Person`’s [registered\_address](https://docs.stripe.com/api/persons/object.md#person_object-registered_address) parameter.
+The registered address requirement refers to the Household Registration address. Provide an address as per the ‘Tabien Bann’ or Household Registration book, also known as the Blue book for Thai nationals, or Yellow book for non-Thai nationals. To collect a Household Registration address, use the `Person`’s [registered\_address](https://docs.stripe.com/api/persons/object.md#person_object-registered_address) parameter.
 
 If the user is neither a Thai national nor resident of Thailand, collect their current residential address with the same parameter instead.
 
@@ -1484,7 +1484,7 @@ If Stripe can’t verify the account representative, or if they’re not a Thai 
 
 #### Additional information on beneficial owners
 
-Accounts belonging to companies and registered partnerships are required to provide information on all beneficial owners. A beneficial owner is defined as any individual who owns 25% or more shares of the business. If there is no such person, then any individual who exercises significant control over the company is considered a beneficial owner. Otherwise, please provide information on any individual holding the position of senior management.
+Accounts belonging to companies and registered partnerships are required to provide information on all beneficial owners. A beneficial owner is defined as any individual who owns 25% or more shares of the business. If there is no such person, then any individual who exercises significant control over the company is considered a beneficial owner. Otherwise, provide information on any individual holding the position of senior management.
 
 If Stripe can’t verify a beneficial owner, or if they’re not a Thai national, you need to provide a scan of a [government-issued ID document](https://docs.stripe.com/connect/handling-api-verification.md#acceptable-verification-documents). To collect a government-issued ID document, use the `Person`’s [verification.document.front](https://docs.stripe.com/api/persons/object.md#person_object-verification-document-front) and [verification.document.back](https://docs.stripe.com/api/persons/object.md#person_object-verification-document-back) parameters.
 

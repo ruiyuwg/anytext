@@ -160,19 +160,19 @@ Update it with environment variables managed by Vite:
 
 ````
 ```typescript name=src/utility/supabaseClient.ts
-import { createClient } from "@refinedev/supabase";
+import { createClient } from '@refinedev/supabase'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 
 export const supabaseClient = createClient(supabaseUrl, supabaseKey, {
   db: {
-    schema: "public",
+    schema: 'public',
   },
   auth: {
     persistSession: true,
   },
-});
+})
 ```
 ````
 
@@ -273,96 +273,96 @@ Remove `register`, `updatePassword`, `forgotPassword` and `getPermissions` prope
 
 ````
 ```typescript name=src/authProvider.ts
-import { AuthProvider } from "@refinedev/core";
+import { AuthProvider } from '@refinedev/core'
 
-import { supabaseClient } from "./utility";
+import { supabaseClient } from './utility'
 
 const authProvider: AuthProvider = {
   login: async ({ email }) => {
     try {
-      const { error } = await supabaseClient.auth.signInWithOtp({ email });
+      const { error } = await supabaseClient.auth.signInWithOtp({ email })
 
       if (!error) {
-        alert("Check your email for the login link!");
+        alert('Check your email for the login link!')
         return {
           success: true,
-        };
+        }
       }
 
-      throw error;
+      throw error
     } catch (e: any) {
-      alert(e.message);
+      alert(e.message)
       return {
         success: false,
         e,
-      };
+      }
     }
   },
   logout: async () => {
-    const { error } = await supabaseClient.auth.signOut();
+    const { error } = await supabaseClient.auth.signOut()
 
     if (error) {
       return {
         success: false,
         error,
-      };
+      }
     }
 
     return {
       success: true,
-      redirectTo: "/",
-    };
+      redirectTo: '/',
+    }
   },
   onError: async (error) => {
-    console.error(error);
-    return { error };
+    console.error(error)
+    return { error }
   },
   check: async () => {
     try {
-      const { data, error } = await supabaseClient.auth.getClaims();
+      const { data, error } = await supabaseClient.auth.getClaims()
 
       if (error || !data) {
         return {
           authenticated: false,
           error: {
-            message: "Check failed",
-            name: "Session not found",
+            message: 'Check failed',
+            name: 'Session not found',
           },
           logout: true,
-          redirectTo: "/login",
-        };
+          redirectTo: '/login',
+        }
       }
     } catch (error: any) {
       return {
         authenticated: false,
         error: error || {
-          message: "Check failed",
-          name: "Not authenticated",
+          message: 'Check failed',
+          name: 'Not authenticated',
         },
         logout: true,
-        redirectTo: "/login",
-      };
+        redirectTo: '/login',
+      }
     }
 
     return {
       authenticated: true,
-    };
+    }
   },
   getIdentity: async () => {
-    const { data } = await supabaseClient.auth.getUser();
+    const { data } = await supabaseClient.auth.getUser()
 
     if (data?.user) {
       return {
         ...data.user,
         name: data.user.email,
-      };
+      }
     }
 
-    return null;
+    return null
   },
-};
+}
 
-export default authProvider;
+export default authProvider
 ```
 ````
 
@@ -374,26 +374,24 @@ Create and edit `src/components/auth.tsx`:
 
 ````
 ```tsx name=src/components/auth.tsx
-import { useState } from "react";
+import { useState } from 'react'
 
-import { useLogin } from "@refinedev/core";
+import { useLogin } from '@refinedev/core'
 
 export default function Auth() {
-  const [email, setEmail] = useState("");
-  const { isPending, mutate: login } = useLogin();
+  const [email, setEmail] = useState('')
+  const { isPending, mutate: login } = useLogin()
 
   const handleLogin = async (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-    login({ email });
-  };
+    event.preventDefault()
+    login({ email })
+  }
 
   return (
     
       
         Supabase + Refine
-        
-          Sign in via magic link with your email below
-        
+        Sign in via magic link with your email below
         
           
             <input
@@ -413,7 +411,7 @@ export default function Auth() {
         
       
     
-  );
+  )
 }
 ```
 ````
@@ -428,29 +426,29 @@ Create a new component for that in `src/components/account.tsx`.
 
 ````
 ```tsx name=src/components/account.tsx
-import { BaseKey, useGetIdentity, useLogout } from "@refinedev/core";
+import { BaseKey, useGetIdentity, useLogout } from '@refinedev/core'
 
-import { useForm } from "@refinedev/react-hook-form";
+import { useForm } from '@refinedev/react-hook-form'
 
 // ...
 
 interface IUserIdentity {
-  id?: BaseKey;
-  username: string;
-  name: string;
+  id?: BaseKey
+  username: string
+  name: string
 }
 
 export interface IProfile {
-  id?: string;
-  username?: string;
-  website?: string;
-  avatar_url?: string;
+  id?: string
+  username?: string
+  website?: string
+  avatar_url?: string
 }
 
 export default function Account() {
-  const { data: userIdentity } = useGetIdentity();
+  const { data: userIdentity } = useGetIdentity()
 
-  const { mutate: logOut } = useLogout();
+  const { mutate: logOut } = useLogout()
 
   const {
     refineCore: { formLoading, query, onFinish },
@@ -459,29 +457,22 @@ export default function Account() {
     handleSubmit,
   } = useForm({
     refineCoreProps: {
-      resource: "profiles",
-      action: "edit",
+      resource: 'profiles',
+      action: 'edit',
       id: userIdentity?.id,
       redirect: false,
       onMutationError: (data) => alert(data?.message),
     },
-  });
+  })
 
   return (
     
       
 
-        {/* ... */}
+          {/* ... */}
 
-        
           Email
-          <input
-            id="email"
-            name="email"
-            type="text"
-            value={userIdentity?.name}
-            disabled
-          />
+          
         
         
           Name
@@ -493,27 +484,19 @@ export default function Account() {
         
 
         
-          <button
-            className="button block primary"
-            type="submit"
-            disabled={formLoading}
-          >
-            {formLoading ? "Loading ..." : "Update"}
+          
+            {formLoading ? 'Loading ...' : 'Update'}
           
         
 
         
-          <button
-            className="button block"
-            type="button"
-            onClick={() => logOut()}
-          >
+           logOut()}>
             Sign Out
           
         
       
     
-  );
+  )
 }
 ```
 ````
@@ -536,23 +519,23 @@ Add the routes for `/login` with the `<Auth />` component and the routes for `in
 
 ````
 ```tsx name=src/App.tsx
-import { Authenticated, Refine } from "@refinedev/core";
-import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
+import { Authenticated, Refine } from '@refinedev/core'
+import { RefineKbar, RefineKbarProvider } from '@refinedev/kbar'
 import routerProvider, {
   CatchAllNavigate,
   DocumentTitleHandler,
   UnsavedChangesNotifier,
-} from "@refinedev/react-router";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router";
+} from '@refinedev/react-router'
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router'
 
-import { dataProvider, liveProvider } from "@refinedev/supabase";
-import authProvider from "./authProvider";
-import { supabaseClient } from "./utility";
+import { dataProvider, liveProvider } from '@refinedev/supabase'
+import authProvider from './authProvider'
+import { supabaseClient } from './utility'
 
-import Account from "./components/account";
-import Auth from "./components/auth";
+import Account from './components/account'
+import Auth from './components/auth'
 
-import "./App.css";
+import './App.css'
 
 function App() {
   return (
@@ -581,9 +564,7 @@ function App() {
             >
               } />
             
-            <Route
-              element={} />}
-            >
+            } />}>
               } />
             
           
@@ -593,10 +574,10 @@ function App() {
         
       
     
-  );
+  )
 }
 
-export default App;
+export default App
 ```
 ````
 
@@ -622,64 +603,62 @@ Create and edit `src/components/avatar.tsx`:
 
 ````
 ```tsx name=src/components/avatar.tsx
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-import { supabaseClient } from "../utility/supabaseClient";
+import { supabaseClient } from '../utility/supabaseClient'
 
 type TAvatarProps = {
-  url?: string;
-  size: number;
-  onUpload: (filePath: string) => void;
-};
+  url?: string
+  size: number
+  onUpload: (filePath: string) => void
+}
 
 export default function Avatar({ url, size, onUpload }: TAvatarProps) {
-  const [avatarUrl, setAvatarUrl] = useState("");
-  const [uploading, setUploading] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState('')
+  const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
-    if (url) downloadImage(url);
-  }, [url]);
+    if (url) downloadImage(url)
+  }, [url])
 
   async function downloadImage(path: string) {
     try {
-      const { data, error } = await supabaseClient.storage
-        .from("avatars")
-        .download(path);
+      const { data, error } = await supabaseClient.storage.from('avatars').download(path)
       if (error) {
-        throw error;
+        throw error
       }
-      const url = URL.createObjectURL(data);
-      setAvatarUrl(url);
+      const url = URL.createObjectURL(data)
+      setAvatarUrl(url)
     } catch (error: any) {
-      console.log("Error downloading image: ", error?.message);
+      console.log('Error downloading image: ', error?.message)
     }
   }
 
   async function uploadAvatar(event: React.ChangeEvent) {
     try {
-      setUploading(true);
+      setUploading(true)
 
       if (!event.target.files || event.target.files.length === 0) {
-        throw new Error("You must select an image to upload.");
+        throw new Error('You must select an image to upload.')
       }
 
-      const file = event.target.files[0];
-      const fileExt = file.name.split(".").pop();
-      const fileName = `${Math.random()}.${fileExt}`;
-      const filePath = `${fileName}`;
+      const file = event.target.files[0]
+      const fileExt = file.name.split('.').pop()
+      const fileName = `${Math.random()}.${fileExt}`
+      const filePath = `${fileName}`
 
       const { error: uploadError } = await supabaseClient.storage
-        .from("avatars")
-        .upload(filePath, file);
+        .from('avatars')
+        .upload(filePath, file)
 
       if (uploadError) {
-        throw uploadError;
+        throw uploadError
       }
-      onUpload(filePath);
+      onUpload(filePath)
     } catch (error: any) {
-      alert(error.message);
+      alert(error.message)
     } finally {
-      setUploading(false);
+      setUploading(false)
     }
   }
 
@@ -693,19 +672,16 @@ export default function Avatar({ url, size, onUpload }: TAvatarProps) {
           style={{ height: size, width: size }}
         />
       ) : (
-        <div
-          className="avatar no-image"
-          style={{ height: size, width: size }}
-        />
+        
       )}
       
         
-          {uploading ? "Uploading ..." : "Upload"}
+          {uploading ? 'Uploading ...' : 'Upload'}
         
         <input
           style={{
-            visibility: "hidden",
-            position: "absolute",
+            visibility: 'hidden',
+            position: 'absolute',
           }}
           type="file"
           id="single"
@@ -716,7 +692,7 @@ export default function Avatar({ url, size, onUpload }: TAvatarProps) {
         />
       
     
-  );
+  )
 }
 ```
 ````
@@ -727,30 +703,30 @@ And then add the widget to the Account page at `src/components/account.tsx`:
 
 ````
 ```tsx name=src/components/account.tsx
-import { BaseKey, useGetIdentity, useLogout } from "@refinedev/core";
+import { BaseKey, useGetIdentity, useLogout } from '@refinedev/core'
 
-import { useForm } from "@refinedev/react-hook-form";
-import { Controller } from "react-hook-form";
+import { useForm } from '@refinedev/react-hook-form'
+import { Controller } from 'react-hook-form'
 
-import Avatar from "./avatar";
+import Avatar from './avatar'
 
 interface IUserIdentity {
-  id?: BaseKey;
-  username: string;
-  name: string;
+  id?: BaseKey
+  username: string
+  name: string
 }
 
 export interface IProfile {
-  id?: string;
-  username?: string;
-  website?: string;
-  avatar_url?: string;
+  id?: string
+  username?: string
+  website?: string
+  avatar_url?: string
 }
 
 export default function Account() {
-  const { data: userIdentity } = useGetIdentity();
+  const { data: userIdentity } = useGetIdentity()
 
-  const { mutate: logOut } = useLogout();
+  const { mutate: logOut } = useLogout()
 
   const {
     refineCore: { formLoading, query, onFinish },
@@ -759,13 +735,13 @@ export default function Account() {
     handleSubmit,
   } = useForm({
     refineCoreProps: {
-      resource: "profiles",
-      action: "edit",
+      resource: 'profiles',
+      action: 'edit',
       id: userIdentity?.id,
       redirect: false,
       onMutationError: (data) => alert(data?.message),
     },
-  });
+  })
 
   return (
     
@@ -782,28 +758,21 @@ export default function Account() {
                   onFinish({
                     ...query?.data?.data,
                     avatar_url: filePath,
-                    onMutationError: (data: { message: string }) =>
-                      alert(data?.message),
-                  });
+                    onMutationError: (data: { message: string }) => alert(data?.message),
+                  })
                   field.onChange({
                     target: {
                       value: filePath,
                     },
-                  });
+                  })
                 }}
               />
-            );
+            )
           }}
         />
         
           Email
-          <input
-            id="email"
-            name="email"
-            type="text"
-            value={userIdentity?.name}
-            disabled
-          />
+          
         
         
           Name
@@ -815,27 +784,19 @@ export default function Account() {
         
 
         
-          <button
-            className="button block primary"
-            type="submit"
-            disabled={formLoading}
-          >
-            {formLoading ? "Loading ..." : "Update"}
+          
+            {formLoading ? 'Loading ...' : 'Update'}
           
         
 
         
-          <button
-            className="button block"
-            type="button"
-            onClick={() => logOut()}
-          >
+           logOut()}>
             Sign Out
           
         
       
     
-  );
+  )
 }
 ```
 ````

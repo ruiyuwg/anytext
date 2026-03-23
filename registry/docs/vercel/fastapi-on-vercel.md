@@ -163,5 +163,5 @@ Learn more about deploying FastAPI projects on Vercel with the following resourc
 
 title: "Fastify on Vercel"
 description: "Deploy Fastify applications to Vercel with zero configuration."
-last\_updated: "2026-03-08T05:03:14.761Z"
+last\_updated: "2026-03-23T09:40:10.429Z"
 source: "https://vercel.com/docs/frameworks/backend/fastify"

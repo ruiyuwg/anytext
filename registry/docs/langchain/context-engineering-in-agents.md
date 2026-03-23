@@ -80,7 +80,7 @@ The full list of messages (conversation history) sent to the LLM.
 
 
 
-Utilities the agent has access to to take actions.
+Utilities the agent has access to for taking actions.
 
 
 

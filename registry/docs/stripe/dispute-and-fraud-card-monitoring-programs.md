@@ -134,11 +134,11 @@ Visa doesn’t assess fines for VAMP enumeration monitoring.
 
 Accounts can view Stripe’s estimates of their VAMP metrics in their [VAMP dashboard](https://dashboard.stripe.com/test/radar/cbmp/vamp). The dashboard has the following sections:
 
-| Section                               | Description                                                                                                                                                                                                  |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| History                               | View which months Visa identified your account as exceeding `Excessive` thresholds over the previous 12 program months. Identifications in a month are based on data from the previous month.                |
-| Historical and current program status | View the breakdown of the VAMP metrics from Visa whenever your account has exceeded the Visa `Excessive` thresholds.                                                                                         |
-| Projected program status              | Stripe estimates your VAMP metrics so that you can track your VAMP metrics throughout the date and take action to prevent identification in VAMP. These estimates may differ from Visa’s final VAMP numbers. |
+| Section                               | Description                                                                                                                                                                                                    |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| History                               | View which months Visa identified your account as exceeding `Excessive` thresholds over the previous 12 program months. Identifications in a month are based on data from the previous month.                  |
+| Historical and current program status | View the breakdown of the VAMP metrics from Visa whenever your account has exceeded the Visa `Excessive` thresholds.                                                                                           |
+| Projected program status              | Stripe estimates your VAMP metrics so that you can track your VAMP metrics throughout the date and take action to prevent identification in VAMP. These estimates might differ from Visa’s final VAMP numbers. |
 
 ### Visa Secure Excessive Fraud Program (US-only)
 
@@ -286,7 +286,7 @@ SCA is an authentication method in which you verify cardholder’s identity usin
 APN exempts the following types of transactions from the SCA requirement:
 
 - Recurring transactions: Series of repeated transactions with SCA applied on the first charge of the recurring series
-- Trusted customer transactions: Transactions where you have previously identified/authenticated the cardholder and the cardholder uses the same card on file with matching identifiers
+- Trusted customer transactions: Transactions where you’ve previously identified/authenticated the cardholder and the cardholder uses the same card on file with matching identifiers
 - Wallet transactions: Digital or mobile wallet transactions where the cardholder identity has been verified and each subsequent transaction is authorized by the cardholder using biometrics or a passcode
 
 ## Best practices for preventing fraud and disputes

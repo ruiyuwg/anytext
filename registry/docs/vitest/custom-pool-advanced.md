@@ -10,7 +10,7 @@ Vitest runs tests in a pool. By default, there are several pool runners:
 - `browser` to run tests using browser providers
 - `typescript` to run typechecking on tests
 
-See [`vitest-pool-example`](https://www.npmjs.com/package/vitest-pool-example) for example of a custom pool runner implementation.
+See [`vitest-pool-example`](https://npmx.dev/package/vitest-pool-example) for example of a custom pool runner implementation.
 
 ## Usage
 

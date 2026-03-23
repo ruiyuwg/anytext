@@ -7,7 +7,7 @@ In this guide, you'll learn to add environment variables and access them from wi
 Prerequisites:
 
 - Complete the [Functions quick start](https://www.sanity.io/docs/functions/functions-introduction), or be comfortable creating and deploying a function.
-- `sanity` CLI v3.88.1 or higher is required to interact with Blueprints and Functions. You can always run the latest CLI commands with `npx sanity@latest`.
+- The latest version of `sanity` CLI (`sanity@latest`) is recommended to interact with Blueprints and Functions as shown in this guide. You can always run the latest CLI commands with `npx sanity@latest`.
 
 ## Create a function
 

@@ -46,5 +46,5 @@ Once you have [created your integration](/docs/integrations/create-integration/m
 
 title: "Telemetry"
 description: "Vercel CLI collects telemetry data about general usage."
-last\_updated: "2026-03-08T05:03:11.953Z"
+last\_updated: "2026-03-23T09:40:06.408Z"
 source: "https://vercel.com/docs/cli/about-telemetry"

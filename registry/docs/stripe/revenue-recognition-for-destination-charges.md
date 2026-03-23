@@ -43,7 +43,7 @@ In this example, the `transfer_data[amount]="800"` is set on the charge.
 
 If the destination charges [issue refunds](https://docs.stripe.com/connect/destination-charges.md#issue-refunds), by default the destination account keeps the funds that were transferred to it, leaving the platform account to cover the negative balance from the refund. The refund amount is booked as the ConnectTransferLoss.
 
-In this example, the charge collects fees with `application_fee_amount`, and it is fully refunded in February.
+In this example, the charge collects fees with `application_fee_amount`, and it’s fully refunded in February.
 
 - On January 15, the full charge amount of 10 USD is added to your platform account.
   - 10 USD is transferred to the connected account.

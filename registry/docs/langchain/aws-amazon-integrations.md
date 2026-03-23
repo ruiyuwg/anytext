@@ -88,7 +88,7 @@ from langchain_aws import SagemakerEndpoint
 
 ### Bedrock
 
-See a [usage example](/oss/python/integrations/text_embedding/bedrock).
+See a [usage example](/oss/python/integrations/embeddings/bedrock).
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_aws import BedrockEmbeddings
@@ -96,7 +96,7 @@ from langchain_aws import BedrockEmbeddings
 
 ### SageMaker endpoint
 
-See a [usage example](/oss/python/integrations/text_embedding/sagemaker-endpoint).
+See a [usage example](/oss/python/integrations/embeddings/sagemaker-endpoint).
 
 ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 from langchain_community.embeddings import SagemakerEndpointEmbeddings
@@ -235,6 +235,16 @@ vds = InMemoryVectorStore.from_documents(
 ```
 
 See a [usage example](/oss/python/integrations/vectorstores/memorydb).
+
+### Valkey
+
+[Valkey](https://valkey.io/) is an open source, high-performance key/value datastore that supports workloads such as caching, message queues, and can act as a primary database. Use ValkeyVectorStore to connect with [Amazon ElastiCache for Valkey](https://aws.amazon.com/elasticache/valkey/) or [Amazon MemoryDB for Valkey](https://aws.amazon.com/memorydb/).
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langchain_aws.vectorstores import ValkeyVectorStore
+```
+
+See a [usage example](/oss/python/integrations/vectorstores/valkey).
 
 ## Retrievers
 

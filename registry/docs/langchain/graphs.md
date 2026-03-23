@@ -10,7 +10,7 @@ At its core, LangGraph models agent workflows as graphs. You define the behavior
 
 By composing `Nodes` and `Edges`, you can create complex, looping workflows that evolve the state over time. The real power, though, comes from how LangGraph manages that state.
 
-To emphasize: `Nodes` and `Edges` are nothing more than functions – they can contain an LLM or just good ol' code.
+To emphasize: `Nodes` and `Edges` are nothing more than functions—they can contain an LLM or just good ol' code.
 
 In short: *nodes do the work, edges tell what to do next*.
 

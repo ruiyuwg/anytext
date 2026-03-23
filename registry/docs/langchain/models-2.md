@@ -2,7 +2,7 @@
 
 Source: https://docs.langchain.com/oss/python/deepagents/models
 
-Deep agents work with any [LangChain chat model](/oss/python/langchain/models) that supports [tool calling](/oss/python/langchain/models#tool-calling).
+Deep Agents work with any [LangChain chat model](/oss/python/langchain/models) that supports [tool calling](/oss/python/langchain/models#tool-calling).
 
 ## Pass a model string
 
@@ -44,7 +44,20 @@ Available parameters vary by provider. See the [chat model integrations](/oss/py
 
 ## Supported models
 
-Deep agents work with any chat model that supports [tool calling](/oss/python/langchain/models#tool-calling). See [chat model integrations](/oss/python/integrations/chat) for the full list of supported providers.
+Deep Agents work with any chat model that supports [tool calling](/oss/python/langchain/models#tool-calling). See [chat model integrations](/oss/python/integrations/chat) for the full list of supported providers.
+
+### Suggested models
+
+These models perform well on the [Deep Agents eval suite](https://github.com/langchain-ai/deepagents/tree/main/libs/deepagents/tests/evals), which tests basic agent operations. Passing these evals is necessary but not sufficient for strong performance on longer, more complex tasks.
+
+| Provider                                                  | Models                                                                                                                                   |
+| --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [Anthropic](/oss/python/integrations/providers/anthropic) | `claude-opus-4-6`, `claude-opus-4-5`, `claude-sonnet-4-6`, `claude-sonnet-4`, `claude-sonnet-4-5`, `claude-haiku-4-5`, `claude-opus-4-1` |
+| [OpenAI](/oss/python/integrations/providers/openai)       | `gpt-5.4`, `gpt-4o`, `gpt-4.1`, `o4-mini`, `gpt-5.2-codex`, `gpt-4o-mini`, `o3`                                                          |
+| [Google](/oss/python/integrations/providers/google)       | `gemini-3-flash-preview`, `gemini-3.1-pro-preview`                                                                                       |
+| Open-weight                                               | `GLM-5`, `Kimi-K2.5`, `MiniMax-M2.5`, `qwen3.5-397B-A17B`, `devstral-2-123B`                                                             |
+
+Open-weight models are available through providers like [Baseten](/oss/python/integrations/providers/baseten), [Fireworks](/oss/python/integrations/providers/fireworks) [OpenRouter](/oss/python/integrations/providers/openrouter), and [Ollama](/oss/python/integrations/providers/ollama).
 
 ## Learn more
 

@@ -11,17 +11,17 @@ The Fal provider is available via the `@ai-sdk/fal` module. You can install it w
 You can import the default provider instance `fal` from `@ai-sdk/fal`:
 
 ```ts
-import { fal } from "@ai-sdk/fal";
+import { fal } from '@ai-sdk/fal';
 ```
 
 If you need a customized setup, you can import `createFal` and create a provider instance with your settings:
 
 ```ts
-import { createFal } from "@ai-sdk/fal";
+import { createFal } from '@ai-sdk/fal';
 
 const fal = createFal({
-  apiKey: "your-api-key", // optional, defaults to FAL_API_KEY environment variable, falling back to FAL_KEY
-  baseURL: "custom-url", // optional
+  apiKey: 'your-api-key', // optional, defaults to FAL_API_KEY environment variable, falling back to FAL_KEY
+  baseURL: 'custom-url', // optional
   headers: {
     /* custom headers */
   }, // optional
@@ -30,21 +30,21 @@ const fal = createFal({
 
 You can use the following optional settings to customize the Fal provider instance:
 
-- **baseURL** _string_
+- **baseURL** *string*
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://fal.run`.
 
-- **apiKey** _string_
+- **apiKey** *string*
 
   API key that is being sent using the `Authorization` header.
   It defaults to the `FAL_API_KEY` environment variable, falling back to `FAL_KEY`.
 
-- **headers** _Record\<string,string>_
+- **headers** *Record\<string,string>*
 
   Custom headers to include in the requests.
 
-- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
+- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   You can use it as a middleware to intercept requests,
@@ -58,13 +58,13 @@ For more on image generation with the AI SDK see [generateImage()](/docs/referen
 ### Basic Usage
 
 ```ts
-import { fal } from "@ai-sdk/fal";
-import { generateImage } from "ai";
-import fs from "fs";
+import { fal } from '@ai-sdk/fal';
+import { experimental_generateImage as generateImage } from 'ai';
+import fs from 'fs';
 
-const { image, providerMetadata } = await generateImage({
-  model: fal.image("fal-ai/flux/dev"),
-  prompt: "A serene mountain landscape at sunset",
+const { image } = await generateImage({
+  model: fal.image('fal-ai/fast-sdxl'),
+  prompt: 'A serene mountain landscape at sunset',
 });
 
 const filename = `image-${Date.now()}.png`;
@@ -72,33 +72,21 @@ fs.writeFileSync(filename, image.uint8Array);
 console.log(`Image saved to ${filename}`);
 ```
 
-Fal image models may return additional information for the images and the request.
-
-Here are some examples of properties that may be set for each image
-
-```js
-providerMetadata.fal.images[0].nsfw; // boolean, image is not safe for work
-providerMetadata.fal.images[0].width; // number, image width
-providerMetadata.fal.images[0].height; // number, image height
-providerMetadata.fal.images[0].contentType; // string, mime type of the image
-```
-
 ### Model Capabilities
 
-Fal offers many models optimized for different use cases. Here are a few popular examples. For a full list of models, see the [Fal AI Search Page](https://fal.ai/explore/search).
+Fal offers many models optimized for different use cases. Here are a few popular examples. For a full list of models, see the [Fal AI documentation](https://fal.ai/models).
 
-| Model                                          | Description                                                                                                                       |
-| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `fal-ai/flux/dev`                              | FLUX.1 \[dev] model for high-quality image generation                                                                             |
-| `fal-ai/flux-pro/kontext`                      | FLUX.1 Kontext \[pro] handles both text and reference images as inputs, enabling targeted edits and complex transformations       |
-| `fal-ai/flux-pro/kontext/max`                  | FLUX.1 Kontext \[max] with improved prompt adherence and typography generation                                                    |
-| `fal-ai/flux-lora`                             | Super fast endpoint for FLUX.1 with LoRA support                                                                                  |
-| `fal-ai/ideogram/character`                    | Generate consistent character appearances across multiple images. Maintain facial features, proportions, and distinctive traits   |
-| `fal-ai/qwen-image`                            | Qwen-Image foundation model with significant advances in complex text rendering and precise image editing                         |
-| `fal-ai/omnigen-v2`                            | Unified image generation model for Image Editing, Personalized Image Generation, Virtual Try-On, Multi Person Generation and more |
-| `fal-ai/bytedance/dreamina/v3.1/text-to-image` | Dreamina showcases superior picture effects with improvements in aesthetics, precise and diverse styles, and rich details         |
-| `fal-ai/recraft/v3/text-to-image`              | SOTA in image generation with vector art and brand style capabilities                                                             |
-| `fal-ai/wan/v2.2-a14b/text-to-image`           | High-resolution, photorealistic images with fine-grained detail                                                                   |
+| Model                               | Description                                                                                                                                                   |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fal-ai/fast-sdxl`                  | High-speed SDXL model optimized for quick inference with up to 4x faster speeds                                                                               |
+| `fal-ai/flux-pro/kontext`           | FLUX.1 Kontext \[pro] handles both text and reference images as inputs, seamlessly enabling targeted, local edits and complex transformations of entire scenes |
+| `fal-ai/flux-pro/kontext/max`       | FLUX.1 Kontext \[max] with greatly improved prompt adherence and typography generation, meeting premium consistency for editing without compromise on speed    |
+| `fal-ai/flux-lora`                  | Super fast endpoint for the FLUX.1 \[dev] model with LoRA support, enabling rapid and high-quality image generation using pre-trained LoRA adaptations.        |
+| `fal-ai/flux-pro/v1.1-ultra`        | Professional-grade image generation with up to 2K resolution and enhanced photorealism                                                                        |
+| `fal-ai/ideogram/v2`                | Specialized for high-quality posters and logos with exceptional typography handling                                                                           |
+| `fal-ai/recraft-v3`                 | SOTA in image generation with vector art and brand style capabilities                                                                                         |
+| `fal-ai/stable-diffusion-3.5-large` | Advanced MMDiT model with improved typography and complex prompt understanding                                                                                |
+| `fal-ai/hyper-sdxl`                 | Performance-optimized SDXL variant with enhanced creative capabilities                                                                                        |
 
 Fal models support the following aspect ratios:
 
@@ -125,51 +113,18 @@ Key features of Fal models include:
 Transform existing images using text prompts.
 
 ```ts
+// Example: Modify existing image
 await generateImage({
-  model: fal.image("fal-ai/flux-pro/kontext/max"),
-  prompt: {
-    text: "Put a donut next to the flour.",
-    images: [
-      "https://v3.fal.media/files/rabbit/rmgBxhwGYb2d3pl3x9sKf_output.png",
-    ],
+  model: fal.image('fal-ai/flux-pro/kontext'),
+  prompt: 'Put a donut next to the flour.',
+  providerOptions: {
+    fal: {
+      image_url:
+        'https://v3.fal.media/files/rabbit/rmgBxhwGYb2d3pl3x9sKf_output.png',
+    },
   },
 });
 ```
-
-Images can also be passed as base64-encoded string, a `Uint8Array`, an `ArrayBuffer`, or a `Buffer`.
-A mask can be passed as well
-
-```ts
-await generateImage({
-  model: fal.image("fal-ai/flux-pro/kontext/max"),
-  prompt: {
-    text: "Put a donut next to the flour.",
-    images: [imageBuffer],
-    mask: maskBuffer,
-  },
-});
-```
-
-### Provider Options
-
-Fal image models support flexible provider options through the `providerOptions.fal` object. You can pass any parameters supported by the specific Fal model's API. Common options include:
-
-- **imageUrl** - Reference image URL for image-to-image generation (deprecated, use `prompt.images` instead)
-- **strength** - Controls how much the output differs from the input image
-- **guidanceScale** - Controls adherence to the prompt (range: 1-20)
-- **numInferenceSteps** - Number of denoising steps (range: 1-50)
-- **enableSafetyChecker** - Enable/disable safety filtering
-- **outputFormat** - Output format: 'jpeg' or 'png'
-- **syncMode** - Wait for completion before returning response
-- **acceleration** - Speed of generation: 'none', 'regular', or 'high'
-- **safetyTolerance** - Content safety filtering level (1-6, where 1 is strictest)
-- **useMultipleImages** - When true, converts multiple input images to `image_urls` array for models that support multiple images (e.g., fal-ai/flux-2/edit)
-
-  **Deprecation Notice**: snake_case parameter names (e.g., `image_url`,
-  `guidance_scale`) are deprecated and will be removed in a future version.
-  Please use camelCase names (e.g., `imageUrl`, `guidanceScale`) instead.
-
-Refer to the [Fal AI model documentation](https://fal.ai/models) for model-specific parameters.
 
 ### Advanced Features
 
@@ -190,112 +145,59 @@ using the `.transcription()` factory method.
 The first argument is the model id without the `fal-ai/` prefix e.g. `wizper`.
 
 ```ts
-const model = fal.transcription("wizper");
+const model = fal.transcription('wizper');
 ```
 
 You can also pass additional provider-specific options using the `providerOptions` argument. For example, supplying the `batchSize` option will increase the number of audio chunks processed in parallel.
 
 ```ts highlight="6"
-import { experimental_transcribe as transcribe } from "ai";
-import { fal, type FalTranscriptionModelOptions } from "@ai-sdk/fal";
-import { readFile } from "fs/promises";
+import { experimental_transcribe as transcribe } from 'ai';
+import { fal } from '@ai-sdk/fal';
+import { readFile } from 'fs/promises';
 
 const result = await transcribe({
-  model: fal.transcription("wizper"),
-  audio: await readFile("audio.mp3"),
-  providerOptions: {
-    fal: { batchSize: 10 } satisfies FalTranscriptionModelOptions,
-  },
+  model: fal.transcription('wizper'),
+  audio: await readFile('audio.mp3'),
+  providerOptions: { fal: { batchSize: 10 } },
 });
 ```
 
 The following provider options are available:
 
-- **language** _string_
-  Language of the audio file. Defaults to 'en'. If set to null, the language will be automatically detected.
+- **language** *string*
+  Language of the audio file. If set to null, the language will be automatically detected.
   Accepts ISO language codes like 'en', 'fr', 'zh', etc.
   Optional.
 
-- **diarize** _boolean_
+- **diarize** *boolean*
   Whether to diarize the audio file (identify different speakers).
   Defaults to true.
   Optional.
 
-- **chunkLevel** _string_
+- **chunkLevel** *string*
   Level of the chunks to return. Either 'segment' or 'word'.
-  Default value: "segment"
+  Default value: "word"
   Optional.
 
-- **version** _string_
+- **version** *string*
   Version of the model to use. All models are Whisper large variants.
   Default value: "3"
   Optional.
 
-- **batchSize** _number_
+- **batchSize** *number*
   Batch size for processing.
   Default value: 64
   Optional.
 
-- **numSpeakers** _number_
+- **numSpeakers** *number*
   Number of speakers in the audio file. If not provided, the number of speakers will be automatically detected.
   Optional.
 
 ### Model Capabilities
 
-| Model     | Transcription | Duration | Segments | Language |
-| --------- | ------------- | -------- | -------- | -------- |
-| `whisper` |               |          |          |          |
-| `wizper`  |               |          |          |          |
-
-## Speech Models
-
-You can create models that call Fal text-to-speech endpoints using the `.speech()` factory method.
-
-### Basic Usage
-
-```ts
-import { experimental_generateSpeech as generateSpeech } from "ai";
-import { fal } from "@ai-sdk/fal";
-
-const result = await generateSpeech({
-  model: fal.speech("fal-ai/minimax/speech-02-hd"),
-  text: "Hello from the AI SDK!",
-});
-```
-
-### Model Capabilities
-
-| Model                                     | Description                                                                                                                                                           |
-| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fal-ai/minimax/voice-clone`              | Clone a voice from a sample audio and generate speech from text prompts                                                                                               |
-| `fal-ai/minimax/voice-design`             | Design a personalized voice from a text description and generate speech from text prompts                                                                             |
-| `fal-ai/dia-tts/voice-clone`              | Clone dialog voices from a sample audio and generate dialogs from text prompts                                                                                        |
-| `fal-ai/minimax/speech-02-hd`             | Generate speech from text prompts and different voices                                                                                                                |
-| `fal-ai/minimax/speech-02-turbo`          | Generate fast speech from text prompts and different voices                                                                                                           |
-| `fal-ai/dia-tts`                          | Directly generates realistic dialogue from transcripts with audio conditioning for emotion control. Produces natural nonverbals like laughter and throat clearing     |
-| `resemble-ai/chatterboxhd/text-to-speech` | Generate expressive, natural speech with Resemble AI's Chatterbox. Features unique emotion control, instant voice cloning from short audio, and built-in watermarking |
-
-### Provider Options
-
-Pass provider-specific options via `providerOptions.fal` depending on the model:
-
-- **voice_setting** _object_
-  - `voice_id` (string): predefined voice ID
-  - `speed` (number): 0.5–2.0
-  - `vol` (number): 0–10
-  - `pitch` (number): -12–12
-  - `emotion` (enum): happy | sad | angry | fearful | disgusted | surprised | neutral
-  - `english_normalization` (boolean)
-
-- **audio_setting** _object_
-  Audio configuration settings specific to the model.
-
-- **language_boost** _enum_
-  Chinese | Chinese,Yue | English | Arabic | Russian | Spanish | French | Portuguese | German | Turkish | Dutch | Ukrainian | Vietnamese | Indonesian | Japanese | Italian | Korean | Thai | Polish | Romanian | Greek | Czech | Finnish | Hindi | auto
-
-- **pronunciation_dict** _object_
-  Custom pronunciation dictionary for specific words.
-
-Model-specific parameters (e.g., `audio_url`, `prompt`, `preview_text`, `ref_audio_url`, `ref_text`) can be passed directly under `providerOptions.fal` and will be forwarded to the Fal API.
+| Model     | Transcription       | Duration            | Segments            | Language            |
+| --------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| `whisper` |  |  |  |  |
+| `wizper`  |  |  |  |  |
 
 # AssemblyAI

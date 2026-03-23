@@ -8,7 +8,7 @@ This tutorial demonstrates how to build a basic user management app. The app aut
 
 ![Supabase User Management example](/docs/img/ionic-demos/ionic-angular-account.png)
 
-If you get stuck while working through this guide, refer to the [full example on GitHub](https://github.com/mhartington/supabase-ionic-angular).
+If you get stuck while working through this guide, refer to the [full example on GitHub](https://github.com/supabase/supabase/tree/master/examples/user-management/ionic-angular-user-management).
 
 ## Project setup
 
@@ -125,11 +125,11 @@ In most cases, you can get the correct key from [the Project's **Connect** dialo
 
 ## Building the app
 
-Let's start building the Angular app from scratch.
+Start building the Angular app from scratch.
 
 ### Initialize an Ionic Angular app
 
-We can use the [Ionic CLI](https://ionicframework.com/docs/cli) to initialize
+Use the [Ionic CLI](https://ionicframework.com/docs/cli) to initialize
 an app called `supabase-ionic-angular`:
 
 ```bash
@@ -138,30 +138,43 @@ ionic start supabase-ionic-angular blank --type angular
 cd supabase-ionic-angular
 ```
 
-Then let's install the only additional dependency: [supabase-js](https://github.com/supabase/supabase-js)
+Install the only additional dependency: [supabase-js](https://github.com/supabase/supabase-js)
 
 ```bash
 npm install @supabase/supabase-js
 ```
 
-And finally, we want to save the environment variables in the `src/environments/environment.ts` file.
-All we need are the API URL and the key that you copied [earlier](#get-api-details).
-These variables will be exposed on the browser, and that's completely fine since we have [Row Level Security](/docs/guides/auth#row-level-security) enabled on our Database.
+And finally, save the environment variables in the `src/environments/environment.ts` file.
+All you need are the API URL and the key that you copied [earlier](#get-api-details).
+These variables will be exposed on the browser, and that's fine as [Row Level Security](/docs/guides/auth#row-level-security) is enabled on the Database.
 
 ````
-```ts name=environment.ts
+```typescript name=src/environments/environment.ts
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
 export const environment = {
   production: false,
-  supabaseUrl: 'YOUR_SUPABASE_URL',
-  supabaseKey: 'YOUR_SUPABASE_KEY',
+  supabaseUrl: '',
+  supabaseKey: '',
 }
+
+/*
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 ```
 ````
 
-Now that we have the API credentials in place, let's create a `SupabaseService` with `ionic g s supabase` to initialize the Supabase client and implement functions to communicate with the Supabase API.
+Now that you have the API credentials in place, create a `SupabaseService` with `ionic g s supabase` to initialize the Supabase client and implement functions to communicate with the Supabase API.
 
 ````
-```ts name=src/app/supabase.service.ts
+```typescript name=src/app/supabase.service.ts
 import { Injectable } from '@angular/core'
 import { LoadingController, ToastController } from '@ionic/angular'
 import { AuthChangeEvent, createClient, Session, SupabaseClient } from '@supabase/supabase-js'
@@ -191,7 +204,14 @@ export class SupabaseService {
   }
 
   get session() {
-    return this.supabase.auth.getSession().then(({ data }) => data?.session)
+    return this.supabase.auth.getClaims().then(async ({ data }) => {
+      if (!data?.claims) {
+        return null
+      }
+
+      const { data: userData } = await this.supabase.auth.getUser()
+      return userData?.user ? ({ user: userData.user } as Session) : null
+    })
   }
 
   get profile() {
@@ -247,43 +267,18 @@ export class SupabaseService {
 
 ### Set up a login route
 
-Let's set up a route to manage logins and signups. We'll use Magic Links so users can sign in with their email without using passwords.
+Set up a route to manage logins and signups. Use Magic Links so users can sign in with their email without using passwords.
 Create a `LoginPage` with the `ionic g page login` Ionic CLI command.
 
-This guide will show the template inline, but the example app will have `templateUrl`s
-
 ````
-```ts name=src/app/login/login.page.ts
+```typescript name=src/app/login/login.page.ts
 import { Component, OnInit } from '@angular/core'
 import { SupabaseService } from '../supabase.service'
 
 @Component({
   selector: 'app-login',
-  template: `
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Login</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-      
-        Supabase + Ionic Angular
-        Sign in via magic link with your email below
-      
-      <ion-list inset="true">
-        
-          <ion-item>
-            <ion-label position="stacked">Email</ion-label>
-            <ion-input [(ngModel)]="email" name="email" autocomplete type="email"></ion-input>
-          </ion-item>
-          
-            <ion-button type="submit" fill="clear">Login</ion-button>
-          
-        
-      </ion-list>
-    </ion-content>
-  `,
+  standalone: false,
+  templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
@@ -309,54 +304,58 @@ export class LoginPage {
   }
 }
 ```
+
+
+
+
+
+```
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+    Supabase + Ionic Angular
+    Sign in via magic link with your email below
+  
+    <ion-list inset="true">
+      
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input
+            [(ngModel)]="email"
+            name="email"
+            autocomplete
+            type="email"
+          ></ion-input>
+        </ion-item>
+        
+          <ion-button type="submit" fill="clear">Login</ion-button>
+        
+      
+    </ion-list>
+</ion-content>
+```
 ````
 
 ### Account page
 
-After a user is signed in, we can allow them to edit their profile details and manage their account.
+After a user is signed in, allow them to edit their profile details and manage their account.
 Create an `AccountComponent` with `ionic g page account` Ionic CLI command.
 
 ````
-```ts name=src/app/account.page.ts
+```typescript name=src/app/account/account.page.ts
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { Profile, SupabaseService } from '../supabase.service'
 
 @Component({
   selector: 'app-account',
-  template: `
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Account</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-      
-        <ion-item>
-          <ion-label position="stacked">Email</ion-label>
-          <ion-input type="email" name="email" [(ngModel)]="email" readonly></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label position="stacked">Name</ion-label>
-          <ion-input type="text" name="username" [(ngModel)]="profile.username"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label position="stacked">Website</ion-label>
-          <ion-input type="url" name="website" [(ngModel)]="profile.website"></ion-input>
-        </ion-item>
-        
-          <ion-button fill="clear" (click)="updateProfile()">Update Profile</ion-button>
-        
-      
-
-      
-        <ion-button fill="clear" (click)="signOut()">Log Out</ion-button>
-      
-    </ion-content>
-  `,
+  standalone: false,
+  templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
@@ -372,6 +371,7 @@ export class AccountPage implements OnInit {
     private readonly supabase: SupabaseService,
     private router: Router
   ) {}
+
   ngOnInit() {
     this.getEmail()
     this.getProfile()
@@ -418,25 +418,75 @@ export class AccountPage implements OnInit {
   }
 }
 ```
+
+
+
+
+
+```
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-avatar
+    [avatarUrl]="this.profile?.avatar_url"
+    (upload)="updateProfile($event)"
+  >
+  </app-avatar>
+  
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input type="email" name="email" [(ngModel)]="email" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Name</ion-label>
+      <ion-input
+        type="text"
+        name="username"
+        [(ngModel)]="profile.username"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Website</ion-label>
+      <ion-input
+        type="url"
+        name="website"
+        [(ngModel)]="profile.website"
+      ></ion-input>
+    </ion-item>
+    
+      <ion-button fill="clear" (click)="updateProfile()"
+        >Update Profile</ion-button
+      >
+    
+  
+
+  
+    <ion-button fill="clear" (click)="signOut()">Log Out</ion-button>
+  
+</ion-content>
+```
 ````
 
 ### Launch!
 
-Now that we have all the components in place, let's update `AppComponent`:
+Now that you have all the components in place, update `AppComponent`:
 
 ````
-```ts name=src/app/app.component.ts
+```typescript name=src/app/app.component.ts
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { SupabaseService } from './supabase.service'
 
 @Component({
   selector: 'app-root',
-  template: `
-    <ion-app>
-      <ion-router-outlet></ion-router-outlet>
-    </ion-app>
-  `,
+  standalone: false,
+  templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
@@ -458,7 +508,7 @@ export class AppComponent {
 Then update the `AppRoutingModule`
 
 ````
-```ts name=src/app/app-routing.module.ts"
+```typescript name=src/app/app-routing.module.ts
 import { NgModule } from '@angular/core'
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router'
 
@@ -474,11 +524,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      preloadingStrategy: PreloadAllModules,
-    }),
-  ],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
@@ -491,7 +537,7 @@ Once that's done, run this in a terminal window:
 ionic serve
 ```
 
-And the browser will automatically open to show the app.
+And the browser automatically opens to show the app.
 
 ![Supabase Angular](/docs/img/ionic-demos/ionic-angular.png)
 
@@ -511,12 +557,12 @@ npm install @ionic/pwa-elements @capacitor/camera
 
 [Capacitor](https://capacitorjs.com) is a cross-platform native runtime from Ionic that enables web apps to be deployed through the app store and provides access to native device API.
 
-Ionic PWA elements is a companion package that will polyfill certain browser APIs that provide no user interface with custom Ionic UI.
+Ionic PWA elements is a companion package that polyfills certain browser APIs that provide no user interface with custom Ionic UI.
 
-With those packages installed, we can update our `main.ts` to include an additional bootstrapping call for the Ionic PWA Elements.
+With those packages installed, update `main.ts` to include an additional bootstrapping call for the Ionic PWA Elements.
 
 ````
-```ts name=src/main.ts
+```typescript name=src/main.ts
 import { enableProdMode } from '@angular/core'
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
 
@@ -538,58 +584,23 @@ platformBrowserDynamic()
 Then create an `AvatarComponent` with this Ionic CLI command:
 
 ```bash
- ionic g component avatar --module=/src/app/account/account.module.ts --create-module
+ionic g component avatar --module=/src/app/account/account.module.ts --create-module
 ```
 
 ````
-```ts name=src/app/avatar.component.ts
+```typescript name=src/app/avatar/avatar.component.ts
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { SupabaseService } from '../supabase.service'
 import { Camera, CameraResultType } from '@capacitor/camera'
 import { addIcons } from 'ionicons'
 import { person } from 'ionicons/icons'
+
 @Component({
   selector: 'app-avatar',
-  template: `
-    
-      
-      <ng-template #noAvatar>
-        <ion-icon name="person" class="no-avatar"></ion-icon>
-      </ng-template>
-    
-  `,
-  style: [
-    `
-    :host {
-       display: block;
-       margin: auto;
-       min-height: 150px;
-    }
-     :host .avatar_wrapper {
-       margin: 16px auto 16px;
-       border-radius: 50%;
-       overflow: hidden;
-       height: 150px;
-       aspect-ratio: 1;
-       background: var(--ion-color-step-50);
-       border: thick solid var(--ion-color-step-200);
-    }
-     :host .avatar_wrapper:hover {
-       cursor: pointer;
-    }
-     :host .avatar_wrapper ion-icon.no-avatar {
-       width: 100%;
-       height: 115%;
-    }
-     :host img {
-       display: block;
-       object-fit: cover;
-       width: 100%;
-       height: 100%;
-    }
-  `,
-  ],
+  standalone: false,
+  templateUrl: './avatar.component.html',
+  styleUrls: ['./avatar.component.scss'],
 })
 export class AvatarComponent {
   _avatarUrl: SafeResourceUrl | undefined
@@ -652,29 +663,55 @@ export class AvatarComponent {
   }
 }
 ```
-````
-
-### Add the new widget
-
-And then, we can add the widget on top of the `AccountComponent` HTML template:
-
-````
-```ts name=src/app/account.component.ts
-template: `
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Account</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <app-avatar
-    [avatarUrl]="this.profile?.avatar_url"
-    (upload)="updateProfile($event)"
-  ></app-avatar>
 
 
-`
+
+
+
+```
+
+  
+  <ng-template #noAvatar>
+    <ion-icon name="person" class="no-avatar"></ion-icon>
+  </ng-template>
+
+```
+
+
+
+
+
+```
+:host {
+  display: block;
+  margin: auto;
+  min-height: 150px;
+
+  .avatar_wrapper {
+    margin: 16px auto 16px;
+    border-radius: 50%;
+    overflow: hidden;
+    height: 150px;
+    aspect-ratio: 1/1;
+    background: var(--ion-color-step-50);
+    border: thick solid var(--ion-color-step-200);
+    &:hover {
+      cursor: pointer;
+    }
+
+    ion-icon.no-avatar {
+      width: 100%;
+      height: 115%;
+    }
+  }
+
+  img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
 ```
 ````
 

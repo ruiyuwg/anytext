@@ -36,6 +36,8 @@ The connector uses HTTPS to [securely](https://docs.stripe.com/security.md) comm
 
 [Reconcile Stripe payouts](https://docs.stripe.com/use-stripe-apps/netsuite/stripe-payouts-netsuite.md): Automatically reconcile Stripe payouts to NetSuite bank deposits, including fees and transactions.
 
+[Reconcile Stripe Connect activity](https://docs.stripe.com/use-stripe-apps/netsuite/stripe-connect-netsuite.md): Automatically reconcile Stripe Connect transfers, application fees, and connected account activity to NetSuite.
+
 [Accept payments in multiple currencies](https://docs.stripe.com/use-stripe-apps/netsuite/multiple-currencies.md): Accept payments in multiple currencies and automatically reconcile payments that require currency conversion.
 
 ## Features

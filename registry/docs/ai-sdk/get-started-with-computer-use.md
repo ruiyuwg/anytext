@@ -70,10 +70,6 @@ This reference implementation serves as a foundation to understand the requireme
 If you have never used the AI SDK before, start by following the [Getting
 Started guide](/docs/getting-started).
 
-For a working example of Computer Use implementation with Next.js and the AI
-SDK, check out our [AI SDK Computer Use
-Template](https://github.com/vercel-labs/ai-sdk-computer-use).
-
 First, ensure you have the AI SDK and [Anthropic AI SDK provider](/providers/ai-sdk-providers/anthropic) installed:
 
 You can add Computer Use to your AI SDK applications using provider-defined-client tools. These tools accept various input parameters (like display height and width in the case of the computer tool) and then require that you define an execute function.
@@ -81,17 +77,17 @@ You can add Computer Use to your AI SDK applications using provider-defined-clie
 Here's how you could set up the Computer Tool with the AI SDK:
 
 ```ts
-import { anthropic } from "@ai-sdk/anthropic";
-import { getScreenshot, executeComputerAction } from "@/utils/computer-use";
+import { anthropic } from '@ai-sdk/anthropic';
+import { getScreenshot, executeComputerAction } from '@/utils/computer-use';
 
-const computerTool = anthropic.tools.computer_20250124({
+const computerTool = anthropic.tools.computer_20241022({
   displayWidthPx: 1920,
   displayHeightPx: 1080,
   execute: async ({ action, coordinate, text }) => {
     switch (action) {
-      case "screenshot": {
+      case 'screenshot': {
         return {
-          type: "image",
+          type: 'image',
           data: getScreenshot(),
         };
       }
@@ -100,17 +96,17 @@ const computerTool = anthropic.tools.computer_20250124({
       }
     }
   },
-  toModelOutput({ output }) {
-    return typeof output === "string"
-      ? [{ type: "text", text: output }]
-      : [{ type: "image", data: output.data, mediaType: "image/png" }];
+  experimental_toToolResultContent(result) {
+    return typeof result === 'string'
+      ? [{ type: 'text', text: result }]
+      : [{ type: 'image', data: result.data, mediaType: 'image/png' }];
   },
 });
 ```
 
 The `computerTool` handles two main actions: taking screenshots via `getScreenshot()` and executing computer actions like mouse movements and clicks through `executeComputerAction()`. Remember, you have to implement this execution logic (eg. the `getScreenshot` and `executeComputerAction` functions) to handle the actual computer interactions. The `execute` function should handle all low-level interactions with the operating system.
 
-Finally, to send tool results back to the model, use the [`toModelOutput()`](/docs/foundations/prompts#multi-modal-tool-results) function to convert text and image responses into a format the model can process. The AI SDK includes experimental support for these multi-modal tool results when using Anthropic's models.
+Finally, to send tool results back to the model, use the [`experimental_toToolResultContent()`](/docs/foundations/prompts#multi-modal-tool-results) function to convert text and image responses into a format the model can process. The AI SDK includes experimental support for these multi-modal tool results when using Anthropic's models.
 
 Computer Use requires appropriate safety measures like using virtual machines,
 limiting access to sensitive data, and implementing human oversight for
@@ -124,8 +120,8 @@ For one-shot text generation, use `generateText`:
 
 ```ts
 const result = await generateText({
-  model: "anthropic/claude-sonnet-4-20250514",
-  prompt: "Move the cursor to the center of the screen and take a screenshot",
+  model: anthropic('claude-3-5-sonnet-20241022'),
+  prompt: 'Move the cursor to the center of the screen and take a screenshot',
   tools: { computer: computerTool },
 });
 
@@ -136,8 +132,8 @@ For streaming responses, use `streamText` to receive updates in real-time:
 
 ```ts
 const result = streamText({
-  model: "anthropic/claude-sonnet-4-20250514",
-  prompt: "Open the browser and navigate to vercel.com",
+  model: anthropic('claude-3-5-sonnet-20241022'),
+  prompt: 'Open the browser and navigate to vercel.com',
   tools: { computer: computerTool },
 });
 
@@ -148,16 +144,14 @@ for await (const chunk of result.textStream) {
 
 ### Configure Multi-Step (Agentic) Generations
 
-To allow the model to perform multiple steps without user intervention, use the `stopWhen` parameter. This will automatically send any tool results back to the model to trigger a subsequent generation:
+To allow the model to perform multiple steps without user intervention, specify a `maxSteps` value. This will automatically send any tool results back to the model to trigger a subsequent generation:
 
-```ts highlight="1,7"
-import { stepCountIs } from "ai";
-
+```ts highlight="5"
 const stream = streamText({
-  model: "anthropic/claude-sonnet-4-20250514",
-  prompt: "Open the browser and navigate to vercel.com",
+  model: anthropic('claude-3-5-sonnet-20241022'),
+  prompt: 'Open the browser and navigate to vercel.com',
   tools: { computer: computerTool },
-  stopWhen: stepCountIs(10), // experiment with this value based on your use case
+  maxSteps: 10, // experiment with this value based on your use case
 });
 ```
 
@@ -166,22 +160,21 @@ const stream = streamText({
 You can combine multiple tools in a single request to enable more complex workflows. The AI SDK supports all three of Claude's Computer Use tools:
 
 ```ts
-const computerTool = anthropic.tools.computer_20250124({
+const computerTool = anthropic.tools.computer_20241022({
   ...
 });
 
-const bashTool = anthropic.tools.bash_20250124({
+const bashTool = anthropic.tools.bash_20241022({
   execute: async ({ command, restart }) => execSync(command).toString()
 });
 
-const textEditorTool = anthropic.tools.textEditor_20250124({
+const textEditorTool = anthropic.tools.textEditor_20241022({
   execute: async ({
     command,
     path,
     file_text,
     insert_line,
     new_str,
-    insert_text,
     old_str,
     view_range
   }) => {
@@ -193,7 +186,6 @@ const textEditorTool = anthropic.tools.textEditor_20250124({
         fileText: file_text,
         insertLine: insert_line,
         newStr: new_str,
-        insertText: insert_text,
         oldStr: old_str,
         viewRange: view_range
       });
@@ -203,11 +195,11 @@ const textEditorTool = anthropic.tools.textEditor_20250124({
 
 
 const response = await generateText({
-  model: 'anthropic/claude-sonnet-4-20250514',
+  model: anthropic("claude-3-5-sonnet-20241022"),
   prompt: "Create a new file called example.txt, write 'Hello World' to it, and run 'cat example.txt' in the terminal",
   tools: {
     computer: computerTool,
-    bash: bashTool,
+    bash: bashTool
     str_replace_editor: textEditorTool,
   },
 });
@@ -235,4 +227,4 @@ Remember, Computer Use is a beta feature. Please be aware that it poses unique r
 3. Limit internet access to an allowlist of domains to reduce exposure to malicious content.
 4. Ask a human to confirm decisions that may result in meaningful real-world consequences as well as any tasks requiring affirmative consent, such as accepting cookies, executing financial transactions, or agreeing to terms of service.
 
-# Add Skills to Your Agent
+# Get started with Claude 4

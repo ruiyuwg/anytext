@@ -18,7 +18,7 @@ By the end of the tutorial we will have done the following:
 
 We will cover the following concepts:
 
-- [Retrieval](/oss/javascript/langchain/retrieval) using [document loaders](/oss/javascript/integrations/document_loaders), [text splitters](/oss/javascript/integrations/splitters), [embeddings](/oss/javascript/integrations/text_embedding), and [vector stores](/oss/javascript/integrations/vectorstores)
+- [Retrieval](/oss/javascript/langchain/retrieval) using [document loaders](/oss/javascript/integrations/document_loaders), [text splitters](/oss/javascript/integrations/splitters), [embeddings](/oss/javascript/integrations/embeddings), and [vector stores](/oss/javascript/integrations/vectorstores)
 - The LangGraph [Graph API](/oss/javascript/langgraph/graph-api), including state, nodes, edges, and conditional edges.
 
 ## Setup
@@ -181,7 +181,7 @@ AIMessage {
 
 ## 4. Grade documents
 
-1. Add a node — `gradeDocuments` — to determine whether the retrieved documents are relevant to the question. We will use a model with structured output using Zod for document grading. We'll also add a [conditional edge](/oss/javascript/langgraph/graph-api#conditional-edges) — `checkRelevance` — that checks the grading result and returns the name of the node to go to (`generate` or `rewrite`):
+1. Add a node—`gradeDocuments`—to determine whether the retrieved documents are relevant to the question. We will use a model with structured output using Zod for document grading. We'll also add a [conditional edge](/oss/javascript/langgraph/graph-api#conditional-edges)—`checkRelevance`—that checks the grading result and returns the name of the node to go to (`generate` or `rewrite`):
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import * as z from "zod";

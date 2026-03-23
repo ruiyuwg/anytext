@@ -88,7 +88,7 @@ const sendMagicLink = async () => {
 
 export default function Auth() {
   // Handle linking into app from email app.
-  const url = Linking.useURL();
+  const url = Linking.useLinkingURL();
   if (url) createSessionFromUrl(url);
 
   return (
@@ -181,7 +181,6 @@ The redirect callback URL should have this format `[YOUR_SCHEME]://[YOUR_HOSTNAM
     To enable Universal Links, you need to:
 
     1.  **Configure Associated Domains** in your Xcode project:
-
         *   Add your domain to the Associated Domains capability
         *   Format: `applinks:yourdomain.com`
 
@@ -370,7 +369,6 @@ For a better user experience, you can use **Universal Links** instead of custom 
 To enable Universal Links, you need to:
 
 1.  **Configure Associated Domains** in your Xcode project:
-
     *   Add your domain to the Associated Domains capability
     *   Format: `applinks:yourdomain.com`
 

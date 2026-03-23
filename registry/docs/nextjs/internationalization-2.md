@@ -28,32 +28,32 @@ module.exports = {
   i18n: {
     // These are all the locales you want to support in
     // your application
-    locales: ["en-US", "fr", "nl-NL"],
+    locales: ['en-US', 'fr', 'nl-NL'],
     // This is the default locale you want to be used when visiting
     // a non-locale prefixed path e.g. `/hello`
-    defaultLocale: "en-US",
+    defaultLocale: 'en-US',
     // This is a list of locale domains and the default locale they
     // should handle (these are only required when setting up domain routing)
     // Note: subdomains must be included in the domain value to be matched e.g. "fr.example.com".
     domains: [
       {
-        domain: "example.com",
-        defaultLocale: "en-US",
+        domain: 'example.com',
+        defaultLocale: 'en-US',
       },
       {
-        domain: "example.nl",
-        defaultLocale: "nl-NL",
+        domain: 'example.nl',
+        defaultLocale: 'nl-NL',
       },
       {
-        domain: "example.fr",
-        defaultLocale: "fr",
+        domain: 'example.fr',
+        defaultLocale: 'fr',
         // an optional http field can also be used to test
         // locale domains locally with http instead of https
         http: true,
       },
     ],
   },
-};
+}
 ```
 
 ## Locale Strategies
@@ -67,10 +67,10 @@ Sub-path Routing puts the locale in the url path.
 ```js filename="next.config.js"
 module.exports = {
   i18n: {
-    locales: ["en-US", "fr", "nl-NL"],
-    defaultLocale: "en-US",
+    locales: ['en-US', 'fr', 'nl-NL'],
+    defaultLocale: 'en-US',
   },
-};
+}
 ```
 
 With the above configuration `en-US`, `fr`, and `nl-NL` will be available to be routed to, and `en-US` is the default locale. If you have a `pages/blog.js` the following urls would be available:
@@ -88,30 +88,30 @@ By using domain routing you can configure locales to be served from different do
 ```js filename="next.config.js"
 module.exports = {
   i18n: {
-    locales: ["en-US", "fr", "nl-NL", "nl-BE"],
-    defaultLocale: "en-US",
+    locales: ['en-US', 'fr', 'nl-NL', 'nl-BE'],
+    defaultLocale: 'en-US',
 
     domains: [
       {
         // Note: subdomains must be included in the domain value to be matched
         // e.g. www.example.com should be used if that is the expected hostname
-        domain: "example.com",
-        defaultLocale: "en-US",
+        domain: 'example.com',
+        defaultLocale: 'en-US',
       },
       {
-        domain: "example.fr",
-        defaultLocale: "fr",
+        domain: 'example.fr',
+        defaultLocale: 'fr',
       },
       {
-        domain: "example.nl",
-        defaultLocale: "nl-NL",
+        domain: 'example.nl',
+        defaultLocale: 'nl-NL',
         // specify other locales that should be redirected
         // to this domain
-        locales: ["nl-BE"],
+        locales: ['nl-BE'],
       },
     ],
   },
-};
+}
 ```
 
 For example if you have `pages/blog.js` the following urls will be available:
@@ -144,39 +144,36 @@ For example, here's a `next.config.js` file with support for a few languages. No
 ```js filename="next.config.js"
 module.exports = {
   i18n: {
-    locales: ["default", "en", "de", "fr"],
-    defaultLocale: "default",
+    locales: ['default', 'en', 'de', 'fr'],
+    defaultLocale: 'default',
     localeDetection: false,
   },
   trailingSlash: true,
-};
+}
 ```
 
 Next, we can use [Proxy](/docs/pages/api-reference/file-conventions/proxy) to add custom routing rules:
 
 ```ts filename="proxy.ts"
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server'
 
-const PUBLIC_FILE = /\.(.*)$/;
+const PUBLIC_FILE = /\.(.*)$/
 
 export async function proxy(req: NextRequest) {
   if (
-    req.nextUrl.pathname.startsWith("/_next") ||
-    req.nextUrl.pathname.includes("/api/") ||
+    req.nextUrl.pathname.startsWith('/_next') ||
+    req.nextUrl.pathname.includes('/api/') ||
     PUBLIC_FILE.test(req.nextUrl.pathname)
   ) {
-    return;
+    return
   }
 
-  if (req.nextUrl.locale === "default") {
-    const locale = req.cookies.get("NEXT_LOCALE")?.value || "en";
+  if (req.nextUrl.locale === 'default') {
+    const locale = req.cookies.get('NEXT_LOCALE')?.value || 'en'
 
     return NextResponse.redirect(
-      new URL(
-        `/${locale}${req.nextUrl.pathname}${req.nextUrl.search}`,
-        req.url,
-      ),
-    );
+      new URL(`/${locale}${req.nextUrl.pathname}${req.nextUrl.search}`, req.url)
+    )
   }
 }
 ```
@@ -192,7 +189,7 @@ module.exports = {
   i18n: {
     localeDetection: false,
   },
-};
+}
 ```
 
 When `localeDetection` is set to `false` Next.js will no longer automatically redirect based on the user's preferred locale and will only provide locale information detected from either the locale based domain or locale path as described above.
@@ -205,7 +202,7 @@ You can access the locale information via the Next.js router. For example, using
 - `locales` contains all configured locales.
 - `defaultLocale` contains the configured default locale.
 
-When [pre-rendering](/docs/pages/building-your-application/rendering/static-site-generation) pages with `getStaticProps` or `getServerSideProps`, the locale information is provided in [the context](/docs/pages/building-your-application/data-fetching/get-static-props) provided to the function.
+When [prerendering](/docs/pages/building-your-application/rendering/static-site-generation) pages with `getStaticProps` or `getServerSideProps`, the locale information is provided in [the context](/docs/pages/building-your-application/data-fetching/get-static-props) provided to the function.
 
 When leveraging `getStaticPaths`, the configured locales are provided in the context parameter of the function under `locales` and the configured defaultLocale under `defaultLocale`.
 
@@ -216,45 +213,45 @@ You can use `next/link` or `next/router` to transition between locales.
 For `next/link`, a `locale` prop can be provided to transition to a different locale from the currently active one. If no `locale` prop is provided, the currently active `locale` is used during client-transitions. For example:
 
 ```jsx
-import Link from "next/link";
+import Link from 'next/link'
 
 export default function IndexPage(props) {
   return (
     <Link href="/another" locale="fr">
       To /fr/another
     </Link>
-  );
+  )
 }
 ```
 
 When using the `next/router` methods directly, you can specify the `locale` that should be used via the transition options. For example:
 
 ```jsx
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
 
 export default function IndexPage(props) {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <div
       onClick={() => {
-        router.push("/another", "/another", { locale: "fr" });
+        router.push('/another', '/another', { locale: 'fr' })
       }}
     >
       to /fr/another
     </div>
-  );
+  )
 }
 ```
 
 Note that to handle switching only the `locale` while preserving all routing information such as [dynamic route](/docs/pages/building-your-application/routing/dynamic-routes) query values or hidden href query values, you can provide the `href` parameter as an object:
 
 ```jsx
-import { useRouter } from "next/router";
-const router = useRouter();
-const { pathname, asPath, query } = router;
+import { useRouter } from 'next/router'
+const router = useRouter()
+const { pathname, asPath, query } = router
 // change just the locale and maintain all other route information including href's query
-router.push({ pathname, query }, asPath, { locale: nextLocale });
+router.push({ pathname, query }, asPath, { locale: nextLocale })
 ```
 
 See [here](/docs/pages/api-reference/functions/use-router#with-url-object) for more information on the object structure for `router.push`.
@@ -262,14 +259,14 @@ See [here](/docs/pages/api-reference/functions/use-router#with-url-object) for m
 If you have a `href` that already includes the locale you can opt-out of automatically handling the locale prefixing:
 
 ```jsx
-import Link from "next/link";
+import Link from 'next/link'
 
 export default function IndexPage(props) {
   return (
     <Link href="/fr/another" locale={false}>
       To /fr/another
     </Link>
-  );
+  )
 }
 ```
 
@@ -298,12 +295,12 @@ export const getStaticPaths = ({ locales }) => {
   return {
     paths: [
       // if no `locale` is provided only the defaultLocale will be generated
-      { params: { slug: "post-1" }, locale: "en-US" },
-      { params: { slug: "post-1" }, locale: "fr" },
+      { params: { slug: 'post-1' }, locale: 'en-US' },
+      { params: { slug: 'post-1' }, locale: 'fr' },
     ],
     fallback: true,
-  };
-};
+  }
+}
 ```
 
 For [Automatically Statically Optimized](/docs/pages/building-your-application/rendering/automatic-static-optimization) and non-dynamic `getStaticProps` pages, **a version of the page will be generated for each locale**. This is important to consider because it can increase build times depending on how many locales are configured inside `getStaticProps`.
@@ -318,19 +315,19 @@ For pages that are [automatically statically optimized](/docs/pages/building-you
 
 ### Non-dynamic getStaticProps Pages
 
-For non-dynamic `getStaticProps` pages, a version is generated for each locale like above. `getStaticProps` is called with each `locale` that is being rendered. If you would like to opt-out of a certain locale from being pre-rendered, you can return `notFound: true` from `getStaticProps` and this variant of the page will not be generated.
+For non-dynamic `getStaticProps` pages, a version is generated for each locale like above. `getStaticProps` is called with each `locale` that is being rendered. If you would like to opt-out of a certain locale from being prerendered, you can return `notFound: true` from `getStaticProps` and this variant of the page will not be generated.
 
 ```js
 export async function getStaticProps({ locale }) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch(`https://.../posts?locale=${locale}`);
-  const posts = await res.json();
+  const res = await fetch(`https://.../posts?locale=${locale}`)
+  const posts = await res.json()
 
   if (posts.length === 0) {
     return {
       notFound: true,
-    };
+    }
   }
 
   // By returning { props: posts }, the Blog component
@@ -339,7 +336,7 @@ export async function getStaticProps({ locale }) {
     props: {
       posts,
     },
-  };
+  }
 }
 ```
 

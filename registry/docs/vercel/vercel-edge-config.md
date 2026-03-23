@@ -512,5 +512,5 @@ All helper methods throw errors when:
 
 title: "Getting started with Edge Config"
 description: "Learn how to create an Edge Config store and read from it in your project."
-last\_updated: "2026-03-08T05:03:13.815Z"
+last\_updated: "2026-03-23T09:40:09.228Z"
 source: "https://vercel.com/docs/edge-config/get-started"

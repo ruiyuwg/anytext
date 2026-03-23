@@ -1,6 +1,6 @@
 ## Reference code
 
-Remember to also add the config files for [Vitest](#config-files-for-vitestjest) and [Jest](#config-files-for-vitestjest) to your project.
+Remember to also add the config files for Vitest and Jest to your project.
 
 ### Agent
 

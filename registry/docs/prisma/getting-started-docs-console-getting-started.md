@@ -189,17 +189,17 @@ bunx --bun prisma platform environment create --project $PROJECT_ID --name "prod
 ```
 ````
 
-Step 5: Generate an API key \[#step-5-generate-an-api-key]
+Step 5: Generate a connection string \[#step-5-generate-a-connection-string]
 
-API keys authenticate your application's requests to Prisma products.
+Connection strings authenticate your application's requests to Prisma products.
 
 Using the Console web interface \[#using-the-console-web-interface-1]
 
 1. Navigate to your resource (database or environment)
-2. Click **API Keys** tab
-3. Click **Create API Key**
-4. Enter a name for the key
-5. Copy the API key and store it securely
+2. Click **Connection Strings** tab
+3. Click **Create Connection String**
+4. Enter a name for the connection string
+5. Copy the connection string and store it securely
 6. Click **Done**
 
 Using the CLI \[#using-the-cli-3]
@@ -245,9 +245,9 @@ bunx --bun prisma platform apikey create --environment $ENVIRONMENT_ID --name "p
 ```
 ````
 
-Step 6: Use the API key in your application \[#step-6-use-the-api-key-in-your-application]
+Step 6: Use the connection string in your application \[#step-6-use-the-connection-string-in-your-application]
 
-Add the API key to your `.env` file:
+Add the connection string to your `.env` file:
 
 ```bash
 # For Accelerate
@@ -261,7 +261,6 @@ Next steps \[#next-steps]
 
 - Learn more about [Console concepts](/console/concepts)
 - Explore [database metrics](/console/features/metrics)
-- View [API key management](/console/features/api-keys)
 - Check out the [CLI reference](/cli/console)
 
 # Console (/docs/console)
@@ -270,7 +269,7 @@ Overview \[#overview]
 
 The [Console](https://console.prisma.io/login) enables you to manage and configure your projects that use Prisma products, and helps you integrate them into your application:
 
-- [Optimize](/optimize): Provides you with recommendations that can help you make your database queries faster.
+- [Query Insights](/query-insights): Inspect slow queries, connect Prisma calls to SQL, and apply focused fixes.
 - [Prisma Postgres](/postgres): A managed PostgreSQL database that is optimized for Prisma ORM.
 
 Getting started \[#getting-started]
@@ -280,7 +279,7 @@ To start using Prisma products, you'll need to:
 1. Create a Console account
 2. Set up a workspace for your team
 3. Create a project for your application
-4. Generate API keys for your resources
+4. Generate connection strings for your resources
 
 Learn more in the [Getting Started](/console/getting-started) guide.
 
@@ -301,8 +300,14 @@ In addition to the web interface, the Prisma CLI provides another way to interac
 
 Learn more about the [Console CLI commands](/cli/console).
 
-API keys \[#api-keys]
+# Guides (/docs/guides)
 
-An API key is required to authenticate Prisma Client requests to Prisma Data Platform resources. API keys are generated and managed at the resource level.
+Welcome to the Guides section! Here you'll find practical, step-by-step guides to help you accomplish specific tasks with Prisma products, including Prisma ORM, Prisma Accelerate, Prisma Postgres, and more.
 
-Learn more about [API keys](/console/features/api-keys).
+Browse through our guides using the sidebar navigation or use the search to find specific topics.
+
+Getting started \[#getting-started]
+
+- [Next.js](/guides/frameworks/nextjs) - Learn how to use Prisma ORM in a Next.js app and deploy it to Vercel
+- [Hono](/guides/frameworks/hono) - Learn how to use Prisma ORM in a Hono app
+- [SvelteKit](/guides/frameworks/sveltekit) - Learn how to use Prisma ORM in a SvelteKit app

@@ -58,38 +58,13 @@ POSTGRES_PASSWORD="..."
 POSTGRES_DATABASE="..."
 ```
 
+This project uses Vercel Postgres. You can learn more about how to set up at
+the [Vercel Postgres documentation](https://vercel.com/postgres).
+
 4. This project uses CB Insights' Unicorn Companies dataset. You can download the dataset by following these instructions:
    - Navigate to [CB Insights Unicorn Companies](https://www.cbinsights.com/research-unicorn-companies)
    - Enter in your email. You will receive a link to download the dataset.
    - Save it as `unicorns.csv` in your project root
-
-You will need a Postgres database to complete this tutorial. If you don't have
-Postgres setup on your local machine you can: - Create a free Postgres
-database with Vercel (recommended - see instructions below); or - Follow [this
-guide](https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database)
-to set it up locally
-
-#### Setting up Postgres with Vercel
-
-To set up a Postgres instance on your Vercel account:
-
-1. Go to [Vercel.com](https://vercel.com) and make sure you're logged in
-2. Navigate to your team homepage
-3. Click on the **Integrations** tab
-4. Click **Browse Marketplace**
-5. Look for the **Storage** option in the sidebar
-6. Select the **Neon** option (recommended, but any other PostgreSQL database provider should work)
-7. Click **Install**, then click **Install** again in the top right corner
-8. On the "Get Started with Neon" page, click **Create Database** on the right
-9. Select your region (e.g., Washington, D.C., U.S. East)
-10. Turn off **Auth**
-11. Click **Continue**
-12. Name your database (you can use the default name or rename it to something like "NaturalLanguagePostgres")
-13. Click **Create** in the bottom right corner
-14. After seeing "Database created successfully", click **Done**
-15. You'll be redirected to your database instance
-16. In the Quick Start section, click **Show secrets**
-17. Copy the full `DATABASE_URL` environment variable and use it to populate the Postgres environment variables in your `.env` file
 
 ### About the dataset
 
@@ -241,37 +216,36 @@ Add a new action. This action should be asynchronous and take in one parameter -
 export const generateQuery = async (input: string) => {};
 ```
 
-In this action, you'll use the `generateText` function with `Output` from the AI SDK which allows you to constrain the model's output to a pre-defined schema. This process, sometimes called structured output, ensures the model returns only the SQL query without any additional prefixes, explanations, or formatting that would require manual parsing.
+In this action, you'll use the `generateObject` function from the AI SDK which allows you to constrain the model's output to a pre-defined schema. This process, sometimes called structured output, ensures the model returns only the SQL query without any additional prefixes, explanations, or formatting that would require manual parsing.
 
 ```ts filename="app/actions.ts"
 /* ...other imports... */
-import { generateText, Output } from "ai";
-import { z } from "zod";
+import { generateObject } from 'ai';
+import { openai } from '@ai-sdk/openai';
+import { z } from 'zod';
 
 /* ...rest of the file... */
 
 export const generateQuery = async (input: string) => {
-  "use server";
+  'use server';
   try {
-    const result = await generateText({
-      model: "openai/gpt-4o",
+    const result = await generateObject({
+      model: openai('gpt-4o'),
       system: `You are a SQL (postgres) ...`, // SYSTEM PROMPT AS ABOVE - OMITTED FOR BREVITY
       prompt: `Generate the query necessary to retrieve the data the user wants: ${input}`,
-      output: Output.object({
-        schema: z.object({
-          query: z.string(),
-        }),
+      schema: z.object({
+        query: z.string(),
       }),
     });
-    return result.output.query;
+    return result.object.query;
   } catch (e) {
     console.error(e);
-    throw new Error("Failed to generate query");
+    throw new Error('Failed to generate query');
   }
 };
 ```
 
-Note, you are constraining the output to a single string field called `query` using `zod`, a TypeScript schema validation library. This will ensure the model only returns the SQL query itself. The resulting output will then be returned.
+Note, you are constraining the output to a single string field called `query` using `zod`, a TypeScript schema validation library. This will ensure the model only returns the SQL query itself. The resulting generated query will then be returned.
 
 ### Update the frontend
 
@@ -281,7 +255,7 @@ Import the `generateQuery` function and call it with the user's input.
 
 ```typescript filename="app/page.tsx" highlight="21"
 /* ...other imports... */
-import { runGeneratedSQLQuery, generateQuery } from "./actions";
+import { runGeneratedSQLQuery, generateQuery } from './actions';
 
 /* ...rest of the file... */
 
@@ -297,13 +271,13 @@ const handleSubmit = async (suggestion?: string) => {
 
   setLoading(true);
   setLoadingStep(1);
-  setActiveQuery("");
+  setActiveQuery('');
 
   try {
     const query = await generateQuery(question);
 
     if (query === undefined) {
-      toast.error("An error occurred. Please try again.");
+      toast.error('An error occurred. Please try again.');
       setLoading(false);
       return;
     }
@@ -318,7 +292,7 @@ const handleSubmit = async (suggestion?: string) => {
 
     setLoading(false);
   } catch (e) {
-    toast.error("An error occurred. Please try again.");
+    toast.error('An error occurred. Please try again.');
     setLoading(false);
   }
 };
@@ -340,7 +314,7 @@ As with the SQL query generation, you'll need a prompt to guide the model when e
 Let's craft a prompt for the explain query functionality:
 
 ```txt
-You are a SQL (postgres) expert. Your job is to explain to the user the SQL query you wrote to retrieve the data they asked for. The table schema is as follows:
+You are a SQL (postgres) expert. Your job is to explain to the user write a SQL query you wrote to retrieve the data they asked for. The table schema is as follows:
 unicorns (
   id SERIAL PRIMARY KEY,
   company VARCHAR(255) NOT NULL UNIQUE,
@@ -368,10 +342,10 @@ This action takes two parameters - the original natural language input and the g
 /* ...rest of the file... */
 
 export const explainQuery = async (input: string, sqlQuery: string) => {
-  "use server";
+  'use server';
   try {
-    const result = await generateText({
-      model: "openai/gpt-4o",
+    const result = await generateObject({
+      model: openai('gpt-4o'),
       system: `You are a SQL (postgres) expert. ...`, // SYSTEM PROMPT AS ABOVE - OMITTED FOR BREVITY
       prompt: `Explain the SQL query you generated to retrieve the data the user wanted. Assume the user is not an expert in SQL. Break down the query into steps. Be concise.
 
@@ -381,20 +355,20 @@ export const explainQuery = async (input: string, sqlQuery: string) => {
       Generated SQL Query:
       ${sqlQuery}`,
     });
-    return result.text;
+    return result.object;
   } catch (e) {
     console.error(e);
-    throw new Error("Failed to generate query");
+    throw new Error('Failed to generate query');
   }
 };
 ```
 
-This action uses the `generateText` function. However, you haven't defined the output schema yet. Let's define it in another file so it can also be used as a type in your components.
+This action uses the `generateObject` function again. However, you haven't defined the schema yet. Let's define it in another file so it can also be used as a type in your components.
 
 Update your `lib/types.ts` file to include the schema for the explanations:
 
 ```ts filename="lib/types.ts"
-import { z } from "zod";
+import { z } from 'zod';
 
 /* ...rest of the file... */
 
@@ -410,15 +384,15 @@ This schema defines the structure of the explanation that the model will generat
 
 ```ts filename="app/actions.ts" highlight="2,19,20"
 // other imports
-import { explanationSchema } from "@/lib/types";
+import { explanationSchema } from '@/lib/types';
 
 /* ...rest of the file... */
 
 export const explainQuery = async (input: string, sqlQuery: string) => {
-  "use server";
+  'use server';
   try {
-    const result = await generateText({
-      model: "openai/gpt-4o",
+    const result = await generateObject({
+      model: openai('gpt-4o'),
       system: `You are a SQL (postgres) expert. ...`, // SYSTEM PROMPT AS ABOVE - OMITTED FOR BREVITY
       prompt: `Explain the SQL query you generated to retrieve the data the user wanted. Assume the user is not an expert in SQL. Break down the query into steps. Be concise.
 
@@ -427,18 +401,19 @@ export const explainQuery = async (input: string, sqlQuery: string) => {
 
       Generated SQL Query:
       ${sqlQuery}`,
-      output: Output.array({ element: explanationSchema }),
+      schema: explanationSchema,
+      output: 'array',
     });
-    return result.output;
+    return result.object;
   } catch (e) {
     console.error(e);
-    throw new Error("Failed to generate query");
+    throw new Error('Failed to generate query');
   }
 };
 ```
 
-You can use `Output.array()` to indicate to the model that you expect an array
-of objects matching the schema to be returned.
+You can use `output: "array"` to indicate to the model that you expect an
+array of objects matching the schema to be returned.
 
 ### Update query viewer
 
@@ -446,7 +421,7 @@ Next, update the `query-viewer.tsx` component to display these explanations. The
 
 ```ts filename="components/query-viewer.tsx" highlight="2,10,11"
 /* ...other imports... */
-import { explainQuery } from "@/app/actions";
+import { explainQuery } from '@/app/actions';
 
 /* ...rest of the component... */
 
@@ -478,7 +453,7 @@ Finally, let's render the query results visually in a chart. There are two appro
 
 1. Send both the query and data to the model and ask it to return the data in a visualization-ready format. While this provides complete control over the visualization, it requires the model to send back all of the data, which significantly increases latency and costs.
 
-2. Send the query and data to the model and ask it to generate a chart configuration (fixed-size and not many tokens) that maps your data appropriately. This configuration specifies how to visualize the information while delivering the insights from your natural language query. Importantly, this is done without requiring the model return the full dataset.
+2. Send the query and data to the model and ask it to generate a chart configuration (fixed-size and not many tokens) that maps your data appropriately. This configuration specifies how to visualize the information while delivering the insights from your natural language query. Importnatly, this is done without requiring the model return the full dataset.
 
 Since you don't know the SQL query or data shape beforehand, let's use the second approach to dynamically generate chart configurations based on the query results and user intent.
 
@@ -500,45 +475,45 @@ export const configSchema = z
     description: z
       .string()
       .describe(
-        "Describe the chart. What is it showing? What is interesting about the way the data is displayed?",
+        'Describe the chart. What is it showing? What is interesting about the way the data is displayed?',
       ),
-    takeaway: z.string().describe("What is the main takeaway from the chart?"),
-    type: z.enum(["bar", "line", "area", "pie"]).describe("Type of chart"),
+    takeaway: z.string().describe('What is the main takeaway from the chart?'),
+    type: z.enum(['bar', 'line', 'area', 'pie']).describe('Type of chart'),
     title: z.string(),
-    xKey: z.string().describe("Key for x-axis or category"),
+    xKey: z.string().describe('Key for x-axis or category'),
     yKeys: z
       .array(z.string())
       .describe(
-        "Key(s) for y-axis values this is typically the quantitative column",
+        'Key(s) for y-axis values this is typically the quantitative column',
       ),
     multipleLines: z
       .boolean()
       .describe(
-        "For line charts only: whether the chart is comparing groups of data.",
+        'For line charts only: whether the chart is comparing groups of data.',
       )
       .optional(),
     measurementColumn: z
       .string()
       .describe(
-        "For line charts only: key for quantitative y-axis column to measure against (eg. values, counts etc.)",
+        'For line charts only: key for quantitative y-axis column to measure against (eg. values, counts etc.)',
       )
       .optional(),
     lineCategories: z
       .array(z.string())
       .describe(
-        "For line charts only: Categories used to compare different lines or data series. Each category represents a distinct line in the chart.",
+        'For line charts only: Categories used to compare different lines or data series. Each category represents a distinct line in the chart.',
       )
       .optional(),
     colors: z
       .record(
-        z.string().describe("Any of the yKeys"),
-        z.string().describe("Color value in CSS format (e.g., hex, rgb, hsl)"),
+        z.string().describe('Any of the yKeys'),
+        z.string().describe('Color value in CSS format (e.g., hex, rgb, hsl)'),
       )
-      .describe("Mapping of data keys to color values for chart elements")
+      .describe('Mapping of data keys to color values for chart elements')
       .optional(),
-    legend: z.boolean().describe("Whether to show legend"),
+    legend: z.boolean().describe('Whether to show legend'),
   })
-  .describe("Chart configuration object");
+  .describe('Chart configuration object');
 
 export type Config = z.infer<typeof configSchema>;
 ```
@@ -555,7 +530,7 @@ Create a new action in `app/actions.ts`:
 
 ```ts
 /* ...other imports... */
-import { Config, configSchema, explanationsSchema, Result } from "@/lib/types";
+import { Config, configSchema, explanationsSchema, Result } from '@/lib/types';
 
 /* ...rest of the file... */
 
@@ -563,12 +538,12 @@ export const generateChartConfig = async (
   results: Result[],
   userQuery: string,
 ) => {
-  "use server";
+  'use server';
 
   try {
-    const { output: config } = await generateText({
-      model: "openai/gpt-4o",
-      system: "You are a data visualization expert.",
+    const { object: config } = await generateObject({
+      model: openai('gpt-4o'),
+      system: 'You are a data visualization expert.',
       prompt: `Given the following data from a SQL query result, generate the chart config that best visualises the data and answers the users query.
       For multiple groups use multi-lines.
 
@@ -590,7 +565,7 @@ export const generateChartConfig = async (
 
       Data:
       ${JSON.stringify(results, null, 2)}`,
-      output: Output.object({ schema: configSchema }),
+      schema: configSchema,
     });
 
     // Override with shadcn theme colors
@@ -603,7 +578,7 @@ export const generateChartConfig = async (
     return { config: updatedConfig };
   } catch (e) {
     console.error(e);
-    throw new Error("Failed to generate chart suggestion");
+    throw new Error('Failed to generate chart suggestion');
   }
 };
 ```
@@ -616,7 +591,7 @@ Update the `handleSubmit` function in your root page (`app/page.tsx`) to generat
 
 ```typescript filename="app/page.tsx" highlight="38,39"
 /* ...other imports... */
-import { getCompanies, generateQuery, generateChartConfig } from "./actions";
+import { getCompanies, generateQuery, generateChartConfig } from './actions';
 
 /* ...rest of the file... */
 const handleSubmit = async (suggestion?: string) => {
@@ -631,13 +606,13 @@ const handleSubmit = async (suggestion?: string) => {
 
   setLoading(true);
   setLoadingStep(1);
-  setActiveQuery("");
+  setActiveQuery('');
 
   try {
     const query = await generateQuery(question);
 
     if (query === undefined) {
-      toast.error("An error occurred. Please try again.");
+      toast.error('An error occurred. Please try again.');
       setLoading(false);
       return;
     }
@@ -655,7 +630,7 @@ const handleSubmit = async (suggestion?: string) => {
     const { config } = await generateChartConfig(companies, question);
     setChartConfig(config);
   } catch (e) {
-    toast.error("An error occurred. Please try again.");
+    toast.error('An error occurred. Please try again.');
     setLoading(false);
   }
 };

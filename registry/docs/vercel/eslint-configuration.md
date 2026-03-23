@@ -62,5 +62,5 @@ You should also add `"eslint-config-custom": "workspace:*"` to your
 
 title: "ESLINT\_NEXT\_RULES\_REQUIRED"
 description: "Requires that a workspace package is configured with required Next.js plugins and rules"
-last\_updated: "2026-03-08T05:03:12.631Z"
+last\_updated: "2026-03-23T09:40:07.505Z"
 source: "https://vercel.com/docs/conformance/rules/ESLINT\_NEXT\_RULES\_REQUIRED"

@@ -2,6 +2,8 @@
 
 Build a marketplace to connect sellers with customers and facilitate the exchange of physical or digital items or services.
 
+> This guide uses Accounts v2 to create and manage connected accounts. For a guide that uses Accounts v1, see [Build a marketplace with Accounts v1](https://docs.stripe.com/connect/end-to-end-marketplace.md).
+
 A marketplace provides a single storefront that offers products and services from many sellers. Customers pay the marketplace, and see the marketplace’s name on their receipt. The marketplace then pays the sellers. Traditional marketplaces, like Amazon and TixTrack, facilitate the sale of physical or digital items. Businesses such as Lyft and Instacart, which connect customers to vendors that offer services, are also considered marketplaces.
 
 Use this guide if you’re creating a marketplace where:

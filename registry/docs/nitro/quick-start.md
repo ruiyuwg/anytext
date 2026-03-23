@@ -1,0 +1,114 @@
+# Quick Start
+
+## Try Nitro online
+
+Get a taste of Nitro in your browser using our playground.
+
+[Play with Nitro in StackBlitz](https://stackblitz.com/github/nitrojs/starter/tree/v3-vite?file=index.html,server.ts){rel=""nofollow""}
+
+## Create a Nitro project
+
+The fastest way to create a Nitro application is using the `create-nitro-app`.
+
+::note
+Make sure to have installed the latest LTS version of either [Node.js](https://nodejs.org/en){rel=""nofollow""}, [Bun](https://bun.sh/){rel=""nofollow""}, or [Deno](https://deno.com/){rel=""nofollow""}.
+::
+
+:pm-x{command="create-nitro-app"}
+
+Preview
+
+::div{style="display:flex;justify-content:center;"}
+![Preview](https://github.com/nitrojs/create-nitro-app/blob/main/.images/preview.png?raw=true){style="max-width:100%;height:auto;display:block;"}
+::
+
+Follow the instructions from the CLI and you will be ready to start your development server.
+
+## Add to a Vite project
+
+You can add Nitro to any existing Vite project to get API routes, server-side rendering, and more.
+
+::steps{level="3"}
+
+### Install `nitro` and `vite`
+
+:pm-install{name="nitro vite"}
+
+### Add Nitro plugin to Vite
+
+Add the Nitro plugin to your `vite.config.ts`:
+
+```ts [vite.config.ts] {2,6}
+import { defineConfig } from "vite";
+import { nitro } from "nitro/vite";
+
+export default defineConfig({
+  plugins: [
+    nitro()
+  ],
+});
+```
+
+### Configure Nitro
+
+Create a `nitro.config.ts` to configure the server directory:
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
+  serverDir: "./server",
+});
+```
+
+The `serverDir` option tells Nitro where to look for your server routes. In this example, all routes will be inside the `server/` directory.
+
+### Create an API route
+
+Create your first API route at `server/api/test.ts`:
+
+:::code-tree{default-value="server/api/test.ts"}
+
+```ts [server/api/test.ts]
+import { defineHandler } from "nitro";
+
+export default defineHandler(() => {
+  return { message: "Hello Nitro!" };
+});
+```
+
+```ts [nitro.config.ts]
+import { defineNitroConfig } from "nitro/config";
+
+export default defineNitroConfig({
+  serverDir: "./server",
+});
+```
+
+```ts [vite.config.ts]
+import { defineConfig } from "vite";
+import { nitro } from "nitro/vite";
+
+export default defineConfig({
+  plugins: [nitro()],
+});
+```
+
+:::
+
+The file path maps directly to the route URL — `server/api/test.ts` becomes `/api/test`.
+
+:::tip
+As an alternative to filesystem routing, you can declare routes programmatically using the `routes` config option. See [Programmatic route handlers](https://nitro.build/docs/routing#programmatic-route-handlers) for more details.
+:::
+
+:::tip
+You can return strings, JSON objects, `Response` instances, or readable streams from your handlers. See [Routing](https://nitro.build/docs/routing) for more about dynamic routes, methods, and middleware.
+:::
+
+### Start the development server
+
+:pm-run{script="dev -- --open"}
+
+Your API route is now accessible at `http://localhost:3000/api/test` ✨
+::

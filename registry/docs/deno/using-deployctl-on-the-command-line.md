@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/deployctl
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 `deployctl` is a command line tool (CLI) that lets you operate the Deno Deploy
 platform without leaving your terminal. With it you can deploy your code, create

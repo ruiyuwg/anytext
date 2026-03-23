@@ -30,7 +30,7 @@ Run `next dev` locally to reproduce the error and get additional details.
 
 title: "INVALID\_REQUEST\_METHOD"
 description: "The request method used is invalid or not supported. This is a request error."
-last\_updated: "2026-03-08T05:03:14.213Z"
+last\_updated: "2026-03-23T09:40:09.740Z"
 source: "https://vercel.com/docs/errors/INVALID\_REQUEST\_METHOD"
 
 # INVALID\_REQUEST\_METHOD
@@ -51,7 +51,7 @@ To troubleshoot this error, follow these steps:
 
 title: "MALFORMED\_REQUEST\_HEADER"
 description: "The MALFORMED\_REQUEST\_HEADER error occurs when a request contains an improperly formatted or invalid header. This is a request error."
-last\_updated: "2026-03-08T05:03:14.217Z"
+last\_updated: "2026-03-23T09:40:09.743Z"
 source: "https://vercel.com/docs/errors/MALFORMED\_REQUEST\_HEADER"
 
 # MALFORMED\_REQUEST\_HEADER
@@ -72,7 +72,7 @@ To troubleshoot this error, follow these steps:
 
 title: "MICROFRONTENDS\_MIDDLEWARE\_ERROR"
 description: "The microfrontend middleware returned an invalid application."
-last\_updated: "2026-03-08T05:03:14.220Z"
+last\_updated: "2026-03-23T09:40:09.747Z"
 source: "https://vercel.com/docs/errors/MICROFRONTENDS\_MIDDLEWARE\_ERROR"
 
 # MICROFRONTENDS\_MIDDLEWARE\_ERROR
@@ -88,7 +88,7 @@ To troubleshoot this error, follow these steps:
 
 title: "MICROFRONTENDS\_MISSING\_FALLBACK\_ERROR"
 description: "The microfrontend request did not have a fallback for the environment."
-last\_updated: "2026-03-08T05:03:14.223Z"
+last\_updated: "2026-03-23T09:40:09.750Z"
 source: "https://vercel.com/docs/errors/MICROFRONTENDS\_MISSING\_FALLBACK\_ERROR"
 
 # MICROFRONTENDS\_MISSING\_FALLBACK\_ERROR
@@ -107,7 +107,7 @@ If the issue persists after checking that every project has a deployment in the 
 
 title: "MIDDLEWARE\_INVOCATION\_FAILED"
 description: "The request for an Routing Middleware was not completed successfully. This is an application error."
-last\_updated: "2026-03-08T05:03:14.227Z"
+last\_updated: "2026-03-23T09:40:09.754Z"
 source: "https://vercel.com/docs/errors/MIDDLEWARE\_INVOCATION\_FAILED"
 
 # MIDDLEWARE\_INVOCATION\_FAILED
@@ -128,5 +128,5 @@ To troubleshoot this error, follow these steps:
 
 title: "MIDDLEWARE\_INVOCATION\_TIMEOUT"
 description: "The Routing Middleware invocation timed out. This is an application error."
-last\_updated: "2026-03-08T05:03:14.231Z"
+last\_updated: "2026-03-23T09:40:09.763Z"
 source: "https://vercel.com/docs/errors/MIDDLEWARE\_INVOCATION\_TIMEOUT"

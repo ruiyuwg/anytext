@@ -4,9 +4,9 @@ Source: https://docs.langchain.com/langsmith/llm-as-judge-sdk
 
 LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
 
-This guide shows you how to define an [LLM-as-a-judge evaluator](/langsmith/evaluation-concepts#llm-as-judge) for [offline evaluation](/langsmith/evaluation-concepts#offline-evaluation) using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/observability/sdk).
+This guide shows you how to define an [LLM-as-a-judge evaluator](/langsmith/evaluation-concepts#llm-as-judge) for [offline evaluation](/langsmith/evaluation-concepts#offline-evaluations) using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/observability/sdk).
 
-For a quick start, use [pre-built evaluators](/langsmith/prebuilt-evaluators), which provide ready-to-use LLM-as-a-judge evaluators.
+For a quick start, use [prebuilt evaluators](/langsmith/prebuilt-evaluators), which provide ready-to-use LLM-as-a-judge evaluators.
 
 ## Create your own LLM-as-a-judge evaluator
 

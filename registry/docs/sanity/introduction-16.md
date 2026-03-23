@@ -1,99 +1,69 @@
 # Introduction
 
-While the Studio provides an excellent out-of-the-box experience, its true power lies in its extensive customization capabilities. The React-based framework lets you tailor the editorial experience to your specific workflows.
+Block content in Sanity uses Portable Text, a structured format for rich text that stores content as blocks. It allows you to create content with formatting, custom blocks, and annotations while keeping the content separate from its presentation.
 
-With Sanity Studio customization, you can:
+In Sanity Studio, block content lets you build flexible editing experiences where you can include custom content types, add structured data to text, and control how your content appears across different platforms.
 
-- **Create custom input components** to provide specialized editing interfaces for your content.
-- **Design custom document views** and structure to organize content in ways that make sense for your team.
-- **Add visual enhancements** with custom icons, theming, and UI components.
-- **Extend functionality** with plugins and custom tools that integrate with your existing systems.
-- **Localize** the Studio interface to support your global team's preferred languages.
+Here's what you can do with block content:
 
-> \[!TIP]
-> Studio or App SDK?
-> Sanity Studio is a fully featured Content Management System (CMS) based on your schemas. While highly customizable and extendable, it does come with the assumptions and all the bells and whistles of a CMS.
-> If you rather need a highly specialized workflow or tool to interact with your content without front-loading the entire editorial toolkit, you might consider building a custom application using the [App SDK](https://www.sanity.io/docs/app-sdk).
+- **Create rich text content** with customizable styles, decorators, and annotations.
+- **Embed custom content blocks** like images, videos, or code snippets directly within your text.
+- **Add structured data to text** through annotations, enabling features like internal linking to references.
+- **Customize the editing experience** with your own toolbar icons, block styles, and plugins.
+- **Serialize Portable Text** for a common targets like HTML, React, Vue, Markdown, or even write your own custom serializer.
 
 ## Core concepts
 
-Sanity Studio is built from the ground up with customization in mind. Understanding these core customization areas will help you create the perfect editing environment for your team.
+### Portable Text
 
-### Custom components
+When you define your schema, you define rich text as an array of blocks. This is the fundamental shape of Portable Text.
 
-The Studio's form builder automatically creates editing interfaces based on your schema definitions, but you can replace any input component with your own custom React component. This allows you to create specialized editing experiences for specific content types or fields.
+Portable Text is built on the idea of rich text as an array of blocks, where each block is an array of child spans.
 
-Custom components can range from simple UI enhancements to complex interfaces that integrate with external services or provide specialized editing capabilities.
+#### Blocks
 
-#### Develop custom components
+Blocks are units representing paragraphs, headings, or other block-level elements. Each block can have a style (like normal, h1, h2, etc.) and contains an array of spans or inline objects.
 
-[Custom component for Sanity Studio](https://www.sanity.io/docs/studio/intro-to-custom-studio-components)
+#### Spans
 
-[Form Components](https://www.sanity.io/docs/studio/form-components)
+Spans are the text content within blocks. They can have marks applied to them, which are either simple decorators (like bold or italic) or more complex annotations (like links with structured data).
 
-#### Example components and tutorials
+#### Marks
 
-[Create a time duration object field](https://www.sanity.io/docs/developer-guides/create-a-time-duration-object-field)
+Marks let you label sections of inline text, either for stylistic reasons for to add additional information to the text. There are two types of marks.
 
-[Create a “coupon generator” string field input](https://www.sanity.io/docs/developer-guides/create-a-coupon-generator-string-field-input)
+Decorators are simple marks applied to spans, like bold, italic, or inline code formatting. They're stored as string values in the marks array of a span.
 
-[Create an array input field with selectable templates](https://www.sanity.io/docs/developer-guides/create-an-array-input-field-with-selectable-templates)
+Annotations are more complex marks that can contain structured data. For example, a link annotation might include a URL or a reference to another document.
 
-[Create a document form progress component](https://www.sanity.io/docs/developer-guides/create-a-document-progress-root-level-component)
+#### Custom blocks
 
-[Create a visual string selector field input](https://www.sanity.io/docs/developer-guides/create-a-rich-string-selector-field-input)
+Beyond text blocks, Portable Text allows you to insert custom content blocks like images, videos, or any other content type you define. These appear as separate items in the Portable Text array.
 
-[Create a survey rating number field input](https://www.sanity.io/docs/developer-guides/create-a-survey-rating-number-field-input)
+### The Portable Text Editor
 
-[Create a time duration object field](https://www.sanity.io/docs/developer-guides/create-a-time-duration-object-field)
+When you use an array of blocks in your schema, Studio inserts a pre-configured version of the Portable Text Editor(PTE). The editor itself is open source and allows you to build on top of the same foundation that Studio uses for its rich text experience. Learn more about the [standalone editor](https://portabletext.org).
 
-### Structure builder
+### Extending the editor in Studio
 
-The Structure Builder gives you complete control over how documents are organized and presented in the Studio. You can customize document lists, create custom views, build specialized navigation, and design intuitive workflows for your content editors.
+You can customize the built-in editor experience by customizing blocks individually, and by creating behavior plugins. You can even replace the entire editor with your own implementation of the standalone PTE.
 
-With Structure Builder, you can move beyond the default document type lists to create an information architecture that matches your team's mental model of the content.
+### Rendering Portable Text in your apps
 
-#### Get started with structure builder
-
-[Structure tool and Structure builder](https://www.sanity.io/docs/studio/structure-introduction)
-
-### Visual customization
-
-Sanity Studio can be visually customized to match your brand or to improve the editing experience. This includes:
-
-- **Theming**: Customize colors, typography, and spacing.
-- **Icons**: Replace default icons with custom ones for document types and fields.
-- **Sanity UI**: Use the built-in UI component library to create consistent interfaces.
-- **Favicons**: Add your own favicon to make the Studio recognizable in browser tabs.
-
-#### Bring your brand to Studio
-
-[Icons](https://www.sanity.io/docs/studio/icons-for-data-types)
-
-[Favicons](https://www.sanity.io/docs/studio/favicons)
-
-[Theming](https://www.sanity.io/docs/studio/theming)
-
-[Sanity UI](https://www.sanity.io/docs/studio/sanity-ui)
-
-### Tools and plugins
-
-The Studio can be extended with custom tools and plugins that add new functionality to the editing environment:
-
-- **Custom tools**: Create entirely new sections in the Studio for specialized workflows.
-- **Plugins**: Install or create plugins that add features like the Dashboard, Comments, or AI Assist.
-- **Integrations**: Connect the Studio to external services and systems.
-
-#### Popular tools and plugins
-
-[The Vision Plugin](https://www.sanity.io/docs/content-lake/the-vision-plugin)
-
-[AI Assist for Studio](https://www.sanity.io/docs/studio/install-and-configure-sanity-ai-assist)
-
-[Explore the Sanity Exchange](https://www.sanity.io/exchange)
+Because block content uses the Portable Text specification, you can use any portable text serializer to render the content in your front end code.
 
 ## Limitations
 
-- Custom components should be compatible with Sanity's real-time collaboration system.
-- Some advanced customizations may require deeper knowledge of React and Sanity's internal APIs.
-- Custom tools and plugins may need to be updated when new versions of the Studio are released.
+### Attribute limits
+
+Block content is powerful, but can sometimes lead to complex documents made up of many attributes. Refer to the [advice in this guide on attribute limits](https://www.sanity.io/docs/content-lake/attribute-limit) to use block content responsibly.
+
+#### Related articles
+
+[Block](https://www.sanity.io/docs/studio/block-type)
+
+[Configure the Portable Text Editor](https://www.sanity.io/docs/studio/portable-text-editor-configuration)
+
+[Add Portable Text Editor plugins to Studio](https://www.sanity.io/docs/studio/add-portable-text-plugins)
+
+[Attribute limit](https://www.sanity.io/docs/content-lake/attribute-limit)

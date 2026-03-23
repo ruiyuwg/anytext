@@ -37,7 +37,7 @@ You can access Google's `gemini` and `gemini-vision` models, as well as other
 generative models in LangChain through `ChatGoogleGenerativeAI` class in the
 `@langchain/google-genai` integration package.
 
-You can also access Google's `gemini` family of models via the LangChain VertexAI and VertexAI-web integrations. Click [here](/oss/javascript/integrations/chat/google_vertex_ai) to read the docs.
+You can also access Google's `gemini` family of models via the LangChain VertexAI and VertexAI-web integrations. See the [Vertex AI integration docs](/oss/javascript/integrations/chat/google_vertex_ai).
 
 ### Credentials
 

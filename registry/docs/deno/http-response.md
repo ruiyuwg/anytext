@@ -2,9 +2,9 @@
 
 URL: https://docs.deno.com/deploy/classic/api/runtime-response
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-Deno Deploy platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new Deno Deploy platform. See the
+migration guide for details.
 
 The [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)
 interface is part of the Fetch API and represents a response resource of

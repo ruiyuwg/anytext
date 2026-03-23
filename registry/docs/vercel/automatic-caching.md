@@ -8,8 +8,8 @@ When you set `caching: 'auto'` and the request routes to a provider that require
 
 **Default behavior**: When `caching` is not set, AI Gateway passes your request through without modification. Providers with implicit caching still cache automatically. For Anthropic, you'll need to set `caching: 'auto'` or manually add cache markers to your messages.
 
-> **💡 Note:** **Supported providers:** Automatic caching works with Anthropic (direct and
-> Vertex) and MiniMax. Bedrock is not yet supported for automatic caching.
+> **💡 Note:** **Supported providers:** Automatic caching works with Anthropic (direct,
+> Vertex, and Bedrock) and MiniMax.
 
 ## Examples
 
@@ -208,17 +208,17 @@ For fine-grained control over what gets cached, you can manually add cache marke
 
 ## Provider behavior
 
-| Provider               | Caching type  | `caching: 'auto'` effect                          |
-| ---------------------- | ------------- | ------------------------------------------------- |
-| OpenAI                 | Implicit      | No change needed. Caching happens automatically.  |
-| Google                 | Implicit      | No change needed. Caching happens automatically.  |
-| DeepSeek               | Implicit      | No change needed. Caching happens automatically.  |
-| Anthropic              | Explicit      | Adds `cache_control` breakpoint to static content |
-| Anthropic (via Vertex) | Explicit      | Adds `cache_control` breakpoint to static content |
-| MiniMax                | Explicit      | Adds cache markers to static content              |
-| Bedrock                | Not supported | No effect                                         |
+| Provider                | Caching type | `caching: 'auto'` effect                          |
+| ----------------------- | ------------ | ------------------------------------------------- |
+| OpenAI                  | Implicit     | No change needed. Caching happens automatically.  |
+| Google                  | Implicit     | No change needed. Caching happens automatically.  |
+| DeepSeek                | Implicit     | No change needed. Caching happens automatically.  |
+| Anthropic               | Explicit     | Adds `cache_control` breakpoint to static content |
+| Anthropic (via Vertex)  | Explicit     | Adds `cache_control` breakpoint to static content |
+| Anthropic (via Bedrock) | Explicit     | Adds `cache_control` breakpoint to static content |
+| MiniMax                 | Explicit     | Adds cache markers to static content              |
 
 title: "Model Fallbacks"
 description: "Configure model-level failover to try backup models when the primary model is unavailable"
-last\_updated: "2026-03-08T05:03:10.507Z"
+last\_updated: "2026-03-23T09:40:04.483Z"
 source: "https://vercel.com/docs/ai-gateway/models-and-providers/model-fallbacks"

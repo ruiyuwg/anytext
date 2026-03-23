@@ -145,6 +145,10 @@ Comprehensive API reference documentation for the LangChain and LangGraph Python
 ## Reference sites
 
 ```
+Build agents that can plan, use subagents, and leverage file systems for complex tasks.
+
+
+
 Complete API reference for LangChain Python, including chat models, tools, agents, and more.
 
 
@@ -158,10 +162,6 @@ LangChain packages to connect with popular LLM providers, vector stores, tools, 
 
 
 Use Model Context Protocol (MCP) tools within LangChain and LangGraph applications.
-
-
-
-Build agents that can plan, use subagents, and leverage file systems for complex tasks.
 ```
 
 ***

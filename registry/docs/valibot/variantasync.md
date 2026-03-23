@@ -687,6 +687,34 @@ Bytes issue interface.
   - `received`
   - `requirement`
 
+### Cache
+
+Cache interface type.
+
+> Hint: The `key` method uses value-based keys for primitive inputs and reference-identity keys for object and function inputs.
+
+#### Generics
+
+- `TValue`
+
+#### Definition
+
+- `Cache`
+  - `key`
+  - `get`
+  - `set`
+  - `clear`
+
+### CacheConfig
+
+Cache config interface.
+
+#### Definition
+
+- `CacheConfig`
+  - `maxSize?`
+  - `maxAge?`
+
 ### CheckAction
 
 Check action interface.
@@ -3268,6 +3296,41 @@ Path item type.
 #### Definition
 
 - `IssuePathItem`
+
+### JwsCompactAction
+
+JWS compact action interface.
+
+#### Generics
+
+- `TInput`
+- `TMessage`
+
+#### Definition
+
+- `JwsCompactAction`
+  - `type`
+  - `reference`
+  - `expects`
+  - `requirement`
+  - `message`
+
+### JwsCompactIssue
+
+JWS compact issue interface.
+
+#### Generics
+
+- `TInput`
+
+#### Definition
+
+- `JwsCompactIssue`
+  - `kind`
+  - `type`
+  - `expected`
+  - `received`
+  - `requirement`
 
 ### LazySchema
 

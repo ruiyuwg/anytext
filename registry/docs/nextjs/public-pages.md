@@ -10,7 +10,7 @@ This guide will show you how to build public pages that share data across users.
 
 As an example, we'll build a product list page.
 
-We'll start with a static header, add a product list with async external data, and learn how to render it without blocking the response. Finally, we'll add a user-specific promotion banner without switching the entire page to [request-time rendering](/docs/app/glossary#request-time-rendering).
+We'll start with a static header, add a product list with async external data, and learn how to render it without blocking the response. Finally, we'll add a user-specific promotion banner without switching the entire page to [dynamic rendering](/docs/app/glossary#dynamic-rendering).
 
 You can find the resources used in this example here:
 
@@ -25,7 +25,7 @@ Let's start with a simple header.
 ```tsx filename="app/products/page.tsx"
 // Static component
 function Header() {
-  return <h1>Shop</h1>;
+  return <h1>Shop</h1>
 }
 
 export default async function Page() {
@@ -33,7 +33,7 @@ export default async function Page() {
     <>
       <Header />
     </>
-  );
+  )
 }
 ```
 
@@ -60,15 +60,15 @@ Notice that the product route is marked as static, even though we didn't add any
 Now, let's fetch and render our product list.
 
 ```tsx filename="app/products/page.tsx"
-import db from "@/db";
-import { List } from "@/app/products/ui";
+import db from '@/db'
+import { List } from '@/app/products/ui'
 
 function Header() {}
 
 // Dynamic component
 async function ProductList() {
-  const products = await db.product.findMany();
-  return <List items={products} />;
+  const products = await db.product.findMany()
+  return <List items={products} />
 }
 
 export default async function Page() {
@@ -77,7 +77,7 @@ export default async function Page() {
       <Header />
       <ProductList />
     </>
-  );
+  )
 }
 ```
 
@@ -107,16 +107,16 @@ In our case, the product catalog is shared across all users, so caching is the r
 We can mark a function as cacheable using the [`'use cache'`](/docs/app/api-reference/directives/use-cache) directive.
 
 ```tsx filename="app/products/page.tsx"
-import db from "@/db";
-import { List } from "@/app/products/ui";
+import db from '@/db'
+import { List } from '@/app/products/ui'
 
 function Header() {}
 
 // Cache component
 async function ProductList() {
-  "use cache";
-  const products = await db.product.findMany();
-  return <List items={products} />;
+  'use cache'
+  const products = await db.product.findMany()
+  return <List items={products} />
 }
 
 export default async function Page() {
@@ -125,7 +125,7 @@ export default async function Page() {
       <Header />
       <ProductList />
     </>
-  );
+  )
 }
 ```
 
@@ -150,9 +150,9 @@ But, pages rarely stay static forever.
 Sooner or later, even simple pages need some dynamic content. To demonstrate this, let's add a promotional banner:
 
 ```tsx filename="app/products/page.tsx"
-import db from "@/db";
-import { List, Promotion } from "@/app/products/ui";
-import { getPromotion } from "@/app/products/data";
+import db from '@/db'
+import { List, Promotion } from '@/app/products/ui'
+import { getPromotion } from '@/app/products/data'
 
 function Header() {}
 
@@ -160,8 +160,8 @@ async function ProductList() {}
 
 // Dynamic component
 async function PromotionContent() {
-  const promotion = await getPromotion();
-  return <Promotion data={promotion} />;
+  const promotion = await getPromotion()
+  return <Promotion data={promotion} />
 }
 
 export default async function Page() {
@@ -171,7 +171,7 @@ export default async function Page() {
       <Header />
       <ProductList />
     </>
-  );
+  )
 }
 ```
 
@@ -183,13 +183,13 @@ Last time, the data was shared, so it could be cached. This time, the promotion 
 
 Adding dynamic content doesn't mean we have to go back to a fully blocking render. We can unblock the response with streaming.
 
-Next.js supports streaming by default. We can use a [Suspense boundary](/docs/app/glossary#suspense-boundary) to tell the framework where to slice the streamed response into _chunks_, and what fallback UI to show while content loads.
+Next.js supports streaming by default. We can use a [Suspense boundary](/docs/app/glossary#suspense-boundary) to tell the framework where to slice the streamed response into *chunks*, and what fallback UI to show while content loads.
 
 ```tsx filename="app/products/page.tsx"
-import { Suspense } from "react";
-import db from "@/db";
-import { List, Promotion, PromotionSkeleton } from "@/app/products/ui";
-import { getPromotion } from "@/app/products/data";
+import { Suspense } from 'react'
+import db from '@/db'
+import { List, Promotion, PromotionSkeleton } from '@/app/products/ui'
+import { getPromotion } from '@/app/products/data'
 
 function Header() {}
 
@@ -197,8 +197,8 @@ async function ProductList() {}
 
 // Dynamic component (streamed)
 async function PromotionContent() {
-  const promotion = await getPromotion();
-  return <Promotion data={promotion} />;
+  const promotion = await getPromotion()
+  return <Promotion data={promotion} />
 }
 
 export default async function Page() {
@@ -210,7 +210,7 @@ export default async function Page() {
       <Header />
       <ProductList />
     </>
-  );
+  )
 }
 ```
 
@@ -230,7 +230,7 @@ Route (app)      Revalidate  Expire
 
 At [**build time**](/docs/app/glossary#build-time), most of the page, including the header, product list and promotion fallback, is rendered, cached and pushed to a content delivery network.
 
-At [**request time**](/docs/app/glossary#request-time), the prerendered part is served instantly from a CDN node close to the user.
+At [**request time**](/docs/app/glossary#dynamic-rendering), the prerendered part is served instantly from a CDN node close to the user.
 
 In parallel, the user specific promotion is rendered on the server, streamed to the client, and swapped into the fallback slot.
 

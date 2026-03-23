@@ -106,7 +106,7 @@ const client = createClient({
   apiVersion: '2025-03-25',
   useCdn: false,
   token: 'your-token',
-  '~experimental_resource': {
+  resource: {
     type: 'media-library',
     id: 'your-media-library-id',
   },

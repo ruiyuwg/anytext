@@ -449,5 +449,5 @@ For complete API documentation, see:
 
 title: "OpenAI Responses API"
 description: "Use the OpenAI Responses API with AI Gateway to generate text, call tools, stream tokens, and more across any supported provider."
-last\_updated: "2026-03-08T05:03:10.855Z"
+last\_updated: "2026-03-23T09:40:04.975Z"
 source: "https://vercel.com/docs/ai-gateway/sdks-and-apis/responses"

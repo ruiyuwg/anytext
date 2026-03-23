@@ -8,7 +8,7 @@ However, sometimes you need to be more flexible. Think of long social media post
 
 There is currently no default solution for that in the React Native ecosystem. However, this guide explores some options and promising approaches, each with its own tradeoffs.
 
-[Watch: How to implement a Rich Text Editor using DOM components](https://www.youtube.com/watch?v=CxORa1tXMjw)
+[Watch: How to implement a Rich Text Editor using DOM components](https://www.youtube.com/watch?v=CxORa1tXMjw) — Build a rich text editor in React Native using Expo DOM components to render a web-based editor inside a native app.
 
 ## Render rich text
 

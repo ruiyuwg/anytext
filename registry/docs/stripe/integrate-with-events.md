@@ -4,7 +4,7 @@ Send events from Stripe to webhook endpoints and cloud services.
 
 > [Thin events](https://docs.stripe.com/event-destinations.md#thin-events) for API v1 resources are available in private preview. You can use them to streamline integration upgrades without changing your webhook configuration. Previously, thin events only supported API v2 resources. [Learn more and request access](https://docs.google.com/forms/d/e/1FAIpQLSeEkqzB02afvlklMkqwA6wsBH90eW8gxmc-hBOvqe2N6TRujQ/viewform?usp=dialog).
 
-Set up an event destination to receive events from Stripe across multiple destination types, including webhook endpoints, and [Amazon EventBridge](https://docs.stripe.com/event-destinations/eventbridge.md). You can receive events in either:
+Set up an event destination to receive events from Stripe across multiple destination types, including webhook endpoints and [Amazon EventBridge](https://docs.stripe.com/event-destinations/eventbridge.md). You can receive events in either:
 
 - Self-contained [snapshot events](https://docs.stripe.com/event-destinations.md#choosing-event-format) for a point-in-time view of your resources
 - Lightweight [thin events](https://docs.stripe.com/event-destinations.md#thin-events) to guarantee you always act on the most up-to-date data, which help simplify your integration upgrade process
@@ -21,7 +21,7 @@ With an event destination, Stripe pushes real-time event data from your account,
 
 ## Supported destination types
 
-Send events to an AWS account using [Amazon EventBridge](https://docs.stripe.com/event-destinations/eventbridge.md), or deliver them to an HTTPS endpoint through [webhook endpoints](https://docs.stripe.com/webhooks.md).
+Send events to an AWS account using [Amazon EventBridge](https://docs.stripe.com/event-destinations/eventbridge.md) or deliver them to an HTTPS endpoint through [webhook endpoints](https://docs.stripe.com/webhooks.md).
 
 ## Events overview
 
@@ -58,42 +58,36 @@ This table outlines high-level differences across thin events and snapshot event
 
 ### Example thin event notification payload
 
-The following is an example of an `v1.billing.meter.error_report_triggered` event. The `data` hash below won’t be accessible in the event notification sent to the destination. The `related_object` field includes the `id` of the object, but doesn’t include the object record itself.
+The following is an example of a `v2.core.account.updated` thin event. The `related_object` field includes the `id` of the object, the `reason` field shows what triggered the event, and the `changes` field shows what changed on the object.
 
 ```json
 {
-  "id": "evt_test_65R9Ijk8dKEYZcXeRWn16R9A7j1FSQ3w3TGDPLLGSM4CW0",
+  "id": "evt_test_65UIRNU7G1XbhCfOim416TgmEI4ASQ3jHxXt8RFwXoeVwO",
   "object": "v2.core.event",
-  "type": "v1.billing.meter.error_report_triggered",
+  "type": "v2.core.account.updated",
   "livemode": false,
-  "created": "2024-09-17T06:20:52.246Z",
+  "created": "2026-03-09T13:00:28.435Z",
+  "context": null,
+  "reason": {
+    "type": "request",
+    "request": {
+      "id": "req_v2y9y15XqG3Futmjg",
+      "idempotency_key": "ik_TgmEI3jHxXt8RFw4jS7ve2QcAReDQWBjPAkAEUm"
+    }
+  },
   "related_object": {
-    "id": "mtr_test_61R9IeP0SgKbYROOx41PEAQhH0qO23oW",
-    "type": "billing.meter",
-    "url": "/v1/billing/meters/mtr_test_61R9IeP0SgKbYROOx41PEAQhH0qO23oW"
-  }
-  "data": {
-    "developer_message_summary": "There is 1 invalid event",
-    "reason": {
-      "error_count": 1,
-      "error_types": [
-        {
-          "code": "meter_event_no_customer_defined",
-          "error_count": 1,
-          "sample_errors": [
-            {
-              "error_message": "Customer mapping key stripe_customer_id not found in payload.",
-              "request": {
-                "id": "",
-                "idempotency_key": "37c741d8-1f7e-4adc-af16-afdca1d73b37"
-              }
-            }
-          ]
-        }
-      ]
+    "id": "acct_1T93Q4Pmpb34Vto6",
+    "type": "v2.core.account",
+    "url": "/v2/core/accounts/acct_1T93Q4Pmpb34Vto6"
+  },
+  "data": {},
+  "changes": {
+    "before": {
+      "display_name": "Example Account"
     },
-    "validation_end": "2024-08-28T20:54:10.000Z",
-    "validation_start": "2024-08-28T20:54:00.000Z"
+    "after": {
+      "display_name": "Updated Example Account"
+    }
   }
 }
 ```

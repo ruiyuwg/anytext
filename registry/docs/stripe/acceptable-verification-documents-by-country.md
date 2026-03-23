@@ -19,6 +19,19 @@ See the following list of documents that Stripe accepts as proof of identity, ad
 - Documents must not be cropped or missing pages with crucial information, and all borders must be visible
 - If the country of residence differs from the country of the account, a passport is required for identity verification
 
+## How to use this page
+
+If you received a verification request from Stripe, follow these steps:
+
+1. Select your country from the dropdown below
+2. Choose the document type you need to provide:
+   - **Identity documents**: Passport, driver’s license, or government-issued ID
+   - **Address documents**: Utility bill, bank statement, or other proof of address
+   - **Company or entity documents**: Business registration, tax documents, or incorporation papers
+   - **Bank account documents**: Bank statements or account verification
+   - **Registration status**: Nonprofit or charity registration documents
+   - **Relationship documents**: Documents proving ownership or directorship
+
 ## Select a country to view its requirements
 
 #### Item 1
@@ -39,6 +52,8 @@ Required information:
 - Full legal name that matches the name in your settings
 - Date of birth (DOB) that matches what’s in your settings
 - Photo of person (except where exclusions apply)
+
+If you don’t have any of the listed identity documents or your document was rejected, [contact Stripe support](https://support.stripe.com/contact) for alternative verification options.
 
 #### Item 2
 
@@ -62,6 +77,8 @@ Be aware of the following exceptions:
 - For Singapore based Stripe accounts, a CN ID Card is acceptable as proof of Address.
 - A Turkish Resident Certificate is an acceptable form of address verification for Turkey based account representatives.
 
+If you can’t provide any of the listed address documents, see our [cross border verification requirements](https://docs.stripe.com/acceptable-verification-documents.md#cross-border-verification-requirements) above, or [contact Stripe support](https://support.stripe.com/contact).
+
 #### Item 3
 
 Required information:
@@ -75,6 +92,17 @@ Required information:
 #### Item 2
 
 - All documents must be issued or notarized in the last 12 months.
+
+#### Item 3
+
+- Stripe verifies your business differently depending on whether your business uses an EIN or SSN for tax purposes.
+- **If your business has an EIN** (Multi-member LLC, private/public partnership, private/public corporation, unincorporated association, non-profit, government entity): Acceptable documents include IRS Letter 147C, IRS SS-4 confirmation letter, IRS Fax Transmission Letter, or EIN Assistance Letter.
+- **If you use your SSN** (Individual, sole proprietorship, single-member LLC): Stripe checks against the individual listed as owner, not your DBA or business name.
+- The business name on your document must exactly match the legal business name registered with the IRS.
+- An SS-4 application isn’t the same as an SS-4 confirmation letter. The confirmation letter is sent from the IRS after you have successfully submitted your SS-4 application.
+- Check your most recent Form W-9 or tax return to determine whether you use an EIN or SSN for your business.
+
+If your entity type isn’t listed, you can’t provide any of the documents listed above, or your document was rejected and you’re not sure why, [contact Stripe support](https://support.stripe.com/contact) for guidance on acceptable alternatives.
 
 #### Item 4
 
@@ -635,6 +663,9 @@ Required information:
 
 **Country-specific:**
 
+- [Tax ID verification guidelines by business type in the US](https://support.stripe.com/questions/tax-id-verification-guidelines-by-business-type-in-the-us)
+- [Business requirements for US companies](https://support.stripe.com/questions/business-rep-owner-tax-id-requirements-for-us-companies)
+- [Business requirements for sole proprietorships](https://support.stripe.com/questions/business-rep-owner-tax-id-requirements-for-us-companies-sole-proprietorship-accounts)
 - [2023/2024 US verification requirements updates for Standard and Express Platforms: FAQs](https://support.stripe.com/questions/2023-2024-us-verification-requirements-updates-for-standard-and-express-platforms-faqs)
 - [2024 updates to US verification requirements FAQ](https://support.stripe.com/questions/2024-updates-to-us-verification-requirements-faq)
 - [How to check your EIN status with the IRS](https://support.stripe.com/questions/how-to-check-your-ein-status-with-the-irs)
@@ -642,7 +673,7 @@ Required information:
 - [Signing up for a US Stripe account without a tax ID or employer ID number](https://support.stripe.com/questions/signing-up-for-a-us-stripe-account-without-a-tax-id-or-employer-id-number)
 - [Tax ID Number (TIN) format is different than Stripe’s suggested TIN format in the dashboard](https://support.stripe.com/questions/tax-id-number-\(tin\)-format-is-different-than-stripe-s-suggested-tin-format-in-the-dashboard)
 - [Tax information to submit when signing up for Stripe as a US-based nonprofit or tax-exempt organization](https://support.stripe.com/questions/tax-information-to-submit-when-signing-up-for-stripe-as-a-us-based-nonprofit-or-tax-exempt-organization)
-- [“This combination of tax ID and legal name was not recognized by the IRS” error when entering tax ID for verification](https://support.stripe.com/questions/this-combination-of-tax-id-and-legal-name-was-not-recognized-by-the-irs-error-when-entering-tax-id-for-verification)
+- [“This combination of tax ID and legal name wasn’t recognized by the IRS” error when entering tax ID for verification](https://support.stripe.com/questions/this-combination-of-tax-id-and-legal-name-was-not-recognized-by-the-irs-error-when-entering-tax-id-for-verification)
 - [Using IRS documentation as reference when entering business name and tax ID number (TIN) for US-based businesses](https://support.stripe.com/questions/using-irs-documentation-as-reference-when-entering-business-name-and-tax-id-number-%28tin%29-for-us-based-businesses)
 - [“Verify your tax information” error messages](https://support.stripe.com/questions/verify-your-tax-information-error-messages)
 
@@ -656,8 +687,34 @@ Required information:
 
 - [Beneficial Ownership Requirements: United States](https://support.stripe.com/questions/beneficial-ownership-requirements-united-states)
 
+## Why was my document rejected?
+
+If Stripe rejected your document, it’s usually for one of these reasons:
+
+- **Document is expired**: Identity and legal entity documents must be current and not expired.
+- **Screenshot instead of original**: We need the original scan (PDF) or photo (JPEG/PNG), not a screenshot,
+- **Name mismatch**: The name on the document must exactly match the name in your Stripe account settings.
+- **Document is cropped or incomplete**: All borders must be visible and no pages can be missing.
+- **Poor image quality**: Document must be clear, readable, and in focus.
+- **Wrong file format**: Document copies must be PDF. Photos must be JPEG or PNG.
+- **Missing back side**: If your document is double-sided (like some IDs), you must include both sides.
+- **Black and white photo ID** - Photo IDs must be submitted in color
+
+If your document was rejected:
+
+1. Review the rejection reason in your Dashboard.
+2. Check that your document meets all requirements listed above.
+3. Re-upload a corrected version through your Dashboard.
+
+If you’re still having issues, contact [Stripe support](https://support.stripe.com/contact) for help with document verification.
+
 ## Upload your verification documents
 
 Due to the sensitive nature of your verification documents, Stripe can only accept documents that are uploaded through the Dashboard. Don’t send documents by email.
 
-In the [Dashboard](https://dashboard.stripe.com/dashboard), banners direct you to the correct location to upload any required documents.
+In the Dashboard, banners direct you to the correct location to upload any required documents. To upload your document:
+
+1. Go to your [Stripe Dashboard](https://dashboard.stripe.com).
+2. Navigate to [Account verifications](https://dashboard.stripe.com/account/verifications).
+3. Find the verification request banner or the document type you need to provide.
+4. Upload your document in the required format (PDF for scans, JPEG or PNG for photos)

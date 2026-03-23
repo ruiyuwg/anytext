@@ -1,18 +1,18 @@
 # OpenAIEmbeddings integration
 
-Source: https://docs.langchain.com/oss/javascript/integrations/text\_embedding/openai
+Source: https://docs.langchain.com/oss/javascript/integrations/embeddings/openai
 
 Integrate with the OpenAIEmbeddings embedding model using LangChain JavaScript.
 
-This will help you get started with OpenAIEmbeddings [embedding models](/oss/javascript/integrations/text_embedding) using LangChain. For detailed documentation on `OpenAIEmbeddings` features and configuration options, please refer to the [API reference](https://api.js.langchain.com/classes/langchain_openai.OpenAIEmbeddings.html).
+This will help you get started with OpenAIEmbeddings [embedding models](/oss/javascript/integrations/embeddings) using LangChain. For detailed documentation on `OpenAIEmbeddings` features and configuration options, please refer to the [API reference](https://api.js.langchain.com/classes/langchain_openai.OpenAIEmbeddings.html).
 
 ## Overview
 
 ### Integration details
 
-| Class                                                                                           | Package                                                                         | Local | [Py support](https://python.langchain.com/docs/integrations/text_embedding/openai/) |                                             Downloads                                             |                                             Version                                            |
-| :---------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ | :---: | :---------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| [OpenAIEmbeddings](https://api.js.langchain.com/classes/langchain_openai.OpenAIEmbeddings.html) | [@langchain/openai](https://api.js.langchain.com/modules/langchain_openai.html) |   ❌   |                                          ✅                                          | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
+| Class                                                                                           | Package                                                                         | Local | [Py support](https://python.langchain.com/docs/integrations/embeddings/openai/) |                                             Downloads                                             |                                             Version                                            |
+| :---------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ | :---: | :-----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
+| [OpenAIEmbeddings](https://api.js.langchain.com/classes/langchain_openai.OpenAIEmbeddings.html) | [@langchain/openai](https://api.js.langchain.com/modules/langchain_openai.html) |   ❌   |                                        ✅                                        | ![NPM - Downloads](https://img.shields.io/npm/dm/@langchain/openai?style=flat-square\&label=%20&) | ![NPM - Version](https://img.shields.io/npm/v/@langchain/openai?style=flat-square\&label=%20&) |
 
 ## Setup
 
@@ -216,7 +216,7 @@ console.log(vectorsDefaultDimensions[0].length);
 3072
 ```
 
-But by passing in `dimensions: 1024` we can reduce the size of our embeddings to 1024:
+By passing in `dimensions: 1024` we can reduce the size of our embeddings to 1024:
 
 ```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
 import { OpenAIEmbeddings } from "@langchain/openai";
@@ -250,7 +250,7 @@ const model = new OpenAIEmbeddings({
 
 You can also pass other `ClientOptions` parameters accepted by the official SDK.
 
-If you are hosting on Azure OpenAI, see the [dedicated page instead](/oss/javascript/integrations/text_embedding/azure_openai).
+If you are hosting on Azure OpenAI, see the [dedicated page instead](/oss/javascript/integrations/embeddings/azure_openai).
 
 ***
 
@@ -261,7 +261,73 @@ For detailed documentation of all OpenAIEmbeddings features and configurations h
 ***
 
 ```
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/text_embedding/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/embeddings/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# Cache integrations
+
+Source: https://docs.langchain.com/oss/javascript/integrations/llm\_caching/index
+
+Integrate with caches using LangChain JavaScript.
+
+[Caching LLM calls](/oss/javascript/langchain/models#caching) can be useful for testing, cost savings, and speed.
+
+Below are some integrations that allow you to cache results of individual LLM calls using different caches with different strategies.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llm_caching/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# LLM integrations
+
+Source: https://docs.langchain.com/oss/javascript/integrations/llms/index
+
+Integrate with LLMs using LangChain JavaScript.
+
+**You are currently on a page documenting the use of text completion models. Many of the latest and most popular models are [chat completion models](/oss/javascript/langchain/models).**
+
+Unless you are specifically using more advanced prompting techniques, you are probably looking for [this page instead](/oss/javascript/integrations/chat/).
+
+[LLMs](/oss/javascript/langchain/models) are language models that takes a string as input and return a string as output.
+
+## All LLMs
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/llms/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# Middleware integrations
+
+Source: https://docs.langchain.com/oss/javascript/integrations/middleware/index
+
+Integrate with middleware using LangChain JavaScript.
+
+Middleware designed for specific providers. Learn more about [middleware](/oss/javascript/langchain/middleware/overview).
+
+| Provider                                                       | Middleware available |
+| -------------------------------------------------------------- | -------------------- |
+| [Anthropic](/oss/javascript/integrations/middleware/anthropic) | Prompt caching       |
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/middleware/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 
 
 

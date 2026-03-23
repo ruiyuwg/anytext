@@ -144,7 +144,7 @@ human_msg = HumanMessage(
 )
 ```
 
-The `name` field behavior varies by provider – some use it for user identification, others ignore it. To check, refer to the model provider's [reference](https://reference.langchain.com/python/integrations/).
+The `name` field behavior varies by provider—some use it for user identification, others ignore it. To check, refer to the model provider's [reference](https://reference.langchain.com/python/integrations/).
 
 ***
 

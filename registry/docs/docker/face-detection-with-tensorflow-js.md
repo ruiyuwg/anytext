@@ -1,5 +1,3 @@
-Context
-
 When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
 
 [Share feedback](https://github.com/docker/docs/issues/23966)
@@ -426,7 +424,7 @@ To stop the application, press `ctrl`+`c` in the terminal.
 
 Publishing your Docker image on Docker Hub streamlines deployment processes for others, enabling seamless integration into diverse projects. It also promotes the adoption of your containerized solutions, broadening their impact across the developer ecosystem. To share your image:
 
-1. [Sign up](https://www.docker.com/pricing?utm_source=docker\&utm_medium=webreferral\&utm_campaign=docs_driven_upgrade) or sign in to [Docker Hub](https://hub.docker.com).
+1. [Sign up](https://www.docker.com/pricing?ref=Docs\&refAction=DocsGuidesTensorflowjs) or sign in to [Docker Hub](https://hub.docker.com).
 
 2. Rebuild your image to include the changes to your application. This time, prefix the image name with your Docker ID. Docker uses the name to determine which repository to push it to. Open a terminal and run the following command in the `TensorJS-Face-Detection` directory. Replace `YOUR-USER-NAME` with your Docker ID.
 

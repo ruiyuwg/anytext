@@ -145,7 +145,9 @@ You can have full control over the HTML template by adding a Nitro plugin that r
 The callback function of the `render:html` hook allows you to mutate the HTML before it is sent to the client.
 
 ```ts [server/plugins/extend-html.ts]
-export default defineNitroPlugin((nitroApp) => {
+import { definePlugin } from 'nitro'
+
+export default definePlugin((nitroApp) => {
   nitroApp.hooks.hook('render:html', (html, { event }) => {
     // This will be an object representation of the html template.
     console.log(html)

@@ -17,6 +17,14 @@ Chat models are subclasses of the [`BaseChatModel`](https://reference.langchain.
 
 
 
+Embedding models are subclasses of the [`Embeddings`](https://reference.langchain.com/python/langchain-core/embeddings/embeddings/Embeddings) class.
+
+
+  The embedding model integration guide is currently WIP. In the meantime, read the [embedding model conceptual guide](/oss/python/integrations/embeddings) for details on how LangChain embedding models function.
+
+
+
+
 Tools are used in 2 main ways:
 
 1. To define an "input schema" or "args schema" to pass to a chat model's tool calling feature along with a text request, such that the chat model can generate a "tool call", or parameters to call the tool with.
@@ -30,29 +38,15 @@ The Tools class must inherit from the [`BaseTool`](https://reference.langchain.c
 
 
 
-Retrievers are used to retrieve documents from APIs, databases, or other sources based on a query. The Retriever class must inherit from the BaseRetriever base class.
+[Middleware](/oss/python/langchain/middleware/overview) lets you customize agent behavior by hooking into model calls, tool calls, and agent lifecycle events. Middleware classes subclass the [`AgentMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware) base class.
 
-
-  The retriever integration guide is currently WIP. In the meantime, read the [retriever conceptual guide](/oss/python/integrations/retrievers) for details on how LangChain retrievers function.
-
-
-
-
-All vector stores must inherit from the [`VectorStore`](https://reference.langchain.com/python/langchain-core/vectorstores/base/VectorStore) base class. This interface consists of methods for writing, deleting and searching for documents in the vector store.
-
-See the [vector store integration guide](/oss/python/integrations/vectorstores) for details on implementing a vector store integration.
-
-
-  The vector store integration guide is currently WIP. In the meantime, read the [vector store conceptual guide](/oss/python/integrations/vectorstores) for details on how LangChain vector stores function.
+See the [custom middleware guide](/oss/python/langchain/middleware/custom#class) for details on implementing a class-based middleware integration.
 
 
 
+Checkpointers enable [persistence](/oss/python/langgraph/persistence) in LangGraph, allowing agents to save and resume state across interactions.
 
-Embedding models are subclasses of the [`Embeddings`](https://reference.langchain.com/python/langchain-core/embeddings/embeddings/Embeddings) class.
-
-
-  The embedding model integration guide is currently WIP. In the meantime, read the [embedding model conceptual guide](/oss/python/integrations/text_embedding) for details on how LangChain embedding models function.
-
+See existing checkpointer integrations in the [LangGraph repo](https://github.com/langchain-ai/langgraph/tree/main/libs) for implementation examples.
 
 
 

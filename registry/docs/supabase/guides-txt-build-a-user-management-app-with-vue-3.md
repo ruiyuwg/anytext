@@ -131,11 +131,11 @@ In most cases, you can get the correct key from [the Project's **Connect** dialo
 
 ## Building the app
 
-Let's start building the Vue 3 app from scratch.
+Start building the Vue 3 app from scratch.
 
 ### Initialize a Vue 3 app
 
-We can quickly use [Vite with Vue 3 Template](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) to initialize
+This guide uses [Vite with Vue 3 Template](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) to initialize
 an app called `supabase-vue-3`:
 
 ```bash
@@ -148,14 +148,13 @@ npm create vite@latest supabase-vue-3 -- --template vue
 cd supabase-vue-3
 ```
 
-Then let's install the only additional dependency: [supabase-js](https://github.com/supabase/supabase-js)
+Then install the only additional dependency: [supabase-js](https://github.com/supabase/supabase-js)
 
 ```bash
 npm install @supabase/supabase-js
 ```
 
-And finally we want to save the environment variables in a `.env`.
-All we need are the API URL and the key that you copied [earlier](#get-api-details).
+And finally save the environment variables in a `.env` file, you need the API URL and the key that you copied [earlier](#get-api-details).
 
 ````
 ```bash name=.env
@@ -165,14 +164,14 @@ VITE_SUPABASE_PUBLISHABLE_KEY=YOUR_SUPABASE_PUBLISHABLE_KEY
 ````
 
 With the API credentials in place, create an `src/supabase.js` helper file to initialize the Supabase client. These variables are exposed
-on the browser, and that's completely fine since we have [Row Level Security](/docs/guides/auth#row-level-security) enabled on our Database.
+on the browser, and that's fine since you have [Row Level Security](/docs/guides/auth#row-level-security) enabled on the Database.
 
 ````
-```js name=src/supabase.js
+```javascript name=src/supabase.js
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+const supabasePublishableKey = import.meta.env.VITE_SUPABASE_KEY
 
 export const supabase = createClient(supabaseUrl, supabasePublishableKey)
 ```
@@ -182,10 +181,10 @@ Optionally, update [src/style.css](https://raw.githubusercontent.com/supabase/su
 
 ### Set up a login component
 
-Set up an `src/components/Auth.vue` component to manage logins and sign ups. We'll use Magic Links, so users can sign in with their email without using passwords.
+Set up an `src/components/Auth.vue` component to manage to add Magic Links as an option, so users can sign in with their email without using passwords.
 
 ````
-```vue name=/src/components/Auth.vue
+```
 
 import { ref } from 'vue'
 import { supabase } from '../supabase'
@@ -194,58 +193,53 @@ const loading = ref(false)
 const email = ref('')
 
 const handleLogin = async () => {
-  try {
-    loading.value = true
-    const { error } = await supabase.auth.signInWithOtp({
-      email: email.value,
-    })
-    if (error) throw error
-    alert('Check your email for the login link!')
-  } catch (error) {
-    if (error instanceof Error) {
-      alert(error.message)
+    try {
+        loading.value = true
+        const { error } = await supabase.auth.signInWithOtp({ email: email.value })
+        if (error) throw error
+        alert('Check your email for the login link!')
+    } catch (error) {
+        if (error instanceof Error) {
+            alert(error.message)
+        }
+    } finally {
+        loading.value = false
     }
-  } finally {
-    loading.value = false
-  }
 }
 
 
 
-  
     
-      Supabase + Vue 3
-      Sign in via magic link with your email below
-      
         
-      
-      
-        <input
-          type="submit"
-          class="button block"
-          :value="loading ? 'Loading' : 'Send magic link'"
-          :disabled="loading"
-        />
-      
+            Supabase + Vue 3
+            Sign in via magic link with your email below
+            
+                
+            
+            
+                <input type="submit" class="button block" :value="loading ? 'Loading' : 'Send magic link'"
+                    :disabled="loading" />
+            
+        
     
-  
 
 ```
 ````
 
 ### Account page
 
-After a user is signed in we can allow them to edit their profile details and manage their account.
+After a user signs in, allow them to edit their profile details and manage their account.
 Create a new `src/components/Account.vue` component to handle this.
 
 ````
-```vue name=src/components/Account.vue
+```
 
 import { supabase } from '../supabase'
 import { onMounted, ref, toRefs } from 'vue'
+import Avatar from './Avatar.vue';
 
-const props = defineProps(['session'])
-const { session } = toRefs(props)
+const props = defineProps(['claims'])
+const { claims } = toRefs(props)
 
 const loading = ref(true)
 const username = ref('')
@@ -253,123 +247,119 @@ const website = ref('')
 const avatar_url = ref('')
 
 onMounted(() => {
-  getProfile()
+    getProfile()
 })
 
 async function getProfile() {
-  try {
-    loading.value = true
-    const { user } = session.value
+    try {
+        loading.value = true
+        let { data, error, status } = await supabase
+            .from('profiles')
+            .select(`username, website, avatar_url`)
+            .eq('id', claims.value.sub)
+            .single()
 
-    const { data, error, status } = await supabase
-      .from('profiles')
-      .select(`username, website, avatar_url`)
-      .eq('id', user.id)
-      .single()
+        if (error && status !== 406) throw error
 
-    if (error && status !== 406) throw error
-
-    if (data) {
-      username.value = data.username
-      website.value = data.website
-      avatar_url.value = data.avatar_url
+        if (data) {
+            username.value = data.username
+            website.value = data.website
+            avatar_url.value = data.avatar_url
+        }
+    } catch (error) {
+        alert(error.message)
+    } finally {
+        loading.value = false
     }
-  } catch (error) {
-    alert(error.message)
-  } finally {
-    loading.value = false
-  }
 }
 
 async function updateProfile() {
-  try {
-    loading.value = true
-    const { user } = session.value
+    try {
+        loading.value = true
+        const updates = {
+            id: claims.value.sub,
+            username: username.value,
+            website: website.value,
+            avatar_url: avatar_url.value,
+            updated_at: new Date(),
+        }
 
-    const updates = {
-      id: user.id,
-      username: username.value,
-      website: website.value,
-      avatar_url: avatar_url.value,
-      updated_at: new Date(),
+        let { error } = await supabase.from('profiles').upsert(updates)
+
+        if (error) throw error
+    } catch (error) {
+        alert(error.message)
+    } finally {
+        loading.value = false
     }
-
-    const { error } = await supabase.from('profiles').upsert(updates)
-
-    if (error) throw error
-  } catch (error) {
-    alert(error.message)
-  } finally {
-    loading.value = false
-  }
 }
 
 async function signOut() {
-  try {
-    loading.value = true
-    const { error } = await supabase.auth.signOut()
-    if (error) throw error
-  } catch (error) {
-    alert(error.message)
-  } finally {
-    loading.value = false
-  }
+    try {
+        loading.value = true
+        let { error } = await supabase.auth.signOut()
+        if (error) throw error
+    } catch (error) {
+        alert(error.message)
+    } finally {
+        loading.value = false
+    }
 }
 
 
 
-  
     
-      Email
-      
-    
-    
-      Name
-      
-    
-    
-      Website
-      
-    
+        
+        
+            Email
+            
+        
+        
+            Name
+            
+        
+        
+            Website
+            
+        
 
-    
-      <input
-        type="submit"
-        class="button primary block"
-        :value="loading ? 'Loading ...' : 'Update'"
-        :disabled="loading"
-      />
-    
+        
+            <input type="submit" class="button primary block" :value="loading ? 'Loading ...' : 'Update'"
+                :disabled="loading" />
+        
 
+        
+            
+                Sign Out
+            
+        
     
-      Sign Out
-    
-  
 
 ```
 ````
 
 ### Launch!
 
-Now that we have all the components in place, let's update `App.vue`:
+With all the components in place, update `App.vue`:
 
 ````
-```vue name=src/App.vue
+```
 
 import { onMounted, ref } from 'vue'
 import Account from './components/Account.vue'
 import Auth from './components/Auth.vue'
 import { supabase } from './supabase'
 
-const session = ref()
+const claims = ref()
 
 onMounted(() => {
-  supabase.auth.getSession().then(({ data }) => {
-    session.value = data.session
+  supabase.auth.getClaims().then(({ data }) => {
+    claims.value = data.claims
   })
 
-  supabase.auth.onAuthStateChange((_, _session) => {
-    session.value = _session
+  supabase.auth.onAuthStateChange(async () => {
+    const { data } = await supabase.auth.getClaims()
+    claims.value = data.claims
   })
 })
 
@@ -402,9 +392,9 @@ Every Supabase project is configured with [Storage](/docs/guides/storage) for ma
 Create a new `src/components/Avatar.vue` component that allows users to upload profile photos:
 
 ````
-```vue name=src/components/Avatar.vue
+```
 
-import { ref, toRefs, watchEffect } from 'vue'
+import { ref, toRefs, watch } from 'vue'
 import { supabase } from '../supabase'
 
 const prop = defineProps(['path', 'size'])
@@ -416,96 +406,70 @@ const src = ref('')
 const files = ref()
 
 const downloadImage = async () => {
-  try {
-    const { data, error } = await supabase.storage.from('avatars').download(path.value)
-    if (error) throw error
-    src.value = URL.createObjectURL(data)
-  } catch (error) {
-    console.error('Error downloading image: ', error.message)
-  }
+    try {
+        const { data, error } = await supabase.storage
+            .from('avatars')
+            .download(path.value)
+        if (error) throw error
+        src.value = URL.createObjectURL(data)
+    } catch (error) {
+        console.error('Error downloading image: ', error.message)
+    }
 }
 
 const uploadAvatar = async (evt) => {
-  files.value = evt.target.files
-  try {
-    uploading.value = true
-    if (!files.value || files.value.length === 0) {
-      throw new Error('You must select an image to upload.')
+    files.value = evt.target.files
+    try {
+        uploading.value = true
+        if (!files.value || files.value.length === 0) {
+            throw new Error('You must select an image to upload.')
+        }
+
+        const file = files.value[0]
+        const fileExt = file.name.split('.').pop()
+        const filePath = `${Math.random()}.${fileExt}`
+
+        let { error: uploadError } = await supabase.storage
+            .from('avatars')
+            .upload(filePath, file)
+
+        if (uploadError) throw uploadError
+        emit('update:path', filePath)
+        emit('upload')
+    } catch (error) {
+        alert(error.message)
+    } finally {
+        uploading.value = false
     }
-
-    const file = files.value[0]
-    const fileExt = file.name.split('.').pop()
-    const filePath = `${Math.random()}.${fileExt}`
-
-    const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
-
-    if (uploadError) throw uploadError
-    emit('update:path', filePath)
-    emit('upload')
-  } catch (error) {
-    alert(error.message)
-  } finally {
-    uploading.value = false
-  }
 }
 
-watchEffect(() => {
-  if (path.value) downloadImage()
+watch(path, () => {
+    if (path.value) downloadImage()
 })
 
 
 
-  
-    <img
-      v-if="src"
-      :src="src"
-      alt="Avatar"
-      class="avatar image"
-      :style="{ height: size + 'em', width: size + 'em' }"
-    />
     
+        <img v-if="src" :src="src" alt="Avatar" class="avatar image"
+            :style="{ height: size + 'em', width: size + 'em' }" />
+        
 
+        
+            
+                {{ uploading ? "Uploading ..." : "Upload" }}
+            
+            <input style="visibility: hidden; position: absolute" type="file" id="single" accept="image/*"
+                @change="uploadAvatar" :disabled="uploading" />
+        
     
-      
-        {{ uploading ? 'Uploading ...' : 'Upload' }}
-      
-      <input
-        style="visibility: hidden; position: absolute"
-        type="file"
-        id="single"
-        accept="image/*"
-        @change="uploadAvatar"
-        :disabled="uploading"
-      />
-    
-  
 
 ```
 ````
 
 ### Add the new widget
 
-And then we can add the widget to the Account page in `src/components/Account.vue`:
+Finally, add the widget to the Account page.
 
-````
-```vue name=src/components/Account.vue
-
-// Import the new component
-import Avatar from './Avatar.vue'
-//...
-const avatar_url = ref('')
-//...
-
-
-
-  
-    
-    
-
-    
-  
-
-```
-````
+The `Account.vue` component [shown earlier](#account-page) already includes the `Avatar` component.
 
 At this stage you have a fully functional application!

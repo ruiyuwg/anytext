@@ -12,14 +12,14 @@ The following table outlines the price for each resource according to the plan y
 
 The following table outlines the limits for each resource according to the plan you are on:
 
-|                                                                                                         | Hobby                     | Pro                       | Enterprise                                                                                                          |
-| ------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| [**Maximum store size**](#maximum-store-size)                                                           | 8 KB                      | 64 KB                     | 512 KBCan request higher limit by [contacting customer success](/help) |
-| [**Maximum number of stores (total)**](#maximum-number-of-stores)                                       | 1                         | 3                         | 10Can request higher limit by [contacting customer success](/help)     |
-| [**Maximum number of stores connected to a project**](#maximum-number-of-stores-connected-to-a-project) | 1                         | 3                         | 3                                                                                                                   |
-| [**Maximum item key name length**](#maximum-item-key-name-length)                                       | 256 characters            | 256 characters            | 256 characters                                                                                                      |
-| [**Write propagation**](#write-propagation)                                            | Up to 10 seconds globally | Up to 10 seconds globally | Up to 10 seconds globally                                                                                           |
-| [**Backup retention**](#backup-retention)                                                               | 7 days                    | 90 days                   | 365 days                                                                                                            |
+|                                                                                                         | Hobby                     | Pro                       | Enterprise                                                                                                        |
+| ------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [**Maximum store size**](#maximum-store-size)                                                           | 8 KB                      | 64 KB                     | 512 KBCan request higher limit by [contacting Vercel Support](/help) |
+| [**Maximum number of stores (total)**](#maximum-number-of-stores)                                       | 1                         | 3                         | 10Can request higher limit by [contacting Vercel Support](/help)     |
+| [**Maximum number of stores connected to a project**](#maximum-number-of-stores-connected-to-a-project) | 1                         | 3                         | 3                                                                                                                 |
+| [**Maximum item key name length**](#maximum-item-key-name-length)                                       | 256 characters            | 256 characters            | 256 characters                                                                                                    |
+| [**Write propagation**](#write-propagation)                                            | Up to 10 seconds globally | Up to 10 seconds globally | Up to 10 seconds globally                                                                                         |
+| [**Backup retention**](#backup-retention)                                                               | 7 days                    | 90 days                   | 365 days                                                                                                          |
 
 ## Usage
 
@@ -129,5 +129,5 @@ If you are developing locally or self-hosting, your Edge Config is loaded throug
 
 title: "@vercel/edge-config"
 description: "The Edge Config client SDK is the most ergonomic way to read data from Edge Configs. Learn how to set up the SDK so you can start reading Edge Configs."
-last\_updated: "2026-03-08T05:03:13.790Z"
+last\_updated: "2026-03-23T09:40:09.216Z"
 source: "https://vercel.com/docs/edge-config/edge-config-sdk"

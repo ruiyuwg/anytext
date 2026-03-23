@@ -67,7 +67,7 @@ const result = streamText({
 });
 ```
 
-title: "Usage & Billing"
-description: "Monitor your AI Gateway credit balance, usage, and generation details."
-last\_updated: "2026-03-08T05:03:10.304Z"
-source: "https://vercel.com/docs/ai-gateway/capabilities/usage"
+title: "Service Tiers"
+description: "Control processing priority and cost for OpenAI models using service tiers through AI Gateway."
+last\_updated: "2026-03-23T09:40:03.986Z"
+source: "https://vercel.com/docs/ai-gateway/capabilities/service-tiers"

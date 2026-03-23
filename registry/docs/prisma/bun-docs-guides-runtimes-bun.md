@@ -69,19 +69,19 @@ This command creates:
 
 2.3. Configure environment variables for direct connection \[#23-configure-environment-variables-for-direct-connection]
 
-We're going to use a direct connection string for connecting to Prisma Postgres. To get your [direct connection string](/postgres/database/direct-connections#how-to-connect-to-prisma-postgres-via-direct-tcp):
+We're going to use a direct connection string for connecting to Prisma Postgres. To get it, follow [Connecting to your database](/postgres/database/connecting-to-your-database):
 
 1. Navigate to your recently created Prisma Postgres project dashboard (e.g. "My Bun Project")
-2. Click the **API Keys** tab in the project's sidebar
-3. Click the **Create API key** button
-4. Provide a name for the API key and click **Create**
+2. Click the **Connection Strings** tab in the project's sidebar
+3. Click the **Create connection string** button
+4. Provide a name for the connection string and click **Create**
 5. Copy the connection string starting with `postgres://`
 
 Update your `.env` file to replace the `DATABASE_URL` with the new connection string:
 
-```text title=".env"
-DATABASE_URL="your_database_url_here" // [!code --]
-DATABASE_URL="your_direct_connection_string_here" // [!code ++]
+```bash title=".env"
+DATABASE_URL="your_database_url_here" # [!code --]
+DATABASE_URL="your_direct_connection_string_here" # [!code ++]
 ```
 
 2.4. Update your Prisma schema \[#24-update-your-prisma-schema]
